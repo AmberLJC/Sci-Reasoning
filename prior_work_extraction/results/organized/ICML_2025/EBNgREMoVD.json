@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Sinkhorn Distances: Lightspeed Computation of Optimal Transport",
+      "authors": "Marco Cuturi",
+      "year": 2013,
+      "role": "Foundational algorithm enabling practical OT via entropic regularization",
+      "relationship_sentence": "HiRef targets the core scalability bottleneck of entropic OT (quadratic time/memory) introduced by Sinkhorn, seeking comparable or better scalability while ultimately recovering a bijective map."
+    },
+    {
+      "title": "Low-Rank Sinkhorn Factorization",
+      "authors": "Maxime Scetbon, Gabriel Peyr\u00e9, Marco Cuturi",
+      "year": 2021,
+      "role": "Key methodological prior showing linear-complexity OT via low-rank factorization of the coupling",
+      "relationship_sentence": "HiRef builds directly on low-rank couplings, reinterpreting their factors as co-clusters aligned with Monge images and using these to drive a refinement process that recovers a one-to-one mapping."
+    },
+    {
+      "title": "A Sparse Multiscale Algorithm for Optimal Transport",
+      "authors": "Bernhard Schmitzer",
+      "year": 2016,
+      "role": "Multiscale/hierarchical acceleration framework for OT with coarse-to-fine refinement",
+      "relationship_sentence": "HiRef adopts the multiscale refinement paradigm but replaces grid-based sparsification with low-rank OT\u2013induced partitions, yielding a data-driven hierarchical procedure that culminates in a bijection."
+    },
+    {
+      "title": "Polar factorization and monotone rearrangement of vector-valued functions",
+      "authors": "Yann Brenier",
+      "year": 1991,
+      "role": "Theoretical guarantee of Monge maps (bijective OT maps) under quadratic cost",
+      "relationship_sentence": "HiRef is motivated by the existence of Monge maps and leverages this bijectivity target to guide refinement from soft low-rank couplings to a hard one-to-one correspondence."
+    },
+    {
+      "title": "The Hungarian Method for the Assignment Problem",
+      "authors": "Harold W. Kuhn",
+      "year": 1955,
+      "role": "Classical discrete bijective matching algorithm (linear assignment)",
+      "relationship_sentence": "By framing the discrete OT setting as an assignment problem, HiRef\u2019s endpoint is a permutation map; the algorithm effectively bridges low-rank relaxations to the Hungarian-style bijective solution."
+    },
+    {
+      "title": "Stochastic Optimization for Large-Scale Optimal Transport",
+      "authors": "Aude Genevay, Marco Cuturi, Gabriel Peyr\u00e9, Francis Bach",
+      "year": 2016,
+      "role": "Scalable entropic OT via stochastic/online methods with reduced memory",
+      "relationship_sentence": "HiRef addresses the same large-scale regime, but instead of stochastic approximation it uses low-rank structure to construct deterministic multiscale partitions that preserve bijectivity in the limit."
+    },
+    {
+      "title": "Near-Linear Time Approximation Algorithms for Optimal Transport via Sinkhorn Iteration",
+      "authors": "Jason Altschuler, Jonathan Niles-Weed, Philippe Rigollet",
+      "year": 2017,
+      "role": "Complexity analysis and acceleration of Sinkhorn for large problems",
+      "relationship_sentence": "HiRef complements these acceleration efforts by achieving linear scaling through low-rank subproblems while explicitly enabling recovery of a bijective Monge map."
+    }
+  ],
+  "synthesis_narrative": "HiRef\u2019s central idea\u2014recovering a bijective Monge map at large scale by orchestrating low-rank OT subproblems within a multiscale refinement scheme\u2014sits at the intersection of three lines of prior work. First, Cuturi\u2019s entropic OT made OT practical but retained quadratic memory/time; subsequent advances such as Altschuler et al. and Genevay et al. improved scalability yet still inherit the dense coupling or stochastic approximation limitations, which complicate exact bijection recovery. Second, Scetbon\u2013Peyr\u00e9\u2013Cuturi\u2019s low-rank Sinkhorn factorization established that OT couplings can be represented with linear complexity, but the factorized plan itself is not one-to-one. HiRef\u2019s key conceptual leap is to interpret the low-rank factors as co-clusters that tend to group points with their Monge images, and to turn this observation into an iterative partition-refinement mechanism. Third, Schmitzer\u2019s multiscale OT demonstrated that hierarchical, coarse-to-fine strategies can drastically cut computational cost. HiRef fuses this hierarchical paradigm with low-rank OT: it constructs data-driven multiscale partitions induced by factorized couplings and progressively refines them until the residual subproblems reduce to bijective assignments. The theoretical north star for this design is the Monge-map framework (Brenier), and, in the discrete limit, classical assignment (Kuhn), which together justify aiming for a permutation as the terminal object. In sum, HiRef synthesizes low-rank factorization, multiscale refinement, and Monge-map/assignment theory to achieve linear-scale computation that still yields an exact bijective correspondence.",
+  "analysis_timestamp": "2026-01-07T00:21:32.366968"
+}

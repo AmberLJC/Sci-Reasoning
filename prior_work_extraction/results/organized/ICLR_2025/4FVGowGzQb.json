@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Using Expectation-Maximization for Reinforcement Learning",
+      "authors": "Dayan et al.",
+      "year": 1997,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "This work provides the probabilistic EM formulation for control\u2014optimizing the probability of successful outcomes\u2014that the current paper adopts and extends to decouple positive and negative feedback channels."
+    },
+    {
+      "title": "Reinforcement Learning by Reward-Weighted Regression",
+      "authors": "Peters et al.",
+      "year": 2007,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "Reward-Weighted Regression instantiates the EM idea with strictly positive weights tied to returns, which inherently prevents learning from negative-only feedback and directly motivates the paper\u2019s decoupled positive/negative weighting scheme."
+    },
+    {
+      "title": "Maximum a Posteriori Policy Optimization",
+      "authors": "Abdolmaleki et al.",
+      "year": 2018,
+      "arxiv_id": "1806.06920",
+      "role": "Extension",
+      "relationship_sentence": "The paper extends MPO\u2019s KL-regularized EM updates by replacing reward-based weightings with separate positive/negative likelihood factors, yielding stable policy updates even from negative-only data."
+    },
+    {
+      "title": "Deep Reinforcement Learning from Human Preferences",
+      "authors": "Christiano et al.",
+      "year": 2017,
+      "arxiv_id": "1706.03741",
+      "role": "Foundation",
+      "relationship_sentence": "This work established the paired-preference formulation (via Bradley\u2013Terry comparisons) that modern preference optimization builds on, whose paired-data requirement is explicitly relaxed by the proposed decoupled approach."
+    },
+    {
+      "title": "Direct Preference Optimization: Your Language Model is Secretly a Reward Model",
+      "authors": "Rafailov et al.",
+      "year": 2023,
+      "arxiv_id": "2305.18290",
+      "role": "Baseline",
+      "relationship_sentence": "DPO\u2019s pairwise log-odds objective is a main baseline the paper generalizes beyond by enabling learning from unpaired and negative-only feedback through an EM-based decoupled likelihood objective."
+    },
+    {
+      "title": "Kahneman\u2013Tversky Optimization: Supervised Fine-Tuning for Human Preferences",
+      "authors": "Ethayarajh et al.",
+      "year": 2024,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "KTO proposes training with unpaired positive/negative labels but relies on heuristic prospect-theory weights; the present work replaces this with a principled EM probabilistic framework and achieves stable learning from negative-only signals."
+    }
+  ],
+  "synthesis_narrative": "Dayan and Hinton introduced an EM-based view of reinforcement learning that treats control as probabilistic inference over successful outcomes, optimizing the likelihood of positive events rather than expected return. Peters and Schaal instantiated this idea with Reward-Weighted Regression, where policy updates are driven by strictly positive weights proportional to returns, providing an efficient M-step but implicitly precluding learning purely from negative evidence. Abdolmaleki and colleagues advanced this EM lineage with Maximum a Posteriori Policy Optimization, combining an E-step weighting with a KL-regularized M-step that stabilizes policy updates under off-policy data and noisy estimates. In human preference learning, Christiano et al. formalized pairwise preference supervision via Bradley\u2013Terry models, anchoring modern preference optimization on paired comparisons. Building on that, Rafailov et al. proposed Direct Preference Optimization, a direct log-odds objective that still fundamentally requires paired samples. Ethayarajh et al. later explored unpaired binary feedback via Kahneman\u2013Tversky-inspired losses, suggesting a practical route to positive- or negative-only labels but relying on heuristic weighting that can be unstable, especially for negative-only training. Together these works outline a principled EM toolkit for control, effective KL-regularized policy updates, and preference-learning practices still constrained by paired data or heuristic losses. The present paper unifies these strands by recasting preference optimization within the EM control-as-inference framework and explicitly decoupling positive and negative likelihoods, thereby preserving MPO-style stability while eliminating the paired-data requirement and enabling reliable learning from negative-only feedback\u2014a natural next step given the identified methodological gaps.",
+  "target_paper": {
+    "title": "Learning from negative feedback, or positive feedback or both",
+    "authors": "Abbas Abdolmaleki, Bilal Piot, Bobak Shahriari, Jost Tobias Springenberg, Tim Hertweck, Michael Bloesch, Rishabh Joshi, Thomas Lampe, Junhyuk Oh, Nicolas Heess, Jonas Buchli, Martin Riedmiller",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "Preference Optimization, Policy Optimization, Negative Feedback, Positive feedback, Reinforcement Learning, Probabilistic Inference",
+    "abstract": "Existing preference optimization methods often assume scenarios where paired preference feedback (preferred/positive vs. dis-preferred/negative examples) is available. This requirement limits their applicability in scenarios where only unpaired feedback\u2014for example, either positive or negative\u2014 is available. To address this, we introduce a novel approach that decouples learning from positive and negative feedback. This decoupling enables control over the influence of each feedback type and, importantly, allows learning even when only one feedback type is present. A key contribution is demonstrating stable learning from negative feedback alone, a capability not well-addressed by current methods. Our approach builds upon the probabilistic framework introduced in (Dayan and Hinton, 1997), which uses expectation-maximization (EM) to directly optimize the probability of positive outcomes (as opposed to classic expected reward maximization). We address a key limitation in current EM-based me",
+    "openreview_id": "4FVGowGzQb",
+    "forum_id": "4FVGowGzQb"
+  },
+  "analysis_timestamp": "2026-01-06T10:57:33.720018"
+}

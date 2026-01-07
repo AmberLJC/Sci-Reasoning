@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Transformers are RNNs: Fast Attention via Linear Transformers",
+      "authors": "Angelos Katharopoulos, Apoorv Vyas, Nikolaos Pappas, Fran\u00e7ois Fleuret",
+      "year": 2020,
+      "role": "Foundational linear-attention formulation",
+      "relationship_sentence": "ZeroS directly builds on the kernelized linear attention of Katharopoulos et al., but removes the implicit uniform 1/t term and the convex-combination constraint by reweighting zero-sum residuals to enable signed, contrastive updates."
+    },
+    {
+      "title": "Rethinking Attention with Performers",
+      "authors": "Krzysztof Choromanski, Valerii Likhosherstov, David Dohan, Xingyou Song, et al.",
+      "year": 2021,
+      "role": "Kernel approximation and positive random features for O(N) attention",
+      "relationship_sentence": "Performer\u2019s FAVOR+ positive random features crystallized the nonnegative, convex-averaging design space for linear attention that ZeroS purposefully departs from by allowing mathematically stable signed weights and a zero-sum structure."
+    },
+    {
+      "title": "Linear Transformers Are Secretly Fast Weight Memory Systems",
+      "authors": "Imanol Schlag, Kazuki Irie, J\u00fcrgen Schmidhuber",
+      "year": 2021,
+      "role": "Limitation analysis via fast-weight interpretation",
+      "relationship_sentence": "Schlag et al.\u2019s fast-weight view exposed denominator-induced diffusion/interference in long contexts, directly motivating ZeroS\u2019s removal of the uniform accumulator and stabilized reweighting of residual interactions."
+    },
+    {
+      "title": "Linformer: Self-Attention with Linear Complexity",
+      "authors": "Sinong Wang, Belinda Z. Li, Madian Khabsa, Han Fang, Hao Ma",
+      "year": 2020,
+      "role": "Efficient-attention baseline using low-rank projections",
+      "relationship_sentence": "Linformer established practical O(N) attention while retaining softmax\u2019s convex mixing, a baseline ZeroS matches in efficiency while expanding the representable function class beyond convex combinations."
+    },
+    {
+      "title": "Nystr\u00f6mformer: A Nystr\u00f6m-Based Algorithm for Approximating Self-Attention",
+      "authors": "Yunyang Xiong, Zhanpeng Zeng, Rudrasis Chakraborty, Mingxing Tan, Glenn Fung, Yin Li, Vikas Singh",
+      "year": 2021,
+      "role": "Softmax approximation for efficient Transformers",
+      "relationship_sentence": "Nystr\u00f6mformer approximates softmax with nonnegative kernels at O(N) cost, providing an influential efficiency baseline that ZeroS contrasts by changing the weighting law itself to a zero-sum, signed scheme."
+    },
+    {
+      "title": "Random Features for Large-Scale Kernel Machines",
+      "authors": "Ali Rahimi, Benjamin Recht",
+      "year": 2007,
+      "role": "Theoretical foundation for kernel linearization",
+      "relationship_sentence": "Random feature theory underpins kernelized linear attention; ZeroS leverages this perspective to identify and excise the zero-order (uniform) term and implement residual-centric O(N) computations."
+    }
+  ],
+  "synthesis_narrative": "ZeroS emerges from the kernel-based linear attention lineage while tackling two structural limitations that prior efficient Transformers implicitly inherit. Katharopoulos et al. (Linear Transformers) and Choromanski et al. (Performer) showed how softmax attention can be linearized via kernel features or random features to achieve O(N) complexity, but their constructions enforce nonnegative, probability-like weights\u2014i.e., convex combinations\u2014through a global normalization that accumulates a uniform component over time. Schlag et al. analyzed such models as fast-weight memories, diagnosing denominator-induced diffusion and interference that worsen with longer contexts. Concurrently, low-rank and Nystr\u00f6m approximations (Linformer, Nystr\u00f6mformer) demonstrated scalable attention yet still preserved softmax\u2019s nonnegative weighting and its attendant dilution on long sequences. ZeroS reframes the kernel view using insights from random-feature linearizations: decompose the softmax kernel into a zero-order uniform term plus zero-sum residuals, then remove the uniform baseline and reweight the residuals. This yields mathematically stable signed weights computable with associative scans, enabling contrastive operations in a single layer while retaining O(N) cost. By breaking the convex-combination restriction and eliminating the uniform accumulator, ZeroS expands the function class representable by linear attention and directly addresses the long-context bias identified in earlier analyses, closing the performance gap to standard softmax attention without sacrificing efficiency.",
+  "analysis_timestamp": "2026-01-06T23:42:48.119626"
+}

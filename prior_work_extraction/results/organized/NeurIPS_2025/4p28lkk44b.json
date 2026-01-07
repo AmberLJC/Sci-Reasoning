@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Mamba: Linear-Time Sequence Modeling with Selective State Spaces",
+      "authors": "Albert Gu, Tri Dao, et al.",
+      "year": 2023,
+      "role": "Target architecture and design blueprint",
+      "relationship_sentence": "The present paper interrogates Mamba\u2019s block design\u2014particularly its depthwise, nonlinear convolution followed by a selective SSM scan\u2014and attributes the discovered symmetry failures specifically to this front-end nonlinear convolution."
+    },
+    {
+      "title": "Efficiently Modeling Long Sequences with Structured State Spaces (S4)",
+      "authors": "Albert Gu, Karan Goel, Christopher R\u00e9",
+      "year": 2022,
+      "role": "Foundational SSM formulation and analysis baseline",
+      "relationship_sentence": "By clarifying what the SSM core can and cannot do, S4 provides the conceptual baseline that lets the authors argue the limitation is not inherent to SSMs per se but arises from Mamba\u2019s preceding nonlinear convolution."
+    },
+    {
+      "title": "Hyena Hierarchy: Towards Larger Convolutional Language Models",
+      "authors": "Michael Poli, Stefano Massaroli, Dan Fu, Tri Dao, Stefano Ermon, Christopher R\u00e9",
+      "year": 2023,
+      "role": "Precedent for long convolutions and input-conditioned token mixing",
+      "relationship_sentence": "Hyena\u2019s demonstration that long, gated convolutions can replace attention helps motivate the paper\u2019s focus on convolutional token fusion and its inductive biases, including potential directional asymmetries."
+    },
+    {
+      "title": "An Empirical Evaluation of Generic Convolutional and Recurrent Networks for Sequence Modeling (TCN)",
+      "authors": "Shaojie Bai, J. Zico Kolter, Vladlen Koltun",
+      "year": 2018,
+      "role": "Causal convolution as a sequence modeling primitive",
+      "relationship_sentence": "Evidence that causal convolutions imprint a left-to-right inductive bias informs the paper\u2019s diagnosis that Mamba\u2019s causal, nonlinear convolution is the proximate source of asymmetric behavior on symmetric tasks."
+    },
+    {
+      "title": "Generalization without systematicity: On the compositional skills of sequence-to-sequence recurrent networks (SCAN)",
+      "authors": "Brenden M. Lake, Marco Baroni",
+      "year": 2018,
+      "role": "Synthetic compositional generalization benchmark and methodology",
+      "relationship_sentence": "The paper\u2019s composite-function tasks are conceptually aligned with SCAN-style probes, enabling a clean contrast between compositional solutions and symmetry-based solutions in assessing Mamba\u2019s biases."
+    },
+    {
+      "title": "Neural Turing Machines",
+      "authors": "Alex Graves, Greg Wayne, Ivo Danihelka",
+      "year": 2014,
+      "role": "Algorithmic synthetic tasks (copy/reverse) for probing sequence models",
+      "relationship_sentence": "The inverse sequence matching and reversal-style diagnostics used here follow the NTM tradition of algorithmic tasks to expose specific failure modes in sequence architectures."
+    },
+    {
+      "title": "Long Range Arena: A Benchmark for Efficient Transformers",
+      "authors": "Yi Tay, Dara Bahri, Donald Metzler, et al.",
+      "year": 2020,
+      "role": "Synthetic stress-testing framework for long-range dependencies",
+      "relationship_sentence": "LRA\u2019s philosophy of targeted synthetic evaluation motivates the paper\u2019s controlled tasks that isolate Mamba\u2019s asymmetry bias apart from data scale or training confounders."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s central contribution is a targeted diagnosis of Mamba\u2019s architectural weakness: a nonlinear, causal depthwise convolution that fuses tokens asymmetrically and undermines recognition of symmetric patterns, including reversed sequences. This analysis stands directly on the Mamba block design (Gu & Dao, 2023), which places the nonlinear convolution before the selective SSM scan. By contrasting with the core SSM formulation from S4 (Gu et al., 2022), the authors argue the limitation is not intrinsic to state space dynamics, but induced by the front-end token mixing. Prior work on convolutional sequence models, especially the TCN study (Bai et al., 2018), established that causal convolutions imprint a left-to-right inductive bias\u2014an observation the present paper operationalizes to explain Mamba\u2019s persistent asymmetry even on synthetic tasks.\nHyena (Poli et al., 2023) further frames the landscape where long, gated convolutions can rival attention, clarifying why convolutional token fusion is a critical locus for inductive biases. Methodologically, the paper adopts the synthetic probing tradition: SCAN (Lake & Baroni, 2018) informs the composite-function tests that tease apart compositional versus symmetry-based solutions, while NTM (Graves et al., 2014) motivates inverse sequence/reversal diagnostics that cleanly reveal directionality failures. Finally, the evaluation philosophy echoes LRA (Tay et al., 2020), emphasizing controlled, stress-test tasks to attribute failure modes to specific architectural choices. Together, these works directly enable the identification and localization of Mamba\u2019s asymmetry bias to its nonlinear convolutional front end.",
+  "analysis_timestamp": "2026-01-07T00:21:33.130437"
+}

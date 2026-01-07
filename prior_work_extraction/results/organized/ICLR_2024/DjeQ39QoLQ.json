@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "HiPPO: Recurrent Memory with Optimal Polynomial Projections",
+      "authors": "Albert Gu et al.",
+      "year": 2020,
+      "arxiv_id": "2008.07669",
+      "role": "Foundation",
+      "relationship_sentence": "Introduces the non-normal Legendre HiPPO operators and the SSM initialization that diagonal SSMs attempt to diagonalize\u2014whose ill-posedness the PTD method explicitly targets."
+    },
+    {
+      "title": "Efficiently Modeling Long Sequences with Structured State Spaces",
+      "authors": "Albert Gu et al.",
+      "year": 2022,
+      "arxiv_id": "2111.00396",
+      "role": "Foundation",
+      "relationship_sentence": "Establishes the S4 layer and the diagonal-plus-low-rank (NPLR) formulation built on HiPPO, defining the core SSM framework and motivating the search for simpler (diagonal) parameterizations that PTD robustifies."
+    },
+    {
+      "title": "S4D: Simple State-Space Models for Sequence Modeling",
+      "authors": "Albert Gu et al.",
+      "year": 2022,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "Proposes using a purely diagonal state matrix by diagonalizing HiPPO for efficiency and channel mixing, but implicitly inherits the ill-posed diagonalization that PTD directly addresses with backward-stable approximate diagonalization."
+    },
+    {
+      "title": "S5: Simplified State Space Models for Sequence Modeling",
+      "authors": "First author et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "Adopts a diagonal SSM parameterization to simplify S4-style models, serving as a primary baseline whose diagonalization step is made robust by the proposed perturb-then-diagonalize methodology."
+    },
+    {
+      "title": "Spectra and Pseudospectra: The Behavior of Nonnormal Matrices and Operators",
+      "authors": "Lloyd N. Trefethen et al.",
+      "year": 2005,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "Provides the pseudospectral theory of non-normal operators that underpins the insight that small perturbations can yield well-conditioned approximate diagonalizations, directly motivating PTD\u2019s perturb-then-diagonalize strategy."
+    },
+    {
+      "title": "Matrix Perturbation Theory",
+      "authors": "G. W. Stewart et al.",
+      "year": 1990,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "Supplies the backward error and eigen-structure perturbation bounds that justify PTD\u2019s backward-stable approach to approximate diagonalization of ill-conditioned non-normal matrices like HiPPO."
+    }
+  ],
+  "synthesis_narrative": "HiPPO: Recurrent Memory with Optimal Polynomial Projections defined continuous-time state-space memory operators (notably the non-normal Legendre matrices) and an initialization scheme that made SSMs practical for long-range dependencies; crucially, these operators are difficult to diagonalize stably. Efficiently Modeling Long Sequences with Structured State Spaces (S4) built on HiPPO to create a state-space layer using a diagonal-plus-low-rank (NPLR) structure, showing that long convolutions can be realized efficiently but at the cost of implementation complexity. S4D simplified this by forcing a purely diagonal state matrix via diagonalization of HiPPO, yielding efficiency and channel communication but implicitly relying on a diagonalization that can be numerically ill-posed. Similarly, S5 advanced simplified diagonal SSMs as strong sequence models, but its reliance on diagonalization inherits the same fragility. Outside of modeling, Spectra and Pseudospectra by Trefethen and Embree established how non-normal operators possess sensitive spectra, where small perturbations can dramatically alter eigen-structure yet yield more numerically stable diagonalizations. Matrix Perturbation Theory by Stewart and Sun formalized backward-stability and eigen-perturbation bounds that guide principled perturbation-based algorithms.\nTogether, these works reveal a tension: diagonal SSMs promise simplicity and speed but rest on an unstable diagonalization of non-normal HiPPO operators. The pseudospectral and perturbation theories suggest a remedy\u2014inject controlled perturbations to obtain a nearby, well-conditioned operator and only then diagonalize. The present work synthesizes these insights into a backward-stable perturb-then-diagonalize procedure that robustifies diagonal SSMs like S4D/S5 while preserving their efficiency, providing a principled approximate diagonalization tailored to the HiPPO-driven SSM setting.",
+  "target_paper": {
+    "title": "Robustifying State-space Models for Long Sequences via Approximate Diagonalization",
+    "authors": "Annan Yu, Arnur Nigmetov, Dmitriy Morozov, Michael W. Mahoney, N. Benjamin Erichson",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "state-space models, sequence models, Long-Range Arena, recurrent neural networks",
+    "abstract": "State-space models (SSMs) have recently emerged as a framework for learning long-range sequence tasks. An example is the structured state-space sequence (S4) layer, which uses the diagonal-plus-low-rank structure of the HiPPO initialization framework. However, the complicated structure of the S4 layer poses challenges; and, in an effort to address these challenges, models such as S4D and S5 have considered a purely diagonal structure. This choice simplifies the implementation, improves computational efficiency, and allows channel communication. However, diagonalizing the HiPPO framework is itself an ill-posed problem. In this paper, we propose a general solution for this and related ill-posed diagonalization problems in machine learning. We introduce a generic, backward-stable ``perturb-then-diagonalize'' (PTD) methodology, which is based on the pseudospectral theory of non-normal operators, and which may be interpreted as the approximate diagonalization of the non-normal matrices defi",
+    "openreview_id": "DjeQ39QoLQ",
+    "forum_id": "DjeQ39QoLQ"
+  },
+  "analysis_timestamp": "2026-01-06T14:14:56.615032"
+}

@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Distributionally Robust Neural Networks for Group Shifts: On the Importance of Regularization for Worst-Case Generalization",
+      "authors": "Shiori Sagawa, Pang Wei Koh, Tatsunori B. Hashimoto, Percy Liang",
+      "year": 2020,
+      "role": "Optimization framework used",
+      "relationship_sentence": "DoReMi directly instantiates Group DRO\u2019s minimax objective over groups, treating pretraining domains as groups to learn mixture weights that improve worst-group loss."
+    },
+    {
+      "title": "Fairness Without Demographics in Repeated Loss Minimization",
+      "authors": "Tatsunori B. Hashimoto, Megha Srivastava, Hongseok Namkoong, Percy Liang",
+      "year": 2018,
+      "role": "Conceptual and algorithmic precursor",
+      "relationship_sentence": "This work introduced subpopulation robustness via distributionally robust optimization and dynamic reweighting, inspiring DoReMi\u2019s domain-as-group framing and emphasis on tail performance."
+    },
+    {
+      "title": "Variance-Based Regularization with Convex Objectives",
+      "authors": "Hongseok Namkoong, John C. Duchi",
+      "year": 2017,
+      "role": "Foundational theory",
+      "relationship_sentence": "The theoretical underpinnings of f-divergence DRO and its reweighting solutions provide the minimax foundation that DoReMi leverages to derive stable domain weights."
+    },
+    {
+      "title": "Don\u2019t Stop Pretraining: Adapt Language Models to Domains and Tasks",
+      "authors": "Suchin Gururangan, Ana Marasovi\u0107, Swabha Swayamdipta, Kyle Lo, Iz Beltagy, Doug Downey, Noah A. Smith",
+      "year": 2020,
+      "role": "Empirical motivation for domain-aware pretraining",
+      "relationship_sentence": "By showing strong gains from domain- and task-adaptive pretraining, this paper motivates optimizing domain composition; DoReMi operationalizes this by automatically reweighting domains during pretraining."
+    },
+    {
+      "title": "The Pile: An 800GB Dataset of Diverse Text for Language Modeling",
+      "authors": "Leo Gao, Stella Biderman, Sid Black, et al.",
+      "year": 2020,
+      "role": "Dataset and problem framing",
+      "relationship_sentence": "The Pile\u2019s multi-domain mixture and heuristic default weights set the stage for DoReMi\u2019s problem of optimizing domain proportions; it is also a primary testbed in the paper."
+    },
+    {
+      "title": "Learning to Reweight Examples for Robust Deep Learning",
+      "authors": "Mengye Ren, Wenyuan Zeng, Bin Yang, Raquel Urtasun",
+      "year": 2018,
+      "role": "Methodological precursor in data reweighting",
+      "relationship_sentence": "This meta-learning approach demonstrates learning data weights with a small proxy to improve generalization, echoing DoReMi\u2019s strategy of using a smaller model to learn weights that transfer to full-scale training."
+    }
+  ],
+  "synthesis_narrative": "DoReMi\u2019s core innovation\u2014automatically optimizing domain mixture proportions for language model pretraining via a small proxy model\u2014sits at the intersection of distributionally robust optimization and domain-aware pretraining. The methodological spine comes from Group DRO (Sagawa et al., 2020), which formulates worst-case risk over predefined groups; DoReMi maps pretraining domains to these groups and directly adopts Group DRO\u2019s minimax weighting to emphasize underperforming domains. This builds on earlier subpopulation-robust learning ideas from Hashimoto et al. (2018) and the broader theoretical framework of f-divergence\u2013based DRO and reweighting developed by Namkoong and Duchi (2017), which justify the stability and efficacy of minimax-derived weights.\n\nOn the data side, Gururangan et al. (2020) established that domain-aware pretraining materially affects downstream performance, motivating systematic control of domain composition rather than heuristic mixing. The Pile (Gao et al., 2020) concretized the multi-domain pretraining setting with explicit mixture weights, providing both the practical need (heuristic weights can be suboptimal) and the evaluation substrate for DoReMi.\n\nFinally, Ren et al. (2018) showed that learned data weights obtained from a small proxy learner can transfer to improve full-scale training. While DoReMi does not rely on labeled validation like meta-reweighting, it borrows the key operational insight: use a smaller model to efficiently learn informative sampling weights that generalize. Together, these strands yield DoReMi\u2019s proxy-driven, Group-DRO-based domain reweighting that accelerates and improves large-scale LM pretraining.",
+  "analysis_timestamp": "2026-01-06T23:42:48.031277"
+}

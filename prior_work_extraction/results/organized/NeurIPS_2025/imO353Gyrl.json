@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Marigold: Learning Depth with Diffusion",
+      "authors": "Zhang et al.",
+      "year": 2024,
+      "role": "Baseline",
+      "relationship_sentence": "This work directly repurposes the pre-trained Marigold diffusion-based monocular depth model and addresses its scale-invariant output by injecting defocus cues and optimizing its latents and global scale at inference time."
+    },
+    {
+      "title": "Diffusion Posterior Sampling for General Noisy Inverse Problems",
+      "authors": "Hyungjin Chung et al.",
+      "year": 2023,
+      "role": "Extension",
+      "relationship_sentence": "The paper adapts DPS-style physics-consistent guidance\u2014using gradients from a forward image formation model to steer diffusion sampling\u2014to optimize Marigold\u2019s noise latents and scale using a defocus-blur likelihood."
+    },
+    {
+      "title": "A Geometric Approach to Shape From Defocus",
+      "authors": "Paolo Favaro et al.",
+      "year": 2005,
+      "role": "Foundation",
+      "relationship_sentence": "Provides the defocus image-formation theory relating blur radius to depth, aperture, and focus, which underpins the differentiable defocus loss used to recover metric depth."
+    },
+    {
+      "title": "Towards Robust Monocular Depth Estimation: Mixing Datasets for Zero-shot Cross-dataset Transfer",
+      "authors": "Ren\u00e9 Ranftl et al.",
+      "year": 2020,
+      "role": "Foundation",
+      "relationship_sentence": "Established the modern zero-shot MDE formulation and cross-dataset evaluation (MiDaS), framing the robustness problem that this paper tackles by adding physics-based cues at inference."
+    },
+    {
+      "title": "ZoeDepth: Zero-shot Transfer for Robust Monocular Depth Estimation",
+      "authors": "Shariq Farooq Bhat et al.",
+      "year": 2023,
+      "role": "Gap Identification",
+      "relationship_sentence": "Highlights that zero-shot MDE remains scale-ambiguous and suffers OOD degradation; the current paper directly addresses this gap by turning a zero-shot, scale-invariant model into a metric predictor using defocus cues."
+    },
+    {
+      "title": "Image and Depth from a Conventional Camera with a Coded Aperture",
+      "authors": "Anat Levin et al.",
+      "year": 2007,
+      "role": "Related Problem",
+      "relationship_sentence": "Demonstrates that aperture design and defocus cues enable metric depth recovery; this work similarly exploits aperture differences but integrates them as a differentiable constraint on a pre-trained diffusion depth prior."
+    },
+    {
+      "title": "Depth from Dual-Pixel: Phase-Defocus Cues in the Wild",
+      "authors": "Neal Wadhwa et al.",
+      "year": 2018,
+      "role": "Related Problem",
+      "relationship_sentence": "Shows practical recovery of metric depth from defocus cues in commodity cameras, motivating the paper\u2019s use of physically grounded defocus information captured at inference."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core idea\u2014turning a zero-shot, scale-invariant diffusion depth model into a metric predictor by injecting defocus cues at inference\u2014sits at the intersection of modern generative priors and classical shape-from-defocus physics. Marigold provides the immediate baseline: a pre-trained diffusion model that predicts zero-shot, scale-invariant monocular depth but lacks metric scale. Foundational works on defocus, epitomized by Favaro and Soatto, formalized the thin-lens image formation linking blur to depth, aperture, and focus. This physical relationship directly becomes the differentiable loss the authors use to optimize both Marigold\u2019s global scale and its diffusion latents. \n\nThe broader zero-shot MDE lineage from MiDaS defined the cross-dataset, training-free robustness regime, while ZoeDepth crystallized the remaining limitations\u2014scale ambiguity and OOD degradation\u2014explicitly motivating the need for additional physical cues. On the generative inference side, Diffusion Posterior Sampling established how to inject measurement-consistency gradients from a forward model into diffusion sampling; the authors extend this idea to a defocus-blur likelihood and to optimizing Marigold\u2019s noise latents and scale at test time. Finally, prior demonstrations that defocus can yield metric depth in practical cameras\u2014via coded apertures (Levin et al.) and dual-pixel phase-defocus cues (Wadhwa et al.)\u2014inform the paper\u2019s hardware-light design choice: capture a small/large aperture pair from the same viewpoint and use it as a physics-based constraint that resolves metric scale without any retraining.",
+  "analysis_timestamp": "2026-01-06T23:08:23.974500"
+}

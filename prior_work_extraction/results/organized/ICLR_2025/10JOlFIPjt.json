@@ -1,0 +1,57 @@
+{
+  "prior_works": [
+    {
+      "title": "Learning Transferable Visual Models From Natural Language Supervision",
+      "authors": "Alec Radford et al.",
+      "year": 2021,
+      "arxiv_id": "2103.00020",
+      "role": "Extension",
+      "relationship_sentence": "NEMO adopts a CLIP-style dual-encoder with a symmetric cross-modal contrastive (InfoNCE) objective to align two heterogeneous neuron-centric modalities\u2014extracellular waveforms and spike-train autocorrelograms\u2014into a joint embedding space."
+    },
+    {
+      "title": "Representation Learning with Contrastive Predictive Coding",
+      "authors": "Aaron van den Oord et al.",
+      "year": 2018,
+      "arxiv_id": "1807.03748",
+      "role": "Foundation",
+      "relationship_sentence": "The InfoNCE contrastive loss introduced by CPC provides the theoretical and practical basis for NEMO\u2019s contrastive training, enabling instance-level discrimination without labels."
+    },
+    {
+      "title": "Extracellular spike waveform identifies inhibitory interneurons in mouse visual cortex",
+      "authors": "Sara Trainito et al.",
+      "year": 2019,
+      "arxiv_id": "",
+      "role": "Baseline",
+      "relationship_sentence": "This opto-tagging study established waveform-only supervised classification of inhibitory versus excitatory neurons, which NEMO surpasses by integrating activity statistics through multimodal contrastive pretraining."
+    },
+    {
+      "title": "Characterization of neocortical inhibitory interneurons in vivo",
+      "authors": "P\u00e9ter Barth\u00f3 et al.",
+      "year": 2004,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "By showing that spike-train autocorrelograms and firing statistics carry cell-type signatures distinct from waveform shape, this work motivates NEMO\u2019s explicit use of autocorrelation as a complementary modality."
+    },
+    {
+      "title": "Distributed coding of choice, action and engagement across the mouse brain",
+      "authors": "Nicholas A. Steinmetz et al.",
+      "year": 2019,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "This large-scale Neuropixels study established brain-wide, atlas-aligned extracellular recordings and region labels, defining the brain-region classification problem that NEMO targets as a downstream task."
+    }
+  ],
+  "synthesis_narrative": "Barth\u00f3 et al. showed that intrinsic firing statistics and spike-train autocorrelograms encode cell-type information distinct from spike shape, establishing activity-temporal structure as a diagnostic signal. Trainito et al. leveraged opto-tagging to demonstrate that extracellular waveform morphology alone can classify inhibitory versus excitatory neurons, operationalizing a supervised baseline but leaving activity features unexploited and generalization limited. Steinmetz et al. created brain-wide, atlas-aligned datasets with Neuropixels, defining a scalable setting where representations must generalize across many regions and animals and enabling brain-region classification as a standardized downstream task. In parallel, contrastive learning advanced a general recipe for label-efficient representation learning: CPC introduced the InfoNCE objective to separate instances without labels, while CLIP operationalized dual-encoder cross-modal alignment by contrasting paired versus unpaired samples to learn a joint embedding shared by heterogeneous modalities.\nCollectively, these works suggest a gap and an opportunity: waveform-only supervised classifiers underuse information present in spike-train dynamics, and large, heterogeneous datasets call for label-efficient, transferable representations. NEMO synthesizes these insights by using a CLIP-style, InfoNCE-driven multimodal contrastive objective to align waveforms with autocorrelograms for each neuron, yielding a unified embedding that captures complementary shape and temporal features. Fine-tuning this representation naturally improves cell-type inference on opto-tagged data and scales to brain-region identification across the brain-wide recordings pioneered by Steinmetz et al., addressing the limitations of prior single-modality, fully supervised approaches.",
+  "target_paper": {
+    "title": "In vivo cell-type and brain region classification via multimodal contrastive learning",
+    "authors": "Han Yu, Hanrui Lyu, YiXun Xu, Charlie Windolf, Eric Kenji Lee, Fan Yang, Andrew M Shelton, Olivier Winter, International Brain Laboratory, Eva L Dyer, Chandramouli Chandrasekaran, Nicholas A. Steinmetz, Liam Paninski, Cole Lincoln Hurwitz",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "contrastive learning, electrophysiology, extracellular, multimodal, neuroscience, cell type, brain region, Neuropixels, deep learning",
+    "abstract": "Current electrophysiological approaches can track the activity of many neurons, yet it is usually unknown which cell-types or brain areas are being recorded without further molecular or histological analysis. Developing accurate and scalable algorithms for identifying the cell-type and brain region of recorded neurons is thus crucial for improving our understanding of neural computation. In this work, we develop a multimodal contrastive learning approach for neural data that can be fine-tuned for different downstream tasks, including inference of cell-type and brain location. We utilize multimodal contrastive learning to jointly embed the activity autocorrelations and extracellular waveforms of individual neurons. We demonstrate that our embedding approach, Neuronal Embeddings via MultimOdal Contrastive Learning (NEMO), paired with supervised fine-tuning, achieves state-of-the-art cell-type classification for two opto-tagged datasets and brain region classification for the public Inter",
+    "openreview_id": "10JOlFIPjt",
+    "forum_id": "10JOlFIPjt"
+  },
+  "analysis_timestamp": "2026-01-06T06:30:40.160263"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Invariant Risk Minimization",
+      "authors": "Martin Arjovsky, L\u00e9on Bottou, Ishaan Gulrajani, David Lopez-Paz",
+      "year": 2019,
+      "role": "Foundational objective for learning predictors invariant across environments (requires environment labels).",
+      "relationship_sentence": "DynaInfer builds directly on IRM\u2019s invariance principle but removes its reliance on provided environment labels by inferring environments from prediction errors and then optimizing with respect to the inferred partitions."
+    },
+    {
+      "title": "Distributionally Robust Neural Networks for Group Shifts (Group DRO)",
+      "authors": "Shiori Sagawa, Pang Wei Koh, Tatsunori Hashimoto, Percy Liang",
+      "year": 2020,
+      "role": "Robust optimization across groups/environments given group labels.",
+      "relationship_sentence": "Group DRO motivates training against worst-case environments; DynaInfer contributes the missing piece for unlabeled settings by discovering environment assignments from data so that group-robust training principles can be applied without group labels."
+    },
+    {
+      "title": "Out-of-Distribution Generalization via Risk Extrapolation (REx/VREx)",
+      "authors": "David Krueger et al.",
+      "year": 2021,
+      "role": "Environment-based regularization equalizing risks across environments to improve OOD generalization.",
+      "relationship_sentence": "DynaInfer operationalizes risk-based invariance ideas like REx in the unlabeled case by constructing environment splits via prediction-error signals, enabling risk equalization and spurious correlation exposure without given environments."
+    },
+    {
+      "title": "Environment Inference for Invariant Learning (EIIL)",
+      "authors": "Elliot Creager, J\u00f6rn-Henrik Jacobsen, Richard Zemel",
+      "year": 2021,
+      "role": "Precedent for inferring environment partitions to enable invariant learning when environment labels are missing.",
+      "relationship_sentence": "DynaInfer extends the EIIL paradigm to dynamical systems and introduces a training-round-wise, prediction-error\u2013driven assignment with theoretical guarantees for the alternating optimization in unlabeled settings."
+    },
+    {
+      "title": "Maximum Likelihood from Incomplete Data via the EM Algorithm",
+      "authors": "A. P. Dempster, N. M. Laird, D. B. Rubin",
+      "year": 1977,
+      "role": "Theoretical template for alternating optimization with latent assignments.",
+      "relationship_sentence": "DynaInfer\u2019s alternation between fixing networks to infer environment assignments and updating models mirrors EM-style latent-variable optimization, and its convergence analysis builds on this classical alternating optimization framework."
+    },
+    {
+      "title": "Variational Learning for Switching State-Space Models (Switching Linear Dynamical Systems)",
+      "authors": "Zoubin Ghahramani, Geoffrey E. Hinton",
+      "year": 2000,
+      "role": "Latent regime segmentation in time series via probabilistic assignments informed by prediction/reconstruction error.",
+      "relationship_sentence": "By treating environments as latent regimes in dynamical systems, DynaInfer echoes SLDS\u2019 insight that regime identities can be inferred from prediction discrepancies, adapting this idea to modern neural predictors and generalization goals."
+    },
+    {
+      "title": "Adaptive Mixtures of Local Experts",
+      "authors": "Robert A. Jacobs, Michael I. Jordan, Steven J. Nowlan, Geoffrey E. Hinton",
+      "year": 1991,
+      "role": "Mixture-of-experts framework with data-dependent assignment and alternating/gated training.",
+      "relationship_sentence": "DynaInfer\u2019s mechanism of assigning samples to environment-specific components based on error signals is conceptually aligned with mixture-of-experts responsibilities, providing an algorithmic blueprint for alternating assignment and model updates."
+    }
+  ],
+  "synthesis_narrative": "DynaInfer\u2019s core contribution\u2014inferring environment specifications directly from data to enable generalizable learning of dynamical systems\u2014sits at the intersection of environment-based generalization and latent-variable modeling. Invariant Risk Minimization (IRM) crystallized the goal of learning predictors stable across environments, while Group DRO and Risk Extrapolation (REx/VREx) operationalized robustness by optimizing worst-case or equalized risk across labeled groups. These methods, however, presuppose access to environment labels. EIIL bridged this gap by proposing to infer environments that expose spurious correlations for invariant learning, establishing that environment discovery can be framed as an optimization objective. DynaInfer extends this thread into the dynamical systems domain and introduces a principled, training-round\u2013wise environment assignment based on prediction errors from fixed neural networks.\nAlgorithmically, DynaInfer\u2019s alternating procedure is rooted in classical EM: it iterates between estimating latent assignments (environments) and updating model parameters, using prediction errors as a surrogate for responsibilities. For time-series structure, Switching Linear Dynamical Systems provide a direct precedent for inferring latent regimes via discrepancies in predictive fit, a perspective DynaInfer updates with modern neural dynamics models and generalization objectives. Mixture-of-experts further informs the use of error-driven gating and alternating training. Synthesizing these lines, DynaInfer offers theoretically grounded alternating optimization without environment labels and empirically demonstrates that prediction-error\u2013based environment inference enables robust, invariant learning across diverse dynamical systems.",
+  "analysis_timestamp": "2026-01-07T00:02:04.921302"
+}

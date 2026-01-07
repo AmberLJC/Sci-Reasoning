@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Jonathan Ho; Ajay Jain; Pieter Abbeel",
+      "year": 2020,
+      "role": "Foundational diffusion framework defining the forward noising and reverse denoising process used in image-to-image diffusion.",
+      "relationship_sentence": "OCTDiff builds directly on DDPM\u2019s reverse process for conditional generation, modifying it with Adaptive Noise Aggregation (ANA) to better handle portable OCT noise characteristics and data scarcity."
+    },
+    {
+      "title": "Improved Denoising Diffusion Probabilistic Models",
+      "authors": "Alex Nichol; Prafulla Dhariwal",
+      "year": 2021,
+      "role": "Introduced practical training/sampling refinements (cosine noise schedule, learned variance) that stabilize denoising dynamics.",
+      "relationship_sentence": "The idea that noise behavior across timesteps should be explicitly modeled informs OCTDiff\u2019s ANA, which adaptively aggregates noise estimates to further stabilize the reverse process beyond fixed schedules."
+    },
+    {
+      "title": "Image Super-Resolution via Iterative Refinement (SR3)",
+      "authors": "Chitwan Saharia; Jonathan Ho; William Chan; Tim Salimans; David J. Fleet; Mohammad Norouzi",
+      "year": 2021,
+      "role": "Pioneered diffusion-based image super-resolution via conditional iterative refinement.",
+      "relationship_sentence": "OCTDiff adopts SR3\u2019s image-conditioned diffusion paradigm for SR/enhancement but augments it with Multi-Scale Cross-Attention (MSCA) and clinically guided losses tailored to preserve retinal microstructures."
+    },
+    {
+      "title": "High-Resolution Image Synthesis with Latent Diffusion Models",
+      "authors": "Robin Rombach; Andreas Blattmann; Dominik Lorenz; Patrick Esser; Bj\u00f6rn Ommer",
+      "year": 2022,
+      "role": "Established cross-attention in UNet at multiple scales for conditioning signals and efficient diffusion architectures.",
+      "relationship_sentence": "OCTDiff\u2019s MSCA is inspired by LDM\u2019s multi-scale cross-attention, repurposed from text/image conditioning to align low-/high-quality OCT features across UNet resolutions."
+    },
+    {
+      "title": "Elucidating the Design Space of Diffusion-Based Generative Models",
+      "authors": "Tero Karras; Miika Aittala; Timo Aila; Samuli Laine",
+      "year": 2022,
+      "role": "Clarified noise-level parameterization, sigma-conditioning, and sampler choices that affect denoising stability and quality.",
+      "relationship_sentence": "EDM\u2019s sigma-conditioning motivates OCTDiff\u2019s ANA to explicitly aggregate noise-level\u2013conditioned predictions, improving reverse-process robustness under clinical noise and small datasets."
+    },
+    {
+      "title": "Attention U-Net: Learning Where to Look for the Pancreas",
+      "authors": "Ozan Oktay; Jo Schlemper; et al.",
+      "year": 2018,
+      "role": "Introduced attention mechanisms within UNet for medical imaging to focus on salient anatomical structures.",
+      "relationship_sentence": "OCTDiff adapts the attention-gated UNet idea into a multi-scale cross-attention module that aligns features across resolutions, preserving fine retinal layers in portable OCT."
+    },
+    {
+      "title": "Perceptual Losses for Real-Time Style Transfer and Super-Resolution",
+      "authors": "Justin Johnson; Alexandre Alahi; Li Fei-Fei",
+      "year": 2016,
+      "role": "Popularized feature-space (perceptual) losses to align reconstructions with human-perceived quality instead of pixel fidelity.",
+      "relationship_sentence": "OCTDiff extends perceptual-loss principles by using clinician-derived quality scores to guide training, mitigating overfitting and prioritizing diagnostically relevant structures in OCT."
+    }
+  ],
+  "synthesis_narrative": "OCTDiff\u2019s core advances arise at the intersection of diffusion modeling for super-resolution, improved denoising dynamics, and attention mechanisms tailored to medical imaging. DDPM established the reverse denoising process that OCTDiff inherits for conditional image-to-image generation, while Improved DDPMs and EDM highlighted how noise schedules, variance parameterization, and sigma-conditioning critically shape stability and fidelity. Building on these insights, OCTDiff\u2019s Adaptive Noise Aggregation (ANA) adaptively fuses noise-level\u2013conditioned predictions across timesteps to stabilize and accelerate the reverse process under the high noise and limited-data regimes of portable OCT.\nSR3 demonstrated that diffusion is a powerful paradigm for super-resolution via iterative refinement, directly motivating OCTDiff\u2019s image-conditioned diffusion for OCT enhancement. To preserve subtle retinal microstructures, OCTDiff strengthens the conditioning pathway with Multi-Scale Cross-Attention (MSCA), inspired by LDM\u2019s multi-resolution cross-attention in UNet but repurposed to align low-/high-quality OCT features rather than text-image signals. This is further grounded in the medical imaging literature by Attention U-Net, which showed that attention within UNet helps focus on salient anatomy.\nFinally, while perceptual losses are standard for visually faithful SR, OCTDiff replaces generic perceptual proxies with clinician-driven quality scores, aligning optimization with diagnostic utility. Together, these lines of work directly inform OCTDiff\u2019s bridged diffusion formulation: a stabilized, clinically guided, attention-augmented diffusion pipeline that upgrades portable OCT images while preserving fine retinal structures.",
+  "analysis_timestamp": "2026-01-07T00:02:04.924581"
+}

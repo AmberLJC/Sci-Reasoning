@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "A Simple Framework for Contrastive Learning of Visual Representations",
+      "authors": "Ting Chen et al.",
+      "year": 2020,
+      "role": "Gap Identification",
+      "relationship_sentence": "SimCLR established that contrastive learning performance scales strongly with large in-batch negatives, highlighting the batch-size limitation that B3 explicitly targets by curating batches rich in hard negatives without requiring huge batch sizes."
+    },
+    {
+      "title": "Learning Transferable Visual Models From Natural Language Supervision",
+      "authors": "Alec Radford et al.",
+      "year": 2021,
+      "role": "Baseline",
+      "relationship_sentence": "CLIP is the canonical multimodal contrastive baseline that relies on massive in-batch negatives; B3 is designed to improve CLIP-style training by constructing high-quality batches that emulate the benefits of very large batches."
+    },
+    {
+      "title": "Momentum Contrast for Unsupervised Visual Representation Learning",
+      "authors": "Kaiming He et al.",
+      "year": 2020,
+      "role": "Related Problem",
+      "relationship_sentence": "MoCo tackles the small-batch constraint by using a memory queue to enlarge the negative set; B3 addresses the same bottleneck via a complementary path\u2014batch construction\u2014eschewing memory queues in favor of curated, hard-negative-dense batches."
+    },
+    {
+      "title": "Unsupervised Feature Learning via Non-Parametric Instance Discrimination",
+      "authors": "Zhirong Wu et al.",
+      "year": 2018,
+      "role": "Foundation",
+      "relationship_sentence": "Instance Discrimination introduced large external negative pools via a memory bank, cementing the importance of negative abundance in contrastive training, a core assumption that B3 operationalizes through smarter batch composition instead of external memories."
+    },
+    {
+      "title": "Approximate Nearest Neighbor Negative Contrastive Learning for Dense Text Retrieval (ANCE)",
+      "authors": "Luyu Xiong et al.",
+      "year": 2021,
+      "role": "Extension",
+      "relationship_sentence": "ANCE showed that mining hard negatives using ANN over a (teacher/current) model\u2019s embedding space accelerates dual-encoder training; B3 extends this idea from per-query mining to dataset-wide ranking and community-based batch construction using a teacher."
+    },
+    {
+      "title": "Hard Negative Mixing for Contrastive Learning",
+      "authors": "Yannis Kalantidis et al.",
+      "year": 2020,
+      "role": "Inspiration",
+      "relationship_sentence": "This work demonstrated that specifically emphasizing hard negatives improves contrastive learning; B3 operationalizes this by systematically discovering cohorts of mutually hard negatives and packing them into the same batch."
+    },
+    {
+      "title": "Smart Mining for Deep Metric Learning",
+      "authors": "Benjamin Harwood et al.",
+      "year": 2017,
+      "role": "Inspiration",
+      "relationship_sentence": "Smart Mining introduced principled offline mining using nearest-neighbor structure to select informative samples; B3 echoes this principle at scale by building a teacher-induced similarity graph and applying community detection to form high-yield batches."
+    }
+  ],
+  "synthesis_narrative": "B3\u2019s core innovation\u2014constructing high-quality batches by mining sets of mutually hard negatives with a teacher-derived similarity graph\u2014emerges from two converging lines of work. First, contrastive learning\u2019s reliance on negative abundance was cemented by Instance Discrimination and then amplified by SimCLR, which showed that performance improves markedly with large in-batch negatives, and by CLIP, which operationalized this at multimodal scale. These works defined both the problem formulation and the practical \u2018batch barrier\u2019 that B3 aims to break. A second line tackled the same bottleneck by enlarging the negative pool beyond the batch: MoCo used a momentum queue, while retrieval research (ANCE) showed that mining hard negatives via ANN over a teacher/current model yields more informative training signals than random in-batch negatives. In parallel, metric learning developed principled batch/sample selection strategies, with Smart Mining demonstrating offline nearest-neighbor-driven selection and Hard Negative Mixing proving that emphasizing hard negatives accelerates contrastive learning. B3 synthesizes these insights: like ANCE, it leverages a pretrained teacher to score global similarity, but it departs by constructing a sparse similarity graph and using community structure to discover cohorts of examples that are particularly confusable, then packs them together to maximize in-batch hardness. In doing so, B3 bypasses the need for massive batches or memory banks while preserving the core benefits of hard, plentiful negatives.",
+  "analysis_timestamp": "2026-01-06T23:08:23.947454"
+}

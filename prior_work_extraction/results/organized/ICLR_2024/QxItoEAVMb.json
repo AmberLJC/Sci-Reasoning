@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Tianshou: A Highly Modularized Deep Reinforcement Learning Library",
+      "authors": "Weng et al.",
+      "year": 2020,
+      "arxiv_id": "",
+      "role": "Extension",
+      "relationship_sentence": "TorchRL\u2019s TensorDict directly generalizes Tianshou\u2019s Batch container by adding nested keys, shared storage, and zero-copy, device-aware views to overcome Batch\u2019s limitations for large-scale PyTorch RL."
+    },
+    {
+      "title": "Acme: A Research Framework for Distributed Reinforcement Learning",
+      "authors": "Hoffman et al.",
+      "year": 2020,
+      "arxiv_id": "",
+      "role": "Inspiration",
+      "relationship_sentence": "Acme\u2019s actor\u2013learner decomposition and spec-validated nested data pipelines motivated TorchRL\u2019s modular collectors and replay interfaces, with TensorDict unifying the data passed between components in a PyTorch-native way."
+    },
+    {
+      "title": "RLlib: Abstractions for Distributed Reinforcement Learning",
+      "authors": "Liang et al.",
+      "year": 2018,
+      "arxiv_id": "1712.09381",
+      "role": "Baseline",
+      "relationship_sentence": "RLlib\u2019s SampleBatch and policy/worker abstractions serve as the principal baseline that TorchRL improves upon by replacing Ray-centric batches with TensorDict to reduce Python overhead and enable zero-copy, device-aware pipelines."
+    },
+    {
+      "title": "TF-Agents: A Library for Reinforcement Learning in TensorFlow",
+      "authors": "Guadarrama et al.",
+      "year": 2018,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "TF-Agents introduced Trajectory/TimeStep structures with rigorous Specs and environment wrappers, and TorchRL adopts this idea by providing a PyTorch analogue where TensorDict carries spec-checked transitions through transforms."
+    },
+    {
+      "title": "rlpyt: A Research Code Base for Deep Reinforcement Learning in PyTorch",
+      "authors": "Stooke et al.",
+      "year": 2019,
+      "arxiv_id": "",
+      "role": "Inspiration",
+      "relationship_sentence": "rlpyt\u2019s high-throughput parallel sampling and GPU-affinity pipelines directly informed TorchRL\u2019s vectorized collectors and memory-mapped TensorDict storage for efficient multiprocessing and data movement."
+    },
+    {
+      "title": "JAX: Composable Transformations of Python Programs",
+      "authors": "Bradbury et al.",
+      "year": 2018,
+      "arxiv_id": "",
+      "role": "Inspiration",
+      "relationship_sentence": "JAX\u2019s PyTree abstraction showed that nested containers enable composable transformations (e.g., tree_map/vmap), inspiring TensorDict\u2019s tree-like tensor container with functional transforms and batched operations in PyTorch."
+    }
+  ],
+  "synthesis_narrative": "Tianshou demonstrated that a dict-like, batched container (Batch) can streamline RL pipelines in PyTorch, but its flat structure and limited device semantics constrained scalability and composability. Acme established a clear actor\u2013learner decomposition and relied on spec-validated, nested data structures to flow trajectories across collectors, replay, and learners, emphasizing modularity and consistency in large-scale RL. RLlib defined SampleBatch and policy/worker abstractions for scalable training, but its Ray-centric design and Python-level batching introduced overhead and limited PyTorch-native zero-copy data handling. TF-Agents introduced Trajectory/TimeStep along with rigorous Specs and environment wrappers, crystallizing the value of spec-checked transitions and transformable data as a first-class design principle. rlpyt showed how parallel environment sampling, memory pinning, and GPU affinity can deliver high throughput in PyTorch when data movement is carefully engineered. JAX, via PyTrees, proved that nested containers enable powerful, composable transformations across structured data, guiding how tree-like abstractions can unlock seamless vectorization and transformations. Together, these works revealed both the utility of structured, spec-validated trajectory representations and the need for a PyTorch-native, zero-copy, nested abstraction that composes with high-throughput collectors and modular RL components. TorchRL synthesizes these insights by introducing TensorDict\u2014a tree-structured, device-aware tensor container with shared storage and views\u2014and by organizing collectors, replay, transforms, and learners around it, yielding a unified, efficient, and extensible control library in PyTorch.",
+  "target_paper": {
+    "title": "TorchRL: A data-driven decision-making library for PyTorch",
+    "authors": "Albert Bou, Matteo Bettini, Sebastian Dittert, Vikash Kumar, Shagun Sodhani, Xiaomeng Yang, Gianni De Fabritiis, Vincent Moens",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Reinforcement Learning, pytorch, control, robotics",
+    "abstract": "PyTorch has ascended as a premier machine learning framework, yet it lacks a native and comprehensive library for decision and control tasks suitable for large development teams dealing with complex real-world data and environments. To address this issue, we propose TorchRL, a generalistic control library for PyTorch that provides well-integrated, yet standalone components. We introduce a new and flexible PyTorch primitive, the TensorDict, which facilitates streamlined algorithm development across the many branches of Reinforcement Learning (RL) and control. We provide a detailed description of the building blocks and an extensive overview of the library across domains and tasks. Finally, we experimentally demonstrate its reliability and flexibility, and show comparative benchmarks to demonstrate its computational efficiency. TorchRL fosters long-term support and is publicly available on GitHub for greater reproducibility and collaboration within the research community. The code is ope",
+    "openreview_id": "QxItoEAVMb",
+    "forum_id": "QxItoEAVMb"
+  },
+  "analysis_timestamp": "2026-01-06T11:03:38.168956"
+}

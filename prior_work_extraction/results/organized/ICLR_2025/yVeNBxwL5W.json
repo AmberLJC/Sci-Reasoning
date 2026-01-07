@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Score-Based Generative Modeling through Stochastic Differential Equations",
+      "authors": "Yang Song, Jascha Sohl-Dickstein, Diederik P. Kingma, Abhishek Kumar, Stefano Ermon, Ben Poole",
+      "year": 2021,
+      "role": "Foundational SDE/PF-ODE theory and samplers",
+      "relationship_sentence": "MaRS explicitly solves the reverse-time SDE and the probability flow ODE for the MR process; this formulation and the predictor\u2013corrector perspective come directly from the SDE/PF-ODE framework established in this work."
+    },
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Jonathan Ho, Ajay Jain, Pieter Abbeel",
+      "year": 2020,
+      "role": "Base diffusion formulation (VP/variance scheduling)",
+      "relationship_sentence": "MaRS inherits the variance-preserving diffusion parameterization and time-dependent noise schedules introduced here, then adapts them to the mean-reverting SDE structure to enable compatible fast sampling."
+    },
+    {
+      "title": "Denoising Diffusion Implicit Models",
+      "authors": "Jiaming Song, Chenlin Meng, Stefano Ermon",
+      "year": 2021,
+      "role": "Deterministic ODE sampling of diffusion models",
+      "relationship_sentence": "By leveraging the PF-ODE viewpoint popularized by DDIM, MaRS derives a semi-analytical PF-ODE solution for MR diffusion that decomposes into a closed-form part plus a learnable integral."
+    },
+    {
+      "title": "DPM-Solver: A Fast ODE Solver for Diffusion Probabilistic Model Sampling in Around 10 Steps",
+      "authors": "Cheng Lu, Jianfei Chen, Qiang Liu",
+      "year": 2022,
+      "role": "Semi-analytical exponential-integrator solvers for diffusion ODEs",
+      "relationship_sentence": "MaRS\u2019s core idea\u2014analytically integrating the linear part of the dynamics and numerically approximating the network-dependent integral\u2014directly mirrors the exponential-integrator principle of DPM-Solver, adapted to the MR SDE/ODE forms."
+    },
+    {
+      "title": "Elucidating the Design Space of Diffusion-Based Generative Models",
+      "authors": "Tero Karras, Miika Aittala, Timo Aila, Samuli Laine",
+      "year": 2022,
+      "role": "Sampling parameterization, step schedules, and higher-order ODE solvers",
+      "relationship_sentence": "MaRS borrows practical insights from EDM on parameterizations (e.g., sigma/LogSNR) and stable, few-step ODE integration, informing its solver choices and NFE-efficient scheduling for MR diffusion."
+    },
+    {
+      "title": "Classifier-Free Diffusion Guidance",
+      "authors": "Jonathan Ho, Tim Salimans",
+      "year": 2022,
+      "role": "Baseline paradigm for controllable generation via score modification",
+      "relationship_sentence": "MaRS is motivated in contrast to guidance-based control; by targeting MR\u2019s structural-SDE approach instead of score modification, it addresses controllability while keeping fast sampling through tailored SDE/ODE solvers."
+    }
+  ],
+  "synthesis_narrative": "MaRS targets the problem of accelerating sampling for Mean Reverting (MR) diffusion, where controllability is built into the SDE structure rather than via score modifications. Its key technical move is to derive semi-analytical solutions for both the reverse-time SDE and the probability flow ODE of the MR process: a closed-form deterministic component plus an integral term evaluated with the neural network. This formulation rests squarely on the score-based SDE/PF-ODE framework of Song et al., which formalized reverse-time SDEs, PF-ODEs, and predictor\u2013corrector sampling. DDPM provides the variance-preserving diffusion family and noise schedules that MR generalizes by adding a mean-reverting drift, while DDIM\u2019s deterministic ODE viewpoint motivates solving the PF-ODE directly for efficiency.\n\nThe most direct algorithmic influence is DPM-Solver, whose exponential-integrator strategy analytically integrates the linear time-varying part of the diffusion ODE and numerically approximates the network-dependent residual. MaRS adopts this semi-analytical separation but re-derives it for the MR SDE/ODE, whose drift and covariance have different structure from standard VP/DDIM forms. Practical design choices for stable few-step integration and parameterization are informed by EDM, which clarified sigma/LogSNR parameterizations and robust step schedules. Finally, classifier-free guidance frames the motivation: rather than manipulating scores to impose conditions (the prevailing controllability route), MR encodes conditions in the SDE itself. MaRS makes that structurally controlled formulation computationally practical by supplying matching fast SDE/ODE solvers with low NFE.",
+  "analysis_timestamp": "2026-01-06T23:42:48.097065"
+}

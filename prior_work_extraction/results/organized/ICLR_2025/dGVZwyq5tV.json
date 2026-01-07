@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "SparseGPT: Massive Language Models Can Be Accurately Pruned in One-Shot",
+      "authors": "Aleksandar Frantar and Dan Alistarh",
+      "year": 2023,
+      "role": "Training-free sparsification of LLMs (weights) with practical accuracy, showing that post-training modifications can be effective at LLM scale and motivating reliance on efficient sparse GEMM.",
+      "relationship_sentence": "TEAL adopts the same training-free philosophy as SparseGPT but applies it to activations (not weights), leveraging simple magnitude criteria and sparse kernels for immediate inference speedups."
+    },
+    {
+      "title": "LLM.int8(): 8-bit Matrix Multiplication for Transformers at Scale",
+      "authors": "Tim Dettmers, Mike Lewis, Yacine Jernite, and Luke Zettlemoyer",
+      "year": 2022,
+      "role": "Outlier-aware quantization that characterized heavy-tailed activation channels in modern LLMs and used mixed precision to preserve salient activations.",
+      "relationship_sentence": "TEAL\u2019s magnitude-based activation pruning is grounded in the same observation of heavy-tailed activation distributions, keeping the largest-magnitude components while safely zeroing small ones."
+    },
+    {
+      "title": "SmoothQuant: Accurate and Efficient Post-Training Quantization for Large Language Models",
+      "authors": "Xiao et al.",
+      "year": 2023,
+      "role": "Post-training method that rebalances weight/activation scales to tame activation outliers, enabling low-precision inference without retraining.",
+      "relationship_sentence": "By showing that activation statistics can be manipulated post hoc for efficiency, SmoothQuant directly informs TEAL\u2019s training-free, statistics-driven thresholds and its compatibility with weight/activation quantization."
+    },
+    {
+      "title": "AWQ: Activation-Aware Weight Quantization for LLMs",
+      "authors": "Lin et al.",
+      "year": 2023,
+      "role": "Activation-aware calibration that preserves high-importance channels during post-training quantization.",
+      "relationship_sentence": "TEAL similarly prioritizes high-magnitude activations, extending the activation-aware preservation principle from quantization of weights to pruning of activations themselves."
+    },
+    {
+      "title": "Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Mixture-of-Experts",
+      "authors": "William Fedus, Barret Zoph, and Noam Shazeer",
+      "year": 2021,
+      "role": "Top-k expert gating that realizes sparse activation at inference for efficiency and scale.",
+      "relationship_sentence": "TEAL mirrors the top-k gating spirit within each MLP layer by selecting only the largest-magnitude hidden activations, achieving sparse activation without training learned routers."
+    },
+    {
+      "title": "Gated Linear Units (GLU)",
+      "authors": "Yann N. Dauphin, Angela Fan, Michael Auli, and David Grangier",
+      "year": 2017,
+      "role": "Introduced gated MLPs, foundational to SwiGLU used in modern LLMs, shaping activation distributions and gating behavior in feedforward blocks.",
+      "relationship_sentence": "Because LLaMA/Mistral use SwiGLU-style MLPs, TEAL\u2019s per-layer magnitude pruning is tailored to these gated hidden states, leveraging GLU-style architectures\u2019 activation structure."
+    }
+  ],
+  "synthesis_narrative": "TEAL\u2019s core idea\u2014training-free, magnitude-based activation sparsity across all layers of modern LLMs\u2014emerges from two converging threads of prior work. First, post-training modification at LLM scale has proven both effective and practical: SparseGPT demonstrated that large models can be sparsified without retraining by relying on simple saliency criteria and efficient sparse kernels. Parallel advances in post-training quantization (LLM.int8, SmoothQuant, AWQ) revealed that activations in Transformers are heavy-tailed with prominent outliers, and that preserving high-magnitude channels is crucial for quality. These works established that activation statistics can be exploited post hoc to deliver efficiency while maintaining accuracy\u2014directly motivating TEAL\u2019s choice of magnitude-based activation pruning and its seamless compatibility with quantization.\n\nSecond, the efficiency of sparse activation has a conceptual precedent in Mixture-of-Experts: Switch Transformers use top-k gating to activate only selected experts, yielding sparse computation pathways at inference. TEAL internalizes this principle at a finer granularity by selecting the top-magnitude elements of hidden states within each feedforward block, requiring no learned router or additional training. Finally, because modern LLMs rely on gated MLPs (GLU/SwiGLU), TEAL\u2019s activation selection aligns naturally with the gating-induced activation structure these layers produce. In sum, TEAL synthesizes training-free sparsity (SparseGPT), activation-aware calibration (LLM.int8, SmoothQuant, AWQ), and top-k sparse activation routing (Switch) into a single, practical method that pairs with optimized sparse kernels to yield real wall-clock speedups.",
+  "analysis_timestamp": "2026-01-06T23:42:48.090287"
+}

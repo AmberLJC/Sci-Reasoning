@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Learning to predict by the methods of temporal differences",
+      "authors": "Richard S. Sutton",
+      "year": 1988,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "HUBL\u2019s core idea of mixing Monte\u2011Carlo returns with bootstrapped targets directly builds on the TD(\u03bb) insight that convexly blending MC and TD targets trades bias for variance, which HUBL adapts by data\u2011dependent (trajectory\u2011quality) weighting in the offline setting."
+    },
+    {
+      "title": "Policy Invariance Under Reward Transformations: Theory and Application to Reward Shaping",
+      "authors": "Andrew Y. Ng et al.",
+      "year": 1999,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "HUBL\u2019s practical implementation via relabeling rewards and effective discounts relies on the potential\u2011based reward shaping equivalence to preserve optimal solutions while altering per\u2011transition rewards, enabling its drop\u2011in integration with existing algorithms."
+    },
+    {
+      "title": "Stabilizing Off-Policy Q-Learning via Bootstrapping Error Reduction (BEAR)",
+      "authors": "Aviral Kumar et al.",
+      "year": 2019,
+      "arxiv_id": "1906.00949",
+      "role": "Gap Identification",
+      "relationship_sentence": "BEAR formalized bootstrapping error accumulation under distribution shift in offline RL, the precise limitation HUBL targets by leaning on Monte\u2011Carlo trajectory returns (when reliable) to curb harmful bootstrap propagation."
+    },
+    {
+      "title": "Conservative Q-Learning for Offline Reinforcement Learning",
+      "authors": "Aviral Kumar et al.",
+      "year": 2020,
+      "arxiv_id": "2006.04779",
+      "role": "Baseline",
+      "relationship_sentence": "As a canonical bootstrapping\u2011based offline RL method, CQL\u2019s Bellman backups are the exact target HUBL modifies by blending in Monte\u2011Carlo estimates on high\u2011return data, yielding consistent empirical gains over CQL."
+    },
+    {
+      "title": "A Minimalist Approach to Offline Reinforcement Learning (TD3+BC)",
+      "authors": "Scott Fujimoto et al.",
+      "year": 2021,
+      "arxiv_id": "2106.06860",
+      "role": "Baseline",
+      "relationship_sentence": "TD3+BC employs standard TD bootstrapping with behavior cloning regularization, and HUBL plugs into its target computation by replacing part of the TD target with Monte\u2011Carlo trajectory returns to reduce bootstrapping bias."
+    },
+    {
+      "title": "Offline Reinforcement Learning with Implicit Q-Learning",
+      "authors": "Ilya Kostrikov et al.",
+      "year": 2021,
+      "arxiv_id": "2110.06169",
+      "role": "Baseline",
+      "relationship_sentence": "IQL still relies on value bootstrapping in its expectile\u2011based value learning, and HUBL directly augments this step by blending in Monte\u2011Carlo heuristics to improve stability and performance on high\u2011quality trajectories."
+    }
+  ],
+  "synthesis_narrative": "Temporal-Difference learning introduced the \u03bb-return, showing that a convex blend of Monte-Carlo and bootstrapped targets can systematically navigate the bias\u2013variance tradeoff; this established that mixing targets is a principled way to improve value estimation. Potential-based reward shaping then proved that one can transform rewards (and effectively discounts) without changing optimal policies, providing a theoretical conduit to reparameterize modified backups as simple dataset relabeling. In offline reinforcement learning, BEAR identified bootstrapping error accumulation under distribution shift as a core failure mode, highlighting that blindly propagating TD targets from out-of-distribution regions degrades learning. Conservative Q-Learning operationalized pessimism within value backups to mitigate overestimation while remaining fundamentally bootstrapping-based. TD3+BC demonstrated that even minimalist TD bootstrapping coupled with behavior cloning can be competitive in offline settings, underscoring the centrality\u2014and fragility\u2014of TD targets. Implicit Q-Learning showed that changing the value-learning objective (expectiles) can alleviate distribution shift, yet it still depends on bootstrapped value propagation.\nTogether, these works reveal both the power and pitfalls of bootstrapping in offline RL and that blending targets can reduce estimation complexity. The natural next step is to fuse Monte-Carlo returns from the dataset with TD backups, weighting toward MC on high-return, reliable trajectories, and to implement this blend via reward/discount relabeling guaranteed by shaping theory. This synthesis directly addresses bootstrapping error while preserving the plug-and-play structure of leading offline RL algorithms.",
+  "target_paper": {
+    "title": "Improving Offline RL by Blending Heuristics",
+    "authors": "Sinong Geng, Aldo Pacchiano, Andrey Kolobov, Ching-An Cheng",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "offline RL, heuristic, RL, MDP, sequential decision-making",
+    "abstract": "We propose **H**e**u**ristic **Bl**ending (HUBL), a simple performance-improving technique for a broad class of offline RL algorithms based on value bootstrapping. HUBL modifies the Bellman operators used in these algorithms, partially replacing the bootstrapped values with heuristic ones that are estimated with Monte-Carlo returns. For trajectories with higher returns, HUBL relies more on the heuristic values and less on bootstrapping; otherwise, it leans more heavily on bootstrapping. HUBL is very easy to combine with many existing offline RL implementations by relabeling the offline datasets with adjusted rewards and discount factors. We derive a theory that explains HUBL's effect on offline RL as reducing offline RL's complexity and thus increasing its finite-sample performance.  Furthermore, we empirically demonstrate that HUBL consistently improves the policy quality of four state-of-the-art bootstrapping-based offline RL algorithms (ATAC, CQL, TD3+BC, and IQL), by 9% on average ",
+    "openreview_id": "MCl0TLboP1",
+    "forum_id": "MCl0TLboP1"
+  },
+  "analysis_timestamp": "2026-01-06T07:58:34.782811"
+}

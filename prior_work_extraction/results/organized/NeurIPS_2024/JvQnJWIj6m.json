@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Self-Supervised Learning from Images with a Joint-Embedding Predictive Architecture (I-JEPA)",
+      "authors": "Mahmoud Assran, Mathilde Caron, Piotr Bojanowski, Ishan Misra, Yann LeCun, et al.",
+      "year": 2023,
+      "role": "Direct architectural predecessor",
+      "relationship_sentence": "C-JEPA retains I-JEPA\u2019s masked latent prediction and teacher\u2013student setup, explicitly targeting I-JEPA\u2019s observed failure modes (EMA not fully preventing collapse and inaccurate prediction of the mean of patch embeddings) and replaces their mitigation with VICReg-style statistical regularization."
+    },
+    {
+      "title": "A Path Towards Autonomous Machine Intelligence",
+      "authors": "Yann LeCun",
+      "year": 2022,
+      "role": "Conceptual foundation of JEPA",
+      "relationship_sentence": "This work articulated the JEPA principle of predicting abstract latent variables rather than pixels, which C-JEPA follows while augmenting the framework with contrastive-style invariance and variance/covariance constraints to stabilize learning."
+    },
+    {
+      "title": "VICReg: Variance-Invariance-Covariance Regularization for Self-Supervised Learning",
+      "authors": "Adrien Bardes, Jean Ponce, Yann LeCun",
+      "year": 2022,
+      "role": "Core regularization integrated into C-JEPA",
+      "relationship_sentence": "C-JEPA directly incorporates VICReg\u2019s variance and covariance terms to prevent representational collapse and its invariance term to ensure the mean agreement of augmented-view representations, addressing the precise deficiencies observed in I-JEPA."
+    },
+    {
+      "title": "Barlow Twins: Self-Supervised Learning via Redundancy Reduction",
+      "authors": "Jure Zbontar, Li Jing, Ishan Misra, Yann LeCun, St\u00e9phane Deny",
+      "year": 2021,
+      "role": "Redundancy-reduction precursor to VICReg",
+      "relationship_sentence": "By demonstrating that decorrelating feature dimensions avoids collapse without negatives, Barlow Twins motivated the covariance/whitening-style regularization that C-JEPA leverages through VICReg to maintain feature diversity."
+    },
+    {
+      "title": "Bootstrap Your Own Latent (BYOL): A New Approach to Self-Supervised Learning",
+      "authors": "Jean-Bastien Grill, Florian Strub, Florent Altch\u00e9, Corentin Tallec, et al.",
+      "year": 2020,
+      "role": "EMA teacher-student paradigm and collapse considerations",
+      "relationship_sentence": "C-JEPA critiques the reliance on EMA teachers popularized by BYOL\u2014also used in I-JEPA\u2014showing that EMA alone may not prevent collapse and motivating the addition of explicit variance/covariance constraints."
+    },
+    {
+      "title": "Exploring Simple Siamese Representation Learning (SimSiam)",
+      "authors": "Xinlei Chen, Kaiming He",
+      "year": 2021,
+      "role": "Analysis of collapse without negatives and importance of constraints",
+      "relationship_sentence": "SimSiam\u2019s findings that stop-gradient and predictor are not sufficient to guarantee stability inform C-JEPA\u2019s move toward principled statistical constraints (VICReg) rather than architectural tricks alone."
+    },
+    {
+      "title": "Representation Learning with Contrastive Predictive Coding",
+      "authors": "Aaron van den Oord, Yazhe Li, Oriol Vinyals",
+      "year": 2018,
+      "role": "Early bridge between predictive objectives and contrastive learning",
+      "relationship_sentence": "CPC\u2019s framing of prediction in latent space with contrastive objectives motivates C-JEPA\u2019s goal of connecting JEPA-style prediction with contrastive/self-distillation regularizers to obtain stable, invariant representations."
+    }
+  ],
+  "synthesis_narrative": "C-JEPA\u2019s core contribution is to stabilize and calibrate the Joint-Embedding Predictive Architecture by inserting principled statistical constraints drawn from the contrastive/self-distillation literature. The immediate precursor, I-JEPA, operationalized LeCun\u2019s JEPA vision by predicting masked latent representations with a teacher\u2013student architecture, yet it showed two weaknesses: EMA momentum updates did not always prevent representational collapse, and the predictor struggled to match the mean of patch embeddings across views. VICReg provides exactly the ingredients missing in I-JEPA: an invariance term to align representations of the same image under augmentation and explicit variance and covariance regularizers to maintain per-dimension spread and decorrelation, thereby preventing trivial solutions. This redundancy-reduction lineage traces back to Barlow Twins, which demonstrated that decorrelation can avoid collapse without negatives and informed VICReg\u2019s covariance term.\nAt the same time, teacher\u2013student methods like BYOL (and analyses from SimSiam) highlighted that EMA or stop-gradient alone are fragile collapse mitigations, motivating C-JEPA\u2019s shift toward explicit statistical constraints. Finally, CPC established a conceptual bridge between predictive modeling in latent space and contrastive objectives, foreshadowing C-JEPA\u2019s unification of JEPA-style prediction with contrastive-family regularization. Together, these works directly shaped C-JEPA: it keeps JEPA\u2019s masked latent prediction, replaces heuristic anti-collapse mechanisms with VICReg\u2019s variance/covariance regularization, and enforces mean invariance across augmented views to correct I-JEPA\u2019s bias, yielding a more robust self-supervised learner.",
+  "analysis_timestamp": "2026-01-07T00:02:04.757739"
+}

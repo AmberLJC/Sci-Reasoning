@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "MasterRTL: Pre-synthesis PPA Estimation at RTL with Graph Neural Networks",
+      "authors": "Jianan Mu et al.",
+      "year": 2023,
+      "role": "Baseline",
+      "relationship_sentence": "Provides the prevailing RTL-level GNN framework for early PPA/timing estimation that RTLDistil directly improves by distilling layout-aware timing knowledge into the RTL student to close the accuracy gap."
+    },
+    {
+      "title": "TimingPredict: Instance-level Post-Placement Timing Prediction with Graph Neural Networks",
+      "authors": "X. Gu et al.",
+      "year": 2022,
+      "role": "Foundation",
+      "relationship_sentence": "Establishes a layout-aware GNN that accurately models physical timing after placement; RTLDistil leverages this class of post-layout GNNs as the teacher to transfer precise physical characteristics to the RTL student."
+    },
+    {
+      "title": "Distilling the Knowledge in a Neural Network",
+      "authors": "Geoffrey Hinton et al.",
+      "year": 2015,
+      "role": "Foundation",
+      "relationship_sentence": "Introduces the core knowledge distillation paradigm that RTLDistil adopts to transfer supervisory signals from an accurate teacher to a lightweight student."
+    },
+    {
+      "title": "FitNets: Hints for Thin Deep Nets",
+      "authors": "Adriana Romero et al.",
+      "year": 2015,
+      "role": "Extension",
+      "relationship_sentence": "Proposes intermediate feature (hint) matching for distillation, directly informing RTLDistil\u2019s multi\u2011granularity distillation that aligns intermediate timing representations between teacher and student."
+    },
+    {
+      "title": "Paying More Attention to Attention: Improving the Performance of ConvNets via Attention Transfer",
+      "authors": "Sergey Zagoruyko et al.",
+      "year": 2017,
+      "role": "Extension",
+      "relationship_sentence": "Introduces attention/feature-map transfer in distillation; RTLDistil\u2019s focus on timing\u2011critical features operationalizes this idea by encouraging the student to mimic teacher saliency on critical paths."
+    },
+    {
+      "title": "Cross-Modal Distillation for Supervision Transfer",
+      "authors": "Saurabh Gupta et al.",
+      "year": 2016,
+      "role": "Inspiration",
+      "relationship_sentence": "Demonstrates distillation across different input modalities; RTLDistil applies the same principle across EDA stages (layout \u2192 RTL) to transfer physical knowledge from a layout-aware teacher to an RTL-only student."
+    },
+    {
+      "title": "RTL-Timer: Fine-Grained Register-Level Timing Prediction",
+      "authors": "M. Chen et al.",
+      "year": 2023,
+      "role": "Gap Identification",
+      "relationship_sentence": "Shows that purely RTL-level timing predictors are fast but miss layout-dependent effects; RTLDistil explicitly addresses this limitation by importing post-layout physical knowledge via distillation."
+    }
+  ],
+  "synthesis_narrative": "RTLDistil\u2019s core innovation\u2014cross-stage knowledge distillation from a layout-aware teacher GNN to an RTL-level student\u2014stands on two converging lines of prior work. On the EDA side, MasterRTL established a practical RTL-level GNN framework for early PPA/timing estimation, but, like other RTL-only predictors (e.g., RTL-Timer), it struggles to capture layout-dependent timing effects. In parallel, layout-aware graph models such as TimingPredict demonstrated that post\u2011placement physical features enable highly accurate timing predictions, albeit at significantly higher computational cost. RTLDistil fuses these strands by using a layout\u2011aware teacher to imbue an efficient RTL student with physically grounded timing cues.\nOn the methodology side, the work is rooted in knowledge distillation as formalized by Hinton et al., and specifically extends the paradigm with multi\u2011granularity supervision inspired by FitNets\u2019 intermediate hint matching and attention\u2011transfer techniques of Zagoruyko and Komodakis. Crucially, RTLDistil embraces cross\u2011modal/sensor supervision transfer, echoing Gupta et al.\u2019s cross\u2011modal distillation, but recast across design stages (layout to RTL). The result is a student that maintains RTL\u2011level efficiency while recovering fidelity characteristic of layout\u2011aware models. Thus, RTLDistil directly addresses the accuracy\u2011efficiency gap identified by RTL\u2011level predictors by operationalizing distillation from the physically precise, layout\u2011aware timing models.",
+  "analysis_timestamp": "2026-01-06T23:07:19.590741"
+}

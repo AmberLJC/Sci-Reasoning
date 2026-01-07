@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "On Using Monolingual Corpora in Neural Machine Translation (Shallow/Deep Fusion)",
+      "authors": "Caglar Gulcehre, Orhan Firat, Kelvin Xu, Kyunghyun Cho, Yoshua Bengio",
+      "year": 2015,
+      "role": "Methodological antecedent: step-wise fusion of probability distributions during decoding",
+      "relationship_sentence": "DeePEn generalizes the shallow/deep fusion idea of combining LM and seq2seq probabilities at each decoding step to multiple heterogeneous LLMs by fusing their next-token distributions in a shared space."
+    },
+    {
+      "title": "Cold Fusion: Training with Pre-Trained Language Model to Improve End-to-End Speech Recognition",
+      "authors": "Anuroop Sriram, Heewoo Jun, Sanjeev Satheesh, Adam Coates",
+      "year": 2018,
+      "role": "Methodological antecedent: deeper combination of internal LM signals",
+      "relationship_sentence": "The paper\u2019s emphasis on leveraging internal probabilistic signals (rather than only final texts) echoes Cold Fusion\u2019s insight that richer internal distributions can be combined to improve decoding."
+    },
+    {
+      "title": "Edinburgh Neural Machine Translation Systems for WMT16",
+      "authors": "Rico Sennrich, Barry Haddow, Alexandra Birch",
+      "year": 2016,
+      "role": "Baseline paradigm: ensemble decoding via per-step probability averaging",
+      "relationship_sentence": "Standard NMT ensembling averages next-token probabilities across models with a shared vocabulary; DeePEn extends this paradigm to heterogeneous LLMs by resolving token misalignment through a universal relative space."
+    },
+    {
+      "title": "Distilling the Knowledge in a Neural Network",
+      "authors": "Geoffrey Hinton, Oriol Vinyals, Jeff Dean",
+      "year": 2015,
+      "role": "Conceptual foundation: soft probabilities as information carriers",
+      "relationship_sentence": "DeePEn\u2019s choice to communicate and fuse soft probability distributions (rather than hard textual outputs) is directly inspired by KD\u2019s demonstration that logits/soft targets encode transferable, complementary knowledge."
+    },
+    {
+      "title": "Products of Experts",
+      "authors": "Geoffrey E. Hinton",
+      "year": 2002,
+      "role": "Theoretical foundation: combining expert distributions",
+      "relationship_sentence": "The paper\u2019s distribution-level fusion aligns with the Products-of-Experts view that combining multiple expert distributions can yield sharper, more informative predictions than any single expert."
+    },
+    {
+      "title": "Self-Consistency Improves Chain of Thought Reasoning in Language Models",
+      "authors": "Xuezhi Wang, Jason Wei, Dale Schuurmans, Quoc V. Le, Ed Chi, et al.",
+      "year": 2022,
+      "role": "Problem framing and contrast: ensemble via multiple textual samples",
+      "relationship_sentence": "DeePEn addresses the limitations of text-only ensembling exemplified by self-consistency by instead fusing models\u2019 token-level distributions during decoding to improve generalization without extra training."
+    },
+    {
+      "title": "Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity",
+      "authors": "William Fedus, Barret Zoph, Noam Shazeer",
+      "year": 2021,
+      "role": "Broader inspiration: expert collaboration at inference",
+      "relationship_sentence": "While Switch Transformers mix experts within one model via routing, DeePEn brings the spirit of expert collaboration to independent, heterogeneous LLMs through training-free, parallel probability fusion."
+    }
+  ],
+  "synthesis_narrative": "DeePEn\u2019s core technical advance\u2014training-free, step-wise fusion of heterogeneous LLMs\u2019 next-token distributions via a universal relative space\u2014builds directly on the tradition of probability-space ensembling in sequence generation. Shallow and deep fusion in neural machine translation established that combining a model\u2019s decoder with an external LM at each decoding step can improve outputs, and Cold Fusion further underscored the value of leveraging internal probabilistic signals rather than just final texts. The WMT16 Edinburgh systems popularized per-step ensemble averaging in NMT, but these methods presuppose shared vocabularies; DeePEn tackles the missing piece: vocabulary/tokenizer heterogeneity that otherwise blocks direct logit fusion.\nKnowledge Distillation provided the conceptual basis for treating soft probability distributions as rich, transferable carriers of knowledge. Products of Experts offered a principled lens for combining multiple expert distributions to yield sharper predictions, a perspective reflected in DeePEn\u2019s fusion rule. In contrast to text-only ensemble strategies such as self-consistency, which vote over final responses and can overfit to seen distributions, DeePEn aggregates information at the distributional level during decoding, mitigating generalization issues.\nFinally, while Switch Transformers demonstrate the power of expert collaboration within a single sparse model through routing, DeePEn operationalizes a parallel, training-free collaboration across independent LLMs. Its key novelty is resolving tokenizer mismatches by mapping each model\u2019s probability space into a universal relative representation, enabling deep, step-wise collaboration without retraining or additional reward/fusion models.",
+  "analysis_timestamp": "2026-01-06T23:33:36.260602"
+}

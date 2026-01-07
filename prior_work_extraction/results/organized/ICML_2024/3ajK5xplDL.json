@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "k-Median via Successive Sampling",
+      "authors": "Ramgopal R. Mettu et al.",
+      "year": 2004,
+      "role": "Extension",
+      "relationship_sentence": "The paper\u2019s unified private clustering algorithm is a direct modification of Mettu\u2013Plaxton\u2019s successive-sampling reduction, replacing its public weight/count computations with privacy-preserving estimators across central, local, shuffle, and continual-observation models."
+    },
+    {
+      "title": "On Coresets for k-Means and k-Median",
+      "authors": "Sariel Har-Peled et al.",
+      "year": 2004,
+      "role": "Foundation",
+      "relationship_sentence": "The core idea of reducing clustering to a small weighted instance (coreset/sample) underlies the paper\u2019s strategy of privatizing only the few summary statistics needed by the 20-year-old sampling-based algorithm."
+    },
+    {
+      "title": "Turning Big Data into Tiny Data: Constant-Size Coresets for k-Means, PCA and Projective Clustering",
+      "authors": "Dan Feldman et al.",
+      "year": 2013,
+      "role": "Inspiration",
+      "relationship_sentence": "This coreset perspective directly motivates the paper\u2019s blueprint\u2014privately construct a compact weighted summary and then run a standard (non-private) clustering routine\u2014enabling a single pipeline to instantiate in multiple privacy models."
+    },
+    {
+      "title": "Calibrating Noise to Sensitivity in Private Data Analysis",
+      "authors": "Cynthia Dwork et al.",
+      "year": 2006,
+      "role": "Foundation",
+      "relationship_sentence": "The unified algorithm\u2019s centralized-DP instantiation relies on Laplace/Gaussian mechanisms and global sensitivity bounds to privatize the sampling/weight estimation steps of the classical clustering reduction."
+    },
+    {
+      "title": "What Can We Learn Privately?",
+      "authors": "Shiva P. Kasiviswanathan et al.",
+      "year": 2011,
+      "role": "Foundation",
+      "relationship_sentence": "The local model formalization and its standard locally-private frequency/count estimation primitives are the basis for plugging LDP reporting into the successive-sampling pipeline."
+    },
+    {
+      "title": "Distributed Differential Privacy via Shuffling",
+      "authors": "Albert Cheu et al.",
+      "year": 2019,
+      "role": "Foundation",
+      "relationship_sentence": "Shuffle privacy and privacy amplification by shuffling enable the paper\u2019s shuffle-model instantiation to estimate the weights/counters needed by the old sampling algorithm with substantially reduced noise."
+    },
+    {
+      "title": "Differential Privacy under Continual Observation",
+      "authors": "Cynthia Dwork et al.",
+      "year": 2010,
+      "role": "Foundation",
+      "relationship_sentence": "The binary-tree (continual-release) mechanism is used to extend the modified sampling algorithm to the continual observation setting, producing updated private clusterings over time."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core insight is to revive and slightly adapt a classic sampling-based clustering algorithm so that its few summary computations can be privatized uniformly across privacy regimes. The 20-year-old backbone is Mettu\u2013Plaxton\u2019s successive sampling, which reduces k-means/median to solving a much smaller weighted instance; this is the specific algorithmic template the authors directly extend. The broader coreset/sampling paradigm of Har-Peled\u2013Mazumdar, and its later unification by Feldman\u2013Schmidt\u2013Sohler, provide the conceptual foundation: if accurate weighted summaries suffice for good clustering, then privacy can be enforced by privatizing only those summaries.\n\nTo make that reduction private in the centralized model, the work leverages Dwork\u2013McSherry\u2013Nissim\u2013Smith\u2019s sensitivity-calibrated noise mechanisms to estimate the needed weights with controlled error. For the local and shuffle models, the framework swaps in model-appropriate primitives: Kasiviswanathan\u2013Lee\u2013Nissim\u2013Raskhodnikova\u2013Smith\u2019s local model underpins locally private reporting, while Cheu\u2013Smith\u2013Ullman\u2013Zeber\u2013Zhilyaev\u2019s shuffle model provides privacy amplification to lower the noise on aggregated counts. Finally, to support continual observation\u2014where inputs and outputs evolve over time\u2014the algorithm composes with Dwork\u2013Naor\u2013Pitassi\u2013Rothblum\u2019s binary-tree mechanism to maintain accurate private summaries through time. In aggregate, these works form a direct intellectual lineage: an old sampling reduction plus model-specific private aggregation tools yield a single, unified algorithm that matches or improves disparate prior results across central, local, shuffle, and continual observation privacy settings.",
+  "analysis_timestamp": "2026-01-06T23:09:26.455738"
+}

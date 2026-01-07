@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Process Supervision Improves Mathematical Reasoning in Large Language Models (PRM800K)",
+      "authors": "Lightman et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Baseline",
+      "relationship_sentence": "This work established process reward models trained from human step labels to guide search and RL, which the current paper replaces with an automated, progress-based reward to overcome the scalability and limited generalization of human-annotated PRMs."
+    },
+    {
+      "title": "Let\u2019s Verify Step by Step",
+      "authors": "Wang et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Inspiration",
+      "relationship_sentence": "By framing intermediate-step verification and using verifiers to score partial reasoning, this paper directly motivates defining a step reward from changes in a verifier\u2019s predicted likelihood of eventual correctness."
+    },
+    {
+      "title": "Tree of Thoughts: Deliberate Problem Solving with Large Language Models",
+      "authors": "Yao et al.",
+      "year": 2023,
+      "arxiv_id": "2305.10601",
+      "role": "Related Problem",
+      "relationship_sentence": "Tree of Thoughts evaluates partial thoughts to steer search, and the present paper formalizes this evaluation as a calibrated prover\u2019s success probability and uses its before/after change as a principled progress signal."
+    },
+    {
+      "title": "Policy Invariance under Reward Transformations: Theory and Application to Reward Shaping",
+      "authors": "Ng et al.",
+      "year": 1999,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "The paper\u2019s progress reward instantiates potential-based shaping by using a value-like potential\u2014the prover\u2019s success probability\u2014and rewarding the difference across consecutive steps for better credit assignment."
+    },
+    {
+      "title": "Verifier-of-Thought: Generalist Verifiers for Step-by-Step Reasoning",
+      "authors": "Zhou et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Extension",
+      "relationship_sentence": "Building on verifier models that assess intermediate steps, the current work extends the idea by calibrating the verifier as a probabilistic \u2018prover\u2019 and using deltas in its predicted success as the reward signal."
+    },
+    {
+      "title": "STaR: Bootstrapping Reasoning With Reasoning",
+      "authors": "Zelikman et al.",
+      "year": 2022,
+      "arxiv_id": "2203.14465",
+      "role": "Inspiration",
+      "relationship_sentence": "STaR demonstrates that conditioning on improved intermediate rationales raises the chance of a correct final answer, motivating the paper\u2019s explicit measurement of progress as the change in success probability after each step."
+    }
+  ],
+  "synthesis_narrative": "Process supervision for reasoning introduced training and deployment of process reward models that score intermediate steps, exemplified by PRM800K, which showed that step-wise feedback improves credit assignment but at the cost of expensive human annotations and limited generalization beyond curated labels. Let\u2019s Verify Step by Step further crystallized the notion of intermediate-step verification, training models to judge partial chains-of-thought and use those judgments to guide solution search. Tree of Thoughts operationalized partial-state evaluation for test-time search, proposing that a value or heuristic score over partial thoughts can steer exploration effectively. In parallel, Verifier-of-Thought demonstrated generalist verifiers capable of assessing step-wise reasoning across tasks, highlighting that verifier predictions over partial trajectories can be broadly applied. From the reinforcement learning side, potential-based reward shaping established that rewards defined as differences in a potential (value) across consecutive states produce effective, policy-invariant shaping. Finally, STaR revealed that improved intermediate rationales causally increase the probability of final correctness, underscoring the importance of quantifying incremental progress along a trajectory.\n\nTogether, these works exposed a gap: verifiers scored steps, and search used heuristic partial-state evaluations, but there was no principled, scalable reward that directly measured incremental movement toward correctness. The current paper synthesizes these insights by calibrating a distinct prover to estimate the probability of eventual success given a partial trace and defining the process reward as the before/after change in that estimate. This turns verifier-style evaluation into a potential-based progress signal that scales without human step labels and plugs naturally into both test-time search and RL for stronger credit assignment.",
+  "target_paper": {
+    "title": "Rewarding Progress: Scaling Automated Process Verifiers for LLM Reasoning",
+    "authors": "Amrith Setlur, Chirag Nagpal, Adam Fisch, Xinyang Geng, Jacob Eisenstein, Rishabh Agarwal, Alekh Agarwal, Jonathan Berant, Aviral Kumar",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "LLM, Math Reasoning, Process Supervision, Reward Models, RL, Search",
+    "abstract": "A promising approach for improving reasoning in large language models is to use process reward models (PRMs). PRMs provide feedback at each step of a multi-step reasoning trace, improving credit assignment over outcome reward models (ORMs) that only provide feedback at the final step. However, collecting dense, per-step human labels is not scalable, and training PRMs from automatically-labeled data has thus far led to limited gains. With the goal of using PRMs to improve a *base* policy via test-time search and reinforcement learning (RL), we ask: ``How should we design process rewards?'' Our key insight is that, to be effective, the process reward for a step should measure \n *progress*: a change in the likelihood of producing a correct response in the future, before and after taking the step, as measured under a *prover* policy distinct from the base policy. Such progress values can {distinguish} good and bad steps generated by the base policy, even though the base policy itself canno",
+    "openreview_id": "A6Y7AqlzLW",
+    "forum_id": "A6Y7AqlzLW"
+  },
+  "analysis_timestamp": "2026-01-06T06:22:49.133999"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Numerical solution of the quasi-linear Poisson equation for grid generation",
+      "authors": "A. M. Winslow",
+      "year": 1966,
+      "role": "Foundational r-adaptivity PDE",
+      "relationship_sentence": "Introduced the classical meshing PDE (Winslow\u2019s variable-diffusion formulation) that underpins r-adaptivity; G-Adaptivity explicitly replaces solving such meshing PDEs by learning mesh relocation with a GNN while retaining equidistribution/alignment priors."
+    },
+    {
+      "title": "Adaptive Moving Mesh Methods",
+      "authors": "Weizhang Huang, Robert D. Russell",
+      "year": 2011,
+      "role": "Theory and algorithms for MMPDE-based r-adaptivity",
+      "relationship_sentence": "Synthesizes the equidistribution and alignment principles and the MMPDE framework that define the target space of high-quality relocated meshes; G-Adaptivity encodes these principles as architectural/inductive biases while optimizing meshes without explicitly solving MMPDEs."
+    },
+    {
+      "title": "Moving mesh generation using the parabolic Monge\u2013Amp\u00e8re equation",
+      "authors": "Chris J. Budd, Joan F. Williams",
+      "year": 2006,
+      "role": "Optimal-transport-based mesh relocation",
+      "relationship_sentence": "Developed OT/Monge\u2013Amp\u00e8re-based mesh redistribution delivering near-optimal alignment to solution features; G-Adaptivity aims to emulate these optimality properties via learned graph-based relocation rather than solving Monge\u2013Amp\u00e8re-type meshing equations."
+    },
+    {
+      "title": "Metric tensors for anisotropic mesh generation",
+      "authors": "Weizhang Huang",
+      "year": 2005,
+      "role": "Metric-based anisotropic adaptation and error links",
+      "relationship_sentence": "Established how FEM interpolation/error estimates map to anisotropic metric tensors that specify desired mesh geometry; G-Adaptivity aligns its output space to such metric-induced meshes and directly optimizes FE solution error instead of relying on surrogate interpolation-error proxies."
+    },
+    {
+      "title": "Firedrake: automating the finite element method by composing abstractions",
+      "authors": "Florian Rathgeber, David A. Ham, Lawrence Mitchell, Michael Lange, Fabio Luporini, Andrew T. T. McRae, Gheorghe-Teodor Bercea, Graham R. Markall, Paul H. J. Kelly",
+      "year": 2016,
+      "role": "FE software enabling end-to-end training",
+      "relationship_sentence": "Provides the PDE/FE infrastructure that G-Adaptivity couples to so the learning objective can be the actual FE solution error from a real solver, supporting the paper\u2019s core contribution of direct error-minimizing mesh relocation."
+    },
+    {
+      "title": "Automated derivation of the adjoint of high-level transient finite element programs",
+      "authors": "Patrick E. Farrell, David A. Ham, Simon W. Funke, Marie E. Rognes",
+      "year": 2013,
+      "role": "Adjoint differentiation for FE solvers",
+      "relationship_sentence": "Introduces automated adjoints (dolfin-adjoint/pyadjoint) for computing gradients of FE objectives w.r.t. parameters, including mesh coordinates; G-Adaptivity relies on such adjoint capabilities to train the GNN by backpropagating FE error through the solver."
+    },
+    {
+      "title": "Learning Mesh-Based Simulation with Graph Networks (MeshGraphNets)",
+      "authors": "Tobias Pfaff, Alvaro Sanchez-Gonzalez, Suneel Belongie, Peter W. Battaglia, et al.",
+      "year": 2021,
+      "role": "GNNs on unstructured meshes for PDEs",
+      "relationship_sentence": "Demonstrates message passing on mesh graphs for physical simulation, informing G-Adaptivity\u2019s choice of a graph architecture that operates directly on unstructured FE meshes to predict node relocations."
+    }
+  ],
+  "synthesis_narrative": "G-Adaptivity sits at the intersection of classical r-adaptivity theory and modern differentiable learning on meshes. The classical backbone is the meshing PDE paradigm initiated by Winslow, where node relocation is obtained by solving a variable-diffusion grid-generation equation. This matured into the MMPDE framework comprehensively developed by Huang and Russell, formalizing equidistribution and alignment principles and connecting mesh quality to FE accuracy. Complementing this, optimal-transport/Monge\u2013Amp\u00e8re approaches (Budd and Williams) provided theoretically attractive meshes with near-optimal alignment to features, while metric-tensor theory (Huang) linked FEM interpolation/error estimates directly to anisotropic metric fields that prescribe desired mesh geometry.\n\nRather than building a surrogate for these meshing PDEs, G-Adaptivity leverages the capability to differentiate through finite element solvers, enabled by Firedrake\u2019s high-level FE abstraction and automated adjoint frameworks (dolfin-adjoint/pyadjoint). This infrastructure allows the paper\u2019s central move: train a model to minimize the actual FE solution error with respect to mesh node positions, instead of proxy interpolation errors or separate meshing objectives. To operationalize learning on unstructured meshes, the work draws on graph neural network designs proven effective for mesh-based physical simulation (MeshGraphNets), adopting message passing as a natural inductive bias.\n\nTogether, these strands directly shape G-Adaptivity: classical r-adaptivity supplies the target geometric properties (equidistribution, alignment, metric-based anisotropy), optimal-transport methods set the standard for \u201coptimal\u201d relocation, and differentiable FE tooling plus mesh-graph GNNs make it possible to learn those properties by optimizing the true FE error end-to-end.",
+  "analysis_timestamp": "2026-01-07T00:04:09.144508"
+}

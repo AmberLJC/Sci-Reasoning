@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Attention Is All You Need",
+      "authors": "Ashish Vaswani et al.",
+      "year": 2017,
+      "role": "Baseline",
+      "relationship_sentence": "Diff Transformer directly replaces the standard softmax self-attention from Vaswani et al. with a differential (two-softmax subtraction) attention, using the vanilla Transformer as the primary baseline it seeks to improve."
+    },
+    {
+      "title": "From Softmax to Sparsemax: A Sparse Model of Attention and Multi-Label Classification",
+      "authors": "Andr\u00e9 F. T. Martins and Ram\u00f3n Fernandez Astudillo",
+      "year": 2016,
+      "role": "Foundation",
+      "relationship_sentence": "The paper\u2019s core aim\u2014promoting sparse, focused attention\u2014builds on the foundational idea that alternative normalizers (like sparsemax) can yield sparse attention distributions instead of the dense softmax."
+    },
+    {
+      "title": "Adaptively Sparse Transformers",
+      "authors": "Gon\u00e7alo M. Correia et al.",
+      "year": 2019,
+      "role": "Inspiration",
+      "relationship_sentence": "Diff Transformer is inspired by the demonstrated benefits of sparse attention in Transformers, but achieves sparsity via subtracting two attention maps rather than replacing softmax with entmax/sparsemax."
+    },
+    {
+      "title": "Longformer: The Long-Document Transformer",
+      "authors": "Iz Beltagy et al.",
+      "year": 2020,
+      "role": "Gap Identification",
+      "relationship_sentence": "Longformer\u2019s fixed local+global sparse patterns address long contexts but require hand-designed sparsity; Diff Transformer targets the same need\u2014focusing on relevant tokens in long sequences\u2014through learned noise cancellation via differential attention."
+    },
+    {
+      "title": "Big Bird: Transformers for Longer Sequences",
+      "authors": "Manzil Zaheer et al.",
+      "year": 2020,
+      "role": "Gap Identification",
+      "relationship_sentence": "BigBird shows structured sparsity can scale context, yet imposes predefined patterns; Diff Transformer tackles the underlying distractor/noise problem by encouraging emergent sparsity through subtractive attention instead of architectural sparsity patterns."
+    },
+    {
+      "title": "Lost in the Middle: How Language Models Use Long Context",
+      "authors": "Nelson F. Liu et al.",
+      "year": 2023,
+      "role": "Gap Identification",
+      "relationship_sentence": "This work revealed that LMs often overlook key information amidst distractors in long contexts; Diff Transformer\u2019s differential attention directly targets this failure mode by canceling irrelevant context and amplifying relevant signals."
+    },
+    {
+      "title": "LLM.int8(): 8-bit Matrix Multiplication for Transformers at Scale",
+      "authors": "Tim Dettmers et al.",
+      "year": 2022,
+      "role": "Related Problem",
+      "relationship_sentence": "By diagnosing activation outliers in Transformer attention/MLPs, this paper motivates designs that temper extreme activations; Diff Transformer observes reduced activation outliers as a consequence of noise-canceling differential attention."
+    }
+  ],
+  "synthesis_narrative": "The Differential Transformer grows out of two intertwined lines of work: (1) core Transformer attention and its empirical shortcomings with distractors, and (2) methods that promote sparsity to focus attention. Vaswani et al. (2017) provide the baseline attention mechanism and training paradigm that Diff Transformer modifies at the heart of the model. Martins and Astudillo (2016) and Correia et al. (2019) established that replacing softmax with sparse alternatives (sparsemax/entmax) can yield more selective, interpretable attention, motivating the pursuit of mechanisms that sharpen focus. However, long-context architectures such as Longformer (Beltagy et al., 2020) and BigBird (Zaheer et al., 2020) largely rely on predefined sparse patterns; they scale sequence length but do not directly address the semantic problem of irrelevant context overwhelming relevant evidence. Liu et al. (2023) made this failure mode explicit with Lost in the Middle, showing that LMs often miss key information surrounded by distractors. Diff Transformer targets this precise gap by constructing attention as the difference of two softmax maps, explicitly canceling noise and allowing sparse patterns to emerge without hand-crafted layouts or non-standard normalizers. Beyond accuracy, Dettmers et al. (2022) highlight activation outliers as a practical issue; Diff Transformer\u2019s subtractive scoring naturally dampens extremes, contributing to better quantization and stability. Taken together, these works shaped Diff Transformer\u2019s core idea: retain the Transformer scaffold while inducing selective, noise-canceling attention that tackles distractor sensitivity and long-context utility head-on.",
+  "analysis_timestamp": "2026-01-06T23:09:26.632913"
+}

@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Successor Features for Transfer in Reinforcement Learning",
+      "authors": "Andr\u00e9 Barreto et al.",
+      "year": 2017,
+      "arxiv_id": "",
+      "role": "Extension",
+      "relationship_sentence": "This work introduced successor features and generalized policy improvement (GPI), which the current paper generalizes to successor measures and uses to perform zero-shot policy selection for imitation objectives without additional RL."
+    },
+    {
+      "title": "Universal Successor Features Approximators",
+      "authors": "Jo\u00e3o Borsa et al.",
+      "year": 2019,
+      "arxiv_id": "",
+      "role": "Extension",
+      "relationship_sentence": "USFA showed how to parameterize successor features by task embeddings to generalize to unseen rewards, a mechanism directly repurposed here by conditioning successor-measure foundation models on demo-derived imitation objectives."
+    },
+    {
+      "title": "Universal Value Function Approximators",
+      "authors": "Tom Schaul et al.",
+      "year": 2015,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "UVFA established goal/task-conditioned value functions, providing the conditioning blueprint that enables the paper\u2019s goal-based imitation reduction within a single pre-trained behavior model."
+    },
+    {
+      "title": "Apprenticeship Learning via Inverse Reinforcement Learning",
+      "authors": "Pieter Abbeel et al.",
+      "year": 2004,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "This work formalized feature expectation matching, which the paper realizes instantly by evaluating expert feature expectations through successor measures learned during pretraining."
+    },
+    {
+      "title": "Generative Adversarial Imitation Learning",
+      "authors": "Jonathan Ho et al.",
+      "year": 2016,
+      "arxiv_id": "1606.03476",
+      "role": "Gap Identification",
+      "relationship_sentence": "GAIL framed imitation as occupancy-measure matching but required costly online RL; the paper explicitly targets this limitation by using pre-trained successor-measure models to achieve occupancy-style matching without any RL loop."
+    },
+    {
+      "title": "ValueDICE: Learning Diffusion Policies via Stationary Distribution Correction",
+      "authors": "Ilya Kostrikov et al.",
+      "year": 2020,
+      "arxiv_id": "",
+      "role": "Baseline",
+      "relationship_sentence": "ValueDICE implements occupancy-measure matching via density ratios in offline settings, serving as a primary baseline whose optimization-heavy procedure the paper replaces with instant evaluation over a successor-measure foundation model."
+    },
+    {
+      "title": "IQ-Learn: Inverse Soft-Q Learning for Imitation",
+      "authors": "Kartik Garg et al.",
+      "year": 2021,
+      "arxiv_id": "",
+      "role": "Baseline",
+      "relationship_sentence": "IQ-Learn reduces imitation to solving an entropy-regularized RL objective, and the paper improves on this by eliminating any RL optimization through zero-shot policy selection enabled by successor measures and GPI."
+    }
+  ],
+  "synthesis_narrative": "Successor features introduced a way to decouple dynamics from rewards and, through generalized policy improvement, to compose policies for new reward functions without additional learning. Universal Successor Features Approximators extended this by conditioning successor features on task embeddings, allowing zero-shot generalization to unseen tasks via GPI. Universal Value Function Approximators earlier established the idea of conditioning value functions on goals or tasks, providing a template for representing many objectives within a single model. Apprenticeship Learning via Inverse Reinforcement Learning formalized imitation as feature expectation matching, showing that reproducing an expert\u2019s cumulative features suffices to imitate behavior. Generative Adversarial Imitation Learning reframed imitation as occupancy-measure matching but required adversarial training with online interaction. ValueDICE later achieved occupancy matching in an offline manner via density-ratio estimation, while IQ-Learn cast imitation as solving an entropy-regularized RL objective, yet both still relied on optimization-heavy RL loops.\nTogether these works established: (i) imitation can be expressed as feature or occupancy matching; (ii) task/goal conditioning can unify many objectives; and (iii) successor-based representations allow zero-shot policy composition for new rewards. The natural next step is to pretrain a successor-based foundation model that captures broad behavior (successor measures generalizing successor features), then instantiate multiple imitation criteria\u2014feature matching, reward-based, or goal-based\u2014as conditioning signals and use GPI for instantaneous policy selection. This synthesis removes RL/fine-tuning at test time while retaining the flexibility of prior IL formulations.",
+  "target_paper": {
+    "title": "Fast Imitation via Behavior Foundation Models",
+    "authors": "Matteo Pirotta, Andrea Tirinzoni, Ahmed Touati, Alessandro Lazaric, Yann Ollivier",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Behavior Foundation Models, unsupervised reinforcement learning, imitation learning",
+    "abstract": "Imitation learning (IL) aims at producing agents that can imitate any behavior given a few expert demonstrations. Yet existing approaches require many demonstrations and/or running (online or offline) reinforcement learning (RL) algorithms for each new imitation task. Here we show that recent RL foundation models based on successor measures can imitate any expert behavior almost instantly with just a few demonstrations and no need for RL or fine-tuning, while accommodating several IL principles (behavioral cloning, feature matching, reward-based, and goal-based reductions). In our experiments, imitation via RL foundation models matches, and often surpasses, the performance of SOTA offline IL algorithms, and produces imitation policies from new demonstrations within seconds instead of hours.",
+    "openreview_id": "qnWtw3l0jb",
+    "forum_id": "qnWtw3l0jb"
+  },
+  "analysis_timestamp": "2026-01-06T17:22:40.019506"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "On Calibration of Modern Neural Networks",
+      "authors": "Chuan Guo, Geoff Pleiss, Yu Sun, Kilian Q. Weinberger",
+      "year": 2017,
+      "role": "Foundational study of miscalibration in deep nets; introduced temperature scaling as a strong post-hoc baseline.",
+      "relationship_sentence": "The paper\u2019s key claim that standard calibrators (e.g., temperature scaling) fail to correct proximity-dependent miscalibration directly builds on Guo et al.\u2019s framework and baseline."
+    },
+    {
+      "title": "Can You Trust Your Model\u2019s Uncertainty? Evaluating Predictive Uncertainty Under Dataset Shift",
+      "authors": "Yarin Ovadia, Emily Fertig, Jie Ren, Zachary Nado, Dustin Tran, et al.",
+      "year": 2019,
+      "role": "Large-scale evaluation showing calibration degrades under covariate shift and motivating uncertainty methods robust to distributional changes.",
+      "relationship_sentence": "The notion that low-proximity samples behave like localized covariate shift echoes Ovadia et al.\u2019s findings and motivates conditioning calibration on sample difficulty/shift."
+    },
+    {
+      "title": "To Trust or Not to Trust a Classifier?",
+      "authors": "Heinrich Jiang, Been Kim, Melody Y. Guan, Maya R. Gupta",
+      "year": 2018,
+      "role": "Introduced the Trust Score, a distance-to-manifold measure in feature space for estimating prediction reliability.",
+      "relationship_sentence": "This work provides the core insight that distance/proximity to training data is predictive of reliability, which the new paper operationalizes for calibration rather than binary trust."
+    },
+    {
+      "title": "Deep k-Nearest Neighbors: Towards Confident, Interpretable and Robust Predictions",
+      "authors": "Nicolas Papernot, Patrick McDaniel",
+      "year": 2018,
+      "role": "Proposed kNN in deep representation space to assess conformity and provide confidence signals.",
+      "relationship_sentence": "The use of local neighborhood structure in representation space to gauge confidence informs the paper\u2019s proximity definition and its sample-wise calibration adjustments."
+    },
+    {
+      "title": "A Simple Unified Baseline for Detecting Out-of-Distribution Samples and Adversarial Attacks",
+      "authors": "Kimin Lee, Kibok Lee, Honglak Lee, Jinwoo Shin",
+      "year": 2018,
+      "role": "Showed that class-conditional Mahalanobis distance in feature space is an effective density/proximity proxy.",
+      "relationship_sentence": "Their representation-space distance offers a principled, architecture-agnostic proximity metric that the paper can leverage to stratify samples and inform calibration."
+    },
+    {
+      "title": "Energy-based Out-of-Distribution Detection",
+      "authors": "Weitang Liu, Xiaoyun Wang, John D. Owens, Yixuan Li",
+      "year": 2020,
+      "role": "Introduced the energy score as a model-agnostic surrogate for density/closeness to the training distribution.",
+      "relationship_sentence": "By linking confidence to an energy-based closeness measure, this work supports the paper\u2019s premise that calibration quality should vary with proximity to the data manifold."
+    },
+    {
+      "title": "Beyond Temperature Scaling: Obtaining Well-Calibrated Multi-Class Probabilities with Dirichlet Calibration",
+      "authors": "Maximilian Kull, Telmo M. Silva Filho, Peter Flach",
+      "year": 2019,
+      "role": "Advanced post-hoc multi-class calibration beyond scalar temperature, highlighting limits of global calibrators.",
+      "relationship_sentence": "The new method contrasts with and extends beyond distribution-agnostic calibrators like Dirichlet calibration by explicitly conditioning on sample proximity."
+    }
+  ],
+  "synthesis_narrative": "The core innovation of Proximity-Informed Calibration is to expose and correct a systematic, sample-dependent failure mode of modern calibrators: proximity bias\u2014overconfidence that grows in sparse, low-density regions of the data distribution. This builds on two strands of prior art. First, calibration foundations (Guo et al.) and evaluations under shift (Ovadia et al.) establish both the centrality of post-hoc calibration and its degradation when test inputs diverge from training data. The paper reframes this as a within-distribution heterogeneity problem, where low-proximity samples locally resemble shifted data. Second, proximity-sensitive reliability signals from representation space\u2014Trust Score (Jiang et al.), Deep kNN (Papernot & McDaniel), Mahalanobis distance (Lee et al.), and energy scores (Liu et al.)\u2014demonstrate that nearness to the training manifold is a strong predictor of correctness and uncertainty. These works provide concrete, scalable proxies (kNN density, class-conditional Gaussian distance, energy) that the paper can directly adopt to quantify proximity. Finally, advanced multiclass calibrators like Dirichlet calibration (Kull et al.) underscore that strong global post-hoc schemes still ignore sample-specific structure. The present paper synthesizes these insights: it diagnoses miscalibration stratified by proximity, shows the persistence of the issue across architectures and after standard calibrators, and proposes a proximity-informed calibration procedure that conditions the mapping from logits to probabilities on a representation-space proximity measure, thereby delivering more consistent calibration across dense and sparse regions.",
+  "analysis_timestamp": "2026-01-06T23:42:49.111019"
+}

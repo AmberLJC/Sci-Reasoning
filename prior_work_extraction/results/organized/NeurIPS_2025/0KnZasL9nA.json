@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "EMVS: Event-based Multi-View Stereo",
+      "authors": "Henri Rebecq, Timo Horstschaefer, Davide Scaramuzza",
+      "year": 2016,
+      "role": "Event-based multi-view geometry and ray accumulation",
+      "relationship_sentence": "DERD-Net generalizes EMVS\u2019s core idea of back-projecting events with known poses to accumulate per-depth evidence by learning to interpret these event ray-density volumes (DSIs) with a neural network for dense, per-pixel depth."
+    },
+    {
+      "title": "A Space-Sweep Approach to True Multi-Image Matching (Plane Sweep Stereo)",
+      "authors": "Robert T. Collins",
+      "year": 1996,
+      "role": "Foundational DSI/plane-sweep representation",
+      "relationship_sentence": "DERD-Net\u2019s disparity-space images directly inherit the plane-sweep/DSI concept, replacing photometric costs with event ray-density evidence to build a learnable cost volume for depth."
+    },
+    {
+      "title": "End-to-End Learning of Geometry and Context for Deep Stereo (GC-Net)",
+      "authors": "Alex Kendall et al.",
+      "year": 2017,
+      "role": "3D CNN regularization of cost volumes",
+      "relationship_sentence": "DERD-Net adopts the GC-Net insight that 3D convolutions over a disparity volume can learn robust aggregation, applying it to event-derived DSIs instead of frame-based costs."
+    },
+    {
+      "title": "Recurrent MVSNet for High-Resolution Multi-View Stereo Depth Inference",
+      "authors": "Yao Yao, Zixin Luo, Shiwei Li, Tian Fang, Long Quan",
+      "year": 2019,
+      "role": "Memory-efficient recurrent processing of plane-sweep volumes",
+      "relationship_sentence": "DERD-Net\u2019s combination of 3D convolutions with a recurrent module and local subregion processing echoes R-MVSNet\u2019s recurrent regularization to scale volume processing while preserving detail."
+    },
+    {
+      "title": "A Unifying Contrast Maximization Framework for Event Cameras, with Applications to Motion, Depth, and Optical Flow",
+      "authors": "Guillermo Gallego et al.",
+      "year": 2018,
+      "role": "Event warping/back-projection principle for geometric inference",
+      "relationship_sentence": "The contrast maximization paradigm underpins DERD-Net\u2019s geometric rationale: correct depth hypotheses align/aggregate events coherently, which DERD-Net captures via learned patterns in ray-density DSIs."
+    },
+    {
+      "title": "Event Spike Tensor: A Sparse Recurrent Representation for Event-based Learning",
+      "authors": "Daniel Gehrig, Antonio Loquercio, Konstantinos G. Derpanis, Davide Scaramuzza",
+      "year": 2020,
+      "role": "Event data representation for 3D convolutional processing",
+      "relationship_sentence": "EST showed that 3D convolutions on structured event tensors can learn meaningful spatiotemporal patterns; DERD-Net leverages this idea over depth-disparity volumes formed by event back-projections."
+    }
+  ],
+  "synthesis_narrative": "DERD-Net\u2019s core innovation is to encode event streams into disparity-space images (DSIs) that measure spatial ray densities from back-projected events and to learn depth with a hybrid 3D-convolutional and recurrent architecture operating locally on these volumes. This design fuses two lines of prior work. On the geometric side, Collins\u2019 plane-sweep stereo established the DSI as a powerful representation for multi-view depth reasoning, later adapted to events by EMVS, which back-projected events with known poses to accumulate volumetric evidence and extract depth at peaks. The contrast maximization framework for event cameras provided the unifying principle that correct geometric hypotheses align events to yield high-contrast, high-density accumulations\u2014precisely the signal DERD-Net learns to parse in ray-density DSIs.\nOn the learning side, GC-Net demonstrated that 3D CNNs can regularize and infer disparity directly from cost volumes, while R-MVSNet introduced recurrent processing to scale volume inference efficiently without sacrificing detail. DERD-Net borrows these architectural insights, tailoring them to the sparser, asynchronous statistics of event-derived DSIs and enabling local, parallelizable subregion inference. Finally, EST evidenced that event data can be structured into tensors amenable to 3D convolutional learning, motivating DERD-Net\u2019s learned processing of an event-specific volumetric representation. Together, these works directly shape DERD-Net\u2019s formulation: event-driven DSI construction from geometric back-projection, and deep 3D/recurrent aggregation for fast, accurate, monocular and stereo depth from events.",
+  "analysis_timestamp": "2026-01-06T23:42:48.161156"
+}

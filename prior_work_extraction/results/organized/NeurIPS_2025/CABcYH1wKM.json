@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Jonathan Ho, Ajay Jain, Pieter Abbeel",
+      "year": 2020,
+      "role": "Foundational diffusion framework",
+      "relationship_sentence": "LABridge inherits the forward\u2013reverse diffusion training objective and denoising parameterization introduced by DDPM, serving as the base generative paradigm that its mean\u2011conditioned process and alignment modules modify."
+    },
+    {
+      "title": "Score-Based Generative Modeling through Stochastic Differential Equations",
+      "authors": "Yang Song, Jascha Sohl-Dickstein, Diederik P. Kingma, Abhishek Kumar, Stefano Ermon",
+      "year": 2021,
+      "role": "Theoretical SDE framing enabling OU processes",
+      "relationship_sentence": "By casting diffusion as an SDE (notably the variance\u2011preserving SDE which is an OU process), this work provides the mathematical foundation that LABridge extends by conditioning the OU mean on text to create a controlled bridge between text priors and image latents."
+    },
+    {
+      "title": "High-Resolution Image Synthesis with Latent Diffusion Models",
+      "authors": "Robin Rombach, Andreas Blattmann, Dominik Lorenz, Patrick Esser, Bj\u00f6rn Ommer",
+      "year": 2022,
+      "role": "Architectural precedent for latent-space diffusion and text conditioning",
+      "relationship_sentence": "LABridge operates in a learned image latent space and interfaces text with the UNet backbone, directly building on LDM\u2019s latent-space formulation and text conditioning via cross-attention while replacing it with an explicit aligned text\u2013image latent prior."
+    },
+    {
+      "title": "Learning Transferable Visual Models from Natural Language Supervision (CLIP)",
+      "authors": "Alec Radford, Jong Wook Kim, Chris Hallacy, et al.",
+      "year": 2021,
+      "role": "Shared text\u2013image representation for semantic alignment",
+      "relationship_sentence": "CLIP established a joint embedding space for text and images, motivating LABridge\u2019s Text\u2011Image Alignment Encoder to produce text\u2011conditioned priors that are geometrically compatible with image latents for improved semantic consistency."
+    },
+    {
+      "title": "Hierarchical Text-Conditional Image Generation with CLIP Latents (DALL\u00b7E 2)",
+      "authors": "Aditya Ramesh, Prafulla Dhariwal, Alex Nichol, Casey Chu, Mark Chen",
+      "year": 2022,
+      "role": "Blueprint for mapping text to image-aligned latent priors",
+      "relationship_sentence": "DALL\u00b7E 2\u2019s diffusion prior that maps text embeddings to image-embedding distributions directly inspires LABridge\u2019s TIAE, which similarly predicts text\u2011conditioned priors aligned with image latents but integrates them into the generative SDE path."
+    },
+    {
+      "title": "Diffusion Schr\u00f6dinger Bridge with Applications to Score-Based Generative Modeling",
+      "authors": "Guillaume De Bortoli, James Thornton, Jeremy Heng, Arnaud Doucet",
+      "year": 2021,
+      "role": "Conceptual basis for distribution-bridging dynamics",
+      "relationship_sentence": "This work\u2019s idea of constructing stochastic bridges between source and target distributions informs LABridge\u2019s mean\u2011conditioned OU bridge that smoothly transports from text\u2011conditioned priors to image latents for stable generation."
+    },
+    {
+      "title": "Classifier-Free Diffusion Guidance",
+      "authors": "Jonathan Ho, Tim Salimans",
+      "year": 2022,
+      "role": "Key conditioning strategy for stronger text\u2013image alignment",
+      "relationship_sentence": "LABridge\u2019s focus on semantic stability is motivated by guidance strategies; classifier\u2011free guidance highlighted alignment\u2013diversity tradeoffs that LABridge addresses via explicit latent alignment and a mean\u2011conditioned path rather than stronger guidance alone."
+    }
+  ],
+  "synthesis_narrative": "LABridge builds on the diffusion modeling core of DDPM and the SDE view of score-based generative modeling, where the variance-preserving SDE naturally corresponds to an Ornstein\u2013Uhlenbeck (OU) process. These works establish both the training objective and the stochastic calculus that LABridge leverages to introduce a novel mean-conditioned OU trajectory. Operating in a compact latent space follows Latent Diffusion Models, which demonstrated that moving generation from pixel space to an autoencoder\u2019s latent space yields efficiency without sacrificing fidelity. However, LDM\u2019s cross-attention alone can leave text\u2013image semantics underconstrained.\nCLIP and DALL\u00b7E 2 directly motivate LABridge\u2019s Text\u2013Image Alignment Encoder (TIAE). CLIP showed that text and images can inhabit a shared, semantically coherent space, while DALL\u00b7E 2\u2019s diffusion prior maps text embeddings to image-aligned embedding distributions. LABridge advances this idea by learning a text-conditioned prior aligned specifically to the image diffusion latents and embedding it into the generative path itself. Conceptually, the system is informed by Schr\u00f6dinger bridge formulations, which model stochastic bridges between given marginals. LABridge embodies this by conditioning the OU mean to smoothly transport from the text prior to the image latent manifold, reducing semantic drift and enabling fewer denoising steps through a more directed trajectory. Finally, insights from classifier-free guidance about the alignment\u2013diversity tradeoff motivate replacing ever-stronger guidance with principled latent alignment and controlled dynamics. Together, these threads yield LABridge\u2019s core contribution: a text\u2013image aligned latent prior coupled with a mean-conditioned OU bridge for stable, efficient text-to-image synthesis.",
+  "analysis_timestamp": "2026-01-07T00:27:38.139235"
+}

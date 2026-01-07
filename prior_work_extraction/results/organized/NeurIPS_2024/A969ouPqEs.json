@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Diffuser: Diffusion Models for Planning",
+      "authors": "Michael Janner, Qiyang Li, Sergey Levine",
+      "year": 2022,
+      "role": "Trajectory-level diffusion for control",
+      "relationship_sentence": "DiffLight extends Diffuser\u2019s idea of modeling trajectories with a conditional diffusion process to the traffic-signal domain, adapting goal/return conditioning into a Partial Rewards Conditioned Diffusion (PRCD) setup to remain robust when reward information is missing."
+    },
+    {
+      "title": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+      "authors": "Lili Chen, Kevin Lu, Aravind Rajeswaran, Kimin Lee, Aditya Grover, Pieter Abbeel, Sergey Levine",
+      "year": 2021,
+      "role": "Return-conditioned sequence modeling for offline RL",
+      "relationship_sentence": "The return-conditioning principle in Decision Transformer directly inspires DiffLight\u2019s conditioning on reward signals; DiffLight generalizes this idea to diffusion-based trajectory generation and handles partially observed (missing) rewards."
+    },
+    {
+      "title": "Trajectory Transformer: Offline Reinforcement Learning as Sequence Modeling",
+      "authors": "Michael Janner, Qiyang Li, Sergey Levine",
+      "year": 2021,
+      "role": "Generative modeling of trajectories for offline decision making",
+      "relationship_sentence": "DiffLight follows the trajectory-as-sequence perspective introduced by Trajectory Transformer, but replaces autoregressive modeling with diffusion and augments conditioning to accommodate partial rewards and missing observations."
+    },
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Jonathan Ho, Ajay Jain, Pieter Abbeel",
+      "year": 2020,
+      "role": "Foundational diffusion modeling framework",
+      "relationship_sentence": "The PRCD mechanism in DiffLight builds on DDPM\u2019s conditional denoising framework, leveraging masks and conditioning to generate plausible trajectories and imputations under missing-data constraints."
+    },
+    {
+      "title": "Score-Based Generative Modeling through Stochastic Differential Equations",
+      "authors": "Yang Song, Jascha Sohl-Dickstein, Diederik P. Kingma, Abhishek Kumar, Stefano Ermon, Ben Poole",
+      "year": 2021,
+      "role": "Score-based diffusion and conditional generation",
+      "relationship_sentence": "DiffLight\u2019s handling of missing traffic states aligns with score-based diffusion\u2019s conditional sampling and masking strategies, enabling probabilistic imputation jointly with decision generation."
+    },
+    {
+      "title": "PressLight: Learning Max Pressure Control for Traffic Signal Control",
+      "authors": "Hua Wei, Guanjie Zheng, Vikash V. Gayah, Zhenhui (Jessie) Li",
+      "year": 2019,
+      "role": "RL for multi-intersection TSC and reward design (pressure)",
+      "relationship_sentence": "PressLight\u2019s max-pressure reward and multi-intersection setting motivate DiffLight\u2019s network-level control objective and the need to remain effective when some sensors (and thus rewards) are missing."
+    },
+    {
+      "title": "GMAN: A Graph Multi-Attention Network for Traffic Prediction",
+      "authors": "Chuanpan Zheng, Xiaoliang Fan, Cheng Wang, Jianzhong Qi",
+      "year": 2020,
+      "role": "Spatiotemporal attention for traffic networks",
+      "relationship_sentence": "DiffLight\u2019s STFormer architecture draws on the multi-attention, spatiotemporal dependency modeling exemplified by GMAN to capture inter-junction interactions under irregular, missing observations."
+    }
+  ],
+  "synthesis_narrative": "DiffLight fuses two lines of prior work: (1) offline decision-making via generative trajectory models and (2) diffusion-based conditional generation for imputation. From the offline RL side, Decision Transformer and Trajectory Transformer established that trajectories can be modeled generatively and controlled via conditioning (e.g., on return). Diffuser then showed that diffusion models are particularly effective for trajectory synthesis and goal/return conditioning in control. DiffLight inherits this trajectory-level conditional generation but introduces Partial Rewards Conditioned Diffusion to cope with missing rewards\u2014adapting the return-conditioning idea to scenarios where only subsets of rewards are available, and preventing spurious gradients from incomplete signals.\nOn the generative modeling side, the foundational DDPM and score-based SDE frameworks provide the denoising/score estimation machinery and conditional sampling strategies that enable DiffLight to jointly impute missing traffic states while generating decisions. This joint imputation\u2013policy synthesis is central to operating in real-world TSC where sensor outages create partial observability. Finally, domain-specific advances in traffic networks guide the architecture. PressLight motivates a network-level objective (pressure-based reward and multi-intersection coordination), highlighting the importance of robust control under incomplete sensing. GMAN\u2019s spatiotemporal attention for traffic forecasting informs DiffLight\u2019s STFormer, which captures spatial and temporal dependencies among intersections despite missing data. Together, these works converge to enable DiffLight\u2019s integrated diffusion-based imputation and reward-conditioned decision-making for TSC with missing data.",
+  "analysis_timestamp": "2026-01-07T00:02:04.737278"
+}

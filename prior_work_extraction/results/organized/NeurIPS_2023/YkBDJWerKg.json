@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "VPT: Learning to Act by Watching Unlabeled Online Videos",
+      "authors": "Bowen Baker et al.",
+      "year": 2022,
+      "role": "Pretrained behavior backbone and policy architecture",
+      "relationship_sentence": "STEVE-1 directly fine-tunes the VPT policy to accept MineCLIP latent commands, using VPT\u2019s action space, tokenizer, and video-pretrained policy as the behavior \u2018decoder\u2019 in its unCLIP-style design."
+    },
+    {
+      "title": "MineDojo: Building Open-Ended Embodied Agents with Internet-Scale Knowledge (introducing MineCLIP)",
+      "authors": "Linxi (Jim) Fan et al.",
+      "year": 2022,
+      "role": "Cross-modal video\u2013text latent space for Minecraft",
+      "relationship_sentence": "STEVE-1 conditions behavior in the MineCLIP latent space and uses it for hindsight relabeling, making MineCLIP the semantic goal/command space that replaces costly human instruction labels."
+    },
+    {
+      "title": "Hierarchical Text-Conditional Image Generation with CLIP Latents (unCLIP)",
+      "authors": "Aditya Ramesh et al.",
+      "year": 2022,
+      "role": "Two-stage prior+decoder paradigm",
+      "relationship_sentence": "STEVE-1 explicitly mirrors unCLIP by first training a text-to-latent prior (text\u2192MineCLIP code) and then using a decoder (VPT) that follows those latents to produce behavior."
+    },
+    {
+      "title": "Learning Transferable Visual Models From Natural Language Supervision (CLIP)",
+      "authors": "Alec Radford et al.",
+      "year": 2021,
+      "role": "Foundational text\u2013vision alignment enabling MineCLIP-style latents",
+      "relationship_sentence": "By leveraging a CLIP-like aligned latent (via MineCLIP), STEVE-1 grounds instructions in a shared semantic space that the policy can follow without dense instruction labels."
+    },
+    {
+      "title": "Hindsight Experience Replay",
+      "authors": "Marcin Andrychowicz et al.",
+      "year": 2017,
+      "role": "Hindsight relabeling principle",
+      "relationship_sentence": "STEVE-1 adopts the HER idea of relabeling trajectories with achieved goals, but in a language/semantic latent form, to create self-supervised instruction data from unlabeled behavior."
+    },
+    {
+      "title": "Visual Reinforcement Learning with Imagined Goals (RIG)",
+      "authors": "Soroush Nair et al.",
+      "year": 2018,
+      "role": "Latent goal-conditioned control with relabeling",
+      "relationship_sentence": "STEVE-1 parallels RIG by learning to act toward goals represented in a learned latent space (MineCLIP) and using relabeling to bootstrap goal-conditioned training."
+    },
+    {
+      "title": "Learning Goal-Conditioned Policies with Supervised Learning (GCSL)",
+      "authors": "Dibya Ghosh et al.",
+      "year": 2019,
+      "role": "Goal-conditioned behavioral cloning without rewards",
+      "relationship_sentence": "STEVE-1\u2019s self-supervised behavioral cloning echoes GCSL\u2019s insight that relabeled goals enable purely supervised training of goal-conditioned policies."
+    }
+  ],
+  "synthesis_narrative": "STEVE-1\u2019s core contribution is to reframe text-to-behavior as unCLIP-style generation in a task-relevant latent space, eliminating the need for large, instruction-labeled trajectories. The design fuses three strands of prior work. First, unCLIP (Ramesh et al.) provides the two-stage blueprint: learn a text-to-embedding prior, then decode from that embedding. STEVE-1 instantiates this by training a text\u2192MineCLIP prior and using a pretrained behavior decoder. Second, CLIP\u2019s cross-modal alignment, realized in Minecraft by MineDojo\u2019s MineCLIP, supplies a semantic video\u2013text latent that is both instruction-expressive and behavior-relevant; STEVE-1 conditions the policy on MineCLIP latents and uses them to relabel trajectories. Third, hindsight relabeling and goal-conditioned learning (HER, RIG, GCSL) show how to turn unlabeled experience into goal-conditioned supervision. STEVE-1 applies this by relabeling collected trajectories with achieved MineCLIP codes, enabling self-supervised behavioral cloning without reward or dense language annotation.\nCrucially, VPT provides the behavior backbone trained from web-scale videos; STEVE-1 adapts VPT to accept MineCLIP commands, casting it as the decoder in the unCLIP analogy. The combination\u2014unCLIP-style prior+decoder, MineCLIP latent semantics, VPT behavior capacity, and hindsight goal relabeling\u2014directly yields a low-cost, instruction-following policy that aligns short-horizon text and visual commands with executable behavior in Minecraft.",
+  "analysis_timestamp": "2026-01-06T23:33:36.295869"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Deep Reinforcement Learning from Human Preferences",
+      "authors": "Paul F. Christiano, Jan Leike, Tom B. Brown, Miljan Martic, Shane Legg, Dario Amodei",
+      "year": 2017,
+      "role": "Foundational RLHF framework (preference-based reward modeling and policy optimization)",
+      "relationship_sentence": "QA extends the RLHF pipeline introduced here by replacing pure expected-reward maximization with quantile-constrained objectives over the learned reward distribution."
+    },
+    {
+      "title": "Learning to Summarize with Human Feedback",
+      "authors": "Nisan Stiennon, Long Ouyang, Jeff Wu, Daniel M. Ziegler, et al.",
+      "year": 2020,
+      "role": "RLHF for language tasks (reward modeling + KL-regularized policy optimization)",
+      "relationship_sentence": "QA builds on this practical RLHF recipe for language models but augments the reward shaping/optimization to target specified reward quantiles rather than only the mean."
+    },
+    {
+      "title": "Training language models to follow instructions with human feedback (InstructGPT)",
+      "authors": "Long Ouyang, Jeff Wu, Xu Jiang, Diogo Almeida, et al.",
+      "year": 2022,
+      "role": "Scalable RLHF for LLMs with KL penalties and PPO-style optimization",
+      "relationship_sentence": "QA inherits the KL-regularized RLHF setup from InstructGPT and modifies the objective to enforce user-specified quantile constraints, enabling tail-focused alignment while preserving overall performance."
+    },
+    {
+      "title": "A Distributional Perspective on Reinforcement Learning",
+      "authors": "Marc G. Bellemare, Will Dabney, R\u00e9mi Munos",
+      "year": 2017,
+      "role": "Introduced distributional RL (modeling full return distributions)",
+      "relationship_sentence": "QA\u2019s focus on controlling outcome quantiles is conceptually grounded in distributional RL\u2019s insight that policies should reason about the entire reward distribution, not just its expectation."
+    },
+    {
+      "title": "Distributional Reinforcement Learning with Quantile Regression (QR-DQN)",
+      "authors": "Will Dabney, Mark Rowland, Marc G. Bellemare, R\u00e9mi Munos",
+      "year": 2018,
+      "role": "Quantile regression to approximate return distributions",
+      "relationship_sentence": "QA leverages quantile estimation ideas from QR-DQN to operationalize constraints at specific reward quantiles, enabling precise control over tail behavior."
+    },
+    {
+      "title": "Optimizing the CVaR via Sampling",
+      "authors": "Aviv Tamar, Yonatan Glassner, Shie Mannor",
+      "year": 2015,
+      "role": "Risk-sensitive RL with tail-focused (CVaR) objectives",
+      "relationship_sentence": "QA draws on risk-sensitive RL principles that prioritize tail risk (e.g., CVaR), adapting them to human-feedback alignment by enforcing quantile (VaR-like) constraints on reward outcomes."
+    },
+    {
+      "title": "Constrained Policy Optimization",
+      "authors": "Joshua Achiam, David Held, Aviv Tamar, Pieter Abbeel",
+      "year": 2017,
+      "role": "Constrained RL via Lagrangian/trust-region methods",
+      "relationship_sentence": "QA\u2019s augmented reward with quantile constraints aligns with constrained RL formulations and uses similar Lagrangian-style machinery to enforce safety-like constraints during policy optimization."
+    }
+  ],
+  "synthesis_narrative": "Quantile-Guided Alignment (QA) emerges by fusing the RLHF pipeline for language models with distributional and risk-sensitive reinforcement learning. Foundationally, RLHF established how to learn reward models from preferences and optimize policies accordingly (Christiano et al., 2017), later refined for language modeling with KL-regularized policy optimization in summarization (Stiennon et al., 2020) and scaled to instruction following (Ouyang et al., 2022). However, these methods predominantly optimize expected reward, leaving rare but harmful tail outcomes under-controlled.\nDistributional RL reframed returns as distributions rather than expectations (Bellemare et al., 2017), while QR-DQN provided a practical quantile-regression parameterization of those distributions (Dabney et al., 2018). QA directly leverages these insights by targeting specific reward quantiles, allowing users to request improvements at the tails and across multiple reward dimensions. In parallel, risk-sensitive RL formalized tail-aware objectives like CVaR and provided gradient-based techniques to optimize them (Tamar et al., 2015), motivating QA\u2019s focus on the lower tail of the reward distribution to mitigate catastrophic outputs.\nOperationally, QA\u2019s \u201caugmented reward with quantile constraints\u201d is closely related to constrained RL formulations, where Lagrangian or trust-region methods enforce safety or performance limits during optimization (Achiam et al., 2017). By integrating quantile-aware objectives from distributional/risk-sensitive RL into the established RLHF pipeline for LLMs, QA offers a principled mechanism to calibrate tail risk\u2014improving worst-case quality while maintaining overall performance.",
+  "analysis_timestamp": "2026-01-06T23:42:48.161647"
+}

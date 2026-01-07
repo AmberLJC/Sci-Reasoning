@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Flow Network based Generative Models for Non-Iterative Diverse Candidate Generation",
+      "authors": "Emmanuel Bengio et al.",
+      "year": 2021,
+      "role": "Foundation",
+      "relationship_sentence": "Introduced the GFlowNet framework and the local training principles (e.g., flow/detailed balance) for sampling from unnormalized rewards, establishing the problem formulation that SubTB(\u03bb) operates within and partially reduces to when emphasizing very short subtrajectories."
+    },
+    {
+      "title": "Trajectory Balance: Improved Credit Assignment in GFlowNets",
+      "authors": "Nikolay Malkin et al.",
+      "year": 2022,
+      "role": "Baseline",
+      "relationship_sentence": "Proposed the full-trajectory Trajectory Balance (TB) objective; SubTB(\u03bb) strictly generalizes this loss (recovering TB at \u03bb=1) and is explicitly designed to address TB\u2019s higher variance and slower convergence by learning from partial subtrajectories."
+    },
+    {
+      "title": "On the Foundations of GFlowNets",
+      "authors": "Nikolay Malkin et al.",
+      "year": 2022,
+      "role": "Gap Identification",
+      "relationship_sentence": "Formalized GFlowNet objectives and highlighted the bias of local (state/edge) training objectives versus the variance of trajectory-level training, a core tradeoff that SubTB(\u03bb) directly tackles by interpolating between local and global credit assignment."
+    },
+    {
+      "title": "Learning to Predict by the Methods of Temporal Differences",
+      "authors": "Richard S. Sutton",
+      "year": 1988,
+      "role": "Inspiration",
+      "relationship_sentence": "Introduced TD(\u03bb) and the \u03bb-return as a principled bias\u2013variance tradeoff between one-step bootstrapping and Monte Carlo returns; SubTB(\u03bb) directly ports this idea to GFlowNets by weighting subtrajectory consistency constraints across variable lengths."
+    },
+    {
+      "title": "High-Dimensional Continuous Control Using Generalized Advantage Estimation",
+      "authors": "John Schulman et al.",
+      "year": 2016,
+      "role": "Related Problem",
+      "relationship_sentence": "Demonstrated the practical advantages of \u03bb-weighted estimators in RL for stabilizing and accelerating learning, empirically motivating the use of a \u03bb knob in SubTB(\u03bb) to balance variance and bias in GFlowNet training."
+    },
+    {
+      "title": "Bridging the Gap Between Value and Policy Based Reinforcement Learning",
+      "authors": "Ofir Nachum et al.",
+      "year": 2017,
+      "role": "Related Problem",
+      "relationship_sentence": "Introduced multi-step path-consistency constraints (PCL); TB can be viewed as a path-consistency objective in the GFlowNet setting, and SubTB(\u03bb) extends this idea by enforcing consistency over subtrajectories of varying lengths."
+    }
+  ],
+  "synthesis_narrative": "The core innovation of SubTB(\u03bb) is to unify and control the bias\u2013variance tradeoff in GFlowNet training by learning from partial subtrajectories, directly mirroring TD(\u03bb)\u2019s \u03bb-returns. The foundational GFlowNet paper by Bengio et al. established the problem of training a sequential sampler for an unnormalized reward and introduced local conservation-based objectives, which are efficient but biased. Malkin et al.\u2019s Trajectory Balance (TB) then provided a full-trajectory objective with superior credit assignment but higher variance and slower convergence. Their broader foundations work explicitly articulated this tension between local (state/edge) and global (trajectory) objectives, setting up the exact gap SubTB(\u03bb) aims to close. Sutton\u2019s TD(\u03bb) contributed the central idea: interpolate between one-step and Monte Carlo targets using \u03bb to balance bias and variance. SubTB(\u03bb) transposes this principle to GFlowNets by enforcing subtrajectory-level consistency constraints and recovering TB at \u03bb=1 while approaching local updates as \u03bb\u21920. Empirical successes with \u03bb-weighted returns in RL, exemplified by Generalized Advantage Estimation, further motivate the practical benefits of a tunable \u03bb for stability and speed. Finally, PCL\u2019s multi-step path-consistency perspective situates TB\u2014and thus SubTB(\u03bb)\u2014within a lineage of trajectory-level consistency objectives, with SubTB(\u03bb) extending them to variable-length partial episodes tailored to GFlowNets.",
+  "analysis_timestamp": "2026-01-06T23:09:26.586295"
+}

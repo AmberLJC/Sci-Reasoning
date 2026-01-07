@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Segment Anything",
+      "authors": "Kirillov et al.",
+      "year": 2023,
+      "arxiv_id": "arXiv:2304.02643",
+      "role": "Inspiration",
+      "relationship_sentence": "Provides the promptable, high-quality 2D mask generator that is leveraged per RGB frame to obtain category-agnostic instance masks without 3D supervision, enabling the core lift-to-3D pipeline."
+    },
+    {
+      "title": "Fusion++: Volumetric Object-Level SLAM",
+      "authors": "McCormac et al.",
+      "year": 2018,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "Introduces the online object-level map representation and per-instance TSDF fusion pipeline that the method adopts while replacing category-specific detectors with SAM masks and adding fast streaming association."
+    },
+    {
+      "title": "MaskFusion: Real-Time Recognition, Tracking and Reconstruction of Multiple Moving Objects",
+      "authors": "R\u00fcnz et al.",
+      "year": 2018,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "Demonstrates real-time RGB-D instance-aware SLAM by fusing per-frame 2D instance masks into 3D and highlights the need for robust mask-to-object association that the new work redesigns for streaming with SAM."
+    },
+    {
+      "title": "OpenScene: 3D Scene Understanding with Open Vocabularies",
+      "authors": "Peng et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "Shows that lifting 2D vision-language/foundation model features into 3D yields open-vocabulary segmentation but operates offline and slowly, motivating an online, real-time VFM-to-3D alternative."
+    },
+    {
+      "title": "OpenMask3D: Open-Vocabulary 3D Instance Segmentation",
+      "authors": "Schult et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "Aggregates 2D masks across views to form 3D instances with open-vocabulary labels, establishing a primary baseline whose multi-view batch processing and latency the new method addresses with streaming fusion."
+    },
+    {
+      "title": "Point-Anything: Segment Anything You Want in 3D Point Clouds",
+      "authors": "Li et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Extension",
+      "relationship_sentence": "Back-projects SAM masks to point clouds and enforces multi-view consistency for 3D instance formation, a technique that is adapted to incremental RGB-D streaming with efficient inter-frame matching."
+    }
+  ],
+  "synthesis_narrative": "Promptable mask generation with category-agnostic generalization emerged with Segment Anything, which delivers high-quality 2D instance masks from single images via flexible prompts. In parallel, online object-centric mapping advanced through Fusion++, which established per-instance TSDF volumes and maintained an object-level map while ingesting frame-by-frame detector outputs. MaskFusion further proved that fusing 2D instance masks into a real-time RGB-D SLAM pipeline is feasible, underscoring the central difficulty of associating transient 2D masks with persistent 3D objects across frames. As vision foundation models matured, OpenScene demonstrated that lifting 2D VLM/VFM features into 3D enables open-vocabulary recognition, but its offline, multi-view processing limited applicability to embodied, time-critical settings. OpenMask3D extended this theme to 3D instance segmentation by aggregating 2D masks across views for open-vocabulary 3D instances, yet relied on batch multi-view inputs and incurred high latency. Point-Anything showed a practical recipe to back-project SAM masks to point clouds and fuse multi-view evidence to form 3D instances, illustrating how SAM can be exploited in 3D via geometric consistency.\nBuilding on these insights, a natural gap appears: object-level, online mapping pipelines rely on task-specific detectors, while VFM-based 3D methods are offline and slow. The synthesis is to combine SAM\u2019s promptable 2D masks with Fusion++/MaskFusion-style incremental fusion, adopting Point-Anything\u2019s back-projection and multi-view consistency but redesigning association to operate causally per frame. This resolves the tension between generalization and latency by performing efficient mask-to-object matching and real-time 3D integration without future frames.",
+  "target_paper": {
+    "title": "EmbodiedSAM: Online Segment Any 3D Thing in Real Time",
+    "authors": "Xiuwei Xu, Huangxing Chen, Linqing Zhao, Ziwei Wang, Jie Zhou, Jiwen Lu",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "oral",
+    "keywords": "3d instance segmentation; online 3d scene segmentation",
+    "abstract": "Embodied tasks require the agent to fully understand 3D scenes simultaneously with its exploration, so an online, real-time, fine-grained and highly-generalized 3D perception model is desperately needed. Since high-quality 3D data is limited, directly training such a model in 3D is infeasible. Meanwhile, vision foundation models (VFM) has revolutionized the field of 2D computer vision with superior performance, which makes the use of VFM to assist embodied 3D perception a promising direction. However, most existing VFM-assisted 3D perception methods are either offline or too slow that cannot be applied in practical embodied tasks. In this paper, we aim to leverage Segment Anything Model (SAM) for real-time 3D instance segmentation in an online setting. This is a challenging problem since future frames are not available in the input streaming RGB-D video, and an instance may be observed in several frames so efficient object matching between frames is required. To address these challenge",
+    "openreview_id": "XFYUwIyTxQ",
+    "forum_id": "XFYUwIyTxQ"
+  },
+  "analysis_timestamp": "2026-01-06T19:02:42.801595"
+}

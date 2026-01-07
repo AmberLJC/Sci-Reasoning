@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "3D Gaussian Splatting for Real-Time Radiance Field Rendering",
+      "authors": "Bernhard Kerbl, Georgios Kopanas, Thomas Leimk\u00fchler, George Drettakis",
+      "year": 2023,
+      "role": "Core representation and rendering pipeline",
+      "relationship_sentence": "GSRF directly builds on 3DGS\u2019s ellipsoidal Gaussian surfels and screen-space splatting pipeline, adapting the representation and rasterization mechanics to complex-valued RF fields."
+    },
+    {
+      "title": "NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis",
+      "authors": "Ben Mildenhall, Pratul P. Srinivasan, Matthew Tancik, Jonathan T. Barron, Ravi Ramamoorthi, Ren Ng",
+      "year": 2020,
+      "role": "Foundational neural volume rendering baseline",
+      "relationship_sentence": "NeRF\u2019s volumetric rendering equation and training regime form the baseline that GSRF aims to outperform in RF synthesis, motivating a shift from dense ray-marching to splat-based rendering for efficiency."
+    },
+    {
+      "title": "An Efficient Representation for Irradiance Environment Maps",
+      "authors": "Ravi Ramamoorthi, Pat Hanrahan",
+      "year": 2001,
+      "role": "Directional basis (spherical harmonics / Legendre foundation)",
+      "relationship_sentence": "GSRF\u2019s hybrid Fourier\u2013Legendre basis leverages the SH/Legendre framework for modeling directional dependence on the sphere, extending it to phase-sensitive RF radiance."
+    },
+    {
+      "title": "Fourier Features Let Networks Learn High Frequency Functions in Low Dimensional Domains",
+      "authors": "Matthew Tancik, Pratul P. Srinivasan, Ben Mildenhall, Sara Fridovich-Keil, Nithin Raghavan, Utkarsh Singhal, Ravi Ramamoorthi, Jonathan T. Barron, Ren Ng",
+      "year": 2020,
+      "role": "Frequency-domain parameterization",
+      "relationship_sentence": "The Fourier component of GSRF\u2019s hybrid basis is inspired by Fourier features to efficiently capture high-frequency, phase-sensitive RF variations along paths."
+    },
+    {
+      "title": "Deep Complex Networks",
+      "authors": "Chiheb Trabelsi, Olexa Bilaniuk, Ying Zhang, Dmitriy Serdyuk, Sandeep Subramanian, Jo\u00e3o Felipe Santos, Soroush Mehri, Negar Rostamzadeh, Yoshua Bengio, Aaron Courville",
+      "year": 2018,
+      "role": "Complex-valued learning framework",
+      "relationship_sentence": "GSRF\u2019s complex-valued Gaussians and learning of amplitude/phase rely on principles from complex-valued neural networks for stable optimization with complex arithmetic."
+    },
+    {
+      "title": "Surface Splatting",
+      "authors": "Matthias Zwicker, Hanspeter Pfister, Jeroen van Baar, Markus Gross",
+      "year": 2001,
+      "role": "Foundational splatting theory and rasterization",
+      "relationship_sentence": "GSRF\u2019s orthographic splatting and efficient ray\u2013Gaussian intersection benefit from classical splatting theory for projecting anisotropic kernels and performing tile-based visibility/accumulation."
+    },
+    {
+      "title": "Instant Neural Graphics Primitives with a Multiresolution Hash Encoding",
+      "authors": "Thomas M\u00fcller, Alex Evans, Christoph Schied, Alexander Keller",
+      "year": 2022,
+      "role": "Efficiency in neural fields",
+      "relationship_sentence": "Although using a different representation, Instant-NGP\u2019s emphasis on training/inference speed motivates GSRF\u2019s design choices to replace NeRF-style ray-marching with fast splatting for RF synthesis."
+    }
+  ],
+  "synthesis_narrative": "GSRF\u2019s core contribution\u2014bringing efficient 3D Gaussian Splatting to the RF domain with complex-valued fields and a hybrid Fourier\u2013Legendre basis\u2014rests on three converging lines of prior work. First, 3D Gaussian Splatting (Kerbl et al.) provides the central point-based scene representation and real-time rasterization pipeline that GSRF adapts from optical radiance to RF amplitudes and phases. The classical splatting literature (Zwicker et al.) underpins GSRF\u2019s orthographic splatting and efficient ray\u2013Gaussian intersection strategies, enabling scalable culling, visibility, and accumulation with anisotropic kernels.\n\nSecond, NeRF (Mildenhall et al.) established the volumetric rendering objective and data-consistency formulation that early RF synthesis methods inherited. GSRF explicitly targets NeRF\u2019s bottlenecks (long training and high inference latency) by replacing dense ray marching with splat-based rendering, a direction also motivated by the efficiency agenda exemplified by Instant-NGP (M\u00fcller et al.).\n\nThird, GSRF\u2019s complex-valued modeling and directional basis derive from signal-processing and rendering bases. The Legendre/Spherical Harmonic foundations (Ramamoorthi & Hanrahan) inform GSRF\u2019s directional modeling on the sphere, while Fourier features (Tancik et al.) motivate an explicit frequency-domain parameterization to capture high-frequency, phase-sensitive RF effects. To learn amplitude and phase robustly, GSRF relies on established practices in complex-valued deep learning (Trabelsi et al.), enabling stable optimization with complex arithmetic and losses. Together, these works directly inform GSRF\u2019s representation (complex Gaussians), parameterization (Fourier\u2013Legendre), and rendering (orthographic splatting), yielding fast, high-fidelity RF data synthesis.",
+  "analysis_timestamp": "2026-01-07T00:29:42.052984"
+}

@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Controlling the False Discovery Rate: A Practical and Powerful Approach to Multiple Testing",
+      "authors": "Yoav Benjamini, Yosef Hochberg",
+      "year": 1995,
+      "role": "Foundational statistical control (FDR)",
+      "relationship_sentence": "Provides the FDR framework and BH procedure that SGen adapts to control the rate of accepting non-entailing (incorrect) generations, yielding the paper\u2019s FDR-E guarantees."
+    },
+    {
+      "title": "SelectiveNet: A Deep Neural Network with an Integrated Reject Option",
+      "authors": "Yonatan Geifman, Ran El-Yaniv",
+      "year": 2019,
+      "role": "Selective prediction framework",
+      "relationship_sentence": "Establishes supervised selective prediction with abstention, which SGenSup directly modifies by replacing standard correctness with an entailment-based label to decide when to generate or abstain."
+    },
+    {
+      "title": "Conformal Risk Control",
+      "authors": "Anastasios N. Angelopoulos, Stephen Bates, Michael I. Jordan, Jitendra Malik",
+      "year": 2022,
+      "role": "Risk-control framework (conformal prediction)",
+      "relationship_sentence": "Introduces distribution-free procedures to control expected loss via verifiers; SGen leverages this paradigm to calibrate generation decisions using an entailment verifier and to extend to semi-supervised settings."
+    },
+    {
+      "title": "The PASCAL Recognising Textual Entailment Challenge",
+      "authors": "Ido Dagan, Oren Glickman, Bernardo Magnini",
+      "year": 2005,
+      "role": "Foundational task/metric (textual entailment)",
+      "relationship_sentence": "Defines textual entailment as a formal correctness relation between texts, which SGen adopts as the task-agnostic criterion for judging the correctness of generated sequences."
+    },
+    {
+      "title": "A Broad-Coverage Challenge Corpus for Sentence Understanding through Inference (MultiNLI)",
+      "authors": "Adina Williams, Nikita Nangia, Samuel R. Bowman",
+      "year": 2018,
+      "role": "Dataset for entailment supervision",
+      "relationship_sentence": "Provides large-scale, diverse entailment annotations enabling robust NLI models; SGenSup relies on such human-annotated entailment data to train/select its verifier for correctness."
+    },
+    {
+      "title": "Evaluating the Factual Consistency of Abstractive Text Summarization (FactCC)",
+      "authors": "Wojciech Kry\u015bci\u0144ski, Bryan McCann, Caiming Xiong, Richard Socher",
+      "year": 2020,
+      "role": "NLI-based factuality verifier for generation",
+      "relationship_sentence": "Demonstrates that entailment-style classifiers can detect hallucinations in generated text, motivating SGen\u2019s use of an entailment verifier as a correctness oracle for risk control."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core innovation\u2014selective generation with theoretical guarantees on the false discovery rate of incorrect outputs defined via textual entailment\u2014emerges at the intersection of selective prediction, conformal risk control, and NLI-based correctness assessment. Benjamini and Hochberg (1995) supply the foundational notion of false discovery rate and the BH procedure, which the authors adapt to the generative setting to define and control FDR with respect to entailment (FDR-E). Building on abstention-based supervised methods, SelectiveNet (Geifman & El-Yaniv, 2019) provides the selective prediction blueprint that SGenSup directly modifies: the acceptance rule is retained, but correctness is redefined by an entailment relation rather than task-specific labels. Conformal Risk Control (Angelopoulos et al., 2022) contributes the calibration philosophy for distribution-free risk guarantees using verifiers, informing both the design of SGen\u2019s acceptance thresholds and the semi-supervised extension that leverages unlabeled data with verifier feedback. To make principled guarantees tractable in open-ended language generation, the work reuses textual entailment as a universal correctness predicate, grounded in the RTE formulation (Dagan et al., 2005). MNLI (Williams et al., 2018) supplies broad-coverage, human-annotated entailment data for training/selecting robust NLI verifiers, which SGenSup depends on. Finally, FactCC (Kry\u015bci\u0144ski et al., 2020) establishes the practical effectiveness of NLI-style verifiers for detecting hallucinations in generated text, justifying SGen\u2019s choice of entailment as the operative correctness signal for risk control. Together, these works directly underwrite SGen\u2019s theoretical and algorithmic path to FDR-controlled, verifier-driven selective language generation.",
+  "analysis_timestamp": "2026-01-06T23:33:35.526827"
+}

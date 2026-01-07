@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Segment Anything",
+      "authors": "Alexander Kirillov, Eric Mintun, Nikhila Ravi, et al.",
+      "year": 2023,
+      "role": "Foundational model and teacher network",
+      "relationship_sentence": "InfoSAM directly builds on SAM as the teacher, explicitly extracting and preserving SAM\u2019s pre-trained, domain-invariant relational knowledge during parameter-efficient fine-tuning."
+    },
+    {
+      "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+      "authors": "Edward J. Hu, Yelong Shen, Phillip Wallis, Zeyuan Allen-Zhu, Yuanzhi Li, Shean Wang, Weizhu Chen",
+      "year": 2021,
+      "role": "Parameter-efficient fine-tuning mechanism",
+      "relationship_sentence": "InfoSAM operates in the PEFT regime typified by LoRA, updating a small number of parameters while integrating its MI-based distillation to prevent forgetting of SAM\u2019s pre-trained relations."
+    },
+    {
+      "title": "Parameter-Efficient Transfer Learning for NLP (Adapter Tuning)",
+      "authors": "Neil Houlsby, Andrei Giurgiu, Stanislaw Jastrzebski, Bruna Morrone, Quentin de Laroussilhe, Andrea Gesmundo, Mona Attariyan, Sylvain Gelly",
+      "year": 2019,
+      "role": "PEFT paradigm and architectural template",
+      "relationship_sentence": "Adapter-based PEFT motivates InfoSAM\u2019s design choice to fine-tune large vision transformers with small trainable modules, highlighting the need for additional constraints to preserve pre-trained knowledge."
+    },
+    {
+      "title": "Distilling the Knowledge in a Neural Network",
+      "authors": "Geoffrey Hinton, Oriol Vinyals, Jeff Dean",
+      "year": 2015,
+      "role": "Teacher\u2013student knowledge distillation framework",
+      "relationship_sentence": "InfoSAM adopts a teacher\u2013student distillation setup but replaces classic logit/feature matching with mutual information objectives tailored to preserve SAM\u2019s relational knowledge."
+    },
+    {
+      "title": "Relational Knowledge Distillation",
+      "authors": "Wonpyo Park, Dongju Kim, Yan Lu, Minsu Cho",
+      "year": 2019,
+      "role": "Distillation of inter-sample relational structure",
+      "relationship_sentence": "InfoSAM\u2019s focus on domain-invariant relations echoes RKD\u2019s idea of distilling structural relations, extending it by formalizing relation preservation via mutual information."
+    },
+    {
+      "title": "Contrastive Representation Distillation",
+      "authors": "Yonglong Tian, Dilip Krishnan, Phillip Isola",
+      "year": 2020,
+      "role": "MI/contrastive alignment for teacher\u2013student representation transfer",
+      "relationship_sentence": "InfoSAM\u2019s MI maximization between teacher and student relational knowledge aligns with contrastive/MI-based distillation principles introduced by CRD."
+    },
+    {
+      "title": "Deep Variational Information Bottleneck",
+      "authors": "Alexander A. Alemi, Ian Fischer, Joshua V. Dillon, Kevin Murphy",
+      "year": 2017,
+      "role": "Information-theoretic compression principle",
+      "relationship_sentence": "InfoSAM\u2019s objective to compress domain-invariant relations while excluding pseudo-invariant nuisance information is directly inspired by the Information Bottleneck framework."
+    }
+  ],
+  "synthesis_narrative": "InfoSAM\u2019s core contribution is to fine-tune the Segment Anything Model (SAM) in a parameter-efficient manner while preserving its pre-trained, domain-invariant relational knowledge through information-theoretic objectives. SAM (Kirillov et al., 2023) provides the pre-trained teacher from which relational knowledge is extracted. The method operates in the PEFT regime, drawing on LoRA (Hu et al., 2021) and adapter-tuning (Houlsby et al., 2019) to minimize trainable parameters. However, unlike standard PEFT that often overlooks knowledge preservation, InfoSAM explicitly guards against forgetting by reframing distillation.\n\nHinton et al. (2015) establish the teacher\u2013student paradigm that InfoSAM follows, but InfoSAM pivots from matching logits/features to preserving relations and information content. Park et al. (2019) demonstrate that transferring inter-sample relational structure can be more faithful than direct feature matching; InfoSAM extends this idea by defining relational preservation via mutual information. Tian et al. (2020) show that contrastive/MI-driven alignment is effective for distillation; InfoSAM similarly maximizes mutual information between teacher and student relational representations to ensure alignment in specialized domains.\n\nCrucially, Alemi et al. (2017) provide the Information Bottleneck principle underpinning InfoSAM\u2019s compression term: it seeks a minimal sufficient relational representation by suppressing pseudo-invariant/nuisance information while retaining invariant structure useful for segmentation. Together, these strands\u2014SAM as a teacher, PEFT mechanisms for efficiency, and MI/IB-grounded distillation\u2014coalesce in InfoSAM\u2019s two-objective formulation that both compresses domain-invariant relations and maximizes teacher\u2013student mutual information, enabling robust, specialization-aware fine-tuning.",
+  "analysis_timestamp": "2026-01-07T00:04:09.149278"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Generalizing from several related classification tasks to a new unlabeled sample",
+      "authors": "Gilles Blanchard et al.",
+      "year": 2011,
+      "role": "Foundation",
+      "relationship_sentence": "This paper formalized the domain generalization problem\u2014learning predictors that transfer to unseen domains\u2014which is the exact problem setting the Imprecise Domain Generalisation framework operates in."
+    },
+    {
+      "title": "Domain Generalization via Invariant Feature Representation",
+      "authors": "Krikamol Muandet et al.",
+      "year": 2013,
+      "role": "Foundation",
+      "relationship_sentence": "By casting domain generalization as learning representations that generalize across environments, this work established the DG paradigm that the current paper retains while rethinking the risk objective that governs generalization."
+    },
+    {
+      "title": "Distributionally Robust Neural Networks for Group Shifts: On the Importance of Regularization for Worst-Case Generalization",
+      "authors": "Shiori Sagawa et al.",
+      "year": 2020,
+      "role": "Baseline",
+      "relationship_sentence": "Group DRO is the canonical worst-case DG objective; the present paper treats this as one endpoint of the risk spectrum and trains a single model to support this choice (and others) at deployment rather than committing to it during training."
+    },
+    {
+      "title": "Stochastic Gradient Methods for Distributionally Robust Optimization with f-divergences",
+      "authors": "Hamed Namkoong et al.",
+      "year": 2017,
+      "role": "Inspiration",
+      "relationship_sentence": "This work showed how a robustness parameter in f-divergence DRO continuously interpolates between ERM and worst-case risk, directly motivating the idea of optimizing against a continuum of generalization criteria rather than fixing one."
+    },
+    {
+      "title": "Optimization of Conditional Value-at-Risk",
+      "authors": "R. Tyrrell Rockafellar et al.",
+      "year": 2000,
+      "role": "Foundation",
+      "relationship_sentence": "CVaR provides a parametric family of coherent risk measures that tune tail emphasis, and the current paper leverages this notion to model operators\u2019 preferences along a continuum from average- to worst-case risk."
+    },
+    {
+      "title": "Spectral measures of risk: A coherent representation of subjective risk aversion",
+      "authors": "Carlo Acerbi",
+      "year": 2002,
+      "role": "Extension",
+      "relationship_sentence": "Spectral risk measures aggregate CVaR across levels via user-specified spectra; the imprecise risk optimization in this paper extends this idea by optimizing over a set (spectrum) of such risk preferences to defer commitment until deployment."
+    },
+    {
+      "title": "Fairness Without Demographics in Repeated Loss Minimization",
+      "authors": "Tatsunori B. Hashimoto et al.",
+      "year": 2018,
+      "role": "Gap Identification",
+      "relationship_sentence": "This paper effectively optimizes tail risk (CVaR-like) to protect worst-off subgroups but requires choosing a fixed risk preference during training, a limitation the present work addresses by keeping the risk preference imprecise and operator-selectable at test time."
+    }
+  ],
+  "synthesis_narrative": "The paper addresses domain generalization when the operator\u2019s risk preference\u2014average versus worst-case\u2014is unknown at training time. Foundational formulations of domain generalization by Blanchard et al. and Muandet et al. define the setting of learning predictors that transfer to unseen domains; most subsequent methods instantiate this with a specific risk criterion. On one end, Group DRO (Sagawa et al.) optimizes worst-group risk, a strong DG baseline but one that hard-commits to the most conservative objective regardless of deployment needs. Complementing this, the distributionally robust optimization literature (Namkoong and Duchi) reveals a continuous interpolation between ERM and worst-case via a robustness parameter in f-divergence DRO, suggesting that a single knob governs the spectrum of generalization strategies.\nRisk-measure theory provides the mathematical scaffold: CVaR (Rockafellar and Uryasev) offers a parametric family that emphasizes tail losses, and spectral risk measures (Acerbi) aggregate CVaR across levels to encode subjective risk aversion. Yet existing ML instantiations\u2014e.g., CVaR-style training for fairness (Hashimoto et al.) or DRO\u2014require fixing the risk parameter during training, binding the learned model to one point on the spectrum.\nThe core innovation of Imprecise Domain Generalisation is to optimize imprecisely over a set of risk preferences, effectively training against a continuum of coherent risk measures so that the operator can specify the desired point (average, worst-case, or in-between) at deployment. In doing so, it directly extends spectral/CVaR principles and DRO\u2019s interpolation while resolving the practical gap of pre-specifying risk preferences during training.",
+  "analysis_timestamp": "2026-01-06T23:09:26.510734"
+}

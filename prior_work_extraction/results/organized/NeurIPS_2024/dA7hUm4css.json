@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Training language models to follow instructions with human feedback",
+      "authors": "Long Ouyang et al.",
+      "year": 2022,
+      "role": "Established the practical RLHF pipeline for LLM alignment using PPO with a KL regularizer against a reference model.",
+      "relationship_sentence": "The paper reframes KL-regularized RLHF from Ouyang et al. via optimal dualization, replacing costly, unstable PPO-style primal updates with a closed-form, one-shot objective."
+    },
+    {
+      "title": "Direct Preference Optimization: Your Language Model is Secretly a Reward Model",
+      "authors": "Yannick L. Rafailov et al.",
+      "year": 2023,
+      "role": "Showed a closed-form, supervised loss equivalent to KL-regularized RLHF from pairwise preferences, removing explicit RL loops.",
+      "relationship_sentence": "PeCAN generalizes DPO\u2019s preference-based closed-form reduction by incorporating safety constraints through optimal dualization, turning constrained RLHF into an unconstrained supervised objective."
+    },
+    {
+      "title": "Maximum a Posteriori Policy Optimization",
+      "authors": "Abbas Abdolmaleki et al.",
+      "year": 2018,
+      "role": "Introduced a dual optimization scheme that solves a KL-constrained E-step in closed form via Lagrange dual variables, yielding a smooth convex dual.",
+      "relationship_sentence": "The proposed one-shot dual pre-optimization closely follows the MPO-style dualization blueprint, providing the technical mechanism to avoid iterative primal\u2013dual policy updates."
+    },
+    {
+      "title": "Constrained Policy Optimization",
+      "authors": "Joshua Achiam, David Held, Aviv Tamar, Pieter Abbeel",
+      "year": 2017,
+      "role": "Canonical primal\u2013dual method for CMDPs enforcing constraints during policy optimization, known for computational overhead and instability.",
+      "relationship_sentence": "The contribution directly targets the limitations of CPO-like primal\u2013dual iterations, replacing them with a closed-form optimal dual that stabilizes and accelerates constrained alignment."
+    },
+    {
+      "title": "Constrained Markov Decision Processes",
+      "authors": "Eitan Altman",
+      "year": 1999,
+      "role": "Foundational CMDP framework and Lagrangian duality for handling constraints in reinforcement learning.",
+      "relationship_sentence": "The paper builds on CMDP duality principles but departs by deriving a smooth convex dual with a closed-form optimizer, enabling a reduction to an unconstrained alignment problem."
+    },
+    {
+      "title": "Deep Reinforcement Learning from Human Preferences",
+      "authors": "Paul F. Christiano et al.",
+      "year": 2017,
+      "role": "Pioneered learning from pairwise human preferences to train reward models guiding policy optimization.",
+      "relationship_sentence": "PeCAN operates in the preference-based alignment setting introduced by Christiano et al., adding principled safety constraints that are handled via optimal dualization rather than iterative RL."
+    },
+    {
+      "title": "Constitutional AI: Harmlessness from AI Feedback",
+      "authors": "Yuntao Bai et al.",
+      "year": 2022,
+      "role": "Advanced safety alignment objectives for LLMs, emphasizing harmlessness and constraints guided by principles.",
+      "relationship_sentence": "This work motivates the safety constraints the paper seeks to enforce; the proposed dualization delivers these safety goals with greater stability and efficiency than RLHF-style loops."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core innovation\u2014reducing constrained RLHF to an equivalent unconstrained objective via optimal dualization\u2014sits at the intersection of CMDP theory, practical RLHF for LLMs, preference-based optimization, and dual methods from KL-regularized policy search. Altman\u2019s CMDP framework supplies the underlying constrained optimization and Lagrangian duality that define safety-aligned objectives. Constrained Policy Optimization operationalized these ideas in practice but exposed the computational cost and instability of iterative primal\u2013dual policy updates, precisely the pain point this paper addresses. InstructGPT established KL-regularized RLHF with PPO as the standard alignment pipeline for LLMs, while Constitutional AI sharpened the safety motivation and constraint types relevant for modern models.\nOn the optimization side, MPO demonstrated that KL-constrained policy updates admit smooth convex duals whose optima yield closed-form updates, a design pattern the present work repurposes for alignment. In the preference setting, Christiano et al. introduced pairwise feedback for learning reward signals, and DPO later showed that KL-regularized RLHF with preferences collapses to a supervised objective without explicit RL. The proposed MoCAN and PeCAN unify these strands: they extend DPO-style preference optimization and MPO-style dualization to the safety-constrained regime, pre-optimizing a smooth convex dual in closed form. This eliminates unstable primal\u2013dual loops, yielding one-shot, computationally efficient, and more stable safety alignment for LLMs.",
+  "analysis_timestamp": "2026-01-06T23:39:42.957468"
+}

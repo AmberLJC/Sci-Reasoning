@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "GFlowNet Foundations",
+      "authors": "Yoshua Bengio et al.",
+      "year": 2021,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "This work established the GFlowNet framework for sampling proportional to unnormalized rewards over sequential construction MDPs, which SynFlowNet adopts to generate diverse molecules while optimizing synthesizability-aware rewards."
+    },
+    {
+      "title": "Trajectory Balance: Improved Training for Generative Flow Networks",
+      "authors": "Nikolai Malkin et al.",
+      "year": 2022,
+      "arxiv_id": "",
+      "role": "Extension",
+      "relationship_sentence": "SynFlowNet trains its reaction-based policy using the Trajectory Balance objective introduced here, directly extending TB to a reaction-application action space to stabilize learning over long synthesis trajectories."
+    },
+    {
+      "title": "Equivariant 3D-Conditional GFlowNets for Molecular Generation",
+      "authors": "Ilia Igashov et al.",
+      "year": 2022,
+      "arxiv_id": "",
+      "role": "Inspiration",
+      "relationship_sentence": "This paper demonstrated that GFlowNets produce substantially more diverse molecular candidates under property-driven rewards, motivating SynFlowNet\u2019s choice of GFlowNets to preserve diversity while imposing synthesis constraints."
+    },
+    {
+      "title": "Lib-INVENT: Reaction-Based Generative Scaffold Decoration Using Reinforcement Learning",
+      "authors": "Thomas Blaschke et al.",
+      "year": 2020,
+      "arxiv_id": "",
+      "role": "Baseline",
+      "relationship_sentence": "Lib-INVENT introduced building molecules via specified reaction filters and purchasable building blocks; SynFlowNet directly builds on this reaction-as-action idea but replaces RL with GFlowNets to achieve mode-covering diversity and stronger synthesis guarantees."
+    },
+    {
+      "title": "Planning Chemical Syntheses with Deep Neural Networks and Symbolic AI",
+      "authors": "Marwin Segler et al.",
+      "year": 2018,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "By formalizing route search over reaction templates and buyable starting materials, this work provided the reaction-template paradigm and practical motivation for constraining generation to forward-synthesis steps used in SynFlowNet\u2019s action space."
+    },
+    {
+      "title": "Molecular De-novo Design through Deep Reinforcement Learning (REINVENT)",
+      "authors": "Marcus Olivecrona et al.",
+      "year": 2017,
+      "arxiv_id": "1704.07555",
+      "role": "Gap Identification",
+      "relationship_sentence": "REINVENT optimized SMILES with heuristic synthesizability terms but did not enforce forward-synthesis feasibility, a limitation SynFlowNet addresses by making executable reactions the generative actions."
+    },
+    {
+      "title": "Junction Tree Variational Autoencoder for Molecular Graph Generation",
+      "authors": "Wengong Jin et al.",
+      "year": 2018,
+      "arxiv_id": "1802.04364",
+      "role": "Gap Identification",
+      "relationship_sentence": "JT-VAE improved validity via substructure assembly but lacked explicit synthesis constraints, highlighting the broader gap of generative models producing non-synthesizable molecules that SynFlowNet closes with reaction-constrained generation."
+    }
+  ],
+  "synthesis_narrative": "Generative Flow Networks were introduced to sample from unnormalized reward distributions over sequential construction processes, providing a principled way to generate diverse sets of high-reward objects rather than collapsing to a few modes. Trajectory Balance subsequently gave a stable, path-consistent training objective for GFlowNets, enabling learning over long horizons with many alternative construction paths. In molecular design, equivariant 3D-conditional GFlowNets showed that this framework yields markedly higher diversity while optimizing property-driven objectives, establishing GFlowNets as a strong fit for chemistry search spaces. In parallel, synthesis planning work formalized the use of reaction templates with buyable starting materials to define practically actionable chemical routes, anchoring the notion that generation constrained by executable reactions can bridge in silico proposals and lab feasibility. Reaction-based generative design, exemplified by Lib-INVENT, operationalized this by building molecules through reaction filters and catalog reagents, but trained with RL that often forfeits diversity. Earlier SMILES/RL and graph VAEs improved validity or property scores but relied on heuristic synthesizability terms or none at all, frequently yielding non-synthesizable outputs.\nTogether these strands point to a natural opportunity: marry the practical guarantees of reaction-constrained construction with the mode-covering sampling of GFlowNets. By treating forward reaction applications on purchasable reactants as actions and training with Trajectory Balance, the current work synthesizes these insights to produce diverse, property-optimized molecules that are executable by construction, while also confronting reaction-encoding issues that arise when navigating the resulting MDP.",
+  "target_paper": {
+    "title": "SynFlowNet: Design of Diverse and Novel Molecules with Synthesis Constraints",
+    "authors": "Miruna Cretu, Charles Harris, Ilia Igashov, Arne Schneuing, Marwin Segler, Bruno Correia, Julien Roy, Emmanuel Bengio, Pietro Lio",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "GFlowNets, de novo molecular generation, synthesizable molecular design",
+    "abstract": "Generative models see increasing use in computer-aided drug design. However, while performing well at capturing distributions of molecular motifs, they often produce synthetically inaccessible molecules. To address this, we introduce SynFlowNet, a GFlowNet model whose action space uses chemical reactions and buyable reactants to sequentially build new molecules. By incorporating forward synthesis as an explicit constraint of the generative mechanism, we aim at bridging the gap between in silico molecular generation and real world synthesis capabilities. We evaluate our approach using synthetic accessibility scores and an independent retrosynthesis tool to assess the synthesizability of our compounds, and motivate the choice of GFlowNets through considerable improvement in sample diversity compared to baselines. Additionally, we identify challenges with reaction encodings that can complicate traversal of the MDP in the backward direction. To address this, we introduce various strategies",
+    "openreview_id": "uvHmnahyp1",
+    "forum_id": "uvHmnahyp1"
+  },
+  "analysis_timestamp": "2026-01-06T17:28:53.213333"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Neural Discrete Representation Learning (VQ-VAE)",
+      "authors": "Aaron van den Oord, Oriol Vinyals, Koray Kavukcuoglu",
+      "year": 2017,
+      "role": "Foundational discrete tokenizer for visual generation",
+      "relationship_sentence": "UniTok inherits the vector-quantized autoencoder paradigm from VQ-VAE\u2014learning a codebook with a reconstruction objective\u2014and explicitly tackles the representational bottleneck that arises in such discrete token spaces."
+    },
+    {
+      "title": "Generating Diverse High-Fidelity Images with VQ-VAE-2",
+      "authors": "Ali Razavi, Aaron van den Oord, Oriol Vinyals",
+      "year": 2019,
+      "role": "Capacity scaling in discrete VAEs via hierarchical quantization",
+      "relationship_sentence": "VQ-VAE-2 showed that increasing the capacity of discrete latents (through hierarchical quantization) improves fidelity, directly motivating UniTok\u2019s strategy to expand the bottleneck rather than treat reconstruction and semantic objectives as inherently conflicting."
+    },
+    {
+      "title": "Jukebox: A Generative Model for Music",
+      "authors": "Prafulla Dhariwal, Heewoo Jun, Christine Payne, Jong Wook Kim, Alec Radford, Ilya Sutskever",
+      "year": 2020,
+      "role": "Demonstrated multi-level/residual quantization for high-capacity discrete representations",
+      "relationship_sentence": "Jukebox\u2019s use of multiple quantization levels to increase representational capacity influenced UniTok\u2019s multi-codebook quantization design to scale vocabulary and bottleneck dimensionality within a unified tokenizer."
+    },
+    {
+      "title": "Zero-Shot Text-to-Image Generation (DALL\u00b7E, dVAE)",
+      "authors": "Aditya Ramesh, Mikhail Pavlov, Gabriel Goh, Scott Gray, Chelsea Voss, Alec Radford, Mark Chen, Ilya Sutskever",
+      "year": 2021,
+      "role": "Established discrete VAEs as tokenizers for autoregressive image generation",
+      "relationship_sentence": "DALL\u00b7E\u2019s use of a discrete VAE as an image tokenizer defines the generative side that UniTok must support, highlighting both the utility and limitations of fixed-size codebooks that UniTok addresses via multi-codebook scaling."
+    },
+    {
+      "title": "Learning Transferable Visual Models From Natural Language Supervision (CLIP)",
+      "authors": "Alec Radford, Jong Wook Kim, Chris Hallacy, Aditya Ramesh, Gabriel Goh, Sandhini Agarwal, Girish Sastry, et al.",
+      "year": 2021,
+      "role": "Semantic supervision via contrastive image\u2013text pretraining",
+      "relationship_sentence": "CLIP provides the semantic learning signal that prior attempts found to conflict with reconstruction; UniTok reinterprets the issue as capacity-limited token spaces and shows CLIP-style supervision can coexist when the discrete bottleneck is expanded."
+    },
+    {
+      "title": "BEiT: BERT Pre-Training of Image Transformers",
+      "authors": "Hangbo Bao, Li Dong, Furu Wei",
+      "year": 2021,
+      "role": "Used discrete visual tokens for understanding via masked prediction",
+      "relationship_sentence": "BEiT demonstrated that discrete tokens from an image tokenizer can power visual understanding, directly motivating UniTok\u2019s goal of a unified tokenizer that serves both generation and understanding when endowed with sufficient capacity."
+    },
+    {
+      "title": "Product Quantization for Nearest Neighbor Search",
+      "authors": "Herv\u00e9 J\u00e9gou, Matthijs Douze, Cordelia Schmid",
+      "year": 2011,
+      "role": "Core concept of multi-codebook factorization to enlarge representational capacity",
+      "relationship_sentence": "UniTok\u2019s multi-codebook quantization echoes PQ\u2019s idea of factorizing a latent space across multiple codebooks to achieve a large effective vocabulary and higher-dimensional bottleneck with manageable codebook sizes."
+    }
+  ],
+  "synthesis_narrative": "UniTok\u2019s central insight is that the apparent conflict between reconstruction (generative tokenizers) and semantic supervision (contrastive understanding) is not intrinsic to the objectives; it emerges from the limited capacity of discrete token spaces. This view is grounded in the VQ-VAE lineage. VQ-VAE established discrete tokenization for images, while VQ-VAE-2 showed that increasing latent capacity through hierarchical quantization boosts fidelity\u2014hinting that capacity, not the loss type, is the bottleneck. DALL\u00b7E operationalized discrete VAEs as tokenizers for autoregressive generation, setting a strong precedent for the generative use case UniTok must satisfy. On the understanding side, CLIP introduced powerful image\u2013text contrastive supervision, and BEiT demonstrated that discrete visual tokens can drive discriminative pretraining. Attempts to combine these threads often reported loss interference; UniTok reframes this as a capacity issue and resolves it by scaling the discrete bottleneck.\n\nThe mechanism UniTok adopts\u2014multi-codebook quantization\u2014directly draws on evidence that multiple quantizers increase representational power, as seen in multi-level/residual quantization used in Jukebox. Conceptually, it also aligns with product quantization\u2019s factorization of latent spaces to realize large effective vocabularies without exploding codebook size. By expanding both vocabulary and bottleneck dimensionality via multiple codebooks, UniTok supports accurate reconstruction and rich semantics simultaneously, enabling a single tokenizer to serve visual generation and understanding, and achieving state-of-the-art rFID and zero-shot accuracy.",
+  "analysis_timestamp": "2026-01-07T00:21:33.163634"
+}

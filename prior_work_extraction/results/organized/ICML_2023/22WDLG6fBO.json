@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Connectionist Temporal Classification: Labelling Unsegmented Sequence Data with Recurrent Neural Networks",
+      "authors": "Alex Graves et al.",
+      "year": 2006,
+      "role": "Foundation",
+      "relationship_sentence": "The paper\u2019s first contribution\u2014using CTC at pre-training to narrow the speech\u2013text modality gap\u2014directly relies on the CTC formulation and its monotonic alignment property introduced by Graves et al."
+    },
+    {
+      "title": "Sinkhorn Distances: Lightspeed Computation of Optimal Transport",
+      "authors": "Marco Cuturi",
+      "year": 2013,
+      "role": "Foundation",
+      "relationship_sentence": "Their Wasserstein alignment objective is made tractable and differentiable through entropy-regularized OT and Sinkhorn iterations introduced by Cuturi, which the authors use to implement the OT loss."
+    },
+    {
+      "title": "From Word Embeddings to Document Distances",
+      "authors": "Matt J. Kusner et al.",
+      "year": 2015,
+      "role": "Inspiration",
+      "relationship_sentence": "The idea of comparing sequences via optimal transport over token/embedding distributions follows the Word Mover\u2019s Distance formulation, which the authors adapt from text\u2013text to speech\u2013text encoder representations."
+    },
+    {
+      "title": "Optimal Transport for Domain Adaptation",
+      "authors": "Nicolas Courty et al.",
+      "year": 2017,
+      "role": "Related Problem",
+      "relationship_sentence": "Using OT specifically to reduce a distributional shift is motivated by Courty et al.\u2019s domain-adaptation perspective, here instantiated as bridging the modality gap between speech and text encodings."
+    },
+    {
+      "title": "Sequence-to-Sequence models can directly translate foreign speech",
+      "authors": "Ron J. Weiss et al.",
+      "year": 2017,
+      "role": "Foundation",
+      "relationship_sentence": "This work established the end-to-end speech translation problem and exposed the speech\u2013text modality mismatch that the proposed CTC+OT pre-training explicitly targets."
+    },
+    {
+      "title": "Learning Transferable Visual Models From Natural Language Supervision",
+      "authors": "Alec Radford et al.",
+      "year": 2021,
+      "role": "Inspiration",
+      "relationship_sentence": "The two-encoder, Siamese-style cross-modal alignment paradigm is inspired by CLIP, with the present paper replacing CLIP\u2019s global contrastive loss by sequence-level CTC+OT alignment for speech\u2013text."
+    },
+    {
+      "title": "ESPnet-ST: All-in-One Speech Translation Toolkit",
+      "authors": "Hirofumi Inaguma et al.",
+      "year": 2020,
+      "role": "Gap Identification",
+      "relationship_sentence": "ESPnet-ST popularized multi-task ASR/MT and KD strategies to mitigate the modality gap but with architectural/training changes, motivating this paper\u2019s pre-train-only approach that requires no changes to the ST model."
+    }
+  ],
+  "synthesis_narrative": "The lineage of \u201cCTC Meets Optimal Transport\u201d traces back to the formulation of end-to-end speech translation (ST) and its central challenge: the speech\u2013text modality gap. Weiss et al. established the end-to-end ST task, revealing the mismatch between acoustic and textual representations that later work sought to mitigate. Toolkits like ESPnet-ST codified effective remedies\u2014multi-task ASR/MT training and knowledge distillation\u2014but at the cost of architectural and training complexity, which directly motivates a pre-training\u2013only solution that does not alter the ST model.\nThe paper\u2019s first pillar is CTC. Building on Graves et al., the authors exploit CTC\u2019s intrinsic monotonic alignment to encourage speech encoders to produce token-aligned representations during pre-training, showing its systematic advantage over cross-entropy objectives for ST. The second pillar is optimal transport (OT). Cuturi\u2019s Sinkhorn distances make Wasserstein alignment computationally feasible, enabling a differentiable OT loss between sets of encoder states. Conceptually, the move to compare sequences as distributions of embeddings follows the Word Mover\u2019s Distance of Kusner et al., while Courty et al.\u2019s use of OT for domain adaptation provides the rationale for using distribution alignment to reduce modality shift. Finally, the architectural choice\u2014a Siamese pair of encoders trained to produce close cross-modal representations\u2014draws inspiration from CLIP\u2019s two-encoder paradigm, but replaces global contrastive alignment with sequence-level CTC+OT to directly close the speech\u2013text gap without modifying the downstream ST architecture.",
+  "analysis_timestamp": "2026-01-06T23:09:26.546120"
+}

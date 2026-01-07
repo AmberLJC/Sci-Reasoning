@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Interpreting GPT: The Logit Lens",
+      "authors": "nostalgebraist",
+      "year": 2020,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "The paper\u2019s vocabulary projection analysis directly adopts the logit-lens idea of projecting intermediate residual stream states into vocabulary space to track how specific token probabilities evolve across layers."
+    },
+    {
+      "title": "The Tuned Lens: A Tool for Interpreting and Debugging Language Models",
+      "authors": "Belrose et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Extension",
+      "relationship_sentence": "They extend the logit-lens with a learned, layer-specific mapping, providing the concrete technique that this work builds on to quantify how later layers amplify the correct answer symbol in vocabulary space."
+    },
+    {
+      "title": "Locating and Editing Factual Associations in GPT",
+      "authors": "Meng et al.",
+      "year": 2022,
+      "arxiv_id": null,
+      "role": "Extension",
+      "relationship_sentence": "This work introduces activation patching/causal tracing to localize where specific information is represented, which the current paper adapts to MCQA to causally attribute the predicted answer symbol to particular layers and attention heads."
+    },
+    {
+      "title": "In-Context Learning and Induction Heads",
+      "authors": "Olsson et al.",
+      "year": 2022,
+      "arxiv_id": "2209.11895",
+      "role": "Related Problem",
+      "relationship_sentence": "By demonstrating that specific attention heads implement distinct algorithmic roles (e.g., induction), it motivates the head-level causal analyses used here to identify sparse heads with unique roles in assembling MCQA answers."
+    },
+    {
+      "title": "Towards Automated Circuit Discovery in Language Models",
+      "authors": "Conmy et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "Their methodology of head- and component-level activation patching to uncover circuits directly informs the paper\u2019s approach to patching attention heads to reveal the causal pathway from question and choices to the answer token."
+    },
+    {
+      "title": "Measuring Massive Multitask Language Understanding",
+      "authors": "Hendrycks et al.",
+      "year": 2020,
+      "arxiv_id": "2009.03300",
+      "role": "Foundation",
+      "relationship_sentence": "This work formalized large-scale MCQA evaluation (MMLU), providing the problem setting and mainstream benchmark context that the present analysis targets and explains mechanistically."
+    },
+    {
+      "title": "Calibrate Before Use: Improving Few-Shot Performance of Language Models",
+      "authors": "Zhao et al.",
+      "year": 2021,
+      "arxiv_id": "2102.09690",
+      "role": "Gap Identification",
+      "relationship_sentence": "By revealing sensitivity to prompt and label format (including order effects), it motivates this paper\u2019s investigation into how MCQA format variations, such as answer choice shuffling, affect internal mechanisms leading to the final answer."
+    }
+  ],
+  "synthesis_narrative": "Projecting intermediate representations into vocabulary space revealed that models progressively form token-level hypotheses that sharpen across depth; the logit lens introduced this projection, and the tuned lens refined it with learned, layer-specific mappings that better track per-layer token probabilities. Parallel mechanistic work developed causal intervention techniques: activation patching and causal tracing showed that one can localize where specific content lives inside transformers, while automated circuit discovery scaled such patching to identify which layers and heads carry task-relevant signals. Complementing these tools, analyses of induction heads established that individual attention heads can implement distinct algorithmic roles, motivating head-level inspection as a meaningful granularity for causal attribution. Meanwhile, large-scale MCQA benchmarks like MMLU defined the standard evaluation setting in which model abilities are probed. Finally, studies on calibration and prompt sensitivity documented that language models are surprisingly brittle to superficial format changes, including order effects, highlighting that observed MCQA performance may hinge on formatting rather than robust reasoning. Together, these strands suggested a concrete opportunity: use causal activation patching at head and layer granularity, combined with vocabulary-space projections, to trace how MCQA answers are selected and then amplified through depth. In this view, benchmarked MCQA behavior can be decomposed into a small set of middle-layer mechanisms that select an answer symbol and later-layer processes that boost its logit, explaining sensitivity to choice formatting via the specific heads and layers that mediate these steps.",
+  "target_paper": {
+    "title": "Answer, Assemble, Ace: Understanding How LMs Answer Multiple Choice Questions",
+    "authors": "Sarah Wiegreffe, Oyvind Tafjord, Yonatan Belinkov, Hannaneh Hajishirzi, Ashish Sabharwal",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "interpretability; multiple-choice question answering",
+    "abstract": "Multiple-choice question answering (MCQA) is a key competence of performant transformer language models that is tested by mainstream benchmarks. However, recent evidence shows that models can have quite a range of performance, particularly when the task format is diversified slightly (such as by shuffling answer choice order). In this work we ask: how do successful models perform formatted MCQA? We employ vocabulary projection and activation patching methods to localize key hidden states that encode relevant information for predicting the correct answer. We find that prediction of a specific answer symbol is causally attributed to a few middle layers, and specifically their multi-head self-attention mechanisms. We show that subsequent layers increase the probability of the predicted answer symbol in vocabulary space, and that this probability increase is associated with a sparse set of attention heads with unique roles. We additionally uncover differences in how different models adjust",
+    "openreview_id": "6NNA0MxhCH",
+    "forum_id": "6NNA0MxhCH"
+  },
+  "analysis_timestamp": "2026-01-06T07:27:25.202717"
+}

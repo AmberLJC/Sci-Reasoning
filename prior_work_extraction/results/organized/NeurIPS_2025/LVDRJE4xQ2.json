@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Distilling the Knowledge in a Neural Network",
+      "authors": "Geoffrey Hinton, Oriol Vinyals, Jeff Dean",
+      "year": 2015,
+      "role": "Foundational teacher\u2013student knowledge distillation",
+      "relationship_sentence": "LRC builds directly on KD by moving beyond logit matching to a richer, network-wide transfer that clones internal activations while learning projections that compress teacher knowledge."
+    },
+    {
+      "title": "FitNets: Hints for Thin Deep Nets",
+      "authors": "Adriana Romero, Nicolas Ballas, Samuel E. Kahou, Antoine Chassang, Carlo Gatta, Yoshua Bengio",
+      "year": 2015,
+      "role": "Intermediate activation (hint) distillation",
+      "relationship_sentence": "LRC generalizes FitNets\u2019 core idea of supervising students with intermediate activations to Transformers, explicitly cloning attention and FFN signals via learned low-rank projections."
+    },
+    {
+      "title": "TinyBERT: Distilling BERT for Natural Language Understanding",
+      "authors": "Xiaoqi Jiao, Yichun Yin, Lifeng Shang, Xin Jiang, Xiao Chen, Linlin Li, Fang Wang, Qun Liu",
+      "year": 2020,
+      "role": "Transformer-specific multi-level distillation (hidden states, attention, logits)",
+      "relationship_sentence": "TinyBERT demonstrated the value of aligning Transformer layer outputs, including FFN representations; LRC subsumes this by unifying activation alignment with low-rank weight compression, avoiding separate alignment modules."
+    },
+    {
+      "title": "MiniLM: Deep Self-Attention Distillation for Task-Agnostic Compression of Pre-Trained Transformers",
+      "authors": "Wenhui Wang, Furu Wei, Li Dong, Hangbo Bao, Nan Yang, Ming Zhou",
+      "year": 2020,
+      "role": "Relation-based distillation of attention for efficient compression",
+      "relationship_sentence": "LRC extends MiniLM\u2019s representation alignment insight by coupling activation alignment (including FFN signals) with learned low-rank projections that compress teacher weights for soft pruning."
+    },
+    {
+      "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+      "authors": "Edward J. Hu, Yelong Shen, Phillip Wallis, Zeyuan Allen-Zhu, Yuanzhi Li, Shean Wang, Weizhu Chen",
+      "year": 2021,
+      "role": "Low-rank parameterization for efficient weight adaptation",
+      "relationship_sentence": "LRC adapts LoRA\u2019s low-rank factorization principle from parameter-efficient tuning to distillation-driven compression, using learned low-rank projections to approximate teacher weights and facilitate activation cloning (soft pruning)."
+    },
+    {
+      "title": "Movement Pruning: Adaptive Sparsity by Fine-Tuning",
+      "authors": "Victor Sanh, Thomas Wolf, Alexander M. Rush",
+      "year": 2020,
+      "role": "Pruning for compression, illustrating information loss from hard sparsification",
+      "relationship_sentence": "By highlighting the accuracy costs of hard pruning, Movement Pruning motivates LRC\u2019s soft-pruning approach that preserves information via low-rank compression coupled with activation alignment."
+    },
+    {
+      "title": "Parameter-Efficient Transfer Learning for NLP",
+      "authors": "Neil Houlsby, Andrei Giurgiu, Stanislaw Jastrzebski, Bruna Morrone, Quentin de Laroussilhe, Andrea Gesmundo, Mona Attariyan, Sylvain Gelly",
+      "year": 2019,
+      "role": "Adapter modules introducing bottleneck projections for efficient transfer",
+      "relationship_sentence": "LRC draws on the adapter idea of bottleneck projections but removes explicit modules, instead learning low-rank projections that both compress and align, eliminating separate alignment components."
+    }
+  ],
+  "synthesis_narrative": "Low-Rank Clone (LRC) sits at the intersection of three lines of work: knowledge distillation (KD), representation alignment inside Transformers, and low-rank parameterization for efficient transfer. The teacher\u2013student paradigm of Hinton et al. established the basis for transferring behavior, but classical KD focused on output logits. FitNets shifted the emphasis to internal features, showing that supervising intermediate activations can guide thinner students. In the Transformer era, TinyBERT and MiniLM operationalized these ideas by aligning hidden states and attention relations, underscoring that internal representation matching\u2014particularly beyond logits\u2014is crucial for high-fidelity compression. However, these approaches commonly rely on explicit alignment modules or per-layer mapping losses, and they do not inherently address compression of the teacher\u2019s parameter space.\nLoRA introduced a powerful abstraction: low-rank factors can capture most of the effective updates or structure in large models with minimal parameters. LRC reinterprets this low-rank lens not merely for adaptation but as a vehicle for distillation: learned low-rank projection matrices simultaneously approximate the teacher\u2019s weights (soft pruning via compression) and induce activation cloning across layers, including the often underutilized FFN signals. This unification removes the need for external alignment modules typical of adapter-based transfer while reducing the information loss associated with hard sparsification. Movement Pruning crystallizes the pitfalls of hard pruning, motivating LRC\u2019s soft, low-rank compression coupled with representation alignment. Together, these threads converge in LRC\u2019s core innovation: a single, low-rank projection framework that maximizes knowledge transfer by jointly compressing weights and aligning activations for efficient SLM pre-training.",
+  "analysis_timestamp": "2026-01-07T00:21:32.292382"
+}

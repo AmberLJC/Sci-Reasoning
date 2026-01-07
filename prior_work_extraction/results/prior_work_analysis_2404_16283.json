@@ -1,0 +1,63 @@
+{
+  "paper_title": "Andes: Defining and Enhancing Quality-of-Experience in LLM-Based Text Streaming Services",
+  "paper_arxiv_id": "2404.16283",
+  "paper_abstract": "Large language models (LLMs) are now at the core of conversational AI services such as real-time translation and chatbots, which provide live user interaction by incrementally streaming text to the user. However, existing LLM serving systems fail to provide good user experience because their optimization metrics are not always aligned with user experience.   In this paper, we first introduce and define the notion of Quality-of-Experience (QoE) for text streaming services by considering each user's end-to-end interaction timeline. Based on this, we propose Andes, a QoE-aware LLM serving system that enhances user experience by ensuring that users receive the first token promptly and subsequent tokens at a smooth, digestible pace, even during surge periods. This is enabled by Andes's preemptive request scheduler that dynamically prioritizes requests at the token granularity based on each request's expected QoE gain and GPU resource usage. Our evaluations demonstrate that, compared to state-of-the-art LLM serving systems, Andes improves the average QoE by up to $4.7\\times$ given the same GPU resource, or saves up to 61% GPU resources while maintaining the same high QoE.",
+  "prior_works": [
+    {
+      "title": "Efficient Memory Management for Large Language Model Serving with PagedAttention (vLLM)",
+      "authors": "Kwon et al.",
+      "year": 2023,
+      "role": "Baseline",
+      "relationship_sentence": "This system\u2019s continuous batching and throughput-oriented scheduling provide the dominant serving baseline that Andes directly departs from by replacing throughput/latency proxies with token-granular prioritization based on expected QoE gain.",
+      "arxiv_id": null,
+      "url": null
+    },
+    {
+      "title": "SGLang: Efficient Execution Engine for Structured Language Model Programs",
+      "authors": "Lianmin Zheng et al.",
+      "year": 2024,
+      "role": "Baseline",
+      "relationship_sentence": "SGLang\u2019s optimized prefill/decode execution and batching policies serve as a high-performance baseline that focuses on system efficiency rather than user-perceived smoothness, motivating Andes\u2019s shift to QoE-aware token-level scheduling.",
+      "arxiv_id": null,
+      "url": null
+    },
+    {
+      "title": "Neural Adaptive Video Streaming with Pensieve",
+      "authors": "Hongzi Mao et al.",
+      "year": 2017,
+      "role": "Inspiration",
+      "relationship_sentence": "Pensieve\u2019s explicit QoE formulation balancing startup delay, rebuffering, and smoothness directly inspired Andes\u2019s analogous QoE definition for text streaming (first-token promptness and digestible, smooth token pace).",
+      "arxiv_id": null,
+      "url": null
+    },
+    {
+      "title": "BOLA: Near-Optimal Bitrate Adaptation for Online Videos",
+      "authors": "Stefano Petrangeli Spiteri et al.",
+      "year": 2016,
+      "role": "Inspiration",
+      "relationship_sentence": "BOLA\u2019s marginal-utility view of segment choices and emphasis on smoothness informed Andes\u2019s notion of per-token marginal QoE gain and the need to avoid bursty, hard-to-digest output rates.",
+      "arxiv_id": null,
+      "url": null
+    },
+    {
+      "title": "InferLine: ML Inference Pipeline Composition with End-to-End Latency SLOs",
+      "authors": "Isaac Crankshaw et al.",
+      "year": 2020,
+      "role": "Gap Identification",
+      "relationship_sentence": "InferLine\u2019s SLO-centric scheduling underscored the limitation of meeting latency targets without modeling user-perceived utility over the full interaction timeline, a gap Andes addresses with an explicit QoE objective.",
+      "arxiv_id": null,
+      "url": null
+    },
+    {
+      "title": "Size-Based Scheduling to Improve Web Performance",
+      "authors": "Mor Harchol-Balter et al.",
+      "year": 2003,
+      "role": "Related Problem",
+      "relationship_sentence": "This work\u2019s preemptive, size-aware scheduling insights (e.g., SRPT-style prioritization) informed Andes\u2019s token-granularity preemption policy that favors actions with the highest immediate QoE gain per unit of GPU time.",
+      "arxiv_id": null,
+      "url": null
+    }
+  ],
+  "synthesis_narrative": "Throughput-oriented LLM serving systems like vLLM introduced continuous batching and memory-efficient PagedAttention to maximize tokens-per-second, and SGLang further streamlined prefill/decode execution with high-performance batching and caching policies. These systems excel at raw efficiency but optimize proxy metrics rather than modeling how users experience streamed text. In contrast, the adaptive bitrate (ABR) literature explicitly defined and optimized user-centric Quality-of-Experience (QoE): Pensieve formalized a QoE function combining startup delay, rebuffering, and smoothness, and learned policies that trade off early start versus consistent playback; BOLA framed bitrate selection via marginal utility and emphasized avoiding burstiness that harms perception. Meanwhile, inference pipeline schedulers such as InferLine focused on meeting end-to-end latency SLOs across models, revealing a gap between hitting deadlines and optimizing perceived utility over an interaction. Finally, size-based, preemptive scheduling work in web systems (e.g., SRPT-style insights) demonstrated the benefits of preemption and prioritizing high-payoff work units to minimize perceived wait. Taken together, these strands highlighted an opportunity: import ABR-style QoE modeling into token-streamed LLM interactions and couple it with preemptive, fine-grained scheduling. Building on high-throughput batching engines, a natural next step is to prioritize tokens by expected marginal QoE gain per unit GPU time, ensuring fast first tokens and smooth, digestible pacing under load rather than solely maximizing aggregate throughput.",
+  "analysis_timestamp": "2026-01-06T05:37:56.260221"
+}

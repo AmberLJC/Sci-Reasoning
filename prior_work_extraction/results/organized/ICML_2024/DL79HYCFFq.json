@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Fast \u03b5-free inference of simulation models with Bayesian conditional density estimation",
+      "authors": "Papamakarios et al.",
+      "year": 2016,
+      "role": "Foundation",
+      "relationship_sentence": "Introduced amortized SBI via neural posterior density estimation (SNPE), defining the simulator-driven amortized inference paradigm that Simformer generalizes by learning the full joint p(\u03b8, x) to enable any-conditional queries."
+    },
+    {
+      "title": "Automatic posterior transformation for likelihood-free inference",
+      "authors": "Greenberg et al.",
+      "year": 2019,
+      "role": "Extension",
+      "relationship_sentence": "SNPE-C (APT) improved neural posterior estimation but remained tied to a fixed prior/task; Simformer addresses this limitation by modeling the joint distribution with diffusion so it can sample posteriors and other conditionals without committing to a single prior."
+    },
+    {
+      "title": "Sequential Neural Likelihood: Fast Likelihood-free Inference with Autoregressive Flows",
+      "authors": "Papamakarios et al.",
+      "year": 2019,
+      "role": "Extension",
+      "relationship_sentence": "Showed that learning the simulator likelihood p(x|\u03b8) decouples inference from the prior and allows reuse across tasks; Simformer extends this idea by learning the entire joint p(\u03b8, x), which simultaneously yields likelihoods, posteriors, and other conditionals."
+    },
+    {
+      "title": "Likelihood-free inference with neural ratio estimation",
+      "authors": "Hermans et al.",
+      "year": 2020,
+      "role": "Baseline",
+      "relationship_sentence": "NRE improved sample efficiency via likelihood-ratio learning but still trains for specific tasks; Simformer supersedes this by training a single joint diffusion model that amortizes across tasks and supports arbitrary conditional queries."
+    },
+    {
+      "title": "Benchmarking Simulation-Based Inference",
+      "authors": "Lueckmann et al.",
+      "year": 2021,
+      "role": "Gap Identification",
+      "relationship_sentence": "Systematically documented that state-of-the-art SBI methods are simulation-hungry and inflexible\u2014limitations Simformer directly targets with a joint diffusion + transformer architecture to reduce simulations and handle diverse data/parameter types."
+    },
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Ho et al.",
+      "year": 2020,
+      "role": "Foundation",
+      "relationship_sentence": "Provides the core diffusion modeling objective and sampling scheme that Simformer adapts to learn a high-dimensional joint density over (\u03b8, x), enabling flexible conditioning at inference time."
+    },
+    {
+      "title": "Score-Based Generative Modeling through Stochastic Differential Equations",
+      "authors": "Song et al.",
+      "year": 2021,
+      "role": "Inspiration",
+      "relationship_sentence": "The SDE view of diffusion and its conditional sampling tools inform Simformer\u2019s ability to draw samples from arbitrary conditionals (e.g., posterior and likelihood) of the learned joint distribution."
+    }
+  ],
+  "synthesis_narrative": "Simformer\u2019s core idea\u2014train a single generative model of the joint distribution over simulator parameters and observations to answer arbitrary conditional queries\u2014emerges directly from two intellectual lineages that it unifies. From simulation-based inference, early amortized posterior estimators such as SNPE established that neural conditional density estimators can turn simulator pairs (\u03b8, x) into fast Bayesian inference; later refinements like APT (SNPE-C) improved robustness, while SNL and NRE shifted focus to likelihoods or ratios to decouple inference from the prior and bolster sample efficiency. However, as highlighted by the SBI benchmark, these approaches remained simulation-hungry and largely locked to predefined priors, simulators, and task conditionings. Simformer tackles precisely these gaps by moving from conditional modeling to learning the entire joint p(\u03b8, x).\nConcurrently, diffusion/score-based generative modeling provided the practical machinery for flexible high-dimensional density learning. DDPM supplied the denoising objective and sampling pipeline, and the SDE formulation clarified how to perform conditional sampling within learned generative models. Simformer marries these strands: it replaces task-specific conditional estimators with a diffusion model over the joint, parameterized by transformers to handle function-valued and unstructured inputs. This design yields an all-in-one amortized inference engine that can sample from any conditional of interest\u2014posterior, likelihood, or others\u2014thus directly extending SNL/NRE\u2019s decoupling philosophy while resolving the simulation inefficiency and inflexibility emphasized by the SBI benchmark.",
+  "analysis_timestamp": "2026-01-06T23:09:26.408628"
+}

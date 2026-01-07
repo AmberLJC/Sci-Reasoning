@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Heavy-Tailed Self-Regularization in Deep Neural Networks",
+      "authors": "Charles H. Martin, Michael W. Mahoney",
+      "year": 2019,
+      "role": "Theoretical foundation for HT-SR layer-wise metrics",
+      "relationship_sentence": "Introduced the HT-SR framework and per-layer power-law (PL) spectral exponents that TempBalance uses to quantify each layer\u2019s implicit self-regularization and drive layer-wise temperature (learning-rate) assignment."
+    },
+    {
+      "title": "Predicting Trends in the Quality of State-of-the-Art Neural Networks Without Access to Training or Testing Data",
+      "authors": "Charles H. Martin, Michael W. Mahoney",
+      "year": 2019,
+      "role": "Metric design and validation of HT-SR predictors",
+      "relationship_sentence": "Established practical HT-SR\u2013motivated metrics (e.g., PL exponents and related log-norm aggregates) that correlate with generalization, informing TempBalance\u2019s choice of layer-scoring signals for setting learning rates."
+    },
+    {
+      "title": "Large Batch Training of Convolutional Networks with Layer-wise Adaptive Rate Scaling (LARS)",
+      "authors": "Yang You, Igor Gitman, Boris Ginsburg",
+      "year": 2017,
+      "role": "Precedent for layer-wise learning-rate scaling",
+      "relationship_sentence": "Provided the key precedent that layer-wise learning-rate adaptation can stabilize training, which TempBalance builds upon by replacing gradient/weight-norm heuristics with HT-SR spectral metrics."
+    },
+    {
+      "title": "Large Batch Optimization for Deep Learning: Training BERT in 76 minutes (LAMB)",
+      "authors": "Yang You, Jing Li, Sashank J. Reddi, Jonathan Hseu, Sanjiv Kumar, Srinadh Bhojanapalli, Xiaodan Song, James Demmel, Kurt Keutzer, Cho-Jui Hsieh",
+      "year": 2019,
+      "role": "Layer-wise adaptation in adaptive optimizers",
+      "relationship_sentence": "Extended LARS-style ideas to Adam-like methods, reinforcing the effectiveness of layer-wise scaling that TempBalance adopts, but with an HT-SR\u2013guided criterion instead of ratio-based rules."
+    },
+    {
+      "title": "Stochastic Gradient Descent as Approximate Bayesian Inference",
+      "authors": "Martin A. Mandt, Matthew D. Hoffman, David M. Blei",
+      "year": 2017,
+      "role": "Learning rate as temperature conceptualization",
+      "relationship_sentence": "Formalized the view that SGD behaves like a stochastic process with an effective temperature governed by learning rate and batch size, directly motivating TempBalance\u2019s interpretation of per-layer learning rates as temperatures to be balanced."
+    },
+    {
+      "title": "A Tail-Index Analysis of Stochastic Gradient Noise in Deep Neural Networks",
+      "authors": "Umut \u015eim\u015fekli, Levent Sagun, Mert G\u00fcrb\u00fczbalaban, et al.",
+      "year": 2019,
+      "role": "Heavy-tailed dynamics in optimization",
+      "relationship_sentence": "Showed that SGD noise is heavy-tailed, linking optimization dynamics to heavy-tailed statistics and supporting TempBalance\u2019s use of HT-driven layer-wise signals for temperature control."
+    },
+    {
+      "title": "Don\u2019t Decay the Learning Rate, Increase the Batch Size",
+      "authors": "Samuel L. Smith, Pieter-Jan Kindermans, Chris Ying, Quoc V. Le",
+      "year": 2018,
+      "role": "Noise-scale/temperature control via LR\u2013batch-size tradeoffs",
+      "relationship_sentence": "Connected learning-rate schedules and batch size to an effective noise scale (temperature), reinforcing TempBalance\u2019s premise that temperature should be explicitly managed\u2014here, at the layer level using HT-SR metrics."
+    }
+  ],
+  "synthesis_narrative": "TempBalance\u2019s core contribution\u2014treating layer-wise learning rates as temperatures and setting them using HT-SR metrics\u2014rests on two converging lines of prior work. First, the Heavy-Tailed Self-Regularization (HT-SR) program (Martin & Mahoney, 2019; Martin & Mahoney, 2019) established that trained networks\u2019 weight matrices exhibit heavy-tailed spectra, with per-layer power-law exponents serving as quantitative indicators of implicit self-regularization. These works not only supplied the statistical-mechanical lens but also provided practical, validated layer-wise metrics (e.g., PL exponents and log-norm aggregates) that correlate with generalization quality\u2014precisely the signals TempBalance exploits to prioritize and calibrate layers.\n\nSecond, advances in optimization framed learning rate as a temperature-like control variable and demonstrated the utility of layer-wise scaling. Mandt et al. (2017) theoretically linked SGD\u2019s stationary distribution to an effective temperature determined by learning rate and batch size, while Smith et al. (2018) operationalized this view via noise-scale control. In parallel, LARS (You et al., 2017) and LAMB (You et al., 2019) showed that adjusting learning rates per layer can stabilize and accelerate large-batch training, establishing a practical template for layer-wise adaptation.\n\nSimsekli et al. (2019) closed the conceptual loop by revealing heavy-tailed characteristics in SGD noise, connecting optimization dynamics to the heavy-tailed perspective. TempBalance integrates these strands: it retains the proven effectiveness of layer-wise rate scaling, grounds the temperature interpretation in SGD theory, and replaces heuristic layer criteria with HT-SR spectral metrics to balance per-layer temperatures during training.",
+  "analysis_timestamp": "2026-01-06T23:42:48.030735"
+}

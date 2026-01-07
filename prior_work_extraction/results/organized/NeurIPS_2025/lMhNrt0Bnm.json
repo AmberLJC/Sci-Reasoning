@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Semantic Scene Completion from a Single Depth Image (SSCNet)",
+      "authors": "Shuran Song, Fisher Yu, Andy Zeng, Angel X. Chang, Manolis Savva, Thomas Funkhouser",
+      "year": 2017,
+      "role": "Foundational SSC formulation",
+      "relationship_sentence": "Established SSC as voxel-wise semantic segmentation with dense voxel labels, defining the dominant paradigm that VoxDet explicitly rethinks into an instance-centric, detection-style formulation."
+    },
+    {
+      "title": "Panoptic-DeepLab: A Simple, Strong, and Fast Baseline for Bottom-Up Panoptic Segmentation",
+      "authors": "Bowen Cheng et al.",
+      "year": 2020,
+      "role": "Center/offset supervision for instance grouping",
+      "relationship_sentence": "Introduced center heatmaps and per-pixel offset regression targets derived from labels, directly inspiring VoxDet\u2019s use of offset fields and the VoxNT conversion of labels into instance-centric offset supervision."
+    },
+    {
+      "title": "CenterNet: Objects as Points",
+      "authors": "Xingyi Zhou, Dequan Wang, Philipp Kr\u00e4henb\u00fchl",
+      "year": 2019,
+      "role": "Anchor-free dense detection via center keypoints and offsets",
+      "relationship_sentence": "Demonstrated that dense detection can be decoupled into center localization plus regression, a design mirrored by VoxDet when casting voxel-level SSC as dense object detection with offset regression and semantic prediction."
+    },
+    {
+      "title": "CenterPoint: Center-based 3D Object Detection and Tracking",
+      "authors": "Tianwei Yin, Xingyi Zhou, Philipp Kr\u00e4henb\u00fchl",
+      "year": 2021,
+      "role": "3D center-based dense detection",
+      "relationship_sentence": "Showed the effectiveness of center heatmaps and offset regression in 3D, supporting VoxDet\u2019s instance-centric reformulation of 3D SSC as dense detection on voxel grids."
+    },
+    {
+      "title": "VoteNet: A Deep Learning Labeling Paradigm for 3D Object Detection from Point Clouds",
+      "authors": "Charles R. Qi, Or Litany, Kaiming He, Leonidas J. Guibas",
+      "year": 2019,
+      "role": "Offset-to-center voting in 3D",
+      "relationship_sentence": "Popularized learning offsets from points to object centers for 3D grouping/detection, conceptually underpinning VoxDet\u2019s offset regression targets derived via the VoxNT label conversion."
+    },
+    {
+      "title": "VoxelNet: End-to-End Learning for Point Cloud Based 3D Object Detection",
+      "authors": "Yin Zhou, Oncel Tuzel",
+      "year": 2018,
+      "role": "Voxelized 3D feature learning backbone",
+      "relationship_sentence": "Provided the end-to-end voxel feature learning paradigm that enables dense 3D prediction on voxel grids, the spatial substrate used by VoxDet\u2019s dense detection formulation."
+    },
+    {
+      "title": "ImVoxelNet: Image-to-Voxel 3D Object Detection",
+      "authors": "Ilya Rukhovich, Anna Vorontsova, Anton Konushin",
+      "year": 2022,
+      "role": "Dense detection in voxel space from images",
+      "relationship_sentence": "Demonstrated effective dense detection directly in voxel representations, informing VoxDet\u2019s choice to operate instance-centrically within a voxel grid for SSC."
+    }
+  ],
+  "synthesis_narrative": "VoxDet\u2019s key contribution is to recast Semantic Scene Completion (SSC) from voxel-wise semantic segmentation into an instance-centric, dense detection problem, supervised by offset fields derived from standard SSC labels. SSCNet established the community\u2019s default formulation\u2014per-voxel semantic classification with dense voxel labels\u2014whose limitations (instance fragmentation and ambiguity) VoxDet targets. Two strands of prior work directly shape VoxDet\u2019s redesign.\nFirst, offset-based instance representations showed how simple supervision can yield strong instance discriminability. Panoptic-DeepLab\u2019s center heatmaps with per-pixel offsets defined a generic way to turn label masks into instance-aware regression targets; VoteNet extended the idea to 3D, using point-to-center voting for grouping and detection. These works motivate VoxDet\u2019s Voxel-to-Instance (VoxNT) trick, which converts voxel-level labels into instance-level offset supervision without extra annotation.\nSecond, dense and center-based object detection provides the architectural lens for SSC. CenterNet demonstrated anchor-free decoupling of classification from center/offset regression, later proven highly effective in 3D by CenterPoint. Operating within voxel grids is supported by VoxelNet\u2019s end-to-end voxel feature learning, while ImVoxelNet shows dense detection directly in voxel space. Synthesizing these insights, VoxDet treats SSC as dense voxel detection: semantic prediction paired with offset regression to implicit instance centers, resolving the instance-level incompleteness and adjacency ambiguities inherent to segmentation-style SSC.",
+  "analysis_timestamp": "2026-01-07T00:05:12.560221"
+}

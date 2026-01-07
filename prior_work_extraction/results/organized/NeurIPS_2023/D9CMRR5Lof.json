@@ -1,0 +1,83 @@
+{
+  "prior_works": [
+    {
+      "title": "Dataset Distillation",
+      "authors": [
+        "Tongzhou Wang",
+        "Jun-Yan Zhu",
+        "Antonio Torralba",
+        "Alexei A. Efros"
+      ],
+      "year": 2018,
+      "role": "Problem formulation and bilevel framework",
+      "relationship_sentence": "Established the dataset distillation task via bilevel optimization of synthetic data to emulate training on real data, providing the conceptual and optimization template that MGDD streamlines and re-parameterizes with a generator."
+    },
+    {
+      "title": "Dataset Condensation with Gradient Matching",
+      "authors": [
+        "Bo Zhao",
+        "Konda R. Mopuri",
+        "Hakan Bilen"
+      ],
+      "year": 2021,
+      "role": "Methodological predecessor and key baseline",
+      "relationship_sentence": "Introduced gradient-matching objectives to optimize synthetic images, achieving strong performance but requiring many forward\u2013backward passes; MGDD is explicitly designed to avoid this heavy iterative loop by learning a generator to emit synthetic samples in one shot."
+    },
+    {
+      "title": "Dataset Distillation by Matching Training Trajectories",
+      "authors": [
+        "Jeremy Cazenavette",
+        "Tongzhou Wang",
+        "Antonio Torralba",
+        "Alexei A. Efros"
+      ],
+      "year": 2022,
+      "role": "High-performing but computationally intensive baseline",
+      "relationship_sentence": "Showed that matching full training trajectories yields high-quality distilled data at the cost of extreme compute; MGDD targets comparable utility with far better time efficiency by replacing trajectory-matching with a meta generator."
+    },
+    {
+      "title": "Dataset Condensation with Differentiable Siamese Augmentation",
+      "authors": [
+        "Bo Zhao",
+        "Hakan Bilen"
+      ],
+      "year": 2021,
+      "role": "Technique shaping objectives and robustness in DD",
+      "relationship_sentence": "Demonstrated that differentiable augmentation within gradient-matching pipelines boosts generalization but increases optimization burden; MGDD bypasses these iterative image-parameter updates while retaining compatibility with augmentation at generation time."
+    },
+    {
+      "title": "Model-Agnostic Meta-Learning for Fast Adaptation of Deep Networks (MAML)",
+      "authors": [
+        "Chelsea Finn",
+        "Pieter Abbeel",
+        "Sergey Levine"
+      ],
+      "year": 2017,
+      "role": "Meta-learning foundation conditioning on initialization",
+      "relationship_sentence": "Provided the meta-learning paradigm of optimizing over initializations and learners; MGDD\u2019s generator is conditioned on the initialization of the distilled learner, inheriting the idea of generalizing across random inits via meta-optimization."
+    },
+    {
+      "title": "Neural Tangent Kernel: Convergence and Generalization in Neural Networks",
+      "authors": [
+        "Arthur Jacot",
+        "Franck Gabriel",
+        "Cl\u00e9ment Hongler"
+      ],
+      "year": 2018,
+      "role": "Theoretical scaffold for feature-space least-squares",
+      "relationship_sentence": "Linked wide-network training to kernel regression, motivating MGDD\u2019s closed-form label synthesis via least-squares in a feature space and supporting the paper\u2019s analysis on error equivalence between original and feature spaces."
+    },
+    {
+      "title": "Dataset Condensation with Distribution Matching",
+      "authors": [
+        "Bo Zhao",
+        "Hakan Bilen"
+      ],
+      "year": 2023,
+      "role": "Objective design emphasizing distributional alignment",
+      "relationship_sentence": "Promoted aligning distributions of real and synthetic data to improve distilled quality; MGDD\u2019s generator implicitly targets such alignment while removing the repeated backprop loops typical of distribution-matching optimization."
+    }
+  ],
+  "synthesis_narrative": "MGDD responds to the core limitations of iterative dataset distillation by reframing the synthesis process as generation conditioned on learner initialization, plus closed-form label computation. The original Dataset Distillation formulation defined the bilevel objective of optimizing synthetic data to mimic real training, which subsequent methods operationalized through gradient-centric criteria. Gradient Matching and its DSA-enhanced variant established effective, widely adopted objectives but required many forward\u2013backward passes to adjust pixel-level parameters, making them slow and inflexible when target set sizes change. Matching Training Trajectories further improved fidelity by aligning entire learning trajectories, yet accentuated the computational burden. This line of work collectively motivates MGDD\u2019s pursuit of drastically higher time efficiency.\n\nMGDD adopts a meta-learning perspective, inspired by MAML\u2019s conditioning on learner initialization, to train a generator that outputs synthetic samples tailored to a given network init. This removes the need to re-run heavy inner-loop optimization when requesting different synthetic dataset sizes and supports fast, flexible distillation. For labels, MGDD leverages kernel-inspired reasoning: the NTK view connects network training to kernel regression, justifying MGDD\u2019s least-squares solution in a feature space and underpinning its theoretical error analysis between original and feature domains. Finally, distribution matching ideas guide the goal of aligning synthetic and real data statistics, which MGDD attains implicitly through its generator rather than explicit iterative optimization. Together, these works directly shape MGDD\u2019s generator-based, meta-conditioned, and closed-form labeling pipeline that achieves fast, scalable dataset distillation.",
+  "analysis_timestamp": "2026-01-06T23:42:49.109650"
+}

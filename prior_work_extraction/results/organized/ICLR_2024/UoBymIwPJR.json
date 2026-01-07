@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Deep Reinforcement Learning from Human Preferences",
+      "authors": "Paul F. Christiano et al.",
+      "year": 2017,
+      "arxiv_id": "1706.03741",
+      "role": "Foundation",
+      "relationship_sentence": "The paper adopts Christiano et al.\u2019s PbRL formulation\u2014learning a reward model from pairwise trajectory-segment preferences and optimizing a policy against it\u2014and directly questions the common uncertainty-driven query heuristic used within this loop."
+    },
+    {
+      "title": "Active Preference-Based Learning of Reward Functions",
+      "authors": "Dorsa Sadigh et al.",
+      "year": 2017,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "This work established information-gain\u2013based query selection for preference learning, which the current paper shows can be misaligned with policy improvement and therefore motivates a policy-aligned query objective."
+    },
+    {
+      "title": "Batch Active Preference-Based Learning of Reward Functions",
+      "authors": "Emre B\u0131y\u0131k et al.",
+      "year": 2019,
+      "arxiv_id": "",
+      "role": "Gap Identification",
+      "relationship_sentence": "B\u0131y\u0131k et al.\u2019s batch active preference selection focuses on globally improving reward-model fidelity, a strategy the present paper identifies as prone to query\u2013policy misalignment that yields little policy benefit."
+    },
+    {
+      "title": "PEBBLE: Feedback-Efficient Reinforcement Learning via Bootstrapped Labeling",
+      "authors": "H. Lee et al.",
+      "year": 2021,
+      "arxiv_id": "",
+      "role": "Baseline",
+      "relationship_sentence": "PEBBLE\u2019s ensemble-disagreement query selection and replay-based training are taken as a leading feedback-efficient PbRL baseline that the new method modifies via policy-aligned querying and hybrid experience replay to convert labels into larger policy gains."
+    },
+    {
+      "title": "A Reduction of Imitation Learning and Structured Prediction to No-Regret Online Learning (DAgger)",
+      "authors": "St\u00e9phane Ross et al.",
+      "year": 2011,
+      "arxiv_id": "1011.0686",
+      "role": "Inspiration",
+      "relationship_sentence": "DAgger\u2019s insight that supervision should be collected on the learner\u2019s own state distribution directly inspires aligning query selection with the current policy\u2019s occupancy to avoid covariate shift."
+    },
+    {
+      "title": "Value-Aware Model Learning",
+      "authors": "Amir-massoud Farahmand et al.",
+      "year": 2017,
+      "arxiv_id": "",
+      "role": "Inspiration",
+      "relationship_sentence": "The value-aware principle\u2014optimizing models for downstream control rather than pure predictive accuracy\u2014provides the conceptual basis for replacing reward-model\u2013centric query objectives with policy-aligned ones."
+    }
+  ],
+  "synthesis_narrative": "Pairwise-preference\u2013based reward modeling for policy optimization was crystallized by Christiano et al., who trained a reward model from trajectory comparisons and optimized an RL agent against it; they also popularized ensemble uncertainty as a practical signal for choosing which comparisons to label. In parallel, Sadigh et al. formalized active preference-based learning by selecting queries that maximize expected information gain about the reward, thereby centering query design on improving global reward-model fidelity. B\u0131y\u0131k et al. extended this line to batch active preference learning, operationalizing uncertainty- and information-centric selection in scalable settings while keeping the objective squarely on reward estimation quality. Building on these ideas, PEBBLE introduced a feedback-efficient PbRL system that samples trajectory pairs from replay and uses ensemble disagreement to pick informative comparisons, becoming a de facto baseline for label efficiency. Outside preference learning, DAgger demonstrated that supervision must be gathered on the learner\u2019s own state distribution to avoid covariate shift, while value-aware model learning argued that learning signals should be aligned with downstream control performance rather than pure predictive accuracy. Together, these works exposed a gap: uncertainty- or information-driven queries can improve the reward model yet offer limited policy benefit because they are not aligned with the agent\u2019s evolving occupancy. The present paper synthesizes these insights by diagnosing query\u2013policy misalignment and introducing policy-aligned query selection plus hybrid experience replay, ensuring that labeled comparisons are both informative and situated where they most impact the current policy\u2019s learning dynamics.",
+  "target_paper": {
+    "title": "Query-Policy Misalignment in Preference-Based Reinforcement Learning",
+    "authors": "Xiao Hu, Jianxiong Li, Xianyuan Zhan, Qing-Shan Jia, Ya-Qin Zhang",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "preference-based reinforcement learning, human feedback efficiency, query-policy misalignment",
+    "abstract": "Preference-based reinforcement learning (PbRL) provides a natural way to align RL agents\u2019 behavior with human desired outcomes, but is often restrained by costly human feedback. To improve feedback efficiency, most existing PbRL methods focus on selecting queries to maximally improve the overall quality of the reward model, but counter-intuitively, we find that this may not necessarily lead to improved performance. To unravel this mystery, we identify a long-neglected issue in the query selection schemes of existing PbRL studies: Query-Policy Misalignment. We show that the seemingly informative queries selected to improve the overall quality of reward model actually may not align with RL agents\u2019 interests, thus offering little help on policy learning and eventually resulting in poor feedback efficiency. We show that this issue can be effectively addressed via policy-aligned query and a specially designed hybrid experience replay, which together enforce the bidirectional query-policy al",
+    "openreview_id": "UoBymIwPJR",
+    "forum_id": "UoBymIwPJR"
+  },
+  "analysis_timestamp": "2026-01-06T13:30:52.860154"
+}

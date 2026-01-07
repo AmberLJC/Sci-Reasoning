@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Language Models are Few-Shot Learners",
+      "authors": "Tom B. Brown et al.",
+      "year": 2020,
+      "role": "Foundational in-context learning concept",
+      "relationship_sentence": "Introduced the in-context learning paradigm that Point-In-Context adapts to 3D point clouds by conditioning on demonstration point sets at inference without fine-tuning."
+    },
+    {
+      "title": "Masked Autoencoders Are Scalable Vision Learners (MAE)",
+      "authors": "Kaiming He et al.",
+      "year": 2022,
+      "role": "2D masked modeling precursor showing emergent ICL-like behavior",
+      "relationship_sentence": "Demonstrated that masked token reconstruction in vision can enable powerful test-time conditioning, motivating the paper\u2019s masked-modeling-style formulation where masked point coordinates are predicted from context."
+    },
+    {
+      "title": "Perceiver IO: A General Architecture for Structured Inputs & Outputs",
+      "authors": "Andrew Jaegle et al.",
+      "year": 2021,
+      "role": "General I/O abstraction for flexible querying",
+      "relationship_sentence": "Inspired modeling both inputs and outputs as generic arrays/queries, informing the paper\u2019s coordinate-as-token interface across diverse 3D tasks and its inference-time querying mechanism."
+    },
+    {
+      "title": "Point-BERT: Pre-Training 3D Point Cloud Transformers with Masked Point Modeling",
+      "authors": "Yu et al.",
+      "year": 2022,
+      "role": "3D masked point modeling precursor",
+      "relationship_sentence": "Showed how to mask and reconstruct point tokens for 3D pretraining, highlighting tokenization and positional encoding choices that the paper revisits to avoid position-information leakage in ICL."
+    },
+    {
+      "title": "Point-MAE: Masked Autoencoders for Point Clouds",
+      "authors": "Pang et al.",
+      "year": 2022,
+      "role": "3D MAE-style reconstruction precursor",
+      "relationship_sentence": "Established that reconstructing masked point patches is effective in 3D, directly motivating the paper\u2019s choice to predict masked coordinates and analyze how positional embeddings can leak target information."
+    },
+    {
+      "title": "PointNet++: Deep Hierarchical Feature Learning on Point Sets in a Metric Space",
+      "authors": "Charles R. Qi et al.",
+      "year": 2017,
+      "role": "Sampling and grouping foundation (FPS)",
+      "relationship_sentence": "Provided the farthest point sampling and hierarchical grouping pipeline on which the paper\u2019s Joint Sampling module builds to jointly select support and query points and mitigate sampling-induced bias/leakage."
+    },
+    {
+      "title": "Point Transformer",
+      "authors": "Hengshuang Zhao et al.",
+      "year": 2021,
+      "role": "3D transformer with relative position encoding",
+      "relationship_sentence": "Introduced attention with relative position features for point clouds, informing the paper\u2019s design choices to reduce absolute-coordinate leakage and stabilize coordinate-token attention in in-context inference."
+    }
+  ],
+  "synthesis_narrative": "Point-In-Context extends the in-context learning paradigm to 3D point clouds by treating both inputs and outputs uniformly as coordinate tokens and performing masked prediction conditioned on demonstrations at inference time. The conceptual backbone is GPT-3\u2019s few-shot ICL, which inspires test-time adaptation without gradient updates. In vision, MAE reveals that masked token reconstruction can induce strong emergent capabilities, suggesting that masked modeling could serve as a mechanism for visual ICL; Point-In-Context adapts this idea to 3D, where the tokens are the point coordinates themselves. Perceiver IO contributes the key abstraction of flexible, query-based inputs/outputs, encouraging a universal coordinate-as-token interface that spans multiple 3D tasks under a single inference-time prompting protocol.\n\nTranslating masked modeling to 3D requires grappling with how tokens and positions are defined. Point-BERT and Point-MAE pioneered masked point modeling, exposing practical design issues\u2014tokenization via patches, reconstruction targets, and positional encodings\u2014that can inadvertently leak location information. Point-In-Context directly addresses this leakage risk by redesigning the positional treatment and coordinating sampling at test time. Building on PointNet++\u2019s farthest point sampling, the proposed Joint Sampling module jointly selects support and query sets to align distributions and minimize information leakage through sampling or positional bias. Finally, Point Transformer\u2019s relative position mechanisms inform how to structure attention over coordinates without relying on absolute positions, stabilizing the coordinate-token attention that underpins in-context inference for 3D point cloud understanding.",
+  "analysis_timestamp": "2026-01-07T00:02:04.831371"
+}

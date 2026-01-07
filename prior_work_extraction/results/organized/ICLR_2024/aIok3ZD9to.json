@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Quantifying the Carbon Emissions of Machine Learning",
+      "authors": "Lacoste et al.",
+      "year": 2019,
+      "arxiv_id": "1910.09700",
+      "role": "Baseline",
+      "relationship_sentence": "LLMCarbon directly generalizes mlco2\u2019s pre-training emissions prediction by making it architecture-aware (dense and MoE), adding multi-phase coverage (training, inference, experimentation, storage), and incorporating embodied-carbon accounting that mlco2 lacks."
+    },
+    {
+      "title": "Energy and Policy Considerations for Deep Learning in NLP",
+      "authors": "Strubell et al.",
+      "year": 2019,
+      "arxiv_id": "1906.02243",
+      "role": "Foundation",
+      "relationship_sentence": "LLMCarbon builds on Strubell et al.\u2019s carbon accounting formulation\u2014energy multiplied by datacenter PUE and regional grid carbon intensity\u2014as the base emissions model it expands to an end-to-end lifecycle."
+    },
+    {
+      "title": "The Carbon Footprint of Machine Learning Training Will Plateau, Then Shrink",
+      "authors": "Patterson et al.",
+      "year": 2022,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "LLMCarbon adopts Patterson et al.\u2019s key insight to include embodied hardware emissions and datacenter efficiency factors in ML carbon estimates, extending these ideas to GPU-centric LLM projections and lifecycle phases beyond training."
+    },
+    {
+      "title": "Training Compute-Optimal Large Language Models",
+      "authors": "Hoffmann et al.",
+      "year": 2022,
+      "arxiv_id": "2203.15556",
+      "role": "Foundation",
+      "relationship_sentence": "LLMCarbon leverages Hoffmann et al.\u2019s compute-optimal scaling laws and FLOP/token estimates to map LLM architectural parameters and dataset size to training compute, enabling accurate pre-training carbon prediction."
+    },
+    {
+      "title": "Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity",
+      "authors": "Fedus et al.",
+      "year": 2021,
+      "arxiv_id": "2101.03961",
+      "role": "Related Problem",
+      "relationship_sentence": "LLMCarbon uses Switch Transformers\u2019 characterization of MoE routing (e.g., top-1 expert activation and per-token compute) to model the sparsity-driven reduction in FLOPs and energy for MoE LLMs."
+    },
+    {
+      "title": "DeepSpeed-MoE: Advancing Mixture-of-Experts Inference and Training to Power Next-Generation AI Scale",
+      "authors": "Rajbhandari et al.",
+      "year": 2022,
+      "arxiv_id": null,
+      "role": "Extension",
+      "relationship_sentence": "LLMCarbon extends DeepSpeed-MoE\u2019s practical metrics (top-k routing, capacity factor, expert/communication overhead) to parameterize MoE training and inference energy and carbon within its projection model."
+    }
+  ],
+  "synthesis_narrative": "Quantifying the Carbon Emissions of Machine Learning introduced the first widely used predictor (mlco2) that estimates emissions via hardware choice, location, and runtime, cementing the carbon-accounting template based on energy, PUE, and grid carbon intensity. Energy and Policy Considerations for Deep Learning in NLP formalized this accounting, tying emissions to datacenter PUE and regional carbon intensity and establishing transparent reporting for training workloads. The Carbon Footprint of Machine Learning Training Will Plateau, Then Shrink argued that embodied hardware emissions and datacenter efficiency must be included alongside operational energy, and provided a methodology to factor hardware manufacturing impacts. Training Compute-Optimal Large Language Models provided compute scaling laws and FLOP-per-token estimates linking LLM architecture and dataset size to required compute\u2014a bridge from model design to energy demand. Switch Transformers characterized MoE sparsity with top-1 routing and per-token compute, quantifying how only a subset of parameters are active per token. DeepSpeed-MoE detailed practical MoE training/inference behavior\u2014capacity factors, top-k routing, and communication overhead\u2014giving actionable parameters for system-level cost modeling.\n\nTogether, these works revealed the opportunity for an architecture-aware, end-to-end predictor that covers dense and MoE LLMs, spans training, inference, experimentation, and storage, and includes both operational and embodied emissions. LLMCarbon synthesizes the carbon-accounting framework (energy \u00d7 PUE \u00d7 carbon intensity) with compute scaling laws for dense models and routing/overhead characterizations for MoE, and integrates Patterson\u2019s embodied-emissions perspective, yielding a pre-training projection tool that connects LLM design choices directly to total lifecycle carbon.",
+  "target_paper": {
+    "title": "LLMCarbon: Modeling the End-to-End Carbon Footprint of Large Language Models",
+    "authors": "Ahmad Faiz, Sotaro Kaneda, Ruhan Wang, Rita Chukwunyere Osi, Prateek Sharma, Fan Chen, Lei Jiang",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "oral",
+    "keywords": "carbon footprint modeling, large lanaguage models",
+    "abstract": "The carbon footprint associated with large language models (LLMs) is a significant concern, encompassing emissions from their training, inference, experimentation, and storage processes, including operational and embodied carbon emissions. An essential aspect is accurately estimating the carbon impact of emerging LLMs even before their training, which heavily relies on GPU usage. Existing studies have reported the carbon footprint of LLM training, but only one tool, mlco2, can predict the carbon footprint of new neural networks prior to physical training. However, mlco2 has several serious limitations. It cannot extend its estimation to dense or mixture-of-experts (MoE) LLMs, disregards critical architectural parameters, focuses solely on GPUs, and cannot model embodied carbon footprints. Addressing these gaps, we introduce \\textit{\\carb}, an end-to-end carbon footprint projection model designed for both dense and MoE LLMs. Compared to mlco2, \\carb~significantly enhances the accuracy o",
+    "openreview_id": "aIok3ZD9to",
+    "forum_id": "aIok3ZD9to"
+  },
+  "analysis_timestamp": "2026-01-06T19:53:59.124439"
+}

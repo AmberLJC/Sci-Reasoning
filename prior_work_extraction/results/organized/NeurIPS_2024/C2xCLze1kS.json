@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Jonathan Ho, Ajay Jain, Pieter Abbeel",
+      "year": 2020,
+      "role": "Foundational diffusion model and Gaussian reverse-kernel approximation",
+      "relationship_sentence": "RTK builds directly on DDPM\u2019s Markovian reverse process, generalizing the per-step Gaussian reverse transition (posterior) into a flexible reverse transition kernel and arguing that DDPM\u2019s many small Gaussian segments are inefficient."
+    },
+    {
+      "title": "Denoising Diffusion Implicit Models",
+      "authors": "Jiaming Song, Chenlin Meng, Stefano Ermon",
+      "year": 2020,
+      "role": "Deterministic ODE-based diffusion inference with fewer steps",
+      "relationship_sentence": "DDIM\u2019s non-Markovian/ODE view motivates RTK\u2019s perspective of decomposing inference into segments; RTK extends this by replacing closed-form Gaussian moves with solving richer per-segment RTK subproblems."
+    },
+    {
+      "title": "Score-Based Generative Modeling through Stochastic Differential Equations",
+      "authors": "Yang Song, Jascha Sohl-Dickstein, Diederik P. Kingma, Abhishek Kumar, Stefano Ermon, Ben Poole",
+      "year": 2021,
+      "role": "SDE/ODE formulation of diffusion inference and predictor\u2013corrector samplers",
+      "relationship_sentence": "The SDE/ODE lens underpins RTK\u2019s view of inference as discretized reverse dynamics, and the use of Langevin-type correctors directly inspires RTK\u2019s use of MCMC (MALA/ULD) to solve each reverse-kernel subproblem."
+    },
+    {
+      "title": "DPM-Solver: A Fast ODE Solver for Diffusion Probabilistic Models",
+      "authors": "Cheng Lu, Jianfei Chen, Qiang Liu",
+      "year": 2022,
+      "role": "High-order ODE solvers to reduce diffusion NFEs",
+      "relationship_sentence": "As a leading fast ODE-based sampler, DPM-Solver is a key baseline that RTK contrasts with; RTK proposes an alternative speed path by using a small number of harder subproblems solved via MCMC rather than higher-order ODE integration."
+    },
+    {
+      "title": "Pseudo Numerical Methods for Diffusion Models on Manifolds (PNDM)",
+      "authors": "Luping Liu, Yi Ren, Zhijie Lin, Zhou Zhao",
+      "year": 2022,
+      "role": "Linear multistep discretizations for efficient diffusion inference",
+      "relationship_sentence": "PNDM exemplifies the discretization-based acceleration RTK aims to surpass; RTK reframes step-size reduction as balancing a few reverse-kernel subproblems with stronger targets tackled by advanced samplers."
+    },
+    {
+      "title": "Exponential Convergence of Langevin Distributions and Their Discrete Approximations (MALA)",
+      "authors": "Gareth O. Roberts, Richard L. Tweedie",
+      "year": 1996,
+      "role": "Core MCMC method and theory for Metropolis-Adjusted Langevin Algorithm",
+      "relationship_sentence": "RTK-MALA relies on MALA as the engine to sample strongly log-concave reverse-kernel targets, drawing on its acceptance-corrected Langevin proposals and convergence guarantees to justify few-step accuracy."
+    },
+    {
+      "title": "Underdamped Langevin MCMC: A Non-Asymptotic Analysis",
+      "authors": "Xiang Cheng, Niladri S. Chatterji, Peter L. Bartlett, Michael I. Jordan",
+      "year": 2018,
+      "role": "Accelerated MCMC with better condition-number dependence for log-concave sampling",
+      "relationship_sentence": "RTK-ULD leverages underdamped Langevin\u2019s non-asymptotic rates for strongly log-concave targets, providing the theoretical backbone for using ULD as a fast solver within each reverse transition kernel."
+    }
+  ],
+  "synthesis_narrative": "RTK reframes diffusion inference as solving a sequence of reverse transition kernel (RTK) subproblems. DDPM provides the starting point by realizing each reverse step as a Gaussian posterior, but its many small Gaussian segments incur high step counts. DDIM and the SDE/ODE formulation of score-based generative modeling further shaped the community\u2019s focus on discretizing reverse dynamics, including deterministic ODE paths and predictor\u2013corrector schemes; these works clarified that sampling efficiency is governed by how we segment time and approximate each segment. Building on that insight, recent fast ODE solvers such as DPM-Solver and PNDM push discretization accuracy with higher-order or multistep integrators, yet still largely rely on many inexpensive steps.\n\nThe core innovation of RTK is to rebalance this trade-off: use a tilde-O(1) number of segments, but make each segment a stronger (log-concave) target and solve it with advanced MCMC. This design draws directly from Langevin-based correctors in the SDE literature while upgrading them to principled MCMC solvers with non-asymptotic guarantees. Foundational MCMC theory for MALA (Roberts\u2013Tweedie) and accelerated mixing for underdamped Langevin (Cheng et al.) justify choosing MALA/ULD as subproblem solvers, yielding favorable dependence on condition number and accuracy. Together, these prior works enable RTK\u2019s conceptual shift from fine ODE discretization to few, well-conditioned reverse-kernel samplers, unifying diffusion inference and modern MCMC to achieve large step reductions without retraining.",
+  "analysis_timestamp": "2026-01-06T23:33:35.536619"
+}

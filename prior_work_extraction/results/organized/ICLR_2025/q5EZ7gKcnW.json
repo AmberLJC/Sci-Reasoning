@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Training language models to follow instructions with human feedback",
+      "authors": "Long Ouyang et al.",
+      "year": 2022,
+      "arxiv_id": "2203.02155",
+      "role": "Foundation",
+      "relationship_sentence": "This work established the two-stage post-training pipeline\u2014SFT on demonstrations followed by preference-based optimization\u2014that ILR explicitly modifies by keeping SFT and repurposing the preference stage to refine (replace) SFT labels rather than optimize a policy."
+    },
+    {
+      "title": "Deep Reinforcement Learning from Human Preferences",
+      "authors": "Paul F. Christiano et al.",
+      "year": 2017,
+      "arxiv_id": "1706.03741",
+      "role": "Foundation",
+      "relationship_sentence": "It introduced pairwise human comparison feedback as a supervision signal, which ILR directly reuses not for reward/policy learning but to decide whether a human demonstration should be replaced by a model-generated alternative."
+    },
+    {
+      "title": "Direct Preference Optimization: Your Language Model is Secretly a Reward Model",
+      "authors": "Rafailov et al.",
+      "year": 2023,
+      "arxiv_id": "2305.18290",
+      "role": "Baseline",
+      "relationship_sentence": "DPO is the primary preference-optimization baseline that the paper shows fails under unreliable comparisons, motivating ILR as an alternative that uses the same preference signal to iteratively relabel SFT data."
+    },
+    {
+      "title": "Learning to Summarize with Human Feedback",
+      "authors": "Nisan Stiennon et al.",
+      "year": 2020,
+      "arxiv_id": "2009.01325",
+      "role": "Inspiration",
+      "relationship_sentence": "By using preference models to rank and select higher-quality outputs (e.g., best-of-N), this work provided the concrete idea of using comparisons as a selection mechanism, which ILR adapts to choose between a human demo and a model candidate for dataset replacement."
+    },
+    {
+      "title": "Self-Instruct: Aligning Language Models with Self-Generated Instructions",
+      "authors": "Yizhong Wang et al.",
+      "year": 2023,
+      "arxiv_id": "2212.10560",
+      "role": "Inspiration",
+      "relationship_sentence": "Self-Instruct demonstrated that model-generated data can iteratively bootstrap and improve SFT datasets, an idea ILR extends by using preference feedback to selectively substitute unreliable human demonstrations with model outputs."
+    },
+    {
+      "title": "Constitutional AI: Harmlessness from AI Feedback",
+      "authors": "Yuntao Bai et al.",
+      "year": 2022,
+      "arxiv_id": "2212.08073",
+      "role": "Related Problem",
+      "relationship_sentence": "Showing that AI-provided preference/critique can substitute for expensive or inconsistent human feedback directly motivated the paper\u2019s setting of unreliable supervision and the design of ILR to make principled use of such noisy comparisons."
+    },
+    {
+      "title": "Weak-to-Strong Generalization: Eliciting Strong Capabilities With Weak Supervision",
+      "authors": "Burns et al.",
+      "year": 2023,
+      "arxiv_id": "2312.09390",
+      "role": "Gap Identification",
+      "relationship_sentence": "By formalizing the oversight problem where the supervisor is weaker than the model, this work highlights the unreliability of supervision that ILR directly addresses by converting weak comparisons into iterative label improvements."
+    }
+  ],
+  "synthesis_narrative": "Instruction-following post-training emerged as a two-stage pipeline of supervised fine-tuning on human demonstrations followed by preference-driven optimization, as crystallized by Ouyang et al., while Christiano et al. introduced pairwise comparisons as a practical supervisory signal. Stiennon et al. showed that preference information can serve not only for training but also for selection\u2014ranking multiple candidates and choosing the best\u2014which revealed a powerful use of comparisons as a gating mechanism. DPO reframed preference optimization as a supervised loss on chosen versus rejected responses, making preference learning simple and scalable but inherently sensitive to the quality of comparison labels. In parallel, Self-Instruct demonstrated that model-generated data can iteratively bootstrap and strengthen SFT corpora, suggesting that models themselves can supply or replace labels when done judiciously. Constitutional AI established that AI feedback can substitute for humans in preference judgments, underscoring both scalability and the inevitability of noisier, less reliable supervision as models grow stronger. Weak-to-Strong Generalization further formalized the setting where overseers are weaker than the models they train, sharpening the challenge of unreliable oversight.\nTogether these works expose a gap: preference optimization like DPO can falter when comparisons are noisy, yet comparisons are excellent for choosing between alternatives, and model-generated data can improve SFT if filtered well. The present paper synthesizes these insights by using comparisons as a principled filter to iteratively replace unreliable demonstrations with better model outputs and then retraining via SFT, thereby turning weak or AI feedback into a robust label-refinement mechanism under unreliable supervision.",
+  "target_paper": {
+    "title": "Iterative Label Refinement Matters More than Preference Optimization under Weak Supervision",
+    "authors": "Yaowen Ye, Cassidy Laidlaw, Jacob Steinhardt",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "unreliable human supervision, language model post-training, scalable oversight",
+    "abstract": "Language model (LM) post-training relies on two stages of human supervision: task demonstrations for supervised finetuning (SFT), followed by preference comparisons for reinforcement learning from human feedback (RLHF). As LMs become more capable, the tasks they are given become harder to supervise. Will post-training remain effective under unreliable supervision? To test this, we simulate unreliable demonstrations and comparison feedback using small LMs and time-constrained humans. We find that in the presence of unreliable supervision, SFT still retains some effectiveness, but DPO (a common RLHF algorithm) fails to improve the model beyond SFT. To address this, we propose *iterative label refinement* (ILR) as an alternative to RLHF. ILR improves the SFT data by using comparison feedback to decide whether human demonstrations should be replaced by model-generated alternatives, then retrains the model via SFT on the updated data. SFT+ILR outperforms SFT+DPO on several tasks with unreli",
+    "openreview_id": "q5EZ7gKcnW",
+    "forum_id": "q5EZ7gKcnW"
+  },
+  "analysis_timestamp": "2026-01-06T12:09:11.510113"
+}

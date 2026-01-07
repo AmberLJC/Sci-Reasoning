@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "3D Gaussian Splatting for Real-Time Radiance Field Rendering",
+      "authors": "Bernhard Kerbl; Georgios Kopanas; Thomas Leimk\u00fchler; George Drettakis",
+      "year": 2023,
+      "role": "Foundational 3D representation and renderer for efficient neural rendering",
+      "relationship_sentence": "Asymmetric Dual 3DGS builds directly on 3DGS by training two splat-based models in parallel and augmenting the standard optimization with cross-model consistency and masking to gain robustness in the wild."
+    },
+    {
+      "title": "NeRF in the Wild: Neural Radiance Fields for Unconstrained Photo Collections",
+      "authors": "Ricardo Martin-Brualla et al.",
+      "year": 2021,
+      "role": "In-the-wild neural rendering with learned appearance embeddings and transient-object masking",
+      "relationship_sentence": "The paper extends NeRF-W\u2019s idea of suppressing transient/inconsistent content via masks by introducing complementary multi-cue and self-supervised soft masks tailored to 3DGS training."
+    },
+    {
+      "title": "Mean Teachers Are Better Role Models: Weight-Averaged Consistency Targets Improve Semi-Supervised Learning",
+      "authors": "Antti Tarvainen; Harri Valpola",
+      "year": 2017,
+      "role": "Consistency regularization between teacher and student predictions",
+      "relationship_sentence": "The proposed cross-model consistency constraint adapts teacher\u2013student style stabilization to geometric/radiance predictions in dual 3DGS, encouraging convergence on reliable scene structure."
+    },
+    {
+      "title": "Co-teaching: Robust Training of Deep Neural Networks with Noisy Labels",
+      "authors": "Bo Han et al.",
+      "year": 2018,
+      "role": "Dual-network learning to mitigate confirmation bias under noisy supervision",
+      "relationship_sentence": "The asymmetric dual setup and complementary masking mirror co-teaching\u2019s principle of using two models to filter unreliable samples and avoid shared failure modes."
+    },
+    {
+      "title": "Simple and Scalable Predictive Uncertainty Estimation using Deep Ensembles",
+      "authors": "Balaji Lakshminarayanan; Alexander Pritzel; Charles Blundell",
+      "year": 2017,
+      "role": "Leveraging diversity across independently trained models to capture epistemic uncertainty",
+      "relationship_sentence": "The method explicitly exploits run-to-run stochasticity and inter-model disagreement\u2014central to deep ensembles\u2014to identify and suppress artifacts that are inconsistent across trainings."
+    },
+    {
+      "title": "Pixelwise View Selection for Multi-View Stereo",
+      "authors": "Johannes L. Sch\u00f6nberger; Enliang Zheng; Jan-Michael Frahm; Marc Pollefeys",
+      "year": 2016,
+      "role": "Multi-view photometric/geometric consistency and outlier rejection in MVS",
+      "relationship_sentence": "The multi-cue adaptive mask is informed by classical MVS view-consistency and photometric-residual cues, leveraging similar criteria to down-weight outliers and occlusions in in-the-wild data."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core idea\u2014training two 3D Gaussian Splatting (3DGS) models in parallel with a consistency constraint and complementary masks\u2014builds on three converging threads. First, 3DGS established a high-fidelity, efficient point-based representation and training pipeline for neural rendering, but it remains brittle to in-the-wild artifacts. Second, the in-the-wild NeRF literature, especially NeRF-W, demonstrated that explicitly modeling or masking transient, inconsistent content is crucial for stability outside controlled captures. Asymmetric Dual 3DGS inherits this insight, replacing a single transient head with two complementary masks: a multi-cue adaptive mask grounded in multi-view photometric/geometric evidence and a self-supervised soft mask learned from the rendering signal itself. The multi-cue design echoes classical MVS practice (e.g., pixelwise view selection) where photometric consistency, visibility, and reprojection cues drive outlier rejection.\nThird, the method draws from robust and semi-supervised learning. Consistency regularization (Mean Teacher) shows that aligning predictions across perturbed models stabilizes learning, while co-teaching highlights that two networks can mutually filter unreliable samples and reduce confirmation bias. The proposed asymmetric dual setup uses cross-model consistency to converge on stable geometry, and divergent masking to avoid both models reinforcing the same failure modes. Finally, deep ensembles motivated exploiting stochastic variation across runs: disagreement becomes a proxy for uncertainty, guiding the masking and suppression of artifacts. Together, these strands directly inform a principled, efficient recipe for robust 3DGS training in the wild.",
+  "analysis_timestamp": "2026-01-07T00:21:32.272074"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Universal Value Function Approximators",
+      "authors": "Tom Schaul, Daniel Horgan, Karol Gregor, David Silver",
+      "year": 2015,
+      "role": "Foundational concept: goal-conditioned value functions",
+      "relationship_sentence": "HIQL\u2019s use of a single goal-conditioned value function builds directly on UVFA\u2019s formulation of conditioning value estimates on goals."
+    },
+    {
+      "title": "Hindsight Experience Replay",
+      "authors": "Marcin Andrychowicz et al.",
+      "year": 2017,
+      "role": "Key mechanism: goal relabeling from offline trajectories",
+      "relationship_sentence": "HIQL relies on HER-style relabeling to convert diverse reward-free/off-policy data into effective goal-conditioned training signals, especially for near-goal supervision."
+    },
+    {
+      "title": "Data-Efficient Hierarchical Reinforcement Learning (HIRO): Off-Policy Correction",
+      "authors": "Ofir Nachum, Shixiang Gu, Honglak Lee, Sergey Levine",
+      "year": 2018,
+      "role": "Blueprint for hierarchical subgoal selection in state space",
+      "relationship_sentence": "HIQL\u2019s high-level policy selecting subgoals (states/latents as actions) and leveraging off-policy data echoes HIRO\u2019s hierarchical decomposition and subgoal relabeling ideas."
+    },
+    {
+      "title": "Hindsight Actor-Critic (HAC): Experience Replay for Hierarchical RL",
+      "authors": "Andrew Levy et al.",
+      "year": 2019,
+      "role": "Technique: states-as-actions with hindsight subgoal transitions",
+      "relationship_sentence": "HIQL adopts the states-as-actions perspective at the high level and benefits from HAC\u2019s insight that hindsight relabeling stabilizes hierarchical subgoal learning."
+    },
+    {
+      "title": "Offline Reinforcement Learning with Implicit Q-Learning (IQL)",
+      "authors": "Ilya Kostrikov, Ashvin Nair, Sergey Levine",
+      "year": 2022,
+      "role": "Algorithmic scaffold for offline RL with action-free value learning",
+      "relationship_sentence": "HIQL generalizes IQL\u2019s action-free value and advantage-weighted policy updates to the goal-conditioned, hierarchical setting to mitigate distributional shift from offline data."
+    },
+    {
+      "title": "Learning to Reach Goals via Supervised Learning (GCSL)",
+      "authors": "Dibya Ghosh, Abhishek Gupta, Sergey Levine",
+      "year": 2021,
+      "role": "Problem framing and baseline for offline goal-conditioned learning",
+      "relationship_sentence": "HIQL addresses GCSL\u2019s limitation on long-horizon credit assignment by introducing a hierarchical subgoal decomposition trained from the same offline data."
+    },
+    {
+      "title": "C-Learning: Learning to Achieve Goals via Classification",
+      "authors": "Benjamin Eysenbach et al.",
+      "year": 2020,
+      "role": "Stability via action-agnostic goal-reaching objectives",
+      "relationship_sentence": "HIQL\u2019s use of an action-free value target for robust goal-reaching echoes C-Learning\u2019s insight that action-agnostic success signals can stabilize goal-conditioned learning from unlabeled data."
+    }
+  ],
+  "synthesis_narrative": "HIQL\u2019s core idea is to make offline goal-conditioned RL work by (1) learning an action-free, goal-conditioned value function that is easier to estimate from diverse data and (2) exploiting the structure of long-horizon tasks via hierarchical subgoals selected in state/latent space. This design tightly integrates several prior threads. UVFA introduced goal-conditioned value functions, making it natural for HIQL to learn a single goal-conditioned value that can supervise multiple policies. HER demonstrated that hindsight goal relabeling can transform arbitrary trajectories into useful goal-reaching data; HIQL inherits this mechanism to obtain rich supervision, particularly for near-goal segments where value estimation is reliable.\n\nThe hierarchical decomposition in HIQL is directly inspired by HIRO and HAC, which showed that treating states (or latent states) as high-level actions and relabeling subgoals stabilizes learning; HIQL adopts this states-as-actions view to select subgoals that bridge distant targets through easier, nearby ones. From the offline RL side, IQL provides the critical recipe for robust policy learning from static datasets\u2014an action-free value with advantage-weighted updates that avoid explicit behavior modeling\u2014an approach HIQL extends to both high- and low-level goal-conditioned policies. Finally, GCSL and C-Learning shaped the problem framing for learning from unlabeled, reward-free data: GCSL exposed challenges in long-horizon credit assignment in offline goal-reaching, while C-Learning highlighted the robustness of action-agnostic success objectives. HIQL synthesizes these influences to deliver a hierarchical, offline, goal-conditioned method that learns reliable short-horizon values and composes them to reach distant goals.",
+  "analysis_timestamp": "2026-01-07T00:02:04.788689"
+}

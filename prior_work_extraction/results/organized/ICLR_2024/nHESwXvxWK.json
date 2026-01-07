@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Generative Modeling by Estimating Gradients of the Data Distribution",
+      "authors": "Yang Song et al.",
+      "year": 2019,
+      "arxiv_id": "1907.05600",
+      "role": "Foundation",
+      "relationship_sentence": "This work introduced learning scores \u2207x log p\u03c3(x) for a ladder of Gaussian-smoothed priors p\u03c3, which the present paper exploits to define the intermediate posteriors p\u03c3(x|y) and to evaluate the prior-score component at each SMC stage."
+    },
+    {
+      "title": "Score-Based Generative Modeling through Stochastic Differential Equations",
+      "authors": "Yang Song et al.",
+      "year": 2021,
+      "arxiv_id": "2011.13456",
+      "role": "Inspiration",
+      "relationship_sentence": "By formalizing diffusion as a continuous-time process with predictor\u2013corrector moves across decreasing noise levels, this paper motivates using learned score-guided Markov transitions along a decreasing-\u03c3 sequence\u2014an idea the current work adapts for SMC over posterior targets."
+    },
+    {
+      "title": "Sequential Monte Carlo Samplers",
+      "authors": "Pierre Del Moral et al.",
+      "year": 2006,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "Provides the SMC sampler framework\u2014importance weighting, resampling, and rejuvenation over a sequence of target distributions\u2014that the present work instantiates on the diffusion-induced ladder of posteriors."
+    },
+    {
+      "title": "Annealed Importance Sampling",
+      "authors": "Radford M. Neal",
+      "year": 2001,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "Introduces bridging from prior to posterior via a tempered sequence, directly inspiring the idea of replacing temperature with diffusion noise levels as the annealing schedule inside an SMC scheme."
+    },
+    {
+      "title": "Diffusion Posterior Sampling for General Noisy Inverse Problems",
+      "authors": "Hyungjin Chung et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "Proposes sampling p(x|y) by approximating the posterior score with the sum of a learned prior score and the likelihood score, which the current work replaces with a principled SMC over \u03c3-indexed posteriors to improve robustness in ill-posed settings."
+    },
+    {
+      "title": "Denoising Diffusion Restoration Models",
+      "authors": "Bahjat Kawar et al.",
+      "year": 2022,
+      "arxiv_id": "2201.11793",
+      "role": "Gap Identification",
+      "relationship_sentence": "Shows diffusion-based restoration for linear inverse problems via data-consistency operations but yields deterministic reconstructions without posterior uncertainty, a gap the present work fills by sampling the full Bayesian posterior."
+    },
+    {
+      "title": "Inverse Problems: A Bayesian Perspective",
+      "authors": "Andrew M. Stuart",
+      "year": 2010,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "Establishes the Bayesian formulation for linear inverse problems with Gaussian noise, defining the likelihood and target posterior measure that the proposed SMC-over-\u03c3 scheme is designed to approximate."
+    }
+  ],
+  "synthesis_narrative": "A key ingredient for recent inverse-problem solvers is the ability to evaluate scores of Gaussian-smoothed data distributions across a noise ladder; this comes from Song et al.\u2019s noise-conditional score networks, which learn \u2207x log p\u03c3(x) for multiple \u03c3 and enable annealed sampling. The SDE view of diffusion further systematized sampling along decreasing noise with predictor\u2013corrector moves, clarifying how learned scores guide transitions as \u03c3 decreases. On the Bayesian side, Del Moral, Doucet, and Jasra established Sequential Monte Carlo samplers, which transport a particle system through a sequence of intermediate targets using importance weighting, resampling, and rejuvenation kernels. Neal\u2019s annealed importance sampling highlighted the power of bridging distributions, typically via temperature schedules, to connect prior and posterior. In inverse problems, Diffusion Posterior Sampling (DPS) leveraged the decomposition \u2207x log p(x|y)=\u2207x log p(x)+\u2207x log p(y|x) to steer reverse diffusion with likelihood gradients, while Denoising Diffusion Restoration Models (DDRM) solved linear inverse problems with data-consistency operations but produced point estimates rather than posterior samples. Stuart\u2019s Bayesian formulation provides the likelihood and posterior measure for linear inverse problems under Gaussian noise. Together, these works reveal a gap: diffusion priors give a natural \u03c3-indexed family p\u03c3(x), but posterior samplers either rely on heuristic guidance (DPS) or forgo uncertainty (DDRM), while SMC offers a principled pathway if one can specify an appropriate sequence. The natural synthesis is to replace temperature with diffusion noise levels and define \u03c3-indexed posteriors p\u03c3(x|y), then use SMC with score-guided Markov moves to traverse this ladder, yielding theoretically grounded Bayesian posterior sampling even in ill-posed regimes.",
+  "target_paper": {
+    "title": "Monte Carlo guided Denoising Diffusion models for Bayesian linear inverse problems.",
+    "authors": "Gabriel Cardoso, Yazid Janati el idrissi, Sylvain Le Corff, Eric Moulines",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "oral",
+    "keywords": "Monte Carlo, Denoising Diffusion model, score-based generative models, Sequential Monte Carlo, Bayesian Inverse Problems, Generative Models.",
+    "abstract": "Ill-posed linear inverse problems arise frequently in various applications, from computational photography to medical imaging.\nA recent line of research exploits Bayesian inference with informative priors to handle the ill-posedness of such problems.\nAmongst such priors, score-based generative models (SGM) have recently been successfully applied to several different inverse problems.\nIn this study, we exploit the particular structure of the prior defined by the SGM to define a sequence of intermediate linear inverse problems. As the noise level decreases, the posteriors of these inverse problems get closer to the target posterior of the original inverse problem. \nTo sample from this sequence of posteriors, we propose the use of Sequential Monte Carlo (SMC) methods.\nThe proposed algorithm, \\algo, is shown to be theoretically grounded and we provide numerical simulations showing that it outperforms competing baselines when dealing with ill-posed inverse problems in a Bayesian setting.",
+    "openreview_id": "nHESwXvxWK",
+    "forum_id": "nHESwXvxWK"
+  },
+  "analysis_timestamp": "2026-01-06T17:16:12.562546"
+}

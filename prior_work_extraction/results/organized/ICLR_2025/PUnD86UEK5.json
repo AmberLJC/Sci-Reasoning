@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Adam: A Method for Stochastic Optimization",
+      "authors": "Diederik P. Kingma et al.",
+      "year": 2015,
+      "arxiv_id": "1412.6980",
+      "role": "Baseline",
+      "relationship_sentence": "This is the optimizer whose coordinate-wise moment adaptation we analyze, and our theory reframes Adam\u2019s updates under \u2113\u221e-smoothness (and extends to blockwise variants) to explain when it outperforms SGD."
+    },
+    {
+      "title": "Adaptive Subgradient Methods for Online Learning and Stochastic Optimization",
+      "authors": "John Duchi et al.",
+      "year": 2011,
+      "arxiv_id": "",
+      "role": "Inspiration",
+      "relationship_sentence": "AdaGrad\u2019s analysis connects coordinate-wise adaptivity to exploiting problem geometry via per-coordinate preconditioning and dual norms, directly motivating our lens that Adam\u2019s advantage arises from favorable \u2113\u221e-geometry."
+    },
+    {
+      "title": "On the Convergence of Adam and Beyond",
+      "authors": "Sashank J. Reddi et al.",
+      "year": 2018,
+      "arxiv_id": "",
+      "role": "Gap Identification",
+      "relationship_sentence": "Their convergence results for Adam under \u21132-smoothness focus on step-dependent rates that essentially match SGD, a limitation our work addresses by replacing the \u21132 assumption with \u2113\u221e-smoothness to reveal Adam\u2019s distinct advantage."
+    },
+    {
+      "title": "Introductory Lectures on Convex Optimization: A Basic Course",
+      "authors": "Yurii Nesterov",
+      "year": 2004,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "We build directly on the notion of L-smoothness with respect to a general norm from this text, instantiating it at the \u2113\u221e norm to derive sharper Adam convergence bounds."
+    },
+    {
+      "title": "Iteration Complexity of Randomized Block-Coordinate Descent Methods for Minimizing a Composite Function",
+      "authors": "Peter Richt\u00e1rik et al.",
+      "year": 2014,
+      "arxiv_id": "1107.2848",
+      "role": "Foundation",
+      "relationship_sentence": "Their formalization of blockwise Lipschitz/smoothness constants underpins our blockwise smoothness assumptions used to analyze blockwise Adam."
+    },
+    {
+      "title": "Large Batch Optimization for Deep Learning: Training BERT in 76 minutes",
+      "authors": "Yang You et al.",
+      "year": 2020,
+      "arxiv_id": "1904.00962",
+      "role": "Related Problem",
+      "relationship_sentence": "By introducing layer-wise (blockwise) Adam-style scaling in LAMB for Transformers, this work directly motivates our theoretical treatment of blockwise Adam under blockwise smoothness."
+    }
+  ],
+  "synthesis_narrative": "Adaptive methods were first linked to problem geometry in AdaGrad, which showed that per-coordinate preconditioning exploits structure through dual norms, yielding benefits when gradients are sparse or anisotropic. Adam introduced coordinate-wise adaptivity with exponential moving averages of first and second moments, a practical and widely adopted variant whose per-coordinate scaling also embodies a geometry-aware preconditioning. Prevailing analyses of Adam, typified by work that studies convergence under \u21132-smoothness and reports step-dependent rates similar to SGD, do not isolate why Adam can outperform SGD in practice. The optimization literature provides a broader lens: smoothness can be defined with respect to arbitrary norms, and block coordinate methods formalize blockwise Lipschitz constants that capture heterogeneous curvature across parameter groups. Meanwhile, practical optimizers such as LAMB popularized layer-wise (blockwise) scaling in large Transformer training, underscoring the importance of block-structured geometry in deep models. Together these strands suggested a missing theoretical link: Adam-like methods may be capitalizing on favorable \u2113\u221e and blockwise geometries that standard \u21132 analyses ignore. Building on general-norm smoothness, we instantiate \u2113\u221e-smoothness to align with coordinate-wise adaptivity and extend block-coordinate smoothness to analyze blockwise Adam. This synthesis replaces T-centric \u21132 bounds with geometry-aware guarantees whose constants match empirical measurements on modern networks, thereby explaining when Adam surpasses SGD and predicting its sensitivity when the favorable \u2113\u221e geometry is disrupted.",
+  "target_paper": {
+    "title": "Adam Exploits $\\ell_\\infty$-geometry of Loss Landscape via Coordinate-wise Adaptivity",
+    "authors": "Shuo Xie, Mohamad Amin Mohamadi, Zhiyuan Li",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "Adam, coordinate-wise adaptivity, adaptive algorithms, infinity norm",
+    "abstract": "Adam outperforms SGD when training language models. Yet this advantage is not well-understood theoretically --  previous convergence analysis for Adam and SGD mainly focuses on the number of steps $T$ and is already minimax-optimal in non-convex cases, which are both $\\widetilde{O}(T^{-1/4})$. In this work, we argue that the exploitation of nice $\\ell_\\infty$-geometry is the key advantage of Adam over SGD. More specifically, we give a new convergence analysis for Adam under novel assumptions that loss is smooth under $\\ell_\\infty$-geometry rather than the more common $\\ell_2$-geometry, which yields a much better empirical smoothness constant for GPT-2 and ResNet models. Our experiments confirm that Adam performs much worse when the favorable $\\ell_\\infty$-geometry is changed while SGD provably remains unaffected. We also extend the convergence analysis to blockwise Adam under novel blockwise smoothness assumptions.",
+    "openreview_id": "PUnD86UEK5",
+    "forum_id": "PUnD86UEK5"
+  },
+  "analysis_timestamp": "2026-01-06T12:34:10.831551"
+}

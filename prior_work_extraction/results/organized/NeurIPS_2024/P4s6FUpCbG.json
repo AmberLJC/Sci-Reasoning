@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "3D Gaussian Splatting for Real-Time Radiance Field Rendering",
+      "authors": "Kerbl et al.",
+      "year": 2023,
+      "role": "Foundational 3D representation and rendering baseline",
+      "relationship_sentence": "3DGS-Enhancer is built directly on 3D Gaussian Splatting: it renders novel views from an initial 3DGS and fine-tunes the same Gaussian representation using diffusion-enhanced, view-consistent supervision."
+    },
+    {
+      "title": "Mip-NeRF 360: Unbounded Anti-Aliased Neural Radiance Fields",
+      "authors": "Barron et al.",
+      "year": 2022,
+      "role": "Unbounded-scene modeling precedent",
+      "relationship_sentence": "By targeting unbounded scenes, 3DGS-Enhancer follows the unbounded-scene formulation popularized by Mip-NeRF 360 (e.g., handling backgrounds and long rays), informing how its 3DGS backbone is used in large-scale, 360\u00b0 settings."
+    },
+    {
+      "title": "DreamFusion: Text-to-3D using 2D Diffusion",
+      "authors": "Poole et al.",
+      "year": 2022,
+      "role": "Key idea of using 2D diffusion priors to supervise 3D",
+      "relationship_sentence": "DreamFusion established that 2D diffusion priors can fill in under-constrained 3D content via rendered-view guidance; 3DGS-Enhancer adapts this principle to condition on input views and employs diffusion-enhanced views to fine-tune the 3D model."
+    },
+    {
+      "title": "Zero-1-to-3: Zero-shot One Image to 3D Object",
+      "authors": "Liu et al.",
+      "year": 2023,
+      "role": "Pose-conditioned diffusion for novel view generation",
+      "relationship_sentence": "Zero-1-to-3 showed that a 2D diffusion model conditioned on camera pose can synthesize plausible novel views; 3DGS-Enhancer leverages this capability to restore missing details in rendered novel views before using them to supervise 3DGS."
+    },
+    {
+      "title": "SyncDreamer: Generating Multiview-Consistent Images from a Single-View",
+      "authors": "Liu et al.",
+      "year": 2023,
+      "role": "Multi-view consistency in diffusion",
+      "relationship_sentence": "SyncDreamer introduced mechanisms to synchronize diffusion trajectories for cross-view consistency; 3DGS-Enhancer echoes this goal by reframing cross-view consistency as temporal consistency and enforcing it via video diffusion priors."
+    },
+    {
+      "title": "Video Diffusion Models",
+      "authors": "Ho et al.",
+      "year": 2022,
+      "role": "Temporal-consistency prior via video diffusion",
+      "relationship_sentence": "The temporal coherence learned by video diffusion models underpins 3DGS-Enhancer\u2019s central idea: arrange rendered novel views as a video so temporal-consistency priors translate into view-consistency constraints."
+    },
+    {
+      "title": "High-Resolution Image Synthesis with Latent Diffusion Models",
+      "authors": "Rombach et al.",
+      "year": 2022,
+      "role": "Latent-space autoencoding and decoding backbone",
+      "relationship_sentence": "3DGS-Enhancer operates in diffusion latent space and employs a spatio-temporal decoder to fuse enhanced latents with inputs, a design enabled by the latent diffusion formulation and its encoder\u2013decoder infrastructure."
+    }
+  ],
+  "synthesis_narrative": "3DGS-Enhancer\u2019s core contribution\u2014using view-consistent 2D diffusion priors to enhance unbounded 3D Gaussian Splatting\u2014sits at the intersection of efficient 3D representations and generative priors. The pipeline relies on 3D Gaussian Splatting (Kerbl et al.) as its fast, differentiable 3D backbone; novel views rendered from this model define the supervision loop that will later improve the Gaussians. Because the target setting is large, unbounded scenes, the approach inherits design choices and problem framing from Mip-NeRF 360, which established robust strategies for 360\u00b0 capture, background handling, and anti-aliased rays.\nDreamFusion provided the seminal blueprint for leveraging powerful 2D diffusion priors to supervise 3D by operating on rendered views; 3DGS-Enhancer adapts this idea from text-to-3D to data-driven novel-view enhancement, using diffusion outputs as guidance for fine-tuning the 3DGS. To make those diffusion completions geometrically reliable, the method draws on pose-conditioned view synthesis with diffusion (Zero-1-to-3), confirming that diffusion models can hallucinate pose-controllable novel views from sparse inputs. It further addresses the thorny multi-view consistency issue by connecting to diffusion synchronization across views (SyncDreamer)\u2014but innovates by reframing view consistency as temporal consistency. This is enabled by Video Diffusion Models, whose temporal-coherence priors are exploited by arranging multi-view renderings as a video so time-consistency enforces cross-view alignment. Finally, the approach operates in latent space and fuses information with a spatio-temporal decoder, leveraging Latent Diffusion Models\u2019 encoder\u2013decoder design to restore and integrate consistent latent features before fine-tuning the 3D Gaussians.",
+  "analysis_timestamp": "2026-01-06T23:33:35.574404"
+}

@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Discrete Bayesian Flow Networks",
+      "authors": "Zhang et al.",
+      "year": 2024,
+      "arxiv_id": "",
+      "role": "Extension",
+      "relationship_sentence": "ProfileBFN directly extends the discrete Bayesian Flow Network objective from token-level sequences to position-wise profile distributions, enabling training on single sequences by treating them as degenerate profiles and steering generation with profile priors."
+    },
+    {
+      "title": "Generative Flow Networks",
+      "authors": "Bengio et al.",
+      "year": 2021,
+      "arxiv_id": "2106.04399",
+      "role": "Inspiration",
+      "relationship_sentence": "The flow-based construction for sampling in discrete spaces inspired ProfileBFN\u2019s use of forward\u2013backward flow factorization to model combinatorial sequence spaces without autoregressive decoding."
+    },
+    {
+      "title": "Profile hidden Markov models",
+      "authors": "Sean R. Eddy",
+      "year": 1998,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "The notion of protein families as position-specific residue distributions (profiles) is the conceptual basis that ProfileBFN adopts and generalizes into a learnable flow over profiles, with single sequences as degenerate profiles."
+    },
+    {
+      "title": "Deep generative models of genetic variation capture mutation effects",
+      "authors": "Riesselman et al.",
+      "year": 2018,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "This VAE trained on family MSAs established family-specific generative modeling for proteins, which ProfileBFN targets while removing the need for large MSAs by learning in profile space from single sequences."
+    },
+    {
+      "title": "Mutation effects predicted from sequence co-variation",
+      "authors": "Hopf et al.",
+      "year": 2017,
+      "arxiv_id": "",
+      "role": "Gap Identification",
+      "relationship_sentence": "Potts/EVmutation showed MSA-derived pairwise couplings capture family constraints but depend on deep MSAs; ProfileBFN addresses this limitation by replacing explicit MSA dependence with profile-guided Bayesian flows."
+    },
+    {
+      "title": "MSA Transformer",
+      "authors": "Rao et al.",
+      "year": 2021,
+      "arxiv_id": "",
+      "role": "Gap Identification",
+      "relationship_sentence": "While MSA Transformer exploits multiple-sequence alignments to capture coevolutionary structure, its reliance on large MSAs motivates ProfileBFN\u2019s design to capture family structure without building or training on MSAs."
+    },
+    {
+      "title": "Large language models generate functional protein sequences",
+      "authors": "Madani et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Baseline",
+      "relationship_sentence": "This LLM-based generator conditions on global tags to bias function/family, a coarse control that ProfileBFN improves upon by conditioning generation on per-position profile priors to steer family design more precisely."
+    }
+  ],
+  "synthesis_narrative": "Profile hidden Markov models introduced the core idea that a protein family can be represented as a position-specific distribution over residues, providing a profile that summarizes permissible amino acids at each site. DeepSequence demonstrated that training generative models directly on MSAs yields family-specific distributions that capture mutational constraints and predict fitness effects. EVmutation further showed that pairwise couplings extracted from MSAs encode family constraints, underscoring the utility and limitations of MSA-derived statistics. MSA Transformer leveraged multiple sequences to learn coevolutionary structure via attention, validating that family information is richly encoded in aligned sets but at the cost of constructing large MSAs. In parallel, Generative Flow Networks established a flow-based paradigm for sampling in discrete combinatorial spaces by learning consistent forward and backward flows, offering a non-autoregressive route to discrete generation. Building on this line, Discrete Bayesian Flow Networks introduced a training objective that makes flow-based generation practical for categorical sequences by estimating transitions consistent with a target posterior over discrete states. Recent LLM-based protein generators such as ProGen2 showed that global conditioning can bias function across families, while revealing the need for finer, position-wise control. Taken together, these works pointed to a gap: family-aware generative modeling benefits from profile-level constraints but is bottlenecked by MSA construction and lacks precise steering. ProfileBFN naturally emerges by marrying the profile representation with Bayesian flow objectives, lifting flows from tokens to per-position distributions so that single sequences act as degenerate profiles, thereby eliminating MSA requirements while enabling precise, profile-driven control over family design.",
+  "target_paper": {
+    "title": "Steering Protein Family Design through Profile Bayesian Flow",
+    "authors": "Jingjing Gong, Yu Pei, Siyu Long, Yuxuan Song, Zhe Zhang, Wenhao Huang, Ziyao Cao, Shuyi Zhang, Hao Zhou, Wei-Ying Ma",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "oral",
+    "keywords": "protein family generation, homologous protein generation, protein design, bayesian flow",
+    "abstract": "Protein family design emerges as a promising alternative by combining the advantages of de novo protein design and mutation-based directed evolution.In this paper, we propose ProfileBFN, the Profile Bayesian Flow Networks, for specifically generative modeling of protein families. ProfileBFN extends the discrete Bayesian Flow Network from an MSA profile perspective, which can be trained on single protein sequences by regarding it as a degenerate profile, thereby achieving efficient protein family design by avoiding large-scale MSA data construction and training. Empirical results show that ProfileBFN has a profound understanding of proteins. When generating diverse and novel family proteins, it can accurately capture the structural characteristics of the family. The enzyme produced by this method is more likely than the previous approach to have the corresponding function, offering better odds of generating diverse proteins with the desired functionality.",
+    "openreview_id": "PSiijdQjNU",
+    "forum_id": "PSiijdQjNU"
+  },
+  "analysis_timestamp": "2026-01-06T12:01:14.683293"
+}

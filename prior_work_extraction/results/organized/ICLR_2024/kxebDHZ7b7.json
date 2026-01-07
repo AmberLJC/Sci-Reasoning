@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Sharpness-Aware Minimization for Efficiently Improving Generalization",
+      "authors": "Pierre Foret et al.",
+      "year": 2021,
+      "arxiv_id": "2010.01412",
+      "role": "Baseline",
+      "relationship_sentence": "TRAM directly modifies SAM\u2019s inner maximization by constraining its adversarial neighborhood with a trust-region bound, turning SAM\u2019s parameter-space flatness objective into one that is explicitly aware of function-space curvature."
+    },
+    {
+      "title": "Trust Region Policy Optimization",
+      "authors": "John Schulman et al.",
+      "year": 2015,
+      "arxiv_id": "1502.05477",
+      "role": "Foundation",
+      "relationship_sentence": "TRPO introduced KL-divergence trust-region constraints to limit function changes per update, and TRAM adapts this KL-based bound to regulate how far SAM perturbs parameters so as to preserve representation stability."
+    },
+    {
+      "title": "Virtual Adversarial Training: A Regularization Method for Supervised and Semi-Supervised Learning",
+      "authors": "Takeru Miyato et al.",
+      "year": 2018,
+      "arxiv_id": "1704.03976",
+      "role": "Inspiration",
+      "relationship_sentence": "VAT\u2019s core idea of enforcing local prediction smoothness via adversarial perturbations and a KL-based stability term informs TRAM\u2019s use of a function-space (KL) bound to shape the SAM adversarial neighborhood."
+    },
+    {
+      "title": "Better Fine-Tuning by Reducing Representational Collapse",
+      "authors": "Armen Aghajanyan et al.",
+      "year": 2020,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "R3F demonstrated that constraining representation drift during fine-tuning via prediction-consistency (KL) regularization improves OOD transfer, a principle TRAM operationalizes by imposing a trust-region bound when computing SAM perturbations."
+    },
+    {
+      "title": "Overcoming catastrophic forgetting in neural networks",
+      "authors": "James Kirkpatrick et al.",
+      "year": 2017,
+      "arxiv_id": "1612.00796",
+      "role": "Related Problem",
+      "relationship_sentence": "EWC\u2019s Fisher-based penalty approximates a local KL trust region to preserve pre-trained knowledge, motivating TRAM\u2019s use of a trust-region perspective to protect task-agnostic structure while seeking flatter minima."
+    },
+    {
+      "title": "GSAM: Rethinking Sharpness-Aware Minimization",
+      "authors": "Zhuang et al.",
+      "year": 2022,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "GSAM showed that purely parameter-space flatness objectives can conflict with descent directions and do not guarantee better generalization, motivating TRAM to introduce explicit function-space curvature control via a trust-region bound."
+    }
+  ],
+  "synthesis_narrative": "Sharpness-Aware Minimization (SAM) frames generalization as minimizing worst-case loss in a small parameter-space neighborhood, operationalized by an inner maximization step that seeks sharper directions and a descent step that prefers flatter minima. Trust Region Policy Optimization (TRPO) formalized using a KL-divergence trust-region to limit functional change per update, establishing a principled way to bound representation drift. Virtual Adversarial Training (VAT) brought adversarial smoothing to supervised learning by enforcing local prediction consistency under worst-case perturbations measured with KL, directly targeting function-space smoothness. In fine-tuning, R3F showed that penalizing representational collapse via KL consistency under noise preserves pre-trained structure and improves out-of-domain transfer. EWC further connected preservation of pre-trained knowledge to an approximate KL trust-region through a Fisher-weighted quadratic penalty, demonstrating how trust-region ideas mitigate catastrophic forgetting. Meanwhile, GSAM dissected SAM\u2019s gradient conflicts and highlighted that optimizing only parameter-space flatness can misalign with generalization, especially when representation transfer is critical. Taken together, these works reveal a gap: SAM variants succeed at parameter-space flatness, while trust-region and consistency methods control function-space drift, yet they remain separate. The natural next step is to couple them\u2014use a trust-region (KL) bound to inform SAM\u2019s adversarial neighborhood so the inner maximization becomes representation-aware. TRAM synthesizes these strands, co-optimizing for flat minima and controlled function curvature to preserve pre-trained structure during fine-tuning, yielding better OOD and cross-lingual generalization.",
+  "target_paper": {
+    "title": "TRAM: Bridging Trust Regions and Sharpness Aware Minimization",
+    "authors": "Tom Sherborne, Naomi Saphra, Pradeep Dasigi, Hao Peng",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "sharpness-aware minimization, sam, trust region, optimization, cross-lingual transfer, language modeling",
+    "abstract": "Sharpness-aware minimization (SAM) reports improving domain generalization by\nreducing the loss surface curvature in the parameter space. However,\ngeneralization during _fine-tuning_ is often more dependent on the\ntransferability of _representations_ in the function space. Trust-region\nmethods (TR) target this goal by regularizing representation curvature to reduce\ncatastrophic forgetting of pre-trained task-agnostic information while adopting\ntask-specific skills. We consider unifying these strategies for low curvature in\nboth parameter space and function space to improve out-of-domain (OOD)\ngeneralization. We propose **Trust Region Aware Minimization** (TRAM), a\nSAM algorithm fine-tuning for low parameter sharpness and smooth, informative\nrepresentations preserving pre-trained structure. TRAM uses a trust region bound\nto inform the SAM adversarial neighborhood, introducing an awareness of function\ncurvature within optimization for flatter minima. We empirically validate TRAM\nin visio",
+    "openreview_id": "kxebDHZ7b7",
+    "forum_id": "kxebDHZ7b7"
+  },
+  "analysis_timestamp": "2026-01-06T11:19:23.712125"
+}

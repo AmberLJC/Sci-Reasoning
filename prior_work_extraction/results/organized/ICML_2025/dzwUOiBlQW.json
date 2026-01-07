@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Masked Autoencoders Are Scalable Vision Learners",
+      "authors": "Kaiming He, Xinlei Chen, Saining Xie, Yanghao Li, Piotr Doll\u00e1r, Ross Girshick",
+      "year": 2022,
+      "role": "Masked image modeling autoencoder pretraining",
+      "relationship_sentence": "MAE introduced asymmetric masked autoencoding that learns semantically rich, discriminative representations from reconstruction alone; MAETok directly adopts this masked modeling principle inside the tokenizer to shape a more structured latent space without variational regularization."
+    },
+    {
+      "title": "High-Resolution Image Synthesis with Latent Diffusion Models",
+      "authors": "Robin Rombach, Andreas Blattmann, Dominik Lorenz, Patrick Esser, Bj\u00f6rn Ommer",
+      "year": 2022,
+      "role": "Latent diffusion and AE/ VAE tokenizer design",
+      "relationship_sentence": "LDM established running diffusion in a learned latent space with a KL-regularized autoencoder tokenizer; MAETok is a plug-in replacement that questions the need for the variational component and targets better-structured latents to improve ImageNet generation efficiency and quality."
+    },
+    {
+      "title": "Scalable Diffusion Models with Transformers",
+      "authors": "William Peebles, Saining Xie",
+      "year": 2023,
+      "role": "Token-based ViT diffusion scaling",
+      "relationship_sentence": "DiT showed that diffusion over tokens with Transformers scales strongly and that token count critically affects compute and quality; MAETok is designed to yield semantically powerful tokens, enabling high ImageNet performance with only 128 tokens."
+    },
+    {
+      "title": "Taming Transformers for High-Resolution Image Synthesis",
+      "authors": "Patrick Esser, Robin Rombach, Bj\u00f6rn Ommer",
+      "year": 2021,
+      "role": "Discrete tokenizer (VQGAN) for generative modeling",
+      "relationship_sentence": "VQGAN demonstrated that a strong tokenizer is pivotal for high-fidelity generation with Transformers but highlighted codebook/discretization trade-offs; MAETok instead keeps a continuous AE while aiming for VQ-like semantic compactness via masking."
+    },
+    {
+      "title": "Generating Diverse High-Fidelity Images with VQ-VAE-2",
+      "authors": "Ali Razavi, Aaron van den Oord, Oriol Vinyals",
+      "year": 2019,
+      "role": "Hierarchical discrete latent tokenizers",
+      "relationship_sentence": "VQ-VAE-2 underscored how hierarchical discrete latents can capture semantics for powerful generative models; MAETok targets comparable semantic structure in a continuous latent with mask modeling to avoid quantization artifacts."
+    },
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Jonathan Ho, Ajay Jain, Pieter Abbeel",
+      "year": 2020,
+      "role": "Foundational diffusion framework",
+      "relationship_sentence": "DDPM provides the core denoising diffusion formulation used downstream; MAETok\u2019s contribution is orthogonal\u2014improving the latent space on which diffusion operates to boost sampling quality and efficiency."
+    },
+    {
+      "title": "GLO: Generative Latent Optimization",
+      "authors": "Piotr Bojanowski, Armand Joulin, David Lopez-Paz, Arthur Szlam",
+      "year": 2018,
+      "role": "Non-variational generative autoencoding",
+      "relationship_sentence": "GLO showed that generative modeling can succeed without variational objectives by learning a good latent mapping and fitting a simple prior; this directly supports MAETok\u2019s claim that a non-variational AE can yield effective latents for diffusion."
+    }
+  ],
+  "synthesis_narrative": "MAETok sits at the intersection of latent diffusion and masked image modeling, rethinking the tokenizer as the critical bottleneck for efficiency and fidelity. Latent Diffusion Models (Rombach et al.) established the practice of running diffusion in a compressed latent space using a KL-regularized autoencoder, coupling speed with high-quality synthesis. However, their variational prior can blur semantic structure in latents. Masked Autoencoders (He et al.) demonstrated that reconstructive masked modeling yields highly discriminative and semantically organized features. MAETok fuses these insights by embedding MAE-style masking into the tokenizer itself, explicitly shaping the latent distribution toward fewer effective modes and stronger separability\u2014properties the paper argues are beneficial for diffusion.\n\nScalable Transformer-based diffusion (DiT; Peebles & Xie) further sharpened the objective: the number and quality of tokens govern compute and performance. By producing semantically rich tokens, MAETok enables state-of-the-art ImageNet generation with only 128 tokens, improving both throughput and gFID. Prior discrete tokenizers like VQGAN and VQ-VAE-2 clarified the power and pitfalls of codebook-based semantics (e.g., quantization artifacts), motivating MAETok\u2019s continuous latent approach with masking to retain fidelity while enhancing structure. Underpinning the generative procedure, DDPM provides the diffusion backbone, while GLO offers conceptual evidence that strong generation need not rely on variational objectives. Together, these works directly shape MAETok\u2019s design choice: a non-variational, masked autoencoding tokenizer that delivers better-structured latents for more efficient and higher-quality diffusion.",
+  "analysis_timestamp": "2026-01-07T00:21:32.368203"
+}

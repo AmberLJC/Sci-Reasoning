@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "OptNet: Differentiable Optimization as a Layer in Neural Networks",
+      "authors": "Brandon Amos; J. Zico Kolter",
+      "year": 2017,
+      "role": "Pioneered differentiable QP layers with KKT-based implicit differentiation and custom solvers.",
+      "relationship_sentence": "BPQP directly builds on OptNet\u2019s idea of backpropagating through QPs via KKT conditions, but replaces the costly KKT linear solve with a simplified, decoupled QP for the backward pass to improve scalability."
+    },
+    {
+      "title": "Differentiating Through a Cone Program",
+      "authors": "Shane Barratt; Stephen Boyd",
+      "year": 2018,
+      "role": "Provided rigorous sensitivity analysis and gradients for general cone programs via KKT systems.",
+      "relationship_sentence": "BPQP leverages the same KKT-based sensitivity framework as Barratt and Boyd, but restructures the adjoint computation into a quadratic program that avoids explicit Jacobian computations."
+    },
+    {
+      "title": "Differentiable Convex Optimization Layers",
+      "authors": "Akshay Agrawal; Brandon Amos; Stephen Boyd",
+      "year": 2019,
+      "role": "Generalized differentiable convex programming (via CVXPY Layers) using implicit differentiation of KKT systems.",
+      "relationship_sentence": "BPQP targets the main bottleneck identified in CVXPY Layers\u2014expensive Jacobian/KKT factorizations\u2014by reformulating backprop as a smaller, decoupled QP that better exploits problem structure."
+    },
+    {
+      "title": "Deep Declarative Networks: A New Hope",
+      "authors": "Stephen Gould; Richard Hartley; Dylan Campbell",
+      "year": 2019,
+      "role": "Established a general framework for differentiating through argmin/argmax layers using KKT/implicit function theory.",
+      "relationship_sentence": "BPQP can be viewed as a specialized declarative layer for convex programs that instantiates the DDN philosophy with a QP-based backward map to gain efficiency."
+    },
+    {
+      "title": "Hyperparameter Optimization with Approximate Implicit Differentiation",
+      "authors": "Fabian Pedregosa",
+      "year": 2016,
+      "role": "Showed how to compute hypergradients via implicit differentiation using linear-system solves instead of explicit Jacobians.",
+      "relationship_sentence": "BPQP follows the same principle of avoiding explicit Jacobian computation, but achieves it by casting the adjoint step as a structured QP that can be solved efficiently and decoupled across instances."
+    },
+    {
+      "title": "Task-Based End-to-End Model Learning in Stochastic Optimization",
+      "authors": "Christina T. Donti; Brandon Amos; J. Zico Kolter",
+      "year": 2017,
+      "role": "Motivated decision-focused learning where optimization appears inside the training loop, necessitating efficient differentiation through solvers.",
+      "relationship_sentence": "BPQP directly addresses the computational inefficiencies that arise in decision-focused training by making the backward pass through convex solvers faster and more scalable."
+    },
+    {
+      "title": "Generic Methods for Optimization-Based Modeling in Machine Learning",
+      "authors": "Justin Domke",
+      "year": 2012,
+      "role": "Early foundational work on differentiating through optimization problems using implicit differentiation and linear algebra.",
+      "relationship_sentence": "BPQP inherits Domke\u2019s core idea of implicit differentiation through optimization solutions and advances it with a QP-form backward formulation that exploits KKT structure."
+    }
+  ],
+  "synthesis_narrative": "BPQP stands on a clear lineage of research that made optimization layers differentiable and practical. OptNet first demonstrated a QP as a neural layer and backpropagated via KKT-based implicit differentiation, but required solving large KKT linear systems. Barratt and Boyd then provided a rigorous sensitivity analysis for cone programs via KKT systems, which underpins both theory and practice of differentiable convex optimization. Building on this, CVXPY Layers generalized differentiable convex programs using implicit differentiation of KKT systems, but incurred heavy Jacobian/KKT factorization costs, especially with many constraints. In parallel, Gould and colleagues\u2019 Deep Declarative Networks formalized differentiating through argmin layers via KKT/implicit function theory, encouraging specialized implementations tailored to problem structure. Earlier, Domke and Pedregosa showed that one can avoid explicit Jacobian formation and large inverses by solving structured linear systems for implicit gradients\u2014a computational perspective that strongly influenced efficiency-focused designs. Finally, decision-focused learning by Donti et al. highlighted the need for scalable, solver-in-the-loop differentiation on large, constrained problems.\nBPQP\u2019s core contribution\u2014recasting the backward pass as a simplified, decoupled QP by exploiting KKT structure\u2014directly extends these foundations. It retains the correctness guarantees of KKT-based implicit differentiation while replacing costly Jacobian/KKT solves with a smaller QP that can be solved efficiently and even decoupled across instances, addressing the scalability and efficiency bottlenecks identified in prior differentiable optimization frameworks.",
+  "analysis_timestamp": "2026-01-06T23:42:49.048311"
+}

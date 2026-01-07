@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "FlatCam: Thin, Lensless Cameras Using Coded Masks and Compressive Reconstruction",
+      "authors": "Asif et al.",
+      "year": 2016,
+      "role": "foundational lensless imaging",
+      "relationship_sentence": "Established the coded-mask lensless imaging paradigm and linear multiplexed forward models, motivating PhoCoLens\u2019s emphasis on accurate forward modeling and data-consistent reconstruction."
+    },
+    {
+      "title": "DiffuserCam: Lensless Single-Exposure 3D Imaging",
+      "authors": "Antipa et al.",
+      "year": 2018,
+      "role": "foundational lensless imaging/forward model calibration",
+      "relationship_sentence": "Showed practical, calibration-based lensless imaging with highly space-variant PSFs, directly motivating PhoCoLens\u2019s stage-1 spatially varying deconvolution to handle field-dependent blur while preserving fidelity."
+    },
+    {
+      "title": "Efficient Filter Flow for Space-Variant Deblurring",
+      "authors": "Hirsch et al.",
+      "year": 2010,
+      "role": "methodological inspiration for spatially varying deconvolution",
+      "relationship_sentence": "Introduced an efficient framework for space-variant deblurring, inspiring PhoCoLens\u2019s first-stage strategy that reconstructs low-frequency content via spatially adaptive deconvolution across the field of view."
+    },
+    {
+      "title": "Plug-and-Play Priors for Model Based Reconstruction",
+      "authors": "Venkatakrishnan et al.",
+      "year": 2013,
+      "role": "prior integration in inverse problems",
+      "relationship_sentence": "Pioneered using powerful denoisers as implicit priors while enforcing data fidelity, a principle PhoCoLens extends by plugging a generative diffusion prior on top of a data-consistent low-frequency estimate."
+    },
+    {
+      "title": "Denoising Diffusion Restoration Models (DDRM)",
+      "authors": "Kawar et al.",
+      "year": 2022,
+      "role": "diffusion priors with data consistency",
+      "relationship_sentence": "Demonstrated how pretrained diffusion models can solve linear inverse problems with measurement-subspace consistency, informing PhoCoLens\u2019s second-stage diffusion prior design to enhance realism without sacrificing fidelity."
+    },
+    {
+      "title": "Diffusion Posterior Sampling for General Noisy Linear Inverse Problems",
+      "authors": "Chung et al.",
+      "year": 2022,
+      "role": "diffusion-based inverse problem solving",
+      "relationship_sentence": "Provided a principled posterior-sampling view for applying diffusion models to inverse problems, underpinning PhoCoLens\u2019s measurement-conditioned diffusion sampling to refine high-frequency details."
+    },
+    {
+      "title": "Image Super-Resolution via Iterative Refinement (SR3)",
+      "authors": "Saharia et al.",
+      "year": 2021,
+      "role": "conditional diffusion for photorealistic detail",
+      "relationship_sentence": "Showed that conditioning diffusion models on low-resolution inputs yields photorealistic high-frequency synthesis, directly paralleling PhoCoLens\u2019s conditioning on stage-1 low-frequency reconstructions."
+    }
+  ],
+  "synthesis_narrative": "PhoCoLens builds on two converging lines of work: lensless computational imaging and generative priors for inverse problems. Foundational lensless systems like FlatCam established coded-mask sensing and multiplexed linear forward models, while DiffuserCam demonstrated practical calibration for strongly space-variant PSFs, exposing the fidelity challenges that arise from forward-model mismatches across the field of view. Classic space-variant deblurring, exemplified by Efficient Filter Flow, provides the algorithmic blueprint for PhoCoLens\u2019s first stage: a spatially varying deconvolution that emphasizes accurate, data-consistent recovery of low-frequency structure across the image plane.\n\nConcurrently, Plug-and-Play Priors introduced the paradigm of injecting powerful learned priors into iterative reconstruction while preserving measurement consistency. Recent diffusion-based approaches, DDRM and DPS, refined this idea by using pretrained diffusion models to sample solutions that remain consistent with the measurement operator, clarifying how to marry generative modeling with data fidelity. Finally, SR3 demonstrated the effectiveness of conditioning diffusion models on low-resolution (i.e., low-frequency) guidance to generate photorealistic high-frequency details.\n\nPhoCoLens synthesizes these threads: it first secures a trustworthy, spatially consistent low-frequency estimate via space-variant deconvolution tailored to lensless PSFs, then leverages a measurement-conditioned diffusion prior\u2014akin to DDRM/DPS and SR3\u2019s conditional formulation\u2014to add realistic high-frequency content without violating data consistency. This staged design directly addresses the twin bottlenecks of lensless imaging\u2014imperfect forward models and weak priors\u2014yielding reconstructions that are both physically consistent and photorealistic.",
+  "analysis_timestamp": "2026-01-06T23:33:35.579109"
+}

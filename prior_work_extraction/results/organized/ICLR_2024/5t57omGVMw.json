@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Iterative methods for solving partial difference equations of elliptic type",
+      "authors": "D. M. Young",
+      "year": 1950,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "Young introduced SOR and characterized how its convergence rate depends on the relaxation parameter \u03c9, establishing the parameter space and performance metric that the learning procedure targets."
+    },
+    {
+      "title": "Matrix Iterative Analysis",
+      "authors": "R. S. Varga",
+      "year": 1962,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "Varga\u2019s analysis shows that the optimal SOR parameter requires spectral information (e.g., eigenvalue bounds) that is expensive to obtain, directly motivating a no-extra-computation approach that learns \u03c9 from runtime feedback."
+    },
+    {
+      "title": "Successive Overrelaxation (SOR) and related methods",
+      "authors": "A. Hadjidimos",
+      "year": 2000,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "This survey documents heuristic and adaptive SOR parameter rules that rely on problem-specific structure or extra matrix work, highlighting the lack of principled, black-box methods for choosing \u03c9 across varying instances."
+    },
+    {
+      "title": "Data-Driven Algorithm Design",
+      "authors": "M.-F. Balcan et al.",
+      "year": 2017,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "Balcan et al. formalized selecting algorithm parameters from performance feedback over an instance distribution, providing the learning-theoretic framework that is instantiated for SOR parameter tuning across system sequences."
+    },
+    {
+      "title": "The nonstochastic multiarmed bandit problem",
+      "authors": "P. Auer et al.",
+      "year": 2002,
+      "arxiv_id": null,
+      "role": "Extension",
+      "relationship_sentence": "EXP3-style adversarial bandit algorithms with bandit feedback underpin the no-regret procedure that selects \u03c9 using only iteration counts and competes with the best fixed choice in hindsight."
+    },
+    {
+      "title": "X-Armed Bandits",
+      "authors": "S. Bubeck et al.",
+      "year": 2011,
+      "arxiv_id": null,
+      "role": "Extension",
+      "relationship_sentence": "Techniques for optimizing over continuous arm spaces motivate discretizing \u03c9 \u2208 (0,2) and controlling approximation error so bandit selection can compete with the best continuous parameter."
+    },
+    {
+      "title": "Hyperband: A Novel Bandit-Based Approach to Hyperparameter Optimization",
+      "authors": "L. Li et al.",
+      "year": 2018,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "Hyperband demonstrates bandit-based parameter selection but requires multiple evaluations per task, a limitation explicitly avoided here by learning \u03c9 from a single solver run per instance without extra matrix work."
+    }
+  ],
+  "synthesis_narrative": "Successive over-relaxation (SOR) was introduced with an explicit dependence of convergence on the relaxation parameter \u03c9, establishing a one-dimensional control knob whose choice can dramatically affect iteration counts (Young, 1950). Classical matrix iterative analysis made this dependence precise, tying the optimal \u03c9 to spectral properties of the iteration matrix and showing that computing or even estimating those quantities typically requires costly eigenvalue information (Varga, 1962). Surveys of SOR and its relatives catalog numerous heuristic or adaptive rules for \u03c9 that exploit problem-specific structure or extra computations, but they lack a general black-box procedure with guarantees across varying instances (Hadjidimos, 2000). In parallel, learning theory proposed selecting algorithm parameters by observing performance over instances drawn from a distribution, giving formal guarantees for data-driven algorithm design without requiring gradient information (Balcan et al., 2017). Adversarial bandit methods such as EXP3 provide no-regret selection from discrete choices using only bandit feedback, exactly the signal available when one observes iteration counts (Auer et al., 2002), while continuum-armed bandit work shows how to handle continuous parameter spaces via controlled discretization (Bubeck et al., 2011). Bandit-based hyperparameter optimization like Hyperband further underscored the viability of bandits for parameter tuning, but at the cost of multiple evaluations per task (Li et al., 2018). Taken together, these strands reveal both a ripe target\u2014the \u03c9-sensitive performance of SOR whose optimal choice is expensive to compute\u2014and a toolkit: online bandits that learn from single-outcome feedback and discretization schemes to approximate continuous parameters. The natural next step is to cast \u03c9-selection across repeated linear systems as a no-regret bandit problem, leveraging only iteration counts, discretizing \u03c9 to compete with the continuous optimum, and thereby closing the gap left by spectral-estimate-dependent or multi-evaluation heuristics.",
+  "target_paper": {
+    "title": "Learning to Relax: Setting Solver Parameters Across a Sequence of Linear System Instances",
+    "authors": "Mikhail Khodak, Edmond Chow, Maria Florina Balcan, Ameet Talwalkar",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "scientific computing, data-driven algorithm design, online learning, multi-armed bandits, contextual bandits, numerical analysis, learning-augmented algorithms, algorithms with predictions",
+    "abstract": "Solving a linear system ${\\bf Ax}={\\bf b}$ is a fundamental scientific computing primitive for which numerous solvers and preconditioners have been developed. \n\tThese come with parameters whose optimal values depend on the system being solved and are often impossible or too expensive to identify;\n\tthus in practice sub-optimal heuristics are used.\n\tWe consider the common setting in which many related linear systems need to be solved, e.g. during a single numerical simulation.\n\tIn this scenario, can we sequentially choose parameters that attain a near-optimal overall number of iterations, without extra matrix computations?\n\tWe answer in the affirmative for Successive Over-Relaxation (SOR), a standard solver whose parameter $\\omega$ has a strong impact on its runtime.\n\tFor this method, we prove that a bandit online learning algorithm\u2014using only the number of iterations as feedback\u2014can select parameters for a sequence of instances such that the overall cost approaches that of the best fixe",
+    "openreview_id": "5t57omGVMw",
+    "forum_id": "5t57omGVMw"
+  },
+  "analysis_timestamp": "2026-01-06T06:24:56.559971"
+}

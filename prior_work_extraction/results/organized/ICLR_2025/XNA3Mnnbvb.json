@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Human Motion Diffusion Model (MDM)",
+      "authors": "Tevet et al.",
+      "year": 2023,
+      "role": "Established diffusion as a strong backbone for text-conditioned human motion generation and set the standard training/inference recipe for denoising-based motion synthesis.",
+      "relationship_sentence": "DART adopts the diffusion-based motion synthesis paradigm introduced by MDM but augments it with an autoregressive primitive scheduler to support long-horizon, streaming control rather than single-shot clips."
+    },
+    {
+      "title": "T2M-GPT: Generating Diverse Human Motions from Text Using GPT",
+      "authors": "Zhang et al.",
+      "year": 2023,
+      "role": "Framed long human motion generation as autoregressive modeling over discrete motion tokens learned via vector quantization.",
+      "relationship_sentence": "DART\u2019s motion-primitive decomposition and sequential conditioning are inspired by T2M-GPT\u2019s AR formulation, but DART replaces discrete token decoding with diffusion within each primitive for higher fidelity and stable online extension."
+    },
+    {
+      "title": "MCDiff: Character Motion Synthesis with Diffusion Models",
+      "authors": "Kim et al.",
+      "year": 2022,
+      "role": "Introduced controllable motion diffusion conditioned on kinematic signals such as trajectories and foot contacts.",
+      "relationship_sentence": "DART generalizes MCDiff-style controllability to multi-modal constraints by jointly aligning text semantics with spatial goals and scene geometry for precise motion control."
+    },
+    {
+      "title": "MotionDiffuse: Text-Driven Human Motion Generation via Diffusion",
+      "authors": "Zhang et al.",
+      "year": 2023,
+      "role": "Demonstrated CLIP-based text conditioning within diffusion for text-to-motion, showing strong text-motion alignment.",
+      "relationship_sentence": "DART builds on MotionDiffuse\u2019s text-conditioning strategy but adds an online, autoregressive mechanism and constraint interfaces to respond to streaming descriptions in real time."
+    },
+    {
+      "title": "Motion Latent Diffusion (MLD) for 3D Human Motion Synthesis",
+      "authors": "Chen et al.",
+      "year": 2023,
+      "role": "Showed that operating diffusion in a compact latent space yields major speedups while maintaining quality.",
+      "relationship_sentence": "DART\u2019s real-time focus is enabled by the idea of low-dimensional motion representations and efficient denoising from MLD, combined with short motion primitives for fast per-step sampling."
+    },
+    {
+      "title": "Diffuser: Diffusion Models for Planning",
+      "authors": "Janner et al.",
+      "year": 2022,
+      "role": "Cast sequential decision-making and trajectory generation as conditional diffusion, enabling goal-directed sampling and control.",
+      "relationship_sentence": "DART adopts a planning perspective akin to Diffuser, conditioning diffusion on evolving goals and scene constraints to steer each primitive toward user-specified targets in an online loop."
+    },
+    {
+      "title": "MotionCLIP: Exposing Human Motion Generation to CLIP Space",
+      "authors": "Tevet et al.",
+      "year": 2022,
+      "role": "Aligned motion and language in a shared semantic space using CLIP, improving text-motion correspondence and retrieval.",
+      "relationship_sentence": "DART leverages CLIP-like text encoders and alignment objectives pioneered by MotionCLIP to faithfully map streaming language inputs to semantically consistent motion primitives."
+    }
+  ],
+  "synthesis_narrative": "DartControl\u2019s core innovation\u2014real-time, text-driven control of long, continuous human motion with spatial constraints\u2014emerges from three converging lines of work. First, diffusion-based motion generation (MDM; MotionDiffuse) provided the high-fidelity denoising backbone and practical text-conditioning pipelines that DART adopts as its per-primitive generator. Second, research on long-horizon and tokenized motion modeling (T2M-GPT) demonstrated that decomposing sequences into reusable units and generating them autoregressively improves scalability and temporal coherence. DART blends these by treating short motion primitives as the autoregressive units, but samples each primitive via diffusion to retain fine-grained realism absent in discrete token decoders.\nA second pillar is controllability. MCDiff showed diffusion models can be steered with kinematic controls (e.g., trajectories, contacts), while Diffuser framed sequential control and planning as conditional diffusion. DART extends this to multi-modal, online control, aligning free-form text semantics with explicit spatial goals and 3D scene geometry to guide each primitive in a closed loop. Finally, achieving real-time responsiveness draws on efficiency advances from latent-space diffusion for motion (MLD), suggesting compact representations and short denoising schedules, which DART combines with short-horizon primitives to meet latency constraints. Semantic alignment techniques from MotionCLIP ensure streaming language commands remain faithfully reflected in the generated motion. Together, these works directly shape DART\u2019s diffusion-based autoregressive design, enabling responsive, goal-aware, and semantically accurate long-form motion control.",
+  "analysis_timestamp": "2026-01-07T00:02:04.907103"
+}

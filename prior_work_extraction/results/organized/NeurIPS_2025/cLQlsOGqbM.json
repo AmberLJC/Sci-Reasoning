@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Deep Sets",
+      "authors": "Manzil Zaheer, Satwik Kottur, Siamak Ravanbakhsh, Barnab\u00e1s P\u00f3czos, Ruslan Salakhutdinov, Alexander Smola",
+      "year": 2017,
+      "role": "Conceptual foundation for permutation-invariant, size-agnostic architectures",
+      "relationship_sentence": "Established permutation-invariant parameter sharing and pooling, which XNN extends from sets to tensor axes to make representations independent of axis order and dimensionality."
+    },
+    {
+      "title": "Neural Message Passing for Quantum Chemistry",
+      "authors": "Justin Gilmer, Samuel S. Schoenholz, Patrick F. Riley, Oriol Vinyals, George E. Dahl",
+      "year": 2017,
+      "role": "Architectural template for shared local operators on variable-sized structures",
+      "relationship_sentence": "Showed how shared message-passing kernels can operate on graphs of arbitrary size; XNN adapts this idea by applying shared axial operators that compose across any number of dimensions."
+    },
+    {
+      "title": "Axial Attention in Multidimensional Transformers",
+      "authors": "Jonathan Ho, Nal Kalchbrenner, Dirk Weissenborn, Tim Salimans",
+      "year": 2019,
+      "role": "Architectural mechanism (axial factorization) enabling scalable N-D processing",
+      "relationship_sentence": "Introduced factorizing global attention into sequential 1D axis-wise operations, directly motivating XNN\u2019s axis-wise parameterization to achieve dimension-agnostic computation."
+    },
+    {
+      "title": "Axial-DeepLab: Stand-Alone Axial-Attention for Panoptic Segmentation",
+      "authors": "Huiyu Wang, Yukun Zhu, Bradley Green, Alan L. Yuille, Liang-Chieh Chen",
+      "year": 2020,
+      "role": "Empirical validation of axial mechanisms on grid-structured data",
+      "relationship_sentence": "Demonstrated that axis-wise attention can replace full 2D attention/convolution, supporting XNN\u2019s strategy to compose N-D operators from reusable 1D axial blocks."
+    },
+    {
+      "title": "Fourier Neural Operator: Learning in Infinite-Dimensional Spaces",
+      "authors": "Zongyi Li, Nikola Kovachki, Kamyar Azizzadenesheli, Burigede Liu, Andrew Stuart, Kaushik Bhattacharya, Anima Anandkumar",
+      "year": 2021,
+      "role": "PDE operator-learning foundation model/baseline to convert",
+      "relationship_sentence": "Provided a standard PDE foundation model whose convolutional operator blocks XNN converts into axial counterparts to share parameters across dimensionalities."
+    },
+    {
+      "title": "DeepONet: Learning Nonlinear Operators for PDEs",
+      "authors": "Lu Lu, Pengzhan Jin, George Em Karniadakis",
+      "year": 2021,
+      "role": "Operator-learning paradigm and baseline",
+      "relationship_sentence": "Defined a general operator-learning blueprint (branch/trunk) used in PDE foundation models; XNN reparameterizes such components in an axial, dimension-agnostic form."
+    },
+    {
+      "title": "Perceiver IO: A General Architecture for Structured Inputs & Outputs",
+      "authors": "Andrew Jaegle, Sebastian Borgeaud, Jean-Baptiste Alayrac, et al.",
+      "year": 2021,
+      "role": "General, shape-agnostic attention architecture",
+      "relationship_sentence": "Showed how latent cross-attention decouples model parameters from input shape and modality, reinforcing XNN\u2019s goal of dimension-free processing across heterogeneous PDE tensors."
+    }
+  ],
+  "synthesis_narrative": "Axial Neural Networks (XNN) tackle the central obstacle in PDE foundation models: a single model that operates efficiently across heterogeneous tensor dimensionalities. The conceptual basis comes from Deep Sets, which formalized permutation-invariant parameter sharing and aggregation independent of input size, and from Neural Message Passing, which demonstrated that shared local operators can generalize across variable-sized structures. XNN transposes these principles from sets/graphs to tensor axes, enforcing parameter-tying that is insensitive to how many axes a field has.\n\nThe key architectural lever enabling this transfer is axial factorization. Axial Attention in Multidimensional Transformers introduced composing high-dimensional interactions from sequential 1D axis-wise operations, with Axial-DeepLab validating that such axis-wise modules can replace full 2D attention/convolution in practice. XNN adopts this axis-wise composition to build N-D operators from reusable 1D blocks, yielding both computational efficiency and a natural path to dimension-agnostic weight sharing.\n\nOn the application side, XNN targets PDE operator-learning models. Fourier Neural Operator and DeepONet defined the dominant templates for data-driven operator learning but require dimension-specific instantiations. By converting these operator blocks into axial forms, XNN preserves their inductive biases while tying parameters across dimensionalities, enabling pretraining over diverse PDE families and efficient fine-tuning. Finally, Perceiver IO\u2019s demonstration that cross-attention to a latent array can decouple model parameters from input shape supports XNN\u2019s broader foundation-model aim: a single architecture that scales across resolutions, grids, and dimensions without bespoke encoders.",
+  "analysis_timestamp": "2026-01-06T23:42:48.153995"
+}

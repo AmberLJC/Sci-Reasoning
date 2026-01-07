@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Learning to Prompt for Vision-Language Models",
+      "authors": "Kaiyang Zhou et al.",
+      "year": 2022,
+      "arxiv_id": "2109.01134",
+      "role": "Extension",
+      "relationship_sentence": "CroPA directly adopts CoOp\u2019s idea of learnable continuous text context by co-optimizing soft textual prompts together with the image perturbation so the crafted adversarial image remains effective across diverse natural-language prompts."
+    },
+    {
+      "title": "Synthesizing Robust Adversarial Examples",
+      "authors": "Anish Athalye et al.",
+      "year": 2018,
+      "arxiv_id": "1707.07397",
+      "role": "Inspiration",
+      "relationship_sentence": "CroPA mirrors EOT\u2019s principle by optimizing the perturbation under an expectation over a prompt distribution (instantiated via learnable prompts), yielding invariance of the attack to prompt variations."
+    },
+    {
+      "title": "Improving Transferability of Adversarial Examples with Input Diversity",
+      "authors": "Cihang Xie et al.",
+      "year": 2019,
+      "arxiv_id": "1803.06978",
+      "role": "Inspiration",
+      "relationship_sentence": "The input-diversity mechanism that boosts transferability motivates CroPA\u2019s explicit prompt diversity during optimization, replacing image transformations with learned prompt variations to generalize across prompts."
+    },
+    {
+      "title": "Boosting Adversarial Attacks with Momentum",
+      "authors": "Yinpeng Dong et al.",
+      "year": 2018,
+      "arxiv_id": "1710.06081",
+      "role": "Baseline",
+      "relationship_sentence": "MI-FGSM serves as a primary transferability baseline that CroPA is designed to surpass under multi-prompt VLM settings, highlighting the added benefit of prompt-aware optimization beyond momentum methods."
+    },
+    {
+      "title": "Universal Adversarial Perturbations",
+      "authors": "Seyed-Mohsen Moosavi-Dezfooli et al.",
+      "year": 2017,
+      "arxiv_id": "1610.08401",
+      "role": "Foundation",
+      "relationship_sentence": "The concept that a single perturbation can generalize across many inputs directly inspires CroPA\u2019s goal of crafting a single adversarial image that generalizes across many textual prompts (a new axis of universality)."
+    },
+    {
+      "title": "LLaVA: Large Language-And-Vision Assistant",
+      "authors": "Haotian Liu et al.",
+      "year": 2023,
+      "arxiv_id": "2304.08485",
+      "role": "Foundation",
+      "relationship_sentence": "By establishing instruction-following VLMs where different prompts define different tasks, LLaVA provides the prompt-driven setting and targets in which CroPA formulates and evaluates cross-prompt adversarial transfer."
+    }
+  ],
+  "synthesis_narrative": "Learnable text prompting for VLMs demonstrated that continuous context tokens can replace hand-crafted templates, letting models adapt to downstream tasks by optimizing textual embeddings directly in the text encoder. Expectation-over-transformation showed that adversarial perturbations can be made robust to nuisance variations by optimizing under a distribution, rendering attacks stable across transformations at test time. Building on this idea of diversity for transferability, input-diverse attacks emphasized sampling variations during optimization\u2014random resizing and padding\u2014to craft perturbations that generalize beyond a specific input configuration. Momentum-based iterative attacks further improved transferability by stabilizing the update direction across steps, becoming a standard strong baseline for black-box transfer. Earlier still, universal adversarial perturbations revealed that a single small perturbation can fool many inputs and even multiple models, crystallizing the notion of \u201cshared vulnerabilities\u201d that can be exploited with a single adversarial pattern. In parallel, instruction-following VLMs such as LLaVA established that prompts themselves define tasks, with a single model shifting behavior based on natural-language instructions. Together, these works expose a gap: transferability has been pursued across images, models, and transformations, but not across the prompt dimension that governs VLM behavior. By treating prompts as the key nuisance variable and parameterizing them with learnable soft tokens, one can extend expectation/diversity principles to prompt space, yielding a single adversarial image whose effectiveness persists across many instructions\u2014precisely the synthesis realized by CroPA.",
+  "target_paper": {
+    "title": "An Image Is Worth 1000 Lies: Transferability of Adversarial Images across Prompts on Vision-Language Models",
+    "authors": "Haochen Luo, Jindong Gu, Fengyuan Liu, Philip Torr",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Vision Language Model, Adversarial Transferability, Prompt Tuning",
+    "abstract": "Different from traditional task-specific vision models, recent large VLMs can readily adapt to different vision tasks by simply using different textual instructions, i.e., prompts. However, a well-known concern about traditional task-specific vision models is that they can be misled by imperceptible adversarial perturbations. Furthermore, the concern is exacerbated by the phenomenon that the same adversarial perturbations can fool different task-specific models. Given that VLMs rely on prompts to adapt to different tasks, an intriguing question emerges: Can a single adversarial image mislead all predictions of VLMs when a thousand different prompts are given? This question essentially introduces a novel perspective on adversarial transferability: cross-prompt adversarial transferability. In this work, we propose the Cross-Prompt Attack (CroPA). This proposed method updates the visual adversarial perturbation with learnable textual prompts, which are designed to counteract the misleadin",
+    "openreview_id": "nc5GgFAvtk",
+    "forum_id": "nc5GgFAvtk"
+  },
+  "analysis_timestamp": "2026-01-06T16:58:44.081401"
+}

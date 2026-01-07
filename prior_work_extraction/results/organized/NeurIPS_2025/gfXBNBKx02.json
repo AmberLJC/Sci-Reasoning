@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Between MDPs and Semi-MDPs: A Framework for Temporal Abstraction in Reinforcement Learning",
+      "authors": "Richard S. Sutton, Doina Precup, Satinder Singh",
+      "year": 1999,
+      "role": "Foundational theory of options and SMDP value backups",
+      "relationship_sentence": "OTA\u2019s \u201coption-aware\u201d critic is grounded in the SMDP/option value framework of Sutton\u2013Precup\u2013Singh, using option-level Bellman equations (durations, terminations) to compute values and advantages at the appropriate temporal scale."
+    },
+    {
+      "title": "Universal Value Function Approximators",
+      "authors": "Tom Schaul, Daniel Horgan, Karol Gregor, David Silver",
+      "year": 2015,
+      "role": "Goal-conditioned value functions",
+      "relationship_sentence": "OTA learns goal-conditioned values at a higher temporal abstraction; UVFA provides the key idea of conditioning the value function on goals that OTA extends to option-time-scale critics."
+    },
+    {
+      "title": "Hindsight Experience Replay",
+      "authors": "Marcin Andrychowicz et al.",
+      "year": 2017,
+      "role": "Data-efficient goal relabeling for GCRL",
+      "relationship_sentence": "OTA targets offline GCRL on long horizons where relabeling is critical; HER\u2019s insight that diverse goals can be learned from the same trajectories underpins OTA\u2019s use of goal-conditioned supervision for option-level value learning."
+    },
+    {
+      "title": "Data-Efficient Hierarchical Reinforcement Learning with Off-Policy Correction (HIRO)",
+      "authors": "Ofir Nachum, Shixiang Gu, Honglak Lee, Sergey Levine",
+      "year": 2018,
+      "role": "Subgoal-based hierarchical RL with off-policy training",
+      "relationship_sentence": "OTA directly addresses the high-level subgoal learning failures highlighted by hierarchical methods like HIRO by supplying a temporally abstracted critic that produces more reliable high-level advantages from offline data."
+    },
+    {
+      "title": "C-Learning: Learning to Achieve Goals via Classification",
+      "authors": "Benjamin Eysenbach, Ruslan Salakhutdinov, Sergey Levine",
+      "year": 2020,
+      "role": "Stable offline goal-conditioned learning signal",
+      "relationship_sentence": "C-Learning shows how to derive robust, offline goal-reaching value signals; OTA shares this offline GCRL premise but focuses on correcting high-level credit assignment via option-aware temporal abstraction."
+    },
+    {
+      "title": "Implicit Q-Learning (IQL): Offline Reinforcement Learning with Implicit Value Regularization",
+      "authors": "Ilya Kostrikov, Ashvin Nair, Sergey Levine",
+      "year": 2021,
+      "role": "Advantage-weighted policy learning for offline RL",
+      "relationship_sentence": "OTA is motivated by the observation that high-level advantages used in IQL-style updates can have incorrect signs on long horizons; it replaces the standard critic with an option-time-scale value to yield more reliable advantages."
+    }
+  ],
+  "synthesis_narrative": "OTA\u2019s core idea\u2014learning an option-aware, temporally abstracted value to stabilize high-level advantage estimation in offline goal-conditioned RL\u2014stands on two pillars: temporal abstraction and goal conditioning. The options/SMDP framework of Sutton\u2013Precup\u2013Singh formalizes value and advantage at option time scales, enabling OTA to back up values over variable option durations and terminations rather than single primitive steps. UVFA and HER established how to condition value functions on goals and exploit goal relabeling for data efficiency, which OTA inherits but applies at the high-level/option granularity to shorten effective horizons and reduce bootstrapping error.\n\nOn the hierarchical side, HIRO demonstrated the promise and pitfalls of subgoal-based decomposition with off-policy data: high-level policies often suffer from brittle credit assignment and mis-specified subgoals. OTA directly targets this bottleneck by redefining the critic at the temporal scale of subgoals, aligning the learning signal with the high-level decision cadence. In offline RL, IQL popularized advantage-weighted policy updates without explicit behavior models, but its advantages can flip sign in long-horizon, hierarchical settings due to critic bias. OTA addresses this by structuring the critic to respect option dynamics, improving the fidelity of the advantage signal. Finally, C-Learning\u2019s robust offline goal-reaching perspective underscores OTA\u2019s emphasis on reliable supervision from static datasets. Together, these works motivate OTA\u2019s design: a goal-conditioned, option-time-scale value function that yields correct, low-variance advantages for the high-level policy, unlocking long-horizon performance in offline GCRL.",
+  "analysis_timestamp": "2026-01-07T00:29:42.051788"
+}

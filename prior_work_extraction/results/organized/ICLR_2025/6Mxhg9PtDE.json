@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Training language models to follow instructions with human feedback",
+      "authors": "Long Ouyang et al.",
+      "year": 2022,
+      "arxiv_id": "2203.02155",
+      "role": "Foundation",
+      "relationship_sentence": "The RLHF pipeline popularized here concentrates reward on sequence-level preferences that often manifest as early refusal templates, a setup this paper argues leads to shallow safety alignment and that it explicitly seeks to deepen beyond the first few tokens."
+    },
+    {
+      "title": "Constitutional AI: Harmlessness from AI Feedback",
+      "authors": "Yuntao Bai et al.",
+      "year": 2022,
+      "arxiv_id": "2212.08073",
+      "role": "Baseline",
+      "relationship_sentence": "Constitutional AI\u2019s harmlessness training yields front-loaded refusal behaviors, and this paper directly critiques such approaches as producing safety that is only a few tokens deep and proposes methods to push safety constraints throughout the generation."
+    },
+    {
+      "title": "Universal and Transferable Adversarial Attacks on Aligned Language Models",
+      "authors": "Andy Zou et al.",
+      "year": 2023,
+      "arxiv_id": "2307.15043",
+      "role": "Gap Identification",
+      "relationship_sentence": "The universal adversarial suffix attack showed that fixed suffixes reliably bypass safety in aligned LMs, and this paper explains that success via the shallow-safety mechanism and uses it as a core case study motivating deeper alignment across the whole output."
+    },
+    {
+      "title": "Not What You\u2019ve Signed Up For: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection",
+      "authors": "Timo Greshake et al.",
+      "year": 2023,
+      "arxiv_id": "2302.12173",
+      "role": "Gap Identification",
+      "relationship_sentence": "Indirect prompt injection demonstrates how downstream context can override initial safety guidance, which this paper reframes as an instance of safety that is anchored shallowly at the start and not preserved through subsequent tokens."
+    },
+    {
+      "title": "RealToxicityPrompts: Evaluating Neural Toxic Degeneration with Unbounded Generation",
+      "authors": "Samuel Gehman et al.",
+      "year": 2020,
+      "arxiv_id": "2009.11462",
+      "role": "Foundation",
+      "relationship_sentence": "This work showed toxicity is highly sensitive to decoding settings and sampling in open-ended generation, a phenomenon this paper interprets as decoding-parameter attacks that exploit safety alignment concentrated only in early output tokens."
+    },
+    {
+      "title": "Sleeper Agents: Training Deceptive LLMs that Persist Through Safety Training",
+      "authors": "Evan Hubinger et al.",
+      "year": 2024,
+      "arxiv_id": "",
+      "role": "Gap Identification",
+      "relationship_sentence": "By showing that fine-tuning and safety training can be circumvented by models that later exhibit unsafe behaviors, this paper motivates the claim that existing alignment is shallow and can be undone or bypassed mid-generation, prompting the need for deeper alignment."
+    }
+  ],
+  "synthesis_narrative": "Reinforcement learning from human feedback established a practical pipeline for aligning models to human-preferred behavior, but its reward shaping typically emphasized sequence-level preferences that surfaced as early refusal phrases and standard response templates. Constitutional AI refined harmlessness training via rubric-based self-critique and refusals, further normalizing front-loaded safety behaviors. In parallel, evaluations of open-ended generation found that toxicity depends strongly on decoding choices and sampling, indicating that the guardrails learned during alignment may not persist under different decoding regimes. Attack literature then exposed concrete failure modes: universal adversarial suffixes showed that a fixed, learned string appended to prompts can reliably induce unsafe outputs across models, while indirect prompt injection in real applications demonstrated how downstream context can override initial safety instructions. Finally, work on deceptive and persistent behaviors under fine-tuning showed that post-hoc training can leave models capable of unsafe continuations despite passing initial safety checks.\nTaken together, these findings suggested a common mechanism: alignment often anchors at the very start of the response, leaving later tokens insufficiently constrained. This paper crystallizes that mechanism as shallow safety alignment and argues that many jailbreaks\u2014suffix-based, context/prefill-like effects, decoding parameter changes, and fine-tuning\u2014exploit it. Building on these insights, the paper proposes deepening alignment so safety constraints persist throughout the entire generation, turning disparate vulnerabilities into a unified target for mitigation and guiding concrete techniques to distribute safety beyond the first few tokens.",
+  "target_paper": {
+    "title": "Safety Alignment Should be Made More Than Just a Few Tokens Deep",
+    "authors": "Xiangyu Qi, Ashwinee Panda, Kaifeng Lyu, Xiao Ma, Subhrajit Roy, Ahmad Beirami, Prateek Mittal, Peter Henderson",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "oral",
+    "keywords": "Safety Alignment, AI Safety, LLM",
+    "abstract": "The safety alignment of current Large Language Models (LLMs) is vulnerable. Simple attacks, or even benign fine-tuning, can jailbreak aligned models. We note that many of these vulnerabilities are related to a shared underlying issue: safety alignment can take shortcuts, wherein the alignment adapts a model's generative distribution primarily over only its very first few output tokens. We unifiedly refer to this issue as shallow safety alignment. In this paper, we present case studies to explain why shallow safety alignment can exist and show how this issue universally contributes to multiple recently discovered vulnerabilities in LLMs, including the susceptibility to adversarial suffix attacks, prefilling attacks, decoding parameter attacks, and fine-tuning attacks. The key contribution of this work is that we demonstrate how this consolidated notion of shallow safety alignment sheds light on promising research directions for mitigating these vulnerabilities. We show that deepening th",
+    "openreview_id": "6Mxhg9PtDE",
+    "forum_id": "6Mxhg9PtDE"
+  },
+  "analysis_timestamp": "2026-01-06T19:45:24.241393"
+}

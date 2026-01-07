@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "ReAct: Synergizing Reasoning and Acting in Language Models",
+      "authors": "Shunyu Yao et al.",
+      "year": 2022,
+      "arxiv_id": "2210.03629",
+      "role": "Foundation",
+      "relationship_sentence": "ReAct established the thought\u2013action\u2013observation paradigm for LM tool use, whose structured tool-call traces are precisely the interaction format ToolEmu emulates to test agents without executing real tools."
+    },
+    {
+      "title": "Toolformer: Language Models Can Teach Themselves to Use Tools",
+      "authors": "Timo Schick et al.",
+      "year": 2023,
+      "arxiv_id": "2302.04761",
+      "role": "Foundation",
+      "relationship_sentence": "Toolformer formalized API-style tool invocation and schemas for LM tool use, providing the concrete tool-call interfaces that ToolEmu emulates instead of integrating and running actual APIs."
+    },
+    {
+      "title": "G-Eval: NLG Evaluation Using GPT-4 with Better Human Alignment",
+      "authors": "Liu et al.",
+      "year": 2023,
+      "arxiv_id": "2303.16634",
+      "role": "Extension",
+      "relationship_sentence": "G-Eval demonstrated rubric-guided LLM-as-a-judge evaluation, which ToolEmu extends by designing an LM-based safety evaluator that diagnoses agent failures and assigns risk severities."
+    },
+    {
+      "title": "Discovering Language Model Behaviors with Model-Written Evaluations",
+      "authors": "Ethan Perez et al.",
+      "year": 2022,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "This work showed that LMs can generate targeted test cases that reveal failure modes, directly inspiring ToolEmu\u2019s use of an LM to emulate tools and surface risky agent behaviors at scale."
+    },
+    {
+      "title": "WebArena: A Realistic Web Environment for Building Autonomous Agents",
+      "authors": "Xiyang Zhou et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "WebArena highlighted the significant engineering cost of building and maintaining realistic, instrumented environments for agent evaluation, motivating ToolEmu\u2019s LM-emulated sandbox to avoid such setup overhead."
+    },
+    {
+      "title": "ToolLLM: Facilitating Large Language Models to Use Tools with 16k APIs",
+      "authors": "Yujia Qin et al.",
+      "year": 2023,
+      "arxiv_id": "2307.16789",
+      "role": "Gap Identification",
+      "relationship_sentence": "By surfacing the scale and heterogeneity of real-world APIs for LM tool use, ToolLLM underscored the impracticality of implementing thousands of tools, a limitation ToolEmu addresses via LM-based tool emulation for testing."
+    }
+  ],
+  "synthesis_narrative": "ReAct introduced a structured loop where language models interleave reasoning with tool calls and consume observations, defining the thought\u2013action\u2013observation traces that concretize how agents interact with external tools. Toolformer further operationalized LM tool use as API-style function calls with explicit schemas, showing that models can decide when and how to invoke tools through standardized interfaces. G-Eval established that large models can serve as rubric-driven judges to evaluate outputs reliably, providing a template for systematic, criteria-based assessments. Perez et al. showed that models can write evaluations to uncover failure modes, demonstrating that LMs can not only be subjects but also instruments for discovering risky behaviors. WebArena built a realistic web environment for agent testing, revealing the heavy engineering burden and maintenance cost of realistic sandboxes. ToolLLM scaled tool-use to 16k APIs, exposing the breadth and diversity of interfaces that make exhaustive, implementation-based testing infeasible.\nTogether, these works reveal a gap: agents increasingly act through diverse tools, yet constructing and maintaining faithful, real tool environments is costly, and exhaustive risk discovery is hard. The natural synthesis is to replace environment and tool implementations with an LM that emulates tool behavior in the ReAct/Toolformer schema, and to pair it with an LLM-as-judge safety assessor in the spirit of G-Eval and model-written evaluations. ToolEmu emerges as this step\u2014using LM emulation to scalably surface long-tail risky trajectories across many tools, and an LM evaluator to diagnose and quantify the associated safety risks.",
+  "target_paper": {
+    "title": "Identifying the Risks of LM Agents with an LM-Emulated Sandbox",
+    "authors": "Yangjun Ruan, Honghua Dong, Andrew Wang, Silviu Pitis, Yongchao Zhou, Jimmy Ba, Yann Dubois, Chris J. Maddison, Tatsunori Hashimoto",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Language Model Agent, Tool Use, Evaluation, Safety, Language Model",
+    "abstract": "Recent advances in Language Model (LM) agents and tool use, exemplified by applications like ChatGPT Plugins, enable a rich set of capabilities but also amplify potential risks\u2014such as leaking private data or causing financial losses. Identifying these risks is labor-intensive, necessitating implementing the tools, setting up the environment for each test scenario manually, and finding risky cases. As tools and agents become more complex, the high cost of testing these agents will make it increasingly difficult to find high-stakes, long-tail risks. To address these challenges, we introduce ToolEmu: a framework that uses an LM to emulate tool execution and enables scalable testing of LM agents against a diverse range of tools and scenarios. Alongside the emulator, we develop an LM-based automatic safety evaluator that examines agent failures and quantifies associated risks. We test both the tool emulator and evaluator through human evaluation and find that 68.8% of failures identified w",
+    "openreview_id": "GEcwtMk1uA",
+    "forum_id": "GEcwtMk1uA"
+  },
+  "analysis_timestamp": "2026-01-06T13:22:42.969880"
+}

@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "A Reduction of Imitation Learning and Structured Prediction to No-Regret Online Learning",
+      "authors": "Ross et al.",
+      "year": 2011,
+      "arxiv_id": "1011.0686",
+      "role": "Foundation",
+      "relationship_sentence": "RPI generalizes DAgger\u2019s interactive imitation framework\u2014querying a black-box oracle during learner rollouts and aggregating data\u2014by interleaving oracle imitation with RL based on online performance rather than a fixed mixing schedule."
+    },
+    {
+      "title": "Safe Policy Improvement with Baseline Bootstrapping",
+      "authors": "Laroche et al.",
+      "year": 2019,
+      "arxiv_id": "1906.05601",
+      "role": "Foundation",
+      "relationship_sentence": "RPI builds on SPIBB\u2019s safe policy improvement principle by extending the idea of guaranteed improvement over a baseline from batch RL with a single baseline to an online setting that can robustly improve over multiple black-box oracles."
+    },
+    {
+      "title": "Conservative Policy Iteration",
+      "authors": "Kakade et al.",
+      "year": 2002,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "RPI\u2019s decision rule for switching between imitation and RL leverages CPI\u2019s performance-difference lemma and conservative mixing insights to ensure monotonic policy improvement when shifting weight away from the oracle."
+    },
+    {
+      "title": "SafeDAgger: Safe and High-Performance Driving from Imitation Learning",
+      "authors": "Zhang et al.",
+      "year": 2016,
+      "arxiv_id": "1606.03473",
+      "role": "Inspiration",
+      "relationship_sentence": "RPI\u2019s performance-triggered handoff between oracle guidance and autonomous learning generalizes SafeDAgger\u2019s safety-based expert querying by using online IL-vs-RL return estimates rather than a deviation classifier."
+    },
+    {
+      "title": "Learning Complex Dexterous Manipulation with Deep Reinforcement Learning and Demonstrations (DAPG)",
+      "authors": "Rajeswaran et al.",
+      "year": 2018,
+      "arxiv_id": "1709.10087",
+      "role": "Baseline",
+      "relationship_sentence": "RPI directly addresses DAPG\u2019s fixed pretrain-then-finetune schedule and sensitivity to demo quality by replacing it with an online, performance-based interleaving that can reliably surpass suboptimal oracles."
+    },
+    {
+      "title": "AWAC: Accelerating Online Reinforcement Learning with Offline Datasets",
+      "authors": "Nair et al.",
+      "year": 2020,
+      "arxiv_id": "2006.09359",
+      "role": "Gap Identification",
+      "relationship_sentence": "RPI targets AWAC\u2019s limitation of static advantage-weighted imitation blending by adaptively choosing between pure IL and RL via online performance estimates, enabling robust improvement over imperfect teachers."
+    },
+    {
+      "title": "Kickstarting Deep Reinforcement Learning",
+      "authors": "Schmitt et al.",
+      "year": 2018,
+      "arxiv_id": "1803.03835",
+      "role": "Inspiration",
+      "relationship_sentence": "RPI generalizes Kickstarting\u2019s teacher-distillation-with-annealing idea by replacing heuristic schedule tuning with principled performance-based switching and by accommodating multiple imperfect teachers as black-box oracles."
+    }
+  ],
+  "synthesis_narrative": "Interactive imitation learning established that querying an expert during learner rollouts and aggregating corrective labels stabilizes training under the learner\u2019s state distribution, as in DAgger; however, its efficacy hinges on oracle quality and a hand-set mixing schedule. SafeDAgger introduced a decision mechanism that consults the expert only when the learner is at risk, showing that targeted, state-dependent interventions can reduce dependence on the oracle. In parallel, DAPG demonstrated that demonstrations can jump-start exploration and then hand off to policy gradients, but the pretrain-then-finetune schedule and reliance on high-quality demos limit robustness. AWAC blended advantage-weighted imitation with RL, yet still used static weighting that is brittle to suboptimal demonstrations. Kickstarting showed that distilling from a teacher while gradually annealing toward pure RL can surpass the teacher, but it relies on tuned schedules and typically a single teacher. The safe policy improvement literature, especially SPIBB, formalized guarantees to improve over a baseline policy, and Conservative Policy Iteration provided the performance-difference lemma and conservative mixing tools to ensure monotonic improvement. Together these works revealed that expert guidance is valuable for exploration, that interventions should be selective, and that improvement guarantees require principled mixing. The natural next step was to synthesize these insights into a method that (i) uses online, quantitative estimates to decide between imitation and RL at any time, (ii) treats the learned policy itself as an increasingly better oracle, and (iii) extends safe improvement ideas to multiple black-box experts, yielding a robust, adaptive blend that can reliably outperform its teachers.",
+  "target_paper": {
+    "title": "Blending Imitation and Reinforcement Learning for Robust Policy Improvement",
+    "authors": "Xuefeng Liu, Takuma Yoneda, Rick Stevens, Matthew Walter, Yuxin Chen",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "imitation learning, reinforcement learning, multiple experts",
+    "abstract": "While reinforcement learning (RL) has shown promising performance, its sample complexity continues to be a substantial hurdle, restricting its broader application across a variety of domains. Imitation learning (IL) utilizes oracles to improve sample efficiency, yet it is often constrained by the quality of the oracles deployed. To address the demand for robust policy improvement in real-world scenarios, we introduce a novel algorithm, Robust Policy Improvement (RPI), which actively interleaves between IL and RL based on an online estimate of their performance. RPI draws on the strengths of IL, using oracle queries to facilitate exploration\u2014an aspect that is notably challenging in sparse-reward RL\u2014particularly during the early stages of learning. As learning unfolds, RPI gradually transitions to RL, effectively treating the learned policy as an improved oracle. This algorithm is capable of learning from and improving upon a diverse set of black-box oracles. Integral to RPI are Robust A",
+    "openreview_id": "eJ0dzPJq1F",
+    "forum_id": "eJ0dzPJq1F"
+  },
+  "analysis_timestamp": "2026-01-06T08:43:06.191991"
+}

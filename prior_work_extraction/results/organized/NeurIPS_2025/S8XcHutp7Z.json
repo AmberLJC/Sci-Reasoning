@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis",
+      "authors": "Ben Mildenhall, Pratul P. Srinivasan, Matthew Tancik, Jonathan T. Barron, Ravi Ramamoorthi, Ren Ng",
+      "year": 2020,
+      "role": "Foundational neural volumetric rendering and optimization framework",
+      "relationship_sentence": "NeRF established the ray-based integral rendering and differentiable optimization paradigm; X-Field adopts this optimization framework but replaces radiance emission with Beer\u2013Lambert attenuation to model X-ray physics."
+    },
+    {
+      "title": "3D Gaussian Splatting for Real-Time Radiance Field Rendering",
+      "authors": "Bernhard Kerbl, Georgios Kopanas, Thomas Leimkuehler, George Drettakis",
+      "year": 2023,
+      "role": "Ellipsoidal primitive representation and large-scale primitive optimization",
+      "relationship_sentence": "3DGS popularized representing scenes with many anisotropic ellipsoidal primitives; X-Field leverages this idea but uses homogeneous ellipsoids with material-specific attenuation and computes exact path partitions instead of density accumulation."
+    },
+    {
+      "title": "Fast calculation of the exact radiological path for a three-dimensional CT array",
+      "authors": "R. L. Siddon",
+      "year": 1985,
+      "role": "Efficient path-length computation for X-ray attenuation in voxelized media",
+      "relationship_sentence": "Siddon's algorithm directly informs X-Field\u2019s path-partitioning by demonstrating how cumulative attenuation can be computed via ordered entry/exit events; X-Field generalizes this from axis-aligned voxels to intersecting ellipsoids."
+    },
+    {
+      "title": "A Fast Voxel Traversal Algorithm for Ray Tracing",
+      "authors": "John Amanatides, Andrew Woo",
+      "year": 1987,
+      "role": "Event-ordered ray traversal strategy",
+      "relationship_sentence": "The event-driven traversal strategy of Amanatides\u2013Woo motivates X-Field\u2019s efficient ordering of intersection events along a ray, enabling scalable accumulation of attenuation over many primitives."
+    },
+    {
+      "title": "The Fourier Reconstruction of a Head Section",
+      "authors": "L. A. Shepp, B. F. Logan",
+      "year": 1974,
+      "role": "Ellipsoidal decomposition of anatomy for CT (Shepp\u2013Logan phantom)",
+      "relationship_sentence": "The Shepp\u2013Logan phantom\u2014modeling anatomy as a sum of homogeneous ellipsoids\u2014directly inspires X-Field\u2019s core representation of internal structures as ellipsoids with distinct attenuation coefficients."
+    },
+    {
+      "title": "The Radon Transform \u2014 Theory and Implementation",
+      "authors": "Peter Toft",
+      "year": 1996,
+      "role": "Analytical foundation of line integrals and X-ray forward models",
+      "relationship_sentence": "Toft\u2019s treatment of the Radon transform and Beer\u2013Lambert line integrals underpins X-Field\u2019s physically faithful rendering equation and its analytic handling of attenuation along rays."
+    },
+    {
+      "title": "DeepDRR \u2013 A Catalyst for Machine Learning in Fluoroscopy",
+      "authors": "Jonas Unberath, Mehran Armand, Nassir Navab, et al.",
+      "year": 2018,
+      "role": "Differentiable X-ray rendering and physics-based supervision",
+      "relationship_sentence": "DeepDRR operationalized Beer\u2013Lambert-based, differentiable X-ray projection for learning; X-Field builds on this idea by embedding a physics-correct forward model into its representation and training for NVS/CT."
+    }
+  ],
+  "synthesis_narrative": "X-Field\u2019s key contribution\u2014a physics-informed 3D representation for X-ray NVS and CT\u2014emerges from unifying classical CT physics with modern neural scene representations and efficient ray traversal. From the physics side, Toft\u2019s formulation of the Radon transform and Beer\u2013Lambert attenuation provides the mathematical backbone for treating X-ray measurements as line integrals of attenuation, while the Shepp\u2013Logan phantom demonstrates that anatomy can be fruitfully modeled as a sum of homogeneous ellipsoids with distinct attenuation coefficients. These two strands directly motivate X-Field\u2019s choice of ellipsoidal, piecewise-constant primitives and its attenuation-centric rendering equation.\n\nOn the algorithmic side, Siddon\u2019s exact path-length computation through voxels and the Amanatides\u2013Woo event-ordered traversal inform X-Field\u2019s efficient path-partitioning: the ray is decomposed into entry/exit segments across many overlapping primitives, enabling accurate, scalable accumulation of attenuation. This generalizes classical grid-based traversal to a quadric (ellipsoidal) setting.\n\nFrom the neural rendering side, NeRF contributes the end-to-end differentiable, ray-based optimization framework, which X-Field adapts by replacing radiance emission with physically grounded transmittance. 3D Gaussian Splatting inspires the use of many anisotropic, ellipsoidal primitives and practical large-scale optimization; X-Field departs by enforcing homogeneous interiors and resolving exact intersections rather than relying on smooth density accumulation. Finally, DeepDRR\u2019s differentiable X-ray rendering validates the integration of physics-based forward models into learning pipelines, guiding X-Field\u2019s training for both novel-view X-ray synthesis and CT reconstruction with reduced dose.",
+  "analysis_timestamp": "2026-01-07T00:02:04.978675"
+}

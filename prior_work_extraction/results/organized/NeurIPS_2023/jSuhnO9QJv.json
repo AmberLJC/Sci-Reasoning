@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Network Dissection: Quantifying Interpretability of Deep Visual Representations",
+      "authors": "David Bau, Bolei Zhou, Aditya Khosla, Aude Oliva, Antonio Torralba",
+      "year": 2017,
+      "role": "Concept-based interpretability and concept segmentation",
+      "relationship_sentence": "Spuriosity Rankings relies on estimating the presence of human-interpretable cues via deep features; Network Dissection\u2019s unit-to-concept mappings and soft segmentations provide the concrete mechanism to score concept presence per image, enabling within-class spuriosity ranking."
+    },
+    {
+      "title": "TCAV: Testing with Concept Activation Vectors",
+      "authors": "Been Kim, Martin Wattenberg, Justin Gilmer, Carrie Cai, James Wexler, Fernanda Vi\u00e9gas, Rory Sayres",
+      "year": 2018,
+      "role": "Measuring model dependence on human concepts",
+      "relationship_sentence": "The paper\u2019s core idea of quantifying reliance on spurious cues is concept-centric; TCAV established that model behavior can be assessed along human-aligned concept dimensions, directly inspiring the use of interpretable concept features to proxy spuriosity."
+    },
+    {
+      "title": "ImageNet-trained CNNs are biased towards texture; increasing shape bias improves accuracy and robustness",
+      "authors": "Robert Geirhos, Patricia Rubisch, Claudio Michaelis, Matthias Bethge, Felix A. Wichmann, Wieland Brendel",
+      "year": 2019,
+      "role": "Empirical evidence of spurious visual cues (texture/background) in ImageNet",
+      "relationship_sentence": "By showing that standard CNNs over-rely on texture and other superficial cues, this work motivates Spuriosity Rankings\u2019 focus on identifying and downweighting high-spuriosity (cue-aligned) images within each class."
+    },
+    {
+      "title": "Invariant Risk Minimization",
+      "authors": "Martin Arjovsky, L\u00e9on Bottou, Ishaan Gulrajani, David Lopez-Paz",
+      "year": 2019,
+      "role": "Framework for avoiding spurious correlations via invariance",
+      "relationship_sentence": "IRM formalized the goal of learning predictors invariant across environments; Spuriosity Rankings operationalizes a practical, label-free proxy by ranking samples by spurious-cue strength and then training a classifier head on low-spuriosity (more invariant) examples."
+    },
+    {
+      "title": "Distributionally Robust Neural Networks for Group Shifts: On the Importance of Regularization for Worst-Case Generalization",
+      "authors": "Shiori Sagawa, Pang Wei Koh, Tatsunori B. Hashimoto, Percy Liang",
+      "year": 2020,
+      "role": "Group robustness objective and evaluation (worst-group accuracy)",
+      "relationship_sentence": "Group DRO established measuring and optimizing worst-group performance; Spuriosity Rankings effectively constructs pseudo-groups (low vs high spuriosity) to quantify bias as an accuracy gap and mitigate it without requiring group labels."
+    },
+    {
+      "title": "Learning from Failure to De-bias: Training Debiased Classifiers by Emphasizing Failure Samples",
+      "authors": "Nam et al.",
+      "year": 2020,
+      "role": "Bias-conflicting sample identification without explicit group labels",
+      "relationship_sentence": "LfF\u2019s idea of emphasizing bias-conflicting samples directly aligns with Spuriosity Rankings\u2019 strategy of finetuning on low-spuriosity images, providing a practical template for debiasing when explicit subgroup annotations are unavailable."
+    },
+    {
+      "title": "Noise or Signal: The Role of Image Backgrounds in Object Recognition",
+      "authors": "Kai Xiao, Logan Engstrom, Andrew Ilyas, Aleksander Madry",
+      "year": 2020,
+      "role": "Demonstrated background as a dominant spurious cue in ImageNet",
+      "relationship_sentence": "By isolating background as a key spurious factor affecting accuracy, this work concretely informed Spuriosity Rankings\u2019 emphasis on ranking within-class images by the presence of such cues and evaluating bias as a performance gap across spuriosity levels."
+    }
+  ],
+  "synthesis_narrative": "Spuriosity Rankings advances a practical path to measure and mitigate spurious-cue bias by ranking images within a class according to the strength of human-understandable cues and then training on the least spurious subset. This contribution fuses two lines of prior work: concept-based interpretability and group-robust learning. On the interpretability side, Network Dissection operationalized unit-to-concept mapping and soft segmentation, giving a tool to estimate per-image concept presence; TCAV showed that model behavior can be quantified along human concepts, legitimizing concept-centric bias measurement. Empirical studies on ImageNet\u2019s spurious cues\u2014textures and backgrounds\u2014by Geirhos et al. and Xiao et al. established which cues are problematic and why per-example cue measurement is meaningful. On the robustness side, IRM and Group DRO formalized avoiding spurious correlations via invariance and worst-group performance, but typically require environment or group labels. Methods like Learning from Failure (LfF) demonstrated that emphasizing bias-conflicting samples can improve robustness without group annotations. Spuriosity Rankings synthesizes these strands by constructing a concept-driven spuriosity score that implicitly induces subpopulations (low vs high spuriosity), enabling both an informative bias metric (accuracy gap) and a simple mitigation (head finetuning on low-spuriosity images) that mirrors the benefits of group-aware methods without needing group labels or costly retraining. The result is a lightweight, data-sorting approach that leverages interpretable features to directly target spurious correlations at scale.",
+  "analysis_timestamp": "2026-01-07T00:02:04.806519"
+}

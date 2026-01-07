@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Tent: Fully Test-Time Adaptation by Entropy Minimization",
+      "authors": "Dequan Wang et al.",
+      "year": 2021,
+      "arxiv_id": "2006.10726",
+      "role": "Foundation",
+      "relationship_sentence": "MOS builds its online adaptation loop on the entropy-minimization paradigm introduced by TENT, using unsupervised test-time optimization to update 3D detectors without labels."
+    },
+    {
+      "title": "CoTTA: Continual Test-Time Adaptation",
+      "authors": "Wang et al.",
+      "year": 2022,
+      "arxiv_id": "2203.13591",
+      "role": "Baseline",
+      "relationship_sentence": "MOS targets the continual TTA scenario formalized by CoTTA but replaces its single EMA teacher and augmentation-averaging with dynamic assembly of diverse historical checkpoints to mitigate catastrophic forgetting under evolving corruptions."
+    },
+    {
+      "title": "EATA: Efficient Test-Time Adaptation",
+      "authors": "Niu et al.",
+      "year": 2022,
+      "arxiv_id": "2203.13495",
+      "role": "Gap Identification",
+      "relationship_sentence": "MOS addresses EATA\u2019s reliance on per-sample filtering and a single adapted model\u2014which can be brittle on severe or compound corruptions\u2014by leveraging long-term checkpoint memory and synergy weighting across models."
+    },
+    {
+      "title": "Model soups: averaging weights of multiple fine-tuned models improves accuracy without increasing inference time",
+      "authors": "Mitchell Wortsman et al.",
+      "year": 2022,
+      "arxiv_id": "2203.05482",
+      "role": "Inspiration",
+      "relationship_sentence": "MOS generalizes the model-soups insight by assembling a batch-dependent weighted combination of diverse historical checkpoints rather than a static greedy average, enabling distribution-aware integration at test time."
+    },
+    {
+      "title": "Snapshot Ensembles: Train 1, Get M for Free",
+      "authors": "Gao Huang et al.",
+      "year": 2017,
+      "arxiv_id": "1704.00109",
+      "role": "Inspiration",
+      "relationship_sentence": "MOS operationalizes the checkpoint-diversity idea from snapshot ensembles at test time by selecting and combining past snapshots whose complementary knowledge best matches the current batch via synergy weights."
+    },
+    {
+      "title": "Robo3D: Towards Robust and Reliable 3D Object Detection in Open-World Environments",
+      "authors": "Wang et al.",
+      "year": 2024,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "MOS explicitly targets the LiDAR corruption and weather-induced robustness issues characterized in Robo3D\u2019s benchmark, extending the setting to cross-corruption and using it as a primary evaluation context."
+    }
+  ],
+  "synthesis_narrative": "Entropy-minimization test-time adaptation established that models can be updated on unlabeled test streams by minimizing predictive uncertainty, defining a practical objective for label-free adaptation in deployment. Continual test-time adaptation introduced a streaming-shift setting with methods that maintain an EMA teacher and leverage augmentation-averaging to reduce drift, but they still operate a single evolving model and are vulnerable to catastrophic forgetting across long sequences. Efficient TTA proposals further curbed instability by filtering unreliable samples and regularizing updates, though these approaches remain brittle under severe or compound corruptions when one adapted model must serve all domains. In parallel, model soups demonstrated that aggregating weights from multiple fine-tuned checkpoints yields stronger out-of-distribution generalization than any single model, and snapshot ensembles showed that checkpoints capture complementary hypotheses that can be combined effectively. Robustness work in LiDAR-based 3D detection, exemplified by Robo3D, documented performance collapses under sensor/weather corruptions and provided concrete corruption taxonomies and evaluation protocols. Integrating these strands, the next step was to fuse the stability of TTA with the complementary knowledge in multiple checkpoints. Rather than continually pushing a single model to fit every shift, dynamically selecting and assembling historical checkpoints offers a principled way to retain long-term knowledge. By guiding selection and combination with batch-dependent synergy weights atop an entropy-minimization objective, the approach addresses continual TTA\u2019s forgetting and EATA-style brittleness, aligning with evidence from soups and snapshot ensembles that diversity across checkpoints is a powerful lever for robustness\u2014now exploited online for LiDAR 3D detection, including cross-corruption scenarios.",
+  "target_paper": {
+    "title": "MOS: Model Synergy for Test-Time Adaptation on LiDAR-Based 3D Object Detection",
+    "authors": "Zhuoxiao Chen, Junjie Meng, Mahsa Baktashmotlagh, Yonggang Zhang, Zi Huang, Yadan Luo",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "oral",
+    "keywords": "Test-Time Adaptation, 3D Object Detection",
+    "abstract": "LiDAR-based 3D object detection is crucial for various applications but often experiences performance degradation in real-world deployments due to domain shifts. While most studies focus on cross-dataset shifts, such as changes in environments and object geometries, practical corruptions from sensor variations and weather conditions remain underexplored. In this work, we propose a novel online test-time adaptation framework for 3D detectors that effectively tackles these shifts, including a challenging $\\textit{cross-corruption}$ scenario where cross-dataset shifts and corruptions co-occur. By leveraging long-term knowledge from previous test batches, our approach mitigates catastrophic forgetting and adapts effectively to diverse shifts. Specifically, we propose a Model Synergy (MOS) strategy that dynamically selects historical checkpoints with diverse knowledge and assembles them to best accommodate the current test batch. This assembly is directed by our proposed Synergy Weights (SW",
+    "openreview_id": "Y6aHdDNQYD",
+    "forum_id": "Y6aHdDNQYD"
+  },
+  "analysis_timestamp": "2026-01-06T18:52:34.435949"
+}

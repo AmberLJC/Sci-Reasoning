@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena",
+      "authors": "Lianmin Zheng et al.",
+      "year": 2023,
+      "arxiv_id": "2306.05685",
+      "role": "Foundation",
+      "relationship_sentence": "This work established large-scale pairwise comparison-based evaluation with Arena Elo and documented sampling-imbalance and budget constraints, directly motivating UniCBE\u2019s uniformity-driven sampling to suppress sampling bias while keeping comparisons efficient."
+    },
+    {
+      "title": "AlpacaEval: An Automatic Evaluator for Instruction-Following Language Models",
+      "authors": "Li et al.",
+      "year": 2024,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "AlpacaEval defined a budgeted comparison-based evaluation protocol and benchmark that UniCBE explicitly targets, with UniCBE optimizing sampling and aggregation under the same pairwise (and tuple) judging setting used in AlpacaEval."
+    },
+    {
+      "title": "The Bradley\u2013Terry Model",
+      "authors": "Ralph A. Bradley and Milton E. Terry",
+      "year": 1952,
+      "arxiv_id": "",
+      "role": "Baseline",
+      "relationship_sentence": "Bradley\u2013Terry\u2019s logistic aggregation of pairwise preferences is the primary CBE baseline that UniCBE builds around, with UniCBE designing uniform update and sampling objectives to mitigate the estimation variance and update instability that arise under BT with imbalanced comparisons."
+    },
+    {
+      "title": "TrueSkill: A Bayesian Skill Rating System",
+      "authors": "Ralf Herbrich, Tom Minka, Thore Graepel",
+      "year": 2007,
+      "arxiv_id": "",
+      "role": "Related Problem",
+      "relationship_sentence": "TrueSkill highlighted how unbalanced match schedules inflate posterior uncertainty and slow convergence, directly informing UniCBE\u2019s objective to equalize update opportunities (uniform updating uncertainty) across systems and prompts."
+    },
+    {
+      "title": "The Plackett\u2013Luce Model for Ranked Data",
+      "authors": "R. L. Plackett",
+      "year": 1975,
+      "arxiv_id": "",
+      "role": "Extension",
+      "relationship_sentence": "The Plackett\u2013Luce framework for k-way choices provides the formal basis for UniCBE\u2019s tuple sampling and preference aggregation ablations that generalize beyond pairwise BT to improve data efficiency."
+    },
+    {
+      "title": "Relative Upper Confidence Bound for the K-armed Dueling Bandit Problem",
+      "authors": "Hamed Zoghi et al.",
+      "year": 2014,
+      "arxiv_id": "",
+      "role": "Inspiration",
+      "relationship_sentence": "RUCB\u2019s uncertainty-driven pair selection demonstrated that sampling guided by estimated uncertainty accelerates convergence, which UniCBE generalizes into uniformity-balanced sampling probability matrices that balance the descent of uncertainty across models and prompts rather than greedily targeting single pairs."
+    }
+  ],
+  "synthesis_narrative": "Pairwise comparison-based evaluation for LLMs was popularized by MT-Bench and Chatbot Arena, which operationalized large-scale head-to-head battles with Elo-style aggregation while revealing practical issues like sampling imbalance and limited evaluation budgets. AlpacaEval consolidated an automatic, budgeted comparison protocol and benchmark, making the comparison-based setting concrete and widely adopted for instruction-following evaluation. On the modeling side, the Bradley\u2013Terry formulation provided the canonical maximum-likelihood estimator for pairwise preferences, but its estimates become biased and high-variance under imbalanced match schedules. TrueSkill reframed rating as Bayesian inference with explicit uncertainty, underscoring how uneven pairings slow uncertainty reduction and degrade convergence. Beyond pairwise judgments, the Plackett\u2013Luce model offered a principled extension to k-way (tuple) comparisons and aggregation for improved sample efficiency. From the exploration perspective, the dueling bandit literature, exemplified by RUCB, showed that selecting pairs using uncertainty estimates can markedly speed convergence, albeit with risks of sampling bias when optimization is myopically focused on the most informative comparisons.\nTogether, these works exposed three intertwined levers for effective comparison-based evaluation: suppress sampling bias, accelerate and balance the descent of uncertainty, and control update variance in aggregation. UniCBE synthesizes these insights by constructing decoupled uniformity-driven sampling probability matrices (over systems, prompts, and uncertainty states), integrating BT/PL-style aggregation to support tuple sampling, and jointly optimizing multiple objectives so that accuracy, convergence, and scalability improve under the same budgeted protocols used in AlpacaEval and Arena.",
+  "target_paper": {
+    "title": "UniCBE: An Uniformity-driven Comparing Based Evaluation Framework with Unified Multi-Objective Optimization",
+    "authors": "Peiwen Yuan, Shaoxiong Feng, Yiwei Li, Xinglin Wang, Yueqi Zhang, Jiayi Shi, Chuyi Tan, Boyuan Pan, Yao Hu, Kan Li",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "evaluation, efficient, scalability, accuracy, convergence",
+    "abstract": "Human preference plays a significant role in measuring large language models and guiding them to align with human values. Unfortunately, current comparing-based evaluation (CBE) methods typically focus on a single optimization objective, failing to effectively utilize scarce yet valuable preference signals. To address this, we delve into key factors that can enhance the accuracy, convergence, and scalability of CBE: suppressing sampling bias, balancing descending process of uncertainty, and mitigating updating uncertainty.\nFollowing the derived guidelines, we propose UniCBE, a unified uniformity-driven CBE framework which simultaneously optimize these core objectives by constructing and integrating three decoupled sampling probability matrices, each designed to ensure uniformity in specific aspects. We further ablate the optimal tuple sampling and preference aggregation strategies to achieve efficient CBE.\nOn the AlpacaEval benchmark, UniCBE saves over 17% of evaluation budgets while a",
+    "openreview_id": "rpwGUtTeA5",
+    "forum_id": "rpwGUtTeA5"
+  },
+  "analysis_timestamp": "2026-01-06T05:55:48.938011"
+}

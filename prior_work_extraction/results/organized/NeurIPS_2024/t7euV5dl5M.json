@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Approximate Inference for the Loss-Calibrated Bayesian",
+      "authors": "Simon Lacoste-Julien et al.",
+      "year": 2011,
+      "role": "framework",
+      "relationship_sentence": "Provides the utility-calibrated variational inference principle that AABO instantiates to couple GP posterior approximation with the downstream BO acquisition utility."
+    },
+    {
+      "title": "Variational Learning of Inducing Variables in Sparse Gaussian Processes",
+      "authors": "Michalis Titsias",
+      "year": 2009,
+      "role": "sparse GP method",
+      "relationship_sentence": "Introduces the inducing-point variational GP formulation that underlies the SVGP family AABO modifies to be acquisition/utility-aware."
+    },
+    {
+      "title": "Gaussian Processes for Big Data",
+      "authors": "James Hensman, Nicolo Fusi, Neil D. Lawrence",
+      "year": 2013,
+      "role": "sparse GP method",
+      "relationship_sentence": "Develops stochastic variational inference for GPs (SVGP), the scalable GP approximation AABO re-optimizes using an acquisition-calibrated objective rather than marginal likelihood ELBO."
+    },
+    {
+      "title": "Efficient Global Optimization of Expensive Black-Box Functions",
+      "authors": "Donald R. Jones, Matthias Schonlau, William J. Welch",
+      "year": 1998,
+      "role": "acquisition function",
+      "relationship_sentence": "Introduces Expected Improvement (EI), for which AABO derives efficient joint objectives that differentiate the acquisition utility through the approximate GP."
+    },
+    {
+      "title": "Sparse Gaussian Processes using Pseudo-inputs",
+      "authors": "Edward Snelson, Zoubin Ghahramani",
+      "year": 2006,
+      "role": "sparse GP method",
+      "relationship_sentence": "Establishes inducing-point sparse GP approximations that are the conceptual precursor to SVGPs whose approximation bias AABO explicitly accounts for in decision-making."
+    },
+    {
+      "title": "Scalable Global Optimization via Local Bayesian Optimization (TuRBO)",
+      "authors": "David Eriksson, Michael Pearce, Jacob R. Gardner, Ryan Turner, Matthias Poloczek",
+      "year": 2019,
+      "role": "BO algorithm",
+      "relationship_sentence": "Provides the high-dimensional trust-region BO setting in which AABO is designed to operate, motivating acquisition-calibrated GP approximations that remain effective within TuRBO."
+    }
+  ],
+  "synthesis_narrative": "Approximation-Aware Bayesian Optimization (AABO) fuses two historically separate threads: scalable Gaussian process approximation and decision-theoretic acquisition design. The inducing-point lineage\u2014beginning with pseudo-input sparse GPs (Snelson & Ghahramani, 2006) and formalized via variational inducing variables (Titsias, 2009)\u2014made GPs computationally viable for large or high-dimensional BO, but at the cost of approximation bias. Hensman et al. (2013) further enabled stochastic variational inference for GPs (SVGP), cementing a practical training objective (ELBO) and optimization pipeline. However, standard SVGP training optimizes global posterior fidelity rather than the quality of BO decisions derived from that posterior. The decision-theoretic perspective in BO, epitomized by Expected Improvement (Jones et al., 1998), defines an explicit utility for data acquisition; yet typical pipelines treat acquisition optimization and model approximation as decoupled. AABO\u2019s central step is to adopt utility-calibrated variational inference (Lacoste-Julien et al., 2011), replacing a pure evidence objective with one that explicitly optimizes the approximate posterior for the downstream acquisition utility. This yields a joint objective that differentiates the acquisition (e.g., EI) through the GP approximation, aligning limited computational resources with decision quality rather than global fit. Finally, high-dimensional trust-region BO such as TuRBO (Eriksson et al., 2019) motivates AABO\u2019s design constraints and illustrates its plug-in compatibility: the acquisition-calibrated SVGP can be dropped into TuRBO to improve query selection under tight budgets. Together, these works directly scaffold AABO\u2019s idea of approximation-aware, decision-aligned GP training for BO.",
+  "analysis_timestamp": "2026-01-06T23:33:35.545027"
+}

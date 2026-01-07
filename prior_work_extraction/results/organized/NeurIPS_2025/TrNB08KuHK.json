@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "High-Resolution Image Synthesis with Latent Diffusion Models",
+      "authors": "Robin Rombach, Andreas Blattmann, Dominik Lorenz, Patrick Esser, Bj\u00f6rn Ommer",
+      "year": 2022,
+      "role": "Foundational architecture for Stable/Latent Diffusion",
+      "relationship_sentence": "Provides the latent diffusion framework and Stable Diffusion backbone that this paper leverages to make constraint enforcement efficient and training-free by operating in a compact latent space."
+    },
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Jonathan Ho, Ajay Jain, Pieter Abbeel",
+      "year": 2020,
+      "role": "Core diffusion modeling and sampling framework",
+      "relationship_sentence": "Establishes the forward\u2013reverse noising process and denoising-based sampling trajectory that the proposed method augments with constraint-aware optimization steps during generation."
+    },
+    {
+      "title": "Diffusion Models Beat GANs on Image Synthesis",
+      "authors": "Prafulla Dhariwal, Alex Nichol",
+      "year": 2021,
+      "role": "Guided diffusion via external gradients",
+      "relationship_sentence": "Introduces classifier guidance as an external-gradient steering mechanism in diffusion sampling, a key precedent for adding constraint gradients/penalties to guide samples toward feasible sets without retraining."
+    },
+    {
+      "title": "Diffusion Posterior Sampling for General Noisy Inverse Problems",
+      "authors": "Hyungjin Chung, Jong Chul Ye",
+      "year": 2022,
+      "role": "Data-consistency guidance for inverse problems with diffusion",
+      "relationship_sentence": "Demonstrates adding log-likelihood (forward-physics) gradients to the diffusion score to enforce measurement constraints, directly motivating the paper\u2019s stricter constraint enforcement via optimization within the diffusion trajectory."
+    },
+    {
+      "title": "Plug-and-Play Priors for Model Based Reconstruction",
+      "authors": "Sreehari Venkatakrishnan, Charles A. Bouman, Brendt Wohlberg",
+      "year": 2013,
+      "role": "Optimization with learned denoisers as priors (training-free integration)",
+      "relationship_sentence": "Establishes the paradigm of alternating optimization steps with a powerful denoiser prior, which this work adapts by inserting constrained optimization/projection steps between diffusion updates to enforce hard domain constraints."
+    },
+    {
+      "title": "Regularization by Denoising (RED): Image Restoration via Image Denoising",
+      "authors": "Yaniv Romano, Michael Elad, Peyman Milanfar",
+      "year": 2017,
+      "role": "Denoiser-as-regularizer in constrained optimization",
+      "relationship_sentence": "Formalizes using a denoiser as an explicit regularizer within optimization, informing this paper\u2019s view of Stable Diffusion as a prior coupled with explicit constrained optimization to produce physically valid samples."
+    },
+    {
+      "title": "DreamFusion: Text-to-3D using 2D Diffusion",
+      "authors": "Ben Poole, Ajay Jain, Jonathan T. Barron, Ben Mildenhall",
+      "year": 2022,
+      "role": "Optimization-in-the-loop guidance with diffusion (training-free)",
+      "relationship_sentence": "Shows how external, differentiable objectives can be optimized in tandem with diffusion priors in a training-free manner, underpinning the paper\u2019s integration of constrained optimization loops with Stable Diffusion to satisfy strict requirements."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s key contribution\u2014training-free enforcement of strict, domain-specific constraints within Stable Diffusion\u2014emerges from three converging lines of prior work. First, Latent Diffusion Models (Rombach et al.) and the DDPM framework (Ho et al.) supply the generative and sampling scaffolding, with latent-space efficiency critical for inserting computationally tractable constraint handling. Second, guidance-based diffusion (Dhariwal & Nichol) and diffusion posterior sampling for inverse problems (Chung & Ye) establish that external gradients\u2014originating from classifiers, likelihoods, or physics forward models\u2014can steer the sampling trajectory without retraining. This paper extends that idea from soft, probabilistic consistency to stricter satisfaction by embedding explicit constrained optimization steps into the reverse process. Third, classical optimization with learned priors, particularly Plug-and-Play ADMM (Venkatakrishnan et al.) and RED (Romano et al.), demonstrates how powerful denoisers can serve as priors within iterative solvers to satisfy data fidelity or feasibility constraints. The present work translates this denoiser-prior perspective to diffusion priors, effectively alternating between diffusion updates and constraint-enforcing steps. Finally, optimization-in-the-loop methods like DreamFusion validate the practicality of marrying diffusion scores with differentiable objective functions in a training-free way. Together, these works directly motivate a principled integration of Stable Diffusion with constrained optimization, enabling strict physics and functional constraint adherence for tasks such as material and inverse design without additional model training.",
+  "analysis_timestamp": "2026-01-06T23:42:48.163993"
+}

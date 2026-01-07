@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Self-RAG: Learning to Retrieve, Generate, and Critique for Better Language Modeling",
+      "authors": "Asai et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Inspiration",
+      "relationship_sentence": "Self-RAG\u2019s explicit model-internal judgments of the helpfulness/correctness of retrieved passages directly inspire the paper\u2019s Self-Guided Confidence Reasoning, which similarly elicits and uses model-written confidence assessments to decide whether to trust external context."
+    },
+    {
+      "title": "Self-Ask with Search: Improving Multistep Reasoning by Decomposing Questions",
+      "authors": "Press et al.",
+      "year": 2022,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "Self-Ask established the formulation where an LM introspects on what it knows and selectively consults external information, providing the foundational paradigm of balancing internal knowledge and external retrieval that this paper formalizes as situated faithfulness."
+    },
+    {
+      "title": "FLARE: Active Retrieval Augmented Generation",
+      "authors": "Jiang et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Related Problem",
+      "relationship_sentence": "FLARE triggers retrieval based on model uncertainty, and this work extends that uncertainty-as-signal idea to compute internal and external confidence scores that gate whether retrieved context should be trusted or overridden."
+    },
+    {
+      "title": "SelfCheckGPT: Zero-Resource Black-Box Hallucination Detection for Generative Large Language Models",
+      "authors": "Manakul et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Inspiration",
+      "relationship_sentence": "SelfCheckGPT showed that self-evaluation via consistency checks yields practical confidence signals about factuality, which this paper adapts into structured confidence reasoning to quantify internal-knowledge confidence and context reliability."
+    },
+    {
+      "title": "Selective Question Answering under Domain Shift",
+      "authors": "Kamath et al.",
+      "year": 2020,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "By formalizing answer-or-abstain decisions using calibrated confidence, this work provides the selective prediction framework that is extended here to selective trust\u2014choosing between internal knowledge and external context based on confidence."
+    },
+    {
+      "title": "Prompt Injection Attacks against Retrieval-Augmented Language Models",
+      "authors": "Greshake et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Gap Identification",
+      "relationship_sentence": "This paper identified that RAG systems over-trust malicious or misleading retrieved text, directly motivating the need for mechanisms that detect and downweight untrustworthy contexts as proposed here."
+    }
+  ],
+  "synthesis_narrative": "Self-RAG introduced a retrieval\u2013generation loop in which the model explicitly critiques the helpfulness and correctness of retrieved passages, showing that model-written meta-judgments can steer evidence use. Self-Ask with Search established an agentic prompting paradigm where a model introspects on what it knows, decomposes questions, and selectively queries external tools when its internal knowledge is insufficient. FLARE operationalized model uncertainty as a control signal for evidence acquisition, triggering retrieval only when the model exhibits low confidence during generation. SelfCheckGPT demonstrated that self-consistency and internal critique produce usable confidence signals for hallucination detection without external supervision. Selective Question Answering formalized the answer-or-abstain setting using calibrated confidence, framing selective prediction as a principled decision based on uncertainty. Prompt Injection Attacks against RAG exposed that systems frequently over-trust retrieved or injected content, highlighting a concrete and prevalent failure mode in which externally provided context is misleading or adversarial.\nTogether, these works revealed both the promise and the pitfall of retrieval: models can self-assess evidence utility, but they lack calibrated mechanisms to arbitrate conflicts between internal knowledge and external context. The natural next step is to fuse agentic self-assessment (Self-RAG, Self-Ask), uncertainty-driven control (FLARE), and selective prediction principles (Selective QA) into a unified decision process that explicitly estimates confidence in both sources. By casting evidence use as confidence reasoning and targeting the over-trust failure mode identified by prompt-injection studies, the paper synthesizes these ideas into situated faithfulness: dynamically trusting, disputing, or rejecting context based on structured self-guided confidence in internal knowledge and external evidence.",
+  "target_paper": {
+    "title": "To Trust or Not to Trust? Enhancing Large Language Models' Situated Faithfulness to External Contexts",
+    "authors": "Yukun Huang, Sanxing Chen, Hongyi Cai, Bhuwan Dhingra",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "Large Language Model, Knowledge Conflict, Retrieval Augmented Generation, Confidence Estimation, Reasoning",
+    "abstract": "Large Language Models (LLMs) are often augmented with external contexts, such as those used in retrieval-augmented generation (RAG). However, these contexts can be inaccurate or intentionally misleading, leading to conflicts with the model\u2019s internal knowledge. We argue that robust LLMs should demonstrate situated faithfulness, dynamically calibrating their trust in external information based on their confidence in the internal knowledge and the external context to resolve knowledge conflicts. To benchmark this capability, we evaluate LLMs across several QA datasets, including a newly created dataset featuring in-the-wild incorrect contexts sourced from Reddit posts. We show that when provided with both correct and incorrect contexts, both open-source and proprietary models tend to overly rely on external information, regardless of its factual accuracy. To enhance situated faithfulness, we propose two approaches: Self-Guided Confidence Reasoning (SCR) and Rule-Based Confidence Reasonin",
+    "openreview_id": "K2jOacHUlO",
+    "forum_id": "K2jOacHUlO"
+  },
+  "analysis_timestamp": "2026-01-06T12:51:22.988600"
+}

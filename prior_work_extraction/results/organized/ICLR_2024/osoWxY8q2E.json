@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "GLU Variants Improve Transformer",
+      "authors": "Noam Shazeer et al.",
+      "year": 2020,
+      "arxiv_id": "2002.05202",
+      "role": "Baseline",
+      "relationship_sentence": "SwiGLU from this work is the dominant LLM activation baseline that the paper replaces with ReLU to unlock exact channel-level zeros and enable neuron-skipping during inference."
+    },
+    {
+      "title": "Gaussian Error Linear Units (GELUs)",
+      "authors": "Dan Hendrycks et al.",
+      "year": 2016,
+      "arxiv_id": "1606.08415",
+      "role": "Baseline",
+      "relationship_sentence": "GELU is the standard smooth activation used in many Transformers; the paper directly challenges this default by swapping GELU with ReLU to obtain activation sparsity without hurting convergence."
+    },
+    {
+      "title": "Sigmoid-Weighted Linear Units for Deep Learning",
+      "authors": "Dongyoon Elfwing et al.",
+      "year": 2018,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "SiLU/Swish, widely adopted in LLM MLPs, serves as a primary baseline whose smooth nonlinearity lacks inherent zeros; the paper shows ReLU can match its accuracy while enabling zero-skipping and reduced weight transfer."
+    },
+    {
+      "title": "Deep Sparse Rectifier Neural Networks",
+      "authors": "Xavier Glorot et al.",
+      "year": 2011,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "This work established that ReLU induces sparse, exactly-zero activations, a property the paper scales to LLMs and operationalizes with algorithms that skip inactive neurons and reuse activation masks across tokens."
+    },
+    {
+      "title": "DejaVu: Contextual Sparsity for Efficient LLM Inference",
+      "authors": "Liu et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Extension",
+      "relationship_sentence": "By revealing temporal consistency and contextual sparsity of active neurons in LLMs, this work directly motivates the paper\u2019s strategy to cache and reuse activated neuron sets across tokens, now amplified by ReLU\u2019s exact zeros."
+    },
+    {
+      "title": "SparseGPT: Massive Language Models Can Be Accurately Pruned in One-Shot",
+      "authors": "Aleksandar Frantar et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "While demonstrating high unstructured weight sparsity with minimal perplexity loss, this work highlights limited practical speedups on GPUs, motivating the paper\u2019s shift to activation sparsity (via ReLU) that can be exploited at inference time for real runtime gains."
+    },
+    {
+      "title": "Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity",
+      "authors": "William Fedus et al.",
+      "year": 2021,
+      "arxiv_id": "2101.03961",
+      "role": "Related Problem",
+      "relationship_sentence": "This paper\u2019s conditional computation via top-k expert gating informs the idea that selective activation can cut FLOPs; the current work achieves a non-architectural, intra-layer analogue by leveraging ReLU-induced channel sparsity."
+    }
+  ],
+  "synthesis_narrative": "GLU Variants Improve Transformer introduced SwiGLU, showing that gated smooth activations outperform plain ReLU in Transformers and becoming the default MLP nonlinearity in modern LLMs. GELU further cemented smooth activations as standard, and SiLU/Swish provided another widely adopted choice; however, all of these eliminate exact zeros, implicitly precluding straightforward zero-skipping at inference. Earlier, Deep Sparse Rectifier Neural Networks established that ReLU naturally yields sparse, exactly-zero activations, suggesting a compute-saving opportunity if such sparsity could be safely harnessed in large models. DejaVu then demonstrated contextual sparsity and temporal consistency of active neurons in LLMs, showing that small subsets of channels remain predictive across successive tokens, hinting that caching and reusing active sets could substantially reduce matmul cost. In parallel, SparseGPT revealed that although large weight sparsity is achievable post hoc, unstructured weight sparsity often fails to translate into real GPU speedups, pointing to the need for a more hardware-friendly sparsity source. Switch Transformers validated the principle that conditional computation\u2014activating only a subset of capacity per token\u2014can preserve quality while cutting FLOPs.\nTogether, these works exposed a promising but underutilized path: conditional computation at the channel level that is temporally stable and hardware-exploitable. By reinstating ReLU, the current paper recovers exact activation zeros, strengthens the temporal reuse signal observed by DejaVu, and translates it into practical inference-time algorithms that skip inactive neurons and reuse activation masks, achieving substantial compute and memory-traffic reductions without sacrificing convergence or accuracy.",
+  "target_paper": {
+    "title": "ReLU Strikes Back: Exploiting Activation Sparsity in Large Language Models",
+    "authors": "Seyed Iman Mirzadeh, Keivan Alizadeh-Vahid, Sachin Mehta, Carlo C del Mundo, Oncel Tuzel, Golnoosh Samei, Mohammad Rastegari, Mehrdad Farajtabar",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "oral",
+    "keywords": "Large Language Models, Sparsity, Activation Function, ReLU Activation Function",
+    "abstract": "Large Language Models (LLMs) with billions of parameters have drastically transformed AI applications. However, their demanding computation during inference has raised significant challenges for deployment on resource-constrained devices. Despite recent trends favoring alternative activation functions such as GELU or SiLU, known for increased computation, this study strongly advocates for reinstating ReLU activation in LLMs. We demonstrate that using the ReLU activation function has a negligible impact on convergence and performance while significantly reducing computation and weight transfer. This reduction is particularly valuable during the memory-bound inference step, where efficiency is paramount. Exploring sparsity patterns in ReLU-based LLMs, we unveil the reutilization of activated neurons for generating new tokens and leveraging these insights, we propose practical strategies to substantially reduce LLM inference computation up to three times, using ReLU activations with minim",
+    "openreview_id": "osoWxY8q2E",
+    "forum_id": "osoWxY8q2E"
+  },
+  "analysis_timestamp": "2026-01-06T10:12:20.577278"
+}

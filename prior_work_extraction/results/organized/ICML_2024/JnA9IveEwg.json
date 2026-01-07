@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Distilling the Knowledge in a Neural Network",
+      "authors": "Geoffrey Hinton, Oriol Vinyals, Jeff Dean",
+      "year": 2015,
+      "role": "Foundational knowledge distillation",
+      "relationship_sentence": "MGSE builds on Hinton et al.\u2019s soft-target distillation and temperature scaling, using teacher-produced probability distributions at varying temperatures to create coarse-to-fine supervisory signals for multiple students."
+    },
+    {
+      "title": "Bootstrap Your Own Latent (BYOL): A New Approach to Self-Supervised Learning",
+      "authors": "Jean-Bastien Grill et al.",
+      "year": 2020,
+      "role": "Teacher\u2013student self-supervision paradigm",
+      "relationship_sentence": "MGSE adopts a teacher\u2013student design from BYOL-style self-supervision and extends it by introducing multiple students specialized to different semantic granularities distilled from a single teacher."
+    },
+    {
+      "title": "DINO: Emerging Properties in Self-Supervised Vision Transformers",
+      "authors": "Mathilde Caron et al.",
+      "year": 2021,
+      "role": "Distributional self-distillation with prototype-based targets",
+      "relationship_sentence": "The idea of supervising students with distributional outputs (e.g., prototype probabilities) informs MGSE\u2019s use of teacher probability distributions, which MGSE further diversifies across granularities to capture both coarse and fine semantics."
+    },
+    {
+      "title": "Deep Graph Infomax",
+      "authors": "Petar Veli\u010dkovi\u0107 et al.",
+      "year": 2019,
+      "role": "Local\u2013global (fine\u2013coarse) mutual information on graphs",
+      "relationship_sentence": "DGI established the value of aligning node-level and global graph semantics; MGSE generalizes this insight by explicitly distilling multi-granular semantics (from coarse to fine) rather than optimizing a single granularity."
+    },
+    {
+      "title": "Contrastive Multi-View Representation Learning on Graphs (MVGRL)",
+      "authors": "Kaveh Hassani, Amir Khasahmadi",
+      "year": 2020,
+      "role": "Multi-view graph SSL capturing local/global structure",
+      "relationship_sentence": "MVGRL\u2019s demonstration that complementary views (local vs. global) improve graph representations motivates MGSE\u2019s explicit multi-granularity supervision via a teacher to better unify abstract and fine-grained semantics."
+    },
+    {
+      "title": "Graph Contrastive Learning with Augmentations (GraphCL)",
+      "authors": "Yuning You, Tianlong Chen, Yongxin Chen, Zhangyang Wang",
+      "year": 2020,
+      "role": "General graph contrastive SSL baseline",
+      "relationship_sentence": "As a widely used GSSL backbone, GraphCL exemplifies methods that may emphasize a single granularity; MGSE is designed as a plug-and-play module to enhance such frameworks by injecting multi-granular distilled semantics."
+    },
+    {
+      "title": "Bootstrapped Representation Learning on Graphs (BGRL)",
+      "authors": "Thakoor et al.",
+      "year": 2021,
+      "role": "BYOL-style self-supervision adapted to graphs",
+      "relationship_sentence": "BGRL shows the efficacy of teacher\u2013student bootstrapping on graphs; MGSE extends this line by orchestrating multiple students under a single teacher with granularity-conditioned distributions to broaden semantic coverage."
+    }
+  ],
+  "synthesis_narrative": "MGSE\u2019s core idea\u2014distilling multi-granular semantics from a single teacher into multiple students to jointly capture fine-grained and high-level graph features\u2014emerges at the intersection of graph self-supervision and knowledge distillation. On the graph SSL side, DGI and MVGRL crystallized the importance of relating local (node/subgraph) and global (graph) semantics, revealing that different granularities carry complementary signal. General-purpose contrastive frameworks like GraphCL (and similar baselines) provided strong but largely single-granularity training recipes, highlighting the performance gap MGSE targets when downstream tasks demand both coarse abstractions and fine details.\n\nOn the distillation/self-distillation side, Hinton et al. introduced soft targets and temperature scaling, a mechanism MGSE leverages to control the granularity of semantic distributions produced by the teacher. BYOL established the viability of teacher\u2013student self-supervision without negatives, and BGRL successfully adapted this paradigm to graphs; MGSE inherits this architecture but scales it to multiple students, each conditioned on a distinct granularity of the teacher\u2019s output. Finally, DINO\u2019s distributional supervision (e.g., prototype probability targets) motivates MGSE\u2019s use of probability distributions as semantic carriers; MGSE generalizes this by assembling a coarse-to-fine ensemble of distributions, ensuring complementary supervision across students. Together, these works directly underpin MGSE\u2019s plug-and-play framework that enriches existing graph SSL methods with comprehensive, multi-granular distilled knowledge, improving generalization across heterogeneous downstream tasks.",
+  "analysis_timestamp": "2026-01-06T23:42:48.074760"
+}

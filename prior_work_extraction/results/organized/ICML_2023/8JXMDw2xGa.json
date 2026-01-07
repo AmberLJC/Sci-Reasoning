@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Men Also Like Shopping: Reducing Gender Bias Amplification using Corpus-level Constraints",
+      "authors": "Jieyu Zhao et al.",
+      "year": 2017,
+      "role": "Foundation",
+      "relationship_sentence": "Introduced the notion and measurement of \u201cbias amplification\u201d (e.g., gender bias in vSRL/coreference), which this paper explicitly generalizes to a temporal setting by tracking a bias statistic across rounds of training on model-influenced data."
+    },
+    {
+      "title": "To Predict and Serve?",
+      "authors": "Kristian Lum et al.",
+      "year": 2016,
+      "role": "Foundation",
+      "relationship_sentence": "Established the feedback-loop paradigm where model outputs shape future data (predictive policing), directly motivating this paper\u2019s formalization of Internet-scale data feedback loops in which model outputs are scraped and reused as training data."
+    },
+    {
+      "title": "How Algorithmic Confounding in Recommendation Systems Increases Performance and Bias",
+      "authors": "Allison J. B. Chaney et al.",
+      "year": 2018,
+      "role": "Related Problem",
+      "relationship_sentence": "Demonstrated that iterative training on interaction-affected data induces confounding and bias, providing a closely analogous feedback-loop mechanism that informed this paper\u2019s iterative retraining-with-logged-interactions formulation for web-scraped datasets."
+    },
+    {
+      "title": "Pseudo-Label: The Simple and Efficient Semi-Supervised Learning Method for Deep Neural Networks",
+      "authors": "Dong-Hyun Lee",
+      "year": 2013,
+      "role": "Foundation",
+      "relationship_sentence": "Provided the core mechanism of training on model-generated labels; this paper scales that idea to an ecosystem-level loop (models\u2019 outputs becoming future web data) and analyzes its bias dynamics over repeated iterations."
+    },
+    {
+      "title": "Self-Training With Noisy Student Improves ImageNet Accuracy",
+      "authors": "Qizhe Xie et al.",
+      "year": 2020,
+      "role": "Baseline",
+      "relationship_sentence": "Popularized large-scale retraining on model-generated labels from web data; this paper scrutinizes the long-term stability and bias consequences of such self-training pipelines and proposes uniform faithfulness as a criterion mitigating amplification."
+    },
+    {
+      "title": "The Curious Case of Neural Text Degeneration",
+      "authors": "Ari Holtzman et al.",
+      "year": 2019,
+      "role": "Inspiration",
+      "relationship_sentence": "Showed that greedy decoding distorts distributions while stochastic sampling (e.g., nucleus sampling) better matches human text; this insight directly informs the paper\u2019s key claim that sampling-like outputs (uniform faithfulness) stabilize bias under data feedback loops."
+    },
+    {
+      "title": "On Calibration of Modern Neural Networks",
+      "authors": "Chuan Guo et al.",
+      "year": 2017,
+      "role": "Extension",
+      "relationship_sentence": "Established techniques and theory for probabilistic calibration; the paper\u2019s uniform faithfulness condition leverages the idea that sampling from calibrated predictive probabilities preserves label frequencies, thereby curbing bias drift across retraining rounds."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s central innovation\u2014formalizing Internet-scale data feedback loops and linking their stability to a sampling-like property they term uniform faithfulness\u2014rests on two intertwined lineages: bias amplification and feedback-loop dynamics. Zhao et al. (2017) provided the foundational bias-amplification concept and metrics that this work generalizes temporally, tracking a bias statistic as models are repeatedly retrained on data containing their own outputs. In parallel, Lum and Isaac (2016) and Chaney et al. (2018) established that model-driven data collection can create self-reinforcing feedback, supplying the conceptual template this paper adapts to web-scraped training data.\n\nOperationally, the loop this paper studies is a generalization of self-training: model outputs become new supervision. Lee\u2019s pseudo-labeling (2013) and Xie et al.\u2019s Noisy Student (2020) concretized training on model-generated labels at scale; the present work directly interrogates the long-term stability and bias consequences of such pipelines. The paper\u2019s key prescription\u2014make outputs behave like samples from the training distribution\u2014draws on two technical threads: Holtzman et al. (2019) showed that stochastic sampling preserves distributional fidelity in language generation relative to greedy decoding, and Guo et al. (2017) formalized calibration, implying that sampling from calibrated probabilities preserves aggregate label frequencies. Together, these works directly motivate the paper\u2019s uniform faithfulness condition and its empirical finding that sampling-like generation stabilizes bias across retraining rounds, thereby unifying feedback-loop concerns with concrete generation and calibration practices.",
+  "analysis_timestamp": "2026-01-06T23:09:26.551951"
+}

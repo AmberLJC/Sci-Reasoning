@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Gated DeltaNet: Delta-rule Supervised Fast-Weight Memory for Efficient Sequence Modeling",
+      "authors": "Yongqi Pan et al.",
+      "year": 2024,
+      "role": "Baseline",
+      "relationship_sentence": "Comba directly builds on the bilinear fast\u2011weight recurrence introduced by Gated DeltaNet and replaces its open\u2011loop delta\u2011rule memory update with a closed\u2011loop design that adds state- and output\u2011feedback together with a scalar\u2011plus\u2011low\u2011rank transition."
+    },
+    {
+      "title": "RWKV: Reinventing RNNs for the Transformer Era",
+      "authors": "Bo Peng et al.",
+      "year": 2023,
+      "role": "Inspiration",
+      "relationship_sentence": "RWKV\u2019s time-mix/decay mechanism yields a bilinear state\u2013input interaction that motivates the paper\u2019s formalization of Bilinear RNNs and inspires Comba\u2019s feedback\u2011stabilized variant of such bilinear recurrences."
+    },
+    {
+      "title": "Linear Transformers: Transformers are RNNs",
+      "authors": "Angelos Katharopoulos et al.",
+      "year": 2020,
+      "role": "Related Problem",
+      "relationship_sentence": "Linear Transformers framed attention as an associative linear-time recurrence, informing Comba\u2019s chunk-wise parallel inference/training kernel while highlighting the limitation of purely linear (non\u2011bilinear) updates that Comba surpasses."
+    },
+    {
+      "title": "Efficiently Modeling Long Sequences with Structured State Spaces (S4)",
+      "authors": "Albert Gu et al.",
+      "year": 2022,
+      "role": "Foundation",
+      "relationship_sentence": "S4 established the state-space modeling framework and linear recurrent formulation that Comba adopts and then generalizes to a bilinear, feedback\u2011controlled RNN with scalar\u2011plus\u2011low\u2011rank transitions."
+    },
+    {
+      "title": "Mamba: Linear-Time Sequence Modeling with Selective State Spaces",
+      "authors": "Albert Gu et al.",
+      "year": 2023,
+      "role": "Gap Identification",
+      "relationship_sentence": "Mamba demonstrated powerful linear SSMs with input selectivity but lacks explicit state\u2013key bilinear coupling; Comba addresses this gap by introducing closed\u2011loop\u2011controlled bilinear recurrences that outperform linear SSM baselines."
+    },
+    {
+      "title": "Linear Transformers Are Secretly Fast Weight Programmers",
+      "authors": "Irie Schlag et al.",
+      "year": 2021,
+      "role": "Foundation",
+      "relationship_sentence": "This work connects linear attention to fast\u2011weight memory updated by delta\u2011like rules, providing the theoretical bridge that Comba uses to define Bilinear RNNs and then augment them with control\u2011theoretic feedback."
+    },
+    {
+      "title": "A New Approach to Linear Filtering and Prediction Problems",
+      "authors": "R. E. Kalman",
+      "year": 1960,
+      "role": "Foundation",
+      "relationship_sentence": "Kalman\u2019s closed\u2011loop output\u2011feedback principle directly motivates Comba\u2019s state\u2011 and output\u2011feedback corrections for stabilizing and improving the bilinear fast\u2011weight memory dynamics."
+    }
+  ],
+  "synthesis_narrative": "Comba\u2019s core idea is to reframe recently popular fast\u2011weight, delta\u2011rule\u2013supervised recurrent models as Bilinear RNNs and then improve them with closed\u2011loop control: state and output feedback applied to a scalar\u2011plus\u2011low\u2011rank transition. The immediate precursors are the new bilinear fast\u2011weight systems\u2014most notably Gated DeltaNet and RWKV\u2014whose state updates depend multiplicatively on the current key/state, yielding strong efficiency but leaving memory dynamics effectively open\u2011loop. Building on the state\u2011space formalism inaugurated by S4 and the selective SSM evolution in Mamba, the authors identify a specific gap: linear SSMs (even with selection) do not realize explicit state\u2013key bilinear coupling, and existing bilinear fast\u2011weight models lack principled feedback for stability and controllability. The theoretical underpinning comes from fast\u2011weight/linear\u2011attention connections (Schlag et al.), which justify seeing these models as delta\u2011rule memories, and from classical control (Kalman), which prescribes output\u2011feedback corrections to close the loop. This synthesis leads directly to Comba\u2019s architectural choices: (1) keep the bilinear fast\u2011weight mechanism; (2) introduce state- and output\u2011feedback corrections to the recurrence; and (3) parameterize the transition as scalar\u2011plus\u2011low\u2011rank for capacity/efficiency balance. Finally, linear\u2011time attention work (Katharopoulos et al.) informs the chunk\u2011wise parallel kernel design that makes the closed\u2011loop bilinear recurrence hardware\u2011efficient. Without these prior lines\u2014fast\u2011weight bilinear updates, SSM framing, and closed\u2011loop control\u2014the paper\u2019s key innovation would not cohere.",
+  "analysis_timestamp": "2026-01-06T23:08:23.960640"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Classifier-Free Diffusion Guidance",
+      "authors": "Jonathan Ho; Tim Salimans",
+      "year": 2022,
+      "role": "Origin of the core technique",
+      "relationship_sentence": "Introduces classifier-free guidance (CFG), the key idea of blending conditional and unconditional model predictions at inference-time with a tunable weight\u2014precisely the mechanism this paper adapts from diffusion to autoregressive language modeling."
+    },
+    {
+      "title": "Diffusion Models Beat GANs on Image Synthesis",
+      "authors": "Prafulla Dhariwal; Alex Nichol",
+      "year": 2021,
+      "role": "Precursor establishing guided sampling",
+      "relationship_sentence": "Demonstrates guidance in diffusion sampling via an external classifier, showing that increasing guidance improves adherence to conditioning at the cost of diversity, a trade-off this paper recreates for LMs using classifier-free (internal) guidance."
+    },
+    {
+      "title": "GLIDE: Towards Photorealistic Image Generation and Editing with Text-Guided Diffusion Models",
+      "authors": "Alex Nichol et al.",
+      "year": 2021,
+      "role": "Practical validation of CFG in text-conditional generation",
+      "relationship_sentence": "Popularizes CFG for text-to-image, empirically validating guidance weights as a simple knob for prompt adherence and quality\u2014insights this work ports to language generation across diverse NLP tasks."
+    },
+    {
+      "title": "Plug and Play Language Models: A Simple Approach to Controlled Text Generation",
+      "authors": "Siddharth Dathathri; Andrea Madotto; Janice Lan; Jane Hung; Eric Frank; Piero Molino; Jason Yosinski; Rosanne Liu",
+      "year": 2020,
+      "role": "Inference-time steering for LMs with auxiliary signals",
+      "relationship_sentence": "Shows that LM outputs can be steered at inference-time without fine-tuning by leveraging an attribute model, motivating the paper\u2019s pursuit of lightweight, training-free guidance\u2014here via CFG rather than gradient-based control."
+    },
+    {
+      "title": "GeDi: Generative Discriminator Guided Sequence Generation",
+      "authors": "Ben Krause; Akhilesh Deepak Gotmare; Bryan McCann; Nitish Shirish Keskar; Shafiq Joty; Richard Socher; Nazneen Fatema Rajani",
+      "year": 2020,
+      "role": "Bayesian guidance for controllable LM decoding",
+      "relationship_sentence": "Uses a discriminator to reweight LM token probabilities under Bayes\u2019 rule, a direct antecedent for decoding-time guidance; the present work achieves similar controllability with a simpler, classifier-free guidance signal."
+    },
+    {
+      "title": "DExperts: Decoding-Time Controlled Text Generation with Experts and Anti-Experts",
+      "authors": "Zhiqing Sun; Yiming Yang; et al.",
+      "year": 2021,
+      "role": "Model-difference guidance at decoding time",
+      "relationship_sentence": "Steers generation by contrasting an expert and anti-expert LM, conceptually close to combining conditional and unconditional predictions; the paper generalizes this idea through CFG\u2019s unified, weightable guidance."
+    },
+    {
+      "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models; Self-Consistency Improves Chain of Thought Reasoning in Language Models",
+      "authors": "Jason Wei et al.; Xuezhi Wang et al.",
+      "year": 2022,
+      "role": "Complementary inference-time methods",
+      "relationship_sentence": "Establish inference-time prompting (CoT) and aggregation (Self-Consistency) as powerful add-ons; this paper shows CFG stacks with them, extending their benefits by improving prompt adherence and faithfulness."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s central contribution is to port classifier-free guidance (CFG) from diffusion models to autoregressive language modeling and show it is a broadly effective, training-free, inference-time control mechanism. Ho and Salimans\u2019 classifier-free guidance is the direct technical blueprint: mix unconditional and conditional model predictions with a tunable scale to trade off adherence and diversity. Dhariwal and Nichol\u2019s guided diffusion established the broader principle that stronger guidance boosts target fidelity, while GLIDE operationalized classifier-free guidance for text conditioning in practice, making the guidance weight a simple, powerful knob.\n\nIn language modeling, a lineage of decoding-time control methods demonstrated that steering without retraining is feasible: PPLM used gradients of an auxiliary attribute model, GeDi reweighted token probabilities with a generative discriminator via Bayes, and DExperts contrasted expert vs. anti-expert LMs. These works directly motivate seeking a lighter, more universal guidance signal; the present paper shows CFG delivers that signal using only the base LM, with no extra classifiers or fine-tuning.\n\nFinally, Chain-of-Thought and Self-Consistency established inference-time reasoning and voting as stackable tools. By demonstrating that CFG composes with CoT and Self-Consistency, the paper integrates guidance with contemporary inference-time techniques, yielding state-of-the-art prompt adherence and faithfulness across tasks while retaining the simplicity and generality that made CFG compelling in diffusion.",
+  "analysis_timestamp": "2026-01-07T00:02:04.877682"
+}

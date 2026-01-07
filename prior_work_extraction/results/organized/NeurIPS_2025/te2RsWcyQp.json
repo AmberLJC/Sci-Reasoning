@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Direct Preference Optimization: Your Language Model Is Secretly a Reward Model",
+      "authors": "Rafailov et al.",
+      "year": 2023,
+      "role": "Foundational preference-based RLHF method that optimizes a policy directly from pairwise preferences without an explicit reward model.",
+      "relationship_sentence": "Mesh-RFT generalizes DPO to a masked, fine-grained setting (M-DPO), enabling per-face credit assignment so local mesh regions can be improved without building a learned reward model."
+    },
+    {
+      "title": "Self-Critical Sequence Training for Image Captioning",
+      "authors": "Rennie et al.",
+      "year": 2017,
+      "role": "Seminal sequence-level RL approach using global rewards, highlighting credit assignment issues for structured outputs.",
+      "relationship_sentence": "Mesh-RFT addresses the global-reward limitation exemplified by SCST by moving from object-level rewards to face-level optimization, improving local structure while preserving global coherence."
+    },
+    {
+      "title": "AtlasNet: A Papier-M\u00e2ch\u00e9 Approach to Learning 3D Surface Generation",
+      "authors": "Groueix et al.",
+      "year": 2018,
+      "role": "Early neural mesh/surface generator that revealed common artifacts (holes, self-intersections) and weak topology control in learned meshes.",
+      "relationship_sentence": "The failure modes seen in AtlasNet motivate Mesh-RFT\u2019s topology-aware scoring (BER, TS) and localized refinement to systematically repair such artifacts."
+    },
+    {
+      "title": "MeshCNN: A Network with an Edge",
+      "authors": "Hanocka et al.",
+      "year": 2019,
+      "role": "Introduced edge/face-centric neural operations directly on meshes, emphasizing local structural reasoning.",
+      "relationship_sentence": "Mesh-RFT\u2019s quality-aware face masking and per-face optimization adopt MeshCNN\u2019s insight that mesh processing benefits from localized, edge/face-level operations."
+    },
+    {
+      "title": "PolyGen: An Autoregressive Generative Model of 3D Meshes",
+      "authors": "Nash et al.",
+      "year": 2020,
+      "role": "Autoregressive mesh generator showcasing data biases and difficulties in maintaining geometric and topological integrity.",
+      "relationship_sentence": "Mesh-RFT is designed to fine-tune pretrained mesh generators like PolyGen by selectively improving low-quality faces using preference-optimized updates guided by BER/TS."
+    },
+    {
+      "title": "GET3D: A Generative Model of High-Quality 3D Meshes Learned from Images",
+      "authors": "Gao et al.",
+      "year": 2022,
+      "role": "State-of-the-art mesh generation from images with strong visual quality but persistent topology and regularity issues.",
+      "relationship_sentence": "Mesh-RFT targets the residual artifacts observed in GET3D-style outputs by providing a reinforcement fine-tuning layer with topology-aware, localized rewards."
+    },
+    {
+      "title": "Topological Loss Functions for Deep-Learning-Based Image Segmentation Using Persistent Homology",
+      "authors": "Clough et al.",
+      "year": 2019,
+      "role": "Pioneered incorporating topology-aware objectives via persistent homology into learning pipelines.",
+      "relationship_sentence": "Mesh-RFT extends the ethos of topology-aware objectives to 3D meshes by defining practical, objective metrics (BER, TS) and using them as fine-grained reinforcement signals."
+    }
+  ],
+  "synthesis_narrative": "Mesh-RFT\u2019s core contribution\u2014fine-grained reinforcement fine-tuning with Masked DPO guided by topology-aware metrics\u2014builds on two converging lines of work: preference-based policy optimization and mesh-generation/processing. Direct Preference Optimization (Rafailov et al., 2023) provides the backbone for aligning generators with preference signals without learning an explicit reward model; Mesh-RFT adapts this to a masked, localized regime so updates target only problematic regions. This directly counters the known limitation of global, sequence-level RL (e.g., SCST; Rennie et al., 2017), where object-level rewards obscure where errors arise and hinder credit assignment.\n\nOn the 3D side, early and modern mesh generators such as AtlasNet (Groueix et al., 2018), PolyGen (Nash et al., 2020), and GET3D (Gao et al., 2022) demonstrate strong generative capabilities but struggle with topology, manifoldness, and local geometric regularity\u2014precisely the failure modes Mesh-RFT seeks to correct post hoc. MeshCNN (Hanocka et al., 2019) crystallizes the value of operating directly at edge/face granularity, informing Mesh-RFT\u2019s quality-aware face masking and localized optimization. Finally, the idea of injecting topological reasoning into learning pipelines (Clough et al., 2019) underpins Mesh-RFT\u2019s objective metrics\u2014Boundary Edge Ratio and Topology Score\u2014which provide actionable, topology-sensitive signals at both object and face levels. By marrying DPO-style preference learning with face-level masking and topology-aware scoring, Mesh-RFT becomes the first to align mesh generators at per-face granularity, repairing local errors while preserving global coherence.",
+  "analysis_timestamp": "2026-01-07T00:29:41.032833"
+}

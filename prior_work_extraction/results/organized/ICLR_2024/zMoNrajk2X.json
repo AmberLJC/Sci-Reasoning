@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Classifier-Free Diffusion Guidance",
+      "authors": "Jonathan Ho and Tim Salimans",
+      "year": 2022,
+      "arxiv_id": "2207.12598",
+      "role": "Foundation",
+      "relationship_sentence": "CADS directly targets the diversity loss introduced by strong classifier-free guidance and is designed to be a drop-in modification that preserves CFG\u2019s mechanism while mitigating its high-scale mode contraction by perturbing the conditioning vector."
+    },
+    {
+      "title": "Diffusion Models Beat GANs on Image Synthesis",
+      "authors": "Prafulla Dhariwal and Alex Nichol",
+      "year": 2021,
+      "arxiv_id": "2105.05233",
+      "role": "Foundation",
+      "relationship_sentence": "This work established guidance as a central lever in diffusion sampling and demonstrated the fidelity\u2013diversity trade-off under strong guidance, the precise trade-off CADS resolves via condition-annealed sampling."
+    },
+    {
+      "title": "GLIDE: Towards Photorealistic Image Generation and Editing with Text-Guided Diffusion Models",
+      "authors": "Alex Nichol et al.",
+      "year": 2022,
+      "arxiv_id": "2112.10741",
+      "role": "Gap Identification",
+      "relationship_sentence": "GLIDE popularized text-conditioned diffusion with classifier-free guidance and documented that increasing guidance improves quality but reduces diversity, a limitation CADS explicitly addresses by injecting scheduled noise into the text condition."
+    },
+    {
+      "title": "Imagen: Photorealistic Text-to-Image Diffusion Models",
+      "authors": "Chitwan Saharia et al.",
+      "year": 2022,
+      "arxiv_id": "2205.11487",
+      "role": "Gap Identification",
+      "relationship_sentence": "Imagen relies heavily on strong classifier-free guidance to maximize fidelity, highlighting the diversity collapse at high scales that CADS remedies without retraining by annealing noise on the conditioning embedding."
+    },
+    {
+      "title": "StackGAN: Text to Photo-realistic Image Synthesis with Stacked Generative Adversarial Networks",
+      "authors": "Han Zhang et al.",
+      "year": 2017,
+      "arxiv_id": "1612.03242",
+      "role": "Inspiration",
+      "relationship_sentence": "StackGAN\u2019s conditioning augmentation (adding Gaussian noise to text embeddings to encourage diversity) directly inspires CADS\u2019s key idea of injecting Gaussian noise into the conditioning vector\u2014now performed at inference with an annealed schedule in diffusion models."
+    },
+    {
+      "title": "SDEdit: Image Synthesis and Editing with Stochastic Differential Equations",
+      "authors": "Chenlin Meng et al.",
+      "year": 2021,
+      "arxiv_id": "2108.01073",
+      "role": "Related Problem",
+      "relationship_sentence": "SDEdit shows that controlled noise schedules during diffusion can balance adherence and diversity, a principle CADS adapts by scheduling noise on the conditioning channel rather than the data trajectory."
+    }
+  ],
+  "synthesis_narrative": "Classifier-free guidance formalized a powerful way to steer diffusion models by interpolating between conditional and unconditional predictions, but it also tightly linked higher guidance scales to reduced sample diversity. Guided Diffusion cemented guidance as the central tool for quality control and empirically highlighted the fidelity\u2013diversity trade-off under strong guidance. GLIDE scaled text conditioning in diffusion and documented that pushing guidance improves sharpness and alignment at the cost of variety, while Imagen crystallized this practice at larger scales, depending on strong guidance to reach top image quality and thereby exacerbating diversity collapse. From the GAN literature, StackGAN introduced conditioning augmentation\u2014adding Gaussian noise to the text embedding\u2014to improve robustness and diversity of conditional generation, demonstrating that perturbing the condition can beneficially widen support. SDEdit showed that injecting and annealing noise within the diffusion process can trade off adherence and realism through a schedule, underscoring the utility of time-varying noise control.\nBringing these threads together, CADS recognizes that the core source of diversity loss is the untempered dominance of the conditioning signal under strong classifier-free guidance and leverages the StackGAN insight to perturb the condition itself, but does so within diffusion by annealing Gaussian noise over timesteps. This condition-annealed schedule, inspired by SDEdit\u2019s noise scheduling principle yet applied to the conditioning channel, preserves alignment while restoring coverage, giving a training-free, sampler-agnostic remedy to the fidelity\u2013diversity tension established by Guided Diffusion, GLIDE, and Imagen.",
+  "target_paper": {
+    "title": "CADS: Unleashing the Diversity of Diffusion Models through Condition-Annealed Sampling",
+    "authors": "Seyedmorteza Sadat, Jakob Buhmann, Derek Bradley, Otmar Hilliges, Romann M. Weber",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "diffusion models, diversity, generative models",
+    "abstract": "While conditional diffusion models are known to have good coverage of the data distribution, they still face limitations in output diversity, particularly when sampled with a high classifier-free guidance scale for optimal image quality or when trained on small datasets. We attribute this problem to the role of the conditioning signal in inference and offer an improved sampling strategy for diffusion models that can increase generation diversity, especially at high guidance scales, with minimal loss of sample quality. Our sampling strategy anneals the conditioning signal by adding scheduled, monotonically decreasing Gaussian noise to the conditioning vector during inference to balance diversity and condition alignment. Our Condition-Annealed Diffusion Sampler (CADS) can be used with any pretrained model and sampling algorithm, and we show that it boosts the diversity of diffusion models in various conditional generation tasks. Further, using an existing pretrained diffusion model, CADS",
+    "openreview_id": "zMoNrajk2X",
+    "forum_id": "zMoNrajk2X"
+  },
+  "analysis_timestamp": "2026-01-06T17:39:01.636257"
+}

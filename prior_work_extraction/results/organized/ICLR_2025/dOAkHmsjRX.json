@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "On Tiny Episodic Memories in Continual Learning",
+      "authors": "Arslan Chaudhry et al.",
+      "year": 2019,
+      "arxiv_id": "1902.10486",
+      "role": "Foundation",
+      "relationship_sentence": "This work formalized the online, single-epoch replay setting with a fixed-size buffer (typically via reservoir sampling), establishing the problem setup and baseline this paper evaluates under a unified FLOPs/Bytes budget and augments with frequency-based retrieval."
+    },
+    {
+      "title": "Learning to Learn without Forgetting by Maximizing Transfer and Minimizing Interference",
+      "authors": "Matthew Riemer et al.",
+      "year": 2019,
+      "arxiv_id": "1810.11910",
+      "role": "Gap Identification",
+      "relationship_sentence": "By using meta-gradients and multiple inner updates per batch, this method exposed how 'single-epoch' protocols can mask large compute disparities across OCL algorithms, motivating the paper\u2019s FLOPs-based budgeting for fair comparisons."
+    },
+    {
+      "title": "Online Continual Learning with Maximally Interfered Retrieval",
+      "authors": "Rahaf Aljundi et al.",
+      "year": 2019,
+      "arxiv_id": "1908.04742",
+      "role": "Baseline",
+      "relationship_sentence": "MIR\u2019s interference-driven buffer retrieval is a primary replay baseline that this paper replaces with a frequency-based sampler to equalize informational exposure under the same total resource budget."
+    },
+    {
+      "title": "Dark Experience for General Continual Learning",
+      "authors": "Paolo Buzzega et al.",
+      "year": 2020,
+      "arxiv_id": "2004.07211",
+      "role": "Gap Identification",
+      "relationship_sentence": "DER/DER++ improved replay using stored logits, directly highlighting unaccounted auxiliary storage\u2014precisely the memory overhead this paper\u2019s Bytes-budget explicitly counts when comparing OCL methods."
+    },
+    {
+      "title": "FreezeOut: Accelerate Training by Progressively Freezing Convolutional Layers",
+      "authors": "Andrew Brock et al.",
+      "year": 2017,
+      "arxiv_id": "1706.04983",
+      "role": "Inspiration",
+      "relationship_sentence": "FreezeOut showed that progressively freezing layers can cut training FLOPs with little accuracy loss, directly inspiring this paper\u2019s adaptive, batch-informativeness-driven layer freezing tailored to online replay."
+    },
+    {
+      "title": "ER-ACE: Mitigating New-Class Overconfidence in Online Class-Incremental Learning",
+      "authors": "Lucas Caccia et al.",
+      "year": 2021,
+      "arxiv_id": "",
+      "role": "Related Problem",
+      "relationship_sentence": "ER-ACE pinpointed new-class bias and leveraged class-aware mechanisms in replay, a limitation this paper addresses via frequency-based retrieval that balances exposure without incurring extra compute or memory."
+    }
+  ],
+  "synthesis_narrative": "Online continual learning coalesced around a single-epoch, class-incremental replay protocol with tiny buffers, crystallized by Chaudhry et al., where reservoir-updated memories underpin simple, strong ER baselines. Riemer et al. then pursued meta-learning with replay to optimize transfer versus interference, but its multiple inner-loop updates per minibatch underscored that nominally similar protocols can hide major compute disparities. Aljundi et al. advanced retrieval with MIR, selecting high-interference samples from the buffer, while Buzzega et al. (DER/DER++) boosted performance by distilling from stored logits\u2014both strategies improved accuracy yet introduced untracked costs, from extra gradient computations to auxiliary memory for logits. ER-ACE identified a complementary pain point: new-class overconfidence in the online regime, motivating class-aware replay treatments to re-balance exposure. Parallel to these CL developments, FreezeOut showed that progressively freezing layers can markedly reduce training FLOPs with limited accuracy loss, although its schedule was not conditioned on stream informativeness or replay dynamics. Together, these strands revealed an unmet need: a fair, unified accounting of computation and memory across OCL methods, and mechanisms that deliver competitive accuracy within a strict resource budget. Building directly on the replay setting, the paper formalizes budgets via FLOPs and Bytes, counters DER-style hidden storage, and replaces interference-centric retrieval with frequency-based sampling to equalize informational exposure. It adapts FreezeOut\u2019s efficiency insight into an online context with batch-informativeness-driven layer freezing, achieving compute savings that respect the new budget while preserving accuracy.",
+  "target_paper": {
+    "title": "Budgeted Online Continual Learning by Adaptive Layer Freezing and Frequency-based Sampling",
+    "authors": "Minhyuk Seo, Hyunseo Koh, Jonghyun Choi",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "Continual Learning, Lifelong Learning, Efficient Training, Layer Freezing",
+    "abstract": "The majority of online continual learning (CL) advocates single-epoch training and imposes restrictions on the size of replay memory. However, single-epoch training would incur a different amount of computations per CL algorithm, and the additional storage cost to store logit or model in addition to replay memory is largely ignored in calculating the storage budget. Arguing different computational and storage budgets hinder fair comparison among CL algorithms in practice, we propose to use floating point operations (FLOPs) and total memory size in Byte as a metric for computational and memory budgets, respectively, to compare and develop CL algorithms in the same \u2018total resource budget.\u2019 To improve a CL method in a limited total budget, we propose adaptive layer freezing that does not update the layers for less informative batches to reduce computational costs with a negligible loss of accuracy. In addition, we propose a memory retrieval method that allows the model to learn the same a",
+    "openreview_id": "dOAkHmsjRX",
+    "forum_id": "dOAkHmsjRX"
+  },
+  "analysis_timestamp": "2026-01-06T13:13:04.248571"
+}

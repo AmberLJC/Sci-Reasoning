@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Open Set Recognition using OpenMax",
+      "authors": "Abhijit Bendale, Terrance E. Boult",
+      "year": 2016,
+      "role": "Open-set recognition foundation",
+      "relationship_sentence": "Introduced the need to explicitly model and reject unknown classes beyond softmax, motivating CODA\u2019s disambiguation of open classes under shift."
+    },
+    {
+      "title": "Deep Anomaly Detection with Outlier Exposure",
+      "authors": "Dan Hendrycks, Mantas Mazeika, Thomas Dietterich",
+      "year": 2019,
+      "role": "Training-time unknown regularization",
+      "relationship_sentence": "Showed that exposing models to outliers during training sharpens decision boundaries for unknowns, which CODA echoes by inserting virtual unknown classes to regularize the latent space."
+    },
+    {
+      "title": "Energy-based Out-of-distribution Detection",
+      "authors": "Weitang Liu, Xiaoyun Wang, John D. Owens, Yixuan Li",
+      "year": 2020,
+      "role": "Open-set/OOD scoring principle",
+      "relationship_sentence": "Established energy scores as a principled way to separate in- vs out-of-distribution samples, informing CODA\u2019s test-time disambiguation for unknown detection under domain shift."
+    },
+    {
+      "title": "Open Set Domain Adaptation by Backpropagation (OSBP)",
+      "authors": "Kuniaki Saito, Shohei Yamamoto, Yoshitaka Ushiku, Tatsuya Harada",
+      "year": 2018,
+      "role": "Open-set under domain shift formulation",
+      "relationship_sentence": "Formulated learning to recognize knowns while rejecting unknowns under domain shift, a key precursor to CODA\u2019s OTDG setting that combines shift with open classes without target supervision."
+    },
+    {
+      "title": "Do We Really Need to Access the Source Data? Source Hypothesis Transfer for Unsupervised Domain Adaptation (SHOT)",
+      "authors": "Jian Liang, Dapeng Hu, Jiashi Feng",
+      "year": 2020,
+      "role": "Source-free/test-time adaptation mechanics",
+      "relationship_sentence": "Demonstrated adapting a source-trained model to shifted targets via information maximization and self-training without source data, inspiring CODA\u2019s test-time disambiguation procedure."
+    },
+    {
+      "title": "TENT: Fully Test-Time Adaptation by Entropy Minimization",
+      "authors": "Dequan Wang, Evan Shelhamer, Shaojie Xie, Trevor Darrell",
+      "year": 2021,
+      "role": "Test-time adaptation objective",
+      "relationship_sentence": "Showed that on-the-fly entropy minimization can adapt models at test time, a principle CODA leverages while additionally handling open-set ambiguity."
+    },
+    {
+      "title": "A Discriminative Feature Learning Approach for Deep Face Recognition (Center Loss)",
+      "authors": "Yandong Wen, Kaipeng Zhang, Zhifeng Li, Yu Qiao",
+      "year": 2016,
+      "role": "Intra-class compaction objective",
+      "relationship_sentence": "Provided a clear objective to compact same-class embeddings, directly aligning with CODA\u2019s compaction stage that tightens known-class clusters to carve space for virtual unknowns."
+    }
+  ],
+  "synthesis_narrative": "CODA tackles Open Test-Time Domain Generalization by unifying two strands of prior art: open-set recognition and test-time/ source-free adaptation under domain shift. OpenMax established the core challenge that closed-set softmax fails to handle unknown categories, while OSBP extended this insight to domain-shifted targets by separating known classes from unknowns. On the training side, Outlier Exposure showed that injecting unknowns during learning sharpens decision boundaries. CODA generalizes this idea without relying on external data by creating virtual unknown classes directly in latent space, and makes that feasible and effective by explicitly compacting known-class features\u2014an idea rooted in center loss-style intra-class compactness to enlarge safe margins. For identifying and rejecting unknowns at inference, energy-based OOD detection provides a robust scoring principle to distinguish in-distribution from out-of-distribution samples, which CODA leverages in its disambiguation stage.\nConcurrently, CODA\u2019s ability to adapt on-the-fly to domain shift draws from test-time and source-free adaptation. SHOT showed how to update a target model without source data via information maximization and self-training, and TENT demonstrated that simple entropy minimization can yield effective test-time adaptation. CODA integrates these adaptation mechanics with open-set handling: compacting known features and inserting virtual unknowns to regularize the representation, then disambiguating at test time with energy/confidence-driven rejection and lightweight adaptation. This synthesis yields a framework tailored to the OTDG setting\u2014handling both distribution shift and genuinely novel classes.",
+  "analysis_timestamp": "2026-01-06T23:42:48.047312"
+}

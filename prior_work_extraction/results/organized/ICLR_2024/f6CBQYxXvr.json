@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "The Use of Multiple Measurements in Taxonomic Problems",
+      "authors": "R. A. Fisher",
+      "year": 1936,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "Pro^2 adopts the core LDA idea of learning a low-dimensional set of discriminative, mutually orthogonal directions and adapts it to pretrained embeddings by training an orthonormal projection with supervised source labels before reweighting on the target."
+    },
+    {
+      "title": "Partial Least Squares",
+      "authors": "Herman Wold",
+      "year": 1984,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "Pro^2 borrows PLS\u2019s insight of extracting multiple orthogonal latent components that are directly predictive of labels, then linearly combining them, by learning source-supervised, orthogonal feature directions that can be recombined with few labeled target samples."
+    },
+    {
+      "title": "Do Better ImageNet Models Transfer Better?",
+      "authors": "Kornblith et al.",
+      "year": 2019,
+      "arxiv_id": "1805.08974",
+      "role": "Foundation",
+      "relationship_sentence": "Building on the finding that linear probes on fixed representations are strong and sample-efficient transfer baselines, Pro^2 keeps linear-probe adaptation but first reshapes the representation via an orthogonal, label-predictive projection to improve probe efficiency under shift."
+    },
+    {
+      "title": "Parameter-Efficient Transfer Learning for NLP",
+      "authors": "Houlsby et al.",
+      "year": 2019,
+      "arxiv_id": "1902.00751",
+      "role": "Baseline",
+      "relationship_sentence": "Adapters serve as a primary parameter-efficient fine-tuning baseline that relies on target supervision, which Pro^2 explicitly aims to outperform in label-scarce regimes by freezing the encoder and only reweighting orthogonal source-trained features with a small target set."
+    },
+    {
+      "title": "Model Soups: Averaging Weights of Multiple Fine-Tuned Models Improves Accuracy Without Extra Inference Cost",
+      "authors": "Wortsman et al.",
+      "year": 2022,
+      "arxiv_id": "2203.05482",
+      "role": "Inspiration",
+      "relationship_sentence": "Pro^2 is motivated by the observation that interpolating diverse solutions yields robust generalization, operationalizing this in feature space by constructing diverse (orthogonal) source-predictive directions and interpolating them with a target linear classifier."
+    },
+    {
+      "title": "WILDS: A Benchmark of in-the-Wild Distribution Shifts",
+      "authors": "Koh et al.",
+      "year": 2021,
+      "arxiv_id": "2012.07421",
+      "role": "Foundation",
+      "relationship_sentence": "WILDS provides the distribution-shift setting and benchmarks that frame the paper\u2019s target problem\u2014adapting with very limited labeled target data\u2014against which Pro^2\u2019s sample-efficient adaptation is evaluated."
+    },
+    {
+      "title": "Editing Models with Task Arithmetic",
+      "authors": "Ilharco et al.",
+      "year": 2023,
+      "arxiv_id": "2212.04089",
+      "role": "Related Problem",
+      "relationship_sentence": "Echoing task arithmetic\u2019s linear composition of task-specific directions in weight space, Pro^2 composes task-relevant orthogonal directions in feature space to represent and adapt to shifted target tasks via simple linear recombination."
+    }
+  ],
+  "synthesis_narrative": "Classical discriminative projection methods established that compact sets of orthogonal directions could capture task-relevant variation: Fisher\u2019s linear discriminant analysis explicitly seeks orthogonal, low-dimensional discriminative axes, while partial least squares constructs orthogonal latent components that are directly predictive of labels and designed to be linearly recombined. In transfer learning, Kornblith et al. showed that linear probes on frozen representations are strong and sample-efficient, positioning simple linear adaptation as a robust default. Parameter-efficient fine-tuning via adapters demonstrated that small, learnable modules enable transfer with limited compute but still rely on substantial target supervision. Meanwhile, model soups revealed that interpolation across diverse solutions reliably improves out-of-distribution generalization, and task arithmetic showed that task-specific directions can be linearly composed to achieve new capabilities. The WILDS benchmark codified the practical scenario of adapting to real-world distribution shifts with scarce target labels.\nTogether, these works suggest a pathway: build multiple, diverse, predictive directions that can be linearly recombined in the target domain. The orthogonal, supervised-components perspective from LDA/PLS dovetails with the linear-probe paradigm to promise sample-efficient adaptation, while insights from model interpolation and task composition argue for constructing diversity and then reweighting rather than relearning. This naturally leads to learning an orthonormal, source-supervised projection to produce diverse predictive features, then using a tiny target set to interpolate among them with a linear classifier, addressing adapters\u2019 label-hungry adaptation and improving robustness under shift.",
+  "target_paper": {
+    "title": "Project and Probe: Sample-Efficient Adaptation by Interpolating Orthogonal Features",
+    "authors": "Annie S Chen, Yoonho Lee, Amrith Setlur, Sergey Levine, Chelsea Finn",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "distribution-shift robustness, fine-tuning, adaptation, transfer learning",
+    "abstract": "Transfer learning with a small amount of target data is an effective and common approach to adapting a pre-trained model to distribution shifts. In some situations, target data labels may be expensive to obtain, so we may only have access to a limited number of target data points. To make the most of a very small target dataset, we propose a lightweight, sample-efficient approach that learns a diverse set of features and adapts to a target distribution by interpolating these features. Our approach, Project and Probe (Pro$^2$), first learns a linear projection that maps a pre-trained embedding onto orthogonal directions while being predictive of labels in the source dataset. The goal of this step is to learn a variety of predictive features, so that at least some of them remain useful after distribution shift. Pro$^2$ then learns a linear classifier on top of these projected features using a small target dataset. Theoretically, we find that Pro$^2$ results in more sample-efficient gener",
+    "openreview_id": "f6CBQYxXvr",
+    "forum_id": "f6CBQYxXvr"
+  },
+  "analysis_timestamp": "2026-01-06T14:30:01.975592"
+}

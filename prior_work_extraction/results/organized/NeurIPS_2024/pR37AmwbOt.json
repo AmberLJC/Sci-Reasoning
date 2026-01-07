@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Erasing Concepts from Diffusion Models",
+      "authors": "Gandikota et al.",
+      "year": 2023,
+      "role": "Diffusion model unlearning/erasure",
+      "relationship_sentence": "Established that targeted unlearning can remove unsafe concepts directly from diffusion parameters but is brittle and can be undone by later fine-tuning, motivating a defense that remains robust under adversarial fine-tuning."
+    },
+    {
+      "title": "Safe Latent Diffusion",
+      "authors": "Schramowski et al.",
+      "year": 2023,
+      "role": "Safety guidance/filtering for diffusion",
+      "relationship_sentence": "Demonstrated external safety guidance with classifiers, highlighting strengths and the ease of bypass via model adaptation\u2014framing the need to internalize safety by shaping the model\u2019s latent space rather than relying on filters."
+    },
+    {
+      "title": "Diffusion Models Beat GANs (Guided Diffusion)",
+      "authors": "Dhariwal and Nichol",
+      "year": 2021,
+      "role": "Classifier guidance foundation (external steering)",
+      "relationship_sentence": "Introduced classifier guidance as an external steering mechanism for diffusion sampling, a paradigm later used for safety but vulnerable to malicious fine-tuning, which the present work aims to withstand."
+    },
+    {
+      "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+      "authors": "Hu et al.",
+      "year": 2022,
+      "role": "Parameter-efficient fine-tuning enabling attacks",
+      "relationship_sentence": "Provided a lightweight adaptation mechanism widely used to jailbreak or repurpose diffusion models; the new method is explicitly designed to resist such malicious LoRA-style fine-tuning through latent separation."
+    },
+    {
+      "title": "DreamBooth: Fine Tuning Text-to-Image Diffusion Models for Subject-Driven Generation",
+      "authors": "Ruiz et al.",
+      "year": 2023,
+      "role": "Personalization fine-tuning that can induce forgetting",
+      "relationship_sentence": "Showed how subject-driven fine-tuning can overfit and alter model priors, illustrating the catastrophic forgetting dynamics that the proposed approach intentionally exploits to prevent harmful re-purposing."
+    },
+    {
+      "title": "Overcoming catastrophic forgetting in neural networks (EWC)",
+      "authors": "Kirkpatrick et al.",
+      "year": 2017,
+      "role": "Catastrophic forgetting theory and mitigation",
+      "relationship_sentence": "Provided the seminal analysis of catastrophic forgetting, which this paper inverts as a security property\u2014structuring representations so harmful concepts are preferentially forgotten under subsequent fine-tuning."
+    },
+    {
+      "title": "Supervised Contrastive Learning",
+      "authors": "Khosla et al.",
+      "year": 2020,
+      "role": "Contrastive objective for class-separable representations",
+      "relationship_sentence": "Inspires the use of a supervised contrastive loss to push apart harmful and clean distributions in latent space, a core mechanism enabling safety-preserving forgetting during malicious fine-tuning."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core idea\u2014leveraging catastrophic forgetting as a protective asset\u2014sits at the intersection of safety for diffusion models, fine-tuning dynamics, and contrastive representation learning. Early safety efforts in diffusion centered on external guidance or filters, as exemplified by Guided Diffusion and Safe Latent Diffusion. These methods steer sampling using classifiers and safety heads but leave the base model parameters largely unchanged, rendering them susceptible to circumvention via subsequent adaptation. Parallel work on unlearning, notably Erasing Concepts from Diffusion Models, directly edits diffusion parameters to remove unsafe concepts but has been shown to be fragile: later fine-tuning can reintroduce or route around erased content.\n\nThe rise of practical fine-tuning tools\u2014DreamBooth for personalization and LoRA for parameter-efficient adaptation\u2014exposed a concrete adversarial vector. These methods can induce distributional shifts and catastrophic forgetting of safety-relevant distinctions, undoing both external filters and naive unlearning. Drawing on foundational insights from catastrophic forgetting (EWC), the present work flips the narrative: rather than merely preventing forgetting, it engineers the representation so that harmful concepts occupy a distinct, isolated region in latent space. Supervised contrastive learning provides the mechanism, explicitly maximizing separation between clean and harmful distributions. As a result, when attackers apply small fine-tuning steps (e.g., LoRA/DreamBooth), the model preferentially \u201cforgets\u201d or fails to acquire harmful generations, preserving safety. Together, these prior works shape a defense that internalizes safety, is resilient to malicious fine-tuning, and uses forgetting as a feature rather than a liability.",
+  "analysis_timestamp": "2026-01-06T23:33:35.540971"
+}

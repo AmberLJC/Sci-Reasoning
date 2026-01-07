@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "BEER: BEtter Evaluation as Ranking",
+      "authors": "Milo\u0161 Stanojevi\u0107 and Khalil Sima'an",
+      "year": 2014,
+      "arxiv_id": "unknown",
+      "role": "Inspiration",
+      "relationship_sentence": "BEER established training MT evaluation models via pairwise human preferences rather than absolute scores, directly inspiring MT-Ranker\u2019s decision to cast evaluation as a pairwise ranking problem."
+    },
+    {
+      "title": "Findings of the 2013 Workshop on Statistical Machine Translation",
+      "authors": "Ond\u0159ej Bojar et al.",
+      "year": 2013,
+      "arxiv_id": "unknown",
+      "role": "Foundation",
+      "relationship_sentence": "WMT13 formalized human evaluation protocols based on relative ranking of system outputs, providing the foundational inter-system comparison setup that MT-Ranker automates without references."
+    },
+    {
+      "title": "Experts, Errors, and Context: A Large-Scale Study of Human Evaluation for Machine Translation with MQM",
+      "authors": "Markus Freitag et al.",
+      "year": 2021,
+      "arxiv_id": "2104.14478",
+      "role": "Foundation",
+      "relationship_sentence": "MQM introduced high-quality, segment-level error annotations that can be reliably converted into better/worse labels between system outputs, supplying the supervision MT-Ranker uses for pairwise training."
+    },
+    {
+      "title": "COMET: A Neural Framework for MT Evaluation",
+      "authors": "Ricardo Rei et al.",
+      "year": 2020,
+      "arxiv_id": "2009.04439",
+      "role": "Baseline",
+      "relationship_sentence": "COMET popularized neural, learned MT metrics but outputs scalar regression scores\u2014MT-Ranker targets the same evaluation goal while replacing absolute scoring with a pairwise inter-system decision."
+    },
+    {
+      "title": "COMET-QE / CometKiwi: Reference-free MT Evaluation",
+      "authors": "Ricardo Rei et al.",
+      "year": 2021,
+      "arxiv_id": "unknown",
+      "role": "Baseline",
+      "relationship_sentence": "CometKiwi demonstrates strong reference-free regression for sentence-level QE, and MT-Ranker directly improves on this setting by reformulating the objective to predict which of two hypotheses is better given the source."
+    },
+    {
+      "title": "TransQuest: Translation Quality Estimation with Cross-lingual Transformers",
+      "authors": "Tharindu Ranasinghe et al.",
+      "year": 2020,
+      "arxiv_id": "2003.05964",
+      "role": "Baseline",
+      "relationship_sentence": "TransQuest is a primary transformer-based reference-free QE baseline producing absolute scores, whose limitations in interpretability and cross-system comparability MT-Ranker addresses via pairwise ranking."
+    },
+    {
+      "title": "QuEst++: A Toolkit for Automatic Machine Translation Quality Estimation",
+      "authors": "Lucia Specia et al.",
+      "year": 2015,
+      "arxiv_id": "unknown",
+      "role": "Foundation",
+      "relationship_sentence": "QuEst++ codified the reference-free QE formulation\u2014predicting quality from source\u2013hypothesis pairs\u2014which MT-Ranker retains but recasts from scalar regression to pairwise inter-system comparison."
+    }
+  ],
+  "synthesis_narrative": "Early MT evaluation work showed that human judges can more reliably express preferences between outputs than provide calibrated absolute scores, and community protocols at WMT13 operationalized system comparison via relative rankings of translations for a source segment. Building on this insight, BEER introduced learning an evaluation model directly from pairwise human preferences, demonstrating that a ranking objective can better capture human judgments than regression. In parallel, the QE line of work, crystallized by QuEst++, defined reference-free evaluation as predicting quality from source\u2013hypothesis pairs, and modern neural metrics such as TransQuest and COMET(-QE/CometKiwi) advanced this formulation with transformer encoders trained to regress human scores. More recently, MQM provided high-quality, expert error annotations at segment level that can be aggregated into better/worse labels, offering a principled supervisory signal for preference learning between competing system outputs. COMET further established the practicality of learned metrics but reinforced the dominance of scalar scoring.\nThese threads reveal a gap: while reference-free QE is practical, and pairwise judgments are more reliable and actionable for inter-system comparisons, no method unified them as a direct, reference-free, inter-system ranking function. The natural next step is to keep the QE input setting (source plus hypotheses), replace regression with a pairwise ranking objective trained on MQM/DA-derived preferences, and deliver a model that answers the operational question\u2014between two systems, which translation is better\u2014thereby improving interpretability and real-world applicability.",
+  "target_paper": {
+    "title": "MT-Ranker: Reference-free machine translation evaluation by inter-system ranking",
+    "authors": "Ibraheem Muhammad Moosa, Rui Zhang, Wenpeng Yin",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Machine Translation Evaluation",
+    "abstract": "Traditionally, Machine Translation (MT) Evaluation has been treated as a regression problem -- producing an absolute translation-quality score. This approach has two limitations: i) the scores lack interpretability, and human annotators struggle with giving consistent scores; ii) most scoring methods are based on (reference, translation) pairs, limiting their applicability in real-world scenarios where references are absent. In practice, we often care about whether a new MT system is better or worse than some competitors. In addition, reference-free MT evaluation is increasingly practical and necessary. Unfortunately, these two practical considerations have yet to be jointly explored. In this work, we formulate the reference-free MT evaluation into a pairwise ranking problem. Given the source sentence and a pair of translations, our system predicts which translation is better. In addition to proposing this new formulation, we further show that this new paradigm can demonstrate superior",
+    "openreview_id": "Rry1SeSOQL",
+    "forum_id": "Rry1SeSOQL"
+  },
+  "analysis_timestamp": "2026-01-06T07:05:25.766619"
+}

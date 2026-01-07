@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Score-Based Generative Modeling through Stochastic Differential Equations",
+      "authors": "Yang Song et al.",
+      "year": 2021,
+      "arxiv_id": "2011.13456",
+      "role": "Foundation",
+      "relationship_sentence": "The paper provides the score-based SDE framework and sampling procedures that this work uses to learn and sample from the joint score of multiple audio sources."
+    },
+    {
+      "title": "Denoising Diffusion Restoration Models",
+      "authors": "Bahjat Kawar et al.",
+      "year": 2022,
+      "arxiv_id": "2201.11793",
+      "role": "Extension",
+      "relationship_sentence": "Their data-consistency formulation for inverse problems directly motivates the paper\u2019s Dirac-likelihood separation inference as a projection onto the constraint set defined by the mixture operator."
+    },
+    {
+      "title": "RePaint: Inpainting using Denoising Diffusion Probabilistic Models",
+      "authors": "Andreas Lugmayr et al.",
+      "year": 2022,
+      "arxiv_id": "2201.09865",
+      "role": "Related Problem",
+      "relationship_sentence": "RePaint\u2019s clamping of known pixels (a Dirac-like conditioning) informs the paper\u2019s hard-likelihood conditioning strategy, adapted from pixel inpainting to the linear sum constraint of audio source separation."
+    },
+    {
+      "title": "Diffusion Posterior Sampling for General Noisy Inverse Problems",
+      "authors": "Hyungjin Chung et al.",
+      "year": 2022,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "DPS\u2019s incorporation of measurement likelihood gradients into reverse diffusion inspires treating source separation as Bayesian inference with a diffusion prior, which this work operationalizes via a Dirac likelihood."
+    },
+    {
+      "title": "Slakh2100: A Synthetic Dataset for Audio Source Separation",
+      "authors": "Ethan Manilow et al.",
+      "year": 2019,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "This dataset defines the multi-instrument stem setup and evaluation protocol the paper adopts for jointly modeling sources and testing generation, imputation, and separation."
+    },
+    {
+      "title": "Music Source Separation in the Waveform Domain",
+      "authors": "Alexandre D\u00e9fossez et al.",
+      "year": 2019,
+      "arxiv_id": "1909.01174",
+      "role": "Baseline",
+      "relationship_sentence": "Demucs serves as the main separation baseline whose strong performance but task-specific nature motivates a unified generative model that also handles music generation and source imputation."
+    }
+  ],
+  "synthesis_narrative": "Score-based generative modeling via stochastic differential equations established how to learn noise-conditioned score functions and sample from complex data distributions; critically, it showed that scores of joint distributions can be learned and exploited for flexible conditional sampling. Denoising Diffusion Restoration Models extended diffusion to inverse problems by interleaving denoising with exact data-consistency projections under known forward operators, illustrating how hard measurement constraints can be enforced within diffusion inference. RePaint demonstrated a closely related idea in image inpainting by repeatedly clamping observed pixels during the reverse process, effectively imposing a Dirac-like likelihood on known data. Diffusion Posterior Sampling framed inverse problems as sampling from posteriors defined by a diffusion prior and an explicit likelihood, injecting gradients of log-likelihood into the reverse dynamics. Slakh2100 provided a standardized multi-stem music corpus with aligned sources and mixtures, enabling consistent training and evaluation across separation and generative tasks. Demucs delivered a strong waveform-domain separation baseline, but its specialization to separation highlighted the absence of a single model capable of both generating mixtures/sources and separating them. Together, these works suggest training a single diffusion model on the joint distribution of stems to support unconditional generation, conditional imputation, and separation as posterior inference. By combining joint score learning with inference-time enforcement of exact mixture consistency\u2014generalizing data-consistency and clamping ideas into a Dirac-likelihood formulation\u2014the current approach naturally unifies music generation and source separation within one probabilistic model.",
+  "target_paper": {
+    "title": "Multi-Source Diffusion Models for Simultaneous Music Generation and Separation",
+    "authors": "Giorgio Mariani, Irene Tallini, Emilian Postolache, Michele Mancusi, Luca Cosmo, Emanuele Rodol\u00e0",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "oral",
+    "keywords": "source separation, probabilistic diffusion models, music generation",
+    "abstract": "In this work, we define a diffusion-based generative model capable of both music generation and source separation by learning the score of the joint probability density of sources sharing a context. Alongside the classic total inference tasks (i.e., generating a mixture, separating the sources), we also introduce and experiment on the partial generation task of source imputation, where we generate a subset of the sources given the others (e.g., play a piano track that goes well with the drums). Additionally, we introduce a novel inference method for the separation task based on Dirac likelihood functions. We train our model on Slakh2100, a standard dataset for musical source separation, provide qualitative results in the generation settings, and showcase competitive quantitative results in the source separation setting. Our method is the first example of a single model that can handle both generation and separation tasks, thus representing a step toward general audio models.",
+    "openreview_id": "h922Qhkmx1",
+    "forum_id": "h922Qhkmx1"
+  },
+  "analysis_timestamp": "2026-01-06T16:01:41.539319"
+}

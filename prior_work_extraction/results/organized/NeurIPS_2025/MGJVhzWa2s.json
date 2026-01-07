@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis",
+      "authors": "Ben Mildenhall et al.",
+      "year": 2020,
+      "role": "Foundational neural rendering and ray-based supervision",
+      "relationship_sentence": "CLiFT adopts NeRF\u2019s multi-view, ray-conditioned learning objective and supervision paradigm while replacing volumetric ray-marching with a compressed light-field token representation."
+    },
+    {
+      "title": "Local Light Field Fusion: Practical View Synthesis for Real Scenes",
+      "authors": "Ben Mildenhall et al.",
+      "year": 2019,
+      "role": "Light-field oriented view synthesis",
+      "relationship_sentence": "CLiFT extends LLFF\u2019s idea of leveraging local light-field structure by learning to encode and compress local ray neighborhoods into tokens that can be adaptively selected at render time."
+    },
+    {
+      "title": "Light Field Networks: Neural Scene Representations with Single-Evaluation Rendering",
+      "authors": "Vincent Sitzmann et al.",
+      "year": 2021,
+      "role": "Neural light-field representation for efficient rendering",
+      "relationship_sentence": "By framing scene appearance as a neural light field, LFNs directly motivate CLiFT\u2019s choice to model scenes with light-field tokens instead of density fields, prioritizing compute-efficient inference."
+    },
+    {
+      "title": "pixelNeRF: Neural Radiance Fields from One or Few Images",
+      "authors": "Alex Yu, Vickie Ye, Matthew Tancik, Angjoo Kanazawa",
+      "year": 2021,
+      "role": "Generalizable multi-view conditioning with camera-aware encoders",
+      "relationship_sentence": "CLiFT\u2019s multi-view encoder that tokenizes posed images echoes pixelNeRF\u2019s camera-conditioned feature extraction, but reifies these features into explicit ray tokens suitable for later compression."
+    },
+    {
+      "title": "3D Gaussian Splatting for Real-Time Radiance Field Rendering",
+      "authors": "Bernhard Kerbl et al.",
+      "year": 2023,
+      "role": "Compute-efficient neural rendering with quality\u2013speed trade-offs",
+      "relationship_sentence": "The notion of trading rendering quality for speed by selecting a subset of primitives in Gaussian Splatting directly informs CLiFT\u2019s compute-adaptive rendering via selecting a variable number of CLiFT tokens."
+    },
+    {
+      "title": "Token Merging: Your ViT But Faster",
+      "authors": "Daniel Bolya et al.",
+      "year": 2022,
+      "role": "Token reduction via similarity-based merging",
+      "relationship_sentence": "CLiFT\u2019s latent-space K-means selection and condensation of many ray tokens into centroid tokens closely parallels ToMe\u2019s idea of merging similar tokens to preserve semantics while reducing compute."
+    },
+    {
+      "title": "Perceiver IO: A General Architecture for Structured Inputs & Outputs",
+      "authors": "Andrew Jaegle et al.",
+      "year": 2021,
+      "role": "Latent bottleneck and variable-sized input handling",
+      "relationship_sentence": "CLiFT\u2019s condenser and compute-adaptive renderer that accept a variable number of tokens and distill them into a compact latent for image synthesis are directly aligned with Perceiver-style latent cross-attention."
+    }
+  ],
+  "synthesis_narrative": "CLiFT\u2019s core innovation\u2014representing scenes as compressed light-field tokens and rendering adaptively under a compute budget\u2014sits at the intersection of neural light-field modeling, generalizable multi-view conditioning, and token-efficient transformer design. NeRF establishes the ray-based supervision and view-synthesis framing that CLiFT retains while moving away from volumetric integration. LLFF and Light Field Networks provide the conceptual shift toward light-field representations, highlighting that many view-synthesis cues can be captured in 4D ray space; CLiFT operationalizes this by explicitly tokenizing rays and compressing them into centroid tokens. On the multi-view encoding side, pixelNeRF demonstrates how posed images can be transformed into camera-aware feature descriptors; CLiFT similarly encodes multi-view evidence but structures it as a set of ray tokens amenable to set operations.\n\nTo realize compute adaptivity, CLiFT borrows directly from token-efficiency advances in vision transformers: ToMe\u2019s similarity-based token merging inspires the latent K-means selection and condensation into representative centroid tokens, preserving scene semantics while reducing computation. Perceiver IO motivates the condenser and renderer design that gracefully handle variable-sized token sets via latent bottlenecks and cross-attention. Finally, 3D Gaussian Splatting influences the practical perspective on speed\u2013quality trade-offs, demonstrating that selecting a subset of rendering primitives can yield dramatic speedups; CLiFT harnesses the same principle by selecting a controllable number of CLiFT tokens at test time. Together, these works directly shape CLiFT\u2019s representation, training supervision, token compression strategy, and compute-adaptive rendering pipeline.",
+  "analysis_timestamp": "2026-01-07T00:21:32.334238"
+}

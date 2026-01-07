@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Dataset Distillation",
+      "authors": "Tongzhou Wang et al.",
+      "year": 2018,
+      "arxiv_id": "1811.10959",
+      "role": "Foundation",
+      "relationship_sentence": "This work established the core formulation of optimizing a small synthetic dataset so that training a model on it achieves high downstream accuracy, which MDC inherits as the basic condensation setup that its new adaptive subset loss augments."
+    },
+    {
+      "title": "Dataset Condensation with Gradient Matching",
+      "authors": "Bo Zhao et al.",
+      "year": 2021,
+      "arxiv_id": "2006.05929",
+      "role": "Extension",
+      "relationship_sentence": "MDC builds directly on gradient-matching style condensation objectives and adds an adaptive subset loss so that any sampled subset of the synthesized data remains representative, collapsing multiple size-specific gradient-matching runs into a single training."
+    },
+    {
+      "title": "Matching Training Trajectories for Data Condensation",
+      "authors": "George Cazenavette et al.",
+      "year": 2022,
+      "arxiv_id": "2203.11932",
+      "role": "Baseline",
+      "relationship_sentence": "MTT is a primary strong baseline that optimizes synthetic data for a fixed target size; MDC explicitly addresses MTT\u2019s limitation of requiring separate condensation per size and the observed degradation when subsetting larger synthetic sets."
+    },
+    {
+      "title": "Dataset Condensation with Distribution Matching",
+      "authors": "Bo Zhao et al.",
+      "year": 2023,
+      "arxiv_id": "unknown",
+      "role": "Extension",
+      "relationship_sentence": "MDC augments distribution-matching condensation by introducing a subset-consistency term on top of the base loss, enabling a single optimization to yield high-quality synthetic datasets across multiple sizes."
+    },
+    {
+      "title": "Dataset Distillation with Kernel Methods (KIP)",
+      "authors": "Tuan Anh Nguyen et al.",
+      "year": 2021,
+      "arxiv_id": "unknown",
+      "role": "Baseline",
+      "relationship_sentence": "KIP exemplifies fixed-budget condensation that must be rerun for each target size and whose subsets are not guaranteed to be representative; MDC targets this rigidity by training once to support many sizes."
+    },
+    {
+      "title": "Once for All: Train One Network and Specialize It for Efficient Deployment",
+      "authors": "Han Cai et al.",
+      "year": 2020,
+      "arxiv_id": "1908.09791",
+      "role": "Inspiration",
+      "relationship_sentence": "The \u2018train-once, serve-many-budgets\u2019 paradigm in Once-for-All directly motivates MDC\u2019s idea of compressing N size-specific condensation processes into a single training via a subset-consistency objective."
+    }
+  ],
+  "synthesis_narrative": "Dataset distillation introduced the objective of optimizing a compact synthetic set so that training on it from scratch yields competitive performance, grounding later condensation methods in a meta-optimization over data rather than model weights. Gradient matching then provided a practical surrogate loss by directly aligning synthetic and real gradients, making synthetic sets tuned for a chosen budget (e.g., images per class). Matching training trajectories pushed fidelity further by aligning entire optimization paths, producing strong synthetic datasets but still targeting a single, fixed size. Distribution matching reframed condensation as aligning distributions of features/gradients between real and synthetic mini-batches, again yielding state-of-the-art results for a pre-specified dataset size. Kernel-based KIP demonstrated a distinct, fixed-budget route via inducing points in kernel space, similarly lacking guarantees that subsets of a larger synthetic set remain representative. Outside condensation, Once-for-All showed that a single training procedure can be structured to support many deployment budgets by enforcing consistency across sub-configurations.\nTogether these works crystallize a gap: leading condensation objectives (gradient/trajectory/distribution matching and kernel methods) optimize for one size at a time, and subsets of larger synthetic sets often degrade compared to sets distilled directly for the smaller size. Inspired by the Once-for-All paradigm, the new approach synthesizes these insights by augmenting standard condensation losses with a subset-consistency objective, effectively compressing multiple size-specific optimizations into one. This makes condensed data flexible for on-device deployment across fluctuating compute budgets while preserving representativeness at every target size.",
+  "target_paper": {
+    "title": "Multisize Dataset Condensation",
+    "authors": "Yang He, Lingao Xiao, Joey Tianyi Zhou, Ivor Tsang",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "oral",
+    "keywords": "Dataset Condensation, Dataset Distillation, Image Classification",
+    "abstract": "While dataset condensation effectively enhances training efficiency, its application in on-device scenarios brings unique challenges. 1) Due to the fluctuating computational resources of these devices, there's a demand for a flexible dataset size that diverges from a predefined size. 2) The limited computational power on devices often prevents additional condensation operations. These two challenges connect to the \"subset degradation problem\" in traditional dataset condensation: a subset from a larger condensed dataset is often unrepresentative compared to directly condensing the whole dataset to that smaller size. In this paper, we propose Multisize Dataset Condensation (MDC) by **compressing $N$ condensation processes into a single condensation process to obtain datasets with multiple sizes.** Specifically, we introduce an \"adaptive subset loss\" on top of the basic condensation loss to mitigate the \"subset degradation problem\". Our MDC method offers several benefits: 1) No additional",
+    "openreview_id": "FVhmnvqnsI",
+    "forum_id": "FVhmnvqnsI"
+  },
+  "analysis_timestamp": "2026-01-06T23:35:49.497367"
+}

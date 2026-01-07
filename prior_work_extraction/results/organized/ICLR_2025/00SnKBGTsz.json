@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Self-Instruct: Aligning Language Models with Self-Generated Instructions",
+      "authors": "Yizhong Wang et al.",
+      "year": 2023,
+      "arxiv_id": "2212.10560",
+      "role": "Baseline",
+      "relationship_sentence": "This LLM-as-annotator pipeline established synthetic instruction/data generation without a closed feedback loop, providing both the primary baseline and a generation module that DataEnvGym wraps with an agent policy and student-driven feedback."
+    },
+    {
+      "title": "Dynabench: Rethinking Benchmarking in NLP",
+      "authors": "Douwe Kiela et al.",
+      "year": 2021,
+      "arxiv_id": "2104.14337",
+      "role": "Foundation",
+      "relationship_sentence": "Dynabench introduced dynamic, model-in-the-loop adversarial data collection environments with humans, directly informing DataEnvGym\u2019s formulation of teacher environments that automate this loop with agents."
+    },
+    {
+      "title": "Adversarial NLI: A New Benchmark for Natural Language Understanding",
+      "authors": "Yixin Nie et al.",
+      "year": 2020,
+      "arxiv_id": "1910.14599",
+      "role": "Foundation",
+      "relationship_sentence": "ANLI operationalized iterative human-and-model-in-the-loop data creation using model feedback to target weaknesses, a paradigm DataEnvGym generalizes by enabling autonomous teachers to generate such targeted data."
+    },
+    {
+      "title": "Beyond Accuracy: Behavioral Testing of NLP Models with CheckList",
+      "authors": "Marco Tulio Ribeiro et al.",
+      "year": 2020,
+      "arxiv_id": "2005.04118",
+      "role": "Gap Identification",
+      "relationship_sentence": "CheckList showed that humans must plan tests and analyze failures to guide data creation, a manual bottleneck that DataEnvGym explicitly removes by giving agents an environment to plan and generate data from student feedback."
+    },
+    {
+      "title": "Teacher-Student Curriculum Learning",
+      "authors": "Ilya Matiisen et al.",
+      "year": 2017,
+      "arxiv_id": "1707.00183",
+      "role": "Foundation",
+      "relationship_sentence": "This work formalized teaching as sequential task selection to maximize student learning progress, a framing DataEnvGym adopts by casting data generation as a sequential decision-making problem with student-feedback rewards."
+    },
+    {
+      "title": "Paired Open-Ended Trailblazer (POET): Endlessly Generating Increasingly Complex Environments and Their Solvable Agents",
+      "authors": "Rui Wang et al.",
+      "year": 2019,
+      "arxiv_id": "1901.01753",
+      "role": "Related Problem",
+      "relationship_sentence": "POET\u2019s co-evolution of tasks and learners inspired DataEnvGym\u2019s view of a teacher agent that generates progressively challenging data guided by student performance signals."
+    },
+    {
+      "title": "STaR: Bootstrapping Reasoning With Reasoning",
+      "authors": "Ethan Zelikman et al.",
+      "year": 2022,
+      "arxiv_id": "2203.14465",
+      "role": "Inspiration",
+      "relationship_sentence": "STaR demonstrated that model errors can be leveraged to generate training signals in an iterative loop, directly motivating DataEnvGym\u2019s closed-loop use of student feedback to steer data synthesis policies."
+    }
+  ],
+  "synthesis_narrative": "LLM-driven data synthesis first became practical with pipelines that prompt models to generate instructions and examples, as in Self-Instruct, which delivered scalable synthetic data but relied on largely one-shot generation without explicit planning from model feedback. Concurrently, model-in-the-loop collection frameworks like Dynabench and ANLI showed that iteratively querying a model to expose weaknesses and then collecting targeted data produces harder, more useful examples; these systems, however, depended on humans to analyze failures and craft the next data. Behavioral testing tools such as CheckList highlighted the same manual bottleneck: humans design capability checklists, inspect model behavior, and then decide what data to create next. From the learning-theory side, Teacher-Student Curriculum Learning formalized teaching as sequential decision-making\u2014selecting tasks to maximize student learning progress\u2014foreshadowing a policy-and-reward formulation for data creation. POET extended the idea by co-evolving problem generators with learners in open-ended settings, providing a template for pairing a generator (teacher) with a solver (student) and driving complexity through feedback. STaR demonstrated in NLP that student errors are valuable signals to synthesize targeted training content, closing the loop between evaluation and new data. Together these works exposed a gap: we had LLM-based generators, evidence that feedback-driven, iterative data creation is superior, and a teacher-student decision-making lens\u2014but no standardized environment to develop autonomous teachers that plan and act from student feedback. DataEnvGym synthesizes these threads by formalizing data generation as a sequential teacher policy operating in a feedback-rich environment, enabling modular generators (e.g., instruction evolution) to be steered by student-progress signals and systematically evaluated.",
+  "target_paper": {
+    "title": "DataEnvGym: Data Generation Agents in Teacher Environments with Student Feedback",
+    "authors": "Zaid Khan, Elias Stengel-Eskin, Jaemin Cho, Mohit Bansal",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "iterative data generation, llm agent, lifelong learning",
+    "abstract": "The process of creating training data to teach models is currently driven by humans, who manually analyze model weaknesses and plan how to create data that improves a student model. Recent approaches using large language models (LLMs) as annotators reduce human annotation effort, but still require humans to interpret feedback from evaluations and control the LLM to produce data the student needs. Automating this labor-intensive process by creating autonomous data generation agents \u2013 or teachers \u2013 is desirable, but requires environments that can simulate the feedback-driven, iterative, closed loop of data creation. To enable rapid and scalable testing for such agents and their modules, we introduce DataEnvGym, a testbed of teacher environments for data generation agents. DataEnvGym frames data generation as a sequential decision-making task, involving an agent consisting of a data generation policy (which generates a plan for creating training data) and a data generation engine (which t",
+    "openreview_id": "00SnKBGTsz",
+    "forum_id": "00SnKBGTsz"
+  },
+  "analysis_timestamp": "2026-01-06T09:45:14.468701"
+}

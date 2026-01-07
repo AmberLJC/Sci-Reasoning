@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Deep Reinforcement Learning from Human Preferences",
+      "authors": "Paul F. Christiano et al.",
+      "year": 2017,
+      "role": "Foundation",
+      "relationship_sentence": "RIME builds directly on the Christiano et al. PbRL pipeline\u2014learning a reward model from pairwise preferences with a Bradley\u2013Terry-style loss and optimizing a policy with the learned reward\u2014while making that reward learning robust to noisy preferences via sample selection and warm-starting."
+    },
+    {
+      "title": "Preference-Based Policy Learning",
+      "authors": "Mohamed Akrour et al.",
+      "year": 2012,
+      "role": "Foundation",
+      "relationship_sentence": "This work formalized preference-based RL with probabilistic comparison models and pairwise feedback, providing the conceptual and mathematical underpinnings that RIME adopts before introducing robustness mechanisms to handle mislabeled preferences."
+    },
+    {
+      "title": "Active Preference-Based Learning of Reward Functions",
+      "authors": "Dorsa Sadigh et al.",
+      "year": 2017,
+      "role": "Foundation",
+      "relationship_sentence": "Sadigh et al. established the modern formulation of learning reward functions from pairwise human comparisons (including noisy responses) and active querying; RIME operates in the same preference-learning setup but targets robustness to noisy/erroneous feedback during reward model training."
+    },
+    {
+      "title": "Reward Learning from Human Preferences and Demonstrations in Atari",
+      "authors": "Daniel Ibarz et al.",
+      "year": 2018,
+      "role": "Gap Identification",
+      "relationship_sentence": "Ibarz et al. showed the practicality of training reward models from preferences but highlighted brittleness and reliance on high-quality labels; RIME explicitly addresses this gap by filtering noisy preference data and stabilizing training with a warm-started reward model."
+    },
+    {
+      "title": "Extrapolating Beyond Suboptimal Demonstrations via Inverse Reinforcement Learning by Comparing Trajectories (T-REX)",
+      "authors": "Daniel S. Brown et al.",
+      "year": 2019,
+      "role": "Extension",
+      "relationship_sentence": "T-REX demonstrated learning rewards from ranked/paired trajectories and the value of offline pretraining; RIME extends this lineage by warm-starting the preference reward model to reduce cumulative error and bridge the pretrain-to-online transition in PbRL."
+    },
+    {
+      "title": "Co-teaching: Robust Training of Deep Neural Networks with Extremely Noisy Labels",
+      "authors": "Bo Han et al.",
+      "year": 2018,
+      "role": "Inspiration",
+      "relationship_sentence": "RIME adapts the small-loss sample selection principle from noisy-label learning (as in Co-teaching) to the preference-learning setting by introducing a selection-based discriminator that filters suspected noisy preference pairs during reward model training."
+    }
+  ],
+  "synthesis_narrative": "RIME sits squarely in the preference-based reinforcement learning lineage that began with Akrour et al.\u2019s formulation of learning from pairwise preferences and Sadigh et al.\u2019s modern treatment of reward learning from comparisons (and active querying). Christiano et al. operationalized this paradigm for deep RL, introducing the now-standard pipeline: fit a Bradley\u2013Terry-style preference model to comparison data, then optimize a policy using the learned reward. Subsequent work by Ibarz et al. showed the pipeline\u2019s practical value but also revealed a key fragility: performance degrades with low-quality or inconsistent human feedback, underscoring PbRL\u2019s dependence on clean labels. In parallel, Brown et al.\u2019s T-REX highlighted the benefits of learning reward models from ranked trajectories and using pretraining to seed reward learning, suggesting a path to more stable optimization. RIME directly combines and advances these threads: it retains the canonical Christiano/Sadigh/Akrour preference-modeling framework, but introduces a sample selection-based discriminator\u2014borrowing the small-loss filtering idea from Co-teaching\u2014to dynamically exclude mislabeled comparisons during reward learning. To mitigate cumulative error from any residual mis-selections and to bridge the distribution shift from pretraining to online updates, RIME warm-starts the reward model, extending the pretraining insight from T-REX into an online PbRL setting. The result is a method that preserves the data efficiency of PbRL while substantially improving robustness to noisy human preferences.",
+  "analysis_timestamp": "2026-01-06T23:09:26.504644"
+}

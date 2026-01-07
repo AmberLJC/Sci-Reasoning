@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "TaPas: Weakly Supervised Table Parsing via Pre-training",
+      "authors": "Jonathan Herzig et al.",
+      "year": 2020,
+      "arxiv_id": "2004.02349",
+      "role": "Extension",
+      "relationship_sentence": "CABINET generalizes TaPas\u2019s cell-selection idea by replacing its task-specific, weakly supervised selection head with an unsupervised, model-agnostic relevance scorer that weights cells before any QA LLM consumes the table."
+    },
+    {
+      "title": "RePlug: Retrieval-Augmented Language Model with Plug-in Retriever",
+      "authors": "Weijia Shi et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Inspiration",
+      "relationship_sentence": "CABINET adapts RePlug\u2019s core insight\u2014training a selector using feedback from a generator\u2014by training a cell-level Unsupervised Relevance Scorer directly from the QA LLM\u2019s loss in a differentiable pipeline."
+    },
+    {
+      "title": "Lost in the Middle: How Language Models Use Long Context",
+      "authors": "Nelson F. Liu et al.",
+      "year": 2023,
+      "arxiv_id": "2307.03172",
+      "role": "Gap Identification",
+      "relationship_sentence": "CABINET directly addresses the finding that irrelevant content degrades LLM performance by explicitly suppressing non-relevant table regions before answering."
+    },
+    {
+      "title": "Rationalizing Neural Predictions",
+      "authors": "Tao Lei et al.",
+      "year": 2016,
+      "arxiv_id": "1606.04155",
+      "role": "Inspiration",
+      "relationship_sentence": "CABINET adopts the selector\u2013predictor paradigm of learning a differentiable mask optimized by the end-task objective, with URS serving as the rationale-style selector over table cells."
+    },
+    {
+      "title": "Compositional Semantic Parsing on Semi-Structured Tables",
+      "authors": "Panupong Pasupat et al.",
+      "year": 2015,
+      "arxiv_id": "1508.00305",
+      "role": "Foundation",
+      "relationship_sentence": "CABINET builds on the WikiTableQuestions problem formulation of QA over semi-structured tables, using its answer-matching setup and evaluation conventions."
+    },
+    {
+      "title": "Seq2SQL: Generating Structured Queries from Natural Language using Reinforcement Learning",
+      "authors": "Victor Zhong et al.",
+      "year": 2017,
+      "arxiv_id": "1709.00103",
+      "role": "Foundation",
+      "relationship_sentence": "CABINET\u2019s parsing-statement module echoes the SQL-style row/column filtering formalized by WikiSQL, using natural-language criteria for selecting relevant rows/columns."
+    },
+    {
+      "title": "TAPEX: Table Pre-training via Learning a Neural SQL Executor",
+      "authors": "Qian Liu et al.",
+      "year": 2021,
+      "arxiv_id": "2107.07653",
+      "role": "Baseline",
+      "relationship_sentence": "CABINET targets strong table QA models like TAPEX as primary baselines, improving accuracy by filtering irrelevant table content before answer generation."
+    }
+  ],
+  "synthesis_narrative": "TaPas introduced the idea that identifying answer-bearing cells is integral to table QA, training a cell-selection head with weak supervision to focus model attention on relevant table regions. RePlug showed that a retriever can be trained effectively using feedback from a downstream generator, aligning selection with what actually improves answer likelihood. Lost in the Middle demonstrated that large language models are highly sensitive to irrelevant content within long contexts, quantifying how distractors impair accuracy. Rationalizing Neural Predictions proposed a selector\u2013predictor architecture in which a differentiable mask is learned under the end-task objective, providing a blueprint for learning to highlight only the necessary input evidence. WikiTableQuestions established the core formulation of answering questions over semi-structured tables with answer-based supervision, and Seq2SQL (WikiSQL) formalized row/column filtering as natural-language conditions akin to WHERE clauses for selecting table subsets. TAPEX provided a strong neural executor-style baseline for table QA that still ingests substantial table content and can be susceptible to noise.\nTogether, these works pointed to a gap: LLM-based table QA needed an explicit, training-signal-aligned selector that reduces irrelevant table tokens without requiring labeled rationales, while also making the selection criteria interpretable. CABINET synthesizes the TaPas-style cell relevance idea with RePlug\u2019s generator-supervised training by learning a cell-level scorer directly from QA loss, instantiates it as a differentiable rationale-style mask, and complements it with a weakly supervised parsing statement that mirrors SQL-like row/column criteria\u2014yielding robust noise suppression that slots in front of strong table QA models like TAPEX or LLM-based solvers.",
+  "target_paper": {
+    "title": "CABINET: Content Relevance-based Noise Reduction for Table Question Answering",
+    "authors": "Sohan Patnaik, Heril Changwal, Milan Aggarwal, Sumit Bhatia, Yaman Kumar, Balaji Krishnamurthy",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Table Question Answering, Large Language Models, Noise Reduction, Unsupervised Relevance Scoring, Table Parsing, Relevant Cell Highlighting",
+    "abstract": "Table understanding capability of Large Language Models (LLMs) has been extensively studied through the task of question-answering (QA) over tables. Typically, only a small part of the whole table is relevant to derive the answer for a given question. The irrelevant parts act as noise and are distracting information, resulting in sub-optimal performance due to the vulnerability of LLMs to noise. To mitigate this, we propose CABINET (Content RelevAnce-Based NoIse ReductioN for TablE QuesTion-Answering) \u2013 a framework to enable LLMs to focus on relevant tabular data by suppressing extraneous information. CABINET comprises an Unsupervised Relevance Scorer (URS), trained differentially with the QA LLM, that weighs the table content based on its relevance to the input question before feeding it to the question answering LLM (QA LLM). To further aid the relevance scorer, CABINET employs a weakly supervised module that generates a parsing statement describing the criteria of rows and columns r",
+    "openreview_id": "SQrHpTllXa",
+    "forum_id": "SQrHpTllXa"
+  },
+  "analysis_timestamp": "2026-01-06T08:34:23.285250"
+}

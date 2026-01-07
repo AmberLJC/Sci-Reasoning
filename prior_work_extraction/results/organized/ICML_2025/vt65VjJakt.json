@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Distilling the Knowledge in a Neural Network",
+      "authors": "Geoffrey Hinton et al.",
+      "year": 2015,
+      "role": "Foundation",
+      "relationship_sentence": "This work formalized KD as minimizing KL between teacher and student soft distributions; ABKD directly revisits this foundational FKLD-based formulation and replaces it with a tunable \u03b1-\u03b2 divergence to fix its probability-mass allocation shortcomings."
+    },
+    {
+      "title": "Model Compression",
+      "authors": "Cristian Bucilua et al.",
+      "year": 2006,
+      "role": "Foundation",
+      "relationship_sentence": "Introduced the teacher\u2013student paradigm of training a compact model on soft targets; ABKD keeps this problem setup and focuses on the core question it left open\u2014what divergence best allocates probability mass during distillation."
+    },
+    {
+      "title": "Families of Alpha\u2013Beta Divergences and Their Applications",
+      "authors": "Andrzej Cichocki et al.",
+      "year": 2011,
+      "role": "Foundation",
+      "relationship_sentence": "Defined the \u03b1\u2013\u03b2 divergence family and its gradient behavior; ABKD directly adopts this divergence to construct a distillation loss whose parameters explicitly control the two identified concentration effects."
+    },
+    {
+      "title": "Divergence Measures and Message Passing",
+      "authors": "Thomas P. Minka",
+      "year": 2005,
+      "role": "Inspiration",
+      "relationship_sentence": "Clarified how forward vs. reverse KL induce mode-covering vs. mode-seeking behavior; ABKD maps these behaviors to hardness- and confidence-concentration in KD and motivates interpolating between them."
+    },
+    {
+      "title": "R\u00e9nyi Divergence Variational Inference",
+      "authors": "Yingzhen Li et al.",
+      "year": 2016,
+      "role": "Inspiration",
+      "relationship_sentence": "Showed that tuning \u03b1 in generalized divergences trades off mass-covering and mode-seeking; ABKD extends this idea by using a two-parameter \u03b1\u2013\u03b2 divergence to decouple and balance the two concentration effects in KD."
+    },
+    {
+      "title": "Decoupled Knowledge Distillation",
+      "authors": "Zhang et al.",
+      "year": 2022,
+      "role": "Baseline",
+      "relationship_sentence": "Separated target-class and non-target-class supervision to reallocate probability mass; ABKD addresses the same goal with a principled, divergence-based formulation that supersedes DKD\u2019s heuristic weighting."
+    },
+    {
+      "title": "Focal Loss for Dense Object Detection",
+      "authors": "Tsung-Yi Lin et al.",
+      "year": 2017,
+      "role": "Related Problem",
+      "relationship_sentence": "Introduced hardness-weighted gradients to emphasize difficult cases; ABKD mirrors this intuition at the class-distribution level by letting \u03b1\u2013\u03b2 parameters amplify the hardness-concentration component of the distillation gradient."
+    }
+  ],
+  "synthesis_narrative": "ABKD sits squarely in the KD lineage inaugurated by Model Compression (Bucilua et al., 2006) and crystallized by Distilling the Knowledge in a Neural Network (Hinton et al., 2015), which established training a student to match a teacher\u2019s soft outputs via KL. However, the choice and direction of KL carry strong behavioral implications. Minka (2005) clarified that forward and reverse KL produce mode-covering and mode-seeking tendencies, respectively\u2014a dichotomy that ABKD recasts as hardness-concentration (prioritizing large teacher\u2013student discrepancies) versus confidence-concentration (reinforcing high student-confidence modes). Prior KD refinements such as Decoupled Knowledge Distillation (Zhang et al., 2022) attempted to reallocate probability mass by heuristically separating target and non-target supervision, but lacked a principled knob to balance the two concentration effects. ABKD\u2019s key insight is to ground this balancing in a general divergence family. Drawing on the theory of \u03b1\u2013\u03b2 divergences (Cichocki et al., 2011) and the variational-inference literature on tuning divergence parameters to interpolate between mass-covering and mode-seeking behaviors (Li & Turner, 2016), ABKD selects a two-parameter divergence whose gradients directly control probability reassignment across classes. This provides a principled mechanism to modulate both concentration effects jointly, rather than inheriting the extremes of FKLD or RKLD. The intuition behind emphasizing harder components echoes focal loss (Lin et al., 2017), but ABKD operationalizes it within a distributional, teacher\u2013student matching objective, yielding a theoretically motivated and practically effective distillation loss.",
+  "analysis_timestamp": "2026-01-06T23:07:19.589625"
+}

@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Behavior Cloning from Observation",
+      "authors": "Faraz Torabi et al.",
+      "year": 2018,
+      "arxiv_id": "1805.01954",
+      "role": "Gap Identification",
+      "relationship_sentence": "BCO formalized learning from state-only demonstrations by training an inverse dynamics model on agent-collected action-labeled experience, and LAPO directly addresses BCO\u2019s core limitation by recovering action structure without any action-labeled interactions."
+    },
+    {
+      "title": "Generative Adversarial Imitation from Observation (GAIfO)",
+      "authors": "Faraz Torabi et al.",
+      "year": 2019,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "GAIfO learns policies from state-only trajectories via occupancy matching but does not infer action semantics, providing a primary baseline that LAPO surpasses by explicitly recovering a discrete action space from dynamics."
+    },
+    {
+      "title": "ILPO: Imitation Learning from Observation by Inferring Latent Actions",
+      "authors": "Andrew Liu et al.",
+      "year": 2019,
+      "arxiv_id": null,
+      "role": "Extension",
+      "relationship_sentence": "ILPO clusters state transitions into discrete latent actions and later maps them to real actions with limited interaction, a mechanism LAPO generalizes to high-dimensional video domains by learning latent actions and associated world/inverse-dynamics models purely from videos."
+    },
+    {
+      "title": "Video PreTraining (VPT): Learning to Act by Watching Internet Videos",
+      "authors": "Bowen Baker et al.",
+      "year": 2022,
+      "arxiv_id": "2206.11795",
+      "role": "Gap Identification",
+      "relationship_sentence": "VPT showed large-scale video pretraining for control by training an inverse dynamics model using a small action-labeled seed set, and LAPO removes this labeled dependency by first recovering latent action structure from unlabeled videos then fine-tuning with minimal labels."
+    },
+    {
+      "title": "Diversity is All You Need: Learning Diverse Skills without a Reward Function (DIAYN)",
+      "authors": "Benjamin Eysenbach et al.",
+      "year": 2018,
+      "arxiv_id": "1802.06070",
+      "role": "Inspiration",
+      "relationship_sentence": "DIAYN\u2019s mutual-information-driven discovery of discrete latent codes that control state transitions inspired LAPO\u2019s use of latent variables tied to one-step dynamics to uncover action-equivalent factors from video."
+    },
+    {
+      "title": "Actionable Representations for Control",
+      "authors": "Benjamin Eysenbach et al.",
+      "year": 2019,
+      "arxiv_id": "1906.09443",
+      "role": "Related Problem",
+      "relationship_sentence": "By emphasizing representations that reflect the agent\u2019s controllable aspects of dynamics, this work informed LAPO\u2019s design of latent variables whose identities are determined by how they transform state transitions, i.e., action structure."
+    }
+  ],
+  "synthesis_narrative": "Behavior Cloning from Observation (BCO) established a practical recipe for learning from state-only trajectories by first training an inverse dynamics model on a small set of action-labeled interactions and then inferring missing actions on demonstrations, crystallizing the central obstacle: dependence on action labels. Generative Adversarial Imitation from Observation (GAIfO) bypassed actions via occupancy matching between expert and learner state sequences, but left action semantics implicit and brittle in generalization. ILPO advanced a concrete mechanism for inferring discrete latent actions from state transitions and then mapping them to real actions with minimal environment interaction, demonstrating that latent action discovery can bridge state-only demos and executable policies. Video PreTraining (VPT) validated internet-scale video as a powerful pretraining source but relied on an action-labeled seed set to train an inverse dynamics model, tying scalability to labeled actions. In parallel, DIAYN showed that discrete latent variables aligned with changes in future states can be discovered by maximizing mutual information, while Actionable Representations for Control argued representations should encode the agent\u2019s controllable aspects of dynamics. Together these works reveal both a path and a gap: latent variables that explain one-step dynamics can encode action-like factors, but prior pipelines still hinge on action labels or do not recover explicit action structure. The natural next step is to recover the true action space structure directly from unlabeled videos by learning latent variables whose identities are determined by how they transform states, yielding latent-action policies and dynamics models that can be minimally fine-tuned to real actions, thus marrying VPT-style scale with ILPO\u2019s latent-action bridge and DIAYN\u2019s dynamics-aligned latents.",
+  "target_paper": {
+    "title": "Learning to Act without Actions",
+    "authors": "Dominik Schmidt, Minqi Jiang",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "reinforcement learning, world models, inverse dynamics models, imitation learning, representation learning",
+    "abstract": "Pre-training large models on vast amounts of web data has proven to be an effective approach for obtaining powerful, general models in domains such as language and vision. However, this paradigm has not yet taken hold in reinforcement learning. This is because videos, the most abundant form of embodied behavioral data on the web, lack the action labels required by existing methods for imitating behavior from demonstrations. We introduce **Latent Action Policies** (LAPO), a method for recovering latent action information\u2014and thereby latent-action policies, world models, and inverse dynamics models\u2014purely from videos. LAPO is the first method able to recover the structure of the true action space just from observed dynamics, even in challenging procedurally-generated environments. LAPO enables training latent-action policies that can be rapidly fine-tuned into expert-level policies, either offline using a small action-labeled dataset, or online with rewards. LAPO takes a first step towar",
+    "openreview_id": "rvUq3cxpDF",
+    "forum_id": "rvUq3cxpDF"
+  },
+  "analysis_timestamp": "2026-01-06T10:03:49.538567"
+}

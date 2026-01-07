@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "RAFT: Recurrent All-Pairs Field Transforms for Optical Flow",
+      "authors": "Zachary Teed, Jia Deng",
+      "year": 2020,
+      "role": "Discriminative flow backbone and dominant baseline",
+      "relationship_sentence": "Establishes the strong discriminative paradigm (iterative all-pairs matching) that struggles under motion blur and low light, motivating a generative alternative and serving as a comparative baseline for the proposed diffusion-based approach."
+    },
+    {
+      "title": "E-RAFT: Dense Optical Flow from Event Cameras",
+      "authors": "David Gehrig et al.",
+      "year": 2021,
+      "role": "Event-only dense flow with RAFT-style architecture",
+      "relationship_sentence": "Demonstrates that events provide sharp boundaries and robustness to HDR/fast motion but lack rich appearance cues, directly motivating complementary fusion of events with frames rather than relying on events alone."
+    },
+    {
+      "title": "EV-FlowNet: Self-Supervised Learning of Optical Flow from Events",
+      "authors": "Alex Zhu, Liangzhe Yuan, Kenneth Chaney, Kostas Daniilidis",
+      "year": 2018,
+      "role": "Early learning-based event optical flow",
+      "relationship_sentence": "Shows the viability and limits of learning optical flow from events, highlighting sparsity and appearance ambiguity that the new method addresses via joint frame\u2013event fusion within the flow estimator."
+    },
+    {
+      "title": "E2VID: Learning to Reconstruct Intensity Images from Event Cameras",
+      "authors": "Henri Rebecq et al.",
+      "year": 2019,
+      "role": "Event-to-intensity reconstruction revealing modality complementarity",
+      "relationship_sentence": "Empirically establishes that events contribute boundary completeness and HDR while frames contribute dense appearance, directly informing the paper\u2019s complementary fusion design."
+    },
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Jonathan Ho, Ajay Jain, Pieter Abbeel",
+      "year": 2020,
+      "role": "Foundational diffusion modeling framework",
+      "relationship_sentence": "Provides the core generative denoising process that the paper conditions on frame\u2013event inputs to model multimodal, uncertainty-aware optical flow in challenging scenes."
+    },
+    {
+      "title": "ControlNet: Adding Conditional Control to Text-to-Image Diffusion Models",
+      "authors": "Lvmin Zhang, Maneesh Agrawala",
+      "year": 2023,
+      "role": "Architecture for injecting external structural signals into diffusion",
+      "relationship_sentence": "Inspires the architectural principle of injecting auxiliary structural guidance (here, event/frame complementary cues) into the diffusion U-Net without destabilizing the generative process."
+    },
+    {
+      "title": "Palette: Image-to-Image Diffusion Models",
+      "authors": "Chitwan Saharia et al.",
+      "year": 2022,
+      "role": "Conditional diffusion for dense pixelwise prediction",
+      "relationship_sentence": "Demonstrates that diffusion can excel at conditional, per-pixel regression tasks, supporting the paper\u2019s formulation of optical flow estimation as conditional diffusion guided by fused modalities."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core idea\u2014injecting complementary frame\u2013event fusion into a diffusion model for optical flow\u2014sits at the intersection of discriminative flow estimation, event-based vision, and conditional diffusion. RAFT established the dominant discriminative paradigm for optical flow with strong matching and iterative refinement, yet it degrades under motion blur and low light, the very regimes targeted here. Event-based works like EV-FlowNet and E-RAFT showed that events offer temporally precise, HDR-aligned boundary cues that remain reliable under such degradations, but they also revealed the insufficiency of events alone to recover rich appearance and texture. E2VID further crystallized the complementary nature of events and frames, illustrating how events can supply boundary completeness while frames provide dense appearance, thereby motivating explicit, synergistic fusion rather than simple feature concatenation or domain adaptation.\nOn the generative side, DDPM laid the groundwork for leveraging diffusion as a robust, uncertainty-aware estimator, enabling the model to represent ambiguous motions prevalent in blurred/noisy scenes. Palette demonstrated that diffusion scales to conditional dense prediction, making optical flow a natural target. Finally, ControlNet provided a concrete architectural recipe for injecting structured guidance into diffusion networks without disrupting training stability. Together, these strands directly motivate the paper\u2019s design: use a diffusion backbone (DDPM/Palette) and inject a control-like, complementary fusion of frame appearance and event boundaries (in the spirit of ControlNet), overcoming RAFT-style brittleness while capitalizing on the proven strengths of event sensing.",
+  "analysis_timestamp": "2026-01-07T00:05:12.558294"
+}

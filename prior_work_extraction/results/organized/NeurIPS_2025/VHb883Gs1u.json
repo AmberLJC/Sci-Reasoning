@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Plug and Play Language Models: A Simple Approach to Controlled Text Generation",
+      "authors": "S. Dathathri et al.",
+      "year": 2020,
+      "role": "Foundational representation-steering via activation perturbation",
+      "relationship_sentence": "RePS targets the same goal of attribute control without full fine-tuning as PPLM but replaces classifier/BoW gradient guidance with a learned, preference-based objective that trains compact steering modules."
+    },
+    {
+      "title": "GeDi: Generative Discriminator Guided Sequence Generation",
+      "authors": "B. Krause et al.",
+      "year": 2021,
+      "role": "Controllable generation through discriminator guidance and suppression",
+      "relationship_sentence": "RePS generalizes GeDi\u2019s idea of jointly promoting and suppressing concepts by casting it as a bidirectional preference objective trained in representation space rather than decoding-time discriminator guidance."
+    },
+    {
+      "title": "Activation Addition: Steering Language Models Without Fine-Tuning",
+      "authors": "A. Turner et al.",
+      "year": 2023,
+      "role": "Direct activation-steering technique using linear concept directions",
+      "relationship_sentence": "RePS advances activation-steering beyond fixed vector addition by learning steer/suppress directions through preference optimization, improving efficacy while retaining interpretability."
+    },
+    {
+      "title": "Direct Preference Optimization: Your Language Model Is Secretly a Reward Model",
+      "authors": "A. Rafailov et al.",
+      "year": 2023,
+      "role": "Core pairwise preference-optimization framework",
+      "relationship_sentence": "RePS adapts DPO\u2019s pairwise preference learning to the representation-steering setting, using chosen/rejected outcomes to train steering that explicitly optimizes for desired behavioral shifts."
+    },
+    {
+      "title": "ORPO: Monolithic Preference Optimization without a Reference Model",
+      "authors": "J. Hong et al.",
+      "year": 2024,
+      "role": "Reference-free preference optimization",
+      "relationship_sentence": "RePS adopts the reference-free philosophy of ORPO, removing dependence on a separate reference model and enabling lightweight, interpretable steering modules with minimal parameters."
+    },
+    {
+      "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+      "authors": "E. J. Hu et al.",
+      "year": 2022,
+      "role": "Parameter-efficient adaptation mechanism",
+      "relationship_sentence": "RePS leverages the LoRA-style parameter-efficient design space to instantiate compact steering parameterizations that minimize parameter count while enabling effective representation updates."
+    },
+    {
+      "title": "Null It Out: Guarding Protected Attributes by Iterative Nullspace Projection",
+      "authors": "S. Ravfogel et al.",
+      "year": 2020,
+      "role": "Concept suppression via linear subspace manipulation",
+      "relationship_sentence": "RePS\u2019s bidirectional design that explicitly suppresses unwanted concepts draws on INLP\u2019s insight that linear concept subspaces can be identified and attenuated, but learns this suppression via preferences rather than hand-crafted projections."
+    }
+  ],
+  "synthesis_narrative": "RePS sits at the intersection of representation steering and preference optimization. Early controllable generation methods like PPLM and GeDi established that one can steer and suppress attributes by intervening at decoding or in intermediate activations, but their reliance on external classifiers, token-level guidance, and decoding-time gradients limited robustness and practicality. The activation-steering line, exemplified by Activation Addition, showed that linear concept directions in hidden states afford interpretable control, yet fixed or manually constructed vectors often underperform robust prompting.\n\nRePS reframes representation control as a learning problem over preferences: inspired by DPO\u2019s pairwise objective, it directly optimizes for generations that are preferred under a target concept while simultaneously suppressing the opposite, unifying steer-and-suppress in a single bidirectional loss. Building on ORPO\u2019s reference-free advances, RePS removes dependence on a reference model, which reduces complexity and makes the method portable across base LMs. To keep the intervention compact and interpretable, RePS explores parameterizations in the spirit of LoRA and linear concept directions, learning small modules or vectors that adjust internal representations with minimal parameters. Finally, insights from INLP about linear subspaces for unwanted attributes inform RePS\u2019s explicit suppression pathway, but RePS learns these subspaces from preferences rather than analytic projections.\n\nTogether, these strands yield a representation-steering method that narrows the performance gap with prompting while staying interpretable and lightweight, addressing long-standing efficacy limitations of activation- and weight-based steering.",
+  "analysis_timestamp": "2026-01-07T00:02:04.980843"
+}

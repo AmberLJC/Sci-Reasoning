@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+      "authors": "Alexey Dosovitskiy, Lucas Beyer, Alexander Kolesnikov, Dirk Weissenborn, Xiaohua Zhai, Thomas Unterthiner, Mostafa Dehghani, Matthias Minderer, Georg Heigold, Sylvain Gelly, Jakob Uszkoreit, Neil Houlsby",
+      "year": 2020,
+      "role": "Foundational ViT architecture",
+      "relationship_sentence": "PH-Reg builds directly on the ViT formulation of patch tokens plus special tokens (e.g., [CLS]), modifying the token set by adding registers to pretrained ViTs without altering the core architecture."
+    },
+    {
+      "title": "DINO: Emerging Properties in Self-Supervised Vision Transformers",
+      "authors": "Mathilde Caron, Hugo Touvron, Ishan Misra, Herv\u00e9 J\u00e9gou, Julien Mairal, Piotr Bojanowski, Armand Joulin",
+      "year": 2021,
+      "role": "Label-free self-distillation for ViTs",
+      "relationship_sentence": "PH-Reg leverages the DINO-style teacher\u2013student paradigm to train without labels, distilling from a frozen teacher (original ViT) into a student augmented with register tokens."
+    },
+    {
+      "title": "Training data-efficient image transformers & distillation through attention (DeiT)",
+      "authors": "Hugo Touvron, Matthieu Cord, Matthijs Douze, Francisco Massa, Alexandre Sablayrolles, Herv\u00e9 J\u00e9gou",
+      "year": 2021,
+      "role": "Distillation tokens and KD in ViTs",
+      "relationship_sentence": "DeiT\u2019s use of a dedicated distillation token informs PH-Reg\u2019s strategy of introducing new special tokens and supervising them via distillation rather than full retraining."
+    },
+    {
+      "title": "DINOv2: Learning Robust Visual Features without Supervision",
+      "authors": "Maxime Oquab et al.",
+      "year": 2023,
+      "role": "Registers in ViTs to absorb nuisance/artifact content",
+      "relationship_sentence": "DINOv2 introduced register tokens and showed they can \u2018soak up\u2019 non-semantic artifacts; PH-Reg\u2019s key idea is to retrofit such registers into existing ViTs post hoc via self-distillation."
+    },
+    {
+      "title": "Set Transformer: A Framework for Attention-based Permutation-Invariant Neural Networks",
+      "authors": "Juho Lee, Yoonho Lee, Jungtaek Kim, Adam Kosiorek, Seungjin Choi, Yee Whye Teh",
+      "year": 2019,
+      "role": "Learned inducing points as latent tokens",
+      "relationship_sentence": "The notion of adding learned latent tokens (inducing points) to mediate attention provides a conceptual precursor to register tokens that act as learned sinks/memory in PH-Reg."
+    },
+    {
+      "title": "Parameter-Efficient Transfer Learning for NLP (Adapters)",
+      "authors": "Neil Houlsby, Andrei Giurgiu, Stanislaw Jastrzebski, Bruna Morrone, Quentin de Laroussilhe, Andrea Gesmundo, Mona Attariyan, Sylvain Gelly",
+      "year": 2019,
+      "role": "Post-hoc, parameter-efficient model augmentation",
+      "relationship_sentence": "PH-Reg follows the adapter philosophy of minimally modifying large pretrained models to add capacity, here by inserting registers and training them without full model retraining."
+    },
+    {
+      "title": "Born-Again Neural Networks",
+      "authors": "Tommaso Furlanello, Zachary C. Lipton, Michael Tschannen, Laurent Itti, Anima Anandkumar",
+      "year": 2018,
+      "role": "Self-distillation from a model to itself",
+      "relationship_sentence": "PH-Reg\u2019s teacher=student-family setup\u2014distilling a pretrained model into an augmented copy\u2014draws directly on the self-distillation principle established by Born-Again Networks."
+    }
+  ],
+  "synthesis_narrative": "Post Hoc Registers (PH-Reg) addresses a practical gap: existing large ViTs often exhibit artifact tokens that harm localization and structure, yet fully retraining at scale to add register tokens is infeasible. The foundational ViT formulation by Dosovitskiy et al. established the tokenized image representation and special-token interface that PH-Reg modifies by introducing registers. Prior evidence that distillation can supervise special tokens in ViTs comes from DeiT, where a dedicated distillation token is trained via a teacher, suggesting a path to supervise newly added tokens without architectural upheaval. DINO demonstrated that ViTs can be distilled without labels using a teacher\u2013student framework, providing the label-free training recipe PH-Reg adopts to learn registers from a frozen teacher. Crucially, DINOv2 introduced register tokens in ViTs and argued they absorb nuisance and artifact content, directly motivating PH-Reg\u2019s central idea to retrofit registers into already-trained models. Conceptually, Set Transformer\u2019s inducing points established that learned latent tokens can mediate attention and act as memory, a perspective that underpins the role of registers as information sinks. Finally, the adapter literature on parameter-efficient transfer (Houlsby et al.) and self-distillation via Born-Again Networks inform PH-Reg\u2019s practical recipe: minimally augment a large pretrained model, keep most weights fixed, and transfer behavior from the original to the augmented model. Together, these works crystallize PH-Reg\u2019s contribution: a label-free self-distillation procedure that post hoc equips pretrained ViTs with register tokens to suppress artifacts without full retraining.",
+  "analysis_timestamp": "2026-01-07T00:21:32.285528"
+}

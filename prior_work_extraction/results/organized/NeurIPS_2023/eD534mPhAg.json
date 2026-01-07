@@ -1,0 +1,92 @@
+{
+  "prior_works": [
+    {
+      "title": "GNNExplainer: Generating Explanations for Graph Neural Networks",
+      "authors": [
+        "Rex Ying",
+        "Dylan Bourgeois",
+        "Jiaxuan You",
+        "Marinka Zitnik",
+        "Jure Leskovec"
+      ],
+      "year": 2019,
+      "role": "Canonical post-hoc GNN explanation method; established the common \"mask subgraph and feed it to the model\" evaluation paradigm.",
+      "relationship_sentence": "OAR is motivated by the OOD pitfalls inherent in the GNNExplainer-style evaluation pipeline and is designed to assess such subgraph explanations without drifting off the original data distribution."
+    },
+    {
+      "title": "Adversarial Attack on Graph Structured Data",
+      "authors": [
+        "Hanjun Dai",
+        "Hui Li",
+        "Tian Tian",
+        "Xinbing Wang",
+        "Jun Zhu",
+        "Le Song"
+      ],
+      "year": 2018,
+      "role": "Foundational framework for crafting adversarial perturbations on graphs (structure/features).",
+      "relationship_sentence": "OAR repurposes the notion of adversarial attacks on graphs as a quantitative yardstick\u2014measuring how much perturbation is needed to flip predictions on an explanation subgraph."
+    },
+    {
+      "title": "Adversarial Attacks on Neural Networks for Graph Data (Nettack)",
+      "authors": [
+        "Daniel Z\u00fcgner",
+        "Amir Akbarnejad",
+        "Stephan G\u00fcnnemann"
+      ],
+      "year": 2018,
+      "role": "Seminal, constrained node-level attack on GNNs that preserves graph statistics while inducing misclassification.",
+      "relationship_sentence": "OAR leverages Nettack-like constrained perturbation spaces to define meaningful robustness of explanation subgraphs under realistic graph attacks."
+    },
+    {
+      "title": "Adversarial Attacks on Graph Neural Networks via Meta Learning (Metattack)",
+      "authors": [
+        "Daniel Z\u00fcgner",
+        "Stephan G\u00fcnnemann"
+      ],
+      "year": 2019,
+      "role": "Poisoning attack optimizing meta-gradients for worst-case graph editing.",
+      "relationship_sentence": "By framing evaluation as worst-case robustness, OAR can incorporate meta-learning style attack objectives to stress-test the fidelity of explanation subgraphs."
+    },
+    {
+      "title": "Towards Deep Learning Models Resistant to Adversarial Attacks",
+      "authors": [
+        "Aleksander Madry",
+        "Aleksandar Makelov",
+        "Ludwig Schmidt",
+        "Dimitris Tsipras",
+        "Adrian Vladu"
+      ],
+      "year": 2018,
+      "role": "Established robustness-as-worst-case risk and PGD-based evaluation in adversarial robustness.",
+      "relationship_sentence": "OAR directly adopts the robustness-as-worst-case-evidence principle, translating PGD-style adversarial evaluation into the graph/explanation setting."
+    },
+    {
+      "title": "A Benchmark for Interpretability Methods in Deep Neural Networks (ROAR)",
+      "authors": [
+        "Sara Hooker",
+        "Dumitru Erhan",
+        "Pieter-Jan Kindermans",
+        "Been Kim"
+      ],
+      "year": 2019,
+      "role": "Showed deletion/insertion evaluations cause OOD artifacts; proposed retraining-based evaluation to mitigate.",
+      "relationship_sentence": "OAR is explicitly designed to avoid OOD artifacts highlighted by ROAR, replacing deletion-based scoring with robustness and adding a reweighting module instead of costly retraining."
+    },
+    {
+      "title": "Correcting Sample Selection Bias by Unlabeled Data (Kernel Mean Matching)",
+      "authors": [
+        "Jiayuan Huang",
+        "Arthur Gretton",
+        "Karsten M. Borgwardt",
+        "Bernhard Sch\u00f6lkopf",
+        "Alex J. Smola"
+      ],
+      "year": 2007,
+      "role": "Foundational importance-weighting approach for covariate shift correction.",
+      "relationship_sentence": "The OOD reweighting block in OAR applies covariate-shift importance weighting to confine robustness evaluation to the original data distribution."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s key contribution\u2014a robustness-based, OOD-resistant evaluation of post-hoc GNN explanations\u2014sits at the intersection of three strands of prior work: (1) subgraph-based GNN explainability and its evaluation practice, (2) adversarial robustness, especially on graphs, and (3) covariate-shift correction.\n\nFirst, GNNExplainer established the dominant paradigm of extracting explanatory subgraphs and evaluating them by re-feeding masked inputs. While widely adopted, this procedure can push inputs off the data manifold, undermining faithfulness. In vision, ROAR revealed that deletion/insertion tests suffer from OOD artifacts and advocated distribution-aware evaluation via retraining\u2014insight that directly motivates OAR\u2019s OOD-aware design.\n\nSecond, adversarial robustness provides a principled, model-agnostic metric: measure the worst-case perturbation needed to change a prediction. Madry et al. formalized robustness-as-worst-case risk with PGD-style evaluation. On graphs, Dai et al., Nettack, and Metattack operationalized adversarial perturbations under realistic constraints (structure and features), supplying concrete attack spaces and optimization tools. OAR translates this robustness lens to explanations: an explanation is better if it is harder to adversarially subvert when restricted to its subgraph.\n\nThird, to avoid the OOD trap during evaluation, OAR introduces importance-based reweighting grounded in covariate-shift correction (e.g., Kernel Mean Matching), keeping the assessment aligned with the original data distribution without expensive retraining. Together, these works enable OAR/SimOAR to deliver scalable, distribution-respecting, and adversarially grounded metrics for judging the quality of GNN post-hoc explanations.",
+  "analysis_timestamp": "2026-01-06T23:42:49.126101"
+}

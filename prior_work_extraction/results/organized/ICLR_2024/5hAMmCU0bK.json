@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Offline Reinforcement Learning with Implicit Q-Learning",
+      "authors": "Ilya Kostrikov et al.",
+      "year": 2021,
+      "arxiv_id": "2110.06169",
+      "role": "Extension",
+      "relationship_sentence": "This work builds directly on IQL\u2019s expectile-based value estimation and advantage-weighted supervised policy extraction, and it modifies IQL\u2019s critic learning to be robust to the heavy-tailed Q-targets that arise under dynamics corruption."
+    },
+    {
+      "title": "AWAC: Accelerating Online Reinforcement Learning with Offline Datasets",
+      "authors": "Ashvin Nair et al.",
+      "year": 2020,
+      "arxiv_id": "2006.09359",
+      "role": "Inspiration",
+      "relationship_sentence": "AWAC\u2019s idea of advantage-weighted supervised policy learning underpins the mechanism identified as key to robustness and motivates the paper\u2019s choice to retain supervised policy learning while only altering the critic updates."
+    },
+    {
+      "title": "Conservative Q-Learning for Offline Reinforcement Learning",
+      "authors": "Aviral Kumar et al.",
+      "year": 2020,
+      "arxiv_id": "2006.04779",
+      "role": "Gap Identification",
+      "relationship_sentence": "CQL\u2019s pessimistic value learning is shown to degrade under corrupted datasets in the paper\u2019s comprehensive evaluation, highlighting the brittleness of critic-centric bootstrapping and motivating the search for a more robust alternative."
+    },
+    {
+      "title": "A Minimalist Approach to Offline Reinforcement Learning (TD3+BC)",
+      "authors": "Scott Fujimoto et al.",
+      "year": 2021,
+      "arxiv_id": "2106.06860",
+      "role": "Gap Identification",
+      "relationship_sentence": "TD3+BC serves as a primary offline baseline whose critic-actor bootstrapping is highly sensitive to noisy rewards and dynamics, a limitation the paper explicitly targets with robustified Q-target learning."
+    },
+    {
+      "title": "OptiDICE: Offline Policy Optimization via Stationary Distribution Correction Estimation",
+      "authors": "Jaeho Lee et al.",
+      "year": 2021,
+      "arxiv_id": "",
+      "role": "Related Problem",
+      "relationship_sentence": "OptiDICE demonstrates that avoiding bootstrapped actor updates via a supervised-learning formulation improves stability offline, reinforcing the paper\u2019s central insight that supervised policy learning is inherently more robust to dataset imperfections."
+    },
+    {
+      "title": "Distributional Reinforcement Learning with Quantile Regression",
+      "authors": "Will Dabney et al.",
+      "year": 2018,
+      "arxiv_id": "1710.10044",
+      "role": "Inspiration",
+      "relationship_sentence": "The use of quantile regression to temper the influence of outliers in TD targets informs the paper\u2019s robust critic design that mitigates heavy-tailed Q-targets induced by dynamics corruption."
+    }
+  ],
+  "synthesis_narrative": "Advantage-weighted supervised policy learning emerged as a stable approach for leveraging offline data: AWAC formalized updating policies by behavior cloning weighted by advantages, decoupling policy learning from unstable actor bootstrapping. Implicit Q-Learning advanced this idea by estimating values via expectile regression and extracting a policy with advantage-weighted supervised learning, thereby keeping the policy update non-bootstrapped while relying on a critic for value learning. OptiDICE further illustrated that reframing offline policy optimization as supervised estimation of stationary distribution corrections can improve stability, again avoiding bootstrapped actor updates. In contrast, widely used offline RL baselines such as CQL and TD3+BC rely on critic-actor bootstrapping; while effective on clean data, their pessimism or TD-based critics can be fragile when datasets contain noise or malicious corruptions. Separately, distributional RL via quantile regression showed that replacing squared-error targets with quantile-based objectives reduces sensitivity to heavy-tailed and outlier TD targets.\nTaken together, these works suggested a path: retain supervised policy learning, which empirical evidence points to as inherently stable under dataset imperfections, but address the remaining vulnerability\u2014critic learning with heavy-tailed bootstrapped targets\u2014using robust regression ideas. The natural synthesis is to keep the IQL-style supervised policy extraction that resists corruption-induced instability, while modifying only the Q-target learning to attenuate heavy tails (e.g., via quantile/expectile-inspired robust losses). This combination directly tackles the specific failure mode exposed by dynamics corruption, yielding a principled, robust offline RL approach across diverse data corruptions.",
+  "target_paper": {
+    "title": "Towards Robust Offline Reinforcement Learning under Diverse Data Corruption",
+    "authors": "Rui Yang, Han Zhong, Jiawei Xu, Amy Zhang, Chongjie Zhang, Lei Han, Tong Zhang",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Offline RL, robust RL, data corruption, training-time attack",
+    "abstract": "Offline reinforcement learning (RL) presents a promising approach for learning reinforced policies from offline datasets without the need for costly or unsafe interactions with the environment. However, datasets collected by humans in real-world environments are often noisy and may even be maliciously corrupted, which can significantly degrade the performance of offline RL. In this work, we first investigate the performance of current offline RL algorithms under comprehensive data corruption, including states, actions, rewards, and dynamics. Our extensive experiments reveal that implicit Q-learning (IQL) demonstrates remarkable resilience to data corruption among various offline RL algorithms. Furthermore, we conduct both empirical and theoretical analyses to understand IQL's robust performance, identifying its supervised policy learning scheme as the key factor. Despite its relative robustness, IQL still suffers from heavy-tail targets of Q functions under dynamics corruption. To tack",
+    "openreview_id": "5hAMmCU0bK",
+    "forum_id": "5hAMmCU0bK"
+  },
+  "analysis_timestamp": "2026-01-06T11:06:32.099410"
+}

@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Outrageously Large Neural Networks: The Sparsely-Gated Mixture-of-Experts Layer",
+      "authors": "Noam Shazeer et al.",
+      "year": 2017,
+      "arxiv_id": "1701.06538",
+      "role": "Inspiration",
+      "relationship_sentence": "MoG ports the sparsely-gated MoE idea by treating diverse sparsifiers as experts and learning a node-wise gating function that selects which sparsification rule to apply for each node."
+    },
+    {
+      "title": "Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity",
+      "authors": "William Fedus et al.",
+      "year": 2021,
+      "arxiv_id": "2101.03961",
+      "role": "Extension",
+      "relationship_sentence": "MoG adopts Switch-style simple top-1 routing and a load-balancing auxiliary loss to prevent expert collapse when assigning nodes to sparsifier experts."
+    },
+    {
+      "title": "DropEdge: Towards Deep Graph Convolutional Networks on Node Classification",
+      "authors": "Yu Rong et al.",
+      "year": 2020,
+      "arxiv_id": "1907.10903",
+      "role": "Gap Identification",
+      "relationship_sentence": "MoG explicitly addresses DropEdge\u2019s limitation of a global, uniform edge-drop rate by learning per-node selections over multiple pruning schemes rather than applying a single stochastic rule across the graph."
+    },
+    {
+      "title": "Predict then Propagate: Graph Neural Networks meet Personalized PageRank (APPNP)",
+      "authors": "Johannes Klicpera et al.",
+      "year": 2019,
+      "arxiv_id": "1810.05997",
+      "role": "Foundation",
+      "relationship_sentence": "MoG uses PPR-based pruning as a sparsifier expert and generalizes APPNP\u2019s globally fixed teleport/threshold into a node-conditioned choice among different PPR sparsity regimes."
+    },
+    {
+      "title": "Diffusion Improves Graph Learning (GDC)",
+      "authors": "Johannes Klicpera et al.",
+      "year": 2019,
+      "arxiv_id": "1911.05485",
+      "role": "Baseline",
+      "relationship_sentence": "MoG incorporates diffusion/top-k-based sparsification as an expert and extends GDC by mixing diffusion-sparsified graphs with other criteria under a learned gate instead of fixing one diffusion recipe globally."
+    },
+    {
+      "title": "Learning Discrete Structures for Graph Neural Networks",
+      "authors": "Luca Franceschi et al.",
+      "year": 2019,
+      "arxiv_id": "1905.09717",
+      "role": "Gap Identification",
+      "relationship_sentence": "MoG departs from LDS\u2019s single, globally learned discrete adjacency by learning to combine several sparsification principles via node-wise routing, addressing LDS\u2019s monolithic structure and scalability limits."
+    },
+    {
+      "title": "Graph Sparsification by Effective Resistances",
+      "authors": "Daniel A. Spielman et al.",
+      "year": 2011,
+      "arxiv_id": "0803.0929",
+      "role": "Foundation",
+      "relationship_sentence": "MoG leverages the core idea of criterion-driven edge selection from spectral sparsification and relaxes its single global sparsity budget by routing nodes to experts with different sparsity levels."
+    }
+  ],
+  "synthesis_narrative": "Sparsely-gated mixture-of-experts established that inputs can be routed to specialized experts via a learned gate, yielding conditional computation and diversity in processing; later, Switch Transformers simplified this idea with top-1 routing and load-balancing losses that stabilize expert usage at scale. On the graph side, DropEdge showed that removing edges reduces computation and can even help generalization, but it did so with a global, uniform drop rate that ignores local structural needs. APPNP grounded a principled, PPR-based propagation that effectively acts as a PPR-driven sparsification of neighborhoods using globally fixed parameters, while GDC implemented diffusion-based reweighting with top\u2011k sparsification\u2014still governed by uniform, graph-wide settings. Learning Discrete Structures (LDS) demonstrated that one can learn a task-specific sparse adjacency end-to-end, yet produced a single global structure with heavy bilevel optimization, limiting scalability and per-node adaptivity. Classical spectral sparsification by effective resistances provided a criterion-based lens on which edges to keep, but again under a single global budget. Taken together, these works revealed a tension: edge sparsification is powerful but typically applied uniformly or as a single global structure, whereas gating can tailor computation per input. The natural next step is to treat different sparsification criteria and sparsity levels as experts and learn a node-wise routing policy that selects and mixes them. By importing stabilized MoE routing into graph sparsification, the current work enables locally customized, computationally efficient sparsity that flexibly combines diffusion/PPR/criterion-driven graphs without committing to one global recipe.",
+  "target_paper": {
+    "title": "Graph Sparsification via Mixture of Graphs",
+    "authors": "Guibin Zhang, Xiangguo Sun, Yanwei Yue, Chonghe Jiang, Kun Wang, Tianlong Chen, Shirui Pan",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "Graph Sparsification, Mixture-of-Experts",
+    "abstract": "Graph Neural Networks (GNNs) have demonstrated superior performance across various graph learning tasks but face significant computational challenges when applied to large-scale graphs. One effective approach to mitigate these challenges is graph sparsification, which involves removing non-essential edges to reduce computational overhead. However, previous graph sparsification methods often rely on a single global sparsity setting and uniform pruning criteria, failing to provide customized sparsification schemes for each node's complex local context.\nIn this paper, we introduce Mixture-of-Graphs (MoG), leveraging the concept of Mixture-of-Experts (MoE), to dynamically select tailored pruning solutions for each node. Specifically, MoG incorporates multiple sparsifier experts, each characterized by unique sparsity levels and pruning criteria, and selects the appropriate experts for each node. Subsequently, MoG performs a mixture of the sparse graphs produced by different experts on the G",
+    "openreview_id": "7ANDviElAo",
+    "forum_id": "7ANDviElAo"
+  },
+  "analysis_timestamp": "2026-01-06T18:35:07.761299"
+}

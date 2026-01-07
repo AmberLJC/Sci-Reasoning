@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "GPTQ: Accurate Post-Training Quantization for Generative Pretrained Transformers",
+      "authors": "Elias Frantar et al.",
+      "year": 2022,
+      "role": "Extension",
+      "relationship_sentence": "SparseGPT directly adapts GPTQ\u2019s blockwise, Hessian-informed, sequential reconstruction-and-compensation procedure from quantization to pruning, enabling post-training compression of GPT-scale models without retraining."
+    },
+    {
+      "title": "Optimal Brain Compression: A Unified Framework for Model Compression",
+      "authors": "Elias Frantar et al.",
+      "year": 2022,
+      "role": "Foundation",
+      "relationship_sentence": "SparseGPT instantiates the OBC second-order reconstruction objective layerwise, using activation-derived curvature to select and compensate pruned weights, exactly following OBC\u2019s theoretical formulation for post-training compression."
+    },
+    {
+      "title": "Second-Order Derivatives for Network Pruning: Optimal Brain Surgeon",
+      "authors": "Babak Hassibi et al.",
+      "year": 1993,
+      "role": "Foundation",
+      "relationship_sentence": "The core idea of pruning with minimal loss increase via inverse-Hessian\u2013based compensation of remaining weights comes from OBS, which SparseGPT approximates efficiently at GPT scale with blockwise curvature."
+    },
+    {
+      "title": "Optimal Brain Damage",
+      "authors": "Yann LeCun et al.",
+      "year": 1990,
+      "role": "Foundation",
+      "relationship_sentence": "OBD introduced the seminal second-order saliency view of pruning, which SparseGPT refines beyond diagonal approximations by using richer (blockwise) curvature information from real activations."
+    },
+    {
+      "title": "Movement Pruning: Adaptive Sparsity by Fine-Tuning",
+      "authors": "Victor Sanh et al.",
+      "year": 2020,
+      "role": "Gap Identification",
+      "relationship_sentence": "Movement Pruning achieves strong sparsity on transformers but requires task-specific fine-tuning; SparseGPT explicitly addresses this limitation by delivering high-sparsity pruning without any retraining."
+    },
+    {
+      "title": "Learning Both Weights and Connections for Efficient Neural Networks",
+      "authors": "Song Han et al.",
+      "year": 2015,
+      "role": "Baseline",
+      "relationship_sentence": "Magnitude pruning is the canonical unstructured sparsification baseline that SparseGPT consistently outperforms by replacing magnitude scores with second-order, compensation-aware one-shot pruning."
+    },
+    {
+      "title": "SNIP: Single-Shot Network Pruning Based on Connection Sensitivity",
+      "authors": "Namhoon Lee et al.",
+      "year": 2019,
+      "role": "Related Problem",
+      "relationship_sentence": "SNIP demonstrated the feasibility of one-shot pruning, and SparseGPT realizes this paradigm for fully-trained GPT models by using activation-driven second-order reconstruction rather than first-order initialization-time saliency."
+    }
+  ],
+  "synthesis_narrative": "SparseGPT\u2019s key insight\u2014accurate, one-shot pruning of GPT-scale models without retraining\u2014emerges from a lineage of second-order pruning and modern post-training compression. Optimal Brain Damage and Optimal Brain Surgeon established the foundational view that pruning should minimize loss increase using curvature information, with OBS introducing compensation of remaining weights via (approximate) inverse Hessian updates. Optimal Brain Compression modernized this principle into a practical, unified post-training framework: reconstruct each layer\u2019s outputs under a quadratic approximation built from activation-derived curvature and compensate surviving parameters accordingly. GPTQ operationalized OBC for LLMs by processing weights in blocks, computing a local curvature (from activations), and applying fast sequential updates via blockwise solves; SparseGPT directly extends this machinery from quantization to pruning by selecting zeros under the same reconstruction objective and performing the same compensation to preserve layer outputs. Against prevalent baselines, magnitude pruning represents the standard unstructured approach that SparseGPT replaces with curvature-aware selection and updates, yielding far lower perplexity at 50\u201360% sparsity. In NLP-specific pruning, Movement Pruning demonstrated strong sparsity but hinges on fine-tuning, which is impractical for 100B+ parameter models; SparseGPT explicitly targets this gap by requiring no retraining. Finally, SNIP\u2019s one-shot paradigm foreshadowed zero-training pruning, but SparseGPT achieves it on fully trained GPTs through second-order, activation-driven reconstruction rather than first-order initialization heuristics.",
+  "analysis_timestamp": "2026-01-06T23:09:26.536888"
+}

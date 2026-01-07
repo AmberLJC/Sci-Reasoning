@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Fast Inference from Transformers via Speculative Decoding",
+      "authors": "Yaniv Leviathan, Matan Kalman, Yossi Matias",
+      "year": 2023,
+      "role": "Algorithmic blueprint",
+      "relationship_sentence": "RAPID inherits the draft-and-verify acceptance/rejection mechanism from speculative decoding, but replaces the small draft model with a retrieval-conditioned drafter to sustain high acceptance in long-context settings."
+    },
+    {
+      "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP",
+      "authors": "Patrick Lewis et al.",
+      "year": 2020,
+      "role": "Retrieval foundation",
+      "relationship_sentence": "RAPID\u2019s RAG drafter directly builds on the RAG paradigm, using retrieved passages to construct a short, salient context that guides speculation for the long-context target model."
+    },
+    {
+      "title": "RETRO: Improving Language Models by Retrieving from a Large Corpus",
+      "authors": "Sebastian Borgeaud et al.",
+      "year": 2022,
+      "role": "Retrieval-conditioned generation at scale",
+      "relationship_sentence": "RETRO demonstrated that retrieval-conditioned generation can substitute large in-context windows, motivating RAPID\u2019s insight that a short retrieved context can closely approximate long-context predictions for drafting."
+    },
+    {
+      "title": "vLLM: Efficient Memory Management for LLM Serving with PagedAttention",
+      "authors": "Sheng Shen et al.",
+      "year": 2023,
+      "role": "Systems evidence of KV-cache bottlenecks",
+      "relationship_sentence": "By showing that KV-cache memory operations dominate long-context inference costs, vLLM motivates RAPID\u2019s shift of heavy-context computation into a short-context drafter to mitigate memory-bound slowdowns."
+    },
+    {
+      "title": "Lost in the Middle: How Language Models Use Long Context",
+      "authors": "Nelson F. Liu et al.",
+      "year": 2023,
+      "role": "Empirical grounding for selective context",
+      "relationship_sentence": "Findings that LLMs underuse long contexts support RAPID\u2019s strategy to rely on compact, retrieved snippets for drafting, improving acceptance rates without processing the full context."
+    },
+    {
+      "title": "Self-RAG: Learning to Retrieve, Generate, and Critique for Knowledge-Intensive Language Generation",
+      "authors": "Akari Asai et al.",
+      "year": 2023,
+      "role": "Dynamic retrieval during generation",
+      "relationship_sentence": "Self-RAG\u2019s interleaving of retrieval and generation informs RAPID\u2019s RAG drafter design, showing that timely retrieval can boost faithfulness and guide token proposals verified by the target LLM."
+    }
+  ],
+  "synthesis_narrative": "RAPID\u2019s core contribution\u2014using a retrieval-augmented drafter to accelerate and enhance long-context decoding\u2014rests on two pillars: speculative decoding and retrieval conditioning. The speculative decoding framework of Leviathan et al. provides the acceptance\u2013rejection mechanism and the drafter\u2013verifier architecture that RAPID reuses; the twist is to supply the drafter with a short, high-signal context built via retrieval. Works in retrieval-augmented generation (Lewis et al.) and retrieval-conditioned language modeling at scale (RETRO) validate that targeted retrieval can substitute for wide in-context windows, suggesting a short retrieved context can approximate the predictive distribution of a long-context model well enough to yield high acceptance rates. Concurrently, systems work (vLLM/PagedAttention) establishes that long-context inference is often memory bound due to KV-cache operations, motivating RAPID\u2019s design to relocate most context processing to a small retrieval window for the drafter, alleviating the KV bottleneck. Empirical evidence that models often underutilize long contexts (Lost in the Middle) further supports selecting compact, salient spans for drafting. Finally, dynamic retrieval during generation (Self-RAG) informs how retrieval can be interleaved with token proposal to improve factuality and guidance. Together, these strands directly shape RAPID\u2019s insight: a RAG-powered drafter can be same-scale\u2014or even larger\u2014than the target yet remain efficient by operating on a short retrieved context, achieving both acceleration and quality gains in long-context inference.",
+  "analysis_timestamp": "2026-01-07T00:21:32.388924"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "High-Resolution Image Synthesis with Latent Diffusion Models",
+      "authors": "Robin Rombach et al.",
+      "year": 2022,
+      "role": "Foundational text-to-image diffusion backbone and cross-attention token interface",
+      "relationship_sentence": "Neural Assets fine-tunes a pre-trained latent diffusion model and exploits its cross-attention, replacing/augmenting text tokens with per-object appearance and 3D-pose tokens while preserving the standard T2I interface introduced by LDM."
+    },
+    {
+      "title": "An Image is Worth One Word: Personalizing Text-to-Image Generation using Textual Inversion",
+      "authors": "Rinon Gal et al.",
+      "year": 2022,
+      "role": "Learning token embeddings that encode subject appearance",
+      "relationship_sentence": "The idea of representing an object\u2019s identity as learnable token embeddings directly informs Neural Assets\u2019 per-object appearance tokens pooled from reference images, enabling subject-specific control decoupled from pose."
+    },
+    {
+      "title": "DreamBooth: Fine Tuning Text-to-Image Diffusion Models for Subject-Driven Generation",
+      "authors": "Nataniel Ruiz et al.",
+      "year": 2022,
+      "role": "Subject-driven personalization via finetuning to preserve identity under new prompts",
+      "relationship_sentence": "Neural Assets inherits DreamBooth\u2019s insight that identity features can be retained across contexts, but extends it to multi-object settings by learning per-object appearance tokens that are explicitly disentangled from target 3D poses."
+    },
+    {
+      "title": "GLIGEN: Open-Set Grounded Text-to-Image Generation",
+      "authors": "Li et al.",
+      "year": 2023,
+      "role": "Grounding diffusion with region/layout tokens while keeping the text interface",
+      "relationship_sentence": "GLIGEN\u2019s mechanism of appending grounding tokens to text conditioned cross-attention motivates Neural Assets\u2019 sequence-of-tokens design, where per-object visual and pose tokens control multi-object placement and properties."
+    },
+    {
+      "title": "ControlNet: Adding Conditional Control to Text-to-Image Diffusion Models",
+      "authors": "Lvmin Zhang and Maneesh Agrawala",
+      "year": 2023,
+      "role": "Injecting structural controls (e.g., edges, depth, pose) into diffusion generation",
+      "relationship_sentence": "ControlNet establishes that structural signals can steer diffusion; Neural Assets leverages this principle but encodes 3D pose as discrete tokens aligned with per-object appearance tokens for fine-grained multi-object 3D control."
+    },
+    {
+      "title": "Object-Centric Learning with Slot Attention",
+      "authors": "Francesco Locatello et al.",
+      "year": 2020,
+      "role": "Set-based per-object representations and disentanglement of object factors",
+      "relationship_sentence": "The concept of modeling scenes as sets of object-specific slots underpins Neural Assets\u2019 per-object representations and their training to disentangle appearance (from a reference) from pose (from a target frame)."
+    },
+    {
+      "title": "Zero-1-to-3: Zero-shot One Image to 3D Object",
+      "authors": "Liu et al.",
+      "year": 2023,
+      "role": "Demonstrating 2D diffusion can capture 3D priors and be guided by viewpoint cues",
+      "relationship_sentence": "Zero-1-to-3 shows diffusion models can respond to 3D/viewpoint signals; Neural Assets generalizes this by conditioning on per-object 3D poses, enabling precise pose control for multiple objects in a single scene."
+    }
+  ],
+  "synthesis_narrative": "Neural Assets builds on the latent diffusion paradigm, inheriting the powerful text-to-image interface and cross-attention machinery of Latent Diffusion Models while reinterpreting the token sequence as a conduit for non-text conditioning. Personalization works like Textual Inversion and DreamBooth establish that an object\u2019s identity can be encapsulated in learnable token embeddings from a few images, providing a blueprint for extracting per-object appearance representations. GLIGEN demonstrates that diffusion models can accept additional grounding tokens (e.g., regions/layout) alongside text without altering the overall interface; this inspires Neural Assets\u2019 decision to encode both visual appearance and 3D pose as a token sequence compatible with cross-attention.\n\nControlNet provides the core insight that structural signals (edges, depth, pose) can reliably steer diffusion generation. Neural Assets adopts this control philosophy but discretizes 3D pose into per-object tokens that pair with appearance tokens, enabling fine-grained, multi-object 3D pose manipulation. From the representation side, Slot Attention motivates modeling scenes as sets of object-centric slots and disentangling object factors, which Neural Assets operationalizes by encoding appearance from a reference frame while conditioning on target-frame poses. Finally, Zero-1-to-3 evidences that 2D diffusion models contain strong 3D priors and can be driven by viewpoint inputs, supporting Neural Assets\u2019 claim that per-object 3D pose tokens can yield 3D-aware, multi-object scene synthesis\u2014without abandoning the familiar text-to-image diffusion interface.",
+  "analysis_timestamp": "2026-01-07T00:02:04.745323"
+}

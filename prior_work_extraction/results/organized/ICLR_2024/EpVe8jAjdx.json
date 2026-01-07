@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Asymmetric Actor-Critic for Image-Based Robot Learning",
+      "authors": "Pinto et al.",
+      "year": 2017,
+      "arxiv_id": "1710.06542",
+      "role": "Baseline",
+      "relationship_sentence": "This work established the standard asymmetric training setup where the critic receives privileged state while the actor uses deployment observations, and Scaffolder generalizes this idea beyond the critic to world models, reward estimators, and other training-only components under privileged sensing."
+    },
+    {
+      "title": "Learning Using Privileged Information: Similarity Control and Knowledge Transfer",
+      "authors": "Vladimir Vapnik et al.",
+      "year": 2009,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "LUPI formalized training-time-only side information, which Scaffolder instantiates in RL by treating extra sensors as privileged inputs used to aid auxiliary components while keeping the deployment policy sensor-limited."
+    },
+    {
+      "title": "Mastering Diverse Domains through World Models (DreamerV3)",
+      "authors": "Danijar Hafner et al.",
+      "year": 2023,
+      "arxiv_id": "2301.04104",
+      "role": "Extension",
+      "relationship_sentence": "Scaffolder extends Dreamer-style world-model RL by injecting privileged sensing into the training of the latent dynamics, value, and reward models while deploying a policy that operates without those privileged inputs."
+    },
+    {
+      "title": "Learning by Cheating",
+      "authors": "Mikhail Philion et al.",
+      "year": 2020,
+      "arxiv_id": "1912.12294",
+      "role": "Inspiration",
+      "relationship_sentence": "This paper demonstrated that training with privileged signals (e.g., depth/segmentation) can produce camera-only policies, motivating Scaffolder\u2019s use of privileged sensing as a training scaffold for a deployable low-sensor policy in RL."
+    },
+    {
+      "title": "End-to-End Training of Deep Visuomotor Policies",
+      "authors": "Sergey Levine et al.",
+      "year": 2016,
+      "arxiv_id": "1504.00702",
+      "role": "Inspiration",
+      "relationship_sentence": "By using full-state privileged information to supervise a vision policy that is deployed without it, this work provided a concrete precedent for train-time privileged sensing that Scaffolder adapts to modern actor-critic and world-model RL."
+    },
+    {
+      "title": "Multi-Agent Actor-Critic for Mixed Cooperative-Competitive Environments (MADDPG)",
+      "authors": "Ryan Lowe et al.",
+      "year": 2017,
+      "arxiv_id": "1706.02275",
+      "role": "Related Problem",
+      "relationship_sentence": "MADDPG\u2019s centralized (privileged) critic with decentralized actors established the efficacy of asymmetric training, which Scaffolder generalizes from multi-agent global-state privilege to single-agent multi-sensor privilege across multiple auxiliary modules."
+    }
+  ],
+  "synthesis_narrative": "Asymmetric Actor-Critic showed that granting the critic access to privileged state while constraining the actor to raw observations can dramatically stabilize and accelerate learning for image-based control. Learning Using Privileged Information (LUPI) cast this as a general principle: training-time side information can guide a learner without being available at test time. DreamerV3 demonstrated that latent world models can jointly learn dynamics, value, and reward from high-dimensional observations, offering modular components whose training signals can, in principle, be enriched. Learning by Cheating proved in autonomous driving that camera-only policies can be trained effectively by exploiting privileged signals like depth or segmentation during training. End-to-End Training of Deep Visuomotor Policies used full-state supervision to train deployable vision policies, establishing a robotics precedent for \u201ctrain with state, deploy with vision.\u201d MADDPG extended asymmetric training to multi-agent settings by using a centralized critic with privileged global information, underscoring the general utility of asymmetric access in actor-critic methods.\nTogether, these works exposed a gap: privileged information was either confined to the critic (AAC, MADDPG) or leveraged via supervised/imitative training (GPS, LbC), while world-model RL (Dreamer) had not systematically exploited privileged sensing across its auxiliary components. The natural next step was to treat extra sensors as training-time scaffolds throughout the RL pipeline\u2014critics, world models, and reward estimators\u2014so the target policy benefits from richer training signals yet remains deployable with limited sensing. This synthesis yields a unified, modality-agnostic approach that broadens asymmetric learning beyond critics to all training-only modules.",
+  "target_paper": {
+    "title": "Privileged Sensing Scaffolds Reinforcement Learning",
+    "authors": "Edward S. Hu, James Springer, Oleh Rybkin, Dinesh Jayaraman",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "reinforcement learning, model-based reinforcement learning, world models, robotics, privileged information, asymmetric learning, multimodality, perception, sensing",
+    "abstract": "We need to look at our shoelaces as we first learn to tie them but having mastered this skill, can do it from touch alone. We call this phenomenon \u201csensory scaffolding\u201d: observation streams that are not needed by a master might yet aid a novice learner. We consider such sensory scaffolding setups for training artificial agents. For example, a robot arm may need to be deployed with just a low-cost, robust, general-purpose camera; yet its performance may improve by having privileged training-time-only access to informative albeit expensive and unwieldy motion capture rigs or fragile tactile sensors. For these settings, we propose \u201cScaffolder\u201d, a reinforcement learning approach which effectively exploits privileged sensing in critics, world models, reward estimators, and other such auxiliary components that are only used at training time, to improve the target policy. For evaluating sensory scaffolding agents, we design a new \u201cS3\u201d suite of ten diverse simulated robotic tasks that explore ",
+    "openreview_id": "EpVe8jAjdx",
+    "forum_id": "EpVe8jAjdx"
+  },
+  "analysis_timestamp": "2026-01-06T09:58:51.911418"
+}

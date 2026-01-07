@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Up or Down? Adaptive Rounding for Post-Training Quantization",
+      "authors": "Nagel et al.",
+      "year": 2020,
+      "role": "Extension",
+      "relationship_sentence": "ERQ\u2019s Wqer explicitly refines weight rounding directions via an efficient proxy objective, directly extending AdaRound\u2019s core idea that rounding decisions should be optimized (not fixed R2N) using a differentiable surrogate tied to reconstruction error."
+    },
+    {
+      "title": "BRECQ: Pushing the Limit of Post-Training Quantization by Block Reconstruction",
+      "authors": "Li et al.",
+      "year": 2021,
+      "role": "Baseline",
+      "relationship_sentence": "ERQ builds on the reconstruction-driven PTQ paradigm popularized by BRECQ and addresses its limitation of treating weights/activations insufficiently coupled by first minimizing activation quantization error (via ridge regression) before iteratively optimizing weight rounding."
+    },
+    {
+      "title": "Data-Free Quantization Through Weight Equalization and Bias Correction",
+      "authors": "Nagel et al.",
+      "year": 2019,
+      "role": "Inspiration",
+      "relationship_sentence": "This work established that modifying weights can systematically reduce activation quantization error (via equalization/bias-correction), a weight\u2013activation interplay that ERQ formalizes and strengthens through an explicit ridge-regression objective for activation error reduction."
+    },
+    {
+      "title": "SmoothQuant: Accurate and Efficient Post-Training Quantization for Large Language Models",
+      "authors": "Xiao et al.",
+      "year": 2023,
+      "role": "Inspiration",
+      "relationship_sentence": "SmoothQuant shifts activation magnitude into weights to ease activation quantization without retraining; ERQ\u2019s Aqer generalizes this principle to ViTs by learning full-precision weight updates via ridge regression specifically to minimize activation quantization error."
+    },
+    {
+      "title": "GPTQ: Accurate Post-Training Quantization for Generative Pretrained Transformers",
+      "authors": "Frantar et al.",
+      "year": 2022,
+      "role": "Related Problem",
+      "relationship_sentence": "GPTQ introduced importance-aware rounding for transformer weights; ERQ\u2019s Wqer pursues the same goal for ViT layers but replaces expensive second-order machinery with an empirically efficient proxy to iteratively refine rounding directions."
+    },
+    {
+      "title": "ZeroQ: A Novel Zero Shot Quantization Framework",
+      "authors": "Li et al.",
+      "year": 2020,
+      "role": "Foundation",
+      "relationship_sentence": "ZeroQ established the calibration/reconstruction-based PTQ setting without training data that ERQ operates within, providing the foundational reconstruction formulation onto which ERQ\u2019s sequential activation-then-weight error reduction is layered."
+    }
+  ],
+  "synthesis_narrative": "ERQ sits squarely in the reconstruction-based, training-free PTQ lineage and crystallizes two strands of prior insight into a unified, ViT-tailored procedure. First, the weight\u2013activation coupling recognized by early PTQ works\u2014through weight equalization and bias correction\u2014showed that adjusting weights can alleviate activation quantization error. SmoothQuant later made this explicit in transformers by shifting activation magnitude into weights to stabilize activation quantization. ERQ\u2019s Aqer formalizes and strengthens this idea: instead of heuristic rescaling, it solves a ridge-regression problem to update full-precision weights so that activation quantization error is directly minimized in ViT layers. Second, the shift from fixed round-to-nearest to optimized rounding, inaugurated by AdaRound and further explored in transformer PTQ such as GPTQ, established that rounding directions are learnable decisions tied to reconstruction fidelity. ERQ\u2019s Wqer embraces this principle but avoids second-order cost by using an efficient proxy to iteratively refine rounding directions. BRECQ provided the immediate baseline\u2014block reconstruction PTQ\u2014upon which ERQ improves by explicitly decoupling and sequencing activation-error reduction before weight rounding. Operating within the data/calibration-efficient PTQ framework typified by ZeroQ, ERQ\u2019s two-step design surfaces the interdependence between activations and weights as the core lever, yielding a targeted, sequential error-reduction pipeline for ViTs.",
+  "analysis_timestamp": "2026-01-06T23:09:26.503764"
+}

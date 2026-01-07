@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "LoFTR: Detector-Free Local Feature Matching with Transformers",
+      "authors": "Jiaming Sun et al.",
+      "year": 2021,
+      "arxiv_id": "2104.00680",
+      "role": "Baseline",
+      "relationship_sentence": "LoFTR is the primary learning-based matcher the authors start from and aim to generalize beyond, and its need for separately trained indoor/outdoor models is the concrete limitation GIM overcomes via video-driven self-training."
+    },
+    {
+      "title": "SuperGlue: Learning Feature Matching with Graph Neural Networks",
+      "authors": "Paul-Edouard Sarlin et al.",
+      "year": 2020,
+      "arxiv_id": "1911.11763",
+      "role": "Gap Identification",
+      "relationship_sentence": "SuperGlue\u2019s training protocol relies on domain-specific SfM-derived pairs (e.g., ScanNet vs. MegaDepth) and commonly provides separate indoor/outdoor weights, directly motivating GIM\u2019s goal of a single model that generalizes across unknown scenes."
+    },
+    {
+      "title": "MegaDepth: Learning Single-View Depth Prediction from Internet Photos",
+      "authors": "Zhengqi Li et al.",
+      "year": 2018,
+      "arxiv_id": "1804.00607",
+      "role": "Foundation",
+      "relationship_sentence": "MegaDepth established the practice of mining web imagery with multi-view geometry to supervise geometric vision models, a principle GIM adopts and extends from internet photos to internet videos to scale correspondence supervision."
+    },
+    {
+      "title": "ScanNet: Richly-annotated 3D Reconstructions of Indoor Scenes",
+      "authors": "Angela Dai et al.",
+      "year": 2017,
+      "arxiv_id": "1702.04405",
+      "role": "Foundation",
+      "relationship_sentence": "ScanNet serves as the canonical indoor training source for modern matchers, providing the domain-specific initialization that GIM leverages before performing video-based self-training to remove the indoor/outdoor divide."
+    },
+    {
+      "title": "RAFT: Recurrent All-Pairs Field Transforms for Optical Flow",
+      "authors": "Zachary Teed et al.",
+      "year": 2020,
+      "arxiv_id": "2003.12039",
+      "role": "Related Problem",
+      "relationship_sentence": "GIM explicitly combines a trained matcher with a high-accuracy optical flow method (e.g., RAFT) on adjacent video frames to generate dense pseudo-correspondences that seed its self-training labels."
+    },
+    {
+      "title": "Self-Training with Noisy Student improves ImageNet classification",
+      "authors": "Qizhe Xie et al.",
+      "year": 2020,
+      "arxiv_id": "1911.04252",
+      "role": "Inspiration",
+      "relationship_sentence": "GIM adapts the Noisy Student self-training paradigm\u2014teacher-generated pseudo-labels filtered for reliability\u2014to the geometric correspondence setting using robust fitting and temporal propagation on unlabeled videos."
+    }
+  ],
+  "synthesis_narrative": "Detector-free and learned matchers showed that strong priors and context can replace keypoint detectors for correspondence, with LoFTR\u2019s transformer-based architecture producing dense matches and SuperGlue\u2019s graph neural network reasoning over sparse keypoints. Both methods, however, rely on domain-specific supervision extracted by multi-view geometry pipelines and are commonly trained as separate indoor and outdoor models, a practice rooted in datasets like ScanNet for indoor scenes and MegaDepth for outdoor, where SfM or RGB-D provides precise correspondences. MegaDepth further demonstrated that large, noisy web imagery can be harnessed via structure from motion to supervise geometric prediction at scale. In parallel, RAFT established a state-of-the-art optical flow estimator capable of delivering accurate frame-to-frame correspondences in videos, making it a practical source of dense short-range labels. Beyond geometry, Noisy Student popularized self-training with pseudo-labels, showing how a teacher can bootstrap a more general student when unlabeled data are abundant. Together these works exposed a gap: powerful matchers exist, robust flow can provide dense local correspondences in videos, and self-training can exploit unlabeled data, yet correspondence learning still depended on curated, domain-specific supervision. The natural next step is to fuse a pretrained matcher with complementary video correspondence estimators to synthesize and robustly filter pseudo-matches from internet videos, propagate them temporally for coverage and diversity, and self-train a single model that generalizes across scene types without foreknowledge of the domain.",
+  "target_paper": {
+    "title": "GIM: Learning Generalizable Image Matcher From Internet Videos",
+    "authors": "Xuelun Shen, zhipeng cai, Wei Yin, Matthias M\u00fcller, Zijun Li, Kaixuan Wang, Xiaozhi Chen, Cheng Wang",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Image Matching, Pose Estimation, 3D Reconstruction",
+    "abstract": "Image matching is a fundamental computer vision problem. While learning-based methods achieve state-of-the-art performance on existing benchmarks, they generalize poorly to in-the-wild images. Such methods typically need to train separate models for different scene types (e.g., indoor vs. outdoor) and are impractical when the scene type is unknown in advance. One of the underlying problems is the limited scalability of existing data construction pipelines, which limits the diversity of standard image matching datasets. To address this problem, we propose GIM, a self-training framework for learning a single generalizable model based on any image matching architecture using internet videos, an abundant and diverse data source. Given an architecture, GIM first trains it on standard domain-specific datasets and then combines it with complementary matching methods to create dense labels on nearby frames of novel videos. These labels are filtered by robust fitting, and then enhanced by propa",
+    "openreview_id": "NYN1b8GRGS",
+    "forum_id": "NYN1b8GRGS"
+  },
+  "analysis_timestamp": "2026-01-06T22:43:56.890671"
+}

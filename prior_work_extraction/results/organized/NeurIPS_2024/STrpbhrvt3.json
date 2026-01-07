@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Concept Bottleneck Models",
+      "authors": "Pang Wei Koh et al.",
+      "year": 2020,
+      "role": "Architectural inspiration for interpretable, concept-mediated prediction",
+      "relationship_sentence": "KnoBo adopts the core CBM idea\u2014forcing predictions to pass through human-understandable concepts\u2014but extends it by populating and supervising the concept layer with explicitly retrieved clinical knowledge from textbooks/PubMed rather than relying solely on human-annotated concepts."
+    },
+    {
+      "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP",
+      "authors": "Patrick Lewis et al.",
+      "year": 2020,
+      "role": "Retrieval mechanism foundation",
+      "relationship_sentence": "KnoBo\u2019s use of retrieval-augmented language models to bring in external medical facts directly builds on the RAG paradigm, enabling the model to condition concept predictions on authoritative textual evidence."
+    },
+    {
+      "title": "Learning Transferable Visual Models From Natural Language Supervision (CLIP)",
+      "authors": "Alec Radford et al.",
+      "year": 2021,
+      "role": "Language supervision as a visual prior",
+      "relationship_sentence": "KnoBo leverages CLIP\u2019s insight that natural language encodes broadly transferable visual semantics; it operationalizes this by constraining the visual pipeline to align with clinically phrased concepts and descriptions drawn from medical text."
+    },
+    {
+      "title": "PubMedBERT: a pre-trained biomedical language model for biomedical text mining",
+      "authors": "Y. Gu et al.",
+      "year": 2021,
+      "role": "Domain-specific language understanding for biomedical text",
+      "relationship_sentence": "By relying on biomedical LMs to parse and represent textbook/PubMed content, KnoBo inherits PubMedBERT\u2019s ability to accurately interpret clinical terminology, improving the fidelity of knowledge-derived concept supervision."
+    },
+    {
+      "title": "Distributionally Robust Neural Networks for Group Shifts (GroupDRO)",
+      "authors": "Shiori Sagawa, Pang Wei Koh, et al.",
+      "year": 2020,
+      "role": "Baseline approach to domain shift via robust optimization",
+      "relationship_sentence": "KnoBo targets the same group/domain shift failure modes as GroupDRO but introduces a complementary mechanism\u2014knowledge-grounded concept constraints\u2014rather than reweighting objectives, and is positioned against such baselines."
+    },
+    {
+      "title": "Invariant Risk Minimization",
+      "authors": "Martin Arjovsky, L\u00e9on Bottou, Ishaan Gulrajani, David Lopez-Paz",
+      "year": 2020,
+      "role": "Invariant representation learning for OOD robustness",
+      "relationship_sentence": "IRM framed the goal of learning invariant predictors across environments; KnoBo addresses the same robustness objective but enforces invariance through explicit clinical concepts derived from text, not purely statistical constraints."
+    },
+    {
+      "title": "Variable generalization performance of a deep learning model to detect pneumonia on chest radiographs",
+      "authors": "J. R. Zech et al.",
+      "year": 2018,
+      "role": "Empirical motivation: domain shift and shortcuts in medical imaging",
+      "relationship_sentence": "Documenting cross-hospital performance drops and spurious shortcut reliance in chest X-rays, this work motivates KnoBo\u2019s central claim that architectural priors\u2014instantiated here via knowledge-grounded concepts\u2014are needed for reliable generalization."
+    }
+  ],
+  "synthesis_narrative": "KnoBo\u2019s central idea\u2014constraining medical image models to reason through explicit, clinically grounded concepts sourced from textbooks and PubMed\u2014sits at the intersection of three influential threads. First, Concept Bottleneck Models established a blueprint for interpretable-by-design architectures that require predictions to flow through human-understandable concepts. KnoBo directly extends this blueprint by replacing manual concept supervision with concepts discovered and supervised via external clinical text. Second, advances in language-driven vision and knowledge access made this feasible: CLIP demonstrated that natural language can serve as a powerful visual prior, while Retrieval-Augmented Generation provided the mechanism to fetch supporting facts at train/inference time. Domain-specific biomedical LMs such as PubMedBERT enable accurate parsing and representation of medical terminology, ensuring retrieved knowledge can be operationalized into reliable concept signals. Third, the method is explicitly motivated by the failures of standard backbones under distribution shift in medical imaging, as documented by Zech et al., and by the limitations of purely statistical robustness methods like GroupDRO and IRM. Whereas those approaches optimize for invariance or reweighting across environments, KnoBo injects an architectural knowledge prior: it forces the model to ground its reasoning in clinically relevant factors derived from authoritative texts. This synthesis yields improved domain generalization by aligning the model\u2019s internal concepts with the causal clinical attributes expected to transfer across hospitals and demographics.",
+  "analysis_timestamp": "2026-01-07T00:02:04.771189"
+}

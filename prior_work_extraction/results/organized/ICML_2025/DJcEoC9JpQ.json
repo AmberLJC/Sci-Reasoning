@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP",
+      "authors": "Patrick Lewis et al.",
+      "year": 2020,
+      "role": "Baseline",
+      "relationship_sentence": "RCTS adopts the RAG pipeline and directly improves the retrieval\u2192context\u2192generation loop by enriching contexts with reasoning patterns and replacing flat relevance scoring with tree-search re-ranking."
+    },
+    {
+      "title": "Self-Consistency Improves Chain of Thought Reasoning in Language Models",
+      "authors": "Xuezhi Wang et al.",
+      "year": 2022,
+      "role": "Inspiration",
+      "relationship_sentence": "RCTS\u2019s self-consistent evaluation mechanism for constructing a reasoning-context knowledge base is inspired by Self-Consistency\u2019s idea of aggregating multiple reasoning paths to obtain reliable signals."
+    },
+    {
+      "title": "Tree of Thoughts: Deliberate Problem Solving with Large Language Models",
+      "authors": "Shunyu Yao et al.",
+      "year": 2023,
+      "role": "Inspiration",
+      "relationship_sentence": "RCTS\u2019s MCTS-HR reframes example selection as a tree search over candidate reasoning contexts, directly building on Tree-of-Thoughts\u2019 insight to search over intermediate reasoning states with heuristic evaluations."
+    },
+    {
+      "title": "Bandit Based Monte-Carlo Planning",
+      "authors": "Levente Kocsis and Csaba Szepesv\u00e1ri",
+      "year": 2006,
+      "role": "Foundation",
+      "relationship_sentence": "RCTS\u2019s re-ranking is instantiated with MCTS using UCT to balance exploration and exploitation, relying on the foundational UCT framework introduced in this work."
+    },
+    {
+      "title": "Mastering the game of Go with deep neural networks and tree search",
+      "authors": "David Silver et al.",
+      "year": 2016,
+      "role": "Inspiration",
+      "relationship_sentence": "RCTS mirrors AlphaGo\u2019s principle of guiding MCTS with heuristic value/policy signals by using LVLM-derived consistency and relevance scores as heuristic rewards to steer the search over contexts."
+    },
+    {
+      "title": "Self-RAG: Learning to Retrieve, Generate, and Critique for Better Language Modeling",
+      "authors": "Akari Asai et al.",
+      "year": 2023,
+      "role": "Gap Identification",
+      "relationship_sentence": "Self-RAG highlights instability and noise in retrieved evidence and proposes critique-guided selection; RCTS addresses this gap by extending critique to multimodal reasoning contexts and replacing greedy reranking with MCTS-HR."
+    },
+    {
+      "title": "OK-VQA: A Visual Question Answering Benchmark Requiring External Knowledge",
+      "authors": "Kenneth Marino et al.",
+      "year": 2019,
+      "role": "Foundation",
+      "relationship_sentence": "RCTS targets the knowledge-intensive VQA setting defined by OK-VQA, motivating the need for external retrieval and richer reasoning exemplars to overcome knowledge scarcity."
+    }
+  ],
+  "synthesis_narrative": "RCTS sits at the intersection of retrieval-augmented generation and structured search for reasoning. The problem setting originates from OK-VQA, which establishes that VQA often requires external knowledge beyond the image. The RAG framework by Lewis et al. provides the baseline pipeline\u2014retrieve, condition the model on retrieved context, then generate\u2014yet its performance hinges on the quality of retrieved evidence. Recent advances in reasoning highlight two key ideas RCTS fuses. First, Self-Consistency shows that aggregating multiple reasoning paths yields reliable signals; RCTS adapts this to curate a reasoning-context knowledge base by selecting exemplars with intrinsically consistent reasoning. Second, Tree-of-Thoughts demonstrates that explicitly searching over intermediate reasoning states improves solution quality; RCTS operationalizes this via a Monte Carlo Tree Search scheme. Grounded in the UCT formulation and inspired by AlphaGo\u2019s heuristic-guided tree search, RCTS introduces MCTS with heuristic rewards to explore and prioritize combinations of retrieved reasoning exemplars, balancing exploration and exploitation. Finally, Self-RAG identifies a core gap of RAG\u2014noisy retrieval and unstable use of evidence\u2014and proposes critique-guided retrieval in text; RCTS extends this idea to the multimodal setting and replaces greedy/learned reranking with principled tree search. Together, these works directly shape RCTS\u2019s core contributions: a reasoning-enriched knowledge base and MCTS-driven re-ranking that strengthens LVLM reasoning consistency and accuracy.",
+  "analysis_timestamp": "2026-01-06T23:07:19.608180"
+}

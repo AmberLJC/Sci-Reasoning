@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Highly accurate protein structure prediction with AlphaFold",
+      "authors": "Jumper et al.",
+      "year": 2021,
+      "role": "Foundation",
+      "relationship_sentence": "This work introduced the frame-based representation and the Frame Aligned Point Error (FAPE) loss that FAFE explicitly analyzes and replaces, making AF2\u2019s formulation the conceptual substrate for the new geodesic frame-to-frame loss."
+    },
+    {
+      "title": "Protein complex prediction with AlphaFold-Multimer",
+      "authors": "Evans et al.",
+      "year": 2022,
+      "role": "Baseline",
+      "relationship_sentence": "AF2-Multimer is the primary complex-modeling baseline that FAFE fine-tunes and improves upon; its observed difficulties on antibody\u2013antigen docking motivated replacing FAPE with a rotation-aware geodesic loss."
+    },
+    {
+      "title": "Geometric loss functions for camera pose regression with deep learning",
+      "authors": "Kendall and Cipolla",
+      "year": 2017,
+      "role": "Inspiration",
+      "relationship_sentence": "This paper established geodesic losses on SO(3) for stable rotation learning, directly inspiring FAFE\u2019s shift from point-based errors to a geodesic rotation/translation objective between rigid frames."
+    },
+    {
+      "title": "A micro Lie theory for state estimation in robotics",
+      "authors": "Sol\u00e0 et al.",
+      "year": 2018,
+      "role": "Foundation",
+      "relationship_sentence": "Provides the Lie-group log/exp machinery and geodesic distances on SE(3) that FAFE leverages to reformulate residue-to-residue errors as group-to-group geodesic frame distances."
+    },
+    {
+      "title": "Independent SE(3)-Equivariant Models for End-to-End Rigid Protein Docking (EquiDock)",
+      "authors": "Ganea et al.",
+      "year": 2022,
+      "role": "Related Problem",
+      "relationship_sentence": "Demonstrates that SE(3)-aware objectives and geodesic treatment of rigid motions improve docking, informing FAFE\u2019s choice to optimize geodesic distances between frames rather than point errors."
+    },
+    {
+      "title": "DiffDock: Diffusion Steps, Twists, and Turns for Molecular Docking",
+      "authors": "Corso et al.",
+      "year": 2023,
+      "role": "Related Problem",
+      "relationship_sentence": "Shows the practical benefits of SE(3)-geometric modeling and group-aware objectives in docking tasks, reinforcing FAFE\u2019s adoption of group-geodesic distances to stabilize rotation/translation optimization."
+    }
+  ],
+  "synthesis_narrative": "FAFE\u2019s core idea\u2014replacing AlphaFold\u2019s point-based FAPE with a geodesic, frame-to-frame objective\u2014sits squarely on the intellectual foundation laid by AlphaFold (Jumper et al., 2021), which introduced the frame representation and FAPE itself. AlphaFold-Multimer (Evans et al., 2022) is the operative baseline and problem setting: its difficulties on immune complex docking, where large rotational errors are common, expose FAPE\u2019s failure mode that FAFE addresses. The decisive conceptual shift comes from the 3D vision/robotics literature on pose learning, especially Kendall and Cipolla (2017), which established that geodesic losses on SO(3) yield stable rotation gradients, directly motivating FAFE\u2019s move away from point-aligned penalties. Turning that insight into a principled protein loss requires Lie-group machinery: Sol\u00e0 et al. (2018) provides the SE(3) log/exp and geodesic distance formalism that FAFE uses to recast residue-to-residue discrepancies as group-to-group geodesic frame distances. Parallel advances in rigid docking underscore the value of SE(3)-aware objectives: EquiDock (Ganea et al., 2022) and DiffDock (Corso et al., 2023) both operationalize group geometry for docking, reinforcing that optimizing geodesic distances between rigid motions improves stability and accuracy. Together, these works directly enable FAFE\u2019s diagnosis of FAPE\u2019s gradient issues and the design of a group-geodesic frame loss that, when used to fine-tune AF2/AF2-Multimer, materially improves antibody\u2013antigen complex modeling.",
+  "analysis_timestamp": "2026-01-06T23:09:26.415257"
+}

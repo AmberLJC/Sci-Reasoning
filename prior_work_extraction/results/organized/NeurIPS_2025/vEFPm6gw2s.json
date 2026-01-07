@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "DUSt3R",
+      "authors": "Wang et al.",
+      "year": 2023,
+      "role": "Baseline",
+      "relationship_sentence": "Rig3R directly generalizes DUSt3R\u2019s dense pointmap-based multiview reconstruction by adding rig-aware conditioning and augmenting outputs with pose and rig raymaps, addressing DUSt3R\u2019s limitation of treating inputs as an unstructured image set."
+    },
+    {
+      "title": "MASt3R",
+      "authors": "Leroy et al.",
+      "year": 2024,
+      "role": "Extension",
+      "relationship_sentence": "Rig3R builds on MASt3R\u2019s joint prediction paradigm (pointmaps + ray-like scene-to-camera representations) and extends it to two distinct raymaps\u2014one global pose raymap and one rig-centric raymap\u2014explicitly structured to infer and exploit multi-camera rig geometry."
+    },
+    {
+      "title": "Using Many Cameras as One: The Generalized Camera",
+      "authors": "Pless et al.",
+      "year": 2003,
+      "role": "Foundation",
+      "relationship_sentence": "The generalized camera model underpins Rig3R\u2019s rig-centric framing of rays; Rig3R\u2019s rig raymap is a learned instantiation of generalized-camera rays tied to a persistent rig coordinate frame."
+    },
+    {
+      "title": "COLMAP: A General-Purpose Structure-from-Motion and Multi-View Stereo Pipeline",
+      "authors": "Sch\u00f6nberger et al.",
+      "year": 2016,
+      "role": "Foundation",
+      "relationship_sentence": "Rig3R inherits the core SfM problem formulation (joint camera pose and 3D structure estimation) formalized by COLMAP, but replaces hand-engineered optimization with learned rig-aware conditioning and dense point/ray map predictions."
+    },
+    {
+      "title": "MultiCol-SLAM: A Multi-Fisheye Camera SLAM System",
+      "authors": "Urban et al.",
+      "year": 2016,
+      "role": "Related Problem",
+      "relationship_sentence": "Rig3R targets the same multi-camera rig setting as MultiCol-SLAM but replaces explicit calibration- and BA-heavy pipelines with a learned rig-aware latent space and rig raymaps that can infer rig structure when metadata are missing."
+    },
+    {
+      "title": "DeepV2D: Video to Depth with Differentiable Structure from Motion",
+      "authors": "Teed et al.",
+      "year": 2020,
+      "role": "Inspiration",
+      "relationship_sentence": "Rig3R follows DeepV2D\u2019s insight of jointly predicting scene structure and camera motion, but specializes it to multi-camera rigs by conditioning on rig metadata and by predicting rig-consistent raymaps for structure discovery across time."
+    }
+  ],
+  "synthesis_narrative": "Rig3R\u2019s core innovation\u2014rig-aware conditioning together with dual raymap outputs that enable discovery and exploitation of multi-camera rig structure\u2014sits at the intersection of modern dense multiview learning and classical rig geometry. DUSt3R provided the immediate baseline by showing that dense pointmaps can power strong multiview pose and 3D predictions, yet its unstructured set treatment leaves rig-specific information unused. MASt3R advanced this paradigm by coupling pointmaps with ray-based outputs, foreshadowing Rig3R\u2019s representational choice; Rig3R extends this idea into two complementary raymaps: a global pose raymap and a rig-centric raymap that remains consistent across time, directly enabling rig structure inference.\n\nThis representational shift is grounded in the generalized camera model of Pless, which conceptualizes a rigid multi-camera rig as a single camera with a bundle of rays. Rig3R essentially learns a generalized-camera representation via its rig raymap. Classical SfM systems like COLMAP define the joint estimation objective of camera poses and 3D structure that Rig3R solves, but Rig3R exchanges sparse features and hand-crafted optimization for rig-aware learned conditioning. In multi-camera robotics, MultiCol-SLAM established the benefits of a rig-centric coordinate frame and synchronized views, while highlighting the burden of explicit calibration\u2014precisely the gap Rig3R addresses by learning to infer rig structure when metadata are missing. Finally, DeepV2D\u2019s joint depth\u2013motion estimation inspired Rig3R\u2019s joint prediction strategy, which Rig3R adapts to the rig domain with conditioning on camera ID/time/rig pose and the proposed rig-consistent raymaps.",
+  "analysis_timestamp": "2026-01-06T23:08:23.957548"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Neural Ordinary Differential Equations",
+      "authors": "Ricky T. Q. Chen, Yulia Rubanova, Jesse Bettencourt, David Duvenaud",
+      "year": 2018,
+      "role": "Foundational continuous-time modeling",
+      "relationship_sentence": "Introduced parameterizing data evolution via continuous-time velocity fields, directly inspiring Rectified Point Flow\u2019s core idea of learning a point-wise velocity field that transports points toward target positions."
+    },
+    {
+      "title": "FFJORD: Free-form Continuous Dynamics for Scalable Reversible Generative Models",
+      "authors": "Will Grathwohl, Ricky T. Q. Chen, Jesse Bettencourt, Ilya Sutskever, David Duvenaud",
+      "year": 2019,
+      "role": "Continuous normalizing flows for generative transport",
+      "relationship_sentence": "Demonstrated practical training of continuous normalizing flows, providing the generative-transport viewpoint that Rectified Point Flow adapts to conditionally move source point clouds to target configurations."
+    },
+    {
+      "title": "Score-Based Generative Modeling through Stochastic Differential Equations",
+      "authors": "Yang Song, Jascha Sohl-Dickstein, Diederik P. Kingma, Abhishek Kumar, Stefano Ermon, Ben Poole",
+      "year": 2021,
+      "role": "Probability flow ODE view of generation",
+      "relationship_sentence": "Established the probability flow ODE perspective that connects diffusion/score models to deterministic velocity fields, underpinning RPF\u2019s training of a conditional velocity field that straightens transport from noise/unposed inputs to posed targets."
+    },
+    {
+      "title": "FlowNet3D: Learning Scene Flow in 3D Point Clouds",
+      "authors": "Xingyi Liu, Charles R. Qi, Leonidas J. Guibas",
+      "year": 2019,
+      "role": "Point-wise motion fields on point clouds",
+      "relationship_sentence": "Showed that learning per-point motion vectors on raw point sets is effective, motivating RPF\u2019s point-wise velocity parameterization for transporting unposed points to their target locations."
+    },
+    {
+      "title": "Deep Closest Point: Learning Representations for Point Cloud Registration",
+      "authors": "Yue Wang, Justin M. Solomon",
+      "year": 2019,
+      "role": "Learning-based pairwise registration",
+      "relationship_sentence": "Framed point cloud registration as learning correspondences/poses, a task RPF subsumes by replacing pose regression with a conditional transport field that implicitly yields the relative transform."
+    },
+    {
+      "title": "RPM-Net: Robust Point Matching using Learned Features",
+      "authors": "Tze Sian Yew, Gim Hee Lee",
+      "year": 2020,
+      "role": "Robust correspondence and pose estimation",
+      "relationship_sentence": "Emphasized robust feature learning and soft matching for registration; RPF leverages this insight by focusing its encoder on contact/overlap cues but recovers poses via generative transport rather than explicit correspondence optimization."
+    },
+    {
+      "title": "Normalized Object Coordinate Space (NOCS) for Category-Level 6D Object Pose and Size Estimation",
+      "authors": "He Wang, Srinath Sridhar, Jingwei Huang, Julien Valentin, Shuran Song, Leonidas J. Guibas",
+      "year": 2019,
+      "role": "Canonical mapping and symmetry handling for pose",
+      "relationship_sentence": "Showed that mapping observations to a canonical coordinate space enables pose recovery and highlighted symmetry issues; RPF generalizes this idea by learning a continuous transport to target positions that intrinsically resolves symmetries without labels."
+    }
+  ],
+  "synthesis_narrative": "Rectified Point Flow (RPF) fuses two trajectories of prior work: continuous-time generative transport and learning-based 3D registration/assembly. On the generative side, Neural ODEs established representing dynamics with learned velocity fields, and FFJORD showed how to train such flows as practical generative models. Score-based SDEs then connected diffusion to deterministic probability flow ODEs, crystallizing the principle of learning a velocity field that transports simple noise to data. RPF adapts this transport paradigm to a conditional setting on point clouds, learning a point-wise velocity field that moves unposed points to their target positions, from which rigid part poses can be recovered.\nOn the geometric side, FlowNet3D validated learning per-point motion vectors directly on unordered point sets, foreshadowing RPF\u2019s point-wise velocity parameterization. Deep Closest Point and RPM-Net reframed registration as learned feature matching and robust pose estimation, revealing the importance of overlap/contact cues; RPF retains this insight via an overlap-aware encoder but sidesteps brittle correspondence/pose regression by using generative transport to implicitly align parts. Finally, NOCS demonstrated that mapping observations to a canonical target enables pose recovery while exposing symmetry ambiguities. RPF generalizes this idea: its learned transport intrinsically captures symmetric assemblies without explicit symmetry labels. Together, these works enabled RPF\u2019s unified conditional generative formulation that spans pairwise registration and multi-part assembly and benefits from joint training across heterogeneous datasets.",
+  "analysis_timestamp": "2026-01-07T00:29:41.032287"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "GAIN: Generative Adversarial Imputation Nets",
+      "authors": "Jinsung Yoon, James Jordon, Mihaela van der Schaar",
+      "year": 2018,
+      "role": "Deep imputation baseline that explicitly models the missingness mask via an adversarial hint mechanism.",
+      "relationship_sentence": "CACTI targets the same tabular imputation problem as GAIN and retains the idea that the missingness mask is informative, but replaces adversarial training with a masked autoencoding objective guided by data-driven mask design."
+    },
+    {
+      "title": "VIME: Value Imputation and Mask Estimation for Self-supervised Learning with Missing Values",
+      "authors": "Jinsung Yoon, James Jordon, Mihaela van der Schaar",
+      "year": 2020,
+      "role": "Introduced masked feature reconstruction as a self-supervised pretext task for tabular data.",
+      "relationship_sentence": "CACTI builds directly on VIME\u2019s masked-imputation pretraining idea, but departs by using copy-masked patterns from the dataset (rather than i.i.d. random masks) and by injecting column-level semantic context into the encoder."
+    },
+    {
+      "title": "Masked Autoencoders Are Scalable Vision Learners (MAE)",
+      "authors": "Kaiming He, Xinlei Chen, Saining Xie, Yanghao Li, Piotr Doll\u00e1r, Ross Girshick",
+      "year": 2022,
+      "role": "Established high-ratio masked autoencoding as a simple, effective reconstruction pretraining paradigm.",
+      "relationship_sentence": "CACTI adapts MAE\u2019s reconstruction training recipe to tabular data, leveraging heavy masking while tailoring the masking distribution and inputs to account for tabular missingness and feature semantics."
+    },
+    {
+      "title": "CSDI: Conditional Score-based Diffusion Models for Imputation of Missing Values in Time Series",
+      "authors": "Yusuke Tashiro, Jiaming Song, Uri Shalit, Stefano Ermon",
+      "year": 2021,
+      "role": "Popularized copy-masking\u2014sampling training masks by copying real missingness patterns\u2014to align training with deployment missingness.",
+      "relationship_sentence": "CACTI generalizes CSDI\u2019s copy-masking idea to tabular data and introduces a median-truncated variant to robustify training against extreme or uninformative copied masks."
+    },
+    {
+      "title": "FT-Transformer: Highly Efficient Tabular Transformers",
+      "authors": "Sergey Gorishniy, Ivan Rubachev, Vladimir Khrulkov, Artem Babenko",
+      "year": 2021,
+      "role": "Showed that tokenizing features and using transformers captures inter-feature dependencies in tabular data.",
+      "relationship_sentence": "CACTI leverages transformer-style feature tokenization/attention to model dependencies among columns, further enhanced by contextual signals from column names and descriptions."
+    },
+    {
+      "title": "TAPAS: Weakly Supervised Table Parsing via Pre-training",
+      "authors": "Jonathan Herzig, Pawe\u0142 Krzysztof Nowak, Thomas M\u00fcller, Francesco Piccinno, Julian Eisenschlos",
+      "year": 2020,
+      "role": "Demonstrated that incorporating table structure, headers, and textual metadata with language models yields stronger table representations.",
+      "relationship_sentence": "CACTI adopts the principle of enriching tabular representations with textual column names/descriptions to inject semantic relationships between features into the imputation model."
+    },
+    {
+      "title": "MIDA: Multiple Imputation using Denoising Autoencoders",
+      "authors": "Liyuan (Leon) Gondara, Ke Wang",
+      "year": 2018,
+      "role": "Applied denoising autoencoders to tabular imputation, showing reconstruction-based objectives can impute missing values effectively.",
+      "relationship_sentence": "CACTI modernizes the denoising-autoencoder approach with masked autoencoding and data-driven mask design, improving robustness across MCAR/MAR/MNAR regimes."
+    }
+  ],
+  "synthesis_narrative": "CACTI\u2019s core innovation fuses two inductive biases\u2014data-driven masking and semantic column context\u2014within a masked autoencoding framework. The masked-imputation pretext task for tabular data traces directly to VIME, while MAE provides the modern recipe for high-ratio masking and simple reconstruction training. CACTI departs from conventional i.i.d. random masks by embracing copy-masking, a strategy popularized by CSDI to mimic real-world missingness patterns during training; CACTI further refines it with median-truncated copy masking to prevent training from being dominated by pathological or uninformative mask instances. On the representation side, FT-Transformer established that treating each feature as a token and modeling inter-feature dependencies with attention is effective for tabular data. Complementing this, table\u2013text pretraining works such as TAPAS showed that column headers and textual metadata encode useful semantics about relationships among columns. CACTI operationalizes this insight by injecting column names and descriptions as contextual inputs, allowing the model to align structural and semantic dependencies during reconstruction. Finally, classical deep imputation methods like GAIN and MIDA motivate CACTI\u2019s focus on explicit handling of missingness (via masks) and reconstruction-based learning without adversarial instability. Together, these strands yield a tabular imputation method that is mask-aware, semantically informed, and robust across MCAR, MAR, and MNAR settings.",
+  "analysis_timestamp": "2026-01-07T00:21:32.376144"
+}

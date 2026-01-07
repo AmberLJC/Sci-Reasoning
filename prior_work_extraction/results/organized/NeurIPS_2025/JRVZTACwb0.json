@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Monte Carlo Tree Diffusion (MCTD)",
+      "authors": "Jaesik Yoon, Hyeonseo Cho, Yoshua Bengio, Sungjin Ahn",
+      "year": 2024,
+      "role": "Immediate precursor method combining diffusion models with tree search",
+      "relationship_sentence": "Fast-MCTD is an efficiency-focused variant of MCTD, inheriting its diffusion-guided tree-search framework while redesigning rollout execution and trajectory representation for speed."
+    },
+    {
+      "title": "Bandit Based Monte-Carlo Planning (UCT)",
+      "authors": "Levente Kocsis, Csaba Szepesv\u00e1ri",
+      "year": 2006,
+      "role": "Core algorithmic foundation for Monte Carlo Tree Search",
+      "relationship_sentence": "Fast-MCTD\u2019s search relies on UCT-style selection and backup, and its parallelization strategy must preserve the statistical guarantees and exploration\u2013exploitation behavior UCT enables."
+    },
+    {
+      "title": "Parallel Monte-Carlo Tree Search",
+      "authors": "Guillaume M. J.-B. Chaslot, Mark H. M. Winands, H. Jaap van den Herik",
+      "year": 2008,
+      "role": "Parallel MCTS techniques (leaf/root/tree parallelization, virtual loss)",
+      "relationship_sentence": "The paper\u2019s Parallel MCTD\u2014delayed tree updates with redundancy-aware selection\u2014directly builds on classic parallel MCTS ideas to avoid contention and duplicate simulations while maximizing throughput."
+    },
+    {
+      "title": "A general reinforcement learning algorithm that masters chess, shogi and Go through self-play (AlphaZero)",
+      "authors": "David Silver et al.",
+      "year": 2018,
+      "role": "Neural-guided MCTS and practical batched search engineering",
+      "relationship_sentence": "AlphaZero\u2019s batched neural evaluations and PUCT-inspired selection inform Fast-MCTD\u2019s design for high-throughput rollouts and principled selection when coordinating many concurrent simulations."
+    },
+    {
+      "title": "Planning with Diffusion for Flexible Behavior Synthesis (Diffuser)",
+      "authors": "Michael Janner et al.",
+      "year": 2022,
+      "role": "Trajectory diffusion models for planning",
+      "relationship_sentence": "Diffuser\u2019s formulation of trajectory-level diffusion establishes the denoising rollout paradigm that MCTD and Fast-MCTD adopt and subsequently accelerate."
+    },
+    {
+      "title": "Between MDPs and Semi-MDPs: A Framework for Temporal Abstraction in Reinforcement Learning",
+      "authors": "Richard S. Sutton, Doina Precup, Satinder Singh",
+      "year": 1999,
+      "role": "Temporal abstraction via options/macro-actions",
+      "relationship_sentence": "Fast-MCTD\u2019s Sparse MCTD component\u2014trajectory coarsening to shorten rollouts\u2014draws directly on the options framework\u2019s principle of temporal abstraction to reduce effective planning horizon."
+    }
+  ],
+  "synthesis_narrative": "Fast-MCTD targets the key bottlenecks of Monte Carlo Tree Diffusion\u2014sequential tree expansion and costly iterative denoising\u2014by marrying two mature lines of work: parallel MCTS and temporal abstraction, within a diffusion-guided planning architecture. The immediate scaffold is MCTD, which introduced diffusion-model rollouts embedded in MCTS; Fast-MCTD retains this scaffold but restructures how rollouts are scheduled and represented. From the MCTS side, UCT provides the exploration\u2013exploitation backbone, while classical parallel MCTS work (e.g., Chaslot et al.) contributes concrete mechanisms\u2014leaf-level parallelism, delayed/aggregated backups, and redundancy control (akin to virtual loss)\u2014that directly inform Fast-MCTD\u2019s Parallel MCTD with delayed tree updates and redundancy-aware selection. AlphaZero further demonstrates how to engineer high-throughput neural-guided search with batched evaluations and robust selection rules (PUCT-style), shaping the practical design for coordinating many concurrent simulations in Fast-MCTD.\nOn the diffusion side, Diffuser established trajectory diffusion as a planning primitive, highlighting the iterative denoising cost that becomes acute when embedded in search; Fast-MCTD tackles this by reducing the number of denoising steps per decision via Sparse MCTD. The conceptual justification for this sparsification comes from the options framework: temporal abstraction (macro-steps) reduces effective horizon without sacrificing hierarchical expressivity. Together, these strands\u2014diffusion-based trajectory generation, statistically grounded tree search, parallel rollout engineering, and temporal abstraction\u2014coalesce into Fast-MCTD\u2019s 100\u00d7 speedup while preserving the performance benefits of diffusion-guided planning.",
+  "analysis_timestamp": "2026-01-07T00:02:04.971115"
+}

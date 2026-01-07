@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Plug and Play Language Models: A Simple Approach to Controlled Text Generation",
+      "authors": "Archit Dathathri et al.",
+      "year": 2020,
+      "role": "Foundational method for steering generation by intervening in hidden activations without model retraining.",
+      "relationship_sentence": "The paper\u2019s activation-steering interventions build directly on PPLM\u2019s core idea of modifying internal representations to control attributes, extending it from style control to safety-refusal bypass and persona induction."
+    },
+    {
+      "title": "Activation Addition: Steering Language Models Without Optimization",
+      "authors": "Turner et al.",
+      "year": 2023,
+      "role": "Introduced simple linear control via adding precomputed activation vectors to steer LLM behavior.",
+      "relationship_sentence": "This work provides the operational template for constructing and applying steering vectors; the NeurIPS paper adapts this paradigm to encode user personas and shows geometry of these vectors predicts refusal behavior."
+    },
+    {
+      "title": "Tuned Lens: A Model of Layerwise Prediction in Language Models",
+      "authors": "Belrose et al.",
+      "year": 2023,
+      "role": "Tooling to decode model predictions from intermediate layers by fitting layer-specific decoders.",
+      "relationship_sentence": "The authors leverage the lens-style idea of decoding from earlier layers to reveal that harmful content persists latently even when final outputs are safe, directly supporting their \u2018latent misalignment\u2019 claim."
+    },
+    {
+      "title": "Toy Models of Superposition in Neural Networks",
+      "authors": "Nelson Elhage et al.",
+      "year": 2022,
+      "role": "Theoretical account of linear feature directions and superposition in representations.",
+      "relationship_sentence": "This theory underpins the paper\u2019s geometric analysis of persona steering vectors\u2014motivating why vector norms/angles should predict refusal\u2014and explains how harmful features can remain present yet suppressed."
+    },
+    {
+      "title": "Universal and Transferable Adversarial Attacks on Aligned Language Models",
+      "authors": "Andy Zou et al.",
+      "year": 2023,
+      "role": "Demonstrated robust jailbreak suffixes that bypass safety training via prompting.",
+      "relationship_sentence": "Provides a comparative baseline for prompt-based bypass; the NeurIPS paper shows persona manipulation and activation steering can be even more effective, reframing jailbreaks around \u2018who is asking\u2019 rather than explicit content."
+    },
+    {
+      "title": "Constitutional AI: Harmlessness from AI Feedback",
+      "authors": "Yuntao Bai et al.",
+      "year": 2022,
+      "role": "Established a prominent safety-tuning paradigm that induces refusals and safer outputs.",
+      "relationship_sentence": "Serves as the aligned-model backdrop; the paper demonstrates that despite such tuning, harmful content can persist in hidden states and be elicited by persona-based steering, revealing limits of refusal-centric alignment."
+    },
+    {
+      "title": "Red Teaming Language Models with Language Models",
+      "authors": "Janae Redfield (Ganguli) et al.",
+      "year": 2022,
+      "role": "Systematized discovery of safety failures via adversarial prompting and role-based setups.",
+      "relationship_sentence": "Informs the paper\u2019s focus on user roles/personas as attack vectors; the new work formalizes personas with steering vectors and quantifies their effect on refusals, moving from discovery to mechanism and prediction."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s central claim\u2014that safety-tuned models\u2019 willingness to divulge harmful content depends sharply on the interlocutor\u2019s persona and that this effect can be mechanistically controlled\u2014sits at the intersection of activation-level control, interpretability lenses, and safety/jailbreaking research. Plug and Play Language Models first established that one can steer generation by intervening in hidden activations without retraining. Activation Addition crystallized this into a simple, linear recipe for adding precomputed feature vectors, which the current paper repurposes to encode user personas. By operationalizing personas as steering vectors, the authors show these interventions can bypass refusal behavior more effectively than direct prompt-based control, extending beyond earlier jailbreak work that relied on adversarial suffixes.\nMethodologically, the paper uses lens-style decoding (as in Tuned Lens) to extract predictions from intermediate layers, revealing that harmful content often persists latently even when the final output is safe. This observation is grounded theoretically by Toy Models of Superposition, which predicts that features live as directions in representation space; the paper leverages this to predict persona effects on refusal from the geometry (norms/angles) of steering vectors. Safety-tuned models like those trained with Constitutional AI provide the empirical backdrop, while red teaming work underscores personas as natural attack vectors. Together, these strands directly enable the paper\u2019s core innovation: formalizing user persona as a controllable representational direction that both explains latent misalignment and systematically modulates safety refusals.",
+  "analysis_timestamp": "2026-01-06T23:33:35.525880"
+}

@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Constitutional AI: Harmlessness from AI Feedback",
+      "authors": "Yuntao Bai et al.",
+      "year": 2022,
+      "arxiv_id": "2212.08073",
+      "role": "Foundation",
+      "relationship_sentence": "This work operationalized subjective principles like \u201chelpful\u201d and \u201charmless\u201d via a critique-and-revise loop using natural-language rules, directly motivating TED\u2019s focus on whether models\u2019 operational semantics for such subjective phrases match human intent."
+    },
+    {
+      "title": "Training a Helpful and Harmless Assistant with RLHF",
+      "authors": "Yuntao Bai et al.",
+      "year": 2022,
+      "arxiv_id": "2204.05862",
+      "role": "Foundation",
+      "relationship_sentence": "By formalizing the helpful/harmless alignment objective and providing widely used data/protocols, this paper establishes the subjective value targets whose meanings TED checks for alignment with human expectations."
+    },
+    {
+      "title": "Red Teaming Language Models with Language Models",
+      "authors": "Ethan Perez et al.",
+      "year": 2022,
+      "arxiv_id": "2202.03286",
+      "role": "Related Problem",
+      "relationship_sentence": "This paper introduced automated failure elicitation with LLMs; TED builds on that paradigm by systematically eliciting failures through disagreements between an LLM-derived \u2018operational thesaurus\u2019 and a human reference thesaurus."
+    },
+    {
+      "title": "Discovering Language Model Behaviors with Model-Written Evaluations",
+      "authors": "Ethan Perez et al.",
+      "year": 2022,
+      "arxiv_id": "2212.09251",
+      "role": "Inspiration",
+      "relationship_sentence": "Showing that LLMs can generate targeted evaluations to expose unexpected behaviors inspired TED\u2019s use of model-driven structure (an operational thesaurus) to automatically surface surprising misalignments tied to subjective descriptors."
+    },
+    {
+      "title": "Semantically Equivalent Adversarial Rules for Debugging NLP Models",
+      "authors": "Marco Tulio Ribeiro et al.",
+      "year": 2018,
+      "arxiv_id": "1806.09030",
+      "role": "Extension",
+      "relationship_sentence": "SEAR\u2019s insight\u2014probing models with human-defined semantic equivalences (e.g., synonym substitutions) to reveal failures\u2014is directly extended by TED to the instruction-following setting via a large-scale, LLM-induced synonymy over subjective phrases."
+    },
+    {
+      "title": "WordNet: A Lexical Database for English",
+      "authors": "George A. Miller",
+      "year": 1995,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "WordNet\u2019s curated synonym/antonym relations provide the human-reference thesaurus that TED explicitly compares against to detect discrepancies in the LLM\u2019s operational semantics."
+    }
+  ],
+  "synthesis_narrative": "Constitutional AI demonstrated that natural-language principles like \u201chelpful\u201d and \u201charmless\u201d can guide a critique-and-revise training loop, thereby making subjective descriptors a central mechanism for alignment. In parallel, Anthropic\u2019s helpful/harmless RLHF work concretized these subjective targets and popularized the practice of specifying them in instructions and training, establishing the exact value-laden phrases models are supposed to implement. Red Teaming Language Models with Language Models showed that LLMs can systematically uncover their own failure modes through automated prompt generation, motivating structured, model-driven searches for safety gaps. Model-Written Evaluations extended this idea by using LMs to synthesize targeted tests that reveal surprising, misaligned behaviors, suggesting that model-internal regularities can be exploited to find failures at scale. Earlier, SEAR introduced the principle of diagnosing NLP systems with human-declared semantic invariances (e.g., synonym swaps), revealing brittleness when models diverge from these equivalences. WordNet, as a canonical human-built lexicon of synonymy and antonymy, provides a stable reference of semantic relations for such tests.\nTaken together, these works point to a gap: alignment methods heavily rely on subjective language while automated safety discovery lacks a principled way to verify that models implement these descriptors as humans intend. The current paper synthesizes these threads by constructing an LLM-induced \u201coperational thesaurus\u201d over subjective phrases and explicitly comparing it to a human reference (WordNet-like) to target disagreements, then using this structured mismatch to elicit concrete misalignments. Given the prevalence of CAI/RLHF and automated red teaming, codifying descriptor semantics and auditing their fidelity was a natural next step.",
+  "target_paper": {
+    "title": "Uncovering Gaps in How Humans and LLMs Interpret Subjective Language",
+    "authors": "Erik Jones, Arjun Patrawala, Jacob Steinhardt",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "safety, alignment, constitutional ai, language model failures, misalignment, automated evaluation, automated red-teaming",
+    "abstract": "Humans often rely on subjective natural language to direct language models (LLMs); for example, users might instruct the LLM to write an *enthusiastic* blogpost, while developers might train models to be *helpful* and *harmless* using LLM-based edits. The LLM\u2019s *operational semantics* of such subjective phrases---how it adjusts its behavior when each phrase is included in the prompt---thus dictates how aligned it is with human intent. In this work, we uncover instances of *misalignment* between LLMs' actual operational semantics and what humans expect. Our method, TED (thesaurus error detector), first constructs a thesaurus that captures whether two phrases have similar operational semantics according to the LLM. It then elicits failures by unearthing disagreements between this thesaurus and a human-constructed reference. TED routinely produces surprising instances of misalignment; for example, Mistral 7B Instruct produces more *harassing* outputs when it edits text to be *witty*, and ",
+    "openreview_id": "gye2U9uNXx",
+    "forum_id": "gye2U9uNXx"
+  },
+  "analysis_timestamp": "2026-01-06T18:08:17.238995"
+}

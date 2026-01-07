@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Jonathan Ho et al.",
+      "year": 2020,
+      "role": "Foundational diffusion generative modeling",
+      "relationship_sentence": "Provides the training objective and sampling framework that DPT adopts for its conditional diffusion generator trained from pseudo-labels."
+    },
+    {
+      "title": "Diffusion Models Beat GANs on Image Synthesis",
+      "authors": "Prafulla Dhariwal, Alex Nichol",
+      "year": 2021,
+      "role": "Class-conditional diffusion and classifier\u2013generator interplay",
+      "relationship_sentence": "Introduces the ADM architecture and classifier guidance for class-conditional diffusion on ImageNet, establishing the practical backbone and the idea of leveraging a classifier with a diffusion model that DPT operationalizes in a semi-supervised loop."
+    },
+    {
+      "title": "Classifier-Free Diffusion Guidance",
+      "authors": "Jonathan Ho, Tim Salimans",
+      "year": 2022,
+      "role": "Practical conditional sampling for diffusion models",
+      "relationship_sentence": "Provides a robust conditioning method that DPT can use to sample high-fidelity pseudo images from a (pseudo-)label-conditioned diffusion model to augment classifier training."
+    },
+    {
+      "title": "FixMatch: Simplifying Semi-Supervised Learning with Consistency and Confidence",
+      "authors": "Kihyuk Sohn et al.",
+      "year": 2020,
+      "role": "Strong pseudo-labeling baseline for SSL classifiers",
+      "relationship_sentence": "Supplies the pseudo-labeling and consistency-regularization machinery that DPT uses in Stage 1 to obtain reliable pseudo-labels and in Stage 3 to retrain the classifier with mixed real and generated data."
+    },
+    {
+      "title": "FlexMatch: Boosting Semi-Supervised Learning with Curriculum Pseudo Labeling",
+      "authors": "Bowen Zhang et al.",
+      "year": 2021,
+      "role": "Label-efficient enhancement to pseudo-labeling",
+      "relationship_sentence": "Inspires DPT\u2019s use of a strong, label-efficient SSL learner as the pseudo-labeling teacher, improving robustness when only 1\u20135 labels per class are available."
+    },
+    {
+      "title": "Improved Techniques for Training GANs",
+      "authors": "Tim Salimans et al.",
+      "year": 2016,
+      "role": "Generative models for semi-supervised classification",
+      "relationship_sentence": "Establishes the paradigm that a generator can aid a classifier in SSL, a key precedent for DPT\u2019s Stage 3 where diffusion-generated images improve the downstream classifier."
+    },
+    {
+      "title": "Good Semi-supervised Learning that Requires a Bad GAN",
+      "authors": "Zihang Dai et al.",
+      "year": 2017,
+      "role": "Generator-driven decision boundary improvement in SSL",
+      "relationship_sentence": "Demonstrates that generating targeted samples can strengthen a semi-supervised classifier, directly motivating DPT\u2019s use of pseudo images to refine classification with very few labels."
+    }
+  ],
+  "synthesis_narrative": "Dual Pseudo Training (DPT) fuses two mature lines of work\u2014label-efficient semi-supervised learning (SSL) and high-fidelity diffusion generative modeling\u2014into a closed loop where each model improves the other. The diffusion side is grounded in DDPM, which provides the core likelihood-based training and sampling mechanics, while \u201cDiffusion Models Beat GANs\u201d contributes the ADM backbone and the principle of coupling classifiers and diffusion models for class-conditional ImageNet synthesis. Classifier-Free Guidance further supplies a practical conditioning/sampling mechanism that enables strong, label-aware pseudo-image generation once pseudo-labels are available.\nOn the discriminative side, DPT relies on modern pseudo-labeling SSL methods. FixMatch offers the simple yet powerful recipe\u2014confidence-thresholded pseudo-labels with strong/weak augmentations\u2014that DPT uses to bootstrap labels from scarce annotations; FlexMatch adds curriculum-aware thresholds to increase label efficiency, especially critical at the 1\u20135 labels-per-class regime.\nHistorically, the idea that generative models can bolster semi-supervised classifiers traces to GAN-based SSL. Salimans et al. showed a generator\u2013discriminator system can benefit classification with few labels, and BadGAN illustrated that strategically generated samples can sharpen decision boundaries. DPT updates this generator\u2013classifier synergy with diffusion models, using a pseudo-labeled, class-conditional diffuser to synthesize high-quality images that, when mixed with real data, measurably enhance the SSL classifier\u2014completing a mutual-improvement loop that advances both semi-supervised generation and classification.",
+  "analysis_timestamp": "2026-01-06T23:42:49.104104"
+}

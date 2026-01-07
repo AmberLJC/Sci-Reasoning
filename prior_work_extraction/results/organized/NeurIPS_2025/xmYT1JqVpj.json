@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Between MDPs and semi-MDPs: A framework for temporal abstraction in reinforcement learning",
+      "authors": "Richard S. Sutton, Doina Precup, Satinder Singh",
+      "year": 1999,
+      "role": "Foundational temporal abstraction/skills in RL (options framework)",
+      "relationship_sentence": "SIL-C builds on the options view of skills by treating policies as callers of abstract subtask/option interfaces, then ensuring those interfaces remain valid as the underlying skills are incrementally improved."
+    },
+    {
+      "title": "The Option-Critic Architecture",
+      "authors": "Pierre-Luc Bacon, Jean Harb, Doina Precup",
+      "year": 2017,
+      "role": "End-to-end learning of skills (options) and their terminations",
+      "relationship_sentence": "Option-Critic established practical learning of skill libraries and hierarchical control; SIL-C directly addresses the incompatibility that arises when such learned options are updated over time by inserting a compatibility-preserving interface between policy-selected subtasks and evolving skills."
+    },
+    {
+      "title": "Modular Multitask Reinforcement Learning with Policy Sketches",
+      "authors": "Jacob Andreas, Dan Klein, Sergey Levine",
+      "year": 2017,
+      "role": "Policy-to-skill API via subtask sketches and modular policies",
+      "relationship_sentence": "Policy Sketches articulate a clear separation between high-level subtask specifications and low-level skills; SIL-C preserves this contract during skill upgrades by learning a mapping that keeps policy-referenced subtasks compatible with the current skill implementations."
+    },
+    {
+      "title": "Diversity is All You Need: Learning Skills without a Reward Function",
+      "authors": "Benjamin Eysenbach, Abhishek Gupta, Julian Ibarz, Sergey Levine",
+      "year": 2019,
+      "role": "Unsupervised skill discovery using latent-conditioned behaviors",
+      "relationship_sentence": "DIAYN\u2019s latent skill variables highlight the notion of a skill space decoded into behavior; SIL-C explicitly aligns a policy\u2019s subtask codes with a possibly shifting latent skill space so that improved unsupervised skills benefit downstream policies without retraining."
+    },
+    {
+      "title": "Locally Weighted Learning",
+      "authors": "Christopher G. Atkeson, Andrew W. Moore, Stefan Schaal",
+      "year": 1997,
+      "role": "Lazy (instance-based) learning for fast, adaptive mappings",
+      "relationship_sentence": "SIL-C\u2019s \"lazy learning-based mapping\" draws on locally weighted/instance-based methods to provide a nonparametric, update-at-inference interface that adapts subtask-to-skill mappings on the fly without retraining the policy or modifying its structure."
+    },
+    {
+      "title": "Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks",
+      "authors": "Jun-Yan Zhu, Taesung Park, Phillip Isola, Alexei A. Efros",
+      "year": 2017,
+      "role": "Cycle-consistency as a design principle for bidirectional alignment",
+      "relationship_sentence": "SIL-C\u2019s bilateral mapping and compatibility objective echo cycle-consistency ideas: enforcing mutual consistency between the policy\u2019s subtask space and the evolving skill space stabilizes semantics across updates."
+    },
+    {
+      "title": "Progressive Neural Networks",
+      "authors": "Andrei A. Rusu, Neil C. Rabinowitz, Guillaume Desjardins, Hubert Soyer, James Kirkpatrick, Koray Kavukcuoglu, Razvan Pascanu, Raia Hadsell",
+      "year": 2016,
+      "role": "Continual/transfer learning without forgetting via architectural modularity",
+      "relationship_sentence": "Progressive Nets showed how to preserve prior capabilities while adding new ones; SIL-C achieves a similar preservation goal for hierarchical policies, but via a lightweight compatibility interface rather than architectural growth or policy retraining."
+    }
+  ],
+  "synthesis_narrative": "The core novelty of SIL-C is to guarantee policy\u2013skill compatibility under incremental skill learning by inserting a lightweight, bidirectional, lazy-learned interface that aligns a policy\u2019s subtask space with an evolving skill space. This idea is rooted in temporal abstraction (Sutton\u2013Precup\u2013Singh) and its practical realization through Option-Critic, which established the centrality of option/skill libraries for hierarchical control. However, modular and programmatic formulations such as Policy Sketches made clear that policies often rely on a stable subtask API; any post-hoc improvement of the underlying skills risks breaking this contract. In parallel, unsupervised skill discovery methods like DIAYN introduced latent skill spaces whose semantics can drift as skills are refined, exacerbating compatibility issues for pre-trained high-level policies.\nTo address this, SIL-C draws on lazy learning principles from locally weighted/instance-based learning to implement a parameter-light, nonparametric mapping that can be updated online without retraining the policy. By making this mapping bilateral and enforcing mutual consistency, SIL-C borrows the cycle-consistency design principle to maintain semantic alignment both from policy subtasks to skills and back. Relative to continual learning approaches such as Progressive Networks, which preserve prior competencies via architectural expansion, SIL-C preserves and even improves downstream policy performance through an interface layer that adapts to upgraded skills, avoiding policy retraining and structural changes while enabling seamless benefit from incremental skill improvements.",
+  "analysis_timestamp": "2026-01-07T00:21:32.242202"
+}

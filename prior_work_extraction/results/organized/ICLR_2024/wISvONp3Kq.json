@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Regularization Paths for Generalized Linear Models via Coordinate Descent",
+      "authors": "Jerome H. Friedman et al.",
+      "year": 2010,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "This work established the standard sparse-GLM formulation and exact batch solutions (via pathwise coordinate descent) that the new algorithm explicitly seeks to match while updating under data variations instead of retraining from scratch."
+    },
+    {
+      "title": "Ad Click Prediction: a View from the Trenches",
+      "authors": "H. Brendan McMahan et al.",
+      "year": 2013,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "FTRL-Proximal is the canonical online sparse-GLM method the paper positions against, adopting its online learning and regret framework but overcoming its inaccuracy under dataset changes and inability to support deletions."
+    },
+    {
+      "title": "Efficient Online and Batch Learning using Forward Backward Splitting",
+      "authors": "John C. Duchi et al.",
+      "year": 2009,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "FOBOS introduced proximal online updates yielding sparse solutions, but it handles only insertions and trades exact optimality for regret bounds, a limitation the new method addresses by tracking the batch-optimal sparse GLM under additions and deletions."
+    },
+    {
+      "title": "Least Angle Regression",
+      "authors": "Bradley Efron et al.",
+      "year": 2004,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "LARS\u2019 homotopy/path-following view of l1-regularized solutions directly inspires the paper\u2019s idea of following an exact solution path, generalized from changing regularization strength to changing datasets via a differential-equation trajectory."
+    },
+    {
+      "title": "Bregman Iterative Algorithms for l1-Minimization with Applications to Compressed Sensing",
+      "authors": "Wotao Yin et al.",
+      "year": 2008,
+      "arxiv_id": null,
+      "role": "Extension",
+      "relationship_sentence": "The paper adapts the Bregman/continuous-time perspective on l1-regularization to GLM losses and time-varying data, designing an ODE-based update that preserves sparsity while remaining on (or near) the batch-optimal solution manifold."
+    },
+    {
+      "title": "Incremental and Decremental Support Vector Learning",
+      "authors": "Gert Cauwenberghs et al.",
+      "year": 2001,
+      "arxiv_id": null,
+      "role": "Related Problem",
+      "relationship_sentence": "This work demonstrated exact addition/deletion updates by maintaining KKT optimality, motivating the paper\u2019s simultaneous handling of insertions and deletions by continuously enforcing optimality conditions for sparse GLMs."
+    }
+  ],
+  "synthesis_narrative": "Coordinate-descent GLM solvers showed that l1-regularized generalized linear models could be fit exactly in batch, tracing solution paths over regularization levels to yield sparse, high-accuracy models. LARS provided a homotopy view of l1 solutions, revealing that optimal coefficients evolve along piecewise-smooth paths with discrete support changes as a parameter varies, a structural insight central to exact path tracking. Bregman iterative methods and their continuous-time interpretations further connected sparse solutions to differential equations/differential inclusions, where thresholding dynamics drive trajectories onto l1-optimal manifolds without sacrificing exactness. In contrast, online sparse learning methods like FOBOS and FTRL-Proximal delivered regret guarantees via proximal updates and per-step shrinkage, but they primarily support insertions, induce approximation bias relative to batch optima, and lack mechanisms to maintain exact optimality under dataset changes. Meanwhile, incremental\u2013decremental SVM learning established that exact updates under both addition and deletion are possible by preserving optimality/KKT structure between steps. Together, these works expose a gap: exact, sparse GLMs are well understood offline, online methods provide regret but sacrifice exactness and deletions, and homotopy/ODE viewpoints suggest one can track optimal sparse solutions continuously. The present paper synthesizes these strands by formulating an ODE-driven path that maintains the batch-optimal sparse GLM as observations are added or removed, while embedding the analysis within an online learning/no-regret framework and adaptively tuning data-dependent regularization to keep the trajectory on the exact solution path.",
+  "target_paper": {
+    "title": "Learning No-Regret Sparse Generalized Linear Models with Varying Observation(s)",
+    "authors": "Diyang Li, Charles Ling, zhiqiang xu, Huan Xiong, Bin Gu",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Generalized Linear Models, Learning with Varying Data, Differential Equations",
+    "abstract": "Generalized Linear Models (GLMs) encompass a wide array of regression and classification models, where prediction is a function of a linear combination of the input variables. Often in real-world scenarios, a number of observations would be added into or removed from the existing training dataset, necessitating the development of learning systems that can efficiently train optimal models with varying observations in an online (sequential) manner instead of retraining from scratch. Despite the significance of data-varying scenarios, most existing approaches to sparse GLMs concentrate on offline batch updates, leaving online solutions largely underexplored. In this work, we present the first algorithm without compromising accuracy for GLMs regularized by sparsity-enforcing penalties trained on varying observations. Our methodology is capable of handling the addition and deletion of observations simultaneously, while adaptively updating data-dependent regularization parameters to ensure t",
+    "openreview_id": "wISvONp3Kq",
+    "forum_id": "wISvONp3Kq"
+  },
+  "analysis_timestamp": "2026-01-07T00:14:26.784907"
+}

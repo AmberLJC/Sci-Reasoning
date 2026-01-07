@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Neural Discrete Representation Learning (VQ-VAE)",
+      "authors": "Aaron van den Oord, Oriol Vinyals, Koray Kavukcuoglu",
+      "year": 2017,
+      "role": "Introduced discrete visual tokenization and two-stage autoencoder + autoregressive generation",
+      "relationship_sentence": "Established the core recipe of compressing images into discrete codes and modeling them autoregressively, creating the design space (codebook size, rate) whose compression choices this paper systematically studies."
+    },
+    {
+      "title": "Generating Diverse High-Fidelity Images with VQ-VAE-2",
+      "authors": "Ali Razavi, Aaron van den Oord, Oriol Vinyals",
+      "year": 2019,
+      "role": "Hierarchical discrete latents and compression-quality trade-offs",
+      "relationship_sentence": "Showed how multi-level discrete tokenization increases compression while keeping fidelity, foregrounding the tension between aggressive compression and reconstruction that this work links to generator capacity."
+    },
+    {
+      "title": "Taming Transformers for High-Resolution Image Synthesis (VQGAN)",
+      "authors": "Patrick Esser, Robin Rombach, Bj\u00f6rn Ommer",
+      "year": 2021,
+      "role": "Downstream-aware tokenizer design for autoregressive transformers",
+      "relationship_sentence": "Demonstrated that shaping the tokenizer objective (with perceptual/GAN losses) improves downstream AR generation, a direct precursor to the paper\u2019s Causally Regularized Tokenization that explicitly incorporates the stage-2 modeling procedure."
+    },
+    {
+      "title": "Zero-Shot Text-to-Image Generation (DALL\u00b7E, dVAE tokenizer)",
+      "authors": "Aditya Ramesh, Mikhail Pavlov, Gabriel Goh, Scott Gray, et al.",
+      "year": 2021,
+      "role": "Large-scale two-stage discrete pipeline and practical compression choices",
+      "relationship_sentence": "Popularized dVAE tokenizers for AR transformers and exposed practical trade-offs between codebook size/compression and reconstruction quality, directly motivating the paper\u2019s \u2018worse is better\u2019 hypothesis for smaller generators."
+    },
+    {
+      "title": "Scaling Laws for Autoregressive Generative Modeling",
+      "authors": "Tom Henighan, Jared Kaplan, Sam McCandlish, et al.",
+      "year": 2020,
+      "role": "Scaling-law framework linking performance to model size, data, and compute",
+      "relationship_sentence": "Provided methodology and evidence that AR modeling difficulty scales predictably with capacity and compute, which this paper extends by quantifying how tokenizer compression interacts with generator size under compute budgets."
+    },
+    {
+      "title": "Variational Image Compression with a Scale Hyperprior",
+      "authors": "Johannes Ball\u00e9, David Minnen, Saurabh Singh, Sung Jin Hwang, Nick Johnston",
+      "year": 2018,
+      "role": "Rate\u2013distortion theory and learned compression foundations",
+      "relationship_sentence": "Grounded the rate\u2013distortion lens used here to formalize the compression side of the trade-off, enabling the paper\u2019s analysis of how different rates shift generator learning difficulty."
+    },
+    {
+      "title": "The Perception-Distortion Tradeoff",
+      "authors": "Tali Blau, Tomer Michaeli",
+      "year": 2018,
+      "role": "Fundamental trade-offs between distortion and perceptual quality",
+      "relationship_sentence": "Established that better perceptual outcomes can require worse distortion, foreshadowing the paper\u2019s finding that worse reconstructions can yield better generative modeling when tokenization eases the AR task."
+    }
+  ],
+  "synthesis_narrative": "The paper builds on a two-stage paradigm crystallized by VQ-VAE and VQ-VAE-2: compress images into discrete codes and then model them with an autoregressive generator. These works established the controllable axes of tokenization\u2014codebook size, hierarchy, and compression rate\u2014while already hinting at trade-offs between aggressive compression and reconstruction fidelity. VQGAN deepened this connection by showing that the tokenizer\u2019s objective can be tailored for downstream generation quality, providing a clear precedent for designing tokenizers with the end generator in mind. DALL\u00b7E\u2019s large-scale dVAE+Transformer pipeline then made the practical tension salient: choices that ease the transformer\u2019s modeling burden (e.g., stronger compression) can harm pixel-wise reconstruction but improve overall generative utility.\nScaling-law analyses for autoregressive generative modeling supplied the methodological backbone to study these effects rigorously, linking performance to model size, data, and compute. Rate\u2013distortion theory from learned image compression anchored the compression side of the analysis, while the perception\u2013distortion trade-off offered a conceptual rationale for why \u201cworse\u201d reconstructions might be \u201cbetter\u201d for generation. Together, these threads directly motivate the paper\u2019s core contribution: characterizing how compression interacts with generator capacity under compute constraints and proposing Causally Regularized Tokenization, which explicitly uses knowledge of the stage-2 autoregressive procedure to shape the tokenizer so that its codes are easier to model\u2014even when that means accepting higher reconstruction distortion.",
+  "analysis_timestamp": "2026-01-07T00:21:32.247973"
+}

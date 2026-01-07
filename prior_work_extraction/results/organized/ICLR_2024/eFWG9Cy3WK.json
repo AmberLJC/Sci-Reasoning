@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Outrageously Large Neural Networks: The Sparsely-Gated Mixture-of-Experts Layer",
+      "authors": "Noam Shazeer et al.",
+      "year": 2017,
+      "arxiv_id": "arXiv:1701.06538",
+      "role": "Foundation",
+      "relationship_sentence": "This work introduced the SMoE formulation with learned routing and load-balancing, establishing the duplicated-experts architecture and routing signals that the current method consolidates via expert merging."
+    },
+    {
+      "title": "Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity",
+      "authors": "William Fedus et al.",
+      "year": 2021,
+      "arxiv_id": "arXiv:2101.03961",
+      "role": "Foundation",
+      "relationship_sentence": "Switch\u2019s practical routing (top-1) and stabilization techniques exposed routing-driven expert redundancy and collapse, motivating the use of router probabilities as actionable signals to guide which experts to merge and how much to compress."
+    },
+    {
+      "title": "DeepSpeed-MoE: Advancing Mixture-of-Experts Inference and Training",
+      "authors": "Samyam Rajbhandari et al.",
+      "year": 2022,
+      "arxiv_id": "arXiv:2201.05596",
+      "role": "Related Problem",
+      "relationship_sentence": "By formalizing and instrumenting routing policies (e.g., Expert-Choice) with per-expert loads and balancing losses, this work provides the measurable routing statistics that are repurposed as hints for grouping and prioritizing experts during merging."
+    },
+    {
+      "title": "Git Re-Basin: Merging Models modulo Permutation Symmetry",
+      "authors": "Samuel Ainsworth et al.",
+      "year": 2023,
+      "arxiv_id": "arXiv:2209.04836",
+      "role": "Extension",
+      "relationship_sentence": "The current method extends Git Re-Basin\u2019s neuron permutation alignment by applying weight matching within each expert and across experts, now guided by router-derived affinities, before merging to avoid destructive averaging."
+    },
+    {
+      "title": "The Role of Permutation Invariance in Linear Mode Connectivity of Neural Networks",
+      "authors": "Mohammad Reza Entezari et al.",
+      "year": 2022,
+      "arxiv_id": "arXiv:2110.06296",
+      "role": "Inspiration",
+      "relationship_sentence": "This paper\u2019s insight that permutation symmetry underlies successful model interpolation directly motivates performing neuron alignment prior to fusing experts so that merged experts land in a compatible mode."
+    },
+    {
+      "title": "Merging Models with Fisher-Weighted Averaging",
+      "authors": "Michael Matena et al.",
+      "year": 2022,
+      "arxiv_id": "arXiv:2111.09832",
+      "role": "Baseline",
+      "relationship_sentence": "Fisher-weighted averaging serves as a primary merging baseline that the authors find ineffective for SMoE expert consolidation, motivating their routing-aware and permutation-aligned merging strategy."
+    },
+    {
+      "title": "TIES-Merging: Resolving Interference When Merging Models",
+      "authors": "Prateek Yadav et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "The idea of masking/sparsifying unimportant parameter differences to prevent interference when merging models directly informs the proposed redundancy-aware scheme that prevents dominant experts from overshadowing critical ones during expert fusion."
+    }
+  ],
+  "synthesis_narrative": "Sparsely-gated Mixture-of-Experts was established by Shazeer et al., which paired learned routing with load balancing to scale capacity but at the cost of duplicating expert parameters and incurring memory overhead; crucially, this setup yields router probabilities and per-expert loads as observable signals. Switch Transformers demonstrated a practical, top-1 routing variant and stabilization tricks, yet also revealed that learned routing can induce expert redundancy and collapse, highlighting that routing statistics reflect which experts truly carry distinct knowledge. DeepSpeed-MoE further systematized routing with Expert-Choice and exposed per-expert traffic and balancing metrics, making routing behavior measurable at scale. In parallel, the model-merging literature showed both potential and pitfalls: Git Re-Basin introduced neuron permutation alignment to enable effective weight fusion by matching units across networks, while Entezari et al. explained why permutation alignment is necessary for mode-compatible merging. Fisher-weighted averaging provided a principled but permutation-agnostic baseline that often fails when representations are misaligned. TIES-Merging showed that sparsifying or masking unimportant differences reduces interference during fusion, preventing dominant updates from swamping critical parameters. Together, these works expose a gap: SMoE has rich routing signals that identify expert importance and similarity, but na\u00efve merging fails without permutation alignment and interference control. The natural next step is to merge experts using router-derived affinities to group and weight experts, apply neuron-level permutation matching before fusion, and incorporate redundancy-aware masking; this yields compact, knowledgeable experts that can then be safely compressed.",
+  "target_paper": {
+    "title": "Merge, Then Compress: Demystify Efficient SMoE with Hints from Its Routing Policy",
+    "authors": "Pingzhi Li, Zhenyu Zhang, Prateek Yadav, Yi-Lin Sung, Yu Cheng, Mohit Bansal, Tianlong Chen",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Sparse Mixture-of-Experts, Efficiency, Merging, Compression",
+    "abstract": "Sparsely activated Mixture-of-Experts (SMoE) has shown promise to scale up the learning capacity of neural networks, however, they have issues like: ($a$) $\\textit{High Memory Usage,}$ due to duplication of the network layers into multiple copies as experts; and ($b$) $\\textit{Redundancy in Experts,}$ as common learning-based routing policies suffer from representational collapse. Therefore, vanilla SMoE models are memory inefficient and non-scalable, especially for resource-constrained downstream scenarios. In this paper, we ask: Can we craft a compact SMoE model by consolidating expert information? What is the best recipe to merge multiple experts into fewer but more knowledgeable experts? Our pilot investigation reveals that conventional model merging methods fail to be effective in such expert merging for SMoE. The potential reasons are: ($1$) redundant information overshadows critical experts; ($2$) appropriate neuron permutation for each expert is missing to bring all of them in ",
+    "openreview_id": "eFWG9Cy3WK",
+    "forum_id": "eFWG9Cy3WK"
+  },
+  "analysis_timestamp": "2026-01-06T09:22:41.793515"
+}

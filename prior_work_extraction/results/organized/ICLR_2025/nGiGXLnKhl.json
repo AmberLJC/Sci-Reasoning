@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "RWKV: Reinventing RNNs for the Transformer Era",
+      "authors": "Bo Peng et al.",
+      "year": 2023,
+      "role": "Extension",
+      "relationship_sentence": "VRWKV directly adapts and modifies RWKV\u2019s time-mix/channel-mix recurrent blocks to 2D spatial tokens, preserving parallelizable training and linear-time global modeling; without RWKV\u2019s architecture, VRWKV\u2019s attention-free vision backbone would not exist."
+    },
+    {
+      "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+      "authors": "Alexey Dosovitskiy et al.",
+      "year": 2021,
+      "role": "Baseline",
+      "relationship_sentence": "VRWKV follows ViT\u2019s patch-tokenization and global modeling formulation and positions itself as a drop-in backbone that surpasses ViT on classification while reducing complexity for high-resolution inputs."
+    },
+    {
+      "title": "Swin Transformer: Hierarchical Vision Transformer using Shifted Windows",
+      "authors": "Ze Liu et al.",
+      "year": 2021,
+      "role": "Gap Identification",
+      "relationship_sentence": "Swin\u2019s reliance on windowed attention for scalability exposes limitations in cross-window aggregation and mandates window operations; VRWKV is explicitly designed to retain global processing with linear complexity and no windowing."
+    },
+    {
+      "title": "Retentive Network: A Successor to Transformer",
+      "authors": "Sun et al.",
+      "year": 2023,
+      "role": "Inspiration",
+      "relationship_sentence": "RetNet showed that linear-time retention-based recurrence can match Transformer-level performance, motivating VRWKV\u2019s attention-free global processing and informing RWKV-like gating/decay mechanisms used in VRWKV."
+    },
+    {
+      "title": "Mamba: Linear-Time Sequence Modeling with Selective State Spaces",
+      "authors": "Albert Gu et al.",
+      "year": 2023,
+      "role": "Related Problem",
+      "relationship_sentence": "Mamba established the viability of attention-free, linear-time operators as Transformer alternatives; VRWKV offers a distinct RWKV-style alternative and leverages this paradigm to achieve efficient long-context and high-resolution vision modeling."
+    },
+    {
+      "title": "VMamba: Visual State Space Model",
+      "authors": "Liu et al.",
+      "year": 2024,
+      "role": "Gap Identification",
+      "relationship_sentence": "By adapting Mamba to images via scanning-based 2D processing and revealing scan-order anisotropy and challenges with sparse/masked inputs, VMamba highlighted concrete limitations that VRWKV addresses with RWKV-like global mixing without scan windows."
+    },
+    {
+      "title": "Masked Autoencoders Are Scalable Vision Learners",
+      "authors": "Kaiming He et al.",
+      "year": 2022,
+      "role": "Foundation",
+      "relationship_sentence": "MAE formalized masked image modeling with sparse visible patches; VRWKV\u2019s architecture is explicitly designed to efficiently process sparse inputs such as masked images and is evaluated under MAE-style regimes."
+    }
+  ],
+  "synthesis_narrative": "Vision-RWKV\u2019s core idea\u2014bringing RWKV\u2019s linear-time, parallel-trainable recurrence to vision for truly global processing at high resolution\u2014traces directly to RWKV\u2019s architectural design. RWKV introduced the time-mix/channel-mix mechanism that marries RNN-style state with Transformer-like capacity; VRWKV extends this operator to 2D spatial tokens with vision-specific modifications. ViT provided the problem formulation and principal baseline: patch tokenization and globally receptive backbones for image understanding. However, as resolutions scale, window-based systems such as Swin Transformer expose a key gap: efficiency is purchased at the cost of window operations and restricted per-layer global communication\u2014precisely what VRWKV removes while keeping linear aggregation complexity. In parallel, the broader movement toward attention-free sequence modeling informed VRWKV\u2019s design space. RetNet demonstrated that linear-time retention can rival Transformers, and Mamba showed selective state spaces as another successful operator class; these works validated that attention is not necessary for long-context, high-capacity models. Their visual adaptation, VMamba, further identified practical limitations\u2014scan-order anisotropy and difficulty with sparse/masked tokens\u2014that VRWKV targets by using RWKV-like global mixing without windows or scans. Finally, MAE\u2019s masked image modeling established a sparse-input setting that VRWKV explicitly supports, enabling efficient processing of masked images. Together, these works form the direct intellectual lineage VRWKV builds upon and the gaps it resolves.",
+  "analysis_timestamp": "2026-01-06T23:09:26.629590"
+}

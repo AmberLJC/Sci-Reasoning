@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis",
+      "authors": "Ben Mildenhall, Pratul P. Srinivasan, Matthew Tancik, Jonathan T. Barron, Ravi Ramamoorthi, Ren Ng",
+      "year": 2020,
+      "role": "Foundational volumetric rendering framework",
+      "relationship_sentence": "MSTH adopts NeRF\u2019s volumetric rendering setup and supervision signals, but replaces NeRF\u2019s MLP representation with a masked mix of 3D and 4D hash encodings to better handle dynamic scenes efficiently."
+    },
+    {
+      "title": "Instant Neural Graphics Primitives with a Multiresolution Hash Encoding",
+      "authors": "Thomas M\u00fcller, Alex Evans, Christoph Schied, Alexander Keller",
+      "year": 2022,
+      "role": "Encoding technique foundation (multi-resolution hash grids)",
+      "relationship_sentence": "MSTH directly builds on Instant-NGP\u2019s hash grids, extending them from 3D to a coupled 3D/4D design and introducing a learnable mask to reduce redundant queries and mitigate hash collisions in largely static regions."
+    },
+    {
+      "title": "Neural Sparse Voxel Fields (NSVF)",
+      "authors": "Lingjie Liu, Jiatao Gu, Kyaw Zaw Lin, Tat-Seng Chua, Christian Theobalt",
+      "year": 2020,
+      "role": "Explicit sparse grid acceleration and occupancy/masking",
+      "relationship_sentence": "NSVF\u2019s use of sparse voxel structures to avoid unnecessary sampling motivates MSTH\u2019s masking of static areas to skip redundant updates and queries, improving efficiency in space-time."
+    },
+    {
+      "title": "NeRF in the Wild: Neural Radiance Fields for Unconstrained Photo Collections",
+      "authors": "Ricardo Martin-Brualla, Noha Radwan, Mehdi S. M. Sajjadi, Jonathan T. Barron, Alexey Dosovitskiy, Daniel Duckworth",
+      "year": 2021,
+      "role": "Uncertainty and transient components for masking",
+      "relationship_sentence": "MSTH\u2019s uncertainty-guided objective for its learnable mask echoes NeRF-W\u2019s strategy of modeling uncertainty/transient phenomena to down-weight unreliable or non-static content."
+    },
+    {
+      "title": "Nerfies: Deformable Neural Radiance Fields",
+      "authors": "Keunhong Park, Utkarsh Sinha, Jonathan T. Barron, Sofien Bouaziz, Dan B. Goldman, Steven M. Seitz, Ricardo Martin-Brualla",
+      "year": 2021,
+      "role": "Dynamic scene modeling via deformation fields",
+      "relationship_sentence": "By showing the challenges of deformation-based dynamic modeling, Nerfies motivates MSTH\u2019s deformation-free alternative that uses an explicit 4D hash branch plus a static 3D branch mediated by a mask."
+    },
+    {
+      "title": "K-Planes: Explicit Radiance Fields in Space, Time, and Appearance",
+      "authors": "Benjamin Fridovich-Keil et al.",
+      "year": 2023,
+      "role": "Explicit 4D factorized representation for dynamics",
+      "relationship_sentence": "K-Planes demonstrates the efficiency of explicit space-time parameterizations; MSTH similarly embraces explicit 4D encoding but couples it with a 3D static encoding and a gating mask to minimize redundancy and storage."
+    },
+    {
+      "title": "Plenoxels: Radiance Fields without Neural Networks",
+      "authors": "Alex Yu, Ruilong Li, Matthew Tancik, Hao Li, Ren Ng, Angjoo Kanazawa",
+      "year": 2022,
+      "role": "Fast optimization of explicit scene parameters",
+      "relationship_sentence": "Plenoxels\u2019 success with optimizing explicit coefficients motivates MSTH\u2019s hash-table parameterization and contributes to its rapid convergence compared to heavy per-time-step networks."
+    }
+  ],
+  "synthesis_narrative": "MSTH\u2019s core idea\u2014mixing 3D and 4D hash encodings through a learnable, uncertainty-guided mask to efficiently reconstruct dynamic scenes\u2014arises from converging threads in neural rendering. NeRF establishes the volumetric rendering backbone, while Instant-NGP provides the pivotal multi-resolution hash encoding that MSTH directly extends to a coupled 3D/4D setting. Recognizing that many dynamic videos contain largely static content, NSVF\u2019s sparse voxel philosophy inspires masking to avoid unnecessary space-time queries and updates, thereby cutting collisions and storage. Handling real-world variability, NeRF in the Wild introduces uncertainty and transient modeling; MSTH adapts this principle by using an uncertainty-guided objective to steer its mask toward spatial-temporal importance, enabling it to route points to either the static 3D or dynamic 4D branch. Dynamic NeRF works like Nerfies underscore both the need to capture non-rigid motion and the optimization burdens of deformation-field approaches; MSTH proposes a deformation-free alternative via explicit 4D encoding. Contemporary explicit dynamic representations such as K-Planes validate the efficiency of explicit space-time parameterizations; MSTH\u2019s hybrid 3D/4D design further trims redundancy in predominantly static regions. Finally, Plenoxels\u2019 success with optimizing explicit scene parameters informs MSTH\u2019s choice of hash-table parameters that train quickly and scale. Together, these works shape MSTH\u2019s masked space-time hashing, achieving lower collisions, reduced storage, and faster convergence for dynamic scene reconstruction.",
+  "analysis_timestamp": "2026-01-06T23:42:48.034306"
+}

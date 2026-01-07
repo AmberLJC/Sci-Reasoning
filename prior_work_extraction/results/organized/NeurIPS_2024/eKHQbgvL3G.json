@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "An Iterative Image Registration Technique with an Application to Stereo Vision",
+      "authors": "Bruce D. Lucas, Takeo Kanade",
+      "year": 1981,
+      "role": "Foundational point tracking via local optical flow; basis for tracking sparse points with local motion models and grouping points to estimate rigid/affine motion.",
+      "relationship_sentence": "TrackIME inherits the idea of estimating an instance\u2019s motion from a set of tracked points\u2014conceptually akin to aggregating KLT-style local motions\u2014then uses that motion to constrain subsequent searches."
+    },
+    {
+      "title": "RAFT: Recurrent All-Pairs Field Transforms for Optical Flow",
+      "authors": "Zachary Teed, Jia Deng",
+      "year": 2020,
+      "role": "High-accuracy dense correspondence using all-pairs correlations; influential in modern tracking but computationally heavy and typically uses downsampled features.",
+      "relationship_sentence": "TrackIME addresses RAFT-like computational bottlenecks by pruning the correspondence search to instance-relevant regions so full-resolution detail can be preserved without exhaustive all-pairs matching."
+    },
+    {
+      "title": "DROID-SLAM: Deep Visual SLAM for Monocular, Stereo, and RGB-D Cameras",
+      "authors": "Zachary Teed, Jia Deng",
+      "year": 2021,
+      "role": "Multi-frame recurrent correspondence refinement with robust handling of long-range associations and occlusions.",
+      "relationship_sentence": "TrackIME\u2019s multi-frame trajectory aggregation and occlusion-aware compensation echo DROID-SLAM\u2019s insight that iterative refinement across frames improves robustness while controlling compute."
+    },
+    {
+      "title": "TAP-Vid: A Benchmark for Tracking Any Point in a Video",
+      "authors": "Carl Doersch et al.",
+      "year": 2022,
+      "role": "Defines the modern \u2018track-any-point\u2019 task and visibility evaluation; spurred methods that still rely on downsampled features and broad search.",
+      "relationship_sentence": "TrackIME directly targets TAP-Vid-style point tracking but avoids the common downsampling trade-off by shrinking the search space via instance motion estimation and occlusion-aware point compensation."
+    },
+    {
+      "title": "Video Object Segmentation using Space-Time Memory Networks",
+      "authors": "Seoung Wug Oh, Joon-Young Lee, Ning Xu, Seon Joo Kim",
+      "year": 2019,
+      "role": "Instance-centric propagation with a memory of past frames to constrain computation to object regions and handle occlusions.",
+      "relationship_sentence": "TrackIME adapts VOS\u2019s instance-centric, memory-driven restriction of attention to foreground regions to prune point-tracking search around the moving instance and to recover through occlusions."
+    },
+    {
+      "title": "SORT: Simple Online and Realtime Tracking",
+      "authors": "Alex Bewley, Zongyuan Ge, Lionel Ott, Fabio Ramos, Ben Upcroft",
+      "year": 2016,
+      "role": "Track-by-detect framework that predicts instance motion (Kalman filter) to restrict association to a local neighborhood.",
+      "relationship_sentence": "TrackIME generalizes SORT\u2019s motion-prediction-for-local-association idea from object boxes to fine-grained point clouds on an instance, using predicted instance motion to prune correspondence candidates."
+    },
+    {
+      "title": "Object Segmentation by Long Term Analysis of Point Trajectories",
+      "authors": "Thomas Brox, Jitendra Malik",
+      "year": 2010,
+      "role": "Demonstrated that grouping point trajectories reveals instance-level motion and supports motion segmentation.",
+      "relationship_sentence": "TrackIME builds on the principle that clustering point trajectories exposes coherent instance motion, using aggregated point motion to estimate an instance trajectory that guides search pruning."
+    }
+  ],
+  "synthesis_narrative": "TrackIME\u2019s core idea\u2014estimating an instance\u2019s motion from a set of tracked points and using it to prune correspondence search while handling occlusions\u2014stands at the intersection of classic point tracking, dense correspondence, and instance-centric propagation. Lucas\u2013Kanade provides the foundational notion of tracking sparse points under a local motion model; Brox and Malik advanced this by showing that grouping long-term point trajectories yields coherent object-level motion. Modern dense correspondence methods such as RAFT and recurrent multi-frame refinements like DROID-SLAM achieved strong accuracy but at high computational cost, typically relying on downsampled features or broad all-pairs search. TrackIME directly addresses this bottleneck by shifting from exhaustive matching to instance-guided pruning.\n\nConcurrently, the TAP-Vid benchmark crystallized the \u2018track any point\u2019 task and highlighted the importance of visibility and occlusion handling. TrackIME targets this setting but preserves full-resolution fidelity by shrinking the search region to the predicted instance footprint. The mechanism echoes two influential paradigms: VOS with space-time memory, which constrains computation to object regions and bridges occlusions via memory, and object tracking frameworks like SORT that predict motion to localize association windows efficiently. Synthesizing these lines, TrackIME aggregates multiple point trajectories to estimate instance motion, prunes the search to those regions to avoid downsampling losses, and compensates occluded points\u2014achieving efficient, accurate, full-resolution point tracking.",
+  "analysis_timestamp": "2026-01-07T00:02:04.736774"
+}

@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "High-Resolution Image Synthesis with Latent Diffusion Models",
+      "authors": "Robin Rombach et al.",
+      "year": 2022,
+      "arxiv_id": "2112.10752",
+      "role": "Foundation",
+      "relationship_sentence": "This work introduced the latent diffusion framework and non-linear VAE encoder/decoder that ReSample explicitly builds upon and must reconcile with when enforcing measurement consistency."
+    },
+    {
+      "title": "Diffusion Posterior Sampling for General Noisy Inverse Problems",
+      "authors": "Hyungjin Chung et al.",
+      "year": 2022,
+      "arxiv_id": "2209.14687",
+      "role": "Baseline",
+      "relationship_sentence": "DPS adds a likelihood-gradient (soft data consistency) term during reverse diffusion, which ReSample directly replaces with an optimization-based hard data consistency step and subsequently improves with a resampling back to the noise manifold."
+    },
+    {
+      "title": "Denoising Diffusion Restoration Models",
+      "authors": "Nimrod Kawar et al.",
+      "year": 2022,
+      "arxiv_id": "2201.11793",
+      "role": "Gap Identification",
+      "relationship_sentence": "DDRM achieves exact (hard) data consistency for linear degradations with pixel-space diffusion models, whose linearity and pixel-domain restrictions motivate ReSample\u2019s generalization to latent diffusion and nonlinear forward models."
+    },
+    {
+      "title": "ILVR: Conditioning Method for Denoising Diffusion Probabilistic Models",
+      "authors": "Jooyoung Choi et al.",
+      "year": 2021,
+      "arxiv_id": "2108.02938",
+      "role": "Inspiration",
+      "relationship_sentence": "ILVR shows that repeatedly enforcing a degradation-consistent constraint inside the reverse process improves conditioning, inspiring ReSample\u2019s projection/optimization-style enforcement of measurement consistency within diffusion steps."
+    },
+    {
+      "title": "SDEdit: Guided Image Synthesis and Editing with Stochastic Differential Equations",
+      "authors": "Chenlin Meng et al.",
+      "year": 2022,
+      "arxiv_id": "2108.01073",
+      "role": "Inspiration",
+      "relationship_sentence": "SDEdit\u2019s principle of adding the appropriate noise and then denoising to stay on the correct diffusion trajectory directly informs ReSample\u2019s resampling step that maps a measurement-consistent update back to the noisy data manifold."
+    },
+    {
+      "title": "Plug-and-Play Priors for Model Based Reconstruction",
+      "authors": "S. H. Venkatakrishnan et al.",
+      "year": 2013,
+      "arxiv_id": "unknown",
+      "role": "Foundation",
+      "relationship_sentence": "The plug-and-play paradigm of alternating a data-fidelity proximal (projection) step with a learned denoiser underlies ReSample\u2019s hard data consistency subproblem embedded at each diffusion timestep."
+    }
+  ],
+  "synthesis_narrative": "Latent diffusion models introduced the idea of performing generative modeling in a learned VAE latent space, where a non-linear encoder/decoder trades sample quality and efficiency against the difficulty of imposing constraints in image space. Diffusion Posterior Sampling established a practical way to solve inverse problems by injecting the likelihood gradient as a soft data-consistency correction within reverse diffusion. Denoising Diffusion Restoration Models demonstrated that hard data consistency can be achieved in the diffusion loop for linear degradations with pixel-space models via closed-form conditioning, highlighting both the power and the limitations of exact consistency. ILVR showed that repeatedly enforcing a degradation-driven constraint during sampling (e.g., by replacing low-frequency components) can strongly condition the generation process, pointing to projection-style updates as effective controls. SDEdit clarified how adding the correct amount of forward noise and then denoising keeps samples on the appropriate noise manifold, a key consideration when interleaving external constraints. Finally, Plug-and-Play Priors provided the core algorithmic pattern of alternating a data-fidelity proximal step with a learned prior, foreshadowing optimization-in-the-loop conditioning.\nTogether, these works exposed a gap: soft guidance can be unstable or biased for challenging operators, while hard consistency was confined to pixel-space and linear models, and naive projections can drift off the diffusion trajectory. The current paper synthesizes these elements by embedding an optimization-based hard data-consistency step inside latent diffusion and immediately resampling to return to the noisy manifold, thus generalizing the ILVR/DDRM-style exact conditioning to nonlinear and latent settings while preserving the principled trajectory control suggested by SDEdit and the PnP paradigm.",
+  "target_paper": {
+    "title": "Solving Inverse Problems with Latent Diffusion Models via Hard Data Consistency",
+    "authors": "Bowen Song, Soo Min Kwon, Zecheng Zhang, Xinyu Hu, Qing Qu, Liyue Shen",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Diffusion models, inverse problems",
+    "abstract": "Latent diffusion models have been demonstrated to generate high-quality images, while offering efficiency in model training compared to diffusion models operating in the pixel space. However, incorporating latent diffusion models to solve inverse problems remains a challenging problem due to the nonlinearity of the encoder and decoder. To address these issues, we propose ReSample, an algorithm that can solve general inverse problems with pre-trained latent diffusion models. Our algorithm incorporates data consistency by solving an optimization problem during the reverse sampling process, a concept that we term as hard data consistency. Upon solving this optimization problem, we propose a novel resampling scheme to map the measurement-consistent sample back onto the noisy data manifold and theoretically demonstrate its benefits. Lastly, we apply our algorithm to solve a wide range of linear and nonlinear inverse problems in both natural and medical images, demonstrating that our approac",
+    "openreview_id": "j8hdRqOUhN",
+    "forum_id": "j8hdRqOUhN"
+  },
+  "analysis_timestamp": "2026-01-06T12:53:30.641588"
+}

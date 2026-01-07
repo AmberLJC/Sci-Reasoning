@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Communication-Efficient Learning of Deep Networks from Decentralized Data",
+      "authors": "H. Brendan McMahan, Eider Moore, Daniel Ramage, Seth Hampson, Blaise Aguera y Arcas",
+      "year": 2017,
+      "role": "Foundational FL aggregation and communication baseline",
+      "relationship_sentence": "NormFit is built on the federated optimization paradigm introduced by FedAvg, and targets its core bottlenecks\u2014communication and local compute\u2014by shrinking the set of trainable parameters to only Pre-LayerNorm scales and biases."
+    },
+    {
+      "title": "SCAFFOLD: Stochastic Controlled Averaging for Federated Learning",
+      "authors": "Sai Praneeth Karimireddy, Satyen Kale, Mehryar Mohri, Sashank J. Reddi, Sebastian Stich, Karthik Suresh",
+      "year": 2020,
+      "role": "Non-IID mitigation and client-drift theory",
+      "relationship_sentence": "By highlighting client drift under non-IID data and providing a theoretical lens on variance reduction, SCAFFOLD motivates NormFit\u2019s design to constrain update directions via a tiny, well-conditioned parameter subset, reducing inter-client gradient discrepancy."
+    },
+    {
+      "title": "FedBN: Federated Learning on Non-IID Features via Local Batch Normalization",
+      "authors": "Xiaoxiao Li, Meirui Jiang, Xiaofei Zhang, Michael Kamp, Qi Dou",
+      "year": 2021,
+      "role": "Normalization-layer strategy for heterogeneity in FL",
+      "relationship_sentence": "FedBN demonstrates that normalization parameters are powerful levers for robustness to feature shift; NormFit extends this insight to ViT/CLIP by selectively tuning only LayerNorm parameters to handle non-IID client distributions with minimal communication."
+    },
+    {
+      "title": "BitFit: Simple Parameter-Efficient Fine-Tuning for Transformer-Based Masked Language Models",
+      "authors": "Elad Ben Zaken, Shauli Ravfogel, Yoav Goldberg",
+      "year": 2022,
+      "role": "Parameter-efficient fine-tuning via small subsets (bias-only)",
+      "relationship_sentence": "BitFit\u2019s success with updating only bias terms directly inspires NormFit\u2019s philosophy that modifying a tiny, targeted parameter set can retain strong adaptation, guiding NormFit to focus on normalization affine parameters."
+    },
+    {
+      "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+      "authors": "Edward J. Hu, Yelong Shen, Phillip Wallis, Zeyuan Allen-Zhu, Yuanzhi Li, Shean Wang, Lu Wang, Weizhu Chen",
+      "year": 2022,
+      "role": "PEFT method balancing accuracy and efficiency",
+      "relationship_sentence": "LoRA established a practical tradeoff between accuracy and communication/computation by restricting updates to low-rank subspaces; NormFit adopts the same efficiency ethos but targets LayerNorm to further cut parameter count and bandwidth."
+    },
+    {
+      "title": "Learning to Prompt for Vision-Language Models",
+      "authors": "Kaiyang Zhou, Jingkang Yang, Chen Change Loy, Ziwei Liu",
+      "year": 2022,
+      "role": "Few-shot CLIP adaptation without full fine-tuning",
+      "relationship_sentence": "CoOp shows CLIP can be adapted with minimal learnable components (prompts) for few-shot recognition, motivating NormFit\u2019s choice to retain the CLIP backbone and adapt it lightly for federated few-shot settings."
+    },
+    {
+      "title": "On Layer Normalization in the Transformer Architecture",
+      "authors": "Ruibin Xiong, Yunchang Yang, Di He, Kai Zheng, Shuxin Zheng, Chen Xing, Huishuai Zhang, Yanyan Lan, Liwei Wang, Tie-Yan Liu",
+      "year": 2020,
+      "role": "Architectural analysis of Pre-LayerNorm Transformers",
+      "relationship_sentence": "Xiong et al. clarify the role and stability benefits of Pre-LayerNorm in Transformers; NormFit leverages this by tuning only Pre-LN affine parameters in CLIP\u2019s vision encoder to steer features with minimal disturbance and drift across clients."
+    }
+  ],
+  "synthesis_narrative": "NormFit sits at the intersection of federated optimization under non-IID data, parameter-efficient fine-tuning (PEFT), and few-shot adaptation of vision\u2013language models. FedAvg established the decentralized aggregation paradigm and exposed the core bottlenecks of communication and local computation that NormFit explicitly targets. SCAFFOLD formalized client drift in non-IID regimes, motivating NormFit\u2019s strategy to constrain the update space so that client gradients align better and aggregation becomes more stable. FedBN demonstrated that normalization layers are particularly effective handles for coping with feature heterogeneity across clients; NormFit extends this insight from BatchNorm to LayerNorm in ViT/CLIP backbones.\nBitFit showed that carefully choosing a tiny subset of parameters (bias terms) can preserve most adaptation capacity, and LoRA generalized this PEFT principle with strong accuracy\u2013efficiency tradeoffs. These works directly inform NormFit\u2019s design choice to fine-tune an even smaller and more principled target: the Pre-LayerNorm affine parameters. Finally, CoOp demonstrated that CLIP can be adapted for few-shot tasks through small learnable modules rather than full fine-tuning, validating NormFit\u2019s premise that minimal updates can yield large gains in downstream performance.\nTogether, these strands lead to NormFit\u2019s core contribution: selectively tuning only Pre-LN parameters in CLIP\u2019s vision encoder to jointly achieve low communication and computation cost, while improving accuracy and robustness under non-IID client data\u2014an approach theoretically motivated by drift/variance considerations and architecturally grounded in Pre-LN Transformer behavior.",
+  "analysis_timestamp": "2026-01-07T00:21:32.326115"
+}

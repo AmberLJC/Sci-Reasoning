@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Scaling Laws for Neural Language Models",
+      "authors": "Jared Kaplan et al.",
+      "year": 2020,
+      "arxiv_id": "2001.08361",
+      "role": "Foundation",
+      "relationship_sentence": "This work established the param/data power-law loss scaling that the present paper directly extends by introducing precision as a new axis via an \"effective parameter count\" that predicts additional loss under low precision."
+    },
+    {
+      "title": "Training Compute-Optimal Large Language Models",
+      "authors": "Jordan Hoffmann et al.",
+      "year": 2022,
+      "arxiv_id": "2203.15556",
+      "role": "Extension",
+      "relationship_sentence": "By formalizing compute-optimal tradeoffs between model size and data, this paper provides the functional form and optimization lens that the current work augments to incorporate precision, yielding new compute-optimal recommendations (e.g., larger models at lower precision)."
+    },
+    {
+      "title": "Explaining Neural Scaling Laws",
+      "authors": "Yasaman Bahri et al.",
+      "year": 2021,
+      "arxiv_id": "unknown",
+      "role": "Inspiration",
+      "relationship_sentence": "This theory links performance to an effective model dimension under noise, directly motivating the present paper\u2019s key idea that finite precision acts like noise that reduces an \"effective parameter count\" governing loss scaling."
+    },
+    {
+      "title": "GPTQ: Accurate Post-Training Quantization for Generative Pretrained Transformers",
+      "authors": "Tim Dettmers Frantar et al.",
+      "year": 2022,
+      "arxiv_id": "2210.17323",
+      "role": "Baseline",
+      "relationship_sentence": "As a primary PTQ baseline whose quantization-induced loss is well characterized, GPTQ provides the empirical target that the new precision-aware scaling law is designed to predict across model and data scales."
+    },
+    {
+      "title": "AWQ: Activation-aware Weight Quantization for LLMs",
+      "authors": "Shuming Lin et al.",
+      "year": 2023,
+      "arxiv_id": "2306.00978",
+      "role": "Baseline",
+      "relationship_sentence": "AWQ\u2019s finding that preserving salient (outlier) channels is crucial for 4-bit LLM inference pinpoints the mechanisms of quantization degradation that the present paper abstracts into a precision-driven reduction of effective parameters."
+    },
+    {
+      "title": "SmoothQuant: Accurate and Efficient Post-Training Quantization for Large Language Models",
+      "authors": "Xiao Xiao et al.",
+      "year": 2023,
+      "arxiv_id": "2211.10438",
+      "role": "Gap Identification",
+      "relationship_sentence": "SmoothQuant documents that activation outliers and model scale make PTQ harder and proposes empirical fixes, highlighting the absence of a predictive law that the current paper fills with a quantization-aware scaling framework."
+    },
+    {
+      "title": "FP8 Formats for Deep Learning",
+      "authors": "Paulius Micikevicius et al.",
+      "year": 2022,
+      "arxiv_id": "2209.05433",
+      "role": "Foundation",
+      "relationship_sentence": "By demonstrating practical low-precision (FP8) training and detailing dynamic-range/rounding effects, this work defines the training regime whose loss impact the present paper models as a precision-dependent effective capacity."
+    }
+  ],
+  "synthesis_narrative": "Power-law loss scaling with parameters and data was established for language models by work showing that cross-entropy decreases predictably as model size and dataset grow, providing a quantitative backbone for extrapolation. Subsequent analysis of compute-optimality unified parameters and data into a single budgeting lens, giving a functional form and optimization criterion for deciding how to allocate compute between width and data. Theoretical accounts of scaling then linked performance to an effective model dimension in the presence of noise, indicating that capacity relevant to generalization can be smaller than the raw parameter count. On the inference side, accurate post-training quantization methods such as GPTQ characterized how weight rounding errors translate into generative loss, while AWQ revealed that preserving a small set of outlier channels is critical to avoid sharp degradation at 4-bit precision. SmoothQuant further showed that activation outliers and model scale exacerbate PTQ difficulty, motivating a need to predict when and how quantization harms performance rather than only mitigate it empirically. In parallel, FP8 training established that low-precision arithmetic is feasible for pretraining, but with accuracy-sensitive tradeoffs tied to dynamic range and rounding.\nTogether, these works expose a gap: existing scaling laws ignore precision, while PTQ and low-precision training papers lack predictive laws for loss as precision varies. The present paper synthesizes the effective-dimension perspective with compute-optimal scaling, modeling finite precision as a reduction in effective parameter count and unifying pre- and post-training quantization into a single predictive form that explains when quantization harm grows with data and when larger, lower-precision models are compute optimal.",
+  "target_paper": {
+    "title": "Scaling Laws for Precision",
+    "authors": "Tanishq Kumar, Zachary Ankner, Benjamin Frederick Spector, Blake Bordelon, Niklas Muennighoff, Mansheej Paul, Cengiz Pehlevan, Christopher Re, Aditi Raghunathan",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "oral",
+    "keywords": "quantization, scaling laws, precision, language models",
+    "abstract": "Low precision training and inference affect both the quality and cost of language models, but current scaling laws do not account for this. In this work, we devise \"precision-aware\" scaling laws for both training and inference. We propose that training in lower precision reduces the model's \"effective parameter count,\" allowing us to predict the additional loss incurred from training in low precision and post-train quantization. For inference, we find that the degradation introduced by post-training quantization increases as models are trained on more data, eventually making additional pretraining data actively harmful. For training, our scaling laws allow us to predict the loss of a model with different parts in different precisions, and suggest that training larger models in lower precision can be compute optimal.  We unify the scaling laws for post and pretraining quantization to arrive at a single functional form that predicts degradation from training and inference in varied preci",
+    "openreview_id": "wg1PCg3CUP",
+    "forum_id": "wg1PCg3CUP"
+  },
+  "analysis_timestamp": "2026-01-06T07:29:18.446821"
+}

@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Multi-Task Learning as Multi-Objective Optimization",
+      "authors": "Ozan Sener et al.",
+      "year": 2018,
+      "arxiv_id": "1810.04650",
+      "role": "Baseline",
+      "relationship_sentence": "JoGBa\u2019s analysis and experiments target accelerating MGDA-style updates introduced for deep multi-task learning in this work, and it explicitly proves faster convergence for MGDA under principled data ordering."
+    },
+    {
+      "title": "Multiple-Gradient Descent Algorithm (MGDA) for Multiobjective Optimization",
+      "authors": "Jean-Antoine D\u00e9sid\u00e9ri",
+      "year": 2012,
+      "arxiv_id": "1208.3932",
+      "role": "Foundation",
+      "relationship_sentence": "JoGBa preserves the MGDA update rule from this paper and builds its convergence analysis around how sample ordering can reduce inter-objective gradient discrepancy to speed MGDA."
+    },
+    {
+      "title": "Without-Replacement Sampling for Stochastic Gradient Methods",
+      "authors": "Ohad Shamir",
+      "year": 2016,
+      "arxiv_id": "1603.00570",
+      "role": "Foundation",
+      "relationship_sentence": "By showing that without-replacement (ordered) sampling can improve finite-sum optimization, this work directly motivates seeking principled, non-random sample orders\u2014generalized here to the multi-objective setting."
+    },
+    {
+      "title": "Why Random Reshuffling Beats SGD? A Theoretical Explanation with Larger Step Sizes",
+      "authors": "Mert G\u00fcrb\u00fczbalaban et al.",
+      "year": 2019,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "This paper establishes random reshuffling as a strong baseline in single-objective finite-sum problems, highlighting a gap\u2014lack of analogous ordering theory and methods for multi-objective optimization\u2014that JoGBa addresses and theoretically surpasses."
+    },
+    {
+      "title": "Gradient Surgery for Multi-Task Learning (PCGrad)",
+      "authors": "Tongzhou Yu et al.",
+      "year": 2020,
+      "arxiv_id": "2001.06782",
+      "role": "Inspiration",
+      "relationship_sentence": "PCGrad\u2019s core insight that mitigating conflicting task gradients accelerates training directly inspires JoGBa\u2019s strategy to balance gradients across objectives via sample ordering rather than per-step projection."
+    },
+    {
+      "title": "The Gram-Schmidt Walk: A Cure for the Banaszczyk Problem",
+      "authors": "Nikhil Bansal et al.",
+      "year": 2018,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "This discrepancy-minimization method for balancing vector sums inspires JoGBa\u2019s framing of per-sample multi-objective gradients as vectors and using online vector balancing to keep cumulative inter-objective gradient discrepancy small during training."
+    }
+  ],
+  "synthesis_narrative": "MGDA was first formalized for multiobjective optimization with a principled multiple-gradient descent rule, providing a convergence framework tied to how gradients from different objectives are aggregated. Its adaptation to deep multi-task learning established MGDA as a practical baseline for neural networks, highlighting the role of gradient geometry in driving multiobjective progress. In parallel, the finite-sum optimization literature showed that sampling without replacement, and in particular random reshuffling, can significantly improve convergence over i.i.d. sampling, thereby elevating sample order from an implementation detail to a provably impactful design choice. Theoretical analyses made random reshuffling a de facto baseline in single-objective regimes and mapped how ordering can enable larger steps and faster rates. Separately, multi-task methods like PCGrad demonstrated that explicitly reducing gradient conflict between tasks yields practical gains, crystallizing the idea that balancing gradients\u2014however achieved\u2014is beneficial. From discrepancy theory, the Gram-Schmidt Walk provided a constructive way to balance sequences of vectors by keeping partial sums small, offering an algorithmic lens for controlling cumulative vector imbalance. Together, these works expose a clear opportunity: while ordering boosts finite-sum optimization and balancing mitigates multiobjective conflicts, there was no principled mechanism to order data in multiobjective settings by directly balancing objective gradients. The current work synthesizes these threads by formulating sample ordering as an online vector balancing problem over per-sample, per-objective gradients and proving that such ordering provably accelerates MGDA, while empirically improving convergence across multiobjective optimizers.",
+  "target_paper": {
+    "title": "Joint Gradient Balancing for Data Ordering in Finite-Sum Multi-Objective Optimization",
+    "authors": "Hansi Yang, James Kwok",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "multi-objective optimization",
+    "abstract": "In finite-sum optimization problems, the sample orders for parameter updates can significantly influence the convergence rate of optimization algorithms. While numerous sample ordering techniques have been proposed in the context of single-objective optimization, the problem of sample ordering in finite-sum multi-objective optimization has not been thoroughly explored. To address this gap, we propose a sample ordering method called JoGBa, which finds the sample orders for multiple objectives by jointly performing online vector balancing on the gradients of all objectives. Our theoretical analysis demonstrates that this approach outperforms the standard baseline of random ordering and accelerates the convergence rate for the MGDA algorithm. Empirical evaluation across various datasets with different multi-objective optimization algorithms further demonstrates that JoGBa can achieve faster convergence and superior final performance than other data ordering strategies.",
+    "openreview_id": "rdAbEn5DZt",
+    "forum_id": "rdAbEn5DZt"
+  },
+  "analysis_timestamp": "2026-01-06T10:53:55.552036"
+}

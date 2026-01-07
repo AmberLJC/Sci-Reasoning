@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Interpretable Explanations of Black Boxes by Meaningful Perturbation",
+      "authors": "Ruth Fong et al.",
+      "year": 2017,
+      "role": "Foundation",
+      "relationship_sentence": "L-MAC adopts the core mask-optimization paradigm introduced by Meaningful Perturbations\u2014learning a mask that preserves the classifier\u2019s decision\u2014while adapting it to audio with a trainable decoder and binary, listenable masks."
+    },
+    {
+      "title": "Understanding Deep Networks via Extremal Perturbations and Smooth Masks",
+      "authors": "Ruth Fong et al.",
+      "year": 2019,
+      "role": "Extension",
+      "relationship_sentence": "L-MAC directly builds on extremal-perturbation style objectives by learning compact, high-confidence regions, extending them to a decoder that outputs discrete time masks and adding an explicit penalty on the masked-out portion."
+    },
+    {
+      "title": "Rationalizing Neural Predictions",
+      "authors": "Tao Lei et al.",
+      "year": 2016,
+      "role": "Foundation",
+      "relationship_sentence": "L-MAC\u2019s binary time-mask can be seen as an audio rationale that is sufficient for the classifier\u2019s decision, mirroring the generator\u2013predictor framework for selecting minimal, discrete evidence introduced in this work."
+    },
+    {
+      "title": "ERASER: A Benchmark to Evaluate Rationalized NLP Models",
+      "authors": "Jay DeYoung et al.",
+      "year": 2020,
+      "role": "Gap Identification",
+      "relationship_sentence": "L-MAC operationalizes ERASER\u2019s sufficiency and comprehensiveness notions by explicitly maximizing confidence on masked-in audio while minimizing it on masked-out audio to yield faithful rationales."
+    },
+    {
+      "title": "RISE: Randomized Input Sampling for Explanation of Black-box Models",
+      "authors": "Vitali Petsiuk et al.",
+      "year": 2018,
+      "role": "Baseline",
+      "relationship_sentence": "As a leading masking-based baseline, RISE motivates L-MAC\u2019s learned decoder approach by highlighting the limitations of random masks and non-listenable perturbations that L-MAC replaces with deterministic, faithful audio masks."
+    },
+    {
+      "title": "Grad-CAM: Visual Explanations from Deep Networks via Gradient-based Localization",
+      "authors": "Ramprasaath R. Selvaraju et al.",
+      "year": 2017,
+      "role": "Baseline",
+      "relationship_sentence": "L-MAC improves over gradient-based localization (often adapted to audio spectrograms) by producing directly listenable, time-domain masks with higher faithfulness."
+    },
+    {
+      "title": "Axiomatic Attribution for Deep Networks (Integrated Gradients)",
+      "authors": "Mukund Sundararajan et al.",
+      "year": 2017,
+      "role": "Baseline",
+      "relationship_sentence": "L-MAC addresses the noise and non-causal artifacts of gradient-based attributions like Integrated Gradients by learning binary masks that causally affect the classifier and can be listened to."
+    }
+  ],
+  "synthesis_narrative": "L-MAC\u2019s core innovation\u2014learning a decoder that produces binary, listenable masks which both preserve and contrast a classifier\u2019s decision\u2014emerges from two intersecting lines of work. From the vision XAI literature, Meaningful Perturbations and its extremal-perturbation successor established mask optimization as a principled way to extract minimal, decision-preserving evidence. L-MAC inherits this optimization view but adapts it to audio by training a decoder that outputs discrete time masks and by explicitly combining a \u2018keep\u2019 objective (maximize confidence on masked-in audio) with a complementary \u2018remove\u2019 objective (minimize confidence on masked-out audio). This dual objective resonates with the rationale literature in NLP: Rationalizing Neural Predictions framed explanations as selecting a sparse, discrete subset sufficient for prediction, and ERASER formalized sufficiency and comprehensiveness, a gap L-MAC closes in audio by baking both criteria into its loss.\n\nAt the same time, L-MAC positions itself against prevalent baselines. RISE shows the promise of mask-based, black-box explanations but relies on random masks and often yields non-listenable perturbations; L-MAC replaces randomness with a learned, deterministic decoder and enforces listenability by operating directly as binary time masks on the signal. Gradient-based methods like Grad-CAM and Integrated Gradients, commonly adapted to audio, suffer from noisy, non-causal attributions; L-MAC\u2019s causal keep/remove training yields more faithful, human-auditable explanations. Together, these works directly shape L-MAC\u2019s formulation and the specific limitations it overcomes.",
+  "analysis_timestamp": "2026-01-06T23:09:26.402529"
+}

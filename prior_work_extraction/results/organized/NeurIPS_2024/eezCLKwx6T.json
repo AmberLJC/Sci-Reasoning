@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Emergent Complexity and Zero-shot Transfer via Unsupervised Environment Design (PAIRED)",
+      "authors": "Dennis et al.",
+      "year": 2020,
+      "role": "Introduced regret-based UED via a teacher that maximizes agent regret to generate challenging environments.",
+      "relationship_sentence": "ADD adopts the core idea of using agent regret as a guidance signal, replacing PAIRED\u2019s teacher with a diffusion generator steered by regret to directly synthesize adversarial environments."
+    },
+    {
+      "title": "Prioritized Level Replay (PLR): A Replay Strategy for Procedurally-Generated RL",
+      "authors": "Jiang et al.",
+      "year": 2021,
+      "role": "Showed that sampling training levels by difficulty/regret improves robustness and generalization in UED/Procgen settings.",
+      "relationship_sentence": "ADD generalizes PLR\u2019s regret/difficulty-driven selection into a generative paradigm, using regret to guide a diffusion model to create new hard-but-learnable environments rather than only replaying existing ones."
+    },
+    {
+      "title": "Paired Open-Ended Trailblazer (POET): Endlessly Generating Increasingly Complex and Diverse Environments",
+      "authors": "Wang et al.",
+      "year": 2019,
+      "role": "Pioneered open-ended environment generation emphasizing continual challenge and diversity for robust agents.",
+      "relationship_sentence": "ADD targets POET\u2019s dual goals\u2014adversarial challenge and diversity\u2014but achieves them with a learned diffusion generator that can directly model rich environment distributions."
+    },
+    {
+      "title": "Automatic Curriculum Learning for Deep RL with ALP-GMM",
+      "authors": "Portelas et al.",
+      "year": 2020,
+      "role": "Developed teacher-driven task sampling based on learning progress to target the agent\u2019s competence frontier.",
+      "relationship_sentence": "ADD echoes ALP-GMM\u2019s principle of targeting the learning frontier, instantiating it via regret as the progress proxy and operationalizing it through guided diffusion sampling."
+    },
+    {
+      "title": "Diffusion Models Beat GANs on Image Synthesis (Guided Diffusion)",
+      "authors": "Dhariwal and Nichol",
+      "year": 2021,
+      "role": "Introduced classifier-guided diffusion, showing how external signals can steer generative sampling toward desired properties.",
+      "relationship_sentence": "ADD\u2019s regret-guided sampling parallels classifier guidance by using the gradient of a performance signal (regret) to bias the diffusion process toward adversarial yet useful environments."
+    },
+    {
+      "title": "Classifier-Free Diffusion Guidance",
+      "authors": "Ho and Salimans",
+      "year": 2021,
+      "role": "Proposed guidance without an external classifier, stabilizing and simplifying conditional diffusion.",
+      "relationship_sentence": "ADD leverages the concept of guidance strength and conditional steering from classifier-free guidance to control the adversariality-diversity trade-off when conditioning on regret."
+    },
+    {
+      "title": "Diffuser: Diffusion Models for Planning",
+      "authors": "Janner et al.",
+      "year": 2022,
+      "role": "Applied diffusion models to RL by guiding trajectory generation with reward/value signals.",
+      "relationship_sentence": "ADD extends the paradigm of RL signals guiding diffusion by applying a related idea to environment generation, using agent-centric regret to steer the generative process over environments."
+    }
+  ],
+  "synthesis_narrative": "ADD sits at the intersection of unsupervised environment design (UED) and guided diffusion. On the UED side, PAIRED established regret as a powerful signal for crafting curricula: a teacher maximizes the gap between achievable return and the agent\u2019s performance to expose weaknesses. PLR further demonstrated that prioritizing high-regret or high-failure levels improves robustness and generalization in procedurally generated settings. Earlier open-ended generation, notably POET, emphasized both continual challenge and diversity, while ALP-GMM formalized targeting the learning frontier via progress signals. These works collectively motivate using a principled difficulty signal (regret/progress) and preserving diversity when shaping the training distribution.\n\nOn the generative modeling side, guided diffusion showed how external objectives can steer sampling. Dhariwal and Nichol\u2019s classifier guidance and Ho and Salimans\u2019s classifier-free guidance provided the toolkit to translate scalar signals into controlled conditional generation, including tuning guidance strength to balance fidelity and diversity. Diffuser extended this guidance paradigm into RL by conditioning trajectory generation on reward/value-related objectives.\n\nADD fuses these threads: it replaces teacher policies or replay heuristics with a diffusion-based environment generator and drives it using agent regret. This yields a generator that directly produces adversarial yet learnable environments while maintaining diversity\u2014addressing limitations of hand-designed curricula, parameter-only randomization, or selection-only methods. The result is a principled, scalable approach to robust policy learning via regret-guided diffusion.",
+  "analysis_timestamp": "2026-01-06T23:33:35.534775"
+}

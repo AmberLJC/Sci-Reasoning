@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "High-Resolution Image Synthesis with Latent Diffusion Models",
+      "authors": "Robin Rombach, Andreas Blattmann, Dominik Lorenz, Patrick Esser, Bj\u00f6rn Ommer",
+      "year": 2022,
+      "role": "Backbone architecture and cross-attention mechanism for text-to-image diffusion (Stable Diffusion).",
+      "relationship_sentence": "SynGen builds directly on LDM\u2019s cross-attention maps as token-to-spatial localization signals and applies its loss to those maps during inference."
+    },
+    {
+      "title": "Diffusion Models Beat GANs on Image Synthesis",
+      "authors": "Prafulla Dhariwal, Alexander Nichol",
+      "year": 2021,
+      "role": "Introduced classifier guidance\u2014optimizing an external objective during sampling to steer diffusion.",
+      "relationship_sentence": "SynGen follows this paradigm by injecting a guidance objective at inference, but replaces classifier gradients with an attention-alignment loss derived from linguistic binding."
+    },
+    {
+      "title": "Classifier-Free Diffusion Guidance",
+      "authors": "Jonathan Ho, Tim Salimans",
+      "year": 2022,
+      "role": "Training-free guidance technique that scales conditional signals at sampling time.",
+      "relationship_sentence": "The paper\u2019s training-free, inference-time steering principle underpins SynGen\u2019s decision to avoid retraining and instead guide generation solely via test-time losses."
+    },
+    {
+      "title": "Prompt-to-Prompt: Image Editing with Cross-Attention Control",
+      "authors": "Amir Hertz et al.",
+      "year": 2022,
+      "role": "Showed that cross-attention maps in diffusion localize word tokens and can be manipulated at inference.",
+      "relationship_sentence": "SynGen leverages the same cross-attention maps and extends their use from editing/control to enforcing correct modifier\u2013entity bindings via overlap and separation constraints."
+    },
+    {
+      "title": "Attend-and-Excite: Attention-Based Semantic Guidance for Text-to-Image Diffusion Models",
+      "authors": "Hila Chefer et al.",
+      "year": 2023,
+      "role": "Introduced attention-based, test-time optimization losses to ensure all prompt entities appear.",
+      "relationship_sentence": "SynGen generalizes this attention-guidance idea from ensuring object presence to precisely aligning attributes with their entities using syntax-derived positive/negative attention overlaps."
+    },
+    {
+      "title": "Compositional Visual Generation with Composable Diffusion Models",
+      "authors": "Xiaohui Liu et al.",
+      "year": 2022,
+      "role": "Proposed product-of-experts style guidance for composing multiple textual conditions without retraining.",
+      "relationship_sentence": "This work motivates training-free handling of multi-entity, multi-attribute prompts; SynGen similarly tackles compositionality but via linguistic-structure-aware attention alignment."
+    },
+    {
+      "title": "GLIGEN: Open-Set Grounded Text-to-Image Generation",
+      "authors": "Li et al.",
+      "year": 2023,
+      "role": "Adds region-level grounding (e.g., boxes) to improve correspondence between text entities and image regions.",
+      "relationship_sentence": "GLIGEN shows explicit grounding improves binding; SynGen achieves a related effect by deriving soft grounding from syntax and aligning cross-attention maps, without extra annotations."
+    }
+  ],
+  "synthesis_narrative": "SynGen\u2019s core insight\u2014enforcing correct attribute\u2013entity binding by aligning cross-attention maps according to syntactic structure\u2014emerges from three converging lines of prior work. First, Latent Diffusion Models established cross-attention as the operative mechanism for mapping text tokens to spatial features, providing the very signals SynGen measures and shapes. Second, a series of guidance methods for diffusion (classifier guidance and classifier-free guidance) demonstrated that one can inject external objectives at sampling time to steer generation without retraining. SynGen adopts this training-free, inference-time optimization template, but replaces class-based or unconditional guidance with a linguistically motivated alignment loss on attention maps. Third, cross-attention interpretability and control papers\u2014most notably Prompt-to-Prompt\u2014verified that token-specific attention maps localize semantics and can be manipulated during inference. Attend-and-Excite went further, proposing attention-based guidance losses to fix missing-object failures, directly inspiring SynGen\u2019s attention-centric, test-time loss design.\n\nComplementing these, compositional diffusion work on composable guidance clarified how to handle multi-entity prompts in a training-free manner, while grounded generation (GLIGEN) provided evidence that explicit spatial conditioning improves text\u2013image correspondence. SynGen synthesizes these threads by using a dependency parse to derive which modifiers should overlap with which entities, and then optimizing an attention-overlap/separation objective during denoising. This yields targeted corrections of attribute swaps and mismatches\u2014preserving the strengths of pretrained diffusion models while enforcing linguistically faithful bindings, all without additional training.",
+  "analysis_timestamp": "2026-01-06T23:33:35.586954"
+}

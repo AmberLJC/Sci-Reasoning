@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Classifier-Free Diffusion Guidance",
+      "authors": "Jonathan Ho et al.",
+      "year": 2022,
+      "arxiv_id": "2207.12598",
+      "role": "Foundation",
+      "relationship_sentence": "CAS exploits the classifier-free guidance identity that the difference between conditional and unconditional denoisers estimates \u2207x log p(y|x), integrating this quantity along the diffusion trajectory to obtain a probability-based alignment score without any external model."
+    },
+    {
+      "title": "Score-Based Generative Modeling through Stochastic Differential Equations",
+      "authors": "Yang Song et al.",
+      "year": 2021,
+      "arxiv_id": "2011.13456",
+      "role": "Foundation",
+      "relationship_sentence": "CAS relies on the probability-flow ODE and path-wise log-likelihood formulation from score-based SDEs to turn model scores along a trajectory into measurable changes in (conditional) log-probability, enabling a principled probabilistic alignment measure."
+    },
+    {
+      "title": "Denoising Diffusion Implicit Models",
+      "authors": "Jiaming Song et al.",
+      "year": 2020,
+      "arxiv_id": "2010.02502",
+      "role": "Extension",
+      "relationship_sentence": "CAS uses DDIM\u2019s deterministic sampling/inversion to map a generated image to its noise trajectory, over which it accumulates the conditional-probability evidence defining the alignment score."
+    },
+    {
+      "title": "Diffusion Posterior Sampling for General Inverse Problems",
+      "authors": "Hyungjin Chung et al.",
+      "year": 2023,
+      "arxiv_id": "unknown",
+      "role": "Inspiration",
+      "relationship_sentence": "CAS adopts the Bayesian view from DPS that diffusion models serve as score-based priors combined with an arbitrary likelihood p(y|x), repurposing this idea to estimate p(y|x) as a universal alignment score rather than for posterior sampling."
+    },
+    {
+      "title": "PickScore: Learning to Score Text-to-Image Generations via Pick-a-Pic",
+      "authors": "Tomer Kirstain et al.",
+      "year": 2023,
+      "arxiv_id": "unknown",
+      "role": "Baseline",
+      "relationship_sentence": "CAS directly targets the same alignment-scoring objective as PickScore but replaces its large-scale preference-trained scorer with a diffusion-derived conditional probability usable across arbitrary conditions."
+    },
+    {
+      "title": "HPS v2: A Universal Human Preference Score for Text-to-Image Generation",
+      "authors": "Wu et al.",
+      "year": 2023,
+      "arxiv_id": "unknown",
+      "role": "Baseline",
+      "relationship_sentence": "CAS addresses HPS v2\u2019s reliance on extensive human preference training and text-only conditioning by providing a training-free, model-internal probability score applicable to non-text conditions."
+    },
+    {
+      "title": "ImageReward: Learning and Evaluating Human Preferences for Text-to-Image Generation",
+      "authors": "Xu et al.",
+      "year": 2023,
+      "arxiv_id": "unknown",
+      "role": "Baseline",
+      "relationship_sentence": "CAS replaces ImageReward\u2019s external reward model with a self-scoring mechanism derived from the generator\u2019s conditional probability, overcoming domain specificity and data demands."
+    }
+  ],
+  "synthesis_narrative": "Classifier-free guidance established that the difference between a conditional and an unconditional diffusion denoiser estimates the gradient of the conditional log-likelihood, providing a direct link between model outputs and \u2207x log p(y|x). Score-based SDEs further showed that integrating model scores along a probability-flow trajectory yields changes in log-probability, formalizing how diffusion processes can quantify likelihoods. DDIM introduced a deterministic sampler with an approximate inverse mapping, enabling one to trace or reconstruct a generation trajectory for a given image without retraining. Building on the Bayesian framing that diffusion models act as score-based priors, diffusion posterior sampling demonstrated how to incorporate an arbitrary likelihood p(y|x) to condition on general measurements beyond text. In parallel, text-to-image alignment scorers such as PickScore, HPS v2, and ImageReward trained large external evaluators on human preferences, achieving strong text alignment but remaining domain-specific and data-hungry. Together, these works revealed that diffusion models already encode the ingredients to assess conditional likelihoods while highlighting the limitations of learned T2I-only scorers. The natural next step was to synthesize the CF-guidance identity with the SDE likelihood view and operationalize it along an invertible DDIM trajectory, yielding a direct estimate of p(y|x) from the base model. By reinterpreting the DPS Bayesian perspective for evaluation rather than sampling, this integration produces a universal, training-free condition alignment score that enables self-rejection across diverse conditioning modalities.",
+  "target_paper": {
+    "title": "CAS: A Probability-Based Approach for Universal Condition Alignment Score",
+    "authors": "Chunsan Hong, ByungHee Cha, Tae-Hyun Oh",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Generative model, diffusion model, score-based prior, conditional diffusion model, text-to-image alignment score, inversion process, image quality assessment, T2I alignment score",
+    "abstract": "Recent conditional diffusion models have shown remarkable advancements and have been widely applied in fascinating real-world applications. However, samples generated by these models often do not strictly comply with user-provided conditions. Due to this, there have been few attempts to evaluate this alignment via pre-trained scoring models to select well-generated samples. Nonetheless, current studies are confined to the text-to-image domain and require large training datasets. This suggests that crafting alignment scores for various conditions will demand considerable resources in the future. In this context, we introduce a universal condition alignment score that leverages the conditional probability measurable through the diffusion process. Our technique operates across all conditions and requires no additional models beyond the diffusion model used for generation, effectively enabling self-rejection. Our experiments validate that our met- ric effectively applies in diverse conditi",
+    "openreview_id": "E78OaH2s3f",
+    "forum_id": "E78OaH2s3f"
+  },
+  "analysis_timestamp": "2026-01-06T09:04:42.847159"
+}

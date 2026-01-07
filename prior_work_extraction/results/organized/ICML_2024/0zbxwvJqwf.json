@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Automatic chemical design using a data-driven continuous representation of molecules",
+      "authors": "Rafael G\u00f3mez-Bombarelli et al.",
+      "year": 2018,
+      "role": "Foundation",
+      "relationship_sentence": "This work established the core idea of optimizing discrete biological objects by searching in a smooth encoder\u2013decoder latent space (via BO), which LatProtRL adopts for proteins while replacing BO with an RL policy to traverse and escape local optima."
+    },
+    {
+      "title": "Deep generative models of genetic variation capture the effects of mutations",
+      "authors": "Adam J. Riesselman et al.",
+      "year": 2018,
+      "role": "Foundation",
+      "relationship_sentence": "By showing that VAE latent spaces trained on protein sequences capture functional constraints and predict mutational effects, this paper underpins LatProtRL\u2019s use of an encoder\u2013decoder latent manifold as the substrate on which optimization is performed."
+    },
+    {
+      "title": "Conditioning by Adaptive Sampling for Robust Design",
+      "authors": "David H. Brookes et al.",
+      "year": 2019,
+      "role": "Gap Identification",
+      "relationship_sentence": "CbAS introduced oracle-guided steering of a latent generative model but tends to remain near the training distribution and can get stuck near local optima; LatProtRL explicitly addresses this by casting design as an MDP and using RL to explore and escape low-fitness basins in latent space."
+    },
+    {
+      "title": "Low-N protein engineering with data-efficient deep learning",
+      "authors": "Surojit Biswas et al.",
+      "year": 2021,
+      "role": "Gap Identification",
+      "relationship_sentence": "This work combines pretrained protein embeddings with Bayesian optimization to improve proteins from scarce data, yet BO often exploits locally and depends on good seeds; LatProtRL targets the same low-fitness starting regime but uses latent-space RL to move beyond local neighborhoods."
+    },
+    {
+      "title": "Design-Bench: Benchmarks for Data-Driven Offline Model-Based Optimization",
+      "authors": "Brandon Trabucco et al.",
+      "year": 2021,
+      "role": "Foundation",
+      "relationship_sentence": "Design-Bench formalized black-box sequence design and highlighted over-optimization/local trapping on protein tasks; LatProtRL operates in this problem setting but swaps acquisition-driven search for an RL policy acting in latent space to improve robustness."
+    },
+    {
+      "title": "Graph Convolutional Policy Network for Goal-Directed Molecular Graph Generation",
+      "authors": "Jiaxuan You et al.",
+      "year": 2018,
+      "role": "Inspiration",
+      "relationship_sentence": "GCPN showed that formulating molecular design as an MDP and training a policy to maximize oracle rewards is effective; LatProtRL adopts this RL-for-design principle, but executes actions in a continuous protein latent space rather than discrete graph edits."
+    },
+    {
+      "title": "Flow Network based Generative Models for Non-Iterative Diverse Candidate Generation",
+      "authors": "Emmanuel Bengio et al.",
+      "year": 2021,
+      "role": "Related Problem",
+      "relationship_sentence": "GFlowNets motivated exploration-focused generative design to avoid local optima; LatProtRL pursues a closely related goal by learning exploratory policies in protein latent space to reliably reach high-fitness regions."
+    }
+  ],
+  "synthesis_narrative": "LatProtRL\u2019s key idea\u2014treating protein sequence optimization as reinforcement learning over a learned latent manifold\u2014sits at the intersection of two influential threads. First, G\u00f3mez-Bombarelli et al. introduced the foundational notion of navigating a smooth encoder\u2013decoder latent space to optimize discrete biochemical objects, while Riesselman et al. showed that such latent spaces trained on protein sequences capture functional constraints relevant to fitness. Building on these, LatProtRL retains the encoder\u2013decoder latent substrate but replaces Bayesian or gradient-based search with an RL policy that can deliberately explore and escape local optima. The second thread is RL-driven design: You et al.\u2019s GCPN crystallized the MDP framing for goal-directed molecule generation, and GFlowNets emphasized exploration to discover diverse high-reward structures. LatProtRL draws on these insights to model optimization as an MDP in latent space, explicitly targeting robust traversal from low-fitness starting points. The immediate motivation comes from gaps in oracle-guided generative design and BO-based protein engineering: CbAS and Low-N BO approaches effectively steer toward high-scoring sequences but often remain near the training distribution or exploit locally, making them sensitive to initial seeds. Design-Bench further codified the black-box design setup and revealed over-optimization pitfalls on protein tasks. LatProtRL directly addresses these limitations by coupling a protein latent manifold with an RL policy, enabling broader, more reliable exploration to reach high-fitness regions, as validated against established baselines.",
+  "analysis_timestamp": "2026-01-06T23:09:26.423959"
+}

@@ -1,0 +1,85 @@
+{
+  "prior_works": [
+    {
+      "title": "Outrageously Large Neural Networks: The Sparsely-Gated Mixture-of-Experts Layer",
+      "authors": [
+        "Noam Shazeer",
+        "Azalia Mirhoseini",
+        "Krzysztof Maziarz",
+        "Andy Davis",
+        "Quoc V. Le",
+        "Geoffrey Hinton",
+        "Jeff Dean"
+      ],
+      "year": 2017,
+      "role": "Conceptual precursor (expert routing)",
+      "relationship_sentence": "CSCR generalizes the expert-routing idea from internal MoE layers to routing across heterogeneous, external LLMs, while explicitly optimizing for an accuracy\u2013cost objective."
+    },
+    {
+      "title": "Learning Transferable Visual Models From Natural Language Supervision (CLIP)",
+      "authors": [
+        "Alec Radford",
+        "Jong Wook Kim",
+        "Chris Hallacy",
+        "Aditya Ramesh",
+        "Gabriel Goh",
+        "Sandhini Agarwal",
+        "Girish Sastry",
+        "Amanda Askell",
+        "Pamela Mishkin",
+        "Jack Clark",
+        "Gretchen Krueger",
+        "Ilya Sutskever"
+      ],
+      "year": 2021,
+      "role": "Methodological inspiration (contrastive dual-encoder)",
+      "relationship_sentence": "CSCR\u2019s contrastive encoder that maps prompts and model fingerprints into a shared space directly follows the CLIP-style dual-encoder alignment, enabling simple nearest-neighbor routing at inference."
+    },
+    {
+      "title": "Billion-scale similarity search with GPUs (FAISS)",
+      "authors": [
+        "Jeff Johnson",
+        "Matthijs Douze",
+        "Herv\u00e9 J\u00e9gou"
+      ],
+      "year": 2017,
+      "role": "Enabling infrastructure (ANN search)",
+      "relationship_sentence": "CSCR\u2019s microsecond-latency k-NN routing and plug-and-play expert pool changes are made practical by FAISS\u2019s high-performance approximate nearest neighbor indexing."
+    },
+    {
+      "title": "Nearest Neighbor Language Models",
+      "authors": [
+        "Urvashi Khandelwal",
+        "Angela Fan",
+        "Dan Jurafsky",
+        "Luke Zettlemoyer",
+        "Mike Lewis"
+      ],
+      "year": 2020,
+      "role": "Operational precedent (k-NN at LM inference)",
+      "relationship_sentence": "kNN-LM showed that FAISS-backed retrieval can be integrated into LM inference efficiently; CSCR adopts a similar k-NN formulation for fast, non-parametric routing decisions."
+    },
+    {
+      "title": "Distilling the Knowledge in a Neural Network",
+      "authors": [
+        "Geoffrey Hinton",
+        "Oriol Vinyals",
+        "Jeff Dean"
+      ],
+      "year": 2015,
+      "role": "Feature design rationale (logit-based signals)",
+      "relationship_sentence": "CSCR\u2019s use of compact logit \u2018footprints\u2019 as informative, low-cost descriptors for open-source experts is grounded in the KD insight that logits capture rich model behavior succinctly."
+    },
+    {
+      "title": "FrugalGPT: How to Use Large Language Models While Reducing Cost and Improving Performance",
+      "authors": [
+        "Chen et al."
+      ],
+      "year": 2023,
+      "role": "Direct baseline (cost-aware LLM routing/cascades)",
+      "relationship_sentence": "FrugalGPT popularized cost-aware routing and cascades across LLMs but relies on profiling and trial-and-error; CSCR replaces these with a learned contrastive router and single-shot k-NN selection."
+    }
+  ],
+  "synthesis_narrative": "Cost-Aware Contrastive Routing (CSCR) draws on three lines of prior work and fuses them into a practical, plug-and-play router for heterogeneous LLM pools. From the expert-routing tradition, the Sparsely-Gated Mixture-of-Experts established the principle that selective activation of experts yields strong efficiency\u2013performance tradeoffs. CSCR extends that idea beyond intra-model layers to inter-model routing across independently deployed LLMs, with an explicit accuracy\u2013cost objective rather than pure capacity scaling.\nMethodologically, CSCR\u2019s central innovation\u2014jointly embedding prompts and models and training with a contrastive objective to favor the cheapest accurate expert\u2014echoes CLIP\u2019s dual-encoder alignment. This design enables stateless, training-free adaptation to changing expert pools: at inference, routing reduces to a nearest-neighbor lookup. The feasibility and latency of this non-parametric selection are underwritten by FAISS and operational precedents like kNN-LM, which demonstrated that ANN-backed retrieval can be tightly integrated into language model inference.\nFinally, CSCR\u2019s feature choices are informed by compact behavior descriptors: logit vectors as informative \u2018footprints\u2019 (a perspective popularized by knowledge distillation) for open-source models, and perplexity-derived \u2018fingerprints\u2019 for black-box APIs. Relative to prior cost-aware LLM selection strategies such as FrugalGPT\u2019s cascades and profiling, CSCR removes trial-and-error passes and expensive per-expert measurements. The result is a lightweight, contrastively trained router that generalizes across dynamic expert pools, achieves microsecond-level selection via k-NN, and consistently improves the accuracy\u2013cost frontier.",
+  "analysis_timestamp": "2026-01-07T00:21:33.126818"
+}

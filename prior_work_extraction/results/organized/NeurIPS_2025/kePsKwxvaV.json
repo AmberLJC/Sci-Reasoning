@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Shampoo: Preconditioned Stochastic Tensor Optimization",
+      "authors": "Vineet Gupta, Tomer Koren, Yoram Singer",
+      "year": 2018,
+      "role": "Foundational Kronecker-factored preconditioner",
+      "relationship_sentence": "The paper\u2019s core contribution explicitly decomposes and analyzes Shampoo\u2019s preconditioner (eigenbasis vs. eigenvalues), showing that common heuristics used with Shampoo largely act on the eigenvalues, and proposes direct eigenvalue correction instead."
+    },
+    {
+      "title": "Scalable Second-Order Optimization with Shampoo",
+      "authors": "Rohan Anil et al.",
+      "year": 2020,
+      "role": "Practical scaling of Shampoo; introduces grafting and stale updates",
+      "relationship_sentence": "The heuristics scrutinized here\u2014learning-rate grafting (to Adam/Adagrad) and infrequent/stale preconditioning\u2014were popularized for scale in this line, and the present work replaces grafting with principled eigenvalue correction and proposes an adaptive schedule for eigenbasis recomputation."
+    },
+    {
+      "title": "Adam: A Method for Stochastic Optimization",
+      "authors": "Diederik P. Kingma, Jimmy Ba",
+      "year": 2015,
+      "role": "Source of grafted magnitude; full-matrix Adam target",
+      "relationship_sentence": "Learning-rate grafting in Shampoo borrows Adam\u2019s step magnitude; this paper reframes that effect as correcting mis-scaled eigenvalues and develops a Frobenius-norm approximation to full-matrix Adam that obviates the need for grafting."
+    },
+    {
+      "title": "Optimizing Neural Networks with Kronecker-Factored Approximate Curvature (K-FAC)",
+      "authors": "James Martens, Roger B. Grosse",
+      "year": 2015,
+      "role": "Kronecker factorization and stale curvature updates",
+      "relationship_sentence": "K-FAC established the use of Kronecker factorization and periodic (stale) curvature inverses; this paper leverages that perspective to decouple eigenbasis/eigenvalue updates and introduces an adaptive criterion to set eigenbasis update frequency."
+    },
+    {
+      "title": "EKFAC: Efficient Kronecker-Factored Approximate Curvature with Eigenvalue Correction",
+      "authors": "Thomas George et al.",
+      "year": 2018,
+      "role": "Eigenbasis/eigenvalue decoupling with Frobenius-norm correction",
+      "relationship_sentence": "EKFAC\u2019s idea of keeping a fixed eigenbasis and correcting the diagonal (eigenvalues) in a Frobenius-optimal way directly motivates the paper\u2019s decomposition of Shampoo\u2019s preconditioner and its eigenvalue-correction mechanism that replaces grafting."
+    },
+    {
+      "title": "Adafactor: Adaptive Learning Rates with Sublinear Memory",
+      "authors": "Noam Shazeer, Mitchell Stern",
+      "year": 2018,
+      "role": "Factorized second-moment and magnitude-scaling heuristics",
+      "relationship_sentence": "Adafactor\u2019s factored second-moment and step-magnitude design influenced memory-efficient, factorized preconditioning and scale heuristics later adopted with Shampoo; this paper clarifies those effects via explicit eigenvalue correction."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s key contribution\u2014purifying Shampoo by decoupling its preconditioner into eigenvalues and eigenbasis, then replacing learning-rate grafting with direct eigenvalue correction and adaptively scheduling eigenbasis updates\u2014sits at the intersection of Kronecker-factorized preconditioning and adaptive methods. Shampoo (Gupta et al., 2018) provided the core Kronecker-factored preconditioner that this work dissects, while subsequent scalable implementations (Anil et al., 2020) introduced the very heuristics\u2014learning-rate grafting to Adam and stale/periodic preconditioning\u2014that the authors analyze and aim to replace. Adam (Kingma & Ba, 2015) is central because its magnitude is the object of grafting; the authors reinterpret this magnitude transfer as implicitly correcting mis-scaled eigenvalues and formalize a Frobenius-norm approximation to full-matrix Adam to perform that correction directly.\nK-FAC (Martens & Grosse, 2015) established Kronecker factorization and routine staleness in curvature updates, shaping the notion that eigenbases can be recomputed infrequently. EKFAC (George et al., 2018) is a particularly direct antecedent: it decouples eigenbasis and eigenvalues and performs Frobenius-optimal eigenvalue correction in a fixed basis, mirroring the present work\u2019s decomposition and correction strategy but applied to Shampoo\u2019s adaptive preconditioner and to full-matrix Adam. Finally, Adafactor (Shazeer & Stern, 2018) demonstrated factored second-moment estimation and step-magnitude heuristics that informed Shampoo-at-scale practice; this paper replaces such scale-dependent heuristics with principled eigenvalue corrections and an adaptive criterion for when to refresh the eigenbasis.",
+  "analysis_timestamp": "2026-01-06T23:42:48.128161"
+}

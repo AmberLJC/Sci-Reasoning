@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Pseudo-Label: The Simple and Efficient Semi-Supervised Learning Method for Deep Neural Networks",
+      "authors": "Dong-Hyun Lee",
+      "year": 2013,
+      "role": "Foundational self-training with pseudo-labels",
+      "relationship_sentence": "Establishes the pseudo-labeling/self-training paradigm that this work adopts for SSMLL, with the proposed loss directly targeting the variance bias that emerges when training on labeled plus pseudo-labeled data."
+    },
+    {
+      "title": "Mean teachers are better role models: Weight-averaged consistency targets improve semi-supervised deep learning results",
+      "authors": "Antti Tarvainen, Harri Valpola",
+      "year": 2017,
+      "role": "Consistency-based SSL framework",
+      "relationship_sentence": "Provides the teacher\u2013student SSL machinery and confidence-driven targets that underpin modern pseudo-label pipelines, clarifying how unlabeled data interact with the loss\u2014context in which the balanced angular margin is introduced to curb bias."
+    },
+    {
+      "title": "FixMatch: Simplifying Semi-Supervised Learning with Consistency and Confidence",
+      "authors": "Kihyuk Sohn, David Berthelot, Chun-Liang Li, Zizhao Zhang, Nicholas Carlini, Ekin D. Cubuk, Alex Kurakin, Han Zhang, Colin Raffel",
+      "year": 2020,
+      "role": "State-of-the-art pseudo-labeling SSL recipe",
+      "relationship_sentence": "Demonstrates strong self-training via confidence-thresholded pseudo-labels and augmentations; the new balanced binary angular margin loss is designed to be plugged into such pipelines to mitigate pseudo-label\u2013induced positive/negative feature variance bias."
+    },
+    {
+      "title": "CosFace: Large Margin Cosine Loss for Deep Face Recognition",
+      "authors": "Hao Wang et al.",
+      "year": 2018,
+      "role": "Angular margin metric-learning loss",
+      "relationship_sentence": "Introduces margin-based optimization on the hypersphere using cosine similarity, providing the angular-margin formulation that this paper extends to a binary, one-vs-rest setting for multi-label learning."
+    },
+    {
+      "title": "ArcFace: Additive Angular Margin Loss for Deep Face Recognition",
+      "authors": "Jiankang Deng, Jia Guo, Niannan Xue, Stefanos Zafeiriou",
+      "year": 2019,
+      "role": "Canonical additive angular margin",
+      "relationship_sentence": "Refines angular-margin learning with an additive margin in angle space; the present work builds on this angular view and further balances the positive/negative angle distributions per label to correct variance bias."
+    },
+    {
+      "title": "Learning Imbalanced Datasets with Label-Distribution-Aware Margin Loss",
+      "authors": "Kaidi Cao, Colin Wei, Adrien Gaidon, Nikos Arechiga, Tengyu Ma",
+      "year": 2019,
+      "role": "Imbalance-aware margin design",
+      "relationship_sentence": "Shows that class-dependent margins can counter distributional imbalance, directly inspiring the paper\u2019s idea of label-wise, imbalance-aware margin adjustment\u2014here derived from estimated positive/negative angle variances rather than frequencies."
+    },
+    {
+      "title": "Asymmetric Loss For Multi-Label Classification",
+      "authors": "Tal Ridnik, Emanuel Ben-Baruch, Nadav Zamir, Asaf Noy",
+      "year": 2021,
+      "role": "Multi-label loss handling positive/negative asymmetry",
+      "relationship_sentence": "Demonstrates that treating positives and negatives asymmetrically improves multi-label learning; the proposed loss carries this principle into angular space, balancing positive/negative angle distributions instead of only reweighting logits/probabilities."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core contribution\u2014a balanced binary angular margin loss for semi-supervised multi-label learning\u2014sits at the intersection of self-training SSL and angular-margin metric learning, while explicitly addressing positive/negative imbalance in multi-label settings. Pseudo-labeling (Lee, 2013) established the foundational self-training scheme later strengthened by teacher\u2013student consistency (Tarvainen & Valpola, 2017) and confidence-thresholded pipelines like FixMatch (Sohn et al., 2020). These frameworks enabled effective use of unlabeled data but also exacerbated asymmetries between positive and negative examples (especially with negative sampling), creating the variance bias the authors identify between their feature distributions.\n\nOn the representation side, angular-margin losses such as CosFace (Wang et al., 2018) and ArcFace (Deng et al., 2019) showed that optimizing on a hypersphere with explicit angular margins yields compact, separable feature clusters. This angular view invites reasoning about feature angle distributions per label, which the present work leverages by estimating and transforming these distributions under a Gaussian assumption. Complementing this, imbalance-aware margin and loss design\u2014LDAM (Cao et al., 2019) and Asymmetric Loss (Ridnik et al., 2021)\u2014demonstrated that adjusting decision margins or weighting differently for positives and negatives can counter skewed data. The new loss synthesizes these insights: it adapts the angular-margin formulation to the binary one-vs-rest setting used in multi-label classification and balances positive/negative angle variances per label, estimated iteratively from labeled and pseudo-labeled data. The result directly targets pseudo-label\u2013induced variance bias while preserving the discriminative power of angular-margin learning within modern SSL pipelines.",
+  "analysis_timestamp": "2026-01-07T00:02:04.740828"
+}

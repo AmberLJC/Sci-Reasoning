@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "GraphRNN: Generating Realistic Graphs with Deep Auto-regressive Models",
+      "authors": "Jiaxuan You, Rex Ying, Xiang Ren, William L. Hamilton, Jure Leskovec",
+      "year": 2018,
+      "role": "Autoregressive factorization for graphs",
+      "relationship_sentence": "ARTree\u2019s core idea of expressing a complex distribution over combinatorial structures via a sequential node-addition process directly mirrors GraphRNN\u2019s autoregressive construction of graphs, providing the template for simple sampling and tractable likelihoods."
+    },
+    {
+      "title": "Learning Deep Generative Models of Graphs (DeepGMG)",
+      "authors": "Yujia Li, Oriol Vinyals, Chris Dyer, Razvan Pascanu, Peter Battaglia",
+      "year": 2018,
+      "role": "GNN-parameterized graph construction policies",
+      "relationship_sentence": "DeepGMG showed how graph neural networks can parameterize local construction actions in an autoregressive generator; ARTree adopts this paradigm to score where to attach a new leaf using learned topological features from a GNN."
+    },
+    {
+      "title": "Neural Message Passing for Quantum Chemistry",
+      "authors": "Justin Gilmer, Samuel S. Schoenholz, Patrick F. Riley, Oriol Vinyals, George E. Dahl",
+      "year": 2017,
+      "role": "Message-passing neural network framework",
+      "relationship_sentence": "ARTree relies on message-passing GNNs to compute permutation-equivariant, topology-aware features on partial trees, a capability formalized by the MPNN framework."
+    },
+    {
+      "title": "How Powerful Are Graph Neural Networks? (GIN)",
+      "authors": "Keyulu Xu, Weihua Hu, Jure Leskovec, Stefanie Jegelka",
+      "year": 2019,
+      "role": "Expressivity of GNNs for graph structure",
+      "relationship_sentence": "By establishing conditions under which GNNs can distinguish graph structures, GIN motivates ARTree\u2019s use of sufficiently expressive aggregators to capture subtle topological cues needed for accurate conditional distributions over attachments."
+    },
+    {
+      "title": "Phylogenetic Inference via Sequential Monte Carlo",
+      "authors": "Alexandre Bouchard-C\u00f4t\u00e9, Michael I. Jordan, Arnaud Doucet",
+      "year": 2012,
+      "role": "Sequential taxon addition for tree construction",
+      "relationship_sentence": "This work popularized building phylogenies by adding taxa sequentially within SMC, directly inspiring ARTree\u2019s decomposition of a tree topology into a sequence of leaf-addition operations."
+    },
+    {
+      "title": "Comparison of Phylogenetic Trees",
+      "authors": "David F. Robinson, L. R. Foulds",
+      "year": 1981,
+      "role": "Heuristic tree similarity metric (RF distance)",
+      "relationship_sentence": "The widespread use of RF distance as a hand-engineered feature for comparing tree topologies exemplifies the heuristic representations ARTree replaces with end-to-end learned, GNN-based features."
+    },
+    {
+      "title": "Efficiency of Markov Chain Monte Carlo Tree Proposals",
+      "authors": "Christian Lakner, Paul Van Der Mark, John P. Huelsenbeck, Bruce Larget, Fredrik Ronquist",
+      "year": 2008,
+      "role": "Analysis of topology move proposals in Bayesian phylogenetics",
+      "relationship_sentence": "By highlighting the limitations of hand-crafted proposal operators over tree topologies, this study motivates ARTree\u2019s learned autoregressive proposals/distributions as a more flexible alternative for inference."
+    }
+  ],
+  "synthesis_narrative": "ARTree\u2019s core contribution\u2014a flexible, deep autoregressive distribution over phylogenetic tree topologies with simple sampling\u2014draws from two converging lines of work. From the deep graph generation literature, GraphRNN demonstrated that complex graph distributions can be modeled via sequential node/edge additions with tractable likelihoods, while DeepGMG showed that graph neural networks can parameterize the local construction decisions in such autoregressive procedures. These ideas transfer naturally to trees: ARTree generates a topology by sequentially adding leaves and uses a GNN to parameterize the conditional distribution over attachment locations at each step. The GNN backbone is grounded in the message-passing paradigm (MPNN), ensuring permutation-equivariant aggregation on partial trees, and the expressivity insights of GIN support ARTree\u2019s choice of powerful aggregators to capture fine-grained topological differences crucial for accurate conditionals.\n\nFrom phylogenetics, sequential taxon addition has a long history in inference algorithms, with Sequential Monte Carlo methods formalizing it as an effective proposal mechanism. ARTree adopts the same decomposition but replaces hand-designed proposals with a learned autoregressive model, enabling richer, data-driven distributions. Finally, the field\u2019s reliance on heuristic topology features and operators\u2014exemplified by Robinson\u2013Foulds distances for similarity and studies of MCMC proposal inefficiency\u2014motivates ARTree\u2019s end-to-end learnable topological features. Together, these works shape ARTree\u2019s design: an expressive, GNN-powered autoregressive generator that eschews hand-crafted features, supports efficient sampling, and serves as a strong variational family for Bayesian phylogenetic inference and tree topology density estimation.",
+  "analysis_timestamp": "2026-01-07T00:02:04.823387"
+}

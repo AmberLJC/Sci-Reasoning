@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Neural Ordinary Differential Equations",
+      "authors": "Ricky T. Q. Chen et al.",
+      "year": 2018,
+      "arxiv_id": "1806.07366",
+      "role": "Foundation",
+      "relationship_sentence": "ClimODE treats weather evolution as a continuous-time neural flow by parameterizing and integrating a velocity field with an ODE solver, directly building on the neural ODE formulation of dynamics."
+    },
+    {
+      "title": "Physics-Informed Neural Networks: A Deep Learning Framework for Solving Forward and Inverse Problems Involving Nonlinear Partial Differential Equations",
+      "authors": "Maziar Raissi et al.",
+      "year": 2019,
+      "arxiv_id": "1711.10561",
+      "role": "Inspiration",
+      "relationship_sentence": "ClimODE borrows the PINN principle of embedding governing equations into the loss by enforcing advection-driven value conservation along characteristics rather than learning unconstrained forecasts."
+    },
+    {
+      "title": "Latent ODEs for Irregularly-Sampled Time Series",
+      "authors": "Yulia Rubanova et al.",
+      "year": 2019,
+      "arxiv_id": "1907.03907",
+      "role": "Extension",
+      "relationship_sentence": "ClimODE adapts variational inference over continuous-time latent dynamics to quantify predictive uncertainty, extending latent ODE methodology from temporal trajectories to spatiotemporal advection fields."
+    },
+    {
+      "title": "FourCastNet: A Global Data-driven High-resolution Weather Model using Adaptive Fourier Neural Operators",
+      "authors": "Anima Anandkumar et al.",
+      "year": 2022,
+      "arxiv_id": "2202.11214",
+      "role": "Baseline",
+      "relationship_sentence": "FourCastNet serves as a primary baseline whose powerful but discrete-time, black-box operator highlights the need for a physics-informed continuous-time alternative with uncertainty quantification that ClimODE provides."
+    },
+    {
+      "title": "GraphCast: Learning skillful medium-range global weather forecasting",
+      "authors": "R\u00e9mi Lam et al.",
+      "year": 2023,
+      "arxiv_id": "2212.12794",
+      "role": "Baseline",
+      "relationship_sentence": "GraphCast is a central baseline and exemplar of state-of-the-art data-driven forecasts lacking explicit physical conservation or principled uncertainty, motivating ClimODE\u2019s physics-grounded flow-based design."
+    },
+    {
+      "title": "Pangu-Weather: A 3D High-Resolution Model for Fast and Accurate Global Weather Forecasting",
+      "authors": "Kaifeng Bi et al.",
+      "year": 2023,
+      "arxiv_id": "2211.02556",
+      "role": "Baseline",
+      "relationship_sentence": "Pangu-Weather\u2019s strong black-box 3D neural forecasting baseline emphasizes the limitations in physical interpretability and UQ that ClimODE addresses via value-conserving advection dynamics."
+    },
+    {
+      "title": "WeatherBench: A Benchmark Dataset for Data-Driven Weather Forecasting",
+      "authors": "Stephan Rasp et al.",
+      "year": 2020,
+      "arxiv_id": "2002.00469",
+      "role": "Foundation",
+      "relationship_sentence": "WeatherBench provides the ERA5 variables, splits, and metrics that define the forecasting task and evaluation protocol ClimODE adopts and advances upon."
+    }
+  ],
+  "synthesis_narrative": "Neural Ordinary Differential Equations introduced the idea of representing dynamical evolution as a learnable continuous-time flow, enabling integration-based prediction under an ODE solver; this view naturally supports transport along learned trajectories. Physics-Informed Neural Networks showed how to inject governing equations into neural training objectives, enforcing PDE structure as soft constraints rather than relying on purely data-driven losses. Latent ODEs extended continuous-time modeling to probabilistic settings via variational inference over latent dynamics and initial conditions, yielding predictive distributions consistent with ODE evolution. In parallel, FourCastNet demonstrated that adaptive Fourier operator models can deliver competitive global weather forecasts, albeit as discrete-time, parameter-heavy black boxes. GraphCast showed further gains from mesh-based graph neural networks for medium-range global forecasts, while similarly omitting explicit physical conservation and principled uncertainty. WeatherBench standardized ERA5-based inputs, targets, and metrics for fair, large-scale benchmarking of data-driven weather methods. Together, these works revealed a gap: state-of-the-art weather models achieved high skill yet lacked explicit enforcement of fundamental transport physics and struggled to provide uncertainty, while continuous-time neural ODEs and physics-informed training offered the right tools to encode advection and conservation. The natural next step was to synthesize these strands by learning a global velocity field whose ODE flow advects prognostic variables with value-conserving dynamics, trained with physics-informed objectives and equipped with variational continuous-time inference for uncertainty\u2014yielding a compact, interpretable, and probabilistic forecasting model.",
+  "target_paper": {
+    "title": "ClimODE: Climate and Weather Forecasting with Physics-informed Neural ODEs",
+    "authors": "Yogesh Verma, Markus Heinonen, Vikas Garg",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "oral",
+    "keywords": "neural ODE, time-series forecasting, climate prediction, physics-informed ML",
+    "abstract": "Climate and weather prediction traditionally relies on complex numerical simulations of atmospheric physics. Deep learning approaches, such as transformers, have recently challenged the simulation paradigm with complex network forecasts. However, they often act as data-driven black-box models that neglect the underlying physics and lack uncertainty quantification. We address these limitations with ClimODE, a  spatiotemporal continuous-time process that implements a key principle of advection from statistical mechanics, namely, weather changes due to a spatial movement of quantities over time. ClimODE models precise weather evolution with value-conserving dynamics, learning global weather transport as a neural flow, which also enables estimating the uncertainty in predictions. Our approach outperforms existing data-driven methods in global and regional forecasting with an order of magnitude smaller parameterization, establishing a new state of the art.",
+    "openreview_id": "xuY33XhEGR",
+    "forum_id": "xuY33XhEGR"
+  },
+  "analysis_timestamp": "2026-01-06T08:52:14.591871"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Numerical Optimization (chapters on Sequential Quadratic Programming)",
+      "authors": "Jorge Nocedal, Stephen J. Wright",
+      "year": 2006,
+      "role": "SQP foundation",
+      "relationship_sentence": "BayeSQP lifts the SQP blueprint\u2014build a local quadratic subproblem and perform a line search\u2014by replacing exact derivatives with GP posterior second-order estimates and solving a conic relaxation under uncertainty."
+    },
+    {
+      "title": "Derivative observations in Gaussian process models of dynamic systems",
+      "authors": "Ercan Solak, Roderick Murray-Smith, William E. Leithead, David J. Leith, Carl E. Rasmussen",
+      "year": 2003,
+      "role": "GP with derivatives",
+      "relationship_sentence": "BayeSQP relies on the fact that GP priors induce joint Gaussian posteriors over function, gradients, and Hessians; this paper provides the core calculus to model and infer derivatives within a GP."
+    },
+    {
+      "title": "Bayesian Optimization with Gradients",
+      "authors": "Jian Wu, Matthias Poloczek, Andrew Gordon Wilson",
+      "year": 2017,
+      "role": "Using derivative information in BO",
+      "relationship_sentence": "Demonstrates the practical advantage of incorporating (posterior) derivative information in BO; BayeSQP extends this idea to second order, using GP-implied gradients and Hessians to form an SQP-style subproblem."
+    },
+    {
+      "title": "Bayesian Optimization with Unknown Constraints",
+      "authors": "Michael A. Gelbart, Jos\u00e9 Miguel Hern\u00e1ndez-Lobato, Ryan P. Adams",
+      "year": 2014,
+      "role": "Constrained BO",
+      "relationship_sentence": "Introduces modeling of unknown constraints with separate GPs and feasibility-aware selection; BayeSQP jointly models objective and constraints and embeds their uncertainties in the local optimization step."
+    },
+    {
+      "title": "Safe Exploration for Optimization with Gaussian Processes (SafeOpt)",
+      "authors": "Yanan Sui, Andreas Gotovos, Joel W. Burdick, Andreas Krause",
+      "year": 2015,
+      "role": "High-probability feasibility via GP confidence bounds",
+      "relationship_sentence": "Inspires BayeSQP\u2019s use of GP uncertainty to enforce high-probability safety/feasibility; BayeSQP translates such probabilistic requirements into tractable constraints within its local subproblem."
+    },
+    {
+      "title": "Robust optimization\u2014methodology and applications",
+      "authors": "Aharon Ben-Tal, Arkadi Nemirovski",
+      "year": 2002,
+      "role": "SOCP formulations for uncertainty",
+      "relationship_sentence": "Provides the conic optimization machinery showing how ellipsoidal (Gaussian) uncertainty leads to second-order cone constraints; BayeSQP leverages this to cast high-probability improvement/feasibility as an SOCP."
+    },
+    {
+      "title": "Gaussian Process Bandit Optimization via Thompson Sampling",
+      "authors": "Daniel Russo, Benjamin Van Roy",
+      "year": 2014,
+      "role": "Thompson sampling for GP models",
+      "relationship_sentence": "BayeSQP\u2019s 1D line search uses constrained Thompson sampling along the search direction, building directly on GP-based posterior sampling for exploration\u2013exploitation."
+    }
+  ],
+  "synthesis_narrative": "BayeSQP\u2019s core innovation fuses the local, second-order structure of Sequential Quadratic Programming with the uncertainty-aware decision-making of Bayesian optimization. The SQP blueprint from Nocedal and Wright provides the architectural scaffold: iteratively form a local quadratic approximation, solve a subproblem, and perform a line search. To realize this without derivatives, BayeSQP builds on Gaussian-process calculus for derivatives (Solak et al.), which ensures that gradients and Hessians can be inferred jointly with function values from zero-order data. This idea connects to Bayesian optimization with gradient information (Wu et al.), but BayeSQP advances it by constructing a full second-order local model for both objective and constraints.\n\nHandling constraints under uncertainty draws on constrained BO (Gelbart et al.), where separate GPs model feasibility, and on SafeOpt (Sui et al.), which formalized high-probability guarantees using GP confidence sets. BayeSQP operationalizes these guarantees within the local step: by invoking robust optimization insights (Ben-Tal and Nemirovski), it converts Gaussian posterior uncertainty into second-order cone constraints, yielding a tractable SOCP that targets high-probability improvement while respecting constraint risk. Finally, the algorithm\u2019s one-dimensional line search employs constrained Thompson sampling along the SQP direction, directly leveraging GP posterior sampling (Russo and Van Roy) to balance exploration and exploitation under feasibility considerations. Together, these strands produce a principled, uncertainty-aware, second-order local optimizer that inherits the efficiency of SQP while retaining the global-surrogate advantages of Bayesian optimization, particularly effective in challenging high-dimensional regimes.",
+  "analysis_timestamp": "2026-01-07T00:05:12.533523"
+}

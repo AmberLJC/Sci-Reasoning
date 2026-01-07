@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Invariant Causal Prediction: Identifying causal relations from multiple environments",
+      "authors": "Jonas Peters, Peter B\u00fchlmann, Nicolai Meinshausen",
+      "year": 2016,
+      "role": "Conceptual foundation",
+      "relationship_sentence": "ICP formalized the idea of leveraging multiple environments to isolate invariant (causal) relations, providing the causal-invariance lens that XRM adopts when discovering environments to achieve OOD robustness."
+    },
+    {
+      "title": "Invariant Risk Minimization",
+      "authors": "Mart\u00edn Arjovsky, L\u00e9on Bottou, Ishaan Gulrajani, David Lopez-Paz",
+      "year": 2019,
+      "role": "Objective framing for OOD generalization",
+      "relationship_sentence": "IRM crystallized the environment-based invariance objective but requires environment labels; XRM targets this bottleneck by automatically inferring environments consistent with IRM\u2019s invariance premise."
+    },
+    {
+      "title": "Distributionally Robust Neural Networks for Group Shifts: On the Importance of Regularization for Worst-Case Generalization",
+      "authors": "Shiori Sagawa, Pang Wei Koh, Tatsunori Hashimoto, Percy Liang",
+      "year": 2020,
+      "role": "Group-robust optimization baseline",
+      "relationship_sentence": "Group DRO motivated the need for environment/group information to control worst-group risk; XRM directly addresses the missing-group-labels setting by discovering groups that can be used by such objectives without human annotations."
+    },
+    {
+      "title": "Environment Inference for Invariant Learning (EIIL)",
+      "authors": "Erin Creager, J\u00f6rn-Henrik Jacobsen, David Duvenaud, Richard Zemel",
+      "year": 2021,
+      "role": "Direct precursor in environment discovery",
+      "relationship_sentence": "EIIL pioneered inferring environments from model behavior but relies on error-based splits, hyperparameters, and early stopping tuned with labeled environments; XRM is designed explicitly to remove these dependencies."
+    },
+    {
+      "title": "Just Train Twice: Improving Group Robustness Without Group Labels",
+      "authors": "Y. Liu, S. Sagawa, P. W. Koh, P. Liang",
+      "year": 2021,
+      "role": "Error-based partitioning for robustness",
+      "relationship_sentence": "JTT uses misclassified examples from a first model to guide a second training phase; XRM generalizes this error-driven idea with twin networks and cross-held-out mistake imitation to yield stable, label-free environment discovery and tuning."
+    },
+    {
+      "title": "Co-teaching: Robust Training of Deep Neural Networks with Extremely Noisy Labels",
+      "authors": "Bo Han, Quanming Yao, Xingrui Yu, Gang Niu, Miao Xu, Weihua Hu, Ivor W. Tsang, Masashi Sugiyama",
+      "year": 2018,
+      "role": "Twin-network learning paradigm",
+      "relationship_sentence": "Co-teaching\u2019s two-network, cross-sample selection mechanism informed XRM\u2019s twin-network design, where each model learns from the other\u2019s held-out confident mistakes to avoid confirmation bias."
+    },
+    {
+      "title": "Learning from Failure: De-biasing Classifier from Biased Classifier (LfF)",
+      "authors": "S. Nam, I. Lee, J. Park, J. Yoon, S. Yun",
+      "year": 2020,
+      "role": "Learning from errors to counter spurious bias",
+      "relationship_sentence": "LfF showed that exploiting a model\u2019s failure patterns can surface bias-relevant examples; XRM builds on this insight by explicitly imitating sibling networks\u2019 confident errors to partition data into environments that expose spurious correlations."
+    }
+  ],
+  "synthesis_narrative": "Cross-Risk Minimization (XRM) tackles the central obstacle in invariant and group-robust learning: discovering useful environments without human annotations or validation-time early-stopping. This goal is conceptually anchored in invariant causal prediction and Invariant Risk Minimization, which framed environments as the vehicle for enforcing invariance across shifts, yet operationally depend on known environment labels. Group DRO further highlighted the practical benefits of group-aware learning but also made explicit the need for group labels to control worst-case risk.\nDirectly addressing the label-free setting, EIIL introduced environment inference from model behavior, and JTT leveraged a model\u2019s errors to emphasize vulnerable subpopulations. XRM is a response to the core limitations of these error-based approaches\u2014sensitivity to hyperparameters and reliance on early stopping tuned with group labels. The key advance in XRM is a twin-network training scheme on random data halves, where each network imitates the other\u2019s confident held-out mistakes. This cross-risk imitation stabilizes environment discovery, reduces confirmation bias, and yields a principled recipe for hyperparameter selection without group-labeled validation.\nMethodologically, XRM\u2019s twin-network design is inspired by co-teaching\u2019s cross-supervision under noise, while its focus on exploiting failure patterns echoes LfF\u2019s use of biased-model errors to reveal spurious correlations. By synthesizing these lines\u2014environmental invariance, error-based environment inference, and twin-network cross-learning\u2014XRM delivers robust, annotation-free environment discovery that can be directly plugged into invariance or group-robust objectives.",
+  "analysis_timestamp": "2026-01-07T00:02:04.902647"
+}

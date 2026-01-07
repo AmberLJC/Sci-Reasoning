@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Provable defenses via the convex outer adversarial polytope",
+      "authors": "Eric Wong, J. Zico Kolter",
+      "year": 2018,
+      "role": "Foundational linear-relaxation (LP/LiRPA) verification that propagates per-neuron linear bounds across layers.",
+      "relationship_sentence": "SDP-CROWN keeps the same linear bound-propagation pipeline introduced here, but augments it with an SDP-derived inter-neuron linear constraint, improving tightness while preserving scalability."
+    },
+    {
+      "title": "A Dual Approach to Scalable Verification of Deep Networks",
+      "authors": "Krishnamurthy Dvijotham, Sven Gowal, Robert Stanforth, et al.",
+      "year": 2018,
+      "role": "Established the Lagrangian dual perspective that unifies many linear bound-propagation methods and enables efficient backward bound computation.",
+      "relationship_sentence": "SDP-CROWN\u2019s new per-layer coupling parameter and linear constraints can be directly embedded in this dual/LiRPA framework, enabling efficient optimization of the strengthened bounds."
+    },
+    {
+      "title": "Towards Fast and Scalable Certified Training of Robust Neural Networks (CROWN-IBP)",
+      "authors": "Huan Zhang, Shiqi Wang, Kaiqi Yang, et al.",
+      "year": 2020,
+      "role": "State-of-the-art scalable LiRPA/IBP-style certification and training framework that popularized practical large-scale bound propagation.",
+      "relationship_sentence": "SDP-CROWN is designed to plug into CROWN-IBP-like pipelines, replacing per-neuron relaxations with an SDP-informed inter-neuron bound to substantially tighten certificates at similar cost."
+    },
+    {
+      "title": "Semidefinite Relaxations for Certifying Robustness to Adversarial Examples",
+      "authors": "Aditi Raghunathan, Jacob Steinhardt, Percy Liang",
+      "year": 2018,
+      "role": "Pioneered SDP relaxations for robustness that capture inter-neuron coupling via second-moment matrices, achieving tight bounds but with cubic complexity.",
+      "relationship_sentence": "SDP-CROWN explicitly derives a linear inter-neuron bound from SDP principles, approximating the coupling benefits of this approach while avoiding SDP\u2019s cubic scaling."
+    },
+    {
+      "title": "Safety Verification and Robustness Analysis of Neural Networks via Quadratic Constraints",
+      "authors": "Mahyar Fazlyab, Alexander Robey, Hamed Hassani, Manfred Morari, George J. Pappas",
+      "year": 2019,
+      "role": "Introduced IQC/SDP formulations that encode L2-sector constraints and inter-neuron coupling at the layer level.",
+      "relationship_sentence": "SDP-CROWN distills an L2-norm-based, layerwise coupling inequality inspired by these quadratic constraints into a simple linear bound with one extra parameter per layer."
+    },
+    {
+      "title": "A Convex Relaxation Barrier to Tight Robustness Verification",
+      "authors": "Hadi Salman, Greg Yang, Jerry Li, Pengchuan Zhang, Huan Zhang, Ilya Razenshteyn, S\u00e9bastien Bubeck",
+      "year": 2019,
+      "role": "Demonstrated intrinsic gaps of per-neuron LP relaxations and the need for richer coupling information for tight certificates.",
+      "relationship_sentence": "By adding SDP-derived cross-neuron information while staying linear, SDP-CROWN directly addresses a key weakness identified by this barrier result."
+    },
+    {
+      "title": "On the Effectiveness of Interval Bound Propagation for Training Verifiably Robust Models",
+      "authors": "Sven Gowal, Krishnamurthy Dvijotham, Robert Stanforth, et al.",
+      "year": 2019,
+      "role": "Established IBP as an extremely scalable (though often loose) bound-propagation method for large networks.",
+      "relationship_sentence": "SDP-CROWN preserves the speed and composability of IBP-like propagation while significantly tightening bounds via an L2-based inter-neuron linear constraint."
+    }
+  ],
+  "synthesis_narrative": "SDP-CROWN sits at the intersection of two verification paradigms: scalable linear bound propagation and tight (but costly) semidefinite relaxations. Linear relaxation pipelines such as Wong and Kolter\u2019s convex outer adversarial polytope, Dvijotham et al.\u2019s dual approach, and the CROWN-IBP framework established how per-neuron linear bounds can be propagated efficiently and optimized, enabling certification and even certified training at scale. However, the per-neuron nature of these relaxations\u2014highlighted by the convex relaxation barrier\u2014often misses crucial inter-neuron coupling, leading to loose bounds on challenging networks.\n\nOn the other hand, SDP-based methods, notably Raghunathan et al.\u2019s semidefinite relaxations and the IQC/SDP formulations by Fazlyab et al., naturally encode cross-neuron, L2-type coupling through second-moment or quadratic constraints, yielding significantly tighter certificates but with cubic complexity that limits applicability to small models. SDP-CROWN bridges this gap by extracting an L2-norm-based, inter-neuron coupling inequality from the SDP/IQC perspective and translating it into a single additional linear parameter per layer. This preserves the composability and speed of IBP/LiRPA propagation while injecting the key coupling information that SDPs exploit. Theoretically, this yields up to a sqrt(n) tightening over traditional per-neuron bounds; practically, it integrates seamlessly into existing dual/LiRPA frameworks like CROWN-IBP, improving certificates without invoking full SDPs. In short, SDP-CROWN operationalizes SDP tightness within a linear propagation toolkit, overcoming known LP barriers while retaining large-scale efficiency.",
+  "analysis_timestamp": "2026-01-07T00:21:33.190691"
+}

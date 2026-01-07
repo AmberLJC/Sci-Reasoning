@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "HyperNetworks",
+      "authors": "David Ha, Andrew M. Dai, Quoc V. Le",
+      "year": 2016,
+      "role": "Conceptual precursor for decoupling a model\u2019s computation from fixed weight matrices",
+      "relationship_sentence": "TokenFormer extends the HyperNetworks idea of separating parameters from the main computation by making parameters first-class, addressable tokens that are queried via attention instead of being instantiated as fixed linear projection matrices."
+    },
+    {
+      "title": "Set Transformer: A Framework for Attention-based Permutation-Invariant Neural Networks",
+      "authors": "Juho Lee, Yoonho Lee, Jungtaek Kim, Adam Kosiorek, Seungjin Choi, Yee Whye Teh",
+      "year": 2019,
+      "role": "Methodological inspiration via inducing-point cross-attention",
+      "relationship_sentence": "TokenFormer\u2019s replacement of linear projections with cross-attention over a learned bank of parameter tokens directly parallels Set Transformer\u2019s inducing points, recasting learned inducing slots as reusable parameter tokens for all projections."
+    },
+    {
+      "title": "Perceiver: General Perception with Iterative Attention",
+      "authors": "Andrew Jaegle, Felix Gimeno, Andrew Brock, et al.",
+      "year": 2021,
+      "role": "Architectural inspiration for decoupling I/O from a learned latent array",
+      "relationship_sentence": "Like Perceiver\u2019s learned latent array that inputs attend to, TokenFormer uses a persistent set of parameter tokens; this decoupling enables dimension-agnostic scaling and avoids retraining when channel sizes change."
+    },
+    {
+      "title": "Transformers are RNNs: Fast Weight Programmers",
+      "authors": "Ilya Schlag, Kazuki Irie, J\u00fcrgen Schmidhuber",
+      "year": 2021,
+      "role": "Theoretical grounding linking attention to fast-weight memory",
+      "relationship_sentence": "By interpreting attention as dynamic weight access, this work motivates TokenFormer\u2019s core move to replace static linear weights with attention-mediated lookups into parameter tokens, turning weights into an addressable memory."
+    },
+    {
+      "title": "Large Memory Layers with Product Keys",
+      "authors": "Guillaume Lample, Alexandre Sablayrolles, Marc\u2019Aurelio Ranzato, Ludovic Denoyer, Herv\u00e9 J\u00e9gou",
+      "year": 2019,
+      "role": "Scalable content-addressable parameter memory for Transformers",
+      "relationship_sentence": "TokenFormer echoes PKM\u2019s idea of query-dependent access to a large bank of learned vectors, but repurposes it to universally substitute linear projections with attention over a shared parameter-token memory."
+    },
+    {
+      "title": "Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity",
+      "authors": "William Fedus, Barret Zoph, Noam Shazeer",
+      "year": 2021,
+      "role": "Scaling via token-dependent routing to subsets of parameters",
+      "relationship_sentence": "MoE shows that tokens can select specialized parameter subsets; TokenFormer similarly performs token-parameter routing, but via dense attention over parameter tokens to flexibly scale capacity and modify architecture without retraining from scratch."
+    },
+    {
+      "title": "Prefix-Tuning: Optimizing Continuous Prompts for Generation",
+      "authors": "Xiang Lisa Li, Percy Liang",
+      "year": 2021,
+      "role": "Evidence that learned token-like vectors can stand in for parameters",
+      "relationship_sentence": "Treating small sets of learned vectors as control tokens for large models foreshadows TokenFormer\u2019s notion of parameter tokens, generalizing from steering to fully replacing linear projections with token-parameter attention."
+    }
+  ],
+  "synthesis_narrative": "TokenFormer\u2019s key contribution\u2014replacing all linear projections with attention between input tokens and a bank of learned parameter tokens\u2014sits at the intersection of three mature ideas: decoupling weights from computation, cross-attention to learned latents, and token-dependent parameter selection. HyperNetworks first showed that a model\u2019s parameters need not be fixed matrices tied to architecture; TokenFormer takes this further by making parameters persistent, addressable tokens rather than generated weights. Set Transformer and Perceiver introduced cross-attention to learned latent arrays/inducing points, decoupling input size from internal compute; TokenFormer repurposes this mechanism so every projection layer queries a shared parameter-token memory, enabling dimension-agnostic scaling and architectural changes without full retraining. Theoretical work on fast weight programmers reframed attention as dynamic weight access, providing the conceptual bridge for treating parameters as memory retrieved by queries. Product Key Memory demonstrated scalable, content-addressable parameter banks in Transformer LMs; TokenFormer generalizes this from auxiliary memory to the universal substrate replacing linear layers. Finally, MoE (Switch Transformer) established that tokens can be routed to subsets of parameters for scalable capacity, a principle TokenFormer adopts through differentiable attention rather than hard gating. Together with evidence from prefix/soft prompting that learned token vectors can act as effective parametric knobs, these works crystallize into TokenFormer\u2019s parameter-as-tokens paradigm for native architectural scalability.",
+  "analysis_timestamp": "2026-01-06T23:42:48.094643"
+}

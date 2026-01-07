@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Robust Stochastic Approximation Approach to Stochastic Programming",
+      "authors": "Arkadi Nemirovski, Anatoli Juditsky, Guanghui Lan, Alexander Shapiro",
+      "year": 2009,
+      "role": "Foundational convergence theory for (sub)gradient methods in stochastic convex optimization, including step-size\u2013error tradeoffs that isolate optimization error.",
+      "relationship_sentence": "The paper\u2019s decomposition underpinning population loss after multiple passes mirrors the classic subgradient tradeoff (optimization term ~1/(\u03b7T)), providing the optimization component of the new \u0398(1/(\u03b7T)+\u03b7\u221aT) characterization."
+    },
+    {
+      "title": "Information-Theoretic Lower Bounds on the Oracle Complexity of Stochastic Convex Optimization",
+      "authors": "Alekh Agarwal, Peter L. Bartlett, Pradeep K. Ravikumar, Martin J. Wainwright",
+      "year": 2012,
+      "role": "Establishes minimax lower bounds for excess risk in SCO, identifying the \u0398(1/\u221an) statistical limit for Lipschitz convex problems.",
+      "relationship_sentence": "This anchors the claim that one-pass SGD with \u03b7\u22481/\u221an achieves optimal out-of-sample error, setting a benchmark against which the detrimental effect of additional passes is measured."
+    },
+    {
+      "title": "Train Faster, Generalize Better: Stability of Stochastic Gradient Descent",
+      "authors": "Moritz Hardt, Ben Recht, Yoram Singer",
+      "year": 2016,
+      "role": "Connects SGD\u2019s number of steps and step size to generalization via algorithmic stability, showing how more updates can increase generalization error.",
+      "relationship_sentence": "The new paper builds directly on the stability perspective to explain overfitting from additional epochs, refining the dependence to a non-smooth regime that yields the \u03b7\u221aT growth term and demonstrating a sharp phase transition."
+    },
+    {
+      "title": "Algorithmic Stability and Generalization Performance",
+      "authors": "Olivier Bousquet, Andr\u00e9 Elisseeff",
+      "year": 2002,
+      "role": "Foundational framework linking stability of learning algorithms to generalization error bounds.",
+      "relationship_sentence": "Provides the theoretical lens through which the paper quantifies how multi-pass updates degrade out-of-sample performance in non-smooth SCO."
+    },
+    {
+      "title": "Stochastic Gradient Descent for Non-smooth Optimization: Convergence Results and Optimal Averaging",
+      "authors": "Ohad Shamir, Tong Zhang",
+      "year": 2013,
+      "role": "Sharp convergence analysis of SGD for non-smooth convex losses, including effects of averaging and step-size selection.",
+      "relationship_sentence": "Supplies the non-smooth optimization behavior and one-pass step-size calibration (\u03b7\u22481/\u221an) that the paper shows becomes counterproductive in subsequent passes."
+    },
+    {
+      "title": "Without-Replacement Sampling for Stochastic Gradient Methods",
+      "authors": "Ohad Shamir",
+      "year": 2016,
+      "role": "Analyzes SGD with random reshuffling across epochs, clarifying dynamics specific to multi-pass training used in practice.",
+      "relationship_sentence": "Informs the paper\u2019s multi-epoch setup (typical without-replacement passes) and helps separate optimization gains of reshuffling from the generalization harms identified after the first pass."
+    },
+    {
+      "title": "On Early Stopping in Gradient Descent Learning",
+      "authors": "Yiming Yao, Lorenzo Rosasco, Andrea Caponnetto",
+      "year": 2007,
+      "role": "Establishes early stopping as an implicit regularization mechanism preventing overfitting in iterative optimization.",
+      "relationship_sentence": "Provides conceptual precedent for the paper\u2019s phase-transition phenomenon, where continuing SGD beyond one pass in non-smooth SCO provably hurts generalization, motivating early stopping."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core contribution\u2014showing that multi-pass SGD can rapidly overfit in non-smooth stochastic convex optimization and quantifying a sharp phase transition\u2014rests on three interlocking strands of prior work. First, foundational SCO and subgradient analyses (Nemirovski et al., Shamir & Zhang) characterize the optimization-error side, including the 1/(\u03b7T) decay and the one-pass step-size choice \u03b7\u22481/\u221an that yields optimal excess risk. Second, statistical limits for SCO (Agarwal et al.) establish that \u0398(1/\u221an) is the minimax-optimal generalization rate under Lipschitz convex losses, framing one-pass SGD as already statistically optimal and leaving no headroom for multi-pass improvements in the general case. Third, algorithmic stability theory (Bousquet & Elisseeff) and its modern instantiation for SGD (Hardt, Recht & Singer) link the number of updates and step size to out-of-sample error, highlighting how additional iterations can worsen generalization\u2014especially pertinent when smoothness is absent.\n\nBuilding on these, the present paper targets the practically dominant multi-epoch regime (Shamir, 2016, without-replacement sampling), and precisely balances optimization progress against instability to derive a population loss of order \u0398(1/(\u03b7T)+\u03b7\u221aT) from the second pass onward. This crystallizes a phase transition: the \u03b7 that is optimal for one pass triggers overfitting as T grows, yielding even \u03a9(1) population loss after a second pass. The result sharpens stability-based intuitions for the non-smooth setting and echoes early-stopping principles (Yao, Rosasco & Caponnetto), but with tight, distribution-agnostic rates that explain rapid overfitting in multi-pass SGD.",
+  "analysis_timestamp": "2026-01-07T00:04:09.154586"
+}

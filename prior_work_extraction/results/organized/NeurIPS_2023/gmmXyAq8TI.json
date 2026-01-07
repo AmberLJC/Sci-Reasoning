@@ -1,0 +1,81 @@
+{
+  "prior_works": [
+    {
+      "title": "Training Deep Nets with Sublinear Memory Cost",
+      "authors": [
+        "Tianqi Chen",
+        "Bing Xu",
+        "Chiyuan Zhang",
+        "Carlos Guestrin"
+      ],
+      "year": 2016,
+      "role": "Introduced gradient checkpointing for deep networks, framing rematerialization as a practical compute\u2013memory tradeoff.",
+      "relationship_sentence": "Coop builds on the checkpointing/rematerialization paradigm but departs by making evictions address-aware to prevent fragmentation that standard checkpointing ignores."
+    },
+    {
+      "title": "Algorithm 799: Revolve: An Implementation of Checkpointing for the Reverse or Adjoint Mode of Computational Differentiation",
+      "authors": [
+        "Andreas Griewank",
+        "Andrea Walther"
+      ],
+      "year": 2000,
+      "role": "Foundational theory for optimal checkpoint placement and recomputation schedules.",
+      "relationship_sentence": "Coop inherits the rematerialization principle from Revolve but augments it with allocator-aware contiguous evictions and immediate reuse, which classical checkpoint theory does not model."
+    },
+    {
+      "title": "Checkmate: Breaking the Memory Wall with Optimal Tensor Rematerialization",
+      "authors": [
+        "M. Jain",
+        "et al."
+      ],
+      "year": 2022,
+      "role": "Formulates globally optimal rematerialization schedules under memory budgets for DL graphs.",
+      "relationship_sentence": "Coop addresses Checkmate\u2019s implicit commodity-memory assumption by coupling rematerialization with address-aware allocation to avoid fragmentation during tensor evictions."
+    },
+    {
+      "title": "Dynamic Tensor Rematerialization (DTR)",
+      "authors": [
+        "H. Chen",
+        "et al."
+      ],
+      "year": 2021,
+      "role": "Online eviction-based rematerialization system that decides which tensors to drop and recompute at runtime.",
+      "relationship_sentence": "Coop rethinks DTR-style eviction by enforcing a sliding-window policy that guarantees contiguous free regions and immediate reuse, cutting fragmentation and recomputation cost."
+    },
+    {
+      "title": "TensorFlow: A System for Large-Scale Machine Learning",
+      "authors": [
+        "Mart\u00edn Abadi",
+        "et al."
+      ],
+      "year": 2016,
+      "role": "Introduced the BFC (Best-Fit with Coalescing) GPU allocator and documented fragmentation behavior in DL workloads.",
+      "relationship_sentence": "Coop explicitly co-optimizes with framework allocators like BFC, shaping evictions/allocations to create contiguous blocks rather than assuming fungible free memory."
+    },
+    {
+      "title": "MXNet: A Flexible and Efficient Machine Learning Library",
+      "authors": [
+        "Tianqi Chen",
+        "Mu Li",
+        "Yutian Li",
+        "Min Lin",
+        "et al."
+      ],
+      "year": 2015,
+      "role": "Pioneered graph-aware static memory planning (in-place, co-sharing) to reduce peak memory.",
+      "relationship_sentence": "Coop extends graph-aware allocation ideas to a dynamic rematerialization setting via in-place recomputation and cheap tensor partitioning aligned with eviction decisions."
+    },
+    {
+      "title": "vDNN: Virtualized Deep Neural Networks for Scalable Memory Capacity",
+      "authors": [
+        "Minsoo Rhu",
+        "et al."
+      ],
+      "year": 2016,
+      "role": "Layer-wise windowed offload/prefetch scheduling to fit DNN training in limited GPU memory.",
+      "relationship_sentence": "Coop\u2019s sliding-window eviction echoes vDNN\u2019s windowed management but targets address-contiguous evictions for allocator friendliness instead of host\u2013device offloading."
+    }
+  ],
+  "synthesis_narrative": "Coop\u2019s central contribution is to treat GPU memory as addressful, not fungible, and to co-optimize tensor allocation with rematerialization so evictions form contiguous, immediately reusable regions. This builds on a lineage of compute\u2013memory tradeoffs. Revolve provides the theoretical basis for checkpointing schedules, while Chen et al. brought rematerialization to deep learning with gradient checkpointing. Later, systems like Checkmate and DTR refined rematerialization\u2014Checkmate by optimizing global schedules under memory budgets and DTR by making online eviction decisions. However, these methods largely assume that any freed memory is equivalent, neglecting the allocator\u2019s address space and the fragmentation it induces.\n\nAt the same time, DL frameworks exposed the practical challenge: TensorFlow\u2019s BFC allocator and MXNet\u2019s graph-aware memory planning highlighted how allocation, in-place reuse, and co-sharing govern peak memory and fragmentation. These works showed that where and how a tensor is placed matters, yet they did not integrate this with rematerialization policies. Finally, vDNN\u2019s windowed management of activations illustrated the benefits of structured, locality-aware scheduling for memory, albeit focused on offloading rather than address-aware evictions.\n\nCoop synthesizes these strands: it adopts rematerialization but constrains evictions to a sliding window so freed bytes are contiguous and immediately consumed by the pending allocation, and it further reduces recomputation with in-place reuse and cheap tensor partitioning. By unifying schedule and placement, Coop directly addresses fragmentation\u2014a blind spot in prior rematerialization work.",
+  "analysis_timestamp": "2026-01-06T23:42:49.129962"
+}

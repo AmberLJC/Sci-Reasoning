@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "End-to-End Training of Deep Visuomotor Policies",
+      "authors": "Sergey Levine et al.",
+      "year": 2016,
+      "arxiv_id": "1504.00702",
+      "role": "Extension",
+      "relationship_sentence": "Guided Policy Search couples a privileged teacher (local controllers with full state) with a student policy via KL constraints so the teacher produces behaviors the partial-observation student can realize, a principle this work generalizes by directly optimizing the privileged teacher under a student-imitation objective."
+    },
+    {
+      "title": "A Reduction of Imitation Learning and Structured Prediction to No-Regret Online Learning",
+      "authors": "St\u00e9phane Ross et al.",
+      "year": 2011,
+      "arxiv_id": "1011.0686",
+      "role": "Inspiration",
+      "relationship_sentence": "DAgger\u2019s core idea\u2014make the expert respond on the student\u2019s state distribution to mitigate mismatch\u2014inspires conditioning teacher updates on the student\u2019s capabilities to address the asymmetry-induced mismatch in privileged imitation."
+    },
+    {
+      "title": "DART: Noise Injection for Robust Imitation Learning",
+      "authors": "Michael Laskey et al.",
+      "year": 2017,
+      "arxiv_id": "1703.09327",
+      "role": "Gap Identification",
+      "relationship_sentence": "DART tackles expert\u2013student mismatch by injecting noise into the expert to yield more imitable demonstrations, but does not adapt the expert policy to the student\u2019s observation limits; this work closes that gap by explicitly co-training the privileged teacher to be imitable."
+    },
+    {
+      "title": "Policy Distillation",
+      "authors": "Andrei A. Rusu et al.",
+      "year": 2015,
+      "arxiv_id": "1511.06295",
+      "role": "Foundation",
+      "relationship_sentence": "The method adopts the distillation paradigm of matching the student to a teacher\u2019s action distribution and extends it by backpropagating a student-informed objective that shapes the teacher\u2019s policy rather than keeping it fixed."
+    },
+    {
+      "title": "RMA: Rapid Motor Adaptation for Legged Robots",
+      "authors": "Ashish Kumar et al.",
+      "year": 2021,
+      "arxiv_id": "2107.04034",
+      "role": "Baseline",
+      "relationship_sentence": "RMA uses a privileged teacher policy to supervise a non-privileged student for deployment, and this work directly addresses RMA\u2019s limitation of a teacher trained oblivious to the student by making teacher learning explicitly informed by student imitation performance."
+    },
+    {
+      "title": "Deep Mutual Learning",
+      "authors": "Ying Zhang et al.",
+      "year": 2018,
+      "arxiv_id": "1706.00384",
+      "role": "Inspiration",
+      "relationship_sentence": "Deep Mutual Learning shows that teachers benefit from student feedback via mutual KL objectives; this idea motivates jointly shaping the privileged teacher using the student\u2019s imitation error in a control setting with asymmetric observations."
+    }
+  ],
+  "synthesis_narrative": "Guided Policy Search established a concrete mechanism to make privileged supervision compatible with partial observations by training full-state local controllers under KL constraints so their induced behaviors are realizable by a vision-based student policy. DAgger reframed imitation as an interactive process where experts answer on the student\u2019s state distribution, directly addressing mismatch due to covariate shift by letting the expert adapt to where the student actually visits. DART pushed this further by injecting noise into the expert so demonstrations reflect the errors a learner will make, implicitly steering data toward imitable regions without changing the expert\u2019s objective. Policy Distillation formalized matching a student to a teacher\u2019s action distribution, providing the practical loss used to transfer control knowledge. RMA operationalized privileged teacher-to-student distillation in robotics at scale, training a teacher with extra state and then supervising a deployable student, but it left the teacher blind to the student\u2019s observation constraints. Deep Mutual Learning showed that training signals flowing from student to teacher can improve both, via mutual KL guidance rather than a frozen teacher. Taken together, these works exposed a gap: privileged teachers provide powerful supervision, but when trained in isolation they can induce behaviors that a partially observed student cannot imitate. The natural next step is to couple the two with an imitation-aware objective, retaining the practicality of distillation while, in the spirit of GPS and DAgger, updating the teacher under feedback from the student\u2019s limitations so the learned behaviors are intrinsically imitable under partial observability.",
+  "target_paper": {
+    "title": "Student-Informed Teacher Training",
+    "authors": "Nico Messikommer, Jiaxu Xing, Elie Aljalbout, Davide Scaramuzza",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "Reinforcement Learning, Imitation Learning, Robotics",
+    "abstract": "Imitation learning with a privileged teacher has proven effective for learning complex control behaviors from high-dimensional inputs, such as images. In this framework, a teacher is trained with privileged task information, while a student tries to predict the actions of the teacher with more limited observations, e.g., in a robot navigation task, the teacher might have access to distances to nearby obstacles, while the student only receives visual observations of the scene. However, privileged imitation learning faces a key challenge: the student might be unable to imitate the teacher's behavior due to partial observability. This problem arises because the teacher is trained without considering if the student is capable of imitating the learned behavior. To address this teacher-student asymmetry, we propose a framework for joint training of the teacher and student policies, encouraging the teacher to learn behaviors that can be imitated by the student despite the latters' limited acc",
+    "openreview_id": "Dzh0hQPpuf",
+    "forum_id": "Dzh0hQPpuf"
+  },
+  "analysis_timestamp": "2026-01-06T20:08:06.033241"
+}

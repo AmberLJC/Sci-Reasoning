@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Learning Mesh-Based Simulation with Graph Networks",
+      "authors": "Tobias Pfaff et al.",
+      "year": 2021,
+      "role": "Baseline",
+      "relationship_sentence": "This work is the primary mesh-based GNN simulator used for CFD surrogates; the ICML 2024 paper directly builds on this formulation and addresses its key limitations by injecting finite-volume (cell volume, face area, face centroid) features into message passing and by adding global geometry representations (SV/DID) that MGN lacks."
+    },
+    {
+      "title": "Learning to Simulate Complex Physics with Graph Networks",
+      "authors": "Alvaro Sanchez-Gonzalez et al.",
+      "year": 2020,
+      "role": "Foundation",
+      "relationship_sentence": "It introduced the graph-network-based simulator paradigm for physical systems on particles/meshes; the new paper adopts this problem formulation and graph-message-passing architecture as the base upon which it augments FVM-aware features and global geometry signals."
+    },
+    {
+      "title": "Message Passing Neural PDE Solver",
+      "authors": "Johannes Brandstetter et al.",
+      "year": 2022,
+      "role": "Extension",
+      "relationship_sentence": "This paper tailored message passing to discretized PDEs, motivating discretization-aware features; the ICML 2024 work extends this line by explicitly injecting canonical finite-volume quantities (cell volumes and face areas/centroids) into the messages for CFD on unstructured meshes."
+    },
+    {
+      "title": "Fourier Neural Operator for Parametric Partial Differential Equations",
+      "authors": "Zongyi Li et al.",
+      "year": 2021,
+      "role": "Related Problem",
+      "relationship_sentence": "FNO popularized operator learning and, in subsequent variants, encoded complex geometries via masks or signed-distance fields on grids; the new paper translates this insight to mesh-based GNNs by designing SV/DID as mesh-native, global geometry descriptors to supply boundary/obstacle context."
+    },
+    {
+      "title": "Geo-FNO: Geometry-informed Fourier Neural Operator for PDEs on Complex Domains",
+      "authors": "Zongyi Li et al.",
+      "year": 2022,
+      "role": "Gap Identification",
+      "relationship_sentence": "Geo-FNO showed that providing global geometry information (e.g., signed-distance/mask) markedly improves PDE surrogates on complex shapes, but it is grid-centric; the ICML 2024 paper explicitly addresses this gap by proposing SV/DID to endow mesh-based GNNs with comparable global geometry perception."
+    },
+    {
+      "title": "DimeNet: Directional Message Passing for Molecular Graphs",
+      "authors": "Johannes Klicpera et al.",
+      "year": 2020,
+      "role": "Inspiration",
+      "relationship_sentence": "DimeNet demonstrated the value of directional information in message passing; the new paper\u2019s Directional Integrated Distance (DID) generalizes this idea from local bond angles to global, direction-conditioned distance integrals that encode obstacle geometry for CFD meshes."
+    }
+  ],
+  "synthesis_narrative": "The paper sits squarely in the lineage of graph-network simulators for physics. Sanchez-Gonzalez et al. established the GN-based simulation framework, and Pfaff et al.\u2019s MeshGraphNet adapted it to mesh-based CFD, becoming the de facto baseline. However, MGN-style methods pass predominantly local, topology-based features and overlook finite-volume attributes that govern conservation on practical CFD meshes, as well as lack global awareness of immersed objects. Brandstetter et al. highlighted that message passing can be tailored to numerical discretizations, motivating a discretization-aware treatment; the present work operationalizes this for the finite volume method by embedding cell volumes and face areas/centroids directly in the messages. In parallel, operator-learning advances such as FNO\u2014and especially its geometry-informed variant Geo-FNO\u2014demonstrated that global geometry encodings (e.g., masks/SDFs) are crucial when handling complex domains but were developed for regular grids. This paper transfers that insight to unstructured, finite-volume meshes through two mesh-native, global geometry descriptors: Shortest Vector (SV), akin to an SDF vectorial analogue, and Directional Integrated Distance (DID), which aggregates distance information along directions to capture obstacle context. Finally, inspired by directional message passing ideas exemplified by DimeNet, DID injects directional structure into the geometry cues. Together, these lineage threads directly enable the paper\u2019s core contributions: FVM-aware GNN message passing and globally informed geometry representations for accurate, data-efficient CFD surrogates.",
+  "analysis_timestamp": "2026-01-06T23:09:26.489458"
+}

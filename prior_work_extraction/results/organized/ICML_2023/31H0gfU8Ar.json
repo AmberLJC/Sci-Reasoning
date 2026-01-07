@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "High-Resolution Image Synthesis with Latent Diffusion Models",
+      "authors": "Rombach et al.",
+      "year": 2022,
+      "role": "Foundation",
+      "relationship_sentence": "Cones is built on the Stable Diffusion/LDM framework and adopts its text-to-image diffusion formulation and U-Net backbone as the substrate in which concept neurons are identified and manipulated."
+    },
+    {
+      "title": "Textual Inversion: Generating Novel Subjects with Text-to-Image Diffusion Models",
+      "authors": "Gal et al.",
+      "year": 2022,
+      "role": "Baseline",
+      "relationship_sentence": "Cones directly targets the same personalization goal as Textual Inversion but replaces learned token embeddings with sparse, neuron-level concept representations to improve multi-subject composition and storage efficiency."
+    },
+    {
+      "title": "DreamBooth: Fine Tuning Text-to-Image Diffusion Models for Subject-Driven Generation",
+      "authors": "Ruiz et al.",
+      "year": 2022,
+      "role": "Baseline",
+      "relationship_sentence": "DreamBooth\u2019s per-subject fine-tuning and large storage footprint motivate Cones\u2019 core idea of identifying and storing only a small cluster of subject-specific neurons to achieve comparable or better customization without full model adaptation."
+    },
+    {
+      "title": "Multi-Concept Customization of Text-to-Image Diffusion",
+      "authors": "Kumari et al.",
+      "year": 2023,
+      "role": "Gap Identification",
+      "relationship_sentence": "While enabling multi-concept composition via shared fine-tuning (Custom Diffusion/LoRA), this work still suffers from concept interference and per-concept parameter storage, gaps Cones addresses by concatenating sparse concept-neuron clusters without additional training."
+    },
+    {
+      "title": "Interpretability Beyond Feature Attribution: Quantitative Testing with Concept Activation Vectors (TCAV)",
+      "authors": "Kim et al.",
+      "year": 2018,
+      "role": "Inspiration",
+      "relationship_sentence": "Cones adapts TCAV\u2019s gradient-based concept sensitivity idea to diffusion U-Nets by using gradient statistics under subject-specific stimulation to discover neurons causally tied to a target concept."
+    },
+    {
+      "title": "Network Dissection: Quantifying Interpretability of Deep Visual Representations",
+      "authors": "Bau et al.",
+      "year": 2017,
+      "role": "Foundation",
+      "relationship_sentence": "The notion that individual units align with human-interpretable concepts and can be causally intervened upon underpins Cones\u2019 pursuit of concept neurons and unit-level control inside diffusion models."
+    },
+    {
+      "title": "GAN Dissection: Visualizing and Understanding Generative Adversarial Networks",
+      "authors": "Bau et al.",
+      "year": 2019,
+      "role": "Extension",
+      "relationship_sentence": "Cones extends GAN Dissection\u2019s causal unit manipulation from GAN generators to diffusion U-Nets, showing that shutting or concatenating concept-neuron clusters removes/adds subjects analogously to object-level edits in GANs."
+    }
+  ],
+  "synthesis_narrative": "Cones fuses two lines of work\u2014text-to-image personalization and unit-level interpretability\u2014into a new, neuron-centric approach to customization. Latent Diffusion (Rombach et al.) provides the architectural and algorithmic foundation: a text-conditioned U-Net where internal representations can, in principle, be probed and controlled. The personalization thread, led by Textual Inversion and DreamBooth, defined the task of subject-driven generation but required either learned token embeddings or per-subject fine-tuning, each with drawbacks in multi-subject composition and storage. Multi-Concept Customization (Custom Diffusion) pushed toward composing several subjects, yet still relied on per-concept parameter sets (e.g., LoRA) and encountered interference between concepts. \n\nCones\u2019 key insight draws from interpretability works. Network Dissection and GAN Dissection demonstrated that individual units can correspond to semantic concepts and that targeted unit interventions causally change generations. TCAV introduced a practical gradient-based mechanism to quantify concept sensitivity. Cones adapts and unifies these ideas in diffusion models by computing gradient statistics under subject-specific stimulation to identify sparse clusters of concept neurons within the U-Net. These clusters form compact, composable representations: shutting or activating them removes or injects the subject, and concatenating clusters enables faithful multi-subject synthesis without re-training. Thus, Cones directly builds on diffusion-based personalization\u2019s problem formulation while overcoming its limits using concept-level unit discovery and causal manipulation rooted in gradient-based interpretability.",
+  "analysis_timestamp": "2026-01-06T23:09:26.587238"
+}

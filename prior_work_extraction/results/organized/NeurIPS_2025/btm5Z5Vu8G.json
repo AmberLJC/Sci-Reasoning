@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Bayesian Active Learning by Disagreement",
+      "authors": "Neil Houlsby, Ferenc Husz\u00e1r, Zoubin Ghahramani, M\u00e1t\u00e9 Lengyel",
+      "year": 2011,
+      "role": "Foundational active learning objective",
+      "relationship_sentence": "Introduced mutual-information (BALD) acquisition for selecting informative data, directly underpinning ALINE\u2019s information-gain\u2013driven querying strategy."
+    },
+    {
+      "title": "VIME: Variational Information Maximizing Exploration",
+      "authors": "Rein Houthooft, Xi Chen, Yan Duan, John Schulman, Filip De Turck, Pieter Abbeel",
+      "year": 2016,
+      "role": "RL with information-gain rewards",
+      "relationship_sentence": "Demonstrated using approximate Bayesian inference to compute intrinsic rewards based on information gain, a key idea mirrored in ALINE\u2019s self-estimated information-gain reward from its integrated inference module."
+    },
+    {
+      "title": "Bayesian Optimization for Likelihood-Free Inference (BOLFI)",
+      "authors": "Michael U. Gutmann, Jukka Corander",
+      "year": 2016,
+      "role": "Adaptive data acquisition for inference",
+      "relationship_sentence": "Pioneered adaptively choosing simulations/experiments to accelerate Bayesian inference in implicit models, foreshadowing ALINE\u2019s tight coupling of acquisition and inference."
+    },
+    {
+      "title": "Fast \u03b5-free Inference of Simulator Models with Bayesian Conditional Density Estimation",
+      "authors": "George Papamakarios, Iain Murray",
+      "year": 2016,
+      "role": "Amortized Bayesian inference",
+      "relationship_sentence": "Established amortized posterior inference via conditional density estimation, providing the template for ALINE\u2019s integrated amortized inference component."
+    },
+    {
+      "title": "Neural Processes",
+      "authors": "Marta Garnelo, Jonathan Schwarz, Dan Rosenbaum, Fabio Viola, Danilo Rezende, S. M. Ali Eslami, Pushmeet Kohli, et al.",
+      "year": 2018,
+      "role": "Amortized inference over tasks with query/context sets",
+      "relationship_sentence": "Showed how a single model can amortize inference across tasks and make instant predictions at arbitrary query points, conceptually aligning with ALINE\u2019s task-agnostic, rapid inference and query selection."
+    },
+    {
+      "title": "Variational Bayesian Optimal Experimental Design",
+      "authors": "Adam Foster, Martin Jankowiak, Eli Bingham, Tom Rainforth, Yee Whye Teh",
+      "year": 2019,
+      "role": "Differentiable EIG estimation for design",
+      "relationship_sentence": "Provided variational bounds and differentiable estimators of expected information gain using learned posteriors, directly informing ALINE\u2019s use of its own inference module to estimate information gain for training."
+    },
+    {
+      "title": "Bayesian Experimental Design for Implicit Models via Mutual Information Neural Estimation",
+      "authors": "Julia Kleinegesse, Michael U. Gutmann",
+      "year": 2020,
+      "role": "Amortised Bayesian experimental design",
+      "relationship_sentence": "Advanced amortized, MI-based design for simulator-based settings, a methodological precursor to ALINE\u2019s unified amortization of both inference and experimental design."
+    }
+  ],
+  "synthesis_narrative": "ALINE\u2019s core innovation\u2014jointly amortizing Bayesian inference and active data acquisition within a single transformer trained by reinforcement learning\u2014builds on two converging lines of work: amortized probabilistic inference and information-theoretic experimental design. On the inference side, conditional density estimation approaches like Papamakarios and Murray established that neural networks can amortize posterior inference across datasets, while Neural Processes broadened this idea to task-agnostic, query\u2013context settings with instant predictions at arbitrary inputs. On the design side, BALD framed data selection as maximizing mutual information, and subsequent advances in Bayesian optimal experimental design, notably variational EIG estimation (Foster et al.) and MI-based methods for implicit models (Kleinegesse & Gutmann), showed how learned posteriors can drive differentiable, scalable design objectives. Bridging inference and control, VIME demonstrated that information gain computed from an internal Bayesian model can serve as an intrinsic reward for RL agents, a principle ALINE adopts by using its integrated inference component to self-estimate information gain as the training signal for its query policy. Finally, adaptive acquisition for likelihood-free inference (BOLFI) presaged the tight coupling between experiment selection and posterior refinement that ALINE operationalizes in a unified, amortized architecture. Together, these works directly motivate ALINE\u2019s design: a single model that (i) performs instant amortized inference, (ii) guides acquisition via internally estimated information gain, and (iii) learns a sequential querying strategy through reinforcement learning to rapidly gather the most informative data for immediate inference.",
+  "analysis_timestamp": "2026-01-07T00:21:32.356538"
+}

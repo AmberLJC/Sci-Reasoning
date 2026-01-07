@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+      "authors": "Jason Wei et al.",
+      "year": 2022,
+      "role": "Foundation",
+      "relationship_sentence": "Established chain-of-thought (CoT) prompting as a way to elicit step-by-step rationales from large models\u2014the precise supervision signal that this paper distills from GPT-3.5 into smaller T5 models."
+    },
+    {
+      "title": "Large Language Models are Zero-Shot Reasoners",
+      "authors": "Takeshi Kojima et al.",
+      "year": 2022,
+      "role": "Inspiration",
+      "relationship_sentence": "Showed that a simple \"let\u2019s think step by step\" cue can trigger CoT in LLMs without demonstrations, directly enabling scalable collection of teacher rationales that this work uses for specialization."
+    },
+    {
+      "title": "Self-Consistency Improves Chain of Thought Reasoning in Language Models",
+      "authors": "Xuezhi Wang et al.",
+      "year": 2023,
+      "role": "Extension",
+      "relationship_sentence": "Introduced sampling-and-voting over multiple CoT traces; this paper leverages that idea to harvest higher-quality teacher solutions before distilling them into small models."
+    },
+    {
+      "title": "Scaling Instruction-Finetuned Language Models",
+      "authors": "Hyung Won Chung et al.",
+      "year": 2022,
+      "role": "Baseline",
+      "relationship_sentence": "Provides the general-purpose instruction-tuned T5 (FLAN/FLAN-T5) baseline that this work specializes and surpasses on multi-step reasoning, highlighting the multi-task vs specialization trade-off."
+    },
+    {
+      "title": "GSM8K: A Training Dataset for Grade School Math Word Problems",
+      "authors": "Katherine Cobbe et al.",
+      "year": 2021,
+      "role": "Foundation",
+      "relationship_sentence": "Defines the core multi-step arithmetic reasoning benchmark and problem setup on which the paper evaluates and targets specialization."
+    },
+    {
+      "title": "STaR: Bootstrapping Reasoning With Reasoning",
+      "authors": "Michael Zelikman et al.",
+      "year": 2022,
+      "role": "Extension",
+      "relationship_sentence": "Demonstrated that training on rationales improves reasoning via iterative bootstrapping; this work extends the rationale-supervision idea by distilling high-quality teacher CoT into much smaller students for targeted specialization."
+    },
+    {
+      "title": "Self-Instruct: Aligning Language Models with Self-Generated Instructions",
+      "authors": "Yizhong Wang et al.",
+      "year": 2022,
+      "role": "Inspiration",
+      "relationship_sentence": "Pioneered using a strong LLM to synthesize supervised data for finetuning smaller models; this paper adapts that pipeline to collect CoT-specific supervision from GPT-3.5 for reasoning specialization."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core innovation\u2014specializing small language models for multi-step reasoning by distilling chain-of-thought (CoT) from a much larger teacher\u2014rests squarely on the emergence and exploitation of CoT in large models. Wei et al. established CoT prompting as a reliable way to obtain step-by-step rationales, and Kojima et al. showed that zero-shot triggers can elicit such reasoning without exemplars, making large-scale teacher-signal collection practical. To ensure the distilled supervision is reliable, the authors build on Wang et al.\u2019s self-consistency decoding to sample multiple rationales and select consistent, correct solutions before training.\n\nThis specialization is positioned against general-purpose instruction tuning exemplified by FLAN/FLAN-T5 (Chung et al.), which provides the main small-model baseline but also exposes the paper\u2019s central gap: multi-task balancing often dilutes hard reasoning skill. The target task and evaluation setting are grounded in GSM8K (Cobbe et al.), the canonical benchmark for step-by-step math reasoning. Methodologically, the work extends the rationale-supervision paradigm inaugurated by STaR (Zelikman et al.), replacing self-bootstrapped explanations with high-quality teacher CoT and focusing on a capacity-limited student. Finally, the data-generation lens is inspired by Self-Instruct (Wang et al.), adapting the idea of using a strong LLM to synthesize supervision\u2014here, CoT traces tailored to reasoning\u2014so that small T5 variants can inherit and specialize the teacher\u2019s emergent ability.",
+  "analysis_timestamp": "2026-01-06T23:09:26.530215"
+}

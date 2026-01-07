@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "FlexGen: High-Throughput Text Generation with Deep Offloading",
+      "authors": "Sheng Shen et al.",
+      "year": 2023,
+      "role": "Gap Identification",
+      "relationship_sentence": "FlexGen demonstrated that offloading activations/KV to CPU can save GPU memory but introduces substantial decoding latency, a core limitation ShadowKV explicitly tackles by offloading only values and reconstructing a minimal subset on demand to hide I/O."
+    },
+    {
+      "title": "H2O: Heavy-Hitter Oracle for Efficient Long-Context LLM Inference",
+      "authors": "Yin et al.",
+      "year": 2024,
+      "role": "Baseline",
+      "relationship_sentence": "H2O\u2019s attention-accumulation-based token selection is a primary dynamic sparsity baseline; ShadowKV builds on this idea with a more accurate KV selection that works in tandem with low-rank key storage and selective V offloading to simultaneously cut memory and latency."
+    },
+    {
+      "title": "SnapKV: Efficient KV Cache Compression and Token Selection for LLM Inference",
+      "authors": "Wang et al.",
+      "year": 2024,
+      "role": "Extension",
+      "relationship_sentence": "SnapKV\u2019s query-key similarity-based on-the-fly selection directly motivates ShadowKV\u2019s accurate KV selection; ShadowKV extends this line by storing keys in a low-rank form to cheaply score/select and then reconstruct only the sparse KV pairs needed while fetching minimal Vs."
+    },
+    {
+      "title": "StreamingLLM: Efficient Streaming Language Models with Attention Sinks",
+      "authors": "Xiao et al.",
+      "year": 2024,
+      "role": "Related Problem",
+      "relationship_sentence": "StreamingLLM formalized long-context streaming with bounded KV by retaining a small set of sink/important tokens; ShadowKV addresses the same memory-pressure problem but overcomes quality/recall tradeoffs by accurate selection plus selective V offload rather than a fixed sliding window."
+    },
+    {
+      "title": "Scissorhands: Exploiting the Persistence of Importance for KV Cache Compression in LLMs",
+      "authors": "Kim et al.",
+      "year": 2023,
+      "role": "Gap Identification",
+      "relationship_sentence": "Scissorhands prunes unimportant KV states to save GPU memory, but still stores remaining KV on GPU and does not address CPU offload latency; ShadowKV fills this gap by keeping only low-rank keys on GPU and offloading values while reconstructing a minimal working set."
+    },
+    {
+      "title": "Linformer: Self-Attention with Linear Complexity",
+      "authors": "Sinong Wang et al.",
+      "year": 2020,
+      "role": "Inspiration",
+      "relationship_sentence": "Linformer established that attention can be well-approximated in a low-rank subspace; ShadowKV leverages this insight by storing the key cache in a low-rank form so that keys can be used for fast, accurate selection and lightweight reconstruction of sparse KV pairs."
+    },
+    {
+      "title": "PagedAttention: Efficient Memory Management for Large Language Model Serving (vLLM)",
+      "authors": "Zheng et al.",
+      "year": 2023,
+      "role": "Foundation",
+      "relationship_sentence": "PagedAttention defined the modern KV-cache-centric serving problem and memory fragmentation issues; ShadowKV builds on this problem formulation and goes beyond by compressing keys and offloading values to enable higher batch sizes and longer contexts without throughput collapse."
+    }
+  ],
+  "synthesis_narrative": "ShadowKV sits at the intersection of three converging lines of work: dynamic sparse attention for long-context decoding, memory/offloading systems for serving, and low-rank approximations of attention. Dynamic selection methods such as H2O and SnapKV showed that only a small subset of past tokens materially impacts next-token prediction, but they either retain substantial GPU-resident KV or incur selection overheads without addressing offload latency. StreamingLLM and Scissorhands further framed the memory pressure of KV caches, proposing sink-token retention or importance-based pruning, yet they still trade off recall or keep large values on GPU. From the systems perspective, FlexGen revealed that na\u00efve CPU offloading sharply degrades decoding throughput due to bandwidth and I/O latency, crystallizing a key bottleneck ShadowKV must avoid. Complementing these, Linformer\u2019s low-rank perspective on attention offered a principled avenue to compress the key representation while preserving selection fidelity. Building on the vLLM/PagedAttention formulation of KV-centric serving, ShadowKV unifies these strands: it stores only low-rank keys on GPU to enable fast, accurate token importance scoring; offloads values to CPU; and reconstructs only the minimal sparse KV pairs needed on-the-fly to cap transfers and hide latency. This directly addresses the memory\u2013throughput dilemma of long-context serving by coupling low-rank key compression with precise KV selection and targeted value fetching.",
+  "analysis_timestamp": "2026-01-06T23:07:19.579441"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "On Calibration of Modern Neural Networks",
+      "authors": "Chuan Guo et al.",
+      "year": 2017,
+      "role": "Foundation",
+      "relationship_sentence": "Established the modern miscalibration problem and standard metrics (e.g., ECE, temperature scaling) that CML explicitly targets and extends to the multimodal setting where confidence can perversely increase under modality corruption."
+    },
+    {
+      "title": "Can You Trust Your Model\u2019s Uncertainty Under Dataset Shift?",
+      "authors": "Yarin Ovadia et al.",
+      "year": 2019,
+      "role": "Gap Identification",
+      "relationship_sentence": "Showed that predictive uncertainty often deteriorates under distribution shift; CML directly addresses the analogous, multimodal-specific shift\u2014modality removal/corruption\u2014by enforcing that confidence must not increase when evidence is reduced."
+    },
+    {
+      "title": "Beyond Temperature Scaling: Obtaining Well-Calibrated Multiclass Probabilities with Dirichlet Calibration",
+      "authors": "Meelis Kull et al.",
+      "year": 2019,
+      "role": "Baseline",
+      "relationship_sentence": "Provides a principal post-hoc calibration baseline that CML consistently outperforms by integrating calibration into training via a modality-aware regularizer rather than post-hoc adjustment."
+    },
+    {
+      "title": "Regularizing Neural Networks by Penalizing Confident Output Distributions",
+      "authors": "Gabriel Pereyra et al.",
+      "year": 2017,
+      "role": "Inspiration",
+      "relationship_sentence": "Inspired CML\u2019s regularization view on overconfidence; CML departs by imposing a pairwise monotonicity constraint between full-input and modality-ablated predictions instead of a global entropy penalty."
+    },
+    {
+      "title": "Mean Teachers Are Better Role Models: Weight-Averaged Consistency Targets Improve Semi-Supervised Learning",
+      "authors": "Antti Tarvainen et al.",
+      "year": 2017,
+      "role": "Inspiration",
+      "relationship_sentence": "Motivated CML\u2019s consistency-style training across perturbations; CML adapts this idea by enforcing inequality-based consistency (confidence should not increase) specifically for perturbations that remove modalities."
+    },
+    {
+      "title": "Multimodal Learning with Deep Boltzmann Machines",
+      "authors": "Nitish Srivastava et al.",
+      "year": 2012,
+      "role": "Foundation",
+      "relationship_sentence": "Introduced a principled multimodal framework with missing-modality inference, grounding CML\u2019s core principle that more modalities should not increase uncertainty and, conversely, removing a modality should not boost confidence."
+    },
+    {
+      "title": "Training Products of Experts by Minimizing Contrastive Divergence",
+      "authors": "Geoffrey Hinton",
+      "year": 2002,
+      "role": "Inspiration",
+      "relationship_sentence": "Product-of-Experts theory implies that adding independent evidence should increase certainty; CML operationalizes the complementary discriminative constraint that removing an expert (modality) must not raise predictive confidence."
+    }
+  ],
+  "synthesis_narrative": "Calibrating Multimodal Learning (CML) is grounded in the modern understanding that deep networks are miscalibrated, as formalized by Guo et al., whose metrics and post-hoc baseline (temperature scaling) define the calibration yardstick. Ovadia et al. demonstrated that uncertainty often fails under distribution shift; CML pinpoints a multimodal analog\u2014modality corruption/removal\u2014and designs a training-time remedy tailored to that shift. Rather than rely on post-hoc fixes like Dirichlet calibration (Kull et al.), which serve as key baselines, CML embeds calibration into learning via a targeted regularizer. Two strands directly inspire this design: confidence-targeted regularization (Pereyra et al.) and consistency regularization under perturbations (Tarvainen & Valpola). CML synthesizes these by enforcing a pairwise, inequality-based consistency\u2014confidence with all modalities must not be higher than with a subset\u2014thereby specifically penalizing overconfidence when evidence is reduced. This principle is theoretically consonant with classic multimodal foundations: Srivastava & Salakhutdinov\u2019s multimodal DBMs underscore that more modalities should reduce uncertainty and enable missing-modality reasoning, while Hinton\u2019s Product-of-Experts formalizes that adding independent experts concentrates belief. CML translates these generative intuitions into a discriminative calibration constraint, producing a plug-in regularizer that improves both calibration and accuracy across multimodal classifiers and directly addresses the core gap of unreliable confidence under modality corruption.",
+  "analysis_timestamp": "2026-01-06T23:09:26.566761"
+}

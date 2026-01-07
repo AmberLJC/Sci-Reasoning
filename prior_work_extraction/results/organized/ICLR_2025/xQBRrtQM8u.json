@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Jonathan Ho, Ajay Jain, Pieter Abbeel",
+      "year": 2020,
+      "role": "Foundational diffusion generative modeling and training objective",
+      "relationship_sentence": "Establishes the iterative noising/denoising framework and noise schedules that Adjoint Matching fine-tunes under a theoretically correct, memoryless sampling scheme."
+    },
+    {
+      "title": "Score-Based Generative Modeling through Stochastic Differential Equations",
+      "authors": "Yang Song, Jascha Sohl-Dickstein, Diederik P. Kingma, Abhishek Kumar, Stefano Ermon, Ben Poole",
+      "year": 2021,
+      "role": "SDE/ODE viewpoint linking diffusion and flow dynamics",
+      "relationship_sentence": "Provides the controlled SDE and probability-flow ODE perspectives that enable casting reward fine-tuning of diffusion/flow models as a stochastic optimal control problem."
+    },
+    {
+      "title": "Flow Matching for Generative Modeling",
+      "authors": "Yaron Lipman, Ricky T. Q. Chen, Ben Poole, et al.",
+      "year": 2023,
+      "role": "Vector-field regression training for continuous-time generative models",
+      "relationship_sentence": "Inspires the paper\u2019s key idea of turning an optimization/control problem into a regression objective; Adjoint Matching extends this philosophy to matching adjoint (co-state) dynamics for SOC."
+    },
+    {
+      "title": "Stochastic Interpolants: A Unifying Framework for Flows and Diffusions in Generative Modeling",
+      "authors": "Michael S. Albergo, Eric Vanden-Eijnden",
+      "year": 2023,
+      "role": "Unifies diffusion and flow training via stochastic interpolations",
+      "relationship_sentence": "Motivates the memoryless interpolation/noise design and provides the technical bridge for treating flow and diffusion models within a single continuous-time training framework exploited by Adjoint Matching."
+    },
+    {
+      "title": "Diffusion Schr\u00f6dinger Bridge",
+      "authors": "Vincent De Bortoli, James Thornton, Alain Durmus, Arnaud Doucet",
+      "year": 2021,
+      "role": "SOC/Schr\u00f6dinger bridge connection for generative modeling",
+      "relationship_sentence": "Frames generative modeling as a KL-regularized stochastic control (Schr\u00f6dinger bridge) problem, directly informing the paper\u2019s formulation of preference fine-tuning as SOC with path-wise likelihood ratios."
+    },
+    {
+      "title": "Reinforcement Learning and Control as Probabilistic Inference: Tutorial and Review",
+      "authors": "Sergey Levine",
+      "year": 2018,
+      "role": "Control-as-inference/KL-control foundation",
+      "relationship_sentence": "Provides the probabilistic inference view of control that the paper leverages to derive a principled SOC objective for reward fine-tuning with explicit KL structure and memoryless noise requirements."
+    },
+    {
+      "title": "Neural Ordinary Differential Equations",
+      "authors": "Ricky T. Q. Chen, Yulia Rubanova, Jesse Bettencourt, David Duvenaud",
+      "year": 2018,
+      "role": "Adjoint sensitivity and backward dynamics for continuous-time models",
+      "relationship_sentence": "Introduces adjoint-based backward dynamics central to efficient gradients in continuous-time systems; Adjoint Matching repurposes adjoint/co-state equations as regression targets in the SOC setting."
+    }
+  ],
+  "synthesis_narrative": "Adjoint Matching builds on three converging threads: continuous-time generative modeling, stochastic optimal control (SOC) and control-as-inference, and adjoint-based training. Denoising Diffusion Probabilistic Models and the SDE formulation of score-based generative modeling establish the iterative stochastic dynamics and their deterministic probability-flow ODE counterparts. This continuous-time view is where fine-tuning a generator naturally becomes a control problem over drift fields. Flow Matching and Stochastic Interpolants then demonstrate that training these dynamics can be reduced to simple regression on time-indexed vector fields via carefully chosen (often memoryless) interpolations. Adjoint Matching adopts this regression paradigm but targets the adjoint/co-state quantities from SOC, converting a difficult control optimization into supervised matching of backward variables.\nSchr\u00f6dinger bridge methods and the control-as-inference literature supply the precise SOC objective: a KL-regularized control problem over diffusion paths. This lens explains how reward fine-tuning should be performed and why the noise must be sampled from a specific memoryless schedule to avoid bias from state-noise dependence during generation. Finally, the adjoint methodology from Neural ODEs informs both the algorithmic structure (backward equations) and computational tractability. Together, these works directly enable the paper\u2019s two core innovations: a principled SOC formulation of reward fine-tuning for flow/diffusion models with a provably necessary memoryless noise schedule, and a practical Adjoint Matching algorithm that reframes SOC as regression for efficient, stable preference optimization.",
+  "analysis_timestamp": "2026-01-07T00:02:04.908155"
+}

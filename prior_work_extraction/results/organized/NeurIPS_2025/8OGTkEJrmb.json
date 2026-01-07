@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Model selection and estimation in regression with grouped variables",
+      "authors": "Ming Yuan, Yi Lin",
+      "year": 2006,
+      "role": "foundational",
+      "relationship_sentence": "Introduced the group lasso (L2,1) framework for structured sparsity, providing the canonical non-smooth group penalty that D-Gating seeks to recover in a fully differentiable way via an induced L2,2/D quasi-norm."
+    },
+    {
+      "title": "Learning Structured Sparsity in Deep Neural Networks",
+      "authors": "Wei Wen, Chunpeng Wu, Yandan Wang, Yiran Chen, Hai Li",
+      "year": 2016,
+      "role": "methodological",
+      "relationship_sentence": "Applied group-lasso penalties to induce filter/channel-level sparsity in deep nets, highlighting both the utility of structured sparsity and the optimization friction of non-differentiable penalties that D-Gating resolves."
+    },
+    {
+      "title": "Learning Efficient Convolutional Networks through Network Slimming",
+      "authors": "Zhuang Liu, Jianguo Li, Zhiqiang Shen, Gao Huang, Shoumeng Yan, Changshui Zhang",
+      "year": 2017,
+      "role": "methodological",
+      "relationship_sentence": "Demonstrated per-channel scalar gates (BN scaling factors) with sparsity penalties for pruning; D-Gating generalizes this gating idea to multiple gates per group and supplies theory linking such gates to an exact group quasi-norm."
+    },
+    {
+      "title": "Learning Sparse Neural Networks through L0 Regularization",
+      "authors": "Christos Louizos, Max Welling, Diederik P. Kingma",
+      "year": 2018,
+      "role": "methodological",
+      "relationship_sentence": "Proposed stochastic, differentiable gates (hard-concrete) to approximate L0 penalties; D-Gating contrasts with a deterministic, fully differentiable gating overparameterization and provides formal equivalence to a target group quasi-norm."
+    },
+    {
+      "title": "Implicit Regularization in Matrix Factorization: The Role of Depth",
+      "authors": "Suriya Gunasekar, Daniel Soudry, Jason D. Lee, Nati Srebro",
+      "year": 2018,
+      "role": "theoretical",
+      "relationship_sentence": "Showed that depth with L2 weight decay induces Schatten 2/D quasi-norms on the product; D-Gating leverages the same positive-homogeneity mechanism to prove that L2 penalties on multiplicative gate factors induce an L2,2/D group quasi-norm."
+    },
+    {
+      "title": "Norm-Based Capacity Control in Neural Networks",
+      "authors": "Behnam Neyshabur, Ryota Tomioka, Ruslan Salakhutdinov, Nathan Srebro",
+      "year": 2015,
+      "role": "theoretical",
+      "relationship_sentence": "Developed path-norm and analysis of multiplicative parameterizations, informing D-Gating\u2019s use of overparameterization and L2 penalties to realize specific nonconvex function-space norms driving sparsity."
+    },
+    {
+      "title": "Global Optimality in Tensor Factorization, Deep Learning, and Beyond",
+      "authors": "Loic Haeffele, Rene Vidal",
+      "year": 2015,
+      "role": "theoretical",
+      "relationship_sentence": "Established that positively homogeneous factorized parameterizations with convex per-factor penalties induce explicit function-space regularizers; D-Gating instantiates this principle to derive its equivalence to non-smooth group quasi-norm minimization."
+    }
+  ],
+  "synthesis_narrative": "The core contribution of D-Gating is a fully differentiable, multiplicative overparameterization that induces structured sparsity while remaining compatible with standard SGD. This idea is anchored in two lines of prior work. First, structured sparsity via group penalties\u2014originating with the group lasso (Yuan & Lin, 2006) and operationalized in deep networks (Wen et al., 2016)\u2014established the effectiveness of group-wise regularization but left a non-differentiability gap that often required specialized proximal solvers or post-hoc pruning. Network Slimming (Liu et al., 2017) advanced the notion of using simple scalar gates to prune channels with standard training, foreshadowing D-Gating\u2019s gating design but without a formal equivalence to a target group penalty.\nSecond, a theoretical thread on positive homogeneity and factorization (Neyshabur et al., 2015; Haeffele & Vidal, 2015; Gunasekar et al., 2018) showed that L2 penalties on multiplicative factors implicitly induce nonconvex quasi-norms on the unfactorized parameters\u2014specifically, a 2/D exponent in deep linear settings (Schatten 2/D). D-Gating explicitly harnesses this mechanism at the group level: splitting each group into a primary vector and D scalar gates with L2 penalties yields an induced L2,2/D group quasi-norm. This enables the authors to prove that local minima under D-Gating coincide with those of the corresponding non-smooth structured penalty and to analyze gradient-flow convergence toward the regularized objective. Compared to stochastic L0-style gating (Louizos et al., 2018), D-Gating is deterministic and fully differentiable, offering clean optimization and theory. Together, these works directly inform D-Gating\u2019s design and its guarantees: group-sparsity goals from the structured sparsity literature, realized through the factorization-induced quasi-norm machinery from implicit-regularization theory.",
+  "analysis_timestamp": "2026-01-07T00:21:32.361996"
+}

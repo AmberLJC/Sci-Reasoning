@@ -1,0 +1,81 @@
+{
+  "prior_works": [
+    {
+      "title": "3D Gaussian Splatting for Real-Time Radiance Field Rendering",
+      "authors": [
+        "Bernhard Kerbl",
+        "Georg Kopanas",
+        "Thomas Leimk\u00fchler",
+        "George Drettakis"
+      ],
+      "year": 2023,
+      "role": "foundational representation",
+      "relationship_sentence": "4DGT builds directly on 3DGS\u2019s differentiable Gaussian rasterization and densification/pruning heuristics, extending the primitive to 4D and learning it with a network instead of per-scene optimization."
+    },
+    {
+      "title": "NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis",
+      "authors": [
+        "Ben Mildenhall",
+        "Pratul P. Srinivasan",
+        "Matthew Tancik",
+        "Jonathan T. Barron",
+        "Ravi Ramamoorthi",
+        "Ren Ng"
+      ],
+      "year": 2020,
+      "role": "core methodological precedent",
+      "relationship_sentence": "NeRF established posed-image-driven view synthesis and supervision signals that 4DGT inherits, while replacing volumetric grids with 4D Gaussians to enable fast, feed-forward reconstruction."
+    },
+    {
+      "title": "D-NeRF: Neural Radiance Fields for Dynamic Scenes",
+      "authors": [
+        "Albert Pumarola",
+        "Enric Corona",
+        "Gerard Pons-Moll",
+        "Francesc Moreno-Noguer"
+      ],
+      "year": 2021,
+      "role": "dynamic-scene modeling precedent",
+      "relationship_sentence": "4DGT adopts the core idea of unifying static and dynamic components via time-conditioned representations from D-NeRF, but instantiates it with 4D Gaussians and a transformer for scalable, feed-forward inference."
+    },
+    {
+      "title": "Nerfies: Deformable Neural Radiance Fields",
+      "authors": [
+        "Keunhong Park",
+        "Utkarsh Sinha",
+        "Jonathan T. Barron",
+        "Sofien Bouaziz",
+        "Dan B. Goldman",
+        "Steven M. Seitz",
+        "Ricardo Martin-Brualla"
+      ],
+      "year": 2021,
+      "role": "monocular dynamic reconstruction precedent",
+      "relationship_sentence": "Nerfies showed monocular, real-world posed videos can supervise nonrigid 4D reconstruction; 4DGT targets the same setting but replaces per-scene optimization with a generalizable Gaussian transformer."
+    },
+    {
+      "title": "PixelNeRF: Neural Radiance Fields from One or Few Images",
+      "authors": [
+        "Alex Yu",
+        "Vickie Ye",
+        "Matthew Tancik",
+        "Angjoo Kanazawa"
+      ],
+      "year": 2021,
+      "role": "feed-forward generalization precedent",
+      "relationship_sentence": "4DGT follows PixelNeRF\u2019s paradigm of amortized, feed-forward reconstruction across scenes, extending it from static NeRFs to a 4D Gaussian representation over long monocular video windows."
+    },
+    {
+      "title": "Neural Scene Flow Fields for Space-Time View Synthesis of Dynamic Scenes",
+      "authors": [
+        "Richard Tucker",
+        "Noah Snavely"
+      ],
+      "year": 2020,
+      "role": "temporal consistency precedent",
+      "relationship_sentence": "NSFF\u2019s explicit modeling of scene motion to maintain temporal consistency informs 4DGT\u2019s rolling-window design and its objective to predict temporally consistent 4D Gaussians across long sequences."
+    }
+  ],
+  "synthesis_narrative": "4DGT\u2019s core innovation\u2014predicting temporally consistent 4D Gaussian primitives from long monocular posed videos with a feed-forward transformer\u2014sits at the intersection of explicit Gaussian rendering, dynamic radiance fields, and generalizable inference. The representation and rendering backbone is rooted in 3D Gaussian Splatting, whose differentiable rasterization and density management (densification and pruning) provide the practical inductive bias 4DGT lifts into 4D. From the NeRF lineage, 4DGT inherits posed-image supervision and photometric rendering losses, but departs by using Gaussians to achieve real-time rendering and by amortizing inference rather than optimizing per scene. D-NeRF and Nerfies directly motivate 4DGT\u2019s unified handling of static and dynamic components from real-world monocular videos; 4DGT preserves this formulation while substituting continuous deformation fields with learnable 4D Gaussians to better scale and run in seconds. PixelNeRF contributes the architectural and training paradigm of generalizable, feed-forward reconstruction conditioned on input views\u2014extended here to video-conditioned 4D predictions and a transformer that aggregates 64-frame rolling windows. Finally, NSFF informs the need for explicit temporal coherence; 4DGT operationalizes this through windowed processing and a density control strategy that keeps space-time representations stable over long sequences. Together, these works directly shape 4DGT\u2019s design: explicit Gaussian primitives for efficient rendering, dynamic scene modeling from monocular videos, amortized transformers for scalability, and mechanisms to maintain temporal consistency over extended inputs.",
+  "analysis_timestamp": "2026-01-07T00:05:12.539433"
+}

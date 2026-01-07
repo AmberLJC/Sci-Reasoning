@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "RL^2: Fast Reinforcement Learning via Slow Reinforcement Learning",
+      "authors": "Yan Duan et al.",
+      "year": 2016,
+      "arxiv_id": "1611.02779",
+      "role": "Foundation",
+      "relationship_sentence": "RL^2 introduced the in-context RL formulation\u2014training a recurrent policy to implement a learning algorithm from experience\u2014providing the foundational problem setup that AMAGO adopts with a sequence model instead of an RNN."
+    },
+    {
+      "title": "Recurrent Experience Replay in Distributed Reinforcement Learning (R2D2)",
+      "authors": "Szymon Kapturowski et al.",
+      "year": 2019,
+      "arxiv_id": "1909.02606",
+      "role": "Extension",
+      "relationship_sentence": "R2D2 established how to train recurrent policies off-policy via sequence replay, burn-in, and unrolling\u2014mechanisms that AMAGO generalizes to long-sequence Transformers and full-rollout parallel training."
+    },
+    {
+      "title": "Stabilizing Transformers for Reinforcement Learning (GTrXL)",
+      "authors": "Emilio Parisotto et al.",
+      "year": 2020,
+      "arxiv_id": "1910.06764",
+      "role": "Inspiration",
+      "relationship_sentence": "GTrXL demonstrated that Transformer variants with gating can provide stable long-horizon credit assignment in RL, directly motivating AMAGO\u2019s use of large transformer sequence models for long-term memory."
+    },
+    {
+      "title": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+      "authors": "Lili Chen et al.",
+      "year": 2021,
+      "arxiv_id": "2106.01345",
+      "role": "Related Problem",
+      "relationship_sentence": "Decision Transformer showed that modeling full trajectories with causal Transformers is effective for decision making, inspiring AMAGO\u2019s design to process entire rollouts with a transformer while switching to an end-to-end RL training objective."
+    },
+    {
+      "title": "PEARL: Efficient Off-Policy Meta-Reinforcement Learning",
+      "authors": "Kurtland Chua Rakelly et al.",
+      "year": 2019,
+      "arxiv_id": "1903.08254",
+      "role": "Baseline",
+      "relationship_sentence": "PEARL is a primary off-policy meta-RL baseline whose amortized latent-context inference and scalability limitations on long horizons are explicitly targeted by AMAGO\u2019s in-context sequence-model approach."
+    },
+    {
+      "title": "Hindsight Experience Replay",
+      "authors": "Marcin Andrychowicz et al.",
+      "year": 2017,
+      "arxiv_id": "1707.01495",
+      "role": "Extension",
+      "relationship_sentence": "HER introduced multi-goal hindsight relabeling for sparse-reward, goal-conditioned RL, which AMAGO integrates with off-policy in-context learning to tackle exploration-heavy, sparse-reward tasks."
+    }
+  ],
+  "synthesis_narrative": "In-context reinforcement learning was crystallized by RL^2, which framed a recurrent policy as an implicit learner that adapts online from interaction histories, establishing the core meta-RL objective of learning to learn from trajectories. R2D2 then showed that recurrent agents can be trained off-policy by replaying sequence chunks with burn-in and unrolling, making sequence-based adaptation practical at scale with experience replay. GTrXL demonstrated that Transformer-style sequence models\u2014with gating and architectural tweaks\u2014stabilize long-horizon credit assignment in RL, highlighting the value of long-term memory capacity beyond standard RNNs. Decision Transformer revealed the power of modeling entire trajectories with causal Transformers for control, validating full-rollout sequence modeling as an effective representation for decision making, even if trained with supervised return conditioning. PEARL advanced off-policy meta-RL with probabilistic context encoders but exposed limitations in amortized latent inference and scalability when tasks require long-horizon memory. Hindsight Experience Replay provided a principled multi-goal relabeling strategy to learn from sparse rewards in goal-conditioned settings.\nTogether these insights exposed a clear opportunity: combine off-policy sequence training (R2D2) with high-capacity, stable long-horizon transformers (GTrXL) and full-rollout modeling (Decision Transformer) to realize RL^2-style in-context adaptation without explicit latent inference (addressing PEARL\u2019s bottlenecks), while leveraging HER to extend in-context learning to sparse, multi-goal exploration. The natural next step is a scalable, end-to-end RL agent that trains long-sequence transformers over entire rollouts in parallel via off-policy learning, unifying adaptation, memory, and goal conditioning in one framework.",
+  "target_paper": {
+    "title": "AMAGO: Scalable In-Context Reinforcement Learning for Adaptive Agents",
+    "authors": "Jake Grigsby, Linxi Fan, Yuke Zhu",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Meta-RL, Generalization, Long-Term Memory, Transformers",
+    "abstract": "We introduce AMAGO, an in-context Reinforcement Learning (RL) agent that uses sequence models to tackle the challenges of generalization, long-term memory, and meta-learning. Recent works have shown that off-policy learning can make in-context RL with recurrent policies viable. Nonetheless, these approaches require extensive tuning and limit scalability by creating key bottlenecks in agents' memory capacity, planning horizon, and model size. AMAGO revisits and redesigns the off-policy in-context approach to successfully train long-sequence Transformers over entire rollouts in parallel with end-to-end RL. Our agent is scalable and applicable to a wide range of problems, and we demonstrate its strong performance empirically in meta-RL and long-term memory domains. AMAGO's focus on sparse rewards and off-policy data also allows in-context learning to extend to goal-conditioned problems with challenging exploration. When combined with a multi-goal hindsight relabeling scheme, AMAGO can sol",
+    "openreview_id": "M6XWoEdmwf",
+    "forum_id": "M6XWoEdmwf"
+  },
+  "analysis_timestamp": "2026-01-06T06:41:55.822007"
+}

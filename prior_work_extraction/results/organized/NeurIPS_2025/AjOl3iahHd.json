@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Why Should I Trust You? Explaining the Predictions of Any Classifier",
+      "authors": "Marco Tulio Ribeiro, Sameer Singh, Carlos Guestrin",
+      "year": 2016,
+      "role": "Foundational perturbation-based local explanation method (LIME) that samples and queries the model on perturbed inputs.",
+      "relationship_sentence": "The paper shows that models are systematically miscalibrated on LIME-style neighborhood perturbations, theoretically linking this miscalibration to degraded local fidelity and motivating ReCalX to recalibrate on the perturbation distribution without altering base predictions."
+    },
+    {
+      "title": "A Unified Approach to Interpreting Model Predictions",
+      "authors": "Scott M. Lundberg, Su-In Lee",
+      "year": 2017,
+      "role": "Introduced SHAP/KernelSHAP, which estimates Shapley values via weighted perturbation samples and model probabilities on feature coalitions.",
+      "relationship_sentence": "By identifying and correcting probability miscalibration on masked coalitions, the paper explains biases in KernelSHAP attributions and demonstrates that ReCalX improves global and local SHAP faithfulness under perturbations."
+    },
+    {
+      "title": "RISE: Randomized Input Sampling for Explanation of Black-box Models",
+      "authors": "Vitali Petsiuk, Abir Das, Kate Saenko",
+      "year": 2018,
+      "role": "Black-box perturbation-based explanation framework that relies on model confidence on randomly masked inputs.",
+      "relationship_sentence": "The present work targets the unreliability of model probabilities on RISE masks, proving how miscalibration corrupts importance estimates and showing that recalibration with ReCalX enhances robustness of RISE maps."
+    },
+    {
+      "title": "On Calibration of Modern Neural Networks",
+      "authors": "Chuan Guo, Geoff Pleiss, Yu Sun, Kilian Q. Weinberger",
+      "year": 2017,
+      "role": "Established miscalibration in deep nets and proposed temperature scaling as a post-hoc recalibration that preserves predicted labels.",
+      "relationship_sentence": "ReCalX builds on the post-hoc recalibration principle that leaves argmax predictions intact, adapting calibration to the explainability-induced perturbation distribution rather than i.i.d. validation data."
+    },
+    {
+      "title": "Can You Trust Your Model's Uncertainty? Evaluating Predictive Uncertainty under Dataset Shift",
+      "authors": "Yaniv Ovadia, Emily Fertig, Jie Ren, Zachary Nado, David Sculley, Sebastian Nowozin, Joshua V. Dillon, Balaji Lakshminarayanan, Jasper Snoek",
+      "year": 2019,
+      "role": "Showed that uncertainty calibration deteriorates under distribution shift and provided evaluation protocols for shifted inputs.",
+      "relationship_sentence": "This work motivates treating explanation perturbations as a targeted distribution shift; the paper leverages this insight to measure and reduce perturbation-specific miscalibration with ReCalX."
+    },
+    {
+      "title": "A Benchmark for Interpretability Methods in Deep Neural Networks",
+      "authors": "Sara Hooker, Dumitru Erhan, Pieter-Jan Kindermans, Been Kim",
+      "year": 2019,
+      "role": "Demonstrated limitations of perturbation-based evaluation (e.g., deletion/insertion, ROAR) due to model behavior on perturbed inputs.",
+      "relationship_sentence": "The paper provides a theoretical account\u2014via calibration error\u2014of why such perturbation-based explanations can mislead, and shows recalibration yields more faithful and robust attribution outcomes."
+    },
+    {
+      "title": "Beyond Temperature Scaling: Obtaining Well-Calibrated Multiclass Probabilities with Dirichlet Calibration",
+      "authors": "Meelis Kull, Telmo M. Silva Filho, Peter Flach",
+      "year": 2019,
+      "role": "Advanced post-hoc multiclass calibration methods beyond temperature scaling.",
+      "relationship_sentence": "As a key prior on recalibration design, this work informs the space of calibration baselines against which ReCalX is positioned, while the new paper tailors recalibration to explanation-specific perturbations and preserves predictions."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core contribution\u2014linking uncertainty calibration to the reliability of perturbation-based explanations and introducing a recalibration method (ReCalX) that preserves base predictions\u2014stands at the intersection of two mature lines of work. Foundational perturbation-based explainers such as LIME and KernelSHAP, and black-box masking approaches like RISE, all depend on the model\u2019s probability responses to perturbed inputs. Subsequent benchmarking revealed that perturbation-driven evaluation can be misleading because models behave unpredictably on such inputs, hinting that the reliability of attributions hinges on how trustworthy these probabilities are. In parallel, the calibration literature established that modern neural networks are often miscalibrated and that simple post-hoc strategies like temperature scaling can correct confidence without changing predicted labels. Crucially, research on calibration under dataset shift showed that miscalibration worsens when inputs depart from the training distribution\u2014precisely the regime induced by explanation-specific perturbations. Bringing these threads together, the paper formalizes how miscalibration on perturbed inputs directly undermines both local and global explanation quality, and proposes ReCalX: a targeted recalibration procedure that preserves original predictions while reducing perturbation-specific miscalibration. By adapting post-hoc calibration principles to the distribution of explanatory perturbations and validating improvements in robustness and feature identification, the work directly builds on and synthesizes insights from perturbation-based explainability, calibration methods, and shift-robust uncertainty evaluation.",
+  "analysis_timestamp": "2026-01-07T00:05:12.529780"
+}

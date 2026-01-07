@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Distilling the Knowledge in a Neural Network",
+      "authors": "Geoffrey Hinton et al.",
+      "year": 2015,
+      "arxiv_id": "1503.02531",
+      "role": "Foundation",
+      "relationship_sentence": "Introduces the KD objective (soft targets with temperature) that both vanilla and progressive checkpoint-based distillation in this work build upon and analyze."
+    },
+    {
+      "title": "Teacher Assistant Knowledge Distillation: Bridging the Gap Between Student and Teacher",
+      "authors": "Hadi Mirzadeh et al.",
+      "year": 2020,
+      "arxiv_id": "1902.03393",
+      "role": "Gap Identification",
+      "relationship_sentence": "Shows that a stronger teacher can hurt the student and proposes intermediate \u201cassistant\u201d teachers, directly motivating the paper\u2019s investigation of why intermediate teachers\u2014specifically along a training trajectory\u2014help."
+    },
+    {
+      "title": "Born Again Neural Networks",
+      "authors": "Tommaso Furlanello et al.",
+      "year": 2018,
+      "arxiv_id": "1805.04770",
+      "role": "Inspiration",
+      "relationship_sentence": "Demonstrates sequential self-distillation where successive generations teach the next, inspiring the idea that learning from intermediate teachers can outperform learning solely from a final converged model."
+    },
+    {
+      "title": "Progressive Distillation for Fast Sampling of Diffusion Models",
+      "authors": "Tim Salimans et al.",
+      "year": 2022,
+      "arxiv_id": "2202.00512",
+      "role": "Extension",
+      "relationship_sentence": "Introduces progressive distillation by iteratively distilling from successive teacher checkpoints, which this paper generalizes beyond diffusion and analyzes mechanistically as an implicit curriculum."
+    },
+    {
+      "title": "FitNets: Hints for Thin Deep Nets",
+      "authors": "Adriana Romero et al.",
+      "year": 2015,
+      "arxiv_id": "1412.6550",
+      "role": "Related Problem",
+      "relationship_sentence": "Shows that providing intermediate supervision (via teacher feature hints) eases optimization, paralleling this paper\u2019s use of intermediate teacher states to create an easier-to-harder learning trajectory."
+    },
+    {
+      "title": "Curriculum Learning",
+      "authors": "Yoshua Bengio et al.",
+      "year": 2009,
+      "arxiv_id": "0904.3981",
+      "role": "Foundation",
+      "relationship_sentence": "Formulates the principle that ordering training from easier to harder subproblems accelerates learning, which underpins the paper\u2019s claim that teacher checkpoints induce an implicit curriculum."
+    }
+  ],
+  "synthesis_narrative": "Knowledge distillation formalizes training a student on a teacher\u2019s soft labels, with temperature smoothing shaping a loss that often eases optimization and improves generalization. Sequential variants have shown further gains: Born Again Neural Networks repeatedly train a student to become the next teacher, revealing that learning from intermediate generations can be better than directly mimicking a single final model. Addressing cases where stronger teachers hinder students, Teacher Assistant Knowledge Distillation inserts intermediate-capacity teachers to bridge the gap, empirically validating that intermediate supervision matters. In generative modeling, progressive distillation iteratively distills from successive checkpoints of a teacher to reduce sampling steps, establishing a concrete protocol for using intermediate teacher states. Complementary evidence from FitNets shows that intermediate signals (hints at internal layers) simplify optimization, suggesting a staged acquisition of capabilities. Underlying these ideas is curriculum learning: presenting easier subproblems first accelerates convergence and yields better solutions.\nTogether these works imply that intermediate guidance\u2014whether from generations, assistants, checkpoints, or feature hints\u2014can organize learning into stages, yet they leave open the mechanism: what makes intermediate teachers helpful beyond the final one? By unifying the KD objective with the progressive use of teacher checkpoints, the present work identifies a concrete source of benefit: the teacher\u2019s optimization trajectory implicitly orders subproblems from easy to hard. Formal and empirical analyses (e.g., on sparse parity) then show this trajectory confers both acceleration and sample complexity gains, and probing on PCFGs and real-world corpora confirms that the induced curriculum manifests in transformer representations.",
+  "target_paper": {
+    "title": "Progressive distillation induces an implicit curriculum",
+    "authors": "Abhishek Panigrahi, Bingbin Liu, Sadhika Malladi, Andrej Risteski, Surbhi Goel",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "oral",
+    "keywords": "knowledge distillation, feature learning, curriculum, sparse parity, PCFG, optimization, MLP, Transformer",
+    "abstract": "Knowledge distillation leverages a teacher model to improve the training of a student model. A persistent challenge is that a better teacher does not always yield a better student, to which a common mitigation is to use additional supervision from several \u201cintermediate\u201d teachers. One empirically validated variant of this principle is progressive distillation, where the student learns from successive intermediate checkpoints of the teacher. Using sparse parity as a sandbox, we identify an implicit curriculum as one mechanism through which progressive distillation accelerates the student\u2019s learning. This curriculum is available only through the intermediate checkpoints but not the final converged one, and imparts both empirical acceleration and a provable sample complexity benefit to the student. We then extend our investigation to Transformers trained on probabilistic context-free grammars (PCFGs) and real-world pre-training datasets (Wikipedia and Books). Through probing the teacher mo",
+    "openreview_id": "wPMRwmytZe",
+    "forum_id": "wPMRwmytZe"
+  },
+  "analysis_timestamp": "2026-01-06T14:19:31.898010"
+}

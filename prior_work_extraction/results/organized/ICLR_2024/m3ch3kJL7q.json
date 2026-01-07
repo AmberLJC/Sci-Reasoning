@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models",
+      "authors": "Junnan Li et al.",
+      "year": 2023,
+      "arxiv_id": "2301.12597",
+      "role": "Extension",
+      "relationship_sentence": "The paper leverages BLIP-2\u2019s frozen VLM architecture to condition and generate sentence-level prompts from the reference image, directly enabling the proposed sentence-level prompt for composed image retrieval."
+    },
+    {
+      "title": "Learning to Prompt for Vision-Language Models",
+      "authors": "Kaiyang Zhou et al.",
+      "year": 2022,
+      "arxiv_id": "2203.05557",
+      "role": "Inspiration",
+      "relationship_sentence": "CoOp\u2019s learnable textual context for CLIP inspires treating the prompt as the primary trainable component, which the current work adapts by learning a sentence-level prompt concatenated to the relative caption for CIR."
+    },
+    {
+      "title": "P-Tuning v2: Prompt Tuning Can Be Comparable to Fine-tuning Universally Across Scales and Tasks",
+      "authors": "Xiao Liu et al.",
+      "year": 2022,
+      "arxiv_id": "2110.07602",
+      "role": "Inspiration",
+      "relationship_sentence": "P-Tuning v2 demonstrates that soft prompt optimization can substitute full model fine-tuning, motivating the design where the sentence-level prompt is the main trainable component while keeping the V-L backbone largely frozen."
+    },
+    {
+      "title": "Textual Inversion: Generating Images with Pseudo Words",
+      "authors": "Rinon Gal et al.",
+      "year": 2022,
+      "arxiv_id": "2208.01618",
+      "role": "Gap Identification",
+      "relationship_sentence": "The idea of learning a pseudo-word token to represent visual concepts inspired pseudo-word-based CIR prompting, whose limitations on complex edits (e.g., object removal/attribute changes) are explicitly addressed by replacing the token with a sentence-level prompt."
+    },
+    {
+      "title": "Composing Text and Image for Image Retrieval (TIRG)",
+      "authors": "Nam Vo et al.",
+      "year": 2019,
+      "arxiv_id": "1812.07119",
+      "role": "Baseline",
+      "relationship_sentence": "TIRG established late-fusion composition of image and text features for CIR, serving as the primary late-fusion paradigm that the new method departs from by moving composition into the language side via sentence-level prompting."
+    },
+    {
+      "title": "CIRR: A Dataset for Composed Image Retrieval in the Wild",
+      "authors": "Yong Liu et al.",
+      "year": 2021,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "CIRR formalized real-world CIR evaluation emphasizing complex semantic changes, providing the benchmark setting and motivating focus on cases where pseudo-word prompts underperform."
+    }
+  ],
+  "synthesis_narrative": "BLIP-2 introduces a frozen vision-language pipeline that conditions powerful language heads on visual inputs, enabling sentence-level conditioning and generation tied to images without end-to-end fine-tuning. CoOp shows that learnable textual prompts for CLIP can be the main locus of adaptation, with prompts learned as continuous vectors prepended to class names, effectively steering vision-language models through the text channel. P-Tuning v2 generalizes soft prompt optimization, demonstrating that task performance can be recovered by training only prompts while keeping the backbone frozen, establishing a practical recipe for parameter-efficient adaptation. Textual Inversion presents pseudo-word tokens that encapsulate visual concepts, catalyzing follow-on uses of learned tokens injected into text, but also revealing brittleness when representing complex, compositional edits. TIRG crystallizes the late-fusion paradigm for CIR, combining image features with language via residual gating, shaping baselines that fuse modalities post-encoding. CIRR provides a challenging, real-world benchmark where fine-grained object and attribute changes are central, exposing failure modes of simplistic token-based prompting and late fusion.\nCollectively, these works indicate that composition can be shifted from late-fusion feature mixing to prompt-driven language conditioning, with soft prompts serving as efficient task adapters and BLIP-2 providing image-conditioned sentence scaffolds. The limitations of pseudo-word tokens on complex edits, highlighted by Textual Inversion\u2019s conceptual scope and CIRR\u2019s evaluation, foreground the need for richer, sentence-level prompts. Synthesizing these insights, the current work learns image-conditioned sentence prompts concatenated to relative captions, retaining frozen V-L backbones while overcoming late-fusion and pseudo-token shortcomings on compositional changes.",
+  "target_paper": {
+    "title": "Sentence-level Prompts Benefit Composed Image Retrieval",
+    "authors": "Yang bai, Xinxing Xu, Yong Liu, Salman Khan, Fahad Khan, Wangmeng Zuo, Rick Siow Mong Goh, Chun-Mei Feng",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Composed Image Retrieval, Vision-Language Pre-trained Models",
+    "abstract": "Composed image retrieval (CIR) is the task of retrieving specific images by using a query that involves both a reference image and a relative caption. Most existing CIR models adopt the late-fusion strategy to combine visual and language features. Besides, several approaches have also been suggested to generate a pseudo-word token from the reference image, which is further integrated into the relative caption for CIR. However, these pseudo-word-based prompting methods have limitations when target image encompasses complex changes on reference image, e.g., object removal and attribute modification. In this work, we demonstrate that learning an appropriate sentence-level prompt for the relative caption (SPRC) is sufficient for achieving effective composed image retrieval. Instead of relying on pseudo- word-based prompts, we propose to leverage pretrained V-L models, e.g., BLIP-2, to generate sentence-level prompts. By concatenating the learned sentence-level prompt with the relative capt",
+    "openreview_id": "m3ch3kJL7q",
+    "forum_id": "m3ch3kJL7q"
+  },
+  "analysis_timestamp": "2026-01-06T19:27:19.159376"
+}

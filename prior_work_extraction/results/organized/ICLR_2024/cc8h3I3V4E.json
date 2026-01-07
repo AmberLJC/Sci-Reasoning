@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Note on noncooperative convex games",
+      "authors": "H. Nikaid\u014d and K. Isoda",
+      "year": 1955,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "Introduces the Nikaid\u014d\u2013Isoda merit/gap function that vanishes at Nash equilibria, providing the deviation-based objective this paper reformulates into a Monte Carlo\u2013amenable loss."
+    },
+    {
+      "title": "A Unified Game-Theoretic Approach to Multiagent Reinforcement Learning",
+      "authors": "Marc Lanctot et al.",
+      "year": 2017,
+      "arxiv_id": "1711.00832",
+      "role": "Baseline",
+      "relationship_sentence": "PSRO minimizes exploitability/NashConv via iterative best responses, and this work directly replaces those oracle steps with stochastic gradient descent on an unbiasedly estimable NE loss while using PSRO as a primary comparison point."
+    },
+    {
+      "title": "Monte Carlo Sampling for Regret Minimization in Extensive Games",
+      "authors": "Marc Lanctot",
+      "year": 2009,
+      "arxiv_id": "",
+      "role": "Extension",
+      "relationship_sentence": "Shows that unbiased Monte Carlo estimates of deviation gains can drive convergence to equilibrium, a principle this paper transfers to normal-form games by designing a loss whose value and gradients admit unbiased sampling."
+    },
+    {
+      "title": "A* Sampling",
+      "authors": "Chris J. Maddison, Daniel Tarlow, and Tom Minka",
+      "year": 2014,
+      "arxiv_id": "",
+      "role": "Inspiration",
+      "relationship_sentence": "Formalizes the Gumbel-max trick and the identity E[max(x+Gumbel)]=log\u2211exp(x)+const, which this paper leverages to rewrite best-response max terms as expectations enabling unbiased Monte Carlo estimation."
+    },
+    {
+      "title": "Perturb-and-MAP Random Fields: Using Discrete Optimization to Perform Inference",
+      "authors": "Y. Papandreou and A. L. Yuille",
+      "year": 2011,
+      "arxiv_id": "",
+      "role": "Related Problem",
+      "relationship_sentence": "Demonstrates that adding Gumbel perturbations converts hard max operations into expectations with unbiased estimators in discrete settings, the same device used here to make deviation maxima Monte Carlo\u2013estimable."
+    },
+    {
+      "title": "X-armed Bandits",
+      "authors": "S\u00e9bastien Bubeck, R\u00e9mi Munos, Gilles Stoltz, and Csaba Szepesv\u00e1ri",
+      "year": 2011,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "Provides the theoretical framework for optimizing stochastic objectives over continuous domains with bandit feedback, underpinning the zeroth- and first-order stochastic optimization perspective used to optimize the proposed NE loss on the simplex."
+    },
+    {
+      "title": "The Complexity of Computing a Nash Equilibrium",
+      "authors": "Constantinos Daskalakis, Paul W. Goldberg, and Christos H. Papadimitriou",
+      "year": 2009,
+      "arxiv_id": "",
+      "role": "Gap Identification",
+      "relationship_sentence": "Establishes PPAD-hardness of exact NE in normal-form games, motivating the need for approximate NE objectives that this paper targets with a stochastically optimizable loss."
+    }
+  ],
+  "synthesis_narrative": "The Nikaid\u014d\u2013Isoda construction introduced a merit function whose value equals zero precisely at Nash equilibria by aggregating each player\u2019s deviation gain, thereby framing NE computation as minimizing a deviation-based gap. Monte Carlo Counterfactual Regret Minimization later showed in extensive-form games that unbiased sampling of deviation gains is sufficient to drive convergence, providing a template for equilibrium search via stochastic estimates. In empirical game settings, PSRO operationalized exploitability minimization by iteratively computing best responses and solving reduced games, making the deviation gap a practical objective but tying progress to costly oracle steps. Independently, perturb-and-map methods and A* Sampling formalized the Gumbel-max trick: adding Gumbel noise converts a max over discrete alternatives into an expectation equal to a log-sum-exp, which can be unbiasedly estimated with simple sampling. Finally, x-armed bandit theory supplied convergence tools for optimizing unknown stochastic objectives over continuous domains, such as products of simplices, using only noisy function evaluations.\nCollectively, these ideas exposed a clear opportunity: pair the deviation-gap objective that characterizes NE with a perturbation identity that turns its inner max into an expectation, so the entire NE loss becomes unbiasedly estimable from samples. With that, standard stochastic optimization\u2014supported by bandit-style analysis when gradients are noisy\u2014can directly minimize an NE-targeting loss, eliminating oracle best responses while retaining convergence guarantees. This synthesis naturally yields scalable SGD-based procedures that outperform iterative best-response baselines by optimizing a principled, Monte Carlo\u2013friendly equilibrium objective.",
+  "target_paper": {
+    "title": "Approximating Nash Equilibria in Normal-Form Games via Stochastic Optimization",
+    "authors": "Ian Gemp, Luke Marris, Georgios Piliouras",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "oral",
+    "keywords": "game theory, stochastic optimization, nash equilbrium, normal-form game, x-armed bandits",
+    "abstract": "We propose the first loss function for approximate Nash equilibria of normal-form games that is amenable to unbiased Monte Carlo estimation. This construction allows us to deploy standard non-convex stochastic optimization techniques for approximating Nash equilibria, resulting in novel algorithms  with provable guarantees. We complement our theoretical analysis with experiments demonstrating that stochastic gradient descent can outperform previous state-of-the-art approaches.",
+    "openreview_id": "cc8h3I3V4E",
+    "forum_id": "cc8h3I3V4E"
+  },
+  "analysis_timestamp": "2026-01-06T15:44:03.956230"
+}

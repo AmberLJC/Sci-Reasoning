@@ -1,0 +1,57 @@
+{
+  "prior_works": [
+    {
+      "title": "Learning to summarize with human feedback",
+      "authors": "Stiennon et al.",
+      "year": 2020,
+      "arxiv_id": "2009.01325",
+      "role": "Foundation",
+      "relationship_sentence": "This work established the preference-based RLHF formulation (pairwise comparisons trained via a reward model and optimized with KL-regularized policy updates) that BFPO explicitly re-parameterizes into a supervised objective across two factors."
+    },
+    {
+      "title": "Training language models to follow instructions with human feedback",
+      "authors": "Ouyang et al.",
+      "year": 2022,
+      "arxiv_id": "2203.02155",
+      "role": "Baseline",
+      "relationship_sentence": "As the canonical RLHF baseline (KL-regularized PPO on a learned reward), this paper\u2019s objective is the joint helpfulness/safety RL formulation that BFPO replaces with a single supervised objective via a labeling function."
+    },
+    {
+      "title": "Training a Helpful and Harmless Assistant with Reinforcement Learning from Human Feedback",
+      "authors": "Bai et al.",
+      "year": 2022,
+      "arxiv_id": "",
+      "role": "Gap Identification",
+      "relationship_sentence": "This paper explicitly surfaced the tension between helpfulness and harmlessness and the high cost of jointly optimizing them with RLHF, a limitation BFPO targets by unifying them in a low-cost supervised preference objective."
+    },
+    {
+      "title": "Constitutional AI: Harmlessness from AI Feedback",
+      "authors": "Bai et al.",
+      "year": 2022,
+      "arxiv_id": "2212.08073",
+      "role": "Related Problem",
+      "relationship_sentence": "By showing how to balance harmlessness and helpfulness via AI feedback and principles, this work motivates BFPO\u2019s need to encode multi-faceted safety-helpfulness tradeoffs directly in a learning objective rather than separate multi-stage procedures."
+    },
+    {
+      "title": "Direct Preference Optimization: Your Language Model is Secretly a Reward Model",
+      "authors": "Rafailov et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Extension",
+      "relationship_sentence": "DPO\u2019s key idea of reparameterizing KL-regularized RLHF into a supervised preference loss directly inspires BFPO, which extends this paradigm from single-objective pairwise preferences to a bi-factor, globally ranked labeling objective."
+    }
+  ],
+  "synthesis_narrative": "Preference-based alignment first took shape in work showing that pairwise human comparisons could train a reward model and, via KL-regularized policy optimization, steer generation toward preferred behavior; the formulation crystallized the now-standard RLHF pipeline and its reliance on comparisons and a reference policy. Instruction-following alignment then scaled this recipe to general-purpose language models, codifying KL-regularized RLHF as the de facto baseline objective for helpful behavior while introducing practical recipes for preference collection and policy optimization. Subsequent alignment efforts focused not only on being useful but also on being harmless, documenting that optimizing both properties with RLHF is costly and can create conflicts when refusal and helpfulness interact. A complementary strand demonstrated that principles and AI feedback can reliably elicit harmlessness without excessive human labor, highlighting the importance of explicitly encoding safety-helpfulness tradeoffs. In parallel, direct preference optimization showed that the KL-regularized RLHF objective can be reparameterized as a supervised preference loss, avoiding explicit reward modeling and RL while retaining the same target solution. Together, these works exposed a gap: multi-objective (safety plus helpfulness) alignment remained expensive and conflict-prone under RLHF, while supervised preference methods were largely single-objective and pairwise. The natural next step is to fuse the supervised reparameterization idea with a multi-factor preference formulation, using a labeling function to capture global rankings across safety and helpfulness and optimize them jointly without RL\u2014precisely the niche BFPO fills.",
+  "target_paper": {
+    "title": "Bi-Factorial Preference Optimization: Balancing Safety-Helpfulness in Language Models",
+    "authors": "Wenxuan Zhang, Philip Torr, Mohamed Elhoseiny, Adel Bibi",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "Large Language Models, RLHF, Safety",
+    "abstract": "Fine-tuning large language models (LLMs)  on human preferences, typically through reinforcement learning from human feedback (RLHF), has proven successful in enhancing their capabilities.  However, ensuring the safety of LLMs during fine-tuning remains a critical concern, and mitigating the potential conflicts in  safety and helpfulness  is costly in RLHF.  To address this issue, we propose a supervised learning framework called Bi-Factorial Preference Optimization (BFPO), which re-parameterizes a joint RLHF objective of both safety and helpfulness into a single supervised learning objective. In the supervised optimization, a labeling function is used to capture global preferences ranking to balance both safety and helpfulness. To  evaluate BFPO, we  develop a benchmark  including comprehensive discriminative and generative tasks for helpfulness and harmlessness. The results indicate that our method significantly outperforms existing approaches in both safety and helpfulness. Moreover,",
+    "openreview_id": "GjM61KRiTG",
+    "forum_id": "GjM61KRiTG"
+  },
+  "analysis_timestamp": "2026-01-06T19:42:41.348454"
+}

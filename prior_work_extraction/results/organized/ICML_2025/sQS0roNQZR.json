@@ -1,0 +1,81 @@
+{
+  "prior_works": [
+    {
+      "title": "Weighted Finite-State Transducers in Speech Recognition",
+      "authors": [
+        "Mehryar Mohri",
+        "Fernando Pereira",
+        "Michael Riley"
+      ],
+      "year": 2002,
+      "role": "Algorithmic foundation: composition and marginalization with weighted automata",
+      "relationship_sentence": "The paper\u2019s exact conversion of token-level probabilities into character-level distributions follows the WFST paradigm of composing a language model with a lexicon/transducer and summing over all alignments, as formalized by Mohri\u2013Pereira\u2013Riley."
+    },
+    {
+      "title": "OpenFst: A General and Efficient Weighted Finite-State Transducer Library",
+      "authors": [
+        "Cyril Allauzen",
+        "Michael Riley",
+        "Johan Schalkwyk",
+        "Wojciech Skut",
+        "Mehryar Mohri"
+      ],
+      "year": 2007,
+      "role": "Practical machinery for WFST construction, composition, and pruning",
+      "relationship_sentence": "OpenFst popularized scalable on-the-fly composition and pruning strategies that directly inspire the paper\u2019s practical exact/approximate procedures for mapping token sequences to character strings without pre-expanding massive graphs."
+    },
+    {
+      "title": "Neural Machine Translation of Rare Words with Subword Units",
+      "authors": [
+        "Rico Sennrich",
+        "Barry Haddow",
+        "Alexandra Birch"
+      ],
+      "year": 2016,
+      "role": "Foundational definition of BPE tokenization and segmentation ambiguity",
+      "relationship_sentence": "By introducing BPE and its many-to-one mapping from characters to tokens, this work creates the segmentation ambiguity the paper explicitly marginalizes over to obtain true character-level string probabilities."
+    },
+    {
+      "title": "SentencePiece: A Simple and Language Independent Subword Tokenizer and Detokenizer for Neural Text Processing",
+      "authors": [
+        "Taku Kudo",
+        "John Richardson"
+      ],
+      "year": 2018,
+      "role": "Tokenizer formalization (Unigram LM/ BPE) with deterministic detokenization",
+      "relationship_sentence": "SentencePiece\u2019s formal, detokenizer-defined mapping from token sequences to character strings provides the deterministic transduction the paper exploits to push forward token-level distributions to characters."
+    },
+    {
+      "title": "Subword Regularization: Improving Neural Network Translation Models with Multiple Subword Candidates",
+      "authors": [
+        "Taku Kudo"
+      ],
+      "year": 2018,
+      "role": "Conceptual template for summing over multiple segmentations",
+      "relationship_sentence": "This work\u2019s explicit marginalization over alternative tokenizations of the same character string directly motivates the paper\u2019s summation over all tokenizations consistent with a character prefix when computing P(chars)."
+    },
+    {
+      "title": "Connectionist Temporal Classification: Labelling Unsegmented Sequence Data with Recurrent Neural Networks",
+      "authors": [
+        "Alex Graves",
+        "Santiago Fern\u00e1ndez",
+        "Faustino Gomez",
+        "J\u00fcrgen Schmidhuber"
+      ],
+      "year": 2006,
+      "role": "Dynamic-programming marginalization over latent alignments",
+      "relationship_sentence": "CTC provides the key algorithmic pattern\u2014forward-style summation over latent segmentations\u2014to efficiently aggregate token-level paths into character-level probabilities in the paper\u2019s exact and approximate algorithms."
+    },
+    {
+      "title": "Pynini: A Python Library for Weighted Finite-State Grammar Compilation",
+      "authors": [
+        "Kyle Gorman"
+      ],
+      "year": 2021,
+      "role": "Engineering enabler for compiling tokenizer and detokenizer as WFSAs/WFSTs",
+      "relationship_sentence": "Pynini operationalizes the WFST approach for text, enabling construction of token-to-character transducers and on-the-fly composition/pruning patterns that the paper\u2019s methods conceptually rely on."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core contribution\u2014turning token-level language models into character-level distributions via exact and approximate algorithms\u2014synthesizes two mature lines of research: subword tokenization and weighted finite-state methods for marginalization. BPE (Sennrich et al., 2016) and SentencePiece (Kudo & Richardson, 2018) establish deterministic mappings from characters to tokens that are many-to-one, creating segmentation ambiguity at the character level. Subword Regularization (Kudo, 2018) crystallizes the idea that correct string likelihoods require summing over all tokenizations consistent with a given character sequence, directly motivating the paper\u2019s summation over latent segmentations.\n\nOn the algorithmic side, Mohri\u2013Pereira\u2013Riley (2002) provide the formal WFST framework for composing a language model with a lexicon/transducer and performing forward-style marginalization over all paths. This perspective naturally treats the tokenizer/detokenizer as a transducer from token sequences to characters, allowing a pushforward of the token-level distribution onto character strings. Practical advances from OpenFst (Allauzen et al., 2007) and Pynini (Gorman, 2021) inform efficient, on-the-fly composition and pruning strategies crucial for scaling exact computation and for devising fast approximations.\n\nFinally, the dynamic-programming template of CTC (Graves et al., 2006)\u2014summing probabilities over exponentially many latent alignments\u2014offers a closely related computational pattern for aggregating token-level paths into character-level probabilities. Together, these works yield both the theoretical underpinning (composition and marginalization over segmentations) and the practical blueprint (deterministic transducers, on-the-fly composition, and pruning) for the paper\u2019s exact and approximate algorithms.",
+  "analysis_timestamp": "2026-01-07T00:04:09.137917"
+}

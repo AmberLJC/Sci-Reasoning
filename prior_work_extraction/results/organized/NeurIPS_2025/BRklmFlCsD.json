@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Neural Combinatorial Optimization with Reinforcement Learning",
+      "authors": "Irwan Bello, Hieu Pham, Quoc V. Le, Mohammad Norouzi, Samy Bengio",
+      "year": 2016,
+      "role": "Foundational RL + pointer paradigm for routing",
+      "relationship_sentence": "UniteFormer inherits the policy-gradient (REINFORCE) training of a pointer-style policy introduced here and adapts it to a unified node/edge training regime by sampling input modalities across batches."
+    },
+    {
+      "title": "Attention, Learn to Solve Routing Problems!",
+      "authors": "Wouter Kool, Herke van Hoof, Max Welling",
+      "year": 2019,
+      "role": "Transformer-based neural solver for TSP/CVRP using node inputs",
+      "relationship_sentence": "UniteFormer extends the attention-based encoder\u2013decoder and training setup of the Attention Model to support mixed node\u2013edge inputs, addressing the node-only limitation highlighted by Kool et al."
+    },
+    {
+      "title": "POMO: Policy Optimization with Multiple Optima",
+      "authors": "Youngjoo Kwon et al.",
+      "year": 2020,
+      "role": "Parallel decoding/inference for routing with REINFORCE",
+      "relationship_sentence": "UniteFormer's parallel decoder with query mapping echoes POMO\u2019s insight that parallel rollouts/decoding improve exploration and solution quality, adapting the idea within a transformer decoder tailored to mixed modalities."
+    },
+    {
+      "title": "Learning Combinatorial Optimization Algorithms over Graphs",
+      "authors": "Hanjun Dai, Elias B. Khalil, Yuyu Zhang, Bistra Dilkina, Le Song",
+      "year": 2017,
+      "role": "GCN-based policies for combinatorial optimization",
+      "relationship_sentence": "The mixed encoder in UniteFormer that integrates GCN-style message passing with attention is motivated by this line of work showing the effectiveness of graph convolution for CO problems."
+    },
+    {
+      "title": "Do Transformers Really Perform Bad for Graph Representation? (Graphormer)",
+      "authors": "Chengxuan Ying, Tianle Cai, Shengjie Luo, Shuxin Zheng, Guolin Ke, Di He, Yanming Shen, Tie-Yan Liu",
+      "year": 2021,
+      "role": "Graph Transformer with edge/structural encodings",
+      "relationship_sentence": "UniteFormer\u2019s cross-modal interactions between nodes and edges in attention are informed by Graphormer\u2019s treatment of edge/relational information within transformer attention."
+    },
+    {
+      "title": "Recipe for a General, Powerful, Scalable Graph Transformer (GPS)",
+      "authors": "Luk\u00e1\u0161 Ramp\u00e1\u0161ek et al.",
+      "year": 2022,
+      "role": "Hybrid architecture combining MPNN (GCN) with global attention",
+      "relationship_sentence": "UniteFormer\u2019s mixed encoder directly follows the GPS recipe of fusing local message passing with global attention to capture complementary inductive biases, here specialized to node\u2013edge modality fusion for VRP."
+    },
+    {
+      "title": "Learning TSP with Graph Neural Networks",
+      "authors": "Chaitanya K. Joshi, Thomas Laurent, Xavier Bresson",
+      "year": 2019,
+      "role": "Edge-centric prediction of tours from distance matrices",
+      "relationship_sentence": "By showing that TSP can be solved from edge-weight information alone via GNNs, this work motivates UniteFormer\u2019s support for edge-only inputs and the need to unify node and edge modalities in a single model."
+    }
+  ],
+  "synthesis_narrative": "UniteFormer\u2019s core contribution\u2014one model that natively handles node-only, edge-only, and hybrid inputs via a mixed GCN\u2013attention encoder and a parallel transformer decoder\u2014emerges from two converging threads in neural combinatorial optimization. The first thread established attention/pointer policies trained with REINFORCE for routing problems: Bello et al. introduced the policy-gradient pointer paradigm, later scaled and refined by Kool et al. with a transformer encoder\u2013decoder for TSP/CVRP. These models, while effective, largely rely on node-centric inputs, revealing a modality gap. POMO then demonstrated that parallelized decoding/rollouts substantially improve search and learning stability in routing, a principle UniteFormer adapts through a parallel decoder with query mapping.\nThe second thread concerns graph representation learning that elevates both node and edge signals. Dai et al. showed GCN-based policies are strong for CO, while Graphormer made transformers explicitly edge/structure-aware, and GPS provided a clear recipe to fuse local message passing with global attention. In parallel, edge-centric TSP solvers (e.g., Joshi et al.) proved that high-quality solutions can arise from edge-weight\u2013only inputs, underscoring the value of an edge modality. UniteFormer synthesizes these influences: it blends GCN and attention to model cross-modal node\u2013edge interactions, leverages parallel decoding for efficiency and robustness, and trains with REINFORCE while randomly sampling input types to unify modalities within a single policy that generalizes across benchmarks.",
+  "analysis_timestamp": "2026-01-06T23:42:48.157440"
+}

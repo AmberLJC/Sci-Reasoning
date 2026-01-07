@@ -1,0 +1,81 @@
+{
+  "prior_works": [
+    {
+      "title": "Blockwise Parallel Decoding for Deep Autoregressive Models",
+      "authors": [
+        "Mitchell Stern",
+        "Noam Shazeer",
+        "Jakob Uszkoreit"
+      ],
+      "year": 2018,
+      "role": "Foundational multi-token accept/verify paradigm",
+      "relationship_sentence": "Established the draft-then-verify, blockwise acceptance framework that SuffixDecoding extends to much longer, adaptively sized blocks using cached suffixes rather than only model proposals."
+    },
+    {
+      "title": "Accelerating Transformer Inference via Speculative Decoding",
+      "authors": [
+        "Y. Chen",
+        "R. Dohan",
+        "N. Shazeer"
+      ],
+      "year": 2023,
+      "role": "Core speculative decoding method",
+      "relationship_sentence": "Provided the mainstream draft-and-verify speculative decoding algorithm SuffixDecoding builds upon, replacing a separate draft model with suffix-based proposals and adapting speculation length to empirical acceptance."
+    },
+    {
+      "title": "On-line Construction of Suffix Trees",
+      "authors": [
+        "Esko Ukkonen"
+      ],
+      "year": 1995,
+      "role": "Key data structure enabling long-sequence caching",
+      "relationship_sentence": "Introduced the linear-time online suffix tree algorithm that underpins SuffixDecoding\u2019s efficient caching and lookup of long repeated token sequences across prompts and outputs."
+    },
+    {
+      "title": "Suffix Arrays: A New Method for On-Line String Searches",
+      "authors": [
+        "Udi Manber",
+        "Gene Myers"
+      ],
+      "year": 1990,
+      "role": "Alternative compact index for fast substring search",
+      "relationship_sentence": "Provided a lightweight indexing structure for fast substring queries that informs SuffixDecoding\u2019s design choices and analysis for scalable suffix caching across large corpora of model traces."
+    },
+    {
+      "title": "A Cache-Based Natural Language Model for Speech Recognition",
+      "authors": [
+        "Roland Kuhn",
+        "Renato De Mori"
+      ],
+      "year": 1990,
+      "role": "Evidence that recent context makes next tokens highly predictable",
+      "relationship_sentence": "Demonstrated the predictability gains from caching recent text, directly motivating SuffixDecoding\u2019s exploitation of repetitive contexts to drive longer, high-acceptance speculative blocks."
+    },
+    {
+      "title": "ReAct: Synergizing Reasoning and Acting in Language Models",
+      "authors": [
+        "Shunyu Yao",
+        "Jeffrey Zhao",
+        "Dian Yu",
+        "Karthik Narasimhan"
+      ],
+      "year": 2023,
+      "role": "Agentic workload pattern motivating repetition-aware decoding",
+      "relationship_sentence": "Showed that tool-using/agentic loops repeatedly invoke similar prompts and trajectories, a workload characteristic SuffixDecoding targets with suffix caches to maximize speculation length."
+    },
+    {
+      "title": "Self-Refine: Iterative Refinement with Self-Feedback",
+      "authors": [
+        "Aman Madaan",
+        "Shuyan Zhou",
+        "Uri Alon",
+        "Yiming Yang"
+      ],
+      "year": 2023,
+      "role": "Iterative self-improvement loop creating predictable sequences",
+      "relationship_sentence": "Highlighted iterative refinement patterns that yield long, repeated substrings across turns, directly motivating SuffixDecoding\u2019s cross-turn suffix caching and acceptance-aware adaptive speculation."
+    }
+  ],
+  "synthesis_narrative": "SuffixDecoding\u2019s key contribution\u2014extreme, adaptive speculative decoding powered by long-sequence suffix caches\u2014emerges at the intersection of draft-and-verify generation and classic string-index data structures. The immediate algorithmic lineage traces to blockwise, accept/verify generation (Stern et al., 2018) and modern speculative decoding (Chen, Dohan, and Shazeer, 2023), which formalized proposing multiple tokens and verifying them with the target model to retain exact sampling. SuffixDecoding inherits this verify-to-guarantee-correctness principle but changes what generates proposals and how many to propose: instead of relying solely on a learned draft model, it mines repeated substrings and proposes far longer blocks when acceptance likelihood is high, shrinking when it is low.\n\nEnabling this shift is the adoption of efficient substring indexes\u2014Ukkonen\u2019s on-line suffix trees and the compact suffix arrays of Manber and Myers\u2014allowing fast, memory-conscious caching and retrieval of long token sequences across prompts and outputs. Classic cache language modeling (Kuhn and De Mori, 1990) provides the statistical rationale: recent, repeated context sharply increases next-token predictability, which SuffixDecoding converts into longer speculative spans with high acceptance.\n\nFinally, agentic application patterns such as ReAct-style tool use and Self-Refine\u2019s iterative self-improvement reveal workloads rich in repeated prompts and outputs. These patterns directly motivate SuffixDecoding\u2019s design: cross-turn suffix caching to surface long predictable continuations and an acceptance-aware controller that aggressively stretches speculative length precisely when these agent loops make acceptance most likely.",
+  "analysis_timestamp": "2026-01-07T00:21:32.297458"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Training language models to follow instructions with human feedback",
+      "authors": "Long Ouyang et al.",
+      "year": 2022,
+      "role": "Established response-level RLHF for LLMs using PPO and a reward model",
+      "relationship_sentence": "DAPO directly targets the sparse, outcome-level reward and high-variance policy updates exposed by InstructGPT\u2019s PPO-based RLHF by replacing response-level signals with step-level advantage signals from a critic."
+    },
+    {
+      "title": "Direct Preference Optimization: Your Language Model is Secretly a Reward Model",
+      "authors": "Rafael Rafailov et al.",
+      "year": 2023,
+      "role": "Introduced offline, reward-model-free preference optimization at the response level",
+      "relationship_sentence": "DAPO contrasts with DPO\u2019s uniform response-level updates by providing step-level, critic-derived advantages, retaining the offline-training benefits while addressing DPO\u2019s coarse credit assignment."
+    },
+    {
+      "title": "Deep Reinforcement Learning from Human Preferences",
+      "authors": "Paul F. Christiano et al.",
+      "year": 2017,
+      "role": "Pioneered training policies from human preference data via reward modeling",
+      "relationship_sentence": "DAPO inherits the preference-driven alignment ethos but bypasses explicit response-level reward learning by using a critic to produce dense, step-wise advantages for policy improvement."
+    },
+    {
+      "title": "High-Dimensional Continuous Control Using Generalized Advantage Estimation",
+      "authors": "John Schulman et al.",
+      "year": 2016,
+      "role": "Provided low-variance advantage estimation for actor-critic methods",
+      "relationship_sentence": "DAPO\u2019s direct advantage-based updates and theoretical analysis build on the principle of advantage estimation, adapting it to step-level credit assignment for language reasoning."
+    },
+    {
+      "title": "Accelerating Online Reinforcement Learning with Offline Datasets (AWAC)",
+      "authors": "Ashvin Nair et al.",
+      "year": 2020,
+      "role": "Introduced advantage-weighted policy updates for offline/bootstrapped RL with a decoupled critic",
+      "relationship_sentence": "DAPO\u2019s offline, advantage-weighted policy optimization with an independently trained critic operationalizes AWAC\u2019s insight in the LLM setting and specializes it to step-level reasoning."
+    },
+    {
+      "title": "Offline Reinforcement Learning with Implicit Q-Learning",
+      "authors": "Ilya Kostrikov, Ashvin Nair, Sergey Levine",
+      "year": 2021,
+      "role": "Stabilized offline RL by decoupling policy improvement from explicit behavior cloning via value-based targets",
+      "relationship_sentence": "DAPO\u2019s independent actor-critic training and conservative step-level updates echo IQL\u2019s stability principles for offline learning, but tailored to token/step-level advantage extraction."
+    },
+    {
+      "title": "Let\u2019s Verify Step by Step",
+      "authors": "Shane Uesato et al.",
+      "year": 2022,
+      "role": "Demonstrated process supervision and step-level verification for reasoning tasks",
+      "relationship_sentence": "DAPO extends the idea of step-level feedback by using a critic to deliver dense step-wise advantages, enabling fine-grained credit assignment beyond outcome-only rewards."
+    }
+  ],
+  "synthesis_narrative": "DAPO emerges at the intersection of RLHF for LLMs, offline advantage-weighted RL, and process-level supervision. InstructGPT established the dominant response-level RLHF paradigm using PPO and a reward model, but also revealed practical limitations: sparse outcome rewards and high-variance updates that entangle actor and critic training. DPO advanced offline alignment by eliminating explicit reward models, yet its response-level objective still assigns uniform credit across reasoning steps, limiting fine-grained learning.\n\nDAPO addresses these issues by importing two key ideas from offline RL. First, advantage-weighted policy improvement (AWAC) and stable value-learning decoupling (IQL) demonstrate that an independently trained critic can guide an offline policy via advantages without on-policy rollouts. Second, generalized advantage estimation provides the theoretical footing for low-variance, advantage-centric updates. DAPO adapts these principles to language reasoning by computing step-level (rather than trajectory-level) advantages, thereby converting sparse outcome signals into dense step-wise guidance, and by training the actor and critic independently to reduce coupling-induced instability.\n\nFinally, insights from process supervision and step-level verification (e.g., Let\u2019s Verify Step by Step) motivate the move from outcome-only feedback to step-level signals. DAPO operationalizes this in an offline regimen: a critic supplies step-wise advantages that directly shape the actor\u2019s reasoning policy, unifying preference-driven alignment with advantage-based offline RL. The result is a theoretically grounded, step-level optimization framework that overcomes coarse credit assignment and variance issues inherent in response-level methods like PPO-RLHF and DPO.",
+  "analysis_timestamp": "2026-01-07T00:21:33.146451"
+}

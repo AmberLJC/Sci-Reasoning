@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "A Simple Framework for Contrastive Learning of Visual Representations",
+      "authors": "Ting Chen et al.",
+      "year": 2020,
+      "arxiv_id": "2002.05709",
+      "role": "Foundation",
+      "relationship_sentence": "This work formalized the joint-embedding instance-discrimination pretext task and established linear evaluation as the standard proxy, providing the surrogate class structure (instance IDs and augmentations) on which LiDAR constructs its LDA-based discriminative rank."
+    },
+    {
+      "title": "Bootstrap Your Own Latent: A New Approach to Self-Supervised Learning",
+      "authors": "Jean-Bastien Grill et al.",
+      "year": 2020,
+      "arxiv_id": "2006.07733",
+      "role": "Foundation",
+      "relationship_sentence": "BYOL showed that joint-embedding methods can avoid collapse without negatives, motivating the need for reliable collapse/quality diagnostics across JE variants that LiDAR targets and evaluates."
+    },
+    {
+      "title": "Barlow Twins: Self-Supervised Learning via Redundancy Reduction",
+      "authors": "Jure Zbontar et al.",
+      "year": 2021,
+      "arxiv_id": "2103.03230",
+      "role": "Gap Identification",
+      "relationship_sentence": "By explicitly maximizing feature covariance rank via decorrelation, this paper popularized rank/covariance-based signals whose inability to distinguish informative from uninformative dimensions is precisely the shortcoming LiDAR addresses."
+    },
+    {
+      "title": "VICReg: Variance-Invariance-Covariance Regularization for Self-Supervised Learning",
+      "authors": "Adrien Bardes et al.",
+      "year": 2022,
+      "arxiv_id": "2105.04906",
+      "role": "Gap Identification",
+      "relationship_sentence": "VICReg\u2019s variance/covariance constraints further cemented covariance-rank as a monitoring heuristic, and its limitations in predicting linear-probe performance directly motivate LiDAR\u2019s discriminative (LDA) notion of rank."
+    },
+    {
+      "title": "Whitening for Self-Supervised Representation Learning",
+      "authors": "Artur Ermolov et al.",
+      "year": 2021,
+      "arxiv_id": "unknown",
+      "role": "Gap Identification",
+      "relationship_sentence": "This work showed that enforcing whitened, full-rank features can still yield representations whose dimensionality says little about discriminative content, highlighting why a covariance-rank metric alone is insufficient and motivating LiDAR\u2019s LDA-based criterion."
+    },
+    {
+      "title": "LogME: Practical Assessment of Pretrained Models for Transfer Learning",
+      "authors": "Kaichao You et al.",
+      "year": 2021,
+      "arxiv_id": "unknown",
+      "role": "Related Problem",
+      "relationship_sentence": "LogME predicts downstream performance via marginal evidence but requires labeled target data, a key limitation that LiDAR overcomes by exploiting the JE surrogate task to compute a label-free discriminative rank."
+    },
+    {
+      "title": "The use of multiple measurements in taxonomic problems (Fisher\u2019s Linear Discriminant Analysis)",
+      "authors": "R. A. Fisher",
+      "year": 1936,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "LiDAR directly builds on LDA\u2019s between-class vs. within-class scatter formulation, using the LDA matrix associated with the JE surrogate labels and ranking its discriminative directions as the core metric."
+    }
+  ],
+  "synthesis_narrative": "Contrastive joint-embedding methods established instance discrimination as a pretext task where each image instance, under augmentations, forms the basis for representation learning, with linear probing as the standard readout to assess learned features; SimCLR crystallized this setup and evaluation practice. BYOL demonstrated that negative-free joint-embedding can avoid trivial collapse, highlighting both the diversity of JE training dynamics and the need for principled, training-time diagnostics of representation quality. Redundancy-reduction approaches like Barlow Twins promoted decorrelation and implicitly high covariance rank as desirable signals, while VICReg codified variance and covariance objectives that further elevated covariance-rank heuristics as indicators of health. Whitening-based SSL showed that enforcing full-rank, decorrelated features is feasible yet does not guarantee informative dimensions for discrimination, underscoring a mismatch between covariance rank and linear separability. In parallel, transferability estimators such as LogME predicted downstream performance via marginal evidence but relied on labeled target samples, limiting their applicability during label-free SSL pretraining. Together these works revealed a gap: prevailing rank/covariance signals are insensitive to whether dimensions are discriminative for the task at hand, and label-dependent transfer metrics are unusable during JE training. The natural synthesis is to measure rank through discriminative directions defined by between-class versus within-class scatter. By instantiating Fisher\u2019s LDA on the surrogate labels intrinsic to JE tasks, one can quantify the number of informative dimensions relevant to solving the SSL objective, yielding a label-free, training-time metric that better tracks linear probe performance.",
+  "target_paper": {
+    "title": "LiDAR: Sensing Linear Probing Performance in Joint Embedding SSL Architectures",
+    "authors": "Vimal Thilak, Chen Huang, Omid Saremi, Laurent Dinh, Hanlin Goh, Preetum Nakkiran, Joshua M. Susskind, Etai Littwin",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Self Supervised Learning, Joint Embedding Architectures",
+    "abstract": "Joint embedding (JE) architectures have emerged as a promising avenue for ac-\nquiring transferable data representations. A key obstacle to using JE methods,\nhowever, is the inherent challenge of evaluating learned representations without\naccess to a downstream task, and an annotated dataset. Without efficient and re-\nliable evaluation, it is difficult to iterate on architectural and training choices for\nJE methods. In this paper, we introduce LiDAR (Linear Discriminant Analysis\nRank), a metric designed to measure the quality of representations within JE archi-\ntectures. Our metric addresses several shortcomings of recent approaches based\non feature covariance rank by discriminating between informative and uninforma-\ntive features. In essence, LiDAR quantifies the rank of the Linear Discriminant\nAnalysis (LDA) matrix associated with the surrogate SSL task\u2014a measure that\nintuitively captures the information content as it pertains to solving the SSL task.\nWe empirically demonstrate that L",
+    "openreview_id": "f3g5XpL9Kb",
+    "forum_id": "f3g5XpL9Kb"
+  },
+  "analysis_timestamp": "2026-01-06T06:53:35.906547"
+}

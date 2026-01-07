@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Divergence measures based on the Shannon entropy",
+      "authors": "Jianhua Lin",
+      "year": 1991,
+      "role": "foundational theory",
+      "relationship_sentence": "Introduces the Jensen\u2013Shannon divergence and its skewed/weighted form, providing the exact \u03b1-skew JS objective that SMT proposes to minimize via score estimation on real\u2013fake mixtures."
+    },
+    {
+      "title": "Generative Adversarial Nets",
+      "authors": "Ian Goodfellow et al.",
+      "year": 2014,
+      "role": "method precursor (divergence-minimization in generative modeling)",
+      "relationship_sentence": "Frames learning generators as minimizing a JS-style divergence between data and model; SMT retains this divergence-centric view but replaces adversarial classification with score estimation on mixtures of real and generated samples."
+    },
+    {
+      "title": "f-GAN: Training Generative Neural Samplers using Variational Divergence Minimization",
+      "authors": "Sebastian Nowozin, Botond Cseke, Ryota Tomioka",
+      "year": 2016,
+      "role": "theoretical framework (divergence objectives)",
+      "relationship_sentence": "Generalizes GAN training to f-divergences (including \u03b1-skew JS), supplying formal grounding for divergence choices; SMT complements this by offering a non-adversarial, score-based surrogate for minimizing \u03b1-skew JS."
+    },
+    {
+      "title": "A Connection Between Score Matching and Denoising Autoencoders",
+      "authors": "Pascal Vincent",
+      "year": 2011,
+      "role": "foundational theory (denoising score matching)",
+      "relationship_sentence": "Establishes that the score of a smoothed distribution can be learned via denoising, directly inspiring SMT\u2019s strategy to learn the score of (noise-corrupted) mixtures of real and fake distributions."
+    },
+    {
+      "title": "Generative Modeling by Estimating Gradients of the Data Distribution",
+      "authors": "Yang Song, Stefano Ermon",
+      "year": 2019,
+      "role": "method precursor (multi-scale score estimation)",
+      "relationship_sentence": "Introduces noise-conditional score networks and multi-level denoising score matching, which SMT leverages by estimating scores across multiple noise levels, now on real\u2013fake mixture distributions."
+    },
+    {
+      "title": "Consistency Models",
+      "authors": "Yang Song et al.",
+      "year": 2023,
+      "role": "method precursor (one-step generation and distillation)",
+      "relationship_sentence": "Proposes one-step generation via a consistency objective and distillation from diffusion models; SMT shares the one-step goal and extends it by optimizing \u03b1-skew JS through mixture-score estimation, enabling both training from scratch and distillation (SMD)."
+    },
+    {
+      "title": "Progressive Distillation for Fast Sampling of Diffusion Models",
+      "authors": "Tim Salimans, Jonathan Ho",
+      "year": 2022,
+      "role": "technical tool (distillation of diffusion models)",
+      "relationship_sentence": "Demonstrates how to distill diffusion samplers into few/one-step generators, informing SMT\u2019s distillation variant (SMD), which replaces trajectory/likelihood matching with \u03b1-JS-guided mixture score training."
+    }
+  ],
+  "synthesis_narrative": "Score-of-Mixture Training (SMT) sits at the intersection of divergence-minimization and score-based learning. Lin\u2019s formulation of Jensen\u2013Shannon divergence (and its skewed variant) establishes the precise objective SMT targets. GANs subsequently operationalized JS minimization for generative modeling, while f-GAN framed a broader variational treatment over f-divergences (capturing \u03b1-skew JS), thereby motivating principled divergence choices in generative training. SMT departs from adversarial estimation by importing the score-based toolkit: Vincent\u2019s denoising score matching showed that scores of smoothed distributions are learnable from corrupted samples, and Song & Ermon\u2019s noise-conditional score networks extended this to multi-scale training, a blueprint SMT adopts when estimating scores of noise-corrupted mixtures of real and model samples across noise levels.\n\nFor fast generation, SMT is directly informed by the surge of one-step methods. Consistency Models demonstrated that a single forward pass can be trained either from scratch or via distillation from diffusion models, establishing both the training paradigm and the distillation template that SMT/SMD echo. Progressive Distillation further evidenced the feasibility of compressing diffusion samplers into few/one steps, which SMD adapts but replaces trajectory-focused objectives with an \u03b1-JS-driven mixture-score objective. Collectively, these works converge in SMT\u2019s key contribution: a simple, stable, and principled one-step training framework that minimizes \u03b1-skew JS by learning the score of real\u2013fake mixtures across noise scales, unifying divergence minimization with score estimation and supporting efficient distillation.",
+  "analysis_timestamp": "2026-01-07T00:21:32.385213"
+}

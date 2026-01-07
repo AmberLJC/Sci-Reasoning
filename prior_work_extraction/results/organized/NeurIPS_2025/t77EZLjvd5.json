@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Learning Transferable Visual Models From Natural Language Supervision (CLIP)",
+      "authors": "Alec Radford et al.",
+      "year": 2021,
+      "role": "Foundational vision\u2013language model and zero-shot classifier",
+      "relationship_sentence": "COLA is built on CLIP\u2019s contrastive image\u2013text embedding space and its zero-shot classification mechanism where class text embeddings act as classifier weights; COLA explicitly targets CLIP\u2019s adversarially amplified image\u2013text misalignment and projects adversarial image features onto the subspace spanned by those text embeddings."
+    },
+    {
+      "title": "Learning to Prompt for Vision-Language Models (CoOp)",
+      "authors": "Kaiyang Zhou, Jingkang Yang, Chen Change Loy, Ziwei Liu",
+      "year": 2022,
+      "role": "Prompt optimization for CLIP adaptation",
+      "relationship_sentence": "CoOp typifies the prompt-optimization route to improve CLIP, which COLA contrasts with by directly aligning cross-modal features; COLA complements CoOp-like methods by addressing the core embedding misalignment rather than only tuning prompts."
+    },
+    {
+      "title": "Towards Deep Learning Models Resistant to Adversarial Attacks",
+      "authors": "Aleksander Madry, Aleksandar Makelov, Ludwig Schmidt, Dimitris Tsipras, Adrian Vladu",
+      "year": 2018,
+      "role": "Canonical adversarial training framework (PGD-based)",
+      "relationship_sentence": "Adversarial fine-tuning is a prevailing robustness paradigm that COLA moves beyond; instead of relying solely on adversarial training, COLA restores cross-modal alignment to neutralize adversarial distortions in CLIP\u2019s feature space."
+    },
+    {
+      "title": "Sinkhorn Distances: Lightspeed Computation of Optimal Transport",
+      "authors": "Marco Cuturi",
+      "year": 2013,
+      "role": "Efficient OT (entropic regularization) enabling practical alignment",
+      "relationship_sentence": "COLA\u2019s optimal-transport-based alignment relies on Sinkhorn-regularized OT for tractable, differentiable matching between adversarial image embeddings and class text distributions."
+    },
+    {
+      "title": "Joint Distribution Optimal Transport for Domain Adaptation (JDOT)",
+      "authors": "Nicolas Courty, R\u00e9mi Flamary, Devis Tuia, Alain Rakotomamonjy",
+      "year": 2017,
+      "role": "OT-based alignment of joint feature\u2013label distributions",
+      "relationship_sentence": "JDOT\u2019s principle of aligning joint distributions directly inspires COLA\u2019s global cross-modality alignment objective, treating adversarial image features and class text embeddings as distributions to be matched."
+    },
+    {
+      "title": "Supervised Contrastive Learning",
+      "authors": "Prannay Khosla et al.",
+      "year": 2020,
+      "role": "Representation learning with neighborhood/structure preservation",
+      "relationship_sentence": "COLA\u2019s local structural consistency component echoes supervised contrastive objectives by preserving neighborhood relations and intra-class cohesion in the embedding space under adversarial perturbations."
+    }
+  ],
+  "synthesis_narrative": "COLA targets a concrete failure mode of CLIP\u2014adversarially amplified misalignment between image and text embeddings\u2014by explicitly repairing cross-modality geometry rather than only tuning prompts or adversarially retraining. The foundation is CLIP\u2019s contrastive image\u2013text space and its zero-shot classifier, where class text embeddings function as linear classifier weights; this motivates COLA\u2019s projection of adversarial image features onto the subspace spanned by text embeddings to filter non-semantic perturbations while preserving discriminative semantics. Prior prompt-learning work such as CoOp exemplifies adaptation strategies that operate at the input/prompt level; COLA reframes robustness as a representation alignment problem, directly addressing the gap in the joint embedding space that prompts alone cannot fix. Instead of relying solely on PGD-style adversarial training (Madry et al.), COLA employs optimal transport to restore global alignment between adversarial image features and class texts. This design is technically grounded in the OT literature: Cuturi\u2019s entropic Sinkhorn algorithm enables efficient, differentiable transport plans, while JDOT formalizes alignment of joint feature\u2013label distributions\u2014paralleling COLA\u2019s matching of adversarial image distributions to label-conditioned text prototypes. Finally, to prevent collapsing or distorted neighborhoods, COLA incorporates a local structural consistency objective inspired by supervised contrastive learning, preserving intra-class neighborhoods and inter-class margins under attack. Together, these strands\u2014CLIP\u2019s text-defined classifier geometry, OT-based global distribution matching, and contrastive local structure preservation\u2014cohere into COLA\u2019s robust cross-modality alignment framework.",
+  "analysis_timestamp": "2026-01-07T00:21:32.290138"
+}

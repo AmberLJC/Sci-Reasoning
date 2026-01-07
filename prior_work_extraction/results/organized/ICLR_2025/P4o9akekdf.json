@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "3D Gaussian Splatting for Real-Time Radiance Field Rendering",
+      "authors": "Thomas Kerbl et al.",
+      "year": 2023,
+      "role": "Foundation",
+      "relationship_sentence": "Introduced the 3D Gaussian scene representation and differentiable splatting renderer that NoPoSplat directly predicts and optimizes via photometric loss."
+    },
+    {
+      "title": "pixelNeRF: Neural Radiance Fields from One or Few Images",
+      "authors": "Alex Yu et al.",
+      "year": 2021,
+      "role": "Foundation",
+      "relationship_sentence": "Established the feed-forward, photometricly-supervised paradigm for reconstructing a scene from sparse views, which NoPoSplat adopts while switching the output representation to 3D Gaussians and removing pose requirements."
+    },
+    {
+      "title": "MVSNeRF: Fast Generalizable Radiance Field Reconstruction from Multi-View Stereo",
+      "authors": "Anpei Chen et al.",
+      "year": 2021,
+      "role": "Related Problem",
+      "relationship_sentence": "Provided a multi-view aggregation strategy for feed-forward novel view synthesis that informs NoPoSplat\u2019s sparse-view conditioning without test-time optimization."
+    },
+    {
+      "title": "NeRF--: Neural Radiance Fields Without Known Camera Poses",
+      "authors": "X. Wang et al.",
+      "year": 2021,
+      "role": "Gap Identification",
+      "relationship_sentence": "Showed that jointly optimizing poses and radiance fields from images is possible but slow and brittle, motivating NoPoSplat\u2019s pose-free, feed-forward alternative."
+    },
+    {
+      "title": "BARF: Bundle-Adjusting Neural Radiance Fields",
+      "authors": "Chen-Hsuan Lin et al.",
+      "year": 2021,
+      "role": "Gap Identification",
+      "relationship_sentence": "Exposed how pose errors degrade neural rendering and proposed joint BA with NeRF, whose optimization burden and sensitivity NoPoSplat avoids by anchoring to a canonical input-view space."
+    },
+    {
+      "title": "Scene Representation Transformer: Geometry-Free Novel View Synthesis via Set-Latent",
+      "authors": "Mehdi S. M. Sajjadi et al.",
+      "year": 2022,
+      "role": "Inspiration",
+      "relationship_sentence": "Pioneered conditioning on view-specific tokens (including camera parameters) and set-based aggregation, directly inspiring NoPoSplat\u2019s design to convert camera intrinsics into token embeddings to resolve scale."
+    },
+    {
+      "title": "MASt3R: Matching and Reconstruction Transformer",
+      "authors": "Leroy et al.",
+      "year": 2024,
+      "role": "Inspiration",
+      "relationship_sentence": "Demonstrated pose-free multi-view reconstruction by anchoring predictions in image-centric coordinate frames, informing NoPoSplat\u2019s choice to canonicalize to a single input-view\u2019s camera frame to sidestep global pose estimation."
+    }
+  ],
+  "synthesis_narrative": "NoPoSplat\u2019s core idea\u2014pose-free, feed-forward 3D Gaussian reconstruction trained solely with photometric loss\u2014stands on two converging lines of work. First, Kerbl et al. introduced 3D Gaussian Splatting as a real-time, differentiable scene representation; NoPoSplat directly predicts these primitives and learns via the same photometric supervision. Second, feed-forward neural rendering from sparse views (pixelNeRF, MVSNeRF) defined the paradigm of conditioning on a set of images at training and inference, obviating test-time optimization; NoPoSplat adopts this paradigm but outputs 3D Gaussians rather than radiance fields. A separate lineage in pose-free neural rendering (NeRF--, BARF) highlighted that jointly optimizing camera poses with radiance fields is feasible but computation-heavy and sensitive to pose errors\u2014precisely the gap NoPoSplat addresses by dispensing with global poses altogether. For doing so robustly, two ideas are key: image-centric canonicalization and camera-aware conditioning. MASt3R showed that anchoring geometry in per-image coordinate frames enables unposed multi-view reconstruction, inspiring NoPoSplat\u2019s choice to anchor all predictions to one input view\u2019s camera frame. SRT further demonstrated the power of view tokens (including camera parameters) for geometry-free novel view synthesis; NoPoSplat extends this by converting camera intrinsics to explicit token embeddings to resolve scale ambiguity. Together, these works directly enable NoPoSplat\u2019s main innovation: a simple, real-time, pose-free pipeline that reconstructs accurate 3D Gaussians from sparse unposed images.",
+  "analysis_timestamp": "2026-01-06T23:09:26.625976"
+}

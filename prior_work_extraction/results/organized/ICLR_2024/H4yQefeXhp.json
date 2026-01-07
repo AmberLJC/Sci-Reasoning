@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "LRM: Large Reconstruction Model for Single-View 3D Reconstruction",
+      "authors": "Hong-Xing Yu et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Extension",
+      "relationship_sentence": "DMV3D directly extends LRM\u2019s transformer-based tri-plane NeRF reconstructor by repurposing it as the diffusion denoiser, enabling single-stage 3D generation during multi-view denoising."
+    },
+    {
+      "title": "EG3D: Efficient Geometry-aware 3D Generative Adversarial Networks",
+      "authors": "Eric R. Chan et al.",
+      "year": 2022,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "DMV3D adopts EG3D\u2019s tri-plane representation as the core 3D backbone for reconstruction and rendering inside the denoising loop to maintain geometry-aware multi-view consistency."
+    },
+    {
+      "title": "MVDream: Multi-view Diffusion for 3D Generation",
+      "authors": "Zifan Shi et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "DMV3D targets the same multi-view diffusion setting as MVDream but replaces the 2D image denoiser with a 3D reconstruction denoiser to address MVDream\u2019s cross-view inconsistency."
+    },
+    {
+      "title": "SyncDreamer: Generating Multiview-Consistent Images from a Single-View",
+      "authors": "Liu et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "By relying on cross-view attention in a 2D diffusion model, SyncDreamer exposes the limitation of lacking explicit 3D structure, which DMV3D resolves by reconstructing and rendering a NeRF during denoising."
+    },
+    {
+      "title": "Zero-1-to-3: Zero-shot One Image to 3D",
+      "authors": "Liu et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "Zero-1-to-3 established single-image\u2013conditioned diffusion for novel-view synthesis, which DMV3D generalizes by performing multi-view denoising through an explicit 3D reconstructor for stronger geometric coherence."
+    },
+    {
+      "title": "DreamFusion: Text-to-3D using 2D Diffusion",
+      "authors": "Ben Poole et al.",
+      "year": 2022,
+      "arxiv_id": "2209.14988",
+      "role": "Foundation",
+      "relationship_sentence": "DreamFusion showed how 2D diffusion priors can drive 3D generation, a paradigm DMV3D operationalizes in a single denoising stage by embedding a 3D reconstruction model into the diffusion process for text-to-3D."
+    }
+  ],
+  "synthesis_narrative": "A transformer-based large reconstruction model demonstrated that a single image can be lifted to a tri-plane NeRF by predicting geometry-aware features and rendering them differentiably, establishing a scalable recipe for image-supervised 3D reconstruction without requiring explicit 3D assets. The tri-plane representation popularized by EG3D made this efficient by factoring 3D fields into three orthogonal feature planes that render quickly while preserving geometry, making it a practical backbone for large-scale training. Multi-view diffusion models such as MVDream showed that generating multiple views jointly improves cross-view consistency, yet their denoisers operate purely in 2D image space and still suffer from geometric drift. SyncDreamer improved synchronization across views via cross-view attention, but without an explicit 3D representation its consistency is fundamentally limited. Zero-1-to-3 introduced single-image\u2013conditioned diffusion for novel view synthesis, revealing the power of diffusion priors for view completion but without enforcing a global 3D shape. DreamFusion established that 2D diffusion priors can supervise 3D via rendering, kickstarting diffusion-guided 3D generation.\nSynthesizing these threads, a clear opportunity emerges: marry the efficiency and scalability of tri-plane reconstruction with the cross-view modeling of multi-view diffusion, but inject explicit 3D structure into the denoiser itself. By turning a large tri-plane reconstructor into the denoising operator, the method performs single-stage 3D generation during diffusion, trained with image reconstruction alone, thereby overcoming 2D denoiser limitations and naturally extending to text-to-3D with stronger geometric fidelity.",
+  "target_paper": {
+    "title": "DMV3D: Denoising Multi-view Diffusion Using 3D Large Reconstruction Model",
+    "authors": "Yinghao Xu, Hao Tan, Fujun Luan, Sai Bi, Peng Wang, Jiahao Li, Zifan Shi, Kalyan Sunkavalli, Gordon Wetzstein, Zexiang Xu, Kai Zhang",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "3D Generation; Single-view 3D Reconstruction; text-to-3D",
+    "abstract": "We propose DMV3D, a novel 3D generation approach that uses a transformer-based 3D large reconstruction model to denoise multi-view diffusion. Our reconstruction model incorporates a triplane NeRF representation and, functioning as a denoiser, can denoise noisy multi-view images via 3D NeRF reconstruction and rendering, achieving single-stage 3D generation in the 2D diffusion denoising process. We train DMV3D on large-scale multi-view image datasets of extremely diverse objects using only image reconstruction losses, without accessing 3D assets. We demonstrate state-of-the-art results for the single-image reconstruction problem where probabilistic modeling of unseen object parts is required for generating diverse reconstructions with sharp textures. We also show high-quality text-to-3D generation results outperforming previous 3D diffusion models. Our project website is at: https://dmv3d.github.io/.",
+    "openreview_id": "H4yQefeXhp",
+    "forum_id": "H4yQefeXhp"
+  },
+  "analysis_timestamp": "2026-01-07T00:09:22.663907"
+}

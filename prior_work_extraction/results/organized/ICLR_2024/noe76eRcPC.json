@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "LRM: Large Reconstruction Models",
+      "authors": "Yinghao Xu et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Extension",
+      "relationship_sentence": "PF-LRM directly builds on LRM\u2019s 2D\u20133D token interaction architecture, extending it to unposed multi-view inputs by predicting per-view coarse point clouds and coupling them with a pose head."
+    },
+    {
+      "title": "BARF: Bundle-Adjusting Neural Radiance Fields",
+      "authors": "Chen-Hsuan Lin et al.",
+      "year": 2021,
+      "arxiv_id": "2104.06405",
+      "role": "Gap Identification",
+      "relationship_sentence": "PF-LRM explicitly targets BARF\u2019s limitations\u2014slow joint optimization and the need for strong view overlap\u2014by replacing iterative pose-NeRF fitting with a feed-forward pose-and-reconstruction pipeline trained at scale."
+    },
+    {
+      "title": "NoPe-NeRF: Optimizing Neural Radiance Fields with No Pose Prior",
+      "authors": "Zihan Wang et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Gap Identification",
+      "relationship_sentence": "PF-LRM addresses NoPe-NeRF\u2019s fragility on sparse, low-overlap views by learning to predict pose via 2D\u20133D correspondences and a differentiable PnP layer rather than relying solely on photometric gradients."
+    },
+    {
+      "title": "DSAC++: Differentiable RANSAC for Camera Localization",
+      "authors": "Eric Brachmann et al.",
+      "year": 2018,
+      "arxiv_id": "1711.06321",
+      "role": "Foundation",
+      "relationship_sentence": "PF-LRM leverages the core idea of making PnP differentiable, inserting a differentiable PnP solver to enable end-to-end training from predicted 2D\u20133D correspondences to camera poses."
+    },
+    {
+      "title": "DUSt3R: Reliable 3D Reconstruction from Sparse Views via Dense Pointmap Prediction",
+      "authors": "Paul-Edouard Sarlin et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Inspiration",
+      "relationship_sentence": "PF-LRM adopts DUSt3R\u2019s key insight of predicting dense 3D pointmaps to recover geometry and camera arrangement under limited overlap, adapting it to an object-centric setting with PnP over per-view point clouds."
+    },
+    {
+      "title": "DPOD: 6D Pose Estimation from RGB Images via Dense 2D-3D Correspondences",
+      "authors": "Sergey Zakharov et al.",
+      "year": 2019,
+      "arxiv_id": "",
+      "role": "Inspiration",
+      "relationship_sentence": "PF-LRM generalizes DPOD\u2019s 2D\u20133D correspondence + PnP paradigm by learning canonical 3D predictions jointly with geometry tokens for unknown objects, enabling pose recovery without known CAD models."
+    },
+    {
+      "title": "Objaverse: A Universe of Annotated 3D Objects",
+      "authors": "Adrian Deitke et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "PF-LRM\u2019s large-scale pretraining on ~1M posed multi-view objects is made possible by Objaverse-style massive 3D corpora, which provide the breadth needed for strong cross-dataset generalization."
+    }
+  ],
+  "synthesis_narrative": "Large-scale feed-forward reconstruction emerged with Large Reconstruction Models (LRM), which introduced a transformer that exchanges information between 2D image tokens and 3D object tokens to produce geometry from posed views. BARF showed that jointly optimizing camera poses with NeRF is feasible but requires iterative bundle adjustment and substantial view overlap to avoid degeneracy. NoPe-NeRF removed pose priors entirely, but relied on photometric gradients and often struggled in sparse-view, low-overlap regimes. DSAC++ demonstrated that camera pose can be computed inside neural networks by making PnP differentiable, enabling end-to-end learning from 2D\u20133D correspondences to camera poses. DUSt3R revealed that predicting dense pointmaps per image and then recovering camera geometry from these predictions can handle low overlap and sparse collections effectively. In object pose estimation, DPOD established the powerful recipe of predicting dense 2D\u20133D correspondences in a canonical object space and solving for pose via PnP. Meanwhile, Objaverse-scale datasets provided the massive, diverse multi-view supervision necessary to train reconstruction models that generalize widely. Collectively, these works expose a gap: pose-free few-view reconstruction needs the speed and generalization of LRM, but also the robustness of correspondence-driven pose recovery without iterative optimization. PF-LRM synthesizes these threads by extending LRM\u2019s 2D\u20133D token interactions to predict per-view 3D point clouds, inserting a differentiable PnP layer to recover relative poses, and training at Objaverse scale\u2014yielding a fast, pose-free model that handles sparse, low-overlap views while jointly predicting shape and pose.",
+  "target_paper": {
+    "title": "PF-LRM: Pose-Free Large Reconstruction Model for Joint Pose and Shape Prediction",
+    "authors": "Peng Wang, Hao Tan, Sai Bi, Yinghao Xu, Fujun Luan, Kalyan Sunkavalli, Wenping Wang, Zexiang Xu, Kai Zhang",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Pose estimation, NeRF, 3D Reconstruction, Transformer",
+    "abstract": "We propose a Pose-Free Large Reconstruction Model (PF-LRM) for reconstructing a 3D object from a few unposed images even with little visual overlap, while simultaneously estimating the relative camera poses in ~1.3 seconds on a single A100 GPU. PF-LRM is a highly scalable method utilizing self-attention blocks to exchange information between 3D object tokens and 2D image tokens; we predict a coarse point cloud for each view, and then use a differentiable Perspective-n-Point (PnP) solver to obtain camera poses. When trained on a huge amount of multi-view posed data of ~1M objects, PF-LRM shows strong cross-dataset generalization ability, and outperforms baseline methods by a large margin in terms of pose prediction accuracy and 3D reconstruction quality on various unseen evaluation datasets. We also demonstrate our model's applicability in downstream text/image-to-3D task with fast feed-forward inference. Our project website is at: https://totoro97.github.io/pf-lrm.",
+    "openreview_id": "noe76eRcPC",
+    "forum_id": "noe76eRcPC"
+  },
+  "analysis_timestamp": "2026-01-07T00:13:22.585385"
+}

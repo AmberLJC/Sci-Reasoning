@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Direct Preference Optimization: Your Language Model is Secretly a Reward Model",
+      "authors": "Rafailov et al.",
+      "year": 2023,
+      "role": "Foundational preference optimization objective",
+      "relationship_sentence": "InfiFPO is built on DPO\u2019s reference-model log-ratio formulation, but replaces the fixed reference with a fused implicit reference that aggregates multi-source probabilities at the sequence level."
+    },
+    {
+      "title": "ORPO: Monolithic Preference Optimization via Odds Ratio",
+      "authors": "Hong et al.",
+      "year": 2024,
+      "role": "Reference-model alternative in PA",
+      "relationship_sentence": "By showing how preference learning can be conducted without an explicit reference, ORPO motivates InfiFPO\u2019s design choice to carefully control the reference term\u2014here realized as a probability-preserving fused reference rather than removed entirely."
+    },
+    {
+      "title": "Model soups: averaging weights of multiple fine-tuned models improves accuracy without training",
+      "authors": "Wortsman et al.",
+      "year": 2022,
+      "role": "Foundational model fusion via weight averaging (SFT-phase)",
+      "relationship_sentence": "InfiFPO extends the model-fusion agenda beyond SFT weight averaging to the preference-alignment phase, addressing shortcomings such as architecture/tokenizer compatibility and lack of probability preservation."
+    },
+    {
+      "title": "Editing Models with Task Arithmetic",
+      "authors": "Ilharco et al.",
+      "year": 2023,
+      "role": "Weight-space model fusion via task vectors",
+      "relationship_sentence": "Task arithmetic highlights weight-space fusion benefits and pitfalls (e.g., interference and compatibility), which InfiFPO circumvents by fusing at the sequence-probability level instead of weights."
+    },
+    {
+      "title": "Distilling the Knowledge in a Neural Network",
+      "authors": "Hinton, Vinyals, and Dean",
+      "year": 2015,
+      "role": "Probability-preserving multi-teacher knowledge transfer",
+      "relationship_sentence": "InfiFPO\u2019s synthesis of multi-source probabilities echoes multi-teacher distillation, but adapts soft-probability aggregation to the DPO setting and to sequence-level likelihoods for PA."
+    },
+    {
+      "title": "Products of Experts",
+      "authors": "Hinton",
+      "year": 2002,
+      "role": "Theory for combining distributions via multiplicative fusion",
+      "relationship_sentence": "The idea of merging model beliefs through log-probability combination underpins InfiFPO\u2019s implicit fused reference and its max-margin fusion strategy."
+    },
+    {
+      "title": "Proximal Policy Optimization Algorithms",
+      "authors": "Schulman et al.",
+      "year": 2017,
+      "role": "Stability via clipping in policy optimization",
+      "relationship_sentence": "InfiFPO\u2019s probability clipping is conceptually aligned with PPO\u2019s clipped objectives, improving stability when incorporating multi-source probabilities into the preference objective."
+    }
+  ],
+  "synthesis_narrative": "InfiFPO\u2019s core innovation\u2014implicit model fusion within preference optimization\u2014rests on rethinking the DPO reference model as a fused, probability-preserving aggregator of multiple sources. Direct Preference Optimization (Rafailov et al., 2023) provides the foundational log-ratio structure that InfiFPO modifies: rather than anchoring to a single fixed reference, it constructs an implicit reference that synthesizes multi-model sequence probabilities, thereby retaining fine-grained uncertainty information lost by output-only fusion approaches (e.g., WRPO). Concurrently, ORPO (Hong et al., 2024) demonstrates the sensitivity of preference learning to the treatment of the reference term, motivating InfiFPO\u2019s choice to control\u2014not discard\u2014the reference through a principled fusion.\nWeight-space fusion methods like Model Soup (Wortsman et al., 2022) and Task Arithmetic (Ilharco et al., 2023) established the appeal of combining specialized models but suffer from architecture/tokenizer constraints and interference. InfiFPO sidesteps these issues by operating at the sequence-probability level, eliminating vocabulary-alignment burdens common in weight/logit-space merges across heterogeneous tokenizers.\nThe design of InfiFPO\u2019s fusion mechanism is informed by probability-combination and distillation literature. Multi-teacher knowledge distillation (Hinton et al., 2015) underscores the value of transferring soft probabilities, while Products of Experts (Hinton, 2002) offers a theoretical lens for multiplicative/log-linear combination of distributions that guides InfiFPO\u2019s max-margin fusion. Finally, stability considerations from PPO (Schulman et al., 2017) motivate probability clipping, ensuring robust optimization when aggregating heterogeneous model confidences. Together, these threads yield a preference-alignment-centric fusion method that preserves uncertainty, avoids tokenizer alignment, and stabilizes training.",
+  "analysis_timestamp": "2026-01-07T00:02:04.963506"
+}

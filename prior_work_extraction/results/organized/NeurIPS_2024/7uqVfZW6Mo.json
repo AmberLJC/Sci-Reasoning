@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Attention Is All You Need",
+      "authors": "Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, \u0141ukasz Kaiser, Illia Polosukhin",
+      "year": 2017,
+      "role": "Foundational transformer formulation introducing queries/keys/values and attention mechanics.",
+      "relationship_sentence": "The paper\u2019s central claim that queries and keys in diffusion backbones are under-evaluated directly builds on the Transformer\u2019s Q/K/V decomposition, motivating systematic probing of Q/K activations as discriminative features."
+    },
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Jonathan Ho, Ajay Jain, Pieter Abbeel",
+      "year": 2020,
+      "role": "Introduced diffusion generative modeling with U-Net backbones whose intermediate activations are repurposed as features.",
+      "relationship_sentence": "Provides the denoising process and UNet architecture whose internal activations (resblocks and attention blocks) constitute the primary feature pool the present work evaluates."
+    },
+    {
+      "title": "High-Resolution Image Synthesis with Latent Diffusion Models",
+      "authors": "Robin Rombach, Andreas Blattmann, Dominik Lorenz, Patrick Esser, Bj\u00f6rn Ommer",
+      "year": 2022,
+      "role": "Established Latent Diffusion/Stable Diffusion with cross-attention in the UNet, widely mined for internal signals.",
+      "relationship_sentence": "Supplies the practical backbone (Stable Diffusion) and its rich cross-attention activations from which the paper extracts, organizes, and re-evaluates overlooked signals like Q/K and intermediate projections."
+    },
+    {
+      "title": "Scalable Diffusion Models with Transformers",
+      "authors": "William Peebles, Saining Xie",
+      "year": 2023,
+      "role": "Introduced Diffusion Transformers (DiT), bringing ViT-style blocks and tokens into diffusion architectures.",
+      "relationship_sentence": "Motivates extending activation evaluation beyond UNet to ViT-based diffusion modules, adding new token-level and MLP activations that the paper systematically benchmarks."
+    },
+    {
+      "title": "Prompt-to-Prompt Image Editing with Cross Attention Control",
+      "authors": "Amir Hertz, Ron Mokady, Jay Tenenbaum, Kfir Aberman, Daniel Cohen-Or, Dani Lischinski",
+      "year": 2022,
+      "role": "Demonstrated that cross-attention maps in text-to-image diffusion models encode controllable, semantically meaningful signals.",
+      "relationship_sentence": "Inspires the focus on attention internals by evidencing that attention pathways contain strong localization/semantic cues worth evaluating as discriminative features."
+    },
+    {
+      "title": "Emerging Properties in Self-Supervised Vision Transformers",
+      "authors": "Mathilde Caron, Hugo Touvron, Ishan Misra, Herv\u00e9 J\u00e9gou, Julien Mairal, Piotr Bojanowski, Armand Joulin",
+      "year": 2021,
+      "role": "Showed ViT attention maps and tokens can serve as dense, probeable features for segmentation without supervised training.",
+      "relationship_sentence": "Provides methodological precedent for mining attention-derived signals and using lightweight probes, motivating analogous probing of diffusion attention (including Q/K) as dense features."
+    },
+    {
+      "title": "Improved Denoising Diffusion Probabilistic Models",
+      "authors": "Prafulla Dhariwal, Alexander Nichol",
+      "year": 2021,
+      "role": "Scaled and refined diffusion U-Nets with attention, establishing strong, widely adopted backbones.",
+      "relationship_sentence": "Further cements the attention-enhanced UNet design whose diverse internal activations (res, attn, norm, and projections) form the expanded evaluation set in this work."
+    }
+  ],
+  "synthesis_narrative": "Meng et al.\u2019s core contribution is to systematically broaden and reassess which internal signals of diffusion backbones are truly effective discriminative features, explicitly adding overlooked attention components (queries/keys) and newly introduced activations from transformer-based diffusion architectures. This advances an emerging line of work that treats generative backbones as feature extractors for dense prediction. The intellectual scaffolding comes from three pillars. First, diffusion foundations (Ho et al.; Dhariwal & Nichol) and Latent Diffusion (Rombach et al.) provide the concrete UNet-and-attention architectures whose intermediate tensors\u2014residual blocks, attention pathways, and cross-attention\u2014are accessible at inference and have been informally used as features. Second, attention-centric insights from Transformer's Q/K/V formalism (Vaswani et al.) and empirical evidence that attention internals encode semantic, localizable information (Hertz et al.) motivate explicitly testing not just values or outputs, but the queries and keys themselves as candidate discriminative descriptors. Third, the shift to ViT-style diffusion models (DiT; Peebles & Xie) introduces tokenized representations and MLP/attention projections that considerably expand the activation search space. Complementary ideas from self-supervised ViTs (Caron et al., DINO) validate probing attention-derived signals with lightweight heads for dense tasks. Together, these works directly drive Meng et al. to: (1) enumerate a much wider taxonomy of diffusion activations across UNet and DiT families, (2) highlight that Q/K and transformer-internal projections remain under-evaluated yet potent, and (3) propose a scalable evaluation/selection protocol under budget, yielding stronger discriminative performance from generative backbones.",
+  "analysis_timestamp": "2026-01-06T23:42:49.041457"
+}

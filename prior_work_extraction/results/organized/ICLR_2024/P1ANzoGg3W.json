@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "VolSDF: Volume Rendering of Signed Distance Functions for Surface Reconstruction",
+      "authors": "Ronen Yariv et al.",
+      "year": 2021,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "H2O-SDF adopts the SDF-to-density mapping and differentiable volume rendering formulation of VolSDF as the underlying surface-learning framework that its two-phase scheme and OSF are built upon."
+    },
+    {
+      "title": "NeuS: Learning Neural Implicit Surfaces by Volume Rendering for Multi-view Reconstruction",
+      "authors": "Weihao Zhang et al.",
+      "year": 2021,
+      "arxiv_id": "2106.10689",
+      "role": "Extension",
+      "relationship_sentence": "H2O-SDF directly builds on NeuS-style SDF rendering and explicitly tackles the vanishing gradient/over-smoothing behavior observed in NeuS by introducing an Object Surface Field and a two-phase training schedule."
+    },
+    {
+      "title": "Implicit Geometric Regularization for Learning Shapes",
+      "authors": "Amos Gropp et al.",
+      "year": 2020,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "H2O-SDF uses the IGR eikonal regularization to maintain SDF properties while augmenting training with OSF to concentrate gradients near object surfaces."
+    },
+    {
+      "title": "UNISURF: Unifying Neural Implicit Surfaces and Radiance Fields for Multi-View Reconstruction",
+      "authors": "Michael Oechsle et al.",
+      "year": 2021,
+      "arxiv_id": "",
+      "role": "Related Problem",
+      "relationship_sentence": "UNISURF\u2019s analysis of occupancy- versus SDF-based supervision and its surface-focused rendering motivates H2O-SDF\u2019s choice of an SDF framework and the need to sharpen gradients to recover high-frequency geometry."
+    },
+    {
+      "title": "MonoSDF: Exploring Monocular Geometric Cues for Neural Implicit Surface Reconstruction",
+      "authors": "Zehao Yu et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Gap Identification",
+      "relationship_sentence": "MonoSDF shows that even with extra geometric cues, SDF-based reconstructions struggle with fine object details in indoor scenes, a limitation H2O-SDF addresses through OSF-driven gradient concentration and object-focused training."
+    },
+    {
+      "title": "Object-NeRF: Towards Object-Compositional Neural Radiance Fields",
+      "authors": "Guangyang Yang et al.",
+      "year": 2021,
+      "arxiv_id": "",
+      "role": "Inspiration",
+      "relationship_sentence": "By decomposing scenes into object and background components, Object-NeRF provided the conceptual cue for H2O-SDF\u2019s explicit separation of object vs. non-object regions realized through a two-phase SDF learning scheme."
+    },
+    {
+      "title": "Neuralangelo: High-Fidelity Neural Implicit Surfaces from Video",
+      "authors": "Zhengqi Li et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Gap Identification",
+      "relationship_sentence": "Neuralangelo highlights the need for mechanisms that preserve high-frequency surface detail, which H2O-SDF pursues in indoor scenes via an Object Surface Field that counteracts vanishing gradients near fine object geometry."
+    }
+  ],
+  "synthesis_narrative": "VolSDF established a principled way to map signed distance values to volumetric densities, enabling surface-accurate rendering and supervision within an SDF framework. NeuS refined SDF volume rendering and exposed a practical training recipe, while also revealing a tendency toward vanishing gradients and over-smoothed geometry away from the zero level set. IGR introduced eikonal regularization to enforce valid signed distance geometry and popularized near-surface sampling to stabilize SDF learning. UNISURF analyzed the trade-offs between occupancy- and SDF-based formulations and advocated surface-focused rendering to better localize geometry. MonoSDF injected monocular depth/normal cues into SDF learning, improving indoor reconstructions but still leaving high-frequency object details under-recovered. Complementarily, Object-NeRF demonstrated that decomposing scenes into object and background components can disentangle geometry and appearance, suggesting architectural and training strategies that treat object regions differently for finer reconstructions. Neuralangelo, targeting high-fidelity geometry, further underscored the broader challenge of retaining high-frequency detail in neural implicit surfaces. Together these works crystalized a gap: SDF-based renderers excel at clean surfaces and global structure but struggle to balance large, planar room layouts with intricate object detail due to gradient sparsity near fine-scale geometry. H2O-SDF synthesizes these insights by retaining SDF rendering and eikonal regularization, explicitly separating object and non-object regions as inspired by object-compositional fields, and introducing an Object Surface Field with a two-phase training schedule to concentrate learning signals where objects require high-frequency detail while preserving the integrity of room layouts.",
+  "target_paper": {
+    "title": "H2O-SDF: Two-phase Learning for 3D Indoor Reconstruction using Object Surface Fields",
+    "authors": "Minyoung Park, Mirae Do, Yeon Jae Shin, Jaeseok Yoo, Jongkwang Hong, Joongrock Kim, Chul Lee",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "3D reconstruction, Neural implicit surface learning",
+    "abstract": "Advanced techniques using Neural Radiance Fields (NeRF), Signed Distance Fields (SDF), and Occupancy Fields have recently emerged as solutions for 3D indoor scene reconstruction. We introduce a novel two-phase learning approach, H2O-SDF,  that discriminates between object and non-object regions within indoor environments. This method achieves a nuanced balance, carefully preserving the geometric integrity of room layouts while also capturing intricate surface details of specific objects. A cornerstone of our two-phase learning framework is the introduction of the Object Surface Field (OSF), a novel concept designed to mitigate the persistent vanishing gradient problem that has previously hindered the capture of high-frequency details in other methods. Our proposed approach is validated through several experiments that include ablation studies.",
+    "openreview_id": "P1ANzoGg3W",
+    "forum_id": "P1ANzoGg3W"
+  },
+  "analysis_timestamp": "2026-01-06T13:52:21.084703"
+}

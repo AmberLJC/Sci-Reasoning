@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Randomized Response: A Survey Technique for Eliminating Evasive Answer Bias",
+      "authors": "S.L. Warner",
+      "year": 1965,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "The scalar label-flipping paradigm used in label-LDP baselines is a direct instantiation of Warner\u2019s randomized response, which this paper departs from by emitting a K-dimensional privatized vector rather than a single flipped label."
+    },
+    {
+      "title": "Extremal Mechanisms for Local Differential Privacy",
+      "authors": "Peter Kairouz et al.",
+      "year": 2016,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "k-ary randomized response (GRR) from this work is the standard mechanism for privatizing multi-class labels under LDP and suffers utility degradation as K grows, which the proposed vector approximation is designed to overcome."
+    },
+    {
+      "title": "RAPPOR: Randomized Aggregatable Privacy-Preserving Ordinal Response",
+      "authors": "\u00dalfar Erlingsson et al.",
+      "year": 2014,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "RAPPOR introduced emitting privatized bit vectors (rather than a single category) under LDP, directly inspiring the idea that vectorized outputs can retain more information than scalar label flips."
+    },
+    {
+      "title": "Locally Differentially Private Protocols for Frequency Estimation",
+      "authors": "Tianhao Wang et al.",
+      "year": 2017,
+      "arxiv_id": null,
+      "role": "Extension",
+      "relationship_sentence": "Unary Encoding and Optimized Unary Encoding (OUE) show that K-dimensional privatized vectors yield markedly better accuracy for large-domain categorical estimation, an idea extended here to supervised learning by privatizing labels as vectors whose expectations encode class probabilities."
+    },
+    {
+      "title": "Hadamard Response: Estimating Distributions Efficiently under Local Privacy",
+      "authors": "Jayasree Acharya et al.",
+      "year": 2019,
+      "arxiv_id": null,
+      "role": "Related Problem",
+      "relationship_sentence": "Hadamard Response demonstrates that structured K-dimensional sketches can dramatically improve K-scaling under LDP, motivating the use of structured vector outputs instead of scalar responses for categorical data."
+    },
+    {
+      "title": "Semi-supervised Knowledge Transfer for Deep Learning from Private Training Data (PATE)",
+      "authors": "Nicolas Papernot et al.",
+      "year": 2017,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "PATE established that training on privatized soft-label distributions (probability vectors) preserves more task-relevant information than hard labels, informing the choice to target expectation-aligned label vectors under local label DP."
+    }
+  ],
+  "synthesis_narrative": "Randomized response provides the canonical mechanism for privatizing a categorical value by flipping a single symbol, and k-ary randomized response (GRR) formalizes this for multi-class settings under local differential privacy. While optimal in certain senses, GRR\u2019s variance grows with the alphabet size, making accuracy deteriorate as the number of classes increases. In contrast, RAPPOR pioneered the idea of emitting privatized bit vectors that aggregate more information than a single flip, and later work on unary encoding and optimized unary encoding showed that K-dimensional privatized encodings can substantially improve estimation accuracy for large categorical domains. Hadamard Response further demonstrated that using structured, transformed vector sketches can reduce sample complexity and improve K-scaling in locally private distribution estimation. Parallelly, PATE revealed the value of probability vectors (soft labels) for learning under privacy, indicating that probabilistic targets preserve richer information for training than hard labels, even when privatization noise is present.\nTogether these results exposed a clear gap: label-LDP training largely relied on scalar flips (GRR-style labels) whose utility collapses with growing K, whereas vectorized LDP encodings and soft-label training both suggest that multi-dimensional privatized signals retain more class information. The present work synthesizes these strands by privatizing each label as a K-dimensional random vector whose expectation matches class-conditional probabilities, marrying the variance advantages of vector LDP encodings with the learning benefits of soft targets. This yields an easy-to-implement, low-overhead mechanism whose error grows much more gently with K, directly addressing the core limitation of GRR-based label privatization.",
+  "target_paper": {
+    "title": "Enhancing Learning with Label Differential Privacy by Vector Approximation",
+    "authors": "Puning Zhao, Jiafei Wu, Zhe Liu, Li Shen, Zhikun Zhang, Rongfei Fan, Le Sun, Qingming Li",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "label differential privacy",
+    "abstract": "Label differential privacy (DP) is a framework that protects the privacy of labels in training datasets, while the feature vectors are public. Existing approaches protect the privacy of labels by flipping them randomly, and then train a model to make the output approximate the privatized label. However, as the number of classes K increases, stronger randomization is needed, thus the performances of these methods become significantly worse. In this paper, we propose a vector approximation approach for learning with label local differential privacy, which is easy to implement and introduces little additional computational overhead. Instead of flipping each label into a single scalar, our method converts each label into a random vector with K components, whose expectations reflect class conditional probabilities. Intuitively, vector approximation retains more information than scalar labels. A brief theoretical analysis shows that the performance of our method only decays slightly with K. ",
+    "openreview_id": "IwPXYk6BV9",
+    "forum_id": "IwPXYk6BV9"
+  },
+  "analysis_timestamp": "2026-01-06T13:30:20.030059"
+}

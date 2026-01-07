@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "BCQ: Off-Policy Deep Reinforcement Learning without Exploration",
+      "authors": "Scott Fujimoto, David Meger, Doina Precup",
+      "year": 2019,
+      "role": "Foundational offline RL method introducing explicit policy constraints to mitigate distributional shift",
+      "relationship_sentence": "FamO2O builds on BCQ\u2019s core idea that constraining policy improvement to the data support is crucial, but replaces BCQ\u2019s single global constraint with a learned family of constraint intensities and selects them adaptively per state."
+    },
+    {
+      "title": "BEAR: Bootstrapping Error Accumulation Reduction for Offline RL",
+      "authors": "Aviral Kumar, Justin Fu, George Tucker, Sergey Levine",
+      "year": 2019,
+      "role": "Key formulation of behavior-regularized policy improvement with a tunable conservatism coefficient",
+      "relationship_sentence": "FamO2O generalizes BEAR\u2019s improvement-versus-constraint trade-off by training a universal policy over a continuum of regularization strengths and choosing the appropriate strength at each state during online fine-tuning."
+    },
+    {
+      "title": "Conservative Q-Learning for Offline Reinforcement Learning",
+      "authors": "Aviral Kumar, Aurick Zhou, George Tucker, Sergey Levine",
+      "year": 2020,
+      "role": "Pessimistic value learning with a regularization coefficient controlling conservatism",
+      "relationship_sentence": "FamO2O leverages CQL\u2019s conservative-regularization knob by instantiating a family across different CQL strengths and enabling state-adaptive selection rather than a fixed global coefficient."
+    },
+    {
+      "title": "AWAC: Accelerating Online Reinforcement Learning with Offline Datasets",
+      "authors": "Ashvin Nair, Abhishek Gupta, Murtaza Dalal, Sergey Levine",
+      "year": 2020,
+      "role": "Offline-to-online friendly method via advantage-weighted supervised actor updates (temperature controls conservatism)",
+      "relationship_sentence": "FamO2O extends AWAC-like advantage-weighted updates by conditioning the policy on the temperature (improvement/constraint intensity) and adapting that choice per state during online fine-tuning."
+    },
+    {
+      "title": "Implicit Q-Learning (IQL): Implicit Non-Parametric Behavior Cloning",
+      "authors": "Ilya Kostrikov, Ashvin Nair, Sergey Levine",
+      "year": 2021,
+      "role": "Strong offline RL baseline with expectile regression controlling conservatism",
+      "relationship_sentence": "FamO2O can treat IQL\u2019s expectile as the balance knob, training a universal family across expectiles and selecting the expectile per state to better handle heterogeneous data quality in offline-to-online training."
+    },
+    {
+      "title": "Safe Policy Improvement with Baseline Bootstrapping (SPIBB)",
+      "authors": "Romain Laroche, Paul Trichelair, R\u00e9mi Tachet des Combes",
+      "year": 2019,
+      "role": "State-wise conservative policy improvement for safety under dataset coverage constraints",
+      "relationship_sentence": "FamO2O is conceptually aligned with SPIBB\u2019s state-dependent conservatism but achieves it by learning a state-adaptive choice over a continuous family of improvement/constraint balances rather than hard count-based constraints."
+    },
+    {
+      "title": "Universal Value Function Approximators",
+      "authors": "Tom Schaul, Daniel Horgan, Karol Gregor, David Silver",
+      "year": 2015,
+      "role": "Methodological precursor for conditioning a single function approximator on a context variable to produce a family of solutions",
+      "relationship_sentence": "FamO2O adopts the UVFA-style conditioning idea to build a universal policy/value model over the constraint-intensity variable, enabling \u2018train once, get a family\u2019 and subsequent state-adaptive selection."
+    }
+  ],
+  "synthesis_narrative": "FamO2O targets the core offline-to-online RL challenge: distributional shift worsens during online fine-tuning, yet most methods fix a single conservatism level. Prior offline RL works established the need for constraining policy improvement. BCQ constrained action choices to the dataset support, while BEAR formalized behavior regularization with a tunable coefficient that balances improvement and conservatism. CQL pushed this further with pessimistic value learning, again exposing a crucial regularization knob. These methods, however, typically use a single global balance, which can be suboptimal when data quality varies across states.\nIn parallel, AWAC demonstrated that advantage-weighted, behavior-regularized updates can effectively bridge offline pretraining and online fine-tuning, with a temperature controlling the trade-off; IQL offered a strong alternative where an expectile governs conservatism. SPIBB highlighted that safety and robustness often require state-dependent conservatism, suggesting the limitation of one-size-fits-all regularization. Methodologically, UVFA provided the blueprint for conditioning a single network on a context variable to represent a family of solutions.\nFamO2O synthesizes these threads: it treats the regularization strength (e.g., KL weight, CQL coefficient, temperature/expectile) as a conditioning variable, trains a universal model that realizes a continuum of improvement\u2013constraint balances, and then performs state-adaptive selection during online fine-tuning. This turns the static global knob into a per-state decision, better leveraging heterogeneous data and mitigating distributional shift in the offline-to-online regime.",
+  "analysis_timestamp": "2026-01-07T00:02:04.864197"
+}

@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "High-Resolution Image Synthesis with Latent Diffusion Models",
+      "authors": "Robin Rombach et al.",
+      "year": 2022,
+      "arxiv_id": "2112.10752",
+      "role": "Foundation",
+      "relationship_sentence": "ScaleCrafter operates directly on the Stable Diffusion U-Net from Latent Diffusion, and its re-dilation modifies the model\u2019s fixed 3\u00d73 convolutions at inference to overcome the architecture\u2019s limited receptive field when generating beyond the 512\u00d7512 training size."
+    },
+    {
+      "title": "Multi-Scale Context Aggregation by Dilated Convolutions",
+      "authors": "Fisher Yu et al.",
+      "year": 2016,
+      "arxiv_id": "1511.07122",
+      "role": "Inspiration",
+      "relationship_sentence": "The core idea that atrous/dilated convolutions enlarge receptive fields without extra parameters directly motivates ScaleCrafter\u2019s tuning-free re-dilation of U-Net convolutions to scale perceptual context with target resolution."
+    },
+    {
+      "title": "Understanding the Effective Receptive Field in Deep Convolutional Neural Networks",
+      "authors": "Wenhui Luo et al.",
+      "year": 2016,
+      "arxiv_id": "1701.04128",
+      "role": "Foundation",
+      "relationship_sentence": "The finding that the effective receptive field is much smaller and Gaussian-shaped provides the mechanistic explanation for repeated objects and distorted structures at higher resolutions, motivating ScaleCrafter\u2019s need to expand the U-Net\u2019s effective field via re-dilation."
+    },
+    {
+      "title": "Understanding Convolution for Semantic Segmentation (Hybrid Dilated Convolution)",
+      "authors": "Fisher Yu, Li Zhang, Yunchao Wei, Thomas Huang (aka Wang et al. variants)",
+      "year": 2018,
+      "arxiv_id": "1709.00320",
+      "role": "Extension",
+      "relationship_sentence": "Hybrid Dilated Convolution\u2019s strategy for avoiding gridding artifacts when using large dilation directly informs ScaleCrafter\u2019s dispersed convolution design to distribute sampling coverage under high dilation."
+    },
+    {
+      "title": "Rethinking Atrous Convolution for Semantic Segmentation (DeepLabv3)",
+      "authors": "Liang-Chieh Chen et al.",
+      "year": 2017,
+      "arxiv_id": "1706.05587",
+      "role": "Related Problem",
+      "relationship_sentence": "ASPP\u2019s use of multiple dilation rates to balance local detail and global context influences ScaleCrafter\u2019s layer-wise dilation scheduling to maintain structure while scaling resolution."
+    },
+    {
+      "title": "MultiDiffusion: Fusing Diffusion Paths for Controlled Image Generation",
+      "authors": "Mor Bar-Tal et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "As the leading training-free high-resolution/arbitrary aspect ratio method via joint diffusion over overlapping tiles, MultiDiffusion serves as ScaleCrafter\u2019s primary baseline whose repetition and structural issues ScaleCrafter addresses by enlarging the U-Net\u2019s receptive field instead of tiling."
+    },
+    {
+      "title": "Cascaded Diffusion Models for High Fidelity Image Generation",
+      "authors": "Jonathan Ho et al.",
+      "year": 2022,
+      "arxiv_id": "2106.15282",
+      "role": "Gap Identification",
+      "relationship_sentence": "This cascaded approach achieves high resolution by training separate super-resolution diffusion models, a training burden that ScaleCrafter explicitly avoids by enabling any-resolution generation with a single pre-trained model and no tuning."
+    }
+  ],
+  "synthesis_narrative": "Latent Diffusion established a U-Net-based text-to-image generator trained at 512\u00d7512 with fixed 3\u00d73 convolutions, a design whose receptive field defines how much global structure the model can perceive at inference. Prior convolution theory clarified why na\u00efvely running such models at 1024\u00d71024 fails: the effective receptive field is smaller and Gaussian-shaped, so context grows sublinearly with image size, leading to object repetition and structural distortions. Atrous (dilated) convolutions showed how to enlarge receptive fields without extra parameters or pooling, while Hybrid Dilated Convolution demonstrated that large dilations can create coverage holes and introduced mixed-rate schemes to avoid gridding artifacts. DeepLabv3\u2019s ASPP further leveraged multiple dilation rates to capture both local detail and global context, providing practical recipes for balancing multi-scale perception. On the diffusion side, MultiDiffusion achieved high-resolution and arbitrary aspect ratios by synchronizing overlapping tiles, yet its tiling mechanics still suffer repetition and incoherence, and cascaded diffusion pipelines solve resolution by training separate super-resolution models, increasing complexity and cost. Together, these works exposed a clear opportunity: expand the pre-trained U-Net\u2019s effective receptive field at inference\u2014without retraining\u2014while maintaining uniform coverage. ScaleCrafter synthesizes these ideas by dynamically re-dilating Stable Diffusion\u2019s convolutions according to target resolution and introducing dispersed convolution to avoid gridding, delivering tuning-free, any-aspect-ratio high-resolution generation with improved structural coherence.",
+  "target_paper": {
+    "title": "ScaleCrafter: Tuning-free Higher-Resolution Visual Generation with Diffusion Models",
+    "authors": "Yingqing He, Shaoshu Yang, Haoxin Chen, Xiaodong Cun, Menghan Xia, Yong Zhang, Xintao Wang, Ran He, Qifeng Chen, Ying Shan",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "text-to-image generation, diffusion models, high resolution generation",
+    "abstract": "In this work, we investigate the capability of generating images from pre-trained diffusion models at much higher resolutions than the training image sizes. In addition, the generated images should have arbitrary image aspect ratios. When generating images directly at a higher resolution, 1024 x 1024, with the pre-trained Stable Diffusion using training images of resolution 512 x 512, we observe persistent problems of object repetition and unreasonable object structures. Existing works for higher-resolution generation, such as attention-based and joint-diffusion approaches, cannot well address these issues. As a new perspective, we examine the structural components of the U-Net in diffusion models and identify the crucial cause as the limited perception field of convolutional kernels. Based on this key observation, we propose a simple yet effective re-dilation that can dynamically adjust the convolutional perception field during inference. We further propose the dispersed convolution a",
+    "openreview_id": "u48tHG5f66",
+    "forum_id": "u48tHG5f66"
+  },
+  "analysis_timestamp": "2026-01-06T16:04:43.624042"
+}

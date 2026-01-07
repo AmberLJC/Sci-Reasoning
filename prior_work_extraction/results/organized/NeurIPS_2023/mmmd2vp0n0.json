@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis",
+      "authors": "Ben Mildenhall et al.",
+      "year": 2020,
+      "role": "Foundational neural volumetric rendering and implicit scene representation",
+      "relationship_sentence": "Provides the core radiance-field parameterization and differentiable volume rendering framework that Transient NeRF generalizes by introducing a time-resolved (transient) rendering model and loss."
+    },
+    {
+      "title": "A Framework for Transient Rendering",
+      "authors": "I. Jarabo, J. Marco, A. Mu\u00f1oz, R. Buisan, W. Jarosz, D. Gutierrez",
+      "year": 2014,
+      "role": "Transient light transport theory and time-resolved volume/path rendering",
+      "relationship_sentence": "Introduces the time-resolved radiative transfer/volume rendering formulation that underpins the paper\u2019s extension of NeRF to render SPAD lidar histograms over picosecond time bins."
+    },
+    {
+      "title": "First-Photon Imaging",
+      "authors": "Ahmed Kirmani et al.",
+      "year": 2014,
+      "role": "Photon-counting lidar measurement model and Poisson statistics",
+      "relationship_sentence": "Establishes the probabilistic forward model and Poisson statistics of single-photon detection that Transient NeRF leverages to define a physically grounded histogram rendering and likelihood-based training objective."
+    },
+    {
+      "title": "Confocal Non-Line-of-Sight Imaging Based on the Light Cone Transform",
+      "authors": "Matthew O'Toole, David B. Lindell, Gordon Wetzstein",
+      "year": 2018,
+      "role": "Transient histogram forward model and inversion for time-of-flight imaging",
+      "relationship_sentence": "Demonstrates how time-resolved photon histograms encode geometry and light transport, informing Transient NeRF\u2019s design of a differentiable transient forward model that integrates along rays to produce lidar histograms."
+    },
+    {
+      "title": "Wave-based Non-Line-of-Sight Imaging",
+      "authors": "David B. Lindell, Matthew O'Toole, Gordon Wetzstein",
+      "year": 2019,
+      "role": "Physics-based time-of-flight modeling and inversion of transient signals",
+      "relationship_sentence": "Reinforces the use of physically accurate transient image formation and inversion, a principle Transient NeRF adopts within neural fields to capture multipath and picosecond-scale transport in line-of-sight lidar."
+    },
+    {
+      "title": "Depth-supervised NeRF (DS-NeRF): Fewer Views and Faster Training",
+      "authors": "Kangle Deng et al.",
+      "year": 2022,
+      "role": "Incorporating range/depth supervision into NeRF training",
+      "relationship_sentence": "Shows the value of supervising NeRF with auxiliary range signals; Transient NeRF advances this by modeling the full lidar histogram formation rather than using lidar-derived points or depths as auxiliary cues."
+    }
+  ],
+  "synthesis_narrative": "Transient Neural Radiance Fields (T-NeRF) fuses three lines of prior work: neural volumetric rendering, transient light transport theory, and photon-counting lidar image formation. NeRF provides the core representation and differentiable ray-marching machinery over density and radiance; T-NeRF preserves this structure but augments it with an explicit temporal dimension. Jarabo et al.\u2019s transient rendering framework supplies the theoretical backbone for time-resolved radiative transfer, showing how path contributions are distributed over picosecond-scale time bins\u2014exactly the ingredient needed to convert NeRF\u2019s steady-state rendering into histogram synthesis.\n\nOn the sensing side, photon-efficient lidar works beginning with First-Photon Imaging formalize the Poisson detection process and the statistics of time-resolved photon counts, enabling likelihood-based objectives tailored to SPAD histograms. Subsequent transient/NLOS imaging papers (e.g., the light cone transform and wave-based formulations by O\u2019Toole, Lindell, and Wetzstein) demonstrate how transient histograms encode geometry and multipath, and how differentiable physics can be exploited for reconstruction\u2014insights directly reflected in T-NeRF\u2019s transient forward model and handling of complex light transport.\n\nFinally, depth/LiDAR-supervised NeRF variants (e.g., DS-NeRF) established that augmenting NeRF with range cues improves geometry. T-NeRF moves beyond auxiliary supervision by embedding the lidar\u2019s full image-formation model into the renderer and loss, enabling direct synthesis of SPAD histograms from novel viewpoints and yielding accurate geometry that respects the sensor\u2019s temporal response.",
+  "analysis_timestamp": "2026-01-07T00:02:04.853666"
+}

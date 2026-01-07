@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Training language models to follow instructions with human feedback",
+      "authors": "Long Ouyang et al.",
+      "year": 2022,
+      "role": "Alignment foundation and use of alignment datasets",
+      "relationship_sentence": "BDS conditions its Bayesian inference on alignment data; RLHF established the practice and datasets for harmlessness/alignment that BDS leverages as evidence to estimate per-example safety posteriors."
+    },
+    {
+      "title": "Constitutional AI: Harmlessness from AI Feedback",
+      "authors": "Yuntao Bai et al.",
+      "year": 2022,
+      "role": "Safety training paradigm and safety signal design",
+      "relationship_sentence": "Constitutional AI formalized structured safety principles and datasets; BDS uses such alignment signals as priors/evidence to calibrate the posterior over each data point\u2019s safety attribute."
+    },
+    {
+      "title": "Universal and Transferable Adversarial Attacks on Aligned Language Models",
+      "authors": "Andy Zou et al.",
+      "year": 2023,
+      "role": "Attack-simulation based robustness and its limits",
+      "relationship_sentence": "This work showed red-teamed/jailbreak prompts transfer across models, motivating defenses that don\u2019t rely on bounded attack sets; BDS explicitly avoids attack simulation by inferring safety posteriors directly from data."
+    },
+    {
+      "title": "Learning to Reweight Examples for Robust Deep Learning",
+      "authors": "Mengye Ren, Wenyuan Zeng, Bin Yang, Raquel Urtasun",
+      "year": 2018,
+      "role": "Principled example reweighting under data corruption",
+      "relationship_sentence": "BDS also mitigates harmful data via per-example weighting, but replaces meta-learned weights with a Bayesian posterior over safety, yielding adaptive and uncertainty-aware reweighting."
+    },
+    {
+      "title": "Co-teaching: Robust Training with Extremely Noisy Labels",
+      "authors": "Bo Han et al.",
+      "year": 2018,
+      "role": "Sample selection for robust training",
+      "relationship_sentence": "Like Co-teaching\u2019s selective use of cleaner samples, BDS constrains optimization by downweighting suspected harmful points, generalizing from hard selection to probabilistic, posterior-driven scheduling."
+    },
+    {
+      "title": "Bayesian Active Learning by Disagreement (BALD)",
+      "authors": "Neil Houlsby, Ferenc Husz\u00e1r, Zoubin Ghahramani, M\u00e1t\u00e9 Lengyel",
+      "year": 2011,
+      "role": "Bayesian uncertainty to guide data selection",
+      "relationship_sentence": "BALD\u2019s principle of using posterior uncertainty to drive data choice underpins BDS\u2019s use of inferred safety posteriors to adaptively schedule which fine-tuning data to emphasize."
+    },
+    {
+      "title": "An Information-Theoretic Analysis of Thompson Sampling",
+      "authors": "Daniel Russo, Benjamin Van Roy",
+      "year": 2014,
+      "role": "Posterior sampling for adaptive decision making",
+      "relationship_sentence": "BDS samples safety attributes from their posteriors to stochastically weight data, closely mirroring Thompson sampling\u2019s posterior-sampling strategy for exploration-exploitation."
+    }
+  ],
+  "synthesis_narrative": "The Bayesian Data Scheduler (BDS) reframes defense against harmful fine-tuning as per-example Bayesian inference, drawing on and unifying strands from alignment, adversarial robustness, and robust training. Alignment methods such as RLHF (Ouyang et al.) and Constitutional AI (Bai et al.) provide structured harmlessness signals and datasets; BDS treats these alignment corpora as evidence to calibrate a posterior over each fine-tuning example\u2019s latent safety attribute. In contrast to attack-simulation defenses popularized by jailbreak studies (e.g., Zou et al.), which rely on bounded adversarial prompt sets and struggle with unknown threats, BDS sidesteps red teaming entirely by estimating safety directly from data distributions.\nConceptually, BDS inherits the effectiveness of example-level control from robust training with noisy data: meta-learned reweighting (Ren et al.) and selective sampling (Co-teaching; Han et al.) demonstrate that per-example weighting/selection can resist corruption. BDS advances this line by replacing heuristic or meta-learned weights with a principled Bayesian posterior that captures both estimated safety and uncertainty. Its adaptive scheduler further leverages Bayesian decision-making: inspired by BALD, it uses posterior information to guide which data to emphasize, and, akin to Thompson sampling (Russo & Van Roy), it samples from the posterior to stochastically weight data, naturally balancing caution and coverage. Together, these influences yield a tuning-stage defense that is simulation-free, uncertainty-aware, and adaptable across varying attack settings.",
+  "analysis_timestamp": "2026-01-07T00:21:32.348768"
+}

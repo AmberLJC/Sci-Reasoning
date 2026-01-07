@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Do We Really Need to Access the Source Data? Source Hypothesis Transfer for Unsupervised Domain Adaptation (SHOT)",
+      "authors": "Jian Liang et al.",
+      "year": 2020,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "SHOT formalized the SFDA setting and introduced a self-training/Information Maximization backbone that ProDe uses as the adaptation substrate while replacing self-generated pseudo-labels with denoised vision\u2013language proxy supervision."
+    },
+    {
+      "title": "Learning Transferable Visual Models From Natural Language Supervision (CLIP)",
+      "authors": "Alec Radford et al.",
+      "year": 2021,
+      "arxiv_id": "2103.00020",
+      "role": "Foundation",
+      "relationship_sentence": "CLIP\u2019s zero-shot image\u2013text alignment provides the concrete vision\u2013language proxy whose predictions ProDe explicitly corrects and leverages to guide adaptation toward a domain-invariant space."
+    },
+    {
+      "title": "Test-time Prompt Tuning for Zero-shot Generalization in Vision-Language Models (TPT)",
+      "authors": "Zhang et al.",
+      "year": 2022,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "TPT showed that CLIP\u2019s own predictions can drive unsupervised adaptation but are unstable under domain shift, directly motivating ProDe\u2019s need to denoise vision\u2013language pseudo supervision with principled confidence modeling."
+    },
+    {
+      "title": "Learning to Prompt for Vision-Language Models (CoOp)",
+      "authors": "Kaiyang Zhou et al.",
+      "year": 2022,
+      "arxiv_id": "2109.01134",
+      "role": "Inspiration",
+      "relationship_sentence": "CoOp established a controllable multimodal proxy space via learnable prompts, which ProDe exploits conceptually to define and measure proxy divergence against a latent domain-invariant space during adaptation."
+    },
+    {
+      "title": "Confident Learning: Estimating Uncertainty in Dataset Labels",
+      "authors": "Curtis G. Northcutt et al.",
+      "year": 2021,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "ProDe\u2019s proxy confidence theory borrows the key idea of estimating unknown noise rates from model confidences to identify and correct erroneous supervision, extending it from label noise to vision\u2013language proxy noise."
+    },
+    {
+      "title": "DivideMix: Learning with Noisy Labels as Semi-supervised Learning",
+      "authors": "Junnan Li et al.",
+      "year": 2020,
+      "arxiv_id": "2002.07394",
+      "role": "Related Problem",
+      "relationship_sentence": "ProDe generalizes DivideMix\u2019s principle of separating clean versus noisy supervision by confidence into a multimodal, dynamically evolving proxy setting rather than a fixed single-label noise scenario."
+    }
+  ],
+  "synthesis_narrative": "Source-free domain adaptation was crystallized by SHOT, which showed that a source-trained model can be adapted in a target-only regime by self-training and information maximization, establishing the optimization backbone used broadly in SFDA. CLIP demonstrated that large vision\u2013language models produce zero-shot class predictions via image\u2013text alignment, making their outputs a natural external teacher or proxy without accessing source data. Test-time Prompt Tuning (TPT) further evidenced that CLIP\u2019s own predictions can steer unsupervised adaptation on target data, but also revealed brittleness: proxy predictions fluctuate and degrade under domain shift, introducing noisy supervision. CoOp introduced learnable prompts to control CLIP\u2019s multimodal embedding space, highlighting that the proxy space is not fixed but can be shaped, and offering a handle to characterize alignment or divergence. Beyond adaptation, Confident Learning provided a principled way to estimate unknown label noise rates from classifier confidences and prune or correct mislabeled data. DivideMix treated label noise as a semi-supervised problem, separating clean from noisy samples using confidence-driven mixture modeling to stabilize training.\nBringing these insights together exposes a clear opportunity: vision\u2013language proxies are powerful for SFDA but their noise is unmodeled and dynamically varies as adaptation proceeds. The natural next step is to keep the SHOT-style target adaptation backbone while explicitly modeling a confidence-driven, multimodal proxy space derived from CLIP/CoOp, diagnosing proxy divergence, and denoising proxy predictions as they evolve. By instantiating a confidence theory tailored to proxy supervision and by operationalizing it to correct proxy labels before they guide updates, the current work synthesizes robust noisy-label principles (Confident Learning/DivideMix) with ViL-driven SFDA (CLIP/TPT) into a unified proxy denoising framework that targets the latent domain-invariant space.",
+  "target_paper": {
+    "title": "Proxy Denoising for Source-Free Domain Adaptation",
+    "authors": "Song Tang, Wenxin Su, Yan Gan, Mao Ye, Jianwei Dr. Zhang, Xiatian Zhu",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "oral",
+    "keywords": "Domain adaptation, source-free, multimodal proxy space, proxy confidence theory",
+    "abstract": "Source-Free Domain Adaptation (SFDA) aims to adapt a pre-trained source model to an unlabeled target domain with no access to the source data. Inspired by the success of large Vision-Language (ViL) models in many applications, the latest research has validated ViL's benefit for SFDA by using their predictions as pseudo supervision. However, we observe that ViL's supervision could be noisy and inaccurate at an unknown rate, potentially introducing additional negative effects during adaption. To address this thus-far ignored challenge, we introduce a novel Proxy Denoising (__ProDe__) approach. The key idea is to leverage the ViL model as a proxy to facilitate the adaptation process towards the latent domain-invariant space. Concretely, we design a proxy denoising mechanism to correct ViL's predictions. This is grounded on a proxy confidence theory that models the dynamic effect of proxy's divergence against the domain-invariant space during adaptation. To capitalize the corrected proxy, ",
+    "openreview_id": "FIj9IEPCKr",
+    "forum_id": "FIj9IEPCKr"
+  },
+  "analysis_timestamp": "2026-01-06T19:25:48.926561"
+}

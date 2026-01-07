@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Layer Normalization",
+      "authors": "Jimmy Lei Ba, Jamie Ryan Kiros, Geoffrey E. Hinton",
+      "year": 2016,
+      "role": "Foundational normalization method",
+      "relationship_sentence": "Provides the centering-and-scaling operation at the heart of Pre-LN Transformers; the paper\u2019s key result shows the mean-centering term in LayerNorm is redundant in the pre-norm residual topology, enabling an equivalent, more efficient formulation."
+    },
+    {
+      "title": "Root Mean Square Layer Normalization",
+      "authors": "Biao Zhang, Rico Sennrich",
+      "year": 2019,
+      "role": "Alternative normalization (no mean-centering)",
+      "relationship_sentence": "Introduces RMSNorm, the mean-free counterpart to LayerNorm that is computationally cheaper; the paper directly builds on RMSNorm, identifies its representational limitations, and proposes Pre-RMSNorm/Pre-CRMSNorm with mappings that recover Pre-LN behavior."
+    },
+    {
+      "title": "Transformers without Tears: Improving the Normalization of Self-Attention",
+      "authors": "Toan Q. Nguyen, Julian Salazar",
+      "year": 2019,
+      "role": "Precursor to norm-only rescaling (ScaleNorm)",
+      "relationship_sentence": "Establishes the viability of norm-only rescaling (ScaleNorm), conceptually underpinning the paper\u2019s argument that subtracting the mean is unnecessary when residual connections are present and motivating RMS-style normalizations."
+    },
+    {
+      "title": "On Layer Normalization in the Transformer Architecture",
+      "authors": "Ruibin Xiong, Yunchang Yang, Di He, et al.",
+      "year": 2020,
+      "role": "Establishes Pre-LN Transformer topology",
+      "relationship_sentence": "Formalizes and analyzes the pre-normalization residual architecture studied by the paper; the proposed equivalence between Pre-LN and Pre-RMSNorm/Pre-CRMSNorm is derived specifically in this Pre-LN setting."
+    },
+    {
+      "title": "Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer (T5)",
+      "authors": "Colin Raffel, Noam Shazeer, Adam Roberts, et al.",
+      "year": 2020,
+      "role": "Influential Pre-LN + LayerNorm instantiation",
+      "relationship_sentence": "Represents the prominent use of Pre-LN with LayerNorm in large-scale models; the paper\u2019s unification goal is to make such Pre-LN models convertible to an RMS-style form without loss."
+    },
+    {
+      "title": "LLaMA: Open and Efficient Foundation Language Models",
+      "authors": "Hugo Touvron, Thibaut Lavril, Gautier Izacard, et al.",
+      "year": 2023,
+      "role": "Influential Pre-RMSNorm adoption in LLMs",
+      "relationship_sentence": "Showcases the opposite design choice\u2014RMSNorm in pre-norm Transformers\u2014highlighting a divide in practice; the paper directly targets bridging this divide via equivalence and efficient conversion between the two forms."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core contribution\u2014showing that Pre-RMSNorm and a centered variant (Pre-CRMSNorm) can be made equivalent to Pre-LayerNorm Transformers while being more efficient\u2014rests on a sequence of normalization and architectural insights. Layer Normalization established the standard centering-and-scaling operation widely used in Transformers, especially in the Pre-LN topology analyzed by Xiong et al., which stabilizes training and is now the de facto design. However, RMSNorm, introduced by Zhang and Sennrich, demonstrated that mean-centering may be dispensable, offering a cheaper, mean-free alternative that nonetheless raised concerns about potential representational loss. Nguyen and Salazar\u2019s ScaleNorm further reinforced the idea that norm-only rescaling can suffice for stable training, foreshadowing the paper\u2019s thesis that, in pre-norm residual architectures, the mean component is redundant and can be safely removed or reintroduced in controlled ways. In practice, this theoretical ambiguity has produced a split in large models: T5 exemplifies successful Pre-LN with LayerNorm, while LLaMA popularized Pre-RMSNorm. The present work unifies these lines by supplying explicit mappings and a centered RMSNorm (CRMSNorm) that recover the expressive behavior of Pre-LN without its extra compute, thereby enabling equivalence and efficient conversion between Pre-LN and Pre-RMSNorm-style Transformers. The result resolves a practical fragmentation in model design and provides a principled foundation for choosing or converting between normalization schemes.",
+  "analysis_timestamp": "2026-01-07T00:02:04.854554"
+}

@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Jonathan Ho et al.",
+      "year": 2020,
+      "arxiv_id": "2006.11239",
+      "role": "Foundation",
+      "relationship_sentence": "This work formalized the standard diffusion training objective as MSE on noise prediction across timesteps, whose loss formulation (comparing predictions to ground-truth noise) is exactly the objective prior attribution methods optimized and that this paper argues is mismatched for measuring sample influence."
+    },
+    {
+      "title": "Estimation of Non-Normalized Statistical Models by Score Matching",
+      "authors": "Aapo Hyv\u00e4rinen",
+      "year": 2005,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "Score matching connects training to Fisher divergence with the data distribution, clarifying that diffusion losses measure divergence to ground-truth distributions rather than directly contrasting two models\u2019 predictive behaviors\u2014the precise conceptual gap this paper addresses by proposing a direct model-to-model distribution comparison."
+    },
+    {
+      "title": "Understanding Black-box Predictions via Influence Functions",
+      "authors": "Pang Wei Koh et al.",
+      "year": 2017,
+      "arxiv_id": "1703.04730",
+      "role": "Foundation",
+      "relationship_sentence": "Influence functions define training-sample contribution via leave-one-out effects on loss, a paradigm adopted by diffusion data attribution that this paper retains in spirit while replacing the loss with a direct predictive-distribution discrepancy between models."
+    },
+    {
+      "title": "Data Shapley: Equitable Valuation of Data for Machine Learning",
+      "authors": "Amirata Ghorbani et al.",
+      "year": 2019,
+      "arxiv_id": "1904.02868",
+      "role": "Foundation",
+      "relationship_sentence": "Data Shapley formalizes per-sample contribution as marginal utility measured via a task loss; this paper keeps the marginal-contribution framing but substitutes utility with a direct comparison of predicted distributions to better capture differences in model behavior for diffusion models."
+    },
+    {
+      "title": "Estimating Training Data Influence by Tracing Gradient Descent",
+      "authors": "Garima Pruthi et al.",
+      "year": 2020,
+      "arxiv_id": "2002.08484",
+      "role": "Baseline",
+      "relationship_sentence": "TracIn provides a practical, loss-based influence approximation widely used as a baseline; the proposed Diffusion Attribution Score improves on this class of methods by replacing diffusion-loss dependence with a direct divergence between model predictive distributions."
+    },
+    {
+      "title": "Extracting Training Data from Diffusion Models",
+      "authors": "Nicholas Carlini et al.",
+      "year": 2023,
+      "arxiv_id": "2301.13188",
+      "role": "Gap Identification",
+      "relationship_sentence": "By demonstrating concrete training data memorization and privacy risks in diffusion models, this work motivates the need for precise per-sample attribution beyond loss-based proxies, directly prompting the development of a more behavior-faithful attribution score."
+    }
+  ],
+  "synthesis_narrative": "The core loss used to train diffusion models was established by Denoising Diffusion Probabilistic Models, which framed training as timestep-weighted MSE on noise prediction; this objective compares predictions to ground-truth noise rather than contrasting two models\u2019 behaviors. Score matching theory further clarifies that such training minimizes Fisher divergence to the data distribution, reinforcing that diffusion loss is a model-to-data discrepancy rather than a direct model-to-model comparison. In parallel, influence functions framed training-sample contribution as the leave-one-out effect on loss, and Data Shapley formalized sample valuation as marginal utility, both cementing the loss-centric view of data attribution. TracIn operationalized this paradigm with a scalable approximation based on gradient-trajectory inner products, becoming a practical baseline for influence estimation. Meanwhile, work on extracting training data from diffusion models exposed real privacy and copyright stakes, underscoring the importance of accurate attribution beyond coarse loss-based measures.\nTaken together, these strands revealed a mismatch: diffusion attribution inherited loss-based utilities that inherently compare models to ground-truth distributions, not to each other, obscuring differences in model behavior attributable to specific samples. The natural next step is to retain the leave-one-out/marginal-contribution framing while redefining the utility to directly compare predicted distributions of models trained with versus without a sample. By grounding attribution in model-to-model predictive divergence instead of diffusion loss, the proposed approach directly targets behavioral variance, yielding a more faithful measure of training data influence in diffusion models.",
+  "target_paper": {
+    "title": "Diffusion Attribution Score: Evaluating Training Data Influence in Diffusion Models",
+    "authors": "Jinxu Lin, Linwei Tao, Minjing Dong, Chang Xu",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "Diffusion Model; Data Attribution; Training Data Influence",
+    "abstract": "As diffusion models become increasingly popular, the misuse of copyrighted and private images has emerged as a major concern. One promising solution to mitigate this issue is identifying the contribution of specific training samples in generative models, a process known as data attribution. Existing data attribution methods for diffusion models typically quantify the contribution of a training sample by evaluating the change in diffusion loss when the sample is included or excluded from the training process.\nHowever, we argue that the direct usage of diffusion loss cannot represent such a contribution accurately due to the calculation of diffusion loss.\nSpecifically, these approaches measure the divergence between predicted and ground truth distributions, which leads to an indirect comparison between the predicted distributions and cannot represent the variances between model behaviors.\nTo address these issues, we aim to measure the direct comparison between predicted distributions wit",
+    "openreview_id": "kuutidLf6R",
+    "forum_id": "kuutidLf6R"
+  },
+  "analysis_timestamp": "2026-01-06T18:03:27.471588"
+}

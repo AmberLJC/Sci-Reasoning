@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "mixup: Beyond Empirical Risk Minimization",
+      "authors": "Hongyi Zhang et al.",
+      "year": 2018,
+      "arxiv_id": "1710.09412",
+      "role": "Extension",
+      "relationship_sentence": "SelMix directly extends mixup\u2019s convex interpolation of examples and labels by making the pairing and sampling objective-aware, selecting which samples to mix based on the target non-decomposable metric."
+    },
+    {
+      "title": "Manifold Mixup: Better Representations by Interpolating Hidden States",
+      "authors": "Vikas Verma et al.",
+      "year": 2019,
+      "arxiv_id": "1806.05236",
+      "role": "Extension",
+      "relationship_sentence": "SelMix builds on manifold mixup\u2019s idea of interpolating in feature space, using hidden-state mixup but with a metric-sensitive sampling distribution over groups/classes to bias improvements on the desired objective."
+    },
+    {
+      "title": "Consistent Binary Classification with Generalized Performance Metrics",
+      "authors": "Oluwasanmi Koyejo et al.",
+      "year": 2014,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "SelMix leverages the confusion-matrix\u2013based characterization and cost-sensitive reduction for generalized metrics from this work to derive sampling weights that align feature mixing with the target non-decomposable objective."
+    },
+    {
+      "title": "Optimizing Non-decomposable Performance Measures: A Tale of Two Classes",
+      "authors": "Harikrishna Narasimhan et al.",
+      "year": 2014,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "This line of work provides surrogate-based optimizers for non-decomposable measures but requires training models from scratch per objective, a limitation SelMix overcomes via inexpensive objective-aware fine-tuning."
+    },
+    {
+      "title": "A Reductions Approach to Fair Classification",
+      "authors": "Alekh Agarwal et al.",
+      "year": 2018,
+      "arxiv_id": "1803.02453",
+      "role": "Foundation",
+      "relationship_sentence": "SelMix adopts the reductions viewpoint that fairness constraints can be mapped to cost-sensitive learning, using this mapping to compute which groups to mix and emphasize during fine-tuning to meet fairness-style objectives."
+    },
+    {
+      "title": "Distributionally Robust Neural Networks for Group Shifts: On the Importance of Regularization for Worst-Case Generalization",
+      "authors": "Shiori Sagawa et al.",
+      "year": 2020,
+      "arxiv_id": "1911.08731",
+      "role": "Baseline",
+      "relationship_sentence": "Group DRO serves as a primary baseline targeting worst-group performance, which SelMix surpasses by targeting worst-group recall and related non-decomposable metrics through metric-guided selective mixup rather than uniform group reweighting."
+    },
+    {
+      "title": "ReMix: Rebalanced Mixup for Long-Tailed Recognition",
+      "authors": "Chou et al.",
+      "year": 2020,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "By showing that class-aware pairing and label interpolation can mitigate long-tail imbalance, ReMix directly inspires SelMix\u2019s idea of learning a principled, objective-derived sampling distribution for whom to mix with whom."
+    }
+  ],
+  "synthesis_narrative": "Mixup introduced linear interpolation between samples and labels to regularize training and transfer information across examples, while manifold mixup extended this idea into hidden representations, showing that feature-space interpolation can be especially effective. On the evaluation side, Koyejo et al. established that many non-decomposable metrics admit a confusion-matrix characterization and can be optimized via cost-sensitive reductions, grounding how importance should be distributed across classes or groups. Narasimhan and collaborators developed surrogate-based procedures to optimize such metrics directly, but these typically necessitate specialized training and often retraining per target objective. In fairness, Agarwal et al. framed constraints as reductions to cost-sensitive classification, providing a systematic way to translate fairness goals into weighted learning problems. For robustness under subpopulation shift, Group DRO emphasized worst-group performance via group reweighting, while in long-tailed learning, ReMix demonstrated that class-aware mixup can sharpen minority performance by biasing pair selection and label interpolation.\nCollectively, these works revealed that (i) objective-aware cost sensitivities can dictate whom to prioritize, (ii) feature-space mixup is a powerful mechanism for transferring signal, and (iii) existing NDO optimizers are costly to retrain per objective or operate with coarse reweighting. The natural next step was to fuse reductions-derived sensitivities with feature-level interpolation: selectively mix feature pairs according to a sampling distribution induced by the target non-decomposable metric, enabling inexpensive fine-tuning of pre-trained models to optimize worst-group recall, fairness-style constraints, and other non-decomposable objectives.",
+  "target_paper": {
+    "title": "Selective Mixup Fine-Tuning for Optimizing Non-Decomposable Objectives",
+    "authors": "Shrinivas Ramasubramanian, Harsh Rangwani, Sho Takemori, Kunal Samanta, Yuhei Umeda, Venkatesh Babu Radhakrishnan",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Non-Decomposable Objectives, Long-Tail Learning, Semi-Supervised Learning",
+    "abstract": "The rise in internet usage has led to the generation of massive amounts of data, resulting in the adoption of various supervised and semi-supervised machine learning algorithms, which can effectively utilize the colossal amount of data to train models. However, before deploying these models in the real world, these must be strictly evaluated on performance measures like worst-case recall and satisfy constraints such as fairness. We find that current state-of-the-art empirical techniques offer sub-optimal performance on these practical, non-decomposable performance objectives. On the other hand, the theoretical techniques necessitate training a new model from scratch for each performance objective. To bridge the gap, we propose SelMix, a selective mixup-based inexpensive fine-tuning technique for pre-trained models, to optimize for the desired objective. The core idea of our framework is to determine a sampling distribution to perform a mixup of features between samples from particular ",
+    "openreview_id": "rxVBKhyfSo",
+    "forum_id": "rxVBKhyfSo"
+  },
+  "analysis_timestamp": "2026-01-06T15:16:34.770058"
+}

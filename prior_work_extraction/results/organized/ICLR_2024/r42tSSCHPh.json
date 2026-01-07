@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "The Curious Case of Neural Text Degeneration",
+      "authors": "Ari Holtzman et al.",
+      "year": 2020,
+      "arxiv_id": "1904.09751",
+      "role": "Foundation",
+      "relationship_sentence": "The attack explicitly exploits the top-k/top-p/temperature sampling behaviors characterized by Holtzman et al., showing that simply shifting these decoding hyperparameters can flip aligned models from refusal to harmful completions."
+    },
+    {
+      "title": "RealToxicityPrompts: Evaluating Neural Toxic Degeneration in Language Models",
+      "authors": "Samuel Gehman et al.",
+      "year": 2020,
+      "arxiv_id": "2009.11462",
+      "role": "Inspiration",
+      "relationship_sentence": "Gehman et al. empirically demonstrated that toxicity is highly sensitive to decoding choices (e.g., higher temperature and nucleus sampling), directly motivating the idea that decoding-only changes can elicit unsafe outputs without altering the prompt."
+    },
+    {
+      "title": "Plug and Play Language Models: A Simple Approach to Controlled Text Generation",
+      "authors": "Sumanth Dathathri et al.",
+      "year": 2020,
+      "arxiv_id": "1912.02164",
+      "role": "Related Problem",
+      "relationship_sentence": "PPLM showed that decoding-time interventions can steer a fixed model toward targeted attributes without updating weights, a principle echoed here by steering aligned chat models into unsafe behaviors via generation-only control."
+    },
+    {
+      "title": "Red Teaming Language Models with Language Models",
+      "authors": "Ethan Perez et al.",
+      "year": 2022,
+      "arxiv_id": "2202.03286",
+      "role": "Foundation",
+      "relationship_sentence": "This work formalized automated red teaming through adversarial prompts under fixed decoding, providing the jailbreak problem framing and evaluation setup that this paper adopts while exposing a new attack surface at decoding time."
+    },
+    {
+      "title": "Universal and Transferable Adversarial Attacks on Aligned Language Models",
+      "authors": "Andy Zou et al.",
+      "year": 2023,
+      "arxiv_id": "2307.15043",
+      "role": "Baseline",
+      "relationship_sentence": "We use their AdvBench harmful-instruction set and directly compare against their GCG adversarial-suffix method, showing that generation-exploitation attains higher attack success with ~30\u00d7 fewer queries."
+    },
+    {
+      "title": "Jailbroken: How Does LLM Safety Training Fail?",
+      "authors": "Shen et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "By cataloging failures of safety training under prompt manipulations but assuming fixed decoding, this work leaves open the overlooked vulnerability that we address: decoding variation alone can catastrophically defeat alignment."
+    }
+  ],
+  "synthesis_narrative": "Top-k, nucleus sampling, and temperature were dissected by Holtzman et al., who showed that decoding choices fundamentally reshape model output distributions, establishing that sampling hyperparameters are a first-class lever on model behavior. Gehman et al. then revealed that these same levers systematically modulate toxicity, with higher-temperature and nucleus sampling regimes increasing unsafe continuations, highlighting a direct linkage between decoding settings and safety. Dathathri et al. demonstrated that one can steer a frozen model toward targeted attributes purely at decoding time, proving that generation-time control\u2014without weight changes\u2014can strongly shift semantics. In parallel, Perez et al. formalized the jailbreak/red-teaming problem as inducing harmful behavior with adversarial prompts under fixed decoding setups, providing a canonical task framing and evaluation practices. Building on that framing, Zou et al. introduced GCG adversarial suffixes and the AdvBench harmful-instruction set, establishing state-of-the-art prompt-based jailbreaks and widely used benchmarks. Complementing these, \u201cJailbroken: How Does LLM Safety Training Fail?\u201d systematically surfaced alignment failure modes but focused on prompt-space manipulations while keeping decoding fixed. Taken together, these works revealed that (1) decoding choices strongly change content and safety, (2) jailbreaks were pursued almost exclusively via prompt engineering, and (3) evaluations largely assumed fixed generation settings. The natural next step was to treat decoding itself as an attack surface: by systematically varying temperature, top-k/top-p, and sampling methods, one can shift the model\u2019s generation distribution away from refusal and toward harmful completions. The current paper synthesizes these insights to show that generation-only manipulation, with minimal or no prompt changes, yields dramatically higher jailbreak success at a fraction of the query cost across open-source chat models.",
+  "target_paper": {
+    "title": "Catastrophic Jailbreak of Open-source LLMs via Exploiting Generation",
+    "authors": "Yangsibo Huang, Samyak Gupta, Mengzhou Xia, Kai Li, Danqi Chen",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Large Language Model, Alignment, Attack",
+    "abstract": "The rapid progress in open-source large language models (LLMs) is significantly advancing AI development. Extensive efforts have been made before model release to align their behavior with human values, with the primary goal of ensuring their helpfulness and harmlessness. However, even carefully aligned models can be manipulated maliciously, leading to unintended behaviors, known as ``jailbreaks\". These jailbreaks are typically triggered by specific text inputs, often referred to as adversarial prompts. In this work, we propose the generation exploitation attack, an extremely simple approach that disrupts model alignment by only manipulating variations of decoding methods. By exploiting different generation strategies, including varying decoding hyper-parameters and sampling methods, we increase the attack success rate from $0\\%$ to more than $95\\%$ across 11 language models including LLaMA2, Vicuna, Falcon, and MPT families, outperforming state-of-the-art attacks with $30\\times$ lower",
+    "openreview_id": "r42tSSCHPh",
+    "forum_id": "r42tSSCHPh"
+  },
+  "analysis_timestamp": "2026-01-06T08:17:24.601399"
+}

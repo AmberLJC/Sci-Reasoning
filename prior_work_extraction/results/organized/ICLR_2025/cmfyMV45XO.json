@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Neural Ordinary Differential Equations",
+      "authors": "R. T. Q. Chen et al.",
+      "year": 2018,
+      "arxiv_id": "1806.07366",
+      "role": "Foundation",
+      "relationship_sentence": "Provides the continuous-time parametric vector-field formulation (neural ODE) that the feedback loop in this work explicitly wraps and corrects to improve generalization."
+    },
+    {
+      "title": "Latent ODEs for Irregularly-Sampled Time Series",
+      "authors": "Y. Rubanova et al.",
+      "year": 2019,
+      "arxiv_id": "1907.03907",
+      "role": "Baseline",
+      "relationship_sentence": "Serves as the principal latent-dynamics baseline whose limited extrapolation to changing latent dynamics motivates adding an explicit feedback correction mechanism."
+    },
+    {
+      "title": "Observers for Multivariable Systems",
+      "authors": "D. G. Luenberger",
+      "year": 1966,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "Inspires the linear error-injection idea\u2014adding a gain on the output prediction error to the state dynamics\u2014which this paper adapts to neural ODEs and analyzes for convergence."
+    },
+    {
+      "title": "Neural Controlled Differential Equations for Irregular Time Series",
+      "authors": "P. Kidger et al.",
+      "year": 2020,
+      "arxiv_id": "2005.08926",
+      "role": "Related Problem",
+      "relationship_sentence": "Introduces the controlled-ODE viewpoint that a hidden state can be driven by an input signal, directly informing this paper\u2019s treatment of feedback as a learned control signal injected into the neural ODE dynamics."
+    },
+    {
+      "title": "Domain Randomization for Transferring Deep Neural Networks from Simulation to the Real World",
+      "authors": "J. Tobin et al.",
+      "year": 2017,
+      "arxiv_id": "1703.06907",
+      "role": "Extension",
+      "relationship_sentence": "Provides the training strategy the authors extend to learn a nonlinear neural feedback law that generalizes across varying latent dynamics via randomized environments."
+    },
+    {
+      "title": "Residual Reinforcement Learning for Robot Control",
+      "authors": "T. Johannink et al.",
+      "year": 2019,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "Motivates the residual-correction paradigm\u2014learning a feedback term to compensate model/controller errors\u2014which this work repurposes to add a corrective feedback around a neural ODE without sacrificing nominal accuracy."
+    }
+  ],
+  "synthesis_narrative": "Neural Ordinary Differential Equations formalized learning a continuous-time vector field to evolve hidden states, establishing an end-to-end differentiable ODE solver at the core of modern continuous-time modeling. Latent ODEs extended this to irregularly sampled sequences by learning latent dynamics, but their extrapolation often deteriorates when latent dynamics shift from training conditions. Classical observer theory, via Luenberger\u2019s linear observers, showed that injecting an error-feedback term\u2014proportional to the output prediction error\u2014into state dynamics can drive convergence despite modeling mismatch. Neural Controlled Differential Equations reframed hidden dynamics as controlled systems, indicating that an external signal can steer an ODE\u2019s evolution\u2014a perspective that naturally accommodates error-driven feedback as a learned control input. Residual Reinforcement Learning demonstrated that learning a corrective residual around a nominal controller effectively compensates unmodeled dynamics while preserving existing performance. Finally, domain randomization proved an effective strategy for learning controllers and perception modules that transfer robustly by sampling diverse training environments.\nTogether these works reveal a gap: neural ODE-based latent dynamics are accurate in-distribution yet brittle to dynamics shift, while control theory and residual methods suggest stability and adaptability arise from explicit error feedback. The current paper bridges this by wrapping a neural ODE with a two-degree-of-freedom feedback path: a provably convergent linear error-injection (observer-like) corrector and, trained via domain randomization, a nonlinear neural feedback law. This synthesis retains nominal accuracy of neural ODEs, injects control-theoretic convergence through linear feedback, and leverages randomized training to learn robust nonlinear correction\u2014yielding markedly improved generalization under varying latent dynamics.",
+  "target_paper": {
+    "title": "Feedback Favors the Generalization of Neural ODEs",
+    "authors": "Jindou Jia, Zihan Yang, Meng Wang, Kexin Guo, Jianfei Yang, Xiang Yu, Lei Guo",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "oral",
+    "keywords": "Neural ODEs, feedback, generalization, learning dynamical systems, model predictive control",
+    "abstract": "The well-known generalization problem hinders the application of artificial neural networks in continuous-time prediction tasks with varying latent dynamics. In sharp contrast, biological systems can neatly adapt to evolving environments benefiting from real-time feedback mechanisms. Inspired by the feedback philosophy, we present feedback neural networks, showing that a feedback loop can flexibly correct the learned latent dynamics of neural ordinary differential equations (neural ODEs), leading to a prominent generalization improvement. The feedback neural network is a novel two-DOF neural network, which possesses robust performance in unseen scenarios with no loss of accuracy performance on previous tasks. A linear feedback form is presented to correct the learned latent dynamics firstly, with a convergence guarantee. Then, domain randomization is utilized to learn a nonlinear neural feedback form. Finally, extensive tests including trajectory prediction of a real irregular object a",
+    "openreview_id": "cmfyMV45XO",
+    "forum_id": "cmfyMV45XO"
+  },
+  "analysis_timestamp": "2026-01-06T13:09:19.784379"
+}

@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer",
+      "authors": "Colin Raffel et al.",
+      "year": 2020,
+      "role": "Foundation",
+      "relationship_sentence": "Mu^2SLAM adopts T5\u2019s span-corruption denoising as the decoder-side objective, directly borrowing the text-to-text masked denoising formulation and applying it to both speech- and text-conditioned pretraining."
+    },
+    {
+      "title": "Multilingual Denoising Pre-training for Neural Machine Translation",
+      "authors": "Yinhan Liu et al.",
+      "year": 2020,
+      "role": "Foundation",
+      "relationship_sentence": "mBART established multilingual sequence-to-sequence denoising for MT; Mu^2SLAM generalizes this multilingual denoising framework to a cross-modal setting that jointly handles speech and text."
+    },
+    {
+      "title": "HuBERT: Self-Supervised Speech Representation Learning by Masked Prediction of Hidden Units",
+      "authors": "Wei-Ning Hsu et al.",
+      "year": 2021,
+      "role": "Inspiration",
+      "relationship_sentence": "HuBERT introduced predicting quantized/discrete speech units under a masked objective; Mu^2SLAM leverages quantized speech targets to make speech compatible with a T5-style decoder denoising objective."
+    },
+    {
+      "title": "SpeechT5: Unified-Modal Encoder-Decoder Pre-Training for Spoken Language Processing",
+      "authors": "Sanyuan Chen et al.",
+      "year": 2022,
+      "role": "Extension",
+      "relationship_sentence": "SpeechT5 demonstrated a unified speech\u2013text encoder\u2013decoder using discrete speech units and denoising; Mu^2SLAM extends this paradigm to >100 languages and integrates supervised ASR/AST/MT to strengthen cross-modal and cross-lingual alignment."
+    },
+    {
+      "title": "mSLAM: Massively Multilingual Joint Speech\u2013Text Pretraining",
+      "authors": "Ankur Bapna et al.",
+      "year": 2022,
+      "role": "Baseline",
+      "relationship_sentence": "mSLAM is the immediate predecessor that jointly pretrained on speech and text; Mu^2SLAM addresses its lack of a generative seq2seq denoising decoder and improves AST while matching mSLAM\u2019s strong ASR results."
+    },
+    {
+      "title": "XLS-R: Self-Supervised Cross-Lingual Speech Representation Learning at Scale",
+      "authors": "Arun Babu et al.",
+      "year": 2021,
+      "role": "Gap Identification",
+      "relationship_sentence": "XLS-R provided strong multilingual speech-only SSL encoders but lacked text and cross-modal supervision; Mu^2SLAM explicitly tackles this gap by combining unlabeled speech, unlabeled text, and supervised ASR/AST/MT to improve cross-lingual alignment and AST performance."
+    }
+  ],
+  "synthesis_narrative": "Mu^2SLAM\u2019s core idea\u2014unified multilingual pretraining over speech and text via a seq2seq denoising objective\u2014emerges at the intersection of text denoising, discrete-unit speech modeling, and joint speech\u2013text pretraining. T5 provides the key training primitive: span-corruption denoising for a generative decoder, which Mu^2SLAM directly adopts and applies across modalities. mBART extends that denoising to the multilingual setting for MT, foreshadowing Mu^2SLAM\u2019s ambition to scale to 100+ languages in a seq2seq framework. On the speech side, HuBERT\u2019s insight to predict quantized hidden units under masking makes speech amenable to text-like token prediction; Mu^2SLAM operationalizes this by using quantized speech targets, enabling one decoder objective to serve both speech and text. SpeechT5 then demonstrates the feasibility of a unified speech\u2013text encoder\u2013decoder trained with denoising and discrete units; Mu^2SLAM explicitly extends this paradigm with broader multilingual coverage and with supervised ASR/AST/MT to align modalities and languages. Relative to mSLAM, a direct predecessor that jointly pretrains speech and text but lacks a generative seq2seq denoising decoder, Mu^2SLAM fills that gap and shows sizable AST gains while retaining competitive ASR. Finally, XLS-R highlights the limitations of speech-only SSL at scale for cross-lingual transfer; Mu^2SLAM\u2019s combination of unlabeled speech, unlabeled text, and supervised cross-modal tasks directly addresses that limitation, yielding the reported state-of-the-art results on CoVoST AST with public data.",
+  "analysis_timestamp": "2026-01-06T23:09:26.548721"
+}

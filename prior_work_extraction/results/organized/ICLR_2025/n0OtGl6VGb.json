@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Scissorhands: Efficient Inference of LLMs via KV Cache Pruning",
+      "authors": "Xiao et al.",
+      "year": 2024,
+      "role": "KV-cache pruning antecedent",
+      "relationship_sentence": "Introduced adaptive pruning of KV caches during autoregressive decoding, establishing that much of the cached memory is redundant; ThinK builds on this idea but shifts from token/head-level pruning to query-dependent pruning along the channel dimension with an explicit objective to minimize attention-weight loss."
+    },
+    {
+      "title": "H2O: Heavy-Hitter Oracle for Efficient Generative Inference",
+      "authors": "Dao et al.",
+      "year": 2023,
+      "role": "Importance-based KV retention/eviction",
+      "relationship_sentence": "Proposed importance-driven retention of \u2018heavy-hitter\u2019 tokens in the KV cache under memory constraints; ThinK adapts this importance-guided principle to the per-channel contributions of K/V representations conditioned on the current query."
+    },
+    {
+      "title": "StreamingLLM: Efficient Streaming Language Models with Attention Sinks",
+      "authors": "Xiao et al.",
+      "year": 2023,
+      "role": "Token-level KV eviction under long-context",
+      "relationship_sentence": "Showed that selective preservation of a small subset of influential tokens (attention sinks) suffices for long-context inference, motivating ThinK\u2019s selective preservation but at the finer granularity of KV channels driven by the query."
+    },
+    {
+      "title": "Linformer: Self-Attention with Linear Complexity",
+      "authors": "Wang et al.",
+      "year": 2020,
+      "role": "Low-rank attention foundation",
+      "relationship_sentence": "Demonstrated that attention matrices are approximately low-rank, providing theoretical and empirical grounding for ThinK\u2019s assumption that many channel directions contribute little to attention and can be pruned with limited loss."
+    },
+    {
+      "title": "Are Sixteen Heads Really Better Than One?",
+      "authors": "Michel, Levy, and Neubig",
+      "year": 2019,
+      "role": "Redundancy and structured pruning in attention",
+      "relationship_sentence": "Established that many attention heads are redundant and can be pruned with minimal degradation, informing ThinK\u2019s exploitation of redundancy\u2014here at the KV channel level\u2014with a principled, query-aware pruning rule."
+    },
+    {
+      "title": "SmoothQuant: Accurate and Efficient Post-Training Quantization for Large Language Models",
+      "authors": "Xiao et al.",
+      "year": 2022,
+      "role": "Channel-wise magnitude unevenness in LLM activations",
+      "relationship_sentence": "Identified heavy-tailed, uneven per-channel activation magnitudes and addressed them via channel-wise scaling; ThinK leverages the same observation in KV states to rank channels by impact and prune the least significant while controlling attention loss."
+    }
+  ],
+  "synthesis_narrative": "ThinK targets the high memory footprint of KV caches in long-context LLM inference by pruning along the channel dimension in a query-dependent way designed to minimize attention-weight loss. Its lineage connects directly to prior work on KV cache pruning and importance-based retention, theoretical insights on attention\u2019s low-rank structure, and empirical observations about uneven channel magnitudes in LLMs. Scissorhands is the most immediate antecedent, proving that aggressive KV cache pruning can preserve accuracy; ThinK advances this line by moving from token/head structures to a finer, channel-level pruning guided by the current query\u2019s needs. H2O\u2019s heavy-hitter oracle and StreamingLLM\u2019s attention-sink mechanism establish the broader paradigm of importance-driven KV retention under memory pressure; ThinK inherits this principle but applies it within the representation space (channels) rather than across tokens. Linformer provides the low-rank lens that justifies why many channel directions contribute little to attention, making principled pruning feasible. Meanwhile, SmoothQuant (and related activation quantization works) reveal heavy-tailed, uneven per-channel magnitudes in LLMs\u2014an empirical property ThinK exploits to identify low-impact channels. Finally, head-pruning evidence from Michel et al. underscores systemic redundancy in Transformer attention, motivating ThinK\u2019s structured, query-aware channel pruning that achieves significant KV memory savings (>20%) without accuracy loss.",
+  "analysis_timestamp": "2026-01-06T23:42:48.083079"
+}

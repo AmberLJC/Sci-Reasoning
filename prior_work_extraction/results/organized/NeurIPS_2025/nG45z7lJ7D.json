@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Attention Is All You Need",
+      "authors": "Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, \u0141ukasz Kaiser, Illia Polosukhin",
+      "year": 2017,
+      "role": "Foundational self-attention and softmax normalization",
+      "relationship_sentence": "BSA targets the probabilistic, row-stochastic weighting that softmax confers on attention, redesigning it to be spike-driven and hardware-light while retaining the interpretability introduced by Vaswani et al."
+    },
+    {
+      "title": "Transformers are RNNs: Fast Autoregressive Transformers with Linear Attention",
+      "authors": "Angelos Katharopoulos, Apoorv Vyas, Nikolaos Pappas, Fran\u00e7ois Fleuret",
+      "year": 2020,
+      "role": "Softmax-free/linearized attention to reduce compute",
+      "relationship_sentence": "By showing attention can be computed without explicit softmax via kernelization, this work motivates BSA\u2019s pursuit of MAC-efficient, softmax-free attention compatible with spike-based computation."
+    },
+    {
+      "title": "Rethinking Attention with Performers",
+      "authors": "Krzysztof Choromanski, Valerii Likhosherstov, David Dohan, Xingyou Song, Andreea Gane, Tam\u00e1s Sarl\u00f3s, Peter Hawkins, Jared Davis, Afroz Mohiuddin, Lukasz Kaiser, David Belanger, Lucy Colwell, Adrian Weller",
+      "year": 2021,
+      "role": "Random-feature softmax approximation with efficient normalization",
+      "relationship_sentence": "Performer\u2019s positive random features and normalization pathway to approximate softmax inform BSA\u2019s spike-native normalization that restores row-stochasticity without expensive exponentials or dense MACs."
+    },
+    {
+      "title": "From Softmax to Sparsemax: A Sparse Model of Attention",
+      "authors": "Andr\u00e9 F. T. Martins, Ram\u00f3n Fern\u00e1ndez Astudillo",
+      "year": 2016,
+      "role": "Alternative simplex-preserving normalization",
+      "relationship_sentence": "Sparsemax demonstrates non-exponential mappings to the probability simplex; BSA analogously enforces row-stochastic constraints in a spike-friendly way without resorting to softmax."
+    },
+    {
+      "title": "XNOR-Net: ImageNet Classification Using Binary Convolutional Neural Networks",
+      "authors": "Mohammad Rastegari, Vicente Ordonez, Joseph Redmon, Ali Farhadi",
+      "year": 2016,
+      "role": "Binary arithmetic (XNOR\u2013popcount) to replace MACs",
+      "relationship_sentence": "XNOR-Net established that binary operations can replace multiplications; BSA extends this logic to spike arithmetic, motivating MAC-free attention via discrete operations and highlighting binary\u2019s inability to capture signed interactions."
+    },
+    {
+      "title": "Trained Ternary Quantization",
+      "authors": "Chenzhuo Zhu, Song Han, Huizi Mao, William J. Dally",
+      "year": 2017,
+      "role": "Ternary quantization capturing sign with low cost",
+      "relationship_sentence": "TTQ shows ternary representations recover sign information at minimal compute overhead; BSA leverages ternary matrix multiplication over spikes to explicitly model positive\u2013negative and negative\u2013negative Q\u2013K interactions."
+    },
+    {
+      "title": "Surrogate gradient learning in spiking neural networks: Bringing the power of gradient-based optimization to spiking neural networks",
+      "authors": "Emre O. Neftci, Hesham Mostafa, Friedemann Zenke",
+      "year": 2019,
+      "role": "Training methodology for discrete spikes",
+      "relationship_sentence": "BSA\u2019s end-to-end learnable, fully spike-driven attention relies on surrogate gradients to optimize non-differentiable spike operations, directly enabled by the methods surveyed in this work."
+    }
+  ],
+  "synthesis_narrative": "Bipolar Self-attention (BSA) emerges at the intersection of efficient attention computation and spike-based neural processing. The original Transformer introduced dot-product attention with softmax, establishing row-stochastic weights and a probabilistic interpretation that BSA explicitly seeks to preserve under spiking constraints. Subsequent advances in softmax-free or approximated attention, notably Linear Transformers and Performer, demonstrated that expensive exponentials and quadratic-time operations can be sidestepped via kernelization and positive random features while still enabling principled normalization. This line directly motivates BSA\u2019s spike-native normalization that restores row-stochasticity without energy-intensive multiply\u2013accumulate or exponentials.\n\nOn the arithmetic side, XNOR-Net crystallized the idea that binary operations (XNOR\u2013popcount) can replace MACs, a key tenet for energy-efficient spiking computation. However, binary interactions cannot represent the sign structure needed for negative\u2013negative and positive\u2013negative query\u2013key interactions. Trained Ternary Quantization provided the conceptual and algorithmic bridge: ternary representations recover sign information at marginal extra cost, informing BSA\u2019s ternary spike matrix multiplication that captures richer membrane potential interactions while remaining hardware-friendly.\n\nFinally, making such a fully spike-driven attention mechanism trainable hinges on surrogate gradient methods for non-differentiable spikes, as consolidated by Neftci et al. Together, these works directly shape BSA\u2019s core: a ternary, spike-native attention that reinstates the probabilistic (row-stochastic) semantics of attention with minimal compute, closing the performance gap for spiking Transformers.",
+  "analysis_timestamp": "2026-01-07T00:21:32.279744"
+}

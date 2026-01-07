@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "DreamFusion: Text-to-3D using 2D Diffusion",
+      "authors": "Ben Poole, Ajay Jain, Jonathan T. Barron, Ben Mildenhall",
+      "year": 2022,
+      "role": "Introduces score distillation sampling (SDS) for text-to-3D, the baseline VSD generalizes and critiques.",
+      "relationship_sentence": "ProlificDreamer formalizes SDS within a variational framework, showing SDS is a special case that explains its over-saturation/low-diversity issues and motivates VSD."
+    },
+    {
+      "title": "High-Resolution Image Synthesis with Latent Diffusion Models",
+      "authors": "Robin Rombach, Andreas Blattmann, Dominik Lorenz, Patrick Esser, Bj\u00f6rn Ommer",
+      "year": 2022,
+      "role": "Provides the pretrained text-to-image diffusion backbone (e.g., Stable Diffusion) distilled in both SDS and VSD.",
+      "relationship_sentence": "VSD distills gradients from latent diffusion models and analyzes performance across classifier-free guidance weights typical of Stable Diffusion."
+    },
+    {
+      "title": "Classifier-Free Diffusion Guidance",
+      "authors": "Jonathan Ho, Tim Salimans",
+      "year": 2021,
+      "role": "Establishes the guidance mechanism whose weight critically affects SDS and is explicitly addressed by VSD.",
+      "relationship_sentence": "ProlificDreamer diagnoses SDS failures at small/large CFG weights and designs VSD to remain stable and diverse across guidance strengths."
+    },
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Jonathan Ho, Ajay Jain, Pieter Abbeel",
+      "year": 2020,
+      "role": "Foundational diffusion framework linking denoising scores and ancestral sampling that VSD seeks to mimic during distillation.",
+      "relationship_sentence": "VSD\u2019s objective and time-scheduling are crafted so that the 3D optimization better matches the ancestral sampling behavior of DDPMs than SDS does."
+    },
+    {
+      "title": "Stein Variational Gradient Descent: A General Purpose Bayesian Inference Algorithm",
+      "authors": "Qiang Liu, Dilin Wang",
+      "year": 2016,
+      "role": "Core particle-based variational inference method that underpins modeling 3D parameters as a distribution and optimizing particles.",
+      "relationship_sentence": "ProlificDreamer\u2019s variational score distillation treats 3D as a random variable and uses particle-based VI ideas akin to SVGD to maintain sample diversity and quality."
+    },
+    {
+      "title": "NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis",
+      "authors": "Ben Mildenhall, Pratul P. Srinivasan, Matthew Tancik, Jonathan T. Barron, Ravi Ramamoorthi, Ren Ng",
+      "year": 2020,
+      "role": "Differentiable volumetric rendering backbone enabling gradient-based 3D optimization from 2D supervision.",
+      "relationship_sentence": "VSD inherits the NeRF-style differentiable rendering interface used by SDS to backpropagate diffusion gradients into scene density/color parameters."
+    }
+  ],
+  "synthesis_narrative": "ProlificDreamer\u2019s core contribution\u2014variational score distillation (VSD)\u2014emerges by reframing the DreamFusion paradigm within principled variational inference. DreamFusion introduced score distillation sampling (SDS), the key bridge from 2D text-to-image diffusion to text-to-3D optimization, but its heuristic formulation leads to over-saturation, over-smoothing, and low diversity. ProlificDreamer explains these failures by casting the 3D parameters as a distribution rather than a point estimate and deriving a particle-based variational objective, directly inspired by particle variational methods such as Stein Variational Gradient Descent. This shift from point optimization to particle-based VI is central: it preserves multi-modality in the posterior over 3D scenes and provides stability across optimization dynamics.\n\nThis variational lens is tightly coupled to diffusion modeling foundations. By distilling gradients from latent diffusion models (Stable Diffusion) and explicitly accounting for classifier-free guidance, ProlificDreamer shows why SDS fails at extreme guidance weights and designs VSD to remain robust across typical settings (e.g., CFG 7.5). Moreover, the objective and time-scheduling choices are aligned with the ancestral sampling behavior of denoising diffusion probabilistic models, yielding improved fidelity and diversity. Finally, as with DreamFusion, the method relies on NeRF-style differentiable volumetric rendering to transmit diffusion gradients into learnable 3D density and appearance. Together, these works provide the algorithmic backbone (SDS), generative prior (LDM/DDPM with CFG), inference principle (particle-based VI/SVGD), and optimization interface (NeRF) that VSD unifies into a consistent, high-fidelity, and diverse text-to-3D generation framework.",
+  "analysis_timestamp": "2026-01-07T00:02:04.839776"
+}

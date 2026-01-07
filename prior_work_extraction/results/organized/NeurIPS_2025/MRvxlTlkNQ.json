@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "On Using Monolingual Corpora in Neural Machine Translation (Shallow Fusion)",
+      "authors": "Caglar Gulcehre, Orhan Firat, Kelvin Xu, Kyunghyun Cho, Yoshua Bengio",
+      "year": 2015,
+      "role": "Decoding-time log-probability fusion of two models",
+      "relationship_sentence": "Transformer Copilot\u2019s fused inference that rectifies the Pilot\u2019s logits with a Copilot directly echoes shallow fusion\u2019s principle of combining model log-probabilities at decoding time."
+    },
+    {
+      "title": "GeDi: Generative Discriminator Guided Language Generation",
+      "authors": "Ben Krause, Akhilesh Deepak Gotmare, Bryan McCann, Nitish Shirish Keskar, Shafiq Joty, Richard Socher, Nazneen Fatema Rajani",
+      "year": 2020,
+      "role": "Auxiliary discriminator to steer LM via logit reweighting (product-of-experts)",
+      "relationship_sentence": "GeDi\u2019s mechanism of modifying next-token probabilities with an auxiliary model informs Copilot\u2019s logit rectification of the Pilot, but Copilot learns from a Mistake Log rather than attribute labels."
+    },
+    {
+      "title": "FUDGE: Controlled Text Generation With Future Discriminators",
+      "authors": "Kevin Yang, Dan Klein",
+      "year": 2021,
+      "role": "Decoding-time guidance by combining LM scores with a learned discriminator conditioned on future property",
+      "relationship_sentence": "FUDGE\u2019s learned discriminator that adjusts LM token probabilities parallels Copilot\u2019s learned correction module that reshapes Pilot logits during inference."
+    },
+    {
+      "title": "Plug and Play Language Models: A Simple Approach to Controlled Text Generation",
+      "authors": "Siddharth Dathathri et al.",
+      "year": 2020,
+      "role": "External controller guiding a frozen LM without retraining",
+      "relationship_sentence": "PPLM established the plug-and-play paradigm of steering a base LM with an auxiliary controller, which Transformer Copilot extends by jointly training a Copilot that learns from the model\u2019s own mistakes."
+    },
+    {
+      "title": "Reflexion: Language Agents with Verbal Reinforcement Learning",
+      "authors": "Noah Shinn, Federico Cassano, Yonatan Bisk, Joseph E. Gonzalez",
+      "year": 2023,
+      "role": "Self-reflection and memory of past errors to improve future decisions",
+      "relationship_sentence": "Reflexion\u2019s idea of using explicit memories of failures to guide future behavior directly motivates the Mistake Log that captures recurring errors to train the Copilot."
+    },
+    {
+      "title": "Prioritized Experience Replay",
+      "authors": "Tom Schaul, John Quan, Ioannis Antonoglou, David Silver",
+      "year": 2016,
+      "role": "Error-centric logging and sampling to accelerate learning",
+      "relationship_sentence": "The Mistake Log mirrors prioritized replay by tracking high-error events and leveraging them to focus learning, here to supervise the Copilot\u2019s corrective signals."
+    },
+    {
+      "title": "Long-Tail Learning via Logit Adjustment",
+      "authors": "Aditya Krishna Menon, Sadeep Jayasumana, Ankit Singh Rawat, Himanshu Jain, Andreas Veit, Sanjiv Kumar",
+      "year": 2020,
+      "role": "Systematic logit correction to counter distributional bias",
+      "relationship_sentence": "Copilot\u2019s logit rectification is conceptually aligned with logit adjustment\u2014modifying logits to correct consistent biases\u2014though Copilot learns adjustments from the model\u2019s own mistake distribution."
+    }
+  ],
+  "synthesis_narrative": "Transformer Copilot\u2019s core contribution\u2014using a Mistake Log to train an auxiliary Copilot that rectifies a Pilot model\u2019s logits during joint training and fused inference\u2014sits at the intersection of two lines of work: decoding-time steering via auxiliary models and error-centric learning from past failures. On the steering side, shallow fusion pioneered adding log-probabilities from multiple models to shape decoding, a principle later specialized for controllable generation by PPLM, GeDi, and FUDGE. These approaches demonstrate that an external controller or discriminator can reliably reweight next-token probabilities of a base LM, often via product-of-experts or logit interpolation. Transformer Copilot adopts this logit-level fusion but replaces attribute-based or classifier guidance with a Copilot trained specifically to correct the Pilot\u2019s systematic errors. On the learning-from-failures side, Reflexion shows that explicit memories of past mistakes can guide future behavior in language agents, and prioritized experience replay formalizes logging and exploiting high-error events to improve learning efficiency. The Mistake Log operationalizes these insights for supervised LM fine-tuning: it records recurring error patterns over time and supplies targeted supervision for the Copilot. Finally, logit adjustment for long-tail recognition provides an analytical precedent for systematically correcting biases directly in logit space, aligning with Copilot\u2019s corrective objective. Together, these works directly inform Copilot\u2019s design: a jointly trained, mistake-informed auxiliary model that fuses with the Pilot at inference to rectify logits and reduce recurring errors.",
+  "analysis_timestamp": "2026-01-07T00:21:33.166790"
+}

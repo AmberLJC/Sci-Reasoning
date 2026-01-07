@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+      "authors": "Edward J. Hu et al.",
+      "year": 2022,
+      "role": "Baseline",
+      "relationship_sentence": "DoRA explicitly builds on LoRA by retaining a low\u2011rank update path but confines it to the weight\u2019s direction, directly addressing LoRA\u2019s capacity/stability gaps relative to full fine-tuning."
+    },
+    {
+      "title": "Weight Normalization: A Simple Reparameterization to Accelerate Training of Deep Neural Networks",
+      "authors": "Tim Salimans et al.",
+      "year": 2016,
+      "role": "Foundation",
+      "relationship_sentence": "DoRA\u2019s core idea\u2014decomposing a weight into magnitude and direction\u2014directly adopts the weight reparameterization introduced by Weight Normalization and repurposes it for PEFT."
+    },
+    {
+      "title": "Intrinsic Dimensionality Explains the Effectiveness of Language Model Fine-Tuning",
+      "authors": "Armen Aghajanyan et al.",
+      "year": 2020,
+      "role": "Foundation",
+      "relationship_sentence": "The low\u2011intrinsic\u2011dimension view that task-specific updates lie in a low\u2011rank subspace underpins DoRA\u2019s choice to keep directional updates low\u2011rank while separately learning magnitude."
+    },
+    {
+      "title": "Parameter-Efficient Transfer Learning for NLP",
+      "authors": "Neil Houlsby et al.",
+      "year": 2019,
+      "role": "Foundation",
+      "relationship_sentence": "This work framed the PEFT problem via adapters, and its added inference cost motivates DoRA\u2019s design goal to match full fine-tuning capacity without incurring adapter-like runtime overhead."
+    },
+    {
+      "title": "BitFit: Simple Parameter-efficient Fine-tuning for Transformer-based Masked Language-Models",
+      "authors": "Elad Ben Zaken et al.",
+      "year": 2022,
+      "role": "Related Problem",
+      "relationship_sentence": "BitFit\u2019s success with tuning a tiny subset of parameters informs DoRA\u2019s minimal-parameter magnitude pathway, showing that small, targeted updates can close performance gaps efficiently."
+    },
+    {
+      "title": "QLoRA: Efficient Finetuning of Quantized Large Language Models",
+      "authors": "Tim Dettmers et al.",
+      "year": 2023,
+      "role": "Related Problem",
+      "relationship_sentence": "As a dominant LoRA variant emphasizing efficiency without extra inference cost, QLoRA provides a key comparison point; DoRA\u2019s decomposition offers a complementary route to improve capacity and stability."
+    }
+  ],
+  "synthesis_narrative": "DoRA\u2019s core innovation\u2014separating a pre-trained weight into magnitude and direction and applying low-rank updates only to the direction\u2014sits at the intersection of two lines of work. First, Weight Normalization (Salimans & Kingma) provided the crucial reparameterization that decouples a weight into scale and a unit vector; DoRA directly adopts this decomposition as its modeling scaffold. Second, LoRA (Hu et al.) established low-rank adaptation as a practical, inference-free PEFT baseline for large models. However, LoRA\u2019s single-path update implicitly entangles magnitude and direction and can lag behind full fine-tuning. DoRA preserves LoRA\u2019s efficiency but assigns the low-rank pathway to directional updates while learning magnitude separately, thereby targeting the identified capacity/stability gap.\nThe broader PEFT literature motivated DoRA\u2019s design constraints. Adapters (Houlsby et al.) defined the PEFT problem but incur runtime overhead, clarifying the need for a scheme with LoRA-like inference parity. BitFit demonstrated that judiciously chosen, very small parameter sets can be surprisingly effective, supporting DoRA\u2019s light-weight magnitude parameterization. Finally, QLoRA (Dettmers et al.) exemplifies the community\u2019s drive for efficient, deployment-friendly finetuning; DoRA offers a complementary improvement that can be layered with such efficiency techniques by enhancing learning capacity without adding inference costs. Together, these works directly shaped DoRA\u2019s decomposition-based parameterization and its focus on matching full fine-tuning behavior under PEFT constraints.",
+  "analysis_timestamp": "2026-01-06T23:09:26.505532"
+}

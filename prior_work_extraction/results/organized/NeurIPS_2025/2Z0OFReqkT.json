@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Outrageously Large Neural Networks: The Sparsely-Gated Mixture-of-Experts Layer",
+      "authors": "Noam Shazeer et al.",
+      "year": 2017,
+      "role": "Foundational MoE architecture and routing",
+      "relationship_sentence": "UMoE builds directly on Shazeer et al.\u2019s sparse expert formulation and gating, extending the MoE abstraction beyond FFN blocks by reinterpreting attention so the same expert/routing machinery can be reused and shared."
+    },
+    {
+      "title": "GShard: Scaling Giant Models with Conditional Computation and Automatic Sharding",
+      "authors": "Lepikhin et al.",
+      "year": 2020,
+      "role": "Applied MoE to Transformer FFN at scale",
+      "relationship_sentence": "GShard established practical recipes for inserting MoE into FFN layers of Transformers; UMoE generalizes this placement by exposing an FFN-like view of attention, enabling the same MoE design to operate in attention layers."
+    },
+    {
+      "title": "Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Mixture-of-Experts",
+      "authors": "William Fedus, Barret Zoph, Noam Shazeer",
+      "year": 2021,
+      "role": "Efficient top-1 routing and stabilization",
+      "relationship_sentence": "UMoE leverages Switch-style routing and load-balancing as a unifying mechanism so that attention-side experts can match FFN-MoE efficiency and stability under a single expert/routing interface."
+    },
+    {
+      "title": "Designing Effective Sparse Expert Models (Expert Choice Routing)",
+      "authors": "Barret Zoph et al.",
+      "year": 2022,
+      "role": "Routing design and load-balancing improvements",
+      "relationship_sentence": "By revealing that routing choices critically affect utilization and quality, this work informs UMoE\u2019s ability to apply the same routing/balancing strategy uniformly to shared experts serving both attention and FFN computations."
+    },
+    {
+      "title": "Transformers are RNNs: Fast Autoregressive Transformers with Linear Attention",
+      "authors": "Angelos Katharopoulos, Apoorv Vyas, Nikolaos Pappas, Fran\u00e7ois Fleuret",
+      "year": 2020,
+      "role": "Algebraic reformulation of attention",
+      "relationship_sentence": "Linear-attention\u2019s kernel factorization shows attention as compositions of linear maps and elementwise interactions, motivating UMoE\u2019s reformulation that exposes an FFN-like structure amenable to expert routing and sharing."
+    },
+    {
+      "title": "Synthesizer: Rethinking Self-Attention in Transformer Models",
+      "authors": "Yi Tay et al.",
+      "year": 2021,
+      "role": "Attention as learned mixing (FFN-like token mixing)",
+      "relationship_sentence": "Synthesizer demonstrates that learned mixing can replace dot-product attention, reinforcing UMoE\u2019s premise that attention can be recast into an FFN-like form that can share experts with FFN blocks."
+    },
+    {
+      "title": "ALBERT: A Lite BERT for Self-supervised Learning of Language Representations",
+      "authors": "Zhenzhong Lan et al.",
+      "year": 2019,
+      "role": "Parameter sharing for efficiency",
+      "relationship_sentence": "ALBERT\u2019s cross-layer parameter sharing motivates UMoE\u2019s parameter-sharing ethos; UMoE extends this idea by sharing experts across different module types (attention and FFN) once attention is reformulated into an FFN-like computation."
+    }
+  ],
+  "synthesis_narrative": "UMoE\u2019s core contribution\u2014unifying attention and FFN under a single MoE design with shared experts\u2014stands on two converging lines of prior work. First, sparse conditional computation matured through MoE research in Transformers. The seminal MoE layer of Shazeer et al. introduced sparse expert routing, later operationalized at scale in Transformers by GShard. Switch Transformers simplified routing to top-1, improving stability and efficiency, while Expert Choice refined routing and load balancing. These works established FFN-MoE as the standard scalable path but left attention largely outside the MoE umbrella, in part due to specialized implementations and poorer performance of attention-MoE variants.\n\nSecond, a stream of results reframed attention as structures closer to feed-forward mixing. Linear attention factored softmax attention into kernelized linear maps and associative contractions, and Synthesizer showed that learned parametric mixing can substitute for dot-product attention. Together they imply that attention can be expressed with FFN-like operations, opening the door to reuse MoE machinery. Finally, ALBERT\u2019s success with parameter sharing provided a blueprint for compressing models without sacrificing quality.\n\nUMoE synthesizes these trajectories: it reformulates attention to expose an FFN-like computational path, applies proven MoE routing and balancing uniformly to both attention and FFN, and enables expert sharing across the two. This yields attention-based MoE layers that are competitive with FFN-MoE while reducing implementation divergence and improving parameter efficiency.",
+  "analysis_timestamp": "2026-01-07T00:21:32.263090"
+}

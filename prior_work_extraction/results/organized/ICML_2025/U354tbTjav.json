@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Automatic Chemical Design Using a Data-Driven Continuous Representation of Molecules",
+      "authors": "Rafael G\u00f3mez-Bombarelli et al.",
+      "year": 2018,
+      "role": "Foundation",
+      "relationship_sentence": "Introduced the core paradigm of performing Bayesian optimisation in the continuous latent space of a VAE for molecular design; the present work keeps this latent-BO setup but rethinks it by decoupling the generator from the surrogate and combining them via a Bayesian update rather than tightly coupling them during optimisation."
+    },
+    {
+      "title": "Junction Tree Variational Autoencoder for Molecular Graph Generation",
+      "authors": "Wengong Jin et al.",
+      "year": 2018,
+      "role": "Baseline",
+      "relationship_sentence": "Demonstrated BO over a structured, validity-aware VAE latent space (JT-VAE) for molecule optimisation; our method uses such VAEs purely as generators and improves on this line by training the GP surrogate separately and fusing the two with a principled Bayesian update."
+    },
+    {
+      "title": "Grammar Variational Autoencoder",
+      "authors": "Matt J. Kusner et al.",
+      "year": 2017,
+      "role": "Related Problem",
+      "relationship_sentence": "Proposed VAEs that respect grammar constraints and showcased latent-space optimisation for molecules; this established that structured VAEs can define workable search spaces which our decoupled GP+VAE framework leverages without co-training the surrogate."
+    },
+    {
+      "title": "Conditioning by Adaptive Sampling (CbAS)",
+      "authors": "David Brookes et al.",
+      "year": 2019,
+      "role": "Inspiration",
+      "relationship_sentence": "Provided the key idea of decoupling a generative model from a property model and combining them through a Bayesian conditioning/reweighting update; our approach adapts this principle by using a GP surrogate and a simple Bayesian update to fuse it with a separately trained VAE."
+    },
+    {
+      "title": "Conservative Objective Models for Effective Model-Based Optimization",
+      "authors": "Brandon Trabucco et al.",
+      "year": 2021,
+      "role": "Gap Identification",
+      "relationship_sentence": "Identified that tight coupling between generators and learned oracles can cause over-optimization and distribution-shift exploitation; our decoupled GP+VAE design directly addresses this failure mode by maintaining a generator prior and combining it with the surrogate through a principled update."
+    },
+    {
+      "title": "Design-Bench: Benchmarks for Data-Driven Offline Model-Based Optimization",
+      "authors": "Brandon Trabucco et al.",
+      "year": 2022,
+      "role": "Gap Identification",
+      "relationship_sentence": "Systematically documented how model-based design methods fail when oracles and generators are entangled, highlighting proxy gaps; our work targets this gap by separating training of the VAE and GP and integrating them via a Bayesian update to reduce such exploitation."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core contribution\u2014decoupling a generative model and a GP surrogate and recombining them with a simple Bayesian update\u2014emerges directly from two converging lines of work. First, latent-space Bayesian optimisation for molecules, inaugurated by G\u00f3mez-Bombarelli et al. and advanced with structured VAEs like JT\u2011VAE and Grammar\u2011VAE, showed that VAEs can provide a continuous, validity-aware search space in which a GP and acquisition function can locate promising candidates. These methods, however, often entwined the search dynamics with properties of the learned latent space, incentivizing more complex and tightly coupled algorithms to correct for mismatch.\n\nThe second line stems from model-based design methods such as CbAS, which established a principled, Bayesian conditioning view: treat the generator as a prior over candidates and update it using a separate property model. Concurrently, critiques from COMs and Design\u2011Bench highlighted how tightly coupling generators and oracles leads to distribution-shift exploitation and over-optimization\u2014precisely the brittleness observed in latent-BO pipelines when the latent space is not tailored to the task.\n\nSynthesizing these threads, the present work retains VAEs for what they do best\u2014structure generation\u2014while letting a GP specialise in prediction and uncertainty. It replaces joint/coupled training with a Bayesian update that fuses the VAE prior with the GP\u2019s task-specific beliefs, improving sample efficiency and robustness under constrained evaluation budgets in molecular optimisation.",
+  "analysis_timestamp": "2026-01-06T23:07:19.614306"
+}

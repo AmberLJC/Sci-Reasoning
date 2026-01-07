@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Learning Transferable Visual Models From Natural Language Supervision (CLIP)",
+      "authors": "Alec Radford et al.",
+      "year": 2021,
+      "arxiv_id": "2103.00020",
+      "role": "Foundation",
+      "relationship_sentence": "PathGen-1.6M targets the CLIP-style contrastive image\u2013text pretraining paradigm and supplies the pathology-specific, high-quality image\u2013caption pairs that such VLMs require but previously lacked."
+    },
+    {
+      "title": "PLIP: Pathology Language-Image Pre-training",
+      "authors": "Huang et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Baseline",
+      "relationship_sentence": "PLIP mined pathology image\u2013text pairs from social media and open sources to train pathology VLMs, establishing the web-mined baseline that PathGen-1.6M directly improves upon by replacing noisy, unscalable captions with LMM-generated, agent-refined descriptions from TCGA patches."
+    },
+    {
+      "title": "BioMedCLIP: Large-scale Vision\u2013Language Pretraining on Biomedical Literature",
+      "authors": "Zhang et al.",
+      "year": 2023,
+      "arxiv_id": "2303.00915",
+      "role": "Gap Identification",
+      "relationship_sentence": "By constructing image\u2013text pairs from PubMed Central figures and captions, BioMedCLIP revealed the limits of literature-mined supervision\u2014especially sparse pathology grounding\u2014which PathGen-1.6M addresses via WSI-derived patches and controlled caption generation."
+    },
+    {
+      "title": "LLaVA: Visual Instruction Tuning",
+      "authors": "Haotian Liu et al.",
+      "year": 2023,
+      "arxiv_id": "2304.08485",
+      "role": "Inspiration",
+      "relationship_sentence": "PathGen\u2019s captioning agent follows LLaVA\u2019s approach of using an LMM trained with visual instructions to produce grounded, fine-grained image descriptions, adapted to pathology semantics and morphology."
+    },
+    {
+      "title": "AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation",
+      "authors": "Qingquan Wu et al.",
+      "year": 2023,
+      "arxiv_id": "2308.08155",
+      "role": "Inspiration",
+      "relationship_sentence": "PathGen operationalizes AutoGen-style multi-agent collaboration\u2014specialized agents conversing (selector, captioner, verifier/refiner)\u2014to iteratively improve caption quality for pathology patches."
+    },
+    {
+      "title": "Self-Refine: Iterative Refinement with Self-Feedback",
+      "authors": "Ankur P. Madaan et al.",
+      "year": 2023,
+      "arxiv_id": "2303.17651",
+      "role": "Extension",
+      "relationship_sentence": "PathGen adapts Self-Refine\u2019s generate\u2013critique\u2013revise loop by prompting a critic/verifier agent to identify pathology-specific errors and having the captioner revise accordingly to yield higher-fidelity pairs."
+    },
+    {
+      "title": "The Cancer Digital Slide Archive: An Information Resource to Support Digital Pathology Research (TCGA WSIs)",
+      "authors": "David A. Gutman et al.",
+      "year": 2013,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "PathGen\u2019s patch-extraction pipeline depends on the availability of TCGA whole-slide images curated by the Cancer Digital Slide Archive, enabling large-scale, high-quality WSI patches for automated captioning."
+    }
+  ],
+  "synthesis_narrative": "Contrastive vision\u2013language pretraining popularized by CLIP established that large collections of aligned image\u2013text pairs can serve as supervision for transferable visual representations. In pathology, PLIP demonstrated that mining image\u2013caption pairs from social media and other open sources can yield task-usable pathology VLMs, while also exposing data noisiness, weak grounding, and limited scalability. BioMedCLIP built biomedical VLMs from PubMed Central figures and captions, further underscoring that literature-mined text often incompletely describes visual content, especially for histopathology. LLaVA showed that a large multimodal model trained via visual instruction tuning can produce grounded, fine-grained image descriptions, indicating a path toward synthetic, controllable captions. AutoGen introduced multi-agent collaboration where specialized agents converse to solve tasks, suggesting a principled framework for decomposing data generation and quality control. Complementarily, Self-Refine\u2019s generate\u2013critique\u2013revise loop provided a concrete mechanism to iteratively improve model outputs with self-feedback. Finally, the Cancer Digital Slide Archive\u2019s release of TCGA whole-slide images made expansive, high-quality pathology imagery readily accessible for patch-level sampling.\nTaken together, these works reveal a gap: pathology VLMs need scalable, high-quality, and faithfully grounded image\u2013text pairs that web or literature mining alone cannot provide. PathGen-1.6M synthesizes this landscape by extracting representative patches from TCGA WSIs and using an LLaVA-style captioner within an AutoGen-inspired, Self-Refine loop to generate and iteratively verify/refine captions, directly addressing PLIP/BioMedCLIP limitations while producing CLIP-ready supervision at scale.",
+  "target_paper": {
+    "title": "PathGen-1.6M: 1.6 Million Pathology Image-text Pairs Generation through Multi-agent Collaboration",
+    "authors": "Yuxuan Sun, Yunlong Zhang, Yixuan Si, Chenglu Zhu, Kai Zhang, Zhongyi Shui, Jingxiong Li, Xuan Gong, XINHENG LYU, Tao Lin, Lin Yang",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "oral",
+    "keywords": "Image-text pairs generation, Vision-language models, Multi-agent collaboration",
+    "abstract": "Vision Language Models (VLMs) like CLIP have attracted substantial attention in pathology, serving as backbones for applications such as zero-shot image classification and Whole Slide Image (WSI) analysis. Additionally, they can function as vision encoders when combined with large language models (LLMs) to support broader capabilities. Current efforts to train pathology VLMs rely on pathology image-text pairs from platforms like PubMed, YouTube, and Twitter, which provide limited, unscalable data with generally suboptimal image quality. In this work, we leverage large-scale WSI datasets like TCGA to extract numerous high-quality image patches. We then train a large multimodal model (LMM) to generate captions for extracted images, creating PathGen-1.6M, a dataset containing 1.6 million high-quality image-caption pairs. Our approach involves multiple agent models collaborating to extract representative WSI patches, generating and refining captions to obtain high-quality image-text pairs.",
+    "openreview_id": "rFpZnn11gj",
+    "forum_id": "rFpZnn11gj"
+  },
+  "analysis_timestamp": "2026-01-06T16:46:13.638577"
+}

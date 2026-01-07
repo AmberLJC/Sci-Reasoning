@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Evaluating Large Language Models Trained on Code (Codex)",
+      "authors": "Mark Chen et al.",
+      "year": 2021,
+      "role": "foundation/code LLM",
+      "relationship_sentence": "Established powerful NL-to-code generation that Parsel builds upon, while highlighting limitations of direct sampling without structured decomposition or verification."
+    },
+    {
+      "title": "AlphaCode: Using Large Language Models to Solve Competitive Programming Problems",
+      "authors": "Yujia Li et al.",
+      "year": 2022,
+      "role": "baseline/limitations",
+      "relationship_sentence": "Demonstrated sampling-based approaches to competitive programming and their heavy sample budgets, motivating Parsel\u2019s more sample-efficient, structure- and test-driven search."
+    },
+    {
+      "title": "Least-to-Most Prompting Enables Complex Reasoning in Language Models",
+      "authors": "Denny Zhou, Nathanael Sch\u00e4rli, Le Hou, Jason Wei, Xuezhi Wang, Dale Schuurmans, Ed H. Chi, Quoc V. Le",
+      "year": 2022,
+      "role": "prompting/decomposition",
+      "relationship_sentence": "Inspired Parsel\u2019s hierarchical task decomposition by showing that breaking problems into smaller subproblems improves complex reasoning in LLMs."
+    },
+    {
+      "title": "PAL: Program-aided Language Models",
+      "authors": "Luyu Gao, Aman Madaan, Shuyan Zhou, Uri Alon, Jamie Callan, Graham Neubig",
+      "year": 2023,
+      "role": "program-execution for reasoning",
+      "relationship_sentence": "Showed that having LLMs write and execute code as intermediate reasoning improves problem solving, informing Parsel\u2019s use of code as the substrate for implementing subfunctions."
+    },
+    {
+      "title": "Execution-Guided Decoding for Neural Semantic Parsing",
+      "authors": "Wang, Shin, Liu, Polozov, and Richardson",
+      "year": 2018,
+      "role": "execution-guided search",
+      "relationship_sentence": "Introduced using execution results to prune and guide candidate programs, a principle Parsel generalizes to unit-test\u2013guided search over alternative function implementations."
+    },
+    {
+      "title": "Program Synthesis by Sketching",
+      "authors": "Armando Solar-Lezama",
+      "year": 2008,
+      "role": "program synthesis/CEGIS",
+      "relationship_sentence": "Pioneered the counterexample-guided implement-and-test loop for filling in program sketches, directly informing Parsel\u2019s test-driven search over implementations given a high-level design."
+    },
+    {
+      "title": "DreamCoder: Growing Libraries of Programs with Wake-Sleep",
+      "authors": "Kevin Ellis, Catherine Wong, Maxwell Nye, Joshua B. Tenenbaum, Armando Solar-Lezama",
+      "year": 2021,
+      "role": "hierarchical program decomposition and search",
+      "relationship_sentence": "Demonstrated that decomposing tasks into reusable functions and searching over compositions with specification checks boosts synthesis, paralleling Parsel\u2019s natural-language function decomposition and validation."
+    }
+  ],
+  "synthesis_narrative": "Parsel\u2019s core innovation\u2014composing hierarchical natural-language function decompositions and searching over candidate implementations with unit tests\u2014sits at the intersection of advances in code LLMs, decomposition prompting, and execution-guided program synthesis. Codex and AlphaCode established that pretrained code models can translate natural language into competitive code, but also exposed limits of flat, sampling-heavy decoding without structure or strong verification, motivating Parsel\u2019s shift to design-first, verify-often workflows. From the prompting side, Least-to-Most showed that explicitly decomposing hard tasks into smaller subproblems improves reasoning, a principle Parsel specializes into algorithmic decompositions expressed as natural-language function specs. PAL demonstrated that letting LLMs write and execute code as an intermediate reasoning representation yields more reliable solutions; Parsel extends this idea by having code LLMs implement each decomposed function and by using execution as a validation signal. Technically, Parsel\u2019s search loop is grounded in execution-guided decoding and classic CEGIS/sketching: execution results (unit tests) prune incorrect candidates and drive iterative refinement of implementations, echoing Solar-Lezama\u2019s implement-and-test paradigm and execution-guided semantic parsing. Finally, DreamCoder\u2019s success with hierarchical libraries and compositional search under specification aligns with Parsel\u2019s use of reusable, named functions described in natural language, closing the loop between high-level algorithm design and verified low-level code. Together, these strands directly shape Parsel\u2019s framework for reliable, hierarchical algorithmic reasoning with LLMs.",
+  "analysis_timestamp": "2026-01-06T23:42:48.049480"
+}

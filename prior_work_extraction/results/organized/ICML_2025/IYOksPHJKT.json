@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Least-to-Most Prompting Enables Complex Reasoning in Language Models",
+      "authors": "Denny Zhou et al.",
+      "year": 2022,
+      "role": "Inspiration",
+      "relationship_sentence": "SEPM\u2019s Confidence-Guided Coarse-to-Fine Inference directly operationalizes least-to-most prompting for multimodal emotion recognition by first solving simpler affective sub-tasks (e.g., polarity/valence or broad categories) and then refining to specific emotions conditioned on the model\u2019s confidence."
+    },
+    {
+      "title": "Self-Consistency Improves Chain of Thought Reasoning in Language Models",
+      "authors": "Xuezhi Wang et al.",
+      "year": 2022,
+      "role": "Extension",
+      "relationship_sentence": "SEPM extends the self-consistency idea by using model-derived confidence to select and escalate among candidate emotion predictions at inference time, mitigating confusions between semantically similar emotions without any parameter updates."
+    },
+    {
+      "title": "LLaVA: Large Language and Vision Assistant",
+      "authors": "Haotian Liu et al.",
+      "year": 2023,
+      "role": "Baseline",
+      "relationship_sentence": "LLaVA serves as a primary MLLM baseline that SEPM augments in a training-free manner, with SEPM directly improving LLaVA\u2019s zero-shot emotion classification and reasoning through its coarse-to-fine, confidence-guided inference."
+    },
+    {
+      "title": "InstructBLIP: Towards General-Purpose Vision-Language Models with Instruction Tuning",
+      "authors": "Wenliang Dai et al.",
+      "year": 2023,
+      "role": "Baseline",
+      "relationship_sentence": "InstructBLIP is a core MLLM baseline targeted by SEPM; the proposed training-free pipeline plugs into its inference to sharpen emotional perception without additional fine-tuning or annotations."
+    },
+    {
+      "title": "Grad-CAM: Visual Explanations from Deep Networks via Gradient-based Localization",
+      "authors": "Ramprasaath R. Selvaraju et al.",
+      "year": 2017,
+      "role": "Extension",
+      "relationship_sentence": "SEPM\u2019s Focus-on-Emotion module leverages gradient/attention-based localization to emphasize emotion-relevant regions and suppress distractions, directly extending the Grad-CAM principle to guide MLLMs\u2019 visual focus during inference."
+    },
+    {
+      "title": "AffectNet: A Database for Facial Expression, Valence, and Arousal in the Wild",
+      "authors": "Ali Mollahosseini et al.",
+      "year": 2017,
+      "role": "Foundation",
+      "relationship_sentence": "SEPM builds on AffectNet\u2019s discrete emotion and valence\u2013arousal formulations, explicitly targeting the fine-grained emotion distinctions and misclassification patterns documented on this benchmark."
+    },
+    {
+      "title": "EMOTIC: Contextual Emotion Recognition in Images",
+      "authors": "A. Kosti et al.",
+      "year": 2017,
+      "role": "Gap Identification",
+      "relationship_sentence": "EMOTIC\u2019s demonstration that background context can mislead image-based emotion recognition motivates SEPM\u2019s Focus-on-Emotion design to downweight irrelevant regions and foreground key emotional cues during MLLM inference."
+    }
+  ],
+  "synthesis_narrative": "SEPM\u2019s training-free approach sits at the intersection of reasoning-oriented prompting and emotion-centric visual grounding. At the reasoning level, Least-to-Most Prompting (Zhou et al., 2022) provides the core inspiration: tackling a complex task by progressively solving simpler subproblems. SEPM adopts this idea in a multimodal setting, decomposing emotion understanding into easy-to-hard stages and adding a confidence gate to decide when to refine to more specific labels. This confidence mechanism closely aligns with Self-Consistency (Wang et al., 2022), which showed that inference-time aggregation can correct errors; SEPM extends that spirit by explicitly using confidence to escalate or halt the refinement process, thereby reducing confusions among semantically similar emotions.\n\nOn the model side, LLaVA (Liu et al., 2023) and InstructBLIP (Dai et al., 2023) are the practical MLLM baselines that SEPM aims to improve without any parameter updates or additional data\u2014demonstrating plug-and-play benefits at inference. For visual focus, SEPM\u2019s Focus-on-Emotion module is a targeted extension of Grad-CAM (Selvaraju et al., 2017), using gradient/attention localization to foreground emotionally salient regions and suppress distractors. Finally, the problem formulation and the key failure modes SEPM tackles are grounded in AffectNet (Mollahosseini et al., 2017), which defines the discrete and dimensional affect space, and EMOTIC (Kosti et al., 2017), which exposed how background context can mislead emotion recognition. Together, these works directly shape SEPM\u2019s coarse-to-fine, confidence-guided, and region-focused design for sharpening emotion perception in MLLMs.",
+  "analysis_timestamp": "2026-01-06T23:07:19.626528"
+}

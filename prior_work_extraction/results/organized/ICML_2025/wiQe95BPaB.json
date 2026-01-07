@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Tensor Field Networks: Rotation- and Translation-Equivariant Neural Networks for 3D Point Clouds",
+      "authors": "Thomas et al.",
+      "year": 2018,
+      "role": "Foundation",
+      "relationship_sentence": "FlashTP builds on TFN\u2019s core formulation of SO(3)/E(3)-equivariant tensor products via Clebsch\u2013Gordan (CG) coupling and selection rules, whose structured sparsity (triangle inequality, parity) is exactly the sparsity FlashTP exploits and aggregates across paths."
+    },
+    {
+      "title": "Cormorant: Covariant Molecular Neural Networks",
+      "authors": "Anderson et al.",
+      "year": 2019,
+      "role": "Foundation",
+      "relationship_sentence": "Cormorant brought CG-based tensor products into molecular modeling and highlighted their computational burden in practice; FlashTP targets precisely these CG-coupling contractions with an execution scheme that exploits their structured sparsity."
+    },
+    {
+      "title": "e3nn: Euclidean Neural Networks",
+      "authors": "Geiger et al.",
+      "year": 2022,
+      "role": "Baseline",
+      "relationship_sentence": "FlashTP directly replaces e3nn\u2019s TensorProduct operator: it preserves e3nn\u2019s TP-path semantics (instruction lists over irreps couplings) but fuses those per-path kernels and eliminates intermediates to remove the dominant runtime and memory overhead observed in e3nn."
+    },
+    {
+      "title": "cuEquivariance: A Library for Accelerating SE(3)-Equivariant Neural Networks",
+      "authors": "NVIDIA et al.",
+      "year": 2024,
+      "role": "Baseline",
+      "relationship_sentence": "FlashTP competes with and surpasses NVIDIA\u2019s cuEquivariance TP kernels by going beyond per-op optimizations to fuse CG, mixing, and contraction across paths and to exploit path-level sparsity that cuEquivariance does not aggregate."
+    },
+    {
+      "title": "E(3)-equivariant graph neural networks for data-efficient and accurate interatomic potentials (NequIP)",
+      "authors": "Batzner et al.",
+      "year": 2022,
+      "role": "Gap Identification",
+      "relationship_sentence": "NequIP established equivariant MLIPs as SOTA but also exposed that tensor-product layers dominate compute and memory; FlashTP is designed to remove this precise bottleneck while keeping NequIP-style TP semantics intact."
+    },
+    {
+      "title": "MACE: Higher Order Equivariant Message Passing",
+      "authors": "Batatia et al.",
+      "year": 2022,
+      "role": "Gap Identification",
+      "relationship_sentence": "MACE\u2019s higher-order equivariant couplings amplify TP cost and highlight the need for sparse, efficient CG contractions; FlashTP answers this by sparsity-aware scheduling and path-aggregated execution of those higher-order TP blocks."
+    },
+    {
+      "title": "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness",
+      "authors": "Dao et al.",
+      "year": 2022,
+      "role": "Inspiration",
+      "relationship_sentence": "FlashTP adapts FlashAttention\u2019s IO-aware, fused-kernel design pattern\u2014computing on-the-fly without materializing intermediates\u2014to the CG tensor-product pipeline, yielding large reductions in HBM traffic and kernel launches."
+    }
+  ],
+  "synthesis_narrative": "FlashTP\u2019s core innovation\u2014an IO-aware, fused, sparsity-exploiting tensor-product (TP) kernel for equivariant networks\u2014rests on the representation-theoretic TP formalism introduced by Tensor Field Networks and brought to molecular modeling by Cormorant. These works established CG-based coupling, selection rules, and the structured sparsity that FlashTP explicitly leverages. The e3nn library operationalized this theory through a general-purpose TensorProduct operator and its TP-path (instruction) abstraction, which became the de facto implementation used by MLIPs; however, e3nn\u2019s per-path, multi-kernel execution incurred substantial launch overheads and large intermediates. NVIDIA\u2019s cuEquivariance advanced kernel-level optimization for these operations, but it still treated many steps separately and did not aggregate work across TP paths. In parallel, NequIP and MACE demonstrated that equivariant MLIPs achieve state-of-the-art accuracy yet are dominated by the TP layer\u2019s runtime and memory, especially at higher orders\u2014sharply defining the bottleneck that FlashTP targets. The final conceptual ingredient comes from FlashAttention, which showed that fusing attention\u2019s constituent steps and optimizing for memory IO can transform performance. FlashTP generalizes that IO-aware fusion idea to the CG tensor-product pipeline: it aggregates sparse TP paths, fuses CG, mixing, and contraction, and avoids materializing intermediate tensors. As a result, it directly addresses the limitations of e3nn and cuEquivariance while preserving the TP semantics required by leading MLIPs like NequIP and MACE.",
+  "analysis_timestamp": "2026-01-06T23:07:19.640770"
+}

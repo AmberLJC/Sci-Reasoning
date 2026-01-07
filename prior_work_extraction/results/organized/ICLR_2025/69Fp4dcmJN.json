@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "DP-BandMF: Banded Matrix Factorization for Private ML Training",
+      "authors": "Ryan McKenna et al.",
+      "year": 2024,
+      "role": "Baseline",
+      "relationship_sentence": "This paper is the immediate predecessor and state-of-the-art correlated-noise mechanism whose banded matrix-factorization design the current work keeps intact while specifically addressing its severe scalability limits in iteration count and parameter dimension."
+    },
+    {
+      "title": "DP-MF: Matrix Factorization Mechanisms for Differentially Private ML",
+      "authors": "Ryan McKenna et al.",
+      "year": 2023,
+      "role": "Foundation",
+      "relationship_sentence": "DP-MF introduced the core formulation of viewing DP training as a linear workload answered by a correlated Gaussian via matrix factorization, which the present work (through DP-BandMF) inherits and scales."
+    },
+    {
+      "title": "The Matrix Mechanism: Optimizing Linear Counting Queries under Differential Privacy",
+      "authors": "Chao Li et al.",
+      "year": 2010,
+      "role": "Foundation",
+      "relationship_sentence": "The matrix mechanism provided the foundational idea of designing correlated Gaussian noise by factoring a workload matrix, a conceptual and mathematical template that underlies DP-MF/DP-BandMF and thus the scaled mechanism here."
+    },
+    {
+      "title": "Private and Continual Release of Statistics",
+      "authors": "T.-H. Hubert Chan et al.",
+      "year": 2010,
+      "role": "Inspiration",
+      "relationship_sentence": "The binary-tree aggregation paradigm showed how time-correlated Gaussian noise can reduce per-step error for sequences, inspiring the temporal correlation structures (of which banded MF generalizes) that this work scales up."
+    },
+    {
+      "title": "Deep Learning with Differential Privacy",
+      "authors": "Mart\u00edn Abadi et al.",
+      "year": 2016,
+      "role": "Related Problem",
+      "relationship_sentence": "DP-SGD from this work is the canonical baseline and problem setup for private deep training; DP-MF/DP-BandMF were proposed as alternatives in few-epoch, large-\u03b5 regimes that the present scaling work aims to make practical at very large scales."
+    },
+    {
+      "title": "R\u00e9nyi Differential Privacy of the Sampled Gaussian Mechanism",
+      "authors": "Ilya Mironov et al.",
+      "year": 2019,
+      "role": "Foundation",
+      "relationship_sentence": "The RDP analysis for subsampled Gaussian mechanisms underpins the privacy accounting for balancing amplification by subsampling with noise correlation, a tradeoff preserved in DP-BandMF and maintained in the scaled mechanism."
+    }
+  ],
+  "synthesis_narrative": "The present paper\u2019s core innovation\u2014scaling a banded matrix-factorization DP mechanism to millions of iterations and up to a billion parameters\u2014sits directly on the matrix-mechanism lineage. The Matrix Mechanism (Li et al., 2010) established that one can optimize accuracy by injecting correlated Gaussian noise designed via a workload factorization. DP-MF translated this principle to the ML training setting, casting iterative gradient releases as a linear workload and using matrix factorization to engineer noise correlation that beats i.i.d. DP-SGD in few-epoch, large-\u03b5 regimes. DP-BandMF then refined DP-MF by selecting a banded factorization that optimally trades off privacy amplification from subsampling with structured correlation, achieving state-of-the-art utility but revealing sharp computational bottlenecks in both iteration count and parameter dimension. In parallel, time-series DP work on continual release (Chan et al., 2010) demonstrated the power of temporally correlated noise (e.g., tree aggregation), an idea subsumed by banded correlation structures. The privacy accounting backbone relies on R\u00e9nyi DP for the sampled Gaussian mechanism (Mironov et al., 2019), which enables precise calibration when exploiting subsampling-based amplification. Against the standard training baseline established by DP-SGD (Abadi et al., 2016), the current paper\u2019s contribution is not a new mechanism but an engineering- and theory-consistent scaling of DP-BandMF: algorithmic use of band structure and sparse linear algebra to preserve DP-BandMF\u2019s advantages while extending it to orders-of-magnitude larger iteration horizons and model sizes without utility loss.",
+  "analysis_timestamp": "2026-01-06T23:09:26.623554"
+}

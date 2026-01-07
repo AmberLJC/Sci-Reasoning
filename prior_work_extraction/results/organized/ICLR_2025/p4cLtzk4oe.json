@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Extracting Training Data from Diffusion Models",
+      "authors": "Carlini et al.",
+      "year": 2023,
+      "arxiv_id": "unknown",
+      "role": "Gap Identification",
+      "relationship_sentence": "By operationalizing regurgitation as near-duplicate whole-image copying, this work exposed memorization in diffusion models but offered no mechanism to localize partial (region-level) copying, directly motivating a token-attention\u2013based, spatially resolved test like Bright Ending."
+    },
+    {
+      "title": "Membership Inference Attacks Against Diffusion Models",
+      "authors": "Somepalli et al.",
+      "year": 2023,
+      "arxiv_id": "unknown",
+      "role": "Baseline",
+      "relationship_sentence": "Their image-level membership probes detect whether an example was in training but do not identify where memorization occurs within an image, providing the primary baseline that Bright Ending surpasses by localizing memorized regions."
+    },
+    {
+      "title": "Prompt-to-Prompt Image Editing with Cross-Attention Control",
+      "authors": "Hertz et al.",
+      "year": 2022,
+      "arxiv_id": "unknown",
+      "role": "Foundation",
+      "relationship_sentence": "This paper established that cross-attention maps in text-to-image diffusion spatially align tokens to image regions; Bright Ending builds directly on this mechanism to read out per-patch token attention and detect anomalous dominance of the final token."
+    },
+    {
+      "title": "Attend-and-Excite: Prompting Text-to-Image Models for Fine-grained Control",
+      "authors": "Chefer et al.",
+      "year": 2023,
+      "arxiv_id": "unknown",
+      "role": "Inspiration",
+      "relationship_sentence": "By diagnosing and correcting attention collapse where a few tokens dominate cross-attention, this work inspired the hypothesis that abnormal last-token dominance is a detectable signature of memorized content."
+    },
+    {
+      "title": "Null-Text Inversion for Editing Real Images using Guided Diffusion Models",
+      "authors": "Mokady et al.",
+      "year": 2023,
+      "arxiv_id": "unknown",
+      "role": "Related Problem",
+      "relationship_sentence": "Showing that manipulating special/\u2018null\u2019 tokens in cross-attention can reconstruct specific images, this work supports using special-token attention patterns as a signal for instance-level recall, which Bright Ending operationalizes for detection."
+    },
+    {
+      "title": "DreamBooth: Fine Tuning Text-to-Image Diffusion Models for Subject-Driven Generation",
+      "authors": "Ruiz et al.",
+      "year": 2022,
+      "arxiv_id": "unknown",
+      "role": "Related Problem",
+      "relationship_sentence": "By demonstrating that a single learned token can bind detailed appearance of a specific subject, this work provides a mechanistic precedent for token-centric instance recall that underlies the Bright Ending anomaly."
+    },
+    {
+      "title": "An Image is Worth One Word: Personalizing Text-to-Image Generation using Textual Inversion",
+      "authors": "Gal et al.",
+      "year": 2022,
+      "arxiv_id": "unknown",
+      "role": "Inspiration",
+      "relationship_sentence": "Textual inversion\u2019s finding that one token embedding can encode rich, instance-specific visual details directly informs the idea that excessive focus on a single (final) token can signal localized memorization."
+    }
+  ],
+  "synthesis_narrative": "Work on diffusion memorization first established concrete evidence of regurgitation by showing that models can reproduce near-duplicate training images, but this evidence was largely global and image-level, not spatially resolved. Membership inference studies extended this view to deciding whether an example appeared in training, yet their signals remained coarse and could not pinpoint where copying occurs. In parallel, cross-attention analyses in text-to-image models revealed that attention maps align prompt tokens to spatial regions and can be controlled to preserve or transfer structure, while further diagnostics showed that attention can collapse onto a few tokens, impairing semantic coverage. Methods for real-image inversion and subject personalization deepened this token-centric picture by proving that manipulating a special token (e.g., the null token) or learning a single new token can reconstruct or bind highly specific visual details, demonstrating that a single token can carry instance-level appearance.\nTogether, these strands expose a gap: memorization is often detected only at the whole-image level, even though the mechanism of text-to-image generation routes visual details through token-specific cross-attention that can concentrate on special or single tokens. The current work synthesizes these insights by reading spatial cross-attention to diagnose an anomalous dominance of the final text token\u2014bright ending\u2014as a concrete, localizable signature of memorization. This yields a detector that not only flags memorization but also localizes the affected regions, addressing the precise shortcoming of prior global metrics and membership tests.",
+  "target_paper": {
+    "title": "Exploring Local Memorization in Diffusion Models via Bright Ending Attention",
+    "authors": "Chen Chen, Daochang Liu, Mubarak Shah, Chang Xu",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "Diffusion Models, Local Memorization, Bright Ending Attention",
+    "abstract": "Text-to-image diffusion models have achieved unprecedented proficiency in generating realistic images. However, their inherent tendency to memorize and replicate training data during inference raises significant concerns, including potential copyright infringement. In response, various methods have been proposed to evaluate, detect, and mitigate memorization. Our analysis reveals that existing approaches significantly underperform in handling local memorization, where only specific image regions are memorized, compared to global memorization, where the entire image is replicated. Also, they cannot locate the local memorization regions, making it hard to investigate locally. To address these, we identify a novel \"bright ending\" (BE) anomaly in diffusion models prone to memorizing training images. BE refers to a distinct cross-attention pattern observed in text-to-image diffusion models, where memorized image patches exhibit significantly greater attention to the final text token during ",
+    "openreview_id": "p4cLtzk4oe",
+    "forum_id": "p4cLtzk4oe"
+  },
+  "analysis_timestamp": "2026-01-06T12:15:59.859316"
+}

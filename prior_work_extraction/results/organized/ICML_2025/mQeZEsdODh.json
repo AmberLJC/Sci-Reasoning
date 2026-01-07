@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Integrated Architectures for Learning, Planning, and Reacting Based on Approximating Dynamic Programming (Dyna)",
+      "authors": "Richard S. Sutton",
+      "year": 1990,
+      "role": "Foundational model-based RL framework showing how a learned world model can be continually updated and used for planning.",
+      "relationship_sentence": "The paper\u2019s choice to solve sequential tasks by planning with a continually updated dynamics model directly extends Dyna\u2019s core idea that a single model can be reused across changing reward functions."
+    },
+    {
+      "title": "Probabilistic Ensembles with Trajectory Sampling (PETS): Model-Based Reinforcement Learning for Complex Continuous Control",
+      "authors": "Kurtland Chua, Roberto Calandra, Rowan McAllister, Sergey Levine",
+      "year": 2018,
+      "role": "Demonstrated effective MPC planning over learned dynamics models in continuous control.",
+      "relationship_sentence": "OA\u2019s use of MPC over an online dynamics model closely follows PETS\u2019 paradigm of planning with learned models, differing by making the model update purely online and continual."
+    },
+    {
+      "title": "Learning Latent Dynamics for Planning from Pixels (PlaNet)",
+      "authors": "Danijar Hafner, Timothy P. Lillicrap, Ian Fischer, Ruben Villegas, David Ha, Honglak Lee, James Davidson",
+      "year": 2019,
+      "role": "Showed that planning (CEM/MPC) in a learned latent dynamics model enables fast adaptation to new tasks/goals.",
+      "relationship_sentence": "The claim that a single model supports many reward functions in OA is operationalized via the PlaNet-style planning-with-model approach, here made online and used for continual task sequences."
+    },
+    {
+      "title": "Online Learning and Online Convex Optimization",
+      "authors": "Shai Shalev-Shwartz",
+      "year": 2011,
+      "role": "Provides the FTL/FTRL toolbox and regret analyses for online learning with convex losses.",
+      "relationship_sentence": "OA\u2019s \u2018Follow-The-Leader shallow model\u2019 and its no-forgetting, data-aggregating update rule are grounded in the FTL framework and its regret guarantees formalized in this work."
+    },
+    {
+      "title": "Logarithmic Regret Algorithms for Online Convex Optimization",
+      "authors": "Elad Hazan, Amit Agarwal, Satyen Kale",
+      "year": 2007,
+      "role": "Introduced second-order online methods (e.g., Online Newton Step) achieving fast regret for squared loss/exp-concave settings.",
+      "relationship_sentence": "The paper\u2019s regret analysis for the online world model builds on OCO techniques for regression-like losses, where stability and curvature yield tight bounds akin to ONS guarantees."
+    },
+    {
+      "title": "Overcoming Catastrophic Forgetting in Neural Networks (EWC)",
+      "authors": "James Kirkpatrick, Razvan Pascanu, Neil Rabinowitz, Joel Veness, et al.",
+      "year": 2017,
+      "role": "Seminal continual learning method highlighting and mitigating catastrophic forgetting via parameter regularization.",
+      "relationship_sentence": "By contrasting with parameter-regularization approaches like EWC that operate on policy networks, the paper motivates a model-centric route where an online dynamics estimator avoids forgetting by construction."
+    },
+    {
+      "title": "Selective Experience Replay for Lifelong Learning",
+      "authors": "David Isele, Akansel Cosgun",
+      "year": 2018,
+      "role": "Demonstrated catastrophic forgetting in RL and proposed replay-based mitigation across task sequences.",
+      "relationship_sentence": "The paper\u2019s argument that typical RL agents forget across tasks and rely on replay is directly addressed by replacing policy fine-tuning with online model learning plus planning, obviating large replay buffers."
+    }
+  ],
+  "synthesis_narrative": "This paper fuses three mature lines of work\u2014model-based planning, online learning theory, and continual RL\u2014to produce a continual agent that plans with an online world model and provable learning guarantees. From the model-based side, Dyna established that a single dynamics model can be updated continually and reused for many objectives, while PETS and PlaNet showed that model predictive control over learned (often probabilistic or latent) dynamics enables robust decision making and swift adaptation to changing rewards. The present work adopts that planning paradigm but makes the model strictly online and the sole locus of adaptation across a stream of tasks.\nOn the theory side, the agent\u2019s Follow-The-Leader shallow model and its no-forgetting property are grounded in the FTL/FTRL toolbox from online convex optimization (Shalev-Shwartz), with regret control leveraging second-order insights from OCO (Hazan\u2013Agarwal\u2013Kale) for regression-like losses. This yields a concrete regret bound for the dynamics estimator, which then underpins planning performance.\nFinally, continual RL studies such as EWC and selective experience replay (Isele & Cosgun) crystallized the forgetting problem when directly fine-tuning policies. By shifting the burden of continual adaptation to an online dynamics learner and using MPC for decision making, the paper sidesteps policy-parameter interference and replay dependence, aligning the practical strengths of model-based planning with the stability and guarantees of online learning.",
+  "analysis_timestamp": "2026-01-07T00:21:32.399312"
+}

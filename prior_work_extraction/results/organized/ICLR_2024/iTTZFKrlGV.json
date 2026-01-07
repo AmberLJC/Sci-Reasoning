@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "The Variational Formulation of the Fokker\u2013Planck Equation",
+      "authors": "Richard Jordan et al.",
+      "year": 1998,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "Established that KL divergence admits a Wasserstein gradient-flow dynamics (JKO scheme), which GGF uses to formally define the continuous transport from source to target distributions that yields intermediate domains."
+    },
+    {
+      "title": "Diffusion Models Beat GANs on Image Synthesis",
+      "authors": "Prafulla Dhariwal et al.",
+      "year": 2021,
+      "arxiv_id": "2105.05233",
+      "role": "Extension",
+      "relationship_sentence": "Its classifier-guidance mechanism for diffusion provides the template for GGF\u2019s classifier-based potential that steers Langevin dynamics to remain label-consistent during domain transport."
+    },
+    {
+      "title": "JDOT: Joint Distribution Optimal Transport for Domain Adaptation",
+      "authors": "Nicolas Courty et al.",
+      "year": 2017,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "Showed that transport should be label-aware by coupling features and labels in the cost, a principle GGF embeds as potentials to preserve labels along its gradient-flow path."
+    },
+    {
+      "title": "Geodesic Flow Kernel for Unsupervised Domain Adaptation",
+      "authors": "Boqing Gong et al.",
+      "year": 2012,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "Demonstrated bridging domains along a continuous path via geodesic flow, which GGF generalizes from feature subspaces to data distributions using Wasserstein gradient flow to generate intermediate domains."
+    },
+    {
+      "title": "DLOW: Domain Flow for Adaptation and Generalization",
+      "authors": "Rui Gong et al.",
+      "year": 2019,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "Introduced continuous intermediate domains (domain flow) to ease adaptation but relied on image translation/stylization, motivating GGF to synthesize intermediate domains directly by gradient flow when real intermediates are unavailable."
+    },
+    {
+      "title": "Class-Balanced Self-Training for Unsupervised Domain Adaptation",
+      "authors": "Yang Zou et al.",
+      "year": 2018,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "Pioneered pseudo-label based progressive fine-tuning in UDA, which GGF adopts as the training mechanism on its generated intermediate domains."
+    }
+  ],
+  "synthesis_narrative": "Jordan, Kinderlehrer, and Otto established that the Kullback\u2013Leibler divergence induces a gradient flow in the Wasserstein metric, giving a variational characterization of Fokker\u2013Planck dynamics and a principled way to evolve one distribution toward another. Dhariwal and Nichol later showed that diffusion processes can be steered to desired classes by adding classifier gradients, illustrating how to inject label information into noisy dynamics. Courty and colleagues argued in domain adaptation that transport must be label-aware by coupling features and labels in the optimal transport objective, highlighting the risk of class-mismatched mappings. Gong and collaborators earlier proposed the Geodesic Flow Kernel, integrating features along a continuous path on the Grassmann manifold to bridge domain shift through intermediate representations. DLOW operationalized the idea of a continuous \u201cdomain flow,\u201d generating intermediate domains via image translation controlled by a domainness variable, but depended on stylization machinery and access to suitable intermediate styles. Zou and coauthors demonstrated that pseudo-label driven, progressive self-training can effectively adapt models without target labels.\nTogether, these works suggested a natural opportunity: use a principled continuous transport to synthesize intermediate domains, but make the dynamics explicitly label-aware and compatible with pseudo-label fine-tuning. GGF does exactly this by instantiating the KL Wasserstein gradient flow and simulating it with Langevin dynamics, then injecting classifier-based and sample-based potentials\u2014akin to classifier guidance and label-aware transport\u2014to preserve labels and suppress diffusion noise, yielding reliable intermediate domains for gradual, pseudo-label fine-tuning.",
+  "target_paper": {
+    "title": "Gradual Domain Adaptation via Gradient Flow",
+    "authors": "Zhan Zhuang, Yu Zhang, Ying Wei",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Domain adaptation, gradual domain adaptation, gradient flow",
+    "abstract": "Domain shift degrades classification models on new data distributions. Conventional unsupervised domain adaptation (UDA) aims to learn features that bridge labeled source and unlabeled target domains. In contrast to feature learning, gradual domain adaptation (GDA) leverages extra continuous intermediate domains with pseudo-labels to boost the source classifier. However, real intermediate domains are sometimes unavailable or ineffective. In this paper, we propose $\\textbf{G}$radual Domain Adaptation via $\\textbf{G}$radient $\\textbf{F}$low (GGF) to generate intermediate domains with preserving labels, thereby enabling us a fine-tuning method for GDA. We employ the Wasserstein gradient flow in Kullback\u2013Leibler divergence to transport samples from the source to the target domain. To simulate the dynamics, we utilize the Langevin algorithm. Since the Langevin algorithm disregards label information and introduces diffusion noise, we introduce classifier-based and sample-based potentials to ",
+    "openreview_id": "iTTZFKrlGV",
+    "forum_id": "iTTZFKrlGV"
+  },
+  "analysis_timestamp": "2026-01-06T11:38:23.784179"
+}

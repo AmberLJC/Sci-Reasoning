@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Simple and Scalable Predictive Uncertainty Estimation using Deep Ensembles",
+      "authors": "Balaji Lakshminarayanan, Alexander Pritzel, Charles Blundell",
+      "year": 2017,
+      "role": "Gold-standard baseline for uncertainty via ensembling",
+      "relationship_sentence": "Establishes that ensembling independently trained networks yields strong accuracy and calibrated uncertainty, motivating Asymmetric Duos as a cheaper alternative that preserves these benefits without many large replicas."
+    },
+    {
+      "title": "Pitfalls of In-Domain Uncertainty Estimation and Ensembling are Strong Baselines",
+      "authors": "Yury Ashukha, Alexander Lyzhov, Dmitry Molchanov, Dmitry Vetrov",
+      "year": 2020,
+      "role": "Empirical evidence of ensemble superiority for uncertainty",
+      "relationship_sentence": "Shows ensembles outperform many Bayesian approximations for calibration and selective prediction, directly motivating the need for a compute-efficient substitute like pairing a single large model with a small sidekick."
+    },
+    {
+      "title": "BatchEnsemble: An Alternative Approach to Efficient Ensemble and Lifelong Learning",
+      "authors": "Yeming Wen, Dustin Tran, Jimmy Ba",
+      "year": 2020,
+      "role": "Efficient ensembling method",
+      "relationship_sentence": "Proposes parameter-sharing to approximate ensembles at reduced cost; Asymmetric Duos similarly target efficiency but with heterogeneous large\u2013small members and a simple learned combiner instead of weight sharing."
+    },
+    {
+      "title": "A Simple Baseline for Bayesian Uncertainty in Deep Learning (SWAG)",
+      "authors": "Wesley J. Maddox, Timur Garipov, Pavel Izmailov, Dmitry Vetrov, Andrew Gordon Wilson",
+      "year": 2019,
+      "role": "Cost-effective Bayesian approximation for predictive uncertainty",
+      "relationship_sentence": "Demonstrates posterior approximations can close some of the ensemble\u2013cost gap; Asymmetric Duos take a complementary path by mixing a cheap auxiliary model\u2019s predictions with a large model to boost uncertainty quality."
+    },
+    {
+      "title": "Snapshot Ensembles: Train 1, Get M for Free",
+      "authors": "Gao Huang, Yixuan Li, Geoff Pleiss, Zhuang Liu, John E. Hopcroft, Kilian Q. Weinberger",
+      "year": 2017,
+      "role": "Single-training-run ensembling via trajectory snapshots",
+      "relationship_sentence": "Introduces low-overhead ensembling via cyclical learning rates; Asymmetric Duos share the aim of ensemble-like gains under tight budgets but do so by coupling heterogeneous models at inference with learned weights."
+    },
+    {
+      "title": "Stacked Generalization",
+      "authors": "David H. Wolpert",
+      "year": 1992,
+      "role": "Learned ensemble combination (stacking)",
+      "relationship_sentence": "Provides the foundational idea of learning to combine model predictions; Asymmetric Duos instantiate this with a simple learned weighted average to fuse a large model with a smaller sidekick."
+    },
+    {
+      "title": "Model Soups: Averaging Weights of Multiple Fine-Tuned Models Improves Accuracy",
+      "authors": "Mitchell Wortsman, Gabriel Ilharco, Samir Yitzhak Gadre, Rebecca Roelofs, et al.",
+      "year": 2022,
+      "role": "Low-cost model combination via weight-space averaging",
+      "relationship_sentence": "Shows simple averaging across fine-tuned checkpoints can improve accuracy; Asymmetric Duos analogously use simple aggregation, but in prediction space and across heterogeneous architectures, and demonstrate benefits also for uncertainty and selective classification."
+    }
+  ],
+  "synthesis_narrative": "Asymmetric Duos build on a decade of evidence that combining models substantially improves both accuracy and uncertainty quality, while rethinking how to do so under modern compute and fine-tuning constraints. Deep Ensembles established the gold standard for calibrated uncertainty and selective prediction, and follow-up work highlighted that ensembles remain the strongest practical baseline. However, their cost scales with the number and size of members, clashing with today\u2019s large models and rapid fine-tuning workflows. A line of efficient alternatives\u2014Snapshot Ensembles, SWAG, and BatchEnsemble\u2014pursued lower-overhead ensembling through trajectory sampling, posterior approximation, or parameter sharing, demonstrating that much of the ensemble benefit can be retained with less computation. In parallel, Model Soups showed that simple averaging can be surprisingly effective in weight space during fine-tuning. Asymmetric Duos synthesize these insights: retain the core ensemble principle (diversity boosts uncertainty and accuracy) but make it compute-friendly by pairing a high-performing large model with a much smaller, cheaper \u201csidekick,\u201d then fusing their predictions via a learned weighted combiner rooted in stacked generalization. The key leap is embracing architectural asymmetry and heterogeneity as a source of complementary errors while using an extremely simple, data-driven aggregation rule. This yields ensemble-like gains in calibration and selective classification at a fraction of the traditional cost, fitting real-world fine-tuning practice.",
+  "analysis_timestamp": "2026-01-07T00:05:12.527511"
+}

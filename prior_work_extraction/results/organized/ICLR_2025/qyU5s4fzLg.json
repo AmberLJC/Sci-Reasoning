@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Compound Probabilistic Context-Free Grammars for Unsupervised Parsing",
+      "authors": "Yoon Kim et al.",
+      "year": 2019,
+      "role": "Baseline",
+      "relationship_sentence": "The SemInfo objective is plugged into the PCFG/inside\u2013outside training pipeline of neural C-PCFGs, directly replacing the maximum-likelihood objective while keeping the same latent-tree factorization and chart computations."
+    },
+    {
+      "title": "Efficient, Feature-based, Conditional Random Field Parsing",
+      "authors": "Jenny Rose Finkel et al.",
+      "year": 2008,
+      "role": "Foundation",
+      "relationship_sentence": "The paper\u2019s TreeCRF-based model for optimizing over distributions of constituency trees is built on the TreeCRF formalism and span-chart dynamic program introduced by Finkel et al., enabling differentiable expectations needed for SemInfo maximization."
+    },
+    {
+      "title": "The Estimation of Stochastic Context-Free Grammars using the Inside-Outside Algorithm",
+      "authors": "K. Lari and S. J. Young",
+      "year": 1990,
+      "role": "Foundation",
+      "relationship_sentence": "SemInfo is computed as a probability-weighted (expected) information measure over all parses, which relies on inside\u2013outside marginals introduced by Lari and Young for PCFGs."
+    },
+    {
+      "title": "Neural Language Modeling by Jointly Learning Syntax and Lexicon (PRPN)",
+      "authors": "Yikang Shen et al.",
+      "year": 2018,
+      "role": "Gap Identification",
+      "relationship_sentence": "PRPN couples unsupervised tree induction to sentence log-likelihood and exhibits weak alignment between LL and parsing quality, a limitation this paper explicitly targets by replacing LL with a semantic-information objective."
+    },
+    {
+      "title": "Unsupervised Recurrent Neural Network Grammars",
+      "authors": "Yoon Kim et al.",
+      "year": 2019,
+      "role": "Gap Identification",
+      "relationship_sentence": "URNNG\u2019s reliance on language modeling likelihood for inducing constituency structures highlights the same disconnect between LL and parse accuracy that SemInfo is designed to overcome."
+    },
+    {
+      "title": "Learning Deep Representations by Mutual Information Estimation and Maximization (Deep InfoMax)",
+      "authors": "R. Devon Hjelm et al.",
+      "year": 2019,
+      "role": "Inspiration",
+      "relationship_sentence": "The paper\u2019s core idea\u2014maximize the information a latent structure encodes about semantics\u2014follows the InfoMax principle operationalized in Deep InfoMax, motivating an information-theoretic training signal rather than pure likelihood."
+    },
+    {
+      "title": "Unsupervised Latent Tree Induction with Deep Inside-Outside Recursive Autoencoders (DIORA)",
+      "authors": "Andrew Drozdov et al.",
+      "year": 2019,
+      "role": "Related Problem",
+      "relationship_sentence": "DIORA demonstrated that non-likelihood, structure-aware objectives (reconstruction via inside\u2013outside-style charts) can better induce trees, directly informing this work\u2019s shift to an information-centric objective within a TreeCRF framework."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s central move\u2014training unsupervised constituency parsers by maximizing semantic information encoded in trees\u2014stands on two pillars: neural PCFG parsing and information-theoretic learning. On the parsing side, Compound PCFGs provided the modern baseline and training pipeline the authors adopt, so SemInfo can be dropped in place of maximum-likelihood while retaining latent-tree factorization and chart inference. The TreeCRF formalism and the inside\u2013outside algorithm (Finkel et al.; Lari & Young) supply the exact dynamic programs and marginals needed to compute probability-weighted expectations over entire parse forests, which is precisely how the paper estimates and maximizes SemInfo.\n\nEqually important is the motivation to abandon sentence log-likelihood as the sole training signal. Prior unsupervised parsers such as PRPN and URNNG tie tree induction to language modeling, yet repeatedly show that higher likelihood does not reliably yield better trees\u2014an explicit gap this work targets. DIORA further showed that alternative, structure-aware objectives can improve unsupervised tree induction, encouraging the authors to seek a principled replacement for likelihood.\n\nThe information-theoretic framing takes inspiration from InfoMax-style objectives (Deep InfoMax), recasting learning as maximizing the information a tree structure carries about sentence semantics. By combining TreeCRF expectations with an information objective, the authors directly address the LL\u2013accuracy mismatch: they compute a probability-weighted semantic information measure over parses and optimize it end-to-end, yielding a training signal that correlates more strongly with true parse quality.",
+  "analysis_timestamp": "2026-01-06T23:09:26.599052"
+}

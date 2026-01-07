@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Jonathan Ho, Ajay Jain, Pieter Abbeel",
+      "year": 2020,
+      "role": "foundational technique",
+      "relationship_sentence": "Introduced the diffusion generative modeling framework that underpins non-autoregressive trajectory generation in diffusion planners, the sampling stochasticity of which TAT explicitly mitigates."
+    },
+    {
+      "title": "Diffuser: Diffusion Models for Planning",
+      "authors": "Michael Janner, Yilun Du, Joshua B. Tenenbaum, Sergey Levine",
+      "year": 2022,
+      "role": "direct precursor (diffusion planning)",
+      "relationship_sentence": "Established planning via trajectory diffusion as a non-autoregressive alternative to autoregressive sequence models; TAT is designed as a training-free wrapper to stabilize such diffusion planners by aggregating sampled trajectories into a robust tree."
+    },
+    {
+      "title": "Classifier-Free Diffusion Guidance",
+      "authors": "Jonathan Ho, Tim Salimans",
+      "year": 2022,
+      "role": "contrasting guidance baseline",
+      "relationship_sentence": "Represents a widely used sampling-time guidance method to steer diffusion outputs; TAT offers an orthogonal, training- and sampler-agnostic alternative by post-hoc aggregating multiple predicted trajectories rather than modifying the diffusion dynamics."
+    },
+    {
+      "title": "Deep Reinforcement Learning in a Handful of Trials Using Probabilistic Dynamics Models (PETS)",
+      "authors": "Kurtland Chua, Roberto Calandra, Rowan McAllister, Sergey Levine",
+      "year": 2018,
+      "role": "methodological inspiration (sample-based trajectory selection)",
+      "relationship_sentence": "Popularized trajectory sampling and elite selection (via CEM) for robust MPC; TAT similarly leverages multiple sampled rollouts but aggregates them in a dynamic tree to marginalize unreliable states instead of selecting a single elite trajectory."
+    },
+    {
+      "title": "Bandit Based Monte-Carlo Planning (UCT)",
+      "authors": "Levente Kocsis, Csaba Szepesv\u00e1ri",
+      "year": 2006,
+      "role": "conceptual inspiration (tree search with rollouts)",
+      "relationship_sentence": "Demonstrated how rollouts can be organized into a state-action search tree with principled node prioritization; TAT echoes this idea by building a trajectory aggregation tree that prioritizes impactful nodes and prunes unreliable branches."
+    },
+    {
+      "title": "Randomized Kinodynamic Planning (RRT)",
+      "authors": "Steven M. LaValle, James J. Kuffner Jr.",
+      "year": 2001,
+      "role": "conceptual inspiration (tree-structured exploration)",
+      "relationship_sentence": "Introduced tree-structured exploration over state spaces using sampled trajectories; TAT\u2019s dynamic tree over states/trajectories draws on this intuition, but uses it to fuse multiple diffusion-generated plans and downweight infeasible regions."
+    },
+    {
+      "title": "MBPO: Model-Based Policy Optimization",
+      "authors": "Michael Janner, Justin Fu, Marvin Zhang, Sergey Levine",
+      "year": 2019,
+      "role": "methodological influence (risk mitigation via aggregation)",
+      "relationship_sentence": "Showed that aggregating information from multiple model rollouts/ensembles can curb compounding errors; TAT similarly reduces stochastic risk by aggregating historical and current diffusion trajectories to form more reliable decisions."
+    }
+  ],
+  "synthesis_narrative": "Trajectory Aggregation Tree (TAT) is motivated by the success and limitations of diffusion-based planners. Denoising Diffusion Probabilistic Models established the non-autoregressive generative machinery that enables trajectory-level sampling, and Diffuser extended this idea to decision-making, showing strong long-horizon performance but also exposing the practical risk of infeasible samples due to stochasticity. Prior attempts to steer diffusion outputs\u2014such as classifier-free guidance\u2014modify the sampling dynamics or require auxiliary conditioning; in contrast, TAT aims to be training- and sampler-agnostic.\nTo achieve robustness without retraining, TAT synthesizes ideas from sample-based planning and tree search. PETS popularized sampling many trajectories and selecting elites (often via CEM), illustrating how aggregate statistics over trajectories can improve reliability; TAT generalizes this by organizing repeated diffusion rollouts into a dynamic state/trajectory tree, rather than committing to a single elite path. Classical tree-search principles further inspire TAT\u2019s structure: UCT shows how simulated rollouts can populate a search tree with principled node prioritization, while RRT demonstrates how sampling can grow trees that explore feasible regions of state space. Finally, MBPO\u2019s use of ensembles and multiple rollouts to temper model bias aligns with TAT\u2019s core mechanism\u2014marginalizing unreliable states/branches by pooling evidence across historical and current predictions. Together, these strands directly inform TAT\u2019s key contribution: a training-free, trajectory-aggregation tree that prioritizes robust nodes and resists stochastic failure modes of diffusion planners.",
+  "analysis_timestamp": "2026-01-07T00:02:04.885022"
+}

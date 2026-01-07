@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "A Reduction of Imitation Learning and Structured Prediction to No-Regret Online Learning (DAgger)",
+      "authors": "St\u00e9phane Ross, Geoffrey J. Gordon, J. Andrew Bagnell",
+      "year": 2011,
+      "role": "Problem diagnosis and baseline fix for covariate shift in imitation learning",
+      "relationship_sentence": "SAILOR targets the same compounding-error/covariate-shift failure DAgger identified, but replaces interactive relabeling with decision-time search using learned models to recover from off-distribution states."
+    },
+    {
+      "title": "SEARN: Search-Based Structured Prediction",
+      "authors": "Hal Daum\u00e9 III, John Langford, Daniel Marcu",
+      "year": 2009,
+      "role": "Conceptual backbone of the learning-to-search paradigm",
+      "relationship_sentence": "SEARN\u2019s idea of learning components that guide a search over decisions directly informs SAILOR\u2019s framing: learn a world model and reward so that a test-time search can achieve expert outcomes after mistakes."
+    },
+    {
+      "title": "Generative Adversarial Imitation Learning (GAIL)",
+      "authors": "Jonathan Ho, Stefano Ermon",
+      "year": 2016,
+      "role": "Objective for matching expert occupancy beyond supervised cloning",
+      "relationship_sentence": "By shifting imitation from next-action prediction to outcome/occupancy matching, GAIL motivates SAILOR\u2019s focus on learning objectives (reward) that support robust performance outside the demo distribution."
+    },
+    {
+      "title": "Learning Robust Rewards with Adversarial Inverse Reinforcement Learning (AIRL)",
+      "authors": "Justin Fu, Katie Luo, Sergey Levine",
+      "year": 2018,
+      "role": "Recovering a transferable reward function from demonstrations",
+      "relationship_sentence": "AIRL shows that learning an explicit reward can generalize and support planning; SAILOR adopts this principle by learning a reward model specifically to drive test-time search with a learned dynamics model."
+    },
+    {
+      "title": "Deep Reinforcement Learning in a Handful of Trials using Probabilistic Dynamics Models (PETS)",
+      "authors": "Kurtland Chua, Roberto Calandra, Rowan McAllister, Sergey Levine",
+      "year": 2018,
+      "role": "Model-based control via ensembles and MPC/CEM planning",
+      "relationship_sentence": "PETS established robust decision-time optimization with learned dynamics and CEM; SAILOR leverages this style of search as the mechanism to recover from errors using its learned world and reward models."
+    },
+    {
+      "title": "Learning Latent Dynamics for Planning from Pixels (PlaNet)",
+      "authors": "Danijar Hafner, Timothy Lillicrap, Ian Fischer, Ruben Villegas, James Davidson, Mohammad Norouzi, et al.",
+      "year": 2019,
+      "role": "Latent world models enabling efficient planning",
+      "relationship_sentence": "PlaNet\u2019s latent dynamics and shooting-based planning inform SAILOR\u2019s design choice to learn compact world models that make search feasible and stable under limited demonstration data."
+    },
+    {
+      "title": "Mastering Atari, Go, Chess and Shogi by Planning with a Learned Model (MuZero)",
+      "authors": "Julian Schrittwieser, Ioannis Antonoglou, Thomas Hubert, Karen Simonyan, Laurent Sifre, et al.",
+      "year": 2020,
+      "role": "Unified learning of dynamics and reward with decision-time tree search",
+      "relationship_sentence": "MuZero\u2019s blueprint\u2014jointly learning dynamics and reward and using search at test time\u2014directly inspires SAILOR\u2019s core recipe to learn the components needed for planning from demonstrations rather than rewards."
+    }
+  ],
+  "synthesis_narrative": "SAILOR\u2019s key contribution is to move imitation beyond action matching toward decision-time planning that achieves expert outcomes even after errors. This builds on three converging threads. First, DAgger and SEARN crystallized the core failure of behavioral cloning\u2014covariate shift\u2014and proposed the learning-to-search view: train components that enable recovery during sequential decision making. SAILOR embraces this framing but shifts the recovery mechanism from interactive relabeling to online search at test time.\nSecond, advances in imitation via reward learning (GAIL, AIRL) replaced next-action supervision with objectives over outcomes/occupancies. AIRL in particular emphasizes learning a reward that transfers and supports planning. SAILOR adopts this insight by explicitly learning a reward model from demonstrations, using it as the objective for search rather than relying solely on a discriminative policy.\nThird, model-based planning with learned dynamics (PETS, PlaNet) and unified model-and-search systems (MuZero) demonstrated that learned world models, paired with MPC or tree search, can be both robust and sample-efficient. SAILOR combines these ingredients: it learns a compact world model and a reward model from expert data, then performs decision-time search (e.g., CEM/MCTS) to select actions that optimize the learned reward under the learned dynamics. Through careful algorithmic choices inspired by these works\u2014ensembles/latents for stability, planning horizons and objectives for robustness\u2014SAILOR operationalizes learning-to-search specifically for imitation, delivering recovery from off-demonstration states without requiring expert queries.",
+  "analysis_timestamp": "2026-01-07T00:02:04.972976"
+}

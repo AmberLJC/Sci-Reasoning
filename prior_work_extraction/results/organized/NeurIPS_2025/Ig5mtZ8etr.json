@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Lift, Splat, Shoot: Encoding Images from Arbitrary Cameras into an Occupancy Grid",
+      "authors": "G. Philion; S. Fidler",
+      "year": 2020,
+      "role": "Technique inspiration for BEV synthesis via probabilistic lifting and splatting",
+      "relationship_sentence": "BevSplat adopts the core idea of lifting image features and splatting them into a BEV grid, but replaces LSS\u2019s discrete depth bins with continuous, feature-carrying 3D Gaussian primitives to explicitly address height ambiguity."
+    },
+    {
+      "title": "3D Gaussian Splatting for Real-Time Radiance Field Rendering",
+      "authors": "B. Kerbl; G. Kopanas; T. Leimk\u00fchler; G. Drettakis",
+      "year": 2023,
+      "role": "Representation/renderer foundation",
+      "relationship_sentence": "The notion of representing scenes with anisotropic 3D Gaussians and differentiably rasterizing them directly motivates BevSplat\u2019s per-pixel Gaussian primitives that carry semantic and spatial features for BEV synthesis."
+    },
+    {
+      "title": "BEVFormer: Learning Bird\u2019s-Eye-View Representations from Multi-Camera Input via Transformers",
+      "authors": "Z. Li; W. Wang; H. Hu; et al.",
+      "year": 2022,
+      "role": "Baseline approach and contrast (cross-view transformers for BEV)",
+      "relationship_sentence": "BEVFormer exemplifies transformer-based cross-view transformation; BevSplat contrasts this by using explicit, geometry-aware Gaussian splatting to form BEV features, avoiding heavy attention while better handling vertical uncertainty."
+    },
+    {
+      "title": "Inverse Perspective Mapping Simplifies Optical Flow Computation and Obstacle Detection",
+      "authors": "H. Mallot; H. H. B\u00fclthoff; J. Little; S. Bohrer",
+      "year": 1991,
+      "role": "Classical baseline assumption to overcome",
+      "relationship_sentence": "IPM\u2019s flat-ground assumption underlies many BEV projections but fails with height variation; BevSplat replaces this brittle assumption with per-pixel 3D Gaussian distributions that encode height uncertainty."
+    },
+    {
+      "title": "Orthographic Feature Transform for Monocular 3D Object Detection",
+      "authors": "B. Roddick; A. Kendall; R. Cipolla",
+      "year": 2019,
+      "role": "Early BEV feature lifting framework",
+      "relationship_sentence": "OFT pioneered mapping perspective features to an orthographic BEV, inspiring BevSplat\u2019s view-normalizing goal while highlighting the need for richer vertical modeling, which BevSplat provides via Gaussian primitives."
+    },
+    {
+      "title": "TransGeo: Transformer-based Cross-View Geo-localization",
+      "authors": "X. Chen; et al.",
+      "year": 2022,
+      "role": "Prior cross-view localization approach with transformers",
+      "relationship_sentence": "TransGeo aligns ground and satellite views with cross-view attention; BevSplat achieves cross-view pose estimation by synthesizing a BEV feature map through Gaussian splatting, offering a simpler and more geometry-grounded route under weak supervision."
+    }
+  ],
+  "synthesis_narrative": "BevSplat\u2019s core contribution\u2014resolving height ambiguity for weakly supervised ground-to-satellite localization by synthesizing a BEV feature map from feature-bearing 3D Gaussian primitives\u2014builds by unifying two threads: BEV synthesis from monocular views and efficient, differentiable 3D representations. Orthographic Feature Transform and Lift, Splat, Shoot established the effectiveness of lifting perspective features and splatting them into a top-down grid, but relied on coarse or implicit treatments of vertical structure (e.g., discrete depth bins or cumulative transforms). Classical inverse perspective mapping further revealed the fragility of flat-ground assumptions when height varies. In parallel, transformer-based systems such as BEVFormer and TransGeo demonstrated cross-view alignment via attention, but at the cost of complexity and weaker geometric inductive biases for height reasoning. The emergence of 3D Gaussian Splatting provided a practical, differentiable mechanism to represent and rasterize anisotropic 3D primitives with continuous spatial extent. BevSplat fuses these insights: it adopts the BEV lifting-and-splatting paradigm, replaces depth bins and flat-plane projections with continuous 3D Gaussian primitives, and encodes semantic and spatial features directly on those primitives. This design explicitly models per-pixel height uncertainty while remaining lightweight compared to cross-view transformers. The resulting BEV feature synthesis enables robust, weakly supervised pose estimation against noisy ground-truth, directly addressing the height ambiguity that limits prior BEV and cross-view approaches.",
+  "analysis_timestamp": "2026-01-07T00:21:32.284516"
+}

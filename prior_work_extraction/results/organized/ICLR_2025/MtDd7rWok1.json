@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Score-Based Generative Modeling through Stochastic Differential Equations",
+      "authors": "Yang Song et al.",
+      "year": 2021,
+      "role": "Foundation",
+      "relationship_sentence": "This work formalized diffusion/score models via reverse-time SDE/ODE and highlighted the role of numerical discretization and score estimation errors in sampling\u2014providing the trajectory-based framework and the precise training\u2013sampling mismatch that the anti-bias prompts are designed to rectify."
+    },
+    {
+      "title": "Denoising Diffusion Implicit Models",
+      "authors": "Jiaming Song et al.",
+      "year": 2020,
+      "role": "Foundation",
+      "relationship_sentence": "DDIM introduced deterministic, non-Markovian sampling trajectories and inversion, making the notion of a stepwise sampling path explicit; the proposed per-step anti-bias prompts directly target steering this trajectory back toward the training trajectory."
+    },
+    {
+      "title": "Elucidating the Design Space of Diffusion-Based Generative Models",
+      "authors": "Tero Karras et al.",
+      "year": 2022,
+      "role": "Gap Identification",
+      "relationship_sentence": "EDM diagnosed quality\u2013speed tradeoffs as discretization and loss-weighting issues and proposed SNR-aware weighting; the present work addresses the same mismatch by learning time-dependent anti-bias prompts and adopts a time-aware weighting scheme inspired by EDM\u2019s SNR-driven perspective."
+    },
+    {
+      "title": "DPM-Solver: A Fast ODE Solver for Diffusion Probabilistic Models",
+      "authors": "Cheng Lu et al.",
+      "year": 2022,
+      "role": "Baseline",
+      "relationship_sentence": "DPM-Solver reduces discretization error via high-order ODE solvers; the new approach positions its prompt-based trajectory rectification as an alternative that further mitigates exposure bias beyond what improved solvers alone can achieve."
+    },
+    {
+      "title": "Classifier-Free Diffusion Guidance",
+      "authors": "Jonathan Ho et al.",
+      "year": 2022,
+      "role": "Foundation",
+      "relationship_sentence": "CFG established conditioning via learnable text embeddings (including null prompts) as a powerful steering mechanism; the anti-bias prompt is a learned, per-timestep conditioning vector that plugs into this guidance interface to counteract exposure bias during sampling."
+    },
+    {
+      "title": "Scheduled Sampling for Sequence Prediction with Recurrent Neural Networks",
+      "authors": "Samy Bengio et al.",
+      "year": 2015,
+      "role": "Foundation",
+      "relationship_sentence": "This paper coined exposure bias and proposed training with model-generated states to simulate inference conditions; the current work adopts the same principle to construct training data that expose the diffusion sampler\u2019s own errors and learn anti-bias prompts."
+    },
+    {
+      "title": "An Image is Worth One Word: Personalizing Text-to-Image Generation using Textual Inversion",
+      "authors": "Rinon Gal et al.",
+      "year": 2022,
+      "role": "Inspiration",
+      "relationship_sentence": "Textual Inversion showed that lightweight, learnable prompt embeddings can control diffusion outputs without retraining the backbone; the proposed method generalizes this idea by predicting time-dependent, per-step \u2018anti-bias\u2019 prompts to correct the sampling trajectory."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core idea\u2014learning a lightweight, per-timestep anti-bias prompt to rectify diffusion sampling trajectories\u2014rests on the trajectory view of diffusion sampling introduced by score-based modeling and DDIM. Song et al.\u2019s SDE framework provided the theoretical backbone and identified how score estimation and discretization shape sampling dynamics, while DDIM made the notion of a deterministic, stepwise sampling path concrete, enabling targeted per-step corrections. Karras et al.\u2019s EDM further crystallized the training\u2013sampling mismatch by tying image quality to discretization and SNR-aware loss weighting; the present work adopts a time-dependent weighting in that spirit but addresses the gap by steering the conditioning signal rather than the solver. Solver-centric advances like DPM-Solver form a natural baseline aimed at reducing discretization error; the new method complements and surpasses them by directly correcting the trajectory via learned prompts. The mechanism for such corrections is grounded in classifier-free guidance, which established conditioning embeddings (including a null prompt) as a handle for sample steering; here, that handle becomes a learned, timestep-specific anti-bias prompt. Finally, the strategy for creating training data that expose inference-time states explicitly draws on scheduled sampling\u2019s treatment of exposure bias\u2014training on model-generated states to bridge the teacher-forcing gap. Textual Inversion demonstrates that compact, learnable prompt embeddings can effectively modulate diffusion behavior without backbone retraining, inspiring the paper\u2019s lightweight prompt prediction model to deliver time-dependent corrections.",
+  "analysis_timestamp": "2026-01-06T23:08:23.931562"
+}

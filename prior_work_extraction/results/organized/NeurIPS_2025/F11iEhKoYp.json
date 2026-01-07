@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Deep Neural Decision Forests",
+      "authors": "Peter Kontschieder, Madalina Fiterau, Antonio Criminisi, Samuel Rota Bul\u00f2",
+      "year": 2015,
+      "role": "Differentiable tree/forest with probabilistic routing baseline",
+      "relationship_sentence": "Introduced end-to-end training of trees via soft, probabilistic splits; the present work explicitly departs from this by enforcing a unique hard path via a ReLU+Argmin reformulation while retaining gradient-based optimization."
+    },
+    {
+      "title": "Distilling a Neural Network Into a Soft Decision Tree",
+      "authors": "Nicholas Frosst, Geoffrey Hinton",
+      "year": 2017,
+      "role": "Soft decision tree with temperature-controlled routing",
+      "relationship_sentence": "Established temperature-controlled soft routing and tree training via backprop; the new method replaces probabilistic routing with exact hard branching and uses a temperature (softmin) schedule to approximate Argmin for stable gradients."
+    },
+    {
+      "title": "Neural Oblivious Decision Ensembles for Deep Learning on Tabular Data",
+      "authors": "Sergei Popov, Stanislav Morozov, Artem Babenko",
+      "year": 2019,
+      "role": "Differentiable oblique tree-like model on tabular data",
+      "relationship_sentence": "Demonstrated the strength of differentiable oblique splits on tabular tasks; the proposed approach inherits oblique tests but contributes an exact hard-split, single-path formulation rather than oblivious soft gating."
+    },
+    {
+      "title": "OC1: Randomized Induction of Oblique Decision Trees",
+      "authors": "Sreerama K. Murthy, Steven Kasif, Steven Salzberg",
+      "year": 1994,
+      "role": "Foundation for oblique (linear) decision boundaries in trees",
+      "relationship_sentence": "Established the benefits of oblique splits for accuracy; the new work optimizes such oblique tests globally with gradients under a ReLU-based exact branching mechanism."
+    },
+    {
+      "title": "Optimal Classification Trees",
+      "authors": "Dimitris Bertsimas, Jack Dunn",
+      "year": 2017,
+      "role": "Exact optimization of hard-split trees via MIP",
+      "relationship_sentence": "Showed accuracy gains from globally optimized hard, deterministic trees; the present paper achieves a similarly exact hard-path semantics but via a continuous ReLU+Argmin reformulation amenable to gradient descent."
+    },
+    {
+      "title": "Categorical Reparameterization with Gumbel-Softmax",
+      "authors": "Eric Jang, Shixiang Gu, Ben Poole",
+      "year": 2017,
+      "role": "Temperature-based continuous relaxation of discrete argmax",
+      "relationship_sentence": "Provides the core idea of temperature-controlled soft approximations to discrete selection; the paper leverages a scaled softmin to approximate Argmin and employs annealing/warm-start to stabilize training."
+    },
+    {
+      "title": "OptNet: Differentiable Optimization as a Layer in Neural Networks",
+      "authors": "Brandon Amos, J. Zico Kolter",
+      "year": 2017,
+      "role": "Treating argmin solutions as differentiable layers",
+      "relationship_sentence": "Motivates viewing inference as an Argmin operator with differentiable surrogates; the proposed ReLU+Argmin tree formalizes routing as an optimization and backpropagates through its softmin approximation."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core contribution\u2014an exact hard-split, oblique decision tree trained end-to-end via gradients\u2014emerges by synthesizing lines of work on differentiable routing, oblique splits, and differentiable optimization. Early differentiable trees, notably Deep Neural Decision Forests and the soft decision tree of Frosst & Hinton, established gradient-based training through probabilistic routing and temperature control, but at the cost of averaging over multiple paths and diminished interpretability. NODE advanced performance on tabular data with differentiable oblique gating, reinforcing the value of linear tests at nodes, yet retained soft, oblivious routing.\n\nOn the hard-decision side, OC1 demonstrated the accuracy benefits of oblique tests, while Optimal Classification Trees validated that globally optimized, deterministic trees can be highly accurate\u2014albeit via discrete MIP formulations without gradient flow. Bridging these paradigms, the present work recasts hard routing as ReLU-based zero-violation constraints and uses an Argmin to select the unique feasible path, preserving deterministic predictions while enabling smooth training.\n\nTechnically, the approximation of Argmin with a temperature-controlled softmin draws directly on the Gumbel-Softmax/temperature-relaxation literature, informing the proposed warm-start annealing for numerical stability and effective gradient flow. Finally, the idea of treating an optimization solution as a differentiable module, popularized by OptNet, underpins the paper\u2019s Argmin-as-operator view. Together, these works enable an exact, single-path semantics with end-to-end training, addressing non-differentiability and accuracy limitations simultaneously.",
+  "analysis_timestamp": "2026-01-07T00:02:04.969082"
+}

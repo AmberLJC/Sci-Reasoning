@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Human Motion Diffusion Model",
+      "authors": "Guy Tevet et al.",
+      "year": 2023,
+      "arxiv_id": "2209.14916",
+      "role": "Foundation",
+      "relationship_sentence": "SinMDM adopts the diffusion-based formulation for motion (noise schedule, denoising objective, and motion parameterization) introduced by MDM, then redesigns the denoiser and training regime to work from a single motion instance."
+    },
+    {
+      "title": "SinGAN: Learning a Generative Model from a Single Natural Image",
+      "authors": "Tamar Rott Shaham et al.",
+      "year": 2019,
+      "arxiv_id": "1905.01164",
+      "role": "Inspiration",
+      "relationship_sentence": "SinGAN\u2019s core idea of learning the internal patch statistics of a single example directly motivates SinMDM\u2019s single-instance generative paradigm and its use of limited receptive fields to avoid overfitting."
+    },
+    {
+      "title": "SinFusion: Training Diffusion Models on a Single Image",
+      "authors": "I. Gur et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Extension",
+      "relationship_sentence": "SinFusion demonstrates that diffusion models can be trained effectively on a single instance by carefully constraining capacity and conditioning, a principle SinMDM extends from images to temporal motion with a lightweight denoiser."
+    },
+    {
+      "title": "Deep Image Prior",
+      "authors": "Dmitry Ulyanov et al.",
+      "year": 2018,
+      "arxiv_id": "1711.10925",
+      "role": "Inspiration",
+      "relationship_sentence": "The finding that network inductive bias and local receptive fields can capture a single signal\u2019s internal structure informs SinMDM\u2019s shallow, locality-biased architecture for single-motion learning."
+    },
+    {
+      "title": "Longformer: The Long-Document Transformer",
+      "authors": "Iz Beltagy et al.",
+      "year": 2020,
+      "arxiv_id": "2004.05150",
+      "role": "Extension",
+      "relationship_sentence": "Longformer\u2019s sliding-window local attention directly inspires SinMDM\u2019s use of local attention to restrict temporal receptive fields, mitigating overfitting and enabling arbitrary-length motion synthesis."
+    },
+    {
+      "title": "Spatial Temporal Graph Convolutional Networks for Skeleton-Based Action Recognition",
+      "authors": "Sijie Yan et al.",
+      "year": 2018,
+      "arxiv_id": "1801.07455",
+      "role": "Related Problem",
+      "relationship_sentence": "ST-GCN\u2019s formulation of operations constrained by the skeleton\u2019s kinematic graph underlies SinMDM\u2019s topology-aware locality, allowing the denoiser to generalize across arbitrary skeletal rigs."
+    }
+  ],
+  "synthesis_narrative": "Diffusion-based motion generation was crystallized by the Human Motion Diffusion Model, which established the denoising objective, noise schedule, and practical parameterization for sequences of skeletal poses. Independently, SinGAN revealed that a single example contains rich internal statistics; by learning local patch distributions with constrained receptive fields, a generator can synthesize diverse yet faithful variations from just one input. Deep Image Prior further showed that the inductive bias of shallow, locality-focused networks suffices to capture a single signal\u2019s internal structure without external data. SinFusion then demonstrated that diffusion models themselves can be trained on a single instance, provided capacity and conditioning are carefully controlled\u2014validating that diffusion\u2019s noise-conditioning and iterative denoising can learn an instance\u2019s internal distribution. For handling long sequences, Longformer introduced sliding-window attention that restricts receptive fields while preserving scalability. Finally, ST-GCN formalized modeling along a kinematic graph, reinforcing that locality with respect to skeletal topology is a robust inductive bias for pose sequences.\nSynthesizing these insights, a natural gap emerges: motion diffusion had not been adapted to learn from a single motion while remaining topology-agnostic and avoiding overfitting. By merging diffusion for motion with single-instance internal learning, and by instantiating locality through shallow networks and windowed attention aligned with skeletal structure, the current work enables generation of long, diverse motions faithful to a single clip and applicable to arbitrary rigs\u2014precisely the opportunity suggested by these prior advances.",
+  "target_paper": {
+    "title": "Single Motion Diffusion",
+    "authors": "Sigal Raab, Inbal Leibovitch, Guy Tevet, Moab Arar, Amit Haim Bermano, Daniel Cohen-Or",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Deep Learning, Motion synthesis, Animation, Single Instance Learning, Generative models",
+    "abstract": "Synthesizing realistic animations of humans, animals, and even imaginary creatures, has long been a goal for artists and computer graphics professionals. Compared to the imaging domain, which is rich with large available datasets, the number of data instances for the motion domain is limited, particularly for the animation of animals and exotic creatures (e.g., dragons), which have unique skeletons and motion patterns. In this work, we introduce SinMDM, a Single Motion Diffusion Model. It is designed to learn the internal motifs of a single motion sequence with arbitrary topology and synthesize a variety of motions of arbitrary length that remain faithful to the learned motifs. We harness the power of diffusion models and present a denoising network explicitly designed for the task of learning from a single input motion. SinMDM is crafted as a lightweight architecture, which avoids overfitting by using a shallow network with local attention layers that narrow the receptive field and en",
+    "openreview_id": "DrhZneqz4n",
+    "forum_id": "DrhZneqz4n"
+  },
+  "analysis_timestamp": "2026-01-06T19:14:13.472814"
+}

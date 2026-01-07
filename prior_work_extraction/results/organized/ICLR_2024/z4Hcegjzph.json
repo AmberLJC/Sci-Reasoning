@@ -1,0 +1,57 @@
+{
+  "prior_works": [
+    {
+      "title": "Masked Autoencoders Are Scalable Vision Learners",
+      "authors": "Kaiming He et al.",
+      "year": 2022,
+      "arxiv_id": "2111.06377",
+      "role": "Baseline",
+      "relationship_sentence": "This work establishes the MIM paradigm of encoding only \u201cvisible\u201d content and reconstructing the missing part with a decoder, which ROPIM directly modifies by replacing binary masking with linear random orthogonal projections and using the complement subspace for reconstruction."
+    },
+    {
+      "title": "BEiT: BERT Pre-Training of Image Transformers",
+      "authors": "Hangbo Bao et al.",
+      "year": 2021,
+      "arxiv_id": "2106.08254",
+      "role": "Foundation",
+      "relationship_sentence": "BEiT formalizes masked image modeling for ViTs as learning by predicting masked tokens, providing the core problem formulation that ROPIM retains while changing the masking mechanism from discrete token removal to projection-defined information reduction."
+    },
+    {
+      "title": "An Elementary Proof of the Johnson\u2013Lindenstrauss Lemma",
+      "authors": "Sanjoy Dasgupta et al.",
+      "year": 2003,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "JL theory underpins that random projections preserve structure with bounded distortion, which ROPIM leverages to justify and quantify its guaranteed bound on the noise variance introduced by random orthogonal projection of image tokens."
+    },
+    {
+      "title": "Orthogonal Random Features",
+      "authors": "Felix X. Yu et al.",
+      "year": 2016,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "This paper shows that using orthogonal (rather than i.i.d. Gaussian) random matrices reduces variance and better preserves geometry, directly motivating ROPIM\u2019s choice of orthogonal projections to control information loss during \u2018masking\u2019."
+    },
+    {
+      "title": "Finding Structure with Randomness: Probabilistic Algorithms for Constructing Approximate Matrix Decompositions",
+      "authors": "Nathan Halko et al.",
+      "year": 2011,
+      "arxiv_id": "0909.4061",
+      "role": "Foundation",
+      "relationship_sentence": "Randomized range-finding and projector theory here provides the operative split into a random subspace and its orthogonal complement, informing ROPIM\u2019s design that uses the complement subspace as the unmasking signal for reconstruction."
+    }
+  ],
+  "synthesis_narrative": "BEiT introduced masked image modeling for Vision Transformers by predicting masked visual tokens, crystallizing the pretext of learning robust representations from partially observed inputs. Masked Autoencoders then simplified this paradigm by operating on image patches, encoding only the visible subset and reconstructing the masked ones with a lightweight decoder, demonstrating that aggressive masking ratios can still yield strong representations. In parallel, the random projection literature established that linear dimensionality reduction can preserve geometric structure: the Johnson\u2013Lindenstrauss lemma provided rigorous distortion bounds for random projections, while orthogonal random features showed that enforcing orthogonality in the projection matrix reduces variance and better preserves information than i.i.d. Gaussian projections. Randomized matrix algorithms further detailed how data can be decomposed into a random subspace and its orthogonal complement, offering a practical way to partition information across complementary components of a signal.\nBringing these strands together highlighted an opportunity: replace discrete, binary masking in MIM with continuous, structure-preserving random orthogonal projections that act as controllable information throttles. The JL bounds and orthogonal-feature variance reductions suggest a principled way to guarantee limited distortion, while the randomized range/complement viewpoint naturally yields an \u201cunmasking\u201d signal from the complementary subspace for reconstruction. Within the MAE-style encode-visible/reconstruct-missing scaffold, this synthesis leads directly to a projection-based masking mechanism that enables locally varying masking degrees with theoretical noise control.",
+  "target_paper": {
+    "title": "Pre-training with Random Orthogonal Projection Image Modeling",
+    "authors": "Maryam Haghighat, Peyman Moghadam, Shaheer Mohamed, Piotr Koniusz",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Random Projection, Self-supervised Learning, Image Modelling, Representation Learning, Vision Transformer",
+    "abstract": "Masked Image Modeling (MIM) is a powerful self-supervised strategy for visual pre-training without the use of labels. MIM applies random crops to input images, processes them with an encoder, and then recovers the masked inputs with a decoder, which encourages the network to capture and learn structural information about objects and scenes. The intermediate feature representations obtained from MIM are suitable for fine-tuning on downstream tasks. In this paper, we propose an Image Modeling framework based on random orthogonal projection instead of binary masking as in MIM. Our proposed Random Orthogonal Projection Image Modeling (ROPIM) reduces spatially-wise token information under guaranteed bound on the noise variance and can be considered as masking entire spatial image area under locally varying masking degrees. Since ROPIM uses a random subspace for the projection that realizes the masking step, the readily available complement of the subspace can be used during unmasking to pro",
+    "openreview_id": "z4Hcegjzph",
+    "forum_id": "z4Hcegjzph"
+  },
+  "analysis_timestamp": "2026-01-06T10:51:32.221335"
+}

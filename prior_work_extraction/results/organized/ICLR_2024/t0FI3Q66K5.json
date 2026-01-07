@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Multimodal Few-Shot Learning with Frozen Transformers",
+      "authors": "Markos Tsimpoukelli et al.",
+      "year": 2021,
+      "arxiv_id": "2106.13884",
+      "role": "Inspiration",
+      "relationship_sentence": "By showing that a frozen pre-trained language transformer can be conditioned on visual inputs through a small mapping to achieve multimodal few-shot learning, this work directly inspired the idea that LLM transformer blocks contain reusable, modality-agnostic computation that the current paper repurposes as frozen visual encoder layers without any language interface."
+    },
+    {
+      "title": "Flamingo: a Visual Language Model for Few-Shot Learning",
+      "authors": "Jean-Baptiste Alayrac et al.",
+      "year": 2022,
+      "arxiv_id": "2204.14198",
+      "role": "Gap Identification",
+      "relationship_sentence": "Flamingo interleaves a frozen LLM with gated cross-attention layers to inject visual features but depends on language prompts and multimodal bridging, a reliance the current paper explicitly removes by inserting frozen LLM blocks directly inside vision encoders to process visual tokens."
+    },
+    {
+      "title": "BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models",
+      "authors": "Junnan Li et al.",
+      "year": 2023,
+      "arxiv_id": "2301.12597",
+      "role": "Extension",
+      "relationship_sentence": "BLIP-2 unlocks a frozen LLM via a lightweight Q-Former bridge from visual features, and the present work extends this frozen-LLM capacity reuse by eliminating the bridge entirely and directly transplanting frozen LLM transformer blocks as visual encoder layers."
+    },
+    {
+      "title": "Visual Instruction Tuning",
+      "authors": "Haotian Liu et al.",
+      "year": 2023,
+      "arxiv_id": "2304.08485",
+      "role": "Baseline",
+      "relationship_sentence": "LLaVA aligns a vision encoder to a frozen LLM with a simple projection and instruction tuning for VQA, serving as a primary multimodal baseline whose language-dependent setup the current paper contrasts by demonstrating purely visual gains from inserted frozen LLM blocks."
+    },
+    {
+      "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+      "authors": "Alexey Dosovitskiy et al.",
+      "year": 2020,
+      "arxiv_id": "2010.11929",
+      "role": "Foundation",
+      "relationship_sentence": "ViT\u2019s formulation of images as sequences of patch tokens processed by transformer blocks provides the token interface and architectural compatibility that enables swapping in frozen LLM transformer blocks as layers within a visual encoder."
+    },
+    {
+      "title": "PaLM-E: An Embodied Multimodal Language Model",
+      "authors": "Danny Driess et al.",
+      "year": 2023,
+      "arxiv_id": "2303.03378",
+      "role": "Related Problem",
+      "relationship_sentence": "PaLM-E feeds continuous visual embeddings into a large language model to perform multimodal tasks, reinforcing the premise that LLM internals can process non-text tokens\u2014a premise the current work tests more radically by using frozen LLM blocks as pure visual encoder layers without language supervision."
+    }
+  ],
+  "synthesis_narrative": "Tsimpoukelli et al. first demonstrated that a frozen language transformer can be productively conditioned on visual inputs via a small learned mapping, implying that pre-trained LLM blocks host broadly useful sequence-processing capabilities beyond text. Alayrac et al.\u2019s Flamingo strengthened this view by interleaving a frozen LLM with gated cross-attention to inject visual features, but relied on language prompts and specialized multimodal adapters. BLIP-2 showed that a lightweight Q-Former can bridge visual features into a frozen LLM, recovering strong performance with minimal LLM tuning, while LLaVA achieved visual instruction following by projecting image features into a frozen LLM and training with language-driven supervision. Independently, ViT established images as sequences of patch tokens fed through transformer blocks, creating a compatible token interface for modular transformer components. PaLM-E further corroborated that LLM internals can operate on non-text embeddings when provided a suitable tokenization, achieving multimodal control without fully retraining the language backbone. Together, these works suggested that frozen LLMs contain reusable computation and that visual inputs can be expressed in a transformer-friendly token form, yet prior approaches kept the LLM within language-centric, multimodal pipelines. The natural opportunity was to remove language supervision and bridging modules entirely and to transplant frozen LLM transformer blocks directly into vision encoders that already operate on tokens. By leveraging ViT\u2019s tokenization and the frozen-LLM reuse insights from Frozen/Flamingo/BLIP-2/LLaVA (and PaLM-E\u2019s modality handling), the current work tests the stronger hypothesis that LLM blocks alone function as effective visual encoder layers, yielding gains across 2D, 3D, temporal, and non-semantic tasks.",
+  "target_paper": {
+    "title": "Frozen Transformers in Language Models Are Effective Visual Encoder Layers",
+    "authors": "Ziqi Pang, Ziyang Xie, Yunze Man, Yu-Xiong Wang",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "representation learning, vision-language models, transformer",
+    "abstract": "This paper reveals that large language models (LLMs), despite being trained solely on text data, are surprisingly}strong encoders for purely visual tasks in the absence of language. Even more intriguingly, this can be achieved by a simple yet previously overlooked strategy -- employing a frozen transformer block from pre-trained LLMs as a constituent encoder layer to directly process visual tokens. Our work pushes the boundaries of leveraging LLMs for computer vision tasks, significantly departing from conventional practices that typically necessitate a multi-modal vision-language setup with associated language prompts, inputs, or outputs. We demonstrate that our approach consistently enhances performance across a diverse range of tasks} encompassing pure 2D or 3D visual recognition tasks (e.g., image and point cloud classification), temporal modeling tasks (e.g., action recognition), non-semantic tasks (e.g., motion forecasting), and multi-modal tasks (e.g., 2D/3D visual question answ",
+    "openreview_id": "t0FI3Q66K5",
+    "forum_id": "t0FI3Q66K5"
+  },
+  "analysis_timestamp": "2026-01-06T16:39:18.080593"
+}

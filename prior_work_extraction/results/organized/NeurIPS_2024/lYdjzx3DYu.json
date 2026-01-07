@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Model Soups: Averaging weights of multiple fine-tuned models improves accuracy without increasing inference time",
+      "authors": "Mitchell Wortsman et al.",
+      "year": 2022,
+      "role": "baseline method for weight-space averaging",
+      "relationship_sentence": "EMR-Merging builds on the insight from model soups that simple weight-space averaging can combine task-specialized models, but it addresses the observed limitation that a single averaged set of weights often cannot fully express all tasks by introducing per-task modulators and an election of a unified base model."
+    },
+    {
+      "title": "Robust Fine-Tuning of Zero-Shot Models (WiSE-FT)",
+      "authors": "Mitchell Wortsman et al.",
+      "year": 2022,
+      "role": "weight interpolation for robustness",
+      "relationship_sentence": "The EMR rescale step echoes WiSE-FT\u2019s idea of balancing specialization and generalization via weight interpolation, extending it from two-way interpolation to multi-task settings using task-specific rescalers that align magnitudes without data."
+    },
+    {
+      "title": "Merging Models with Fisher-Weighted Averaging",
+      "authors": "Matena and Raffel",
+      "year": 2021,
+      "role": "importance-weighted model merging",
+      "relationship_sentence": "EMR\u2019s premise that naive averaging underperforms and that different parameters contribute unequally is foreshadowed by Fisher-weighted averaging; EMR departs by using tuning-free masks/rescalers to reconcile direction and magnitude per task instead of estimating importance from data."
+    },
+    {
+      "title": "Editing Models with Task Arithmetic",
+      "authors": "Gabriel Ilharco et al.",
+      "year": 2023,
+      "role": "task-vector composition via deltas and scaling",
+      "relationship_sentence": "EMR\u2019s mask-and-rescale mechanism directly leverages the task-vector viewpoint that task updates have directions and magnitudes in weight space, using masks to handle directional alignment and rescalers to match magnitudes without additional training."
+    },
+    {
+      "title": "Piggyback: Adapting a Single Network to Multiple Tasks by Learning to Mask Weights",
+      "authors": "Arun Mallya and Svetlana Lazebnik",
+      "year": 2018,
+      "role": "mask-based task modulators",
+      "relationship_sentence": "EMR\u2019s extremely lightweight task-specific masks are conceptually aligned with Piggyback\u2019s binary masking over a shared backbone, but EMR derives such masks directly from existing fine-tuned weights in a tuning-free manner."
+    },
+    {
+      "title": "AdapterFusion: Non-Destructive Task Composition for Transfer Learning",
+      "authors": "Jonas Pfeiffer et al.",
+      "year": 2021,
+      "role": "modular multi-task composition",
+      "relationship_sentence": "EMR mirrors AdapterFusion\u2019s principle of keeping a shared model with task-specific lightweight modules, yet avoids any training or data by computing task modulators (masks/rescalers) from the weights of already fine-tuned models."
+    },
+    {
+      "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+      "authors": "Edward J. Hu et al.",
+      "year": 2022,
+      "role": "parameter-efficient task adapters",
+      "relationship_sentence": "EMR\u2019s use of tiny task-specific modulators is inspired by the parameter-efficiency ethos of LoRA, while differing by producing simple mask/scale adjustments from existing checkpoints rather than training low-rank adapters."
+    }
+  ],
+  "synthesis_narrative": "EMR-Merging emerges at the intersection of weight-space model composition and parameter-efficient multi-tasking. Early demonstrations that models can be combined without extra training\u2014via uniform/greedy weight averaging in Model Soups and two-way interpolation in WiSE-FT\u2014established that merging can yield robustness and multi-task benefits. However, Fisher-weighted averaging highlighted a key limitation of naive averages: parameters contribute unequally across tasks, and a single averaged model may inadequately capture all task optima.\n\nConcurrently, task arithmetic reframed fine-tuning as displacement vectors in weight space, where both direction and magnitude matter for composition. This viewpoint directly motivates EMR\u2019s Elect\u2013Mask\u2013Rescale design: elect a unified base and then align each task\u2019s direction (mask) and magnitude (rescale) relative to that base. From the multi-task systems side, Piggyback and AdapterFusion showed that adding lightweight, task-specific modules atop a shared backbone can preserve task performance while avoiding interference; LoRA generalized this efficiency principle to modern large models. EMR synthesizes these strands but removes the need for any additional data or training: its task-specific masks and rescalers are computed directly from existing fine-tuned checkpoints. The result is a tuning-free, high-performance merger that preserves per-task fidelity by explicitly correcting directional conflicts and magnitude mismatches, surpassing what a single unmodulated average can simulate while keeping inference overhead minimal.",
+  "analysis_timestamp": "2026-01-06T23:33:35.573076"
+}

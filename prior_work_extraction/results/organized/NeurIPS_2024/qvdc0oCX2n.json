@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Learning Transferable Visual Models From Natural Language Supervision (CLIP)",
+      "authors": "Alec Radford, Jong Wook Kim, Chris Hallacy, et al.",
+      "year": 2021,
+      "role": "Foundational model and loss",
+      "relationship_sentence": "negCLIPLoss is directly patterned on CLIP\u2019s symmetric contrastive training objective over the full image\u2013text similarity matrix, repurposing that loss as a universal, model-agnostic data selection score."
+    },
+    {
+      "title": "Representation Learning with Contrastive Predictive Coding",
+      "authors": "Aaron van den Oord, Yazhe Li, Oriol Vinyals",
+      "year": 2018,
+      "role": "Foundational contrastive principle (InfoNCE)",
+      "relationship_sentence": "The paper\u2019s central idea\u2014using the denominator (negatives) of an InfoNCE-style objective to judge sample quality\u2014traces to CPC\u2019s formulation of contrastive learning with in-batch negatives."
+    },
+    {
+      "title": "CLIPScore: A Reference-free Evaluation Metric for Image Captioning",
+      "authors": "Jack Hessel, et al.",
+      "year": 2021,
+      "role": "Baseline metric to be improved",
+      "relationship_sentence": "CLIPScore\u2019s single positive-pair cosine similarity is the primary universal metric baseline; the paper extends it by incorporating negative comparisons via a CLIP-style loss for more discriminative data selection."
+    },
+    {
+      "title": "VSE++: Improving Visual-Semantic Embeddings with Hard Negatives",
+      "authors": "Andrei Faghri, David J. Fleet, Jamie Ryan Kiros, Sanja Fidler",
+      "year": 2018,
+      "role": "Methodological inspiration on negatives",
+      "relationship_sentence": "VSE++ showed the critical role of hard negatives in image\u2013text alignment, motivating the authors to move beyond positive-only scores and explicitly leverage negative structure in the selection metric."
+    },
+    {
+      "title": "Supervised Contrastive Learning",
+      "authors": "Prannay Khosla, Piotr Teterwak, et al.",
+      "year": 2020,
+      "role": "Loss design and symmetry inspiration",
+      "relationship_sentence": "The symmetric, two-view contrastive formulation in SupCon informs measuring alignment in both image-to-text and text-to-image directions, which the paper adopts in its negCLIPLoss scoring."
+    },
+    {
+      "title": "LAION-400M: Open Dataset of CLIP-filtered 400 Million Image-Text Pairs",
+      "authors": "Christoph Schuhmann, Romain Beaumont, Richard Vencu, et al.",
+      "year": 2021,
+      "role": "Precedent for CLIP-based data filtering",
+      "relationship_sentence": "LAION popularized CLIP-similarity thresholding for large-scale web-data filtering; the paper targets this setting by proposing drop-in metrics (negCLIPLoss, norm-based) that outperform simple cosine thresholds."
+    },
+    {
+      "title": "DataComp: In search of the next generation of datasets for training computer vision models",
+      "authors": "Gabriel Ilharco, Mitchell Wortsman, Ross Wightman, et al.",
+      "year": 2023,
+      "role": "Benchmark and problem framing for data selection",
+      "relationship_sentence": "DataComp established the importance of data selection for CLIP-style pretraining and common evaluation protocols; the paper positions its universal metrics as a complementary, under-explored track within this framework."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s key contribution\u2014turning the CLIP training loss into a universal data selection metric (negCLIPLoss) and complementing it with norm-based signals\u2014stands on three converging lines of prior work. First, CLIP and its InfoNCE roots formalized contrastive learning with in-batch negatives and a symmetric image\u2013text objective. By directly reusing this loss structure at selection time, the authors transform a training principle into a scoring function, preserving the relative, competition-with-negatives signal that pure cosine alignment omits. Second, universal metric baselines such as CLIPScore and the widespread LAION practice of cosine-threshold filtering established that CLIP embeddings could guide web-scale filtering\u2014but did so with positive-only evidence. Insights from VSE++ and supervised contrastive learning underscored that negative structure (hard negatives and bidirectional alignment) is crucial for assessing the true distinctiveness of a pair, motivating negCLIPLoss\u2019s full-matrix view. Third, DataComp crystallized data selection as a core driver of CLIP performance and provided standardized protocols, encouraging methods that work across models without training specialized selectors. The paper advances this under-explored metric-driven path by (i) injecting the contrastive denominator into the selection score and (ii) exploiting representation geometry via embedding norms, yielding practical, model-agnostic filters that better correlate with downstream utility than cosine-only baselines.",
+  "analysis_timestamp": "2026-01-06T23:33:35.546802"
+}

@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "STRIP: A Defence Against Trojan Attacks on Deep Neural Networks",
+      "authors": "Yansong Gao et al.",
+      "year": 2019,
+      "arxiv_id": "1902.06531",
+      "role": "Inspiration",
+      "relationship_sentence": "The idea of detecting backdoors by measuring prediction instability under random input perturbations directly inspires our use of random edge dropping to elicit high prediction variance on poisoned graph nodes."
+    },
+    {
+      "title": "DropEdge: Towards Deep Graph Convolutional Networks on Node Classification",
+      "authors": "Yu Rong et al.",
+      "year": 2020,
+      "arxiv_id": "1907.10903",
+      "role": "Extension",
+      "relationship_sentence": "We repurpose DropEdge\u2019s stochastic edge removal\u2014originally a training regularizer\u2014as the core perturbation mechanism for both our variance-based detector and our robust training, and provide theory for why it separates poisoned from clean nodes."
+    },
+    {
+      "title": "Neural Cleanse: Identifying and Mitigating Backdoor Attacks in Neural Networks",
+      "authors": "Tianyu Wang et al.",
+      "year": 2019,
+      "arxiv_id": "",
+      "role": "Gap Identification",
+      "relationship_sentence": "Trigger reverse-engineering in Neural Cleanse assumes a fixed trigger pattern and incurs heavy optimization, a limitation our work addresses by proposing a trigger-agnostic, lightweight detection via random edge dropping on graphs."
+    },
+    {
+      "title": "Spectral Signatures in Backdoor Attacks",
+      "authors": "Brandon Tran et al.",
+      "year": 2018,
+      "arxiv_id": "",
+      "role": "Related Problem",
+      "relationship_sentence": "Their representation-spectrum test for backdoor data motivated our search for a graph-native separability signal, which we realize via prediction variance under edge perturbations rather than feature-space eigen-directions."
+    },
+    {
+      "title": "NETTACK: Practical Adversarial Attacks on Neural Networks for Graph Data",
+      "authors": "Daniel Z\u00fcgner et al.",
+      "year": 2018,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "By demonstrating that small structural perturbations can drastically alter GNN predictions, NETTACK underpins our robustness-inspired hypothesis that edge-drop perturbations will disproportionately destabilize poisoned nodes."
+    },
+    {
+      "title": "Pro-GNN: Towards Robustness of Graph Neural Networks via Graph Structure Learning",
+      "authors": "Wei Jin et al.",
+      "year": 2020,
+      "arxiv_id": "",
+      "role": "Related Problem",
+      "relationship_sentence": "Pro-GNN\u2019s success in mitigating malicious edges through structure learning informs our robust training component, which similarly suppresses trigger influence by reducing reliance on unstable edges."
+    }
+  ],
+  "synthesis_narrative": "STRIP showed that backdoored inputs tend to exhibit abnormally unstable predictions under random perturbations, using entropy under input mixing as a simple, trigger-agnostic anomaly signal. Neural Cleanse pursued a complementary direction by reverse-engineering minimal triggers, but its assumption of a fixed, image-like pattern and heavy optimization burden limits portability to varied trigger forms. Spectral Signatures detected poisoned data by finding separable directions in representation space, highlighting that backdoors often induce distinctive instability or separability cues. On graphs, DropEdge introduced stochastic edge removal as a principled perturbation that preserves task performance while modifying message passing, offering a lightweight mechanism to probe stability. NETTACK earlier established how sensitive GNNs are to small structural changes, concretely linking edge perturbations to large prediction shifts. Pro-GNN demonstrated that learning to downweight or remove harmful edges can restore robustness, indicating that suppressing unstable structural signals is effective.\nTaken together, these works imply a natural, graph-native path: use randomized structural perturbations to expose backdoor-induced instability and then train models to be robust to the structural cues that triggers exploit. Our method synthesizes STRIP\u2019s perturbation-based detection with DropEdge\u2019s edge-level stochasticity to measure prediction variance on nodes, leveraging NETTACK\u2019s sensitivity insight for separability and Pro-GNN\u2019s principle of suppressing harmful edges for robust training, while addressing Neural Cleanse\u2019s trigger-specific limitations to achieve a general defense across diverse graph triggers.",
+  "target_paper": {
+    "title": "Robustness Inspired Graph Backdoor Defense",
+    "authors": "Zhiwei Zhang, Minhua Lin, Junjie Xu, Zongyu Wu, Enyan Dai, Suhang Wang",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "oral",
+    "keywords": "Backdoor Defense, Graph Neural Network",
+    "abstract": "Graph Neural Networks (GNNs) have achieved promising results in tasks such as node classification and graph classification. However, recent studies reveal that GNNs are vulnerable to backdoor attacks, posing a significant threat to their real-world adoption. Despite initial efforts to defend against specific graph backdoor attacks, there is no work on defending against various types of backdoor attacks where generated triggers have different properties. Hence, we first empirically verify that prediction variance under edge dropping is a crucial indicator for identifying poisoned nodes. With this observation, we propose using random edge dropping to detect backdoors and theoretically show that it can efficiently distinguish poisoned nodes from clean ones. Furthermore, we introduce a novel robust training strategy to efficiently counteract the impact of the triggers. Extensive experiments on real-world datasets show that our framework can effectively identify poisoned nodes, significantl",
+    "openreview_id": "trKNi4IUiP",
+    "forum_id": "trKNi4IUiP"
+  },
+  "analysis_timestamp": "2026-01-06T19:17:13.994896"
+}

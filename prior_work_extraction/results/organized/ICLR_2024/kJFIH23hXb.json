@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Flow Matching for Generative Modeling",
+      "authors": "Alexander Tong et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "FoldFlow-Base is a direct manifold instantiation of flow matching, adopting its simulation-free regression to a target velocity field and extending it to invariant distributions on SE(3)."
+    },
+    {
+      "title": "Stochastic Flow Matching",
+      "authors": "Cheng-Hao Liu et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Extension",
+      "relationship_sentence": "FoldFlow-SFM explicitly adapts SFM\u2019s stochastic interpolants and simulation-free training objective to learn SE(3) SDEs for protein backbones without simulating stochastic dynamics."
+    },
+    {
+      "title": "Rectified Flow: A Simple Approach for Training Continuous Flows via Optimal Transport Paths",
+      "authors": "Yang Song Liu et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "FoldFlow-OT generalizes rectified flow\u2019s use of OT-inspired straight paths by replacing Euclidean displacement interpolation with Riemannian OT geodesics on SE(3) to obtain simpler, more stable training flows."
+    },
+    {
+      "title": "Denoising Diffusion on Riemannian Manifolds",
+      "authors": "Guillaume De Bortoli et al.",
+      "year": 2022,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "This work formalizes diffusion processes and score modeling on manifolds, providing the geometric tools (log/exp maps and Brownian noise on Lie groups) that underlie FoldFlow\u2019s SE(3) interpolation and noise design."
+    },
+    {
+      "title": "Riemannian Continuous Normalizing Flows",
+      "authors": "Emile Mathieu and Maximilian Nickel",
+      "year": 2020,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "FoldFlow leverages the Riemannian CNF framework to define and integrate ODE vector fields intrinsically on SE(3), ensuring the learned flows remain on the manifold during generation."
+    },
+    {
+      "title": "RFdiffusion: Structure-Guided Protein Design with Diffusion Models",
+      "authors": "Nathaniel J. Anand et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "RFdiffusion is the principal protein-backbone diffusion baseline whose reliance on simulated SDE trajectories and training costs motivate FoldFlow\u2019s simulation-free SE(3) flow approach."
+    },
+    {
+      "title": "Diffusion Probabilistic Modeling of Protein Backbones in 3D",
+      "authors": "Brian Trippe et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "This paper established the modern backbone-generation formulation and SE(3)-aware diffusion targets that FoldFlow pursues with flow-matching dynamics instead of iterative denoising."
+    }
+  ],
+  "synthesis_narrative": "Flow Matching for Generative Modeling introduced simulation-free training of continuous-time generative flows by regressing a model velocity field to an analytically defined target field along a coupling path, establishing a practical alternative to simulating SDEs. Stochastic Flow Matching extended this idea by using stochastic interpolants to learn SDE dynamics directly from conditional velocity regression without simulating the stochastic process. Rectified Flow showed that choosing OT-inspired straight-line paths greatly simplifies training and stabilizes learned dynamics, highlighting the advantage of displacement interpolation as a target reference. On the geometric side, Denoising Diffusion on Riemannian Manifolds formalized how to construct noise processes and scores intrinsically on manifolds such as Lie groups, while Riemannian Continuous Normalizing Flows provided a principled framework for defining and integrating ODE vector fields constrained to a manifold. In protein design, RFdiffusion and Diffusion Probabilistic Modeling of Protein Backbones in 3D established SE(3)-aware backbone generation with diffusion, but required costly SDE simulation and iterative denoising.\nCombining these insights revealed a clear opportunity: use flow matching\u2019s simulation-free velocity regression on the appropriate manifold, while adopting OT-style reference paths to simplify learning, for SE(3)-equivariant protein backbone generation. The resulting synthesis naturally employs Riemannian CNF mechanics to keep dynamics on SE(3), leverages manifold diffusion theory to define noise and geodesics, generalizes rectified, OT-inspired path choices to Riemannian settings, and extends SFM to learn stochastic SE(3) dynamics\u2014all to match or surpass diffusion baselines without simulation overhead.",
+  "target_paper": {
+    "title": "SE(3)-Stochastic Flow Matching for Protein Backbone Generation",
+    "authors": "Joey Bose, Tara Akhound-Sadegh, Guillaume Huguet, Kilian FATRAS, Jarrid Rector-Brooks, Cheng-Hao Liu, Andrei Cristian Nica, Maksym Korablyov, Michael M. Bronstein, Alexander Tong",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Proteins; Equivariance; Riemannian; Flow Matching; Generative models",
+    "abstract": "The computational design of novel protein structures has the potential to impact numerous scientific disciplines greatly. Toward this goal, we introduce \\foldflow, a series of novel generative models of increasing modeling power based on the flow-matching paradigm over $3\\mathrm{D}$ rigid motions---i.e. the group $\\mathrm{SE(3)}$---enabling accurate modeling of protein backbones. We first introduce $\\text{FoldFlow-Base}$, a simulation-free approach to learning deterministic continuous-time dynamics and matching invariant target distributions on $\\mathrm{SE(3)}$. We next accelerate training by incorporating Riemannian optimal transport to create $\\text{FoldFlow-OT}$, leading to the construction of both more simple and stable flows. Finally, we design \\foldflowsfm, coupling both Riemannian OT and simulation-free training to learn stochastic continuous-time dynamics over $\\mathrm{SE(3)}$. Our family of $\\text{FoldFlow}$, generative models offers several key advantages over previous approa",
+    "openreview_id": "kJFIH23hXb",
+    "forum_id": "kJFIH23hXb"
+  },
+  "analysis_timestamp": "2026-01-06T14:53:52.581871"
+}

@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Contrastive Multiview Coding",
+      "authors": "Yonglong Tian et al.",
+      "year": 2019,
+      "role": "Baseline",
+      "relationship_sentence": "CMC extends pairwise InfoNCE to multi-view settings by summing over the k(k\u22121)/2 pairs; M3G replaces this pairwise summation with a single MM-OT polymatching objective that jointly couples all k views in a batch."
+    },
+    {
+      "title": "End-to-End Learning of Visual Representations from Uncurated Instructional Videos",
+      "authors": "Antoine Miech et al.",
+      "year": 2020,
+      "role": "Gap Identification",
+      "relationship_sentence": "MIL-NCE operationalizes a one-vs-average-of-rest strategy by aggregating positives in a bag, a limitation M3G addresses by jointly forming k-way tuples via multi-marginal OT instead of collapsing positives through averaging."
+    },
+    {
+      "title": "Representation Learning with Contrastive Predictive Coding",
+      "authors": "Aaron van den Oord et al.",
+      "year": 2018,
+      "role": "Foundation",
+      "relationship_sentence": "CPC introduced the InfoNCE contrastive formulation that underlies modern paired-view objectives; M3G retains the contrastive principle but generalizes the comparator to an MM-OT polymatching cost for k>2 views."
+    },
+    {
+      "title": "Iterative Bregman Projections for Regularized Transportation Problems",
+      "authors": "Jean-David Benamou et al.",
+      "year": 2015,
+      "role": "Foundation",
+      "relationship_sentence": "This work introduced entropic regularization and generalized Sinkhorn/Bregman projection algorithms for multi-marginal OT, providing the computational backbone M3G leverages to make MM-OT-based losses differentiable and trainable."
+    },
+    {
+      "title": "Low-Rank Sinkhorn Factorization",
+      "authors": "Mathieu Scetbon et al.",
+      "year": 2021,
+      "role": "Extension",
+      "relationship_sentence": "By factorizing multi-marginal couplings in low rank, this paper removes the exponential memory/time barrier of MM-OT; M3G builds on this idea to compute the polymatching cost over n\u00d7k embeddings without O(n^k) complexity."
+    },
+    {
+      "title": "Barycenters in the Wasserstein space",
+      "authors": "Martial Agueh et al.",
+      "year": 2011,
+      "role": "Foundation",
+      "relationship_sentence": "This paper formalized multi-marginal OT through Wasserstein barycenters and joint couplings across multiple distributions, establishing the theoretical framework M3G uses to couple all k views of each object simultaneously."
+    }
+  ],
+  "synthesis_narrative": "M3G\u2019s core innovation is to replace pairwise or pooled multi-view contrastive objectives with a single joint objective that couples all k views using multi-marginal optimal transport (MM-OT). The contrastive lineage begins with CPC (van den Oord et al., 2018), which introduced the InfoNCE formulation that virtually all paired-view methods adopt. In multi-view contexts, CMC (Tian et al., 2019) operationalizes this by summing the k(k\u22121)/2 pairwise InfoNCE terms, while MIL-NCE (Miech et al., 2020) typifies the one-vs-average-of-rest family by aggregating positives into a bag. These extensions, however, inherently neglect the joint structure across all k views. M3G directly targets this gap by contrasting the cost of the ground-truth k-tuples with an MM-OT polymatching cost that forms optimally rearranged k-tuples within the batch. This leap is enabled by the MM-OT foundation: Agueh and Carlier (2011) provided the multi-marginal coupling and barycentric formulations needed to reason about k-way joint structures, while Benamou et al. (2015) introduced entropic regularization and iterative Bregman projections (generalized Sinkhorn) that make MM-OT differentiable and numerically stable. Crucially, the computational bottleneck of MM-OT is addressed by low-rank Sinkhorn factorization (Scetbon et al., 2021), which M3G leverages to avoid O(n^k) complexity when forming polymatchings across n\u00d7k embeddings. Together, these works directly shape M3G\u2019s loss design and its practical scalability.",
+  "analysis_timestamp": "2026-01-06T23:09:26.463037"
+}

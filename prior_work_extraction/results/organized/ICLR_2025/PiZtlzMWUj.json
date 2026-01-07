@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Noise-contrastive estimation of unnormalized statistical models",
+      "authors": "Michael U. Gutmann et al.",
+      "year": 2010,
+      "role": "Foundation",
+      "relationship_sentence": "SoftCVI builds on NCE\u2019s core idea of turning inference with unnormalized densities into a classification task; it adopts this contrastive framing but replaces explicit data/noise pairs with exact soft class probabilities computed from the unnormalized posterior and the variational proposal."
+    },
+    {
+      "title": "Importance Weighted Autoencoders",
+      "authors": "Yuri Burda et al.",
+      "year": 2016,
+      "role": "Extension",
+      "relationship_sentence": "When SoftCVI scores samples with s(x)=log p\u0303(x)\u2212log q(x), the soft labels reduce to normalized importance weights and the K-sample objective recovers IWAE-style multi-sample bounds, which SoftCVI generalizes within a contrastive classification framework."
+    },
+    {
+      "title": "f-GAN: Training Generative Neural Samplers Using Variational Divergence Minimization",
+      "authors": "Sebastian Nowozin et al.",
+      "year": 2016,
+      "role": "Related Problem",
+      "relationship_sentence": "SoftCVI inherits the idea of parameterizing a classifier/discriminator to induce a family of variational objectives but addresses f-GAN\u2019s adversarial instability and need for samples from the target by using exact soft labels derived from the unnormalized posterior."
+    },
+    {
+      "title": "Representation Learning with Contrastive Predictive Coding",
+      "authors": "Aaron van den Oord et al.",
+      "year": 2018,
+      "role": "Inspiration",
+      "relationship_sentence": "SoftCVI borrows the K-way contrastive identification setup popularized by InfoNCE (selecting the \u2018true\u2019 item among distractors) and adapts it to variational inference by replacing one-hot positives with posterior-derived soft labels over q-sampled candidates."
+    },
+    {
+      "title": "Black Box Variational Inference",
+      "authors": "Rajesh Ranganath et al.",
+      "year": 2014,
+      "role": "Baseline",
+      "relationship_sentence": "SoftCVI explicitly targets limitations of standard reverse-KL ELBO optimization (as in BBVI) on complex posteriors, offering contrastive objectives that leverage unnormalized densities to improve robustness without requiring model-specific derivations."
+    },
+    {
+      "title": "On distinguishability criteria for estimating generative models",
+      "authors": "Ian J. Goodfellow et al.",
+      "year": 2014,
+      "role": "Inspiration",
+      "relationship_sentence": "SoftCVI is directly motivated by Goodfellow\u2019s distinguishability/SCE view\u2014using the current model as the \u2018noise\u2019 distribution\u2014by letting the variational distribution play that role and computing exact Bayes-optimal soft labels from log p\u0303(x)\u2212log q(x)."
+    }
+  ],
+  "synthesis_narrative": "SoftCVI\u2019s core innovation\u2014casting variational inference for unnormalized posteriors as a contrastive classification problem with self-generated soft labels\u2014emerges from a tight lineage spanning contrastive estimation and multi-sample variational bounds. The foundational step is Noise-Contrastive Estimation, which reframed learning with unnormalized densities as classification; SoftCVI adopts this lens but discards the need for explicit positives and negatives by computing Bayes-optimal soft class probabilities directly from the unnormalized posterior and the variational proposal. Goodfellow\u2019s distinguishability criteria and self-contrastive perspective further informed the move to use the current model/proposal as the \u2018noise\u2019 mechanism, precisely what SoftCVI does by anchoring labels to log p\u0303(x)\u2212log q(x).\nOn the variational side, Importance Weighted Autoencoders established that normalized importance weights over K samples yield tighter bounds; SoftCVI\u2019s soft labels collapse to these weights under a specific scoring choice, unifying IWAE within a contrastive classification objective and thereby generating a family of VI objectives. The InfoNCE paradigm contributed the K-way identification template that SoftCVI repurposes, replacing one-hot positives with posterior-derived soft targets. Finally, f-GAN demonstrated discriminator-based variational divergence estimation; SoftCVI achieves a similar goal without adversarial training or sampling from the target by leveraging exact soft labels, and it directly tackles the practical shortcomings of standard ELBO/BBVI baselines on complex geometries. Collectively, these works provide the conceptual and technical scaffolding SoftCVI extends into a stable, label-free contrastive VI framework.",
+  "analysis_timestamp": "2026-01-06T23:09:26.641913"
+}

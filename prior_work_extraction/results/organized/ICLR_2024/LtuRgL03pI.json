@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "ATISS: Autoregressive Transformers for Indoor Scene Synthesis",
+      "authors": "Despoina Paschalidou et al.",
+      "year": 2021,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "ATISS models object placements via an implicit joint distribution, and InstructScene directly replaces this paradigm with an explicit semantic graph prior to achieve controllability over object relations."
+    },
+    {
+      "title": "GRAINS: Generative Recursive Autoencoders for Indoor Scenes",
+      "authors": "Zhengjie Wu et al.",
+      "year": 2019,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "GRAINS demonstrated that explicitly modeling inter-object relations improves indoor scene plausibility, motivating InstructScene\u2019s shift to an explicit semantic graph prior rather than implicit relation learning."
+    },
+    {
+      "title": "DiGress: A Generative Model for Graphs via Discrete Denoising Diffusion",
+      "authors": "Thibaud Vignac et al.",
+      "year": 2022,
+      "arxiv_id": null,
+      "role": "Extension",
+      "relationship_sentence": "InstructScene adapts discrete graph diffusion from DiGress to learn and sample instruction-conditioned semantic scene graphs as a controllable prior."
+    },
+    {
+      "title": "Graph2Plan: Learning Floorplan Generation from Layout Graphs",
+      "authors": "Natsunori Minami Nauata et al.",
+      "year": 2021,
+      "arxiv_id": null,
+      "role": "Extension",
+      "relationship_sentence": "By showing that graph-to-layout decoding is effective, Graph2Plan directly informs InstructScene\u2019s layout decoder that maps semantic graphs to 3D object layouts."
+    },
+    {
+      "title": "ControlRoom3D: Controllable Text-to-3D Room Generation",
+      "authors": "Zhengzhe Liu et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "As a primary text-driven indoor scene baseline that maps text to scenes without explicit relation priors, ControlRoom3D\u2019s limitations in fine-grained controllability motivate InstructScene\u2019s semantic graph prior."
+    },
+    {
+      "title": "3D-FRONT: 3D Furnished Rooms with Layouts of Objects and Textures",
+      "authors": "Hao-Shu Fang Fu et al.",
+      "year": 2021,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "InstructScene trains and evaluates its semantic graph prior and layout decoding on 3D-FRONT\u2019s large-scale indoor scenes, adopting its problem formulation and assets for joint appearance/layout learning."
+    }
+  ],
+  "synthesis_narrative": "Autoregressive indoor scene generators such as ATISS model object arrangements by directly learning joint distributions over placements, yielding realistic layouts but encoding relations only implicitly, which hampers precise control. Earlier, GRAINS highlighted that explicit structural modeling of inter-object relations and hierarchies improves plausibility, suggesting a representational gap between implicit set modeling and relationally structured priors. Discrete diffusion on graphs, exemplified by DiGress, introduced a principled way to learn and sample complex discrete relational structures, providing a scalable generative mechanism for graphs. Graph2Plan demonstrated that conditioning a decoder on a relational graph to produce spatial layouts can disentangle semantics from geometry, enabling controllable layout synthesis. Concurrently, ControlRoom3D established text-to-3D room generation but largely mapped language to layouts without an explicit relational prior, limiting fine-grained, relation-aware control. Across these works, the 3D-FRONT dataset supplied standardized room categories, object assets, and typical co-occurrence/layout statistics to learn both appearance and spatial distributions.\nSynthesizing these insights, the opportunity emerged to decouple scene semantics and relations from geometry: learn a language-conditioned semantic graph as a controllable prior, and then decode it into object layouts. InstructScene operationalizes this by adapting discrete graph diffusion to sample instruction-conditioned semantic graphs, addressing ATISS-style implicitness and ControlRoom3D\u2019s coarse control. A graph-conditioned layout decoder, in the spirit of Graph2Plan, maps the semantic graph to 3D placements, leveraging 3D-FRONT\u2019s distributions while extending GRAINS\u2019 explicit relational modeling to a scalable, instruction-driven, zero-shot-capable framework.",
+  "target_paper": {
+    "title": "InstructScene: Instruction-Driven 3D Indoor Scene Synthesis with Semantic Graph Prior",
+    "authors": "Chenguo Lin, Yadong MU",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "3D indoor scene synthesis, controllable generative models, graph diffusion models",
+    "abstract": "Comprehending natural language instructions is a charming property for 3D indoor scene synthesis systems. Existing methods directly model object joint distributions and express object relations implicitly within a scene, thereby hindering the controllability of generation. We introduce InstructScene, a novel generative framework that integrates a semantic graph prior and a layout decoder to improve controllability and fidelity for 3D scene synthesis. The proposed semantic graph prior jointly learns scene appearances and layout distributions, exhibiting versatility across various downstream tasks in a zero-shot manner. To facilitate the benchmarking for text-driven 3D scene synthesis, we curate a high-quality dataset of scene-instruction pairs with large language and multimodal models. Extensive experimental results reveal that the proposed method surpasses existing state-of-the-art approaches by a large margin. Thorough ablation studies confirm the efficacy of crucial design components",
+    "openreview_id": "LtuRgL03pI",
+    "forum_id": "LtuRgL03pI"
+  },
+  "analysis_timestamp": "2026-01-06T19:11:43.352671"
+}

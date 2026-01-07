@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Importance Weighted Autoencoders",
+      "authors": "Yuri Burda et al.",
+      "year": 2016,
+      "arxiv_id": "1509.00519",
+      "role": "Baseline",
+      "relationship_sentence": "IWAE framed variational learning around an importance-sampling-based multi-sample objective, providing the main baseline that VIS departs from by directly maximizing the marginal likelihood and optimizing the proposal via forward \u03c7^2 rather than tightening a lower bound."
+    },
+    {
+      "title": "Reweighted Wake-Sleep",
+      "authors": "J\u00f6rg Bornschein et al.",
+      "year": 2015,
+      "arxiv_id": "1406.2751",
+      "role": "Extension",
+      "relationship_sentence": "RWS trains the inference network by minimizing the inclusive (forward) KL to the true posterior using importance weights, a mechanism VIS extends by replacing inclusive KL with forward \u03c7^2 to explicitly target variance-optimal proposals for evidence estimation."
+    },
+    {
+      "title": "R\u00e9nyi Divergence Variational Inference",
+      "authors": "Yingzhen Li et al.",
+      "year": 2016,
+      "arxiv_id": "1602.02311",
+      "role": "Foundation",
+      "relationship_sentence": "This work introduced the \u03b1-divergence family for VI and showed that \u03b1>1 (including \u03b1=2 which corresponds to \u03c7^2) yields mass-covering behavior and an upper bound (CUBO), laying the divergence-theoretic basis for VIS\u2019s choice of the forward \u03c7^2 objective."
+    },
+    {
+      "title": "Black-box alpha divergence minimization",
+      "authors": "Jos\u00e9 Miguel Hern\u00e1ndez-Lobato et al.",
+      "year": 2016,
+      "arxiv_id": "1511.03243",
+      "role": "Inspiration",
+      "relationship_sentence": "BB-\u03b1 demonstrated practical optimization of \u03b1-divergences (including forward-direction choices) for fitting variational posteriors, motivating VIS\u2019s use of a specific \u03b1 (\u03c7^2) to learn proposals aligned with posterior mass while connecting directly to IS variance."
+    },
+    {
+      "title": "The sample size required in importance sampling",
+      "authors": "Sourav Chatterjee et al.",
+      "year": 2018,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "This paper formalized that IS efficiency and required sample size are governed by the forward \u03c7^2 divergence \u03c7^2(p||q), directly motivating VIS\u2019s proposal training objective as a principled way to control weight degeneracy when estimating the marginal likelihood."
+    },
+    {
+      "title": "Variational Sequential Monte Carlo",
+      "authors": "Jimmy Naesseth et al.",
+      "year": 2017,
+      "arxiv_id": "1705.11140",
+      "role": "Related Problem",
+      "relationship_sentence": "VSMC established that one can train latent variable models by maximizing a stochastic estimator of the marginal likelihood while learning proposals, a strategy VIS adopts in the simpler IS setting with \u03c7^2-trained proposals to reduce estimator variance."
+    },
+    {
+      "title": "Auto-Encoding Sequential Monte Carlo",
+      "authors": "Tuan Anh Le et al.",
+      "year": 2017,
+      "arxiv_id": null,
+      "role": "Related Problem",
+      "relationship_sentence": "AESMC used unbiased SMC estimators of the marginal likelihood as training objectives and optimized proposal distributions, providing the template that VIS follows using plain importance sampling coupled with \u03c7^2-driven proposal optimization."
+    }
+  ],
+  "synthesis_narrative": "Importance Weighted Autoencoders established a multi-sample variational objective derived from importance sampling, showing that learning generative models can benefit from Monte Carlo estimators but still optimizes a lower bound. Reweighted Wake-Sleep trained inference networks with the inclusive KL using importance weights, highlighting the utility of forward-direction divergences for making proposals mass-covering toward the true posterior. R\u00e9nyi Divergence Variational Inference generalized VI to \u03b1-divergences and showed that \u03b1>1\u2014including \u03b1=2 corresponding to \u03c72\u2014induces mass-covering behavior and yields an upper bound on log evidence (CUBO), clarifying the role of \u03c72 within a unified framework. Black-box \u03b1 divergence minimization provided practical tools to optimize \u03b1-divergences, demonstrating that forward-divergence objectives can be stably trained for flexible variational families. Complementing these, the sample size required in importance sampling proved that IS efficiency and weight degeneracy are controlled by the forward \u03c72 divergence between target and proposal, pinpointing \u03c72 as the quantity to minimize for low-variance estimators. Variational/Auto-Encoding SMC showed that one can directly train models by maximizing stochastic estimators of the marginal likelihood while learning proposal distributions. Together, these works reveal a gap: lower-bound objectives or generic \u03b1-divergences do not directly minimize IS variance for evidence estimation. The natural next step is to use importance sampling with a proposal trained by forward \u03c72 minimization\u2014precisely the divergence that governs IS efficiency\u2014and to optimize the resulting marginal likelihood estimator end-to-end. VIS synthesizes these ideas, replacing bound-tightening with direct likelihood maximization and aligning proposal learning with the variance-optimal criterion.",
+  "target_paper": {
+    "title": "Forward $\\chi^2$ Divergence Based Variational Importance Sampling",
+    "authors": "Chengrui Li, Yule Wang, Weihan Li, Anqi Wu",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Importance sampling, $\\chi^2$ divergence, latent variable models",
+    "abstract": "Maximizing the marginal log-likelihood is a crucial aspect of learning latent variable models, and variational inference (VI) stands as the commonly adopted method. However, VI can encounter challenges in achieving a high marginal log-likelihood when dealing with complicated posterior distributions. In response to this limitation, we introduce a novel variational importance sampling (VIS) approach that directly estimates and maximizes the marginal log-likelihood. VIS leverages the optimal proposal distribution, achieved by minimizing the forward $\\chi^2$ divergence, to enhance marginal log-likelihood estimation. We apply VIS to various popular latent variable models, including mixture models, variational auto-encoders, and partially observable generalized linear models. Results demonstrate that our approach consistently outperforms state-of-the-art baselines, in terms of both log-likelihood and model parameter estimation. Code: \\url{https://github.com/JerrySoybean/vis}.",
+    "openreview_id": "HD5Y7M8Xdk",
+    "forum_id": "HD5Y7M8Xdk"
+  },
+  "analysis_timestamp": "2026-01-06T23:33:41.884371"
+}

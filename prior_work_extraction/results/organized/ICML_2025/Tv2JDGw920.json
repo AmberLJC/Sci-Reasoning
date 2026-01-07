@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Invariant Risk Minimization",
+      "authors": "Martin Arjovsky, L\u00e9on Bottou, Ishaan Gulrajani, David Lopez-Paz",
+      "year": 2020,
+      "role": "Foundational DG objective for avoiding spurious correlations",
+      "relationship_sentence": "IRM formalized the goal of learning domain-invariant predictors, motivating GENIE\u2019s focus on suppressing domain-specific feature reliance; GENIE operationalizes this via per-parameter OSGR equalization instead of an explicit invariance constraint."
+    },
+    {
+      "title": "Fishr: Invariant Gradient Variances for Out-of-Distribution Generalization",
+      "authors": "Alexandre Rame, Matthieu Kirchmeyer, et al.",
+      "year": 2022,
+      "role": "Gradient-based DG alignment mechanism",
+      "relationship_sentence": "Fishr aligns gradients across domains by matching gradient statistics to discourage spurious features; GENIE extends this gradient-centric view by quantifying per-parameter one-step loss-reduction (OSGR) and reweighting updates to balance alignment and contribution."
+    },
+    {
+      "title": "GradNorm: Gradient Normalization for Adaptive Loss Balancing in Deep Multitask Networks",
+      "authors": "Zhao Chen, Vijay Badrinarayanan, Chen-Yu Lee, Andrew Rabinovich",
+      "year": 2018,
+      "role": "Balancing contributions to avoid dominance",
+      "relationship_sentence": "GradNorm equalizes task gradients to prevent any task from dominating training; GENIE adopts a similar egalitarian principle but at the parameter level, equalizing per-parameter OSGR so no small subset of weights drives optimization."
+    },
+    {
+      "title": "Sharpness-Aware Minimization for Efficiently Improving Generalization",
+      "authors": "Pierre Foret, Ariel Kleiner, Hossein Mobahi, Behnam Neyshabur",
+      "year": 2021,
+      "role": "Flatness-based optimizer using one-step neighborhood evaluation",
+      "relationship_sentence": "SAM evaluates loss in a perturbed, one-step neighborhood to improve generalization; GENIE likewise leverages a one-step lens via OSGR, but uses it to modulate per-parameter preconditioning and gradient alignment rather than penalizing sharpness directly."
+    },
+    {
+      "title": "Model-Agnostic Meta-Learning for Fast Adaptation of Deep Networks (MAML)",
+      "authors": "Chelsea Finn, Pieter Abbeel, Sergey Levine",
+      "year": 2017,
+      "role": "One-step lookahead/meta-objective design",
+      "relationship_sentence": "MAML popularized using performance after a gradient step as a learning signal; GENIE\u2019s OSGR similarly measures the impact of a single update on generalization and uses it to guide parameter-wise update scaling."
+    },
+    {
+      "title": "Large Batch Training of Convolutional Networks (LARS)",
+      "authors": "Yang You, Igor Gitman, Boris Ginsburg",
+      "year": 2017,
+      "role": "Layer-wise adaptive rate scaling to prevent update domination",
+      "relationship_sentence": "LARS balances layer-wise update magnitudes via a trust ratio so no layer dominates; GENIE generalizes this balancing idea to the per-parameter level guided by OSGR, ensuring equitable convergence contributions."
+    },
+    {
+      "title": "Path-SGD: Path-Normalized Optimization in Deep Neural Networks",
+      "authors": "Behnam Neyshabur, Ruslan Salakhutdinov, Nathan Srebro",
+      "year": 2015,
+      "role": "Preconditioning for balanced, reparameterization-invariant updates",
+      "relationship_sentence": "Path-SGD normalizes updates to equalize effective step sizes under network reparameterizations; GENIE similarly preconditions gradients so parameters contribute comparably to generalization as quantified by OSGR."
+    }
+  ],
+  "synthesis_narrative": "GENIE\u2019s core idea\u2014using a one-step generalization ratio (OSGR) to quantify each parameter\u2019s contribution to generalization and then equalizing those contributions with a preconditioning factor\u2014sits at the intersection of domain-invariant learning, gradient alignment, and balanced optimization. IRM set the objective-level foundation for avoiding spurious correlations by favoring invariant predictors across environments, while Fishr advanced gradient-centric DG by aligning gradient statistics across domains. GENIE builds on this gradient perspective but moves from domain-level alignment to a fine-grained, parameter-wise signal that captures both loss-reduction contribution and gradient alignment after one update.\nMAML and SAM provide the methodological precedent for leveraging one-step lookahead signals: MAML as a meta-objective evaluating post-update performance, and SAM as a flatness-oriented one-step neighborhood evaluation to improve generalization. GENIE adopts the one-step lens but repurposes it as OSGR to steer optimization via per-parameter scaling rather than meta-updates or sharpness penalties.\nFinally, GradNorm, LARS, and Path-SGD contribute the optimization principle of preventing dominance\u2014equalizing influence across tasks (GradNorm), layers (LARS), or parameterizations (Path-SGD). GENIE synthesizes this egalitarian ethos with DG\u2019s gradient-alignment agenda by preconditioning updates to equalize OSGR across parameters, thereby curbing overconfident or domain-specific weights and promoting domain-invariant feature learning.",
+  "analysis_timestamp": "2026-01-07T00:21:32.392515"
+}

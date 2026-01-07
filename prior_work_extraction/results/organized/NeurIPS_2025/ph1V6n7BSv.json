@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Learning Latent Dynamics for Planning from Pixels (PlaNet)",
+      "authors": "Danijar Hafner et al.",
+      "year": 2019,
+      "role": "Foundational world model with recurrent state-space (RSSM) for latent dynamics, rewards, and terminations",
+      "relationship_sentence": "EDELINE inherits the state-space framing of PlaNet/RSSM but replaces the pixel decoder with a diffusion generator and augments the latent dynamics with a modern SSM to extend memory far beyond short horizons."
+    },
+    {
+      "title": "Mastering Atari with Discrete World Models (DreamerV2)",
+      "authors": "Danijar Hafner et al.",
+      "year": 2021,
+      "role": "State-of-the-art discrete-latent world model emphasizing compact latent sequences for sample-efficient RL",
+      "relationship_sentence": "DreamerV2\u2019s reliance on discrete latents highlights the visual-fidelity tradeoff that EDELINE addresses by coupling high-fidelity diffusion observations with long-memory latent dynamics in a unified architecture."
+    },
+    {
+      "title": "High-Resolution Image Synthesis with Latent Diffusion Models",
+      "authors": "Robin Rombach et al.",
+      "year": 2022,
+      "role": "Introduced latent-space diffusion for efficient, high-fidelity generation",
+      "relationship_sentence": "EDELINE leverages the latent-diffusion principle to obtain sharp visual reconstructions while allowing the SSM backbone to carry long-range temporal state, overcoming the fixed-window conditioning typical of diffusion decoders."
+    },
+    {
+      "title": "Video Diffusion Models",
+      "authors": "Jonathan Ho et al.",
+      "year": 2022,
+      "role": "Established diffusion-based video generation/prediction typically conditioned on a short context of past frames",
+      "relationship_sentence": "EDELINE directly addresses the fixed-context limitation of video diffusion by conditioning its diffusion decoder on an SSM state that summarizes arbitrarily long histories in linear time."
+    },
+    {
+      "title": "Diffuser: Diffusion Models for Planning",
+      "authors": "Michael Janner et al.",
+      "year": 2022,
+      "role": "Showed diffusion models can represent sequential trajectories for decision making",
+      "relationship_sentence": "Diffuser motivates using diffusion for sequential RL problems; EDELINE adapts this insight to world modeling by integrating diffusion with an SSM so observation dynamics, rewards, and terminations are modeled coherently over long horizons."
+    },
+    {
+      "title": "Efficiently Modeling Long Sequences with Structured State Space Models (S4)",
+      "authors": "Albert Gu et al.",
+      "year": 2022,
+      "role": "Linear-time state space sequence modeling capturing long-range dependencies",
+      "relationship_sentence": "EDELINE\u2019s memory core builds on S4-style SSMs to achieve linear-time sequence modeling, enabling conditioning the diffusion generator on very long contexts without quadratic cost."
+    },
+    {
+      "title": "Mamba: Linear-Time Sequence Modeling with Selective State Spaces",
+      "authors": "Albert Gu, Tri Dao",
+      "year": 2024,
+      "role": "Scalable, selective SSM architecture with strong performance across modalities",
+      "relationship_sentence": "EDELINE draws on Mamba\u2019s selective SSM design to furnish a powerful, scalable memory signal that unifies observation, reward, and termination modeling within a single diffusion-SSM world model."
+    }
+  ],
+  "synthesis_narrative": "EDELINE\u2019s core contribution\u2014unifying diffusion-based observation modeling with linear-time state-space sequence modeling to unlock long-horizon memory\u2014emerges at the intersection of three lines of work. First, PlaNet and DreamerV2 established recurrent state-space world models that jointly model latent dynamics, rewards, and terminations for sample-efficient RL. While these models excel in compact sequence modeling, their discrete or heavily compressed latents can sacrifice visual fidelity, motivating a higher-capacity observation generator.\nSecond, diffusion models advanced visual fidelity. Latent Diffusion made high-resolution generation efficient, and Video Diffusion Models demonstrated next-frame prediction conditioned on a short context. However, such diffusion approaches typically rely on fixed windows, limiting memory and making it natural to bolt on separate RNN heads for rewards/terminations\u2014fragmenting the world model. Diffuser further showed diffusion\u2019s suitability for sequential decision-making, reinforcing the premise that diffusion can model temporally structured processes.\nThird, modern State Space Models such as S4 and Mamba provide linear-time sequence modeling with strong long-range dependency capture, offering an attractive alternative to quadratic-cost attention for memory. EDELINE synthesizes these threads by conditioning a diffusion-based observation decoder on an SSM state that summarizes arbitrarily long histories, while using the same SSM backbone to model rewards and terminations. This replaces fixed-window conditioning with scalable, unified memory, addressing visual fidelity and long-horizon credit simultaneously and yielding improved performance on Atari 100k, Crafter, and ViZDoom.",
+  "analysis_timestamp": "2026-01-07T00:29:42.065323"
+}

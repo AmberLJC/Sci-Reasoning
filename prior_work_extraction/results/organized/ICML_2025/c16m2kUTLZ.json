@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "AI2: Safety and Robustness Certification of Neural Networks with Abstract Interpretation",
+      "authors": "Timon Gehr et al.",
+      "year": 2018,
+      "role": "Baseline",
+      "relationship_sentence": "AI2 established interval/abstract-interpretation-based, theoretically sound certification for neural networks\u2014a class of methods our paper proves does not guarantee practical (floating-point) soundness and empirically demonstrates can be misled."
+    },
+    {
+      "title": "On the Effectiveness of Interval Bound Propagation for Training Verifiably Robust Models",
+      "authors": "Srinivas Gowal et al.",
+      "year": 2018,
+      "role": "Baseline",
+      "relationship_sentence": "IBP is the canonical interval-analysis variant for DNNs that our theoretical results explicitly target, showing that bounding real-valued outputs via intervals does not ensure bounds for deployed floating-point executions."
+    },
+    {
+      "title": "Neurify: Efficient Neural Network Verification",
+      "authors": "Shiqi Wang et al.",
+      "year": 2018,
+      "role": "Baseline",
+      "relationship_sentence": "Neurify\u2019s symbolic-interval approach represents a key interval-based verifier that our paper shows can be defeated by networks exploiting floating-point operation order/precision, highlighting the theoretical\u2013practical soundness gap."
+    },
+    {
+      "title": "Provable Defenses via the Convex Outer Adversarial Polytope",
+      "authors": "Eric Wong et al.",
+      "year": 2018,
+      "role": "Foundation",
+      "relationship_sentence": "This work formalized certified robustness as bounding worst-case outputs under perturbations via convex relaxations; our paper critiques the assumption that such real-number bounds translate to guarantees for floating-point deployments."
+    },
+    {
+      "title": "Reluplex: An Efficient SMT Solver for Verifying Deep Neural Networks",
+      "authors": "Guy Katz et al.",
+      "year": 2017,
+      "role": "Related Problem",
+      "relationship_sentence": "Reluplex set the standard for exact DNN verification under real arithmetic; our results expose how such guarantees can fail to reflect actual floating-point behavior at deployment time."
+    },
+    {
+      "title": "Interval Analysis",
+      "authors": "Ramon E. Moore",
+      "year": 1966,
+      "role": "Foundation",
+      "relationship_sentence": "Moore\u2019s interval arithmetic is the theoretical basis for interval and symbolic-interval verifiers; we prove that\u2014even when intervals yield sound real-valued bounds\u2014practical floating-point soundness can still fail."
+    },
+    {
+      "title": "What Every Computer Scientist Should Know About Floating-Point Arithmetic",
+      "authors": "David Goldberg",
+      "year": 1991,
+      "role": "Inspiration",
+      "relationship_sentence": "Goldberg\u2019s exposition of rounding and non-associativity directly motivates our construction of adversarial networks that detect and exploit floating-point execution order and precision to mislead sound-on-paper verifiers."
+    }
+  ],
+  "synthesis_narrative": "The core innovation of this paper is to separate theoretical soundness (bounding a network\u2019s real-valued outputs) from practical soundness (bounding the actual floating-point outputs realized on deployed systems), and to show that today\u2019s \u2018sound\u2019 verifiers fail at the latter. This thesis sits squarely on the lineage of interval and relaxation-based verification. AI2 and its abstract-interpretation framework, together with IBP and symbolic-interval methods like Neurify, operationalized interval analysis for neural networks and popularized claims of soundness when computing bounds with floating-point arithmetic. Our results prove that such approaches, although theoretically sound for real-number semantics, do not guarantee practical soundness for IEEE-754 execution and can be systematically deceived.\nConvex relaxation methods exemplified by Wong and Kolter\u2019s convex outer adversarial polytope formalized certified robustness as bounding worst-case outputs under perturbations, yet\u2014like exact verifiers such as Reluplex\u2014implicitly reason in real arithmetic. We show that the guarantees derived under these assumptions may not hold for deployed floating-point inference, especially in stochastic or implementation-dependent environments. The conceptual mechanism enabling our counterexamples traces to foundational numerical analysis: Moore\u2019s interval analysis provides the bounding calculus these verifiers rely on, while Goldberg\u2019s classic account of rounding error and non-associativity inspires our adversarial networks that detect and exploit operation ordering and precision. Taken together, these works directly define the problem, supply the dominant methods and benchmarks, and expose (through their assumptions) the precise gap our paper formalizes and empirically validates.",
+  "analysis_timestamp": "2026-01-06T23:07:19.574095"
+}

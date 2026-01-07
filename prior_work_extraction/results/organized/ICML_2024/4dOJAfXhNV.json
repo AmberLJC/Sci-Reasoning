@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Proximal Policy Optimization Algorithms",
+      "authors": "John Schulman, Filip Wolski, Prafulla Dhariwal, Alec Radford, Oleg Klimov",
+      "year": 2017,
+      "role": "Baseline on-policy policy gradient method with importance-weighted surrogate objective",
+      "relationship_sentence": "SAPG retains the PPO-style on-policy objective but overcomes PPO\u2019s saturation under massive parallelism by splitting data into chunks and aggregating updates via importance sampling rather than treating the whole batch as a single policy snapshot."
+    },
+    {
+      "title": "Asynchronous Methods for Deep Reinforcement Learning (A3C/A2C)",
+      "authors": "Volodymyr Mnih et al.",
+      "year": 2016,
+      "role": "Parallel actor-critic framework for throughput scaling",
+      "relationship_sentence": "SAPG directly addresses the scaling limitations of parallel on-policy methods introduced by A3C/A2C by formalizing a split-and-aggregate scheme that controls policy staleness across many actors and corrects it via importance sampling."
+    },
+    {
+      "title": "IMPALA: Scalable Distributed Deep-RL with Importance Weighted Actor-Learner Architectures",
+      "authors": "Lasse Espeholt et al.",
+      "year": 2018,
+      "role": "Distributed actor-learner architecture with off-policy correction (V-trace)",
+      "relationship_sentence": "SAPG adopts the core idea of aggregating experience produced under slightly different policies and corrects distribution mismatch via importance weights, but does so within an on-policy policy-gradient framework rather than relying on biased truncated corrections like V-trace."
+    },
+    {
+      "title": "Sample Efficient Actor-Critic with Experience Replay (ACER)",
+      "authors": "Ziyu Wang, Victor Bapst, Nicolas Heess, Tom Schaul, Hado van Hasselt, Matteo Hessel, Marc Lanctot, Nando de Freitas",
+      "year": 2017,
+      "role": "Off-policy actor-critic with truncated importance sampling and bias correction",
+      "relationship_sentence": "SAPG\u2019s aggregate step leverages the same importance sampling principles as ACER to combine data from behavior policies that differ from the target policy, but applies them to fuse parallel on-policy chunks rather than experience replay."
+    },
+    {
+      "title": "Off-Policy Actor-Critic",
+      "authors": "Thomas Degris, Martha White, Richard S. Sutton",
+      "year": 2012,
+      "role": "Theoretical foundation for importance-sampling-corrected policy gradients",
+      "relationship_sentence": "SAPG\u2019s justification for unbiased (or bias-controlled) aggregation across split environment chunks rests on off-policy policy-gradient theory formalized by Degris et al., which specifies how IS ratios correct for behavior\u2013target policy mismatch."
+    },
+    {
+      "title": "Isaac Gym: High Performance GPU-Based Physics Simulation for Reinforcement Learning",
+      "authors": "Viktor Makoviychuk et al.",
+      "year": 2021,
+      "role": "GPU simulation platform enabling massive parallel environments",
+      "relationship_sentence": "SAPG is motivated by and evaluated in the GPU-simulation regime that Isaac Gym popularized, and its split-and-aggregate design is tailored to ingest very large numbers of simultaneous environments without the saturation observed in PPO."
+    }
+  ],
+  "synthesis_narrative": "SAPG\u2019s core contribution\u2014splitting massive parallel rollouts into policy-chunks and fusing them with principled importance sampling\u2014sits at the intersection of on-policy policy gradients and distributed RL. PPO supplied the dominant on-policy surrogate objective using importance ratios, but in the GPU-era PPO saturates when simply increasing the number of parallel environments. A3C/A2C first demonstrated that parallel actors can accelerate training, yet they provided no principled mechanism to neutralize policy staleness as concurrency grows. IMPALA addressed large-scale actor\u2013learner decoupling with V-trace corrections, establishing that experience generated under slightly different behavior policies can be aggregated effectively, albeit with truncated, biased corrections optimized for stability. ACER further advanced the use of importance sampling and bias correction for policy gradients, clarifying how to safely reuse off-policy data. These algorithmic threads rest on the off-policy policy-gradient theory of Degris et al., which formalizes how importance weights recover the correct gradient under behavior\u2013target mismatch.\n\nSAPG fuses these insights: it preserves an on-policy PPO-style update while explicitly partitioning data into chunks produced under slightly different policies and then aggregates their contributions with importance sampling grounded in off-policy PG theory. Crucially, this design targets the GPU-simulation setting exemplified by Isaac Gym, where throughput is abundant but conventional on-policy learners underutilize it. By correcting staleness across chunks rather than ignoring or truncating it, SAPG achieves scalable, high-throughput on-policy learning without the performance saturation typical of PPO at large parallelism.",
+  "analysis_timestamp": "2026-01-06T23:42:48.071068"
+}

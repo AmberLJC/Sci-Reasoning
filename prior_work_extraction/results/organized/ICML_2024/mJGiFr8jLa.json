@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Physics-informed neural networks: A deep learning framework for solving forward and inverse problems involving nonlinear partial differential equations",
+      "authors": "M. Raissi et al.",
+      "year": 2019,
+      "role": "Foundation",
+      "relationship_sentence": "Introduced the PINN formulation and popularized Adam/L-BFGS training, providing the exact loss structure and baseline training protocol whose loss landscape and optimizer behavior this paper analyzes and improves."
+    },
+    {
+      "title": "Characterizing possible failure modes in physics-informed neural networks",
+      "authors": "A. Krishnapriyan et al.",
+      "year": 2021,
+      "role": "Gap Identification",
+      "relationship_sentence": "Documented optimizer sensitivity and training pathologies in PINNs, directly motivating this paper\u2019s loss-conditioning analysis and the search for more robust second-order training methods."
+    },
+    {
+      "title": "Deep learning via Hessian-free optimization",
+      "authors": "J. Martens",
+      "year": 2010,
+      "role": "Inspiration",
+      "relationship_sentence": "Established the Newton-CG/Hessian-free paradigm using curvature\u2013vector products, the algorithmic scaffold that NysNewton-CG adopts and specializes to the PINN setting."
+    },
+    {
+      "title": "Sub-sampled Newton methods I: globally convergent algorithms",
+      "authors": "F. Roosta-Khorasani et al.",
+      "year": 2019,
+      "role": "Extension",
+      "relationship_sentence": "Provided randomized second-order strategies via approximate curvature, which NysNewton-CG extends by using a Nystr\u00f6m low-rank curvature model tailored to ill-conditioned PINN losses."
+    },
+    {
+      "title": "Using the Nystr\u00f6m method to speed up kernel machines",
+      "authors": "C. K. I. Williams et al.",
+      "year": 2001,
+      "role": "Inspiration",
+      "relationship_sentence": "Introduced Nystr\u00f6m low-rank approximations for PSD matrices; the proposed NysNewton-CG leverages this idea to build an efficient curvature approximation/preconditioner for Newton-CG in PINNs."
+    },
+    {
+      "title": "Fast exact multiplication by the Hessian",
+      "authors": "B. Pearlmutter",
+      "year": 1994,
+      "role": "Foundation",
+      "relationship_sentence": "Provided the Hessian\u2013vector product technique essential for scalable Newton-CG methods, enabling the practical implementation of NysNewton-CG for large PINNs."
+    },
+    {
+      "title": "On the limited memory BFGS method for large scale optimization",
+      "authors": "D. C. Liu et al.",
+      "year": 1989,
+      "role": "Baseline",
+      "relationship_sentence": "Defines the L-BFGS optimizer that serves as a primary baseline; this paper explains L-BFGS\u2019s limitations under operator-induced ill-conditioning and demonstrates gains from Adam+L-BFGS and NysNewton-CG."
+    }
+  ],
+  "synthesis_narrative": "The core innovation of this paper is to reveal how differential operators induce ill-conditioning in the PINN loss landscape and to exploit this insight with an efficient second-order optimizer, NysNewton-CG. This trajectory begins with Raissi et al. (2019), which formalized the PINN loss and popularized Adam/L-BFGS training\u2014precisely the setup interrogated here. Reports of optimizer sensitivity and failures in Krishnapriyan et al. (2021) directly exposed gaps that this work addresses by tying failures to operator-driven conditioning and by proposing a principled remedy. Algorithmically, the second-order component builds on the Hessian-free/Newton-CG framework of Martens (2010), which uses curvature\u2013vector products to obtain Newton steps without forming the Hessian. Randomized second-order ideas from Roosta-Khorasani and Mahoney (2019) further inform the design, suggesting that approximate curvature can be both effective and scalable. Williams and Seeger (2001) provide the critical Nystr\u00f6m low-rank approximation used here to construct an efficient curvature model/preconditioner aligned to the structure of the PINN loss. Pearlmutter (1994) underpins the entire approach by enabling fast Hessian\u2013vector products required for Newton-CG. Finally, Liu and Nocedal (1989) supply the L-BFGS baseline that the paper analyzes and surpasses, both empirically and conceptually, by showing why pure first- or quasi-Newton methods struggle on ill-conditioned PINN losses and why a hybrid (Adam+L-BFGS) and the proposed NysNewton-CG yield substantial gains.",
+  "analysis_timestamp": "2026-01-06T23:09:26.450197"
+}

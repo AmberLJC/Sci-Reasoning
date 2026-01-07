@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Illuminating search spaces by mapping elites",
+      "authors": "Jean-Baptiste Mouret and Jeff Clune",
+      "year": 2015,
+      "arxiv_id": "1504.04909",
+      "role": "Foundation",
+      "relationship_sentence": "The archive-based Quality Diversity formulation (behavior descriptors, discretized archive, emitters) from MAP-Elites is the substrate into which the new proximal policy-gradient arborescence proposals are inserted to build a repertoire of diverse skills."
+    },
+    {
+      "title": "Differentiable Quality Diversity",
+      "authors": "Matthew C. Fontaine et al.",
+      "year": 2021,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "This work introduced the DQD framework and showed how gradients of objective and behavior descriptors can guide archive expansion, which the new method directly extends by replacing autograd-based gradients with on-policy policy-gradient estimates to operate in RL settings."
+    },
+    {
+      "title": "CMA-MEGA: Scaling Up CMA-ES with Gradient Arborescence for Quality-Diversity",
+      "authors": "Matthew C. Fontaine et al.",
+      "year": 2021,
+      "arxiv_id": null,
+      "role": "Extension",
+      "relationship_sentence": "CMA-MEGA\u2019s gradient arborescence\u2014branching line-search proposals along objective/descriptor gradients\u2014provides the arborescence template that the new approach generalizes using PPO-style policy-gradient steps constrained by proximity for robust branching in stochastic environments."
+    },
+    {
+      "title": "Policy Gradient Assisted MAP-Elites (PGA-MAP-Elites)",
+      "authors": "Anna-K. Nilsson and Antoine Cully",
+      "year": 2021,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "By combining MAP-Elites with off-policy deterministic TD3 gradients, PGA-MAP-Elites exposed limitations in stochastic domains that the new method addresses by adopting on-policy PPO within a DQD-style gradient-guided archive expansion."
+    },
+    {
+      "title": "CEM-RL: Combining Evolutionary and Gradient-Based Methods for Policy Search",
+      "authors": "Thomas Pourchot and Olivier Sigaud",
+      "year": 2019,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "As a prominent hybrid of ES and off-policy RL used as a QD-RL baseline, CEM-RL\u2019s reliance on deterministic off-policy updates motivates the shift to on-policy proximal policy gradients to better cope with environmental stochasticity."
+    },
+    {
+      "title": "Proximal Policy Optimization Algorithms",
+      "authors": "John Schulman et al.",
+      "year": 2017,
+      "arxiv_id": "1707.06347",
+      "role": "Inspiration",
+      "relationship_sentence": "The clipped surrogate objective and implicit KL control from PPO directly inspire the \u2018proximal\u2019 policy-gradient steps that form each branch of the proposed arborescence, enabling stable on-policy optimization within a QD archive."
+    }
+  ],
+  "synthesis_narrative": "MAP-Elites established the repertoire-building paradigm: partition a behavior space with an archive, then iteratively propose and insert elites that maximize quality within each cell. Differentiable Quality Diversity extended this paradigm by showing that when objectives and behavior descriptors are differentiable, gradients can guide proposals toward under-filled regions and higher performance. Building on that, CMA-MEGA introduced gradient arborescence\u2014branching sequences of gradient-informed proposals from a parent solution\u2014to efficiently traverse the elite hypervolume by exploiting local gradient information for both objective and descriptors. In parallel, PGA-MAP-Elites demonstrated that policy-gradient signals from deep RL can accelerate QD search inside MAP-Elites, but its use of deterministic off-policy TD3 exposed fragility in stochastic environments. CEM-RL likewise fused evolutionary sampling with off-policy RL for efficient policy search, yet retained the same deterministic and off-policy limitations. Proximal Policy Optimization, with its clipped surrogate and KL-aware updates, provided a robust on-policy mechanism for stable improvements with stochastic policies.\nTogether, these works suggest a path: retain archive-based QD search, use arborescent branching to multiply gradient-guided proposals, but replace deterministic off-policy gradients with PPO\u2019s proximal on-policy updates to handle stochasticity while preserving stability. The resulting synthesis naturally adapts DQD\u2019s gradient-guided emitters to RL by estimating both objective and descriptor gradients via policy gradients and executing PPO-style bounded updates along multiple branches, overcoming the core shortcomings of prior QD-RL hybrids.",
+  "target_paper": {
+    "title": "Proximal Policy Gradient Arborescence for Quality Diversity Reinforcement Learning",
+    "authors": "Sumeet Batra, Bryon Tjanaka, Matthew Christopher Fontaine, Aleksei Petrenko, Stefanos Nikolaidis, Gaurav S. Sukhatme",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Reinforcement Learning, Quality Diversity, Robotics, Machine Learning, Evolution Strategies",
+    "abstract": "Training generally capable agents that thoroughly explore their environment and\nlearn new and diverse skills is a long-term goal of robot learning. Quality Diversity\nReinforcement Learning (QD-RL) is an emerging research area that blends the\nbest aspects of both fields \u2013 Quality Diversity (QD) provides a principled form\nof exploration and produces collections of behaviorally diverse agents, while\nReinforcement Learning (RL) provides a powerful performance improvement\noperator enabling generalization across tasks and dynamic environments. Existing\nQD-RL approaches have been constrained to sample efficient, deterministic off-\npolicy RL algorithms and/or evolution strategies and struggle with highly stochastic\nenvironments. In this work, we, for the first time, adapt on-policy RL, specifically\nProximal Policy Optimization (PPO), to the Differentiable Quality Diversity (DQD)\nframework and propose several changes that enable efficient optimization and\ndiscovery of novel skills on high-dimen",
+    "openreview_id": "TFKIfhvdmZ",
+    "forum_id": "TFKIfhvdmZ"
+  },
+  "analysis_timestamp": "2026-01-06T07:20:42.887778"
+}

@@ -1,0 +1,87 @@
+{
+  "prior_works": [
+    {
+      "title": "Proximal Policy Optimization Algorithms",
+      "authors": [
+        "John Schulman",
+        "Filip Wolski",
+        "Prafulla Dhariwal",
+        "Alec Radford",
+        "Oleg Klimov"
+      ],
+      "year": 2017,
+      "role": "algorithmic foundation for policy-gradient RL used in alignment",
+      "relationship_sentence": "DRPO preserves the PPO-style KL-regularized policy update paradigm but replaces value-critic estimation with a normalized, domain-aware reward signal to stabilize updates across heterogeneous clinical tasks."
+    },
+    {
+      "title": "Direct Preference Optimization: Your Language Model Is Secretly a Reward Model",
+      "authors": [
+        "Alexander M. Rafailov",
+        "et al."
+      ],
+      "year": 2023,
+      "role": "critic-free preference optimization baseline",
+      "relationship_sentence": "DPO showed that critic-free, relative-signal objectives can effectively align LMs; DRPO extends this critic-free philosophy to online multimodal training by using normalized, relative rewards while adding domain- and modality-aware scaling."
+    },
+    {
+      "title": "Variational Inference for Monte Carlo Objectives (VIMCO)",
+      "authors": [
+        "Andriy Mnih",
+        "Danilo J. Rezende"
+      ],
+      "year": 2016,
+      "role": "multi-sample, leave-one-out baseline inspiring group-relative normalization",
+      "relationship_sentence": "DRPO\u2019s use of group-normalized rewards echoes VIMCO\u2019s leave-one-out baselines for variance reduction, but repurposes the idea for policy-gradient updates over multiple sampled responses per prompt."
+    },
+    {
+      "title": "Distributionally Robust Neural Networks for Group Shifts (Group DRO)",
+      "authors": [
+        "Shiori Sagawa",
+        "Pang Wei Koh",
+        "Tatsunori B. Hashimoto",
+        "Percy Liang"
+      ],
+      "year": 2020,
+      "role": "imbalance robustness objective at the group/domain level",
+      "relationship_sentence": "DRPO\u2019s domain rarity weighting is conceptually aligned with Group DRO\u2019s objective of upweighting underrepresented groups to mitigate performance disparities across domains."
+    },
+    {
+      "title": "Class-Balanced Loss Based on Effective Number of Samples",
+      "authors": [
+        "Yin Cui",
+        "Menglin Jia",
+        "Tsung-Yi Lin",
+        "Yang Song",
+        "Serge Belongie"
+      ],
+      "year": 2019,
+      "role": "rare-class reweighting for long-tailed data",
+      "relationship_sentence": "The domain rarity scaler in DRPO is directly motivated by class-imbalance principles such as effective-number weighting, counteracting skewed clinical distributions during optimization."
+    },
+    {
+      "title": "Visual Instruction Tuning (LLaVA)",
+      "authors": [
+        "Haotian Liu",
+        "Chunyuan Li",
+        "Qingyang Wu",
+        "Yong Jae Lee"
+      ],
+      "year": 2023,
+      "role": "architectural and training blueprint for vision-language instruction tuning",
+      "relationship_sentence": "QoQ-Med adapts the LLaVA-style connector and instruction-tuning regimen to clinical settings, then augments it with DRPO to balance learning across images, signals, and textual reports."
+    },
+    {
+      "title": "Flamingo: a Visual Language Model for Few-Shot Learning",
+      "authors": [
+        "Jean-Baptiste Alayrac",
+        "Rosalia Schneider",
+        "et al."
+      ],
+      "year": 2022,
+      "role": "general multimodal fusion architecture precedent",
+      "relationship_sentence": "Flamingo\u2019s cross-attentional fusion for multimodal reasoning informs QoQ-Med\u2019s generalist design, which DRPO then aligns across modalities of differing difficulty and prevalence."
+    }
+  ],
+  "synthesis_narrative": "QoQ-Med\u2019s core innovation is DRPO, a critic-free reinforcement learning objective that normalizes rewards within response groups and then scales them by domain rarity and modality difficulty to counter severe clinical data imbalance. This design knits together several key threads in prior work. From PPO, the model inherits a stable KL-regularized policy update framework for alignment while discarding the value critic to improve practicality across heterogeneous tasks. DPO\u2019s success with critic-free, relative-signal objectives motivates DRPO\u2019s reliance on normalized rewards rather than trained critics. The idea of group-relative normalization is grounded in multi-sample variance-reduction techniques like VIMCO, which use leave-one-out baselines; DRPO operationalizes a similar principle for policy gradients by comparing multiple sampled responses per prompt.\nOn the imbalance front, DRPO explicitly borrows from robust optimization and long-tailed learning. Group DRO provides the core insight of upweighting underrepresented groups to improve worst-group performance, while effective-number weighting (Class-Balanced Loss) offers a principled way to scale contributions according to rarity. Architecturally, QoQ-Med\u2019s generalist multimodal design builds on LLaVA and Flamingo, which demonstrated effective vision-language instruction tuning and cross-attentional fusion, respectively. QoQ-Med extends these blueprints to clinical images, time-series signals, and text, and pairs them with DRPO to harmonize learning across modalities and specialties. Together, these strands enable QoQ-Med to achieve balanced, domain-robust clinical reasoning without the overhead of a learned critic.",
+  "analysis_timestamp": "2026-01-07T00:21:32.278389"
+}

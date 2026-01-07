@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Are Transformers Effective for Time Series Forecasting?",
+      "authors": "Zeng et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "This work\u2019s finding that Transformer temporal attention degrades with longer lookbacks and that simple channel-wise linear models (e.g., DLinear) often outperform Transformers directly motivates inverting the modeling axis to avoid long temporal attention and recover scalability."
+    },
+    {
+      "title": "A Time Series is Worth 64 Words: Long-term Forecasting with Transformers (PatchTST)",
+      "authors": "Nie et al.",
+      "year": 2023,
+      "arxiv_id": "2211.14730",
+      "role": "Inspiration",
+      "relationship_sentence": "PatchTST\u2019s demonstration that channel-independent processing and avoiding early variate mixing improves forecasting informs the iTransformer\u2019s variate-centric design that treats variates as tokens and applies attention across them."
+    },
+    {
+      "title": "Crossformer: Transformer Utilizing Cross-Dimension Dependency for Multivariate Time Series Forecasting",
+      "authors": "Zhang et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Related Problem",
+      "relationship_sentence": "By explicitly modeling dependencies across the time and variable dimensions, Crossformer highlights the value of attention along the variable axis, which iTransformer streamlines by applying standard Transformer blocks on the inverted (variable) dimension."
+    },
+    {
+      "title": "Informer: Beyond Efficient Transformer for Long Sequence Time-Series Forecasting",
+      "authors": "Zhou et al.",
+      "year": 2021,
+      "arxiv_id": "2012.07436",
+      "role": "Foundation",
+      "relationship_sentence": "Informer established the long-sequence time-series forecasting setting and datasets and tackled temporal attention scalability via sparsification, a setup that the inverted design revisits by eliminating long temporal attention altogether."
+    },
+    {
+      "title": "FEDformer: Frequency Enhanced Decomposed Transformer for Long-term Series Forecasting",
+      "authors": "Zhou et al.",
+      "year": 2022,
+      "arxiv_id": "2201.12740",
+      "role": "Baseline",
+      "relationship_sentence": "FEDformer reduces temporal attention cost with frequency-domain decomposition but still operates on temporal tokens mixing variates, a limitation the inverted approach addresses by operating directly over variate tokens."
+    },
+    {
+      "title": "TimesNet: Temporal 2D-Variation Modeling for General Time Series Analysis",
+      "authors": "Wu et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "TimesNet\u2019s evidence that channel-independent, variate-centric processing captures core temporal patterns motivates iTransformer\u2019s choice to keep Transformer components unchanged while reorganizing them around variate-centric representations."
+    }
+  ],
+  "synthesis_narrative": "Evidence accumulated that temporal self-attention is fragile and costly for long lookbacks: Are Transformers Effective for Time Series Forecasting? showed that, as context grows, standard Transformer forecasters often degrade and are outperformed by simple per-channel linear models, implying that heavy temporal attention is not the key driver of accuracy. PatchTST pinpointed early variate mixing as harmful and showed that channel-independent processing with patching yields stronger representations, arguing for keeping variates separate during modeling. Crossformer further emphasized the importance of cross-dimension structure by explicitly attending across variable and temporal dimensions, showing clear gains when variable-wise dependencies are modeled. Informer defined the long-sequence forecasting setting and benchmarks, and pursued sparsity to alleviate temporal attention\u2019s quadratic cost. FEDformer sought efficiency through frequency-domain decomposition yet still inherited the temporal-token paradigm that fuses multiple variates into each token. TimesNet, from a non-Transformer angle, validated variate-centric, channel-independent design as a strong inductive bias for multivariate time series. Together these works reveal two convergent signals: (1) long-horizon temporal attention is expensive and often unnecessary, and (2) early mixing of variates into temporal tokens undermines representation quality. The natural next step is to reassign the Transformer\u2019s core operations to the variable dimension. By inverting tokenization so that variates become tokens and applying unmodified attention and feed-forward layers over them, the current work leverages channel-independence, preserves meaningful attention, and sidesteps long-temporal scaling\u2014synthesizing the empirical gaps and inductive insights surfaced by these studies.",
+  "target_paper": {
+    "title": "iTransformer: Inverted Transformers Are Effective for Time Series Forecasting",
+    "authors": "Yong Liu, Tengge Hu, Haoran Zhang, Haixu Wu, Shiyu Wang, Lintao Ma, Mingsheng Long",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Time Series Forecasting, Transformer",
+    "abstract": "The recent boom of linear forecasting models questions the ongoing passion for architectural modifications of Transformer-based forecasters. These forecasters leverage Transformers to model the global dependencies over temporal tokens of time series, with each token formed by multiple variates of the same timestamp. However, Transformers are challenged in forecasting series with larger lookback windows due to performance degradation and computation explosion. Besides, the embedding for each temporal token fuses multiple variates that represent potential delayed events and distinct physical measurements, which may fail in learning variate-centric representations and result in meaningless attention maps. In this work, we reflect on the competent duties of Transformer components and repurpose the Transformer architecture without any modification to the basic components. We propose iTransformer that simply applies the attention and feed-forward network on the inverted dimensions. Specifica",
+    "openreview_id": "JePfAI8fah",
+    "forum_id": "JePfAI8fah"
+  },
+  "analysis_timestamp": "2026-01-07T00:18:04.588505"
+}

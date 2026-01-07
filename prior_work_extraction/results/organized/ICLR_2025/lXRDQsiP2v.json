@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "White-Box Transformers via Maximal Coding Rate Reduction",
+      "authors": "Jingyuan Zhang et al.",
+      "year": 2024,
+      "arxiv_id": null,
+      "role": "Extension",
+      "relationship_sentence": "This work showed that unrolling gradient steps to optimize the MCR^2 objective yields a transformer-like block with self-attention and MLP structure, which the current paper extends by introducing a new variational MCR^2 formulation that leads specifically to a linear-time attention operator."
+    },
+    {
+      "title": "Self-Supervised Learning via Maximum Coding Rate Reduction",
+      "authors": "Yaodong Yu et al.",
+      "year": 2020,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "The MCR^2 objective defined here provides the core information-theoretic rate-reduction principle that the current paper variationalizes and optimizes via unrolled gradient steps to derive its token-statistics attention."
+    },
+    {
+      "title": "The Variational Information Bottleneck",
+      "authors": "Alexander A. Alemi et al.",
+      "year": 2016,
+      "arxiv_id": "1612.00410",
+      "role": "Inspiration",
+      "relationship_sentence": "This paper introduced a variational approach to make information-theoretic objectives trainable, directly inspiring the current work\u2019s variational reformulation of MCR^2 that enables a tractable, unrolled derivation of linear-time attention."
+    },
+    {
+      "title": "Learning Fast Approximations of Sparse Coding",
+      "authors": "Karol Gregor et al.",
+      "year": 2010,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "LISTA established the unrolled-optimization paradigm that the current work adopts by mapping gradient descent steps on the variational MCR^2 objective into network layers implementing the new attention operator."
+    },
+    {
+      "title": "Transformers are RNNs: Fast Autoregressive Transformers with Linear Attention",
+      "authors": "Angeliki Katharopoulos et al.",
+      "year": 2020,
+      "arxiv_id": "2006.16236",
+      "role": "Baseline",
+      "relationship_sentence": "This kernelized linear attention method serves as a main baseline that the current paper aims to surpass, addressing its limitation of relying on softmax approximations by deriving linear-time attention from a principled rate-reduction objective."
+    },
+    {
+      "title": "Rethinking Attention with Performers",
+      "authors": "Krzysztof Choromanski et al.",
+      "year": 2021,
+      "arxiv_id": "2009.14794",
+      "role": "Baseline",
+      "relationship_sentence": "Performer\u2019s FAVOR+ random feature approximation is a key baseline motivating the need for a linear-time attention operator without stochastic kernel approximations, which the current work achieves via variational MCR^2."
+    },
+    {
+      "title": "Linformer: Self-Attention with Linear Complexity",
+      "authors": "Sinong Wang et al.",
+      "year": 2020,
+      "arxiv_id": "2006.04768",
+      "role": "Gap Identification",
+      "relationship_sentence": "By assuming low-rank projections of keys/values to linearize attention, Linformer exposes the lack of a principled objective for linear-time attention\u2014a gap the current paper fills by deriving linear attention from an explicit variational rate-reduction objective."
+    }
+  ],
+  "synthesis_narrative": "Maximal Coding Rate Reduction (MCR^2) formalized an information-theoretic principle that favors representations maximizing between-group separation while minimizing within-group coding cost, giving a concrete objective for learning compact, discriminative features. Building on that principle, a white-box derivation showed that unrolling gradient steps that optimize MCR^2 naturally yields a transformer-like block, where attention and feedforward components arise as the mechanics of improving rate reduction across tokens. In parallel, the Variational Information Bottleneck introduced a general recipe to turn intractable information objectives into trainable variational bounds via auxiliary distributions and reparameterization, enabling practical optimization while preserving information-theoretic semantics. The unrolled-optimization paradigm pioneered by LISTA established how iterative algorithms can be mapped into learnable network layers, providing the architectural toolkit to realize such objectives as deep networks. On the efficiency front, Linear Transformers and Performers delivered linear-time attention by kernelization or random-feature approximations, and Linformer achieved linear complexity via low-rank projections\u2014each effective but anchored in approximations or assumptions rather than a generative objective.\nTaken together, these works exposed a natural next step: leverage the white-box MCR^2 view to explain attention mechanistically, then marry it with a variational formulation to obtain a tractable objective whose unrolled optimization prescribes the computations. This synthesis yields a token-statistics mechanism that aggregates sufficient statistics to effect attention in linear time, addressing the approximation limitations of prior linear-attention methods while grounding the operator in an explicit rate-reduction objective.",
+  "target_paper": {
+    "title": "Token Statistics Transformer: Linear-Time Attention via Variational Rate Reduction",
+    "authors": "Ziyang Wu, Tianjiao Ding, Yifu Lu, Druv Pai, Jingyuan Zhang, Weida Wang, Yaodong Yu, Yi Ma, Benjamin David Haeffele",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "white-box deep neural networks, representation learning, transformer",
+    "abstract": "The attention operator is arguably the key distinguishing factor of transformer architectures, which have demonstrated state-of-the-art performance on a variety of tasks. However, transformer attention operators often impose a significant computational burden, with the computational complexity scaling quadratically with the number of tokens. In this work, we propose a novel transformer attention operator whose computational complexity scales linearly with the number of tokens. We derive our network architecture by extending prior work which has shown that a transformer style architecture naturally arises by \"white-box\" architecture design, where each layer of the network is designed to implement an incremental optimization step of a maximal coding rate reduction objective (MCR$^2$). Specifically, we derive a novel variational form of the MCR$^2$ objective and show that the architecture that results from unrolled gradient descent of this variational objective leads to a new attention mo",
+    "openreview_id": "lXRDQsiP2v",
+    "forum_id": "lXRDQsiP2v"
+  },
+  "analysis_timestamp": "2026-01-06T13:45:23.789719"
+}

@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+      "authors": "Edward J. Hu et al.",
+      "year": 2021,
+      "arxiv_id": "2106.09685",
+      "role": "Foundation",
+      "relationship_sentence": "Introduced the low-rank factorization parameterization (W + A B^T) for PEFT, defining the exact optimization setting and equivalence class (A\u2192AS, B\u2192B S^{-T}) that LoRA-RITE targets with an invariant preconditioner."
+    },
+    {
+      "title": "Adam: A Method for Stochastic Optimization",
+      "authors": "Diederik P. Kingma and Jimmy Ba",
+      "year": 2015,
+      "arxiv_id": "1412.6980",
+      "role": "Gap Identification",
+      "relationship_sentence": "Serves as the dominant LoRA optimizer whose coordinate-wise updates depend on the arbitrary scaling/rotation of LoRA factors, a deficiency LoRA-RITE explicitly corrects with transformation-invariant preconditioning."
+    },
+    {
+      "title": "Adafactor: Adaptive Learning Rates with Sublinear Memory",
+      "authors": "Noam Shazeer and Mitchell Stern",
+      "year": 2018,
+      "arxiv_id": "1804.04235",
+      "role": "Baseline",
+      "relationship_sentence": "Provides the memory-efficient factored preconditioner widely used for LLM fine-tuning but remains non-invariant to basis changes in the low-rank subspace, motivating LoRA-RITE\u2019s invariant matrix preconditioning tailored to LoRA factors."
+    },
+    {
+      "title": "Optimizing Neural Networks with Kronecker-factored Approximate Curvature",
+      "authors": "James Martens and Roger Grosse",
+      "year": 2015,
+      "arxiv_id": "1503.05671",
+      "role": "Inspiration",
+      "relationship_sentence": "Shows how Kronecker-structured preconditioning approximates natural-gradient invariances to linear reparameterizations, a principle LoRA-RITE adapts to the coupled A/B LoRA factors to achieve invariance under their joint transformations."
+    },
+    {
+      "title": "Natural Gradient Works Efficiently in Learning",
+      "authors": "Shun-ichi Amari",
+      "year": 1998,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "Establishes parameterization-invariant optimization via the Fisher metric, which directly motivates LoRA-RITE\u2019s design of an efficient, approximate natural-gradient-style preconditioner confined to the LoRA subspace."
+    },
+    {
+      "title": "Low-Rank Matrix Completion by Riemannian Optimization",
+      "authors": "Bart Vandereycken",
+      "year": 2013,
+      "arxiv_id": null,
+      "role": "Related Problem",
+      "relationship_sentence": "Formulates optimization on the quotient manifold of fixed-rank matrices to handle non-uniqueness under factor transformations (A\u2192AS, B\u2192B S^{-T}), the exact invariance that LoRA-RITE enforces via matrix preconditioning rather than manifold machinery."
+    }
+  ],
+  "synthesis_narrative": "Low-rank adaptation (LoRA) introduced an explicit parameterization W + A B^T for PEFT in large models, making updates operate on two coupled factors whose product defines the actual parameter change, and implicitly defining an equivalence class under A\u2192AS, B\u2192B S^{-T}. Adam\u2019s coordinate-wise moment adaptation became the default optimizer for LoRA but its updates depend on the scale and basis of A and B, producing different learning trajectories for equivalent factorizations; Adafactor brought memory-efficient factored second moments yet still lacks invariance to rotations in the low-rank subspace. Natural gradient theory established that optimization should be invariant to reparameterization when measured in the appropriate metric, a property later approximated efficiently in deep networks by K-FAC through Kronecker-structured preconditioning that preserves certain linear reparameterization invariances. In low-rank problems, Riemannian/quotient-manifold methods formalized the gauge symmetry of matrix factorizations and optimized directly over equivalence classes, guaranteeing invariance to transformations of the latent rank space.\nTogether these works revealed a gap: LoRA training uses factorized parameters with inherent gauge freedom, but common adaptive optimizers ignore this structure, while existing invariant methods (natural gradient, manifold optimization) are too costly for LLM-scale PEFT. LoRA-RITE naturally arises by blending natural-gradient invariance with efficient left-right matrix preconditioning: it designs a preconditioner over the coupled LoRA factors that is invariant to their scaling/rotation and computationally tractable, thereby rectifying Adam/Adafactor\u2019s dependence on arbitrary factor parameterizations while preserving the efficiency demanded by LoRA fine-tuning.",
+  "target_paper": {
+    "title": "LoRA Done RITE: Robust Invariant Transformation Equilibration for LoRA Optimization",
+    "authors": "Jui-Nan Yen, Si Si, Zhao Meng, Felix Yu, Sai Surya Duvvuri, Inderjit S Dhillon, Cho-Jui Hsieh, Sanjiv Kumar",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "oral",
+    "keywords": "optimization, LoRA",
+    "abstract": "Low-rank adaption (LoRA) is a widely used parameter-efficient finetuning method for LLM that reduces memory requirements. However, current LoRA optimizers lack transformation invariance, meaning the updates depending on how the two LoRA factors are scaled or rotated. This deficiency leads to inefficient learning and sub-optimal solutions in practice. This paper introduces LoRA-RITE, a novel adaptive matrix preconditioning method for LoRA optimization, which can achieve transformation invariance and remain computationally efficient. We provide theoretical analysis to demonstrate the benefit of our method and conduct experiments on various LLM tasks with different models including Gemma 2B, 7B, and mT5-XXL. The results demonstrate consistent improvements against existing optimizers. For example, replacing Adam with LoRA-RITE during LoRA fine-tuning of Gemma-2B yielded 4.6% accuracy gain on Super-Natural Instructions and 3.5% accuracy gain across other four LLM benchmarks (HellaSwag, ArcC",
+    "openreview_id": "VpWki1v2P8",
+    "forum_id": "VpWki1v2P8"
+  },
+  "analysis_timestamp": "2026-01-06T12:53:27.514065"
+}

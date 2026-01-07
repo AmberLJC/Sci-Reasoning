@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Direct Preference Optimization: Your Language Model is Secretly a Reward Model",
+      "authors": "Rafailov et al.",
+      "year": 2023,
+      "arxiv_id": "2305.18290",
+      "role": "Inspiration",
+      "relationship_sentence": "DSPO adopts DPO\u2019s pairwise Bradley\u2013Terry likelihood framing and reference-policy ratio idea but replaces token log-likelihoods with diffusion scores to avoid the intractable image likelihood estimation that arises when naively porting DPO to T2I."
+    },
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Ho et al.",
+      "year": 2020,
+      "arxiv_id": "2006.11239",
+      "role": "Foundation",
+      "relationship_sentence": "DSPO explicitly aligns its fine-tuning loss with the DDPM denoising score-matching objective, ensuring the preference-learning objective matches the diffusion model\u2019s pretraining criterion."
+    },
+    {
+      "title": "Score-Based Generative Modeling through Stochastic Differential Equations",
+      "authors": "Song et al.",
+      "year": 2021,
+      "arxiv_id": "2011.13456",
+      "role": "Foundation",
+      "relationship_sentence": "DSPO leverages the time-dependent data score formulation and its estimators from score-based generative modeling to derive preference gradients directly in score space rather than via likelihood surrogates."
+    },
+    {
+      "title": "A Connection Between Score Matching and Denoising Autoencoders",
+      "authors": "Vincent",
+      "year": 2011,
+      "arxiv_id": "1107.0296",
+      "role": "Foundation",
+      "relationship_sentence": "DSPO builds its preference objective on the denoising score-matching identity that links denoising residuals to data scores, enabling preference optimization without estimating log-likelihoods."
+    },
+    {
+      "title": "ImageReward: Learning and Evaluating Human Preferences for Text-to-Image Generation",
+      "authors": "Xu et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "By demonstrating that reward-model-based T2I alignment requires training separate evaluators and can suffer from reward hacking, ImageReward motivates DSPO\u2019s reward-free, direct preference optimization in diffusion score space."
+    },
+    {
+      "title": "Pick-a-Pic: A Large-Scale Dataset of Human Preferences for Text-to-Image Generation",
+      "authors": "Kirstain et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "DSPO adopts the pairwise human preference formulation exemplified by Pick-a-Pic (two images per prompt with a winner), using such comparisons to construct its score-based preference loss."
+    }
+  ],
+  "synthesis_narrative": "Direct Preference Optimization introduced a reward-free way to align generation with human choices by maximizing a pairwise Bradley\u2013Terry likelihood under a reference-policy ratio, providing a simple, stable alternative to RLHF. Denoising Diffusion Probabilistic Models established diffusion training as denoising score matching, wherein the model learns the data score via a noise-prediction objective. Score-based generative modeling through SDEs formalized time-dependent data scores and their estimators, clarifying how gradients with respect to noisy samples correspond to likelihood gradients. Vincent\u2019s connection between denoising and score matching tied denoising residuals to the data score, making it possible to optimize objectives without computing intractable likelihoods. ImageReward showed the promise of T2I alignment with human preferences but relied on separate reward models and RL fine-tuning, exposing instability and reward hacking risks. Pick-a-Pic standardized pairwise preference data for T2I, popularizing the two-candidate per prompt setup that underpins most preference-learning objectives.\nBringing these strands together reveals a gap: directly porting DPO-style likelihood-ratio objectives to diffusion models forces estimated image log-likelihoods, breaking alignment with the diffusion training objective and degrading performance. The natural next step is to marry the pairwise preference framing with the diffusion pretraining criterion itself: express preference learning in the diffusion score space. By using denoising score matching identities and time-dependent scores, one can define a reward-free, pairwise preference loss that is consistent with pretraining, avoids likelihood estimation, and preserves the stability that made DPO appealing.",
+  "target_paper": {
+    "title": "DSPO: Direct Score Preference Optimization for Diffusion Model Alignment",
+    "authors": "Huaisheng Zhu, Teng Xiao, Vasant G Honavar",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "oral",
+    "keywords": "Text-to-image generation",
+    "abstract": "Diffusion-based Text-to-Image (T2I) models have achieved impressive success in generating high-quality images from textual prompts. While large language models (LLMs) effectively leverage Direct Preference Optimization (DPO) for fine-tuning on human preference data without the need for reward models, diffusion models have not been extensively explored in this area. Current preference learning methods applied to T2I diffusion models immediately adapt existing techniques from LLMs. However, this direct adaptation introduces an estimated loss specific to T2I diffusion models. This estimation can potentially lead to suboptimal performance through our empirical results.  In this work, we  propose Direct Score Preference Optimization (DSPO), a novel algorithm that aligns the pretraining and fine-tuning objectives of diffusion models by leveraging score matching, the same objective used during pretraining. It introduces a new perspective on preference learning for diffusion models. Specifical",
+    "openreview_id": "xyfb9HHvMe",
+    "forum_id": "xyfb9HHvMe"
+  },
+  "analysis_timestamp": "2026-01-06T15:32:59.180776"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Outrageously Large Neural Networks: The Sparsely-Gated Mixture-of-Experts Layer",
+      "authors": "Noam Shazeer et al.",
+      "year": 2017,
+      "role": "Foundation",
+      "relationship_sentence": "OLMoE\u2019s core idea\u2014computationally sparse MoE layers with noisy top\u2011k token routing and load\u2011balancing\u2014directly descends from Shazeer et al.\u2019s formulation, which established the MoE paradigm and the notion of \u2018active\u2019 vs. total parameters."
+    },
+    {
+      "title": "GShard: Scaling Giant Models with Conditional Computation",
+      "authors": "Sergey Lepikhin et al.",
+      "year": 2020,
+      "role": "Extension",
+      "relationship_sentence": "OLMoE adopts the GShard-style integration of MoE into Transformers\u2014especially top\u20112 routing with per\u2011expert capacity and auxiliary balance losses\u2014whose practical recipe and trade\u2011offs it further studies and tunes at scale."
+    },
+    {
+      "title": "Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity",
+      "authors": "William Fedus et al.",
+      "year": 2021,
+      "role": "Extension",
+      "relationship_sentence": "OLMoE\u2019s routing regularization choices and stability practices (e.g., router z\u2011loss and capacity management) build on Switch\u2019s simplifications and analyses of sparse routing, and it positions its compute/quality gains in the same sparse\u2011vs\u2011dense framework."
+    },
+    {
+      "title": "Scaling Vision with Sparse Mixture of Experts",
+      "authors": "Carlos Riquelme et al.",
+      "year": 2021,
+      "role": "Related Problem",
+      "relationship_sentence": "OLMoE\u2019s new routing property analyses (e.g., load/importance balance and specialization) extend the V\u2011MoE metrics and findings on expert specialization to the language domain, directly informing how OLMoE measures and interprets routing behavior."
+    },
+    {
+      "title": "ST-MoE: Designing Stable and Transferable Sparse Expert Models",
+      "authors": "Barret Zoph et al.",
+      "year": 2022,
+      "role": "Gap Identification",
+      "relationship_sentence": "ST\u2011MoE documented instability and transfer issues in MoE training and proposed stabilizing tricks; OLMoE explicitly targets these gaps at open scale, refining routing losses and hyperparameters and reporting specialization metrics to demonstrate stable training."
+    },
+    {
+      "title": "DeepSeekMoE: Towards Efficient and Transparent Mixture-of-Experts Language Models",
+      "authors": "DeepSeek-AI et al.",
+      "year": 2024,
+      "role": "Baseline",
+      "relationship_sentence": "As the strongest widely-available open MoE baseline, DeepSeekMoE-16B directly anchors OLMoE\u2019s claims; OLMoE is engineered to surpass it with fewer active parameters, and its experimental setup and comparisons are framed against DeepSeekMoE\u2019s design and results."
+    },
+    {
+      "title": "OLMo: Accelerating the Science of Language Models",
+      "authors": "Dirk Groeneveld et al.",
+      "year": 2024,
+      "role": "Foundation",
+      "relationship_sentence": "OLMoE is a direct extension of the OLMo open-science framework\u2014reusing its tokenizer, data pipeline (e.g., Dolma), evaluation, and transparent training logs\u2014while substituting dense blocks with MoE to achieve its core efficiency/quality contribution."
+    }
+  ],
+  "synthesis_narrative": "OLMoE stands on the MoE lineage initiated by Shazeer et al., which introduced sparsely-gated expert layers and the fundamental compute/parameter separation that enables far more parameters than active FLOPs. GShard operationalized this idea within Transformers via top-2 routing, per-expert capacity constraints, and load-balancing losses; OLMoE inherits this practical formulation and tunes it for large-scale language pretraining. Switch Transformers further simplified and stabilized routing (e.g., with z-loss and capacity management), providing the stability heuristics and compute/quality framing that OLMoE extends in pursuit of better sparsity\u2013efficiency trade-offs.\n\nConcurrently, V-MoE established concrete routing diagnostics (importance and load balance) and showed emergent expert specialization in vision; OLMoE adapts and extends these analyses to language, proposing new routing properties to quantify specialization in its experts. ST-MoE documented failure modes\u2014instability and limited transfer\u2014along with stabilizing tricks; OLMoE explicitly addresses these gaps, demonstrating stable training at 5T tokens and strong generalization, while reporting routing metrics to validate specialization and balance.\n\nOn the open-model front, OLMo provided the infrastructure, tokenizer, data pipeline, and commitment to releasing weights, data, and logs; OLMoE directly builds on this framework to deliver a fully open MoE stack. Finally, DeepSeekMoE-16B serves as the key open MoE baseline; OLMoE\u2019s architectural and training choices are empirically validated by surpassing DeepSeekMoE with fewer active parameters, substantiating the paper\u2019s core claim that carefully trained sparse experts can beat larger dense and MoE alternatives.",
+  "analysis_timestamp": "2026-01-06T23:08:23.932586"
+}

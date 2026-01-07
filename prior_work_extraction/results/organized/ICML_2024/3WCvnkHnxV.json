@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Communication-Efficient Learning of Deep Networks from Decentralized Data",
+      "authors": "H. Brendan McMahan, Eider Moore, Daniel Ramage, Seth Hampson, Blaise Aguera y Arcas",
+      "year": 2017,
+      "role": "Foundational federated learning baseline (FedAvg)",
+      "relationship_sentence": "PrE-Text is positioned as an alternative to on-device FedAvg, directly addressing the communication, computation, and deployment limitations surfaced by this seminal FL approach."
+    },
+    {
+      "title": "Differentially Private Federated Learning: A Client Level Perspective",
+      "authors": "Robin C. Geyer, Tassilo Klein, Moin Nabi",
+      "year": 2017,
+      "role": "Introduced client-level DP for FL",
+      "relationship_sentence": "This work formalized client-level DP in federated training, defining the privacy target that PrE-Text attains while avoiding heavy on-device optimization by shifting to DP synthetic data."
+    },
+    {
+      "title": "R\u00e9nyi Differential Privacy",
+      "authors": "Ilya Mironov",
+      "year": 2017,
+      "role": "DP accounting framework",
+      "relationship_sentence": "RDP provides tight composition/accounting tools that enable PrE-Text to guarantee user-level privacy across iterative noisy mechanisms and report epsilons in practical regimes (e.g., ~1\u20138)."
+    },
+    {
+      "title": "Semi-supervised Knowledge Transfer for Deep Learning from Private Training Data (PATE)",
+      "authors": "Nicolas Papernot, Mart\u00edn Abadi, \u00dalfar Erlingsson, Ian Goodfellow, Kunal Talwar",
+      "year": 2017,
+      "role": "DP knowledge transfer via public data",
+      "relationship_sentence": "PATE established the paradigm of transferring private knowledge into public/synthetic data under DP; PrE-Text applies an analogous idea to text by converting private signals into a DP synthetic corpus."
+    },
+    {
+      "title": "Self-Instruct: Aligning Language Models with Self-Generated Instructions",
+      "authors": "Yizhong Wang, Yao Fu, Hao Peng, Zhuowan Li, Xuezhe Ma, Luke Zettlemoyer, Yejin Choi",
+      "year": 2022,
+      "role": "LLM-driven synthetic data generation pipeline",
+      "relationship_sentence": "Self-Instruct demonstrated bootstrapping diverse instruction-like data from LLMs, informing PrE-Text\u2019s use of LLM-based synthesis pipelines that are then constrained to satisfy DP."
+    },
+    {
+      "title": "WizardLM: Empowering Large Pre-Trained Language Models to Follow Complex Instructions (Evol-Instruct)",
+      "authors": "Yue Xu, Junjie Ye, Chaojun Xiao, Qian Liu, et al.",
+      "year": 2023,
+      "role": "Evolutionary instruction/data generation",
+      "relationship_sentence": "The Evol-Instruct methodology inspires PrE-Text\u2019s \u201cevolution\u201d motif\u2014iteratively improving prompts/data\u2014while PrE-Text adds rigorous DP to produce high-utility synthetic text reflecting private distributions."
+    },
+    {
+      "title": "TinyStories: How Small Language Models Can Learn to Generate Reasonable Stories",
+      "authors": "Ronen Eldan, Yuanzhi Li",
+      "year": 2023,
+      "role": "Evidence that synthetic text can train small LMs effectively",
+      "relationship_sentence": "TinyStories showed that small models can be trained successfully on synthetic corpora, motivating PrE-Text\u2019s strategy of training small models on DP synthetic text to outperform on-device FL baselines."
+    }
+  ],
+  "synthesis_narrative": "PrE-Text\u2019s key contribution\u2014replacing on-device federated training with a differentially private synthetic text pipeline\u2014stands at the intersection of three strands of prior work. First, the federated learning literature (McMahan et al., 2017) and its DP extensions (Geyer et al., 2017) articulated the challenges of on-device optimization: limited device capacity, heavy communication, and complex deployment. These works defined the user-level privacy goal that PrE-Text seeks to satisfy while circumventing the operational burdens of FedAvg. Second, differential privacy methodology\u2014particularly R\u00e9nyi Differential Privacy (Mironov, 2017)\u2014provides the accounting backbone enabling tight privacy composition for iterative noisy mechanisms, allowing PrE-Text to offer concrete user-level epsilon guarantees in practical regimes. Third, recent advances in LLM-driven data synthesis showed that high-utility synthetic corpora can be created and used to train smaller models: Self-Instruct (Wang et al., 2022) and Evol-Instruct/WizardLM (Xu et al., 2023) established scalable, iterative instruction/data generation, while TinyStories (Eldan & Li, 2023) provided compelling evidence that small LMs can learn effectively from synthetic text alone. Bridging these, PATE (Papernot et al., 2017) offered a principled template for differentially private knowledge transfer into public/synthetic data. PrE-Text operationalizes this template in the language domain by combining evolution-style LLM synthesis with rigorous DP accounting, yielding a DP synthetic corpus that trains small models more efficiently and, when used to fine-tune larger models, delivers utility without exposing raw user data.",
+  "analysis_timestamp": "2026-01-06T23:42:48.068606"
+}

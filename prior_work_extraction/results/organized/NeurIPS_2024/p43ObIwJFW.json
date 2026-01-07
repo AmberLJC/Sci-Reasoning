@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "A Tutorial on Formulating and Using Binary Quadratic Models (QUBO)",
+      "authors": "Fred Glover, Gary A. Kochenberger, Yu Du",
+      "year": 2019,
+      "role": "Foundational QUBO formulation",
+      "relationship_sentence": "Established the QUBO modeling framework and emphasized the symmetric Q matrix structure that VCM\u2019s graph-convolutional DVN explicitly exploits to extract value features."
+    },
+    {
+      "title": "Learning Combinatorial Optimization Algorithms over Graphs",
+      "authors": "Hanjun Dai, Elias B. Khalil, Yuyu Zhang, Bistra Dilkina, Le Song",
+      "year": 2017,
+      "role": "Graph-based sequential learning baseline",
+      "relationship_sentence": "Introduced GNN-driven (structure2vec) RL for problems like Max-Cut/QUBO, exemplifying the dominant sequential decision paradigm whose computational overhead VCM avoids by reframing inference as classification."
+    },
+    {
+      "title": "Neural Combinatorial Optimization with Reinforcement Learning",
+      "authors": "Irwan Bello, Hieu Pham, Quoc V. Le, Mohammad Norouzi, Samy Bengio",
+      "year": 2016,
+      "role": "Sequential RL paradigm for CO",
+      "relationship_sentence": "Pioneered autoregressive, sequence-based RL solvers for combinatorial optimization, providing the influential but costly decision-by-decision template that motivated VCM\u2019s non-sequential classification approach."
+    },
+    {
+      "title": "Attention, Learn to Solve Routing Problems!",
+      "authors": "Wouter Kool, Herke van Hoof, Max Welling",
+      "year": 2019,
+      "role": "High-performing autoregressive baseline",
+      "relationship_sentence": "Demonstrated state-of-the-art autoregressive attention policies for CO with significant inference cost, reinforcing the need for VCM\u2019s one-shot classification to improve efficiency without sacrificing quality."
+    },
+    {
+      "title": "Semi-Supervised Classification with Graph Convolutional Networks",
+      "authors": "Thomas N. Kipf, Max Welling",
+      "year": 2017,
+      "role": "Architectural foundation (graph convolution)",
+      "relationship_sentence": "Provided the core graph convolutional operator that underpins DVN/VCN, enabling VCM to aggregate pairwise interactions in Q and leverage its symmetry for value-feature extraction."
+    },
+    {
+      "title": "Erdos Goes Neural: an Unsupervised Learning Framework for Combinatorial Optimization on Graphs",
+      "authors": "Alexandros Karalias, Andreas Loukas",
+      "year": 2020,
+      "role": "Classification framing and label-free training on graphs",
+      "relationship_sentence": "Showed that graph combinatorial problems (e.g., Max-Cut/QUBO) can be cast as node/edge labeling and trained without optimal labels by aligning training with the combinatorial objective, informing VCM\u2019s classification view and label-free training ethos."
+    },
+    {
+      "title": "Pseudo-Label: The Simple and Efficient Semi-Supervised Learning Method for Deep Neural Networks",
+      "authors": "Dong-Hyun Lee",
+      "year": 2013,
+      "role": "Self-training with pseudo labels",
+      "relationship_sentence": "Introduced self-training via pseudo-labels, which VCM adapts in its Greedy-guided Self Trainer (GST) by generating and refining pseudo-label assignments using inexpensive greedy heuristics instead of ground-truth optima."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s key contribution\u2014solving QUBO in a one-shot classification manner with a graph-convolutional value extractor and a label-free training routine\u2014emerges from three converging lines of prior work. First, the QUBO canon (Glover\u2013Kochenberger\u2013Du) formalized binary quadratic modeling and highlighted symmetry in Q, which the authors operationalize via a graph view and symmetry-aware feature extraction. Second, the learning-to-optimize literature largely adopted sequential decision paradigms: early sequence-to-sequence RL (Bello et al.) and high-performing autoregressive attention policies (Kool et al.) achieved strong quality but at substantial computational cost; graph-based RL (Dai\u2013Khalil\u2013Dilkina\u2013Song) showed the effectiveness of GNNs for Max-Cut/QUBO but retained the sequential burden. These works set both the performance bar and the efficiency pain point that VCM targets by abandoning autoregression. Third, graph neural models for combinatorial optimization reframed solution construction as labeling and demonstrated label-free training by directly optimizing task objectives (Karalias & Loukas), while the broader semi-supervised literature established pseudo-label self-training (Lee). Building on these, VCM designs a GCN-based Depth Value Network to compress Q\u2019s pairwise structure into value features and couples it with a Value Classification Network for direct assignment prediction. Its Greedy-guided Self Trainer instantiates pseudo-labeling tailored to QUBO: inexpensive greedy flips create evolving supervision without optimal labels. Together, these strands directly inform VCM\u2019s classification reformulation, architectural choices, and efficient training regime.",
+  "analysis_timestamp": "2026-01-07T00:02:04.751968"
+}

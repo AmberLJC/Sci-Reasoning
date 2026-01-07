@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Test-Time Training with Self-Supervision for Generalization under Distribution Shifts",
+      "authors": "Sun et al.",
+      "year": 2020,
+      "role": "Foundation",
+      "relationship_sentence": "Defined the modern test-time adaptation setting\u2014updating a model online on unlabeled test streams\u2014which FOA adopts while removing its reliance on backpropagation."
+    },
+    {
+      "title": "Tent: Fully Test-Time Adaptation by Entropy Minimization",
+      "authors": "Wang et al.",
+      "year": 2021,
+      "role": "Baseline",
+      "relationship_sentence": "Introduced the entropy-minimization objective for unsupervised TTA; FOA retains this core idea in its fitness (prediction entropy) but replaces backprop updates with forward-only derivative-free optimization."
+    },
+    {
+      "title": "Semi-Supervised Learning by Entropy Minimization",
+      "authors": "Grandvalet et al.",
+      "year": 2005,
+      "role": "Foundation",
+      "relationship_sentence": "Provided the theoretical basis for using prediction-entropy minimization on unlabeled data, which FOA directly incorporates as a key component of its forward-only fitness."
+    },
+    {
+      "title": "The Power of Scale for Parameter-Efficient Prompt Tuning",
+      "authors": "Lester et al.",
+      "year": 2021,
+      "role": "Inspiration",
+      "relationship_sentence": "Showed that tuning small input-conditioned prompts can steer frozen models; FOA adopts this paradigm by learning an input prompt to adapt a fixed, possibly quantized model at test time."
+    },
+    {
+      "title": "Completely Derandomized Self-Adaptation in Evolution Strategies",
+      "authors": "Hansen et al.",
+      "year": 2001,
+      "role": "Extension",
+      "relationship_sentence": "Introduced CMA-ES, the derivative-free optimizer FOA directly employs and adapts (with a new fitness design and online setting) to learn prompts without any backpropagation."
+    },
+    {
+      "title": "Evolution Strategies as a Scalable Alternative to Reinforcement Learning",
+      "authors": "Salimans et al.",
+      "year": 2017,
+      "role": "Inspiration",
+      "relationship_sentence": "Demonstrated that population-based, gradient-free optimization can train neural systems using only forward evaluations, motivating FOA\u2019s forward-pass-only adaptation strategy."
+    },
+    {
+      "title": "Revisiting Batch Normalization for Practical Domain Adaptation",
+      "authors": "Li et al.",
+      "year": 2017,
+      "role": "Gap Identification",
+      "relationship_sentence": "Showed that simple test-time statistic alignment (AdaBN) can mitigate shift but is limited to BN layers; FOA addresses this limitation by tuning inputs (prompts) and activations directly, enabling adaptation even when weights are frozen/quantized."
+    }
+  ],
+  "synthesis_narrative": "FOA stands at the intersection of test-time adaptation, parameter-efficient prompting, and derivative-free optimization. The test-time learning problem itself was crystallized by Test-Time Training (Sun et al.), which formalized adapting on unlabeled test streams; Tent (Wang et al.) advanced this by proposing entropy minimization as an unsupervised, online objective. FOA preserves the entropy principle, grounded in the classic theory of Grandvalet and Bengio, but targets deployment realities where backpropagation is unavailable (e.g., quantized or hard-coded accelerators). To make adaptation possible in such constrained settings, FOA leverages the insight from parameter-efficient prompt tuning (Lester et al.) that small prompt-like inputs can steer a frozen network. Rather than using gradients to learn prompts, FOA adopts CMA-ES (Hansen and Ostermeier) and the broader lesson from evolutionary strategies (Salimans et al.) that population-based, gradient-free optimization can progress using forward passes alone. Finally, FOA\u2019s activation shifting and statistic-discrepancy\u2013aware fitness address the shortcomings of BN-only shift handling typified by AdaBN (Li et al.), enabling adaptation that is not confined to specific layers and remains viable when model parameters are immutable. Together, these works directly shape FOA\u2019s core innovation: a forward-only, derivative-free, prompt-based TTA framework with a bespoke fitness for online, unsupervised deployment.",
+  "analysis_timestamp": "2026-01-06T23:09:26.496814"
+}

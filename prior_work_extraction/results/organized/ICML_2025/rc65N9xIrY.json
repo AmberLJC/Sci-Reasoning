@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Distilling the Knowledge in a Neural Network",
+      "authors": "Geoffrey Hinton et al.",
+      "year": 2015,
+      "role": "Foundation",
+      "relationship_sentence": "Introduces the core KD paradigm (matching a student to a teacher via softened likelihood/KL), which DistiLLM-2 reinterprets by making the loss asymmetric and contrastive across teacher- versus student-generated responses."
+    },
+    {
+      "title": "Sequence-Level Knowledge Distillation",
+      "authors": "Yoon Kim et al.",
+      "year": 2016,
+      "role": "Foundation",
+      "relationship_sentence": "Establishes sequence-level KD by training on teacher-decoded outputs; DistiLLM-2 inherits the teacher-response likelihood term and augments it with a complementary push-down on student responses."
+    },
+    {
+      "title": "Neural Text Generation with Unlikelihood Training",
+      "authors": "Sean Welleck et al.",
+      "year": 2019,
+      "role": "Extension",
+      "relationship_sentence": "Provides the key technique for explicitly decreasing the probability of undesirable generations; DistiLLM-2 adapts this idea to penalize student-generated responses as negatives within its contrastive objective."
+    },
+    {
+      "title": "Direct Preference Optimization: Your Language Model is Secretly a Reward Model",
+      "authors": "Rafael Rafailov et al.",
+      "year": 2023,
+      "role": "Inspiration",
+      "relationship_sentence": "Introduces a simple contrastive push\u2013pull objective that raises likelihood of preferred responses and lowers that of rejected ones; DistiLLM-2 transfers this contrastive principle to distillation by treating teacher outputs as positives and student outputs as negatives."
+    },
+    {
+      "title": "Contrastive Representation Distillation",
+      "authors": "Yonglong Tian et al.",
+      "year": 2020,
+      "role": "Inspiration",
+      "relationship_sentence": "Shows that contrastive objectives can strengthen knowledge distillation by leveraging negatives; DistiLLM-2 extends this contrastive distillation ethos from representations to sequence-level language modeling."
+    },
+    {
+      "title": "Orca: Progressive Learning from Complex Explanation Traces of GPT-4",
+      "authors": "Subhabrata Mukherjee et al.",
+      "year": 2023,
+      "role": "Baseline",
+      "relationship_sentence": "Demonstrates LLM-to-small-LM distillation using teacher-generated explanations under standard SFT/KL-style losses; DistiLLM-2 targets this setting and addresses the limitation of identical losses by introducing data-type-aware contrastive training."
+    },
+    {
+      "title": "Self-Training with Noisy Student improves ImageNet classification",
+      "authors": "Qizhe Xie et al.",
+      "year": 2020,
+      "role": "Related Problem",
+      "relationship_sentence": "Combines teacher- and student-generated data in self-training but applies the same likelihood objective; DistiLLM-2 generalizes the idea by assigning complementary (increase/decrease) likelihood treatments to teacher vs. student outputs."
+    }
+  ],
+  "synthesis_narrative": "DistiLLM-2\u2019s core idea\u2014treating teacher- and student-generated responses with complementary, contrastive objectives\u2014emerges at the intersection of classical knowledge distillation and contrastive/negative training insights. The foundational KD framework of Hinton et al. and the sequence-level formulation of Kim and Rush establish the canonical practice of maximizing the likelihood of teacher outputs, a recipe widely adopted by LLM distillation efforts such as Orca. However, these approaches typically apply a uniform loss regardless of whether the response is produced by the teacher or the student, leaving performance gains on the table. Two threads directly inform DistiLLM-2\u2019s remedy. First, unlikelihood training (Welleck et al.) demonstrates that explicitly decreasing the probability of undesired generations is effective, suggesting a natural role for penalizing the student\u2019s own responses. Second, DPO (Rafailov et al.) reframes alignment as a contrastive push\u2013pull of positive versus negative responses, providing a simple likelihood-difference template that DistiLLM-2 repurposes by designating teacher outputs as positives and student outputs as negatives. The broader contrastive distillation perspective from CRD reinforces that negatives can sharpen student learning, which DistiLLM-2 extends from representation space to sequence-level language modeling. Compared to prior self-/co-training paradigms (e.g., Noisy Student) that use the same objective on mixed data sources, DistiLLM-2\u2019s data-type-aware, contrastive treatment directly addresses the identified gap, yielding stronger, more reliable LLM distillation.",
+  "analysis_timestamp": "2026-01-06T23:07:19.592256"
+}

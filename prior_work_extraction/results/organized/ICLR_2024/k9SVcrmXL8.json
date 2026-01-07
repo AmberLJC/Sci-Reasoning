@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Momentum Contrast for Unsupervised Visual Representation Learning",
+      "authors": "Kaiming He et al.",
+      "year": 2020,
+      "arxiv_id": "1911.05722",
+      "role": "Extension",
+      "relationship_sentence": "BECLR\u2019s DyCE generalizes MoCo\u2019s key-value queue by clustering the memory to form class-consistent positive sets, turning MoCo\u2019s instance-level memory into a dynamic, cluster-aware positive sampler for unsupervised contrastive pretraining."
+    },
+    {
+      "title": "With a Little Help from My Friends: Nearest-Neighbor Contrastive Learning of Visual Representations",
+      "authors": "Olivier J. H\u00e9naff (Dwibedi) et al.",
+      "year": 2021,
+      "arxiv_id": "2104.14548",
+      "role": "Gap Identification",
+      "relationship_sentence": "NNCLR\u2019s nearest-neighbor positives highlighted the benefit and fragility of moving beyond instance positives, directly motivating BECLR to replace single-neighbor positives with cluster-based positives via DyCE for more robust class-level signals."
+    },
+    {
+      "title": "Unsupervised Learning of Visual Features by Contrasting Cluster Assignments",
+      "authors": "Mathilde Caron et al.",
+      "year": 2020,
+      "arxiv_id": "2006.09882",
+      "role": "Inspiration",
+      "relationship_sentence": "SwAV showed that online prototype/cluster assignments inject class-level semantics into self-supervised contrastive learning, which BECLR adopts by embedding clustering into a memory to guide positive selection without labels."
+    },
+    {
+      "title": "Deep Clustering for Unsupervised Learning of Visual Features",
+      "authors": "Mathilde Caron et al.",
+      "year": 2018,
+      "arxiv_id": "1807.05520",
+      "role": "Foundation",
+      "relationship_sentence": "DeepCluster\u2019s pseudo-labeling via k-means underpins BECLR\u2019s DyCE idea of grouping embeddings into evolving clusters so that positive pairs approximate class-level groupings in the absence of annotations."
+    },
+    {
+      "title": "Prototypical Networks for Few-shot Learning",
+      "authors": "Jake Snell et al.",
+      "year": 2017,
+      "arxiv_id": "1703.05175",
+      "role": "Foundation",
+      "relationship_sentence": "BECLR builds on the prototypical inference framework where class means from few supports can be biased, and then applies OpTA to align query distributions with these prototypes to correct that bias."
+    },
+    {
+      "title": "Laplacian Regularized Few-Shot Learning (LaplacianShot)",
+      "authors": "Imtiaz Ziko et al.",
+      "year": 2020,
+      "arxiv_id": "2006.15453",
+      "role": "Gap Identification",
+      "relationship_sentence": "LaplacianShot exposed transductive sample-bias in few-shot inference and refined query labels via graph regularization, a limitation BECLR addresses by replacing graph propagation with iterative optimal-transport alignment (OpTA)."
+    },
+    {
+      "title": "Transductive Information Maximization for Few-Shot Learning",
+      "authors": "Muzammal Naseer (Boudiaf) et al.",
+      "year": 2020,
+      "arxiv_id": "2008.11297",
+      "role": "Related Problem",
+      "relationship_sentence": "TIM framed transductive few-shot inference as distribution alignment over the query set, directly informing BECLR\u2019s decision to perform explicit distribution alignment via optimal transport to mitigate low-shot sample bias."
+    }
+  ],
+  "synthesis_narrative": "Momentum Contrast introduced a queue-based memory that stabilizes unsupervised instance discrimination, enabling efficient contrastive learning with a large set of negatives. DeepCluster demonstrated that pseudo-labels from k-means can endow self-supervised features with emergent class structure, while SwAV refined this idea with online prototype assignments that directly inject cluster-level semantics into contrastive pretraining. Nearest-Neighbor Contrastive Learning further showed that replacing strict instance positives with feature-space neighbors improves invariance, though its single-neighbor selection can be noisy and unstable. For downstream recognition, Prototypical Networks established the prototype-based few-shot formulation, where averaging scarce supports forms class prototypes used for classification. However, transductive works such as LaplacianShot and Transductive Information Maximization revealed that prototypes and predictions suffer from sample bias in low-shot regimes, and that aligning predictions across the query set\u2014via graph regularization or information maximization\u2014can substantially improve few-shot accuracy. Together, these insights suggested two complementary opportunities: bring class-level structure into unsupervised contrastive pretraining and correct sample bias during transductive inference. BECLR synthesizes the memory efficiency of MoCo with the class-aware signals of DeepCluster/SwAV and the neighbor intuition of NNCLR by introducing a Dynamic Clustered mEmory that forms cluster-consistent positives without labels. At inference, building on the transductive perspective from LaplacianShot and TIM, BECLR performs an explicit iterative optimal-transport alignment between query predictions and support-induced prototypes, directly correcting distribution mismatch that is most acute in extreme low-shot settings.",
+  "target_paper": {
+    "title": "BECLR: Batch Enhanced Contrastive Few-Shot Learning",
+    "authors": "Stylianos Poulakakis-Daktylidis, Hadi Jamali-Rad",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "few-shot classification, unsupervised few-shot learning, deep representation learning",
+    "abstract": "Learning quickly from very few labeled samples is a fundamental attribute that separates machines and humans in the era of deep representation learning. Unsupervised few-shot learning (U-FSL) aspires to bridge this gap by discarding the reliance on annotations at training time. Intrigued by the success of contrastive learning approaches in the realm of U-FSL, we structurally approach their shortcomings in both pretraining and downstream inference stages. We propose a novel Dynamic Clustered mEmory (DyCE) module to promote a highly separable latent representation space for enhancing positive sampling at the pretraining phase and infusing implicit class-level insights into unsupervised contrastive learning. We then tackle the, somehow overlooked yet critical, issue of sample bias at the few-shot inference stage. We propose an iterative Optimal Transport-based distribution Alignment (OpTA) strategy and demonstrate that it efficiently addresses the problem, especially in low-shot scenarios",
+    "openreview_id": "k9SVcrmXL8",
+    "forum_id": "k9SVcrmXL8"
+  },
+  "analysis_timestamp": "2026-01-06T19:43:54.925114"
+}

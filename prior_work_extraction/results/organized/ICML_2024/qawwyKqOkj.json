@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Estimating Labels from Label Proportions",
+      "authors": "Nico Quadrianto et al.",
+      "year": 2009,
+      "role": "Foundation",
+      "relationship_sentence": "This work formalized learning from aggregate (bag-level) label information and introduced bag-based losses for training instance-level predictors\u2014the exact supervision model PriorBoost operates in, while PriorBoost\u2019s key innovation is to optimize and adaptively construct the bags themselves."
+    },
+    {
+      "title": "SVM Classifiers for Data with Label Proportions",
+      "authors": "Marco R\u00fcping et al.",
+      "year": 2010,
+      "role": "Baseline",
+      "relationship_sentence": "Provided a canonical non-adaptive approach for LLP by optimizing margin-based objectives from fixed bags; PriorBoost directly improves over such non-adaptive baselines by adaptively curating bags and proving advantages over random grouping."
+    },
+    {
+      "title": "From Group to Individual Labels Using Deep Features",
+      "authors": "Ioannis Kotzias et al.",
+      "year": 2015,
+      "role": "Gap Identification",
+      "relationship_sentence": "Popularized training with bag-proportion losses using randomly formed groups for event-level predictions; PriorBoost explicitly targets this limitation by adaptively forming increasingly homogeneous bags and quantifying the benefit over random bags."
+    },
+    {
+      "title": "Clustering with Bregman Divergences",
+      "authors": "Arindam Banerjee et al.",
+      "year": 2005,
+      "role": "Foundation",
+      "relationship_sentence": "Established the k-means\u2013Bregman divergence connection for exponential-family/GLM losses; PriorBoost\u2019s reduction of optimal bagging for linear models and GLMs to one-dimensional k-means relies on this theoretical framework."
+    },
+    {
+      "title": "Ckmeans.1d.dp: Optimal k-means clustering in one dimension by dynamic programming",
+      "authors": "Haizhou Wang et al.",
+      "year": 2011,
+      "role": "Extension",
+      "relationship_sentence": "Provides the exact dynamic-programming method for optimal 1D k-means; once PriorBoost reduces optimal bagging to size-constrained 1D k-means, this algorithmic template enables efficient, exact computation of the optimal aggregation."
+    },
+    {
+      "title": "Semi-supervised Knowledge Transfer for Deep Learning from Private Training Data (PATE)",
+      "authors": "Nicolas Papernot et al.",
+      "year": 2017,
+      "role": "Related Problem",
+      "relationship_sentence": "Demonstrated that aggregating labels can yield strong differential privacy guarantees; PriorBoost\u2019s treatment of label differential privacy for aggregate learning builds on this aggregation-as-privacy principle tailored to event-level prediction."
+    }
+  ],
+  "synthesis_narrative": "PriorBoost sits squarely in the line of work on learning from aggregate supervision introduced by Quadrianto et al., who formalized the label-proportion setting and showed how bag-level information can train instance-level predictors. Early practical methods like R\u00fcping\u2019s SVM for LLP and later deep-learning approaches such as Kotzias et al. typically form fixed or random groups and optimize surrogate bag losses; this non-adaptive bag construction is precisely the limitation PriorBoost targets. The paper\u2019s central theoretical contribution\u2014that optimal bag construction for linear models and GLMs reduces to one-dimensional, size-constrained k-means\u2014rests on the Bregman/exponential-family framework developed by Banerjee et al., which links GLM losses to k-means-type clustering. This reduction is made algorithmically actionable by optimal 1D k-means via dynamic programming (Wang and Song), providing an exact routine once the bagging objective is cast as a constrained 1D clustering problem. PriorBoost then departs from prior non-adaptive LLP methods by adaptively forming increasingly homogeneous bags, and the paper quantifies the performance gap between curated and random groupings in event-level risk. Finally, its label-DP analysis is informed by the PATE paradigm, which showed how aggregation can protect individual labels; PriorBoost tailors this aggregation-as-privacy idea to aggregate learning with event-level objectives, integrating privacy with its adaptive bagging strategy.",
+  "analysis_timestamp": "2026-01-06T23:09:26.461192"
+}

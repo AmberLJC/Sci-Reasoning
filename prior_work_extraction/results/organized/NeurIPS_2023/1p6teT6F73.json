@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "The Reversible Residual Network: Backpropagation Without Storing Activations",
+      "authors": "Aidan N. Gomez, Mengye Ren, Raquel Urtasun, Roger B. Grosse",
+      "year": 2017,
+      "role": "Architectural blueprint for split-and-update couplings",
+      "relationship_sentence": "AltUp\u2019s idea of partitioning channels and alternately updating them with a residual \u201cpredict-and-correct\u201d echo the coupling-style updates in RevNets, which update one partition conditioned on the other to grow capacity without proportional compute."
+    },
+    {
+      "title": "Reformer: The Efficient Transformer",
+      "authors": "Nikita Kitaev, \u0141ukasz Kaiser, Anselm Levskaya",
+      "year": 2020,
+      "role": "Reversible coupling adapted to Transformers",
+      "relationship_sentence": "Reformer showed that reversible, partitioned updates are stable and effective in Transformers, directly informing AltUp\u2019s alternating sub-block updates within widened embeddings."
+    },
+    {
+      "title": "Density Estimation using Real NVP",
+      "authors": "Laurent Dinh, Jascha Sohl-Dickstein, Samy Bengio",
+      "year": 2017,
+      "role": "Foundational coupling-layer mechanism (predict one part, correct later)",
+      "relationship_sentence": "AltUp\u2019s predict-and-correct over inactive channel blocks is conceptually aligned with RealNVP\u2019s additive coupling that alternately updates halves of the representation conditioned on the other half."
+    },
+    {
+      "title": "ShuffleNet: An Extremely Efficient Convolutional Neural Network for Mobile Devices",
+      "authors": "Xiangyu Zhang, Xinyu Zhou, Mengxiao Lin, Jian Sun",
+      "year": 2018,
+      "role": "Grouped processing with cross-group mixing",
+      "relationship_sentence": "AltUp\u2019s practice of operating on a subset of channels per layer while ensuring cross-block communication relates to ShuffleNet\u2019s grouped computation and channel-shuffle strategy for efficient capacity."
+    },
+    {
+      "title": "GhostNet: More Features from Cheap Operations",
+      "authors": "Kai Han, Yunhe Wang, Qi Tian, Jianyuan Guo, Chunjing Xu, Enhua Wu",
+      "year": 2020,
+      "role": "Widening representations with cheap feature generation",
+      "relationship_sentence": "AltUp\u2019s inexpensive prediction of inactive channel blocks parallels GhostNet\u2019s creation of \u201cghost\u201d channels, both enabling wider representations at near-constant latency."
+    },
+    {
+      "title": "Outrageously Large Neural Networks: The Sparsely-Gated Mixture-of-Experts Layer",
+      "authors": "Noam Shazeer, Azalia Mirhoseini, Krzysztof Maziarz, Andy Davis, Quoc V. Le, Geoffrey Hinton, Jeff Dean",
+      "year": 2017,
+      "role": "Sparse conditional computation for capacity scaling",
+      "relationship_sentence": "AltUp shares the core aim of MoE\u2014scaling capacity without proportional compute\u2014by introducing deterministic channel-wise sparsity that complements expert sparsity."
+    },
+    {
+      "title": "Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity",
+      "authors": "William Fedus, Barret Zoph, Noam Shazeer",
+      "year": 2021,
+      "role": "Compute-efficient MoE in Transformers",
+      "relationship_sentence": "AltUp synergizes with Switch-style MoE by offering orthogonal, per-channel sparsity so models gain even higher capacity at minimal latency when combined."
+    }
+  ],
+  "synthesis_narrative": "AltUp\u2019s core idea\u2014widening a Transformer\u2019s hidden representation while only updating a sub-block per layer with a predict-and-correct mechanism\u2014sits at the intersection of split-and-couple architectures and sparse conditional computation. The reversible/coupling lineage (RevNets and RealNVP) provides the architectural motif of partitioning channels and alternately updating them via residual couplings, a direct precursor to AltUp\u2019s alternating active/inactive channel blocks and residual correction of predicted features. Reformer adapts these reversible coupling ideas to Transformers, demonstrating that split-activation updates are stable and effective in sequence models, thereby grounding AltUp\u2019s design in the Transformer setting.\n\nOn the efficiency side, AltUp\u2019s per-layer subset computation parallels grouped processing strategies such as ShuffleNet, which achieve efficiency by operating on channel groups and ensuring cross-group information flow through mixing; AltUp similarly alternates sub-blocks across layers to maintain global communication while keeping cost low. GhostNet offers another complementary precedent: it shows that wider representations can be approximated by cheaply generated feature channels, akin to AltUp\u2019s inexpensive prediction of inactive blocks before later correction.\n\nFinally, sparse conditional computation via Mixture-of-Experts (Shazeer et al.; Switch Transformers) establishes the broader paradigm of scaling model capacity without proportional compute. AltUp contributes a deterministic, channel-wise sparsity mechanism that is orthogonal to expert sparsity, which explains the paper\u2019s empirical claim of synergistic gains when combining AltUp with MoE. Together, these threads directly inform AltUp\u2019s split-update design, efficient width scaling, and compatibility with modern Transformer sparsity techniques.",
+  "analysis_timestamp": "2026-01-06T23:42:49.088509"
+}

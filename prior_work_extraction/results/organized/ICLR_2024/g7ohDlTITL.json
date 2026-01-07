@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Flow Matching for Generative Modeling",
+      "authors": "Yaron Lipman et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Extension",
+      "relationship_sentence": "RFM directly generalizes the Euclidean flow-matching construction of closed-form target vector fields by replacing the L2-based matching with a manifold premetric, yielding a simulation-free training objective on general geometries."
+    },
+    {
+      "title": "Stochastic Interpolants: A Unifying Framework for Flows and Diffusions in Generative Modeling",
+      "authors": "Marcello L. Albergo and Eric Vanden-Eijnden",
+      "year": 2022,
+      "arxiv_id": "",
+      "role": "Inspiration",
+      "relationship_sentence": "RFM adopts the stochastic-interpolant/velocity-matching principle and instantiates it with a Riemannian premetric to define closed-form target vector fields on manifolds."
+    },
+    {
+      "title": "Rectified Flow: A Simple Framework for Learning ODE Flows for Generative Modeling",
+      "authors": "Yaodong Liu et al.",
+      "year": 2022,
+      "arxiv_id": "",
+      "role": "Related Problem",
+      "relationship_sentence": "RFM extends the rectified-flow idea of simulation-free ODE training by constructing an explicit manifold-aware target velocity via a premetric so that deterministic transport can be learned on curved spaces."
+    },
+    {
+      "title": "Riemannian Score-Based Generative Modeling",
+      "authors": "Nicolas De Bortoli et al.",
+      "year": 2022,
+      "arxiv_id": "",
+      "role": "Gap Identification",
+      "relationship_sentence": "RFM addresses the heavy simulation and heat-kernel approximations required by Riemannian score-based diffusion by providing a closed-form, simulation-free target field on manifolds."
+    },
+    {
+      "title": "FFJORD: Free-form Continuous Dynamics for Scalable Reversible Generative Models",
+      "authors": "Will Grathwohl et al.",
+      "year": 2019,
+      "arxiv_id": "1810.01367",
+      "role": "Gap Identification",
+      "relationship_sentence": "RFM overcomes the core limitation of CNFs exemplified by FFJORD\u2014costly divergence estimation\u2014by using a flow-matching objective that avoids computing divergences, which is especially challenging on manifolds."
+    },
+    {
+      "title": "Diffusion Maps",
+      "authors": "R. R. Coifman and S. Lafon",
+      "year": 2006,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "RFM\u2019s manifold premetric is efficiently computed via spectral decompositions of the Laplace\u2013Beltrami operator, directly leveraging diffusion-maps/heat-kernel ideas to obtain closed-form, geometry-aware kernels."
+    }
+  ],
+  "synthesis_narrative": "Flow Matching introduced a simulation-free recipe for generative modeling by constructing closed-form target vector fields that steer an ODE from a base to data; crucially, it made matching depend on an L2 geometry that yields tractable velocities. Stochastic Interpolants formalized the broader principle of defining time-dependent interpolations and matching the associated drift, tying together flows and diffusions and showing that estimating a vector field can replace costly score estimation or SDE simulation. Rectified Flow emphasized training deterministic ODE transports directly\u2014without simulating stochastic processes\u2014by aligning a learned velocity with a prescribed path between base and data. On manifolds, Riemannian Score-Based Generative Modeling framed diffusion-based generation but required simulating Brownian motion and approximating manifold scores via heat-kernel machinery, yielding significant computational overhead. FFJORD established CNFs as likelihood-based models but relied on stochastic trace estimators for divergence, a bottleneck exacerbated by manifold constraints. Diffusion Maps provided a practical spectral framework for computing heat-kernel-based quantities via Laplace\u2013Beltrami eigenfunctions, enabling efficient, geometry-aware kernels. Together these works revealed that (i) simulation-free velocity matching can replace divergence computation and SDE simulation, and (ii) spectral heat-kernel tools provide tractable manifold geometry. The natural next step was to transplant flow-matching to arbitrary manifolds by swapping the Euclidean metric for a Laplace\u2013Beltrami-based premetric computed spectrally, yielding closed-form, manifold-aware target vector fields and training objectives that sidestep both divergence estimation and stochastic simulation.",
+  "target_paper": {
+    "title": "Flow Matching on General Geometries",
+    "authors": "Ricky T. Q. Chen, Yaron Lipman",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "oral",
+    "keywords": "general manifolds, diffusion models, continuous normalizing flow",
+    "abstract": "We propose Riemannian Flow Matching (RFM), a simple yet powerful framework for training continuous normalizing flows on manifolds. Existing methods for generative modeling on manifolds either require expensive simulation, are inherently unable to scale to high dimensions, or use approximations for limiting quantities that result in biased training objectives. Riemannian Flow Matching bypasses these limitations and offers several advantages over previous approaches: it is simulation-free on simple geometries, does not require divergence computation, and computes its target vector field in closed-form. The key ingredient behind RFM is the construction of a relatively simple premetric for defining target vector fields, which encompasses the existing Euclidean case. To extend to general geometries, we rely on the use of spectral decompositions to efficiently compute premetrics on the fly. Our method achieves state-of-the-art performance on real-world non-Euclidean datasets, and we demonstr",
+    "openreview_id": "g7ohDlTITL",
+    "forum_id": "g7ohDlTITL"
+  },
+  "analysis_timestamp": "2026-01-06T14:01:18.465703"
+}

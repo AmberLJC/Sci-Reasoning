@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Towards Real-World Blind Face Restoration with Generative Facial Prior (GFPGAN)",
+      "authors": "Xintao Wang et al.",
+      "year": 2022,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "GFPGAN established the generative facial-prior formulation for blind face restoration that MGFR adopts but augments with multi-modal controls to suppress the attribute and identity hallucinations observed under heavy degradations."
+    },
+    {
+      "title": "CodeFormer: Towards Robust Blind Face Restoration with Codebook Lookup Transformer",
+      "authors": "Shangchen Zhou et al.",
+      "year": 2022,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "CodeFormer\u2019s explicit fidelity\u2013perception trade-off and its tendency to hallucinate facial attributes in extreme cases motivate MGFR\u2019s multi-modal guidance and two-stage training to decouple identity preservation from attribute correction."
+    },
+    {
+      "title": "VQFR: Blind Face Restoration with Vector-Quantized Dictionary and Parallel Decoder",
+      "authors": "Jinjin Gu et al.",
+      "year": 2022,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "VQFR showed that strong discrete priors help recover rich details yet can drift semantically, which MGFR directly addresses by injecting reference faces and identity embeddings into a diffusion framework to anchor semantics."
+    },
+    {
+      "title": "Adding Conditional Control to Text-to-Image Diffusion Models (ControlNet)",
+      "authors": "Lvmin Zhang et al.",
+      "year": 2023,
+      "arxiv_id": "2302.05543",
+      "role": "Extension",
+      "relationship_sentence": "MGFR\u2019s dual-control adapter mirrors ControlNet\u2019s external condition branch to fuse structured conditions, adapting the idea to combine face-specific reference and text/ID cues within a frozen diffusion backbone."
+    },
+    {
+      "title": "T2I-Adapter: Learning Adapters to Adapt Pretrained Text-to-Image Diffusion Models for Conditional Image Synthesis",
+      "authors": "Chong Mou et al.",
+      "year": 2023,
+      "arxiv_id": "2302.08453",
+      "role": "Extension",
+      "relationship_sentence": "MGFR follows T2I-Adapter\u2019s lightweight training paradigm\u2014freezing the base diffusion model while training small adapters\u2014and generalizes it to simultaneous multi-modal conditioning tailored for restoration."
+    },
+    {
+      "title": "IP-Adapter: Text-Image Prompt Adapter for Stable Diffusion",
+      "authors": "Ye et al.",
+      "year": 2023,
+      "arxiv_id": "2308.06721",
+      "role": "Inspiration",
+      "relationship_sentence": "MGFR borrows IP-Adapter\u2019s image-prompt conditioning insight to inject features from a high-quality reference face, using them to preserve identity during diffusion-based restoration."
+    },
+    {
+      "title": "PromptIR: Prompting for Integrating Domain Knowledge in Image Restoration",
+      "authors": "Wang et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Related Problem",
+      "relationship_sentence": "PromptIR\u2019s demonstration that natural-language prompts can steer restoration informs MGFR\u2019s use of attribute text (including negative prompts) to correct or suppress facial attributes during diffusion sampling."
+    }
+  ],
+  "synthesis_narrative": "GFPGAN framed blind face restoration around a generative facial prior, demonstrating that strong priors can recover plausible facial details yet often alter identity or invent attributes when degradation is severe. CodeFormer introduced a codebook lookup transformer and made explicit the fidelity\u2013perception trade-off, revealing that improving perceptual quality can induce attribute hallucinations, especially under blind settings. VQFR leveraged a vector-quantized dictionary with a parallel decoder to inject rich facial details, but also exposed the risk of semantic drift when priors overwhelm weak observations. In parallel, ControlNet showed how to add structured external controls to a frozen diffusion model via a condition branch, while T2I-Adapter established that lightweight adapters can inject new modalities into pretrained diffusion without destabilizing base capabilities. IP-Adapter further demonstrated effective image-prompt conditioning, using reference images to steer diffusion outputs. Complementing these, PromptIR evidenced that natural-language prompts can guide restoration behavior toward desired semantics. Together, these works pointed to a gap: strong priors and diffusion yield high-quality faces but still hallucinate identity or attributes, and existing control mechanisms rarely integrate multiple, face-specific modalities. The natural next step is to fuse text attributes, identity embeddings, and high-quality reference faces into a single diffusion pipeline with carefully designed adapter pathways and staged training. By compositing ControlNet/T2I-style adapters with IP-Adapter-like reference conditioning and prompt-driven semantic steering, the approach can anchor identity, correct attributes, and reduce false illusions while retaining the visual fidelity enabled by modern priors.",
+  "target_paper": {
+    "title": "Overcoming False Illusions in Real-World Face Restoration with Multi-Modal Guided Diffusion Model",
+    "authors": "Keda TAO, Jinjin Gu, Yulun Zhang, Xiucheng Wang, Nan Cheng",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "Face image restoration, diffusion model",
+    "abstract": "We introduce a novel Multi-modal Guided Real-World Face Restoration (MGFR) technique designed to improve the quality of facial image restoration from low-quality inputs. Leveraging a blend of attribute text prompts, high-quality reference images, and identity information, MGFR can mitigate the generation of false facial attributes and identities often associated with generative face restoration methods. By incorporating a dual-control adapter and a two-stage training strategy, our method effectively utilizes multi-modal prior information for targeted restoration tasks. We also present the Reface-HQ dataset, comprising over 21,000 high-resolution facial images across 4800 identities, to address the need for reference face training images. Our approach achieves superior visual quality in restoring facial details under severe degradation and allows for controlled restoration processes, enhancing the accuracy of identity preservation and attribute correction. Including negative quality sam",
+    "openreview_id": "m9RNBZewW2",
+    "forum_id": "m9RNBZewW2"
+  },
+  "analysis_timestamp": "2026-01-06T18:58:05.874353"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Attention Is All You Need",
+      "authors": "Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, Lukasz Kaiser, Illia Polosukhin",
+      "year": "2017",
+      "role": "Foundational architecture establishing self-attention and the Transformer block (attention + FFN) whose O(n^2) activations and large FFN states create the core memory bottlenecks BPT targets.",
+      "relationship_sentence": "BPT directly restructures the Transformer\u2019s self-attention and FFN computations introduced by Vaswani et al. to reduce activation memory without altering the model\u2019s functional form."
+    },
+    {
+      "title": "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness",
+      "authors": "Tri Dao, Daniel Y. Fu, Stefano Ermon, Atri Rudra, Christopher R\u00e9",
+      "year": "2022",
+      "role": "Exact, memory-efficient attention via tiling/blocking and IO-aware kernels; central precedent for blockwise computation that reduces attention activations.",
+      "relationship_sentence": "BPT generalizes the blockwise/tiling principle of FlashAttention from the attention kernel to the entire Transformer block and couples it with FFN fusion to further cut activation memory while preserving exact attention."
+    },
+    {
+      "title": "Reformer: The Efficient Transformer",
+      "authors": "Nikita Kitaev, \u0141ukasz Kaiser, Anselm Levskaya",
+      "year": "2020",
+      "role": "Introduced reversible layers and LSH attention to lower memory and complexity; highlighted activation rematerialization as a key path to sublinear memory.",
+      "relationship_sentence": "BPT pursues the same goal of reducing activation storage as Reformer but achieves it by blockwise streaming and fusion rather than reversible layers or approximate attention."
+    },
+    {
+      "title": "Transformer-XL: Attentive Language Models Beyond a Fixed-Length Context",
+      "authors": "Zihang Dai, Zhilin Yang, Yiming Yang, William W. Cohen, Jaime Carbonell, Quoc V. Le, Ruslan Salakhutdinov",
+      "year": "2019",
+      "role": "Extended context via segment-level recurrence and relative positions, motivating architectural strategies for long-context training.",
+      "relationship_sentence": "BPT addresses the same long-context objective as Transformer-XL but does so by reducing per-sequence memory through blockwise computation, enabling long contexts without recurrence."
+    },
+    {
+      "title": "Big Bird: Transformers for Longer Sequences",
+      "authors": "Manzil Zaheer, Guru Guruganesh, Avinava Dubey, Joshua Ainslie, Chris Alberti, Santiago Onta\u00f1\u00f3n, Philip Pham, Ankur Ahuja, Johan F. Kahn, Ziteng Sun, William Cohen, Ed H. Chi, Quoc V. Le, Amr Ahmed",
+      "year": "2020",
+      "role": "Sparse attention pattern enabling longer sequences with theoretical guarantees; a leading approximation path to manage memory and compute.",
+      "relationship_sentence": "Contrasting with BigBird\u2019s sparse approximation, BPT achieves long-context capability by restructuring computation to keep exact attention while reducing activation memory via blockwise processing."
+    },
+    {
+      "title": "Rethinking Attention with Performers",
+      "authors": "Krzysztof Choromanski, Valerii Likhosherstov, David Dohan, Xingyou Song, Andreea Gane, Tam\u00e1s Sarl\u00f3s, Peter Hawkins, Jared Davis, Afroz Mohiuddin, Lukasz Kaiser, David Belanger, Lucy Colwell, Adrian Weller",
+      "year": "2021",
+      "role": "Linear-attention via kernel feature maps (FAVOR+) to scale to long sequences by approximating softmax attention.",
+      "relationship_sentence": "BPT provides an alternative to Performer\u2019s approximation by retaining exact softmax attention and cutting memory through blockwise scheduling and FFN fusion."
+    },
+    {
+      "title": "Training Deep Nets with Sublinear Memory Cost",
+      "authors": "Tianqi Chen, Bing Xu, Chiyuan Zhang, Carlos Guestrin",
+      "year": "2016",
+      "role": "Activation checkpointing/rematerialization, the standard baseline for memory reduction during training.",
+      "relationship_sentence": "BPT is explicitly designed to outperform pure checkpointing by streaming computations in blocks and fusing FFN with attention, thereby reducing both stored activations and recomputation overhead."
+    }
+  ],
+  "synthesis_narrative": "The Blockwise Parallel Transformer (BPT) tackles the canonical memory bottlenecks introduced by the Transformer architecture of Vaswani et al.\u2014not only the quadratic self-attention activations but also the large feedforward network states. Two lines of prior work directly shaped its solution space. First, exact memory-efficient attention methods, most notably FlashAttention, demonstrated that IO-aware tiling can dramatically cut attention activations without changing the model\u2019s semantics. BPT adopts and extends this blockwise principle beyond the attention kernel to the entire Transformer block, pairing it with a fusion of the attention and FFN computations so that large intermediate activations never need to be materialized at once. Second, memory-reduction techniques such as checkpointing and Reformer\u2019s reversible layers clarified that activation storage is the dominant training cost and that recomputation can trade compute for memory. BPT targets the same objective but achieves stronger savings by streaming computations across sequence blocks, reducing both memory footprint and recomputation overhead.\nIn contrast to long-context approaches that approximate attention (BigBird, Performer) or introduce recurrence (Transformer-XL), BPT preserves exact softmax attention while enabling substantially longer training sequences. By combining IO-aware blockwise scheduling (inspired by FlashAttention) with whole-block fusion that suppresses FFN activations, BPT delivers large-context training with lower memory than checkpointing or reversible designs and without the accuracy trade-offs of sparse or linearized attention.",
+  "analysis_timestamp": "2026-01-07T00:02:04.787241"
+}

@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Conformer: Convolution-augmented Transformer for Speech Recognition",
+      "authors": "Anmol Gulati et al.",
+      "year": 2020,
+      "arxiv_id": "2005.08100",
+      "role": "Baseline",
+      "relationship_sentence": "Conformer is the principal encoder baseline whose convolution-augmented Transformer block structure and strong ASR accuracy motivated Zipformer\u2019s redesign for markedly lower compute/memory while matching or surpassing Conformer performance."
+    },
+    {
+      "title": "U-Net: Convolutional Networks for Biomedical Image Segmentation",
+      "authors": "Olaf Ronneberger et al.",
+      "year": 2015,
+      "arxiv_id": "1505.04597",
+      "role": "Inspiration",
+      "relationship_sentence": "U-Net\u2019s downsample\u2013upsample, multi-resolution pathway directly inspired Zipformer\u2019s U-Net-like encoder that processes middle stacks at lower frame rates to gain efficiency without losing contextual coverage."
+    },
+    {
+      "title": "Listen, Attend and Spell",
+      "authors": "William Chan et al.",
+      "year": 2016,
+      "arxiv_id": "1508.01211",
+      "role": "Foundation",
+      "relationship_sentence": "LAS introduced pyramidal (time-reducing) encoder layers for ASR, providing the foundational insight that higher-level representations can operate at reduced frame rates\u2014a principle Zipformer generalizes with multi-rate Transformer stacks."
+    },
+    {
+      "title": "Root Mean Square Layer Normalization",
+      "authors": "Biao Zhang et al.",
+      "year": 2019,
+      "arxiv_id": "1910.07467",
+      "role": "Inspiration",
+      "relationship_sentence": "RMSNorm showed that normalization need not center activations, motivating Zipformer\u2019s BiasNorm modification to LayerNorm to deliberately retain informative magnitude/length-related signals lost by standard centering."
+    },
+    {
+      "title": "Searching for Activation Functions",
+      "authors": "Prajit Ramachandran et al.",
+      "year": 2017,
+      "arxiv_id": "1710.05941",
+      "role": "Baseline",
+      "relationship_sentence": "Swish (SiLU) from this work is the activation baseline directly modified by Zipformer\u2019s SwooshR/L functions to improve behavior on the negative side and yield better ASR accuracy."
+    },
+    {
+      "title": "Large Batch Optimization for Deep Learning: Training BERT in 76 minutes",
+      "authors": "Yang You et al.",
+      "year": 2019,
+      "arxiv_id": "1904.00962",
+      "role": "Extension",
+      "relationship_sentence": "LAMB\u2019s layer-wise trust ratio to keep relative parameter updates comparable across layers is extended in ScaledAdam to per-tensor scale-normalized updates with explicit scale learning for faster, stabler convergence."
+    },
+    {
+      "title": "Weight Normalization: A Simple Reparameterization to Accelerate Training of Deep Neural Networks",
+      "authors": "Tim Salimans et al.",
+      "year": 2016,
+      "arxiv_id": "1602.07868",
+      "role": "Inspiration",
+      "relationship_sentence": "Weight Normalization\u2019s separation of parameter direction and scale directly informs ScaledAdam\u2019s idea of explicitly learning parameter scales while normalizing update magnitudes by each tensor\u2019s current scale."
+    }
+  ],
+  "synthesis_narrative": "Conformer established a powerful encoder for ASR by interleaving self-attention with local convolutions, but its block structure is computationally and memory intensive. U-Net introduced a multi-resolution encoder\u2013decoder pattern that aggressively downsamples to process coarse representations and then upsamples, proving that carefully designed low-resolution pathways can preserve context while improving efficiency. In ASR, Listen, Attend and Spell\u2019s pyramidal encoder demonstrated that higher-layer acoustic representations can operate at reduced frame rates without degrading recognition, cementing the value of time-reduction for speech encoders. RMSNorm showed that normalization need not center activations, highlighting that preserving certain magnitude-related signals can be beneficial; this opened the door to normalization variants that selectively retain information typically discarded by LayerNorm. Swish (SiLU) provided a smooth, self-gated activation that outperformed ReLU and became a strong default in Transformer-style models, yet its negative-region behavior left room for targeted refinements. LAMB introduced layer-wise trust ratios that keep relative parameter updates comparable across layers, suggesting that optimization should respect parameter scale. Weight Normalization further emphasized decoupling parameter direction from scale, enabling explicit scale learning.\nTogether, these works reveal a path: exploit low-frame-rate computation for efficiency, refine block internals to preserve informative signals, and design optimizers that control relative update magnitudes while learning parameter scales. Zipformer synthesizes these insights with a U-Net-like, multi-rate Transformer encoder that reuses computation, a BiasNorm variant to retain useful magnitude information, improved Swoosh activations over Swish, and ScaledAdam to normalize and learn scale per tensor\u2014naturally extending the efficiency and stability principles surfaced by this prior work.",
+  "target_paper": {
+    "title": "Zipformer: A faster and better encoder for automatic speech recognition",
+    "authors": "Zengwei Yao, Liyong Guo, Xiaoyu Yang, Wei Kang, Fangjun Kuang, Yifan Yang, Zengrui Jin, Long Lin, Daniel Povey",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "oral",
+    "keywords": "Zipformer, ScaledAdam, automatic speech recognition",
+    "abstract": "The Conformer has become the most popular encoder model for automatic speech recognition (ASR).  It adds convolution modules to a transformer to learn both local and global dependencies. In this work we describe a faster, more memory-efficient, and better-performing transformer, called Zipformer.  Modeling changes include: 1) a U-Net-like encoder structure where middle stacks operate at lower frame rates; 2) reorganized block structure with more modules, within which we re-use attention weights for efficiency; 3) a modified form of LayerNorm called BiasNorm allows us to retain some length information; 4)  new activation functions SwooshR and SwooshL work better than Swish.  We also propose a new optimizer, called ScaledAdam, which scales the update by each tensor's current scale to keep the relative change about the same, and also explictly learns the parameter scale. It achieves faster converge and better performance than Adam. Extensive experiments on LibriSpeech, Aishell-1, and Wene",
+    "openreview_id": "9WD9KwssyT",
+    "forum_id": "9WD9KwssyT"
+  },
+  "analysis_timestamp": "2026-01-06T11:33:57.820060"
+}

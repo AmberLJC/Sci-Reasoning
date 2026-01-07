@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Neural Point-Based Graphics",
+      "authors": "Aliev et al.",
+      "year": 2020,
+      "role": "Conceptual foundation for point-based neural rendering with per-point learned features and deferred rendering.",
+      "relationship_sentence": "PAPR adopts the idea of storing learned features on 3D points and compositing them for image synthesis, but removes the reliance on precomputed point clouds by learning point positions/features from scratch and replacing heuristics with proximity-driven attention for ray\u2013point selection."
+    },
+    {
+      "title": "PULSAR: Efficient Sphere-based Neural Rendering",
+      "authors": "Lassner et al.",
+      "year": 2021,
+      "role": "Differentiable point/sphere rasterization providing stable gradients to point position/size.",
+      "relationship_sentence": "PAPR builds on the soft-visibility, point-primitive rendering paradigm exemplified by PULSAR to mitigate vanishing gradients, introducing learned influence scores and proximity attention to ensure rays receive informative gradients that move points toward true surfaces."
+    },
+    {
+      "title": "Point-NeRF: Point-based Neural Radiance Fields",
+      "authors": "Xu et al.",
+      "year": 2022,
+      "role": "Points as spatial anchors with learned features for radiance field rendering and aggregation along rays.",
+      "relationship_sentence": "PAPR follows the anchor-point idea of aggregating nearby point features for each ray but departs by avoiding volumetric density/MLP evaluation and MVS initialization, using proximity attention over view-independent point features to enable parsimonious, from-scratch optimization."
+    },
+    {
+      "title": "SynSin: End-to-End View Synthesis from a Single Image",
+      "authors": "Wiles et al.",
+      "year": 2020,
+      "role": "Introduced lifting and soft splatting of point-based features with a learnable compositor.",
+      "relationship_sentence": "PAPR inherits the principle of soft compositing of point features, but replaces image-conditioned lifting with a geometry-learning pipeline where point positions, influence, and features are optimized from multi-view supervision using proximity attention for precise ray\u2013point selection."
+    },
+    {
+      "title": "PlenOctrees for Real-time Rendering of Neural Radiance Fields",
+      "authors": "Yu et al.",
+      "year": 2021,
+      "role": "Showed that decoupling appearance into simple local features (e.g., SH coefficients) can yield sharp details without heavy MLPs.",
+      "relationship_sentence": "Echoing PlenOctrees\u2019 efficiency-through-local-features, PAPR uses compact, view-independent per-point features and a lightweight differentiable renderer to capture high-frequency textures with far fewer primitives than typical NeRF-style MLPs."
+    },
+    {
+      "title": "Neural Point-Based Graphics (NPBG++)",
+      "authors": "Rakhimov et al.",
+      "year": 2021,
+      "role": "Refinement of NPBG with improved point-based neural rendering quality and robustness.",
+      "relationship_sentence": "PAPR advances the NPBG/NPBG++ line by addressing their dependency on external geometry and sensitivity to point placement, introducing proximity attention and learnable influence to robustly discover geometry and maintain gradients when initialized far from the target surface."
+    }
+  ],
+  "synthesis_narrative": "PAPR emerges at the intersection of point-based neural rendering and differentiable rasterization. Neural Point-Based Graphics (and its NPBG++ refinement) established that storing learned features on 3D points and compositing them with a neural renderer can yield high-quality view synthesis. However, these methods typically rely on externally reconstructed point clouds and are brittle when point placement is suboptimal. Point-NeRF pushed points further as spatial anchors for radiance fields, aggregating nearby point features along rays, yet commonly depends on MVS initialization and volumetric MLP evaluation.\n\nConcurrently, differentiable point/sphere renderers such as PULSAR demonstrated that soft-visibility splatting provides stable gradients with respect to point positions and radii, directly addressing vanishing gradients that plague naive point rendering. In parallel, PlenOctrees showed that compact local features can capture high-frequency detail efficiently without heavy MLPs, suggesting that simple view-independent features can be sufficient if coupled with an effective compositor.\n\nPAPR synthesizes these threads into a point representation with learnable position, influence (coverage), and view-independent features, and a differentiable renderer that performs proximity attention to select and weight only the most relevant points per ray. This attention-based selection maintains gradient flow to the right points and scales, enabling optimization from scratch even when the initial geometry is far from the target. The result is a parsimonious, accurate point-based scene model that captures fine texture with far fewer primitives than volumetric fields, while avoiding the vanishing-gradient and dependency-on-MVS limitations of prior point-based neural renderers.",
+  "analysis_timestamp": "2026-01-07T00:02:04.799538"
+}

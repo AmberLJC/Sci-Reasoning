@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Deep reinforcement learning from human preferences",
+      "authors": "Christiano et al.",
+      "year": 2017,
+      "arxiv_id": "1706.03741",
+      "role": "Foundation",
+      "relationship_sentence": "This work introduced the pairwise preference-based reward modeling framework that Themis adopts and augments by enabling the reward model itself to consult external tools during scoring."
+    },
+    {
+      "title": "Learning to summarize from human feedback",
+      "authors": "Stiennon et al.",
+      "year": 2020,
+      "arxiv_id": "2009.01325",
+      "role": "Foundation",
+      "relationship_sentence": "It established scalable, text-domain reward models trained on human preferences, which Themis directly builds on while addressing their inability to verify factual or computational claims."
+    },
+    {
+      "title": "Training language models to follow instructions with human feedback",
+      "authors": "Ouyang et al.",
+      "year": 2022,
+      "arxiv_id": "2203.02155",
+      "role": "Baseline",
+      "relationship_sentence": "The standard RLHF pipeline and reward model used here serve as the primary baseline that Themis improves by equipping the reward model with tool use for more reliable judgments."
+    },
+    {
+      "title": "WebGPT: Browser-assisted question-answering with human feedback",
+      "authors": "Nakano et al.",
+      "year": 2021,
+      "arxiv_id": "2112.09332",
+      "role": "Related Problem",
+      "relationship_sentence": "By showing that a policy model using web search plus preference-based RM improves factuality, this work motivated Themis\u2019s shift to letting the reward model itself perform search to grade answers."
+    },
+    {
+      "title": "Toolformer: Language Models Can Teach Themselves to Use Tools",
+      "authors": "Schick et al.",
+      "year": 2023,
+      "arxiv_id": "2302.04761",
+      "role": "Inspiration",
+      "relationship_sentence": "Toolformer\u2019s demonstration that LMs can learn to invoke APIs (e.g., calculator, search) directly inspired Themis\u2019s tool-augmented reward model that issues API calls during evaluation."
+    },
+    {
+      "title": "ReAct: Synergizing Reasoning and Acting in Language Models",
+      "authors": "Yao et al.",
+      "year": 2022,
+      "arxiv_id": "2210.03629",
+      "role": "Extension",
+      "relationship_sentence": "Themis extends the ReAct-style interleaving of chain-of-thought and tool actions by generating autoregressive reasoning-and-tool traces inside the reward model to reach a justified score."
+    },
+    {
+      "title": "Can Large Language Models Be Good Judges?",
+      "authors": "Zheng et al.",
+      "year": 2023,
+      "arxiv_id": "2306.05685",
+      "role": "Gap Identification",
+      "relationship_sentence": "This paper documents that LLM-based judges struggle with math, code, and factuality without external verification, directly motivating Themis\u2019s use of calculators and search within the reward model."
+    }
+  ],
+  "synthesis_narrative": "Preference-based reward modeling was formalized by Christiano et al., who introduced pairwise comparisons to learn a scalar reward from human feedback. Stiennon et al. scaled this formulation to long-form text, demonstrating that reward models can guide generation quality at scale. Ouyang et al. operationalized RLHF for instruction-following systems, standardizing a pipeline where a text-only reward model learns to prefer better responses despite lacking direct mechanisms to verify correctness. In parallel, Nakano et al. showed that letting a policy browse the web during answer generation, evaluated by preference models, boosts factual accuracy, suggesting the power of tool use for alignment. Schick et al. revealed that language models can learn to call external APIs like calculators and search engines autonomously, while Yao et al. combined chain-of-thought with actionable tool calls in an interleaved, autoregressive fashion to produce interpretable reasoning-action traces. Finally, Zheng et al. highlighted systematic failures of LLM judges on math, code, and factuality when deprived of verification or external information. Taken together, these works exposed a gap: reward models\u2014as the judges guiding RLHF\u2014remained text-only and thus brittle on verifiable skills, even as policy models and prompting methods leveraged tools for reliability. The natural next step was to move tool use and reasoning-action traces into the reward model itself. Building on the standard pairwise RM framework, while borrowing Toolformer\u2019s API invocation and ReAct\u2019s trace structure, the new approach empowers the judge to compute, search, and justify, directly addressing the documented weaknesses in evaluators and improving scoring reliability and interpretability.",
+  "target_paper": {
+    "title": "Tool-Augmented Reward Modeling",
+    "authors": "Lei Li, Yekun Chai, Shuohuan Wang, Yu Sun, Hao Tian, Ningyu Zhang, Hua Wu",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Reward Model, Large Language Model, Tool Learning, Augmented Language Model",
+    "abstract": "Reward modeling (*a.k.a.*, preference modeling) is instrumental for aligning large language models with human preferences, particularly within the context of reinforcement learning from human feedback (RLHF). While conventional reward models (RMs) have exhibited remarkable scalability, they oft struggle with fundamental functionality such as arithmetic computation, code execution, and factual lookup. In this paper, we propose a tool-augmented preference modeling approach, named Themis, to address these limitations by empowering RMs with access to external environments, including calculators and search engines. This approach not only fosters synergy between tool utilization and reward grading but also enhances interpretive capacity and scoring reliability. Our study delves into the integration of external tools into RMs, enabling them to interact with diverse external sources and construct task-specific tool engagement and reasoning traces in an autoregressive manner. We validate our ap",
+    "openreview_id": "d94x0gWTUX",
+    "forum_id": "d94x0gWTUX"
+  },
+  "analysis_timestamp": "2026-01-06T08:04:23.276042"
+}

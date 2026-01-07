@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Visual Foresight: Learning to Predict and Plan with Deep Predictive Models",
+      "authors": "Frederik Ebert et al.",
+      "year": 2018,
+      "arxiv_id": "",
+      "role": "Inspiration",
+      "relationship_sentence": "This work established the core idea of forecasting future visual states for control, which PIDM adopts by conditioning inverse dynamics on predicted visual futures rather than planning directly in pixel space."
+    },
+    {
+      "title": "Dream to Control: Learning Behaviors by Latent Imagination",
+      "authors": "Danijar Hafner et al.",
+      "year": 2020,
+      "arxiv_id": "",
+      "role": "Inspiration",
+      "relationship_sentence": "By showing that world models can predict future latent states to guide action, this paper directly motivates PIDM\u2019s use of predicted (visual) futures as the substrate from which actions are derived."
+    },
+    {
+      "title": "RT-1: Robotics Transformer for Real-World Control at Scale",
+      "authors": "A. Brohan et al.",
+      "year": 2022,
+      "arxiv_id": "",
+      "role": "Baseline",
+      "relationship_sentence": "RT-1 is the main large-scale behavior cloning baseline focused on actions that PIDM aims to surpass by explicitly incorporating visual foresight before action prediction."
+    },
+    {
+      "title": "Diffusion Policy: Visuomotor Policy Learning via Action Diffusion",
+      "authors": "Chi et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Baseline",
+      "relationship_sentence": "As a strong action-focused imitation method that models action distributions given current observations, Diffusion Policy serves as a primary competitor that lacks explicit future-state prediction, which PIDM addresses."
+    },
+    {
+      "title": "Real-World Robot Learning with Masked Visual Pre-Training (VC-1)",
+      "authors": "Ilya Radosavovic et al.",
+      "year": 2022,
+      "arxiv_id": "",
+      "role": "Gap Identification",
+      "relationship_sentence": "VC-1 demonstrates vision-side pretraining improves manipulation but leaves vision-action coupling weak; PIDM directly tackles this gap by closing the loop with an inverse dynamics head conditioned on predicted visual futures."
+    },
+    {
+      "title": "DROID: A Large-Scale In-the-Wild Robot Manipulation Dataset",
+      "authors": "Caine et al.",
+      "year": 2024,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "PIDM\u2019s large-scale pretraining relies on DROID as the primary dataset, enabling its end-to-end training across diverse robots and tasks."
+    }
+  ],
+  "synthesis_narrative": "Video-prediction-based control established that anticipating future visual states can enable planning directly in image space; Visual Foresight concretized this with learned predictive models that roll out future frames for goal-directed behavior. World-model RL advanced the idea in latent space: Dream to Control showed that a compact predictive model of future states could guide action selection effectively across long horizons. In parallel, large-scale imitation learning scaled action policies from demonstrations: RT-1 introduced a transformer policy trained over diverse real-world data, proving that sequences of observations and actions can be modeled at scale, while Diffusion Policy modeled rich, multimodal action distributions conditioned on observations but remained purely reactive. On the vision side, VC-1 demonstrated that masked visual pretraining on robot data yields representations that improve manipulation, yet its vision-action interface remained decoupled during pretraining. Finally, DROID emerged as a broad, in-the-wild manipulation dataset, providing the diversity and scale needed to pretrain generalist policies. Together, these works revealed a gap: action-focused policies scale but lack explicit foresight, vision-pretrained models generalize but don\u2019t directly produce actions, and world models often require RL or planning. The natural next step is to close the loop by predicting future visual states and then mapping those predictions to actions via supervised inverse dynamics. Leveraging DROID-scale data and transformer sequence modeling, this synthesis yields an end-to-end, scalable learner that unifies foresight with action generation.",
+  "target_paper": {
+    "title": "Predictive Inverse Dynamics Models are Scalable Learners for Robotic Manipulation",
+    "authors": "Yang Tian, Sizhe Yang, Jia Zeng, Ping Wang, Dahua Lin, Hao Dong, Jiangmiao Pang",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "oral",
+    "keywords": "Robotic Manipulation ; Pre-training ; Visual Foresight ; Inverse Dynamics ; Large-scale robot dataset",
+    "abstract": "Current efforts to learn scalable policies in robotic manipulation primarily fall into two categories: one focuses on \"action,\" which involves behavior cloning from extensive collections of robotic data, while the other emphasizes \"vision,\" enhancing model generalization by pre-training representations or generative models, also referred to as world models, using large-scale visual datasets. This paper presents an end-to-end paradigm that predicts actions using inverse dynamics models conditioned on the robot's forecasted visual states, named Predictive Inverse Dynamics Models (PIDM). By closing the loop between vision and action, the end-to-end PIDM can be a better scalable action learner. In practice, we use Transformers to process both visual states and actions, naming the model Seer. It is initially pre-trained on large-scale robotic datasets, such as DROID, and can be adapted to real-world scenarios with a little fine-tuning data. Thanks to large-scale, end-to-end training and the",
+    "openreview_id": "meRCKuUpmc",
+    "forum_id": "meRCKuUpmc"
+  },
+  "analysis_timestamp": "2026-01-06T15:42:42.012749"
+}

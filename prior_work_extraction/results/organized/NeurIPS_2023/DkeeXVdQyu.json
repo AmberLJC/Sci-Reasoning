@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Accurate, Large Minibatch SGD: Training ImageNet in 1 Hour",
+      "authors": "Priya Goyal, Piotr Doll\u00e1r, Ross Girshick, Pieter Noordhuis, Lukasz Wesolowski, Aapo Kyrola, Andrew Tulloch, Yangqing Jia, Kaiming He",
+      "year": 2017,
+      "role": "Linear-scaling precedent for preserving dynamics across batch sizes",
+      "relationship_sentence": "Established the linear learning-rate scaling rule when increasing batch size; this paper generalizes that preservation-of-dynamics principle to EMA by deriving how momentum must scale with batch size to keep EMA behavior invariant."
+    },
+    {
+      "title": "Don't Decay the Learning Rate, Increase the Batch Size",
+      "authors": "Samuel L. Smith, Pieter-Jan Kindermans, Quoc V. Le",
+      "year": 2017,
+      "role": "Equivalence of LR schedules and batch-size schedules",
+      "relationship_sentence": "Showed that training dynamics are better reasoned about in units of samples rather than steps; the EMA scaling rule adopts this viewpoint by defining a per-sample time constant/half-life and mapping it to the per-step momentum under different batch sizes."
+    },
+    {
+      "title": "An Empirical Model of Large-Batch Training",
+      "authors": "Sam McCandlish, Jared Kaplan, Dario Amodei",
+      "year": 2018,
+      "role": "Principled link between batch size, step count, and optimization dynamics (gradient-noise scale)",
+      "relationship_sentence": "Provided a framework for preserving training dynamics as batch size changes; the EMA scaling rule follows the same spirit, ensuring the stochastic filtering of parameters by EMA remains constant when step frequency changes with batch size."
+    },
+    {
+      "title": "Acceleration of Stochastic Approximation by Averaging",
+      "authors": "Boris T. Polyak, Anatoli B. Juditsky",
+      "year": 1992,
+      "role": "Foundational concept of iterate averaging",
+      "relationship_sentence": "Laid the theoretical foundation for model-parameter averaging; this paper treats model EMA as a practical, exponential variant of Polyak averaging and derives how to keep its effective averaging window unchanged across batch sizes."
+    },
+    {
+      "title": "Mean Teachers are Better Role Models: Weight-Averaged Consistency Targets Improve Semi-Supervised Learning",
+      "authors": "Antti Tarvainen, Harri Valpola",
+      "year": 2017,
+      "role": "Canonical EMA teacher framework in semi-supervised learning",
+      "relationship_sentence": "Introduced EMA of model weights as a teacher with a momentum hyperparameter; the current paper supplies the missing scaling rule to retune this momentum when batch size changes, preserving teacher\u2013student dynamics."
+    },
+    {
+      "title": "Bootstrap Your Own Latent: A New Approach to Self-Supervised Learning",
+      "authors": "Jean-Bastien Grill, Florian Strub, Florent Altch\u00e9, Corentin Tallec, Pierre H. Richemond, Elena Buchatskaya, Carl Doersch, Bernardo Avila Pires, Zhaohan Daniel Guo, Mohammad Gheshlaghi Azar, Bilal Piot, Koray Kavukcuoglu, R\u00e9mi Munos, Michal Valko",
+      "year": 2020,
+      "role": "EMA target network as core mechanism in SSL",
+      "relationship_sentence": "Relies on an EMA-updated target with momentum scheduling and shows sensitivity to that hyperparameter; the EMA scaling rule directly addresses maintaining BYOL-like target dynamics when batch size or step frequency changes."
+    },
+    {
+      "title": "Momentum Contrast for Unsupervised Visual Representation Learning",
+      "authors": "Kaiming He, Haoqi Fan, Yuxin Wang, Saining Xie, Ross Girshick",
+      "year": 2020,
+      "role": "Momentum encoder (EMA of parameters) in contrastive SSL",
+      "relationship_sentence": "Uses an EMA-updated momentum encoder whose dynamics depend on the update frequency; the proposed scaling rule ensures consistent encoder behavior across hardware- or batch-induced changes in step counts."
+    }
+  ],
+  "synthesis_narrative": "How to Scale Your EMA tackles a gap left by the well-established practice of preserving optimization dynamics across batch sizes. Goyal et al. introduced the linear learning-rate scaling rule, and Smith et al. sharpened the intuition that batch size and step-wise learning-rate schedules are interchangeable when viewed in units of samples processed. McCandlish et al. further tied batch size to the effective stochastic dynamics via the gradient-noise scale, providing a principled motivation to preserve behavior when the number of parameter updates per epoch changes. In parallel, model-parameter averaging\u2014rooted in Polyak and Juditsky\u2019s iterate averaging\u2014has become central to modern training practice. Mean Teacher formalized EMA of weights as a teacher with a tunable momentum, while BYOL and MoCo embedded EMA targets/momentum encoders at the heart of state-of-the-art self-supervised pipelines, where performance is highly sensitive to the momentum hyperparameter.\n\nDespite this reliance on EMA, prior work lacked a rule for how to adjust EMA momentum when batch size alters the cadence of parameter updates. This paper unifies the two threads: it treats the EMA as a discrete-time low-pass filter with a per-sample time constant (or half-life), then derives the mapping from that invariant quantity to the per-step momentum under different batch sizes. In effect, it extends the linear-scaling philosophy from learning rate to EMA momentum, so that EMA-driven teacher/target dynamics remain stable across batch regimes, benefiting supervised robustness, semi-supervised pseudo-labeling, and self-supervised learning alike.",
+  "analysis_timestamp": "2026-01-07T00:02:04.774578"
+}

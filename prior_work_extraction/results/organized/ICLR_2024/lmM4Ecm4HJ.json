@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Dropout as a Bayesian Approximation: Representing Model Uncertainty in Deep Learning",
+      "authors": "Yarin Gal et al.",
+      "year": 2016,
+      "arxiv_id": "1506.02142",
+      "role": "Inspiration",
+      "relationship_sentence": "This work showed that applying dropout at test time yields stochastic predictions whose agreement indicates confidence, directly inspiring our use of feature-map dropout and agreement of box locations as a label-free reliability signal."
+    },
+    {
+      "title": "End-to-End Object Detection with Transformers",
+      "authors": "Nicolas Carion et al.",
+      "year": 2020,
+      "arxiv_id": "2005.12872",
+      "role": "Extension",
+      "relationship_sentence": "DETR popularized Hungarian bipartite matching with IoU-based costs for aligning sets of boxes, which we directly adopt to pair predictions between normal and dropout passes before averaging IoU as our stability score."
+    },
+    {
+      "title": "IoU-Net: Learning IoU for Bounding Box Regression",
+      "authors": "Bo Jiang et al.",
+      "year": 2018,
+      "arxiv_id": "",
+      "role": "Gap Identification",
+      "relationship_sentence": "IoU-Net established IoU as a localization-quality target but requires ground-truth supervision, motivating our unsupervised alternative that estimates box quality via IoU consistency across stochastic perturbations."
+    },
+    {
+      "title": "BayesOD: A Bayesian Approach for Uncertainty Estimation in Deep Object Detection",
+      "authors": "Abdelrahman Harakeh et al.",
+      "year": 2020,
+      "arxiv_id": "",
+      "role": "Related Problem",
+      "relationship_sentence": "BayesOD leveraged multiple stochastic detections to quantify per-box uncertainty, and we build on this idea by using variance under stochastic forward passes\u2014measured as geometric stability\u2014as a simple proxy for detector reliability."
+    },
+    {
+      "title": "Mean teachers are better role models: Weight-averaged consistency targets improve semi-supervised deep learning results",
+      "authors": "Antti Tarvainen et al.",
+      "year": 2017,
+      "arxiv_id": "1703.01780",
+      "role": "Inspiration",
+      "relationship_sentence": "This work established consistency under perturbations as a signal of prediction correctness, which we transpose to object detection by measuring box-level consistency under feature-map dropout at test time."
+    },
+    {
+      "title": "Benchmarking Robustness in Object Detection",
+      "authors": "Maximilian Michaelis et al.",
+      "year": 2019,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "By formalizing robustness evaluation for detectors under corruptions and distribution shifts, this benchmark framed the cross-environment generalization problem that our label-free stability metric is designed to assess."
+    }
+  ],
+  "synthesis_narrative": "Dropout-as-Bayesian inference demonstrated that enabling dropout at inference yields stochastic predictors whose agreement reflects uncertainty, grounding the notion that stability across stochastic passes can proxy correctness. IoU-Net linked a detector\u2019s localization quality to the Intersection-over-Union between predictions and ground truth, cementing IoU as the right geometric notion of \u201cbox quality,\u201d though it required supervision to learn that signal. DETR made bipartite (Hungarian) matching with IoU-based costs standard for aligning sets of detections, providing a principled way to pair boxes across two unordered sets. In object detection specifically, BayesOD showed that aggregating multiple stochastic detections can quantify per-box uncertainty for both classification and localization, reinforcing that variability across samples is diagnostic of reliability. Meanwhile, Mean Teacher established consistency under perturbations as a general principle for judging prediction quality, widely adopted in detection via IoU-based consistency filters. Finally, robustness benchmarks for detection under corruptions formalized the cross-environment generalization setting and highlighted the need to assess performance under distribution shift.\nSynthesizing these insights, it was natural to pair stochastic perturbations with an IoU-based stability measure: apply feature-map dropout at test time, use Hungarian matching to align the two prediction sets, and average IoU to quantify box stability without labels. This directly addresses IoU-Net\u2019s supervision requirement while leveraging consistency-as-correctness and uncertainty-from-stochasticity, yielding a ground-truth-free indicator that tracks detector generalization across environments defined by robustness benchmarks.",
+  "target_paper": {
+    "title": "Bounding Box Stability against Feature Dropout Reflects Detector Generalization across Environments",
+    "authors": "Yang Yang, Wenhai Wang, Zhe Chen, Jifeng Dai, Liang Zheng",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Object Detection, Model Generalization",
+    "abstract": "Bounding boxes uniquely characterize object detection, where a good detector gives accurate bounding boxes of categories of interest. However, in the real-world where test ground truths are not provided, it is non-trivial to find out whether bounding boxes are accurate, thus preventing us from assessing the detector generalization ability. In this work, we find under feature map dropout, good detectors tend to output bounding boxes whose locations do not change much, while bounding boxes of poor detectors will undergo noticeable position changes. We compute the box stability score (BS score) to reflect this stability. Specifically, given an image, we compute a normal set of bounding boxes and a second set after feature map dropout. To obtain BS score, we use bipartite matching to find the corresponding boxes between the two sets and compute the average Intersection over Union (IoU) across the entire test set. We contribute to finding that BS score has a strong, positive correlation wit",
+    "openreview_id": "lmM4Ecm4HJ",
+    "forum_id": "lmM4Ecm4HJ"
+  },
+  "analysis_timestamp": "2026-01-06T12:35:38.321609"
+}

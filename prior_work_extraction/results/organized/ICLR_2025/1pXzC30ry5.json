@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Segment Anything",
+      "authors": "Alexander Kirillov et al.",
+      "year": 2023,
+      "arxiv_id": "2304.02643",
+      "role": "Extension",
+      "relationship_sentence": "RMP-SAM directly extends SAM\u2019s promptable mask-decoder paradigm by redesigning it to produce task-conditioned masks for interactive, panoptic, and video instance segmentation while making the encoder\u2013decoder real-time."
+    },
+    {
+      "title": "Masked-attention Mask Transformer for Universal Image Segmentation (Mask2Former)",
+      "authors": "Bowen Cheng et al.",
+      "year": 2022,
+      "arxiv_id": "2112.01527",
+      "role": "Foundation",
+      "relationship_sentence": "RMP-SAM adopts the Mask2Former idea of per-mask queries with masked-attention decoding as the unified representation to support multi-task segmentation within a single model."
+    },
+    {
+      "title": "Video Mask2Former",
+      "authors": "Bowen Cheng et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Related Problem",
+      "relationship_sentence": "RMP-SAM leverages the Video Mask2Former insight of temporally updating mask queries to maintain instance identities across frames, adapting it under a real-time budget for VIS."
+    },
+    {
+      "title": "SEEM: Segment Everything Everywhere All at Once",
+      "authors": "Xueyan Zou et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "SEEM showed a single promptable model can cover diverse segmentation modes but is computationally heavy, motivating RMP-SAM\u2019s push to achieve comparable breadth in real time."
+    },
+    {
+      "title": "MobileSAM: Towards Fast Segment Anything",
+      "authors": "Chaoning Zhang et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "MobileSAM serves as the primary real-time interactive segmentation baseline that RMP-SAM generalizes beyond, extending speed-oriented SAM designs from a single task to a multi-purpose setting."
+    },
+    {
+      "title": "Panoptic Segmentation",
+      "authors": "Alexander Kirillov et al.",
+      "year": 2019,
+      "arxiv_id": "1801.00868",
+      "role": "Foundation",
+      "relationship_sentence": "The panoptic segmentation formulation and metrics define the joint semantic+instance targets that RMP-SAM\u2019s unified head must produce in its panoptic mode."
+    },
+    {
+      "title": "YouTube-VIS: A Large-Scale Video Instance Segmentation Benchmark",
+      "authors": "Linjie Yang et al.",
+      "year": 2019,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "YouTube-VIS establishes the VIS problem and benchmark that RMP-SAM explicitly targets with real-time mask association and tracking-aware outputs."
+    }
+  ],
+  "synthesis_narrative": "Segment Anything introduced a promptable mask decoder that predicts high-quality masks conditioned on points, boxes, or masks, but its ViT-H backbone and heavy decoder hinder real-time use. Mask2Former established a unified segmentation formulation using per-mask queries with masked attention, enabling a single architecture to handle semantic, instance, and panoptic outputs. Video Mask2Former extended this idea temporally, updating mask queries across frames to maintain instance identity and produce coherent video segmentation. SEEM demonstrated that a single promptable framework can cover interactive, open-vocabulary, and video-style segmentation with diverse prompts, but its compute cost limits real-time deployment. MobileSAM showed that SAM\u2019s promptable pipeline can be distilled and re-architected for speed, proving real-time interactive segmentation is feasible even if restricted to a single task. The panoptic segmentation formulation precisely defines the joint semantic+instance target and evaluation criteria for unified image-level outputs. YouTube-VIS formalized video instance segmentation as temporally consistent instance masks and provided the benchmark that drives real-time, multi-instance video evaluation.\n\nTogether, these works reveal both the unifying representational leverage of mask-query decoding (Mask2Former/Video Mask2Former) and the practicality of promptable segmentation (SAM) while exposing a gap: no single system handles interactive, panoptic, and VIS in real time. RMP-SAM fuses SAM\u2019s promptable mask decoding with Mask2Former\u2019s per-mask query unification, draws temporal association cues from Video Mask2Former, and applies MobileSAM-style efficiency principles, aligning training and outputs to the panoptic and YouTube-VIS formulations to deliver a single end-to-end, real-time multi-purpose segmenter.",
+  "target_paper": {
+    "title": "RMP-SAM: Towards Real-Time Multi-Purpose Segment Anything",
+    "authors": "Shilin Xu, Haobo Yuan, Qingyu Shi, Lu Qi, Jingbo Wang, Yibo Yang, Yining Li, Kai Chen, Yunhai Tong, Bernard Ghanem, Xiangtai Li, Ming-Hsuan Yang",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "oral",
+    "keywords": "segment anything; real-time segmentation; multi-purpose model;",
+    "abstract": "Recent segmentation methods, which adopt large-scale data training and transformer architecture, aim to create one foundation model that can perform multiple tasks.\n    However, most of these methods rely on heavy encoder and decoder frameworks, hindering their performance in real-time scenarios.\n    To explore real-time segmentation, recent advancements primarily focus on semantic segmentation within specific environments, such as autonomous driving. However, they often overlook the generalization ability of these models across diverse scenarios.\n    Therefore, to fill this gap, this work explores a novel real-time segmentation setting called real-time multi-purpose segmentation.\n    It contains three fundamental sub-tasks: interactive segmentation, panoptic segmentation, and video instance segmentation. \n    Unlike previous methods, which use a specific design for each task, we aim to use only a single end-to-end model to accomplish all these tasks in real-time.\n    To meet real-time",
+    "openreview_id": "1pXzC30ry5",
+    "forum_id": "1pXzC30ry5"
+  },
+  "analysis_timestamp": "2026-01-06T11:59:04.679200"
+}

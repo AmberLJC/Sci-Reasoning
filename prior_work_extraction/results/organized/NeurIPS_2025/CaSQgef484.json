@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Scalable Diffusion Models with Transformers",
+      "authors": "William Peebles, Saining Xie",
+      "year": 2023,
+      "role": "Base architecture for diffusion transformers (DiT) and the DiT-XL/2 testbed.",
+      "relationship_sentence": "The paper\u2019s grafting experiments and benchmarks are built directly on DiT-XL/2, making DiT the foundational model whose blocks are surgically swapped (attention/MLPs) and analyzed."
+    },
+    {
+      "title": "Net2Net: Accelerating Learning via Knowledge Transfer",
+      "authors": "Tianqi Chen, Ian Goodfellow, Jonathon Shlens",
+      "year": 2016,
+      "role": "Function-preserving network transformations enabling rapid architecture modification from pretrained weights.",
+      "relationship_sentence": "Grafting echoes Net2Net\u2019s central idea\u2014reusing and transforming pretrained parameters to instantiate new architectures\u2014allowing fast exploration without full retraining."
+    },
+    {
+      "title": "Once-for-All: Train One Network and Specialize for Many Deployments",
+      "authors": "Han Cai, Chuang Gan, Tianzhe Wang, Zhekai Zhang, Song Han",
+      "year": 2020,
+      "role": "Weight-sharing paradigm for cheap architecture evaluation across subnets.",
+      "relationship_sentence": "The grafting approach extends OFA\u2019s principle of leveraging shared/pretrained weights to cheaply materialize many architectural variants, here within diffusion transformers."
+    },
+    {
+      "title": "Swin Transformer: Hierarchical Vision Transformer using Shifted Windows",
+      "authors": "Ze Liu et al.",
+      "year": 2021,
+      "role": "Introduced local/windowed self-attention as an effective inductive bias for vision.",
+      "relationship_sentence": "Local attention is one of the key operators grafted in place of global softmax attention; Swin provides the canonical locality mechanism and empirical rationale for this substitution."
+    },
+    {
+      "title": "Performer: Rethinking Attention with Transformers",
+      "authors": "Krzysztof Choromanski et al.",
+      "year": 2020,
+      "role": "Linear attention via FAVOR+ kernelization for scalable transformers.",
+      "relationship_sentence": "The paper explicitly tests linear attention as a drop-in replacement via grafting; Performer supplies the specific linear-attention operator and efficiency motivation."
+    },
+    {
+      "title": "Restormer: Efficient Transformer for High-Resolution Image Restoration",
+      "authors": "Syed Waqas Zamir et al.",
+      "year": 2022,
+      "role": "Gated depthwise-convolutional feed-forward networks (GDFN) within transformer blocks.",
+      "relationship_sentence": "Their gated convolutional FFN design motivates the paper\u2019s MLP replacements with convolutional/gated variants when grafting FFNs in DiT blocks."
+    },
+    {
+      "title": "Free-Form Image Inpainting with Gated Convolution",
+      "authors": "Jiahui Yu, Zhe Lin, Jimei Yang, Xiaohui Shen, Xin Lu, Thomas S. Huang",
+      "year": 2019,
+      "role": "Introduced gated convolution as a content-aware, learnable gating operator for generative vision tasks.",
+      "relationship_sentence": "Provides the gating mechanism and generative vision precedent for replacing softmax attention with gated convolution in the grafted hybrid designs."
+    }
+  ],
+  "synthesis_narrative": "The core contribution\u2014grafting\u2014rests on reusing pretrained diffusion transformers to cheaply instantiate and evaluate architectural variants. This idea draws directly from function-preserving and weight-sharing paradigms. Net2Net pioneered transforming pretrained networks to new architectures without losing initialization quality, while Once-for-All demonstrated that one set of shared weights can support many subarchitectures with minimal additional training. Grafting adopts this philosophy in the diffusion-transformer regime, enabling operator-level edits (attention and FFN swaps) without expensive pretraining from scratch.\n\nThe experimental scaffold is DiT-XL/2, making Scalable Diffusion Models with Transformers the indispensable base upon which all surgeries occur. The specific operators explored via grafting come from established alternatives in vision transformers. Swin Transformer\u2019s windowed attention supplies a locality-biased attention mechanism, aligning with the paper\u2019s analysis of attention locality and motivating the local-attention graft. Performer contributes a concrete linear-attention formulation to test as a scalable alternative to softmax attention. For modifying MLPs, Restormer\u2019s gated depthwise-convolutional feed-forward design offers a well-validated convolutional FFN variant tailored for images, informing the convolutional and gated FFN replacements examined here. Finally, gated convolution from Yu et al. provides a content-aware gating operator with strong generative vision credentials, justifying the paper\u2019s attention-to-gated-convolution substitutions.\n\nTogether, these works enable the paper\u2019s central insight: by transplanting well-motivated operators into a pretrained DiT and doing light tuning, one can systematically probe architectural choices\u2014locality, linearization, and convolutional inductive biases\u2014under small compute budgets.",
+  "analysis_timestamp": "2026-01-07T00:05:12.550882"
+}

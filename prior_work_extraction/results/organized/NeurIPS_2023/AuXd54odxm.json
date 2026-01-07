@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Gaussian-Process Factor Analysis for Low-Dimensional Single-Trial Analysis of Neural Population Activity",
+      "authors": "Byron M. Yu, John P. Cunningham, Gopal Santhanam, Stephen I. Ryu, Krishna V. Shenoy, Maneesh Sahani",
+      "year": 2009,
+      "role": "Foundational latent dynamics model for neural population activity with explicit temporal smoothness via GP priors.",
+      "relationship_sentence": "ERDiff builds on GPFA\u2019s premise that neural population activity lies on a low-dimensional, temporally structured manifold, but replaces linear-GP assumptions with a diffusion model that can capture richer spatio-temporal structure and use it as a prior for alignment."
+    },
+    {
+      "title": "Inferring single-trial neural population dynamics using sequential auto-encoders (LFADS)",
+      "authors": "Chethan Pandarinath et al.",
+      "year": 2018,
+      "role": "Nonlinear sequential VAE for extracting low-dimensional latent dynamics from neural spiking data.",
+      "relationship_sentence": "LFADS established that expressive generative models can recover latent neural dynamics; ERDiff extends this idea by employing diffusion models to extract and preserve more complex spatio-temporal structures and then leveraging them to guide cross-domain alignment."
+    },
+    {
+      "title": "Recurrent Switching Linear Dynamical Systems",
+      "authors": "Scott W. Linderman, M. Johnson, A. Miller, Ryan P. Adams",
+      "year": 2017,
+      "role": "Latent variable model capturing piecewise-linear dynamics and discrete state structure in neural data.",
+      "relationship_sentence": "ERDiff adopts the rSLDS motivation of explicitly modeling temporal structure in latent dynamics, but uses diffusion-based priors to encode such structure nonparametrically and deploys them during alignment rather than only during latent inference."
+    },
+    {
+      "title": "Stabilization of a brain\u2013computer interface via alignment of low-dimensional neural activity",
+      "authors": "Andrew D. Degenhart et al.",
+      "year": 2020,
+      "role": "Cross-session alignment of neural manifolds to stabilize decoding without retraining task models.",
+      "relationship_sentence": "ERDiff targets the same cross-session/domain alignment problem as Degenhart et al., but improves upon subspace matching by enforcing preservation of spatio-temporal latent structure through a diffusion prior during maximum-likelihood alignment."
+    },
+    {
+      "title": "Long-term stability of cortical population dynamics underlying consistent behavior",
+      "authors": "Juan A. Gallego, Timothy A. Perich, Lee E. Miller, Sara A. Solla",
+      "year": 2020,
+      "role": "Evidence and methodology for stable low-dimensional manifolds across days and alignment via subspace transforms.",
+      "relationship_sentence": "Motivated by Gallego et al.\u2019s finding that behavior-relevant dynamics are stable, ERDiff encodes the source domain\u2019s latent dynamical manifold with a diffusion model and aligns target data by maximizing likelihood under this structured prior."
+    },
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Jonathan Ho, Ajay Jain, Pieter Abbeel",
+      "year": 2020,
+      "role": "Foundational diffusion generative modeling framework via denoising score matching.",
+      "relationship_sentence": "ERDiff leverages the expressivity and training principles of DDPMs to learn a generative model that captures the source domain\u2019s spatio-temporal latent structure, which then acts as a powerful prior during alignment."
+    },
+    {
+      "title": "Generative Modeling by Estimating Gradients of the Data Distribution",
+      "authors": "Yang Song, Stefano Ermon",
+      "year": 2019,
+      "role": "Score-based generative modeling framework that provides gradients of log-density for guidance and likelihood-related objectives.",
+      "relationship_sentence": "By using a diffusion/score model to provide gradients of the latent dynamics distribution, ERDiff performs maximum-likelihood-guided alignment that explicitly preserves the learned spatio-temporal structure."
+    }
+  ],
+  "synthesis_narrative": "ERDiff\u2019s core contribution\u2014aligning neural population activity across domains while preserving spatio-temporal latent structure\u2014stands at the intersection of latent neural dynamics modeling and modern diffusion-based generative modeling. Foundational latent dynamics methods such as GPFA (Yu et al., 2009) and LFADS (Pandarinath et al., 2018) established that neural activity can be represented by low-dimensional trajectories with temporal coherence, motivating ERDiff\u2019s focus on latent dynamics as the substrate for alignment. rSLDS (Linderman et al., 2017) further emphasized explicit temporal structure and state-dependent dynamics, underscoring the need to respect temporal dependencies rather than aligning static embeddings.\n\nOn the alignment side, Degenhart et al. (2020) and Gallego et al. (2020) demonstrated that behaviorally relevant latent manifolds are stable across days and that subspace alignment can stabilize decoding. However, these approaches typically treat alignment as a geometric mapping that underweights temporal structure. ERDiff addresses this gap by replacing purely geometric criteria with a generative prior that encodes spatio-temporal structure learned from the source domain.\n\nThis is operationalized via diffusion models: DDPM (Ho et al., 2020) provides a powerful training framework to learn complex data distributions, while score-based modeling (Song & Ermon, 2019) offers gradients of the log-density that can guide optimization. ERDiff extracts the source domain\u2019s latent dynamics distribution with a diffusion/score model and then performs maximum-likelihood alignment of target data under this learned prior, ensuring the recovered latents conform to the source\u2019s spatio-temporal manifold. In doing so, ERDiff unifies latent dynamics extraction with alignment under an explicit, expressive generative prior, directly extending both the neural dynamics and diffusion modeling lines of work.",
+  "analysis_timestamp": "2026-01-07T00:02:04.836227"
+}

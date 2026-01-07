@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Jonathan Ho, Ajay Jain, Pieter Abbeel",
+      "year": 2020,
+      "role": "Foundational diffusion framework and sampling procedure",
+      "relationship_sentence": "SW-Guidance operates by modifying the reverse diffusion update introduced in DDPM, injecting an additional gradient term computed from a color-distance objective."
+    },
+    {
+      "title": "Diffusion Models Beat GANs on Image Synthesis",
+      "authors": "Prafulla Dhariwal, Alexander Nichol",
+      "year": 2021,
+      "role": "Introduced classifier guidance as gradient-based steering during sampling",
+      "relationship_sentence": "The paper\u2019s core idea of steering sampling via an external gradient mirrors classifier guidance; SW-Guidance replaces the classifier gradient with the gradient of a color-distribution objective."
+    },
+    {
+      "title": "Classifier-Free Diffusion Guidance",
+      "authors": "Jonathan Ho, Tim Salimans",
+      "year": 2022,
+      "role": "Guidance without auxiliary classifier; conceptual underpinning for guidance strength during sampling",
+      "relationship_sentence": "While SW-Guidance is training-free, it adopts the general principle of modulating the sampling trajectory\u2019s direction/strength and extends it to an external differentiable objective over color distributions."
+    },
+    {
+      "title": "Sliced and Radon Wasserstein Barycenters of Measures",
+      "authors": "Nicolas Bonneel, Julien Rabin, Gabriel Peyr\u00e9, Hanspeter Pfister",
+      "year": 2015,
+      "role": "Established sliced Wasserstein computations for fast, differentiable distribution alignment (including colors)",
+      "relationship_sentence": "SW-Guidance leverages the differentiable sliced 1-Wasserstein distance to compare and align color distributions, building directly on the sliced Wasserstein machinery introduced by Bonneel et al."
+    },
+    {
+      "title": "Regularized Color Transfer using Optimal Transport",
+      "authors": "Stanislas Ferradans, Nikos Papadakis, Gabriel Peyr\u00e9, Jean-Fran\u00e7ois Aujol",
+      "year": 2014,
+      "role": "Demonstrated OT-based alignment of color distributions for color transfer",
+      "relationship_sentence": "This work motivates using 1-Wasserstein/OT to match image color distributions; SW-Guidance embeds a related OT objective (sliced 1-Wasserstein) directly into diffusion sampling for color-consistent generation."
+    },
+    {
+      "title": "Diffusion Posterior Sampling for General Noisy Inverse Problems",
+      "authors": "Hyungjin Chung, Jong Chul Ye",
+      "year": 2022,
+      "role": "Training-free guidance via adding gradients of a differentiable data-consistency term during sampling",
+      "relationship_sentence": "SW-Guidance follows the DPS paradigm of augmenting the reverse diffusion process with gradients of an external likelihood/energy, here instantiated as a sliced Wasserstein color-consistency objective."
+    }
+  ],
+  "synthesis_narrative": "SW-Guidance\u2019s key contribution\u2014training-free, palette-consistent image generation by injecting a differentiable sliced 1-Wasserstein color objective into the diffusion sampler\u2014emerges from two converging lines of work: gradient-based diffusion guidance and optimal-transport color alignment. The diffusion backbone of Ho et al. (DDPM) provides the reverse-time update rule that can be perturbed by auxiliary gradients. Dhariwal and Nichol\u2019s classifier guidance establishes the general recipe for steering the sampling path using \u2207x log p(y|x), while Ho and Salimans\u2019 classifier-free guidance clarifies how guidance strength modulates semantic adherence during sampling. In parallel, the optimal-transport literature on color manipulation\u2014particularly Ferradans et al.\u2014demonstrates that 1-Wasserstein distances capture perceptually meaningful discrepancies between color distributions, yielding stable color transfer. Bonneel et al. supply the computational tool: sliced Wasserstein computes these OT objectives efficiently and differentiably via random projections, making them amenable to backpropagation.\nBridging these threads, Chung and Ye\u2019s diffusion posterior sampling shows how to incorporate arbitrary differentiable data-consistency terms into the reverse dynamics without retraining, effectively treating them as likelihood energies. SW-Guidance instantiates this idea for color conditioning: it defines a sliced 1-Wasserstein energy between the generated image\u2019s color distribution and the reference palette and injects its gradient into each denoising step. The result is a principled, training-free sampler that aligns colors while preserving semantic fidelity to the text prompt, improving over post-hoc color transfer or ad-hoc heuristics.",
+  "analysis_timestamp": "2026-01-07T00:21:32.230194"
+}

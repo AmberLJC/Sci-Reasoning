@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "High-Resolution Image Synthesis with Latent Diffusion Models",
+      "authors": "Robin Rombach, Andreas Blattmann, Dominik Lorenz, Patrick Esser, Bj\u00f6rn Ommer",
+      "year": 2022,
+      "role": "Foundational latent-space diffusion and autoencoder compression baseline",
+      "relationship_sentence": "Sana extends LDM\u2019s latent-space approach by training a much higher-compression (32\u00d7 vs ~8\u00d7) autoencoder to shrink latent tokens while preserving fidelity, which is critical to fast high\u2011resolution generation."
+    },
+    {
+      "title": "Scalable Diffusion Models with Transformers",
+      "authors": "William Peebles, Saining Xie",
+      "year": 2023,
+      "role": "Architectural template for Diffusion Transformers (DiT)",
+      "relationship_sentence": "Sana adopts the DiT backbone but replaces its quadratic self-attention with a linear-attention variant, enabling DiT to scale to the long token sequences needed for 4K images."
+    },
+    {
+      "title": "Rethinking Attention with Performers",
+      "authors": "Krzysztof Choromanski, Valerii Likhosherstov, David Dohan, Xingyou Song, Andreea Gane, Tamas Sarl\u00f3s, Peter Hawkins, Jared Davis, Afroz Mohiuddin, \u0141ukasz Kaiser, David Belanger, Lucy Colwell, Adrian Weller",
+      "year": 2021,
+      "role": "Linear attention mechanism (FAVOR+) for O(N) attention",
+      "relationship_sentence": "Sana\u2019s Linear DiT directly instantiates linearized attention in place of softmax attention, following Performer-style kernelization to achieve linear scaling at high resolutions."
+    },
+    {
+      "title": "DPM-Solver: A Fast ODE Solver for Diffusion Probabilistic Models",
+      "authors": "Cheng Lu et al.",
+      "year": 2022,
+      "role": "Fast high-order sampler for diffusion ODEs",
+      "relationship_sentence": "Sana builds on DPM-Solver and introduces a Flow\u2011DPM\u2011Solver variant to further reduce sampling steps while maintaining image quality."
+    },
+    {
+      "title": "Flow Matching for Generative Modeling",
+      "authors": "Yaron Lipman et al.",
+      "year": 2023,
+      "role": "Flow-based training/sampling paradigm complementary to diffusion",
+      "relationship_sentence": "Sana leverages flow-matching insights to pair with DPM-style solvers (Flow\u2011DPM\u2011Solver), improving convergence and sample efficiency in training and inference."
+    },
+    {
+      "title": "Imagen: Photorealistic Text-to-Image Diffusion Models with Deep Language Understanding",
+      "authors": "Chitwan Saharia, William Chan, Saurabh Saxena, Lala Li, Jay Whang, Emily Denton, Seyed Kamyar Seyed Ghasemipour, Burcu Karagol Ayan, Tim Salimans, Jonathan Ho, David J. Fleet, Mohammad Norouzi",
+      "year": 2022,
+      "role": "Demonstrated benefits of powerful text encoders (T5) for alignment",
+      "relationship_sentence": "Sana departs from Imagen\u2019s T5 conditioning by using a compact decoder\u2011only LLM as the text encoder with in\u2011context instructions, retaining strong alignment at much lower cost."
+    },
+    {
+      "title": "BLIP: Bootstrapping Language-Image Pre-training for Unified Vision-Language Understanding and Generation",
+      "authors": "Junnan Li, Dongxu Li, Caiming Xiong, Steven C.H. Hoi",
+      "year": 2022,
+      "role": "Automatic captioning and filtering to improve supervision quality",
+      "relationship_sentence": "Sana\u2019s efficient caption labeling and selection follows BLIP-style automatic caption enhancement/filtering to improve text-image supervision and accelerate convergence."
+    }
+  ],
+  "synthesis_narrative": "Sana\u2019s core innovations\u2014high-compression latent tokens, a linear-attention Diffusion Transformer, an efficient decoder\u2011only text encoder, and faster training/sampling\u2014are natural continuations of several pivotal advances. Latent Diffusion Models established the recipe of pairing a perceptual autoencoder with diffusion in latent space, making high-resolution synthesis practical; Sana intensifies this lever by training a much deeper-compression autoencoder (32\u00d7) to minimize token counts without losing fidelity. On the generative backbone, DiT demonstrated that ViT-style transformers scale diffusion effectively, but quadratic attention limits resolution; Sana replaces it with Performer-style linear attention to achieve near-linear scaling in memory and compute, unlocking 4K generation on modest hardware.\n\nFor efficiency in sampling and training dynamics, DPM\u2011Solver showed that principled ODE solvers can drastically cut the number of steps, and flow\u2011based formulations clarified how to learn and integrate transport fields. Sana integrates these threads into Flow\u2011DPM\u2011Solver, combining flow insights with diffusion ODE solvers to further reduce steps while preserving quality. Finally, text conditioning and data curation have been key to strong alignment: Imagen revealed the power of large T5 encoders, while BLIP popularized automatic captioning/filtering to improve supervision. Sana departs from heavy encoders by adopting a compact decoder\u2011only LLM with in\u2011context instructions and augments training via BLIP\u2011style caption enhancement and selection\u2014together yielding fast, well-aligned, high\u2011resolution synthesis.",
+  "analysis_timestamp": "2026-01-07T00:02:04.906612"
+}

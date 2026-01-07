@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Reducing Transformer Depth on Demand with Structured Dropout (LayerDrop)",
+      "authors": "Angela Fan et al.",
+      "year": 2019,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "LayerDrop established that entire Transformer layers can be skipped with limited degradation, directly motivating importance-driven layer removal rather than fine-grained pruning."
+    },
+    {
+      "title": "DistilBERT, a distilled version of BERT: smaller, faster, cheaper and lighter",
+      "authors": "Victor Sanh et al.",
+      "year": 2019,
+      "arxiv_id": "1910.01108",
+      "role": "Foundation",
+      "relationship_sentence": "DistilBERT showed that fewer layers can approximate a teacher via distillation, providing the core paradigm that pruned depth can be compensated by learning to mimic the removed transformations."
+    },
+    {
+      "title": "TinyBERT: Distilling BERT for Natural Language Understanding",
+      "authors": "Xiaoqi Jiao et al.",
+      "year": 2020,
+      "arxiv_id": "1909.10351",
+      "role": "Extension",
+      "relationship_sentence": "TinyBERT\u2019s block-wise distillation of hidden states and attention directly informs training a compact replacement module to approximate the function of multiple pruned layers."
+    },
+    {
+      "title": "DynaBERT: Dynamic BERT with Adaptive Width and Depth",
+      "authors": "Lu Hou et al.",
+      "year": 2020,
+      "arxiv_id": "2004.04037",
+      "role": "Related Problem",
+      "relationship_sentence": "DynaBERT demonstrated elastic depth with distillation-guided sub-networks, informing the use of learned, depth-aware surrogates when layers are removed."
+    },
+    {
+      "title": "SparseGPT: Massive Language Models Can Be Accurately Pruned in One-Shot",
+      "authors": "Andreas Frantar et al.",
+      "year": 2023,
+      "arxiv_id": "2301.00774",
+      "role": "Baseline",
+      "relationship_sentence": "SparseGPT is a primary LLM compression baseline that LLM-Streamline improves upon by moving from unstructured/weight pruning to principled depth (layer) removal with learned replacement."
+    },
+    {
+      "title": "Patient Knowledge Distillation for BERT Model Compression",
+      "authors": "Siqi Sun et al.",
+      "year": 2019,
+      "arxiv_id": "1908.09355",
+      "role": "Inspiration",
+      "relationship_sentence": "Patient KD\u2019s layer-wise (intermediate) supervision highlights using hidden-state transformations as learning targets, directly shaping the training objective for the layer-replacement module."
+    }
+  ],
+  "synthesis_narrative": "Structured dropout via LayerDrop showed that entire Transformer blocks can be skipped during training, revealing non-uniform redundancy across depth and opening the door to depth-centric compression. DistilBERT then demonstrated that halving depth and learning from a teacher preserves capability, crystallizing the idea that fewer layers can stand in for more through distillation. TinyBERT refined this with block-wise distillation objectives that explicitly regress hidden states and attention maps across chunks, offering a practical recipe to approximate multi-layer transformations with a compact module. DynaBERT extended elasticity to both width and depth and trained students to operate at different depths, reinforcing that depth-specific supervision enables stable performance after layer removal. In large language models, SparseGPT established a strong one-shot pruning baseline but acted largely at the weight level, highlighting the efficiency of post-hoc compression while leaving depth redundancy underexploited. Patient Knowledge Distillation emphasized the value of intermediate supervision, showing that aligning hidden-state trajectories yields more faithful compressed models than end-task accuracy alone.\nTogether these works suggested a gap: LLM compression was dominated by weight and width pruning or heuristic layer reductions, with limited mechanisms to pick which layers to remove and no dedicated module to stand in for pruned blocks. The present work synthesizes block-wise distillation with depth elasticity by scoring layers via their impact on hidden states, pruning consecutive low-importance spans, and learning a lightweight replacement to mimic the removed transformation\u2014addressing SparseGPT-style limitations and operationalizing the TinyBERT/Patient-KD insights for LLM-scale, layer-level compression while enabling a stability-focused evaluation beyond raw accuracy.",
+  "target_paper": {
+    "title": "Streamlining Redundant Layers to Compress Large Language Models",
+    "authors": "Xiaodong Chen, Yuxuan Hu, Jing Zhang, Yanling Wang, Cuiping Li, Hong Chen",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "large language models, model compression, structured pruning",
+    "abstract": "This paper introduces LLM-Streamline, a pioneer work on layer pruning for large language models (LLMs). It is based on the observation that different layers have varying impacts on hidden states, enabling the identification of less important layers to be pruned. \nLLM-Streamline comprises two parts: layer pruning, which removes consecutive layers with the lowest importance based on target sparsity, and layer replacement, a novel module that trains a lightweight network to replace the pruned layers to mitigate performance loss. Additionally, a new metric called stability is proposed to address the limitations of the widely used accuracy metric in evaluating model compression. Experiments show that LLM-Streamline outperforms both previous and concurrent state-of-the-art pruning methods in terms of both performance and training efficiency. Our code is available at \\href{https://github.com/RUCKBReasoning/LLM-Streamline}{this repository}.",
+    "openreview_id": "IC5RJvRoMp",
+    "forum_id": "IC5RJvRoMp"
+  },
+  "analysis_timestamp": "2026-01-06T17:39:21.530143"
+}

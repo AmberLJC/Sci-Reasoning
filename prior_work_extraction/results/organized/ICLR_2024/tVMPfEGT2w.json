@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Deep Reinforcement Learning from Human Preferences",
+      "authors": "Paul F. Christiano et al.",
+      "year": 2017,
+      "arxiv_id": "1706.03741",
+      "role": "Foundation",
+      "relationship_sentence": "It established the Bradley\u2013Terry\u2013style MLE of a reward model from pairwise trajectory (segment) comparisons and then optimizes the learned reward, which the present work adopts and generalizes to an offline setting with general function approximation."
+    },
+    {
+      "title": "Preference-based Policy Learning",
+      "authors": "Riad Akrour et al.",
+      "year": 2012,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "It formalized preference-based RL by learning policies from pairwise trajectory preferences instead of numeric rewards, providing the problem formulation the current work studies but without offline guarantees."
+    },
+    {
+      "title": "Extrapolating Beyond Suboptimal Demonstrations via Inverse Reinforcement Learning (B-REX)",
+      "authors": "Daniel S. Brown et al.",
+      "year": 2019,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "B-REX showed that one can infer a trajectory-level reward from ranked offline demonstrations and then plan with it, but lacked finite-sample guarantees and coverage-aware analysis that the present work supplies."
+    },
+    {
+      "title": "Robust Dynamic Programming for Markov Decision Processes",
+      "authors": "Gaurav Iyengar",
+      "year": 2005,
+      "arxiv_id": null,
+      "role": "Extension",
+      "relationship_sentence": "It introduced distributionally robust planning over confidence (ambiguity) sets, which is directly instantiated here over reward-model confidence sets around the MLE to implement principled pessimism."
+    },
+    {
+      "title": "Pessimism in the Face of Partial Coverage",
+      "authors": "Chi Jin et al.",
+      "year": 2021,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "It identified pessimistic optimization as the key principle for offline RL under partial coverage, motivating the current paper\u2019s robust-planning step that hedges against reward estimation uncertainty from preferences."
+    },
+    {
+      "title": "Finite-Sample Analysis of Fitted Value Iteration",
+      "authors": "R\u00e9mi Munos et al.",
+      "year": 2008,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "It introduced concentrability coefficients to quantify distribution mismatch, a concept the current paper adapts into a new single-policy, trajectory-level concentrability to capture coverage for preference data."
+    },
+    {
+      "title": "Rank Analysis of Incomplete Block Designs: I. The Method of Paired Comparisons",
+      "authors": "Ralph Allan Bradley et al.",
+      "year": 1952,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "The Bradley\u2013Terry paired-comparison model underlies the maximum-likelihood preference inference step used to estimate rewards from trajectory comparisons."
+    }
+  ],
+  "synthesis_narrative": "Learning policies from preferences emerged by replacing numeric rewards with pairwise trajectory comparisons, as pioneered by preference-based policy learning, which cast control as optimizing behavior consistent with observed preference orders. Deep reinforcement learning from human preferences then operationalized this idea at scale: it fit a reward model via a Bradley\u2013Terry likelihood on trajectory comparisons and optimized the resulting proxy reward, establishing the now-standard MLE-based preference model. Offline variants like B-REX showed that trajectory-level rewards can be inferred from ranked, suboptimal demonstrations and subsequently used for planning, but did so heuristically without finite-sample guarantees or explicit handling of coverage. Independently, robust MDP theory introduced distributionally robust planning over ambiguity sets, providing a template for principled pessimism. Concurrent developments in offline RL highlighted pessimism as essential under partial coverage, and concentrability coefficients from fitted value iteration analysis offered a quantitative lens on coverage and distribution shift. The Bradley\u2013Terry model for paired comparisons provides the statistical backbone for preference likelihoods used in reward estimation.\nTogether, these strands suggested a two-step design: statistically estimate a reward from pairwise preferences with MLE and then counter distribution shift via robust planning. The missing pieces were a coverage notion tailored to single target policies and trajectory-level preferences, and guarantees under general function approximation. By casting ambiguity sets around the MLE reward and introducing a single-policy, trajectory-aware concentrability measure, the current work synthesizes these ideas to deliver polynomial-sample guarantees for any covered target policy in offline preference-based RL.",
+  "target_paper": {
+    "title": "Provable Offline Preference-Based Reinforcement Learning",
+    "authors": "Wenhao Zhan, Masatoshi Uehara, Nathan Kallus, Jason D. Lee, Wen Sun",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "reinforcement learning theory, offline reinforcement learning",
+    "abstract": "In this paper, we investigate the problem of offline Preference-based Reinforcement Learning (PbRL) with human feedback where feedback is available in the form of preference between trajectory pairs rather than explicit rewards. Our proposed algorithm consists of two main steps: (1) estimate the implicit reward using Maximum Likelihood Estimation (MLE) with general function approximation from offline data and (2) solve a distributionally robust planning problem over a confidence set around the MLE. We consider the general reward setting where the reward can be defined over the whole trajectory and provide a novel guarantee that allows us to learn any target policy with a polynomial number of samples, as long as the target policy is covered by the offline data. This guarantee is the first of its kind with general function approximation. To measure the coverage of the target policy, we introduce a new single-policy concentrability coefficient, which can be upper bounded by the per-trajec",
+    "openreview_id": "tVMPfEGT2w",
+    "forum_id": "tVMPfEGT2w"
+  },
+  "analysis_timestamp": "2026-01-06T14:17:20.546612"
+}

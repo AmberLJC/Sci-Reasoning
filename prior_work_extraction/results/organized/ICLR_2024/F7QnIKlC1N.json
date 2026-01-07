@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Do Transformers Really Perform Badly for Graph Representation?",
+      "authors": "Chengxuan Ying et al.",
+      "year": 2021,
+      "arxiv_id": "2106.05234",
+      "role": "Extension",
+      "relationship_sentence": "GTMGC extends Graphormer\u2019s idea of injecting structural biases into attention by designing Molecule Structural Residual Self-Attention (MSRSA), which adds molecule-specific structural residuals (e.g., bond/path/ring cues) directly to self-attention to guide 2D-to-3D prediction."
+    },
+    {
+      "title": "Uni-Mol: A Universal 3D Molecular Representation Learning Framework",
+      "authors": "Zhou et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Related Problem",
+      "relationship_sentence": "Uni-Mol demonstrated that transformer architectures with pairwise 3D-aware signals are effective for molecular geometry tasks, informing GTMGC\u2019s choice to use a transformer backbone while replacing pair-distance features with MSRSA for end-to-end ground-state coordinate regression from 2D graphs."
+    },
+    {
+      "title": "E(n) Equivariant Graph Neural Networks",
+      "authors": "Victor Garcia Satorras et al.",
+      "year": 2021,
+      "arxiv_id": "2102.09844",
+      "role": "Gap Identification",
+      "relationship_sentence": "EGNN established a strong coordinate-update paradigm but its reliance on strict equivariance and localized message passing highlighted a limitation in modeling long-range constraints that GTMGC addresses with global transformer attention via MSRSA."
+    },
+    {
+      "title": "SE(3)-Transformer: 3D Roto-Translation Equivariant Attention Networks",
+      "authors": "Fabian Fuchs et al.",
+      "year": 2020,
+      "arxiv_id": "2006.10503",
+      "role": "Gap Identification",
+      "relationship_sentence": "SE(3)-Transformer showed attention can be made equivariant for 3D structure but with high computational/tensor complexity, motivating GTMGC\u2019s lightweight MSRSA that injects structural biases into attention without expensive equivariant operations."
+    },
+    {
+      "title": "GeoDiff: A Geometric Diffusion Model for Molecular Conformation Generation",
+      "authors": "Minkai Xu et al.",
+      "year": 2022,
+      "arxiv_id": "",
+      "role": "Baseline",
+      "relationship_sentence": "As a leading iterative diffusion method for conformer generation, GeoDiff serves as a primary baseline GTMGC improves upon by predicting the ground-state conformation in a single forward pass instead of costly sampling."
+    },
+    {
+      "title": "Better Informed Distance Geometry: Using What We Know To Improve Conformation Generation (ETKDG)",
+      "authors": "Sereina Riniker et al.",
+      "year": 2015,
+      "arxiv_id": "",
+      "role": "Baseline",
+      "relationship_sentence": "ETKDG provides the classical heuristic baseline for conformer generation that GTMGC directly replaces with a learned, end-to-end Graph-Transformer that targets DFT-quality ground-state geometries."
+    }
+  ],
+  "synthesis_narrative": "Graphormer established that graph transformers can be made structure-aware by adding bias terms derived from graph topology\u2014such as shortest-path distance and edge encodings\u2014directly into attention scores, making attention computation sensitive to molecular structure. Uni-Mol then showed that transformer backbones augmented with 3D-aware pair representations and distance-sensitive attention can effectively handle molecular geometry tasks, suggesting a general recipe for transformer-driven 3D molecular modeling. In parallel, E(n) Equivariant GNNs provided a simple, widely adopted mechanism to update coordinates while guaranteeing equivariance, yet they operate primarily through localized message passing and can struggle to capture long-range steric and ring constraints. SE(3)-Transformer demonstrated that attention itself can be made equivariant for 3D structures but at significant computational cost due to tensor operations and spherical harmonics. On the generative side, GeoDiff became a strong baseline for conformer generation through iterative diffusion sampling, while ETKDG remained the classical heuristic approach grounded in distance geometry and chemical constraints. Together, these works revealed a clear opportunity: combine the global receptive field and structural sensitivity of transformer attention with a lightweight mechanism that avoids the complexity of equivariant tensors and the sampling cost of generative pipelines. GTMGC synthesizes this by designing a Graph-Transformer that directly regresses ground-state coordinates from 2D graphs and introducing Molecule Structural Residual Self-Attention, which injects molecule-specific structural residuals into attention to capture long-range constraints efficiently, yielding an end-to-end alternative to both equivariant-heavy and sampling-heavy baselines.",
+  "target_paper": {
+    "title": "GTMGC: Using Graph Transformer to Predict Molecule\u2019s Ground-State Conformation",
+    "authors": "Guikun Xu, Yongquan Jiang, PengChuan Lei, Yan Yang, Jim Chen",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "molecular conformation prediction, molecule modeling, graph neural network, graph transformer",
+    "abstract": "The ground-state conformation of a molecule is often decisive for its properties. However, experimental or computational methods, such as density functional theory (DFT), are time-consuming and labor-intensive for obtaining this conformation. Deep learning (DL) based molecular representation learning (MRL) has made significant advancements in molecular modeling and has achieved remarkable results in various tasks. Consequently, it has emerged as a promising approach for directly predicting the ground-state conformation of molecules. In this regard, we introduce GTMGC, a novel network based on Graph-Transformer (GT) that seamlessly predicts the spatial configuration of molecules in a 3D space from their 2D topological architecture in an end-to-end manner. Moreover, we propose a novel self-attention mechanism called Molecule Structural Residual Self-Attention (MSRSA) for molecular structure modeling. This mechanism not only guarantees high model performance and easy implementation but al",
+    "openreview_id": "F7QnIKlC1N",
+    "forum_id": "F7QnIKlC1N"
+  },
+  "analysis_timestamp": "2026-01-06T11:54:55.840371"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "SPEX: Efficiently Discovering Sparse Feature Interactions in LLMs",
+      "authors": "Justin Singh Kang et al.",
+      "year": 2025,
+      "role": "Baseline",
+      "relationship_sentence": "ProxySPEX directly replaces SPEX\u2019s inference-heavy sparse-interaction search with a boosted-tree proxy fit to the same masked LLM outputs, retaining SPEX\u2019s sparsity premise while eliminating tens of thousands of model calls."
+    },
+    {
+      "title": "The Shapley Taylor Interaction Index",
+      "authors": "Kedar Dhamdhere et al.",
+      "year": 2020,
+      "role": "Foundation",
+      "relationship_sentence": "ProxySPEX\u2019s goal of attributing higher-order feature interactions is grounded in the Shapley\u2013Taylor formalization of interaction attributions that defines the problem objective it seeks to approximate efficiently."
+    },
+    {
+      "title": "From local explanations to global understanding with explainable AI for trees",
+      "authors": "Scott M. Lundberg et al.",
+      "year": 2020,
+      "role": "Extension",
+      "relationship_sentence": "ProxySPEX leverages tree-based exact interaction readouts (e.g., TreeSHAP-style path-based interaction values) from gradient-boosted trees trained on masked LLM outputs, extending these techniques to serve as a proxy for black-box LLM interaction discovery."
+    },
+    {
+      "title": "A Lasso for Hierarchical Interactions",
+      "authors": "Jacob Bien et al.",
+      "year": 2013,
+      "role": "Inspiration",
+      "relationship_sentence": "The strong heredity (hierarchy) principle formalized by Bien\u2013Taylor\u2013Tibshirani motivates ProxySPEX\u2019s core assumption that higher-order interactions co-occur with their lower-order subsets, enabling a more efficient interaction search."
+    },
+    {
+      "title": "Predictive Learning via Rule Ensembles",
+      "authors": "Jerome H. Friedman et al.",
+      "year": 2008,
+      "role": "Related Problem",
+      "relationship_sentence": "Friedman\u2013Popescu introduced interaction quantification in tree ensembles (e.g., the H-statistic), which ProxySPEX operationalizes by ranking interactions extracted from its boosted-tree proxy of the LLM."
+    },
+    {
+      "title": "Extracting Tree-Structured Representations of Trained Networks",
+      "authors": "Mark Craven et al.",
+      "year": 1996,
+      "role": "Inspiration",
+      "relationship_sentence": "ProxySPEX adapts the classic surrogate-model idea of training trees on a neural network\u2019s queries to the modern LLM setting, distilling masked-output behavior into an interpretable tree ensemble for interaction mining."
+    },
+    {
+      "title": "Detecting Statistical Interactions from Neural Network Weights",
+      "authors": "Michael Tsang et al.",
+      "year": 2018,
+      "role": "Related Problem",
+      "relationship_sentence": "This work demonstrated scalable discovery of sparse, higher-order interactions in neural nets, reinforcing the sparsity premise ProxySPEX assumes and informing its focus on non-enumerative interaction detection."
+    }
+  ],
+  "synthesis_narrative": "ProxySPEX\u2019s core advance\u2014efficiently attributing sparse, hierarchical feature interactions in LLMs\u2014emerges by fusing three strands of prior work. First, the problem formulation comes from interaction attribution via Shapley\u2013Taylor, which defines how higher-order effects should be measured but suffers from combinatorial explosion. SPEX directly tackled this by exploiting interaction sparsity for LLMs, yet required tens of thousands of masked inferences; ProxySPEX takes SPEX\u2019s objective as the primary baseline while addressing its key limitation: inference cost. Second, ProxySPEX draws on decades of tree-based interaction analysis. Friedman and Popescu showed that ensembles can quantify interaction strength; Lundberg et al. later provided exact, efficient interaction attributions for tree models (e.g., TreeSHAP), making trees a practical substrate for extracting multi-order interactions. ProxySPEX extends this paradigm by fitting gradient-boosted trees to masked LLM outputs and then reading out interactions from the proxy, eliminating further LLM calls. Third, the algorithm\u2019s efficiency hinges on the strong heredity (hierarchical) assumption from statistics (Bien\u2013Taylor\u2013Tibshirani), positing that higher-order interactions are accompanied by their subsets. This structural prior focuses the search and aligns naturally with how trees capture interactions through split hierarchies. Complementing these, neural interaction detection work (Tsang et al.) provides evidence and techniques for scalable, non-enumerative discovery of sparse interactions in deep models. Together, these works directly shape ProxySPEX\u2019s design: the objective from Shapley\u2013Taylor, the baseline and gap from SPEX, the proxy-extraction mechanism from tree explainability, and the hierarchy prior from statistical heredity.",
+  "analysis_timestamp": "2026-01-06T23:08:23.940616"
+}

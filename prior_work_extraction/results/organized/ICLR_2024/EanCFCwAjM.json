@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Common Objects in 3D: Large-Scale Learning and Evaluation of Object Category Reconstruction",
+      "authors": "Ilya Reizenstein et al.",
+      "year": 2021,
+      "arxiv_id": "2109.00512",
+      "role": "Foundation",
+      "relationship_sentence": "This paper provides the CO3D dataset and problem setting (category-level, sparse multi-view capture) that the current work targets and evaluates on, defining the task constraints under which the ray-based pose formulation is developed."
+    },
+    {
+      "title": "PoseNet: A Convolutional Network for Real-Time 6-DOF Camera Relocalization",
+      "authors": "Alex Kendall et al.",
+      "year": 2015,
+      "arxiv_id": "1505.07427",
+      "role": "Gap Identification",
+      "relationship_sentence": "By framing camera pose as direct regression of global extrinsics from an image, PoseNet exemplifies the top-down parameterization whose lack of spatial coupling and precision motivates the shift to a distributed, ray-based representation."
+    },
+    {
+      "title": "DSAC \u2014 Differentiable RANSAC for Camera Localization",
+      "authors": "Eric Brachmann et al.",
+      "year": 2017,
+      "arxiv_id": "1611.05705",
+      "role": "Extension",
+      "relationship_sentence": "DSAC\u2019s idea of inferring per-pixel geometric predictions and robustly aggregating them into a pose directly informs this work\u2019s extension to predicting per-patch rays and learning to aggregate them with transformers instead of RANSAC."
+    },
+    {
+      "title": "Set Transformer: A Framework for Attention-based Permutation-Invariant Neural Networks",
+      "authors": "Juho Lee et al.",
+      "year": 2019,
+      "arxiv_id": "1810.00825",
+      "role": "Foundation",
+      "relationship_sentence": "The permutation-invariant attention architecture of Set Transformers underpins the paper\u2019s set-level modeling of ray tokens, enabling view- and patch-agnostic aggregation for pose estimation."
+    },
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Jonathan Ho et al.",
+      "year": 2020,
+      "arxiv_id": "2006.11239",
+      "role": "Foundation",
+      "relationship_sentence": "The denoising diffusion framework provides the generative training and sampling mechanism that is adapted to ray sets to capture multi-modal uncertainties in sparse-view pose inference."
+    },
+    {
+      "title": "Structure-from-Motion Revisited",
+      "authors": "Johannes L. Sch\u00f6nberger and Jan-Michael Frahm",
+      "year": 2016,
+      "arxiv_id": "1606.05830",
+      "role": "Baseline",
+      "relationship_sentence": "As the canonical SfM/BA baseline (e.g., COLMAP) that relies on correspondences and dense view coverage, this work serves as the primary classical competitor whose failures in very sparse views the ray-based approach improves upon."
+    },
+    {
+      "title": "NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis",
+      "authors": "Ben Mildenhall et al.",
+      "year": 2020,
+      "arxiv_id": "2003.08934",
+      "role": "Inspiration",
+      "relationship_sentence": "NeRF\u2019s explicit treatment of cameras as bundles of rays and tight pixel\u2013ray coupling inspires the paper\u2019s core idea to represent camera pose as a distributed set of rays aligned with image features."
+    }
+  ],
+  "synthesis_narrative": "Common Objects in 3D (CO3D) established a category-level, object-centric multi-view benchmark with naturally sparse view counts, fixing both the data regime and evaluation protocol for pose under limited observations. PoseNet framed camera localization as direct regression of global extrinsics from an image, crystallizing a top-down parameterization that ignores spatial feature geometry, which subsequent works found imprecise. DSAC demonstrated that predicting dense, per-pixel geometric quantities (scene coordinates) and robustly aggregating them into poses yields improved localization, revealing the power of distributed predictions tied to image evidence. Set Transformer introduced permutation-invariant attention over sets, providing a principled, learnable mechanism to aggregate unordered tokens such as patch-wise geometric predictions across images. Denoising Diffusion Probabilistic Models showed how to learn multi-modal generative posteriors and sample coherent hypotheses\u2014an essential capability when geometric ambiguity is high under few views. Structure-from-Motion Revisited (COLMAP) codified correspondence-driven SfM/BA pipelines that excel with many matches but often collapse in extremely sparse-view settings. NeRF popularized viewing cameras explicitly as bundles of rays, tightly coupling pixels and rays for 3D reasoning.\nTogether, these works expose a gap: classical SfM needs many views, while global pose regression lacks spatial grounding; yet distributed, pixel-level geometry and ray-based reasoning naturally couple image evidence to 3D. The current paper synthesizes these insights by representing a camera as a set of rays predicted from image patches, aggregating them with set-level transformers, and adopting diffusion to sample plausible pose modes in ambiguous sparse-view scenarios\u2014an immediate and natural next step given this landscape.",
+  "target_paper": {
+    "title": "Cameras as Rays: Pose Estimation via Ray Diffusion",
+    "authors": "Jason Y. Zhang, Amy Lin, Moneish Kumar, Tzu-Hsuan Yang, Deva Ramanan, Shubham Tulsiani",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "oral",
+    "keywords": "3D Computer Vision, Pose Estimation, Diffusion",
+    "abstract": "Estimating camera poses is a fundamental task for 3D reconstruction and remains challenging given sparsely sampled views (<10). In contrast to existing approaches that pursue top-down prediction of global parametrizations of camera extrinsics, we propose a distributed representation of camera pose that treats a camera as a bundle of rays. This representation allows for a tight coupling with spatial image features improving pose precision. We observe that this representation is naturally suited for set-level transformers and develop a regression-based approach that maps image patches to corresponding rays. To capture the inherent uncertainties in sparse-view pose inference, we adapt this approach to learn a denoising diffusion model which allows us to sample plausible modes while improving performance. Our proposed methods, both regression- and diffusion-based, demonstrate state-of-the-art performance on camera pose estimation on CO3D while generalizing to unseen object categories and i",
+    "openreview_id": "EanCFCwAjM",
+    "forum_id": "EanCFCwAjM"
+  },
+  "analysis_timestamp": "2026-01-06T18:42:08.308965"
+}

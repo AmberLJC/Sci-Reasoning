@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Learning to Simulate Complex Physics with Graph Networks",
+      "authors": "Sanchez-Gonzalez et al.",
+      "year": 2020,
+      "role": "Baseline",
+      "relationship_sentence": "Established the graph network learned-simulator paradigm and next-step rollout training that ROBIN directly improves upon by replacing single-step prediction with diffusion-based refinement and multiscale message passing."
+    },
+    {
+      "title": "Learning Mesh-Based Simulation with Graph Networks",
+      "authors": "Pfaff et al.",
+      "year": 2021,
+      "role": "Gap Identification",
+      "relationship_sentence": "Introduced GNN simulators for unstructured meshes (including elastic solids) and revealed limitations with local message passing and long-horizon error accumulation that ROBIN addresses via an AMG-based hierarchy and diffusion refinement."
+    },
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Ho et al.",
+      "year": 2020,
+      "role": "Foundation",
+      "relationship_sentence": "Provides the iterative denoising generative framework that ROBIN leverages at every physical time step, with ROBI amortizing the diffusion refinement by overlapping denoising across a temporal window."
+    },
+    {
+      "title": "Denoising Diffusion Implicit Models",
+      "authors": "Song et al.",
+      "year": 2020,
+      "role": "Extension",
+      "relationship_sentence": "Introduces non-Markovian/implicit samplers for efficient diffusion inference, whose stepwise denoising mechanism ROBI reorganizes and parallelizes across successive time steps to reduce per-step latency."
+    },
+    {
+      "title": "Diffuser: Diffusion Models for Planning",
+      "authors": "Janner et al.",
+      "year": 2022,
+      "role": "Inspiration",
+      "relationship_sentence": "Demonstrates that modeling entire trajectories with diffusion mitigates compounding errors, directly inspiring ROBIN\u2019s use of diffusion-based temporal refinement and its rolling-window inference scheme."
+    },
+    {
+      "title": "Algebraic Multigrid (AMG): An Introduction to Multigrid Methods",
+      "authors": "Ruge and St\u00fcben",
+      "year": 1987,
+      "role": "Foundation",
+      "relationship_sentence": "Provides the algebraic coarsening/prolongation machinery that ROBIN adapts to build a multilevel graph hierarchy, enabling cross-resolution message passing for global solid-mechanics phenomena."
+    }
+  ],
+  "synthesis_narrative": "ROBIN sits at the intersection of learned simulators, multigrid hierarchies, and diffusion generative modeling. The graph-simulator line of work\u2014exemplified by Sanchez-Gonzalez et al. and Pfaff et al.\u2014established message-passing predictors on unstructured meshes for elastic and fluid systems, but also exposed two key bottlenecks: locality that misses global effects (e.g., bending, long-range correlations) and compounding rollout error from direct next-step prediction. ROBIN addresses the second bottleneck by importing the iterative refinement principle from diffusion models. Building on the denoising machinery of DDPM and the efficient non-Markovian samplers of DDIM, ROBI reorganizes diffusion inference across time, overlapping denoising steps in a rolling window to amortize cost while preserving iterative correction at each physical step. In parallel, to overcome the locality limitations of flat message passing, ROBIN adopts the algebraic multigrid (AMG) framework of Ruge\u2013St\u00fcben to construct mesh-agnostic coarsenings and prolongations, enabling principled multiscale message passing that captures global solid-mechanics behavior. Finally, Janner et al.\u2019s Diffuser directly motivates the move from one-step predictors to diffusion over temporal structures, showing that trajectory-level denoising mitigates error accumulation; ROBIN operationalizes this idea for neural PDE simulation with a batched, rolling scheme. Together, these threads yield a hierarchical GNN with diffusion-based refinement that scales across mesh resolutions and stabilizes long rollouts in nonlinear solid mechanics.",
+  "analysis_timestamp": "2026-01-06T23:08:23.946961"
+}

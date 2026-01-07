@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+      "authors": "Alexey Dosovitskiy et al.",
+      "year": 2021,
+      "role": "Foundational ViT architecture establishing tokenized image processing and quadratic complexity in token count.",
+      "relationship_sentence": "DeSparsify leverages the ViT tokenization paradigm and its quadratic token-cost, using this structural pressure point to convert input-dependent sparsification into worst-case compute."
+    },
+    {
+      "title": "DynamicViT: Efficient Vision Transformers with Dynamic Token Sparsification",
+      "authors": "Yongming Rao et al.",
+      "year": 2021,
+      "role": "Canonical learned, input-dependent token pruning for ViTs via importance prediction modules.",
+      "relationship_sentence": "DeSparsify directly targets DynamicViT-style importance predictors, crafting inputs that suppress pruning and force maximal token retention across stages, thereby inflating computation."
+    },
+    {
+      "title": "TokenLearner: What Can 8 Learned Tokens Do for Images and Videos?",
+      "authors": "Michael S. Ryoo, AJ Piergiovanni, Mingxing Tan, Anelia Angelova",
+      "year": 2021,
+      "role": "Introduces differentiable, content-adaptive token selection that drastically reduces tokens while preserving accuracy.",
+      "relationship_sentence": "By exploiting TokenLearner\u2019s differentiable content-dependent selection, DeSparsify steers the selector to resist sparsification, keeping many tokens active while maintaining output semantics."
+    },
+    {
+      "title": "Token Merging: Your ViT but Faster (ToMe)",
+      "authors": "David Bolya et al.",
+      "year": 2023,
+      "role": "General, plug-in token merging mechanism that adaptively reduces token count based on similarity.",
+      "relationship_sentence": "DeSparsify manipulates token similarity structure to prevent merging in ToMe-like modules, generalizing the attack to merging-based sparsifiers and maximizing downstream compute."
+    },
+    {
+      "title": "Sponge Examples: Energy-Latency Attacks on Neural Networks",
+      "authors": "Ilia Shumailov et al.",
+      "year": 2021,
+      "role": "Pioneers adversarial inputs that maximize inference-time resource consumption (energy/latency) while remaining inconspicuous.",
+      "relationship_sentence": "DeSparsify adapts the sponge-attack philosophy to ViTs with token sparsification, explicitly optimizing inputs to exhaust system resources via worst-case token paths."
+    },
+    {
+      "title": "DeepSloth: Slowdown Attacks against Adaptive Deep Neural Networks",
+      "authors": "Ilia Shumailov et al.",
+      "year": 2021,
+      "role": "Demonstrates that adaptive/early-exit networks can be adversarially driven to high-cost execution paths.",
+      "relationship_sentence": "DeSparsify extends DeepSloth\u2019s slowdown insight from early-exit gating to token-gating, crafting gradients that disable sparsification and trigger worst-case computational work."
+    }
+  ],
+  "synthesis_narrative": "DeSparsify emerges at the intersection of adaptive vision transformer design and resource-focused adversarial ML. The ViT formulation by Dosovitskiy et al. established both the tokenization interface and the quadratic cost scaling that make token count a critical lever. Efficiency methods such as DynamicViT and TokenLearner then introduced differentiable, input-dependent token selection, while ToMe generalized token reduction via similarity-driven merging. Collectively, these sparsification mechanisms rely on average-case behavior: most inputs permit aggressive token reduction without harming accuracy.\n\nResource-centric attacks disrupted this assumption. Sponge Examples showed that models can be manipulated to maximize energy and latency consumption, and DeepSloth revealed that adaptive inference policies (e.g., early exits) can be adversarially coerced into worst-case execution paths. DeSparsify fuses these two lines: it recasts token sparsification as a vulnerable adaptive policy and optimizes inputs\u2014via gradients over token-importance/selectors or token-similarity structures\u2014to suppress pruning/merging at each stage. This forces a cascade of maximal token retention, turning the quadratic cost into a denial-of-availability vector that exhausts OS resources. Crucially, by leveraging the differentiable nature of modern sparsifiers (DynamicViT, TokenLearner) and the structural properties of merging (ToMe), DeSparsify remains broadly applicable while preserving task semantics for stealth. In short, DeSparsify translates slowdown/energy-attack principles into the specific mechanics of token sparsification in ViTs, weaponizing adaptivity against itself.",
+  "analysis_timestamp": "2026-01-06T23:33:36.290990"
+}

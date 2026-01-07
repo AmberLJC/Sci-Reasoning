@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Balancing vectors and Gaussian measures of n-dimensional convex bodies",
+      "authors": "Wojciech Banaszczyk",
+      "year": 1998,
+      "role": "Theoretical foundation (vector balancing / discrepancy theory)",
+      "relationship_sentence": "BalanceKV\u2019s core idea\u2014selecting a signed/weighted subset of keys/values whose accumulated vector sum remains small\u2014directly instantiates Banaszczyk\u2019s vector balancing guarantee to control the approximation error of attention in a space-limited stream."
+    },
+    {
+      "title": "Constructive Discrepancy Minimization",
+      "authors": "Nikhil Bansal",
+      "year": 2010,
+      "role": "Algorithmic template for turning discrepancy bounds into efficient procedures",
+      "relationship_sentence": "The paper\u2019s geometric process for selecting a balanced KV subset follows the paradigm of Bansal\u2019s randomized-walk\u2013style constructive discrepancy, bridging non-constructive balancing guarantees with implementable algorithms."
+    },
+    {
+      "title": "Constructive Discrepancy Minimization by Walking on the Edges",
+      "authors": "Shachar Lovett, Raghu Meka",
+      "year": 2012,
+      "role": "Efficient constructive algorithm for discrepancy via edge-walks",
+      "relationship_sentence": "BalanceKV\u2019s update rules and potential-function view are aligned with edge-walk based constructive methods, informing how to maintain bounded norms while incrementally deciding signs/weights in a streaming setting."
+    },
+    {
+      "title": "An Algorithm for Koml\u00f3s Problem Matching Banaszczyk\u2019s Bound",
+      "authors": "Nikhil Bansal, Daniel Dadush, Shashwat Garg",
+      "year": 2016,
+      "role": "Algorithmic realization of Banaszczyk-type bounds",
+      "relationship_sentence": "This work provides constructive tools that achieve Banaszczyk-level guarantees, underpinning BalanceKV\u2019s provable \u03b5-approximation by ensuring the selected KV subset achieves near-optimal vector balance."
+    },
+    {
+      "title": "Online Vector Balancing and Geometric Discrepancy",
+      "authors": "Nikhil Bansal, Haotian Jiang, Sahil Singla",
+      "year": 2020,
+      "role": "Online/streaming discrepancy control",
+      "relationship_sentence": "BalanceKV operates in a streaming regime and inherits online decision-making principles from online vector balancing, ensuring that each arriving token can be incorporated while keeping cumulative error bounded."
+    },
+    {
+      "title": "Transformers are RNNs: Fast Autoregressive Transformers with Linear Attention",
+      "authors": "Angelos Katharopoulos, Apoorv Vyas, Nikolaos Pappas, Fran\u00e7ois Fleuret",
+      "year": 2020,
+      "role": "Attention approximation baseline via kernel feature maps",
+      "relationship_sentence": "Linear Attention provides a foundational baseline for approximating softmax attention; BalanceKV contrasts by selecting balanced actual tokens under memory constraints rather than relying on feature-map linearization."
+    },
+    {
+      "title": "Rethinking Attention with Performers",
+      "authors": "Krzysztof Choromanski et al.",
+      "year": 2020,
+      "role": "Random-feature softmax approximation baseline (FAVOR+)",
+      "relationship_sentence": "Performer\u2019s randomized kernel approximation is a key comparator; BalanceKV instead uses discrepancy-theoretic token selection to achieve \u03b5-approximation with tight space and streaming guarantees."
+    }
+  ],
+  "synthesis_narrative": "BalanceKV\u2019s key insight is to recast streaming attention approximation as a vector balancing problem, enabling provable \u03b5-accurate summaries of past keys/values under strict memory constraints. The theoretical backbone is Banaszczyk\u2019s vector balancing theorem, which guarantees small-norm signed sums of vectors; BalanceKV operationalizes this guarantee to control the deviation between exact and approximated attention scores. Turning these non-constructive guarantees into an implementable streaming algorithm draws on constructive discrepancy methods: Bansal\u2019s randomized-walk framework and the Lovett\u2013Meka edge-walk provide geometric processes and potential functions for incrementally assigning signs/weights while keeping the aggregate balanced. Further, results by Bansal\u2013Dadush\u2013Garg give algorithmic access to Banaszczyk-level bounds, informing BalanceKV\u2019s guarantees that match the right dependence on dimensionality and norms. Because attention must be approximated as tokens arrive, online vector balancing principles (Bansal\u2013Jiang\u2013Singla) guide the streaming decision rules to maintain bounded error growth over time. On the modeling side, BalanceKV addresses the same practical objective as prior attention approximations\u2014reducing compute/memory while preserving fidelity\u2014but takes a different route than kernel/feature-map methods (Linear Attention) or randomized feature expansions (Performer). Rather than approximate the kernel, it selects an adaptively balanced subset of actual tokens to summarize context. This discrepancy-theoretic perspective not only yields tighter space\u2013accuracy tradeoffs but also naturally supports the paper\u2019s space lower bounds via standard discrepancy/communication lower-bound techniques, placing BalanceKV\u2019s guarantees in a near-optimal regime.",
+  "analysis_timestamp": "2026-01-06T23:42:48.143580"
+}

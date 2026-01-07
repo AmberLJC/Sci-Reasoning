@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Learning without Forgetting",
+      "authors": "Zhizhong Li, Derek Hoiem",
+      "year": 2016,
+      "role": "Continual learning without old data (distillation-based)",
+      "relationship_sentence": "LwF pioneered using the previous model\u2019s outputs on new-task data to preserve prior capabilities when old data are unavailable; the ICML 2025 paper similarly leverages the pretrained model\u2019s signal on target samples\u2014here via loss\u2014to guide fine-tuning and curb forgetting."
+    },
+    {
+      "title": "Distilling the Knowledge in a Neural Network",
+      "authors": "Geoffrey Hinton, Oriol Vinyals, Jeff Dean",
+      "year": 2015,
+      "role": "Foundational method (knowledge distillation)",
+      "relationship_sentence": "Knowledge distillation established using teacher predictions to shape student learning; the new paper adapts this spirit by using the pretrained model\u2019s per-sample loss as a training signal, but channels it into sample weighting rather than output matching."
+    },
+    {
+      "title": "Curriculum Learning",
+      "authors": "Yoshua Bengio, J\u00e9r\u00f4me Louradour, Ronan Collobert, Jason Weston",
+      "year": 2009,
+      "role": "Sample weighting/ordering by difficulty",
+      "relationship_sentence": "Curriculum learning showed that emphasizing easier examples can shape optimization and generalization; the new work operationalizes an analogous easy-first principle during fine-tuning to resist drifting from the pretrained solution."
+    },
+    {
+      "title": "Self-Paced Learning for Latent Variable Models",
+      "authors": "M. Pawan Kumar, Benjamin Packer, Daphne Koller",
+      "year": 2010,
+      "role": "Loss-based reweighting/selection",
+      "relationship_sentence": "Self-paced learning formalized loss-driven sample weighting, providing the template for using low-loss (easy) examples more heavily\u2014precisely the mechanism the paper adopts using the pretrained model\u2019s loss on downstream data."
+    },
+    {
+      "title": "Elastic Weight Consolidation",
+      "authors": "James Kirkpatrick, Razvan Pascanu, Neil Rabinowitz, Joel Veness, et al.",
+      "year": 2017,
+      "role": "Continual learning via parameter regularization",
+      "relationship_sentence": "EWC exemplifies parameter-space constraints to prevent forgetting; the new method targets the same goal but moves the control knob to sample space, offering an orthogonal route that does not require old-task data or Fisher estimates."
+    },
+    {
+      "title": "Explicit Inductive Bias for Transfer Learning with Convolutional Networks (L2-SP)",
+      "authors": "Xuhong Li, Yves Grandvalet, Franck Davoine",
+      "year": 2018,
+      "role": "Transfer learning regularization to stay near pretrained weights",
+      "relationship_sentence": "L2-SP constrains fine-tuning to remain close to pretrained parameters; the paper shares the objective of limiting drift but achieves it by upweighting easy target samples identified by the pretrained model\u2019s low loss."
+    },
+    {
+      "title": "Improving Predictive Inference Under Covariate Shift by Weighting the Log-Likelihood Function",
+      "authors": "Hidetoshi Shimodaira",
+      "year": 2000,
+      "role": "Importance weighting under distribution shift",
+      "relationship_sentence": "Importance weighting under covariate shift motivates reweighting examples according to similarity to the training distribution; the paper\u2019s easy-sample upweighting interprets low pretrained loss as proximity to the source manifold, thereby reducing drift and forgetting."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core idea\u2014upweighting easy target samples as judged by the pretrained model\u2019s loss to mitigate catastrophic forgetting\u2014stands at the intersection of three lines of work. First, Learning without Forgetting and knowledge distillation established that a prior model\u2019s outputs can regularize adaptation when original data are unavailable. While those works align predictions or logits, the present paper repurposes the pretrained model\u2019s signal to define a curriculum over the fine-tuning data via loss-based weights, shifting the locus of control from output/parameter matching to sample space.\nSecond, curriculum and self-paced learning demonstrated that emphasizing easy examples can beneficially shape optimization trajectories. The new method instantiates this principle in transfer: treating low-loss examples (for the pretrained model) as anchors that keep optimization near the source solution, thereby curbing drift responsible for forgetting.\nThird, parameter-space regularizers like EWC and L2-SP aim to preserve prior knowledge by constraining weight updates. The proposed approach is complementary: rather than penalizing parameter movement, it steers gradient contributions through data reweighting, avoiding reliance on old-task data, Fisher estimates, or specialized parameterization.\nFinally, importance weighting under covariate shift provides a distributional lens: low pretrained loss indicates samples close to the source manifold; upweighting them reduces effective shift during fine-tuning, aligning with the paper\u2019s theoretical claim that learning stalls in subspaces prone to overfitting. Together, these works directly underpin the paper\u2019s sample-weighted fine-tuning strategy for mitigating forgetting.",
+  "analysis_timestamp": "2026-01-07T00:29:42.076195"
+}

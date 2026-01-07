@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Diffusion Models Beat GANs",
+      "authors": "Prafulla Dhariwal et al.",
+      "year": 2021,
+      "role": "Gap Identification",
+      "relationship_sentence": "Introduced classifier guidance for diffusion sampling via gradients of a classifier, highlighting a key limitation\u2014guidance requires differentiable objectives\u2014which SCG removes by enabling training-free guidance from non-differentiable rule functions."
+    },
+    {
+      "title": "Classifier-Free Diffusion Guidance",
+      "authors": "Jonathan Ho et al.",
+      "year": 2022,
+      "role": "Gap Identification",
+      "relationship_sentence": "Popularized guidance without an external classifier but still reliant on gradients from a conditional model trained for guidance; SCG explicitly addresses this gap by providing plug-and-play guidance that needs only forward evaluations of non-differentiable rules."
+    },
+    {
+      "title": "Diffuser: Diffusion Models for Sequential Decision Making",
+      "authors": "Michael Janner et al.",
+      "year": 2022,
+      "role": "Extension",
+      "relationship_sentence": "Cast trajectory generation and control as diffusion with reward/value-based (gradient) guidance; SCG extends this control perspective to black-box, non-differentiable rule functions via sampling-based (no-gradient) stochastic control within the reverse diffusion process."
+    },
+    {
+      "title": "A Generalized Path Integral Control Approach to Reinforcement Learning",
+      "authors": "Evangelos A. Theodorou et al.",
+      "year": 2010,
+      "role": "Inspiration",
+      "relationship_sentence": "Provides the path-integral policy improvement blueprint\u2014reward-weighted trajectory reweighting using only forward evaluations\u2014that SCG adapts at each denoising step to steer a pretrained diffusion model without backpropagation through the rule."
+    },
+    {
+      "title": "Linearly Solvable Markov Decision Problems",
+      "authors": "Emanuel Todorov",
+      "year": 2009,
+      "role": "Foundation",
+      "relationship_sentence": "Establishes the control-as-inference/entropy-regularized control framework with exponentiated rewards, directly underpinning SCG\u2019s stochastic-control view of guidance via sampling and reweighting rather than gradient-based objectives."
+    },
+    {
+      "title": "High-Resolution Image Synthesis with Latent Diffusion Models",
+      "authors": "Robin Rombach et al.",
+      "year": 2022,
+      "role": "Foundation",
+      "relationship_sentence": "Introduces latent diffusion, the architectural principle the paper adapts to symbolic music (high time-resolution piano-roll latents) and composes with SCG in a plug-and-play manner."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core innovation\u2014Stochastic Control Guidance (SCG) for training-free, non-differentiable rule guidance\u2014emerges from unifying guided diffusion with sampling-based stochastic optimal control. Prior guided diffusion methods defined the problem but left a critical gap: Dhariwal and Nichol\u2019s classifier guidance and Ho and Salimans\u2019 classifier-free guidance both hinge on differentiable signals (either a classifier or conditional model gradients), making them ill-suited for symbolic musical rules that are naturally non-differentiable. Diffuser reframed diffusion as trajectory generation under rewards, suggesting a control-theoretic lens, but it still relied on gradient-based shaping of the denoising process.\nSCG draws its mechanism directly from path-integral and entropy-regularized control. Theodorou et al.\u2019s path-integral policy improvement shows how to steer distributions using reward-weighted sampling with only forward evaluations, while Todorov\u2019s linearly solvable MDPs formalize exponentiated-reward weighting as the foundation of control-as-inference. SCG instantiates these ideas inside each reverse-diffusion step, reweighting samples by rule-derived scores without differentiating through the rules or the generator\u2014thereby delivering the first training-free guidance for non-differentiable musical constraints. Complementing SCG, the paper\u2019s latent diffusion architecture for symbolic music directly builds on Rombach et al.\u2019s latent diffusion principle, enabling high time-resolution piano-roll generation that can be modularly combined with SCG. Together, these works form the direct lineage that enables non-differentiable rule-guided, plug-and-play symbolic music generation.",
+  "analysis_timestamp": "2026-01-06T23:09:26.441656"
+}

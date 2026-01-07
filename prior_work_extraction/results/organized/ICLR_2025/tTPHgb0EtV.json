@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Sharpness-Aware Minimization for Efficiently Improving Generalization",
+      "authors": "Pierre Foret, Ariel Kleiner, Hossein Mobahi, Behnam Neyshabur",
+      "year": 2021,
+      "role": "Optimization technique in weight space",
+      "relationship_sentence": "Booster adapts SAM\u2019s core idea of training under adversarial weight perturbations, but targets the safety objective specifically\u2014penalizing reductions in harmful loss after simulated weight perturbations to build robustness against harmful fine-tuning."
+    },
+    {
+      "title": "Towards Deep Learning Models Resistant to Adversarial Attacks",
+      "authors": "Aleksander Madry, Aleksandar Makelov, Ludwig Schmidt, Dimitris Tsipras, Adrian Vladu",
+      "year": 2018,
+      "role": "Minimax adversarial training framework",
+      "relationship_sentence": "Booster follows the Madry-style minimax principle\u2014introducing an inner perturbation (here, in parameter space) and optimizing a loss that resists that perturbation\u2014specialized to the harmfulness objective of aligned LLMs."
+    },
+    {
+      "title": "Training Language Models to Follow Instructions with Human Feedback",
+      "authors": "Long Ouyang et al.",
+      "year": 2022,
+      "role": "Baseline alignment paradigm (RLHF)",
+      "relationship_sentence": "Booster is appended to the standard alignment loss from RLHF, making the aligned model explicitly robust to subsequent harmful fine-tuning without sacrificing the helpfulness learned via human feedback."
+    },
+    {
+      "title": "Constitutional AI: Harmlessness from AI Feedback",
+      "authors": "Yuntao Bai et al.",
+      "year": 2022,
+      "role": "Safety/harmlessness training objective",
+      "relationship_sentence": "Booster\u2019s notion of a \u2018harmful loss\u2019 and its focus on preserving harmlessness aligns with Constitutional AI\u2019s harmlessness objective, operationalizing it via a perturbation-aware regularizer during alignment."
+    },
+    {
+      "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+      "authors": "Edward J. Hu et al.",
+      "year": 2022,
+      "role": "Enabling mechanism for low-cost fine-tuning (attack surface)",
+      "relationship_sentence": "By making fine-tuning cheap and accessible, LoRA exacerbates harmful FT risks; Booster is designed to attenuate the impact of such adapter-induced weight changes on harmful behavior."
+    },
+    {
+      "title": "Locating and Editing Factual Associations in GPT (ROME)",
+      "authors": "Kevin Meng, David Bau, Yonatan Belinkov, et al.",
+      "year": 2022,
+      "role": "Evidence that targeted weight edits drive behavioral changes",
+      "relationship_sentence": "ROME demonstrates that small, targeted weight updates can reliably alter outputs, motivating Booster\u2019s weight-perturbation view of harmful fine-tuning and the need to regularize harmful-loss changes under such perturbations."
+    }
+  ],
+  "synthesis_narrative": "Booster\u2019s core contribution\u2014attenuating the reduction in harmful loss under simulated weight perturbations during alignment\u2014sits at the intersection of adversarial robustness, weight-space optimization, and LLM safety alignment. Conceptually, SAM (Foret et al., 2021) established that optimizing against worst-case weight perturbations can induce flat minima and robustness; Booster repurposes this idea for safety by constructing weight perturbations that simulate downstream harmful fine-tuning and then discouraging any harmful-loss improvement post-perturbation. This mirrors the minimax structure popularized by Madry et al. (2018), but the inner maximization is carried out in parameter space and the outer objective focuses on harmlessness rather than classification accuracy.\nOperationally, Booster augments standard alignment training, exemplified by RLHF (Ouyang et al., 2022), with a perturbation-aware regularizer. Its definition of harmful loss and its goal of preserving refusal behavior build directly on harmlessness-centric alignment, as in Constitutional AI (Bai et al., 2022). The motivation to model attacks as weight perturbations is reinforced by model-editing results like ROME (Meng et al., 2022), which show how small, directed weight changes can predictably alter model behavior\u2014precisely what malicious fine-tuning seeks to achieve. Finally, LoRA (Hu et al., 2022) makes such fine-tuning cheap and practical, broadening the real-world attack surface that Booster aims to defend against. Together, these works inform Booster\u2019s key insight: proactively shaping the alignment landscape to be insensitive, in the harmful direction, to plausible post-deployment parameter updates.",
+  "analysis_timestamp": "2026-01-06T23:42:48.095132"
+}

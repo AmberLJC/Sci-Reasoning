@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "BitNet b1.58: 1.58-bit Large Language Models",
+      "authors": "Wang et al.",
+      "year": 2024,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "By demonstrating that end-to-end training of ternary-weight Transformers (\u22481.58-bit) can approach floating-point quality, this work directly inspired scaling up pretraining of ternary LMs and systematically comparing their scaling behavior against post-training quantized models."
+    },
+    {
+      "title": "Trained Ternary Quantization",
+      "authors": "Chenzhuo Zhu et al.",
+      "year": 2017,
+      "arxiv_id": "1612.01064",
+      "role": "Extension",
+      "relationship_sentence": "The paper\u2019s learned positive/negative scaling for ternary weights and straight-through estimation provide the concrete quantizer and training recipe that are extended to Transformer weight matrices for large-scale ternary LM pretraining."
+    },
+    {
+      "title": "TernaryBERT: Distillation-aware Ultra-low Bit BERT",
+      "authors": "Zhang et al.",
+      "year": 2020,
+      "arxiv_id": null,
+      "role": "Related Problem",
+      "relationship_sentence": "By showing Transformer-based language models can retain accuracy under ternary weights via task-aware training, it established feasibility in NLP and informed design choices for moving from finetuning to full autoregressive pretraining at scale."
+    },
+    {
+      "title": "GPTQ: Accurate Post-Training Quantization for Generative Pretrained Transformers",
+      "authors": "Frantar et al.",
+      "year": 2022,
+      "arxiv_id": "2210.17323",
+      "role": "Baseline",
+      "relationship_sentence": "As a leading PTQ baseline for 3\u20134-bit LLMs whose quality degrades below 4-bit, it is the primary competitor that the ternary-pretrained models are designed to outperform at ultra-low precision."
+    },
+    {
+      "title": "AWQ: Activation-aware Weight Quantization for LLMs",
+      "authors": "Lin et al.",
+      "year": 2023,
+      "arxiv_id": "2306.00978",
+      "role": "Baseline",
+      "relationship_sentence": "This activation-aware PTQ method preserves 4-bit accuracy but still struggles in sub-4-bit regimes, motivating the shift to pretraining ternary weights as an alternative path to ultra-low-bit quality."
+    },
+    {
+      "title": "Scaling Laws for Neural Language Models",
+      "authors": "Kaplan et al.",
+      "year": 2020,
+      "arxiv_id": "2001.08361",
+      "role": "Foundation",
+      "relationship_sentence": "Its power-law characterization of loss versus model/data/compute supplies the framework extended here to analyze scaling in terms of total model size measured in bits."
+    },
+    {
+      "title": "Training Compute-Optimal Large Language Models",
+      "authors": "Hoffmann et al.",
+      "year": 2022,
+      "arxiv_id": "2203.15556",
+      "role": "Foundation",
+      "relationship_sentence": "The Chinchilla compute\u2013data optimality results guide token budgets and comparative scaling methodology that underpin the bit-level scaling analysis of low-precision models."
+    }
+  ],
+  "synthesis_narrative": "Early work on ternary quantization established both the mechanism and feasibility of extreme weight discretization. Trained Ternary Quantization introduced a learned ternary quantizer with positive/negative scales and straight\u2011through estimation, providing a practical recipe for training networks with 2\u2011bit weight representations. In the Transformer/NLP setting, TernaryBERT showed that language models can sustain ternary weights when training is task\u2011aware, signaling that low\u2011bit transformers are viable beyond vision. More recently, BitNet b1.58 demonstrated that end\u2011to\u2011end training of ternary\u2011weight Transformers can achieve competitive perplexity, bringing ternary LMs from niche feasibility to a realistic path for large\u2011scale models. In parallel, post\u2011training quantization advanced with GPTQ and AWQ, which preserve strong 4\u2011bit accuracy but empirically degrade below 4 bits, especially on generative tasks. Finally, the scaling-law literature, from Kaplan\u2019s power laws to Hoffmann\u2019s compute\u2011optimal Chinchilla prescriptions, defined how to evaluate model quality as a function of parameters, data, and compute, setting standards for rigorous scaling analyses. Together, these works expose a clear opportunity: PTQ struggles at sub\u20114\u2011bit precision, while learned ternary training appears promising but lacked systematic, large\u2011scale validation and a principled scaling treatment. Building on TTQ\u2019s quantizer mechanics and BitNet\u2019s proof of viability, and using GPTQ/AWQ as strong PTQ baselines within a Kaplan\u2013Chinchilla scaling framework, the present study pretrains ternary LMs across sizes and data budgets, enabling a direct, bit\u2011normalized scaling comparison that reveals the advantages of ternary pretraining at billion\u2011parameter scales.",
+  "target_paper": {
+    "title": "Surprising Effectiveness of pretraining Ternary  Language Model at Scale",
+    "authors": "Ayush Kaushal, Tejas Vaidhya, Arnab Kumar Mondal, Tejas Pandey, Aaryan Bhagat, Irina Rish",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "Large Language Models, low-bit language models, quantization-aware training, pretraining of large language models, and scaling laws",
+    "abstract": "Rapid advancements in GPU computational power has outpaced memory capacity and bandwidth growth, creating bottlenecks in Large Language Model (LLM) inference. Post-training quantization is the leading method for addressing memory-related bottlenecks in LLM inference, but it suffers from significant performance degradation below 4-bit precision. This paper addresses these challenges by investigating the pretraining of low-bitwidth models specifically Ternary Language Models (TriLMs) as an alternative to traditional floating-point models (FloatLMs) and their post-training quantized versions (QuantLMs). We present Spectra LLM suite, the first open suite of LLMs spanning multiple bit-widths, including FloatLMs, QuantLMs, and TriLMs, ranging from 99M to 3.9B parameters trained on 300B tokens. Our comprehensive evaluation demonstrates that TriLMs offer superior scaling behavior in terms of model size (in bits). Surprisingly, at scales exceeding one billion parameters, TriLMs consistently out",
+    "openreview_id": "TJo6aQb7mK",
+    "forum_id": "TJo6aQb7mK"
+  },
+  "analysis_timestamp": "2026-01-06T09:20:27.786919"
+}

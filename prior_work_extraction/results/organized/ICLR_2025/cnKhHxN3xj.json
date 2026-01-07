@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Towards Monosemanticity: Decomposing Language Models with Dictionary Learning",
+      "authors": "Bricken et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Extension",
+      "relationship_sentence": "Introduces sparse autoencoder/dictionary-learning methods to disentangle polysemantic neurons, which this paper directly extends by proposing a Wasserstein-based entanglement metric and an alternative disentangling mechanism that addresses SAEs\u2019 failure to capture highly non-Gaussian, multi-function neurons."
+    },
+    {
+      "title": "Toy Models of Superposition",
+      "authors": "Elhage et al.",
+      "year": 2022,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "Formalizes how feature superposition leads to polysemantic neurons and predicts non-Gaussian activations under bottlenecks, motivating this paper\u2019s use of a quantitative non-Gaussianity (Wasserstein-to-Gaussian) measure to identify and target entangled neurons."
+    },
+    {
+      "title": "SparseGPT: Massive Language Models Can Be Accurately Pruned in One-Shot",
+      "authors": "Frantar et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "Establishes one-shot LLM weight pruning as a primary post-training sparsity method, providing the baseline and motivating gap\u2014lack of neuron-level entanglement awareness\u2014that this paper addresses by singling out \u201cWasserstein neurons\u201d crucial for accuracy under sparsity."
+    },
+    {
+      "title": "Wanda: A Simple Method for Pruning LLMs",
+      "authors": "Sun et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "Serves as a widely used pruning baseline whose weight/activation heuristics lack an explicit model of polysemantic entanglement, directly motivating the paper\u2019s entanglement-aware analysis and interventions."
+    },
+    {
+      "title": "Outrageously Large Neural Networks: The Sparsely-Gated Mixture-of-Experts Layer",
+      "authors": "Shazeer et al.",
+      "year": 2017,
+      "arxiv_id": "1701.06538",
+      "role": "Inspiration",
+      "relationship_sentence": "Introduces input-dependent expert routing, which directly inspires this paper\u2019s neuron-level mixture-of-experts decomposition that replaces a highly entangled neuron with a mixture of lower-Wasserstein neurons conditioned on separated input regimes."
+    },
+    {
+      "title": "Calculation of the Wasserstein metric for probability distributions on the line",
+      "authors": "Vallender",
+      "year": 1974,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "Provides the one-dimensional formulation of Wasserstein distance via quantile functions, enabling the paper\u2019s efficient computation of each neuron\u2019s Wasserstein distance to a Gaussian as an entanglement metric."
+    }
+  ],
+  "synthesis_narrative": "Sparse autoencoders for mechanistic interpretability showed that dictionary learning can decompose polysemantic neurons into more interpretable features, but they also revealed failure modes when activations are highly non-Gaussian or multi-function, leaving some features entangled (Bricken et al., 2023). Theoretical analysis of superposition argued that feature overlap under capacity constraints produces polysemantic neurons and predicts notably non-Gaussian activation patterns, identifying the need for quantitative measures of entanglement rooted in distributional shape (Elhage et al., 2022). In parallel, post-training pruning for large language models demonstrated that substantial weight sparsity is possible, yet current methods operate largely without an explicit notion of neuron-level entanglement or its effect on accuracy (Frantar et al., 2023; Sun et al., 2023). Separately, mixture-of-experts introduced input-dependent routing to multiple experts for conditional computation, offering a practical template for splitting complex behaviors across simpler components (Shazeer et al., 2017). Foundational optimal transport results provided closed-form and computationally tractable ways to compute Wasserstein distances on the real line, making it feasible to quantify departures from Gaussianity for neuron outputs at scale (Vallender, 1974). Taken together, these strands suggested a gap: interpretability techniques lacked a robust, distributional metric for entanglement closely tied to superposition theory and practically actionable for sparsity; pruning lacked neuron-level, entanglement-aware guidance; and MoE offered a natural mechanism to split polysemanticity. The present work synthesizes these insights by using Wasserstein-to-Gaussian distance to identify highly entangled neurons and by operationalizing disentanglement through neuron-level MoE decomposition, linking interpretability to performance under sparsity.",
+  "target_paper": {
+    "title": "Wasserstein Distances, Neuronal Entanglement, and Sparsity",
+    "authors": "Shashata Sawmya, Linghao Kong, Ilia Markov, Dan Alistarh, Nir N Shavit",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "Polysemanticity, Disentanglement, Wasserstein Distance, Sparsity, Large Language Models",
+    "abstract": "Disentangling polysemantic neurons is at the core of many current approaches to interpretability of large language models. Here we attempt to study how disentanglement can be used to understand performance, particularly under weight sparsity, a leading post-training optimization technique. We suggest a novel measure for estimating neuronal entanglement: the Wasserstein distance of a neuron's output distribution to a Gaussian. Moreover, we show the existence of a small number of highly entangled \"Wasserstein Neurons\" in each linear layer of an LLM, characterized by their highly non-Gaussian output distributions, their role in mapping similar inputs to dissimilar outputs, and their significant impact on model accuracy. To study these phenomena, we propose a new experimental framework for disentangling polysemantic neurons. Our framework separates each layer's inputs to create a mixture of experts where each neuron's output is computed by a mixture of neurons of lower Wasserstein distance",
+    "openreview_id": "cnKhHxN3xj",
+    "forum_id": "cnKhHxN3xj"
+  },
+  "analysis_timestamp": "2026-01-06T07:59:36.728772"
+}

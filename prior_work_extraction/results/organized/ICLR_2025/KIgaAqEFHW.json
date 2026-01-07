@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "miniF2F: A Cross-Domain Benchmark for Formal and Informal Mathematics",
+      "authors": "Zheng et al.",
+      "year": 2021,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "miniF2F established the prevailing testbed and success metrics for Lean-based neural theorem proving, whose lack of explicit long-context and repository-level conditioning is the precise gap miniCTX targets."
+    },
+    {
+      "title": "LeanDojo: Theorem Proving with Retrieval-Augmented Language Models",
+      "authors": "Zhu et al.",
+      "year": 2024,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "LeanDojo concretely demonstrated that retrieving code/library artifacts from Lean projects improves proof success, directly motivating miniCTX\u2019s formulation of conditioning on repository context at scale."
+    },
+    {
+      "title": "Generating Formal Proofs with GPT-f",
+      "authors": "Polu et al.",
+      "year": 2020,
+      "arxiv_id": "2009.03393",
+      "role": "Baseline",
+      "relationship_sentence": "GPT-f popularized the state-only next-tactic paradigm for neural theorem proving, serving as the canonical baseline that miniCTX contrasts with context-conditioned proving."
+    },
+    {
+      "title": "HOList: An Environment for Machine Learning of Higher-Order Theorem Proving",
+      "authors": "Bansal et al.",
+      "year": 2019,
+      "arxiv_id": "1904.03241",
+      "role": "Foundation",
+      "relationship_sentence": "HOList framed step-wise proof-state learning and large-library proving, crystallizing the state-centric setup whose limitations in leveraging external project context miniCTX addresses."
+    },
+    {
+      "title": "DeepSeek-Prover: Advancing Formal Theorem Proving with Large Language Models",
+      "authors": "Zhang et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "DeepSeek-Prover achieved strong results on miniF2F using state-focused generation and self-reflection, highlighting that SOTA systems excel without explicitly modeling long, repository-level context\u2014an omission miniCTX is designed to expose."
+    },
+    {
+      "title": "LongBench: A Bilingual, Multitask Benchmark for Long-Context Language Models",
+      "authors": "Bai et al.",
+      "year": 2023,
+      "arxiv_id": "2308.14508",
+      "role": "Related Problem",
+      "relationship_sentence": "LongBench established evaluation for long-context understanding in NLP, informing miniCTX\u2019s emphasis on tens-of-thousands-token inputs but lacking the structured proof-state dynamics of formal theorem proving."
+    }
+  ],
+  "synthesis_narrative": "miniF2F defined the de facto evaluation regime for Lean-based neural proving, focusing on problem statements and proof states rather than on leveraging the rich, project-level environment that real formal mathematics lives in. HOList established step-wise proof-state prediction within large theories, reinforcing the state-centric paradigm and framing success as next-tactic or next-step learning. GPT-f operationalized this paradigm with powerful language models trained to emit tactics from proof states, making \u201cstate-only\u201d the practical default for learned theorem proving. In parallel, LeanDojo demonstrated that retrieving definitions and lemmas from Lean repositories boosts proving, foregrounding the importance of external artifacts beyond the immediate state. DeepSeek-Prover then pushed state-driven methods near the frontier on miniF2F via self-reflection and improved generation, yet still without explicit long-context conditioning. Outside formal math, LongBench clarified how long-context inputs can be systematically evaluated at scale.\nTaken together, these works reveal a gap: evaluations and methods excel at state-centric proving but do not directly test or train repository- and file-structure-aware reasoning over tens of thousands of tokens. miniCTX synthesizes LeanDojo\u2019s retrieval insight with long-context evaluation principles to build a benchmark where success requires conditioning on real project context, thereby directly challenging the state-only lineage established by HOList, GPT-f, and miniF2F\u2014and revealing the limitations of SOTA systems like DeepSeek-Prover in this setting.",
+  "target_paper": {
+    "title": "miniCTX: Neural Theorem Proving with (Long-)Contexts",
+    "authors": "Jiewen Hu, Thomas Zhu, Sean Welleck",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "oral",
+    "keywords": "Neural theorem proving, Formal mathematics, Benchmark dataset",
+    "abstract": "Real-world formal theorem proving often depends on a wealth of context, including definitions, lemmas, comments, file structure, and other information. We introduce $\\texttt{miniCTX}$, which tests a model's ability to prove formal mathematical theorems that depend on new context that is not seen during training. $\\texttt{miniCTX}$ contains theorems sourced from real Lean projects and textbooks, each associated with a context that can span tens of thousands of tokens. Models are tasked with proving a theorem given access to code from the theorem's repository, which contains context that is needed for the proof. As a baseline for $\\texttt{miniCTX}$, we tested fine-tuning and prompting methods that condition theorem proving on preceding context. Both approaches substantially outperform traditional methods that rely solely on state information. We found that this ability to use context is not captured by previous benchmarks such as $\\texttt{miniF2F}$. Alongside $\\texttt{miniCTX}$, we offer",
+    "openreview_id": "KIgaAqEFHW",
+    "forum_id": "KIgaAqEFHW"
+  },
+  "analysis_timestamp": "2026-01-06T15:02:12.548912"
+}

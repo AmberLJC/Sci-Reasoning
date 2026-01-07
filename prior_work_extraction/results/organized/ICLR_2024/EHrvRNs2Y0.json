@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis",
+      "authors": "Ben Mildenhall et al.",
+      "year": 2020,
+      "arxiv_id": "2003.08934",
+      "role": "Foundation",
+      "relationship_sentence": "ResFields plugs its temporal residual layers into the NeRF-style coordinate-based MLP, inheriting NeRF\u2019s field formulation to model time-varying radiance."
+    },
+    {
+      "title": "DeepSDF: Learning Continuous Signed Distance Functions for Shape Representation",
+      "authors": "Jeong Joon Park et al.",
+      "year": 2019,
+      "arxiv_id": "1901.05103",
+      "role": "Foundation",
+      "relationship_sentence": "ResFields applies the same residual adaptation mechanism to SDF-based neural fields defined by DeepSDF, demonstrating seamless generalization beyond radiance fields."
+    },
+    {
+      "title": "D-NeRF: Neural Radiance Fields for Dynamic Scenes",
+      "authors": "Albert Pumarola et al.",
+      "year": 2021,
+      "arxiv_id": "2008.03865",
+      "role": "Baseline",
+      "relationship_sentence": "D-NeRF conditions a single MLP on time to model dynamics, and ResFields directly addresses this capacity bottleneck by replacing a monolithic time-conditioned MLP with a shared base plus time-specific residual layers."
+    },
+    {
+      "title": "Nerfies: Deformable Neural Radiance Fields",
+      "authors": "Keunhong Park et al.",
+      "year": 2021,
+      "arxiv_id": "2011.12948",
+      "role": "Gap Identification",
+      "relationship_sentence": "Nerfies relies on a large shared deformation network and per-frame latents, whose escalating parameter demands motivate ResFields\u2019 parameter-efficient temporal adapters."
+    },
+    {
+      "title": "HyperNeRF: A Higher-Dimensional Representation for Topologically Varying Neural Radiance Fields",
+      "authors": "Keunhong Park et al.",
+      "year": 2021,
+      "arxiv_id": "2106.13228",
+      "role": "Gap Identification",
+      "relationship_sentence": "HyperNeRF\u2019s higher-dimensional representation highlights the growing complexity required for dynamic scenes, which ResFields mitigates with lightweight temporal residual layers."
+    },
+    {
+      "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+      "authors": "Edward J. Hu et al.",
+      "year": 2021,
+      "arxiv_id": "2106.09685",
+      "role": "Extension",
+      "relationship_sentence": "ResFields\u2019 matrix factorization of temporal residual weights directly adapts LoRA\u2019s low-rank update parameterization to neural field layers for parameter efficiency and generalization."
+    },
+    {
+      "title": "Learning Multiple Visual Domains with Residual Adapters",
+      "authors": "Sylvestre-Alvise Rebuffi et al.",
+      "year": 2017,
+      "arxiv_id": "1705.10500",
+      "role": "Inspiration",
+      "relationship_sentence": "The idea of inserting small residual adapter modules to specialize a shared backbone across domains inspires ResFields\u2019 per-time residual layers that adapt a shared field across timesteps."
+    }
+  ],
+  "synthesis_narrative": "Coordinate-based neural fields use a compact MLP to map spatial inputs to continuous signals, with NeRF demonstrating this for radiance and DeepSDF for signed distance functions. To capture dynamics, D-NeRF extends this paradigm by conditioning the MLP on time, while Nerfies introduces a deformation network and per-frame latents to canonicalize motion, and HyperNeRF further enlarges representational capacity via a higher-dimensional embedding to handle topology changes. These dynamic-field approaches show that modeling complex temporal variation with a single shared MLP often strains capacity and inflates parameters or architectural complexity. In parallel, residual adapters insert small residual modules into backbones to specialize them to new domains with minimal overhead, and LoRA shows that weight updates can be parameterized as low-rank matrices, retaining performance while dramatically reducing trainable parameters. Together, these lines suggest a path: preserve a shared neural field for spatiotemporal structure, while adding lightweight, per-time specialization in a parameter-efficient form. Building on this, ResFields introduces temporal residual layers that adapt a shared base neural field across timesteps, directly addressing the capacity limitations seen in time-conditioned or deformation-heavy dynamic fields. By factorizing these residual weights in a LoRA-style low-rank manner, the method controls parameter growth and improves generalization, and because it is formulated at the network-layer level, it integrates seamlessly with both NeRF and DeepSDF formulations.",
+  "target_paper": {
+    "title": "ResFields: Residual Neural Fields for Spatiotemporal Signals",
+    "authors": "Marko Mihajlovic, Sergey Prokudin, Marc Pollefeys, Siyu Tang",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "neural fields, NeRF, reconstruction",
+    "abstract": "Neural fields, a category of neural networks trained to represent high-frequency signals, have gained significant attention in recent years due to their impressive performance in modeling complex 3D data, such as signed distance (SDFs) or radiance fields (NeRFs), via a single multi-layer perceptron (MLP). However, despite the power and simplicity of representing signals with an MLP, these methods still face challenges when modeling large and complex temporal signals due to the limited capacity of MLPs. In this paper, we propose an effective approach to address this limitation by incorporating temporal residual layers into neural fields, dubbed ResFields. It is a novel class of networks specifically designed to effectively represent complex temporal signals. We conduct a comprehensive analysis of the properties of ResFields and propose a matrix factorization technique to reduce the number of trainable parameters and enhance generalization capabilities. Importantly, our formulation seaml",
+    "openreview_id": "EHrvRNs2Y0",
+    "forum_id": "EHrvRNs2Y0"
+  },
+  "analysis_timestamp": "2026-01-06T23:44:30.618955"
+}

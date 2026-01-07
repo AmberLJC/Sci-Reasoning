@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "DiGress: Discrete Denoising Diffusion for Graph Generation",
+      "authors": "Cl\u00e9ment Vignac et al.",
+      "year": 2022,
+      "arxiv_id": "2209.14734",
+      "role": "Extension",
+      "relationship_sentence": "LayerDAG adopts DiGress\u2019s discrete diffusion formulation for node/edge categorical variables but confines it to each bipartite inter-layer subgraph, directly extending DiGress to handle DAG-specific logical dependencies while preserving acyclicity via layerwise factorization."
+    },
+    {
+      "title": "Denoising Diffusion Probabilistic Models for Discrete Data",
+      "authors": "Jacob Austin et al.",
+      "year": 2021,
+      "arxiv_id": "2107.03006",
+      "role": "Foundation",
+      "relationship_sentence": "LayerDAG relies on D3PM\u2019s categorical forward and reverse diffusion kernels to define the within-layer noising/denoising process over discrete edge and node types in its bipartite subgraphs."
+    },
+    {
+      "title": "GraphRNN: Generating Realistic Graphs with Deep Auto-regressive Models",
+      "authors": "Jiaxuan You et al.",
+      "year": 2018,
+      "arxiv_id": "1802.08773",
+      "role": "Inspiration",
+      "relationship_sentence": "LayerDAG is inspired by GraphRNN\u2019s insight that graphs can be factorized autoregressively via an ordering, adapting this to a topological layer ordering of DAGs to model directional dependencies sequentially."
+    },
+    {
+      "title": "Efficient Graph Generation with Graph Recurrent Networks",
+      "authors": "Renjie Liao et al.",
+      "year": 2019,
+      "arxiv_id": null,
+      "role": "Extension",
+      "relationship_sentence": "LayerDAG mirrors GRAN\u2019s blockwise factorization by treating inter-layer connections as bipartite adjacency blocks generated sequentially, but specializes the blocks to topological layers to respect DAG directionality."
+    },
+    {
+      "title": "GraphAF: A Flow-based Autoregressive Model for Molecular Graph Generation",
+      "authors": "Shengjia Shi et al.",
+      "year": 2020,
+      "arxiv_id": null,
+      "role": "Related Problem",
+      "relationship_sentence": "LayerDAG leverages GraphAF\u2019s principle of conditioning new edge decisions on previously generated structure, but applies it at the layer level to encode directional constraints while reserving diffusion to capture intra-layer logical consistency."
+    },
+    {
+      "title": "Bayesian Structure Learning with Generative Flow Networks",
+      "authors": "Tristan Deleu et al.",
+      "year": 2022,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "LayerDAG targets the same DAG sampling objective as GFlowNet-based Bayesian structure learning but addresses its limitation of weak modeling of rich logical dependencies by introducing within-layer diffusion and explicit layerwise autoregression."
+    }
+  ],
+  "synthesis_narrative": "Discrete diffusion for graphs showed that categorical noising/denoising can model node and edge types directly on graph structures, with DiGress demonstrating how to parameterize permutation-equivariant denoisers to recover realistic graphs from discrete noise. At the base of this approach lies D3PM, which formalized forward and reverse kernels for diffusion on discrete variables, providing the building blocks for graph-domain variants. In parallel, autoregressive graph models such as GraphRNN established that a graph can be decomposed into a sequence under an ordering, enabling directional conditioning as the structure is built step by step. GRAN extended this idea by generating adjacency blocks, revealing the practical benefits of blockwise factorization for efficiency and stability. GraphAF further highlighted the power of conditioning edge decisions on previously sampled structure for fine-grained control, albeit without explicit mechanisms for enforcing global constraints like acyclicity. For DAGs specifically, GFlowNet-based Bayesian structure learning framed DAG sampling as a sequential construction process that enforces acyclicity, but it does not richly capture intra-structure logical dependencies.\nBringing these strands together reveals a natural opportunity: use autoregression to respect directional dependencies via a topological ordering, while using discrete diffusion to capture complex logical dependencies within local graph units. Layering a DAG into consecutive bipartite subgraphs provides exactly the right factorization: autoregressive over layers for directionality, diffusion within each bipartite block for logical consistency. This synthesis overcomes DiGress\u2019s challenge with directionality, addresses autoregressive models\u2019 difficulty modeling rich intra-layer correlations, and surpasses DAG samplers like GFlowNets by jointly modeling acyclicity and fine-grained logical structure.",
+  "target_paper": {
+    "title": "LayerDAG: A Layerwise Autoregressive Diffusion Model for Directed Acyclic Graph Generation",
+    "authors": "Mufei Li, Viraj Shitole, Eli Chien, Changhai Man, Zhaodong Wang, Srinivas, Ying Zhang, Tushar Krishna, Pan Li",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "directed acyclic graphs, graph generation, discrete diffusion, autoregressive model",
+    "abstract": "Directed acyclic graphs (DAGs) serve as crucial data representations in domains such as hardware synthesis and compiler/program optimization for computing systems. DAG generative models facilitate the creation of synthetic DAGs, which can be used for benchmarking computing systems while preserving intellectual property. However, generating realistic DAGs is challenging due to their inherent directional and logical dependencies. This paper introduces LayerDAG, an autoregressive diffusion model, to address these challenges. LayerDAG decouples the strong node dependencies into manageable units that can be processed sequentially. By interpreting the partial order of nodes as a sequence of bipartite graphs, LayerDAG leverages autoregressive generation to model directional dependencies and employs diffusion models to capture logical dependencies within each bipartite graph. Comparative analyses demonstrate that LayerDAG outperforms existing DAG generative models in both expressiveness and ge",
+    "openreview_id": "kam84eEmub",
+    "forum_id": "kam84eEmub"
+  },
+  "analysis_timestamp": "2026-01-06T06:54:26.971304"
+}

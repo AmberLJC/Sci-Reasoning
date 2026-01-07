@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Generative Pretraining from Pixels",
+      "authors": "Mark Chen et al.",
+      "year": 2020,
+      "role": "Baseline",
+      "relationship_sentence": "D\u2011iGPT directly builds on iGPT\u2019s autoregressive next\u2011pixel modeling for representation learning, replacing its raw\u2011pixel targets and one\u2011step causal objective with semantic tokens and an additional visible\u2011token prediction loss to overcome iGPT\u2019s low\u2011level focus."
+    },
+    {
+      "title": "BEiT: BERT Pre-Training of Image Transformers",
+      "authors": "Hangbo Bao et al.",
+      "year": 2021,
+      "role": "Foundation",
+      "relationship_sentence": "BEiT established the formulation of pretraining vision transformers by predicting discrete visual tokens rather than pixels, a core idea that D\u2011iGPT adopts while switching to more semantic tokens and an autoregressive training regime."
+    },
+    {
+      "title": "BEiT v2: Masked Image Modeling with Vector-Quantized Visual Tokenizers",
+      "authors": "Wenhui Wang et al.",
+      "year": 2022,
+      "role": "Extension",
+      "relationship_sentence": "BEiT v2 introduced CLIP\u2011supervised (VQ\u2011KD) visual tokenizers that yield semantically meaningful codes; D\u2011iGPT explicitly leverages this insight by using discriminatively trained (e.g., CLIP\u2011based) semantic tokens as its AR prediction targets."
+    },
+    {
+      "title": "Learning Transferable Visual Models From Natural Language Supervision",
+      "authors": "Alec Radford et al.",
+      "year": 2021,
+      "role": "Foundation",
+      "relationship_sentence": "CLIP provides the discriminatively trained semantic feature space from which D\u2011iGPT derives high\u2011level visual tokens, enabling the paper\u2019s key shift from pixel targets to semantic token targets."
+    },
+    {
+      "title": "Zero-Shot Text-to-Image Generation",
+      "authors": "Aditya Ramesh et al.",
+      "year": 2021,
+      "role": "Inspiration",
+      "relationship_sentence": "DALL\u00b7E demonstrated autoregressive modeling over discrete image tokens (via a learned tokenizer) as a powerful alternative to pixel AR; D\u2011iGPT adopts AR over discrete tokens but emphasizes semantic (CLIP\u2011guided) tokens for representation learning."
+    },
+    {
+      "title": "XLNet: Generalized Autoregressive Pretraining for Language Understanding",
+      "authors": "Zhilin Yang et al.",
+      "year": 2019,
+      "role": "Inspiration",
+      "relationship_sentence": "XLNet\u2019s generalized AR objective\u2014training an AR model to predict tokens beyond the immediate next via permutations\u2014motivates D\u2011iGPT\u2019s augmentation of next\u2011token prediction with a visible\u2011token prediction objective to exploit richer context."
+    },
+    {
+      "title": "MaskGIT: Masked Generative Image Transformer",
+      "authors": "Huiwen Chang et al.",
+      "year": 2022,
+      "role": "Related Problem",
+      "relationship_sentence": "MaskGIT shows the benefit of predicting (masked) tokens conditioned on visible tokens in image transformers; D\u2011iGPT echoes this principle by explicitly training an AR model to also predict visible tokens, strengthening bidirectional contextual learning."
+    }
+  ],
+  "synthesis_narrative": "D\u2011iGPT explicitly revitalizes iGPT\u2019s autoregressive representation learning by addressing two core shortcomings of the original: pixel\u2011level targets that bias toward low\u2011level statistics and a purely next\u2011token objective. The move from pixels to discrete visual tokens is rooted in BEiT, which reframed pretraining as predicting discrete image codes rather than raw pixels. However, early codebooks (e.g., dVAE) were not strongly semantic. BEiT v2 resolved this by introducing CLIP\u2011supervised tokenizers (VQ\u2011KD), yielding codes aligned with semantic discrimination. Building on that insight, D\u2011iGPT adopts discriminatively trained (CLIP\u2011based) semantic tokens as its AR targets, ensuring the model learns high\u2011level visual structure instead of texture reconstruction. The feasibility and modeling advantages of autoregression over discrete tokens were presaged by DALL\u00b7E, which combined tokenizers with AR transformers; D\u2011iGPT transfers this paradigm from image generation to representation learning with semantically grounded tokens. To strengthen contextual learning beyond the causal boundary, D\u2011iGPT adds visible\u2011token prediction. This echoes XLNet\u2019s generalized AR philosophy\u2014training AR models to predict more than just the next token\u2014and aligns with MaskGIT\u2019s evidence that conditioning on visible tokens to predict others improves learning. Collectively, these works form a direct lineage: iGPT (AR formulation) \u2192 BEiT/BEiT v2 (discrete, CLIP\u2011semantic tokens) \u2192 DALL\u00b7E (AR over tokens) \u2192 XLNet/MaskGIT (predicting beyond next), culminating in D\u2011iGPT\u2019s strong visual representations.",
+  "analysis_timestamp": "2026-01-06T23:09:26.489937"
+}

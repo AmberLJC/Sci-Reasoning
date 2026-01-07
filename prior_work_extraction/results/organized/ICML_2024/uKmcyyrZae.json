@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Do Transformers Really Perform Bad for Graph Representation? (Graphormer)",
+      "authors": "Chengxuan Ying et al.",
+      "year": 2021,
+      "role": "Foundational graph transformer with fully connected global attention and structural biases",
+      "relationship_sentence": "Graphormer popularized global self-attention on fully connected graphs with distance/centrality encodings, providing the exact globalizing mechanism that this paper analyzes and finds to over-emphasize distant nodes; CoBFormer is explicitly designed to correct this global-attention bias."
+    },
+    {
+      "title": "A Generalization of Transformer Networks to Graphs",
+      "authors": "Vijay Prakash Dwivedi, Xavier Bresson",
+      "year": 2021,
+      "role": "Early formulation of graph transformers with positional/Laplacian encodings",
+      "relationship_sentence": "By casting transformers over fully connected graphs with positional encodings, this work set the stage for global receptive fields in graph transformers, motivating the present paper\u2019s critique of over-globalization and its locality-aware bi-level redesign."
+    },
+    {
+      "title": "Recipe for a General, Powerful, Scalable Graph Transformer (GraphGPS)",
+      "authors": "Ladislav Rampasek et al.",
+      "year": 2022,
+      "role": "Hybrid local\u2013global graph transformer design",
+      "relationship_sentence": "GraphGPS showed that combining local message passing with global attention improves graph transformers, directly inspiring CoBFormer\u2019s principle of balancing local (intra-cluster) and global (inter-cluster) information instead of na\u00efvely globalizing attention."
+    },
+    {
+      "title": "DiffPool: Differentiable Graph Pooling",
+      "authors": "Zitao Ying, Jiaxuan You, Christopher Morris, Xiang Ren, Will Hamilton, Jure Leskovec",
+      "year": 2018,
+      "role": "Hierarchical/cluster-based graph representation learning",
+      "relationship_sentence": "DiffPool introduced learning hierarchical cluster structures on graphs; CoBFormer leverages the cluster idea to split modeling into intra-cluster and inter-cluster transformers that curb over-globalization while preserving salient local information."
+    },
+    {
+      "title": "Cluster-GCN: An Efficient Algorithm for Training Deep and Large Graph Convolutional Networks",
+      "authors": "Wei-Lin Chiang et al.",
+      "year": 2019,
+      "role": "Graph clustering for structured mini-batching and locality",
+      "relationship_sentence": "Cluster-GCN demonstrated practical benefits of graph partitioning, reinforcing the concept that cluster-wise processing respects locality; CoBFormer operationalizes this by explicitly conducting intra-cluster and inter-cluster attention."
+    },
+    {
+      "title": "On the Bottleneck of Graph Neural Networks and its Practical Implications",
+      "authors": "Uri Alon, Eran Yahav",
+      "year": 2021,
+      "role": "Theoretical analysis of long-range message passing (over-squashing)",
+      "relationship_sentence": "This work explains how long-range dependencies can be problematic in GNNs; the present paper extends the insight to graph transformers, arguing that indiscriminate global attention can overweight distant nodes and proposing a structure to prioritize near, informative neighbors."
+    },
+    {
+      "title": "Deep Mutual Learning",
+      "authors": "Ying Zhang, Tao Xiang, Timothy M. Hospedales, Huchuan Lu",
+      "year": 2018,
+      "role": "Collaborative training paradigm via mutual knowledge distillation",
+      "relationship_sentence": "CoBFormer\u2019s collaborative training between intra- and inter-cluster transformers is grounded in deep mutual learning, where peer models teach each other to yield better calibrated, complementary representations."
+    }
+  ],
+  "synthesis_narrative": "The core innovation of the ICML 2024 paper is to identify and remedy an over-globalizing bias in graph transformers, whereby global self-attention on fully connected graphs over-weights distant nodes and dilutes informative local neighborhoods. This critique builds directly on foundational graph transformer designs\u2014Graphormer and the Dwivedi\u2013Bresson generalization\u2014that established fully connected attention with structural encodings as a dominant paradigm. Concurrently, empirical and theoretical insights from GraphGPS and the over-squashing analysis by Alon & Yahav emphasized that long-range interactions must be handled judiciously and that preserving locality can be crucial for predictive performance. To operationalize a principled locality\u2013globality balance, the paper adopts hierarchical ideas from DiffPool and the practical advantages of graph partitioning from Cluster-GCN: it organizes computation into intra-cluster transformers (capturing rich, local information) and inter-cluster transformers (exchanging salient global signals) rather than allowing unconstrained global mixing. Finally, to ensure these two views remain complementary and mutually informative, the model employs a collaborative training strategy inspired by Deep Mutual Learning, enabling intra- and inter-cluster modules to co-regularize each other. Together, these prior works inform the paper\u2019s bi-level architecture and training scheme that preserves local signal while selectively integrating global context, directly addressing the identified over-globalization problem.",
+  "analysis_timestamp": "2026-01-07T00:02:04.882494"
+}

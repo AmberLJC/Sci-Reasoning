@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "BiLLM: Pushing the Limit of Post-Training 1-Bit LLM Quantization",
+      "authors": "First author et al.",
+      "year": 2024,
+      "role": "Baseline",
+      "relationship_sentence": "HBLLM directly targets the same 1\u2011bit PTQ setting as BiLLM and overcomes BiLLM\u2019s loss from sign-only expressiveness by introducing a Haar-wavelet basis and frequency-aware grouping to markedly improve fidelity and storage."
+    },
+    {
+      "title": "GPTQ: Accurate Post-Training Quantization for Generative Pretrained Transformers",
+      "authors": "Frantar et al.",
+      "year": 2022,
+      "role": "Foundation",
+      "relationship_sentence": "HBLLM inherits the GPTQ-style PTQ formulation and block/group treatment of weights, extending it to 1\u2011bit with frequency-aware intra-row grouping and band-wise statistics to minimize quantization error."
+    },
+    {
+      "title": "AWQ: Activation-Aware Weight Quantization for LLMs",
+      "authors": "Lin et al.",
+      "year": 2023,
+      "role": "Extension",
+      "relationship_sentence": "HBLLM\u2019s \u21132-norm-based saliency-driven column selection is a direct adaptation of AWQ\u2019s channel saliency idea, but applied within wavelet frequency bands and pushed to the extreme 1\u2011bit regime."
+    },
+    {
+      "title": "SpQR: A Sparse-Quantized Representation for Near-Lossless LLM Weight Compression",
+      "authors": "Frantar et al.",
+      "year": 2024,
+      "role": "Extension",
+      "relationship_sentence": "HBLLM builds on SpQR\u2019s insight of selectively treating salient weights differently by retaining band-wise flexibility for salient columns and using a shared mean for non-salient groups to cut storage while preserving accuracy."
+    },
+    {
+      "title": "QuaRot: Outlier-Free LLM Quantization via Rotation",
+      "authors": "First author et al.",
+      "year": 2023,
+      "role": "Inspiration",
+      "relationship_sentence": "HBLLM is inspired by QuaRot\u2019s core idea that an orthonormal change of basis can make weights more quantization-friendly; it specializes this with a Haar wavelet transform and couples it with frequency-aware grouping for 1\u2011bit PTQ."
+    },
+    {
+      "title": "SmoothQuant: Accurate and Efficient Post-Training Quantization for Large Language Models",
+      "authors": "Xiao et al.",
+      "year": 2022,
+      "role": "Related Problem",
+      "relationship_sentence": "HBLLM echoes SmoothQuant\u2019s strategy of redistributing magnitude before quantization, but does so via frequency decomposition of weights (Haar) and saliency-aware grouping to enable high-fidelity 1\u2011bit quantization."
+    },
+    {
+      "title": "BitNet b1.58: 1.58-bit Large Language Models",
+      "authors": "First author et al.",
+      "year": 2024,
+      "role": "Gap Identification",
+      "relationship_sentence": "By showing ultra-low-bit representations are viable only with training-time changes, BitNet b1.58 highlights the gap HBLLM fills: high-fidelity, post-training near-binary (\u22481\u2011bit) compression of LLM weights."
+    }
+  ],
+  "synthesis_narrative": "HBLLM sits at the intersection of three lines of work that directly shaped its core idea. First, GPTQ established the practical post\u2011training quantization framework and grouping paradigm for LLM weights, which HBLLM keeps while redesigning the basis and grouping to suit the 1\u2011bit extreme. Second, low\u2011bit fidelity hinges on handling saliency and outliers: SmoothQuant demonstrated the value of redistributing magnitude to ease quantization, while AWQ formalized channel saliency (often via \u21132 norms) to protect important columns. SpQR went further by selectively treating salient weights differently to retain accuracy under tight storage budgets. HBLLM directly extends these saliency notions into the wavelet domain, using \u21132\u2011based column selection within frequency bands and assigning a shared mean to non\u2011salient groups for storage efficiency. Third, the key spark for HBLLM\u2019s wavelet-enhanced design comes from orthonormal\u2011basis methods like QuaRot, which showed that rotating to a better basis can dramatically reduce quantization error. HBLLM specializes this idea with a structured Haar wavelet transform to decompose weights by frequency, then performs frequency\u2011aware intra\u2011row grouping that boosts the expressiveness of 1\u2011bit representations. Against the immediate 1\u2011bit PTQ baseline BiLLM\u2014whose sign\u2011only capacity limits fidelity\u2014HBLLM\u2019s wavelet basis plus saliency\u2011aware grouping closes the accuracy gap while keeping overhead near 1 bit, addressing the broader ultra\u2011low\u2011bit challenge framed by BitNet b1.58 without retraining.",
+  "analysis_timestamp": "2026-01-06T23:08:23.952578"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Code as Policies: Language Model Programs for Embodied Control",
+      "authors": "Huang et al.",
+      "year": 2022,
+      "role": "Baseline",
+      "relationship_sentence": "This work establishes the core paradigm of using LLMs to synthesize executable robot-control programs; the present paper directly augments this paradigm with symbolic verification and an interactive validation loop to remedy CaP\u2019s grounding failures in dynamic or partially observable environments."
+    },
+    {
+      "title": "ReAct: Synergizing Reasoning and Acting in Language Models",
+      "authors": "Yao et al.",
+      "year": 2023,
+      "role": "Inspiration",
+      "relationship_sentence": "ReAct\u2019s idea of interleaving reasoning with environment actions directly inspires the paper\u2019s interactive validation phase, which generates exploratory code to actively gather missing observations before committing to task code."
+    },
+    {
+      "title": "Do As I Can, Not As I Say: Grounding Language in Robotic Affordances (SayCan)",
+      "authors": "Ahn et al.",
+      "year": 2022,
+      "role": "Foundation",
+      "relationship_sentence": "SayCan introduced the principle of gating LLM-generated decisions with an external grounding signal; the proposed framework generalizes this by using explicit symbolic precondition/effect checks to verify code prior to execution."
+    },
+    {
+      "title": "PDDLStream: Integrating Task and Motion Planning",
+      "authors": "Garrett et al.",
+      "year": 2020,
+      "role": "Foundation",
+      "relationship_sentence": "The paper\u2019s symbolic verification module borrows from PDDL/TAMP notions of preconditions, effects, and feasibility checks, using them to validate and constrain generated code segments."
+    },
+    {
+      "title": "Voyager: An Open-Ended Embodied Agent with Large Language Models",
+      "authors": "Wang et al.",
+      "year": 2023,
+      "role": "Gap Identification",
+      "relationship_sentence": "Voyager highlighted that code-generating embodied agents can be brittle and unsafe without grounding or state guarantees; the proposed neuro-symbolic verifier and state-preserving exploratory validation directly target this limitation."
+    },
+    {
+      "title": "PAL: Program-Aided Language Models",
+      "authors": "Gao et al.",
+      "year": 2023,
+      "role": "Foundation",
+      "relationship_sentence": "PAL demonstrated reliability gains from delegating reasoning to executable programs; this work builds on that idea by generating policy code while adding formal symbolic checks and execution-driven information gathering."
+    },
+    {
+      "title": "ViperGPT: Visual Inference via Python Execution",
+      "authors": "Sur\u00eds et al.",
+      "year": 2023,
+      "role": "Extension",
+      "relationship_sentence": "ViperGPT\u2019s approach of LLM-generated Python orchestrating tool calls with execution-time verification is extended here to embodied task planning with an added symbolic validator that enforces task-state constraints."
+    }
+  ],
+  "synthesis_narrative": "The core innovation\u2014a neuro-symbolic framework that marries code-as-policies with explicit symbolic verification and interactive validation\u2014emerges by unifying three lines of prior work. First, Code as Policies established the template of treating LLM outputs as executable robot policies, but its failures under dynamics and partial observability motivated stronger grounding. Second, methods that intertwine reasoning and acting, notably ReAct and Voyager, showed that agents can actively probe their environments and refine behavior via execution feedback; however, they lacked formal guarantees or state-preserving constraints. Third, grounding and formalism from classical and neurosymbolic planning\u2014exemplified by SayCan\u2019s external affordance gating and PDDLStream\u2019s precondition/effect-based feasibility checks\u2014demonstrated how symbolic structure can vet decisions before they are executed. Program-centric reasoning work like PAL (and, in vision, ViperGPT) further proved that executing generated code can improve reliability by turning abstract plans into concrete, verifiable procedures.\n\nSynthesizing these threads, the paper adopts CaP\u2019s executable-program substrate but inserts a PDDL/TAMP-inspired symbolic verifier that checks preconditions, effects, and invariants of generated code. It operationalizes ReAct-style interaction as a dedicated validation phase that produces exploratory code to acquire the missing observations needed to satisfy symbolic checks, while preserving task-relevant state. By closing this loop\u2014generate, symbolically verify, actively validate, and then commit\u2014the framework directly addresses the brittleness and grounding gaps identified in Voyager-like agents and CaP, yielding more reliable task execution in dynamic, partially observable environments.",
+  "analysis_timestamp": "2026-01-06T23:08:23.936737"
+}

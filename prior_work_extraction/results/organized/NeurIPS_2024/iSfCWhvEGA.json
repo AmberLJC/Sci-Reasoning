@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Outrageously Large Neural Networks: The Sparsely-Gated Mixture-of-Experts Layer",
+      "authors": "Noam Shazeer et al.",
+      "year": 2017,
+      "role": "Foundational conditional computation and sparse activation via expert gating",
+      "relationship_sentence": "Introduced top-k gating that activates only a small subset of experts per token, directly inspiring LTE\u2019s goal of selectively activating only a structured subset of neurons to cut inference cost."
+    },
+    {
+      "title": "GShard: Scaling Giant Models with Conditional Computation and Automatic Sharding",
+      "authors": "Mikhail Lepikhin et al.",
+      "year": 2020,
+      "role": "Practical large-scale MoE training and routing demonstrating accuracy\u2013efficiency trade-offs",
+      "relationship_sentence": "Showed that conditional computation at scale preserves quality while reducing active compute, a trade-off LTE seeks to replicate inside dense LLM FFNs via structured activation sparsity."
+    },
+    {
+      "title": "Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient MoE",
+      "authors": "William Fedus, Barret Zoph, Noam Shazeer",
+      "year": 2021,
+      "role": "Efficient sparse routing (top-1) and strong empirical evidence for sparse activation benefits",
+      "relationship_sentence": "Demonstrated that simple sparse routing yields large efficiency gains, motivating LTE to design low-overhead selection mechanisms for neuron activation without full MoE conversion."
+    },
+    {
+      "title": "Learning Sparse Neural Networks through L0 Regularization",
+      "authors": "Christos Louizos, Max Welling, Diederik P. Kingma",
+      "year": 2018,
+      "role": "Differentiable sparsity-inducing gates (hard-concrete) for learning which units to deactivate",
+      "relationship_sentence": "Provided a principled way to learn discrete on/off gates, informing LTE\u2019s training-time objective to learn to deactivate neurons while maintaining task performance."
+    },
+    {
+      "title": "k-Sparse Autoencoders",
+      "authors": "Alireza Makhzani, Brendan J. Frey",
+      "year": 2013,
+      "role": "Activation-level sparsity via top-k constraints for structured representations",
+      "relationship_sentence": "Showed that enforcing top-k activation yields robust, structured sparsity, a direct antecedent to LTE\u2019s aim of structured activation sparsity over neurons/groups."
+    },
+    {
+      "title": "GLU Variants Improve Transformer",
+      "authors": "Noam Shazeer",
+      "year": 2020,
+      "role": "Introduced GLU variants (e.g., SwiGLU) now standard in LLM FFNs",
+      "relationship_sentence": "Because LLaMA-style models use non-ReLU activations like SwiGLU, this work frames LTE\u2019s challenge and contribution: inducing sparse activations without relying on ReLU\u2019s inherent zeros."
+    },
+    {
+      "title": "Adaptive Computation Time for Recurrent Neural Networks",
+      "authors": "Alex Graves",
+      "year": 2016,
+      "role": "Learning compute\u2013accuracy trade-offs via differentiable halting",
+      "relationship_sentence": "Established a training paradigm that explicitly optimizes a compute budget alongside accuracy, conceptually underpinning LTE\u2019s efficiency-aware training objective for neuron activation."
+    }
+  ],
+  "synthesis_narrative": "LTE\u2019s central idea\u2014training large language models to \"learn to be efficient\" by activating only a structured subset of neurons\u2014sits at the intersection of conditional computation, differentiable sparsity, and modern LLM activation design. The conditional-computation lineage begins with sparsely gated Mixture-of-Experts (Shazeer et al., 2017), then matures with GShard (Lepikhin et al., 2020) and Switch Transformers (Fedus et al., 2021), which show that routing a token to a few experts yields strong efficiency\u2013quality trade-offs. LTE seeks comparable gains but inside dense FFNs, avoiding full MoE conversion and its routing/serving complexity.\nDifferentiable sparsity mechanisms provide LTE with the tooling to make activation selection learnable. L0 regularization (Louizos et al., 2018) offers discrete, trainable gates that switch units off while preserving differentiability, and k-sparse autoencoders (Makhzani & Frey, 2013) demonstrate that enforcing top-k activations can yield structured representations\u2014both directly echoing LTE\u2019s structured activation sparsity objective.\nA key practical challenge is that state-of-the-art LLMs (e.g., LLaMA) use non-ReLU activations such as SwiGLU (Shazeer, 2020), which do not naturally zero out activations. LTE pushes beyond ReLU-dependent sparsity by learning structure atop such smooth activations. Finally, LTE\u2019s efficiency-aware training objective aligns with the broader paradigm of optimizing compute\u2013accuracy trade-offs during training, as epitomized by Adaptive Computation Time (Graves, 2016). Together, these works furnish the conceptual and algorithmic foundations for LTE to amplify inherent activation sparsity into structured, learnable sparsity that accelerates inference without sacrificing performance.",
+  "analysis_timestamp": "2026-01-06T23:33:35.573510"
+}

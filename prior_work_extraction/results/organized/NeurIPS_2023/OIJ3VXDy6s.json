@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "The Information Bottleneck Method",
+      "authors": "Naftali Tishby, Fernando C. Pereira, William Bialek",
+      "year": 1999,
+      "role": "Theoretical foundation (information-theoretic principle)",
+      "relationship_sentence": "RePo\u2019s core idea of constraining the information flow from observations to latent states directly instantiates the Information Bottleneck principle to encourage retention only of task-relevant, predictable factors."
+    },
+    {
+      "title": "Deep Variational Information Bottleneck",
+      "authors": "Alexander A. Alemi, Ian Fischer, Joshua V. Dillon, Kevin Murphy",
+      "year": 2016,
+      "role": "Practical variational formulation of IB",
+      "relationship_sentence": "RePo operationalizes an information constraint via a stochastic encoder and KL-based regularization in the spirit of VIB, making the bottleneck trainable within deep latent models."
+    },
+    {
+      "title": "\u03b2-VAE: Learning Basic Visual Concepts with a Constrained Variational Framework",
+      "authors": "Irina Higgins, Lo\u00efc Matthey, Arka Pal, Christopher Burgess, Xavier Glorot, Matthew Botvinick, Shakir Mohamed, Alexander Lerchner",
+      "year": 2017,
+      "role": "Capacity control via KL weighting",
+      "relationship_sentence": "The idea of explicitly modulating the encoder\u2019s information capacity (via a KL-weight) to discard nuisance variation informs RePo\u2019s use of bottleneck strength to suppress spurious visual factors while preserving control-relevant content."
+    },
+    {
+      "title": "Learning Latent Dynamics for Planning from Pixels (PlaNet)",
+      "authors": "Danijar Hafner, Timothy P. Lillicrap, Mohammad Norouzi, Jimmy Ba",
+      "year": 2019,
+      "role": "Foundational visual model-based RL with latent dynamics and posterior\u2013prior KL",
+      "relationship_sentence": "RePo builds on PlaNet\u2019s variational world-model setup and modifies the posterior regularization to emphasize predictability, steering the latent encoder away from distractors that do not affect dynamics or reward."
+    },
+    {
+      "title": "Dream to Control: Learning Behaviors by Latent Imagination (Dreamer)",
+      "authors": "Danijar Hafner et al.",
+      "year": 2020,
+      "role": "Backbone algorithm for learning control from latent rollouts (RSSM)",
+      "relationship_sentence": "RePo integrates with Dreamer-style RSSM training and loss structure, adding a posterior predictability regularizer to yield latents that remain stable under visual perturbations while supporting accurate imagined rollouts."
+    },
+    {
+      "title": "DeepMDP: Learning Continuous MDP Representations for Reinforcement Learning",
+      "authors": "Carles Gelada, Saurabh Kumar, Jacob Buckman, Ofir Nachum, Marc G. Bellemare",
+      "year": 2019,
+      "role": "Representation sufficiency for predicting reward and transitions (bisimulation-inspired)",
+      "relationship_sentence": "RePo\u2019s objective to be maximally predictive of dynamics and reward mirrors DeepMDP\u2019s sufficiency criterion, but augments it with an information constraint to avoid encoding task-irrelevant visual variations."
+    },
+    {
+      "title": "Bisimulation Metrics for Continuous Markov Decision Processes",
+      "authors": "Nathana\u00ebl Ferns, Prakash Panangaden, Doina Precup",
+      "year": 2011,
+      "role": "Theoretical basis for invariant, control-sufficient state abstractions",
+      "relationship_sentence": "By encouraging latents to be predictable from the dynamics and rewards, RePo pushes representations toward bisimulation-style equivalence classes that ignore spurious features."
+    }
+  ],
+  "synthesis_narrative": "RePo\u2019s key contribution\u2014a latent representation that is both maximally predictive of dynamics and reward while constraining observational information\u2014sits at the confluence of information bottleneck theory and latent world-model RL. The Information Bottleneck (Tishby et al.) provides the conceptual grounding: compress observations to preserve only task-relevant predictive content. Deep VIB (Alemi et al.) translates this principle into a variational objective with a stochastic encoder and KL regularization, while \u03b2-VAE (Higgins et al.) demonstrates the practical power of capacity control via KL weighting to discard nuisance variation.\n\nOn the RL side, PlaNet and Dreamer establish the variational latent dynamics framework\u2014RSSM with posterior\u2013prior KL and learning control from imagined rollouts\u2014upon which RePo is directly implemented. However, standard world-model training can over-encode visually salient but task-irrelevant factors. RePo modifies the regularization to prioritize posterior predictability, thereby selecting features that are predictable under the learned dynamics and informative for reward, which improves resilience to distractors.\n\nThis predictiveness criterion aligns tightly with the DeepMDP view of sufficient representations: latents should preserve exactly what is needed to model transitions and rewards. The bisimulation metrics literature (Ferns et al.) supplies the theoretical ideal\u2014grouping states that are indistinguishable for control\u2014clarifying why enforcing predictability and an information bottleneck jointly promotes invariance to spurious visual changes while maintaining control performance.",
+  "analysis_timestamp": "2026-01-06T23:42:49.062002"
+}

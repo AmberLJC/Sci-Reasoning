@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Random Forests",
+      "authors": "Leo Breiman",
+      "year": 2001,
+      "role": "Foundational algorithm",
+      "relationship_sentence": "Defines the ensemble structure (CART splits, feature subsampling, bootstrap aggregation) whose deterministic node thresholds, leaf statistics, and bagging mechanism are precisely the constraints the paper exploits and ablates to reconstruct training data."
+    },
+    {
+      "title": "Model Inversion Attacks that Exploit Confidence Information and Basic Countermeasures",
+      "authors": "Matt Fredrikson, Somesh Jha, Thomas Ristenpart",
+      "year": 2015,
+      "role": "Privacy attack precedent (reconstruction via optimization)",
+      "relationship_sentence": "Introduces optimization-based reconstruction from model outputs, motivating the paper\u2019s maximum-likelihood formulation that inverts the learned model to recover training records without needing special side channels."
+    },
+    {
+      "title": "Stealing Machine Learning Models via Prediction APIs",
+      "authors": "Florian Tram\u00e8r, Fan Zhang, Ari Juels, Michael K. Reiter, Thomas Ristenpart",
+      "year": 2016,
+      "role": "Model extraction and tree-structure leakage",
+      "relationship_sentence": "Demonstrates that decision trees/ensembles can be reverse-engineered from accessible outputs, supporting the paper\u2019s premise that readily exposed tree structure and leaf outputs suffice to infer sensitive training-time information."
+    },
+    {
+      "title": "Membership Inference Attacks Against Machine Learning Models",
+      "authors": "Reza Shokri, Marco Stronati, Congzheng Song, Vitaly Shmatikov",
+      "year": 2017,
+      "role": "Privacy threat framework and evaluation baseline",
+      "relationship_sentence": "Establishes the modern framework for empirical privacy attacks and the notion of using standard model outputs, contextualizing the paper\u2019s stronger goal of full-record reconstruction from commonly available forest metadata."
+    },
+    {
+      "title": "Optimal Classification Trees",
+      "authors": "Dimitris Bertsimas, Jack Dunn",
+      "year": 2017,
+      "role": "Combinatorial optimization over tree constraints",
+      "relationship_sentence": "Provides an exact optimization formulation for decision trees, informing the paper\u2019s encoding of split consistency and leaf assignments and showing that discrete optimization can scale on tree-structured ML problems."
+    },
+    {
+      "title": "Learning Optimal Decision Trees Using Caching and Search",
+      "authors": "Ga\u00ebl Aglin, Siegfried Nijssen, Pierre Schaus",
+      "year": 2020,
+      "role": "Constraint programming and propagation for trees",
+      "relationship_sentence": "Demonstrates constraint-propagation and domain-reduction strategies to solve large tree problems exactly, directly inspiring the paper\u2019s use of constraint programming to scale its NP-hard reconstruction formulation."
+    },
+    {
+      "title": "Constructing optimal binary decision trees is NP-complete",
+      "authors": "Laurent Hyafil, Ronald L. Rivest",
+      "year": 1976,
+      "role": "Complexity-theoretic backbone",
+      "relationship_sentence": "Provides classic NP-hardness techniques for tree optimization that parallel the paper\u2019s hardness proof for the dataset reconstruction problem from trained forests."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core contribution\u2014exact or near-exact reconstruction of a random forest\u2019s training dataset from commonly exposed model artifacts\u2014sits at the intersection of privacy attacks and exact combinatorial optimization for tree models. From the privacy side, Fredrikson et al.\u2019s model inversion crystallized the idea that optimization over model outputs can reconstruct sensitive inputs, while Shokri et al. established an empirical, output-only threat model that this work strengthens from membership to full-record recovery. Tram\u00e8r et al. further showed that tree ensembles leak rich structural information through accessible interfaces, supporting the premise that scikit-learn\u2019s leaf indices, thresholds, and counts are sufficient to drive reconstruction.\n\nOn the modeling side, Breiman\u2019s Random Forests define the precise mechanisms\u2014CART splits, feature subsampling, and bootstrap aggregation\u2014that induce combinatorial constraints the attack leverages; the paper\u2019s empirical findings about the role of bagging versus feature randomness directly interrogate these design choices. The optimization engine draws on a decade of exact tree learning: Bertsimas and Dunn\u2019s MIP formulation illustrates how to encode split consistency and sample-to-leaf assignments, while Aglin\u2013Nijssen\u2013Schaus demonstrate the power of constraint propagation and domain reduction to scale exact search on tree structures. Finally, Hyafil and Rivest\u2019s NP-completeness of optimal tree construction provides the complexity-theoretic template the authors echo in proving NP-hardness of reconstruction. Together, these strands enable a principled maximum-likelihood, constraint-programming attack that turns standard random-forest artifacts into sufficient signals for reconstructing the training set.",
+  "analysis_timestamp": "2026-01-07T00:02:04.899270"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Parameter-Efficient Transfer Learning for NLP (Adapters)",
+      "authors": "Neil Houlsby et al.",
+      "year": 2019,
+      "role": "Foundational PEFT architecture introducing adapter modules",
+      "relationship_sentence": "PACE operates directly on adapter features, perturbing them with multiplicative noise and enforcing consistency, building on the adapter-based PEFT paradigm introduced by Houlsby et al."
+    },
+    {
+      "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+      "authors": "Edward J. Hu et al.",
+      "year": 2022,
+      "role": "Core PEFT method and widely used baseline",
+      "relationship_sentence": "PACE targets the generalization shortfalls observed in PEFT methods like LoRA by adding a principled consistency regularizer that controls gradient norms while preserving pretraining knowledge."
+    },
+    {
+      "title": "Virtual Adversarial Training: A Regularization Method for Supervised and Semi-Supervised Learning",
+      "authors": "Takeru Miyato et al.",
+      "year": 2018,
+      "role": "Consistency regularization via perturbations to induce local smoothness",
+      "relationship_sentence": "VAT\u2019s idea of enforcing output invariance under input perturbations inspires PACE\u2019s use of noise-driven consistency; PACE adapts this principle to adapter features to reduce gradient norms and improve generalization in PEFT."
+    },
+    {
+      "title": "SMART: Robust and Efficient Fine-Tuning for Pre-trained Natural Language Models",
+      "authors": "Haoming Jiang et al.",
+      "year": 2020,
+      "role": "Stability/consistency regularization for fine-tuning pre-trained models",
+      "relationship_sentence": "SMART\u2019s stability loss (consistency between clean and perturbed passes) directly motivates PACE\u2019s consistency objective; PACE specializes this to PEFT by perturbing adapter representations to explicitly curb gradient growth."
+    },
+    {
+      "title": "Mean Teachers Are Better Role Models: Weight-Averaged Consistency Targets Improve Semi-Supervised Learning",
+      "authors": "Antti Tarvainen and Harri Valpola",
+      "year": 2017,
+      "role": "Teacher\u2013student consistency framework",
+      "relationship_sentence": "PACE echoes Mean Teacher\u2019s core principle\u2014consistency w.r.t. a reference model\u2014by aligning the fine-tuned model to its pre-trained counterpart to retain pretraining knowledge while regularizing gradients."
+    },
+    {
+      "title": "Learning without Forgetting",
+      "authors": "Zhizhong Li and Derek Hoiem",
+      "year": 2017,
+      "role": "Distillation-based alignment to preserve prior knowledge",
+      "relationship_sentence": "PACE\u2019s alignment to the pre-trained model to mitigate forgetting mirrors LwF\u2019s output-level distillation, but PACE augments it with noise-driven consistency to avoid gradient explosion and better control optimization."
+    },
+    {
+      "title": "Dropout: A Simple Way to Prevent Neural Networks from Overfitting",
+      "authors": "Nitish Srivastava et al.",
+      "year": 2014,
+      "role": "Multiplicative noise as regularization on activations/features",
+      "relationship_sentence": "PACE leverages multiplicative noise at adapter features\u2014conceptually rooted in Dropout\u2014but couples it with an explicit consistency loss to systematically reduce gradient norms and enhance PEFT generalization."
+    }
+  ],
+  "synthesis_narrative": "PACE\u2019s core innovation is to restore generalization in parameter-efficient fine-tuning by explicitly reducing gradient norms while aligning the fine-tuned model to its pre-trained ancestor. Foundational PEFT methods\u2014Adapters and LoRA\u2014enable low-parameter adaptation but often sacrifice out-of-domain robustness, motivating PACE\u2019s design to regularize the adaptation pathway itself. From the consistency-regularization lineage, VAT established that enforcing local output invariance under perturbations induces smooth decision boundaries, and SMART translated this idea to fine-tuning pre-trained models through stability losses. PACE adopts this principle but targets the adapter\u2019s internal representations, injecting multiplicative noise and enforcing consistency to directly curb gradient growth during PEFT optimization. Complementing consistency, the knowledge-retention thread\u2014Learning without Forgetting and Mean Teacher\u2014demonstrated that aligning to a teacher (here, the pre-trained model) preserves prior knowledge and prevents drift. PACE merges this alignment with noise-driven consistency to avoid the gradient explosion that naive matching can cause. Finally, the multiplicative-noise mechanism traces to Dropout\u2019s feature-level regularization, which PACE refines by pairing noise with an explicit consistency objective rather than relying on implicit stochastic regularization. Together, these strands yield a PEFT-specific regularizer that (i) perturbs adapter features, (ii) enforces prediction consistency, and (iii) aligns to the pre-trained model\u2014achieving smaller gradient norms and better generalization without abandoning the efficiency advantages of PEFT.",
+  "analysis_timestamp": "2026-01-06T23:33:35.580884"
+}

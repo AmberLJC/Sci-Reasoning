@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+      "authors": "Alexey Dosovitskiy, Lucas Beyer, Alexander Kolesnikov, Dirk Weissenborn, Xiaohua Zhai, Thomas Unterthiner, Mostafa Dehghani, Matthias Minderer, Georg Heigold, Sylvain Gelly, Jakob Uszkoreit, Neil Houlsby",
+      "year": 2020,
+      "role": "Baseline paradigm",
+      "relationship_sentence": "Established fixed patch tokens for ViTs\u2014the rigid tokenization DHVT replaces\u2014while motivating backward compatibility so the new tokenizer can retrofit pretrained ViT architectures."
+    },
+    {
+      "title": "SLIC Superpixels Compared to State-of-the-Art Superpixel Methods",
+      "authors": "Radhakrishna Achanta, Appu Shaji, Kevin Smith, Aurelien Lucchi, Pascal Fua, Sabine S\u00fcsstrunk",
+      "year": 2012,
+      "role": "Conceptual precursor (region tokens and vectorizable partitions)",
+      "relationship_sentence": "Introduced simple, efficient superpixel oversegmentation that frames images as sets of coherent pixel regions\u2014an idea DHVT generalizes into a learnable, differentiable tokenization that also yields vectorizable regions."
+    },
+    {
+      "title": "Superpixel Sampling Networks",
+      "authors": "Varun Jampani, Deqing Sun, Ming-Hsuan Yang, Jan Kautz",
+      "year": 2018,
+      "role": "Differentiable grouping mechanism",
+      "relationship_sentence": "Pioneered end-to-end differentiable superpixel assignment via soft pixel-to-region associations, directly informing DHVT\u2019s pixel-level, content-adaptive and differentiable token assignment."
+    },
+    {
+      "title": "TokenLearner: Adaptive Space-Time Tokenization for Videos (and Images)",
+      "authors": "Michael S. Ryoo, AJ Piergiovanni, Anurag Arnab, Mostafa Dehghani, Anelia Angelova",
+      "year": 2021,
+      "role": "Adaptive tokenization for transformers",
+      "relationship_sentence": "Showed that learning to select/aggregate informative tokens yields efficiency and accuracy gains; DHVT extends this idea to pixel-level granularity and hierarchical selection while remaining plug-and-play with ViTs."
+    },
+    {
+      "title": "X-means: Extending K-means with Efficient Estimation of the Number of Clusters",
+      "authors": "Dan Pelleg, Andrew W. Moore",
+      "year": 2000,
+      "role": "Model selection with information criteria",
+      "relationship_sentence": "Introduced hierarchical splitting guided by BIC/AIC to automatically pick model complexity; DHVT echoes this by using information criteria to decide token split/merge levels in a differentiable hierarchy."
+    },
+    {
+      "title": "Categorical Reparameterization with Gumbel-Softmax",
+      "authors": "Eric Jang, Shixiang Gu, Ben Poole",
+      "year": 2017,
+      "role": "Differentiable discrete selection",
+      "relationship_sentence": "Provides a standard relaxation for learning discrete assignments end-to-end; DHVT leverages this class of techniques to make pixel-to-token assignment and model selection differentiable."
+    },
+    {
+      "title": "Neural Discrete Representation Learning (VQ-VAE)",
+      "authors": "Aaron van den Oord, Oriol Vinyals, Koray Kavukcuoglu",
+      "year": 2017,
+      "role": "Learned discretization/tokenization",
+      "relationship_sentence": "Established end-to-end training with discrete codebooks via straight-through estimators, inspiring DHVT\u2019s learned visual tokenization that can be retrofitted to existing transformer backbones."
+    }
+  ],
+  "synthesis_narrative": "Differentiable Hierarchical Visual Tokenization (DHVT) targets the core limitation introduced by ViT\u2019s fixed patch tokens (Dosovitskiy et al., 2020): rigid grids ignore image structure yet are deeply embedded in pretrained backbones. DHVT\u2019s solution draws on the superpixel literature to represent images as coherent, vectorizable regions. Classic SLIC (Achanta et al., 2012) established the value of region-level grouping for downstream efficiency and raster-to-vector conversion. Superpixel Sampling Networks (Jampani et al., 2018) then made pixel-to-region assignment differentiable with soft associations, providing a direct methodological template for DHVT\u2019s pixel-level, content-adaptive token formation.\n\nOn the transformer side, TokenLearner (Ryoo et al., 2021) demonstrated that adaptively selecting or aggregating tokens can boost performance while remaining compatible with existing ViT stacks. DHVT generalizes this adaptivity to the pixel level and augments it with principled complexity control: inspired by X-means (Pelleg & Moore, 2000), DHVT uses information criteria (e.g., AIC/BIC) to guide hierarchical split/merge decisions, enabling end-to-end, data-driven model selection of token granularity.\n\nMaking such decisions differentiable relies on established relaxations for discrete choices. Gumbel-Softmax (Jang et al., 2017) provides the reparameterization tools for learning discrete assignments, while VQ-VAE (van den Oord et al., 2017) shows how discrete representations can be integrated into neural training and later consumed by existing architectures. Together, these works directly inform DHVT\u2019s core: a differentiable, hierarchical, information-theoretic visual tokenizer that adapts at pixel-level resolution, plugs into pretrained ViTs for classification and dense prediction, and naturally supports raster-to-vector conversion through region-based tokens.",
+  "analysis_timestamp": "2026-01-07T00:21:32.240607"
+}

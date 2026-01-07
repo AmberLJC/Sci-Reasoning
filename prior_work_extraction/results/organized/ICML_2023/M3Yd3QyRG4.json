@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Efficiently Modeling Long Sequences with Structured State Spaces",
+      "authors": "Albert Gu et al.",
+      "year": 2022,
+      "role": "Baseline",
+      "relationship_sentence": "S4 established deep state-space models (SSMs) as the leading long-sequence baseline with parallelizable training; this paper\u2019s core aim is to recover S4-level performance and speed by redesigning RNNs, directly adopting S4\u2019s stable state-dynamics perspective to justify linearizing/diagonalizing the recurrence."
+    },
+    {
+      "title": "Simplifying State Space Models for Sequence Modeling (S4D)",
+      "authors": "Albert Gu et al.",
+      "year": 2022,
+      "role": "Extension",
+      "relationship_sentence": "S4D showed that diagonal state matrices with log-parameterized, stable eigenvalues are sufficient for SSM performance; the present work extends this diagonal, timescale-parameterized design to RNN recurrences, enabling fast parallel training and long-range memory within an RNN."
+    },
+    {
+      "title": "HiPPO: Orthogonal Polynomial Projections for Learning Long-range Dependencies",
+      "authors": "Albert Gu et al.",
+      "year": 2020,
+      "role": "Foundation",
+      "relationship_sentence": "HiPPO introduced the continuous-time state-space and timescale principles underlying SSM memory; this paper inherits those principles to parameterize/initialize RNN decays so that signals propagate stably over long horizons."
+    },
+    {
+      "title": "Legendre Memory Units: Continuous-Time Representation in Recurrent Neural Networks",
+      "authors": "Aaron R. Voelker et al.",
+      "year": 2019,
+      "role": "Inspiration",
+      "relationship_sentence": "LMU demonstrated that carefully designed linear, state-space\u2013derived RNNs can retain long-term information with fast inference; this work is directly inspired to linearize the RNN recurrence and engineer stable timescales to rival SSMs."
+    },
+    {
+      "title": "On the difficulty of training Recurrent Neural Networks",
+      "authors": "Razvan Pascanu et al.",
+      "year": 2013,
+      "role": "Gap Identification",
+      "relationship_sentence": "This classic analysis of vanishing/exploding gradients in RNNs identifies the core optimization barriers the present paper targets, motivating its signal-propagation\u2013guided parameterization, diagonalization, and careful forward-pass normalization."
+    },
+    {
+      "title": "Can RNNs warp time?",
+      "authors": "Corentin Tallec et al.",
+      "year": 2018,
+      "role": "Extension",
+      "relationship_sentence": "Tallec and Ollivier\u2019s timescale (forget-gate) analysis motivates the log-timescale/decay parameterizations used here, which allocate memory over a wide range of horizons and stabilize training of deep/long RNNs."
+    },
+    {
+      "title": "Independently Recurrent Neural Network (IndRNN): Building A Longer and Deeper RNN",
+      "authors": "Shuai Li et al.",
+      "year": 2018,
+      "role": "Extension",
+      "relationship_sentence": "IndRNN\u2019s use of diagonal recurrent matrices to simplify gradient flow is directly extended here by adopting (potentially complex) diagonal recurrences with stability-enforcing parameterizations and normalization to match SSM performance."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core innovation\u2014recovering SSM-level long-range performance and training speed with RNNs\u2014stands on a direct lineage from state-space modeling and signal-propagation theory. S4 established deep SSMs as the state of the art for long sequences with parallelizable training, while S4D revealed that diagonal, timescale-parameterized state dynamics suffice. Building on HiPPO\u2019s continuous-time perspective and principled memory-timescale design, these works collectively suggested that stable, well-parameterized linear dynamics are the crux of long-range reasoning. This paper ported those ideas back into RNNs: linearizing and diagonalizing the recurrence, parameterizing decays on log-timescales, and enforcing stability constraints on eigenvalues\u2014design choices directly inspired by S4/S4D/HiPPO.\nAt the same time, classical RNN optimization insights shaped the engineering needed to make such RNNs actually train: Pascanu et al. pinpointed the vanishing/exploding gradient pathology, motivating signal-propagation\u2013aware initialization and careful normalization of the forward pass. Tallec and Ollivier\u2019s analysis of time-warping and forget-gate biasing provided a practical recipe for distributing memory across horizons via decay parameters. Finally, IndRNN\u2019s diagonal recurrence offered a concrete precedent that diagonal structures ease gradient flow in deep RNNs, which this work extends with stability-guaranteeing parameterizations and normalization. LMU further validated that linear, state-space\u2013derived RNNs can achieve long memory with fast inference. Together, these works directly enabled the paper\u2019s central result: a carefully designed, diagonally parameterized linear RNN that matches deep SSMs on long-range tasks while training as fast as them.",
+  "analysis_timestamp": "2026-01-06T23:09:26.516965"
+}

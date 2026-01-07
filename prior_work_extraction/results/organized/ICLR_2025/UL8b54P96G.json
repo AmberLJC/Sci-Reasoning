@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Why there are complementary learning systems in the hippocampus and neocortex: Insights from the successes and failures of connectionist models of learning and memory",
+      "authors": "McClelland et al.",
+      "year": 1995,
+      "role": "Foundation",
+      "relationship_sentence": "SlowFast-VGen directly operationalizes the CLS theory by splitting video generation into a slow world-modeling learner and a fast, episodic-memory learner updated at inference."
+    },
+    {
+      "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+      "authors": "Hu et al.",
+      "year": 2022,
+      "role": "Extension",
+      "relationship_sentence": "The paper\u2019s fast learner is a temporal LoRA module whose parameters are updated online, directly extending LoRA\u2019s low-rank adaptation to temporal video dynamics and test-time updating."
+    },
+    {
+      "title": "Tune-A-Video: One-Shot Tuning of Image Diffusion Models for Text-to-Video Generation",
+      "authors": "Wu et al.",
+      "year": 2023,
+      "role": "Inspiration",
+      "relationship_sentence": "Tune-A-Video showed that small, targeted updates to temporal components can adapt diffusion models to specific videos, inspiring SlowFast-VGen\u2019s per-instance fast adaptation for episodic memory."
+    },
+    {
+      "title": "AnimateDiff: Animate Your Personalized Text-to-Image Diffusion Models without Specific Tuning",
+      "authors": "Guo et al.",
+      "year": 2023,
+      "role": "Extension",
+      "relationship_sentence": "AnimateDiff\u2019s plug-in temporal motion modules directly informed SlowFast-VGen\u2019s design of a lightweight temporal adapter, which they further evolve into a learnable temporal LoRA updated at inference."
+    },
+    {
+      "title": "Video Diffusion Models",
+      "authors": "Ho et al.",
+      "year": 2022,
+      "role": "Foundation",
+      "relationship_sentence": "SlowFast-VGen builds its slow learner on the diffusion formulation and 3D spatiotemporal modeling introduced in Video Diffusion Models."
+    },
+    {
+      "title": "MCVD: Masked Conditional Video Diffusion for Prediction, Generation, and Interpolation",
+      "authors": "Voleti et al.",
+      "year": 2022,
+      "role": "Foundation",
+      "relationship_sentence": "The slow learner in SlowFast-VGen adopts the masked conditional video diffusion paradigm from MCVD to learn general world dynamics efficiently."
+    },
+    {
+      "title": "Phenaki: Variable Length Video Generation from Open Domain Text",
+      "authors": "Villegas et al.",
+      "year": 2022,
+      "role": "Gap Identification",
+      "relationship_sentence": "Phenaki targets long videos but exhibits temporal drift/inconsistency across distant frames, a limitation SlowFast-VGen tackles via inference-time episodic memory with temporal LoRA."
+    }
+  ],
+  "synthesis_narrative": "SlowFast-VGen\u2019s core contribution\u2014marrying a slow world-model with a fast, episodic memory learner\u2014derives directly from the Complementary Learning Systems theory of McClelland et al., which argues for separate mechanisms for gradual structure learning and rapid, instance-specific storage. The slow component is instantiated with diffusion-based video generation: it inherits the general spatiotemporal diffusion formulation of Video Diffusion Models and explicitly leverages the masked conditional training strategy of MCVD to model broad world dynamics from large corpora. The fast component is enabled by parameter-efficient adaptation: LoRA provides the low-rank update mechanism that SlowFast-VGen extends into a temporal LoRA, and crucially, it updates these parameters online at inference to accumulate episodic memory from local inputs/outputs. Two recent advances in adapting image diffusion to video\u2014Tune-A-Video and AnimateDiff\u2014demonstrated that small temporal modules or motion adapters can be sufficient to inject temporal coherence; SlowFast-VGen generalizes this idea from per-video finetuning into a principled, inference-time fast learning loop that continuously stores and reuses episodic cues. Finally, long-form video generation works such as Phenaki exposed a persistent gap: temporal drift and incoherence across segments beyond a model\u2019s effective context. SlowFast-VGen directly addresses this limitation by equipping the generator with an inference-time memory mechanism\u2014temporal LoRA fast learning\u2014that binds distant segments coherently while the masked diffusion backbone maintains global dynamics.",
+  "analysis_timestamp": "2026-01-06T23:09:26.644941"
+}

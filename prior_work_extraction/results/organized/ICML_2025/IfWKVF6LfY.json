@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Training language models to follow instructions with human feedback",
+      "authors": "Ouyang et al.",
+      "year": 2022,
+      "role": "Baseline",
+      "relationship_sentence": "Established the practical PPO+reward-model RLHF pipeline with sequence-level rewards and KL regularization that RTO explicitly seeks to improve by moving from sentence-level bandit feedback to an MDP with token-wise credit."
+    },
+    {
+      "title": "Proximal Policy Optimization Algorithms",
+      "authors": "Schulman et al.",
+      "year": 2017,
+      "role": "Foundation",
+      "relationship_sentence": "Provides the PPO objective and trust-region/ratio clipping machinery that RTO uses for policy optimization once token-wise rewards are learned under the proposed MDP formulation."
+    },
+    {
+      "title": "Fine-Tuning Language Models from Human Preferences",
+      "authors": "Ziegler et al.",
+      "year": 2019,
+      "role": "Foundation",
+      "relationship_sentence": "Introduced PPO-based RLHF for LMs with a sentence-level reward model and KL penalty, defining the sequence-level (bandit-like) setup that RTO replaces with token-level MDP modeling."
+    },
+    {
+      "title": "Learning to summarize with human feedback",
+      "authors": "Stiennon et al.",
+      "year": 2020,
+      "role": "Gap Identification",
+      "relationship_sentence": "Showed that sequence-level preference-trained PPO can be sample-inefficient and unstable due to sparse rewards, motivating RTO\u2019s shift to dense token-wise rewards and finer-grained credit assignment."
+    },
+    {
+      "title": "Deep Reinforcement Learning from Human Preferences",
+      "authors": "Christiano et al.",
+      "year": 2017,
+      "role": "Foundation",
+      "relationship_sentence": "Established learning reward functions directly from pairwise human preferences; RTO adopts this idea but learns a token-wise reward function from preferences to support MDP-style optimization."
+    },
+    {
+      "title": "Direct Preference Optimization: Your Language Model Is Secretly a Reward Model",
+      "authors": "Rafailov et al.",
+      "year": 2023,
+      "role": "Extension",
+      "relationship_sentence": "DPO showed how to turn pairwise preferences into an implicit reward via a Bradley\u2013Terry model; RTO extends this line by learning explicit token-level rewards from preferences and then combining it with PPO-style optimization."
+    },
+    {
+      "title": "Sequence Level Training with Recurrent Neural Networks",
+      "authors": "Ranzato et al.",
+      "year": 2016,
+      "role": "Related Problem",
+      "relationship_sentence": "Framed text generation as an MDP with per-token actions and sequence-level returns, directly informing RTO\u2019s sequential decision view and token-wise credit assignment for RLHF."
+    }
+  ],
+  "synthesis_narrative": "RTO emerges by reconciling two dominant RLHF paradigms: PPO-based policy optimization with sentence-level rewards and preference-only optimization. The PPO lineage\u2014crystallized by Ouyang et al. and earlier by Ziegler et al.\u2014established the now-standard pipeline of training a reward model from preferences and optimizing with PPO under KL control. However, as Stiennon et al. documented, sparse, sequence-level rewards can yield instability and poor sample efficiency, a limitation the authors of RTO target explicitly. At the same time, DPO demonstrated that pairwise preferences implicitly define a reward under a Bradley\u2013Terry model, inspiring the RTO authors to learn rewards directly from preference data\u2014but crucially to do so at the token level rather than at the sequence level. The move to token granularity is grounded in the long-standing MDP view of text generation, as articulated by Ranzato et al., where each token is an action in a sequential decision process. Building on PPO (Schulman et al.), RTO conducts policy optimization using the newly learned token-wise rewards, thereby marrying DPO\u2019s preference-grounded reward learning with PPO\u2019s robust policy updates. Finally, the conceptual basis for learning rewards from pairwise human feedback is rooted in Christiano et al., which provides the foundational methodology that RTO adapts and refines to a fine-grained, token-wise setting. Together, these works directly shape RTO\u2019s core innovation: an MDP-based, token-level preference-to-reward learning framework coupled with PPO optimization for more sample-efficient RLHF.",
+  "analysis_timestamp": "2026-01-06T23:07:19.586228"
+}

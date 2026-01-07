@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "The use of ranks to avoid the assumption of normality implicit in the analysis of variance",
+      "authors": "R. A. Bradley and M. E. Terry",
+      "year": 1952,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "Introduced the Bradley\u2013Terry probabilistic choice model that underlies the standard pairwise-preference likelihood used in reward modeling, which this paper analyzes theoretically and questions as a necessary assumption."
+    },
+    {
+      "title": "Deep Reinforcement Learning from Human Preferences",
+      "authors": "Paul F. Christiano et al.",
+      "year": 2017,
+      "arxiv_id": "1706.03741",
+      "role": "Foundation",
+      "relationship_sentence": "Established the preference-based RLHF pipeline by training a reward model with a Bradley\u2013Terry likelihood on human comparisons, providing the exact problem formulation this work re-examines and theoretically grounds."
+    },
+    {
+      "title": "Learning to summarize with human feedback",
+      "authors": "Nisan Stiennon et al.",
+      "year": 2020,
+      "arxiv_id": "2009.01325",
+      "role": "Related Problem",
+      "relationship_sentence": "Demonstrated BT-trained reward models in NLP with sparse pairwise comparisons, directly motivating this paper\u2019s analysis of convergence under sparse comparison graphs and its focus on ranking-preserving objectives."
+    },
+    {
+      "title": "Training language models to follow instructions with human feedback",
+      "authors": "Long Ouyang et al.",
+      "year": 2022,
+      "arxiv_id": "2203.02155",
+      "role": "Baseline",
+      "relationship_sentence": "Adopted BT-based reward modeling as the core of InstructGPT alignment, serving as the primary BT paradigm that this paper both provides theoretical justification for and relaxes via order-consistency."
+    },
+    {
+      "title": "Direct Preference Optimization: Your Language Model is Secretly a Reward Model",
+      "authors": "Yura Rafailov et al.",
+      "year": 2023,
+      "arxiv_id": "2305.18290",
+      "role": "Gap Identification",
+      "relationship_sentence": "Derived a direct policy objective by assuming the BT link between preference probabilities and reward differences, whose reliance on the BT form this paper identifies as unnecessary by formalizing order-consistent alternatives."
+    },
+    {
+      "title": "Learning to rank using gradient descent",
+      "authors": "Christopher J. C. Burges et al.",
+      "year": 2005,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "Introduced pairwise logistic (BT-style) learning with neural scoring functions (RankNet), which this work leverages when analyzing convergence of BT reward models parameterized by deep embeddings."
+    },
+    {
+      "title": "Rank Centrality: Ranking from Pairwise Comparisons",
+      "authors": "S. Negahban, S. Oh, and D. Shah",
+      "year": 2012,
+      "arxiv_id": "1209.1688",
+      "role": "Extension",
+      "relationship_sentence": "Provided statistical consistency and finite-sample rates for BTL under sparse comparison graphs, which this work extends to BT reward models with neural embeddings in LLM alignment settings."
+    }
+  ],
+  "synthesis_narrative": "Bradley and Terry introduced the probabilistic choice model that connects pairwise preferences to latent scores via a logistic link, establishing the statistical foundation for inferring utilities from comparisons. Christiano et al. later embedded this Bradley\u2013Terry likelihood into the RLHF pipeline, training reward models directly from human pairwise judgments and using them for downstream policy optimization. In large-scale NLP, Stiennon et al. showed this approach works under sparse pairwise comparisons for summarization, underscoring the practical regime where only a small comparison graph is observed. Ouyang et al. operationalized this recipe for instruction-following LLMs, making BT-based reward modeling the de facto baseline for alignment. Complementing these applications, Burges et al.\u2019s RankNet framed pairwise logistic learning with neural scoring functions, an architectural viewpoint that directly links BT likelihoods to deep embeddings. On the theory side, Negahban, Oh, and Shah established consistency and rates for BTL under sparse comparison graphs, providing finite-sample guarantees that motivate extending such analyses to neural parameterizations. Rafailov et al. then derived DPO by assuming the BT mapping from reward differences to preference probabilities, tying downstream policy optimization tightly to BT.\nTogether, these works revealed a mature but BT-centric ecosystem: practical success with sparse comparisons, neural scoring architectures, and even direct policy optimization all lean on the BT link. This convergence highlighted a gap: alignment pipelines primarily need correct orderings, not calibrated rewards. Building on the neural pairwise-loss view and BTL statistical guarantees, the present work formalizes convergence for BT with deep embeddings and then relaxes the necessity of the BT assumption by elevating order consistency as the essential criterion for reward models.",
+  "target_paper": {
+    "title": "Rethinking Reward Modeling in Preference-based Large Language Model Alignment",
+    "authors": "Hao Sun, Yunyi Shen, Jean-Francois Ton",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "oral",
+    "keywords": "Bradley-Terry Model, Reward Modeling, Large Language Models",
+    "abstract": "The Bradley-Terry (BT) model is a common and successful practice in reward modeling for Large Language Model (LLM) alignment. However, it remains unclear *why* this model --- originally developed for multi-player stochastic game matching --- can be adopted to convert pairwise response comparisons to reward values and make predictions. Especially given the fact that only a limited number of prompt-response pairs are sparsely compared with others. \nIn this paper, we first establish the convergence rate of BT reward models based on deep neural networks using embeddings, providing a theoretical foundation for their use.\nDespite theoretically sound, we argue that the BT model is not a necessary choice from the perspective of downstream optimization, this is because a reward model only needs to preserve the correct ranking predictions through a monotonic transformation of the true reward. \nWe highlight the critical concept of *order consistency* in reward modeling and demonstrate that the BT",
+    "openreview_id": "rfdblE10qm",
+    "forum_id": "rfdblE10qm"
+  },
+  "analysis_timestamp": "2026-01-06T14:23:48.158647"
+}

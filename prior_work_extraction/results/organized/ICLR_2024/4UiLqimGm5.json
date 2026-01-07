@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Instant Neural Graphics Primitives with a Multiresolution Hash Encoding",
+      "authors": "Thomas M\u00fcller et al.",
+      "year": 2022,
+      "arxiv_id": "2201.05989",
+      "role": "Baseline",
+      "relationship_sentence": "This work is the primary grid+MLP sequential baseline whose grid features are fed into a small MLP, and CAM departs from this design by using grid lookups to modulate intermediate MLP activations instead of supplying them only at the input/head."
+    },
+    {
+      "title": "FiLM: Visual Reasoning with a General Conditioning Layer",
+      "authors": "Ethan Perez et al.",
+      "year": 2018,
+      "arxiv_id": "1709.07871",
+      "role": "Inspiration",
+      "relationship_sentence": "CAM directly adopts the FiLM-style feature-wise scale-and-shift conditioning, extending it so that the modulation parameters are generated from coordinate-dependent grid features."
+    },
+    {
+      "title": "Semantic Image Synthesis with Spatially-Adaptive Normalization (SPADE)",
+      "authors": "Taesung Park et al.",
+      "year": 2019,
+      "arxiv_id": "1903.07291",
+      "role": "Inspiration",
+      "relationship_sentence": "SPADE\u2019s spatially varying gamma/beta parameters motivate CAM\u2019s coordinate-aware modulation by showing that conditioning via per-location scale/shift can inject spatial information throughout a network."
+    },
+    {
+      "title": "Fourier Features Let Networks Learn High Frequency Functions in Low Dimensional Domains",
+      "authors": "Matthew Tancik et al.",
+      "year": 2020,
+      "arxiv_id": "2006.10739",
+      "role": "Gap Identification",
+      "relationship_sentence": "Positional encodings mitigate spectral bias for MLP-based neural fields but still require slow training and larger networks, a limitation CAM addresses by replacing fixed encodings with learned grid-driven modulation across layers."
+    },
+    {
+      "title": "On the Spectral Bias of Neural Networks",
+      "authors": "Nazim Rahaman et al.",
+      "year": 2019,
+      "arxiv_id": "1806.08734",
+      "role": "Foundation",
+      "relationship_sentence": "By formalizing that MLPs learn low frequencies first, this work motivates CAM\u2019s design to inject spectral-bias-free information from grids into hidden layers to accelerate high-frequency learning."
+    },
+    {
+      "title": "Plenoxels: Radiance Fields without Neural Networks",
+      "authors": "Alex Yu et al.",
+      "year": 2022,
+      "arxiv_id": "2112.05131",
+      "role": "Gap Identification",
+      "relationship_sentence": "Plenoxels show grid-only fields train fast and avoid spectral bias but incur high memory, motivating CAM to use grids only to produce modulation signals while keeping a compact MLP backbone."
+    },
+    {
+      "title": "TensoRF: Tensorial Radiance Fields",
+      "authors": "Anpei Chen et al.",
+      "year": 2022,
+      "arxiv_id": "2203.09517",
+      "role": "Related Problem",
+      "relationship_sentence": "TensoRF exemplifies the prevalent sequential combination of learned grids with a small MLP, which CAM rethinks by using grid-derived parameters to modulate internal MLP features rather than serve solely as input."
+    }
+  ],
+  "synthesis_narrative": "Spectral bias in MLPs was established by Rahaman et al., who showed that networks fit low frequencies first, impeding rapid learning of high-frequency signals. Tancik et al. proposed Fourier features to inject high-frequency content into coordinate-based MLPs, alleviating but not eliminating slow convergence and capacity demands. In contrast, explicit/grid methods like Plenoxels demonstrated that optimizing voxel grids yields spectral-bias-free behavior and very fast training, albeit at a substantial memory cost. Hybrid designs, typified by Instant-NGP\u2019s multiresolution hash grids and TensoRF\u2019s tensor decompositions, sequentially feed grid-derived features into a small MLP, capturing detail efficiently but still treating grids as inputs rather than pervasive conditioning. Separately, FiLM introduced feature-wise linear modulation\u2014scale and shift applied to intermediate activations\u2014as a powerful conditioning primitive, and SPADE extended this to spatially adaptive normalization, where per-location modulation injects spatial information throughout a network.\nTaken together, these insights suggest a route to combine the frequency richness and speed of grids with the compactness of MLPs by making spatial/coordinate information a first-class conditioning signal across layers. The natural next step is to replace sequential grid-to-MLP pipelines and fixed positional encodings with coordinate-aware modulation: grid lookups generate per-layer scale/shift parameters that modulate hidden features, reducing spectral bias and accelerating convergence while avoiding the memory footprint of fully explicit grids.",
+  "target_paper": {
+    "title": "Coordinate-Aware Modulation for Neural Fields",
+    "authors": "Joo Chan Lee, Daniel Rho, Seungtae Nam, Jong Hwan Ko, Eunbyung Park",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Neural Fields, Neural Representation",
+    "abstract": "Neural fields, mapping low-dimensional input coordinates to corresponding signals, have shown promising results in representing various signals. Numerous methodologies have been proposed, and techniques employing MLPs and grid representations have achieved substantial success. MLPs allow compact and high expressibility, yet often suffer from spectral bias and slow convergence speed. On the other hand, methods using grids are free from spectral bias and achieve fast training speed, however, at the expense of high spatial complexity. In this work, we propose a novel way for exploiting both MLPs and grid representations in neural fields. Unlike the prevalent methods that combine them sequentially (extract features from the grids first and feed them to the MLP), we inject spectral bias-free grid representations into the intermediate features in the MLP. More specifically, we suggest a Coordinate-Aware Modulation (CAM), which modulates the intermediate features using scale and shift paramet",
+    "openreview_id": "4UiLqimGm5",
+    "forum_id": "4UiLqimGm5"
+  },
+  "analysis_timestamp": "2026-01-06T16:18:36.533243"
+}

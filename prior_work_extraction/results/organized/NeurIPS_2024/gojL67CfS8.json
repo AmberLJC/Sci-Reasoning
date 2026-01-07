@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Deep Generative Image Models using a Laplacian Pyramid of Adversarial Networks",
+      "authors": "Emily L. Denton, Soumith Chintala, Arthur Szlam, Rob Fergus",
+      "year": 2015,
+      "role": "Conceptual precursor for coarse-to-fine generation",
+      "relationship_sentence": "Introduced coarse-to-fine image synthesis via a Laplacian pyramid, establishing the idea of generating higher-resolution details conditioned on lower-resolution images that VAR reframes as next-scale prediction for autoregressive transformers."
+    },
+    {
+      "title": "Conditional Image Generation with PixelCNN Decoders",
+      "authors": "A\u00e4ron van den Oord, Nal Kalchbrenner, Oriol Vinyals et al.",
+      "year": 2016,
+      "role": "Foundational autoregressive image modeling (raster-scan next-token)",
+      "relationship_sentence": "Established the raster-scan next-pixel/token autoregressive paradigm that VAR explicitly departs from, motivating VAR\u2019s shift to next-resolution prediction to overcome slow sampling and limited long-range coherence."
+    },
+    {
+      "title": "Generating High Fidelity Images with Subscale Pixel Networks and Multidimensional Upscaling",
+      "authors": "Jacob Menick, Nal Kalchbrenner",
+      "year": 2019,
+      "role": "Multi-scale AR conditioning and upscaling",
+      "relationship_sentence": "Demonstrated that conditioning high-resolution generation on lower-resolution structure (multidimensional upscaling) boosts fidelity, directly informing VAR\u2019s design of conditioning on a coarser scale while autoregressively predicting the next scale."
+    },
+    {
+      "title": "Generating Diverse High-Fidelity Images with VQ-VAE-2",
+      "authors": "Ali Razavi, A\u00e4ron van den Oord, Oriol Vinyals",
+      "year": 2019,
+      "role": "Hierarchical discrete representation with top-down priors",
+      "relationship_sentence": "Showed hierarchical, coarse-to-fine priors over latent codes can drastically improve image quality; VAR adopts a similar hierarchical dependency but operates directly in image space as next-scale prediction rather than discrete latent tokens."
+    },
+    {
+      "title": "Generative Pretraining from Pixels (Image GPT)",
+      "authors": "Mark Chen, Alec Radford, Rewon Child, Jeff Wu, Heewoo Jun, Prafulla Dhariwal, David Luan, Ilya Sutskever",
+      "year": 2020,
+      "role": "GPT-style transformers applied to images",
+      "relationship_sentence": "Validated GPT-style autoregressive transformers for images under next-token rasterization; VAR retains the GPT-style transformer but replaces the training target with next-resolution prediction to achieve higher quality and faster sampling."
+    },
+    {
+      "title": "Image Super-Resolution via Iterative Refinement (SR3)",
+      "authors": "Chitwan Saharia, Jonathan Ho, William Chan, Tim Salimans, David J. Fleet, Mohammad Norouzi",
+      "year": 2021,
+      "role": "Diffusion-based next-scale (super-resolution) modeling",
+      "relationship_sentence": "Established that training models as conditional super-resolvers at successive scales is a powerful generation strategy; VAR transfers this cascade/next-scale insight from diffusion to autoregressive transformers."
+    },
+    {
+      "title": "DiT: Scalable Diffusion Models with Transformers",
+      "authors": "William Peebles, Saining Xie",
+      "year": 2023,
+      "role": "State-of-the-art diffusion-transformer baseline and architectural reference",
+      "relationship_sentence": "Provided a strong transformer-based diffusion baseline that VAR aims to surpass; also influenced VAR\u2019s architectural/scaling considerations while contrasting AR-next-scale with diffusion objectives."
+    }
+  ],
+  "synthesis_narrative": "VAR\u2019s key contribution\u2014recasting image autoregression as next-scale prediction\u2014stands at the intersection of three research threads: raster-scan autoregression, hierarchical/multi-scale generative modeling, and diffusion-based super-resolution cascades. Early AR models like PixelCNN defined next-token prediction in raster order, but suffered from slow sampling and difficulty capturing long-range structure. Image GPT showed that GPT-style transformers could model images under this paradigm, yet quality and efficiency lagged behind modern diffusion models.\nMulti-scale and hierarchical approaches provided a direct path forward. Laplacian pyramid GANs introduced coarse-to-fine synthesis, while Subscale Pixel Networks operationalized conditioning on lower-resolution structure to achieve high fidelity with AR models. VQ-VAE-2 demonstrated that hierarchical priors\u2014generating coarse codes first and refining details\u2014substantially improve image quality, anticipating VAR\u2019s decision to condition higher-resolution predictions on a downsampled image rather than on previously generated raster tokens.\nIn parallel, diffusion work\u2014exemplified by SR3 and subsequent cascades\u2014validated next-scale (super-resolution) conditioning as a robust generation strategy. DiT then set a high bar for transformer-based generative modeling within diffusion, establishing the comparator that VAR targets. By importing the cascade/next-scale idea from diffusion and coupling it with GPT-style transformers, VAR avoids raster constraints, accelerates sampling, and improves fidelity. This synthesis yields an AR framework that finally outcompetes diffusion transformers, while exhibiting clean scaling behavior akin to large language models.",
+  "analysis_timestamp": "2026-01-06T23:33:36.255955"
+}

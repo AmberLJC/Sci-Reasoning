@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Conservative Q-Learning for Offline Reinforcement Learning",
+      "authors": "Aviral Kumar, Aurick Zhou, George Tucker, Sergey Levine",
+      "year": 2020,
+      "role": "Action-level conservatism baseline for addressing OOD in offline RL",
+      "relationship_sentence": "OGSRL builds on CQL\u2019s idea of suppressing unsupported actions but goes beyond action-only conservatism by adding an explicit state-distribution guard, addressing CQL\u2019s inability to regulate downstream trajectories."
+    },
+    {
+      "title": "Stabilizing Off-Policy Q-Learning via Bootstrapping Error Reduction (BEAR)",
+      "authors": "Aviral Kumar, Justin Fu, Matthew Soh, George Tucker, Sergey Levine",
+      "year": 2019,
+      "role": "Behavior-regularized offline RL constraining policy deviation from the dataset",
+      "relationship_sentence": "OGSRL echoes BEAR\u2019s support-aware action regularization yet extends it with a model-based constraint that keeps learned policies within the empirical state distribution, mitigating trajectory-level OOD errors BEAR does not control."
+    },
+    {
+      "title": "Off-Policy Deep Reinforcement Learning without Exploration (Batch-Constrained Q-learning, BCQ)",
+      "authors": "Scott Fujimoto, David Meger, Doina Precup",
+      "year": 2019,
+      "role": "Action support constraint via generative modeling to restrict OOD actions",
+      "relationship_sentence": "While BCQ constrains action choices to the behavior support, OGSRL complements this idea with a learned-dynamics-driven constraint that restricts the induced state visitation, thereby guarding full trajectories rather than actions alone."
+    },
+    {
+      "title": "MOReL: Model-Based Offline Reinforcement Learning",
+      "authors": "Rahul Kidambi, Aravind Rajeswaran, Praneeth Netrapalli, Sham Kakade",
+      "year": 2020,
+      "role": "Pessimistic model-based offline RL that avoids uncertain regions of the state space",
+      "relationship_sentence": "OGSRL adopts MOReL\u2019s model-based pessimism to reason about where the dynamics are reliable, but casts it as an explicit state-distribution constraint rather than absorbing-state truncation, yielding a tighter trajectory in-distribution guarantee."
+    },
+    {
+      "title": "Safe Policy Improvement with Baseline Bootstrapping (SPIBB)",
+      "authors": "Romain Laroche, Paul Trichelair, R\u00e9mi Tachet des Combes, et al.",
+      "year": 2019,
+      "role": "Safe policy improvement in batch RL via constrained deviations from a baseline",
+      "relationship_sentence": "OGSRL generalizes SPIBB\u2019s safe-improvement principle from count-based action constraints to a dual mechanism that simultaneously limits policy deviation and state-distribution shift using a learned dynamics model."
+    },
+    {
+      "title": "Constrained Policy Optimization",
+      "authors": "Joshua Achiam, David Held, Aviv Tamar, Pieter Abbeel",
+      "year": 2017,
+      "role": "CMDP and Lagrangian optimization framework for enforcing safety constraints",
+      "relationship_sentence": "OGSRL leverages the CMDP/Lagrangian perspective from CPO to implement and analyze its dual constraint mechanism, providing theoretical guarantees for constraint satisfaction in the offline setting."
+    },
+    {
+      "title": "High Confidence Off-Policy Evaluation",
+      "authors": "Philip S. Thomas, Georgios Theocharous, Mohammad Ghavamzadeh",
+      "year": 2015,
+      "role": "Statistical safety guarantees for evaluating policies from logged data",
+      "relationship_sentence": "OGSRL\u2019s safety claims are supported by the high-confidence evaluation mindset, using uncertainty-aware estimates to justify conservative constraints that prevent harmful OOD trajectories in healthcare."
+    }
+  ],
+  "synthesis_narrative": "OGSRL targets a central failure mode of offline RL in healthcare: action-only regularization curbs obviously unsupported choices but does not prevent the policy from pushing the system into out-of-distribution states over multi-step rollouts. Conservative Q-Learning (Kumar et al., 2020), BEAR (Kumar et al., 2019), and BCQ (Fujimoto et al., 2019) established the core toolbox for suppressing OOD actions via value pessimism, behavior regularization, and action-support constraints. OGSRL preserves these strengths but identifies their shared limitation\u2014neglect of downstream state-distribution shift\u2014and introduces a complementary state guard.\nModel-based offline RL advances, particularly MOReL (Kidambi et al., 2020), showed that learned dynamics with pessimistic handling of uncertainty can avoid unreliable parts of the state space. OGSRL adopts this insight yet formalizes it as an explicit constraint over state visitation rather than as reward shaping or absorbing-state truncation, thereby directly regulating trajectory support. For safety guarantees, SPIBB (Laroche et al., 2019) contributes a principled safe-improvement template in the batch setting; OGSRL extends this template from purely action-level deviations to a dual constraint that simultaneously limits policy divergence and state-distribution shift. Finally, the constraint-enforcement machinery and analysis borrow from CMDP/Lagrangian methods such as Constrained Policy Optimization (Achiam et al., 2017), while the spirit of High Confidence Off-Policy Evaluation (Thomas et al., 2015) underpins OGSRL\u2019s conservative, uncertainty-aware design. Together, these works converge into OGSRL\u2019s theoretically grounded, dual-guarded framework that safely improves beyond clinician behavior while keeping full trajectories in-distribution.",
+  "analysis_timestamp": "2026-01-07T00:21:32.323707"
+}

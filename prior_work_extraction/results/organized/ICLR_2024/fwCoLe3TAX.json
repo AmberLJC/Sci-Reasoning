@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Training language models to follow instructions with human feedback",
+      "authors": "Long Ouyang et al.",
+      "year": 2022,
+      "arxiv_id": "2203.02155",
+      "role": "Foundation",
+      "relationship_sentence": "Established the RLHF pipeline\u2014supervised fine-tuning, reward modeling, and PPO-based policy optimization\u2014that this paper seeks to make group-invariant and robust across domains."
+    },
+    {
+      "title": "Direct Preference Optimization: Your Language Model is Secretly a Reward Model",
+      "authors": "Rafailov et al.",
+      "year": 2023,
+      "arxiv_id": "2305.18290",
+      "role": "Baseline",
+      "relationship_sentence": "Provides the direct preference optimization objective that the authors adapt into a group-aware, worst-group\u2013focused training scheme to improve alignment generalization."
+    },
+    {
+      "title": "Distributionally Robust Neural Networks for Group Shifts: On the Importance of Regularization for Worst-Case Generalization",
+      "authors": "Shiori Sagawa et al.",
+      "year": 2020,
+      "arxiv_id": "1911.08731",
+      "role": "Extension",
+      "relationship_sentence": "Introduces worst-group (Group DRO) training, whose min\u2013max principle is directly adapted to preference/RL objectives to prioritize challenging groups during policy learning."
+    },
+    {
+      "title": "Environment Inference for Invariant Learning",
+      "authors": "Elliot Creager et al.",
+      "year": 2021,
+      "arxiv_id": "unknown",
+      "role": "Inspiration",
+      "relationship_sentence": "Proposes inferring latent environments by adversarially splitting data to maximize invariance violations, inspiring this paper\u2019s automatic grouping step that maximizes performance variance before group-robust optimization."
+    },
+    {
+      "title": "Invariant Risk Minimization",
+      "authors": "Martin Arjovsky et al.",
+      "year": 2020,
+      "arxiv_id": "1907.02893",
+      "role": "Foundation",
+      "relationship_sentence": "Formulates learning predictors invariant across environments, providing the invariance principle motivating a policy whose preference-consistent behavior holds across inferred groups."
+    },
+    {
+      "title": "Fairness Without Demographics in Repeated Loss Minimization",
+      "authors": "Tatsunori B. Hashimoto et al.",
+      "year": 2018,
+      "arxiv_id": "1806.08010",
+      "role": "Foundation",
+      "relationship_sentence": "Shows how to improve worst-case subgroup performance without demographic labels via distributionally robust optimization, motivating group-agnostic robustness in alignment without group annotations."
+    },
+    {
+      "title": "Learning to summarize with human feedback",
+      "authors": "Nisan Stiennon et al.",
+      "year": 2020,
+      "arxiv_id": "2009.01325",
+      "role": "Gap Identification",
+      "relationship_sentence": "Documents that optimizing against learned reward models can induce shortcut exploitation and misaligned behavior, motivating robustness mechanisms that prevent RL from ignoring hard examples."
+    }
+  ],
+  "synthesis_narrative": "Instruction-tuned RLHF systems were crystallized by work showing that supervised fine-tuning, reward modeling, and PPO can steer large language models toward human-preferred behavior. Direct Preference Optimization reframed alignment as a supervised objective on pairwise preferences, avoiding explicit reward models while preserving the core preference-optimization setup. In parallel, robustness research developed worst-group optimization, demonstrating that ERM overfits majority patterns and that Group DRO\u2019s min\u2013max objective elevates performance on hard or minority groups. Invariant Risk Minimization formalized the aim of predictors whose conditional relationships remain stable across environments, while Environment Inference for Invariant Learning showed that, when group labels are absent, one can adversarially partition data to expose invariance violations. Fairness Without Demographics established that worst-case performance can be improved without group annotations via distributionally robust optimization, laying groundwork for group-agnostic robustness. Empirically, RLHF work on summarization revealed that directly optimizing learned rewards invites shortcut exploitation and degraded generalization.\nTogether, these strands reveal a gap: preference-optimized RLHF methods optimize average reward and can exploit spurious shortcuts, yet group labels needed for robust training are unavailable. The natural next step is to infer groups that accentuate performance disparities, then couple preference/RL objectives with a worst-group or invariance-guided criterion. This paper synthesizes DPO/RLHF training with EIIL-style group discovery and Group DRO/IRM principles, yielding a policy that focuses learning on challenging groups to generalize alignment consistently across domains.",
+  "target_paper": {
+    "title": "Improving Generalization of Alignment with Human Preferences through Group Invariant Learning",
+    "authors": "Rui Zheng, Wei Shen, Yuan Hua, Wenbin Lai, Shihan Dou, Yuhao Zhou, Zhiheng Xi, Xiao Wang, Haoran Huang, Tao Gui, Qi Zhang, Xuanjing Huang",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "alignment, language model, invariant learning",
+    "abstract": "The success of AI assistants based on language models (LLMs) hinges crucially on Reinforcement Learning from Human Feedback (RLHF), which enables the generation of responses more aligned with human preferences. \nAs universal AI assistants, there's a growing expectation for them to perform consistently across various domains. \nHowever, previous work shows that Reinforcement Learning (RL) often exploits shortcuts to attain high rewards and overlooks challenging samples.\nThis focus on quick reward gains undermines both the stability in training and the model's ability to generalize to new, unseen data.\nIn this work, we propose a novel approach that can learn a consistent policy via RL across various data groups or domains. \nGiven the challenges associated with acquiring group annotations, our method automatically classifies data into different groups, deliberately maximizing performance variance.\nThen, we optimize the policy to perform well on challenging groups. \nLastly, leveraging the e",
+    "openreview_id": "fwCoLe3TAX",
+    "forum_id": "fwCoLe3TAX"
+  },
+  "analysis_timestamp": "2026-01-06T06:17:12.802353"
+}

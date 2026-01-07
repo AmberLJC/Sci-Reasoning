@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Sequence Tutor: Conservative Fine-Tuning of Sequence Generation Models with KL-control",
+      "authors": "Natasha Jaques, Shixiang Gu, Richard E. Turner, Douglas Eck",
+      "year": 2017,
+      "role": "Introduced KL-regularized reinforcement learning for sequence models, formalizing the reward\u2013proximity tradeoff that keeps a fine-tuned policy close to a reference LM.",
+      "relationship_sentence": "DeRa directly operationalizes this KL-control principle by turning the KL coefficient into a decoding-time knob, avoiding additional training."
+    },
+    {
+      "title": "Fine-Tuning Language Models from Human Preferences",
+      "authors": "Daniel M. Ziegler, Nisan Stiennon, Jeffrey Wu, Tom B. Brown, Alec Radford, Paul Christiano, Dario Amodei, et al.",
+      "year": 2019,
+      "role": "Established RLHF for LMs with an explicit KL penalty to the pretraining distribution and highlighted the sensitivity to the regularization strength.",
+      "relationship_sentence": "DeRa targets the same RLHF objective but enables exploring different KL strengths at inference, eliminating costly retraining sweeps."
+    },
+    {
+      "title": "Training language models to follow instructions with human feedback",
+      "authors": "Long Ouyang, Jeff Wu, Xu Jiang, Diogo Almeida, Carroll Wainwright, Pamela Mishkin, Chong Zhang, Sandhini Agarwal, et al.",
+      "year": 2022,
+      "role": "Scaled RLHF (via PPO) with a tunable KL penalty to the reference model, making the practical challenge of selecting the KL coefficient central.",
+      "relationship_sentence": "DeRa offers a decoding-time mechanism to vary effective KL regularization, addressing the coefficient-selection problem surfaced in InstructGPT without repeated PPO runs."
+    },
+    {
+      "title": "Direct Preference Optimization: Your Language Model is Secretly a Reward Model",
+      "authors": "Alexander M. Rafailov, Jongwook Choi, Dorsa Sadigh, Chelsea Finn, Sergey Levine, et al.",
+      "year": 2023,
+      "role": "Showed that, under preference modeling, the optimal aligned policy has a Boltzmann form relative to a reference policy, effectively a logit correction by scaled rewards.",
+      "relationship_sentence": "DeRa leverages this Boltzmann/logit-correction view to adjust alignment strength by rescaling reward/proximity terms at decoding time."
+    },
+    {
+      "title": "Plug and Play Language Models: A Simple Approach to Controlled Text Generation",
+      "authors": "Sumanth Dathathri, Andrea Madotto, Janice Lan, Jane Hung, Eric Frank, Piero Molino, Jason Yosinski, Rosanne Liu",
+      "year": 2020,
+      "role": "Pioneered inference-time control by steering a frozen LM with an auxiliary attribute model, providing an adjustable guidance signal without retraining the LM.",
+      "relationship_sentence": "DeRa adopts the same inference-time steering philosophy but grounds the guidance in the RLHF reward/KL objective to modulate alignment."
+    },
+    {
+      "title": "GeDi: Generative Discriminator Guided Sequence Generation",
+      "authors": "Ben Krause, Akhilesh Deepak Gotmare, Bryan McCann, Nitish Shirish Keskar, Richard Socher",
+      "year": 2021,
+      "role": "Used Bayes-rule guidance from a discriminator/class-conditional LM to modify token probabilities during decoding with a tunable guidance scale.",
+      "relationship_sentence": "DeRa parallels GeDi\u2019s log-prob augmentation at decode time, but replaces class guidance with reward/regularization signals to sweep alignment strength."
+    }
+  ],
+  "synthesis_narrative": "DeRa builds on a line of work that frames alignment as optimizing a tradeoff between reward and proximity to a reference model. Early KL-control for sequence generation (Sequence Tutor) and RLHF for language models (Ziegler et al.) established the canonical objective: maximize reward while constraining divergence from the base LM. InstructGPT operationalized this at scale with PPO and a tunable KL penalty, but also exposed a practical bottleneck\u2014choosing the KL coefficient typically requires retraining or extensive sweeps. DPO later clarified the underlying probabilistic structure: the optimal aligned policy relative to a reference has a Boltzmann form, effectively a logit correction by scaled rewards, which suggests that varying the effective regularization can be achieved by rescaling guidance rather than retraining.\n\nIn parallel, decoding-time control methods such as PPLM and GeDi demonstrated that one can steer a frozen LM by adjusting probabilities during generation using auxiliary models, with an explicit guidance-strength knob. DeRa synthesizes these strands: it uses the Boltzmann/logit-correction view from KL-regularized RLHF/DPO to express the aligned distribution relative to the base model, and then, in the spirit of PPLM/GeDi, applies this correction at decoding time. This yields a simple, training-free mechanism to sweep and evaluate different regularization strengths\u2014precisely addressing the cost and brittleness of KL tuning in RLHF\u2014while preserving the theoretical grounding of KL-controlled alignment.",
+  "analysis_timestamp": "2026-01-06T23:42:48.076350"
+}

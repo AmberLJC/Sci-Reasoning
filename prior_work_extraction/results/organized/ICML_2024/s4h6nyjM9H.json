@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "The Reversible Residual Network: Backpropagation Without Storing Activations",
+      "authors": "Aidan Gomez et al.",
+      "year": 2017,
+      "role": "Foundation",
+      "relationship_sentence": "T-RevSNN adapts RevNet\u2019s invertible residual-block principle to reconstruct forward states during backprop, enabling O(L) training memory without checkpointing."
+    },
+    {
+      "title": "Reversible Recurrent Neural Networks",
+      "authors": "MacKay et al.",
+      "year": 2018,
+      "role": "Inspiration",
+      "relationship_sentence": "The idea of making temporal updates invertible to avoid storing per-timestep activations directly inspired T-RevSNN\u2019s temporal reversible interactions at turn-on spiking neurons."
+    },
+    {
+      "title": "Spatio-Temporal Backpropagation for Training High-Performance Spiking Neural Networks",
+      "authors": "Yujie Wu et al.",
+      "year": 2018,
+      "role": "Foundation",
+      "relationship_sentence": "STBP formalized surrogate-gradient BPTT for SNNs and its O(LT) memory footprint, defining the training bottleneck that T-RevSNN fixes via reversible temporal computation."
+    },
+    {
+      "title": "Deep Residual Learning in Spiking Neural Networks",
+      "authors": "Wei Fang et al.",
+      "year": 2021,
+      "role": "Extension",
+      "relationship_sentence": "T-RevSNN modifies SEW-ResNet-style spiking residual blocks and internal units to make residual pathways compatible with sparse, reversible temporal information flow."
+    },
+    {
+      "title": "DIET-SNN: Direct Input Encoding With Trainable Membrane Time Constant for Low-Latency Spiking Neural Networks",
+      "authors": "Nitin Rathi et al.",
+      "year": 2020,
+      "role": "Inspiration",
+      "relationship_sentence": "Evidence that direct input encoding reduces time steps and energy informed T-RevSNN\u2019s redesigned input encoding, which\u2014combined with reversibility\u2014achieves O(1) inference energy cost."
+    },
+    {
+      "title": "Conversion of Continuous-Valued Deep Networks to Efficient Event-Driven Networks for Image Classification",
+      "authors": "Bodo Rueckauer et al.",
+      "year": 2017,
+      "role": "Gap Identification",
+      "relationship_sentence": "Rate-coded ANN-to-SNN conversion attains accuracy but requires long simulations and high inference energy, a key limitation T-RevSNN overcomes with constant-cost inference."
+    },
+    {
+      "title": "A solution to the learning dilemma in spiking neural networks",
+      "authors": "Guillaume Bellec et al.",
+      "year": 2020,
+      "role": "Related Problem",
+      "relationship_sentence": "e-prop reduces training memory via local rules but departs from exact backprop and does not lower inference cost; T-RevSNN instead uses temporal reversibility to keep global gradients with O(L) memory and O(1) inference energy."
+    }
+  ],
+  "synthesis_narrative": "The core of T-RevSNN is to make SNN time evolution reversible at carefully chosen \u201ctemporal turn-on\u201d points so that training needs only O(L) memory and inference consumes O(1) energy. This directly builds on reversible neural computation: RevNet (Gomez et al.) established that invertible residual blocks allow reconstructing activations during backprop, eliminating activation storage, while Reversible RNNs (MacKay et al.) showed how temporal updates can be made invertible to cut BPTT memory. These ideas motivate T-RevSNN\u2019s multi-level temporal reversible interactions and the decision to turn off neuron dynamics most timesteps to preserve invertibility and stability. The training bottleneck T-RevSNN targets is defined by STBP (Wu et al.), which popularized surrogate-gradient BPTT for SNNs but incurs O(LT) memory by storing time sequences. On the architectural side, T-RevSNN refines spiking residual blocks along the lines of SEW-ResNet (Fang et al.), adjusting residual pathways and internal neuron units so sparse temporal information remains effective under reversible constraints. The inference-energy dilemma is crystallized by ANN-to-SNN conversion (Rueckauer et al.), where long rate-coded simulations drive energy costs high; DIET-SNN (Rathi et al.) demonstrated that direct input encoding can drastically cut timesteps, a cue T-RevSNN leverages and couples with reversibility to reach O(1) inference energy. Finally, while e-prop (Bellec et al.) reduces training memory via local learning, it does not provide the exact, global-gradient training with simultaneous inference savings that T-RevSNN achieves by redesigning the forward dynamics themselves.",
+  "analysis_timestamp": "2026-01-06T23:09:26.498196"
+}

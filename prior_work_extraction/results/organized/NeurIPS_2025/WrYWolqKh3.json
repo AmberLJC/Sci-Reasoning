@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Language Models are Unsupervised Multitask Learners (GPT-2)",
+      "authors": "Alec Radford, Jeffrey Wu, Rewon Child, David Luan, Dario Amodei, Ilya Sutskever",
+      "year": 2019,
+      "role": "Enabling design (byte-level BPE)",
+      "relationship_sentence": "Introduced byte-level BPE, ensuring every byte has a token and enabling the same string to be represented by many alternative segmentations\u2014including pure character sequences\u2014providing the technical affordance this paper exploits to feed non-canonical tokenizations to subword LMs."
+    },
+    {
+      "title": "Neural Machine Translation of Rare Words with Subword Units",
+      "authors": "Rico Sennrich, Barry Haddow, Alexandra Birch",
+      "year": 2016,
+      "role": "Foundational tokenization method (BPE)",
+      "relationship_sentence": "Established deterministic subword segmentation (BPE) as standard practice, defining the \"canonical\" tokenization paradigm against which the paper measures distance and robustness of LMs to alternative segmentations."
+    },
+    {
+      "title": "Subword Regularization: Improving Neural Network Translation Models with Multiple Subword Candidates",
+      "authors": "Taku Kudo",
+      "year": 2018,
+      "role": "Method inspiration (segmentation sampling)",
+      "relationship_sentence": "Proposed probabilistic sampling of multiple valid subword segmentations during training (via SentencePiece/Unigram LM) to improve robustness; the current paper extends this line by showing robust behavior to unseen segmentations at inference without any such training."
+    },
+    {
+      "title": "BPE-Dropout: Simple and Effective Subword Regularization",
+      "authors": "Ivan Provilkov, Dmitrii Emelianenko, Elena Voita",
+      "year": 2020,
+      "role": "Method inspiration (randomized segmentations)",
+      "relationship_sentence": "Demonstrated that randomly perturbing subword merges during training yields models robust to segmentation variability; the new work quantifies that strong instruction-tuned LMs already exhibit high robustness to random/non-canonical tokenizations at test time."
+    },
+    {
+      "title": "ByT5: Towards a token-free future with pre-trained byte-to-byte models",
+      "authors": "Linting Xue, Noah Constant, Adam Roberts, Mihir Kale, Rami Al-Rfou, Aditya Siddhant, et al.",
+      "year": 2022,
+      "role": "Contrastive paradigm (tokenization-free models)",
+      "relationship_sentence": "Showed that byte-level, tokenization-free models are robust to noise and excel on character-sensitive tasks; the paper leverages similar advantages by retokenizing inputs to character-level using existing vocabularies, without retraining."
+    },
+    {
+      "title": "CANINE: Pre-training an Efficient Tokenization-Free Encoder for Language",
+      "authors": "Jonathan H. Clark, Dan Garrette, Iulia Turc, John Wieting",
+      "year": 2021,
+      "role": "Contrastive paradigm (character-level modeling)",
+      "relationship_sentence": "Presented character-level pretraining that handles strings directly and benefits tasks involving fine-grained text; the present work uncovers that subword LMs can approximate these benefits via character-level retokenization at inference."
+    },
+    {
+      "title": "CharacterBERT: Reconciling ELMo and BERT for Word-Level Open-Vocabulary Representations",
+      "authors": "Titouan El Boukkouri, Luis Espinosa Anke, Jos\u00e9 Camacho-Collados, Nizal Alshahaby, V\u00e9ronique B\u00e9dard, Yves Lepage",
+      "year": 2020,
+      "role": "Empirical evidence (character-aware robustness)",
+      "relationship_sentence": "Showed that character-aware encoders improve robustness to misspellings and rare forms; the new paper relates by achieving robustness gains through character-level segmentation of inputs to standard LMs, without modifying model architecture."
+    }
+  ],
+  "synthesis_narrative": "The core contribution of this paper is to demonstrate that instruction-tuned, subword-based LMs are surprisingly robust to non-canonical tokenizations\u2014often unseen during training\u2014and that deliberately moving to character-level segmentation at inference can improve string manipulation and code tasks. This builds on the modern subword paradigm inaugurated by Sennrich et al. (BPE), which made deterministic, canonical tokenization the default, and on GPT-2\u2019s byte-level BPE, which crucially enables any string to be represented through many valid segmentations, including per-character encodings, using the same vocabulary.\nSubword regularization lines of work (Kudo; Provilkov et al.) established that training with randomized or sampled segmentations improves generalization and robustness. The present study departs by showing strong robustness even without such training, quantifying performance retention across random and character-level tokenizations, and relating degradation to distance from the canonical segmentation.\nIn parallel, tokenization-free models (ByT5; CANINE) and character-aware encoders (CharacterBERT) demonstrated that byte/character-level processing can confer robustness to noise and advantages on tasks requiring fine-grained string reasoning. Rather than redesigning the architecture or retraining, this paper reveals that similar benefits can be elicited from existing instruction-tuned LMs by simply retokenizing inputs, leveraging byte-level BPE\u2019s representational flexibility. Together, these works converge on a unifying insight: segmentation is a controllable interface that materially affects LM behavior, and non-canonical segmentations can be exploited at inference to trade off robustness and task performance without modifying the model.",
+  "analysis_timestamp": "2026-01-06T23:42:48.122908"
+}

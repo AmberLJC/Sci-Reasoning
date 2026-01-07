@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Constrained Markov Decision Processes",
+      "authors": "Eitan Altman",
+      "year": 1999,
+      "role": "Foundation",
+      "relationship_sentence": "This work formalized the CMDP framework that MICE operates within, defining reward\u2013cost optimization under constraints and the cost value function whose underestimation MICE targets."
+    },
+    {
+      "title": "Constrained Policy Optimization",
+      "authors": "Joshua Achiam et al.",
+      "year": 2017,
+      "role": "Baseline",
+      "relationship_sentence": "CPO is a primary CRL baseline that relies on learned cost value functions and is known to suffer constraint violations during training; MICE directly improves this regime by correcting cost underestimation with intrinsic costs."
+    },
+    {
+      "title": "Benchmarking Safe Exploration in Deep Reinforcement Learning",
+      "authors": "Alex Ray et al.",
+      "year": 2019,
+      "role": "Gap Identification",
+      "relationship_sentence": "This paper demonstrated that standard Lagrangian/CPO-style CRL methods frequently incur significant training-time constraint violations, motivating MICE\u2019s focus on safer exploration via bias-controlled cost estimation."
+    },
+    {
+      "title": "Responsive Safety in Reinforcement Learning by PID Lagrangian Methods",
+      "authors": "Adam Stooke et al.",
+      "year": 2020,
+      "role": "Baseline",
+      "relationship_sentence": "PID Lagrangian improves online constraint responsiveness but still depends on accurate cost critics; MICE addresses the remaining failure mode by mitigating cost underestimation through memory-driven intrinsic costs."
+    },
+    {
+      "title": "Unifying Count-Based Exploration and Intrinsic Motivation",
+      "authors": "Marc G. Bellemare et al.",
+      "year": 2016,
+      "role": "Inspiration",
+      "relationship_sentence": "MICE repurposes the pseudo-count idea from this work\u2014traditionally a reward bonus for novelty\u2014into an intrinsic cost computed over remembered unsafe states to steer exploration away from high-cost regions."
+    },
+    {
+      "title": "Exploration: A Study of Count-Based Exploration Methods for Deep Reinforcement Learning",
+      "authors": "Haoran Tang et al.",
+      "year": 2017,
+      "role": "Extension",
+      "relationship_sentence": "MICE extends hashing/pseudo-count techniques for high-dimensional states by applying approximate counting to a memory of unsafe states, yielding a tractable intrinsic cost signal targeted at risk regions."
+    },
+    {
+      "title": "Combating Reinforcement Learning\u2019s Sisyphean Curse: Intrinsic Fear for Avoiding Catastrophes",
+      "authors": "Zachary C. Lipton et al.",
+      "year": 2016,
+      "role": "Inspiration",
+      "relationship_sentence": "This work\u2019s idea of adding intrinsic penalties near dangerous states directly inspires MICE\u2019s memory-driven intrinsic cost, but MICE differs by using pseudo-counts over an unsafe-state memory to systematically counter cost underestimation."
+    }
+  ],
+  "synthesis_narrative": "MICE builds on the CMDP foundation established by Altman, adopting the standard reward\u2013cost optimization with a learned cost value function. Within this framework, Achiam\u2019s CPO and subsequent Lagrangian variants like Stooke\u2019s PID Lagrangian serve as primary baselines: they rely on cost critics to enforce constraints yet routinely experience training-time violations. Ray et al.\u2019s Safety Gym study crystallized this gap, showing that even responsive Lagrangian tuning does not prevent frequent early violations\u2014pointing to errors in cost estimation as a root cause.\nTo remedy this, MICE rethinks intrinsic signals through the lens of safety. Bellemare\u2019s pseudo-count framework and Tang\u2019s practical hashing-based approximations originally transformed novelty estimates into intrinsic reward bonuses for exploration. MICE inverts and targets this concept: it constructs a \u2018flashbulb\u2019 memory of unsafe states and computes pseudo-counts as an intrinsic cost, amplifying caution precisely where the critic tends to underestimate. This transforms count-based exploration into count-based risk aversion.\nLipton\u2019s intrinsic fear provided an early demonstration that auxiliary, learned penalties near catastrophes can proactively prevent failures. MICE takes this intuition further by replacing classifier-based fear with a memory-driven, pseudo-count cost that directly augments the cost critic (via an extrinsic\u2013intrinsic cost value function), thereby controlling underestimation bias. The result is a safety-oriented intrinsic signal that integrates seamlessly with CRL baselines to yield safer exploration and fewer constraint violations during learning.",
+  "analysis_timestamp": "2026-01-06T23:07:19.569692"
+}

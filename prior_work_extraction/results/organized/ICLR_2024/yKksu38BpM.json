@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Neural Tangent Kernel: Convergence and Generalization in Neural Networks",
+      "authors": "Arthur Jacot et al.",
+      "year": 2018,
+      "arxiv_id": "1806.07572",
+      "role": "Foundation",
+      "relationship_sentence": "This work formalized the NTK K(x,x') = \u2207\u03b8f(x)\u00b7\u2207\u03b8f(x'), which is the exact kernel the paper adopts (and approximates) to build kernel-machine surrogates for neural networks."
+    },
+    {
+      "title": "Wide Neural Networks of Any Depth Evolve as Linear Models Under Gradient Descent",
+      "authors": "Jaehoon Lee et al.",
+      "year": 2019,
+      "arxiv_id": "1902.06720",
+      "role": "Inspiration",
+      "relationship_sentence": "By showing trained wide networks are well-approximated by their NTK linearization (i.e., kernel regression with the NTK), this paper directly motivates using eNTK kernel machines as faithful global surrogates of trained models."
+    },
+    {
+      "title": "Understanding Black-box Predictions via Influence Functions",
+      "authors": "Pang Wei Koh et al.",
+      "year": 2017,
+      "arxiv_id": "1703.04730",
+      "role": "Foundation",
+      "relationship_sentence": "It introduced the modern data attribution problem\u2014quantifying each training point\u2019s influence on a prediction\u2014whose computational and stability limitations this work addresses via NTK-based surrogate attribution."
+    },
+    {
+      "title": "Estimating Training Data Influence by Tracing Gradient Descent",
+      "authors": "Garima Pruthi et al.",
+      "year": 2020,
+      "arxiv_id": "2002.08484",
+      "role": "Baseline",
+      "relationship_sentence": "TracIn estimates influence via gradient inner products across checkpoints, which this work generalizes by using the eNTK gradient kernel with new random-projection approximations to compute example attributions without storing training trajectories."
+    },
+    {
+      "title": "Representer Point Selection for Explaining Deep Neural Networks",
+      "authors": "Chih-Kuan Yeh et al.",
+      "year": 2018,
+      "arxiv_id": "1811.09720",
+      "role": "Related Problem",
+      "relationship_sentence": "This paper showed predictions can be expressed as weighted sums over training examples through a kernelized representer view, directly informing the use of kernel machines for explain-by-example with an NTK kernel."
+    },
+    {
+      "title": "Database-friendly random projections: Johnson\u2013Lindenstrauss with binary coins",
+      "authors": "Dimitris Achlioptas",
+      "year": 2003,
+      "arxiv_id": null,
+      "role": "Extension",
+      "relationship_sentence": "Its sparse Johnson\u2013Lindenstrauss projections that preserve inner products are adapted here to compress parameter gradients, yielding the paper\u2019s tunable random-projection eNTK approximations for time/memory-efficient surrogate computation."
+    }
+  ],
+  "synthesis_narrative": "The neural tangent kernel was formalized as the inner product of parameter gradients, providing a concrete kernel that encodes a network\u2019s infinitesimal function geometry. Subsequent work established that wide networks trained by gradient descent evolve as their linearized counterparts, effectively performing kernel regression in the NTK, which legitimized using NTK-based kernel machines to emulate trained networks. Example-based explanations advanced in parallel: representer-point selection derived predictions as weighted sums over training examples via a kernelized view of deep models, showing that explain-by-example can be cast in a kernel surrogate framework. In data attribution, influence functions posed the core problem\u2014quantifying each training point\u2019s effect on predictions\u2014but incurred heavy Hessian inversions and stability issues; TracIn mitigated cost by replacing second-order terms with gradient inner products along training trajectories, revealing gradient similarity as a practical attribution signal. Orthogonally, random projection theory (e.g., sparse Johnson\u2013Lindenstrauss transforms) offered a principled way to compress high-dimensional vectors while preserving inner products, suggesting scalable paths for gradient-kernel computation.\nSynthesizing these threads, the opportunity emerged to unify kernel surrogates and example attribution by directly using the empirical NTK as the kernel while overcoming its prohibitive computation. The paper operationalizes this by treating gradient features as the surrogate embedding, introducing random-projection variants that provably preserve gradient inner products to approximate the eNTK efficiently, and analyzing when the resulting kernel machine aligns with the underlying network. This closes the loop between NTK-theoretic faithfulness, example-based interpretability, and scalable computation, making kernel surrogates a practical and reliable vehicle for data attribution.",
+  "target_paper": {
+    "title": "Faithful and Efficient Explanations for Neural Networks via Neural Tangent Kernel Surrogate Models",
+    "authors": "Andrew William Engel, Zhichao Wang, Natalie Frank, Ioana Dumitriu, Sutanay Choudhury, Anand Sarwate, Tony Chiang",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Explainability, Surrogate Models, Neural Tangent Kernel, Deep Learning, Attribution",
+    "abstract": "A recent trend in explainable AI research has focused on surrogate modeling, where neural networks are approximated as simpler ML algorithms such as kernel machines. A second trend has been to utilize kernel functions in various explain-by-example or data attribution tasks. In this work, we combine these two trends to analyze approximate empirical neural tangent kernels (eNTK) for data attribution. Approximation is critical for eNTK analysis due to the high computational cost to compute the eNTK. We define new approximate eNTK and perform novel analysis on how well the resulting kernel machine surrogate models correlate with the underlying neural network. We introduce two new random projection variants of approximate eNTK which allow users to tune the time and memory complexity of their calculation. We conclude that kernel machines using approximate neural tangent kernel as the kernel function are effective surrogate models, with the introduced trace NTK the most consistent performer.",
+    "openreview_id": "yKksu38BpM",
+    "forum_id": "yKksu38BpM"
+  },
+  "analysis_timestamp": "2026-01-06T19:04:46.875333"
+}

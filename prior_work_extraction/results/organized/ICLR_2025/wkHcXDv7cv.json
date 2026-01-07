@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Efficiently Modeling Long Sequences with Structured State Spaces",
+      "authors": "Albert Gu et al.",
+      "year": 2021,
+      "role": "Baseline",
+      "relationship_sentence": "This work introduced the LTI SSM (S4) layer and its transfer-function-based convolutional viewpoint that the present paper analyzes to reveal and tune an innate low-frequency bias."
+    },
+    {
+      "title": "HiPPO: Recurrent Memory with Optimal Polynomial Projections",
+      "authors": "Albert Gu et al.",
+      "year": 2020,
+      "role": "Foundation",
+      "relationship_sentence": "The HiPPO-based initialization used in modern SSMs is shown here to endow models with an inborn frequency bias; the new paper directly builds on this by scaling the initialization to control that bias."
+    },
+    {
+      "title": "Mamba: Linear-time sequence modeling with selective state spaces",
+      "authors": "Albert Gu et al.",
+      "year": 2024,
+      "role": "Related Problem",
+      "relationship_sentence": "As a leading SSM variant and practical baseline, Mamba\u2019s sequence-modeling pipeline motivates the need to manage SSM frequency response; the present work\u2019s theory and tuning mechanisms target the same SSM family\u2019s sensitivity to high vs. low frequencies."
+    },
+    {
+      "title": "On the Spectral Bias of Neural Networks",
+      "authors": "Nasim Rahaman et al.",
+      "year": 2019,
+      "role": "Inspiration",
+      "relationship_sentence": "This paper formalized neural networks\u2019 tendency to favor low frequencies, directly inspiring the present work\u2019s identification and control of spectral/frequency bias specifically in SSMs via transfer-function analysis."
+    },
+    {
+      "title": "Sobolev Training for Neural Networks",
+      "authors": "Wojciech M. Czarnecki et al.",
+      "year": 2017,
+      "role": "Extension",
+      "relationship_sentence": "The proposed Sobolev-norm-based gradient filtering extends Sobolev training ideas to reweight gradients in the frequency domain, enabling training-time adjustment of SSMs\u2019 sensitivity to high-frequency inputs."
+    },
+    {
+      "title": "Focal Frequency Loss for Image Reconstruction and Synthesis",
+      "authors": "Liming Jiang et al.",
+      "year": 2021,
+      "role": "Related Problem",
+      "relationship_sentence": "By explicitly reweighting errors in the Fourier domain to emphasize hard-to-learn high-frequency components, this work informed the paper\u2019s strategy of frequency-domain reweighting (via Sobolev filtering) to counter SSMs\u2019 low-frequency bias."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core innovation\u2014diagnosing and tuning the frequency bias of state space models (SSMs)\u2014rests on two pillars: the LTI-SSM formulation and the broader theory of spectral bias. S4 established the modern LTI SSM architecture and its transfer-function view, giving a concrete handle for analyzing how SSM kernels respond across frequencies. HiPPO provided the standard initialization used in these models; the authors show this initialization effectively presets the model\u2019s spectral preference, thereby motivating an initialization-scaling mechanism to tune the inborn bias. In parallel, the spectral-bias literature (notably Rahaman et al.) demonstrated that neural networks tend to learn low-frequency components first, directly inspiring the authors to ask whether SSMs exhibit a similar bias and how to control it.\nTo change frequency sensitivity during training, the paper extends Sobolev training ideas by introducing a Sobolev-norm-based filter that reweights gradients in the frequency domain, thereby amplifying high-frequency learning when desired. Practical SSM baselines such as Mamba emphasize the importance of frequency control in state-space sequence modeling at scale and motivate evaluating tuning strategies within this family. Finally, frequency-domain reweighting methods from vision (e.g., focal frequency loss) provided a concrete precedent for manipulating spectral emphasis, informing the authors\u2019 decision to operate directly in the frequency domain\u2014here realized through gradient filtering rather than loss reshaping\u2014to strengthen, weaken, or even reverse SSMs\u2019 frequency bias.",
+  "analysis_timestamp": "2026-01-06T23:09:26.619795"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Discrete Denoising Diffusion Probabilistic Models (D3PM)",
+      "authors": "Jacob Austin et al.",
+      "year": 2021,
+      "role": "Foundational method for discrete diffusion",
+      "relationship_sentence": "Provides the discrete-state corruption and denoising framework that Fast and Fluent DLMs build upon; the paper\u2019s decoding innovations assume the D3PM-style token diffusion objective and schedule."
+    },
+    {
+      "title": "Diffusion-LM Improves Controllable Text Generation",
+      "authors": "Xiang Lisa Li et al.",
+      "year": 2022,
+      "role": "First diffusion language model demonstrating parallel, bidirectional decoding",
+      "relationship_sentence": "Established diffusion LMs for text and exposed practical issues like repetition and degraded relevance at long ranges, directly motivating the paper\u2019s focus on the \u2018long decoding-window\u2019 pathology."
+    },
+    {
+      "title": "DiffuSeq: Sequence to Sequence Text Generation with Diffusion Models",
+      "authors": "Y. Gong et al.",
+      "year": 2023,
+      "role": "Seq2seq diffusion baseline and analysis of schedule/windowing",
+      "relationship_sentence": "Showed how diffusion-based decoding for text depends critically on scheduling and context usage, highlighting quality\u2013speed trade-offs that the proposed convolutional decoding seeks to improve without losing bidirectionality."
+    },
+    {
+      "title": "Mask-Predict: Parallel Decoding for Sequence Generation",
+      "authors": "Marjan Ghazvininejad et al.",
+      "year": 2019,
+      "role": "Semi-autoregressive/iterative refinement antecedent",
+      "relationship_sentence": "Introduced block-wise/iterative parallel decoding with masked updates, a key comparator whose block segmentation alleviates long-range errors but sacrifices full bidirectionality\u2014limitations the paper overcomes via normalization-based window narrowing."
+    },
+    {
+      "title": "Blockwise Parallel Decoding for Sequence Generation",
+      "authors": "Mitchell Stern et al.",
+      "year": 2018,
+      "role": "Blockwise decoding framework and speed\u2013quality trade-off",
+      "relationship_sentence": "Formalized blockwise generation that reduces the effective context window but expands time intervals, directly framing the paper\u2019s claim that semi-AR solutions erode diffusion models\u2019 speed advantages."
+    },
+    {
+      "title": "Pay Less Attention with Lightweight and Dynamic Convolutions",
+      "authors": "Felix Wu et al.",
+      "year": 2019,
+      "role": "Architectural inspiration: normalization-based local receptive fields",
+      "relationship_sentence": "Demonstrated that normalized convolutional kernels can substitute attention to enforce locality efficiently; this directly informs the paper\u2019s convolutional decoding, which narrows the diffusion decoding window via normalization rather than hard segmentation."
+    },
+    {
+      "title": "Constitutional AI: Harmlessness from AI Feedback",
+      "authors": "Yuntao Bai et al.",
+      "year": 2022,
+      "role": "Rule-based critique and rejection for post-hoc fine-tuning",
+      "relationship_sentence": "Pioneered rule-based automated feedback and rejection to refine model behavior; the proposed R2FT adapts this idea to diffusion LMs by rejecting rule-breaking generations during fine-tuning to improve fluency and relevance."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core innovation\u2014convolutional decoding (Conv) to narrow the diffusion decoding window without hard segmentation, coupled with Rejecting Rule-based Fine-Tuning (R2FT)\u2014builds directly on two threads: discrete diffusion for text and practical decoding/training strategies that balance speed, bidirectionality, and fluency. Discrete diffusion foundations from D3PM establish the token-level corruption/denoising backbone that enables parallel, bidirectional generation. Diffusion-LM and DiffuSeq then expose the practical challenge this work targets: as denoising proceeds far from the prompt, relevance erodes and repetitions arise, revealing a long-window failure mode sensitive to schedule and context usage. Prior attempts to mitigate this via semi-autoregressive blockwise updates\u2014exemplified by Mask-Predict and blockwise parallel decoding\u2014truncate the effective context but inherently trade away full bidirectionality and induce time-interval expansion, undermining diffusion\u2019s speed advantage. Drawing on normalized convolutional alternatives to attention (LightConv/Dynamic Convs), the proposed Conv decoding injects locality through normalization-shaped receptive fields, preserving parallelism and bidirectionality while avoiding explicit segmentation. Finally, R2FT translates rule-based rejection and critique ideas from Constitutional AI to the diffusion-LM setting: it filters generations using simple rules and fine-tunes on accepted outputs, improving fluency and topicality without costly preference modeling or reinforcement learning. Together, these antecedents converge into a decoding-and-fine-tuning recipe that maintains diffusion\u2019s parallel speed while directly addressing long-range coherence and repetitiveness.",
+  "analysis_timestamp": "2026-01-07T00:02:04.975802"
+}

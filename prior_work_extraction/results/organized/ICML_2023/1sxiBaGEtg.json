@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Attention Is All You Need",
+      "authors": "Ashish Vaswani et al.",
+      "year": 2017,
+      "role": "Baseline",
+      "relationship_sentence": "Hyena is explicitly proposed as a subquadratic, drop-in replacement for the Transformer\u2019s quadratic self-attention, taking this work\u2019s attention operator and its scaling bottleneck as the primary baseline and problem setting."
+    },
+    {
+      "title": "Efficiently Modeling Long Sequences with Structured State Spaces",
+      "authors": "Albert Gu et al.",
+      "year": 2022,
+      "role": "Extension",
+      "relationship_sentence": "S4 introduced computing long-range dependencies via implicitly defined long convolution kernels (via transfer functions) and efficient FFT-based evaluation; Hyena directly extends this idea by retaining implicit long convolutions but replacing LTI kernels with learned hierarchical filters and adding data-controlled gating for content-dependent mixing."
+    },
+    {
+      "title": "HiPPO: Orthogonal Polynomial Projections for Memory",
+      "authors": "Albert Gu et al.",
+      "year": 2020,
+      "role": "Foundation",
+      "relationship_sentence": "HiPPO provided the foundational continuous-time memory and convolutional-kernel viewpoint that underlies SSM methods like S4; Hyena inherits this lineage of modeling long dependencies through learned long convolutions rather than explicit attention."
+    },
+    {
+      "title": "Language Modeling with Gated Convolutional Networks",
+      "authors": "Yann N. Dauphin et al.",
+      "year": 2017,
+      "role": "Inspiration",
+      "relationship_sentence": "Hyena\u2019s data-controlled multiplicative gating between convolutional paths is directly inspired by GLU-style gating from gated convolutional LMs, which it generalizes to long, implicitly parameterized convolutions to enable content-dependent interactions."
+    },
+    {
+      "title": "WaveNet: A Generative Model for Raw Audio",
+      "authors": "Aaron van den Oord et al.",
+      "year": 2016,
+      "role": "Inspiration",
+      "relationship_sentence": "WaveNet\u2019s hierarchical/dilated causal convolutions and gated multiplicative interactions motivated Hyena\u2019s hierarchical composition of long convolutions to realize exponentially large receptive fields with few parameters."
+    },
+    {
+      "title": "Rethinking Attention with Performers",
+      "authors": "Krzysztof Choromanski et al.",
+      "year": 2021,
+      "role": "Gap Identification",
+      "relationship_sentence": "Performer exemplifies subquadratic low-rank attention approximations that often underperform unless combined with dense attention; Hyena is positioned to close this gap by achieving attention-level quality without any dense attention layers."
+    },
+    {
+      "title": "Longformer: The Long-Document Transformer",
+      "authors": "Iz Beltagy et al.",
+      "year": 2020,
+      "role": "Gap Identification",
+      "relationship_sentence": "Longformer\u2019s sparse attention shows subquadratic scaling but highlights limitations of sparsity patterns for rich content-based reasoning; Hyena addresses this by using learned long convolutions plus gating to provide global, content-dependent mixing without attention."
+    }
+  ],
+  "synthesis_narrative": "Hyena emerges from two converging lines of work: the attention-centric Transformer paradigm and the state-space/long-convolution alternative. The Transformer (Vaswani et al.) defined the dominant sequence modeling framework but imposed a quadratic attention cost, which motivated a decade of subquadratic alternatives. Sparse and low-rank attention variants such as Longformer and Performer addressed scaling but often required mixing in dense attention to match accuracy, revealing a persistent capability gap. In parallel, the state-space sequence modeling thread\u2014grounded in HiPPO\u2019s continuous-time memory formulation and realized in S4\u2014showed that long-range dependencies can be captured via implicitly defined long convolution kernels evaluated efficiently (e.g., with FFTs). Hyena directly extends this SSM-inspired, implicit-kernel perspective by discarding LTI constraints in favor of learned hierarchical filters and by introducing data-controlled gating to recover content-dependent interactions akin to attention. The gating mechanism draws clear inspiration from gated convolutional LMs (Dauphin et al.), while the hierarchical composition and exponentially expanding receptive fields echo WaveNet\u2019s dilated, gated convolutions. By interleaving implicitly parametrized long convolutions with multiplicative gating, Hyena unifies the efficiency of SSM-style convolutions with the expressivity of gated conv nets, explicitly targeting the shortcomings of prior subquadratic attention approximations. This synthesis yields a subquadratic operator that matches or exceeds attention-based baselines without relying on any dense attention layers.",
+  "analysis_timestamp": "2026-01-06T23:09:26.543290"
+}

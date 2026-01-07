@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Masked Autoencoders Are Scalable Vision Learners",
+      "authors": "Kaiming He; Xinlei Chen; Saining Xie; Yanghao Li; Piotr Doll\u00e1r; Ross Girshick",
+      "year": 2022,
+      "role": "Foundational masked image modeling (MIM) method with asymmetric encoder-decoder and heavy masking.",
+      "relationship_sentence": "SiamMAE directly builds on MAE\u2019s asymmetric masked reconstruction recipe, but extends it to two frames and uses a cross-attention decoder to reconstruct the future frame from a past-frame encoding."
+    },
+    {
+      "title": "VideoMAE: Masked Autoencoders are Data-Efficient Learners for Self-Supervised Video Pre-Training",
+      "authors": "Zhan Tong; Yibing Song; Jue Wang; Limin Wang",
+      "year": 2022,
+      "role": "Pioneered heavy masking for video MIM and showed strong video pretraining without labels.",
+      "relationship_sentence": "SiamMAE adopts VideoMAE\u2019s insight that very high masking can be beneficial in video, pushing it further by masking ~95% of the future frame while keeping the past frame unmasked to emphasize motion-based correspondence."
+    },
+    {
+      "title": "Masked Siamese Networks for Label-Efficient Learning",
+      "authors": "Mahmoud Assran et al.",
+      "year": 2022,
+      "role": "Bridged Siamese/self-distillation paradigms with masked prediction objectives.",
+      "relationship_sentence": "The idea of combining masking with a Siamese setup informs SiamMAE\u2019s two-branch design, though SiamMAE predicts pixel/patch content of a future frame via cross-attention rather than matching representation targets."
+    },
+    {
+      "title": "Unsupervised Learning of Visual Representations Using Videos",
+      "authors": "Xiaolong Wang; Abhinav Gupta",
+      "year": 2015,
+      "role": "Early demonstration that temporal consistency in videos can supervise representation learning.",
+      "relationship_sentence": "SiamMAE inherits the principle that temporal signals enable correspondence learning, but replaces tracking-based invariance with a masked future-frame reconstruction objective."
+    },
+    {
+      "title": "Learning Correspondence from the Cycle-Consistency of Time (TimeCycle)",
+      "authors": "Krishna Dwibedi; Yusuf Aytar; Andrew Zisserman",
+      "year": 2019,
+      "role": "Showed that cycle-consistency over time yields strong dense correspondences without labels.",
+      "relationship_sentence": "SiamMAE pursues the same goal of correspondence from raw videos but uses a simpler reconstruction proxy\u2014predicting missing future patches\u2014implemented with a cross-attention decoder between frames."
+    },
+    {
+      "title": "Space-Time Correspondence as a Contrastive Random Walk",
+      "authors": "Allan Jabri; Andrew Owens; Alexei A. Efros",
+      "year": 2020,
+      "role": "Contrastive framework leveraging space-time walks to learn dense correspondences.",
+      "relationship_sentence": "SiamMAE offers an alternative pretext to contrastive walks by enforcing correspondence implicitly through reconstructing heavily masked future tokens conditioned on past-frame features."
+    },
+    {
+      "title": "Tracking Emerges by Colorizing Videos",
+      "authors": "Carl Vondrick et al.",
+      "year": 2018,
+      "role": "Demonstrated that reconstruction tasks across time (video colorization) induce tracking/correspondence.",
+      "relationship_sentence": "SiamMAE follows this lineage by using reconstruction across frames as a proxy for learning correspondences, but operates at the patch/token level with ViT encoders and cross-attention decoding."
+    }
+  ],
+  "synthesis_narrative": "SiamMAE fuses two influential streams of research: masked image/video modeling and self-supervised correspondence learning from videos. From MAE, it inherits the powerful asymmetric masked-reconstruction paradigm and lightweight decoder design, while VideoMAE establishes that extremely high masking on videos remains learnable and beneficial. Masked Siamese Networks further inspire the conceptual blend of a Siamese setup with masking, motivating SiamMAE\u2019s two-branch architecture that processes frames independently.\n\nOn the correspondence side, classical video-based self-supervision showed that temporal signals suffice to learn dense alignments without labels. Wang and Gupta\u2019s use of temporal consistency, TimeCycle\u2019s cycle-consistent training, and CRW\u2019s space-time random walks all uncovered that correspondences can emerge from constraints over time rather than explicit labels. Vondrick\u2019s colorization-as-tracking demonstrated that cross-frame reconstruction tasks naturally encourage learning to follow objects.\n\nSiamMAE synthesizes these ideas by reconstructing the future frame\u2019s masked patches using a decoder that cross-attends to encodings from both the unmasked past frame and the sparsely observed future frame. The extreme asymmetry (95% masking on the future view, none on the past) biases the model toward motion and object-centric cues. This unification\u2014MAE-style masked reconstruction with a Siamese, cross-attentive fusion across time\u2014yields features that excel on dense propagation tasks like video object segmentation and keypoint tracking, advancing beyond prior contrastive or cycle-consistency objectives with a simple, scalable pretraining recipe.",
+  "analysis_timestamp": "2026-01-07T00:02:04.804251"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "A new learning paradigm: Learning using privileged information (SVM+)",
+      "authors": "Vladimir Vapnik; Akshay Vashist",
+      "year": 2009,
+      "role": "Foundational paradigm where auxiliary features are available only during training to improve test-time performance.",
+      "relationship_sentence": "Charms treats expert tabular attributes as privileged information and distills them into an image-only model at inference, directly instantiating the LUPI setup introduced by Vapnik and Vashist."
+    },
+    {
+      "title": "Generalized Distillation: A unified framework for distillation and privileged information",
+      "authors": "David Lopez-Paz; L\u00e9on Bottou; Bernhard Sch\u00f6lkopf; Vladimir Vapnik",
+      "year": 2016,
+      "role": "Unifies knowledge distillation with LUPI through teacher\u2013student training when privileged modalities are absent at test time.",
+      "relationship_sentence": "Charms adopts a teacher\u2013student transfer from tabular (teacher) to visual (student), aligning with generalized distillation to exploit training-only expert attributes."
+    },
+    {
+      "title": "Cross Modal Distillation for Supervision Transfer",
+      "authors": "Saurabh Gupta; Judy Hoffman; Jitendra Malik",
+      "year": 2016,
+      "role": "Demonstrated transferring supervision across heterogeneous modalities when one modality is missing during inference.",
+      "relationship_sentence": "Charms extends cross-modal distillation to the tabular\u2192image setting, introducing channel\u2013attribute alignment so supervision selectively maps to visual features."
+    },
+    {
+      "title": "Sinkhorn Distances: Lightspeed Computation of Optimal Transport",
+      "authors": "Marco Cuturi",
+      "year": 2013,
+      "role": "Introduced entropically regularized optimal transport enabling scalable, differentiable distribution alignment.",
+      "relationship_sentence": "Charms leverages Sinkhorn OT to compute tractable alignments between distributions of tabular attributes and image channel activations."
+    },
+    {
+      "title": "Joint Distribution Optimal Transport for Domain Adaptation (JDOT)",
+      "authors": "Nicolas Courty; R\u00e9mi Flamary; Devis Tuia; Alain Rakotomamonjy",
+      "year": 2017,
+      "role": "Aligned joint feature\u2013label distributions across domains via OT to guide transfer.",
+      "relationship_sentence": "Charms adapts the OT-based joint alignment idea to heterogeneous modalities by aligning tabular attributes with labeled image channels for targeted knowledge transfer."
+    },
+    {
+      "title": "Representation Learning with Contrastive Predictive Coding",
+      "authors": "Aaron van den Oord; Yazhe Li; Oriol Vinyals",
+      "year": 2018,
+      "role": "Popularized mutual information maximization via contrastive (InfoNCE) objectives for representation learning.",
+      "relationship_sentence": "Charms maximizes mutual information between tabular attributes and image channels using a contrastive-style objective to enforce meaningful cross-modal correspondences."
+    },
+    {
+      "title": "Learning to detect unseen object classes by between-class attribute transfer",
+      "authors": "Christoph H. Lampert; Hannes Nickisch; Stefan Harmeling",
+      "year": 2009,
+      "role": "Pioneered using human-defined semantic attributes as an intermediate space to link language-like descriptors with visual features.",
+      "relationship_sentence": "Charms borrows the attribute-to-visual alignment principle, mapping expert tabular (attribute) signals onto image feature channels to emphasize morphological characteristics relevant for classification."
+    }
+  ],
+  "synthesis_narrative": "Charms sits at the intersection of privileged information learning, cross-modal distillation, and distributional alignment. The LUPI paradigm (Vapnik & Vashist) establishes the central problem setting: expert tabular attributes are available only during training yet should improve an image-only predictor at test time. Lopez-Paz et al. formalize how teacher\u2013student distillation operationalizes LUPI, while Gupta et al. show that supervision can be transferred across heterogeneous modalities when one is absent at inference, directly motivating Charms\u2019s tabular-to-image supervision transfer.\nTo make this transfer selective and semantically grounded, Charms revives the attribute-to-visual alignment idea from zero-shot learning (Lampert et al.), treating expert tabular descriptors as attributes that should map to specific visual factors. The key algorithmic engine enabling such heterogeneous matching is optimal transport: Cuturi\u2019s Sinkhorn distances provide efficient, differentiable OT, and JDOT (Courty et al.) shows how aligning joint distributions can steer knowledge transfer. Charms adapts these insights to align distributions of tabular attributes with image channel responses, effectively identifying which channels encode attribute-relevant morphology. Finally, by maximizing mutual information in a contrastive manner (van den Oord et al.), Charms strengthens cross-modal correspondences and guards against spurious matches, while accommodating different treatments for numerical versus categorical attributes within the OT/MI framework. Together, these works crystallize into Charms\u2019s core contribution: a channel-wise, OT-driven, MI-regularized transfer of expert tabular knowledge into image classifiers that operate without tabular inputs at inference.",
+  "analysis_timestamp": "2026-01-06T23:42:48.056377"
+}

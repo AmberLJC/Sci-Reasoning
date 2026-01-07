@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Understanding Black-box Predictions via Influence Functions",
+      "authors": "Pang Wei Koh and Percy Liang",
+      "year": 2017,
+      "role": "foundational method for data attribution",
+      "relationship_sentence": "Introduced the core notion of attributing model behavior to individual training points via upweighting and influence, which this paper adapts to the online RL setting by replacing global, fixed-dataset influence with a local, checkpoint-based approximation."
+    },
+    {
+      "title": "Estimating Training Data Influence by Tracing Gradient Descent (TracIn)",
+      "authors": "Rahul Pruthi et al.",
+      "year": 2020,
+      "role": "algorithmic inspiration for gradient-similarity attribution",
+      "relationship_sentence": "Directly motivates the paper\u2019s use of gradient inner products at checkpoints: the proposed local attribution score for PPO records mirrors TracIn\u2019s gradient-similarity approach as a practical and Hessian-free surrogate to classic influence functions."
+    },
+    {
+      "title": "Representer Point Selection for Explaining Deep Neural Networks",
+      "authors": "Chih-Kuan Yeh, Joon Sik Kim, Ian En-Hsu Yen, and Pradeep Ravikumar",
+      "year": 2018,
+      "role": "methodological precedent for gradient-based data-point explanations",
+      "relationship_sentence": "Provides a representer-based view where training examples are weighted by gradient/feature alignments; the paper\u2019s attribution via gradient similarity between a record\u2019s training loss and target functions echoes this gradient-alignment principle."
+    },
+    {
+      "title": "Data Shapley: Valuing Data Contributions via the Shapley Value",
+      "authors": "Amirata Ghorbani and James Zou",
+      "year": 2019,
+      "role": "theoretical foundation for data valuation",
+      "relationship_sentence": "Establishes a formal framework for valuing training data, which the paper operationalizes in online RL through a scalable, local proxy (gradient-based scores) that is feasible under nonstationary, policy-dependent data."
+    },
+    {
+      "title": "Proximal Policy Optimization Algorithms",
+      "authors": "John Schulman, Filip Wolski, Prafulla Dhariwal, Alec Radford, and Oleg Klimov",
+      "year": 2017,
+      "role": "algorithmic base in RL",
+      "relationship_sentence": "Defines the PPO surrogate objective and on-policy training procedure whose per-record losses and gradients form the backbone of the paper\u2019s local attribution computations and target definitions (action and return)."
+    },
+    {
+      "title": "High-Dimensional Continuous Control Using Generalized Advantage Estimation",
+      "authors": "John Schulman, Philipp Moritz, Sergey Levine, Michael I. Jordan, and Pieter Abbeel",
+      "year": 2016,
+      "role": "key estimator for return/advantage signals",
+      "relationship_sentence": "Provides the advantage/return estimators used within PPO; the paper\u2019s return-oriented target leverages these estimators, making GAE central to how contributions of recent records to cumulative return are quantified."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s key contribution\u2014a local data attribution framework for online RL (instantiated for PPO) that scores recent training records via gradient similarity to action and return targets\u2014builds on a lineage of data attribution and policy gradient methods. Koh and Liang\u2019s influence functions established the conceptual foundation for linking model behavior to individual training samples, but their fixed-dataset, Hessian-based formulation is ill-suited to the nonstationarity of online RL. TracIn directly informs the paper\u2019s practical solution: using gradient inner products at model checkpoints to approximate influence without expensive second-order computation and while accommodating evolving data distributions. Representer Point Selection further legitimizes gradient-alignment as a principled way to quantify training-point contributions to predictions, aligning with the paper\u2019s use of per-record loss gradients against specific targets.\nOn the RL side, PPO provides the precise surrogate loss and on-policy training protocol that define both the per-record gradients and the actionable checkpoints for local attribution. The return-focused target is anchored in Generalized Advantage Estimation, which supplies low-variance return/advantage signals central to PPO\u2019s updates and to interpreting how recent experiences shape cumulative returns. Finally, Data Shapley articulates the broader goal of valuing data, and the proposed local, gradient-based scoring can be seen as a tractable instantiation of data valuation tailored to the online, policy-dependent data regime. Collectively, these works enable a theoretically grounded yet computationally feasible attribution mechanism for online RL.",
+  "analysis_timestamp": "2026-01-07T00:21:32.259015"
+}

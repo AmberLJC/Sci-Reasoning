@@ -1,0 +1,89 @@
+{
+  "prior_works": [
+    {
+      "title": "Normalized Object Coordinate Space for Category-Level 6D Object Pose and Size Estimation",
+      "authors": [
+        "Chen Wang",
+        "Danfei Xu",
+        "Yuke Zhu",
+        "Roberto Mart\u00edn-Mart\u00edn",
+        "Cewu Lu",
+        "Silvio Savarese"
+      ],
+      "year": 2019,
+      "role": "Representation foundation for CNOCS",
+      "relationship_sentence": "SceneDesigner\u2019s CNOCS directly builds on NOCS\u2019 idea of per-pixel canonical coordinates for category-level pose/size; it extends this paradigm to camera-view\u2013encoded maps that capture full 9-DoF (translation, rotation, scale) for multi-object control."
+    },
+    {
+      "title": "High-Resolution Image Synthesis with Latent Diffusion Models",
+      "authors": [
+        "Robin Rombach",
+        "Andreas Blattmann",
+        "Dominik Lorenz",
+        "Patrick Esser",
+        "Bj\u00f6rn Ommer"
+      ],
+      "year": 2022,
+      "role": "Base diffusion backbone",
+      "relationship_sentence": "SceneDesigner attaches a lightweight branch to a frozen latent diffusion backbone (e.g., Stable Diffusion), leveraging LDM\u2019s high-fidelity synthesis while injecting pose-aware conditioning through CNOCS."
+    },
+    {
+      "title": "ControlNet: Adding Conditional Control to Text-to-Image Diffusion Models",
+      "authors": [
+        "Lvmin Zhang",
+        "Maneesh Agrawala"
+      ],
+      "year": 2023,
+      "role": "Architectural template for branched conditioning",
+      "relationship_sentence": "The method\u2019s branched network mirrors ControlNet\u2019s strategy of adding a trainable condition branch to a frozen UNet, enabling stable training and strong controllability from external maps\u2014in SceneDesigner\u2019s case, CNOCS for 9-DoF control."
+    },
+    {
+      "title": "DensePose: Dense Human Pose Estimation In The Wild",
+      "authors": [
+        "R\u0131za Alp G\u00fcler",
+        "Natalia Neverova",
+        "Iasonas Kokkinos"
+      ],
+      "year": 2018,
+      "role": "Canonical correspondence inspiration",
+      "relationship_sentence": "DensePose\u2019s per-pixel mapping from image to a canonical surface motivates SceneDesigner\u2019s use of dense, geometrically meaningful correspondence maps; CNOCS generalizes this idea beyond humans to arbitrary objects with camera-normalized coordinates."
+    },
+    {
+      "title": "Image Generation from Layout",
+      "authors": [
+        "Bo Zhao",
+        "Lili Meng",
+        "Weidong Yin",
+        "Leonid Sigal"
+      ],
+      "year": 2019,
+      "role": "Precedent for multi-object spatial control",
+      "relationship_sentence": "Layout2Im established that coarse layout (bounding boxes, categories) can guide multi-object synthesis; SceneDesigner advances this by conditioning not only on location/size but also on orientation via CNOCS, achieving full 9-DoF control."
+    },
+    {
+      "title": "PASCAL3D+: A Dataset and Benchmark for 3D Object Detection in the Wild",
+      "authors": [
+        "Yu Xiang",
+        "Roozbeh Mottaghi",
+        "Silvio Savarese"
+      ],
+      "year": 2014,
+      "role": "Pose annotation precedent",
+      "relationship_sentence": "PASCAL3D+ popularized dataset protocols for object viewpoint and size across categories, informing SceneDesigner\u2019s 9-DoF pose parameterization and the aggregation strategy behind ObjectPose9D."
+    },
+    {
+      "title": "PoseCNN: A Convolutional Neural Network for 6D Object Pose Estimation in Cluttered Scenes (YCB-Video)",
+      "authors": [
+        "Yu Xiang",
+        "Tanner Schmidt",
+        "Venkatraman Narayanan",
+        "Dieter Fox"
+      ],
+      "year": 2017,
+      "role": "Benchmark and supervision source for pose/size",
+      "relationship_sentence": "YCB-Video\u2019s widespread 6D pose benchmarks and supervision practices influenced how SceneDesigner supervises pose-aware maps and curates multi-object pose data for training ObjectPose9D."
+    }
+  ],
+  "synthesis_narrative": "SceneDesigner\u2019s core idea\u2014controllable multi-object image generation with explicit 9-DoF pose manipulation\u2014sits at the intersection of dense geometric correspondences and modular diffusion conditioning. The CNOCS representation is a direct conceptual extension of NOCS, moving from category-level 6D pose/size to a camera-view\u2013encoded, per-pixel map that captures translation, rotation, and scale for multiple objects. This design is further inspired by DensePose\u2019s principle of mapping image pixels to a canonical space, ensuring that the conditioning signal has clear geometric semantics and stable gradients.\nOn the generative side, SceneDesigner relies on latent diffusion as the high-fidelity synthesis backbone, maintaining the base model frozen and injecting control via an auxiliary branch. This branched conditioning mechanism follows ControlNet\u2019s architectural template, enabling efficient training and robust control from external dense maps\u2014here, the CNOCS channels encoding 9-DoF. While earlier layout-to-image work (Layout2Im) demonstrated that bounding boxes and category tags can guide multi-object composition, SceneDesigner advances this thread by conditioning on richer, geometry-aware maps that govern not just locations and sizes but also orientations.\nFinally, established pose datasets and benchmarks such as PASCAL3D+ and YCB-Video shaped both the problem formulation (pose parameterization across categories) and the data practices underlying the new ObjectPose9D dataset. Together, these works directly enable SceneDesigner\u2019s stable training, accurate pose control, and high-quality multi-object synthesis.",
+  "analysis_timestamp": "2026-01-07T00:05:12.555988"
+}

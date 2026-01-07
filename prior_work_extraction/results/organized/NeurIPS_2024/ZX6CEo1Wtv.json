@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Jonathan Ho, Ajay Jain, Pieter Abbeel",
+      "year": 2020,
+      "role": "Foundational diffusion modeling framework",
+      "relationship_sentence": "LDNS builds its generative prior on the DDPM objective, using denoising-based score learning to synthesize realistic samples from a learned noise-to-latent trajectory."
+    },
+    {
+      "title": "High-Resolution Image Synthesis with Latent Diffusion Models",
+      "authors": "Robin Rombach, Andreas Blattmann, Dominik Lorenz, Patrick Esser, Bj\u00f6rn Ommer",
+      "year": 2022,
+      "role": "Diffusion in learned latent spaces",
+      "relationship_sentence": "LDNS adopts the core idea of running diffusion in a compact learned latent space rather than directly on high-dimensional, discrete data, enabling efficient and high-fidelity generation of spike trains."
+    },
+    {
+      "title": "Score-Based Generative Modeling through Stochastic Differential Equations",
+      "authors": "Yang Song, Jascha Sohl-Dickstein, Diederik P. Kingma, Abhishek Kumar, Stefano Ermon, Ben Poole",
+      "year": 2021,
+      "role": "Theoretical underpinnings and training/sampling techniques for diffusion/score models",
+      "relationship_sentence": "The score-based perspective informs LDNS\u2019s training and sampling procedures on continuous latents, stabilizing learning and enabling expressive conditional generation."
+    },
+    {
+      "title": "Efficiently Modeling Long Sequences with Structured State Spaces",
+      "authors": "Albert Gu, Karan Goel, Christopher R\u00e9",
+      "year": 2022,
+      "role": "Sequence modeling backbone (S4) for long-context temporal data",
+      "relationship_sentence": "LDNS employs S4 layers in its autoencoder to map high-dimensional spike trains to time-aligned continuous latents and back, leveraging S4\u2019s long-range temporal modeling capacity."
+    },
+    {
+      "title": "Inferring single-trial neural population dynamics using sequential autoencoders (LFADS)",
+      "authors": "Chethan Pandarinath, Daniel J. O\u2019Shea, Jonathan Oby, Sergey A. Sussillo, et al.",
+      "year": 2018,
+      "role": "Latent variable modeling of neural spiking with behaviorally relevant dynamics",
+      "relationship_sentence": "LFADS established that low-dimensional latent dynamics can reconstruct and predict behavior from spikes; LDNS replaces the LFADS VAE prior with a diffusion prior to improve generative realism and conditional sampling."
+    },
+    {
+      "title": "Gaussian-Process Factor Analysis for low-dimensional single-trial analysis of neural population activity",
+      "authors": "Byron M. Yu, John P. Cunningham, Guosheng Santhanam, Stephen I. Ryu, Krishna V. Shenoy, Maneesh Sahani",
+      "year": 2009,
+      "role": "Pioneering low-dimensional latent trajectory inference for neural populations",
+      "relationship_sentence": "GPFA motivated LDNS\u2019s use of smooth, time-aligned continuous latents as an intermediate representation for complex spike trains."
+    },
+    {
+      "title": "Diffusion Models Beat GANs on Image Synthesis",
+      "authors": "Prafulla Dhariwal, Alexander Nichol",
+      "year": 2021,
+      "role": "Practical conditioning and guidance strategies for diffusion models",
+      "relationship_sentence": "LDNS leverages conditional diffusion design patterns popularized here to steer generation by behavioral covariates while maintaining sample quality."
+    }
+  ],
+  "synthesis_narrative": "LDNS\u2019s core innovation\u2014high-fidelity, behavior-conditional generation of realistic neural spike trains by performing diffusion in a learned low-dimensional latent space\u2014arises from the confluence of two traditions. First, latent dynamical models in neuroscience (GPFA; LFADS) established that population spiking activity is well explained by smooth, low-dimensional trajectories aligned in time and often predictive of behavior. These works shaped LDNS\u2019s decision to infer continuous, time-aligned latents from discrete spike trains and to target behavior-conditioned generation in that latent domain. Second, modern diffusion/score-based generative modeling (DDPM; score-based SDE) provides a powerful, stable training objective and sampling framework capable of capturing rich higher-order statistics that VAEs often miss. Building on Latent Diffusion Models, LDNS moves the diffusion process into the latent space learned by an autoencoder, thereby sidestepping discrete spike modeling while preserving the structure necessary for realistic single-neuron and population statistics.\nTo realize this on long neural recordings, LDNS uses S4 state-space layers in the encoder/decoder, which excel at modeling long-range temporal dependencies, ensuring the latents remain time-aligned and informative. Finally, practical conditional diffusion and guidance techniques (as in Dhariwal & Nichol) inform LDNS\u2019s behavior-dependent sampling, enabling control over generated activity. Together, these strands yield a model that recovers latent structure and firing rates while generating spike trains with realistic statistics, advancing beyond prior latent neural models by marrying them with the expressive priors of diffusion.",
+  "analysis_timestamp": "2026-01-06T23:33:36.257033"
+}

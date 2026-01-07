@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Graph Contrastive Learning with Augmentations",
+      "authors": "You et al.",
+      "year": 2020,
+      "arxiv_id": "2010.13902",
+      "role": "Baseline",
+      "relationship_sentence": "PolyGCL adopts the GraphCL augmentation-based contrastive paradigm but replaces its homophily-leaning, low-pass encoders with learnable spectral polynomial filters to preserve high-frequency signals critical for heterophily."
+    },
+    {
+      "title": "Deep Graph Contrastive Representation Learning",
+      "authors": "Zhu et al.",
+      "year": 2020,
+      "arxiv_id": "2006.04131",
+      "role": "Baseline",
+      "relationship_sentence": "PolyGCL follows the GRACE-style node-level contrastive setup while directly addressing its low-pass smoothing behavior by parameterizing the encoder as a learnable spectral polynomial filter."
+    },
+    {
+      "title": "Graph Contrastive Learning with Adaptive Augmentation",
+      "authors": "Zhu et al.",
+      "year": 2021,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "By explicitly tailoring augmentations to homophily, GCA highlights the homophily bias in existing GCL objectives, which PolyGCL counters by injecting high-pass spectral components via learnable polynomial filters."
+    },
+    {
+      "title": "BernNet: Learning Arbitrary Graph Spectral Filters via Bernstein Polynomial",
+      "authors": "He et al.",
+      "year": 2021,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "BernNet\u2019s demonstration that Bernstein polynomials can flexibly approximate arbitrary graph spectral responses directly motivates PolyGCL\u2019s choice of a learnable polynomial filter family to capture both low- and high-pass behaviors."
+    },
+    {
+      "title": "Adaptive Universal Generalized PageRank Graph Neural Network (GPR-GNN)",
+      "authors": "Chien et al.",
+      "year": 2021,
+      "arxiv_id": null,
+      "role": "Extension",
+      "relationship_sentence": "PolyGCL extends GPR-GNN\u2019s learnable polynomial filtering idea into self-supervised learning, training the polynomial coefficients with a contrastive objective rather than supervised labels to fit task-relevant spectral shapes."
+    },
+    {
+      "title": "Predict then Propagate: Graph Neural Networks meet Personalized PageRank (APPNP)",
+      "authors": "Klicpera et al.",
+      "year": 2019,
+      "arxiv_id": "1810.05997",
+      "role": "Foundation",
+      "relationship_sentence": "APPNP grounds the propagation-as-polynomial-filter perspective that PolyGCL generalizes by learning the spectral polynomial coefficients from contrastive signals instead of using fixed PageRank weights."
+    },
+    {
+      "title": "Convolutional Neural Networks on Graphs with Fast Localized Spectral Filtering",
+      "authors": "Defferrard et al.",
+      "year": 2016,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "ChebNet introduces Chebyshev polynomial spectral filters, providing the core spectral-polynomial machinery that PolyGCL repurposes as a learnable encoder within a contrastive objective."
+    }
+  ],
+  "synthesis_narrative": "GraphCL established a graph-level contrastive paradigm built on stochastic augmentations, implicitly favoring homophily by encouraging views that preserve local similarity through low-pass encoders. GRACE brought node-level contrast with two augmented views and an InfoNCE objective, but still relied on low-pass message passing that smooths away high-frequency (heterophily) information. GCA made the homophily bias explicit by adaptively selecting augmentations based on feature/structural similarity, reinforcing that contemporary GCL objectives and pipelines prefer smooth, homophilous signals. In parallel, BernNet showed that Bernstein polynomials can approximate arbitrary spectral responses on graphs, enabling high- and band-pass filters beyond classical low-pass GNNs. GPR-GNN introduced learnable generalized PageRank (polynomial) filters that fit frequency responses to data, demonstrating strong performance on heterophilic graphs by learning the polynomial coefficients. APPNP framed propagation as a fixed polynomial (PageRank) filter, clarifying how polynomial filtering shapes representation spectra. ChebNet provided the seminal spectral-polynomial construction via Chebyshev approximations, establishing the computationally practical link between spectral filters and localized graph convolutions.\nTaken together, these works expose a gap: contrastive objectives and low-pass encoders in GCL underutilize informative high-frequency signals that polynomial spectral filters can capture. The natural next step is to fuse the flexibility of learnable polynomial filters (BernNet/GPR-GNN/APPNP/ChebNet) with a contrastive pipeline (GraphCL/GRACE/GCA), learning spectral coefficients directly from self-supervised signals. PolyGCL does exactly this\u2014bringing adaptive spectral polynomial filtering into GCL and designing the objective to preserve both low- and high-frequency components\u2014thereby addressing the homophily-induced smoothing bias and improving representation learning on heterophilic graphs.",
+  "target_paper": {
+    "title": "PolyGCL: GRAPH CONTRASTIVE LEARNING via Learnable Spectral Polynomial Filters",
+    "authors": "Jingyu Chen, Runlin Lei, Zhewei Wei",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Graph Contrastive Learning, Spectral Graph Neural Networks, Polynomial Filter, Heterophilic Graph Representation Learning",
+    "abstract": "Recently, Graph Contrastive Learning (GCL) has achieved significantly superior performance in self-supervised graph representation learning. \nHowever, the existing GCL technique has inherent smooth characteristics because of its low-pass GNN encoder and objective based on homophily assumption, which poses a challenge when applying it to heterophilic graphs.\nIn supervised learning tasks, spectral GNNs with polynomial approximation excel in both homophilic and heterophilic settings by adaptively fitting graph filters of arbitrary shapes. \nYet, their applications in unsupervised learning are rarely explored.\nBased on the above analysis, a natural question arises: Can we incorporate the excellent properties of spectral polynomial filters into graph contrastive learning?\nIn this paper, we address the question by studying the necessity of introducing high-pass information for heterophily from a spectral perspective.\nWe propose PolyGCL, a GCL pipeline that utilizes polynomial filters to achie",
+    "openreview_id": "y21ZO6M86t",
+    "forum_id": "y21ZO6M86t"
+  },
+  "analysis_timestamp": "2026-01-06T08:19:53.865553"
+}

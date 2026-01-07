@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models",
+      "authors": "Junnan Li et al.",
+      "year": 2023,
+      "arxiv_id": "2301.12597",
+      "role": "Gap Identification",
+      "relationship_sentence": "BLIP-2 established the now-standard practice of training a visual-to-LLM bridge on image\u2013caption pairs with a frozen LLM, and its saliency-biased caption objective is the explicit limitation VPG-C targets by completing non-salient, missing visual details needed for instruction following."
+    },
+    {
+      "title": "Visual Instruction Tuning (LLaVA: Large Language and Vision Assistant)",
+      "authors": "Haotian Liu et al.",
+      "year": 2023,
+      "arxiv_id": "2304.08485",
+      "role": "Baseline",
+      "relationship_sentence": "LLaVA is the primary MLLM baseline that maps image features to a frozen LLM via a lightweight projector and is instruction-tuned, and VPG-C is designed to plug into this pipeline to remedy LLaVA\u2019s failures on demonstrative, interleaved instructions due to missing fine-grained visual cues."
+    },
+    {
+      "title": "MiniGPT-4: Enhancing Vision-Language Understanding with Advanced Large Language Models",
+      "authors": "Deyao Zhu et al.",
+      "year": 2023,
+      "arxiv_id": "2304.10592",
+      "role": "Baseline",
+      "relationship_sentence": "MiniGPT-4 exemplifies the linear visual projector + frozen LLM recipe and serves as a key competitor that VPG-C directly augments to recover overlooked visual details that hinder following multi-step demonstrative instructions."
+    },
+    {
+      "title": "InstructBLIP: Towards General-purpose Vision-Language Models with Instruction Tuning",
+      "authors": "Junnan Li et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Baseline",
+      "relationship_sentence": "InstructBLIP extends BLIP-2 with broad instruction tuning yet inherits the caption-pretraining bias, and VPG-C addresses this by explicitly completing visual context so the model can follow complex instructions without additional task-specific supervision."
+    },
+    {
+      "title": "Multimodal Few-Shot Learning with Frozen Language Models",
+      "authors": "Yannis Tsimpoukelli et al.",
+      "year": 2021,
+      "arxiv_id": "2106.13884",
+      "role": "Foundation",
+      "relationship_sentence": "This work introduced the core formulation of feeding visual features as prompts to a frozen LLM via a learned adapter, a formulation that VPG-C retains while augmenting the adapter with a completion capability."
+    },
+    {
+      "title": "KOSMOS-2: Grounding Multimodal Large Language Models to the World",
+      "authors": "Xiao et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Related Problem",
+      "relationship_sentence": "KOSMOS-2 formalized interleaved image\u2013text modeling and grounding, underscoring the need for models to capture fine-grained, referential details in multimodal instructions\u2014the very kind of missing information VPG-C is designed to infer and complete."
+    }
+  ],
+  "synthesis_narrative": "Frozen-language-model pipelines first showed that a small visual adapter can feed image-derived prompts to a powerful, frozen LLM, framing multimodal reasoning as prompting rather than end-to-end fusion. BLIP-2 refined this bridge with a Q-Former trained on image\u2013caption pairs to produce LLM-consumable tokens, but its caption-centric supervision emphasized only salient content sufficient for generic descriptions. LLaVA demonstrated that adding visual instruction tuning atop a lightweight visual projector yields impressive interactive abilities, yet it still relies on caption-style pretraining for the visual prompt generator. MiniGPT-4 followed a similar connector-plus-instruction-tuning recipe, exposing the same weakness when instructions require exhaustive, fine-grained details. InstructBLIP broadened the instruction-tuning spectrum while largely inheriting the caption-pretraining bias embedded in the visual-to-LLM bridge. In parallel, KOSMOS-2 highlighted interleaved image\u2013text sequences and grounding, making clear that understanding referential, context-rich instructions demands capturing non-salient visual cues beyond what caption objectives typically enforce. Together, these works established the standard VPG-to-frozen-LLM paradigm and revealed a systematic gap: caption-trained bridges under-represent details crucial for following demonstrative, interleaved instructions. The current paper synthesizes these insights by introducing VPG-C, a lightweight module that augments the existing visual prompt generator to infer and complete missing visual details, slotting seamlessly into LLaVA/MiniGPT-4/BLIP-2 style pipelines and enabling zero-shot compliance with demonstrative instructions without overhauling the underlying architectures.",
+  "target_paper": {
+    "title": "Fine-tuning Multimodal LLMs to Follow Zero-shot Demonstrative Instructions",
+    "authors": "Juncheng Li, Kaihang Pan, Zhiqi Ge, Minghe Gao, Wei Ji, Wenqiao Zhang, Tat-Seng Chua, Siliang Tang, Hanwang Zhang, Yueting Zhuang",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Multimodal Large Language Models, Demonstrative Instruction",
+    "abstract": "Recent advancements in Multimodal Large Language Models (MLLMs) have been utilizing Visual Prompt Generators (VPGs) to convert visual features into tokens that LLMs can recognize. This is achieved by training the VPGs on millions of image-caption pairs, where the VPG-generated tokens of images are fed into a frozen LLM to generate the corresponding captions. However, this image-captioning based training objective inherently biases the VPG to concentrate solely on the primary visual contents sufficient for caption generation, often neglecting other visual details. This shortcoming results in MLLMs\u2019 underperformance in comprehending demonstrative instructions consisting of multiple, interleaved, and multimodal instructions that demonstrate the required context to complete a task. To address this issue, we introduce a generic and lightweight Visual Prompt Generator Complete module (VPG-C), which can infer and complete the missing details essential for comprehending demonstrative instructi",
+    "openreview_id": "BXY6fe7q31",
+    "forum_id": "BXY6fe7q31"
+  },
+  "analysis_timestamp": "2026-01-07T00:21:26.168718"
+}

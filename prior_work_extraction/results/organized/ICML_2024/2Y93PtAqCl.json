@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Visual Prompt Tuning",
+      "authors": "Jia et al.",
+      "year": 2022,
+      "role": "Baseline",
+      "relationship_sentence": "This paper is the primary baseline that introduces learnable visual prompt tokens for adapting ViTs, whose sensitivity to initialization/length and weaker performance on self-supervised backbones are the precise limitations the current work fixes by initializing prompts with downstream token prototypes."
+    },
+    {
+      "title": "Prefix-Tuning: Optimizing Continuous Prompts for Generation",
+      "authors": "Li et al.",
+      "year": 2021,
+      "role": "Foundation",
+      "relationship_sentence": "The idea of conditioning Transformers with learnable prefix tokens underlies VPT and directly frames this work\u2019s approach of keeping the same prompt-based interface but replacing random initialization with data-driven token-prototype initialization."
+    },
+    {
+      "title": "CoOp: Learning to Prompt for Vision-Language Models",
+      "authors": "Zhou et al.",
+      "year": 2022,
+      "role": "Foundation",
+      "relationship_sentence": "CoOp established continuous prompt learning for adaptation and exposed prompt-sensitivity issues (e.g., initialization and transfer), which this work addresses in the pure-vision setting by constructing prompts from downstream token statistics."
+    },
+    {
+      "title": "TokenLearner: Adaptive Token Sampling for Efficient Vision Transformers",
+      "authors": "Ryoo et al.",
+      "year": 2021,
+      "role": "Inspiration",
+      "relationship_sentence": "TokenLearner\u2019s demonstration that a small set of learned tokens distilled from patch tokens can effectively represent images directly inspires initializing prompts as token prototypes that share high information with patch tokens."
+    },
+    {
+      "title": "ToMe: Token Merging for Vision Transformers",
+      "authors": "Bolya et al.",
+      "year": 2023,
+      "role": "Related Problem",
+      "relationship_sentence": "ToMe shows that clustering/merging similar patch tokens into prototypes is both effective and cheap, informing this paper\u2019s streamlined token-construction pipeline that builds prompt prototypes with almost no extra compute."
+    },
+    {
+      "title": "L2P: Learning to Prompt for Continual Learning",
+      "authors": "Wang et al.",
+      "year": 2022,
+      "role": "Inspiration",
+      "relationship_sentence": "L2P\u2019s use of feature-derived keys/prototypes to select prompts motivates this work\u2019s data-dependent prompt design, but here prototypes are used to initialize the prompt tokens themselves rather than to choose among a prompt pool."
+    },
+    {
+      "title": "Masked Autoencoders Are Scalable Vision Learners (MAE)",
+      "authors": "He et al.",
+      "year": 2022,
+      "role": "Gap Identification",
+      "relationship_sentence": "Self-supervised ViT pretraining via MAE defines the regime where VPT often underperforms; this paper explicitly targets that gap by aligning prompts with downstream patch-token prototypes to improve adaptation of MAE-pretrained models."
+    }
+  ],
+  "synthesis_narrative": "The core of this paper is to make visual prompts data-aware by initializing them with downstream token prototypes that share high mutual information with patch tokens, thereby eliminating VPT\u2019s notorious sensitivity to initialization/length and boosting performance on self-supervised backbones. This builds squarely on VPT, which operationalized the idea of learnable visual prompts for ViTs but left open how to initialize them meaningfully and why they falter under self-supervised pretraining. The broader prompt-learning foundation comes from Prefix-Tuning in NLP and CoOp in vision-language models, both of which established continuous prompts as a lightweight adaptation interface while exposing their sensitivity and transfer challenges\u2014issues this work tackles head-on in a pure-vision setting. Two lines of work directly inspire the \u201cprototype-from-tokens\u201d mechanism: TokenLearner shows that a small set of tokens distilled from patch tokens can represent images well, suggesting that prompts should be constructed from patch-token statistics; ToMe demonstrates token merging/clustering can be done with minimal overhead, informing the paper\u2019s streamlined token-construction pipeline. Finally, MAE defines the challenging self-supervised pretraining regime where VPT underdelivers; aligning prompts with downstream token prototypes directly addresses this gap. Together, these works form a clear lineage: from prompt-based conditioning, to token summarization/merging, to a data-driven prompt initialization that materially improves visual tuning.",
+  "analysis_timestamp": "2026-01-06T23:09:26.507892"
+}

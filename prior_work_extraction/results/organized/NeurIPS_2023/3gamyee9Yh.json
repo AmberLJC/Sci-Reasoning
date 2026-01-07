@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Learned Step Size Quantization",
+      "authors": "Steven K. Esser et al.",
+      "year": 2020,
+      "role": "Foundational learnable quantizer (QAT) that optimizes quantization step sizes with STE-based gradients.",
+      "relationship_sentence": "QuantSR\u2019s Redistribution-driven Learnable Quantizer (RLQ) builds on the idea of learning quantizer parameters as in LSQ, but extends it by adding forward/backward redistribution to overcome representation homogeneity at ultra-low bits."
+    },
+    {
+      "title": "PACT: Parameterized Clipping Activation for Quantized Neural Networks",
+      "authors": "Jungwook Choi et al.",
+      "year": 2018,
+      "role": "Learnable activation range/clipping for stable low-bit quantization.",
+      "relationship_sentence": "RLQ is conceptually related to PACT\u2019s learnable activation handling, but goes beyond clipping by injecting redistribution signals that enrich feature representation without inference-time overhead."
+    },
+    {
+      "title": "Data-Free Quantization Through Weight Equalization and Bias Correction (Cross-Layer Equalization)",
+      "authors": "Markus Nagel et al.",
+      "year": 2019,
+      "role": "Scale redistribution/equalization across layers to mitigate outliers prior to quantization (PTQ).",
+      "relationship_sentence": "QuantSR generalizes the equalization/redistribution philosophy of CLE into a learnable, QAT-time mechanism that operates in both forward and backward passes, enabling accurate 2\u20134 bit SR."
+    },
+    {
+      "title": "Estimating or Propagating Gradients Through Stochastic Neurons for Conditional Computation (Straight-Through Estimator)",
+      "authors": "Yoshua Bengio et al.",
+      "year": 2013,
+      "role": "Core gradient estimator enabling backprop through non-differentiable quantizers.",
+      "relationship_sentence": "RLQ\u2019s backward redistribution is designed atop STE-style gradient flow, modifying the gradient pathway to carry richer information through quantized operations at ultra-low precision."
+    },
+    {
+      "title": "RCAN: Image Super-Resolution Using Very Deep Residual Channel Attention Networks",
+      "authors": "Yulun Zhang et al.",
+      "year": 2018,
+      "role": "High-accuracy SR backbone emphasizing channel-attention and deep residual learning.",
+      "relationship_sentence": "QuantSR targets preserving fine-grained channel-attentive representations of RCAN under low-bit QAT, and RLQ is tailored to maintain such representational diversity despite heavy quantization."
+    },
+    {
+      "title": "SwinIR: Image Restoration Using Swin Transformer",
+      "authors": "Jingyun Liang et al.",
+      "year": 2021,
+      "role": "SOTA transformer-based SR/restoration backbone with challenging activation/feature statistics for quantization.",
+      "relationship_sentence": "The difficulty of quantizing SwinIR motivated QuantSR\u2019s inference-agnostic redistribution and flexible inference design, enabling strong accuracy at 2\u20134 bits on modern SR transformers."
+    }
+  ],
+  "synthesis_narrative": "QuantSR advances low-bit image super-resolution by introducing the Redistribution-driven Learnable Quantizer (RLQ), whose design is rooted in two complementary lines of prior work: learnable quantizers and scale-redistribution techniques. From LSQ, QuantSR inherits the core principle of learning quantizer parameters with STE-based gradients, but identifies that merely optimizing step sizes is insufficient at 2\u20134 bits due to representation homogeneity. PACT further shaped the activation-side perspective by demonstrating that learnable clipping stabilizes low-bit QAT; RLQ broadens this idea by injecting learnable redistribution signals that enhance representational diversity without incurring inference-time cost. In parallel, Cross-Layer Equalization established that rebalancing scales (redistribution) across network components alleviates outliers for quantization. QuantSR internalizes this redistribution concept into the quantizer itself, applying it during both forward and backward passes to systematically improve signal expressivity and gradient flow at ultra-low precision. The STE formalism provides the backbone for passing gradients through non-differentiable quantizers; RLQ augments this pathway to deliver richer, more informative gradients. Finally, the practical impetus and validation grounds come from high-capacity SR backbones like RCAN and SwinIR, whose intricate channel attention and transformer dynamics are notoriously fragile under aggressive quantization. By unifying learnable quantization with principled redistribution tailored to SR feature statistics, QuantSR achieves flexible, accurate inference at low bits across both CNN and transformer SR models.",
+  "analysis_timestamp": "2026-01-07T00:02:04.866664"
+}

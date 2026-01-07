@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Deep Unsupervised Learning using Nonequilibrium Thermodynamics",
+      "authors": "Sohl-Dickstein et al.",
+      "year": 2015,
+      "role": "Foundation",
+      "relationship_sentence": "This paper introduced diffusion models as nonequilibrium thermodynamic processes that monotonically increase entropy in a forward diffusion and learn a reverse process; Neural Entropy formalizes and quantifies the \u2018missing information\u2019 implied by that entropy increase as the amount the network must store to invert diffusion."
+    },
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Ho et al.",
+      "year": 2020,
+      "role": "Baseline",
+      "relationship_sentence": "Neural Entropy is instantiated and measured on standard DDPMs with discrete-time Gaussian noise schedules and the \u03b5-prediction objective defined by Ho et al., and its value explicitly depends on the chosen diffusion process (e.g., \u03b2-schedule) established in this work."
+    },
+    {
+      "title": "Score-Based Generative Modeling through Stochastic Differential Equations",
+      "authors": "Song et al.",
+      "year": 2021,
+      "role": "Extension",
+      "relationship_sentence": "By casting diffusion as continuous-time SDEs with an associated probability flow ODE, this work provides the formal machinery to express entropy change along the diffusion path via score functions; Neural Entropy leverages this SDE framework to relate learned scores to total entropy production."
+    },
+    {
+      "title": "A connection between score matching and denoising autoencoders",
+      "authors": "Vincent",
+      "year": 2011,
+      "role": "Foundation",
+      "relationship_sentence": "Vincent\u2019s result that denoising predicts the score of the corrupted data distribution directly underpins Neural Entropy\u2019s ability to estimate entropy production from the diffusion model\u2019s denoiser/score network outputs."
+    },
+    {
+      "title": "Estimation of non-normalized statistical models by score matching",
+      "authors": "Hyv\u00e4rinen",
+      "year": 2005,
+      "role": "Foundation",
+      "relationship_sentence": "Score matching defines the Fisher divergence objective that diffusion models implicitly minimize; Neural Entropy uses this link because, under Gaussian diffusion, entropy production can be expressed via the Fisher information tied to the learned score."
+    },
+    {
+      "title": "Some inequalities satisfied by the quantities of information of Fisher and Shannon",
+      "authors": "Stam",
+      "year": 1959,
+      "role": "Foundation",
+      "relationship_sentence": "Stam\u2019s de Bruijn identity connects the derivative of differential entropy under Gaussian smoothing to Fisher information; Neural Entropy relies on this identity to equate total entropy produced by the forward diffusion with integrals of score/Fisher quantities learned by the network."
+    },
+    {
+      "title": "Stochastic thermodynamics, fluctuation theorems and molecular machines",
+      "authors": "Seifert",
+      "year": 2012,
+      "role": "Inspiration",
+      "relationship_sentence": "Seifert\u2019s framework precisely defines entropy production in nonequilibrium diffusion processes; Neural Entropy adopts this thermodynamic notion to interpret and quantify the information a trained reverse-diffusion network must encode to compensate for forward entropy production."
+    }
+  ],
+  "synthesis_narrative": "Neural Entropy grows out of the explicit thermodynamic framing of diffusion modeling established by Sohl-Dickstein et al., who cast learning as inverting an entropy-increasing nonequilibrium process. Building on the practical DDPM instantiation of this idea by Ho et al., the present work measures a quantity that depends on the discrete Gaussian noise schedule and the \u03b5-prediction training setup widely used in practice. The crucial mathematical link between diffusion, entropy, and what the network learns comes from score-based theory: Hyv\u00e4rinen\u2019s score matching and Vincent\u2019s denoising\u2013score equivalence identify the learned denoiser as an estimator of the score, tying training to Fisher information. Stam\u2019s de Bruijn identity then closes the loop by equating entropy change under Gaussian diffusion with Fisher information, providing the core equation that lets entropy production be computed from the model\u2019s learned scores. Song et al.\u2019s SDE formalism supplies a continuous-time lens\u2014via SDEs and the probability flow ODE\u2014to integrate these quantities along the diffusion path, making the entropy accounting process- and schedule-aware. Finally, Seifert\u2019s stochastic thermodynamics gives the precise notion of entropy production that Neural Entropy adopts and interprets as the information the network must store to reverse diffusion. Together, these works directly enable Neural Entropy\u2019s central contribution: a principled, process-dependent measure of the information encoded by diffusion models, which the paper validates empirically as highly efficient compression of structured data ensembles.",
+  "analysis_timestamp": "2026-01-06T23:08:23.976015"
+}

@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Slimmable Neural Networks",
+      "authors": "Jiahui Yu et al.",
+      "year": 2019,
+      "arxiv_id": "1812.08928",
+      "role": "Extension",
+      "relationship_sentence": "This work introduced the practical 'first-k' channel/head slicing rule for instantiating thinner sub-networks from a larger set of shared weights, which the current paper generalizes by selecting compatible weight subsets from an off-the-shelf pretrained larger model without slimmable training."
+    },
+    {
+      "title": "Once for All: Train One Network and Specialize it for Efficient Deployment",
+      "authors": "Han Cai et al.",
+      "year": 2020,
+      "arxiv_id": "1908.09791",
+      "role": "Gap Identification",
+      "relationship_sentence": "OFA showed that many smaller models can inherit weights by slicing a specially trained supernet, and this paper addresses its key limitation by enabling weight subset selection from standard pretrained large models that were not trained as supernets."
+    },
+    {
+      "title": "Net2Net: Accelerating Learning via Knowledge Transfer",
+      "authors": "Tianqi Chen et al.",
+      "year": 2016,
+      "arxiv_id": "1511.05641",
+      "role": "Foundation",
+      "relationship_sentence": "Net2Net established function-preserving transformations to map weights across architectures of different width/depth, supplying the core premise that weights can be transferred across sizes that this paper adopts in the reverse (large-to-small) direction via selection."
+    },
+    {
+      "title": "Network Morphism",
+      "authors": "Tianxiang Wei et al.",
+      "year": 2016,
+      "arxiv_id": "1603.01670",
+      "role": "Inspiration",
+      "relationship_sentence": "Network Morphism generalized Net2Net\u2019s weight mappings to add/remove layers and change widths while preserving functions, inspiring the idea that a smaller network can be initialized by a structured subset of a larger network\u2019s parameters."
+    },
+    {
+      "title": "The Lottery Ticket Hypothesis: Finding Sparse, Trainable Neural Networks",
+      "authors": "Jonathan Frankle et al.",
+      "year": 2019,
+      "arxiv_id": "1803.03635",
+      "role": "Inspiration",
+      "relationship_sentence": "LTH demonstrated that subnetworks initialized with inherited weights can train effectively, motivating the paper\u2019s strategy of selecting a subnetwork from a pretrained larger model to initialize a smaller one for faster, better training."
+    },
+    {
+      "title": "Distilling the Knowledge in a Neural Network",
+      "authors": "Geoffrey Hinton et al.",
+      "year": 2015,
+      "arxiv_id": "1503.02531",
+      "role": "Baseline",
+      "relationship_sentence": "Knowledge distillation is the dominant baseline for leveraging a large model to improve a small one, against which the paper positions weight selection as a complementary, weight-level initialization alternative."
+    }
+  ],
+  "synthesis_narrative": "Slimmable neural networks established a concrete recipe for deriving thinner models by slicing the first k channels or heads from a shared, larger weight space, showing that submodels can operate effectively with subset weights if trained appropriately. Once-for-All advanced this idea by training a supernet that supports a large family of architectures via progressive shrinking, enabling subnets to directly inherit weights without retraining, but only when the parent model was specially trained for such slicing. Net2Net introduced function-preserving mappings such as Net2WiderNet and Net2DeeperNet, proving that weights can be systematically transferred across networks of different width and depth to accelerate training. Network Morphism broadened these transformations to a more general class of architecture changes, including adding or removing layers while preserving function, further grounding the feasibility of weight-level transfers across sizes. The Lottery Ticket Hypothesis provided the key empirical insight that subnetworks with inherited initializations can train rapidly and reach strong performance, underscoring the value of selecting rather than reinitializing parameters. In parallel, knowledge distillation became the standard pathway to exploit large models for small ones, but it transfers behaviors via outputs or features rather than weights.\nTogether, these works suggested a gap: weight inheritance is powerful but typically requires supernet training or upward morphisms, while popular transfer methods focus on targets, not parameters. The natural next step is to directly initialize smaller models by selecting compatible subsets of weights from ordinary pretrained large models, blending slimmable-style slicing with morphism-inspired structural mapping to deliver faster, stronger small-model training without specialized pretraining.",
+  "target_paper": {
+    "title": "Initializing Models with Larger Ones",
+    "authors": "Zhiqiu Xu, Yanjie Chen, Kirill Vishniakov, Yida Yin, Zhiqiang Shen, Trevor Darrell, Lingjie Liu, Zhuang Liu",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Deep Learning, Neural Networks, Weight Initialization, Small Models, Computer Vision",
+    "abstract": "Weight initialization plays an important role in neural network training. Widely used initialization methods are proposed and evaluated for networks that are trained from scratch. However, the growing number of pretrained models now offers new opportunities for tackling this classical problem of weight initialization. In this work, we introduce weight selection, a method for initializing smaller models by selecting a subset of weights from a pretrained larger model. This enables the transfer of knowledge from pretrained weights to smaller models. Our experiments demonstrate that weight selection can significantly enhance the performance of small models and reduce their training time.  Notably, it can also be used together with knowledge distillation. Weight selection offers a new approach to leverage the power of pretrained models in resource-constrained settings, and we hope it can be a useful tool for training small models in the large-model era.",
+    "openreview_id": "dyrGMhicMw",
+    "forum_id": "dyrGMhicMw"
+  },
+  "analysis_timestamp": "2026-01-06T23:33:49.080343"
+}

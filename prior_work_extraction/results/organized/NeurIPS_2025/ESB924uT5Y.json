@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Understanding Black-box Predictions via Influence Functions",
+      "authors": "Pang Wei Koh and Percy Liang",
+      "year": 2017,
+      "role": "Foundational theory for TDA",
+      "relationship_sentence": "AirRep explicitly targets the influence-estimation objective introduced by influence functions, but replaces costly second-order computations with a learned representation that amortizes influence estimation."
+    },
+    {
+      "title": "TracIn: Tracking the Influence of Training Data on Prediction",
+      "authors": "Gururaj Pruthi et al.",
+      "year": 2020,
+      "role": "Scalable gradient-based approximation",
+      "relationship_sentence": "AirRep pursues TracIn\u2019s scalability goal while moving from gradient-trajectory dot products to task-aligned embeddings trained to reflect empirical influence, improving fidelity without relying on stored gradient paths."
+    },
+    {
+      "title": "Representer Point Selection for Explaining Deep Neural Networks",
+      "authors": "Chih-Kuan Yeh et al.",
+      "year": 2018,
+      "role": "Representation-based attribution",
+      "relationship_sentence": "AirRep generalizes representer point ideas by learning an encoder optimized specifically for attribution quality rather than using fixed last-layer embeddings, addressing the fidelity limits of heuristic representations."
+    },
+    {
+      "title": "Datamodels: Predicting Predictions from Training Data",
+      "authors": "Andrew Ilyas et al.",
+      "year": 2022,
+      "role": "Empirical subset supervision for attribution",
+      "relationship_sentence": "AirRep adopts the datamodels insight of supervising with retraining-on-subsets effects, but uses a ranking objective to train a compact encoder that amortizes per-example and group influence estimation."
+    },
+    {
+      "title": "Data Shapley: Equitable Valuation of Data for Machine Learning",
+      "authors": "Amirata Ghorbani and James Zou",
+      "year": 2019,
+      "role": "Game-theoretic data valuation and group influence",
+      "relationship_sentence": "AirRep\u2019s attention-based pooling provides a scalable surrogate to Shapley-style group valuations by learning to aggregate per-point effects into accurate group-wise influence estimates."
+    },
+    {
+      "title": "Set Transformer: A Framework for Attention-based Permutation-Invariant Networks",
+      "authors": "Juho Lee et al.",
+      "year": 2019,
+      "role": "Architectural prior for attention-based set pooling",
+      "relationship_sentence": "AirRep\u2019s attention-based pooling for estimating group influence directly builds on attention mechanisms for set functions introduced by Set Transformer to model interactions among training points."
+    },
+    {
+      "title": "Deep Sets",
+      "authors": "Manzil Zaheer et al.",
+      "year": 2017,
+      "role": "Foundational theory of permutation-invariant set functions",
+      "relationship_sentence": "AirRep\u2019s group-wise attribution requires permutation-invariant aggregation of example effects; Deep Sets provides the theoretical basis that AirRep extends with attention to increase expressivity."
+    }
+  ],
+  "synthesis_narrative": "AirRep sits at the intersection of theoretically grounded influence estimation and scalable representation learning. Influence functions established the core objective of training data attribution\u2014quantifying how perturbing a training point affects a test prediction\u2014but their second-order computations are prohibitive at modern scales. TracIn showed that scalable approximations are possible via gradient trajectory dot products, yet they still couple attribution to gradients and checkpoints, limiting practicality and alignment with end-task attribution. Representation-based attribution, exemplified by Representer Point Selection, highlighted that embeddings can proxy influence, but fidelity suffers when representations are not optimized for the attribution task. Datamodels introduced a crucial supervision signal: empirical effects measured by retraining on sampled subsets, enabling learning surrogates that predict model outputs from data subsets. AirRep leverages this idea but uses a ranking objective tailored to attribution quality, directly training a task- and model-aligned encoder that amortizes influence estimation. For group-wise influence\u2014central to many TDA applications\u2014game-theoretic data valuation (Data Shapley) provides a principled target but is computationally expensive; AirRep approximates these effects by learning permutation-invariant set functions. Building on Deep Sets and Set Transformer, AirRep employs attention-based pooling to capture interactions among training examples, enabling accurate group influence estimation. Collectively, these works motivate AirRep\u2019s design: optimizing representations specifically for attribution fidelity, supervised by empirical subset effects, and using attention-based set pooling to scale group-wise influence estimation.",
+  "analysis_timestamp": "2026-01-07T00:02:04.981772"
+}

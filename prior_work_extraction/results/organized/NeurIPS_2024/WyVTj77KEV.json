@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Jonathan Ho, Ajay Jain, Pieter Abbeel",
+      "year": 2020,
+      "role": "Foundational generative modeling paradigm",
+      "relationship_sentence": "Established the diffusion/ODE framing and likelihood-free training that PocketFlow builds upon conceptually before adapting to a flow-based formulation to generate 3D protein pockets."
+    },
+    {
+      "title": "Diffusion Models Beat GANs on Image Synthesis",
+      "authors": "Prafulla Dhariwal, Alex Nichol",
+      "year": 2021,
+      "role": "Guidance mechanism for sampling",
+      "relationship_sentence": "Introduced classifier guidance for steering generative trajectories with external objectives; PocketFlow analogously injects multi-granularity guidance using predicted binding affinity and explicit interaction-geometry constraints during sampling."
+    },
+    {
+      "title": "E(n) Equivariant Graph Neural Networks",
+      "authors": "Victor Garcia Satorras, Emiel Hoogeboom, Max Welling",
+      "year": 2021,
+      "role": "3D-equivariant representation learning",
+      "relationship_sentence": "Provided the E(n)-equivariant message passing used to model protein\u2013ligand 3D geometry; PocketFlow relies on such equivariance to faithfully capture and generate interaction-aware pocket structures."
+    },
+    {
+      "title": "Equivariant Diffusion for Molecule Generation",
+      "authors": "Emiel Hoogeboom, Victor Garcia Satorras, Cl\u00e9ment Vignac, Max Welling",
+      "year": 2022,
+      "role": "3D atomic generative modeling with equivariance",
+      "relationship_sentence": "Demonstrated how to generate 3D atoms with SE(3)/E(n) equivariant denoising; PocketFlow adapts these geometric parameterizations and loss designs to produce coordinate-accurate pockets and encode interaction geometry like hydrogen bonds."
+    },
+    {
+      "title": "DiffDock: Diffusion Steps, Twists, and Turns for Molecular Docking",
+      "authors": "Gabriele Corso, Hannes St\u00e4rk, Bowen Jing, Regina Barzilay, Tommi Jaakkola",
+      "year": 2023,
+      "role": "Protein\u2013ligand generative modeling with binding-aware objectives",
+      "relationship_sentence": "Showed that diffusion over ligand poses guided by binding-aware signals yields accurate docking; PocketFlow extends this idea by generating the protein pocket itself, using interaction-aware training targets and guidance to ensure valid contacts."
+    },
+    {
+      "title": "AutoDock Vina: Improving the speed and accuracy of docking with a new scoring function, efficient optimization, and multithreading",
+      "authors": "Oleg Trott, Arthur J. Olson",
+      "year": 2010,
+      "role": "Affinity scoring as external objective",
+      "relationship_sentence": "Popularized fast empirical scoring for binding affinity; PocketFlow replaces slow physics-based loops by incorporating learned affinity predictors/scorers as a global guidance signal during sampling."
+    },
+    {
+      "title": "Computational design of ligand-binding proteins with high affinity and selectivity",
+      "authors": "Jonathan R. Tinberg et al.",
+      "year": 2013,
+      "role": "Interaction-geometry priors in pocket design",
+      "relationship_sentence": "Established that enforcing precise hydrogen-bonding and geometric motifs is crucial for de novo pocket design; PocketFlow directly encodes these priors during training and as sampling-time constraints to ensure chemically valid pockets."
+    }
+  ],
+  "synthesis_narrative": "PocketFlow\u2019s core innovation is to generate protein pockets conditioned on ligands while explicitly embedding protein\u2013ligand interaction priors and using multi-granularity guidance during sampling. This builds on the diffusion/flow generative paradigm introduced by DDPM, which framed generation as integrating a learned vector field or denoising process. Dhariwal and Nichol\u2019s guidance principle directly motivates PocketFlow\u2019s sampling-time control: an external objective steers generation. PocketFlow instantiates this with two complementary signals\u2014a global affinity score to push towards high-binding pockets and local geometry constraints to enforce correct hydrogen-bond and contact motifs.\n\nAccurate 3D modeling is enabled by equivariant representations. EGNN provides the backbone for learning on atomic coordinates without violating Euclidean symmetries, while Equivariant Diffusion for Molecule Generation demonstrates how to model and denoise 3D point clouds/atoms, informing PocketFlow\u2019s coordinate parameterization and loss design. On the application side, DiffDock shows that diffusion-style generative modeling of protein\u2013ligand complexes can be binding-aware and benefit from guidance, which PocketFlow extends from pose generation to pocket synthesis.\n\nFinally, decades of physics- and template-based pocket design (e.g., AutoDock Vina scoring; Tinberg et al.\u2019s geometry-constrained Rosetta designs) crystallized the critical role of hydrogen-bonding and interaction geometry. PocketFlow absorbs this domain knowledge as learnable priors and guidance, achieving the speed of deep generative models while preserving the chemical validity traditionally ensured by structure-based design.",
+  "analysis_timestamp": "2026-01-06T23:33:36.292371"
+}

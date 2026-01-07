@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Language Models as Knowledge Bases?",
+      "authors": "Fabio Petroni et al.",
+      "year": 2019,
+      "arxiv_id": "1909.01066",
+      "role": "Foundation",
+      "relationship_sentence": "Petroni et al. formalized factual knowledge as subject\u2013relation\u2013object tuples and developed probing protocols, providing the exact problem formulation this paper uses to define and count \u201cknowledge bits\u201d stored by language models."
+    },
+    {
+      "title": "Transformer Feed-Forward Layers Are Key-Value Memories",
+      "authors": "Mor Geva et al.",
+      "year": 2021,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "By showing that transformer feed-forward layers act as key\u2013value memory that stores factual associations, this work directly motivates treating parameters as memory slots and underpins the paper\u2019s per-parameter knowledge capacity estimate."
+    },
+    {
+      "title": "Scaling Laws for Neural Language Models",
+      "authors": "Jared Kaplan et al.",
+      "year": 2020,
+      "arxiv_id": "2001.08361",
+      "role": "Baseline",
+      "relationship_sentence": "Kaplan et al. introduced loss-based scaling laws that serve as the primary baseline the paper replaces with an information-theoretic scaling law over stored knowledge bits."
+    },
+    {
+      "title": "Training Compute-Optimal Large Language Models",
+      "authors": "Jordan Hoffmann et al.",
+      "year": 2022,
+      "arxiv_id": "2203.15556",
+      "role": "Gap Identification",
+      "relationship_sentence": "Hoffmann et al. refined loss-based, compute-optimal scaling, whose limitation\u2014optimizing loss rather than parametric knowledge\u2014explicitly motivates this paper\u2019s shift to measuring knowledge capacity."
+    },
+    {
+      "title": "Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity",
+      "authors": "William Fedus et al.",
+      "year": 2021,
+      "arxiv_id": "2101.03961",
+      "role": "Related Problem",
+      "relationship_sentence": "Switch Transformers introduced sparse MoE architectures where only a subset of parameters are active per token, directly prompting this paper\u2019s analysis of how sparsity/MoE affects per-parameter knowledge storage capacity."
+    },
+    {
+      "title": "Extracting Training Data from Large Language Models",
+      "authors": "Nicholas Carlini et al.",
+      "year": 2021,
+      "arxiv_id": "2012.07805",
+      "role": "Gap Identification",
+      "relationship_sentence": "Carlini et al. quantified parametric memorization and extraction, highlighting that prior measures focused on verbatim data rather than structured factual knowledge\u2014a gap this paper closes by counting extractable knowledge bits."
+    },
+    {
+      "title": "LLM.int8(): 8-bit Matrix Multiplication for Transformers at Scale",
+      "authors": "Tim Dettmers et al.",
+      "year": 2022,
+      "arxiv_id": "2208.07339",
+      "role": "Related Problem",
+      "relationship_sentence": "Dettmers et al. showed that int8 quantization preserves model quality, motivating the paper\u2019s test of whether knowledge capacity per parameter remains invariant under int8\u2014culminating in the 2-bits-per-parameter result even when quantized."
+    }
+  ],
+  "synthesis_narrative": "Petroni et al. established the practice of viewing factual knowledge in language models as subject\u2013relation\u2013object tuples and probing models for these associations, thereby setting a concrete, structured notion of what constitutes factual knowledge in parametric form. Geva et al. then argued that transformer feed-forward layers serve as key\u2013value memories, directly tying parameters to stored factual associations and suggesting a memory-slot perspective on what parameters hold. Kaplan et al. demonstrated predictable power-law scaling of performance with model size, data, and compute but defined capability via loss, not explicit knowledge content. Hoffmann et al. refined these loss-based laws to compute-optimal regimes, further entrenching loss as the dominant metric for \u201ccapability.\u201d In parallel, Fedus et al. introduced sparse Mixture-of-Experts, complicating the relationship between total parameters and active capacity by activating only a fraction of parameters per token. Carlini et al. quantified parametric memorization and extraction, but focused on verbatim training data rather than structured factual knowledge. Dettmers et al. showed that int8 quantization can preserve downstream quality, raising the question of how discretization affects what and how much knowledge is actually stored. Together, these works revealed a gap: while models scale predictably in loss and maintain quality under sparsity and quantization, there was no direct, information-theoretic account of how many discrete units of factual knowledge are stored per parameter. Building on tuple-based probing and the memory view of transformer parameters, the paper replaces loss with an information-centric metric, constructs controlled datasets of facts, and derives a robust scaling law\u2014about two bits of factual knowledge per parameter\u2014that remains stable across training duration, architecture (including MoE), and quantization, providing a unified, actionable measure of knowledge capacity.",
+  "target_paper": {
+    "title": "Physics of Language Models: Part 3.3, Knowledge Capacity Scaling Laws",
+    "authors": "Zeyuan Allen-Zhu, Yuanzhi Li",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "scaling laws, knowledge capacity, language models",
+    "abstract": "Scaling laws describe the relationship between the size of language models and their capabilities. Unlike prior studies that evaluate a model's capability via loss or benchmarks, we estimate information-theoretically the number of knowledge \\emph{bits} a model stores. We focus on factual knowledge represented as tuples, such as (USA, capital, Washington D.C.) from a Wikipedia page. Through multiple controlled datasets, we establish that language models can and only can store \\emph{2 bits of knowledge per parameter, even when quantized to int8}, and such knowledge can be flexibly extracted for downstream applications. \n\nMore broadly, we present 12 results on how (1) training duration, (2) model architecture, (3) quantization, (4) sparsity constraints such as MoE, and (5) data signal-to-noise ratio affect a model's knowledge storage capacity.",
+    "openreview_id": "FxNNiUgtfa",
+    "forum_id": "FxNNiUgtfa"
+  },
+  "analysis_timestamp": "2026-01-06T06:34:37.288191"
+}

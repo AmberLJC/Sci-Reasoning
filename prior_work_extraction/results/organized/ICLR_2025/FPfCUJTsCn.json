@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Learning to Branch for Mixed-Integer Programming",
+      "authors": "M. Gasse et al.",
+      "year": 2019,
+      "arxiv_id": "1906.01629",
+      "role": "Gap Identification",
+      "relationship_sentence": "This supervised L2O approach relies on solver-generated labels and can misalign training with the decision objective, directly motivating DiffILO\u2019s unsupervised, objective-aligned formulation to avoid label generation and infeasible predictions."
+    },
+    {
+      "title": "Smart 'Predict, then Optimize' (SPO+): A Framework for Predictive Analytics and Decision Optimization",
+      "authors": "Y. Elmachtoub et al.",
+      "year": 2021,
+      "arxiv_id": "1711.04877",
+      "role": "Foundation",
+      "relationship_sentence": "SPO+ formalizes aligning learning with downstream linear optimization objectives, a principle DiffILO adopts by training directly on the ILP objective rather than a proxy prediction loss."
+    },
+    {
+      "title": "Differentiation of Blackbox Combinatorial Solvers",
+      "authors": "M. Vlastelica et al.",
+      "year": 2020,
+      "arxiv_id": "",
+      "role": "Inspiration",
+      "relationship_sentence": "By showing how to backpropagate through discrete solvers via perturbation and relaxation, this work inspires DiffILO\u2019s strategy of obtaining meaningful gradients for combinatorial decisions without supervised labels."
+    },
+    {
+      "title": "The Concrete Distribution: A Continuous Relaxation of Discrete Random Variables",
+      "authors": "C. Maddison et al.",
+      "year": 2017,
+      "arxiv_id": "1611.00712",
+      "role": "Foundation",
+      "relationship_sentence": "Its reparameterizable continuous relaxation of Bernoulli/categorical variables underpins DiffILO\u2019s probabilistic modeling that renders integer decisions differentiable almost everywhere."
+    },
+    {
+      "title": "Differentiable Convex Optimization Layers",
+      "authors": "A. Agrawal et al.",
+      "year": 2019,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "This work establishes practical techniques for embedding optimization problems as differentiable layers, a paradigm DiffILO extends from convex continuous programs to the integer linear setting via a new relaxation."
+    },
+    {
+      "title": "Neural Combinatorial Optimization with Reinforcement Learning",
+      "authors": "I. Bello et al.",
+      "year": 2017,
+      "arxiv_id": "1611.09940",
+      "role": "Related Problem",
+      "relationship_sentence": "Demonstrating label-free training by directly optimizing task costs for combinatorial problems, this work informs DiffILO\u2019s unsupervised objective that optimizes ILP quality without solver-provided labels."
+    }
+  ],
+  "synthesis_narrative": "Supervised learning-to-optimize for mixed-integer programs, exemplified by Gasse et al., learns branching and other solver components from labels produced by exact solvers, incurring high label-generation cost and risking objective misalignment that yields infeasible or low-quality solutions. Elmachtoub and Grigas introduce the predict-then-optimize framework and SPO+, emphasizing that training should be aligned with the downstream linear optimization objective rather than a separate prediction loss. Vlastelica et al. show that combinatorial decision procedures can be made differentiable by leveraging perturbations and relaxations to obtain gradients through black-box solvers, revealing a path to gradient-based learning over discrete choices. Maddison et al. provide the Concrete distribution, a reparameterizable continuous relaxation for discrete variables, offering a general tool for making discrete selections amenable to backpropagation. Agrawal et al. develop differentiable convex optimization layers, showing how to embed optimization problems within neural networks and propagate gradients through their solutions. Bello et al. demonstrate that combinatorial solvers can be trained without labels by optimizing the task objective directly via reinforcement learning.\nCollectively, these works expose a gap: despite progress in differentiable optimization and label-free training, there is no general, unsupervised, and objective-aligned framework that handles the integrality and feasibility constraints inherent to ILPs. The current paper synthesizes these threads by using probabilistic reparameterization of integer decisions to obtain an almost-everywhere differentiable, unconstrained objective that directly reflects the ILP\u2019s cost and feasibility. This marries objective alignment (SPO+) with differentiable discrete decision-making (Concrete, black-box differentiation), while avoiding solver-generated labels and explicit constraint handling during training.",
+  "target_paper": {
+    "title": "Differentiable Integer Linear Programming",
+    "authors": "Zijie Geng, Jie Wang, Xijun Li, Fangzhou Zhu, Jianye HAO, Bin Li, Feng Wu",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "Integer Linear Programming, Learning to Optimize",
+    "abstract": "Machine learning (ML) techniques have shown great potential in generating high-quality solutions for integer linear programs (ILPs).\nHowever, existing methods typically rely on a *supervised learning* paradigm, leading to (1) *expensive training cost* due to repeated invocations of traditional solvers to generate training labels, and (2) *plausible yet infeasible solutions* due to the misalignment between the training objective (minimizing prediction loss) and the inference objective (generating high-quality solutions).\nTo tackle this challenge, we propose **DiffILO** (**Diff**erentiable **I**nteger **L**inear Programming **O**ptimization), an *unsupervised learning paradigm for learning to solve ILPs*.\nSpecifically, through a novel probabilistic modeling, DiffILO reformulates ILPs---discrete and constrained optimization problems---into continuous, differentiable (almost everywhere), and unconstrained optimization problems.\nThis reformulation enables DiffILO to simultaneously solve ILP",
+    "openreview_id": "FPfCUJTsCn",
+    "forum_id": "FPfCUJTsCn"
+  },
+  "analysis_timestamp": "2026-01-06T14:46:31.245620"
+}

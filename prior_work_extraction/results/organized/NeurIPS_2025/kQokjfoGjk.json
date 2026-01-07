@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Pseudo-Label: The Simple and Efficient Semi-Supervised Learning Method for Deep Neural Networks",
+      "authors": "Dong-Hyun Lee",
+      "year": 2013,
+      "role": "Foundational pseudo-labeling/self-training",
+      "relationship_sentence": "SCAM\u2019s use of reconstruction outputs as supervisory signals directly builds on the pseudo-labeling principle of using model-generated labels to improve training when ground-truth supervision is unreliable."
+    },
+    {
+      "title": "Noise2Self: Blind Denoising by Self-Supervision",
+      "authors": "Joshua Batson; Loic Royer",
+      "year": 2019,
+      "role": "Self-supervised reconstruction without clean targets",
+      "relationship_sentence": "The idea that internal consistency and masking can produce reliable targets without clean labels underpins SCAM\u2019s strategy of generating pseudo labels from an auxiliary reconstruction network to correct corrupted forecast targets."
+    },
+    {
+      "title": "Masked Autoencoders Are Scalable Vision Learners",
+      "authors": "Kaiming He; Xinlei Chen; Saining Xie; Yanghao Li; Piotr Doll\u00e1r; Ross Girshick",
+      "year": 2022,
+      "role": "Masked reconstruction as a robust self-supervised signal",
+      "relationship_sentence": "SCAM\u2019s adaptive masking and reconstruction-driven supervision echo MAE\u2019s insight that masked reconstruction yields stable learning signals, here repurposed to re-label unreliable time-series segments."
+    },
+    {
+      "title": "Co-teaching: Robust Training of Deep Neural Networks with Extremely Noisy Labels",
+      "authors": "Bo Han; Quanming Yao; Xingrui Yu; Gang Niu; Miao Xu; Weihua Hu; Ivor Tsang; Masashi Sugiyama",
+      "year": 2018,
+      "role": "Noisy-label learning via selective filtering",
+      "relationship_sentence": "SCAM\u2019s selective replacement of overfitted components parallels Co-teaching\u2019s core idea of filtering/unlearning suspected noisy labels, but replaces them with self-supervised reconstructions instead of discarding them."
+    },
+    {
+      "title": "Spectral Normalization for Generative Adversarial Networks",
+      "authors": "Takeru Miyato; Toshiki Kataoka; Masanori Koyama; Yuichi Yoshida",
+      "year": 2018,
+      "role": "Spectral norm regularization to control Lipschitzness",
+      "relationship_sentence": "SCAM\u2019s Spectral Norm Regularization (SNR) directly draws on spectral normalization to constrain layer Lipschitz constants, mitigating overfitting and stabilizing the loss landscape during pseudo-label training."
+    },
+    {
+      "title": "Sharpness-Aware Minimization for Efficiently Improving Generalization",
+      "authors": "Pierre Foret; Ariel Kleiner; Hossein Mobahi; Behnam Neyshabur",
+      "year": 2021,
+      "role": "Loss landscape flatness and generalization",
+      "relationship_sentence": "SCAM\u2019s emphasis on suppressing overfitting \u2018from a loss landscape perspective\u2019 aligns with SAM\u2019s motivation that flatter minima generalize better, complementing SNR to reduce sensitivity to noisy labels."
+    },
+    {
+      "title": "Confident Learning: Estimating Uncertainty in Dataset Labels",
+      "authors": "Curtis G. Northcutt; Lu Jiang; Isaac L. Chuang",
+      "year": 2021,
+      "role": "Data-centric label error detection and relabeling",
+      "relationship_sentence": "SCAM\u2019s data-centric stance\u2014that not all observed targets are good labels\u2014and its re-labeling mechanism conceptually align with Confident Learning\u2019s identification and correction of label errors."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core contribution\u2014self-supervised re-labeling for time series forecasting via SCAM\u2014sits at the intersection of pseudo-labeling, blind denoising, masking-based reconstruction, noisy-label learning, and loss-landscape regularization. Pseudo-Label (Lee, 2013) provides the foundational paradigm of using model-generated labels to boost learning, which SCAM adapts by turning reconstruction intermediates into pseudo labels for unreliable forecast targets. Noise2Self (Batson & Royer, 2019) and Masked Autoencoders (He et al., 2022) demonstrate that masking and reconstruction can yield strong supervision without clean targets; SCAM operationalizes this by reconstructing time-series segments and using those reconstructions as substitutes where ground-truth values appear corrupted or overfit. From the noisy-label literature, Co-teaching (Han et al., 2018) inspires SCAM\u2019s selective mechanism: instead of uniformly trusting all targets, it adaptively identifies overfitted components and replaces them, akin to filtering noisy labels rather than learning them. Complementing this data-centric correction, Confident Learning (Northcutt et al., 2021) motivates the explicit identification and remediation of label errors, aligning with SCAM\u2019s premise that \u201cnot all data are good labels.\u201d Finally, to prevent the pseudo-labeling loop from amplifying noise, SCAM borrows from loss-landscape regularization: Spectral Normalization (Miyato et al., 2018) constrains network Lipschitzness, and Sharpness-Aware Minimization (Foret et al., 2021) motivates seeking flatter minima, both curbing overfitting and stabilizing optimization. Together, these threads crystallize into SCAM\u2019s self-correction with adaptive masking and SNR, a model-agnostic way to construct cleaner supervisory signals for time-series forecasting.",
+  "analysis_timestamp": "2026-01-07T00:02:04.947042"
+}

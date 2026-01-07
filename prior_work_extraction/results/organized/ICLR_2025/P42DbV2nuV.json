@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Early Stopping \u2014 But When?",
+      "authors": "Lutz Prechelt",
+      "year": 1998,
+      "role": "foundational early stopping criterion",
+      "relationship_sentence": "IES generalizes classical validation-based early stopping from the dataset level to the instance level, retaining its regularization and compute-saving goals while replacing a global plateau test with a per-instance dynamic criterion."
+    },
+    {
+      "title": "Curriculum Learning",
+      "authors": "Yoshua Bengio, J\u00e9r\u00f4me Louradour, Ronan Collobert, Jason Weston",
+      "year": 2009,
+      "role": "foundational instance scheduling",
+      "relationship_sentence": "By modulating training based on example difficulty, curriculum learning seeded the idea of instance-aware training; IES operationalizes this by automatically halting training on easy/mastered instances rather than merely reordering them."
+    },
+    {
+      "title": "Self-Paced Learning for Latent Variable Models",
+      "authors": "M. Pawan Kumar, Benjamin Packer, Daphne Koller",
+      "year": 2010,
+      "role": "methodological precursor (instance selection via loss)",
+      "relationship_sentence": "Self-paced learning selects examples using the current loss as a proxy for learnability; IES advances this line by using second-order loss differences as a more stable mastery signal and converts selection into definitive per-instance stopping."
+    },
+    {
+      "title": "Active Bias: Training More Accurate Neural Networks by Emphasizing High Variance Samples",
+      "authors": "Haw-Shiuan Chang, Erik Learned-Miller, Andrew McCallum",
+      "year": 2017,
+      "role": "training-dynamics weighting",
+      "relationship_sentence": "Active Bias leverages temporal variability of per-example losses to steer training; IES similarly uses temporal dynamics\u2014specifically second-order loss changes\u2014to judge when an instance is sufficiently learned and can be halted."
+    },
+    {
+      "title": "Not All Samples Are Created Equal: Deep Learning with Importance Sampling",
+      "authors": "Angelos Katharopoulos, Francois Fleuret",
+      "year": 2018,
+      "role": "compute efficiency via sample prioritization",
+      "relationship_sentence": "Importance sampling accelerates SGD by prioritizing informative samples; IES targets the same efficiency goal by eliminating gradient updates for uninformative (mastered) instances once their loss dynamics stabilize."
+    },
+    {
+      "title": "An Empirical Study of Example Forgetting during Deep Neural Network Learning",
+      "authors": "Mariya Toneva, Alessandro Sordoni, Remi Tachet des Combes, et al.",
+      "year": 2019,
+      "role": "empirical basis for instance learnability",
+      "relationship_sentence": "Forgetting events reveal rich per-instance learning trajectories; IES builds on this insight by formalizing \u2018mastery\u2019 through stabilized loss curvature, preventing unnecessary updates on consistently remembered examples."
+    },
+    {
+      "title": "Dataset Cartography: Mapping and Diagnosing Datasets by Training Dynamics",
+      "authors": "Swabha Swayamdipta, Roy Schwartz, Nicholas Lourie, Yizhong Wang, Hannaneh Hajishirzi, Noah A. Smith, Yejin Choi",
+      "year": 2020,
+      "role": "training-dynamics measurement",
+      "relationship_sentence": "Cartography characterizes examples via mean confidence and variability across epochs; IES adopts the spirit of dynamics-based assessment but proposes second-order loss differences as a more consistent mastery proxy than raw loss or confidence alone."
+    }
+  ],
+  "synthesis_narrative": "Instance-dependent Early Stopping (IES) synthesizes three strands of prior work: global early stopping, instance-aware scheduling, and training-dynamics\u2013driven selection. Prechelt\u2019s classic early stopping established validation-based halting to regularize and save compute, but applied a single criterion to the entire dataset. Curriculum learning and self-paced learning introduced instance-level control by prioritizing or downweighting examples as a function of difficulty or loss, foreshadowing the idea that different samples warrant different training effort. Yet, these approaches typically reorder or reweight rather than decisively stop training on specific instances.\nWork on training dynamics sharpened the lens on per-example learning status. Active Bias demonstrated that temporal variability of an example\u2019s loss/confidence is informative for weighting, while Dataset Cartography mapped examples into easy/ambiguous/hard regions using statistics over their trajectories. Complementarily, Toneva et al. showed that \u201cforgetting events\u201d capture learnability, underscoring that stability over time is a meaningful signal. Finally, compute-efficiency methods like importance sampling showed that reallocating updates toward informative samples can accelerate learning.\nIES integrates these ideas and advances them: it keeps the compute- and generalization-aware ethos of early stopping, adopts the instance specificity of curricula/self-paced schemes, and grounds its decision in dynamics\u2014specifically, the stabilization of second-order differences of per-instance loss. This yields a robust mastery test that avoids the brittleness of raw loss thresholds, and turns prioritization into a principled, per-example halt, directly translating training dynamics into compute savings without sacrificing performance.",
+  "analysis_timestamp": "2026-01-06T23:42:48.103190"
+}

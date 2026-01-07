@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Score-Based Generative Modeling through Stochastic Differential Equations",
+      "authors": "Yang Song, Jascha Sohl-Dickstein, Diederik P. Kingma, Abhishek Kumar, Stefano Ermon, Ben Poole",
+      "year": 2020,
+      "role": "foundational theory",
+      "relationship_sentence": "Introduces the probability flow ODE linking temporal density evolution to the score \u2207x log p(x), which directly motivates NSG\u2019s physics-based ratio between spatial probability gradients and temporal density changes and enables its estimation via diffusion scores."
+    },
+    {
+      "title": "Generative Modeling by Estimating Gradients of the Data Distribution",
+      "authors": "Yang Song, Stefano Ermon",
+      "year": 2019,
+      "role": "enabling technique",
+      "relationship_sentence": "Provides the practical denoising score matching framework (NCSN) to estimate \u2207x log p(x) with neural networks, the core tool the paper leverages from pretrained diffusion models to approximate NSG\u2019s spatial probability gradients."
+    },
+    {
+      "title": "High-Resolution Image Synthesis with Latent Diffusion Models",
+      "authors": "Robin Rombach, Andreas Blattmann, Dominik Lorenz, Patrick Esser, Bj\u00f6rn Ommer",
+      "year": 2022,
+      "role": "enabling backbone",
+      "relationship_sentence": "Demonstrates efficient latent-space diffusion and score estimation on high-resolution images, making it feasible to compute reliable spatial probability gradients for video frames in high dimensions as required by the NSG estimator."
+    },
+    {
+      "title": "Determining Optical Flow",
+      "authors": "Berthold K. P. Horn, Brian G. Schunck",
+      "year": 1981,
+      "role": "foundational theory",
+      "relationship_sentence": "Establishes the brightness constancy/continuity relation tying spatial image gradients to temporal change via motion; NSG adopts a probabilistic conservation-law analogue for videos, detecting deviations from such physically consistent spatiotemporal dynamics."
+    },
+    {
+      "title": "A Kernel Two-Sample Test",
+      "authors": "Arthur Gretton, Karsten M. Borgwardt, Malte J. Rasch, Bernhard Sch\u00f6lkopf, Alexander J. Smola",
+      "year": 2012,
+      "role": "statistical test enabling detection",
+      "relationship_sentence": "Introduces MMD for comparing distributions, which the paper applies to NSG statistics (NSG-VD) to distinguish natural videos from AI-generated ones via a principled two-sample test."
+    },
+    {
+      "title": "FakeCatcher: Detection of Synthetic Portrait Videos using Biological Signals",
+      "authors": "Umur Aybars Ciftci, Ilke Demir, Lijun Yin",
+      "year": 2020,
+      "role": "related application and empirical inspiration",
+      "relationship_sentence": "Shows that enforcing/assessing physical and physiological consistency (e.g., PPG signals) is effective for deepfake detection, directly inspiring the paper\u2019s physics-driven perspective for identifying AI-generated video anomalies."
+    },
+    {
+      "title": "Physics-Informed Neural Networks: A Deep Learning Framework for Solving Forward and Inverse Problems Involving Nonlinear Partial Differential Equations",
+      "authors": "Maziar Raissi, Paris Perdikaris, George E. Karniadakis",
+      "year": 2019,
+      "role": "methodological paradigm",
+      "relationship_sentence": "Establishes how to embed PDE-based physical constraints into learning; the paper analogously embeds probability-flow conservation to guide NSG estimation and preserve physically plausible spatiotemporal behavior."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s central idea\u2014detecting AI-generated videos via a physics-driven statistic that measures deviations from spatiotemporal probability-flow conservation\u2014rests on unifying advances in score-based diffusion, conservation-law modeling, and nonparametric hypothesis testing. The theoretical anchor is the probability flow ODE from score-based generative modeling (Song et al., 2020), which connects temporal density evolution to the spatial score. This furnishes the exact physical conservation principle that NSG operationalizes as a normalized ratio between spatial probability gradients and temporal density changes. To estimate the spatial component, the work leans on denoising score matching (Song & Ermon, 2019), using pretrained diffusion models as accurate estimators of \u2207x log p, and on latent diffusion (Rombach et al., 2022) to make such gradient computations tractable in high-dimensional, high-resolution video frames.\n\nConceptually, NSG mirrors classic conservation laws used in motion analysis\u2014Horn and Schunck\u2019s optical-flow formulation relates spatial gradients and temporal changes under brightness constancy\u2014while upgrading to a probabilistic continuity view appropriate for natural video distributions. At the systems level, the method follows the physics-informed learning paradigm (Raissi et al., 2019), explicitly embedding conservation constraints to regularize estimation. For detection, the choice of Maximum Mean Discrepancy (Gretton et al., 2012) provides a rigorous kernel two-sample test to compare NSG distributions between real and suspect videos without strong parametric assumptions. Finally, prior evidence that physical/physiological consistency is a robust cue for deepfake detection (Ciftci et al., 2020) supports the paper\u2019s focus on physics-based anomalies rather than semantic artifacts, tying together a principled and practical route to robust AI-generated video detection.",
+  "analysis_timestamp": "2026-01-07T00:21:32.313475"
+}

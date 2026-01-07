@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Mastering Visual Continuous Control: Improved Data-Augmented Reinforcement Learning",
+      "authors": "Denis Yarats et al.",
+      "year": 2021,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "DrM is built on the standard DrQ-v2 visual RL training stack and targets its observed early-stage motor inactivity by adding a dormant-ratio regularizer to the actor/critic networks."
+    },
+    {
+      "title": "Reinforcement Learning with Augmented Data",
+      "authors": "Michael Laskin et al.",
+      "year": 2020,
+      "arxiv_id": "2004.14990",
+      "role": "Gap Identification",
+      "relationship_sentence": "RAD\u2019s reliance on image augmentations improves pixel-based control but still exhibits prolonged early inactivity and seed brittleness, a limitation DrM addresses by directly minimizing neuron dormancy."
+    },
+    {
+      "title": "CURL: Contrastive Unsupervised Representations for Reinforcement Learning",
+      "authors": "Aravind Srinivas et al.",
+      "year": 2020,
+      "arxiv_id": "2004.04136",
+      "role": "Gap Identification",
+      "relationship_sentence": "CURL shows representation learning boosts sample efficiency yet does not prevent inactive early exploration; DrM explicitly targets this failure mode via a neuron-activation regularizer."
+    },
+    {
+      "title": "Improving Sample Efficiency in Model-Free Reinforcement Learning from Images",
+      "authors": "Denis Yarats et al.",
+      "year": 2019,
+      "arxiv_id": "1910.01741",
+      "role": "Gap Identification",
+      "relationship_sentence": "SAC+AE demonstrates auxiliary reconstruction helps visual RL but still suffers from seed sensitivity and inactivity, motivating DrM\u2019s shift to regulating internal neuron activity rather than only representations."
+    },
+    {
+      "title": "Network Trimming: A Data-Driven Neuron Pruning Approach towards Efficient Deep Architectures",
+      "authors": "Shao-Hua Hu et al.",
+      "year": 2016,
+      "arxiv_id": "1607.03250",
+      "role": "Foundation",
+      "relationship_sentence": "DrM adopts and repurposes the APoZ-style idea\u2014measuring the fraction of zero activations\u2014as the dormant ratio to quantify and then minimize neuron inactivity in policy/value networks."
+    },
+    {
+      "title": "VICReg: Variance-Invariance-Covariance Regularization for Self-Supervised Learning",
+      "authors": "Adrien Bardes et al.",
+      "year": 2021,
+      "arxiv_id": "2105.04906",
+      "role": "Inspiration",
+      "relationship_sentence": "DrM is inspired by VICReg\u2019s use of per-dimension batch statistics to prevent collapse, translating the variance-preserving principle into a neuron-activation regularizer that keeps policy-network units alive."
+    }
+  ],
+  "synthesis_narrative": "Data-augmented visual RL methods like DrQ-v2 and RAD established that simple pixel-space augmentations can markedly improve sample efficiency in continuous control, yet they also revealed a persistent failure mode during early training: agents often remain motorically idle and are sensitive to random seeds. Contrastive representation learning in CURL and auxiliary reconstruction in SAC+AE further advanced the representation side of pixel-based RL, but neither prevented the recurrent phenomenon of inactive early exploration, suggesting that representation quality alone does not guarantee actionful behavior. Separately, pruning research introduced APoZ, a concrete, per-neuron measure of inactivity defined as the fraction of zero activations; this showed that neurons with consistently zero outputs are effectively dormant and can be systematically identified. In self-supervised learning, VICReg demonstrated that regulating per-dimension batch statistics\u2014specifically ensuring sufficient variance\u2014prevents feature collapse, highlighting the power of activation-level regularization as a stabilizer.\n\nTogether these works expose a gap: leading visual RL pipelines optimize data and representations but do not control the internal activation state of policy and value networks, allowing prolonged dormancy that manifests as motor inactivity. The natural next step is to instrument networks with an APoZ-like dormant ratio and actively regulate it, importing the anti-collapse intuition from VICReg into the RL setting. DrM synthesizes these insights by measuring neuron dormancy in standard DrQ-v2\u2013style agents and minimizing it during training, thereby converting internal activation health into a practical driver of robust, active exploration and improved sample efficiency.",
+  "target_paper": {
+    "title": "DrM: Mastering Visual Reinforcement Learning through Dormant Ratio Minimization",
+    "authors": "Guowei Xu, Ruijie Zheng, Yongyuan Liang, Xiyao Wang, Zhecheng Yuan, Tianying Ji, Yu Luo, Xiaoyu Liu, Jiaxin Yuan, Pu Hua, Shuzhen Li, Yanjie Ze, Hal Daum\u00e9 III, Furong Huang, Huazhe Xu",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Visual RL; Dormant Ratio",
+    "abstract": "Visual reinforcement learning (RL) has shown promise in continuous control tasks.\nDespite its progress, current algorithms are still unsatisfactory in virtually every aspect of the performance such as sample efficiency, asymptotic performance, and their robustness to the choice of random seeds.\nIn this paper, we identify a major shortcoming in existing visual RL methods that is the agents often exhibit sustained inactivity during early training, thereby limiting their ability to explore effectively. \nExpanding upon this crucial observation, we additionally unveil a significant correlation between the agents' inclination towards motorically inactive exploration and the absence of neuronal activity within their policy networks.\nTo quantify this inactivity, we adopt dormant ratio as a metric to measure inactivity in the RL agent's network.\nEmpirically, we also recognize that the dormant ratio can act as a standalone indicator of an agent's activity level, regardless of the received reward",
+    "openreview_id": "MSe8YFbhUE",
+    "forum_id": "MSe8YFbhUE"
+  },
+  "analysis_timestamp": "2026-01-06T16:07:15.553996"
+}

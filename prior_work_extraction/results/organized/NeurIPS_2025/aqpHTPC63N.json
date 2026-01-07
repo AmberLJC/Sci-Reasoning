@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "STaR: Bootstrapping Reasoning with Reasoning",
+      "authors": "Uri Zelikman, Yuhuai (Tony) Wu, Jesse Mu, Noah D. Goodman",
+      "year": 2022,
+      "role": "Methodological precedent for iterative generate\u2013verify\u2013fine-tune loops",
+      "relationship_sentence": "STaR established the canonical solver\u2013verifier bootstrapping cycle that this paper formalizes, and Spend Wisely analyzes how to allocate generation/training budget across iterations of exactly this loop\u2014showing why constant-iteration policies (implicit in prior practice) can fail and why increasing budgets help."
+    },
+    {
+      "title": "Self-Instruct: Aligning Language Models with Self-Generated Instructions",
+      "authors": "Yizhong Wang et al.",
+      "year": 2022,
+      "role": "Synthetic data bootstrapping for post-training alignment",
+      "relationship_sentence": "Self-Instruct demonstrated that LMs can self-generate and filter instruction\u2013response data for iterative fine-tuning; the present work provides a theoretical framework to decide how much data and training to invest per round to maximize end performance in such pipelines."
+    },
+    {
+      "title": "Noisy Student Training: Improving ImageNet Classification with Self-Training",
+      "authors": "Qizhe Xie, Minh-Thang Luong, Eduard Hovy, Quoc V. Le",
+      "year": 2020,
+      "role": "Iterative self-training with pseudo-labeling",
+      "relationship_sentence": "Noisy Student validated that iterative pseudo-label generation and re-training can compound gains, and Spend Wisely builds on this paradigm by deriving iteration-wise budget schedules (favoring exponential growth) that theoretically and empirically enhance such compounding improvements."
+    },
+    {
+      "title": "Constitutional AI: Harmlessness from AI Feedback",
+      "authors": "Yuntao Bai et al.",
+      "year": 2022,
+      "role": "External AI verifier/judge for filtering synthetic data",
+      "relationship_sentence": "By introducing LLM-as-judge verifiers to score and filter model generations, Constitutional AI furnishes the verifier component abstracted in this paper\u2019s analysis, which then studies optimal budget allocation under verifier-induced noise and selection."
+    },
+    {
+      "title": "Let\u2019s Verify Step by Step",
+      "authors": "Xuezhi Wang et al.",
+      "year": 2023,
+      "role": "Verifier-guided rejection sampling for reasoning",
+      "relationship_sentence": "This work showed that scaling the number of candidate solutions and filtering with verifiers improves math reasoning, directly motivating Spend Wisely\u2019s theory that increasing (often exponential) per-iteration generation/training budgets yields superior final accuracy."
+    },
+    {
+      "title": "Training Compute-Optimal Large Language Models",
+      "authors": "Jordan Hoffmann et al.",
+      "year": 2022,
+      "role": "Compute/data allocation principles (scaling laws)",
+      "relationship_sentence": "Chinchilla\u2019s compute\u2013data tradeoff inspires the present paper\u2019s focus on principled budget allocation\u2014here across bootstrapping iterations\u2014culminating in a recommendation for growth policies that better convert fixed total budgets into final performance."
+    },
+    {
+      "title": "Hyperband: A Novel Bandit-Based Approach to Hyperparameter Optimization",
+      "authors": "Lisha Li, Kevin Jamieson, Giulia DeSalvo, Afshin Rostamizadeh, Ameet Talwalkar",
+      "year": 2017,
+      "role": "Exponential resource allocation schedules for efficient search",
+      "relationship_sentence": "Hyperband\u2019s success with geometrically increasing resource schedules informs Spend Wisely\u2019s theoretical and empirical finding that exponentially increasing iteration budgets dominate constant policies in bootstrapped post-training."
+    }
+  ],
+  "synthesis_narrative": "Spend Wisely formalizes a practice that has become central across modern post-training pipelines: iterative synthetic data bootstrapping with an external verifier that filters generations before fine-tuning. STaR and Self-Instruct provided the clearest methodological blueprint for this loop in reasoning and instruction following, respectively, while Noisy Student established in vision that iterative pseudo-labeling can compound improvements. These works validated the generate\u2013verify\u2013train cycle but largely treated iteration sizes and spending heuristically, often implicitly constant, leaving open how to allocate a fixed overall budget over many rounds.\nConcurrently, developments around verifiers\u2014LLM-as-judge and programmatic checking\u2014shaped the selection component that this paper abstracts. Constitutional AI operationalized AI feedback as an external verifier, and Let\u2019s Verify Step by Step showed that scaling candidate generations and filtering yields sizable gains in math reasoning. These directly motivate analyzing how generation volume and training effort should scale over iterations under noisy verification.\nFinally, insights from compute allocation and scheduling informed the paper\u2019s central result. Chinchilla reframed performance as a budget allocation problem (between data and parameters), and Hyperband popularized exponentially increasing resource schedules for efficient search. Spend Wisely translates these principles to iterative bootstrapping, proving that constant policies can stall while increasing\u2014often exponential\u2014allocation across iterations better harnesses verifier-filtered synthetic data, a finding corroborated on diffusion denoising and math reasoning benchmarks.",
+  "analysis_timestamp": "2026-01-07T00:05:12.521322"
+}

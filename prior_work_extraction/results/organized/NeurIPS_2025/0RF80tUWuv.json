@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+      "authors": "Edward J. Hu et al.",
+      "year": 2022,
+      "role": "Foundational PEFT method and architectural template",
+      "relationship_sentence": "RidgeLoRA directly builds on LoRA\u2019s low-rank reparameterization of weight updates, addressing LoRA\u2019s core rank-induced expressivity bottleneck with a ridge-enhanced full-rank approximation and a tighter representation bound."
+    },
+    {
+      "title": "AdaLoRA: Adaptive Low-Rank Adaptation of Large Language Models",
+      "authors": "Zhang et al.",
+      "year": 2023,
+      "role": "LoRA variant that allocates rank adaptively to mitigate capacity limits",
+      "relationship_sentence": "By showing that rigid low ranks hurt performance and that dynamic rank helps, AdaLoRA motivates RidgeLoRA\u2019s aim to recover full-rank behavior without growing parameter count, using ridge-regularized approximation instead of large ranks."
+    },
+    {
+      "title": "DoRA: Weight-Decomposed Low-Rank Adaptation",
+      "authors": "Liu et al.",
+      "year": 2024,
+      "role": "Capacity-enhancing LoRA variant via weight decomposition",
+      "relationship_sentence": "DoRA evidences that augmenting vanilla LoRA\u2019s parameterization can restore expressivity; RidgeLoRA offers a principled alternative using matrix ridge enhancement to approximate full-rank updates and theoretically improve representation bounds."
+    },
+    {
+      "title": "QLoRA: Efficient Finetuning of Quantized Large Language Models",
+      "authors": "Tim Dettmers et al.",
+      "year": 2023,
+      "role": "Strong PEFT baseline achieving near full-finetuning quality under tight memory",
+      "relationship_sentence": "QLoRA establishes the bar for memory-efficient finetuning; RidgeLoRA targets matching or surpassing full-rank training while remaining lightweight, complementing QLoRA by improving the adapter\u2019s representational capacity rather than only quantization."
+    },
+    {
+      "title": "Ridge Regression: Biased Estimation for Nonorthogonal Problems",
+      "authors": "Arthur E. Hoerl, Robert W. Kennard",
+      "year": 1970,
+      "role": "Foundational theory of ridge (Tikhonov) regularization",
+      "relationship_sentence": "RidgeLoRA\u2019s matrix ridge\u2013enhanced approximation draws directly on ridge regularization to stabilize inverse problems and expand effective rank, enabling a full-rank\u2013like update from low-parameter adapters with provable advantages."
+    },
+    {
+      "title": "Intrinsic Dimensionality Explains the Effectiveness of Language Model Fine-Tuning",
+      "authors": "Armen Aghajanyan, Sonal Gupta, Luke Zettlemoyer",
+      "year": 2020,
+      "role": "Theoretical motivation for low-dimensional/low-rank finetuning",
+      "relationship_sentence": "This work justifies low-dimensional adaptation yet implicitly frames when capacity may be insufficient; RidgeLoRA leverages this insight to retain PEFT efficiency while mitigating under-representation via ridge-enhanced full-rank approximation."
+    }
+  ],
+  "synthesis_narrative": "RidgeLoRA\u2019s core contribution is to preserve LoRA\u2019s parameter efficiency while overcoming its inherent low-rank expressivity bottleneck through a matrix ridge\u2013enhanced full-rank approximation with accompanying theory. The foundational LoRA formulation (Hu et al., 2022) provides the architectural template and the low-rank update parameterization that RidgeLoRA directly modifies. Subsequent LoRA variants\u2014AdaLoRA (Zhang et al., 2023) and DoRA (Liu et al., 2024)\u2014established that vanilla LoRA\u2019s fixed, low-rank constraint can limit representation and that enhancing the update (via adaptive rank or weight decomposition) restores capacity. These works directly motivate RidgeLoRA\u2019s goal: match full-rank fine-tuning without inflating adapter rank or memory.\nAt the mathematical core, RidgeLoRA appeals to ridge (Tikhonov) regularization (Hoerl & Kennard, 1970) to stabilize the effective inverse/approximation underlying the update, thereby expanding the effective rank and yielding a tighter upper bound on representational error than vanilla LoRA. This principled regularization contrasts with heuristic rank increases, providing a theoretically grounded pathway to full-rank\u2013like behavior.\nIn the broader PEFT context, QLoRA (Dettmers et al., 2023) sets a bar for memory-efficient fine-tuning that approaches full-rank performance; RidgeLoRA complements this by targeting the adapter\u2019s expressivity itself, helping to match or surpass full-rank training under tight memory budgets. Finally, the intrinsic dimensionality perspective (Aghajanyan et al., 2020) contextualizes when low-dimensional updates suffice and when they do not\u2014precisely the gap RidgeLoRA fills via ridge-enhanced approximation.",
+  "analysis_timestamp": "2026-01-06T23:42:48.153421"
+}

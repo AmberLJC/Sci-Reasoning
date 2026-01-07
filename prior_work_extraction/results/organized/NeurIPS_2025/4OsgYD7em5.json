@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Training language models to follow instructions with human feedback",
+      "authors": "Long Ouyang et al.",
+      "year": 2022,
+      "role": "Algorithmic foundation for RL fine-tuning of LLMs (PPO/RLHF)",
+      "relationship_sentence": "Provides the core RL fine-tuning paradigm (policy optimization with a learned reward) that this paper adapts to the verifiable-reward setting and benchmarks against when assessing whether RL adds reasoning capacity beyond the base model."
+    },
+    {
+      "title": "Evaluating Large Language Models Trained on Code",
+      "authors": "Mark Chen et al.",
+      "year": 2021,
+      "role": "Metric and evaluation protocol (pass@k) and best-of-N sampling",
+      "relationship_sentence": "Introduces pass@k and large-N sampling for code tasks; the present work extends this logic to large-k regimes across math/coding/vision to probe upper bounds of latent capability and disentangle sampling efficiency from genuine reasoning gains."
+    },
+    {
+      "title": "Self-Consistency Improves Chain of Thought Reasoning in Language Models",
+      "authors": "Xuezhi Wang et al.",
+      "year": 2023,
+      "role": "Sampling-based probing of latent reasoning ability",
+      "relationship_sentence": "Demonstrates that diverse multi-sample decoding (self-consistency) boosts reasoning accuracy, motivating this paper\u2019s use of large-k sampling to test whether RLVR truly adds new reasoning patterns versus merely improving the chance of sampling existing correct chains."
+    },
+    {
+      "title": "Let\u2019s Verify Step by Step",
+      "authors": "Xuezhi Wang et al.",
+      "year": 2023,
+      "role": "Verifier-based supervision/process rewards for reasoning",
+      "relationship_sentence": "Establishes verifier-guided/process-level supervision for math reasoning, a key precursor to RL with verifiable rewards; this paper evaluates whether such rewardable signals via RL elicit novel reasoning beyond the base model."
+    },
+    {
+      "title": "DeepSeek-R1: Incentivizing Reasoning in LLMs via Reinforcement Learning",
+      "authors": "DeepSeek-AI Team",
+      "year": 2024,
+      "role": "Exemplar of RL with verifiable rewards (RLVR) and central claim of emergent reasoning",
+      "relationship_sentence": "Serves as a primary target of analysis: the authors\u2019 claims that RL alone elicits stronger reasoning are precisely what this paper scrutinizes across families/algorithms using large-k evaluation."
+    },
+    {
+      "title": "Group Relative Policy Optimization (GRPO) for Training LLMs",
+      "authors": "DeepSeek-AI Team",
+      "year": 2024,
+      "role": "RL algorithm variant widely used in RLVR pipelines",
+      "relationship_sentence": "Provides a practical RL objective used in recent RLVR work; this paper\u2019s cross-algorithm analysis (including GRPO-like methods) tests whether algorithmic choices change the emergence of genuinely new reasoning patterns."
+    },
+    {
+      "title": "Tree of Thoughts: Deliberate Problem Solving with Large Language Models",
+      "authors": "Shunyu Yao et al.",
+      "year": 2023,
+      "role": "Test-time search framing that separates sampling/search from learned capability",
+      "relationship_sentence": "Highlights that structured exploration at inference can recover solutions without additional learning; this distinction informs the paper\u2019s thesis that RLVR may chiefly improve sampling efficiency rather than expand core reasoning capacity."
+    }
+  ],
+  "synthesis_narrative": "The paper interrogates a prominent narrative from recent RL-with-verifiable-rewards (RLVR) systems\u2014exemplified by DeepSeek-R1 and GRPO\u2014that reinforcement learning alone can unlock new reasoning abilities beyond a base model. Methodologically, its evaluation bedrock is the pass@k protocol introduced in Codex, extended here to large-k to approximate an upper bound on a model\u2019s latent competence. This approach is directly informed by Self-Consistency, which showed that diverse multi-sample decoding can surface correct chains of thought without changing the underlying model, hinting that higher performance might reflect sampling efficiency rather than new reasoning skills.\nVerifier-driven supervision in Let\u2019s Verify Step by Step underpins the RLVR reward design the authors study across math, coding, and visual reasoning. InstructGPT contributes the RL fine-tuning template (policy optimization against a learned/reward signal) that current RLVR variants adapt, letting the authors compare across RL algorithms, including GRPO-style objectives popularized in reasoning-focused RL.\nFinally, Tree of Thoughts clarifies the role of test-time exploration versus learned capability. Synthesizing these threads, the paper designs a systematic probe: hold base models fixed, vary RL algorithms and tasks with verifiable rewards, and measure pass@k at large k. The central finding\u2014that RLVR chiefly improves the likelihood of sampling existing correct trajectories rather than inducing fundamentally new reasoning patterns\u2014emerges precisely from these prior insights on verifiable supervision, RL fine-tuning, and sampling-based evaluations.",
+  "analysis_timestamp": "2026-01-07T00:05:12.547486"
+}

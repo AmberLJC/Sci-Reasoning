@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Mixed Precision Training",
+      "authors": "Paulius Micikevicius et al.",
+      "year": 2017,
+      "role": "Foundational low\u2011precision training paradigm",
+      "relationship_sentence": "Established the recipe for splitting precisions across forward/backward passes and managing numerical range (e.g., loss scaling), directly informing FP4-All-the-Way\u2019s pass-specific precision/rounding policies while pushing the concept from mixed precision to fully quantized FP4."
+    },
+    {
+      "title": "FP8 Formats for Deep Learning",
+      "authors": "Micikevicius et al.",
+      "year": 2022,
+      "role": "Numeric formats and scaling for low\u2011precision training",
+      "relationship_sentence": "Introduced FP8 (E4M3/E5M2), calibration and per-tensor/group scaling, and stochastic rounding practices for transformer training, which FP4-All-the-Way extends by selecting NVFP4 (E2M1) data and E4M3 block scales and by adopting pass-dependent rounding."
+    },
+    {
+      "title": "Deep Learning with Limited Numerical Precision",
+      "authors": "Suyog Gupta et al.",
+      "year": 2015,
+      "role": "Stochastic rounding for stable low\u2011precision learning",
+      "relationship_sentence": "Showed stochastic rounding stabilizes training with very low precision, motivating FP4-All-the-Way\u2019s use of stochastic rounding in backward and optimizer updates to control bias and accumulation drift."
+    },
+    {
+      "title": "QLoRA: Efficient Finetuning of Quantized LLMs",
+      "authors": "Tim Dettmers, Artidoro Pagnoni, Ari Holtzman, Luke Zettlemoyer",
+      "year": 2023,
+      "role": "4\u2011bit quantization format and block/group scaling in LLMs",
+      "relationship_sentence": "Introduced NF4 and group-wise scaling that validated 4\u2011bit representations for LLMs; FP4-All-the-Way builds on these insights, systematically comparing 4\u2011bit formats and settling on NVFP4 with E4M3 block scales and block size 16 for full training."
+    },
+    {
+      "title": "QSGD: Communication-Efficient SGD via Gradient Quantization and Encoding",
+      "authors": "Dan Alistarh, Demjan Grubic, Jerry Li, Ryota Tomioka, Milan Vojnovic",
+      "year": 2017,
+      "role": "Theory of gradient quantization noise and convergence",
+      "relationship_sentence": "Provided variance bounds and convergence guarantees under quantized gradients; FP4-All-the-Way\u2019s threshold criterion (gradient norm vs. quantization noise) directly echoes and refines this line of analysis for FP4 training stability."
+    },
+    {
+      "title": "Post-Training 4-bit Quantization of Convolutional Networks for Rapid-Deployment",
+      "authors": "Ron Banner, Yury Nahshan, Elad Hoffer, Daniel Soudry",
+      "year": 2018,
+      "role": "4\u2011bit quantization with per-channel/group scaling and clipping",
+      "relationship_sentence": "Demonstrated practical 4\u2011bit quantization with analytical scaling/clipping strategies; these scaling heuristics influenced FP4-All-the-Way\u2019s exploration of block sizes and scale formats for stable low-bit operation."
+    },
+    {
+      "title": "8-bit Optimizers via Block-wise Quantization",
+      "authors": "Tim Dettmers, Mike Lewis, Younes Belkada, Luke Zettlemoyer",
+      "year": 2022,
+      "role": "Quantized optimizer states and gradients in large-scale training",
+      "relationship_sentence": "Showed that block-wise quantization and careful rounding can preserve optimizer effectiveness; FP4-All-the-Way extends this idea to 4\u2011bit floats for gradients and updates, completing a fully quantized training pipeline."
+    }
+  ],
+  "synthesis_narrative": "FP4 All the Way synthesizes three strands of prior art to achieve fully quantized training of LLMs. First, foundational work on low-precision training established how to separate precisions across forward and backward passes and to manage dynamic range (Mixed Precision Training), while the FP8 literature codified concrete floating-point formats (E4M3/E5M2), per-tensor/group scaling, and pass-dependent rounding strategies that succeed in transformer training. These insights underpin the paper\u2019s choice of NVFP4 (E2M1) for tensors combined with E4M3 block scales and the decision to employ stochastic rounding asymmetrically across passes.\nSecond, the 4-bit quantization line\u2014ranging from post-training 4-bit methods with analytical scaling/clipping to QLoRA\u2019s NF4 and group-wise scaling\u2014demonstrated that 4-bit representations can be practical for large models when paired with carefully designed scale granularity and codebooks. FP4 All the Way extends this to the harder setting of full training, systematically testing block sizes (settling on 16) and scale formats, and finding that NVFP4 with E4M3 scaling is superior to alternatives.\nThird, theory around gradient quantization (QSGD) and practice quantizing optimizer states (8-bit Optimizers) directly influenced the paper\u2019s treatment of gradients and updates. The new gradient-norm threshold relative to quantization noise concretizes when FP4 training remains effective, while stochastic rounding in backward/updates controls bias and variance accumulation. Together, these threads enable the first end-to-end FP4 training pipeline for LLMs at scale.",
+  "analysis_timestamp": "2026-01-07T00:21:33.152231"
+}

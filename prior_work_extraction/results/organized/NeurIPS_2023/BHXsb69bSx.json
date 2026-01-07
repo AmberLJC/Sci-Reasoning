@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Toolformer: Language Models Can Teach Themselves to Use Tools",
+      "authors": "Timo Schick et al.",
+      "year": 2023,
+      "role": "Direct conceptual and methodological precursor for LM-driven tool use",
+      "relationship_sentence": "ToolkenGPT generalizes Toolformer\u2019s idea of treating tool use as token prediction, but replaces fine-tuning on synthetic call data with learnable tool embeddings plugged into the LM head, enabling execution triggering while keeping the base LM frozen."
+    },
+    {
+      "title": "ReAct: Synergizing Reasoning and Acting in Language Models",
+      "authors": "Shunyu Yao et al.",
+      "year": 2022,
+      "role": "Prompt-based agent baseline for tool use",
+      "relationship_sentence": "ToolkenGPT addresses ReAct\u2019s reliance on lengthy in-context tool descriptions and demonstrations by introducing compact per-tool embeddings, mitigating context-length limits and improving mastery of many tools without extensive prompting."
+    },
+    {
+      "title": "Gorilla: Large Language Model Connected with Massive APIs",
+      "authors": "Shishir G. Patil et al.",
+      "year": 2023,
+      "role": "Scale-motivating baseline using supervised fine-tuning for many APIs",
+      "relationship_sentence": "By showing the difficulty and rigidity of scaling fine-tuned API-call models to massive and evolving toolsets, Gorilla motivates ToolkenGPT\u2019s parameter-efficient design that supports large, extensible tool inventories without retraining the base LM."
+    },
+    {
+      "title": "ToolLLM: Facilitating Large Language Models to Master 16,000+ Real-world APIs",
+      "authors": "Qin et al.",
+      "year": 2023,
+      "role": "Large-scale dataset and finetuning approach for API mastery",
+      "relationship_sentence": "ToolLLM highlights both potential and limitations of supervised finetuning for huge tool collections, which ToolkenGPT overcomes by adding/removing tools via learned embedding slots rather than re-training the core model."
+    },
+    {
+      "title": "Prefix-Tuning: Optimizing Continuous Prompts for Generation",
+      "authors": "Xiang Lisa Li and Percy Liang",
+      "year": 2021,
+      "role": "Parameter-efficient adaptation inspiration (conditioning frozen LMs with continuous vectors)",
+      "relationship_sentence": "ToolkenGPT adopts the core insight of prefix-tuning\u2014steering a frozen LM using learned continuous vectors\u2014and repurposes it so each external tool is represented by a trainable embedding that the LM can select as a token."
+    },
+    {
+      "title": "The Power of Scale for Parameter-Efficient Prompt Tuning",
+      "authors": "Brian Lester, Rami Al-Rfou, Noah Constant",
+      "year": 2021,
+      "role": "Methodological foundation for training only embeddings with frozen LMs",
+      "relationship_sentence": "Following prompt tuning\u2019s demonstration that small learned embeddings can impart new skills to frozen LMs, ToolkenGPT learns per-tool embeddings and couples them with a function-execution mode to operationalize those skills as executable calls."
+    },
+    {
+      "title": "RETRO: Improving Language Modeling by Retrieval",
+      "authors": "S\u00e9bastien Borgeaud et al.",
+      "year": 2022,
+      "role": "Architectural precedent for augmenting frozen LMs with external capabilities",
+      "relationship_sentence": "Analogous to RETRO\u2019s plug-in external memory that augments generation without retraining the core model, ToolkenGPT externalizes functionality into a pluggable tool inventory and routes to it via token-level predictions and a special function mode."
+    }
+  ],
+  "synthesis_narrative": "ToolkenGPT\u2019s core idea\u2014representing tools as learnable embeddings that a frozen language model can predict like tokens and then execute via a special function mode\u2014sits at the intersection of two lines of prior work: tool-augmented LMs and parameter-efficient adaptation. On the tool-usage side, ReAct and Toolformer established that LMs can plan, decide, and invoke external tools via text, but they reveal trade-offs: ReAct\u2019s prompting incurs context-length and generalization limits, while Toolformer relies on finetuning and a bounded tool set. Contemporary large-scale efforts such as Gorilla and ToolLLM further demonstrate the ambition to master massive API ecosystems, yet they highlight the cost and rigidity of supervised finetuning when tools evolve. On the adaptation side, prefix-tuning and prompt tuning show that frozen LMs can be endowed with new capabilities by learning only small continuous vectors, inspiring ToolkenGPT\u2019s per-tool embeddings that condition the model without touching core parameters. Finally, retrieval-augmented models like RETRO offer an architectural analogy for decoupling external resources from the base model, reinforcing ToolkenGPT\u2019s design of a pluggable tool inventory integrated at the LM head. Synthesizing these strands, ToolkenGPT replaces verbose tool prompts and heavy finetuning with compact, trainable tool embeddings and a clean execution interface, enabling scalable, extensible mastery of massive tool sets.",
+  "analysis_timestamp": "2026-01-06T23:42:49.111679"
+}

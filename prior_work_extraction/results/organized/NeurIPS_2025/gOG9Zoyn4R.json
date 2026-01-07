@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Discrete Denoising Diffusion Probabilistic Models (D3PM)",
+      "authors": "Jacob Austin et al.",
+      "year": 2021,
+      "role": "Foundational framework for diffusion in discrete state spaces, including masking-based transitions used in masked diffusion models.",
+      "relationship_sentence": "KLASS targets the core bottleneck of D3PM-style masked diffusion\u2014slow, stepwise updates\u2014by using token-level KL to finalize stable tokens early, accelerating the same discrete diffusion process without retraining."
+    },
+    {
+      "title": "MaskGIT: Masked Generative Image Transformer",
+      "authors": "Huiwen Chang et al.",
+      "year": 2022,
+      "role": "Introduced confidence-based parallel unmasking and iterative refinement for masked generative modeling.",
+      "relationship_sentence": "KLASS generalizes MaskGIT\u2019s confidence-driven parallel token revealing to masked diffusion, replacing heuristic softmax confidence with a principled token-level KL stability criterion to decide which tokens to unmask."
+    },
+    {
+      "title": "Mask-Predict: Parallel Decoding with Iterative Refinement for Non-Autoregressive Translation",
+      "authors": "Marjan Ghazvininejad et al.",
+      "year": 2019,
+      "role": "Pioneered iterative mask-and-refine decoding with progressive unmasking schedules.",
+      "relationship_sentence": "KLASS adopts the iterative refinement paradigm of Mask-Predict but makes the unmasking schedule adaptive and token-specific via KL divergence, enabling multi-token acceptance per step without fixed heuristics."
+    },
+    {
+      "title": "BERT has a Mouth, and It Must Speak: BERT as a Markov Random Field Language Model",
+      "authors": "Alex Wang and Kyunghyun Cho",
+      "year": 2019,
+      "role": "Showed iterative Gibbs-style sampling with masked LMs via token-wise updates.",
+      "relationship_sentence": "KLASS echoes the iterative masked generation idea and advances it by introducing a token-level KL stability test to accept multiple tokens in parallel, reducing iterations while preserving quality."
+    },
+    {
+      "title": "Denoising Diffusion Implicit Models (DDIM)",
+      "authors": "Jiaming Song, Chenlin Meng, and Stefano Ermon",
+      "year": 2020,
+      "role": "Seminal fast sampling approach for diffusion models via non-Markovian deterministic trajectories, no extra training.",
+      "relationship_sentence": "KLASS shares DDIM\u2019s objective of faster inference without retraining but addresses the masked/discrete regime by adaptively finalizing tokens based on KL stability rather than altering the continuous-time sampler."
+    },
+    {
+      "title": "Progressive Distillation for Fast Sampling of Diffusion Models",
+      "authors": "Tim Salimans and Jonathan Ho",
+      "year": 2022,
+      "role": "Reduces diffusion steps through distillation to accelerate sampling.",
+      "relationship_sentence": "KLASS offers a complementary path to speed\u2014no auxiliary training\u2014by using per-token KL to adaptively compress iterations during inference, contrasting with training-time distillation."
+    },
+    {
+      "title": "Confident Adaptive Language Modeling (CALM)",
+      "authors": "Tal Schuster et al.",
+      "year": 2022,
+      "role": "Uses token-level confidence to allocate computation and early exit in language models.",
+      "relationship_sentence": "KLASS transposes the early-exit, confidence-driven idea to masked diffusion but grounds the decision in token-wise KL divergence between iterations, providing a more principled stability signal than raw softmax confidence."
+    }
+  ],
+  "synthesis_narrative": "KLASS sits at the intersection of discrete diffusion modeling and iterative masked generation. Its base generative setting follows D3PM, which formalized diffusion in categorical state spaces via masking and denoising transitions; KLASS specifically targets the D3PM-style sampling bottleneck\u2014many slow, static steps\u2014by finalizing stable tokens early. The notion of parallel token unmasking draws direct inspiration from MaskGIT and Mask-Predict, which demonstrated that iterative refinement with confidence-guided revealing can dramatically accelerate masked generation. KLASS advances this idea by replacing heuristic confidence thresholds and fixed schedules with a principled token-level stability metric: the KL divergence between successive posteriors, allowing adaptive, per-token acceptance across steps.\nIn spirit, KLASS also echoes earlier masked-LM generation frameworks such as BERT-as-MRF, which perform iterative token updates; KLASS\u2019s novelty is to operationalize a quantitative stability test (per-token KL) to safely accept multiple tokens in parallel. Relative to fast diffusion samplers like DDIM and to training-based accelerators such as Progressive Distillation, KLASS offers an orthogonal acceleration route: it preserves the original masked diffusion model and sampler but dynamically prunes future computation for tokens deemed converged. Finally, akin to CALM\u2019s per-token, confidence-based early exiting in autoregressive LMs, KLASS leverages a tokenwise decision rule to allocate inference effort\u2014yet grounds it in KL stability rather than raw confidence\u2014yielding robust speedups with maintained or improved quality across text, image, and molecular domains.",
+  "analysis_timestamp": "2026-01-06T23:42:48.104181"
+}

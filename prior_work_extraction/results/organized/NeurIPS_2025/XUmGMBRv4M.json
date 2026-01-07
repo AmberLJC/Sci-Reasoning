@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Reducing Transformer Depth on Demand with Structured Dropout (LayerDrop)",
+      "authors": "Angela Fan, Edouard Grave, Armand Joulin",
+      "year": 2020,
+      "role": "Depth/structure pruning",
+      "relationship_sentence": "LayerDrop showed that entire Transformer layers can be removed with minimal accuracy loss, directly motivating FFN Fusion\u2019s strategy of selectively removing attention sublayers to expose runs of FFNs that can be fused and parallelized."
+    },
+    {
+      "title": "Are Sixteen Heads Really Better Than One?",
+      "authors": "Paul Michel, Omer Levy, Graham Neubig",
+      "year": 2019,
+      "role": "Attention head redundancy/pruning",
+      "relationship_sentence": "By quantifying redundancy in multi-head attention and enabling safe head pruning, this work underpins FFN Fusion\u2019s premise that parts of attention can be removed with limited impact, leaving FFN-dominant segments amenable to fusion."
+    },
+    {
+      "title": "Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity",
+      "authors": "William Fedus, Barret Zoph, Noam Shazeer",
+      "year": 2021,
+      "role": "Parallel FFN capacity via MoE",
+      "relationship_sentence": "Switch Transformers demonstrated that multiple FFNs can be applied in parallel with routing while preserving quality, directly inspiring FFN Fusion\u2019s use of parallel FFN computation as a latency-reducing replacement for sequential FFN stacks."
+    },
+    {
+      "title": "Conformer: Convolution-augmented Transformer for Speech Recognition",
+      "authors": "Anmol Gulati, James Qin, Chung-Cheng Chiu, et al.",
+      "year": 2020,
+      "role": "Dual-FFN (Macaron-like) architecture",
+      "relationship_sentence": "Conformer\u2019s two half-step FFNs around attention establishes that FFN contributions can be split and recombined without degrading performance, informing FFN Fusion\u2019s principled fusion/scaling rules when turning sequential FFNs into parallel branches."
+    },
+    {
+      "title": "ALBERT: A Lite BERT for Self-supervised Learning of Language Representations",
+      "authors": "Zhenzhong Lan, Mingda Chen, Sebastian Goodman, Kevin Gimpel, Piyush Sharma, Radu Soricut",
+      "year": 2020,
+      "role": "Cross-layer parameter sharing",
+      "relationship_sentence": "ALBERT showed that many Transformer layers learn similar functions and can share parameters, supporting FFN Fusion\u2019s assumption that adjacent FFN layers are often functionally redundant and thus candidates for fusion without major behavior drift."
+    },
+    {
+      "title": "Transformer Feed-Forward Layers Are Key-Value Memories",
+      "authors": "Mor Geva, Yoav Goldberg, Jonathan Berant",
+      "year": 2021,
+      "role": "Functional analysis of FFNs",
+      "relationship_sentence": "By identifying FFNs as key-value memories that drive token-level transformations, this work justifies preserving and reorganizing FFN computation while trimming attention, as done in FFN Fusion\u2019s attention-pruning-plus-FFN-parallelization pipeline."
+    },
+    {
+      "title": "RepVGG: Making VGG-style ConvNets Great Again",
+      "authors": "Xiaohan Ding, Xiangyu Zhang, Jungong Han, Guiguang Ding",
+      "year": 2021,
+      "role": "Structural re-parameterization and branch fusion",
+      "relationship_sentence": "RepVGG\u2019s train-time multi-branch/inference-time single-branch re-parameterization provides a concrete precedent for analytically fusing networks, directly inspiring FFN Fusion\u2019s transformation of sequential FFNs into equivalent parallel operations for faster inference."
+    }
+  ],
+  "synthesis_narrative": "FFN Fusion rests on three converging insights from prior work. First, the depth and attention components of Transformers exhibit substantial redundancy. LayerDrop and head-pruning results (Fan et al., Michel et al.) showed that large portions of depth and even attention capacity can be removed with minimal performance loss, creating room for structural surgery. Second, the feed-forward sublayers do much of the per-token transformation and can be recomposed without destabilizing the model. Conformer\u2019s dual-FFN design establishes that splitting and recombining FFN contributions preserves quality, while Geva et al. demonstrated that FFNs act as key\u2013value memories central to model behavior\u2014suggesting that reorganizing FFN computation is a safe and impactful lever. Third, parallel FFN computation and structural fusion are effective strategies for scaling and acceleration. Switch Transformers validated the effectiveness of parallel FFN experts for throughput and capacity, and RepVGG provided a concrete recipe for analytically fusing branches into equivalent, cheaper inference-time computations. Complementing these, ALBERT\u2019s cross-layer sharing implies adjacent layers often learn similar functions, strengthening the case for fusing sequential FFNs. FFN Fusion synthesizes these strands: it prunes redundant attention to expose FFN-dominant segments, then applies principled re-parameterizations that transform sequences of FFNs (and in some cases entire blocks) into parallel operations, reducing sequential depth and latency while maintaining behavior on large LLMs.",
+  "analysis_timestamp": "2026-01-07T00:02:04.967281"
+}

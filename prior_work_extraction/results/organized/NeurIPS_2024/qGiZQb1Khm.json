@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Radioactive Data: Tracing Through Training",
+      "authors": "Alexandre Sablayrolles; Matthijs Douze; Nicolas Usunier; Herv\u00e9 J\u00e9gou",
+      "year": 2020,
+      "role": "Conceptual antecedent and methodological template",
+      "relationship_sentence": "Introduced the idea of making training data \"radioactive\"\u2014embedding weak, statistically detectable signatures that survive training\u2014providing the core tracing-through-training paradigm that this paper adapts to LLMs using text watermarks and extends with formal detection guarantees under fine-tuning."
+    },
+    {
+      "title": "A Watermark for Large Language Models",
+      "authors": "John Kirchenbauer; Jonas Geiping; Liam Fowl; Yuxin Wen; Micah Goldblum; Tom Goldstein",
+      "year": 2023,
+      "role": "Core building block (watermark mechanism and detector)",
+      "relationship_sentence": "Proposed a practical LLM text watermark based on vocabulary partitioning with a z-statistic detector; the present work leverages such watermark signals and shows that their residual bias can be provably detected in models fine-tuned on watermarked outputs, even without access to the exact watermarked texts."
+    },
+    {
+      "title": "Secure Spread Spectrum Watermarking for Multimedia",
+      "authors": "Ingemar J. Cox; Joe Kilian; F. Thomson Leighton; Talal Shamoon",
+      "year": 1997,
+      "role": "Foundational statistical framework for watermark detection",
+      "relationship_sentence": "Established correlation-based detection and hypothesis-testing principles for weak watermarks with control of false-alarm rates; this statistical machinery underlies the paper\u2019s p-value guarantees when aggregating faint watermark residuals across tokens and samples."
+    },
+    {
+      "title": "The Secret Sharer: Measuring Unintended Memorization in Neural Networks",
+      "authors": "Nicholas Carlini; Chang Liu; \u00dalfar Erlingsson; Jernej Kos; Dawn Song",
+      "year": 2019,
+      "role": "Foundational measurement of memorization (contrast baseline)",
+      "relationship_sentence": "Developed canary-based audits for memorization requiring knowledge of specific strings; the new work departs from such instance-level tests by detecting dataset-level training on watermarked text via residual statistical biases rather than known canaries."
+    },
+    {
+      "title": "Extracting Training Data from Large Language Models",
+      "authors": "Nicholas Carlini; Florian Tram\u00e8r; Eric Wallace; Matthew Jagielski; Ariel Herbert-Voss; Katherine Lee; Adam Roberts; Tom Brown; Dawn Song; Nicolas Papernot; Colin Raffel",
+      "year": 2021,
+      "role": "Motivation and empirical grounding for data leakage",
+      "relationship_sentence": "Showed LLMs memorize and leak training data, motivating robust auditing; the present paper advances from sample extraction to provable detection that a model was trained on a class of synthetic (watermarked) data."
+    },
+    {
+      "title": "Membership Inference Attacks Against Machine Learning Models",
+      "authors": "Reza Shokri; Marco Stronati; Congzheng Song; Vitaly Shmatikov",
+      "year": 2017,
+      "role": "Problem framing and limitations motivating new approach",
+      "relationship_sentence": "Introduced membership inference as a way to test if specific records were in training; the new method addresses its limitations by offering dataset-level detection with statistical guarantees without needing to know the exact suspect texts."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core contribution\u2014provably detecting whether an LLM was trained on synthetic data produced by a watermarked generator\u2014fuses two lines of work: training-data tracing and LLM text watermarking. Sablayrolles et al. (Radioactive Data) established the central idea that small, structured perturbations can imprint a signature on model parameters, enabling post-hoc attribution; the present work translates this paradigm to language models by treating the watermark\u2019s token-selection bias as the signature and analyzing its survival through fine-tuning. Kirchenbauer et al.\u2019s LLM watermark provides the concrete mechanism and detection statistic (z-score over greenlist/redlist token usage) whose weak residual becomes the target signal inside the fine-tuned model. The statistical rigor of the detection pipeline echoes classical spread-spectrum watermarking (Cox et al.), using correlation-style aggregation and hypothesis testing to deliver calibrated p-values even when individual signals are faint.\nPrior auditing methods centered on instance-level memorization\u2014canaries and extraction (Carlini et al. 2019; 2021)\u2014or membership inference (Shokri et al. 2017), which require known suspect strings or lack reliable guarantees in this setting. By contrast, this paper elevates attribution to the dataset level: it links detectability to watermark robustness, its prevalence in the fine-tuning corpus, and the dynamics of fine-tuning, and shows that residual statistical bias can be measured directly from an open-weight model\u2019s logits/outputs. In doing so, it unifies watermark design with radioactive-data tracing, yielding a practical and theoretically grounded test for \"training on synthetic, watermarked text.\"",
+  "analysis_timestamp": "2026-01-06T23:33:36.268925"
+}

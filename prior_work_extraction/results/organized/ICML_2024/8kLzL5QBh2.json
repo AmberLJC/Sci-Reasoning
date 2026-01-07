@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Sharpness-Aware Minimization for Efficiently Improving Generalization",
+      "authors": "Pierre Foret et al.",
+      "year": 2021,
+      "role": "Foundation",
+      "relationship_sentence": "SAMformer\u2019s core training recipe is built directly on SAM; the paper leverages Foret et al.\u2019s sharpness-aware objective to escape attention-induced sharp minima and bad local optima, which the authors identify as the root cause of poor Transformer generalization on time series."
+    },
+    {
+      "title": "Are Transformers Effective for Time Series Forecasting?",
+      "authors": "Ailing Zeng et al.",
+      "year": 2023,
+      "role": "Gap Identification",
+      "relationship_sentence": "This work established that simple linear models (e.g., DLinear) outperform Transformer-based LTSF methods, explicitly motivating SAMformer\u2019s analysis of why attention underperforms and its SAM-based remedy; DLinear is also a primary baseline SAMformer targets."
+    },
+    {
+      "title": "A Time Series is Worth 64 Words: Long-term Forecasting with Transformers (PatchTST)",
+      "authors": "Nie et al.",
+      "year": 2023,
+      "role": "Baseline",
+      "relationship_sentence": "PatchTST showed that rethinking tokenization and per-variable modeling strengthens Transformers for LTSF; SAMformer builds on this line by adopting channel-wise modeling while addressing the remaining optimization/generalization failures via SAM."
+    },
+    {
+      "title": "iTransformer: Inverted Transformers Are Efficient for Long Sequence Time Series Forecasting",
+      "authors": "Liu et al.",
+      "year": 2023,
+      "role": "Extension",
+      "relationship_sentence": "iTransformer introduced channel-wise self-attention by treating variables as tokens; SAMformer extends this idea with a shallow, lightweight channel-wise attention design and couples it with SAM to overcome the attention-driven convergence/generalization pathologies it identifies."
+    },
+    {
+      "title": "Informer: Beyond Efficient Transformer for Long Sequence Time-Series Forecasting",
+      "authors": "Haoyi Zhou et al.",
+      "year": 2021,
+      "role": "Baseline",
+      "relationship_sentence": "Informer is a canonical LTSF Transformer baseline; SAMformer\u2019s theoretical diagnosis of attention and its SAM-based training are positioned to surpass such attention-centric models on long-horizon multivariate forecasting."
+    },
+    {
+      "title": "Autoformer: Decomposition Transformers with Auto-Correlation for Long-Term Series Forecasting",
+      "authors": "Haixu Wu et al.",
+      "year": 2021,
+      "role": "Baseline",
+      "relationship_sentence": "Autoformer is a widely used LTSF Transformer that attempts to stabilize learning via decomposition; SAMformer directly targets the remaining generalization gap of attention-based models like Autoformer by introducing SAM-driven optimization on a streamlined architecture."
+    },
+    {
+      "title": "Temporal Fusion Transformers for Interpretable Multi-horizon Time Series Forecasting",
+      "authors": "Bryan Lim et al.",
+      "year": 2021,
+      "role": "Inspiration",
+      "relationship_sentence": "TFT pioneered variable-wise selection/gating for multivariate forecasting, foreshadowing channel-wise importance; SAMformer\u2019s channel-wise attention echoes this per-variable modeling instinct while pairing it with SAM to address optimization sharpness."
+    }
+  ],
+  "synthesis_narrative": "SAMformer\u2019s core contribution is twofold: a diagnosis that attention can trap time-series Transformers in sharp, poorly generalizing minima, and a remedy that fuses a lightweight channel-wise attention architecture with sharpness-aware optimization. The immediate catalyst for this work is Zeng et al.\u2019s finding that simple linear baselines can outperform Transformer LTSF models, a stark gap that SAMformer sets out to explain and close. Prior Transformer baselines like Informer and Autoformer defined the long-horizon multivariate forecasting setup and demonstrated attention-centric designs, yet they remained vulnerable to the shortcomings highlighted by Zeng et al. Concurrent advances such as PatchTST and iTransformer showed that rethinking tokenization and emphasizing per-variable modeling (channel-wise representations) can revive Transformer performance; these ideas directly inform SAMformer\u2019s channel-wise attention choice. However, SAMformer argues that architecture alone is insufficient: attention\u2019s optimization landscape remains sharp. Here, Foret et al.\u2019s SAM provides the key enabling method\u2014explicitly optimizing for flat minima\u2014to reliably escape bad local minima. By marrying channel-wise attention (inspired by TFT\u2019s variable-wise mechanisms and crystallized by PatchTST/iTransformer) with SAM\u2019s flatness-driven training, SAMformer delivers a shallow, data-efficient Transformer that closes the gap to strong baselines and aligns with large foundation models, while offering a principled explanation for the prior underperformance of attention in time-series forecasting.",
+  "analysis_timestamp": "2026-01-06T23:09:26.494973"
+}

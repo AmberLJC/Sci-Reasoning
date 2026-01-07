@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Neural Discrete Representation Learning",
+      "authors": "Aaron van den Oord et al.",
+      "year": 2017,
+      "arxiv_id": "arXiv:1711.00937",
+      "role": "Foundation",
+      "relationship_sentence": "This work introduced VQ-VAEs with nearest-neighbor codebook quantization and the straight-through estimator, and the rotation trick is proposed as a direct replacement for that gradient path through the VQ layer."
+    },
+    {
+      "title": "Generating Diverse High-Fidelity Images with VQ-VAE-2",
+      "authors": "Ali Razavi et al.",
+      "year": 2019,
+      "arxiv_id": "arXiv:1906.00446",
+      "role": "Baseline",
+      "relationship_sentence": "VQ-VAE-2 extends VQ with hierarchical codebooks but retains the non-differentiable quantization and STE, serving as a primary baseline whose VQ layer the rotation-based surrogate gradient is designed to improve."
+    },
+    {
+      "title": "Estimating or Propagating Gradients Through Stochastic Neurons for Conditional Computation",
+      "authors": "Yoshua Bengio et al.",
+      "year": 2013,
+      "arxiv_id": "arXiv:1308.3432",
+      "role": "Foundation",
+      "relationship_sentence": "This paper formalized the straight-through estimator that VQ-VAE relies on, and the rotation trick explicitly replaces STE\u2019s identity surrogate Jacobian with a constant rotation\u2013rescaling map that preserves codebook geometry."
+    },
+    {
+      "title": "Categorical Reparameterization with Gumbel-Softmax",
+      "authors": "Eric Jang et al.",
+      "year": 2017,
+      "arxiv_id": "arXiv:1611.01144",
+      "role": "Related Problem",
+      "relationship_sentence": "Gumbel-Softmax provides a differentiable relaxation for discrete variables that trades exact hard assignments for soft ones, motivating the need for a method like the rotation trick that keeps hard nearest-neighbor quantization while enabling informative gradients."
+    },
+    {
+      "title": "Backpropagating through Structured Argmax using a SPIGOT",
+      "authors": "Hao Peng et al.",
+      "year": 2018,
+      "arxiv_id": "arXiv:1807.07729",
+      "role": "Inspiration",
+      "relationship_sentence": "SPIGOT showed that one can backpropagate through non-differentiable argmax decisions using a surrogate linear map treated as constant, directly inspiring the idea to construct a constant rotation\u2013scaling map for nearest-neighbor vector quantization."
+    },
+    {
+      "title": "Surrogate Gradient Learning in Spiking Neural Networks: Bringing the Power of Gradient-based Optimization to Spiking Neural Networks",
+      "authors": "Emre O. Neftci et al.",
+      "year": 2019,
+      "arxiv_id": "arXiv:1901.09948",
+      "role": "Inspiration",
+      "relationship_sentence": "This work systematized surrogate gradients for non-differentiable operations, informing the design choice to encode quantizer geometry into a tailored surrogate (rotation\u2013rescale) rather than using the STE\u2019s identity derivative."
+    }
+  ],
+  "synthesis_narrative": "Vector quantized autoencoders were introduced by van den Oord et al., who paired nearest-neighbor codebook assignments with a straight-through estimator so gradients could traverse the non-differentiable quantizer. Razavi et al. extended this to hierarchical codebooks in VQ-VAE-2, amplifying the impact of quantization decisions while retaining the same STE-based training pipeline. The straight-through estimator itself was formalized by Bengio et al., effectively substituting the true (zero) derivative of the quantization step with an identity surrogate, a choice that discards geometric information about the relation between encoder outputs and codewords. As an alternative to hard assignments, Jang et al. proposed Gumbel-Softmax to relax discrete choices into differentiable soft ones, highlighting a trade-off between exactness of the quantizer and gradient informativeness. Beyond these specific models, Peng et al.\u2019s SPIGOT demonstrated that one can construct constant surrogate linear maps to pass gradients through argmax-like decisions, and Neftci et al. systematized surrogate-gradient design for non-differentiable units, encouraging bespoke surrogates that reflect operator structure.\nTaken together, these works reveal a gap: STE-enabled VQ training is effective but propagates impoverished gradients, while soft relaxations alter the hard nearest-neighbor semantics. The natural next step is to keep hard vector quantization yet replace the identity surrogate with a structure-aware one. Building on SPIGOT\u2019s constant-map insight and surrogate-gradient principles, and under the VQ-VAE formulation, the rotation trick constructs a constant rotation\u2013rescaling that maps each encoder output to its selected codeword, transmitting magnitude and angular information through the quantizer without relaxing the discrete decision.",
+  "target_paper": {
+    "title": "Restructuring Vector Quantization with the Rotation Trick",
+    "authors": "Christopher Fifty, Ronald Guenther Junkins, Dennis Duan, Aniketh Iyengar, Jerry Weihong Liu, Ehsan Amid, Sebastian Thrun, Christopher Re",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "oral",
+    "keywords": "Vector Quantization, VQ-VAE",
+    "abstract": "Vector Quantized Variational AutoEncoders (VQ-VAEs) are designed to compress a continuous input to a discrete latent space and reconstruct it with minimal distortion. \nThey operate by maintaining a set of vectors---often referred to as the codebook---and quantizing each encoder output to the nearest vector in the codebook. \nHowever, as vector quantization is non-differentiable, the gradient to the encoder flows _around_ the vector quantization layer rather than _through_ it in a straight-through approximation.\nThis approximation may be undesirable as all information from the vector quantization operation is lost. \nIn this work, we propose a way to propagate gradients through the vector quantization layer of VQ-VAEs. \nWe smoothly transform each encoder output into its corresponding codebook vector via a rotation and rescaling linear transformation that is treated as a constant during backpropagation. \nAs a result, the relative magnitude and angle between encoder output and codebook vect",
+    "openreview_id": "GMwRl2e9Y1",
+    "forum_id": "GMwRl2e9Y1"
+  },
+  "analysis_timestamp": "2026-01-06T09:18:01.075153"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Self-Consistency Improves Chain of Thought Reasoning in Language Models",
+      "authors": "Xuezhi Wang, Jason Wei, Dale Schuurmans, Quoc V. Le, et al.",
+      "year": 2023,
+      "role": "Conceptual/methodological antecedent for uncertainty via multi-sample agreement",
+      "relationship_sentence": "The paper\u2019s core insight that self-consistency\u2013style voting equates to degree centrality directly builds on Self-Consistency, which introduced sampling multiple reasoning paths and selecting answers by agreement; the new work formalizes this as graph degree and extends it with richer centrality metrics."
+    },
+    {
+      "title": "SelfCheckGPT: Zero-Resource Hallucination Detection for Generative Large Language Models",
+      "authors": "Siru O. Manakul, Pawel Liusie, Mark J. F. Gales",
+      "year": 2023,
+      "role": "Direct precursor for claim-level, sample-agreement hallucination detection",
+      "relationship_sentence": "SelfCheckGPT operationalizes hallucination detection by comparing multiple generations and checking internal consistency at the sentence/claim level; the new paper generalizes this idea by constructing a bipartite generations\u2013claims graph and interpreting uncertainty as centrality in that graph."
+    },
+    {
+      "title": "Minimum Bayes Risk Decoding for Neural Machine Translation",
+      "authors": "Bastiaan Eikema, Wilker Aziz",
+      "year": 2020,
+      "role": "Decoding/selection methodology based on pairwise similarity across samples",
+      "relationship_sentence": "MBR selects outputs that are closest on average to a reference sample set, mirroring closeness-style aggregation; the new work recasts such consensus selection as graph closeness centrality over generations\u2013claims to estimate uncertainty and guide uncertainty-aware decoding."
+    },
+    {
+      "title": "LexRank: Graph-based Lexical Centrality as Salience in Text Summarization",
+      "authors": "G\u00fcnes Erkan, Dragomir R. Radev",
+      "year": 2004,
+      "role": "Graph-centrality foundation for ranking textual units",
+      "relationship_sentence": "LexRank established that centrality in a text-similarity graph identifies reliable/salient content; the new paper adapts this principle to a bipartite graph of generations and claims, using centrality (beyond degree) to quantify claim-level reliability/uncertainty."
+    },
+    {
+      "title": "Centrality in Social Networks: Conceptual Clarification",
+      "authors": "Linton C. Freeman",
+      "year": 1978,
+      "role": "Theoretical foundation of degree, closeness, and betweenness centralities",
+      "relationship_sentence": "Freeman\u2019s formalization of degree and closeness centrality underpins the paper\u2019s key contribution of interpreting self-consistency as degree centrality and proposing closeness centrality and related metrics for improved claim-level uncertainty estimation."
+    },
+    {
+      "title": "FEVER: A Large-scale Dataset for Fact Extraction and VERification",
+      "authors": "James Thorne, Andreas Vlachos, Christos Christodoulopoulos, Arpit Mittal",
+      "year": 2018,
+      "role": "Claim-centric evaluation paradigm",
+      "relationship_sentence": "FEVER\u2019s claim-level verification paradigm motivates decomposing long-form generations into atomic claims; the new paper leverages this claim granularity to attach graph-based uncertainty estimates to individual claims and to filter unreliable ones."
+    },
+    {
+      "title": "Language Models (Mostly) Know What They Know",
+      "authors": "Saurav Kadavath, Ethan Perez, Nicholas Schiefer, et al.",
+      "year": 2022,
+      "role": "Uncertainty estimation and abstention inspiration",
+      "relationship_sentence": "By showing LMs can express calibrated uncertainty and benefit from abstention, this work informs the paper\u2019s uncertainty-aware decoding that preserves only high-confidence claims based on graph-derived uncertainty scores."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s key contribution\u2014casting long-form generation uncertainty as centrality in a bipartite generations\u2013claims graph\u2014sits at the intersection of self-consistency, graph-based ranking, and risk-aware decoding. Self-Consistency (Wang et al., 2023) established multi-sample agreement as a powerful heuristic, which the authors reinterpret as degree centrality: a claim supported by many samples has high degree and thus low uncertainty. SelfCheckGPT (Manakul et al., 2023) brings this idea to hallucination detection at the sentence/claim level, directly motivating the paper\u2019s claim-centric perspective and its need to model cross-sample support and contradiction relations.\nGraph-theoretic underpinnings come from Freeman\u2019s classic formalization of degree and closeness centrality and from LexRank\u2019s demonstration that centrality over text graphs usefully ranks reliable, salient content. Building on these, the authors argue that centralities richer than degree\u2014notably closeness\u2014better capture how well a claim is supported across the sample graph structure, yielding stronger uncertainty estimates.\nFor selection and decoding, Minimum Bayes Risk (Eikema & Aziz, 2020) provides a conceptual bridge: MBR minimizes expected loss by preferring outputs closest to a sample set, akin to maximizing closeness centrality. The paper leverages this consensus-with-respect-to-others view to design uncertainty-aware decoding that retains only central (low-risk) claims. Finally, FEVER\u2019s claim-level verification paradigm grounds the decomposition of generations into atomic claims, while Kadavath et al. (2022) informs the calibration/abstention ethos behind filtering unreliable claims. Together, these works directly shape the paper\u2019s graph formulation, metrics, and decoding strategy.",
+  "analysis_timestamp": "2026-01-06T23:33:36.272265"
+}

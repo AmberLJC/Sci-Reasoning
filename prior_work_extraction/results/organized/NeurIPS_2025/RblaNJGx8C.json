@@ -1,0 +1,80 @@
+{
+  "prior_works": [
+    {
+      "title": "TabPFN: A Transformer that Solves Small Tabular Classification Problems in a Second",
+      "authors": [
+        "Hollmann",
+        "M\u00fcller",
+        "Eggensperger",
+        "Hutter"
+      ],
+      "year": 2022,
+      "role": "PFN foundation for amortized, prior-driven training on synthetic tasks with in-context inference",
+      "relationship_sentence": "CausalPFN directly adopts the PFN paradigm introduced by TabPFN\u2014training a transformer on large libraries of synthetic tasks drawn from a prior\u2014to perform out-of-the-box inference, here specialized to causal effect estimation rather than tabular prediction."
+    },
+    {
+      "title": "Auto-Encoding Variational Bayes",
+      "authors": [
+        "Diederik P. Kingma",
+        "Max Welling"
+      ],
+      "year": 2014,
+      "role": "Conceptual foundation for amortized inference",
+      "relationship_sentence": "CausalPFN\u2019s core idea\u2014learning a reusable inference mapping from data to posterior quantities\u2014builds on the amortized inference principle popularized by VAEs, replacing per-dataset optimization with a single, trained inference mechanism."
+    },
+    {
+      "title": "Estimating Individual Treatment Effect Using Balancing Neural Networks",
+      "authors": [
+        "Uri Shalit",
+        "Fredrik D. Johansson",
+        "David Sontag"
+      ],
+      "year": 2017,
+      "role": "Representation learning for causal inference under ignorability (TARNet/CFR)",
+      "relationship_sentence": "CausalPFN inherits the representation-learning view of ignorability from TARNet/CFR, but amortizes it across simulated data-generating processes, learning a transformer that implicitly balances covariates via in-context learning rather than task-specific training."
+    },
+    {
+      "title": "Estimating and Inference of Heterogeneous Treatment Effects using Random Forests",
+      "authors": [
+        "Stefan Wager",
+        "Susan Athey"
+      ],
+      "year": 2018,
+      "role": "Nonparametric HTE estimation with uncertainty quantification (causal forests)",
+      "relationship_sentence": "CausalPFN targets the same HTE estimation problem as causal forests and aims to provide calibrated uncertainty, but replaces bespoke tree-based estimators with a single amortized transformer trained on synthetic priors."
+    },
+    {
+      "title": "Metalearners for Estimating Heterogeneous Treatment Effects using Machine Learning",
+      "authors": [
+        "K\u00fcnzel",
+        "Sekhon",
+        "Bickel",
+        "Yu"
+      ],
+      "year": 2019,
+      "role": "Framework highlighting the need to choose among many HTE estimators (S-/T-/X-learners)",
+      "relationship_sentence": "By demonstrating that different metalearners excel under different data conditions, this work motivates CausalPFN\u2019s goal of amortizing estimator selection\u2014learning, via a synthetic task library, when and how to infer effects without manual method choice."
+    },
+    {
+      "title": "Bayesian Nonparametric Modeling for Causal Inference",
+      "authors": [
+        "Jennifer L. Hill"
+      ],
+      "year": 2011,
+      "role": "Bayesian causal inference with BART and uncertainty calibration",
+      "relationship_sentence": "CausalPFN\u2019s emphasis on calibrated uncertainty and a Bayesian perspective echoes BART-based causal inference, but achieves it through a transformer trained to approximate posterior effect inference across priors of DGPs."
+    },
+    {
+      "title": "Observed Confounding and R-Learner: Estimation of Heterogeneous Treatment Effects via Residual-on-Residual Regression",
+      "authors": [
+        "Xinkun Nie",
+        "Stefan Wager"
+      ],
+      "year": 2021,
+      "role": "Robust, flexible HTE estimation via orthogonalization",
+      "relationship_sentence": "The R-learner exemplifies specialized estimators tailored to data regimes; CausalPFN seeks to subsume such choices by learning, from simulated DGPs under ignorability, an amortized mapping that adapts in-context to varied confounding and outcome structures."
+    }
+  ],
+  "synthesis_narrative": "CausalPFN\u2019s key contribution\u2014a single transformer that amortizes causal effect estimation across observational datasets\u2014sits at the intersection of prior-fitted networks and modern causal inference. The PFN paradigm crystallized by TabPFN showed that transformers trained on synthetic tasks drawn from a prior can perform near-Bayesian decision-making in-context without per-task optimization. CausalPFN extends this idea to causal inference: it constructs a library of simulated data-generating processes that satisfy ignorability and trains a transformer to map raw observations directly to ATE/CATE estimates and calibrated uncertainties.\n\nThis amortized inference view is rooted in the broader concept from VAEs: learn a reusable inference mechanism rather than re-optimizing for each dataset. On the causal side, representation-learning approaches such as TARNet/CFR established how to address selection bias under ignorability through learned balancing; CausalPFN internalizes this logic but learns it generically across many priors. Classical nonparametric estimators like causal forests and orthogonalized methods like the R-learner demonstrate strong but regime-dependent performance, while metalearners (S-/T-/X-learners) formalize the trade-offs and the resulting burden of method selection. This landscape motivates CausalPFN\u2019s amortization: instead of choosing among many estimators, train once on a rich synthetic prior so the model adapts in-context to the dataset at hand. Finally, Bayesian approaches like BART highlight the importance of uncertainty quantification; CausalPFN pursues calibrated uncertainty by training the transformer to approximate posterior effect inference across simulated DGPs.",
+  "analysis_timestamp": "2026-01-07T00:05:12.548157"
+}

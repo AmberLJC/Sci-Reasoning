@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+      "authors": "Edward J. Hu et al.",
+      "year": 2022,
+      "role": "Motivating baseline and contrastive approach",
+      "relationship_sentence": "LoRA popularized low-rank parameter adaptation to cut memory/optimizer cost but constrains learning to a low-rank parameter subspace. GaLore directly addresses LoRA\u2019s limitation by keeping full-parameter training while projecting only the gradients to a low-rank subspace to save optimizer memory without restricting the model\u2019s parameter space."
+    },
+    {
+      "title": "PowerSGD: Practical low-rank gradient compression for distributed optimization",
+      "authors": "Felix S. Vogels, Sai Praneeth Karimireddy, Martin Jaggi",
+      "year": 2019,
+      "role": "Core technique inspiration (low-rank gradient approximation)",
+      "relationship_sentence": "PowerSGD showed that gradients can be well-approximated by low-rank projections using power iteration. GaLore adapts this idea from communication compression to memory efficiency, projecting per-layer gradients into a low-rank basis and maintaining optimizer states in that compact coordinate space."
+    },
+    {
+      "title": "Finding Structure with Randomness: Probabilistic Algorithms for Matrix Decompositions",
+      "authors": "Nathan Halko, Per-Gunnar Martinsson, Joel A. Tropp",
+      "year": 2011,
+      "role": "Algorithmic primitive (randomized low-rank subspace estimation)",
+      "relationship_sentence": "GaLore relies on efficient randomized range-finding/power-iteration techniques to obtain and refresh low-rank gradient subspaces. The probabilistic SVD framework from this work underpins GaLore\u2019s rotating subspace construction with low overhead."
+    },
+    {
+      "title": "Intrinsic Dimensionality Explains the Effectiveness of Language Model Fine-Tuning",
+      "authors": "Armen Aghajanyan, Sonal Gupta, Luke Zettlemoyer",
+      "year": 2020,
+      "role": "Conceptual justification (low-dimensional update structure)",
+      "relationship_sentence": "This work empirically showed that effective updates for LMs often lie in low-dimensional subspaces. GaLore leverages this insight by assuming gradient signal is largely low-rank, enabling projection without sacrificing full-parameter expressivity."
+    },
+    {
+      "title": "Adafactor: Adaptive Learning Rates with Sublinear Memory Cost",
+      "authors": "Noam Shazeer, Mitchell Stern",
+      "year": 2018,
+      "role": "Memory-efficient optimizer baseline",
+      "relationship_sentence": "Adafactor reduces optimizer memory via factored second-moment estimates. GaLore offers a complementary route\u2014storing optimizer states in a learned low-rank gradient subspace\u2014achieving large memory savings while retaining Adam-like behavior and full-parameter updates."
+    },
+    {
+      "title": "8-bit Optimizers via Block-wise Quantization",
+      "authors": "Tim Dettmers, Mike Lewis, Younes Belkada, Luke Zettlemoyer",
+      "year": 2022,
+      "role": "Memory-reduction baseline via quantized optimizer states",
+      "relationship_sentence": "8-bit optimizers cut memory by lowering precision of optimizer states. GaLore tackles the same bottleneck from an orthogonal angle\u2014rank reduction rather than precision reduction\u2014and can be combined with quantization for further savings."
+    },
+    {
+      "title": "ZeRO: Memory Optimizations Toward Training Trillion Parameter Models",
+      "authors": "Samyam Rajbhandari, Jeff Rasley, Olatunji Ruwase, Yuxiong He",
+      "year": 2020,
+      "role": "System-level baseline for optimizer state memory reduction",
+      "relationship_sentence": "ZeRO partitions optimizer states across data-parallel workers to reduce per-device memory. GaLore instead reduces the intrinsic size of the per-parameter states via low-rank gradient coordinates, providing a complementary, intra-device memory saving."
+    }
+  ],
+  "synthesis_narrative": "GaLore\u2019s central idea\u2014low-rank projection of per-layer gradients to shrink optimizer-state memory while preserving full-parameter training\u2014sits at the intersection of low-rank update structure and memory-efficient optimization. LoRA established the effectiveness of low-rank mechanisms for LLMs but highlighted a key drawback: constraining parameters to a low-rank subspace can hurt performance. GaLore inverts this trade-off by keeping full-parameter weights and projecting only gradients, guided by evidence that model updates often inhabit low-dimensional subspaces, as shown by Aghajanyan et al.\nPowerSGD provides the most direct algorithmic precursor, demonstrating that gradients are amenable to low-rank approximation via power iteration. GaLore repurposes this from reducing communication to reducing memory, storing optimizer moments in the compact subspace. Efficient, frequently refreshed subspaces in GaLore are enabled by randomized low-rank range-finding techniques formalized by Halko\u2013Martinsson\u2013Tropp.\nOn the memory front, GaLore complements established baselines. Adafactor reduces memory by factoring second moments; 8-bit optimizers reduce precision to shrink state size; and ZeRO partitions optimizer states across devices. In contrast, GaLore reduces the intrinsic dimensionality of the states via low-rank coordinates and can potentially compose with quantization or partitioning for additive gains. Collectively, these works shaped GaLore\u2019s design: adopt low-rank where the signal lies (gradients), use randomized low-rank methods to keep it efficient and adaptive, and target the dominant memory bottleneck\u2014optimizer states\u2014without sacrificing the benefits of full-parameter training.",
+  "analysis_timestamp": "2026-01-06T23:42:48.064956"
+}

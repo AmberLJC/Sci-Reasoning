@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Towards Making Systems Forget with Machine Unlearning",
+      "authors": "Yinzhi Cao, Junfeng Yang",
+      "year": 2015,
+      "role": "Foundational concept and problem formulation for machine unlearning (MU), articulating the goal of removing a datapoint\u2019s influence from trained models.",
+      "relationship_sentence": "This paper\u2019s prune-first-then-unlearn paradigm directly targets the Cao\u2013Yang objective\u2014efficiently removing data influence\u2014by proposing a model-centric route (sparsification) rather than purely data- or retraining-centric pipelines."
+    },
+    {
+      "title": "Making AI Forget You: Data Deletion in Machine Learning",
+      "authors": "Alexis Ginart, Melody Y. Guan, Gregory Valiant, James Zou",
+      "year": 2019,
+      "role": "Early algorithms and formal study of data deletion in ML with concrete tasks (e.g., k-means), clarifying exact vs. approximate deletion and evaluation.",
+      "relationship_sentence": "By contrasting exact retraining with approximate deletion, this work frames the approximation gap the present paper aims to shrink via sparsity before unlearning."
+    },
+    {
+      "title": "SISA: Sharded, Isolated, Sliced, and Aggregated Training for Efficient Machine Unlearning",
+      "authors": "S\u00e9bastien Bourtoule, Varun Chandrasekaran, John Chuan-Hsin Chen, et al.",
+      "year": 2021,
+      "role": "Practical, scalable MU via data partitioning and selective retraining; a leading data-centric efficiency baseline.",
+      "relationship_sentence": "The new model-based approach complements SISA\u2019s data-centric strategy by showing that pruning can systematically ease approximate unlearning independent of sharding designs."
+    },
+    {
+      "title": "Eternal Sunshine of the Spotless Net: Selective Forgetting in Deep Networks",
+      "authors": "Aditya Golatkar, Alessandro Achille, Stefano Soatto",
+      "year": 2020,
+      "role": "Introduces approximate MU for deep nets using Fisher-guided weight perturbations/regularization to scrub influence without full retraining.",
+      "relationship_sentence": "This work exemplifies the approximate unlearners whose performance the current paper shows can be boosted\u2014both theoretically and empirically\u2014when models are pruned first."
+    },
+    {
+      "title": "Train faster, generalize better: Stability of stochastic gradient descent",
+      "authors": "Moritz Hardt, Ben Recht, Yoram Singer",
+      "year": 2016,
+      "role": "Establishes algorithmic stability tools linking training dynamics, perturbation sensitivity, and generalization.",
+      "relationship_sentence": "The paper\u2019s theory leverages the stability lens\u2014arguing that sparsity reduces sensitivity/perturbation amplification\u2014thereby narrowing the gap between approximate and exact unlearning."
+    },
+    {
+      "title": "Learning both Weights and Connections for Efficient Neural Networks",
+      "authors": "Song Han, Jeff Pool, John Tran, William J. Dally",
+      "year": 2015,
+      "role": "Pioneers magnitude-based weight pruning to produce sparse yet accurate neural networks.",
+      "relationship_sentence": "Provides the concrete sparsification mechanism the authors adopt to show that pruned models are easier to unlearn from while retaining utility."
+    },
+    {
+      "title": "The Lottery Ticket Hypothesis: Finding Sparse, Trainable Neural Networks",
+      "authors": "Jonathan Frankle, Michael Carbin",
+      "year": 2019,
+      "role": "Demonstrates that sparse subnetworks can match dense-model accuracy when trained appropriately.",
+      "relationship_sentence": "Supports the core premise that substantial sparsity can be induced without sacrificing accuracy, enabling the prune-first-then-unlearn pipeline to maintain performance while improving unlearning."
+    }
+  ],
+  "synthesis_narrative": "Machine unlearning (MU) was first articulated by Cao and Yang (2015), who formalized the goal of removing a datapoint\u2019s influence from a trained model. Subsequent work by Ginart et al. (2019) sharpened the distinction between exact deletion (via retraining) and efficient approximate deletion, crystallizing the approximation gap that practitioners face. Bourtoule et al. (2021) advanced a practical, data-centric solution (SISA) that reduces retraining cost through sharding and slicing, establishing a leading efficiency baseline but still fundamentally tied to retraining. In parallel, Golatkar et al. (2020) introduced approximate unlearning techniques for deep networks using Fisher-guided updates, offering a promising alternative yet leaving open how to systematically tighten the gap to exact unlearning.\nThe present paper\u2019s key move is to shift from the data pipeline to the model itself: prune first, then unlearn. Two strands underpin this shift. First, stability theory for SGD (Hardt et al., 2016) provides a lens linking reduced sensitivity to improved generalization and robustness; the authors leverage this perspective to argue that sparsity curbs parameter-space sensitivity, thereby shrinking the approximation gap of MU procedures. Second, the neural pruning literature\u2014magnitude pruning (Han et al., 2015) and the lottery ticket hypothesis (Frankle & Carbin, 2019)\u2014establishes that substantial sparsity can be achieved without sacrificing accuracy, making sparsity a viable prior to impose before unlearning. Together, these works motivate and technically enable the paper\u2019s model-based paradigm: induce sparsity to stabilize the model and then apply an approximate unlearner, achieving better multi-criteria unlearning while retaining efficiency.",
+  "analysis_timestamp": "2026-01-07T00:02:04.803779"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "A Simple Framework for Contrastive Learning of Visual Representations (SimCLR)",
+      "authors": "Ting Chen, Simon Kornblith, Mohammad Norouzi, Geoffrey Hinton",
+      "year": 2020,
+      "role": "foundational contrastive baseline and augmentation-invariance assumption",
+      "relationship_sentence": "CLVS directly relaxes SimCLR\u2019s binary positive-pair invariance by replacing it with a continuous, augmentation-aware similarity that scales down alignment for more severe transforms."
+    },
+    {
+      "title": "What Makes for Good Views for Contrastive Learning?",
+      "authors": "Yonglong Tian, Dilip Krishnan, Phillip Isola",
+      "year": 2020,
+      "role": "theory and analysis of view selection and mutual information (InfoMin principle)",
+      "relationship_sentence": "Building on the finding that overly strong views reduce shared information, CLVS operationalizes this by assigning lower similarity to stronger augmentations, explicitly linking view severity to the supervision signal."
+    },
+    {
+      "title": "Understanding Contrastive Representation Learning through Alignment and Uniformity",
+      "authors": "Tongzhou Wang, Phillip Isola",
+      "year": 2020,
+      "role": "theoretical decomposition guiding loss design",
+      "relationship_sentence": "CLVS can be interpreted as adaptively modulating the alignment term according to augmentation extent to preserve the alignment\u2013uniformity balance when views share less content."
+    },
+    {
+      "title": "Unsupervised Learning of Visual Features by Contrasting Cluster Assignments (SwAV)",
+      "authors": "Mathilde Caron, Ishan Misra, Julien Mairal, Priya Goyal, Piotr Bojanowski, Armand Joulin",
+      "year": 2020,
+      "role": "multi-crop strategy creating views of varying content overlap",
+      "relationship_sentence": "SwAV\u2019s multi-crop views highlight that different crops share different semantics; CLVS formalizes this by weighting positive similarity lower for small/strong crops that are more likely to be semantically discordant."
+    },
+    {
+      "title": "RandAugment: Practical Automated Data Augmentation with a Reduced Search Space",
+      "authors": "Ekin D. Cubuk, Barret Zoph, Jonathon Shlens, Quoc V. Le",
+      "year": 2020,
+      "role": "augmentation severity parameterization and control",
+      "relationship_sentence": "CLVS leverages the notion of augmentation magnitude from RandAugment to quantify transformation extent and map it into continuous similarity scores for contrastive supervision."
+    },
+    {
+      "title": "Debiased Contrastive Learning",
+      "authors": "Chuang et al.",
+      "year": 2020,
+      "role": "loss reweighting to correct sampling bias in contrastive learning",
+      "relationship_sentence": "By showing that reweighting can correct biases (e.g., false negatives), this work motivates CLVS\u2019s augmentation-aware reweighting of positive pairs to mitigate noise introduced by overly strong views."
+    },
+    {
+      "title": "Supervised Contrastive Learning",
+      "authors": "Prannay Khosla et al.",
+      "year": 2020,
+      "role": "multi-positive formulation with positive weighting/aggregation",
+      "relationship_sentence": "CLVS extends the idea of weighting multiple positives by introducing continuous, transformation-dependent similarity weights rather than uniform treatment of positives."
+    }
+  ],
+  "synthesis_narrative": "CLVS sits squarely at the intersection of contrastive learning\u2019s invariance paradigm and recent insights about view quality and loss design. SimCLR established the prevailing assumption that all augmented views of an instance should be treated as fully positive, a simplification that enabled strong performance but ignores how augmentation severity can erode semantic overlap. Subsequent analysis by Tian, Krishnan, and Isola formalized that not all views are equally informative\u2014overly strong transforms reduce shared mutual information\u2014while Wang and Isola\u2019s alignment\u2013uniformity decomposition clarified why forcing strong alignment for impoverished views can harm representation geometry. Practical pipelines like SwAV\u2019s multi-crop further emphasized that views can differ substantially in content, and augmentation frameworks such as RandAugment provided an explicit severity parameter that can be repurposed to quantify transformation extent. In parallel, the literature on contrastive loss shaping (e.g., Debiased Contrastive Learning) and supervised contrastive learning demonstrated that reweighting pair contributions\u2014especially positives\u2014can correct biases and improve learning when pair relationships are heterogeneous. CLVS fuses these threads: it replaces binary positive treatment with a continuous, augmentation-aware similarity schedule, systematically lowering alignment pressure as augmentation severity increases. This variable similarity preserves the spirit of invariance for gentle transforms while avoiding over-constraint on heavily altered views, yielding a principled, theoretically grounded refinement of the contrastive objective.",
+  "analysis_timestamp": "2026-01-07T00:05:12.534884"
+}

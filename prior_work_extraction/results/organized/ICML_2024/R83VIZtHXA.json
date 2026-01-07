@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Generative Adversarial Imitation Learning",
+      "authors": "Jonathan Ho et al.",
+      "year": 2016,
+      "role": "Inspiration",
+      "relationship_sentence": "OMPO generalizes GAIL\u2019s adversarial occupancy-measure matching\u2014learned via a discriminator\u2014from expert-versus-policy imitation to matching transition occupancies under policy and dynamics shifts for online control."
+    },
+    {
+      "title": "f-GAN: Training Generative Neural Samplers using Variational Divergence Minimization",
+      "authors": "Sebastian Nowozin et al.",
+      "year": 2016,
+      "role": "Foundation",
+      "relationship_sentence": "OMPO\u2019s tractable min\u2013max objective arises from the variational (dual) reformulation of f-divergences introduced by f-GAN, enabling a discriminator to estimate occupancy discrepancies that drive its policy update."
+    },
+    {
+      "title": "DualDICE: Behavior-Agnostic Estimation of Discounted Stationary Distribution Corrections",
+      "authors": "Ofir Nachum et al.",
+      "year": 2019,
+      "role": "Extension",
+      "relationship_sentence": "OMPO adopts the DICE-style saddle-point formulation to estimate distribution corrections and extends it from state\u2013action occupancy to transition occupancy, integrating it into an actor\u2013critic for control under shifting policies/dynamics."
+    },
+    {
+      "title": "ValueDICE: Imitation Learning via Off-Policy Distribution Matching",
+      "authors": "Ilya Kostrikov et al.",
+      "year": 2020,
+      "role": "Extension",
+      "relationship_sentence": "OMPO builds on ValueDICE\u2019s idea of optimizing control by directly matching discounted occupancies, repurposing the distribution-matching objective to handle online RL with policy and dynamics shifts via transition-level matching."
+    },
+    {
+      "title": "Proximal Policy Optimization Algorithms",
+      "authors": "John Schulman et al.",
+      "year": 2017,
+      "role": "Baseline",
+      "relationship_sentence": "PPO serves as a primary baseline whose clipped surrogate is replaced in OMPO by a transition-occupancy discrepancy objective, yielding improved robustness to distribution shift beyond policy-KL constraints."
+    },
+    {
+      "title": "IMPALA: Scalable Distributed Deep-RL with Importance Weighted Actor-Learner Architectures",
+      "authors": "Lasse Espeholt et al.",
+      "year": 2018,
+      "role": "Gap Identification",
+      "relationship_sentence": "OMPO addresses the bias\u2013variance and limited dynamics-shift handling of IMPALA/V-trace\u2019s importance-weight corrections by replacing ratio-based off-policy correction with adversarial transition-occupancy matching."
+    },
+    {
+      "title": "EPOpt: Learning Robust Neural Network Policies Using Model Ensembles",
+      "authors": "Aravind Rajeswaran et al.",
+      "year": 2017,
+      "role": "Gap Identification",
+      "relationship_sentence": "OMPO targets the limitations of EPOpt-style robust RL that require task-specific priors/model ensembles, offering a unified, data-driven occupancy-matching alternative for dynamics shift without specialized priors."
+    }
+  ],
+  "synthesis_narrative": "OMPO\u2019s core innovation\u2014transition occupancy matching for online RL under policy and dynamics shifts\u2014emerges from a direct lineage of adversarial distribution-matching and DICE-style density-ratio estimation. The conceptual seed is GAIL, which framed control via adversarial occupancy measure matching using a discriminator. OMPO retains this adversarial machinery but moves from imitation (expert vs. learner) to matching the transition distribution induced by current data and the target policy/dynamics, directly addressing shift. This adversarial min\u2013max is made tractable by f-GAN\u2019s variational f-divergence duality, which underpins OMPO\u2019s discriminator-based surrogate objective. Practically, OMPO leverages the DICE family: DualDICE provides a behavior-agnostic, saddle-point approach to discounted stationary distribution corrections, and ValueDICE demonstrates how distribution matching can drive control; OMPO extends these ideas from state\u2013action occupancy to transition occupancy and integrates them into an actor\u2013critic with a small local buffer for online learning. The method directly improves upon PPO by replacing KL/clipped-ratio surrogates\u2014which are brittle under distribution shift\u2014with a principled occupancy-discrepancy objective. Finally, OMPO is motivated by the limitations of prevalent off-policy corrections (e.g., IMPALA\u2019s V-trace), which struggle with bias\u2013variance and do not handle dynamics shift, and by robust RL approaches like EPOpt that rely on task priors or model ensembles. OMPO unifies these threads into a single, discriminator-driven framework for policy and dynamics shifts.",
+  "analysis_timestamp": "2026-01-06T23:09:26.412689"
+}

@@ -1,0 +1,75 @@
+{
+  "prior_works": [
+    {
+      "title": "Fast Inference from Transformers via Speculative Decoding",
+      "authors": [
+        "Yaniv Leviathan",
+        "Adam Tauman Kalai",
+        "et al."
+      ],
+      "year": 2023,
+      "role": "Foundational method for speculative decoding",
+      "relationship_sentence": "Established the draft-and-verify paradigm and formalized acceptance-rate-driven speedups, defining the exact objective (maximize verified tokens) that AdaSPEC aligns to by tailoring distillation toward tokens most likely to be accepted."
+    },
+    {
+      "title": "Distilling the Knowledge in a Neural Network",
+      "authors": [
+        "Geoffrey Hinton",
+        "Oriol Vinyals",
+        "Jeff Dean"
+      ],
+      "year": 2015,
+      "role": "Foundational technique (knowledge distillation)",
+      "relationship_sentence": "Provided the standard KL-based teacher\u2013student framework that AdaSPEC modifies by selectively applying KD only on tokens that matter for speculative acceptance rather than uniformly over all tokens."
+    },
+    {
+      "title": "Sequence-Level Knowledge Distillation",
+      "authors": [
+        "Yoon Kim",
+        "Alexander M. Rush"
+      ],
+      "year": 2016,
+      "role": "Distillation for sequence generation",
+      "relationship_sentence": "Showed how KD can be adapted to sequence models; AdaSPEC builds on this lineage but redefines what should be distilled (acceptance-relevant tokens) instead of minimizing KL across every token."
+    },
+    {
+      "title": "Intelligent Selection of Language Model Training Data",
+      "authors": [
+        "Robert C. Moore",
+        "William Lewis"
+      ],
+      "year": 2010,
+      "role": "Data selection using reference models",
+      "relationship_sentence": "Introduced reference-model-based filtering (cross-entropy difference) for LM data selection; AdaSPEC similarly uses a reference model to identify and filter difficult-to-fit tokens before distillation."
+    },
+    {
+      "title": "Co-teaching: Robust Training of Deep Neural Networks with Noisy Labels",
+      "authors": [
+        "Bo Han",
+        "Quanming Yao",
+        "Xingrui Yu",
+        "Gang Niu",
+        "Miao Xu",
+        "Ivor W. Tsang",
+        "Masashi Sugiyama"
+      ],
+      "year": 2018,
+      "role": "Selective sample filtering by loss",
+      "relationship_sentence": "Demonstrated that dropping high-loss (hard/noisy) samples can improve learning; AdaSPEC adopts a related principle at token level, filtering high-difficulty tokens (per a reference model) to make KD better fit the student\u2019s capacity and SD\u2019s goal."
+    },
+    {
+      "title": "DistilBERT, a distilled version of BERT: smaller, faster, cheaper and lighter",
+      "authors": [
+        "Victor Sanh",
+        "Lysandre Debut",
+        "Julien Chaumond",
+        "Thomas Wolf"
+      ],
+      "year": 2019,
+      "role": "Practical KD for language models",
+      "relationship_sentence": "Popularized token-level KL distillation for NLP; AdaSPEC identifies the mismatch of this uniform objective with speculative decoding and replaces it with selective, acceptance-oriented KD."
+    }
+  ],
+  "synthesis_narrative": "AdaSPEC targets the core bottleneck of speculative decoding: maximizing the acceptance rate of draft-model tokens during verification by the target model. The speculative decoding framework itself is grounded in the draft-and-verify mechanism and acceptance-rate analysis introduced by Leviathan et al., which makes clear that speedup hinges on aligning the draft with the target specifically on the tokens likely to be accepted. Traditional knowledge distillation, inaugurated by Hinton et al. and adapted to sequence generation by Kim and Rush, offers a teacher\u2013student training pathway but typically minimizes KL divergence across all tokens\u2014an objective that can overemphasize hard or idiosyncratic cases the student cannot fit, especially under capacity constraints, and thus is misaligned with acceptance-centric goals.\n\nAdaSPEC\u2019s key insight\u2014selectively filtering tokens during KD\u2014draws from established ideas in data selection and robust training. Moore\u2013Lewis demonstrated that a reference language model can guide effective filtering, a strategy AdaSPEC repurposes at token granularity to identify difficult-to-fit instances. In parallel, Co-teaching showed that discarding high-loss samples can improve learning by avoiding noisy or overly hard examples; AdaSPEC applies a similar principle to KD for speculative decoding, focusing training on easier, alignment-critical tokens. Finally, practical NLP distillation efforts like DistilBERT exemplify the default token-level KL setup that AdaSPEC deliberately departs from. By combining speculative decoding\u2019s acceptance objective with reference-model-guided, selective KD, AdaSPEC achieves a student better aligned with the target where it matters most for verification, improving acceptance and thus inference efficiency.",
+  "analysis_timestamp": "2026-01-07T00:21:32.308007"
+}

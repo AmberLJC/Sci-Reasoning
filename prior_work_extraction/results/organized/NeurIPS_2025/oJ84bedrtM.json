@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+      "authors": "Edward J. Hu et al.",
+      "year": 2022,
+      "role": "Foundation",
+      "relationship_sentence": "MokA directly builds on LoRA\u2019s low\u2011rank weight update mechanism, extending it to multimodal settings by splitting low\u2011rank parameters into modality\u2011specific (unimodal) paths and an explicit cross\u2011modal enhancement path."
+    },
+    {
+      "title": "LLaVA: Large Language and Vision Assistant",
+      "authors": "Haotian Liu et al.",
+      "year": 2023,
+      "role": "Baseline",
+      "relationship_sentence": "LLaVA popularized applying standard LoRA to MLLMs without modality-aware design; MokA explicitly targets this baseline\u2019s limitation by separating unimodal adaptation from cross\u2011modal interaction to improve fine\u2011tuning effectiveness."
+    },
+    {
+      "title": "Flamingo: a Visual Language Model for Few-Shot Learning",
+      "authors": "Jean-Baptiste Alayrac et al.",
+      "year": 2022,
+      "role": "Foundation",
+      "relationship_sentence": "Flamingo\u2019s gated cross\u2011attention layers established the importance of explicit cross\u2011modal interaction in MLLMs, which MokA preserves under a parameter\u2011efficient form via a dedicated cross\u2011modal adaptation component."
+    },
+    {
+      "title": "BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models",
+      "authors": "Junnan Li et al.",
+      "year": 2023,
+      "role": "Inspiration",
+      "relationship_sentence": "BLIP\u20112\u2019s Q\u2011Former demonstrated that learnable modules explicitly mediating image\u2013text alignment are critical; MokA adopts this insight by adding an explicit cross\u2011modal enhancement branch instead of relying solely on unimodal updates."
+    },
+    {
+      "title": "LLaMA-Adapter V2: Parameter-Efficient Visual Instruction Model",
+      "authors": "Renrui Zhang et al.",
+      "year": 2023,
+      "role": "Related Problem",
+      "relationship_sentence": "LLaMA\u2011Adapter V2 shows parameter\u2011efficient visual instruction tuning via lightweight cross\u2011modal connectors; MokA pursues the same goal but implements it through multimodal-aware low\u2011rank updates that jointly handle unimodal and cross\u2011modal adaptation."
+    },
+    {
+      "title": "Visual Prompt Tuning",
+      "authors": "Menglin Jia et al.",
+      "year": 2022,
+      "role": "Related Problem",
+      "relationship_sentence": "VPT evidenced that small, modality\u2011specific parameters can effectively adapt a frozen visual backbone; MokA generalizes this idea to MLLMs by assigning modality\u2011specific low\u2011rank parameters for unimodal compression."
+    }
+  ],
+  "synthesis_narrative": "MokA\u2019s core idea\u2014decoupling unimodal adaptation from cross\u2011modal adaptation within a parameter\u2011efficient scheme\u2014emerges from two converging lines of work. First, LoRA provided the crucial mechanism for lightweight fine\u2011tuning, but when ported to MLLMs (as in LLaVA), it was typically applied uniformly across the model without acknowledging modality structure. This created the gap MokA targets: standard PEFT borrowed from LLMs underutilizes multimodal cues. Second, large\u2011scale multimodal architectures such as Flamingo and BLIP\u20112 established that explicit cross\u2011modal interaction modules (gated cross\u2011attention, Q\u2011Former) are vital for aligning modalities, highlighting that cross\u2011modal adaptation should be treated distinctly from unimodal processing.\n\nMokA synthesizes these insights by reshaping LoRA into a multimodal\u2011aware design: modality\u2011specific low\u2011rank parameters compress unimodal information, while an explicit cross\u2011modal enhancement path directly strengthens inter\u2011modal interaction. This design goal resonates with parameter\u2011efficient MLLM adapters (e.g., LLaMA\u2011Adapter V2), yet MokA accomplishes it natively within a low\u2011rank formulation rather than adding heavy cross\u2011modal blocks. Additionally, results from visual prompt tuning reinforce the value of small, modality\u2011scoped parameters, which MokA extends beyond vision to audio, speech, and text. In sum, MokA unifies the efficiency of LoRA with the architectural lesson from Flamingo/BLIP\u20112\u2014that cross\u2011modal alignment must be explicit\u2014thereby addressing the LLaVA\u2011style gap and yielding a principled, multimodal\u2011aware PEFT approach.",
+  "analysis_timestamp": "2026-01-06T23:08:23.964844"
+}

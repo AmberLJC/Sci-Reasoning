@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Training language models to follow instructions with human feedback",
+      "authors": "Long Ouyang et al.",
+      "year": 2022,
+      "role": "Alignment foundation (RLHF) creating systematic refusal behavior",
+      "relationship_sentence": "MULI exploits the refusal priors introduced by RLHF\u2014e.g., high probability on opening tokens like \u201cI\u201d, \u201cSorry\u201d, or \u201cI can\u2019t\u201d for unsafe prompts\u2014by reading the first-response-token logits to separate toxic from benign prompts."
+    },
+    {
+      "title": "Constitutional AI: Harmlessness from AI Feedback",
+      "authors": "Yuntao Bai et al.",
+      "year": 2022,
+      "role": "Safety training paradigm reinforcing consistent refusal styles",
+      "relationship_sentence": "Constitutional AI strengthened predictable refusal patterns for harmful inputs, providing the signal MULI detects in the first-token logit distribution to infer prompt toxicity."
+    },
+    {
+      "title": "RealToxicityPrompts: Evaluating Neural Toxic Degeneration in Language Models",
+      "authors": "Samuel Gehman, Suchin Gururangan, Maarten Sap, Yejin Choi, Noah A. Smith",
+      "year": 2020,
+      "role": "Benchmark and problem framing for toxicity in LMs",
+      "relationship_sentence": "By formalizing toxicity prompting and providing evaluation data, RealToxicityPrompts underpins MULI\u2019s threat model and comparative evaluation against text-only toxicity classifiers."
+    },
+    {
+      "title": "Language Models are Few-Shot Learners",
+      "authors": "Tom B. Brown et al.",
+      "year": 2020,
+      "role": "Methodological precedent: using LM token probabilities/logits for downstream decisions",
+      "relationship_sentence": "MULI extends the idea of leveraging LM probability distributions for classification by focusing specifically on the first response token\u2019s logits as a lightweight, model-internal safety signal."
+    },
+    {
+      "title": "DetectGPT: Zero-Shot Machine-Generated Text Detection using Probability Curvature",
+      "authors": "Eric Mitchell, Yoonho Lee, Alexander Khazatsky, Christopher D. Manning, Chelsea Finn",
+      "year": 2023,
+      "role": "Introspective detection using a model\u2019s own likelihood signals",
+      "relationship_sentence": "DetectGPT showed that model-internal probability structure can power robust detectors; MULI similarly builds a detector directly from the LM\u2019s logit distribution, but targets harmfulness via first-token evidence."
+    },
+    {
+      "title": "ToxiGen: A Large-Scale Machine-Generated Dataset for Adversarial and Implicit Hate Speech Detection",
+      "authors": "Thomas Hartvigsen, Saadia Gabriel, Hamid Palangi, et al.",
+      "year": 2022,
+      "role": "Adversarial toxicity data and strong detector baselines",
+      "relationship_sentence": "ToxiGen provides hard toxic prompts and state-of-the-art baselines that MULI aims to surpass, grounding the claim that logit-based introspection can outperform standard detectors at low FPR."
+    },
+    {
+      "title": "SelfCheckGPT: Zero-Resource Black-Box Hallucination Detection for Generative Large Language Models",
+      "authors": "Nisanth Manakul, Felix Liusie, Mark J. F. Gales",
+      "year": 2023,
+      "role": "LLM self-evaluation as a moderation strategy",
+      "relationship_sentence": "SelfCheckGPT popularized using the model itself for detection; MULI adopts this introspective stance but replaces output sampling with a fast, first-token logit probe and sparse logistic regression."
+    }
+  ],
+  "synthesis_narrative": "MULI\u2019s core insight\u2014that an aligned LLM\u2019s first-response-token logits encode a strong signal about a prompt\u2019s harmfulness\u2014rests on two intertwined lines of prior work: safety alignment shaping refusal behavior and the use of model-internal probability signals for downstream detection. RLHF (Ouyang et al.) and Constitutional AI (Bai et al.) established consistent refusal patterns for unsafe inputs, implicitly concentrating probability mass on stereotypical refusal openings. RealToxicityPrompts framed and measured toxic prompting, while ToxiGen contributed adversarial data and strong baselines, clarifying the shortcomings of standalone text classifiers at low FPRs\u2014precisely the regime MULI targets.\n\nOn the methodological side, GPT-3\u2019s few-shot learning demonstrated how LM logits can drive classification, and DetectGPT showed that introspective likelihood structure enables robust detectors. SelfCheckGPT further validated the principle of LLM self-assessment for safety and reliability. MULI fuses these threads into a practical, low-cost moderation mechanism: instead of generating and then judging text, it inspects the pre-generation probability distribution of the very first token and applies a sparse logistic regression to those logits. This leverages alignment-induced refusal priors while achieving high TPR at low FPR and minimizing inference overhead. The result is a simple, robust detector that directly harnesses the model\u2019s internal safety signal, outperforming traditional toxicity classifiers that lack access to this alignment-shaped logit geometry.",
+  "analysis_timestamp": "2026-01-06T23:39:42.953602"
+}

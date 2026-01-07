@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Transformer Memory as a Differentiable Search Index (DSI)",
+      "authors": "Yi Tay, Mostafa Dehghani, Dara Bahri, Donald Metzler, et al.",
+      "year": 2022,
+      "role": "Foundational method for generative retrieval via encoder\u2013decoder models that directly generate document identifiers.",
+      "relationship_sentence": "GR^2 builds directly on DSI\u2019s formulation of mapping queries to docids with sequence-to-sequence likelihoods, extending this paradigm from binary supervision to multi-graded relevance and addressing docid collision/consistency issues DSI surfaced."
+    },
+    {
+      "title": "Autoregressive Entity Retrieval (GENRE)",
+      "authors": "Nicola De Cao, Gautier Izacard, Sebastian Riedel, Fabio Petroni",
+      "year": 2021,
+      "role": "Demonstrated generating semantic identifiers (entity titles) with seq2seq models for retrieval.",
+      "relationship_sentence": "GR^2\u2019s emphasis on designing identifiers that are both semantically relevant and distinct is motivated by GENRE\u2019s insight that semantic, human-readable IDs improve generalization and controllability in generative retrieval."
+    },
+    {
+      "title": "Cumulated Gain-Based Evaluation of IR Techniques (nDCG)",
+      "authors": "Kalervo J\u00e4rvelin, Jaana Kek\u00e4l\u00e4inen",
+      "year": 2002,
+      "role": "Introduced graded relevance and nDCG, the canonical evaluation/optimization target for multi-graded IR.",
+      "relationship_sentence": "GR^2\u2019s move from binary to multi-graded supervision is grounded in the nDCG framework, shaping both its problem setup and the need to reconcile likelihoods with grade-aware ranking preferences."
+    },
+    {
+      "title": "From RankNet to LambdaRank to LambdaMART",
+      "authors": "Chris J.C. Burges, Robert Ragno, Quoc V. Le",
+      "year": 2010,
+      "role": "Established pairwise/listwise training using gradient signals aligned with graded ranking measures (e.g., nDCG).",
+      "relationship_sentence": "GR^2\u2019s multi-graded constrained contrastive training borrows the core idea of encoding pairwise preferences proportional to graded gains, adapting it to a generative (seq2seq) likelihood setting over docids."
+    },
+    {
+      "title": "Supervised Contrastive Learning",
+      "authors": "Prannay Khosla, Piotr Teterwak, Chen Wang, Aaron Sarna, Yonglong Tian, et al.",
+      "year": 2020,
+      "role": "Generalized contrastive learning to multiple positives per anchor with label-aware weighting.",
+      "relationship_sentence": "GR^2\u2019s contrastive component leverages SupCon\u2019s multi-positive formulation and extends it with grade-aware constraints to encode different relevance levels among multiple positive documents."
+    },
+    {
+      "title": "Representation Learning with Contrastive Predictive Coding (InfoNCE)",
+      "authors": "Aaron van den Oord, Yazhe Li, Oriol Vinyals",
+      "year": 2018,
+      "role": "Provided the widely used InfoNCE objective underpinning modern contrastive learning.",
+      "relationship_sentence": "GR^2\u2019s training objective inherits the InfoNCE-style separation of positives and negatives, adapting it to handle graded positives and to operate over generated identifiers."
+    },
+    {
+      "title": "Circle Loss: A Unified Perspective of Pair Similarity Optimization in Deep Learning",
+      "authors": "Yifan Sun, Changmao Cheng, Yuhan Zhang, Chi Zhang, Liang Zheng",
+      "year": 2020,
+      "role": "Introduced margin-based, degree-aware weighting for pair similarities to balance attraction/repulsion.",
+      "relationship_sentence": "GR^2\u2019s requirement for identifiers to be both relevant and distinct echoes Circle Loss\u2019s principle of modulating pair contributions by similarity/margin, informing the design of constraints that prevent identifier collisions."
+    }
+  ],
+  "synthesis_narrative": "GR^2 directly extends the encoder\u2013decoder paradigm for generative retrieval introduced by DSI, where a model learns to map queries to document identifiers under a sequence likelihood objective. While DSI established the feasibility and benefits of generating docids, GR^2 addresses two shortcomings left open in that line: dependence on binary supervision and instability from identifier conflicts. GENRE\u2019s success in generating semantically meaningful identifiers for entities motivates GR^2\u2019s first pillar\u2014learning identifiers that are both semantically aligned with content and sufficiently distinct to avoid collisions and ambiguity at inference.\nAt the training-objective level, GR^2 imports decades of graded relevance reasoning from classic learning-to-rank. nDCG (J\u00e4rvelin & Kek\u00e4l\u00e4inen) provides the grading semantics and evaluation target, while LambdaRank/LambdaMART contributes the key insight that pairwise/listwise gradients should be proportional to gains induced by relevance differences. GR^2 operationalizes this inside a generative likelihood framework via a grade-aware constrained contrastive objective.\nMethodologically, the contrastive backbone inherits from InfoNCE and its supervised extension (SupCon), enabling multiple positives per query; GR^2 augments these with relevance-grade\u2013conditioned weights and constraints. Finally, principles from margin-aware metric learning (e.g., Circle Loss) inspire the model\u2019s repulsive forces that enforce identifier distinctness, mitigating docid collisions noted in generative indexers. Together, these threads yield a generative retriever that natively models multi-graded relevance while ensuring identifiers are both informative and uniquely assigned.",
+  "analysis_timestamp": "2026-01-06T23:33:35.571681"
+}

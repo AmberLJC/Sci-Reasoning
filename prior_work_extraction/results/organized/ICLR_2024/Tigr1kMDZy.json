@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "In-context Learning and Induction Heads",
+      "authors": "Olsson et al.",
+      "year": 2022,
+      "arxiv_id": "",
+      "role": "Extension",
+      "relationship_sentence": "They identify induction heads that attend to earlier occurrences to copy continuations, and this paper directly extends that mechanism by finding and ablating late-layer \u201cfalse induction heads\u201d that copy incorrect information from few-shot demonstrations."
+    },
+    {
+      "title": "The Tuned Lens: Interpreting Transformers by Aligning Intermediate Representations with the Output Layer",
+      "authors": "Belrose et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "Layerwise decoding via (tuned) logit lenses underpins this paper\u2019s core analysis of \u2018overthinking,\u2019 enabling the authors to read model predictions at each layer and detect the critical layer where behavior diverges under correct vs. incorrect demonstrations."
+    },
+    {
+      "title": "Interpretability in the Wild: A Circuit for Indirect Object Identification in GPT-2 Small",
+      "authors": "Wang et al.",
+      "year": 2022,
+      "arxiv_id": "",
+      "role": "Inspiration",
+      "relationship_sentence": "Their head-level circuit discovery and validation (including specialized \u201cname mover\u201d heads and targeted head ablations) directly inspired the methodology used here to locate and causally validate late-layer heads that copy labels from the prompt."
+    },
+    {
+      "title": "TruthfulQA: Measuring How Models Mimic Human Falsehoods",
+      "authors": "Lin et al.",
+      "year": 2021,
+      "arxiv_id": "2109.07958",
+      "role": "Foundation",
+      "relationship_sentence": "By formalizing and measuring models\u2019 tendency to imitate falsehoods in prompts, this work sets the problem context that the present paper mechanistically explains via critical-layer divergence and copying heads."
+    },
+    {
+      "title": "Rethinking the Role of Demonstrations: What Makes In-Context Learning Work?",
+      "authors": "Min et al.",
+      "year": 2022,
+      "arxiv_id": "",
+      "role": "Gap Identification",
+      "relationship_sentence": "Their finding that example labels often matter less than input format highlights a copying heuristic in ICL, a limitation this paper addresses by showing how late-layer heads can override early truthful representations when demonstrations are false."
+    },
+    {
+      "title": "Are Sixteen Heads Really Better Than One?",
+      "authors": "Michel et al.",
+      "year": 2019,
+      "arxiv_id": "1905.10650",
+      "role": "Foundation",
+      "relationship_sentence": "This work established targeted attention-head ablation as a tool to assess functional contributions, a technique used here to causally implicate specific late-layer heads in harmful imitation."
+    }
+  ],
+  "synthesis_narrative": "Induction heads were first characterized as attention heads that attend to previous occurrences to copy the next token, revealing a concrete copying mechanism for in-context learning. The tuned/logit lens line of work showed how to decode a model\u2019s evolving predictions at intermediate layers by aligning hidden states with the output space, making it possible to track how predictions sharpen or shift across depth. Circuit-level analyses demonstrated that individual attention heads can implement interpretable roles\u2014such as \u201cname mover\u201d heads that copy content from specific prompt locations\u2014and validated these roles via targeted head ablations. TruthfulQA established that language models often imitate falsehoods present in prompts and provided a benchmarked notion of harmful imitation. Complementing this, studies of few-shot prompting found that models sometimes rely more on input format than label semantics, indicating a susceptibility to simplistic copying heuristics. Foundational work on attention-head ablation provided the intervention toolkit to causally test which heads drive particular behaviors.\nTogether, these insights suggested that a copying mechanism\u2014likely implemented by specialized attention heads\u2014could hijack predictions in few-shot settings with misleading demonstrations, yet no work had traced when along the forward pass this takeover occurs or tied it to concrete heads. Building on layerwise decoding, circuit discovery, and head ablation, the current paper identifies a critical layer where predictions diverge under false demonstrations (\u201coverthinking\u201d) and pinpoints late-layer copying heads (\u201cfalse induction heads\u201d) whose ablation mitigates harmful imitation\u2014synthesizing prior mechanistic tools to explain when and how false demonstrations corrupt in-context reasoning.",
+  "target_paper": {
+    "title": "Overthinking the Truth: Understanding how Language Models Process False Demonstrations",
+    "authors": "Danny Halawi, Jean-Stanislas Denain, Jacob Steinhardt",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Mechanistic Interpretability, AI Safety, Interpretability, Science of ML, few-shot learning, Large Language Models",
+    "abstract": "Modern language models can imitate complex patterns through few-shot learning, enabling them to complete challenging tasks without fine-tuning. However, imitation can also lead models to reproduce inaccuracies or harmful content if present in the context. We study harmful imitation through the lens of a model\u2019s internal representations, and identify two related phenomena: overthinking and false induction heads. The first phenomenon, overthinking, appears when we decode predictions from intermediate layers, given correct vs. incorrect few-shot demonstrations. At early layers, both demonstrations induce similar model behavior, but the behavior diverges sharply at some \u201ccritical layer\u201d, after which the accuracy given incorrect demonstrations progressively decreases. The second phenomenon, false induction heads, are a possible mechanistic cause of overthinking: these are heads in late layers that attend to and copy false information from previous demonstrations, and whose ablation reduces ",
+    "openreview_id": "Tigr1kMDZy",
+    "forum_id": "Tigr1kMDZy"
+  },
+  "analysis_timestamp": "2026-01-06T06:58:02.047004"
+}

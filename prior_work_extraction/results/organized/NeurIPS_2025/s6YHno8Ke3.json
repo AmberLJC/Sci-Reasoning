@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Model-Agnostic Meta-Learning for Fast Adaptation of Deep Networks (MAML)",
+      "authors": "Chelsea Finn et al.",
+      "year": 2017,
+      "role": "Foundational gradient-based meta-learning algorithm using episodic training for rapid within-task adaptation.",
+      "relationship_sentence": "ConML augments the MAML-style episodic meta-training loop by injecting a contrastive meta-objective that uses task identity as supervision to shape the learned representation during meta-training."
+    },
+    {
+      "title": "Matching Networks for One Shot Learning",
+      "authors": "Oriol Vinyals et al.",
+      "year": 2016,
+      "role": "Introduced episodic training for few-shot learning and the notion of task-structured episodes.",
+      "relationship_sentence": "ConML leverages the same episodic structure introduced by Matching Networks, but explicitly exploits task identity from episodes as supervised signal in a contrastive objective across tasks."
+    },
+    {
+      "title": "Prototypical Networks for Few-shot Learning",
+      "authors": "Jake Snell, Kevin Swersky, Richard S. Zemel",
+      "year": 2017,
+      "role": "Metric-based meta-learning that emphasizes representation alignment within classes and discrimination across classes in episodes.",
+      "relationship_sentence": "ConML generalizes the alignment/discrimination principle from class-level metric learning to task-level supervision by applying a contrastive loss to meta-learner representations across tasks."
+    },
+    {
+      "title": "Representation Learning with Contrastive Predictive Coding (CPC)",
+      "authors": "Aaron van den Oord, Yazhe Li, Oriol Vinyals",
+      "year": 2018,
+      "role": "Established the InfoNCE contrastive objective as a powerful tool for representation learning.",
+      "relationship_sentence": "ConML\u2019s meta-objective is instantiated as an InfoNCE-style contrastive loss where positives and negatives are defined via task identity, directly borrowing CPC\u2019s contrastive formulation."
+    },
+    {
+      "title": "Supervised Contrastive Learning",
+      "authors": "Prannay Khosla et al.",
+      "year": 2020,
+      "role": "Showed that using labels to define positive/negative pairs improves representation alignment and class separation.",
+      "relationship_sentence": "ConML adapts the supervised-contrastive idea by treating task identity as the supervisory label, enforcing task-aware alignment and discrimination in the meta-learner\u2019s representations."
+    },
+    {
+      "title": "Understanding Contrastive Representation Learning through Alignment and Uniformity on the Hypersphere",
+      "authors": "Tongzhou Wang, Phillip Isola",
+      "year": 2020,
+      "role": "Provided theoretical principles (alignment and uniformity) explaining why contrastive objectives work.",
+      "relationship_sentence": "ConML is explicitly motivated by alignment/discrimination principles, applying them at the task level to encourage aligned representations within tasks and uniform separation across tasks."
+    },
+    {
+      "title": "MetaICL: Learning to Learn In-Context",
+      "authors": "Sewon Min et al.",
+      "year": 2022,
+      "role": "Bridged meta-learning and in-context learning by casting tasks as episodes for large language models.",
+      "relationship_sentence": "ConML\u2019s claim of seamless integration with in-context learners builds on MetaICL\u2019s framing of tasks for LMs, adding a task-identity-driven contrastive objective to improve generalization in ICL settings."
+    }
+  ],
+  "synthesis_narrative": "ConML\u2019s core idea\u2014using task identity as explicit supervision to impose a contrastive meta-objective on learned representations\u2014sits at the intersection of episodic meta-learning and contrastive representation learning. Episodic training, introduced for few-shot learning by Matching Networks and adopted across meta-learning algorithms such as MAML and Prototypical Networks, provides a natural scaffold where each episode defines a task with its own identity. These works established the importance of representations that can be quickly adapted and discriminative within episodes, yet they did not explicitly exploit task identity as a supervisory signal beyond constructing episodes.\n\nContrastive learning contributes the machinery to operationalize that supervision. CPC popularized the InfoNCE objective as a general recipe for learning representations by contrasting positives and negatives, while Supervised Contrastive Learning showed that leveraging labels to define these sets yields stronger alignment and separation. Wang and Isola\u2019s alignment/uniformity principles furnish a conceptual rationale for why such objectives improve generalization. ConML transposes these insights from class labels to task identity: it defines positives and negatives at the task level and optimizes an InfoNCE-style objective on the meta-learner\u2019s representations, thereby promoting within-task alignment and across-task discrimination during meta-training.\n\nFinally, MetaICL demonstrates how tasks can be framed for in-context learning in large language models. ConML leverages this framing to remain problem- and learner-agnostic: its contrastive meta-objective can be layered onto standard meta-learners (e.g., MAML, ProtoNets) and in-context learners alike, yielding broader and more robust generalization.",
+  "analysis_timestamp": "2026-01-07T00:21:32.315061"
+}

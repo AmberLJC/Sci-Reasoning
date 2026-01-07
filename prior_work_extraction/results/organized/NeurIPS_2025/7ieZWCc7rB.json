@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Grounding DINO: Marrying DINO with Grounded Pre-Training for Open-Set Object Detection",
+      "authors": "Liu et al.",
+      "year": 2023,
+      "role": "Open-vocabulary 2D detector",
+      "relationship_sentence": "OpenBox leverages text-conditioned 2D instance proposals and category names in Stage 1 much like Grounding DINO, using open-vocabulary detections to seed instance cues that are later associated with 3D points and used to derive class-specific box statistics."
+    },
+    {
+      "title": "Segment Anything",
+      "authors": "Kirillov et al.",
+      "year": 2023,
+      "role": "Foundation model for 2D instance masks",
+      "relationship_sentence": "OpenBox\u2019s instance-level cue extraction and context-aware refinement are enabled by high-quality, category-agnostic masks in 2D, a capability popularized by SAM and crucial for robustly mapping image instances to LiDAR points without heavy retraining."
+    },
+    {
+      "title": "OpenScene: 3D Scene Understanding with Open Vocabularies",
+      "authors": "Peng et al.",
+      "year": 2023,
+      "role": "2D-to-3D vision-language fusion blueprint",
+      "relationship_sentence": "OpenScene showed how to back-project and fuse multi-view 2D vision-language signals into 3D; OpenBox adapts this idea to associate open-vocabulary 2D instances with 3D point clouds and refine them using scene context rather than iterative detector self-training."
+    },
+    {
+      "title": "Frustum PointNets for 3D Object Detection from RGB-D Data",
+      "authors": "Charles R. Qi, Wei Liu, Chenxia Wu, Hao Su, Leonidas J. Guibas",
+      "year": 2018,
+      "role": "2D-to-3D lifting and class-wise size priors",
+      "relationship_sentence": "OpenBox inherits the principle of using 2D detections to delimit 3D search regions and extends the idea of class-dependent size priors by computing adaptive, open-vocabulary size statistics for its second-stage box generation."
+    },
+    {
+      "title": "AB3DMOT: A Baseline for 3D Multi-Object Tracking",
+      "authors": "Weng et al.",
+      "year": 2020,
+      "role": "Motion state estimation via 3D tracking",
+      "relationship_sentence": "OpenBox\u2019s second-stage categorization of instances by rigidity and motion state draws on insights from 3D MOT about using temporal dynamics and velocity cues to distinguish moving versus static objects to guide bounding box parameterization."
+    },
+    {
+      "title": "ST3D: Self-Training for Unsupervised Domain Adaptation on 3D Object Detection",
+      "authors": "Yang et al.",
+      "year": 2021,
+      "role": "Iterative pseudo-label refinement baseline",
+      "relationship_sentence": "OpenBox targets the limitations of iterative self-training exemplified by ST3D\u2014reliance on multiple refinement rounds and heavy compute\u2014by replacing it with a two-stage, one-pass annotation pipeline anchored by 2D foundation cues and context-aware 2D\u20133D association."
+    }
+  ],
+  "synthesis_narrative": "OpenBox\u2019s core innovation\u2014a two-stage, open-vocabulary 3D box annotation pipeline without iterative self-training\u2014stands on three converging threads of prior work. First, open-vocabulary 2D foundations such as Grounding DINO and SAM provide robust, category-flexible instance cues from images. These models enable OpenBox to retrieve instance masks and text-conditioned detections at scale, seeding reliable proposals and labels without task-specific retraining. Second, recent 2D-to-3D transfer methods like OpenScene demonstrate how to project and fuse multi-view 2D vision-language signals into 3D. OpenBox leverages this paradigm in Stage 1, performing context-aware association of 2D instances to point clouds and refining them with scene consistency rather than the multi-round pseudo-labeling typical in self-training pipelines like ST3D. Third, classical 2D-driven 3D detection and temporal reasoning inform OpenBox\u2019s Stage 2. Frustum PointNets established lifting 2D detections into 3D search regions and employing class-wise size priors; OpenBox generalizes this with open-vocabulary class-specific size statistics and adaptive box shapes. Complementarily, motion modeling from 3D tracking (e.g., AB3DMOT) motivates categorizing instances by rigidity and motion state, allowing OpenBox to tailor box generation to dynamic versus static objects. Together, these strands yield a single-pass, foundation-model-guided pipeline that produces high-quality, open-vocabulary 3D bounding boxes while avoiding the computational overhead and error accumulation of iterative self-training.",
+  "analysis_timestamp": "2026-01-06T23:42:48.154482"
+}

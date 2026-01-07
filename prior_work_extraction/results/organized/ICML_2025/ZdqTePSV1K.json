@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "GLISTER: Generalization based Data Subset Selection for Efficient and Robust Learning",
+      "authors": "Killamsetty et al.",
+      "year": 2021,
+      "role": "IE-based one-shot subset selection baseline using a target-model surrogate and bilevel optimization",
+      "relationship_sentence": "RAM-APL targets the same one-shot data selection goal as GLISTER but replaces dataset-dependent, target-trained IEs with foundation models and a new pseudo-label accuracy ranking tailored to fine-grained data."
+    },
+    {
+      "title": "CRAIG: Coreset Selection via Submodular Optimization of Gradients",
+      "authors": "Mirzasoleiman et al.",
+      "year": 2020,
+      "role": "Canonical gradient/coverage-based coreset selection that relies on a target model\u2019s gradients",
+      "relationship_sentence": "This work challenges CRAIG-style gradient coverage by showing FM-based IEs can outperform such target-model-dependent methods on fine-grained datasets and by proposing a non-gradient, pseudo-label-driven ranking."
+    },
+    {
+      "title": "Learning Transferable Visual Models From Natural Language Supervision (CLIP)",
+      "authors": "Radford et al.",
+      "year": 2021,
+      "role": "Foundation model providing zero-shot classification and robust visual embeddings",
+      "relationship_sentence": "CLIP supplies the core FM capability\u2014zero-shot pseudo-class scores and transferable features\u2014that RAM-APL aggregates across multiple FMs to drive fine-grained one-shot subset selection."
+    },
+    {
+      "title": "DataComp: In Search of Data for Multimodal Learning",
+      "authors": "Ilharco et al.",
+      "year": 2023,
+      "role": "FM-driven data curation framework using CLIP scoring to filter/curate large-scale datasets",
+      "relationship_sentence": "DataComp\u2019s success with CLIP-based scoring for dataset curation motivates using FMs as information extractors for selection and foreshadows RAM-APL\u2019s insight that FM choice materially impacts outcomes."
+    },
+    {
+      "title": "DivideMix: Learning with Noisy Labels as Semi-Supervised Learning",
+      "authors": "Li et al.",
+      "year": 2020,
+      "role": "Multi-model agreement and loss modeling to estimate label correctness under noise",
+      "relationship_sentence": "RAM-APL adapts DivideMix\u2019s core idea\u2014leveraging multiple models to better estimate label correctness\u2014by averaging pseudo-class accuracy signals from several FMs to robustly rank examples."
+    },
+    {
+      "title": "Query by Committee",
+      "authors": "Seung, Opper, and Sompolinsky",
+      "year": 1992,
+      "role": "Foundational active learning principle using committees for selection via (dis)agreement",
+      "relationship_sentence": "RAM-APL operationalizes a modern committee-of-FMs, using agreement on pseudo-classes to guide one-shot subset selection, especially benefiting fine-grained recognition."
+    },
+    {
+      "title": "Pseudo-Label: The Simple and Efficient Semi-Supervised Learning Method for Deep Neural Networks",
+      "authors": "Dong-Hyun Lee",
+      "year": 2013,
+      "role": "Introduced pseudo-labeling as supervision from model predictions",
+      "relationship_sentence": "RAM-APL builds on pseudo-labeling by converting zero-shot FM predictions into pseudo-class labels and then ranking samples via a multi-FM mean-accuracy criterion rather than single-model confidence."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s key contribution\u2014RAM-APL, a multi-foundation-model, pseudo-label-accuracy-based one-shot subset selection method tailored to fine-grained datasets\u2014emerges from two lines of prior work. First, classic one-shot/coreset selection approaches such as GLISTER and CRAIG established that a small, well-chosen subset can approximate full-dataset training, but they depend on dataset-specific information extractors or gradients from a target model. These methods motivate the paper\u2019s Question (1) and serve as the primary baseline paradigm that the authors replace with foundation-model (FM) extractors. Second, recent progress with FMs shows their utility for data curation and transfer. CLIP provides zero-shot classification and robust embeddings, while DataComp demonstrates that CLIP-based scoring can curate datasets effectively at scale and that model choice matters\u2014directly motivating Question (2). To design a selection criterion that exploits FMs while being robust, the authors draw on pseudo-labeling (Lee), using FM predictions as pseudo-class labels, and on multi-model agreement ideas from Query by Committee and DivideMix. Instead of relying on a single model\u2019s confidence, RAM-APL aggregates signals across multiple FMs to estimate the mean accuracy of pseudo-class labels and rank examples accordingly. This synthesis replaces dataset-dependent IEs with transferable FMs and leverages committee-style agreement to excel on fine-grained data, while also explaining diminished gains on noisy, coarse-grained settings.",
+  "analysis_timestamp": "2026-01-07T00:21:32.397229"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "SKEMPI 2.0: an updated benchmark of changes in protein\u2013protein binding energy, kinetics and thermodynamics upon mutation",
+      "authors": "Jankauskait\u0117 et al.",
+      "year": 2019,
+      "role": "Foundation",
+      "relationship_sentence": "Defines the standard PPI \u0394\u0394G prediction task and supplies the core benchmark used to evaluate methods under severe data scarcity, a key motivation for transferring knowledge from pretraining."
+    },
+    {
+      "title": "Flex ddG: Rosetta ensemble-based estimation of changes in protein\u2013protein binding affinity upon mutation",
+      "authors": "Barlow et al.",
+      "year": 2018,
+      "role": "Baseline",
+      "relationship_sentence": "Provides a primary physics-based baseline grounded in the thermodynamic cycle for PPI \u0394\u0394G; the present work starts from the same thermodynamic definition but replaces costly conformational sampling with Boltzmann-aligned use of learned inverse-folding likelihoods."
+    },
+    {
+      "title": "Deep generative models of genetic variation capture the effects of mutations",
+      "authors": "Riesselman et al.",
+      "year": 2018,
+      "role": "Inspiration",
+      "relationship_sentence": "Introduces the idea that log-likelihood differences from unsupervised generative models can approximate mutational effects via a statistical-energy view, directly inspiring this paper\u2019s use of model log-likelihoods to estimate \u0394\u0394G."
+    },
+    {
+      "title": "Generative models for graph-based protein design",
+      "authors": "Ingraham et al.",
+      "year": 2019,
+      "role": "Foundation",
+      "relationship_sentence": "Established modeling p(sequence|structure) for inverse folding and interpreting negative log-likelihood as a statistical energy; this paper leverages that quantity and, via Bayes plus Boltzmann, aligns it to physical binding free energy changes."
+    },
+    {
+      "title": "ProteinMPNN: Protein sequence design by learning probabilistic models of sequences conditioned on backbone",
+      "authors": "Dauparas et al.",
+      "year": 2022,
+      "role": "Extension",
+      "relationship_sentence": "Provides a state-of-the-art inverse folding model whose log-likelihoods are directly used and explicitly aligned to \u0394\u0394G in this work, improving over prior ad hoc use of raw likelihood differences."
+    },
+    {
+      "title": "ESM-IF1: Inverse folding with a sequence\u2013structure transformer",
+      "authors": "Hsu et al.",
+      "year": 2022,
+      "role": "Extension",
+      "relationship_sentence": "Supplies a powerful structure-conditioned sequence likelihood that this paper repurposes; the Boltzmann Alignment formalism calibrates ESM-IF1 log-likelihoods to binding free-energy differences."
+    },
+    {
+      "title": "SAAMBE-3D: Predicting the effect of mutations on protein\u2013protein interactions",
+      "authors": "Pahari et al.",
+      "year": 2020,
+      "role": "Gap Identification",
+      "relationship_sentence": "Representative supervised \u0394\u0394G predictor relying on hand-crafted/physics-derived features; its limited generalization and data dependence motivate a principled alignment of pretrained inverse-folding knowledge to \u0394\u0394G."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core idea\u2014Boltzmann Alignment of inverse-folding log-likelihoods to predict \u0394\u0394G for protein\u2013protein interactions\u2014arises from unifying thermodynamic principles with advances in structure-conditioned generative modeling. SKEMPI 2.0 formalized the PPI \u0394\u0394G task and, by highlighting data scarcity, motivated leveraging pretrained models rather than purely supervised training. Physics-based methods such as Rosetta Flex ddG grounded \u0394\u0394G prediction in the thermodynamic cycle, but their reliance on explicit conformational sampling is computationally intensive. DeepSequence provided the conceptual bridge that differences in model log-likelihoods can act as statistical energies reflecting mutational impact, suggesting a route to energy prediction without direct simulation. In parallel, inverse folding was established by Ingraham et al., who modeled p(sequence|structure) and interpreted negative log-likelihood as a sequence \u2018energy\u2019 for a given backbone; subsequent high-capacity models such as ProteinMPNN and ESM-IF1 delivered strong, calibrated log-likelihoods conditioned on structure. Prior uses of these scores for mutation assessment, however, lacked a principled thermodynamic alignment to binding free energy and did not account for conformational ensembles. The present work combines the Boltzmann distribution with Bayes\u2019 theorem to re-express intractable p(structure|sequence) ratios in terms of accessible p(sequence|structure) likelihoods from inverse folding, thereby directly aligning statistical energies to \u0394\u0394G. This addresses limitations of feature-engineered predictors like SAAMBE-3D and computationally heavy physics methods, yielding a data-efficient, thermodynamically grounded estimator of mutational effects on PPIs.",
+  "analysis_timestamp": "2026-01-06T23:09:26.598566"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Long Short-Term Memory",
+      "authors": "Sepp Hochreiter, J\u00fcrgen Schmidhuber",
+      "year": 1997,
+      "role": "Conceptual foundation for gating",
+      "relationship_sentence": "Established the principle of learnable gates to regulate information flow, which the paper instantiates at the attention-head level via a head-specific sigmoid gate applied after SDPA."
+    },
+    {
+      "title": "GLU Variants Improve Transformer",
+      "authors": "Noam Shazeer",
+      "year": 2020,
+      "role": "Gated nonlinearity in Transformers",
+      "relationship_sentence": "Showed that simple multiplicative sigmoid-style gates (e.g., GEGLU/SwiGLU) substantially improve Transformer performance and scaling, directly motivating the paper\u2019s use of a lightweight sigmoid gate to nonlinearly modulate attention outputs."
+    },
+    {
+      "title": "Stabilizing Transformers for Reinforcement Learning (GTrXL)",
+      "authors": "Emilio Parisotto, H. Francis Song, et al.",
+      "year": 2019,
+      "role": "Gating for stability in Transformer blocks",
+      "relationship_sentence": "Introduced gating around attention/residual pathways to improve optimization stability; the reported gains in training stability and larger learning-rate tolerance with post-SDPA gating align with this line of evidence."
+    },
+    {
+      "title": "Linformer: Self-Attention with Linear Complexity",
+      "authors": "Sinong Wang, Belinda Z. Li, Madian Khabsa, Han Fang, Hao Ma",
+      "year": 2020,
+      "role": "Low-rank perspective on attention",
+      "relationship_sentence": "Argued that self-attention is effectively low-rank, providing theoretical motivation for the paper\u2019s claim that injecting nonlinearity after the low-rank SDPA mapping increases expressivity and yields consistent quality gains."
+    },
+    {
+      "title": "Sparse Sequence-to-Sequence Models (entmax)",
+      "authors": "Ben Peters, Vlad Niculae, Andr\u00e9 F. T. Martins, Noah A. Smith",
+      "year": 2019,
+      "role": "Nonlinear alternatives that induce sparsity in attention",
+      "relationship_sentence": "Demonstrated that replacing softmax with sparse nonlinearities improves behavior by inducing sparsity; the new post-SDPA gate similarly promotes sparsity effects without altering the attention normalization itself."
+    },
+    {
+      "title": "Are Sixteen Heads Really Better than One?",
+      "authors": "Paul Michel, Omer Levy, Graham Neubig",
+      "year": 2019,
+      "role": "Head-level redundancy and sparsification",
+      "relationship_sentence": "Showed many attention heads are redundant and can be pruned; a learned head-specific gate provides a direct mechanism to downweight or silence unhelpful heads, improving efficiency and mitigating pathological head behaviors."
+    },
+    {
+      "title": "Outrageously Large Neural Networks: The Sparsely-Gated Mixture-of-Experts Layer",
+      "authors": "Noam Shazeer, Azalia Mirhoseini, Krzysztof Maziarz, et al.",
+      "year": 2017,
+      "role": "Gating for sparsity and scaling",
+      "relationship_sentence": "Established that simple gating mechanisms can induce sparsity and unlock better scaling; the paper\u2019s head-level gate echoes this principle within attention, contributing to improved scaling and stability in both dense and MoE LLMs."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s key contribution\u2014a lightweight, head-specific sigmoid gate applied after scaled dot-product attention\u2014sits squarely in the lineage of gating as a means to regulate information flow. LSTM introduced the core idea of learnable gates to control what to pass or suppress, later refined in Transformers by Shazeer\u2019s GLU variants, which showed that small, multiplicative sigmoid-style gates can substantially improve performance and scaling. GTrXL further demonstrated that gating around attention pathways stabilizes optimization, anticipating the present work\u2019s findings of improved training stability and tolerance to larger learning rates.\n\nBeyond architectural precedent, Linformer provided a crucial theoretical backdrop by framing self-attention as effectively low-rank. The present paper\u2019s analysis\u2014that adding a nonlinearity after SDPA enriches this low-rank mapping\u2014aligns with that perspective, explaining consistent gains from a simple post-attention gate. On the distributional side, entmax showed that altering attention nonlinearities to encourage sparsity can yield better inductive biases. Rather than modifying normalization, the new method induces sparsity at the output of attention via a gate, simplifying implementation while capturing similar benefits.\n\nFinally, works on head redundancy (Michel et al.) and sparsely-gated MoE (Shazeer et al. 2017) connect the head-specific gate to practical sparsification and scaling: the gate can suppress unhelpful heads, reduce pathological focus, and integrate cleanly with MoE training. Together, these threads directly underpin the paper\u2019s core insight: a minimal, per-head sigmoid gate after SDPA reliably improves quality, stability, and scaling by injecting targeted nonlinearity and controllable sparsity into the attention pathway.",
+  "analysis_timestamp": "2026-01-07T00:21:32.279183"
+}

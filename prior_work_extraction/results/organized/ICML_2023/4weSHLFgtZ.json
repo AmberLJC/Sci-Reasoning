@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Denoising Diffusion Restoration Models",
+      "authors": "Bahjat Kawar et al.",
+      "year": 2022,
+      "role": "Baseline",
+      "relationship_sentence": "GibbsDDRM directly extends DDRM by replacing DDRM\u2019s closed-form conditional updates for known linear operators with a Gibbs scheme that also samples the unknown operator, enabling blind inverse problems."
+    },
+    {
+      "title": "Score-Based Generative Modeling through Stochastic Differential Equations",
+      "authors": "Yang Song et al.",
+      "year": 2021,
+      "role": "Foundation",
+      "relationship_sentence": "This work provides the diffusion/score-based prior and posterior-sampling perspective for inverse problems that GibbsDDRM adopts as the data prior p(x) within its joint model over signals, measurements, and operators."
+    },
+    {
+      "title": "Diffusion Posterior Sampling for Linear Inverse Problems",
+      "authors": "Hyungjin Chung et al.",
+      "year": 2022,
+      "role": "Gap Identification",
+      "relationship_sentence": "DPS demonstrates posterior sampling with diffusion priors but assumes the measurement operator is known; GibbsDDRM explicitly addresses this limitation by treating the operator as latent and sampling it jointly."
+    },
+    {
+      "title": "Partially Collapsed Gibbs Samplers: Theory and Methods",
+      "authors": "Taeyoung Park et al.",
+      "year": 2008,
+      "role": "Foundation",
+      "relationship_sentence": "GibbsDDRM\u2019s efficient sampler is built on the partially collapsed Gibbs principle, collapsing subsets of variables during operator updates to improve mixing and tractability."
+    },
+    {
+      "title": "Understanding and Evaluating Blind Deconvolution Algorithms",
+      "authors": "Anat Levin et al.",
+      "year": 2009,
+      "role": "Foundation",
+      "relationship_sentence": "This work formalized blind linear inverse problems as joint inference over image and blur kernel under priors, a formulation GibbsDDRM follows while replacing handcrafted priors with a pretrained diffusion prior and MCMC sampling."
+    },
+    {
+      "title": "Double-DIP: Unsupervised Image Decomposition via Coupled Deep-Image-Priors",
+      "authors": "Yossi Gandelsman et al.",
+      "year": 2019,
+      "role": "Inspiration",
+      "relationship_sentence": "Double-DIP showed that blind inverse problems can be addressed in a problem-agnostic way by jointly modeling the image and operator with generic priors; GibbsDDRM adopts this joint, problem-agnostic blind setting but performs Bayesian posterior sampling with diffusion priors."
+    }
+  ],
+  "synthesis_narrative": "GibbsDDRM\u2019s core contribution\u2014solving blind linear inverse problems by sampling jointly over the signal and unknown operator using a pretrained diffusion prior\u2014emerges from two converging lines of work. First, score/diffusion models (Song et al.) established powerful data priors and a posterior-sampling view for inverse problems, which DDRM (Kawar et al.) operationalized into efficient conditional updates when the forward operator is known. However, diffusion-based restorations such as DDRM and DPS (Chung et al.) fundamentally require knowledge of the measurement operator, a critical gap for blind settings. GibbsDDRM targets precisely this gap by lifting the DDRM framework to a joint model over data, measurements, and operator, and by sampling the posterior when the operator is unknown.\n\nThe second thread comes from Bayesian treatments of blind inverse problems. Classical blind deconvolution (Levin et al.) formalized the joint estimation of image and kernel under priors, highlighting the importance of principled probabilistic modeling to avoid degeneracies. More recently, Double-DIP (Gandelsman et al.) illustrated that problem-agnostic, joint priors over image and operator can solve diverse blind tasks, motivating GibbsDDRM\u2019s problem-agnostic posture. To make the joint sampling efficient, GibbsDDRM adopts the partially collapsed Gibbs strategy (Park & van Dyk), collapsing appropriate latent variables to improve mixing and computational tractability. Altogether, GibbsDDRM fuses DDRM\u2019s diffusion-based restoration with Bayesian blind modeling and partially collapsed Gibbs sampling, removing the \u201cknown operator\u201d assumption while retaining problem-agnostic applicability.",
+  "analysis_timestamp": "2026-01-06T23:09:26.543768"
+}

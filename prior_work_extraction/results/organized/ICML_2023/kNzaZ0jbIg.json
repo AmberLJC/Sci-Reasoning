@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Outrageously Large Neural Networks: The Sparsely-Gated Mixture-of-Experts Layer",
+      "authors": "Noam Shazeer et al.",
+      "year": 2017,
+      "role": "Foundation",
+      "relationship_sentence": "Introduced the sparse MoE framework and top-k gating that pMoE instantiates at the patch level; the analyzed model is a specialization of this conditional computation paradigm with CNN experts."
+    },
+    {
+      "title": "V-MoE: Learning Visual Representations with Mixture of Experts",
+      "authors": "Carlos Riquelme et al.",
+      "year": 2021,
+      "role": "Baseline",
+      "relationship_sentence": "Pioneered patch/token-level MoE routing in vision and demonstrated strong empirical compute-accuracy tradeoffs; the present paper provides the first provable sample-efficiency explanation for this patch-level MoE regime."
+    },
+    {
+      "title": "Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity",
+      "authors": "William Fedus et al.",
+      "year": 2021,
+      "role": "Gap Identification",
+      "relationship_sentence": "Popularized simple token-to-single-expert routing and capacity constraints, but offered no theoretical generalization or sample-complexity guarantees; this lack of theory directly motivates the present analysis."
+    },
+    {
+      "title": "GShard: Scaling Giant Models with Conditional Computation and Automatic Sharding",
+      "authors": "Yanping Lepikhin et al.",
+      "year": 2021,
+      "role": "Related Problem",
+      "relationship_sentence": "Developed practical MoE routing with capacity limits and load-balancing losses; the pMoE setup analyzed here adopts analogous per-expert capacity constraints that inform the theoretical model."
+    },
+    {
+      "title": "BASE Layers: Simplifying Training of Large, Sparse Neural Networks",
+      "authors": "Mike Lewis et al.",
+      "year": 2021,
+      "role": "Inspiration",
+      "relationship_sentence": "Proposed expert-choice routing that assigns a fixed quota of tokens to each expert; the pMoE \u2018each expert receives l patches\u2019 prioritized routing mirrors this expert-allocated selection, which the paper formalizes and analyzes."
+    },
+    {
+      "title": "TokenLearner: What Can 8 Learned Tokens Do for Images and Videos?",
+      "authors": "Michael S. Ryoo et al.",
+      "year": 2021,
+      "role": "Related Problem",
+      "relationship_sentence": "Showed that selecting a small subset of informative patches (l << n) can preserve accuracy; this selective patch processing idea underpins the pMoE assumption that routing only l patches per expert can still achieve strong performance, which the paper proves is sample-efficient."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core contribution\u2014a provable sample-complexity advantage for patch-level routing in MoE with CNN experts\u2014sits squarely on the conditional computation lineage inaugurated by Shazeer et al. (2017), which established the sparsely-gated MoE framework and top-k routing. As MoE scaled in practice, GShard and Switch Transformers codified pragmatic routing with capacity limits and simple top-1/ top-k routing, demonstrating large empirical gains but leaving a clear theoretical gap regarding generalization and sample efficiency. In vision, V-MoE concretized patch/token-level routing to experts, showing that sending only a subset of patches to experts can deliver strong accuracy-cost tradeoffs; this patch-level MoE is the direct baseline whose empirical success the current work seeks to explain. Concurrently, routing designs such as BASE Layers\u2019 expert-choice mechanism\u2014where experts select a fixed quota of tokens\u2014closely align with pMoE\u2019s \u2018each expert receives l patches\u2019 prioritized routing and motivate the precise routing regime analyzed here. Finally, token-selection methods like TokenLearner provided evidence that processing only a small number of learned patches can suffice, reinforcing the central modeling assumption (l << n) that the paper converts into a rigorous sample-complexity benefit. Integrating these strands, the present work delivers the first provable account that patch-level MoE with capacity-limited, prioritized routing can reduce the sample complexity by a polynomial factor in n/l and outperform comparable single-expert CNNs.",
+  "analysis_timestamp": "2026-01-06T23:09:26.571765"
+}

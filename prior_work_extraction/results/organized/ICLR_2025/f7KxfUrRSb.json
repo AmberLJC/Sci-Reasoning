@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Direct Preference Optimization: Your Language Model is Secretly a Reward Model",
+      "authors": "Rafailov et al.",
+      "year": 2023,
+      "arxiv_id": "2305.18290",
+      "role": "Baseline",
+      "relationship_sentence": "WSPO adopts the DPO log-likelihood ratio view of preferences and replaces the reward term with the weak model\u2019s pre/post-alignment likelihood shift, effectively distilling a weak policy\u2019s alignment shift into a stronger model."
+    },
+    {
+      "title": "Training language models to follow instructions with human feedback",
+      "authors": "Ouyang et al.",
+      "year": 2022,
+      "arxiv_id": "2203.02155",
+      "role": "Foundation",
+      "relationship_sentence": "WSPO builds on the RLHF problem formulation introduced here\u2014learning from pairwise human preferences\u2014but retools the supervision signal to come from a weak aligned model\u2019s distributional shift instead of an explicit reward model."
+    },
+    {
+      "title": "Constitutional AI: Harmlessness from AI Feedback",
+      "authors": "Bai et al.",
+      "year": 2022,
+      "arxiv_id": "2212.08073",
+      "role": "Foundation",
+      "relationship_sentence": "This work established that AI feedback can substitute for human labels in alignment, a premise WSPO leverages by using a weaker aligned model as the feedback source to guide a stronger model."
+    },
+    {
+      "title": "Weak-to-Strong Generalization",
+      "authors": "OpenAI Alignment Team et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Inspiration",
+      "relationship_sentence": "WSPO directly extends the weak-to-strong idea by showing that a strong model can outperform its weak supervisor when trained to mimic the weak model\u2019s alignment-induced distribution shift."
+    },
+    {
+      "title": "RRHF: Rank Responses to Align Language Models with Human Feedback without Reinforcement Learning",
+      "authors": "Yuan et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Related Problem",
+      "relationship_sentence": "RRHF demonstrated effective non-RL ranking objectives for preference learning, informing WSPO\u2019s design choice to avoid RL and use pairwise signals distilled from a weak aligned policy."
+    },
+    {
+      "title": "Self-Instruct: Aligning Language Models with Self-Generated Instructions",
+      "authors": "Wang et al.",
+      "year": 2022,
+      "arxiv_id": "2212.10560",
+      "role": "Related Problem",
+      "relationship_sentence": "Self-Instruct showed that weaker/auxiliary models can bootstrap supervision for stronger models, an approach WSPO echoes by sourcing alignment signal from a weaker aligned model rather than humans."
+    }
+  ],
+  "synthesis_narrative": "Direct Preference Optimization (DPO) recast preference learning as matching a log-likelihood ratio between chosen and rejected responses relative to a reference policy, eliminating explicit reward modeling while preserving the Bradley\u2013Terry structure of preferences. RLHF (InstructGPT) established the core preference-based alignment setting\u2014optimizing policies to respect human choices\u2014while highlighting the reliance on costly reward models and RL. Constitutional AI demonstrated that AI-generated feedback can supplant human labels to produce safer assistants, showing that \u201cwho\u201d supplies preference signals can be flexibly redefined. Weak-to-Strong Generalization posited that models trained on labels from weaker supervisors can outperform them, suggesting a route to amplify alignment signals obtained without expensive expert annotators. RRHF confirmed that non-RL, ranking-based objectives can be competitive in aligning policies, strengthening the case for simple, stable preference optimization without PPO. Self-Instruct showed how weaker or auxiliary models can bootstrap supervision for stronger models at scale, reinforcing the feasibility of teacher\u2013student alignment pipelines without direct human annotation.\nTaken together, these works reveal a gap: we can replace humans with AI feedback and avoid RL, but we lack a principled way to transfer a weak model\u2019s alignment behavior itself. WSPO fills this by treating the weak aligned model\u2019s alignment-induced distribution shift (relative to its pre-aligned base) as the target signal and training a stronger model to match that shift using a DPO-style likelihood-ratio objective, thereby realizing weak-to-strong amplification specifically for preference alignment.",
+  "target_paper": {
+    "title": "Weak-to-Strong Preference Optimization: Stealing Reward from Weak Aligned Model",
+    "authors": "Wenhong Zhu, Zhiwei He, Xiaofeng Wang, Pengfei Liu, Rui Wang",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "weak-to-strong, model alignment",
+    "abstract": "Aligning language models (LMs) with human preferences has become a key area of research, enabling these models to meet diverse user needs better. Inspired by weak-to-strong generalization, where a strong LM fine-tuned on labels generated by a weaker model can consistently outperform its weak supervisor, we extend this idea to model alignment. In this work, we observe that the alignment behavior in weaker models can be effectively transferred to stronger models and even exhibit an amplification effect. Based on this insight, we propose a method called Weak-to-Strong Preference Optimization (WSPO), which achieves strong model alignment by learning the distribution differences before and after the alignment of the weak model. Experiments demonstrate that WSPO delivers outstanding performance, improving the win rate of Qwen2-7B-Instruct on Arena-Hard from 39.70 to 49.60, achieving a remarkable 47.04 length-controlled win rate on AlpacaEval 2, and scoring 7.33 on MT-bench. Our results sugge",
+    "openreview_id": "f7KxfUrRSb",
+    "forum_id": "f7KxfUrRSb"
+  },
+  "analysis_timestamp": "2026-01-06T11:10:40.791309"
+}

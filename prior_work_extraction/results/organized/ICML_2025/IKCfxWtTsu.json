@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Private Evolution (PE): API-assisted DP Synthetic Image Generation via Diffusion Model APIs",
+      "authors": "Yang Liu et al.",
+      "year": 2024,
+      "role": "Direct predecessor and baseline",
+      "relationship_sentence": "PCEvolve retains PE\u2019s API-driven evolutionary loop but replaces PE\u2019s DP-protected per-sample similarity voting with a DP-adapted contrastive utility, directly addressing PE\u2019s failure mode in few-shot regimes."
+    },
+    {
+      "title": "Mechanism Design via Differential Privacy (Exponential Mechanism)",
+      "authors": "Frank McSherry, Kunal Talwar",
+      "year": 2007,
+      "role": "Foundational DP selection mechanism",
+      "relationship_sentence": "PCEvolve adapts the Exponential Mechanism by redefining its score to a contrastive, inter-class utility over few-shot data, improving DP utility during candidate selection in the evolution loop."
+    },
+    {
+      "title": "The PATE Framework: Private Aggregation of Teacher Ensembles",
+      "authors": "Nicolas Papernot, Martin Abadi, \u00dalfar Erlingsson, Ian Goodfellow, Kunal Talwar",
+      "year": 2017,
+      "role": "DP aggregation via noisy voting",
+      "relationship_sentence": "PE\u2019s DP similarity voting is conceptually rooted in PATE-style noisy aggregation, and PCEvolve moves beyond item-level voting to DP contrastive aggregation while preserving the aggregation-privacy principle."
+    },
+    {
+      "title": "PATE-GAN: Generating Synthetic Data with Differential Privacy",
+      "authors": "James Jordon, Jinsung Yoon, Mihaela van der Schaar",
+      "year": 2019,
+      "role": "DP synthetic data via private aggregation",
+      "relationship_sentence": "PCEvolve echoes PATE-GAN\u2019s insight of leveraging aggregated, privatized signals to guide generation, but does so without training a private generator\u2014using public generative APIs and DP contrastive utilities instead."
+    },
+    {
+      "title": "Supervised Contrastive Learning",
+      "authors": "Prannay Khosla, Piotr Teterwak, et al.",
+      "year": 2020,
+      "role": "Source of inter-class contrastive signal design",
+      "relationship_sentence": "PCEvolve operationalizes supervised contrastive principles to mine inter-class relationships from few-shot private data and privatizes these signals within its adapted Exponential Mechanism."
+    },
+    {
+      "title": "Prototypical Networks for Few-Shot Learning",
+      "authors": "Jake Snell, Kevin Swersky, Richard Zemel",
+      "year": 2017,
+      "role": "Few-shot class structure via prototypes",
+      "relationship_sentence": "PCEvolve\u2019s few-shot contrastive utility is informed by prototype/distance-based class structure, using class-level relations rather than per-sample votes to remain informative under severe data scarcity."
+    },
+    {
+      "title": "DP-CGAN: Differentially Private Synthetic Data and Label Generation",
+      "authors": "Narges Torkzadehmahani, Peter Kairouz, Benedict Paten",
+      "year": 2019,
+      "role": "Training-based DP generative baseline highlighting limitations",
+      "relationship_sentence": "By showing the utility challenges of training private generators, DP-CGAN motivates PCEvolve\u2019s API-based, selection-with-privacy paradigm enhanced by contrastive utilities."
+    }
+  ],
+  "synthesis_narrative": "PCEvolve\u2019s core contribution is to make API-assisted, differentially private synthetic image generation work in the few-shot regime by replacing per-sample DP voting with a contrastive, inter-class utility integrated into an adapted Exponential Mechanism. This advances the Private Evolution (PE) line of work, which pioneered using public diffusion-model APIs and a DP selection loop but faltered when similarity voting lacked signal with scarce private data. The Exponential Mechanism (McSherry & Talwar) provides the formal backbone for DP selection; PCEvolve innovates by redefining the score to capture supervised contrastive structure over few-shot data, thereby improving the signal-to-noise trade-off under DP noise.\nPCEvolve\u2019s move from item-wise voting to relationship-level utilities is conceptually rooted in the PATE family: PATE introduced DP-safe aggregation via noisy voting, and PATE-GAN demonstrated how aggregated private signals can guide synthetic data generation. PCEvolve preserves the aggregation-with-privacy ethos but aggregates contrastive relationships (e.g., inter/intra-class discrepancies), which are more robust with few samples.\nDesigning such utilities draws on supervised contrastive learning (Khosla et al.), which emphasizes inter-class separation and intra-class cohesion, and on few-shot methods like Prototypical Networks that summarize classes via prototypes for stable distance computations. Finally, the broader motivation to avoid training private generators\u2014given the utility costs evidenced by DP-CGAN and related DP training approaches\u2014underscores PCEvolve\u2019s API-based, selection-centric strategy. The result is a principled synthesis: evolutionary search from PE, EM for DP selection, contrastive/prototypical structure for few-shot robustness, and API leverage for practicality.",
+  "analysis_timestamp": "2026-01-07T00:21:32.389416"
+}

@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Fourier Neural Operator for Parametric Partial Differential Equations",
+      "authors": "Zongyi Li et al.",
+      "year": 2020,
+      "role": "Baseline",
+      "relationship_sentence": "SFNO directly generalizes the FNO by replacing its Euclidean DFT-based spectral convolution with a spherical-harmonic transform to learn global operators on the sphere without assuming flat geometry."
+    },
+    {
+      "title": "FourCastNet: A Global Data-driven High-resolution Weather Model using Adaptive Fourier Neural Operators",
+      "authors": "Jaideep Pathak et al.",
+      "year": 2022,
+      "role": "Gap Identification",
+      "relationship_sentence": "FourCastNet applied FNO/AFNO to global atmospheric fields on latitude\u2013longitude grids and exhibited grid-imprinting, spectral artifacts, and dissipation from planar FFTs\u2014limitations SFNO explicitly addresses by moving to spherical spectral operators."
+    },
+    {
+      "title": "Spherical CNNs",
+      "authors": "Taco S. Cohen et al.",
+      "year": 2018,
+      "role": "Inspiration",
+      "relationship_sentence": "This work established that convolutions on spherical data should be performed in the spherical harmonic domain; SFNO adopts this core idea to formulate Fourier neural operator layers using spherical harmonics."
+    },
+    {
+      "title": "Learning SO(3)-Equivariant Representations with Spherical CNNs",
+      "authors": "Carlos Esteves et al.",
+      "year": 2018,
+      "role": "Related Problem",
+      "relationship_sentence": "By operationalizing spherical-harmonic transforms for learning on the sphere and demonstrating their stability/rotation handling, this paper informed SFNO\u2019s choice of spherical spectral parameterization for geometry-consistent operator learning."
+    },
+    {
+      "title": "WeatherBench: A benchmark data set for data-driven weather forecasting",
+      "authors": "Stephan Rasp et al.",
+      "year": 2020,
+      "role": "Foundation",
+      "relationship_sentence": "WeatherBench formalized data-driven global weather forecasting on spherical grids and provided the standardized evaluation setting that SFNO targets for long-horizon autoregressive rollouts."
+    },
+    {
+      "title": "Learning nonlinear operators via DeepONet based on the universal approximation theorem of operators",
+      "authors": "Lu Lu et al.",
+      "year": 2021,
+      "role": "Foundation",
+      "relationship_sentence": "DeepONet introduced the modern operator-learning paradigm that FNO and, by extension, SFNO build upon to learn mappings between function spaces."
+    }
+  ],
+  "synthesis_narrative": "SFNO\u2019s core innovation\u2014learning global operator maps natively on the sphere\u2014emerges by unifying two direct lines of prior work. On the operator-learning side, DeepONet established learning maps between function spaces, and the Fourier Neural Operator (FNO) operationalized this with efficient global spectral convolutions that capture long-range dependencies. However, FNO assumes Euclidean geometry and relies on planar DFTs. When this Euclidean assumption was carried over to global atmospheric prediction in FourCastNet, artifacts such as grid-imprinting near the poles, distorted spectra, and increased dissipation were observed, especially in long autoregressive rollouts. These concrete limitations form the explicit gap SFNO targets.\n\nConcurrently, the geometric deep learning community showed how to correctly process spherical data: Spherical CNNs (Cohen et al.; Esteves et al.) demonstrated that convolutions on the sphere should be defined in the spherical harmonic domain to respect spherical geometry and rotational structure. SFNO directly adopts this spherical spectral perspective but integrates it into the neural-operator framework\u2014replacing FNO\u2019s DFT with spherical harmonic transforms and learning spectral multipliers on the sphere\u2014thereby enabling resolution-independent operator learning without the flat-geometry mismatch. WeatherBench provides the standardized, global forecasting setup on spherical grids that SFNO uses to demonstrate its key outcome: stable, physically plausible long-horizon rollouts. In sum, SFNO explicitly extends FNO to the sphere, motivated by FourCastNet\u2019s observed failures with planar FFTs, and is technically inspired by the spherical-harmonic convolution machinery pioneered in Spherical CNNs.",
+  "analysis_timestamp": "2026-01-06T23:09:26.518371"
+}

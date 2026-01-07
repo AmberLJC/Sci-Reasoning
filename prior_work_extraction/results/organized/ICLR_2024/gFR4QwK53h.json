@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Causality: Models, Reasoning, and Inference (2nd ed.)",
+      "authors": "Judea Pearl",
+      "year": 2009,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "Provides the causal-graph and selection-bias framework (selection diagrams, d-separation under selection) that the paper leverages to argue why conditional independences are preserved when cases are deleted based only on variables in the conditioning set."
+    },
+    {
+      "title": "Graphical Models for Processing Missing Data",
+      "authors": "Karthika Mohan et al.",
+      "year": 2013,
+      "arxiv_id": "",
+      "role": "Inspiration",
+      "relationship_sentence": "Introduces missingness graphs (m-graphs) that explicitly model the data-generation and missingness mechanisms causally, which directly inspires the paper\u2019s Causal Dropout Model that treats zeros as outcomes of a causal measurement process rather than naive missingness."
+    },
+    {
+      "title": "Recovering from Selection Bias in Causal and Statistical Inference",
+      "authors": "Elias Bareinboim et al.",
+      "year": 2014,
+      "arxiv_id": "",
+      "role": "Extension",
+      "relationship_sentence": "Provides recoverability conditions under selection that the paper extends to the zero-inflation setting, underpinning the result that deleting samples with zeros in conditioned variables leaves the target conditional independences intact."
+    },
+    {
+      "title": "Bayesian approach to single-cell differential expression analysis",
+      "authors": "Peter V. Kharchenko et al.",
+      "year": 2014,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "Models scRNA-seq dropouts as a probabilistic function of true expression levels (SCDE), a mechanistic assumption the paper formalizes causally to justify how technical zeros arise and can be handled without imputation."
+    },
+    {
+      "title": "scImpute: accurate and robust imputation for single-cell RNA-seq data",
+      "authors": "Wei Vivian Li et al.",
+      "year": 2018,
+      "arxiv_id": "",
+      "role": "Gap Identification",
+      "relationship_sentence": "Represents the dominant imputation paradigm for handling scRNA-seq zeros, whose tendency to alter the joint distribution is explicitly identified by the paper as the bias it avoids through its CI-preserving deletion strategy."
+    },
+    {
+      "title": "Recovering gene interactions from single-cell data using data diffusion (MAGIC)",
+      "authors": "David van Dijk et al.",
+      "year": 2018,
+      "arxiv_id": "",
+      "role": "Gap Identification",
+      "relationship_sentence": "Proposes diffusion-based imputation that smooths scRNA-seq data but can inflate spurious associations, a limitation the paper targets by proving CI recovery without any imputation."
+    },
+    {
+      "title": "Causation, Prediction, and Search (2nd ed.)",
+      "authors": "Peter Spirtes et al.",
+      "year": 2000,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "Establishes the constraint-based causal discovery paradigm that relies on conditional independences, which the paper\u2019s main theorem is designed to preserve in zero-inflated data via principled case deletion."
+    }
+  ],
+  "synthesis_narrative": "Pearl\u2019s treatment of selection bias formalizes how conditioning on or selecting by certain variables can preserve or distort conditional independences, offering graphical criteria to reason about when CI relations remain valid after case deletion. Mohan, Pearl, and Tian\u2019s missingness graphs crystalize the idea that one should model the measurement/missingness mechanism causally, with explicit response indicators that determine whether values are observed, thereby enabling identification arguments about statistical relationships under missingness. Bareinboim, Tian, and Pearl provide recoverability conditions under selection, clarifying when target quantities (including independence relations) are preserved despite biased sampling. In parallel, Kharchenko et al. (SCDE) introduced a mechanistic view of scRNA-seq dropouts where the probability of observing a zero depends on the unobserved true expression, establishing a concrete, biologically motivated dropout mechanism. On the practice side, scImpute and MAGIC typify the prevailing imputation-first responses to zeros in single-cell data, replacing missing/zero entries with model-based estimates or diffusion-smoothed values, which can alter the joint distribution and inflate spurious dependencies.\nSynthesizing these threads, the opportunity emerges to treat scRNA-seq zeros as outcomes of a causal measurement process and to reason about their impact on CI via selection/missingness graphs rather than imputation. By viewing deletion of samples with zeros in conditioned variables as a specific selection operation sanctioned by the graphical criteria of Pearl and Bareinboim, and grounding the dropout mechanism in SCDE-style assumptions, the paper shows that the true CIs are recoverable without imputation. This directly enables constraint-based causal/GRN discovery to proceed on zero-inflated single-cell data with nonparametric CI tests, aligning with the CPS framework while avoiding the joint-distribution distortions of imputation.",
+  "target_paper": {
+    "title": "Gene Regulatory Network Inference in the Presence of Dropouts: a Causal View",
+    "authors": "Haoyue Dai, Ignavier Ng, Gongxu Luo, Peter Spirtes, Petar Stojanov, Kun Zhang",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "oral",
+    "keywords": "Gene regulatory network, Single-cell RNA-sequencing, Dropout, Zero-inflated data, Causal model, Causal discovery, Nonparametric",
+    "abstract": "Gene regulatory network inference (GRNI) is a challenging problem, particularly owing to the presence of zeros in single-cell RNA sequencing data: some are biological zeros representing no gene expression, while some others are technical zeros arising from the sequencing procedure (aka dropouts), which may bias GRNI by distorting the joint distribution of the measured gene expressions. Existing approaches typically handle dropout error via imputation, which may introduce spurious relations as the true joint distribution is generally unidentifiable. To tackle this issue, we introduce a causal graphical model to characterize the dropout mechanism, namely, Causal Dropout Model. We provide a simple yet effective theoretical result: interestingly, the conditional independence (CI) relations in the data with dropouts, after deleting the samples with zero values (regardless if technical or not) for the conditioned variables, are asymptotically identical to the CI relations in the original dat",
+    "openreview_id": "gFR4QwK53h",
+    "forum_id": "gFR4QwK53h"
+  },
+  "analysis_timestamp": "2026-01-06T23:51:14.926475"
+}

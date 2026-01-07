@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "GPTQ: Accurate Post-Training Quantization for Generative Pre-trained Transformers",
+      "authors": "Frantar et al.",
+      "year": 2022,
+      "arxiv_id": "2210.17323",
+      "role": "Baseline",
+      "relationship_sentence": "OmniQuant adopts GPTQ\u2019s PTQ setting for LLMs but replaces GPTQ\u2019s fixed per-group scales/rounding with learnable clipping thresholds and equivalent transformations to recover 3\u20134-bit accuracy."
+    },
+    {
+      "title": "AWQ: Activation-aware Weight Quantization for LLMs",
+      "authors": "Lin et al.",
+      "year": 2023,
+      "arxiv_id": "2306.00978",
+      "role": "Baseline",
+      "relationship_sentence": "OmniQuant addresses AWQ\u2019s heuristic, activation-aware weight scaling by learning the weight clipping thresholds and activation re-scaling factors from calibration data to improve extreme low-bit settings."
+    },
+    {
+      "title": "SmoothQuant: Accurate and Efficient Post-Training Quantization for Large Language Models",
+      "authors": "Xiao et al.",
+      "year": 2023,
+      "arxiv_id": "2211.10438",
+      "role": "Extension",
+      "relationship_sentence": "OmniQuant generalizes SmoothQuant\u2019s invertible per-channel rebalancing into a learnable equivalent transformation (LET) that is optimized jointly with quantization to suppress activation outliers while preserving function equivalence."
+    },
+    {
+      "title": "ACIQ: Analytical Clipping for Integer Quantization of Neural Networks",
+      "authors": "Banner et al.",
+      "year": 2019,
+      "arxiv_id": "1810.05723",
+      "role": "Gap Identification",
+      "relationship_sentence": "OmniQuant replaces ACIQ\u2019s closed-form clipping under distributional assumptions with data-driven, learnable clipping thresholds (LWC) and extends clipping to weights for robust low-bit PTQ."
+    },
+    {
+      "title": "Up or Down? Adaptive Rounding for Post-Training Quantization",
+      "authors": "Nagel et al.",
+      "year": 2020,
+      "arxiv_id": "2004.10568",
+      "role": "Inspiration",
+      "relationship_sentence": "OmniQuant adopts AdaRound\u2019s calibration-based reconstruction paradigm to differentiably optimize quantization parameters, but targets clipping thresholds and equivalent transforms rather than rounding offsets."
+    },
+    {
+      "title": "PACT: Parameterized Clipping Activation for Quantized Neural Networks",
+      "authors": "Choi et al.",
+      "year": 2018,
+      "arxiv_id": "1805.06085",
+      "role": "Extension",
+      "relationship_sentence": "OmniQuant extends PACT\u2019s idea of learning clipping thresholds by making clipping learnable within PTQ and applying it to weight distributions via LWC rather than only to activations during QAT."
+    },
+    {
+      "title": "8-bit Matrix Multiplication for Transformers at Scale (LLM.int8())",
+      "authors": "Dettmers et al.",
+      "year": 2022,
+      "arxiv_id": "2208.07339",
+      "role": "Related Problem",
+      "relationship_sentence": "OmniQuant tackles the activation outlier problem highlighted by LLM.int8 without resorting to mixed precision by learning equivalent transformations (LET) that smooth activations while keeping layers functionally equivalent."
+    }
+  ],
+  "synthesis_narrative": "GPTQ established efficient post-training quantization for large transformers by approximating second-order effects to quantize weights, but it relied on fixed per-group scales and rounding that degrade at 3\u20134 bits. AWQ introduced activation-aware weight quantization, scaling weights based on activation importance and clipping heuristics, yet still depended on hand-tuned rules that struggle under extreme compression. SmoothQuant proposed an invertible per-channel rescaling that transfers magnitude between activations and weights to tame activation outliers for INT8, demonstrating the power of function-preserving equivalent transformations. ACIQ analytically derived clipping thresholds under assumed distributions to reduce quantization error, offering simple PTQ calibration but limited by modeling assumptions and fixed parameters. AdaRound showed that optimizing quantization parameters via calibration-set reconstruction\u2014without full training\u2014can substantially improve PTQ accuracy by differentiably adjusting rounding. PACT introduced learnable activation clipping thresholds optimized via gradients, revealing that trainable clipping can control outliers more effectively than static ranges. LLM.int8 identified activation outliers in LLMs and addressed them with mixed precision, underscoring the centrality of outlier handling for accuracy.\nCombining these insights revealed a gap: extreme low-bit PTQ needs both function-preserving activation shaping and data-driven learnable quantization parameters, but without costly fine-tuning. OmniQuant naturally synthesizes this by learning weight clipping thresholds (inspired by PACT/ACIQ but done in PTQ) and by generalizing SmoothQuant\u2019s invertible rescaling into a learnable equivalent transformation, optimized with AdaRound-style calibration, thereby overcoming GPTQ/AWQ\u2019s fixed heuristics and avoiding LLM.int8\u2019s mixed precision.",
+  "target_paper": {
+    "title": "OmniQuant: Omnidirectionally Calibrated Quantization for Large Language Models",
+    "authors": "Wenqi Shao, Mengzhao Chen, Zhaoyang Zhang, Peng Xu, Lirui Zhao, Zhiqian Li, Kaipeng Zhang, Peng Gao, Yu Qiao, Ping Luo",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Large Language Model Compression, Differentiable Quantization",
+    "abstract": "Large language models (LLMs) have revolutionized natural language processing tasks. However, their practical deployment is hindered by their immense memory and computation requirements. Although recent post-training quantization (PTQ) methods are effective in reducing memory footprint and improving the computational efficiency of LLM, they hand-craft quantization parameters, leading to low performance, especially in extremely low-bit quantization. To tackle this issue, we introduce an Omnidirectionally calibrated Quantization ($\\textbf{OmniQuant}$) technique for LLMs, which achieves good performance in diverse quantization settings while maintaining the computational efficiency of PTQ by efficiently optimizing various quantization parameters. OmniQuant comprises two innovative components including Learnable Weight Clipping (LWC) and Learnable Equivalent Transformation (LET). LWC modulates the extreme values of weights by optimizing the clipping threshold. Meanwhile, LET tackles activat",
+    "openreview_id": "8Wuvhh0LYW",
+    "forum_id": "8Wuvhh0LYW"
+  },
+  "analysis_timestamp": "2026-01-06T19:36:04.811003"
+}

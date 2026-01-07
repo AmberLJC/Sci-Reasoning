@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Visual Instruction Tuning",
+      "authors": "Haotian Liu, Chunyuan Li, Qingyang Wu, Yong Jae Lee",
+      "year": 2023,
+      "role": "Foundational MLLM architecture and training recipe (LLaVA) that PerturboLLaVA builds upon",
+      "relationship_sentence": "PerturboLLaVA directly extends LLaVA\u2019s instruction-tuning pipeline and addresses its tendency to over-rely on language priors by injecting adversarially perturbed text during training to force stronger visual grounding."
+    },
+    {
+      "title": "BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models",
+      "authors": "Junnan Li, Dongxu Li, Silvio Savarese, Steven C. H. Hoi",
+      "year": 2023,
+      "role": "Foundational multimodal design showing strong LLM priors when bridging vision encoders to LLMs",
+      "relationship_sentence": "BLIP-2 demonstrates how powerful LLM priors can dominate generation in MLLMs; PerturboLLaVA\u2019s perturbative text training is a complementary strategy to counter such priors and improve image-grounded fidelity."
+    },
+    {
+      "title": "SPICE: Semantic Propositional Image Caption Evaluation",
+      "authors": "Peter Anderson, Basura Fernando, Mark Johnson, Stephen Gould",
+      "year": 2016,
+      "role": "Graph-based caption evaluation precedent",
+      "relationship_sentence": "HalFscore inherits SPICE\u2019s core idea of graph-based, concept-level comparison and adapts it to dense captioning, explicitly measuring both accuracy and completeness while being sensitive to hallucinations."
+    },
+    {
+      "title": "Object Hallucination in Image Captioning",
+      "authors": "Anna Rohrbach, Lisa Anne Hendricks, Kaylee Burns, Trevor Darrell, Kate Saenko",
+      "year": 2018,
+      "role": "Hallucination analysis and metric (CHAIR) for captioning",
+      "relationship_sentence": "CHAIR formalized hallucination measurement in captioning; HalFscore extends this line by moving beyond object presence to a language-graph formulation that captures granular concept-level correctness for dense captions."
+    },
+    {
+      "title": "RUBi: Reducing Unimodal Biases in Visual Question Answering",
+      "authors": "R\u00e9mi Cad\u00e8ne, Hedi Ben-Younes, Matthieu Cord, Nicolas Thome",
+      "year": 2019,
+      "role": "Debiasing methodology targeting language priors",
+      "relationship_sentence": "RUBi weakens the question-only (language) shortcut; PerturboLLaVA adopts a related principle by adversarially perturbing text during training to diminish language priors and compel reliance on visual evidence."
+    },
+    {
+      "title": "Taking a HINT: Leveraging Explanations to Make Vision and Language Models More Grounded",
+      "authors": "Ramprasaath R. Selvaraju, Stefan Lee, Yilin Shen, Hongxia Jin, Shalini Ghosh, Dhruv Batra, Devi Parikh",
+      "year": 2019,
+      "role": "Grounding enforcement to combat language-driven shortcuts",
+      "relationship_sentence": "HINT enforces alignment with visual evidence; PerturboLLaVA similarly promotes grounding but uses adversarial text perturbations instead of human attention, avoiding extra supervision or inference cost."
+    },
+    {
+      "title": "Don\u2019t Just Assume; Look and Answer: Overcoming Priors for Visual Question Answering (VQA-CP)",
+      "authors": "Aishwarya Agrawal, Dhruv Batra, Devi Parikh, Aniruddha Kembhavi",
+      "year": 2018,
+      "role": "Dataset and analysis exposing harmful language priors",
+      "relationship_sentence": "VQA-CP highlighted the brittleness of V&L models to language priors, motivating PerturboLLaVA\u2019s training-time textual perturbations to break spurious correlations and improve visual faithfulness."
+    }
+  ],
+  "synthesis_narrative": "PerturboLLaVA targets multimodal hallucination by both defining a principled concept-level metric and altering training to reduce language priors. The architectural substrate and problem setting trace directly to LLaVA and related MLLMs like BLIP-2, which demonstrate the potency\u2014and risk\u2014of strong LLM priors when aligned with visual encoders. On the evaluation side, HalFscore clearly descends from SPICE\u2019s graph-based semantics, adapting propositional graph matching to dense captioning and explicitly scoring both accuracy and completeness. It simultaneously advances beyond CHAIR\u2019s object-focused hallucination metric by capturing broader concept-level fidelity rather than only noun presence.\n\nOn the learning side, the paper\u2019s diagnosis\u2014that over-reliance on language priors causes hallucination\u2014connects to a lineage of debiasing in vision-language tasks. Works such as RUBi and HINT explicitly combat language shortcuts by either suppressing unimodal biases or enforcing visual evidence alignment. VQA-CP\u2019s distribution-shift benchmark crystallized the community\u2019s understanding of language priors as a core failure mode. PerturboLLaVA synthesizes these insights into a simple, training-time intervention: adversarially perturbed text that weakens the language channel and compels attention to the image, all without additional inference overhead. In sum, SPICE and CHAIR guide the metric design, while LLaVA/BLIP-2 provide the MLLM context and debiasing works like RUBi, HINT, and VQA-CP shape the perturbative training strategy that directly addresses multimodal hallucinations.",
+  "analysis_timestamp": "2026-01-06T23:42:48.079914"
+}

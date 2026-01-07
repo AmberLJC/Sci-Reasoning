@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Maximum Entropy Inverse Reinforcement Learning",
+      "authors": "Brian D. Ziebart, Andrew Maas, J. Andrew Bagnell, Anind K. Dey",
+      "year": 2008,
+      "role": "Foundational theory for entropy-regularized control and IRL",
+      "relationship_sentence": "CSIL relies on the MaxEnt/causal-entropy formulation (\u03c0 \u221d exp(Q/\u03b1)) introduced by Ziebart to connect policies and soft value functions, which it explicitly inverts to turn a behavioral-cloned policy into a shaped reward signal."
+    },
+    {
+      "title": "Soft Actor-Critic: Off-Policy Maximum Entropy Deep Reinforcement Learning with a Stochastic Actor",
+      "authors": "Tuomas Haarnoja, Aurick Zhou, Pieter Abbeel, Sergey Levine",
+      "year": 2018,
+      "role": "Algorithmic template for soft policy iteration and practical soft RL",
+      "relationship_sentence": "SAC\u2019s closed-form soft policy improvement step (\u03c0_new \u221d exp(Q/\u03b1)) provides the exact mapping CSIL inverts, enabling the BC policy to define both a reward shaping term and a critic hypothesis space for coherent fine-tuning."
+    },
+    {
+      "title": "Maximum a Posteriori Policy Optimisation",
+      "authors": "Abbas Abdolmaleki, Jost Tobias Springenberg, Yuval Tassa, R\u00e9mi Munos, Nicolas Heess, Martin Riedmiller",
+      "year": 2018,
+      "role": "KL-regularized policy improvement with a policy prior",
+      "relationship_sentence": "MPO\u2019s E-step yields \u03c0 \u221d \u03c0_prior exp(Q/\u03b7); CSIL exploits this KL-regularized form and inverts it, effectively using the BC policy as the prior so that log \u03c0_BC induces a shaped reward and constrains the critic."
+    },
+    {
+      "title": "Bridging the Gap Between Value and Policy Based Reinforcement Learning (Path Consistency Learning)",
+      "authors": "Ofir Nachum, Mohammad Norouzi, Kelvin Xu, Dale Schuurmans",
+      "year": 2017,
+      "role": "Consistency principle linking policy and soft value functions",
+      "relationship_sentence": "PCL formalizes path-consistency relations between log policies and soft Q-values; CSIL leverages the same coherence notion to couple the cloned policy and critic via the inverted soft update."
+    },
+    {
+      "title": "Learning Robust Rewards with Adversarial Inverse Reinforcement Learning (AIRL)",
+      "authors": "Justin Fu, Katie Luo, Sergey Levine",
+      "year": 2018,
+      "role": "IRL framework emphasizing reward\u2013policy coherence and shaping invariance",
+      "relationship_sentence": "AIRL\u2019s analysis of reward shaping and policy-optimality coherence motivates CSIL\u2019s design goal; CSIL attains coherence by deriving a shaped reward directly from the BC policy rather than adversarial reward learning."
+    },
+    {
+      "title": "Generative Adversarial Imitation Learning",
+      "authors": "Jonathan Ho, Stefano Ermon",
+      "year": 2016,
+      "role": "Baseline paradigm for combining imitation with online policy optimization",
+      "relationship_sentence": "GAIL established that imitation benefits from coupling policy optimization with a learned signal; CSIL offers a non-adversarial hybrid by replacing a discriminator with the BC-induced, soft-consistent reward via inversion."
+    },
+    {
+      "title": "Relative Entropy Policy Search",
+      "authors": "Jan Peters, Katharina M\u00fclling, Yasemin Altun",
+      "year": 2010,
+      "role": "Original derivation of KL-constrained policy updates",
+      "relationship_sentence": "REPS introduced the exponential tilting solution under KL constraints (\u03c0 \u221d exp(A/\u03b7)), providing the mathematical backbone for CSIL\u2019s inversion of the regularized policy update to extract a reward/critic from a BC policy."
+    }
+  ],
+  "synthesis_narrative": "Coherent Soft Imitation Learning is built on the modern view of control as entropy-regularized optimization, where policies and soft value functions are tightly linked. Ziebart\u2019s maximum entropy IRL established the causal-entropy framework and the Boltzmann relation between optimal policies and soft Q-values, a relation operationalized at scale by SAC\u2019s soft policy iteration. KL-regularized improvement methods\u2014originating with REPS and extended in deep RL by MPO\u2014show that the optimal policy under a KL penalty is the exponential tilting of a prior policy by exp(Q/\u03b1). CSIL\u2019s key insight is to invert this regularized update: if \u03c0 \u221d \u03c0_prior exp(Q/\u03b1), then Q is proportional to the log-ratio between the target policy and the prior. Choosing the behavioral-cloned policy as the prior turns log \u03c0_BC into a shaped reward term and defines a natural critic hypothesis space aligned with the actor.\nPCL further motivates this construction by formalizing path-consistency conditions that couple log policies and soft values; CSIL enforces such coherence from the outset by deriving the critic from the cloned policy. In the imitation space, GAIL and AIRL demonstrated that learning signals must remain consistent with policy optimization; AIRL, in particular, clarified reward-shaping invariances. CSIL attains similar policy\u2013reward coherence without adversarial training: it uses the BC policy to induce a soft-consistent shaped reward and initializes the critic accordingly, enabling stable online fine-tuning that preserves BC\u2019s strengths while overcoming its covariate shift and coverage limitations.",
+  "analysis_timestamp": "2026-01-06T23:42:49.098678"
+}

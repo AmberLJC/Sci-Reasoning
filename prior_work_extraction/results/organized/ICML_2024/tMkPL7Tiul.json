@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Fast and Scalable Polynomial Kernels via Explicit Feature Maps",
+      "authors": "Nguyen Pham; Rasmus Pagh",
+      "year": 2013,
+      "role": "Introduced TensorSketch, which composes CountSketch with FFT-based convolution to sketch outer/Kronecker products in near-linear time.",
+      "relationship_sentence": "The paper\u2019s fast-convolution sampling mirrors TensorSketch\u2019s idea of combining per-mode hash/sign maps via convolution, but repurposes it to realize randomized sums over tensor entries, enabling O(d) application of l0-samplers and l1-embeddings to rank-one tensors."
+    },
+    {
+      "title": "Finding Frequent Items in Data Streams",
+      "authors": "Moses Charikar; Kevin Chen; Martin Farach-Colton",
+      "year": 2002,
+      "role": "Originated CountSketch, the hash-and-sign linear sketching primitive widely used for sparse, sampling-based embeddings.",
+      "relationship_sentence": "The new tensor sketches inherit CountSketch\u2019s limited-independence hashing and sign tricks to obtain unbiased randomized aggregation, which are then fused across modes via fast convolution."
+    },
+    {
+      "title": "Optimal Algorithms for L0-Sampling and Support-Finding in Dynamic Streams",
+      "authors": "Hossein Jowhari; Mert Saglam; G\u00e1bor Tardos",
+      "year": 2011,
+      "role": "Gave canonical l0-sampling schemes in turnstile streams using hashed levels and sparse-recovery ideas.",
+      "relationship_sentence": "The present work targets the same l0-sampling primitive but on tensor data, accelerating the bucketization/aggregation step for rank-one tensors using convolution so the sampler applies in O(d) rather than O(d^q)."
+    },
+    {
+      "title": "Subspace Embeddings for the L1-Norm with Applications",
+      "authors": "Christian Sohler; David P. Woodruff",
+      "year": 2011,
+      "role": "Established l1 subspace embedding techniques (e.g., via Cauchy-based sketches) and their algorithmic utility.",
+      "relationship_sentence": "This paper delivers analogous l1-embedding guarantees for tensor inputs and shows how to implement the embedding for rank-one tensors in O(d) time by a sampling-and-convolution sketch."
+    },
+    {
+      "title": "Compressed Matrix Multiplication",
+      "authors": "Rasmus Pagh",
+      "year": 2013,
+      "role": "Showed how hashing-based sketches can approximate bilinear computations and matrix products efficiently, often via convolution-like combinations.",
+      "relationship_sentence": "The new construction similarly sketches sums over product indices using hashing plus fast convolution, but adapts it to sample over tensor entries to drive l0-sampling and l1-embedding tasks."
+    },
+    {
+      "title": "The Fast Johnson\u2013Lindenstrauss Transform and Approximate Nearest Neighbors",
+      "authors": "Nir Ailon; Bernard Chazelle",
+      "year": 2006,
+      "role": "Pioneered fast application of random embeddings using structured transforms.",
+      "relationship_sentence": "The work follows the same paradigm of accelerating sketch application\u2014here using convolution instead of Hadamard-based transforms\u2014to achieve near input-size time for rank-one tensor sketches."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core idea\u2014using fast convolution to realize randomized sums over tensor entries\u2014sits at the intersection of convolution-based sketching for outer products and classical sampling primitives. TensorSketch (Pham\u2013Pagh, 2013) is the most immediate antecedent: it showed how to compose independent CountSketch maps across modes and aggregate them via FFT-based convolution to sketch Kronecker/outer products quickly. Swartworth and Woodruff adopt this convolutional composition but shift the objective from feature expansion to sampling-based sketches that support l0-sampling and l1 embeddings on tensors, crucially tailored to rank-one inputs to reach O(d) time.\nCountSketch (Charikar\u2013Chen\u2013Farach-Colton, 2002) provides the hash-and-sign machinery enabling unbiased aggregation with limited independence; the new method leverages these primitives within a multi-mode convolutional framework. On the algorithmic goals, the tensor l0-sampling result explicitly builds on the l0-sampler blueprint of Jowhari\u2013Saglam\u2013Tardos (2011), replacing its generic aggregation with convolution-enabled bucket updates that avoid the d^q blowup for rank-one tensors. For l1 embeddings, the guarantees trace to the l1 subspace embedding line (Sohler\u2013Woodruff, 2011), with this paper contributing a specialized construction whose application time matches the input-size of a rank-one tensor. More broadly, Pagh\u2019s compressed matrix multiplication (2013) exemplifies how hashing plus convolution approximate bilinear operations, a perspective this work extends to randomized subset-sum computations over tensor coordinates. Finally, the fast-embedding ethos of Ailon\u2013Chazelle\u2019s FJLT (2006) informs the overarching design choice: pair randomized sketches with fast transforms so that sketch application matches the intrinsic input complexity.",
+  "analysis_timestamp": "2026-01-06T23:42:48.070604"
+}

@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Jonathan Ho et al.",
+      "year": 2020,
+      "role": "Foundation",
+      "relationship_sentence": "DMCMC relies on the denoising paradigm and reverse diffusion process formalized by DDPM; its \"denoise after MCMC\" step directly uses the denoising reverse process learned in DDPM-style training."
+    },
+    {
+      "title": "Score-Based Generative Modeling through Stochastic Differential Equations",
+      "authors": "Yang Song et al.",
+      "year": 2021,
+      "role": "Foundation",
+      "relationship_sentence": "This work established the reverse-SDE/probability-flow ODE view and PC samplers that DMCMC explicitly targets; DMCMC\u2019s core idea is to initialize close to the data manifold and then integrate the same reverse S/ODE more cheaply."
+    },
+    {
+      "title": "Denoising Diffusion Implicit Models",
+      "authors": "Jiaming Song et al.",
+      "year": 2020,
+      "role": "Extension",
+      "relationship_sentence": "DDIM introduced deterministic ODE-style sampling trajectories; DMCMC directly leverages such reverse-ODE integrators as the denoising stage after its MCMC initialization."
+    },
+    {
+      "title": "Generative Modeling by Estimating Gradients of the Data Distribution",
+      "authors": "Yang Song et al.",
+      "year": 2019,
+      "role": "Inspiration",
+      "relationship_sentence": "Annealed Langevin dynamics showed that MCMC with learned scores can traverse toward the data manifold; DMCMC generalizes this by performing Langevin moves in the joint (data, time) space before a final denoising pass."
+    },
+    {
+      "title": "DPM-Solver: A Fast ODE Solver for Diffusion Probabilistic Model Sampling in Around 10 Steps",
+      "authors": "Cheng Lu et al.",
+      "year": 2022,
+      "role": "Baseline",
+      "relationship_sentence": "As a leading fast reverse-ODE integrator, DPM-Solver is one of the primary baselines that DMCMC accelerates further by providing better initializations near the data manifold."
+    },
+    {
+      "title": "Elucidating the Design Space of Diffusion-Based Generative Models",
+      "authors": "Tero Karras et al.",
+      "year": 2022,
+      "role": "Gap Identification",
+      "relationship_sentence": "EDM systematically explored sampling schedules and integrators but still highlighted the many-step cost of high-fidelity generation; DMCMC addresses this gap by shifting work to an MCMC initialization that reduces the required S/ODE steps."
+    }
+  ],
+  "synthesis_narrative": "DMCMC\u2019s core innovation\u2014using MCMC in the joint space of data and diffusion time to initialize close to the data manifold and then cheaply denoise via a reverse S/ODE integrator\u2014rests on two pillars: the diffusion/score modeling framework and Langevin-based MCMC sampling with learned scores. DDPM provides the denoising formulation and reverse process that DMCMC explicitly employs for the final denoising step. The SDE/ODE perspective of score-based modeling formalized by Song et al. supplies the exact reverse dynamics DMCMC targets, as well as the context for why discretization requires many steps. DDIM\u2019s deterministic ODE trajectories are the concrete reverse-ODE integrators that DMCMC can plug into after its MCMC initialization. On the MCMC side, annealed Langevin dynamics (Song & Ermon, 2019) demonstrated that score-driven Langevin moves efficiently approach the data manifold across noise scales; DMCMC extends this idea by running Langevin in a Gibbs-style scheme over both x and t, then handing off to the ODE/SDE integrator for rapid denoising. Finally, recent fast solvers like DPM-Solver and the comprehensive EDM study define the state of the art in integration-based acceleration but still depend on good discretizations and many steps. DMCMC is expressly orthogonal to these solvers: it initializes near high-density regions so any chosen reverse S/ODE integrator (e.g., DDIM, DPM-Solver) needs far fewer steps, thereby addressing the key efficiency gap these works leave open.",
+  "analysis_timestamp": "2026-01-06T23:09:26.566310"
+}

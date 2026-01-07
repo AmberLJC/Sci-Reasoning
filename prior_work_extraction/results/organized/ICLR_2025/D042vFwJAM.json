@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Diffusion Schr\u00f6dinger Bridge with Applications to Score-Based Generative Modeling",
+      "authors": "Giulia De Bortoli et al.",
+      "year": 2021,
+      "arxiv_id": "2106.01357",
+      "role": "Foundation",
+      "relationship_sentence": "This work provides the core diffusion-bridge formulation for transporting between endpoint distributions using learned forward/reverse drifts, which PalSB adopts and tailors so that the terminal constraints encode PDE residuals and boundary conditions."
+    },
+    {
+      "title": "Score-Based Generative Modeling through Stochastic Differential Equations",
+      "authors": "Yang Song et al.",
+      "year": 2021,
+      "arxiv_id": "2011.13456",
+      "role": "Foundation",
+      "relationship_sentence": "It supplies the reverse-time SDE framework and time-indexed score networks that PalSB leverages to parameterize its local reconstruction mapping along the diffusion bridge."
+    },
+    {
+      "title": "Diffusion Posterior Sampling for General Noisy Inverse Problems",
+      "authors": "Hyungjin Chung et al.",
+      "year": 2022,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "By enforcing measurement consistency during diffusion sampling via projection/data-consistency steps, this paper motivates PalSB's boundary-aware sampling that projects bridge trajectories to satisfy physical boundary conditions."
+    },
+    {
+      "title": "Physics-Informed Neural Networks: A Deep Learning Framework for Solving Forward and Inverse Problems Involving Nonlinear Partial Differential Equations",
+      "authors": "Maziar Raissi et al.",
+      "year": 2019,
+      "arxiv_id": "1711.10561",
+      "role": "Gap Identification",
+      "relationship_sentence": "PINNs established imposing PDE and boundary residuals in training but struggle on complex systems, a limitation PalSB addresses by replacing deterministic regression with a diffusion-bridge plus dual-stage physics alignment."
+    },
+    {
+      "title": "Fourier Neural Operator for Parametric Partial Differential Equations",
+      "authors": "Zongyi Li et al.",
+      "year": 2021,
+      "arxiv_id": "2010.08895",
+      "role": "Baseline",
+      "relationship_sentence": "As a dominant operator-learning baseline for field super-resolution/reconstruction from sparse or coarse inputs, FNO is the primary system PalSB aims to outperform while restoring physical fidelity."
+    },
+    {
+      "title": "Physics-Informed Neural Operator for Learning Parametric Partial Differential Equations",
+      "authors": "Zongyi Li et al.",
+      "year": 2022,
+      "arxiv_id": "2111.03794",
+      "role": "Extension",
+      "relationship_sentence": "PINO integrates physics residual losses into operator learning; PalSB extends this principle to generative training by coupling physics-informed objectives with a diffusion-bridge to enforce global physical alignment."
+    }
+  ],
+  "synthesis_narrative": "Diffusion Schr\u00f6dinger Bridge introduced a principled way to learn stochastic bridges by estimating forward and reverse drifts so that paths connect prescribed endpoints, establishing the machinery for distribution-to-distribution transport via learned score fields. Score-Based Generative Modeling through SDEs provided the reverse-time SDE formulation and time-conditioned score networks that enable stable training and sampling of such bridges. Diffusion Posterior Sampling showed that constraints arising from measurements can be enforced during diffusion sampling through projection and data-consistency steps, demonstrating how generative trajectories can be steered to satisfy external conditions. Physics-Informed Neural Networks formalized embedding governing-equation and boundary residuals into the training objective for forward and inverse PDE problems, but also revealed difficulties on complex, multi-scale dynamics. Fourier Neural Operator established an efficient baseline for mapping from sparse/coarse information to full fields, widely used for super-resolution and reconstruction in fluids, though it generally lacks strict physics compliance. Physics-Informed Neural Operator combined operator learning with physics residual penalties to improve physical fidelity, hinting that fusing data-driven and physics-based objectives can enhance reconstruction.\nTogether, these works expose a gap: strong priors from diffusion models and bridges can transport distributions but need principled mechanisms to honor PDE and boundary constraints, while deterministic PINN/NO approaches encode physics yet falter on complex fields. The natural next step is to embed physics residuals and boundary conditions as endpoint/trajectory constraints within a diffusion-bridge framework, trained in a way that separates local reconstruction fidelity from global physical alignment and uses constraint-aware sampling to enforce boundaries\u2014precisely the synthesis realized by PalSB.",
+  "target_paper": {
+    "title": "Physics-aligned field reconstruction with diffusion bridge",
+    "authors": "Zeyu Li, Hongkun Dou, Shen Fang, Wang Han, Yue Deng, Lijun Yang",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "Fluid dynamics, diffusion models, super-resolution",
+    "abstract": "The reconstruction of physical fields from sparse measurements is pivotal in both scientific research and engineering applications. Traditional methods are increasingly supplemented by deep learning models due to their efficacy in extracting features from data. However, except for the low accuracy on complex physical systems, these models often fail to comply with essential physical constraints, such as governing equations and boundary conditions. To overcome this limitation, we introduce a novel data-driven field reconstruction framework, termed the Physics-aligned Schr\\\"{o}dinger Bridge (PalSB). This framework leverages a diffusion bridge mechanism that is specifically tailored to align with physical constraints. The PalSB approach incorporates a dual-stage training process designed to address both local reconstruction mapping and global physical principles. Additionally, a boundary-aware sampling technique is implemented to ensure adherence to physical boundary conditions. We demons",
+    "openreview_id": "D042vFwJAM",
+    "forum_id": "D042vFwJAM"
+  },
+  "analysis_timestamp": "2026-01-06T16:41:02.059527"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Communication-Efficient Learning of Deep Networks from Decentralized Data",
+      "authors": "H. Brendan McMahan, Eider Moore, Daniel Ramage, Seth Hampson, Blaise Aguera y Arcas",
+      "year": 2017,
+      "role": "Foundational federated learning and weight averaging",
+      "relationship_sentence": "Established FedAvg and the paradigm of model averaging under data heterogeneity, framing the communication-efficiency goal that FuseFL maintains while addressing performance collapse in the one-shot regime."
+    },
+    {
+      "title": "Invariant Risk Minimization",
+      "authors": "Martin Arjovsky, L\u00e9on Bottou, Ishaan Gulrajani, David Lopez-Paz",
+      "year": 2020,
+      "role": "Causal robustness against spurious correlations across environments",
+      "relationship_sentence": "Provided the causal lens that environments (here, clients) induce spurious correlations; FuseFL\u2019s cross-client feature augmentation and progressive fusion aim to extract invariant representations to mitigate isolation-induced spurious fits."
+    },
+    {
+      "title": "Split Learning for Health: Distributed Deep Learning without Sharing Raw Data",
+      "authors": "Praneeth Vepakomma, Otkrist Gupta, Tristan Swedish, Ramesh Raskar",
+      "year": 2018,
+      "role": "Intermediate feature sharing across parties",
+      "relationship_sentence": "Demonstrated that exchanging intermediate activations can transfer knowledge without sharing data; FuseFL borrows the idea of leveraging intermediate features across clients, but achieves it implicitly via progressive block fusion without extra communication."
+    },
+    {
+      "title": "Greedy Layer-Wise Training of Deep Networks",
+      "authors": "Yoshua Bengio, Pascal Lamblin, Dan Popovici, Hugo Larochelle",
+      "year": 2007,
+      "role": "Progressive bottom-up training",
+      "relationship_sentence": "Inspired the block-wise, bottom-up training strategy; FuseFL adapts layer/block-wise progression to federated settings, sequentially training and fusing blocks to enable feature augmentation across clients."
+    },
+    {
+      "title": "mixup: Beyond Empirical Risk Minimization",
+      "authors": "Hongyi Zhang, Moustapha Cisse, Yann N. Dauphin, David Lopez-Paz",
+      "year": 2018,
+      "role": "Feature-space augmentation to improve invariance",
+      "relationship_sentence": "Showed that mixing examples improves generalization by smoothing decision boundaries; FuseFL parallels this by augmenting intermediate features using other clients\u2019 representations to combat spurious correlations from isolated training."
+    },
+    {
+      "title": "SCAFFOLD: Stochastic Controlled Averaging for Federated Learning",
+      "authors": "Sai Praneeth Karimireddy, Satyen Kale, Mehryar Mohri, Sashank Reddi, Sebastian Stich, Ananda Theertha Suresh",
+      "year": 2020,
+      "role": "Mitigating client drift under heterogeneity",
+      "relationship_sentence": "Identified and corrected client drift due to non-IID data; FuseFL tackles a related isolation problem in the extreme one-shot setting by cross-client feature augmentation and progressive fusion rather than control variates."
+    },
+    {
+      "title": "Distilling the Knowledge in a Neural Network",
+      "authors": "Geoffrey Hinton, Oriol Vinyals, Jeff Dean",
+      "year": 2015,
+      "role": "Knowledge distillation foundation for one-shot/low-communication model fusion",
+      "relationship_sentence": "Underpins distillation-based one-shot FL approaches that rely on logits/public data; FuseFL avoids extra communication and public data by instead fusing blocks to implicitly transfer knowledge via intermediate features."
+    }
+  ],
+  "synthesis_narrative": "FuseFL targets the long-standing tension in federated learning between communication efficiency and accuracy under non-IID data, especially acute in one-shot aggregation. FedAvg established model averaging as the workhorse for communication efficiency but suffers from pronounced degradation when client updates are isolated and heterogeneous. Causal robustness work\u2014particularly Invariant Risk Minimization\u2014clarified that models trained across environments (clients) can overfit spurious correlations, motivating learning mechanisms that extract invariant features. FuseFL\u2019s central idea follows this causal lens: using other clients as distinct environments and augmenting intermediate representations helps suppress spurious fits.\nSplit learning showed that exchanging intermediate activations enables effective cross-party knowledge transfer without raw data sharing, suggesting the power of feature-level interaction; FuseFL captures a similar benefit implicitly via block-wise fusion, avoiding extra communication. The progressive, bottom-up training/fusion design is rooted in greedy layer-wise training, leveraging stable incremental representation building. In parallel, mixup\u2019s success with feature-space augmentation inspired the notion that mixing representations promotes smoother, more invariant decision boundaries\u2014here realized by fusing intermediate features from disparate clients. While control-variate methods like SCAFFOLD tackle client drift in multi-round FL, FuseFL adapts the insight\u2014heterogeneity-induced drift arises from isolation\u2014by addressing it causally via progressive feature fusion in a single round. Finally, rather than relying on distillation\u2019s additional data/logit exchanges (as popularized by Hinton et al.), FuseFL achieves one-shot knowledge transfer through structured model decomposition and fusion, delivering OFL-level communication with markedly improved robustness.",
+  "analysis_timestamp": "2026-01-06T23:33:35.578208"
+}

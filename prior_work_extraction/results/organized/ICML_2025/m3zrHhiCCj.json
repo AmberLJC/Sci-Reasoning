@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Natural Gradient Works Efficiently in Learning",
+      "authors": "Amari et al.",
+      "year": 1998,
+      "role": "Foundation",
+      "relationship_sentence": "Established the Fisher Information Matrix as a principled, parameterization-invariant measure of parameter sensitivity, providing the conceptual target whose diagonal Squisher seeks to approximate."
+    },
+    {
+      "title": "Adam: A Method for Stochastic Optimization",
+      "authors": "Kingma et al.",
+      "year": 2015,
+      "role": "Extension",
+      "relationship_sentence": "Introduced the moving average of squared gradients (the second-moment accumulator v_t) that Squisher directly repurposes as a 'for free' surrogate for the diagonal Fisher."
+    },
+    {
+      "title": "Dissecting Adam: The Sign, Magnitude and Variance of Stochastic Gradients",
+      "authors": "Balles et al.",
+      "year": 2018,
+      "role": "Inspiration",
+      "relationship_sentence": "Analyzed what Adam\u2019s second-moment estimate actually tracks (the second raw moment/variance of stochastic gradients), directly motivating the idea that this accumulator can stand in for the empirical Fisher\u2019s diagonal."
+    },
+    {
+      "title": "Limitations of the empirical Fisher approximation for neural network optimization",
+      "authors": "Kunstner et al.",
+      "year": 2019,
+      "role": "Gap Identification",
+      "relationship_sentence": "Showed that the empirical Fisher (average of squared per-example gradients) can diverge from the true Fisher/Hessian, motivating Squisher\u2019s careful empirical validation that the optimizer accumulator is an adequate Fisher proxy across applications."
+    },
+    {
+      "title": "Overcoming catastrophic forgetting in neural networks",
+      "authors": "Kirkpatrick et al.",
+      "year": 2017,
+      "role": "Baseline",
+      "relationship_sentence": "EWC relies on a post-hoc diagonal Fisher estimate to define parameter importance; Squisher replaces this costly computation by substituting the already-computed squared-gradient accumulator."
+    },
+    {
+      "title": "Merging Models with Fisher-Weighted Averaging",
+      "authors": "Matena et al.",
+      "year": 2022,
+      "role": "Baseline",
+      "relationship_sentence": "Uses diagonal Fisher to weight model parameters when merging; Squisher keeps the method but removes the expensive Fisher pass by reusing the optimizer\u2019s second-moment statistics."
+    },
+    {
+      "title": "Optimizing Neural Networks with Kronecker-factored Approximate Curvature",
+      "authors": "Martens et al.",
+      "year": 2015,
+      "role": "Related Problem",
+      "relationship_sentence": "Demonstrated that practical Fisher approximations can be built from training-time statistics (K-FAC), inspiring Squisher\u2019s premise of reusing readily available quantities\u2014in this case Adam\u2019s squared-gradient accumulator\u2014to approximate Fisher cheaply."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core idea\u2014recycling the optimizer\u2019s squared-gradient accumulator to approximate the diagonal Fisher\u2014rests on the Fisher\u2019s role as a principled sensitivity metric (Amari, 1998), which many downstream methods operationalize via a diagonal approximation. Two prominent exemplars, EWC (Kirkpatrick et al., 2017) and Fisher-weighted model merging (Matena & Raffel, 2022), depend on computing a diagonal Fisher post hoc, creating a tangible computational bottleneck the present work targets. The enabling mechanism comes from adaptive optimizers: Adam (Kingma & Ba, 2015) maintains a second-moment accumulator of gradients, and an in-depth analysis (Balles et al., 2018) clarifies that this statistic tracks the second raw moment/variance of stochastic gradients\u2014the very quantity underlying the empirical Fisher\u2019s diagonal. At the same time, methodological caution from Kunstner et al. (2019) about discrepancies between empirical Fisher and true Fisher/Hessian motivates the paper\u2019s broad empirical validation across diverse Fisher uses. Finally, K-FAC (Martens & Grosse, 2015) provides a precedent that practical Fisher approximations can be obtained by reusing training-time statistics, conceptually aligning with Squisher\u2019s strategy but at a diagonal, near-zero-cost extreme. Together, these works define the Fisher-based problem formulation, expose the computational gap in standard practice, and supply both the statistical interpretation and the concrete machinery (Adam\u2019s v_t) that make the paper\u2019s \u201cFishers for free\u201d approximation possible.",
+  "analysis_timestamp": "2026-01-06T23:07:19.567882"
+}

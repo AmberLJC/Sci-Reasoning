@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Model-Free Episodic Control",
+      "authors": "Charles Blundell et al.",
+      "year": 2016,
+      "arxiv_id": "1606.04460",
+      "role": "Foundation",
+      "relationship_sentence": "EMU builds on the core idea from MFEC of storing and recalling high-return state\u2013action experiences from an episodic buffer to accelerate learning, repurposing this principle for cooperative MARL."
+    },
+    {
+      "title": "Neural Episodic Control",
+      "authors": "Alexander Pritzel et al.",
+      "year": 2017,
+      "arxiv_id": "1703.01988",
+      "role": "Extension",
+      "relationship_sentence": "EMU extends NEC\u2019s embedding-based episodic lookup by learning a task-specific encoder\u2013decoder that produces semantically coherent memory embeddings to guide exploratory recall in multi-agent settings."
+    },
+    {
+      "title": "Episodic Curiosity through Reachability",
+      "authors": "Nikolay Savinov et al.",
+      "year": 2018,
+      "arxiv_id": "1810.02274",
+      "role": "Inspiration",
+      "relationship_sentence": "EMU adapts the concept of using a learned embedding and episodic memory to compute auxiliary rewards, shifting from reachability/novelty bonuses to desirability-based incentives for promoting beneficial states."
+    },
+    {
+      "title": "Never Give Up: Learning Directed Exploration Strategies",
+      "authors": "Adri\u00e0 Puigdom\u00e8nech Badia et al.",
+      "year": 2020,
+      "arxiv_id": "2002.06038",
+      "role": "Inspiration",
+      "relationship_sentence": "EMU draws on NGU\u2019s episodic-memory-driven intrinsic reward mechanism, replacing novelty scoring with a desirability metric that augments the TD target and biases exploration away from local optima."
+    },
+    {
+      "title": "Go-Explore: a New Approach for Hard-Exploration Problems",
+      "authors": "Adrien Ecoffet et al.",
+      "year": 2019,
+      "arxiv_id": "1901.10995",
+      "role": "Gap Identification",
+      "relationship_sentence": "EMU directly addresses the detachment/derailment failures identified by Go-Explore by explicitly incentivizing returns to promising states via an episodic archive and desirability-weighted promotion of transitions."
+    },
+    {
+      "title": "QMIX: Monotonic Value Function Factorisation for Deep Multi-Agent Reinforcement Learning",
+      "authors": "Tabish Rashid et al.",
+      "year": 2018,
+      "arxiv_id": "1803.11485",
+      "role": "Baseline",
+      "relationship_sentence": "EMU integrates with and improves upon QMIX\u2019s value-decomposition Q-learning by modifying its TD targets with episodic incentives and memory-guided sampling to accelerate cooperative policy discovery."
+    }
+  ],
+  "synthesis_narrative": "Model-Free Episodic Control showed that storing high-return state\u2013action experiences and retrieving them via nearest neighbors can dramatically speed learning by exploiting episodic memory. Neural Episodic Control refined this idea with a learned embedding and a differentiable memory, enabling semantically meaningful retrieval that aligns recall with task structure. Episodic Curiosity through Reachability introduced a learned reachability embedding coupled with an episodic memory to compute intrinsic rewards, using distances in representation space to motivate exploration toward novel but reachable states. Never Give Up broadened this line by maintaining a per-episode memory to compute episodic novelty bonuses that complement life-long exploration, demonstrating how episodic signals can shape behavior and accelerate credit propagation. Meanwhile, Go-Explore highlighted the failure modes of standard exploration\u2014detachment and derailment\u2014and argued for archiving and revisiting promising states as a path to overcoming local optima. In cooperative settings, QMIX formalized a practical Q-learning backbone through monotonic value decomposition under centralized training and decentralized execution, providing the prevailing target and training pipeline for many MARL systems.\nTogether these works suggest that episodic memory can both recall semantically useful experiences and produce auxiliary signals that guide exploration, yet they lack a mechanism tailored to cooperative MARL that explicitly promotes desirable joint states and integrates with value decomposition. The synthesis is to learn a representation that makes episodic memories semantically coherent for multi-agent recall and to transform episodic assessments into a desirability-based incentive that directly augments the TD targets within a QMIX-style learner, thereby accelerating learning and escaping local optima in cooperative tasks.",
+  "target_paper": {
+    "title": "Efficient Episodic Memory Utilization of Cooperative Multi-Agent Reinforcement Learning",
+    "authors": "Hyungho Na, Yunkyeong Seo, Il-chul Moon",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "oral",
+    "keywords": "Multi-agent reinforcement learning, episodic control, episodic incentive, state embedding",
+    "abstract": "In cooperative multi-agent reinforcement learning (MARL), agents aim to achieve a common goal, such as defeating enemies or scoring a goal. Existing MARL algorithms are effective but still require significant learning time and often get trapped in local optima by complex tasks, subsequently failing to discover a goal-reaching policy. To address this, we introduce Efficient episodic Memory Utilization (EMU) for MARL, with two primary objectives: (a) accelerating reinforcement learning by leveraging semantically coherent memory from an episodic buffer and (b) selectively promoting desirable transitions to prevent local convergence. To achieve (a), EMU incorporates a trainable encoder/decoder structure alongside MARL, creating coherent memory embeddings that facilitate exploratory memory recall. To achieve (b), EMU introduces a novel reward structure called episodic incentive based on the desirability of states. This reward improves the TD target in Q-learning and acts as an additional in",
+    "openreview_id": "LjivA1SLZ6",
+    "forum_id": "LjivA1SLZ6"
+  },
+  "analysis_timestamp": "2026-01-06T08:41:14.921072"
+}

@@ -1,0 +1,77 @@
+{
+  "prior_works": [
+    {
+      "title": "NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis",
+      "authors": [
+        "Ben Mildenhall",
+        "Pratul Srinivasan",
+        "Matthew Tancik",
+        "Jonathan T. Barron",
+        "Ravi Ramamoorthi",
+        "Ren Ng"
+      ],
+      "year": 2020,
+      "role": "Foundational density-based volumetric rendering baseline for 3D generation with 2D priors",
+      "relationship_sentence": "TeT-Splatting is explicitly motivated by NeRF\u2019s density-based rendering, aiming to retain photorealism while overcoming its heavy computation and poor mesh extractability."
+    },
+    {
+      "title": "VolSDF: Volume Rendering of Signed Distance Functions",
+      "authors": [
+        "Lior Yariv",
+        "et al."
+      ],
+      "year": 2021,
+      "role": "SDF-based volumetric rendering that bridges surface representations and volume rendering",
+      "relationship_sentence": "TeT-Splatting adopts the surface-aware volumetric rendering paradigm exemplified by VolSDF to couple accurate surface geometry with stable optimization."
+    },
+    {
+      "title": "3D Gaussian Splatting for Real-Time Radiance Field Rendering",
+      "authors": [
+        "Bernhard Kerbl",
+        "Georgios Kopanas",
+        "Thomas Leimk\u00fchler",
+        "George Drettakis"
+      ],
+      "year": 2023,
+      "role": "Real-time splatting-based differentiable rendering",
+      "relationship_sentence": "TeT-Splatting draws on 3DGS\u2019s splatting efficiency, but relocates splats to a structured tetrahedral surface representation to enable precise mesh extraction."
+    },
+    {
+      "title": "Regularised Marching Tetrahedra: Improved Isosurface Extraction",
+      "authors": [
+        "G. M. Treece",
+        "R. W. Prager",
+        "A. H. Gee"
+      ],
+      "year": 1999,
+      "role": "Canonical tetrahedral-grid isosurface extraction method",
+      "relationship_sentence": "By operating on a structured tetrahedral grid, TeT-Splatting inherits robust, precise mesh extraction via Marching Tetrahedra."
+    },
+    {
+      "title": "DreamFusion: Text-to-3D using 2D Diffusion",
+      "authors": [
+        "Ben Poole",
+        "Ajay Jain",
+        "Jonathan T. Barron",
+        "Ben Mildenhall"
+      ],
+      "year": 2022,
+      "role": "Established 2D diffusion priors for 3D generation and highlighted NeRF\u2019s geometry/mesh limitations",
+      "relationship_sentence": "TeT-Splatting targets DreamFusion-style optimization but replaces NeRF-like fields with a tetrahedral surface-splatting representation to improve convergence and mesh quality."
+    },
+    {
+      "title": "Instant Neural Graphics Primitives with a Multiresolution Hash Encoding",
+      "authors": [
+        "Thomas M\u00fcller",
+        "Alex Evans",
+        "Christoph Schied",
+        "Alexander Keller"
+      ],
+      "year": 2022,
+      "role": "Neural field acceleration via structured encodings enabling real-time training",
+      "relationship_sentence": "TeT-Splatting aligns with instant-NGP\u2019s insight that structured, hardware-friendly representations yield fast optimization, here realized with a tetrahedral grid and splatting."
+    }
+  ],
+  "synthesis_narrative": "TeT-Splatting emerges at the intersection of radiance fields, signed-distance rendering, splatting, and tetrahedral meshing. NeRF established density-based volumetric rendering as the de facto engine for 3D generation with 2D diffusion priors, but its computational cost and unreliable mesh extraction became clear in downstream works like DreamFusion. VolSDF showed how SDFs can be integrated into a volume-rendering framework, providing surface-aware accumulation that stabilizes geometry learning and improves extractability\u2014a conceptual bridge to TeT-Splatting\u2019s surface-based volumetric rendering. In parallel, 3D Gaussian Splatting demonstrated that rasterization-style splatting can deliver real-time rendering and training, yet its point/ellipsoid primitives lack principled, high-fidelity mesh extraction. Classic Marching Tetrahedra provides a robust mechanism for precise isosurface extraction on tetrahedral grids, a property widely exploited in SDF-based pipelines but often hindered by topology adaptation and optimization instabilities in pure DMTet-style setups. Finally, Instant-NGP underscored that carefully structured, GPU-friendly representations and encodings can unlock orders-of-magnitude speedups for neural fields. TeT-Splatting synthesizes these threads: it adopts a surface-aware (SDF-inspired) volumetric rendering formulation, instantiates it on a structured tetrahedral grid to guarantee accurate mesh extraction via Marching Tetrahedra, and uses splatting to achieve the training and rendering efficiency popularized by 3DGS. The result is a representation that converges easily, renders in real time, and yields precise meshes\u2014directly addressing the core limitations identified by NeRF/DreamFusion and 3DGS.",
+  "analysis_timestamp": "2026-01-06T23:33:36.293294"
+}

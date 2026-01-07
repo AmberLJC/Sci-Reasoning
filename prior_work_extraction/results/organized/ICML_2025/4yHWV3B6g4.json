@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Multi-view Convolutional Neural Networks for 3D Shape Recognition",
+      "authors": "Hang Su, Subhransu Maji, Evangelos Kalogerakis, Erik Learned-Miller",
+      "year": 2015,
+      "role": "Architectural precedent for representing 3D objects via aggregated 2D view features",
+      "relationship_sentence": "Raptor generalizes MVCNN\u2019s core idea\u2014encoding a 3D object by processing multiple 2D projections and aggregating them\u2014by using random planar slices of medical volumes and a frozen 2D foundation encoder to build train-free volumetric embeddings."
+    },
+    {
+      "title": "Emerging Properties in Self-Supervised Vision Transformers",
+      "authors": "Mathieu Caron, Hugo Touvron, Ishan Misra, Herv\u00e9 J\u00e9gou, Julien Mairal, Piotr Bojanowski, Armand Joulin",
+      "year": 2021,
+      "role": "Source of strong frozen 2D visual tokens from self-supervised ViTs (DINO)",
+      "relationship_sentence": "Raptor relies on the observation from DINO that frozen ViT features produce semantically rich patch tokens, enabling it to extract informative 2D slice tokens from natural-image-pretrained models without any finetuning."
+    },
+    {
+      "title": "Big Transfer (BiT): General Visual Representation Learning",
+      "authors": "Alexander Kolesnikov, Lucas Beyer, Xiaohua Zhai, Joan Puigcerver, Jessica Yung, Sylvain Gelly, Neil Houlsby",
+      "year": 2020,
+      "role": "Evidence that large-scale natural-image pretraining yields highly transferable features",
+      "relationship_sentence": "Raptor\u2019s use of a frozen 2D encoder pretrained on natural images for medical volumes is motivated by BiT\u2019s demonstration that scale and pretraining on natural images can transfer effectively across domains."
+    },
+    {
+      "title": "Database-Friendly Random Projections: Johnson\u2013Lindenstrauss with Binary Coins",
+      "authors": "Dimitris Achlioptas",
+      "year": 2003,
+      "role": "Theoretical basis for using random projections to preserve geometry under dimensionality reduction",
+      "relationship_sentence": "Raptor\u2019s random planar tensor reduction depends on JL-type guarantees that random linear maps conserve pairwise structure, justifying aggressive spatial compression of slice tokens while retaining semantics."
+    },
+    {
+      "title": "Random Features for Large-Scale Kernel Machines",
+      "authors": "Ali Rahimi, Benjamin Recht",
+      "year": 2007,
+      "role": "Train-free random mappings that preserve similarity for efficient learning",
+      "relationship_sentence": "Raptor echoes the random-features philosophy by using fixed, train-free random projections to obtain compact embeddings that preserve meaningful similarities without learning additional parameters."
+    },
+    {
+      "title": "Fast and Scalable Polynomial Features via Randomized Methods (Tensor Sketch)",
+      "authors": "Ninh Pham, Rasmus Pagh",
+      "year": 2013,
+      "role": "Sketching methodology for compressing high-dimensional tensor products while preserving inner products",
+      "relationship_sentence": "Raptor\u2019s spatial token compression is conceptually aligned with Tensor Sketch-style random hashing/sign mappings that compactly summarize tensorized features with controllable distortion."
+    },
+    {
+      "title": "Pulmonary Nodule Detection in CT Images: False Positive Reduction Using Multi-View Convolutional Networks",
+      "authors": "Arnaud A. A. Setio, Francesco Ciompi, Geert Litjens, et al.",
+      "year": 2016,
+      "role": "Medical imaging precedent for aggregating 2D orthogonal views/slices to analyze 3D volumes",
+      "relationship_sentence": "Raptor extends the 2.5D/multi-view slice paradigm from detection toward general-purpose volume embeddings by systematically sampling many planes and aggregating frozen 2D features train-free."
+    }
+  ],
+  "synthesis_narrative": "Raptor\u2019s core contribution\u2014train-free, semantically rich embeddings for 3D medical volumes built from frozen 2D foundation models and random spatial compression\u2014emerges from two converging lines of work. First, MVCNN and 2.5D/orthogonal-view medical approaches (e.g., Setio et al.) established that 3D objects or volumes can be effectively represented by aggregating multiple 2D projections or slices. Raptor adopts this view-centric decomposition but scales it by sampling random planes across the volume rather than relying on fixed orthogonal views or learned renderings.\nSecond, advances in large-scale 2D representation learning (BiT; DINO) showed that pretrained natural-image encoders produce highly transferable, token-level semantic features. Raptor capitalizes on this by extracting robust patch tokens from each slice using a frozen 2D ViT/CNN, eliminating the need for expensive 3D pretraining on medical volumes.\nTo make the aggregated representation computationally tractable, Raptor draws on randomized linear algebra: JL-style random projections (Achlioptas) and sketching methods (Pham & Pagh) provide the theoretical and algorithmic underpinning for compressing high-dimensional token grids while approximately preserving pairwise structure. The train-free, similarity-preserving spirit of Random Features (Rahimi & Recht) further supports using fixed random mappings instead of learned bottlenecks. Together, these works directly motivate Raptor\u2019s design: represent a 3D volume as a set of 2D tokens from a powerful frozen encoder, then apply random planar tensor reduction to compress and aggregate them into compact, semantically faithful embeddings that transfer across diverse medical tasks without training.",
+  "analysis_timestamp": "2026-01-07T00:21:32.364075"
+}

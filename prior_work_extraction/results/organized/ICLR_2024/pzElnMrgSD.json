@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "SDEdit: Image Synthesis and Editing with Stochastic Differential Equations",
+      "authors": "Chenlin Meng et al.",
+      "year": 2021,
+      "arxiv_id": "2108.01073",
+      "role": "Foundation",
+      "relationship_sentence": "By casting editing as adding Gaussian noise and then denoising with a pre-trained image diffusion model, SDEdit made the initial noise sample the pivotal control variable\u2014this paper replaces that i.i.d. noise prior with a temporally correlated, transportable \u222b-noise."
+    },
+    {
+      "title": "Tune-A-Video: One-Shot Tuning of Image Diffusion Models for Text-to-Video Generation",
+      "authors": "Jay Zhangjie Wu et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Gap Identification",
+      "relationship_sentence": "Tune-A-Video reduces flicker by reusing the same noise/seed across frames but suffers from texture-sticking, directly motivating this paper\u2019s \u222b-noise and transport scheme that preserves temporal correlation without locking textures to the frame."
+    },
+    {
+      "title": "Text2Video-Zero: Text-to-Image Diffusion Models are Zero-Shot Video Generators",
+      "authors": "Hrayr Khachatryan et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Gap Identification",
+      "relationship_sentence": "Text2Video-Zero showed that zero-shot video generation with image diffusion and simple noise reuse/warping yields either flicker or over-locked textures, highlighting the need for a principled temporally correlated noise prior provided by \u222b-noise."
+    },
+    {
+      "title": "TokenFlow: Consistent Diffusion Features for Consistent Video Editing",
+      "authors": "First author et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Baseline",
+      "relationship_sentence": "TokenFlow enforces temporal consistency by flow-warping diffusion features while still relying on per-frame Gaussian noise, and this paper complements/improves such pipelines by transporting the noise itself via a continuous \u222b-noise field."
+    },
+    {
+      "title": "Wavelet Noise",
+      "authors": "Robert L. Cook et al.",
+      "year": 2005,
+      "arxiv_id": "",
+      "role": "Inspiration",
+      "relationship_sentence": "Wavelet Noise introduced a continuous, band-limited Gaussian noise with exact filtering over pixel footprints, inspiring the paper\u2019s core idea to treat per-pixel noise as the integral of an underlying continuous noise field."
+    },
+    {
+      "title": "Procedural Noise using Sparse Gabor Convolution",
+      "authors": "Ares Lagae et al.",
+      "year": 2009,
+      "arxiv_id": "",
+      "role": "Inspiration",
+      "relationship_sentence": "Gabor noise formalized stationary continuous noise fields and their exact filtering properties, informing the paper\u2019s \u222b-noise representation and its ability to preserve statistics under warping and integration over pixel areas."
+    }
+  ],
+  "synthesis_narrative": "SDEdit established that image editing with diffusion models can be framed as injecting Gaussian noise and denoising with a fixed pre-trained model, making the initial noise field a primary lever over results. Tune-A-Video extended image diffusion to video by reusing the same seed across frames to mitigate flicker, but its reliance on fixed noise led to texture-sticking artifacts, showing that na\u00efvely correlating noise is insufficient. Text2Video-Zero similarly demonstrated zero-shot video generation/editing from image models using simple noise reuse or flow-based heuristics, revealing a persistent trade-off between flicker and over-constrained textures. TokenFlow improved temporal coherence by warping and aggregating diffusion features along optical flow, yet it retained per-frame i.i.d. noise assumptions, leaving noise as an unmodeled source of inconsistency. In parallel, graphics works such as Wavelet Noise and Gabor Noise treated noise as continuous random fields and emphasized exact filtering/integration over pixel footprints, providing the key insight that noise should be defined and manipulated in a continuous domain and then integrated to pixels. Taken together, these threads exposed a gap: video diffusion pipelines needed a principled noise prior that is continuous, transportable, and correctly filtered under warps. The present work synthesizes these ideas by redefining the pixel noise as the integral of an infinite-resolution white-noise field and by transporting this \u222b-noise with carefully designed advection, naturally resolving flicker versus texture-sticking while fitting seamlessly into image-to-video diffusion workflows.",
+  "target_paper": {
+    "title": "How I Warped Your Noise: a Temporally-Correlated Noise Prior for Diffusion Models",
+    "authors": "Pascal Chang, Jingwei Tang, Markus Gross, Vinicius C. Azevedo",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "oral",
+    "keywords": "diffusion models; temporal coherency; Gaussian noise field; continuous white noise; noise transport",
+    "abstract": "Video editing and generation methods often rely on pre-trained image-based diffusion models. During the diffusion process, however, the reliance on rudimentary noise sampling techniques that do not preserve correlations present in subsequent frames of a video is detrimental to the quality of the results. This either produces high-frequency flickering, or texture-sticking artifacts that are not amenable to post-processing. With this in mind, we propose a novel method for preserving temporal correlations in a sequence of noise samples. This approach is materialized by a novel noise representation, dubbed $\\int$-noise (integral noise), that reinterprets individual noise samples as a continuously integrated noise field: pixel values do not represent discrete values, but are rather the integral of an underlying infinite-resolution noise over the pixel area. Additionally, we propose a carefully tailored transport method that uses $\\int$-noise to accurately advect noise samples over a sequenc",
+    "openreview_id": "pzElnMrgSD",
+    "forum_id": "pzElnMrgSD"
+  },
+  "analysis_timestamp": "2026-01-06T15:04:54.421227"
+}

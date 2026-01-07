@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "GPipe: Efficient Training of Giant Neural Networks using Pipeline Parallelism",
+      "authors": "Huang et al.",
+      "year": 2019,
+      "role": "Foundation",
+      "relationship_sentence": "BPipe builds directly on GPipe\u2019s micro-batch pipeline formulation and exposes its key limitation\u2014uneven activation memory across stages\u2014by introducing activation transfers to balance per-GPU memory while retaining GPipe-style throughput."
+    },
+    {
+      "title": "PipeDream: Generalized Pipeline Parallelism for DNN Training",
+      "authors": "Narayanan et al.",
+      "year": 2019,
+      "role": "Foundation",
+      "relationship_sentence": "BPipe is designed to be compatible with PipeDream\u2019s 1F1B scheduling and addresses a shortcoming that scheduling alone cannot fix\u2014stage-wise activation memory imbalance\u2014by moving activations across GPUs to equalize memory footprints."
+    },
+    {
+      "title": "Megatron-LM: Training Multi-Billion Parameter Language Models Using Model Parallelism",
+      "authors": "Shoeybi et al.",
+      "year": 2019,
+      "role": "Baseline",
+      "relationship_sentence": "Megatron-LM\u2019s tensor+pipeline parallel Transformer training is a primary baseline BPipe improves on, with BPipe targeting the activation memory hotspots that arise in Megatron-style pipelines for LLMs."
+    },
+    {
+      "title": "Efficient Large-Scale Language Model Training on GPU Clusters Using Megatron-LM",
+      "authors": "Narayanan et al.",
+      "year": 2021,
+      "role": "Gap Identification",
+      "relationship_sentence": "This work highlights practical pipeline issues at GPT-3 scale\u2014including memory skew from embedding/output layers and pipeline schedules\u2014motivating BPipe\u2019s activation balancing to fix the persistent inter-stage memory imbalance."
+    },
+    {
+      "title": "Training Deep Nets with Sublinear Memory Cost",
+      "authors": "Chen et al.",
+      "year": 2016,
+      "role": "Gap Identification",
+      "relationship_sentence": "Activation checkpointing reduces memory at the cost of recomputation; BPipe explicitly aims to eliminate such redundant recomputation by balancing activation memory across GPUs instead of relying on heavy rematerialization."
+    },
+    {
+      "title": "ZeRO: Memory Optimizations Toward Training Trillion Parameter Models",
+      "authors": "Rajbhandari et al.",
+      "year": 2020,
+      "role": "Related Problem",
+      "relationship_sentence": "ZeRO partitions parameter/optimizer states but leaves activation memory (and its inter-stage imbalance) largely unaddressed; BPipe complements this by specifically balancing activations across pipeline stages."
+    }
+  ],
+  "synthesis_narrative": "BPipe emerges from the maturation of pipeline parallel training and the practical difficulties observed at GPT-3 scale. GPipe established the micro-batch pipeline abstraction that enables high utilization but also accumulates activations per stage, creating uneven memory pressure when layers have heterogeneous footprints. PipeDream then introduced 1F1B scheduling to reduce bubbles and cap activation lifetimes, yet scheduling alone could not address persistent inter-stage memory skew. Megatron-LM operationalized pipeline+tensor parallelism for large Transformers and became the de facto baseline for LLM training, where practitioners observed that stages containing embeddings and output layers disproportionately strain memory. Megatron\u2019s subsequent large-scale study explicitly surfaced these imbalances and the limits of scheduling/interleaving to smooth them, directly motivating BPipe\u2019s core idea: move intermediate activations between GPUs to equalize per-stage memory. Prior memory-saving approaches such as activation checkpointing deliver relief by recomputation, trading performance for capacity; BPipe instead seeks to eliminate such recompute overhead by exploiting fast GPU\u2013GPU transfers to redistribute activation buffers. Finally, while ZeRO efficiently partitions parameter and optimizer states, it does not solve activation-driven imbalance intrinsic to pipeline execution; BPipe fills this gap by targeting the remaining dominant component\u2014activations\u2014so that micro-batch sizes can be increased and redundant recomputation avoided, yielding higher throughput on large language model training.",
+  "analysis_timestamp": "2026-01-06T23:09:26.580231"
+}

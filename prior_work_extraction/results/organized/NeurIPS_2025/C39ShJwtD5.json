@@ -1,0 +1,91 @@
+{
+  "prior_works": [
+    {
+      "title": "Watch Your Up-Convolution: CNN-based Generative Deep Neural Networks Are Failing to Reproduce Spectral Distributions of Natural Images",
+      "authors": [
+        "Rafael Durall",
+        "Margret Keuper",
+        "Janis Keuper"
+      ],
+      "year": 2020,
+      "role": "Evidence of frequency-domain artifacts in AIGIs",
+      "relationship_sentence": "This work established that GAN images have systematic spectrum mismatches, directly motivating the paper\u2019s claim that detectors can overfit to frequency cues and that frequency-level alignment is necessary."
+    },
+    {
+      "title": "FDA: Fourier Domain Adaptation for Semantic Segmentation",
+      "authors": [
+        "Yanchao Yang",
+        "Stefano Soatto"
+      ],
+      "year": 2020,
+      "role": "Method template for amplitude-spectrum alignment",
+      "relationship_sentence": "FDA\u2019s simple, content-preserving amplitude-spectrum transfer provided a concrete mechanism for aligning frequency statistics across domains, inspiring the paper\u2019s frequency-level alignment component."
+    },
+    {
+      "title": "Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks (CycleGAN)",
+      "authors": [
+        "Jun-Yan Zhu",
+        "Taesung Park",
+        "Phillip Isola",
+        "Alexei A. Efros"
+      ],
+      "year": 2017,
+      "role": "Content-preserving generative reconstruction for cross-domain alignment",
+      "relationship_sentence": "CycleGAN popularized content-preserving reconstruction/translation between domains, underpinning the paper\u2019s pixel-level content alignment idea before extending it with explicit frequency alignment."
+    },
+    {
+      "title": "Invariant Risk Minimization",
+      "authors": [
+        "Martin Arjovsky",
+        "L\u00e9on Bottou",
+        "Ishaan Gulrajani",
+        "David Lopez-Paz"
+      ],
+      "year": 2019,
+      "role": "Theory of eliminating spurious correlations",
+      "relationship_sentence": "IRM formalized learning invariant, causal features across environments, conceptually grounding the paper\u2019s goal of removing spurious pixel/frequency correlations to improve cross-dataset generalization."
+    },
+    {
+      "title": "ImageNet-trained CNNs are biased towards texture; increasing shape bias improves accuracy and robustness",
+      "authors": [
+        "Robert Geirhos",
+        "Patricia Rubisch",
+        "Claudio Michaelis",
+        "Matthias Bethge",
+        "Felix A. Wichmann",
+        "Wieland Brendel"
+      ],
+      "year": 2019,
+      "role": "Empirical evidence of shortcut learning via low-level cues",
+      "relationship_sentence": "By demonstrating texture/low-level bias in CNNs, this work supports the paper\u2019s diagnosis that detectors latch onto non-causal high-frequency cues, necessitating alignment strategies that suppress such shortcuts."
+    },
+    {
+      "title": "Do GANs Leave Artificial Fingerprints?",
+      "authors": [
+        "Francesco Marra",
+        "Diego Gragnaniello",
+        "Davide Cozzolino",
+        "Luisa Verdoliva"
+      ],
+      "year": 2019,
+      "role": "GAN fingerprint characterization",
+      "relationship_sentence": "Revealing model-specific fingerprints highlighted why detectors overfit to generator-specific artifacts; the paper\u2019s dual alignment explicitly aims to avoid reliance on such fragile frequency signatures."
+    },
+    {
+      "title": "Image Super-Resolution via Repeated Refinement (SR3)",
+      "authors": [
+        "Chitwan Saharia",
+        "Jonathan Ho",
+        "William Chan",
+        "Tim Salimans",
+        "David J. Fleet",
+        "Mohammad Norouzi"
+      ],
+      "year": 2021,
+      "role": "Generative reconstruction tends to add high-frequency details",
+      "relationship_sentence": "SR3 exemplifies how reconstruction/restoration models hallucinate high-frequency content, directly informing the paper\u2019s observation that pixel-level alignment alone can induce frequency-level misalignment."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core insight\u2014that content-only (pixel-level) alignment is insufficient for generalizable AI-generated image detection and must be coupled with frequency-level alignment\u2014stands on two pillars: evidence that frequency artifacts drive current detectors and practical mechanisms to align spectra across domains. Foundational analyses of spectral artifacts in generative images (Durall et al.) and forensic studies of GAN fingerprints (Marra et al.) showed that detectors often key on non-causal, generator-specific frequency cues, which break under distribution shift. Complementing this, the broader vision literature documents shortcut learning, particularly texture bias (Geirhos et al.), and formalizes the need to learn invariant features rather than spurious correlations (IRM), directly motivating the paper\u2019s goal of debiasing detectors.\nOn the method side, content-preserving reconstruction/translation (CycleGAN) provides the canonical approach to align content across domains, which prior detectors adopted to mitigate label-content mismatch. However, recent advances in generative reconstruction (e.g., SR3) demonstrate that such models tend to inject or restore high-frequency detail, inadvertently amplifying spectral disparities between real and synthetic images. To resolve this, the paper adapts the idea of Fourier-based amplitude alignment from FDA (Yang & Soatto) to the AIGI forensics setting, explicitly matching frequency statistics while preserving spatial content. Synthesizing these lines, the proposed dual data alignment\u2014pixel-level content matching plus frequency-domain alignment\u2014targets both sources of spurious cues, yielding detectors that better capture causal semantics and generalize across generators and datasets.",
+  "analysis_timestamp": "2026-01-07T00:21:32.331059"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Dataset Distillation",
+      "authors": "Tongzhou Wang, Jun-Yan Zhu, Antonio Torralba, Alexei A. Efros",
+      "year": 2018,
+      "role": "Foundation of dataset distillation via direct optimization of a small synthetic set for downstream training",
+      "relationship_sentence": "LD3M adopts the core idea of optimizing a compact synthetic dataset, but performs the optimization in diffusion latents rather than pixels to scale to high resolutions."
+    },
+    {
+      "title": "Dataset Condensation with Gradient Matching",
+      "authors": "Bo Zhao, Konda Reddy Mopuri, Hakan Bilen",
+      "year": 2020,
+      "role": "Key gradient-based objective for synthesizing data that induces similar training dynamics as real data",
+      "relationship_sentence": "LD3M keeps the spirit of gradient-based dataset optimization yet overcomes prior limitations by backpropagating these signals through a frozen diffusion generator instead of directly optimizing pixels."
+    },
+    {
+      "title": "Generative Teaching Networks: Accelerating Neural Architecture Search by Learning to Generate Synthetic Data",
+      "authors": "Felix L. Such, Aditya Rawal, Joel Lehman, Kenneth O. Stanley, Jeff Clune",
+      "year": 2020,
+      "role": "Demonstrated generator-driven dataset distillation via end-to-end learning of data-producing mechanisms",
+      "relationship_sentence": "LD3M echoes GTN\u2019s insight of using a generator, but replaces a trainable GAN with a fixed latent diffusion model and learns distilled latents/class embeddings to steer it."
+    },
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Jonathan Ho, Ajay Jain, Pieter Abbeel",
+      "year": 2020,
+      "role": "Established the diffusion denoising chain that underpins modern diffusion samplers",
+      "relationship_sentence": "LD3M\u2019s main technical hurdle\u2014vanishing gradients through a long reverse chain\u2014arises directly from DDPM\u2019s formulation, motivating LD3M\u2019s gradient-preserving skip across timesteps."
+    },
+    {
+      "title": "Denoising Diffusion Implicit Models",
+      "authors": "Jiaming Song, Chenlin Meng, Stefano Ermon",
+      "year": 2021,
+      "role": "Provided deterministic, fewer-step sampling and an ODE view of diffusion processes",
+      "relationship_sentence": "LD3M leverages multi-step reverse processes like DDIM and augments them with a linearly decaying noise skip to stabilize and preserve gradients during end-to-end optimization."
+    },
+    {
+      "title": "High-Resolution Image Synthesis with Latent Diffusion Models",
+      "authors": "Robin Rombach, Andreas Blattmann, Dominik Lorenz, Patrick Esser, Bj\u00f6rn Ommer",
+      "year": 2022,
+      "role": "Introduced latent diffusion, enabling efficient high-resolution generation and class/text conditioning",
+      "relationship_sentence": "LD3M relies on a pre-trained latent diffusion backbone to optimize distilled latents and class embeddings without fine-tuning model weights, enabling efficient 128\u2013256 px distillation."
+    },
+    {
+      "title": "An Image is Worth One Word: Personalized Text-to-Image Generation with Textual Inversion",
+      "authors": "Rinon Gal, Yuval Alaluf, Yuval Atzmon, Or Patashnik, Amit H. Bermano, Daniel Cohen-Or",
+      "year": 2022,
+      "role": "Showed that learnable embeddings can steer a frozen diffusion model to represent new concepts",
+      "relationship_sentence": "LD3M adapts the idea of optimizing embeddings under a frozen diffusion prior by learning class embeddings alongside distilled latents to control class-conditional generation."
+    }
+  ],
+  "synthesis_narrative": "LD3M\u2019s core contribution\u2014learning gradient-based distilled latents and class embeddings end-to-end through a frozen latent diffusion model while preserving gradients across many denoising steps\u2014sits at the intersection of dataset distillation and diffusion modeling. The problem framing descends from classic dataset distillation (Wang et al., 2018) and its powerful gradient-based objectives (Zhao et al., 2020), which established that synthetic data can be optimized to induce real-like training dynamics. Generative Teaching Networks (Such et al., 2020) then showed the efficacy of using a generator to emit such synthetic data, foreshadowing LD3M\u2019s decision to rely on a strong generative prior rather than optimize pixels directly.\n\nOn the generative side, LD3M is enabled by the diffusion family. DDPM (Ho et al., 2020) provides the reverse denoising chain that makes diffusion models state-of-the-art yet introduces severe gradient attenuation when naively backpropagated, directly motivating LD3M\u2019s linearly decaying skip from the initial noise to every reverse step. DDIM (Song et al., 2021) contributes the deterministic, reduced-step perspective that makes differentiable multi-step sampling more tractable and amenable to explicit gradient flow control. Crucially, Latent Diffusion (Rombach et al., 2022) furnishes an efficient latent space and conditioning interface, allowing LD3M to scale to 128\u2013256 px and to optimize class embeddings without fine-tuning the diffusion weights. Finally, Textual Inversion (Gal et al., 2022) demonstrates that learnable embeddings can steer a frozen diffusion model, a principle LD3M generalizes to class-conditional dataset distillation by jointly optimizing distilled latents and class embeddings under a fixed diffusion prior.",
+  "analysis_timestamp": "2026-01-07T00:29:42.063533"
+}

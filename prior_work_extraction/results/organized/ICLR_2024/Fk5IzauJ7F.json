@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Learning from Partial Labels",
+      "authors": "Cour et al.",
+      "year": 2011,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "This work formalized the partial-label learning setting where each instance has a candidate label set, providing the problem formulation that CLSP explicitly operates on by pruning candidate labels."
+    },
+    {
+      "title": "Progressive Identification of True Labels for Partial-Label Learning (PRODEN)",
+      "authors": "Lv et al.",
+      "year": 2020,
+      "arxiv_id": "",
+      "role": "Baseline",
+      "relationship_sentence": "As a leading deep PLL method that progressively disambiguates labels during training, it serves as a principal baseline whose performance degrades with large candidate sets\u2014exactly the failure mode CLSP is designed to mitigate via pre-training pruning."
+    },
+    {
+      "title": "PiCO: Contrastive Label Disambiguation for Partial Label Learning",
+      "authors": "Wang et al.",
+      "year": 2022,
+      "arxiv_id": "",
+      "role": "Inspiration",
+      "relationship_sentence": "PiCO\u2019s core insight that representation-space neighborhood structure encodes label information directly inspires CLSP\u2019s training-free use of representation\u2013candidate set consistency to filter implausible candidate labels."
+    },
+    {
+      "title": "Provably Consistent Partial-Label Learning",
+      "authors": "Feng et al.",
+      "year": 2020,
+      "arxiv_id": "",
+      "role": "Gap Identification",
+      "relationship_sentence": "By formalizing identifiability conditions and showing learning-centric PLL can fail when ambiguity is high, this work motivates CLSP\u2019s data-centric pruning to reduce ambiguity before learning."
+    },
+    {
+      "title": "IDGP: Instance-Dependent Graph Propagation for Deep Partial-Label Learning",
+      "authors": "Feng et al.",
+      "year": 2021,
+      "arxiv_id": "",
+      "role": "Extension",
+      "relationship_sentence": "IDGP leverages instance-similarity graphs to propagate label confidences, and CLSP extends this neighbor-consistency principle by converting it into a training-free criterion for pruning candidate labels instead of learning weights."
+    },
+    {
+      "title": "Confident Learning: Estimating Uncertainty in Dataset Labels",
+      "authors": "Northcutt et al.",
+      "year": 2021,
+      "arxiv_id": "",
+      "role": "Inspiration",
+      "relationship_sentence": "This data-centric approach to identify and prune label errors directly inspires CLSP\u2019s training-free philosophy, adapting label error detection to the PLL setting at the candidate-label level using feature\u2013label inconsistency."
+    }
+  ],
+  "synthesis_narrative": "Partial-label learning was formalized by Cour et al., who introduced the setting where each instance is associated with a candidate label set that contains the true class, anchoring subsequent methods to reason over candidate labels. PRODEN advanced deep PLL by progressively identifying true labels through iterative risk minimization and pseudo-label refinement, but its reliance on training-time disambiguation makes it sensitive to large candidate sets. PiCO revealed that representation-space neighborhoods provide strong supervisory signals: contrastive learning can cluster same-class instances and help disambiguate candidates via feature similarity. IDGP encoded this neighbor-agreement prior explicitly using an instance-similarity graph to propagate label confidences, showing that graph-based representation consistency can refine ambiguous labels. Feng et al. further provided identifiability guarantees and clarified when learning-centric strategies break down under heavy ambiguity, delineating the limits of disambiguation-only pipelines. In parallel, Confident Learning demonstrated a data-centric, training-free paradigm to detect and prune label errors by exploiting prediction-driven label\u2013data inconsistencies.\nTogether, these works expose a gap: when candidate sets are large, learning-centric disambiguation struggles, yet representation neighborhoods and data-centric cleaning offer reliable signals. The current paper synthesizes these insights by introducing candidate label set pruning as a training-free pre-processing step that measures inconsistency between representation space and candidate label space, filtering implausible candidates to reduce ambiguity and bolster downstream deep PLL methods like PRODEN and PiCO.",
+  "target_paper": {
+    "title": "Candidate Label Set Pruning: A Data-centric Perspective for Deep Partial-label Learning",
+    "authors": "Shuo He, Chaojie Wang, Guowu Yang, Lei Feng",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "oral",
+    "keywords": "partial label learning, label disambiguation, candidate label set pruning",
+    "abstract": "Partial-label learning (PLL) allows each training example to be equipped with a set of candidate labels. Existing deep PLL research focuses on a \\emph{learning-centric} perspective to design various training strategies for label disambiguation i.e., identifying the concealed true label from the candidate label set, for model training. However, when the size of the candidate label set becomes excessively large, these learning-centric strategies would be unable to find the true label for model training, thereby causing performance degradation. This motivates us to think from a \\emph{data-centric} perspective and pioneer a new PLL-related task called candidate label set pruning (CLSP) that aims to filter out certain potential false candidate labels in a training-free manner. To this end, we propose the first CLSP method based on the inconsistency between the representation space and the candidate label space. Specifically, for each candidate label of a training instance, if it is not a ca",
+    "openreview_id": "Fk5IzauJ7F",
+    "forum_id": "Fk5IzauJ7F"
+  },
+  "analysis_timestamp": "2026-01-06T17:30:04.582356"
+}

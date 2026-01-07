@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Batch Renormalization: Towards Reducing Mini-Batch Dependence in Batch-Normalized Models",
+      "authors": "Sergey Ioffe",
+      "year": 2017,
+      "arxiv_id": "1702.03275",
+      "role": "Inspiration",
+      "relationship_sentence": "The renormalization correction (r, d) for aligning per-batch and running statistics directly inspires the paper\u2019s causal, future-free normalization that stabilizes spiking activations in online settings."
+    },
+    {
+      "title": "Recurrent Batch Normalization",
+      "authors": "Tim Cooijmans et al.",
+      "year": 2016,
+      "arxiv_id": "1603.09025",
+      "role": "Gap Identification",
+      "relationship_sentence": "Its per-time-step BN for RNNs requires sequence-wide statistics, highlighting the core limitation\u2014dependence on future timesteps\u2014that the paper explicitly removes for SNNs with an online, causal alternative."
+    },
+    {
+      "title": "Online Normalization for Training Neural Networks",
+      "authors": "Julian Chiley et al.",
+      "year": 2019,
+      "arxiv_id": "",
+      "role": "Inspiration",
+      "relationship_sentence": "Streaming, causally updated normalization statistics motivate the paper\u2019s design of an online, temporally causal normalization scheme for spiking dynamics without batch access."
+    },
+    {
+      "title": "Direct Training for Spiking Neural Networks: Faster, Larger, Better",
+      "authors": "Yujie Wu et al.",
+      "year": 2019,
+      "arxiv_id": "",
+      "role": "Related Problem",
+      "relationship_sentence": "Its NeuNorm-style spiking-specific normalization demonstrates that stabilizing spike dynamics is crucial, which the paper extends by formulating a normalization that works under strict online constraints."
+    },
+    {
+      "title": "BNTT: Batch Normalization Through Time for Training Spiking Neural Networks",
+      "authors": "Hyoungseok Kim and Priyadarshini Panda",
+      "year": 2021,
+      "arxiv_id": "",
+      "role": "Baseline",
+      "relationship_sentence": "By applying BN separately at each timestep to stabilize SNNs, BNTT serves as the principal normalization baseline whose need for future timesteps the paper overcomes with online spiking renormalization."
+    },
+    {
+      "title": "A solution to the learning dilemma for recurrent networks of spiking neurons",
+      "authors": "Guillaume Bellec et al.",
+      "year": 2020,
+      "arxiv_id": "1901.09049",
+      "role": "Foundation",
+      "relationship_sentence": "E-prop provides the core online credit-assignment framework that the paper stabilizes, addressing e-prop\u2019s sensitivity to unnormalized, time-varying spiking statistics by adding causal normalization."
+    }
+  ],
+  "synthesis_narrative": "Batch Renormalization introduced explicit correction factors that reconcile noisy mini-batch statistics with running estimates, mapping out a practical path to stable normalization when reliable batch statistics are unavailable. Recurrent Batch Normalization showed the benefit of time-step-specific normalization for recurrent dynamics, but crucially depended on full-sequence access, making it incompatible with strictly causal, online training. Online Normalization established that streaming, causal estimators of mean and variance can replace batch-dependent normalization and still stabilize deep learning in non-i.i.d. or low-batch regimes. In spiking networks, Direct Training for Spiking Neural Networks demonstrated that SNN-specific normalization (e.g., NeuNorm) is essential to control membrane potential scales and firing rates, underscoring the centrality of normalization to trainability and accuracy. BNTT extended this idea to time-resolved normalization in SNNs, stabilizing dynamics by applying BN per timestep but at the cost of requiring future information. Finally, e-prop provided a biologically plausible, memory-efficient online credit-assignment mechanism using eligibility traces, yet it remained vulnerable to instability from unnormalized, time-varying spiking activity. Together, these works expose a gap: SNNs trained online need normalization that is both time-aware and strictly causal. The paper synthesizes the renormalization insight (correction toward running stats), streaming normalization updates, and SNN-specific temporal normalization into an online spiking renormalization module that plugs into e-prop-style training, delivering BN-like stabilization without future timesteps\u2014making online, memory-efficient SNN training both stable and accurate.",
+  "target_paper": {
+    "title": "Online Stabilization of Spiking Neural Networks",
+    "authors": "Yaoyu Zhu, Jianhao Ding, Tiejun Huang, Xiaodong Xie, Zhaofei Yu",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "spiking neural networks, online training",
+    "abstract": "Spiking neural networks (SNNs), attributed to the binary, event-driven nature of spikes, possess heightened biological plausibility and enhanced energy efficiency on neuromorphic hardware compared to analog neural networks (ANNs). Mainstream SNN training schemes apply backpropagation-through-time (BPTT) with surrogate gradients to replace the non-differentiable spike emitting process during backpropagation. While achieving competitive performance, the requirement for storing intermediate information at all time-steps incurs higher memory consumption and fails to fulfill the online property crucial to biological brains. \nOur work focuses on online training techniques, aiming for memory efficiency while preserving biological plausibility. \nThe limitation of not having access to future information in early time steps in online training has constrained previous efforts to incorporate advantageous modules such as batch normalization. \nTo address this problem, we propose Online Spiking Renor",
+    "openreview_id": "CIj1CVbkpr",
+    "forum_id": "CIj1CVbkpr"
+  },
+  "analysis_timestamp": "2026-01-07T00:26:39.295242"
+}

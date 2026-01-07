@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Learning Transferable Visual Models From Natural Language Supervision",
+      "authors": "Alec Radford et al.",
+      "year": 2021,
+      "role": "Foundation",
+      "relationship_sentence": "CPL builds directly on CLIP\u2019s zero-shot formulation\u2014using class-name prompts and image\u2013text similarity scores as a confidence score matrix from which its intra-/inter-instance candidate pseudolabels are generated."
+    },
+    {
+      "title": "Learning to Prompt for Vision-Language Models",
+      "authors": "Kaiyang Zhou et al.",
+      "year": 2022,
+      "role": "Foundation",
+      "relationship_sentence": "CPL adopts the CoOp-style learnable prompt parameterization for CLIP and replaces supervised targets with unlabeled, candidate pseudolabel\u2013based supervision to drive prompt tuning."
+    },
+    {
+      "title": "Pseudo-Label: The Simple and Efficient Semi-Supervised Learning Method for Deep Neural Networks",
+      "authors": "Dong-Hyun Lee",
+      "year": 2013,
+      "role": "Foundation",
+      "relationship_sentence": "CPL generalizes the classic pseudolabeling idea by moving from a single hard label to a dynamically refined candidate label set to mitigate early-stage pseudolabel errors."
+    },
+    {
+      "title": "FixMatch: Simplifying Semi-Supervised Learning with Consistency and Confidence",
+      "authors": "Kihyuk Sohn et al.",
+      "year": 2020,
+      "role": "Baseline",
+      "relationship_sentence": "CPL targets the well-known failure mode of hard, confidence-thresholded pseudolabels used in FixMatch-like pipelines, replacing them with progressively refined candidate sets to remain reliable when zero-shot accuracy is low."
+    },
+    {
+      "title": "ReMixMatch: Semi-Supervised Learning with Distribution Alignment and Augmentation Anchoring",
+      "authors": "David Berthelot et al.",
+      "year": 2020,
+      "role": "Inspiration",
+      "relationship_sentence": "CPL\u2019s inter-instance selection explicitly seeks class-balanced instance selection across unlabeled data, echoing ReMixMatch\u2019s distribution alignment idea and adapting it to VLM prompt tuning via a global confidence matrix."
+    },
+    {
+      "title": "Progressive Identification of True Labels for Partial-Label Learning (PRODEN)",
+      "authors": "Jiaqi Lv et al.",
+      "year": 2020,
+      "role": "Extension",
+      "relationship_sentence": "CPL extends PRODEN\u2019s progressive disambiguation principle to the VLM setting by iteratively refining candidate pseudolabel sets based on CLIP-derived confidences with both intra- and inter-instance selection."
+    }
+  ],
+  "synthesis_narrative": "CPL sits at the intersection of vision\u2013language prompt tuning and semi/weakly supervised learning. Its foundation is the CLIP framework, which provides zero-shot, prompt-based class scores that CPL aggregates into a global confidence score matrix; without CLIP\u2019s text\u2013image matching formulation, CPL\u2019s candidate pseudolabel construction would not be defined. CoOp contributes the concrete mechanism for learnable prompts that CPL fine-tunes\u2014CPL keeps the CoOp parameterization but swaps supervised labels for unlabeled supervision via candidate pseudolabels. The intellectual spark comes from the pseudolabeling lineage: Lee\u2019s Pseudo-Label and FixMatch popularized confidence-thresholded hard pseudolabels, but also exposed a key gap\u2014when initial predictions are weak, hard labels are error-prone and destabilize training. CPL addresses this by generalizing the target from a single label to a progressively refined candidate set, improving true-label inclusion while avoiding premature commitment. Its inter-instance selection is informed by distribution alignment ideas in ReMixMatch, using the global score matrix to promote class-balanced instance selection. Finally, CPL\u2019s progressive refinement mechanism draws on partial-label learning, particularly PRODEN\u2019s principle of iteratively identifying the true label from a candidate set; CPL adapts this to the VLM context by leveraging CLIP confidences and combining intra-/inter-instance selection so that standard losses can be applied over candidate pseudolabels.",
+  "analysis_timestamp": "2026-01-06T23:09:26.463444"
+}

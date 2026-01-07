@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "What Uncertainties Do We Need in Bayesian Deep Learning for Computer Vision?",
+      "authors": "Alex Kendall et al.",
+      "year": 2017,
+      "role": "Foundation",
+      "relationship_sentence": "This paper formalized the decomposition of predictive uncertainty into aleatoric and epistemic components, providing the conceptual framework that ICE operationalizes for LLMs by attributing variance from input ambiguity vs. model ignorance."
+    },
+    {
+      "title": "Simple and Scalable Predictive Uncertainty Estimation using Deep Ensembles",
+      "authors": "Balaji Lakshminarayanan et al.",
+      "year": 2017,
+      "role": "Inspiration",
+      "relationship_sentence": "ICE adopts the core idea of ensembling to estimate uncertainty but innovates by ensembling over clarified inputs rather than model instances or stochastic passes, enabling attribution of uncertainty to data ambiguity."
+    },
+    {
+      "title": "Predictive Uncertainty Estimation via Prior Networks",
+      "authors": "Andrey Malinin et al.",
+      "year": 2018,
+      "role": "Gap Identification",
+      "relationship_sentence": "Prior Networks explicitly separate data and distributional (epistemic) uncertainty but require specialized training; ICE addresses this limitation by offering a black-box, training-free decomposition for pre-trained LLMs via input clarifications."
+    },
+    {
+      "title": "Self-Consistency Improves Chain of Thought Reasoning in Language Models",
+      "authors": "Xuezhi Wang et al.",
+      "year": 2023,
+      "role": "Baseline",
+      "relationship_sentence": "Self-consistency ensembles diverse reasoning paths to improve accuracy and provide confidence signals, but conflates ambiguity with model uncertainty; ICE builds on this ensembling paradigm and explicitly factors uncertainty by first clarifying under-specified inputs."
+    },
+    {
+      "title": "Toward Building a Conversational Agent that Can Ask Clarifying Questions",
+      "authors": "Sudha Rao et al.",
+      "year": 2018,
+      "role": "Inspiration",
+      "relationship_sentence": "This work introduced the clarifying-question paradigm to resolve under-specified user inputs, directly inspiring ICE\u2019s strategy of generating input clarifications to reduce aleatoric uncertainty before prediction."
+    },
+    {
+      "title": "AmbigQA: Answering Ambiguous Open-domain Questions",
+      "authors": "Sewon Min et al.",
+      "year": 2020,
+      "role": "Foundation",
+      "relationship_sentence": "AmbigQA established that many inputs are inherently ambiguous and benefit from disambiguation or multiple valid answers; ICE generalizes this insight by using clarifications to expose and quantify aleatoric uncertainty in LLM predictions."
+    },
+    {
+      "title": "Asking Clarifying Questions in Open-Domain Information-Seeking Conversations",
+      "authors": "Mehdi Aliannejadi et al.",
+      "year": 2019,
+      "role": "Related Problem",
+      "relationship_sentence": "This work shows that asking clarifying questions improves performance under input ambiguity; ICE repurposes this mechanism for uncertainty decomposition by ensembling predictions across generated clarifications."
+    }
+  ],
+  "synthesis_narrative": "The core insight behind Input Clarification Ensembling (ICE) is to operationalize the classic aleatoric\u2013epistemic distinction for LLMs by ensembling predictions across intentionally clarified versions of an input. This draws directly on Kendall and Gal\u2019s foundational decomposition of predictive uncertainty, while replacing training-time probabilistic modeling with a black-box, inference-time procedure suitable for large, pre-trained models. The ensembling principle is inspired by deep ensembles, but ICE crucially shifts the axis of diversity from model parameters to input clarifications, enabling attribution of variance to data ambiguity rather than solely model uncertainty. Prior Networks explicitly separated uncertainty types but required specialized architectures and training; ICE addresses this gap by offering a training-free route to decomposition.\nIn the LLM era, self-consistency established ensembling across diverse reasoning traces as a powerful baseline for both accuracy and confidence estimation, yet it conflates ambiguity with parameter uncertainty. ICE advances this line by first generating clarifications, then ensembling predictions conditioned on them to factor uncertainty sources. The idea of clarifying the input is grounded in earlier NLP work on clarifying questions for under-specified user requests and on ambiguous QA, which documented that many inputs admit multiple valid interpretations and that targeted clarification improves reliability. ICE unifies these strands\u2014uncertainty decomposition, ensembling, and clarifying-question paradigms\u2014into a practical framework that separates aleatoric uncertainty from epistemic uncertainty in LLM predictions.",
+  "analysis_timestamp": "2026-01-06T23:09:26.404934"
+}

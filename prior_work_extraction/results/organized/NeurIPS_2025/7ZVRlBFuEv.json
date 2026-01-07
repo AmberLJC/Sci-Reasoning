@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Structured Denoising Diffusion Models in Discrete State-Spaces",
+      "authors": "Jacob Austin et al.",
+      "year": 2021,
+      "role": "Foundation",
+      "relationship_sentence": "This work introduced the discrete diffusion formulation that enables token-level denoising over vocabularies, providing the core probabilistic framework that d1\u2019s masked diffusion language model builds on."
+    },
+    {
+      "title": "Diffusion-LM Improves Controllable Text Generation",
+      "authors": "Xiang Lisa Li et al.",
+      "year": 2022,
+      "role": "Baseline",
+      "relationship_sentence": "Diffusion-LM established diffusion-based language modeling for text and demonstrated competitive generation quality, serving as the primary diffusion-LM paradigm that d1 adapts and upgrades for reasoning via SFT+RL."
+    },
+    {
+      "title": "Planning with Diffusion for Decision Making (Diffuser)",
+      "authors": "Michael Janner et al.",
+      "year": 2022,
+      "role": "Inspiration",
+      "relationship_sentence": "Diffuser showed how a learned critic/Q-function can guide diffusion trajectories toward high reward; d1 extends this reward/critic-guided diffusion idea to text by using an RL critic to steer masked denoising toward higher-reasoning outputs."
+    },
+    {
+      "title": "Classifier-Free Diffusion Guidance",
+      "authors": "Jonathan Ho et al.",
+      "year": 2022,
+      "role": "Extension",
+      "relationship_sentence": "d1 adapts the guidance principle from classifier-free guidance by replacing class-conditioning with an RL-derived critic signal to bias the diffusion sampling process toward reward-aligned (reasoning-correct) completions."
+    },
+    {
+      "title": "Training language models to follow instructions with human feedback",
+      "authors": "Long Ouyang et al.",
+      "year": 2022,
+      "role": "Foundation",
+      "relationship_sentence": "This paper established the SFT\u2192RLHF post-training pipeline that improves LLM capabilities; d1 ports the same SFT+RL paradigm to diffusion LMs, addressing that prior RL-based reasoning gains were AR-only."
+    },
+    {
+      "title": "STaR: Bootstrapping Reasoning with Reasoning",
+      "authors": "Eric Zelikman et al.",
+      "year": 2022,
+      "role": "Inspiration",
+      "relationship_sentence": "STaR\u2019s self-improvement via distilling correct rationales directly motivates d1\u2019s masked SFT procedure, which distills reasoning signals into a diffusion LM to seed and stabilize subsequent RL."
+    },
+    {
+      "title": "Process supervision improves mathematical reasoning of language models",
+      "authors": "Matthew L. Lightman et al.",
+      "year": 2023,
+      "role": "Extension",
+      "relationship_sentence": "This work\u2019s process reward models for step-level evaluation inform d1\u2019s critic design, enabling step/partial-solution-aware signals that guide iterative diffusion refinement during RL."
+    }
+  ],
+  "synthesis_narrative": "d1 sits at the intersection of diffusion-based text generation and reinforcement learning for reasoning. Its diffusion backbone traces directly to the discrete diffusion formulation of Austin et al., which made token-space denoising feasible, and to Diffusion-LM, which established masked diffusion as a viable language modeling alternative to autoregression. However, reasoning advances had largely been confined to the AR regime under the SFT\u2192RLHF pipeline popularized by Ouyang et al., leaving a clear gap: could diffusion LMs also benefit from post-training with RL?\n\nTwo lines of work directly shape d1\u2019s answer. First, STaR demonstrated that models can self-improve by harvesting correct rationales and distilling them via SFT. d1 adapts this idea to the masked diffusion setting, using masked SFT to inject reasoning behaviors and create a stable starting point for RL. Second, reward-guided diffusion from decision-making (Diffuser) and the broader notion of diffusion guidance (classifier-free guidance) reveal how learned signals can steer the denoising trajectory. d1 extends these principles by introducing an RL-derived critic that provides guidance signals tailored to reasoning quality\u2014akin to process supervision, where step-level reward models (Lightman et al.) evaluate intermediate reasoning. Together, these works supply the core ingredients\u2014discrete diffusion modeling, self-improvement SFT, and critic/guidance-based steering\u2014that d1 integrates to scale reasoning in diffusion language models via reinforcement learning.",
+  "analysis_timestamp": "2026-01-06T23:08:23.959403"
+}

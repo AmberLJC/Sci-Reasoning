@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+      "authors": "Jason Wei et al.",
+      "year": 2022,
+      "arxiv_id": "2201.11903",
+      "role": "Gap Identification",
+      "relationship_sentence": "By showing that step-wise rationales dramatically improve reasoning performance but require costly annotations, this work crystallized the data bottleneck that MUSTARD tackles by automatically synthesizing step-by-step proofs and solutions at scale."
+    },
+    {
+      "title": "Training Verifiers to Solve Math Word Problems (GSM8K)",
+      "authors": "Cobbe et al.",
+      "year": 2021,
+      "arxiv_id": "2110.14168",
+      "role": "Foundation",
+      "relationship_sentence": "This paper introduced a high-quality math word problem benchmark and the verifier paradigm, which MUSTARD leverages by generating math problems with solutions and filtering them via automated answer checking/verifier-style validation."
+    },
+    {
+      "title": "Measuring Mathematical Problem Solving With the MATH Dataset",
+      "authors": "Dan Hendrycks et al.",
+      "year": 2021,
+      "arxiv_id": "2103.03874",
+      "role": "Gap Identification",
+      "relationship_sentence": "MATH provided detailed step-by-step solutions but at limited scale and topic coverage, a limitation MUSTARD directly addresses through large-scale, concept-uniform synthesis of diverse math problems and proofs."
+    },
+    {
+      "title": "STaR: Bootstrapping Reasoning with Reasoning",
+      "authors": "Adam Zelikman et al.",
+      "year": 2022,
+      "arxiv_id": "2203.14465",
+      "role": "Inspiration",
+      "relationship_sentence": "STaR\u2019s generate-and-train loop using model-produced rationales inspired MUSTARD\u2019s use of LLM-generated, step-wise solutions as supervision, extended to a uniform pipeline spanning both informal math and formal theorem proving."
+    },
+    {
+      "title": "Self-Instruct: Aligning Language Models with Self-Generated Instructions",
+      "authors": "Yizhong Wang et al.",
+      "year": 2023,
+      "arxiv_id": "2212.10560",
+      "role": "Inspiration",
+      "relationship_sentence": "Self-Instruct\u2019s seed-concept/task bootstrapping directly motivates MUSTARD\u2019s Stage-1 concept sampling and Stage-2 prompting strategy to systematically expand math categories into diverse problems with solutions."
+    },
+    {
+      "title": "Self-Consistency Improves Chain of Thought Reasoning in Language Models",
+      "authors": "Xuezhi Wang et al.",
+      "year": 2022,
+      "arxiv_id": "2203.11171",
+      "role": "Extension",
+      "relationship_sentence": "MUSTARD adopts a multi-sample agreement/consistency-style filtering to retain only reliable synthesized problems and proofs, extending Self-Consistency from inference-time selection to dataset curation."
+    },
+    {
+      "title": "GPT-f: Language Model Fine-Tuning for Formal Proofs",
+      "authors": "Stanislas Polu and Ilya Sutskever",
+      "year": 2020,
+      "arxiv_id": "2009.03393",
+      "role": "Foundation",
+      "relationship_sentence": "GPT-f established the LLM + proof-checker loop for formal theorem proving, which MUSTARD generalizes by generating formal proof traces and validating them via proof assistants as a core quality-control stage."
+    }
+  ],
+  "synthesis_narrative": "Chain-of-Thought revealed that exposing intermediate reasoning steps markedly boosts performance, but also highlighted the scarcity and cost of step-wise annotations in math. GSM8K defined a clean math word problem benchmark and introduced verifier-based checking of solutions, while MATH supplied detailed multi-step solutions across topics yet remained limited in scale and topical uniformity. STaR demonstrated that model-generated rationales could be used as supervision to bootstrap stronger reasoners, suggesting a way to sidestep manual annotation. Self-Instruct showed how to expand task coverage by seeding with concepts and prompting a model to generate diverse, structured tasks and answers, offering a principled path to breadth and diversity. Self-Consistency established that sampling multiple chains and selecting the consistent ones increases reliability, an idea naturally repurposed for filtering synthesized data. In the formal domain, GPT-f pioneered integrating LLMs with proof assistants to produce and verify formal proof steps, proving the feasibility of generation-plus-checking loops for theorem proving.\nBringing these threads together, MUSTARD seizes the opportunity to uniformly synthesize high-quality, diverse math data by concept-seeded prompting (from Self-Instruct), generating explicit solution steps (motivated by CoT and STaR), and enforcing reliability with multi-sample agreement and formal proof checking (from Self-Consistency and GPT-f). This synthesis directly addresses the dataset bottlenecks surfaced by MATH and GSM8K, scaling step-wise supervision and bridging informal problem solving and formal theorem proving within a single, quality-controlled pipeline.",
+  "target_paper": {
+    "title": "MUSTARD: Mastering Uniform Synthesis of Theorem and Proof Data",
+    "authors": "Yinya Huang, Xiaohan Lin, Zhengying Liu, Qingxing Cao, Huajian Xin, Haiming Wang, Zhenguo Li, Linqi Song, Xiaodan Liang",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "theorem proving, math word problem, mathematical reasoning, benchmark",
+    "abstract": "Recent large language models (LLMs) have witnessed significant advancement in various tasks, including mathematical reasoning and theorem proving. As these two tasks require strict and formal multi-step inference, they are appealing domains for exploring the reasoning ability of LLMs but still face important challenges. Previous studies such as Chain-of-Thought (CoT) have revealed the effectiveness of intermediate steps guidance. However, such step-wise annotation requires heavy labor, leading to insufficient training steps for current benchmarks. To fill this gap, this work introduces MUSTARD, a data generation framework that masters uniform synthesis of theorem and proof data of high quality and diversity. MUSTARD synthesizes data in three stages: (1) It samples a few mathematical concept seeds as the problem category. (2) Then, it prompts a generative language model with the sampled concepts to obtain both the problems and their step-wise formal solutions. (3) Lastly, the framework ",
+    "openreview_id": "8xliOUg9EW",
+    "forum_id": "8xliOUg9EW"
+  },
+  "analysis_timestamp": "2026-01-06T18:13:48.902706"
+}

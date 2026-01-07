@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Nearest Neighbor Contrastive Learning of Visual Representations",
+      "authors": "Rohit Girdhar Dwibedi et al.",
+      "year": 2021,
+      "arxiv_id": "2104.14548",
+      "role": "Baseline",
+      "relationship_sentence": "CrIBo directly generalizes NNCLR\u2019s global nearest-neighbor bootstrapping by mining and aligning nearest neighbors at the object/token level to avoid the scene-centric entanglement that NNCLR induces."
+    },
+    {
+      "title": "DINOv2: Learning Robust Visual Features without Supervision",
+      "authors": "Maxime Oquab et al.",
+      "year": 2023,
+      "arxiv_id": "2304.07193",
+      "role": "Extension",
+      "relationship_sentence": "CrIBo adopts the kNN-teacher/neighbor-supervision idea from DINOv2 but applies it to object-level descriptors throughout training and test-time retrieval, rather than global image features."
+    },
+    {
+      "title": "iBOT: Image BERT Pre-Training with Online Tokenizer",
+      "authors": "Jinghao Zhou et al.",
+      "year": 2022,
+      "arxiv_id": "2111.07832",
+      "role": "Extension",
+      "relationship_sentence": "CrIBo builds on iBOT\u2019s token-level self-distillation by replacing intra-image token matching with cross-image object-level nearest-neighbor targets to learn dense, object-aware representations."
+    },
+    {
+      "title": "Dense Contrastive Learning for Self-Supervised Visual Pre-Training",
+      "authors": "Xinlong Wang et al.",
+      "year": 2021,
+      "arxiv_id": "2011.09157",
+      "role": "Foundation",
+      "relationship_sentence": "CrIBo takes DenseCL\u2019s insight that local/dense correspondences are crucial and extends it from within-image correspondences to cross-image, object-level positive mining."
+    },
+    {
+      "title": "Propagate Yourself: Exploring Pixel-Level Consistency for Unsupervised Visual Representation Learning",
+      "authors": "Zhenda Xie et al.",
+      "year": 2021,
+      "arxiv_id": "2011.10043",
+      "role": "Related Problem",
+      "relationship_sentence": "CrIBo is informed by PixPro\u2019s pixel-level consistency idea but replaces within-image propagation with cross-image object-level neighbor bootstrapping to achieve semantic alignment."
+    },
+    {
+      "title": "Emerging Properties in Self-Supervised Vision Transformers",
+      "authors": "Mathilde Caron et al.",
+      "year": 2021,
+      "arxiv_id": "2104.14294",
+      "role": "Inspiration",
+      "relationship_sentence": "CrIBo leverages DINO\u2019s finding that ViT self-supervision yields emergent objectness to define reliable object-level features that can be used for cross-image nearest-neighbor bootstrapping."
+    }
+  ],
+  "synthesis_narrative": "Nearest-neighbor positive mining was introduced for self-supervision at the image level by NNCLR, which showed strong results on object-centric data but also revealed that global retrieval entangles multiple objects in scene-centric images. DINOv2 advanced this idea with a kNN-teacher that supervises with neighborhood-consistent targets, again at the global feature level. In parallel, DINO demonstrated that self-supervised ViTs yield emergent objectness and salient attention maps, suggesting that object-level tokens can be reliable carriers of semantics. iBOT moved supervision to the token level by combining self-distillation and masked modeling, providing a practical framework for learning dense features rather than only global embeddings. DenseCL similarly highlighted the importance of local/dense correspondence by contrasting features at corresponding spatial locations, while PixPro enforced pixel-level consistency via propagation within an image, further emphasizing the value of fine-grained signals for dense representation learning. Together, these works established that nearest-neighbor bootstrapping is powerful yet overly global, and that dense/token-level supervision captures richer semantics but is typically confined to within-image correspondences. The natural next step is to marry nearest-neighbor retrieval with token/object-level supervision: perform cross-image bootstrapping at the level of objects to avoid global entanglement while exploiting dataset-wide neighbors. CrIBo synthesizes these strands by retrieving nearest neighbors for object-level descriptors across images and training with object-aware targets, thereby preserving multi-object structure on scene-centric data and enabling effective retrieval-based in-context learning at test time.",
+  "target_paper": {
+    "title": "CrIBo: Self-Supervised Learning via Cross-Image Object-Level Bootstrapping",
+    "authors": "Tim Lebailly, Thomas Stegm\u00fcller, Behzad Bozorgtabar, Jean-Philippe Thiran, Tinne Tuytelaars",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "self-supervised learning, representation learning",
+    "abstract": "Leveraging nearest neighbor retrieval for self-supervised representation learning has proven beneficial with object-centric images. However, this approach faces limitations when applied to scene-centric datasets, where multiple objects within an image are only implicitly captured in the global representation. Such global bootstrapping can lead to undesirable entanglement of object representations. Furthermore, even object-centric datasets stand to benefit from a finer-grained bootstrapping approach. In response to these challenges, we introduce a novel $\\textbf{Cr}$oss-$\\textbf{I}$mage Object-Level $\\textbf{Bo}$otstrapping method tailored to enhance dense visual representation learning. By employing object-level nearest neighbor bootstrapping throughout the training, CrIBo emerges as a notably strong and adequate candidate for in-context learning, leveraging nearest neighbor retrieval at test time. CrIBo shows state-of-the-art performance on the latter task while being highly competiti",
+    "openreview_id": "3M0GXoUEzP",
+    "forum_id": "3M0GXoUEzP"
+  },
+  "analysis_timestamp": "2026-01-07T00:28:39.062889"
+}

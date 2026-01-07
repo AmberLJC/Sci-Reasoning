@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Deep Reinforcement Learning from Human Preferences",
+      "authors": "Paul F. Christiano et al.",
+      "year": 2017,
+      "role": "Foundation",
+      "relationship_sentence": "NLHF keeps Christiano et al.\u2019s core problem formulation\u2014learning from pairwise human preferences\u2014but replaces their reward-model-then-RL pipeline with a direct preference game whose solution is a Nash policy."
+    },
+    {
+      "title": "Fine-Tuning Language Models from Human Preferences",
+      "authors": "Daniel M. Ziegler et al.",
+      "year": 2019,
+      "role": "Baseline",
+      "relationship_sentence": "Ziegler et al. operationalized RLHF for LMs via KL-regularized PPO on a learned reward; NLHF is positioned as an alternative to this standard baseline by discarding scalar rewards and optimizing a Nash objective over pairwise preferences."
+    },
+    {
+      "title": "Training language models to follow instructions with human feedback",
+      "authors": "Long Ouyang et al.",
+      "year": 2022,
+      "role": "Baseline",
+      "relationship_sentence": "InstructGPT popularized the modern RLHF pipeline (pairwise preference data \u2192 reward model \u2192 PPO fine-tuning), which NLHF directly replaces with a pairwise comparator and Nash equilibrium policy learning."
+    },
+    {
+      "title": "Direct Preference Optimization: Your Language Model is Secretly a Reward Model",
+      "authors": "Alexander M. Rafailov et al.",
+      "year": 2023,
+      "role": "Gap Identification",
+      "relationship_sentence": "DPO showed how to optimize from pairwise feedback without explicit RL but still assumes preferences derive from a latent scalar reward; NLHF addresses this gap by learning a two-input preference model and targeting the Nash policy that beats any opponent under that model."
+    },
+    {
+      "title": "A Unified Game-Theoretic Approach to Multiagent Reinforcement Learning",
+      "authors": "Marc Lanctot et al.",
+      "year": 2017,
+      "role": "Foundation",
+      "relationship_sentence": "PSRO introduced oracle-based methods to compute Nash equilibria in large games; NLHF casts preference optimization as a zero-sum game between policies and adopts this Nash perspective to define its training target."
+    },
+    {
+      "title": "Rank Analysis of Incomplete Block Designs I. The Method of Paired Comparisons",
+      "authors": "R. A. Bradley and M. E. Terry",
+      "year": 1952,
+      "role": "Foundation",
+      "relationship_sentence": "The Bradley\u2013Terry paired-comparison model underlies reward-model training from preferences in RLHF; NLHF explicitly moves beyond this single-response scoring assumption by learning a general two-response preference model and optimizing its Nash equilibrium."
+    }
+  ],
+  "synthesis_narrative": "Nash Learning from Human Feedback (NLHF) is a direct response to the standard RLHF paradigm established by Christiano et al. and operationalized for language models by Ziegler et al. and Ouyang et al. That pipeline turns pairwise human preferences into a scalar reward via a Bradley\u2013Terry-style model and then applies KL-regularized PPO. NLHF challenges this reward-centric assumption at its root: rather than inferring a single-response score that is assumed to rationalize all comparisons, it learns a two-input preference model and defines the target policy as the Nash equilibrium of the induced two-player zero-sum game\u2014one policy\u2019s responses versus any competitor\u2019s. This game-theoretic target is motivated by and grounded in PSRO\u2019s framework for computing Nash policies in large games, providing a principled notion of unexploitable performance under possibly non-transitive preferences. Recent preference-only optimization methods like DPO reduced reliance on explicit RL but maintained the latent scalar reward assumption; NLHF identifies this as a key limitation and removes it, allowing preferences that cannot be globally rank-ordered. In short, NLHF\u2019s core innovation\u2014optimizing a Nash policy under a learned pairwise comparator\u2014emerges by fusing the RLHF problem setup (Christiano/Ziegler/Ouyang), the mathematical foundation of paired comparisons (Bradley\u2013Terry), and game-theoretic solution concepts and algorithms (PSRO), while explicitly addressing the gap revealed by DPO\u2019s dependence on a latent reward model.",
+  "analysis_timestamp": "2026-01-06T23:09:26.466456"
+}

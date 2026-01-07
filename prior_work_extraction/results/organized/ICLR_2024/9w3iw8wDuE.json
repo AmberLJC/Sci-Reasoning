@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Tent: Fully Test-Time Adaptation by Entropy Minimization",
+      "authors": "Dequan Wang et al.",
+      "year": 2021,
+      "arxiv_id": "2006.10726",
+      "role": "Foundation",
+      "relationship_sentence": "Established the modern TTA formulation and the practice of using prediction entropy as a surrogate confidence/objective, which DeYO directly reexamines and replaces with PLPD for reliable sample selection."
+    },
+    {
+      "title": "EATA: Efficient Test-Time Adaptation",
+      "authors": "Niu et al.",
+      "year": 2022,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "Uses entropy-based sample selection to curb error accumulation in online TTA, whose brittleness under bias is the explicit limitation DeYO addresses by substituting entropy with PLPD."
+    },
+    {
+      "title": "CoTTA: Continual Test-Time Adaptation",
+      "authors": "Wang et al.",
+      "year": 2022,
+      "arxiv_id": "2203.13591",
+      "role": "Baseline",
+      "relationship_sentence": "Relies on augmentation-averaged pseudo-labels and confidence heuristics for stable continual TTA, providing a primary baseline into which DeYO\u2019s PLPD can be plugged as a more robust confidence metric."
+    },
+    {
+      "title": "MEMO: Test-Time Robustness via Multi-View Entropy Minimization",
+      "authors": "Zhang et al.",
+      "year": 2022,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "Shows that disagreement across augmented views is informative of prediction reliability, inspiring DeYO\u2019s use of a targeted transformation and prediction-difference (PLPD) to probe factor-specific influence."
+    },
+    {
+      "title": "ImageNet-trained CNNs are biased towards texture; increasing shape-bias improves accuracy and robustness",
+      "authors": "Robert Geirhos et al.",
+      "year": 2019,
+      "arxiv_id": "1811.12231",
+      "role": "Inspiration",
+      "relationship_sentence": "Demonstrates that shape and texture act as disentangled factors driving CNN decisions, directly motivating DeYO\u2019s design of an object-shape\u2013destroying transformation to quantify shape influence via PLPD."
+    },
+    {
+      "title": "SAR: Sharpness-Aware Minimization for Test-Time Adaptation (Towards Stable TTA in Dynamic Environments)",
+      "authors": "Niu et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "Employs entropy-based selective updating with sharpness-aware optimization, serving as a main competitor whose entropy-centric gating DeYO replaces with a factor-aware PLPD criterion."
+    }
+  ],
+  "synthesis_narrative": "Test-time adaptation (TTA) matured around the idea that a model can self-improve at inference by minimizing its output uncertainty. Tent crystallized this formulation and made prediction entropy the de facto signal for both objective and confidence. EATA pushed this further into the online setting, mitigating error accumulation by selectively updating on low-entropy samples and anchoring the model to reduce drift, thereby entrenching entropy as the central gating heuristic. CoTTA improved stability under continual shifts through augmentation-averaged pseudo labels and EMA regularization, still relying on confidence/consistency proxies to decide when to trust updates. MEMO highlighted that multi-view disagreement under test-time augmentations correlates with unreliability, suggesting that carefully chosen transformations can expose fragile predictions. Complementing these methodological advances, Geirhos et al. showed that CNN decisions often hinge on disentangled factors like texture and shape, and that perturbing one factor can radically change predictions, implying that confidence measures oblivious to factor influence can be misleading. Together, these works created a robust but entropy-centric TTA pipeline while revealing that latent factors drive failures under biased scenarios. The current paper synthesizes these threads by replacing generic entropy confidence with PLPD, a targeted prediction-difference probe that destroys object shape to quantify its influence. By plugging PLPD into selective-update pipelines (e.g., EATA/CoTTA/SAR), DeYO curbs error accumulation precisely where entropy is unreliable\u2014biased, factor-driven shifts\u2014making factor-aware confidence the natural next step for stable online TTA.",
+  "target_paper": {
+    "title": "Entropy is not Enough for Test-Time Adaptation: From the Perspective of Disentangled Factors",
+    "authors": "Jonghyun Lee, Dahuin Jung, Saehyung Lee, Junsung Park, Juhyeon Shin, Uiwon Hwang, Sungroh Yoon",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Test-time adaptation, Roustness",
+    "abstract": "Test-time adaptation (TTA) fine-tunes pre-trained deep neural networks for unseen test data. The primary challenge of TTA is limited access to the entire test dataset during online updates, causing error accumulation. To mitigate it, TTA methods have utilized the model output's entropy as a confidence metric that aims to determine which samples have a lower likelihood of causing error. Through experimental studies, however, we observed the unreliability of entropy as a confidence metric for TTA under biased scenarios and theoretically revealed that it stems from the neglect of the influence of latent disentangled factors of data on predictions. Building upon these findings, we introduce a novel TTA method named Destroy Your Object (DeYO), which leverages a newly proposed confidence metric named Pseudo-Label Probability Difference (PLPD). PLPD quantifies the influence of the shape of an object on prediction by measuring the difference between predictions before and after applying an obj",
+    "openreview_id": "9w3iw8wDuE",
+    "forum_id": "9w3iw8wDuE"
+  },
+  "analysis_timestamp": "2026-01-06T22:50:40.311100"
+}

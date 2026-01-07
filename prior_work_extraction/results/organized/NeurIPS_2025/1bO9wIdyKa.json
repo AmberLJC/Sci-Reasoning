@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Lightness and Retinex Theory",
+      "authors": "Edwin H. Land, John J. McCann",
+      "year": 1971,
+      "role": "Foundational intrinsic decomposition theory",
+      "relationship_sentence": "UniRelight\u2019s joint prediction of albedo and relit output builds on the Retinex premise that image formation can be factorized into reflectance (albedo) and illumination, using albedo as a stable, illumination-invariant intermediate."
+    },
+    {
+      "title": "Shape, Illumination, and Reflectance from Shading (SIRFS)",
+      "authors": "Jonathan T. Barron, Jitendra Malik",
+      "year": 2012,
+      "role": "Classical inverse rendering with coupled reflectance\u2013illumination estimation",
+      "relationship_sentence": "The paper\u2019s design to jointly infer intrinsic properties while reasoning about lighting echoes SIRFS\u2019s coupled estimation of reflectance and illumination to reduce ambiguities in inverse rendering."
+    },
+    {
+      "title": "Intrinsic Images in the Wild",
+      "authors": "Sean Bell, Kavita Bala, Noah Snavely",
+      "year": 2014,
+      "role": "Large-scale supervision and benchmarking for albedo/shading learning",
+      "relationship_sentence": "UniRelight leverages the IIW tradition of learning albedo under sparse/weak supervision to mitigate paired relighting data scarcity, integrating intrinsic cues to improve generalization."
+    },
+    {
+      "title": "NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis",
+      "authors": "Ben Mildenhall, Pratul P. Srinivasan, Matthew Tancik, Jonathan T. Barron, Ravi Ramamoorthi, Ren Ng",
+      "year": 2020,
+      "role": "Neural rendering backbone enabling physically-grounded light transport reasoning",
+      "relationship_sentence": "NeRF catalyzed decomposition and relighting work by modeling view-dependent appearance and light transport, a paradigm UniRelight inherits conceptually while avoiding explicit geometry via a generative diffusion prior."
+    },
+    {
+      "title": "NeRV: Neural Reflectance and Visibility Fields for Relighting and View Synthesis",
+      "authors": "Pratul P. Srinivasan et al.",
+      "year": 2021,
+      "role": "Two-stage inverse + forward neural relighting with factorized scene properties",
+      "relationship_sentence": "UniRelight targets the error accumulation and data demands seen in NeRV-like inverse-forward pipelines by learning reflectance (albedo) and performing relighting in a single generative pass."
+    },
+    {
+      "title": "High-Resolution Image Synthesis with Latent Diffusion Models",
+      "authors": "Robin Rombach, Andreas Blattmann, Dominik Lorenz, Patrick Esser, Bj\u00f6rn Ommer",
+      "year": 2022,
+      "role": "Scalable diffusion backbone and conditioning for controllable image synthesis",
+      "relationship_sentence": "UniRelight\u2019s relighting synthesis and conditioning on intrinsic cues are enabled by LDM\u2019s efficient latent-space diffusion, leveraging generative priors to produce realistic lighting effects under limited paired data."
+    },
+    {
+      "title": "Video Diffusion Models",
+      "authors": "Jonathan Ho, Tim Salimans, et al.",
+      "year": 2022,
+      "role": "Temporally coherent generative modeling for videos via diffusion",
+      "relationship_sentence": "UniRelight\u2019s use of video diffusion to synthesize temporally consistent relighted outputs builds directly on VDMs\u2019 formulation for coherent multi-frame generation while accommodating complex, view-dependent light transport."
+    }
+  ],
+  "synthesis_narrative": "UniRelight\u2019s core idea\u2014jointly estimating an illumination-invariant intrinsic (albedo) representation while synthesizing relit images/videos in a single generative pass\u2014sits at the intersection of intrinsic decomposition, inverse rendering, and modern diffusion-based video generation. Retinex theory established reflectance\u2013illumination factorization as the canonical lens on appearance, and SIRFS made explicit the benefits of coupling reflectance and illumination estimation to reduce under-determined ambiguities. The IIW line of work demonstrated that intrinsic signals can be learned under weak supervision, a crucial pathway when fully paired multi-illumination datasets are scarce.\n\nOn the rendering side, NeRF and its relightable descendants such as NeRV showed that factorizing scene properties (reflectance, visibility, and lighting) enables realistic relighting but typically through two-stage inverse-plus-forward pipelines that are fragile to error accumulation and data coverage. UniRelight adopts the factorization spirit (explicit albedo) but collapses the pipeline: instead of estimating a full physical scene model then re-rendering, it conditions a powerful generator to synthesize the relit result while jointly predicting albedo, improving robustness in complex materials and lighting.\n\nThis collapse is enabled by latent and video diffusion models. Latent Diffusion provides efficient, controllable, high-fidelity image synthesis that can be guided by intrinsic cues, while Video Diffusion Models contribute temporal consistency across frames. Together they supply a strong generative prior that compensates for limited paired supervision and can hallucinate realistic light transport effects\u2014shadows, reflections, and transparency\u2014under diverse target illuminations.",
+  "analysis_timestamp": "2026-01-07T00:21:32.298489"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Flow Matching for Generative Modeling",
+      "authors": "Lipman et al.",
+      "year": 2023,
+      "role": "Foundation",
+      "relationship_sentence": "Sundial\u2019s TimeFlow Loss is a direct conditionalization of flow matching to predict the next-patch distribution in continuous-valued time series, adopting the flow-matching objective as its core training principle."
+    },
+    {
+      "title": "Flow Straight and Fast: Learning to Generate with Rectified Flow",
+      "authors": "Liu et al.",
+      "year": 2023,
+      "role": "Inspiration",
+      "relationship_sentence": "The rectified-flow perspective informed Sundial\u2019s use of flow-matching to obtain stable, mode-covering vector fields, motivating its claim of mitigating mode collapse while enabling efficient sampling."
+    },
+    {
+      "title": "FFJORD: Free-form Continuous Dynamics for Scalable Reversible Generative Models",
+      "authors": "Grathwohl et al.",
+      "year": 2019,
+      "role": "Foundation",
+      "relationship_sentence": "FFJORD\u2019s continuous normalizing flows and ODE-based generative modeling framework underpin Sundial\u2019s view of learning continuous-time vector fields for native modeling of real-valued sequences without discrete tokenization."
+    },
+    {
+      "title": "Autoregressive Denoising Diffusion Models for Multivariate Probabilistic Time Series Forecasting",
+      "authors": "Rasul et al.",
+      "year": 2021,
+      "role": "Gap Identification",
+      "relationship_sentence": "This work established diffusion-based distributional forecasting for time series but suffers from slow sampling and training constraints, gaps Sundial addresses by replacing diffusion with flow-matching for fast, native probabilistic prediction."
+    },
+    {
+      "title": "DeepAR: Probabilistic Forecasting with Autoregressive Recurrent Networks",
+      "authors": "Salinas et al.",
+      "year": 2020,
+      "role": "Gap Identification",
+      "relationship_sentence": "DeepAR\u2019s reliance on parametric likelihoods (e.g., Gaussian/negative binomial) motivates Sundial\u2019s nonparametric TimeFlow Loss, which models multi-modal next-patch distributions without assuming a fixed density family."
+    },
+    {
+      "title": "PatchTST: Transformer with Patch-level Input and Channel Independence for Time Series Forecasting",
+      "authors": "Nie et al.",
+      "year": 2023,
+      "role": "Baseline",
+      "relationship_sentence": "Sundial inherits the patch-based Transformer formulation from PatchTST and extends it by replacing point or parametric targets with a flow-matched next-patch distribution as the pretraining objective."
+    },
+    {
+      "title": "Chronos: Learning the Language of Time Series",
+      "authors": "Rasul et al.",
+      "year": 2024,
+      "role": "Gap Identification",
+      "relationship_sentence": "Chronos showed time-series foundation models via discrete tokenization and LLM pretraining; Sundial explicitly avoids this by introducing a native continuous pretraining objective (TimeFlow Loss) that requires no discretization."
+    }
+  ],
+  "synthesis_narrative": "Sundial\u2019s core innovation\u2014TimeFlow Loss for native, distributional pretraining of Transformers on continuous-valued time series\u2014traces directly to the flow-based generative modeling lineage. Flow Matching for Generative Modeling (Lipman et al.) provides the fundamental training principle of matching a target vector field, which Sundial adapts conditionally to predict next-patch distributions. Building on this, Rectified Flow (Liu et al.) demonstrates that properly designed flow fields can mitigate mode collapse and enable fast sampling, informing Sundial\u2019s emphasis on stability and multi-modality. At a deeper level, FFJORD (Grathwohl et al.) established the ODE/CNF perspective\u2014learning continuous vector fields over data\u2014that legitimizes Sundial\u2019s native continuous modeling without discretization.\nOn the time-series side, prior probabilistic forecasters like DeepAR (Salinas et al.) rely on parametric likelihoods that often under-represent multi-modality, a limitation Sundial circumvents by directly learning the next-patch distribution via flows. Diffusion-based forecasting (Rasul et al.) introduced nonparametric, sample-based uncertainty but at the cost of slow sampling; Sundial addresses this by swapping diffusion for flow matching to retain multi-modality with efficiency. Finally, patch-based Transformers for time series (PatchTST) provide the architectural scaffold that Sundial minimally adapts, while tokenization-driven foundation models such as Chronos highlight the tradeoffs of discretization that Sundial explicitly avoids. Together, these works directly shape Sundial\u2019s formulation: patch-conditioned, flow-matched pretraining that scales, remains native to continuous data, and yields diverse, high-quality predictions.",
+  "analysis_timestamp": "2026-01-06T23:07:19.617015"
+}

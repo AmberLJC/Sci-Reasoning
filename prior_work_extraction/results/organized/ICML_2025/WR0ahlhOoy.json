@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Learning Transferable Visual Models From Natural Language Supervision",
+      "authors": "Alec Radford et al.",
+      "year": 2021,
+      "role": "Foundation",
+      "relationship_sentence": "Establishes the zero-shot vision\u2013language paradigm (CLIP) that our method robustifies; our training objective and evaluation setting directly build on CLIP\u2019s text-image alignment and zero-shot classifier."
+    },
+    {
+      "title": "Towards Deep Learning Models Resistant to Adversarial Attacks",
+      "authors": "Aleksander Madry et al.",
+      "year": 2018,
+      "role": "Foundation",
+      "relationship_sentence": "Provides the minimax adversarial training framework and iterative PGD procedure whose adversarial trajectories we exploit; our path-simplices are constructed from successive PGD iterates between clean and adversarial examples."
+    },
+    {
+      "title": "Theoretically Principled Trade-off Between Robustness and Accuracy",
+      "authors": "Hongyang Zhang et al.",
+      "year": 2019,
+      "role": "Baseline",
+      "relationship_sentence": "TRADES aligns clean and adversarial predictions via KL at individual adversaries; we generalize this pointwise alignment to the entire adversarial path simplex and derive a closed-form upper bound that removes explicit sampling."
+    },
+    {
+      "title": "Adversarial Logit Pairing",
+      "authors": "A. Kannan et al.",
+      "year": 2018,
+      "role": "Extension",
+      "relationship_sentence": "ALP\u2019s idea of matching clean/adversarial scores motivates our alignment formulation, which extends pairing from single endpoints to intermediate adversaries along the PGD path via a Taylor-based bound."
+    },
+    {
+      "title": "Virtual Adversarial Training: A Regularization Method for Supervised and Semi-supervised Learning",
+      "authors": "Takeru Miyato et al.",
+      "year": 2018,
+      "role": "Inspiration",
+      "relationship_sentence": "VAT derives local worst-case perturbations and smoothness penalties using Taylor expansion around clean inputs; we similarly use Jacobian/Hessian at clean points to upper-bound alignment loss over a region, avoiding costly sampling."
+    },
+    {
+      "title": "Improving the Adversarial Robustness and Interpretability of Deep Neural Networks by Regularizing their Input Gradients",
+      "authors": "Andrew Ross et al.",
+      "year": 2018,
+      "role": "Inspiration",
+      "relationship_sentence": "Shows that controlling input Jacobians yields robustness; our closed-form alignment depends explicitly on Jacobian/Hessian at clean samples, converting neighborhood alignment into derivative-based penalties."
+    },
+    {
+      "title": "Provable Defenses against Adversarial Examples via the Convex Outer Adversarial Polytope",
+      "authors": "Eric Wong et al.",
+      "year": 2018,
+      "role": "Related Problem",
+      "relationship_sentence": "Introduces optimizing upper bounds of worst-case loss over convex perturbation sets; analogously, we upper-bound alignment loss over convex simplices spanned by adversarial path vertices instead of sampling them."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core contribution\u2014a closed-form alignment objective that robustifies zero-shot vision\u2013language models by covering entire adversarial path simplices\u2014sits at the intersection of zero-shot VLMs and principled adversarial training. CLIP (Radford et al.) furnishes the zero-shot vision\u2013language formulation and the practical baseline our method adapts, while Madry et al. formalize adversarial training as minimax optimization and provide the iterative PGD trajectories whose successive iterates define our path vertices. Popular alignment-based defenses, notably TRADES and Adversarial Logit Pairing, directly motivate our loss design but expose a critical gap: they match predictions only at individual adversarial endpoints, ignoring informative intermediate states near the decision boundary. Our work is a direct extension that upgrades pointwise alignment to cover the convex hull (simplex) along the adversarial path.\nMethodologically, the key enabler is Taylor expansion around clean samples, inspired by Virtual Adversarial Training\u2019s use of local second-order structure to avoid expensive inner maximization. We further echo gradient-based robustness regularization (Ross & Doshi-Velez) by expressing the alignment bound in terms of Jacobians/Hessians at clean points, turning region-wide alignment into derivative-based penalties. Finally, the idea of replacing explicit enumeration over perturbations with an optimized upper bound over a convex set is aligned with the philosophy of convex outer polytope defenses (Wong & Kolter), here specialized to simplices formed by adversarial path iterates. Together, these works directly shape our formulation and reveal the limitation our method resolves.",
+  "analysis_timestamp": "2026-01-06T23:07:19.617944"
+}

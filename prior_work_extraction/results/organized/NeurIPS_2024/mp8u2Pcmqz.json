@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "LLM.int8(): 8-bit Matrix Multiplication for Transformers at Scale",
+      "authors": "Tim Dettmers, Mike Lewis, Younes Belkada, Luke Zettlemoyer",
+      "year": 2022,
+      "role": "Introduced outlier-aware mixed-precision inference for LLMs by explicitly detecting and isolating activation outlier channels.",
+      "relationship_sentence": "DuQuant leverages the same notion of identifiable activation outlier dimensions as a prior, using these indices to construct targeted rotation matrices that redistribute outlier energy."
+    },
+    {
+      "title": "SmoothQuant: Accurate and Efficient Post-Training Quantization for Large Language Models",
+      "authors": "Xiao et al.",
+      "year": 2023,
+      "role": "Proposed per-channel scaling to migrate activation outliers into weights, enabling low-bit activation quantization.",
+      "relationship_sentence": "DuQuant extends SmoothQuant\u2019s outlier-smoothing philosophy by addressing not only normal but also massive outliers via orthogonal rotations and permutations rather than pure rescaling."
+    },
+    {
+      "title": "AWQ: Activation-Aware Weight Quantization for LLMs",
+      "authors": "Lin et al.",
+      "year": 2023,
+      "role": "Used activation statistics to guide per-channel weight scaling and group-wise quantization while preserving salient channels.",
+      "relationship_sentence": "DuQuant builds on AWQ\u2019s channel-level sensitivity by explicitly redistributing high-magnitude channels across neighbors and blocks to balance variance before quantization."
+    },
+    {
+      "title": "GPTQ: Accurate Post-Training Quantization for Generative Pre-trained Transformers",
+      "authors": "Ilyas Frantar, Dan Alistarh",
+      "year": 2022,
+      "role": "A widely adopted PTQ method with block/group-wise quantization and error compensation for LLM weights.",
+      "relationship_sentence": "Observing that block-wise grouping can concentrate outliers and raise variance, DuQuant\u2019s zigzag permutation deliberately spreads outlier channels across blocks to mitigate GPTQ-style group imbalance."
+    },
+    {
+      "title": "Optimized Product Quantization",
+      "authors": "Ting Ge, Kaiming He, Qifa Ke, Jian Sun",
+      "year": 2013,
+      "role": "Established learning orthogonal rotations and permutations prior to quantization to reduce distortion.",
+      "relationship_sentence": "DuQuant adapts OPQ\u2019s core insight\u2014pre-quantization orthogonal transforms\u2014but guides rotations using known outlier dimensions to specifically diffuse extreme activation magnitudes."
+    },
+    {
+      "title": "Outlier Channel Splitting for Post-Training Quantization",
+      "authors": "Meller et al.",
+      "year": 2019,
+      "role": "Introduced splitting high-magnitude channels to alleviate quantization error caused by outliers.",
+      "relationship_sentence": "DuQuant achieves a splitting-like effect without architectural changes by using block-wise rotations to distribute a channel\u2019s outlier mass across adjacent channels."
+    }
+  ],
+  "synthesis_narrative": "DuQuant\u2019s core contribution\u2014dual transformations that redistribute activation outliers via targeted rotations and block-balancing permutations\u2014directly grows from the LLM quantization literature on identifying and mitigating outlier channels and from classical quantization preconditioning. LLM.int8() established that activation outliers are concentrated in a few identifiable dimensions and that handling them specially dramatically improves low-bit inference; DuQuant explicitly uses those outlier indices as priors to construct rotations that diffuse their mass. SmoothQuant demonstrated that channel-wise rescaling can migrate and smooth normal outliers, enabling low-bit activations, but struggles with extremely large magnitudes; DuQuant complements this by employing orthogonal rotations to tame massive outliers that resist simple scaling. AWQ emphasized activation-aware, channel-level sensitivity and group-wise decisions; DuQuant operationalizes this sensitivity by actively re-distributing high-magnitude channels both within blocks (rotations) and across blocks (permutation) to equalize variance. GPTQ\u2019s block/group quantization is a standard backbone but is vulnerable when outliers cluster within groups; DuQuant\u2019s zigzag permutation explicitly spreads outlier channels to stabilize group-wise statistics. Finally, the notion that pre-quantization orthogonal transforms can minimize distortion traces to Optimized Product Quantization, while Outlier Channel Splitting provides a conceptual precedent for redistributing a single channel\u2019s extreme magnitude\u2014an effect DuQuant attains implicitly via rotation without modifying network topology. Together, these works motivate and enable DuQuant\u2019s rotation-plus-permutation strategy to robustly handle both normal and massive outliers in low-bit LLMs.",
+  "analysis_timestamp": "2026-01-06T23:42:49.040392"
+}

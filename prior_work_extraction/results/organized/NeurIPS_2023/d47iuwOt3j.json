@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Classification and Regression Trees",
+      "authors": "Leo Breiman, Jerome H. Friedman, Richard A. Olshen, Charles J. Stone",
+      "year": 1984,
+      "role": "Foundational learning algorithm and impurity criterion",
+      "relationship_sentence": "This book formalized the Gini impurity and its use in binary tree splitting, the exact quantity the paper\u2019s encryption is designed to preserve during split selection."
+    },
+    {
+      "title": "Random Forests",
+      "authors": "Leo Breiman",
+      "year": 2001,
+      "role": "Target ensemble method and training procedure",
+      "relationship_sentence": "Breiman\u2019s random forests popularized Gini-based splitting at scale; the paper\u2019s core goal is to enable RF training while preserving Gini impurity under encryption."
+    },
+    {
+      "title": "Order-Preserving Symmetric Encryption",
+      "authors": "Alexandra Boldyreva, Nathan Chenette, Younho Lee, Adam O\u2019Neill",
+      "year": 2009,
+      "role": "Property-preserving encryption antecedent (preserves order under encryption)",
+      "relationship_sentence": "OPE pioneered the idea of designing encryptions that preserve algorithmically useful properties (order); the paper extends this paradigm by crafting an encryption that preserves the argmin of Gini impurity for splits."
+    },
+    {
+      "title": "Order-Revealing Encryption: New Constructions, Applications, and Lower Bounds",
+      "authors": "Kevin Lewi, David J. Wu",
+      "year": 2016,
+      "role": "Efficient comparisons on ciphertexts with formal leakage analysis",
+      "relationship_sentence": "ORE refined the practicality/leakage trade-offs for comparison over ciphertexts, informing the paper\u2019s design and security discussion for a specialized, Gini-preserving encryption."
+    },
+    {
+      "title": "Machine Learning Classification over Encrypted Data",
+      "authors": "Raphael Bost, Raluca Ada Popa, Stephen Tu, Shafi Goldwasser",
+      "year": 2015,
+      "role": "Encrypted evaluation of ML models, including decision trees",
+      "relationship_sentence": "Demonstrated feasibility and limits of decision-tree operations over encrypted data; the paper advances this line by enabling Gini-minimizing split selection directly on ciphertexts rather than only encrypted inference."
+    },
+    {
+      "title": "Privacy-Preserving Decision Tree Learning over Vertically Partitioned Data",
+      "authors": "Jaideep Vaidya, Chris Clifton",
+      "year": 2005,
+      "role": "Secure computation of split criteria for tree induction",
+      "relationship_sentence": "Showed how to compute split statistics (e.g., counts leading to impurity measures) without revealing raw data; the paper similarly targets secure split selection but with a novel encryption guaranteeing Gini-preservation."
+    },
+    {
+      "title": "Homomorphic Encryption for Arithmetic of Approximate Numbers (CKKS)",
+      "authors": "Jung Hee Cheon, Andrey Kim, Miran Kim, Yongsoo Song",
+      "year": 2017,
+      "role": "HE scheme enabling efficient real-valued operations",
+      "relationship_sentence": "The paper relies on CKKS to encrypt labels due to their sensitivity and real-valued operations, integrating CKKS with its custom feature encryption to complete private RF training."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s central contribution\u2014an encryption scheme that preserves the minimum Gini impurity needed for split selection in random forests\u2014rests on three intertwined threads of prior work. First, CART and Random Forests established the learning mechanics and the primacy of Gini impurity in split decisions. This work targets that precise quantity, aiming to keep the training dynamics intact even under encryption.\nSecond, the paper builds on the property-preserving encryption lineage inaugurated by Order-Preserving Encryption and refined by Order-Revealing Encryption. These works showed that selective exposure of structure (e.g., order) can enable efficient algorithms over ciphertexts. The present paper generalizes this ethos from preserving comparisons to preserving an algorithmic objective: the argmin of Gini impurity across candidate splits. Its modification of the search-tree structure (storing multiple samples per node and encoding order/label relationships) echoes the design philosophy of tailoring encryption to the computation\u2019s invariants while managing leakage.\nThird, prior efforts in privacy-preserving trees over encrypted or distributed data\u2014Bost et al.\u2019s encrypted model evaluation and Vaidya\u2013Clifton\u2019s secure computation of split statistics\u2014demonstrated feasibility but did not guarantee that the impurity optimum is discoverable directly from ciphertexts without decryption. By combining a Gini-preserving feature encryption with CKKS for labels, the paper delivers a practical, theoretically justified pathway to private random forest training that preserves the core split-selection criterion, bridging the gap between secure computation protocols and property-preserving encryption tailored to tree induction.",
+  "analysis_timestamp": "2026-01-07T00:02:04.823803"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "LLMLingua: Compressing Prompts for Accelerated Inference of Large Language Models",
+      "authors": "Shen et al.",
+      "year": 2023,
+      "role": "Prompt compression baseline",
+      "relationship_sentence": "Established that compressing prompts can preserve task performance while reducing compute, directly motivating EHPC\u2019s goal but unlike EHPC relied on an auxiliary compressor rather than native model signals."
+    },
+    {
+      "title": "LongLLMLingua: Accelerating Long-Context LLM Inference via Prompt Compression",
+      "authors": "Jiang et al.",
+      "year": 2024,
+      "role": "Long-context inference acceleration via compression",
+      "relationship_sentence": "Demonstrated practical speedups on long inputs by selective token dropping, which EHPC advances by scoring tokens training-free using early-layer evaluator heads within the same LLM."
+    },
+    {
+      "title": "H2O: Heavy-Hitter Oracle for Efficient KV Cache Eviction in LLMs",
+      "authors": "Zhang et al.",
+      "year": 2023,
+      "role": "Attention-driven token importance for KV eviction",
+      "relationship_sentence": "Showed that attention statistics can estimate token importance at inference time; EHPC extends this idea upstream to prefill, using designated heads to select salient tokens before full decoding."
+    },
+    {
+      "title": "Scissorhands: Efficient KV Cache Pruning for LLMs",
+      "authors": "Miao et al.",
+      "year": 2024,
+      "role": "Token/segment pruning based on attention signals",
+      "relationship_sentence": "Provided a unified, training-free framework to prune KV states using attention-derived importance, a direct methodological precursor to EHPC\u2019s attention-head-driven prompt token selection."
+    },
+    {
+      "title": "StreamingLLM: Efficient Streaming Language Models with Selective State Preservation",
+      "authors": "Xiao et al.",
+      "year": 2023,
+      "role": "Long-context state management via selective retention",
+      "relationship_sentence": "Identified that only a subset of past tokens need to be retained by leveraging attention patterns; EHPC applies a similar principle earlier, selecting key prompt tokens using evaluator heads during prefill."
+    },
+    {
+      "title": "In-Context Learning and Induction Heads",
+      "authors": "Catherine Olsson et al.",
+      "year": 2022,
+      "role": "Mechanistic interpretability revealing specialized attention heads",
+      "relationship_sentence": "Showed that specific heads implement retrieval/induction behaviors, inspiring EHPC\u2019s identification of early-layer 'evaluator heads' that assess token salience for downstream inference."
+    },
+    {
+      "title": "Are Sixteen Heads Really Better than One?",
+      "authors": "Paul Michel, Omer Levy, Graham Neubig",
+      "year": 2019,
+      "role": "Attention head importance and pruning",
+      "relationship_sentence": "Demonstrated heterogeneity and redundancy across attention heads, supporting EHPC\u2019s strategy of leveraging a subset of influential early heads for efficient token evaluation."
+    }
+  ],
+  "synthesis_narrative": "EHPC sits at the intersection of prompt compression and attention-guided inference. Prior prompt compression methods, notably LLMLingua and LongLLMLingua, established that aggressive input reduction can preserve accuracy while yielding sizable speedups on long contexts. However, these approaches typically rely on auxiliary compressors or surrogate models. EHPC departs by mining importance signals from the target LLM itself, avoiding extra training and model coupling.\nA parallel line of work in KV-cache management\u2014H2O, Scissorhands, and StreamingLLM\u2014demonstrated that attention statistics provide reliable, training-free estimates of token importance for eviction or retention during decoding. EHPC generalizes this insight to the prefill stage: instead of keeping or discarding cached states after the fact, it identifies salient prompt tokens before full inference, cutting compute earlier in the pipeline.\nMechanistic interpretability studies, especially the induction-heads work, and classic analyses of head importance (Michel et al.) reveal that attention heads are specialized and unevenly critical. EHPC leverages this heterogeneity by discovering \u201cevaluator heads\u201d in early layers whose attention patterns consistently surface task-relevant tokens. The method then uses only these early layers to skim long inputs and forward a compressed set of tokens to the full model for decoding. In sum, EHPC synthesizes prompt compression with attention-driven importance estimation and head specialization, yielding a training-free, model-internal compressor that improves both efficiency and long-context robustness.",
+  "analysis_timestamp": "2026-01-07T00:21:32.297978"
+}

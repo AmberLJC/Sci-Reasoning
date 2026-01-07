@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Gaussian Processes for Machine Learning",
+      "authors": "Carl Edward Rasmussen, Christopher K. I. Williams",
+      "year": 2006,
+      "role": "Foundational formulation of GP posterior inference and its computational bottlenecks",
+      "relationship_sentence": "This book formalized GP posterior inference as solving dense linear systems (and computing related quadratic forms), establishing the cubic-time, ill-conditioning-sensitive bottleneck that the NeurIPS 2023 paper targets with SGD-based approximate solves and sampling."
+    },
+    {
+      "title": "GPyTorch: Blackbox Matrix-Matrix Gaussian Process Inference with GPU Acceleration",
+      "authors": "Jacob R. Gardner, Geoff Pleiss, David Bindel, Kilian Q. Weinberger, Andrew Gordon Wilson",
+      "year": 2018,
+      "role": "Iterative solvers and Lanczos-based Gaussian sampling for exact/scalable GPs",
+      "relationship_sentence": "GPyTorch popularized CG-based linear solves and Lanczos sampling for GP posteriors; the new paper positions SGD as an alternative iterative engine, compares against CG/Lanczos, and builds upon the idea that scalable GP inference hinges on fast iterative linear algebra with MVMs."
+    },
+    {
+      "title": "Variational Learning of Inducing Variables in Sparse Gaussian Processes",
+      "authors": "Michalis K. Titsias",
+      "year": 2009,
+      "role": "Core inducing-point framework for sparse GPs",
+      "relationship_sentence": "The inducing-point formulation provides the structural low-rank precision/covariance representations that the paper extends its SGD-based sampling objectives to, enabling the method to operate in sparse GP settings."
+    },
+    {
+      "title": "Gaussian Processes for Big Data",
+      "authors": "James Hensman, Nicolo Fusi, Neil D. Lawrence",
+      "year": 2013,
+      "role": "Stochastic variational inference for GPs with inducing points",
+      "relationship_sentence": "By showing that minibatch stochastic optimization can train inducing-point GPs, this work directly motivates the paper\u2019s use of stochastic gradient algorithms within GP inference, and informs its extension of objectives to inducing-point setups."
+    },
+    {
+      "title": "Perturb-and-MAP Random Fields: Using Discrete Optimization to Learn and Sample from Energy Models",
+      "authors": "Georgios Papandreou, Alan L. Yuille",
+      "year": 2011,
+      "role": "Sampling Gaussians via randomized linear-system solves (perturb-and-solve)",
+      "relationship_sentence": "This line of work demonstrates that sampling from Gaussian posteriors can be reduced to solving linear systems with randomized right-hand sides; the NeurIPS paper leverages the same reduction but replaces exact/CG solvers with SGD-driven approximate solves."
+    },
+    {
+      "title": "Early stopping and nonparametric regression",
+      "authors": "Yao, Rosasco, Caponnetto",
+      "year": 2007,
+      "role": "Spectral analysis of early-stopped gradient methods as implicit regularization",
+      "relationship_sentence": "The paper\u2019s spectral characterization of why non-convergent SGD still yields accurate GP predictions (implicit bias/regularization) builds on this theory that early stopping filters high-frequency eigendirections, improving generalization despite suboptimal optimization."
+    },
+    {
+      "title": "Nonparametric Stochastic Approximation with Large Step-sizes",
+      "authors": "Aymeric Dieuleveut, Francis Bach",
+      "year": 2016,
+      "role": "SGD in RKHS/least-squares with spectral bias and averaging",
+      "relationship_sentence": "Their analysis of SGD for kernel least-squares clarifies the bias\u2013variance tradeoffs and spectral filtering of stochastic gradients, informing the NeurIPS paper\u2019s low-variance objective design and its explanation of predictive accuracy under imperfect convergence."
+    }
+  ],
+  "synthesis_narrative": "The paper unifies two strands: iterative linear-algebra for exact/sparse GP inference and the spectral implicit regularization of stochastic optimization. Rasmussen and Williams provided the canonical GP posterior formulation as linear solves with dense kernels, highlighting cubic costs and conditioning issues. Building on the modern iterative toolkit, GPyTorch established conjugate gradients and Lanczos as core mechanisms for scalable exact GP inference and Gaussian sampling using only matrix\u2013vector products; this work proposes SGD as a competing iterative engine, motivated by its simplicity, streaming capability, and different bias properties.\nOn the modeling side, Titsias\u2019s inducing-point variational framework\u2014and Hensman et al.\u2019s stochastic variational training\u2014made minibatch stochastic optimization native to GP methods. The present paper extends its stochastic objectives to inducing settings, preserving scalability while targeting posterior sampling rather than only point estimates or variational approximations.\nCritically, the authors explain why SGD can yield accurate predictive distributions without full convergence by drawing on early-stopping theory in nonparametric regression (Yao, Rosasco, Caponnetto) and kernel least-squares analyses of SGD (Dieuleveut & Bach). These works show that gradient-based iterations act as spectral filters that damp poorly conditioned directions, providing implicit regularization and favorable bias\u2013variance tradeoffs. Finally, prior ideas that Gaussian sampling can be achieved by solving randomized linear systems (e.g., perturb-and-solve/perturb-and-MAP) justify attacking posterior sampling through iterative solvers; the paper contributes new low-variance stochastic objectives and a spectral characterization tailored to GP posteriors, demonstrating that SGD can closely match true posterior predictions in- and out-of-domain.",
+  "analysis_timestamp": "2026-01-07T00:02:04.805593"
+}

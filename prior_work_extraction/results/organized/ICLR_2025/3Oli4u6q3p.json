@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "3D Gaussian Splatting for Real-Time Radiance Field Rendering",
+      "authors": "Kerbl et al.",
+      "year": 2023,
+      "role": "Core 3D representation and renderer",
+      "relationship_sentence": "RelitLRM builds directly on the 3D Gaussian Splatting parameterization and differentiable splat renderer, but extends it from optimized, view-dependent radiance to a feed-forward, relightable Gaussian representation that supports novel illuminations."
+    },
+    {
+      "title": "LRM: Learning a Large Reconstruction Model for Single-View 3D",
+      "authors": "Yu et al.",
+      "year": 2023,
+      "role": "Large feed-forward transformer for 3D reconstruction",
+      "relationship_sentence": "RelitLRM adopts the LRM paradigm of a transformer-based, feed-forward reconstruction model trained at scale, adapting it to sparse multi-view inputs and coupling it with a relightable appearance head to output Gaussian splats."
+    },
+    {
+      "title": "pixelNeRF: Neural Radiance Fields from One or Few Images",
+      "authors": "Yu et al.",
+      "year": 2021,
+      "role": "Feed-forward sparse-view radiance field prediction",
+      "relationship_sentence": "RelitLRM follows pixelNeRF\u2019s strategy of conditioning a neural 3D representation on a small set of posed views, while advancing it by predicting an explicit Gaussian representation and separating geometry from relightable appearance."
+    },
+    {
+      "title": "NeRV: Neural Reflectance and Visibility Fields for Relighting and View Synthesis",
+      "authors": "Srinivasan et al.",
+      "year": 2021,
+      "role": "Physically based relightable neural rendering",
+      "relationship_sentence": "NeRV\u2019s decomposition into reflectance and visibility fields informs RelitLRM\u2019s separation of geometry and appearance, enabling physically plausible relighting under novel environment illuminations."
+    },
+    {
+      "title": "NeRFactor: Neural Factorization of Shape and Reflectance Under an Unknown Illumination",
+      "authors": "Zhang et al.",
+      "year": 2021,
+      "role": "Material\u2013lighting disentanglement under unknown lighting",
+      "relationship_sentence": "RelitLRM builds on NeRFactor\u2019s insight that multi-illumination supervision helps resolve material\u2013lighting ambiguity, incorporating this idea in an end-to-end, data-driven setting to avoid shadow/specular baking."
+    },
+    {
+      "title": "nvdiffrec: Neural Differentiable Rendering for Optimizing Complex 3D Scenes",
+      "authors": "Munkberg et al.",
+      "year": 2022,
+      "role": "Inverse rendering baseline and limitations",
+      "relationship_sentence": "RelitLRM is positioned against optimization-based inverse rendering like nvdiffrec, addressing its need for dense capture and slow per-scene optimization by providing comparable relighting quality in a single feed-forward pass."
+    },
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Ho et al.",
+      "year": 2020,
+      "role": "Generative diffusion backbone for multi-modal appearance",
+      "relationship_sentence": "RelitLRM\u2019s diffusion-based appearance generator leverages DDPM-style probabilistic modeling to capture the multi-modal distribution of shadows and specularities in relit renderings from sparse inputs."
+    }
+  ],
+  "synthesis_narrative": "RelitLRM fuses three influential threads in neural rendering. First, it adopts 3D Gaussian Splatting as the explicit, real-time renderable backbone, but goes beyond its original optimization-centric, view-dependent radiance to predict Gaussians in a feed-forward manner that remain editable under novel lighting. Second, it leverages the Large Reconstruction Model paradigm\u2014pioneered by LRM\u2014showing that a transformer trained at scale can infer high-quality 3D from sparse posed views. This is rooted in earlier feed-forward generalization efforts like pixelNeRF, which demonstrated conditioning on few images to regress a radiance field; RelitLRM modernizes this by predicting explicit Gaussians and by architecturally separating geometry and appearance modules.\nA third pillar is physically based relightability. Works such as NeRV and NeRFactor established that disentangling geometry, reflectance, and illumination (often via multi-illumination supervision) is key to avoiding highlight/shadow baking and achieving plausible relighting. RelitLRM inherits this factorization insight but replaces slow, per-scene inverse rendering with an end-to-end learned model trained on synthetic scenes with known illuminations. To capture the inherent multi-modality of cast shadows and specular highlights from sparse inputs, RelitLRM introduces a diffusion-based appearance generator, drawing on DDPM\u2019s strength in modeling complex, uncertain distributions. Finally, optimization-heavy baselines like nvdiffrec motivate RelitLRM\u2019s design by highlighting the cost and data requirements of classical inverse rendering; RelitLRM matches their relighting fidelity with a single, fast forward pass and an explicit Gaussian output suited for real-time rendering and editing.",
+  "analysis_timestamp": "2026-01-06T23:42:48.084078"
+}

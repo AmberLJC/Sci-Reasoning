@@ -1,0 +1,74 @@
+{
+  "prior_works": [
+    {
+      "title": "Dataset Distillation",
+      "authors": [
+        "Tongzhou Wang",
+        "Jun-Yan Zhu",
+        "Antonio Torralba",
+        "Alexei A. Efros"
+      ],
+      "year": 2018,
+      "role": "Foundational idea of synthesizing a small set of data that can train models comparably to the full dataset.",
+      "relationship_sentence": "SFGC extends the core paradigm of dataset distillation to graphs by synthesizing a compact substitute dataset, but tailored to graph learning."
+    },
+    {
+      "title": "Dataset Condensation with Gradient Matching",
+      "authors": [
+        "Bo Zhao",
+        "Konda Reddy Mopuri",
+        "Hakan Bilen"
+      ],
+      "year": 2021,
+      "role": "Objective for learning synthetic data by matching gradients between real and synthetic training.",
+      "relationship_sentence": "SFGC\u2019s meta-matching mechanism builds on gradient/optimization-dynamics alignment principles introduced in DC, adapting them to graph neural networks."
+    },
+    {
+      "title": "Dataset Condensation with Distribution Matching",
+      "authors": [
+        "Bo Zhao",
+        "Hakan Bilen"
+      ],
+      "year": 2023,
+      "role": "Distribution-level alignment objective for dataset condensation to improve generalization and stability.",
+      "relationship_sentence": "SFGC\u2019s pursuit of synthetic data that generalize across architectures echoes DM\u2019s focus on matching behavior at the distribution level rather than only per-step gradients."
+    },
+    {
+      "title": "Dataset Distillation by Matching Training Trajectories",
+      "authors": [
+        "Justin C. Cazenavette",
+        "et al."
+      ],
+      "year": 2022,
+      "role": "Introduced trajectory-level matching to align full training dynamics between real and synthetic data.",
+      "relationship_sentence": "SFGC\u2019s \u201ctraining trajectory meta-matching\u201d directly draws on trajectory matching, adapting it to GNN training dynamics for effective graph-free synthesis."
+    },
+    {
+      "title": "Simplifying Graph Convolutional Networks",
+      "authors": [
+        "Felix Wu",
+        "Amauri Souza",
+        "Tianyi Zhang",
+        "Christopher Fifty",
+        "Tao Yu",
+        "Kilian Q. Weinberger"
+      ],
+      "year": 2019,
+      "role": "Showed that message passing can be decoupled from feature transformation via pre-propagation, enabling training with identity adjacency thereafter.",
+      "relationship_sentence": "SFGC\u2019s core idea\u2014encoding topology into node attributes so the condensed data can use an identity adjacency\u2014leans on SGC\u2019s decoupling insight."
+    },
+    {
+      "title": "APPNP: Approximate Personalized Propagation of Neural Predictions",
+      "authors": [
+        "Johannes Klicpera",
+        "Aleksandar Bojchevski",
+        "Stephan G\u00fcnnemann"
+      ],
+      "year": 2019,
+      "role": "Decoupled propagation (via personalized PageRank) from parametric fitting, effectively injecting structure into features before classification.",
+      "relationship_sentence": "APPNP\u2019s precompute-then-train philosophy underpins SFGC\u2019s structure-free condensation, motivating the encoding of topology into feature space rather than relying on an explicit graph."
+    }
+  ],
+  "synthesis_narrative": "SFGC\u2019s key contribution\u2014condensing large graphs into a small set of graph-free nodes whose attributes implicitly encode topology\u2014is the confluence of two research threads: dataset distillation/condensation via training-dynamics matching and structure-decoupled graph learning. On the distillation side, Dataset Distillation established the paradigm of learning a synthetic dataset that can stand in for real data. Subsequent advances like Gradient Matching and Distribution Matching sharpened the optimization targets for condensation, emphasizing behavioral alignment between models trained on real versus synthetic data. Crucially, Matching Training Trajectories demonstrated that aligning full training trajectories can dramatically improve distilled-set fidelity and robustness; SFGC directly operationalizes this with a training trajectory meta-matching scheme tailored to GNNs.\nOn the graph-learning side, SGC and APPNP showed that message passing can be decoupled from feature transformation by precomputing diffusion/propagation, effectively pushing structural information into feature representations and allowing training with an identity adjacency. This evidence base makes SFGC\u2019s structure-free stance credible: if topology can be embedded into attributes, then a condensed node set without an explicit graph can still train GNN-like models effectively. SFGC integrates these strands by synthesizing node features that encode topology while using a trajectory-based objective to ensure the synthetic set reproduces GNN training dynamics, further augmented by a feature-score metric to dynamically assess and steer synthesis quality.",
+  "analysis_timestamp": "2026-01-07T00:02:04.825798"
+}

@@ -1,0 +1,79 @@
+{
+  "prior_works": [
+    {
+      "title": "Learning a SAT Solver from Single-Bit Supervision (NeuroSAT)",
+      "authors": [
+        "Daniel Selsam",
+        "et al."
+      ],
+      "year": 2019,
+      "role": "Neural representation for SAT and learned reasoning on CNF graphs",
+      "relationship_sentence": "NeuRes builds on NeuroSAT\u2019s idea of learning over clause\u2013literal graph representations, extending it from satisfiability prediction to autoregressive clause-pair selection and explicit proof construction via resolution."
+    },
+    {
+      "title": "Guiding High-Performance SAT Solvers with Unsat-Core Predictions (NeuroCore)",
+      "authors": [
+        "Daniel Selsam",
+        "Nikolaj Bj\u00f8rner"
+      ],
+      "year": 2019,
+      "role": "Neural guidance for symbolic SAT solving",
+      "relationship_sentence": "NeuRes adopts the NeuroCore paradigm of coupling neural guidance with classical SAT solving, but shifts guidance to resolution step selection and uses generated certificates to supervise and verify learning."
+    },
+    {
+      "title": "ENIGMA: Efficient learning-based inference guiding for automated theorem proving",
+      "authors": [
+        "Jan Jakubuv",
+        "Josef Urban"
+      ],
+      "year": 2018,
+      "role": "Learning from proofs to guide clause selection",
+      "relationship_sentence": "NeuRes mirrors ENIGMA\u2019s proof-driven supervision by using resolution proofs as training signals to learn which clauses to combine, translating ENIGMA\u2019s clause selection ideas to the propositional setting with attention."
+    },
+    {
+      "title": "DRAT-trim: Efficient Checking and Trimming Using Expressive Clausal Proofs",
+      "authors": [
+        "Marijn J. H. Heule",
+        "Warren A. Hunt Jr.",
+        "Nathan Wetzler"
+      ],
+      "year": 2016,
+      "role": "Proof certificates and verification for SAT",
+      "relationship_sentence": "NeuRes leverages the concept of resolution/DRAT-style proof certificates to both supervise learning (certificate-driven training) and ensure correctness via efficient proof checking."
+    },
+    {
+      "title": "Thinking Fast and Slow with Deep Learning and Tree Search (Expert Iteration)",
+      "authors": [
+        "Thomas Anthony",
+        "Zheng Tian",
+        "David Barber"
+      ],
+      "year": 2017,
+      "role": "Training algorithm: expert iteration/self-improvement loop",
+      "relationship_sentence": "NeuRes\u2019s training loop directly instantiates expert iteration, using a symbolic resolution prover/verifier to generate improved targets that iteratively refine the neural clause-pair selection policy."
+    },
+    {
+      "title": "End-to-End Differentiable Proving",
+      "authors": [
+        "Tim Rockt\u00e4schel",
+        "Sebastian Riedel"
+      ],
+      "year": 2017,
+      "role": "Attention-based neural proof construction",
+      "relationship_sentence": "NeuRes\u2019s attention mechanism for autoregressively selecting clause pairs is conceptually aligned with differentiable proving\u2019s attention over facts/rules to build proofs, adapted here to propositional resolution."
+    },
+    {
+      "title": "Learning to Prove Theorems via Interacting with Proof Assistants (HOList)",
+      "authors": [
+        "Kshitij Bansal",
+        "Sarah Loos",
+        "et al."
+      ],
+      "year": 2019,
+      "role": "Proof-driven supervision and expert-iteration in theorem proving",
+      "relationship_sentence": "NeuRes adapts HOList\u2019s demonstration that proofs can supervise neural policies within an expert-iteration loop, translating the idea to propositional SAT with resolution certificates for data-efficient learning."
+    }
+  ],
+  "synthesis_narrative": "NeuRes\u2019s core advance\u2014data-efficient, neuro-symbolic learning for SAT via certificate-driven training and expert iteration\u2014sits at the confluence of three strands of prior work. First, neural representations for SAT, inaugurated by NeuroSAT and extended in NeuroCore, showed that message-passing/attention over CNF graphs can learn powerful signals (e.g., satisfiability, unsat cores) and can guide classical solvers. NeuRes builds on this by maintaining a dynamic formula embedding and shifting the learned target from global classification/branching to fine-grained, autoregressive clause-pair selection for resolution.\nSecond, work on learning from proofs to guide inference\u2014exemplified by ENIGMA\u2014demonstrated that recorded proofs provide high-quality supervision for clause selection in saturation-style provers. NeuRes brings this idea to propositional SAT, using resolution proofs as certificates to supervise which clauses to resolve, thereby directly tying learning targets to verifiable proof objects. The widespread adoption of DRAT-style certificates and efficient checkers (DRAT-trim) underpins NeuRes\u2019s correctness guarantees and enables scalable certificate-driven training.\nThird, training frameworks that iteratively bootstrap policies from an expert\u2014Expert Iteration and its applications in theorem proving (e.g., HOList)\u2014established effective self-improvement loops grounded in proof search. NeuRes adopts this paradigm with a symbolic resolution prover/verifier as the expert, greatly improving data efficiency. Finally, attention-based proof construction (End-to-End Differentiable Proving) informs NeuRes\u2019s architectural choice to autoregressively select clause pairs, aligning neural attention with discrete resolution steps.",
+  "analysis_timestamp": "2026-01-06T23:33:36.267877"
+}

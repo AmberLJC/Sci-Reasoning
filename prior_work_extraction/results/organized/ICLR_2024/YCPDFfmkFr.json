@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "OptNet: Differentiable Optimization as a Layer in Neural Networks",
+      "authors": "Brandon Amos et al.",
+      "year": 2017,
+      "arxiv_id": "1703.00443",
+      "role": "Baseline",
+      "relationship_sentence": "Introduced QP layers with implicit differentiation through KKT conditions, establishing the standard differentiable-QP formulation that this work directly generalizes to handle infeasible cases and provide gradients via an augmented-Lagrangian view."
+    },
+    {
+      "title": "Differentiable Convex Optimization Layers",
+      "authors": "Akshay Agrawal et al.",
+      "year": 2019,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "Generalized differentiable convex layers via cone-program implicit differentiation but assumed well-posed, feasible problems, whose limitation (lack of a principled treatment of infeasibility) this work addresses by defining and differentiating the closest feasible QP through a primal\u2013dual augmented-Lagrangian framework."
+    },
+    {
+      "title": "OSQP: An Operator Splitting Solver for Quadratic Programs",
+      "authors": "Bartolomeo Stellato et al.",
+      "year": 2020,
+      "arxiv_id": "1711.08013",
+      "role": "Inspiration",
+      "relationship_sentence": "Demonstrated that primal\u2013dual operator-splitting (augmented-Lagrangian/ADMM) methods exploit QP structure and provide infeasibility certificates, directly inspiring the use of a primal\u2013dual augmented-Lagrangian backbone to define and differentiate meaningful solution maps even when the QP is infeasible."
+    },
+    {
+      "title": "A Dual Approach to Solving Nonlinear Programming Problems Using Augmented Lagrangians",
+      "authors": "R. Tyrrell Rockafellar",
+      "year": 1973,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "Established the augmented-Lagrangian method\u2019s exact-penalty and feasibility-restoration properties, which this paper leverages to construct a differentiable map to the closest feasible QP solution and to derive unified derivatives across feasible and infeasible regimes."
+    },
+    {
+      "title": "Differentiable MPC for End-to-end Planning and Control",
+      "authors": "Brandon Amos et al.",
+      "year": 2018,
+      "arxiv_id": "1810.13400",
+      "role": "Gap Identification",
+      "relationship_sentence": "Showed QP-based control layers in practice can become infeasible and resort to ad hoc softening, highlighting the need for principled gradients in infeasible regimes that this work directly provides via augmented-Lagrangian differentiation."
+    },
+    {
+      "title": "Deep Declarative Networks",
+      "authors": "Stephen Gould et al.",
+      "year": 2019,
+      "arxiv_id": "1909.04866",
+      "role": "Extension",
+      "relationship_sentence": "Provided a general implicit-differentiation calculus for optimization layers under regularity and feasibility, which this work extends by redefining the layer via an augmented-Lagrangian \u2018closest feasible\u2019 surrogate to obtain well-defined gradients when the original QP is infeasible."
+    }
+  ],
+  "synthesis_narrative": "Early differentiable optimization layers treated quadratic programs as implicit functions, with OptNet formalizing KKT-based differentiation for QP layers and showing how to embed them in neural networks. Differentiable Convex Optimization Layers broadened this to generic cone programs via implicit differentiation, but their sensitivity analysis presupposed well-posed feasible problems. Operator-splitting via OSQP exploited the special structure of convex QPs with a primal\u2013dual augmented-Lagrangian scheme that yields residuals and certificates for infeasibility, illustrating how augmented-Lagrangian mechanisms can remain informative even when constraints cannot be satisfied. The classical augmented-Lagrangian theory of Rockafellar established exact-penalty and feasibility-restoration properties, suggesting a principled way to regularize constraint violations while maintaining meaningful dual information. In application domains like model-predictive control, Differentiable MPC highlighted that QP subproblems can become infeasible in practice, leading to heuristic softening and unreliable gradients. Deep Declarative Networks provided a general calculus for differentiating through argmin layers under regularity, clarifying where standard approaches break when feasibility and smoothness fail. Together, these works exposed both the promise and the fragility of differentiable QP layers: powerful when feasible and regular, but brittle at infeasibility. The present work synthesizes OSQP\u2019s primal\u2013dual augmented-Lagrangian structure with Rockafellar\u2019s feasibility-restoring insights to define a \u2018closest feasible\u2019 surrogate for QPs and to derive unified, stable derivatives across feasible and infeasible regimes, thereby extending declarative-layer differentiation and overcoming the practical gap surfaced by differentiable MPC and prior QP-layer frameworks.",
+  "target_paper": {
+    "title": "Leveraging augmented-Lagrangian techniques for differentiating over infeasible quadratic programs in machine learning",
+    "authors": "Antoine Bambade, Fabian Schramm, Adrien Taylor, Justin Carpentier",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Machine Learning, Optimization, Differentiable Optimization, Optimization layers",
+    "abstract": "Optimization layers within neural network architectures have become increasingly popular for their ability to solve a wide range of machine learning tasks and to model domain-specific knowledge. However, designing optimization layers requires careful consideration as the underlying optimization problems might be infeasible during training. \nMotivated by applications in learning, control and robotics, this work focuses on convex quadratic programming (QP) layers. The specific structure of this type of optimization layer can be efficiently exploited for faster computations while still allowing rich modeling capabilities. We leverage primal-dual augmented Lagrangian techniques for computing derivatives of both feasible and infeasible QP solutions. \nMore precisely, we propose a unified approach which tackles the differentiability of the closest feasible QP solutions in a classical $\\ell_2$ sense. We then harness this approach to enrich the expressive capabilities of existing QP layers. Mor",
+    "openreview_id": "YCPDFfmkFr",
+    "forum_id": "YCPDFfmkFr"
+  },
+  "analysis_timestamp": "2026-01-06T17:49:57.672557"
+}

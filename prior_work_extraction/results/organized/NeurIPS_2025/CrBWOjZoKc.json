@@ -1,0 +1,81 @@
+{
+  "prior_works": [
+    {
+      "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+      "authors": [
+        "Jason Wei",
+        "Xuezhi Wang",
+        "Dale Schuurmans",
+        "et al."
+      ],
+      "year": 2022,
+      "role": "Established the effectiveness of long, step-by-step rationales for complex reasoning tasks.",
+      "relationship_sentence": "QFFT leverages Long CoT traces as its sole supervision signal, explicitly building on the finding that long rationales carry rich supervisory structure for reasoning."
+    },
+    {
+      "title": "Large Language Models are Zero-Shot Reasoners",
+      "authors": [
+        "Takeshi Kojima",
+        "Shixiang Shane Gu",
+        "Machel Reid",
+        "et al."
+      ],
+      "year": 2022,
+      "role": "Showed that simple prompts can elicit concise reasoning without heavy supervision.",
+      "relationship_sentence": "By encouraging models to default to Short CoT and only escalate when needed, QFFT operationalizes the insight that minimal prompts can induce efficient, concise reasoning."
+    },
+    {
+      "title": "Self-Consistency Improves Chain of Thought Reasoning in Language Models",
+      "authors": [
+        "Xuezhi Wang",
+        "Jason Wei",
+        "Dale Schuurmans",
+        "et al."
+      ],
+      "year": 2023,
+      "role": "Popularized sampling multiple long chains and voting, pushing toward longer, more exhaustive reasoning.",
+      "relationship_sentence": "QFFT reacts to the overthinking implicit in self-consistency\u2013style long reasoning by training a model that retains long-CoT competence but learns to avoid unnecessary length."
+    },
+    {
+      "title": "Tree of Thoughts: Deliberate Problem Solving with Large Language Models",
+      "authors": [
+        "Shunyu Yao",
+        "Dian Yu",
+        "Karthik Narasimhan",
+        "et al."
+      ],
+      "year": 2023,
+      "role": "Introduced structured, multi-branch search that further lengthens and strengthens reasoning traces.",
+      "relationship_sentence": "QFFT uses rich long-trace supervision (as in ToT-style trajectories) yet learns to trigger such extended reasoning only when short reasoning is insufficient."
+    },
+    {
+      "title": "Skeleton-of-Thought: Large Language Models Can Do Parallel Decoding",
+      "authors": [
+        "Sun et al."
+      ],
+      "year": 2023,
+      "role": "Proposed concise, outline-like reasoning to improve efficiency while preserving accuracy.",
+      "relationship_sentence": "QFFT\u2019s bias toward Short CoT mirrors the SoT intuition: start with compact, high-yield reasoning and expand only if necessary."
+    },
+    {
+      "title": "Adaptive Computation Time for Recurrent Neural Networks",
+      "authors": [
+        "Alex Graves"
+      ],
+      "year": 2016,
+      "role": "Pioneered learnable halting/adaptive depth to allocate computation based on input difficulty.",
+      "relationship_sentence": "QFFT\u2019s adaptive switching between short and long reasoning patterns echoes ACT\u2019s principle of conditioning compute on problem hardness."
+    },
+    {
+      "title": "PonderNet: Learning to Ponder",
+      "authors": [
+        "Banino et al."
+      ],
+      "year": 2021,
+      "role": "Learned stochastic halting policies to use more steps only when needed.",
+      "relationship_sentence": "QFFT brings the ponder/halting ethos to LLM reasoning: it trains a policy that prefers brief chains and \u2018ponders\u2019 longer only when the task demands it."
+    }
+  ],
+  "synthesis_narrative": "QFFT\u2019s core contribution\u2014training on long chain-of-thought (CoT) traces while removing the question, so the model adaptively defaults to short reasoning and escalates only when necessary\u2014sits at the intersection of two lines of work: CoT-based supervision and adaptive computation. CoT prompting (Wei et al.) and zero-shot CoT (Kojima et al.) established that explicit reasoning traces boost accuracy and that concise, minimally cued reasoning can suffice for many problems. Self-Consistency (Wang et al.) and Tree of Thoughts (Yao et al.) then pushed toward longer, more exhaustive trajectories, which improved robustness on hard tasks but also amplified overthinking and token cost. In parallel, efficiency-oriented approaches like Skeleton-of-Thought (Sun et al.) showed that compact, outline-like rationales can retain performance while reducing verbosity.\n\nQFFT synthesizes these insights with the adaptive-compute paradigm exemplified by Adaptive Computation Time (Graves) and PonderNet (Banino et al.), which allocate more steps only when needed. By fine-tuning exclusively on long CoT responses while withholding the question, QFFT forces the model to internalize when expanded reasoning is actually necessary, rather than reflexively reproducing long chains conditioned on the prompt. The resulting behavior\u2014prioritize Short CoT, then activate Long CoT selectively\u2014preserves the accuracy benefits of long-trace supervision while curbing overthinking and token usage. In effect, QFFT operationalizes a learned halting policy for LLM reasoning, unifying long-trace competence with concise default behavior.",
+  "analysis_timestamp": "2026-01-07T00:21:33.144588"
+}

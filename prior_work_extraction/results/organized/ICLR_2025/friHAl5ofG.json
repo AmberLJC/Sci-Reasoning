@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Universal Value Function Approximators",
+      "authors": "Tom Schaul et al.",
+      "year": 2015,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "GVL adopts the UVFA perspective of predicting a single value function across many tasks/goals and generalizes it by conditioning value estimates on open-vocabulary visual-linguistic context via a VLM."
+    },
+    {
+      "title": "Deep Reinforcement Learning from Human Preferences",
+      "authors": "Paul F. Christiano et al.",
+      "year": 2017,
+      "arxiv_id": "1706.03741",
+      "role": "Foundation",
+      "relationship_sentence": "GVL replaces the human preference annotator with a VLM that orders shuffled frames to produce pairwise progress preferences, turning those judgments into a scalar value signal without manual labels."
+    },
+    {
+      "title": "Extrapolating Beyond Suboptimal Demonstrations via Inverse Reinforcement Learning from Observations (T-REX)",
+      "authors": "Daniel S. Brown et al.",
+      "year": 2019,
+      "arxiv_id": "1904.11455",
+      "role": "Extension",
+      "relationship_sentence": "Like T-REX, GVL casts reward/value learning as trajectory ranking based on temporal order, but extends it by using a VLM to infer semantic progress orderings rather than relying only on within-trajectory timestamps and in-domain training."
+    },
+    {
+      "title": "Shuffle and Learn: Unsupervised Learning using Temporal Order Verification",
+      "authors": "Ishan Misra et al.",
+      "year": 2016,
+      "arxiv_id": "1603.08561",
+      "role": "Inspiration",
+      "relationship_sentence": "GVL borrows the key insight that predicting temporal order over shuffled frames induces temporal reasoning, adapting this idea to prompt a VLM to sort frames by perceived task progress and then map the inferred order to values."
+    },
+    {
+      "title": "Time-Contrastive Networks: Self-Supervised Learning from Video",
+      "authors": "Pierre Sermanet et al.",
+      "year": 2018,
+      "arxiv_id": "1704.06888",
+      "role": "Gap Identification",
+      "relationship_sentence": "Progress-from-video methods like TCN learn phase/progress via temporal proximity but require large, domain-specific training; GVL targets the same progress signal while avoiding task-specific training by leveraging VLM world knowledge through in-context ordering."
+    },
+    {
+      "title": "Do As I Can, Not As I Say: Grounding Language in Robotic Affordances (SayCan)",
+      "authors": "Michael Ahn et al.",
+      "year": 2022,
+      "arxiv_id": "2204.01691",
+      "role": "Related Problem",
+      "relationship_sentence": "SayCan showed foundation models can score feasibility to guide robots; GVL analogously uses a foundation model to score visual task progress, but at the trajectory level to produce a value function rather than action feasibility."
+    }
+  ],
+  "synthesis_narrative": "Universal Value Function Approximators established that a single value function can generalize across goals by conditioning on context, motivating methods that estimate progress across diverse tasks. Preference-based reinforcement learning demonstrated a practical route to value signals via pairwise comparisons, showing that scalar rewards can be inferred from judgments over trajectory snippets rather than explicit numeric labels. Trajectory-ranked reward extrapolation (T-REX) pushed this further by converting the temporal order inherent in demonstrations into ranked comparisons to learn rewards that extrapolate, highlighting temporal ordering as a powerful supervisory signal. Complementing these ideas, Shuffle and Learn showed that verifying temporal order of shuffled frames forces models to capture temporal dynamics instead of exploiting short-range correlations. Time-Contrastive Networks learned phase/progress-like embeddings from video using temporal proximity, but required sizable, task-specific video collections to train robustly. Meanwhile, SayCan revealed that foundation models\u2019 world knowledge can meaningfully score or prioritize options for robots, hinting that such models might also assess notions of task progress.\nTogether, these works suggested a gap: progress/value estimation benefits from temporal ordering and preferences, yet existing approaches either need human labels or large in-domain video training and struggle to generalize broadly. Leveraging the demonstrated evaluative power and world knowledge of foundation models, the current work synthesizes these insights by prompting a VLM to sort shuffled frames\u2014sidestepping temporal shortcutting\u2014then converting those rank-based judgments into a universal progress value. This unifies UVFA\u2019s generality with preference/ranking supervision while eliminating domain-specific training, yielding a scalable, cross-task value estimator.",
+  "target_paper": {
+    "title": "Vision Language Models are In-Context Value Learners",
+    "authors": "Yecheng Jason Ma, Joey Hejna, Chuyuan Fu, Dhruv Shah, Jacky Liang, Zhuo Xu, Sean Kirmani, Peng Xu, Danny Driess, Ted Xiao, Osbert Bastani, Dinesh Jayaraman, Wenhao Yu, Tingnan Zhang, Dorsa Sadigh, Fei Xia",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "robot learning, vision-language model, value estimation, manipulation",
+    "abstract": "Predicting temporal progress from visual trajectories is important for intelligent robots that can learn, adapt, and improve. However, learning such progress estimator, or temporal value function, across different tasks and domains requires both a large amount of diverse data and methods which can scale and generalize. To address these challenges, we present Generative Value Learning (GVL), a universal value function estimator that leverages the world knowledge embedded in vision-language models (VLMs) to predict task progress. Naively asking a VLM to predict values for a video sequence performs poorly due to the strong temporal correlation between successive frames. Instead, GVL poses value estimation as a temporal ordering problem over shuffled video frames; this seemingly more challenging task encourages VLMs to more fully exploit their underlying semantic and temporal grounding capabilities to differentiate frames based on their perceived task progress, consequently producing signi",
+    "openreview_id": "friHAl5ofG",
+    "forum_id": "friHAl5ofG"
+  },
+  "analysis_timestamp": "2026-01-06T07:50:25.407669"
+}

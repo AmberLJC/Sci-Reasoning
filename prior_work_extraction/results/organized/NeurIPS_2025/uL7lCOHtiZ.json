@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "DeepSeek-R1: Incentivizing Reasoning in Large Language Models via Group Relative Policy Optimization",
+      "authors": "DeepSeek-AI Team",
+      "year": 2024,
+      "role": "Algorithmic and conceptual backbone for reasoning-induced training via GRPO",
+      "relationship_sentence": "VisualQuality-R1 directly adapts DeepSeek-R1\u2019s group relative policy optimization to sample multiple outputs per input and optimize them with a relative, group-normalized advantage to induce stronger reasoning-like computation for IQA."
+    },
+    {
+      "title": "Proximal Policy Optimization Algorithms",
+      "authors": "John Schulman, Filip Wolski, Prafulla Dhariwal, Alec Radford, Oleg Klimov",
+      "year": 2017,
+      "role": "Foundational RL optimizer underlying GRPO-style clipped policy updates",
+      "relationship_sentence": "The policy optimization in VisualQuality-R1 follows the PPO-style clipped objective that GRPO builds on, enabling stable reinforcement learning for ranking-based IQA."
+    },
+    {
+      "title": "Deep Reinforcement Learning from Human Preferences",
+      "authors": "Paul F. Christiano, Jan Leike, Tom B. Brown, Miljan Marti\u0107, Shane Legg, Dario Amodei",
+      "year": 2017,
+      "role": "Preference-based RL framework",
+      "relationship_sentence": "VisualQuality-R1 inherits the core idea of optimizing a policy from comparative feedback, but tailors the preference formulation and rewards to visual quality rather than language."
+    },
+    {
+      "title": "RankIQA: Learning from Rankings for No-Reference Image Quality Assessment",
+      "authors": "Xialei Liu, Joost van de Weijer, Andrew D. Bagdanov",
+      "year": 2017,
+      "role": "Pairwise ranking paradigm for NR-IQA",
+      "relationship_sentence": "By framing IQA as a relative judgment task, RankIQA established the efficacy of pairwise comparisons that VisualQuality-R1 elevates into an RL-to-rank training scheme."
+    },
+    {
+      "title": "The Unreasonable Effectiveness of Deep Features as a Perceptual Metric (LPIPS/BAPPS)",
+      "authors": "Richard Zhang, Phillip Isola, Alexei A. Efros, Eli Shechtman, Oliver Wang",
+      "year": 2018,
+      "role": "Pairwise perceptual judgments and probabilistic modeling of comparative outcomes",
+      "relationship_sentence": "VisualQuality-R1\u2019s use of probabilistic comparative outcomes for two-image judgments echoes LPIPS\u2019s learning from 2AFC pairwise preferences and informs how to connect predicted scores to comparison probabilities."
+    },
+    {
+      "title": "A Law of Comparative Judgment",
+      "authors": "L. L. Thurstone",
+      "year": 1927,
+      "role": "Statistical model for transforming pairwise comparisons into probabilistic comparisons (Thurstone Case V)",
+      "relationship_sentence": "The paper explicitly employs the Thurstone model to convert multiple sampled quality scores into probabilities that one image is better than another."
+    },
+    {
+      "title": "NIMA: Neural Image Assessment",
+      "authors": "Hossein Talebi, Peyman Milanfar",
+      "year": 2018,
+      "role": "Continuous quality distribution supervision for IQA",
+      "relationship_sentence": "VisualQuality-R1\u2019s rewards based on continuous fidelity measures are aligned with NIMA\u2019s insight to model and optimize continuous quality signals rather than binarized labels."
+    }
+  ],
+  "synthesis_narrative": "VisualQuality-R1 fuses preference-based reinforcement learning with the inherently relative nature of image quality assessment. The immediate algorithmic anchor is DeepSeek-R1, whose Group Relative Policy Optimization (GRPO) induces sophisticated reasoning by sampling multiple outputs and optimizing them with group-normalized advantages; VisualQuality-R1 ports this paradigm to vision by sampling multiple quality scores per image and optimizing them comparatively. This sits on the PPO foundation, ensuring stable clipped policy updates during RL. Conceptually, the work draws from preference-based RL (Christiano et al.), replacing absolute supervision with comparative feedback\u2014here, image-pair quality relations\u2014so the model learns policies aligned with human judgments.\nWithin IQA, RankIQA established that relative judgments can be more reliable and task-aligned than absolute MOS labels, motivating VisualQuality-R1\u2019s reinforcement learning to rank formulation. To connect predicted scalar qualities to pairwise outcomes, the method leverages probabilistic comparative modeling in the spirit of LPIPS/BAPPS, while explicitly invoking the Thurstone model to compute the probability that one image surpasses another given multiple sampled scores. Finally, the choice of continuous, fidelity-based rewards reflects lessons from NIMA, which demonstrated the value of optimizing against continuous quality distributions rather than discretized labels. Together, these works directly shape VisualQuality-R1\u2019s core contribution: a reasoning-induced, preference-driven NR-IQA model trained via GRPO-style reinforcement learning to rank with continuous probabilistic feedback.",
+  "analysis_timestamp": "2026-01-07T00:29:41.033414"
+}

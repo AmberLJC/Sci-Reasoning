@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Training language models to follow instructions with human feedback",
+      "authors": "Long Ouyang et al.",
+      "year": 2022,
+      "arxiv_id": "2203.02155",
+      "role": "Foundation",
+      "relationship_sentence": "Established the pairwise preference learning formulation and data pipeline (prompt, multiple responses, human comparison) that SPA seeks to reproduce at far lower annotation cost."
+    },
+    {
+      "title": "Direct Preference Optimization: Your Language Model Is Secretly a Reward Model",
+      "authors": "Yura Rafailov et al.",
+      "year": 2023,
+      "arxiv_id": "2305.18290",
+      "role": "Inspiration",
+      "relationship_sentence": "Its derivation linking pairwise preferences to log-probability ratios between policy and reference models directly motivates SPA\u2019s idea to read preference signals from model logits without training an external reward model."
+    },
+    {
+      "title": "Self-Instruct: Aligning Language Models with Self-Generated Instructions",
+      "authors": "Yizhong Wang et al.",
+      "year": 2023,
+      "arxiv_id": "2212.10560",
+      "role": "Inspiration",
+      "relationship_sentence": "Demonstrated an iterative seed-expansion loop (small human seed \u2192 model-generated data \u2192 filtering) that SPA extends to preference annotation by iteratively generating responses and self-labeling pairs."
+    },
+    {
+      "title": "RRHF: Rank Responses to Align Language Models with Human Feedback",
+      "authors": "Weizhe Yuan et al.",
+      "year": 2023,
+      "arxiv_id": "2304.05302",
+      "role": "Baseline",
+      "relationship_sentence": "Provides a primary AI-feedback baseline that ranks model outputs using an external judge signal, which SPA replaces with direct logit-based preference judgment to remove judge dependence and reduce bias/cost."
+    },
+    {
+      "title": "Constitutional AI: Harmlessness from AI Feedback",
+      "authors": "Yuntao Bai et al.",
+      "year": 2022,
+      "arxiv_id": "2212.08073",
+      "role": "Gap Identification",
+      "relationship_sentence": "Showed AI feedback can reduce human labels but still relies on external critique/judge mechanisms, a dependency SPA explicitly eliminates by deriving preferences straight from the policy\u2019s logits."
+    },
+    {
+      "title": "Self-Rewarding Language Models",
+      "authors": "Yuan et al.",
+      "year": 2024,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "Proposed in-context self-evaluation to generate rewards without RMs, whose prompt-sensitivity and instability motivate SPA\u2019s explicit, deterministic preference labeling from token-level logits."
+    }
+  ],
+  "synthesis_narrative": "Instruction-following with human preferences formalized pairwise comparisons as the core supervisory signal for alignment, defining the now-standard pipeline of generating multiple responses per prompt and learning from human-chosen winners and losers. Direct Preference Optimization showed that pairwise preferences can be expressed through log-probability ratios between a policy and reference model, revealing a tight connection between preferences and logits that obviates separate reward models. Self-Instruct introduced an iterative seed-expansion paradigm in which a small set of human-curated seeds bootstraps large-scale, model-generated supervision via generate\u2013filter loops. RRHF operationalized AI feedback by ranking model outputs with an external judge signal to form preference supervision, turning LLM-as-judge rankings into trainable pairwise signals. Constitutional AI demonstrated that AI feedback can replace human critiques to cut labeling costs, while still depending on auxiliary critique/judge components. Self-Rewarding Language Models further reduced reliance on external judges by prompting the model to self-evaluate, but its in-context grading introduced prompt sensitivity and instability in the supervision signal. Together, these works suggest that cheap, iterative expansion from small seeds is viable, yet existing AI-feedback routes either depend on external judges or use implicit, prompt-based evaluations. The theoretical tie between preferences and logits indicates that the model\u2019s own probabilities encode a stable, explicit signal. Leveraging this, the current work synthesizes Self-Instruct\u2019s iterative spread with DPO\u2019s logit-based insight to self-annotate preference pairs directly from logits, eliminating reward models and judge LLMs while preserving the pairwise alignment benefits defined by RLHF.",
+  "target_paper": {
+    "title": "Spread Preference Annotation: Direct Preference Judgment for Efficient LLM Alignment",
+    "authors": "Dongyoung Kim, Kimin Lee, Jinwoo Shin, Jaehyung Kim",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "oral",
+    "keywords": "large language model, alignment, preference",
+    "abstract": "Aligning large language models (LLMs) with human preferences becomes a key component to obtaining state-of-the-art performance, but it yields a huge cost to construct a large human-annotated preference dataset. To tackle this problem, we propose a new framework, Spread Preference Annotation with direct preference judgment (SPA), that boosts the alignment of LLMs using only a very small amount of human-annotated preference data.\nOur key idea is leveraging the human prior knowledge within the small (seed) data and progressively improving the alignment of LLM, by iteratively generating the responses and learning from them with the self-annotated preference data.\nTo be specific, we propose to derive the preference label from the logits of LLM to explicitly extract the model's inherent preference. \nCompared to the previous approaches using external reward models or implicit in-context learning, we observe that the proposed approach is significantly more effective.\nIn addition, we introduce ",
+    "openreview_id": "BPgK5XW1Nb",
+    "forum_id": "BPgK5XW1Nb"
+  },
+  "analysis_timestamp": "2026-01-06T06:47:40.254348"
+}

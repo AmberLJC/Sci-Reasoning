@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Jonathan Ho, Ajay Jain, Pieter Abbeel",
+      "year": 2020,
+      "role": "Foundational diffusion framework and iterative sampling procedure.",
+      "relationship_sentence": "HI-Diff builds on the DDPM forward\u2013reverse diffusion paradigm to extract generative priors, while explicitly addressing DDPM\u2019s heavy multi-step sampling cost that hampers restoration efficiency."
+    },
+    {
+      "title": "Score-Based Generative Modeling through Stochastic Differential Equations",
+      "authors": "Yang Song, Jascha Sohl-Dickstein, Diederik P. Kingma, Abhishek Kumar, Stefano Ermon, Ben Poole",
+      "year": 2021,
+      "role": "Unified SDE view of diffusion/score models and demonstrated applicability to inverse problems.",
+      "relationship_sentence": "The SDE formulation underpins using diffusion priors for degradations like blur; HI-Diff leverages this idea but channels the prior as features rather than performing full generative restoration."
+    },
+    {
+      "title": "High-Resolution Image Synthesis with Latent Diffusion Models",
+      "authors": "Robin Rombach, Andreas Blattmann, Dominik Lorenz, Patrick Esser, Bj\u00f6rn Ommer",
+      "year": 2022,
+      "role": "Efficiency via diffusion in a compact latent space with an autoencoder.",
+      "relationship_sentence": "Directly motivates HI-Diff\u2019s key design of running diffusion in a highly compact latent space to provide rich priors at a fraction of the compute of pixel-space diffusion."
+    },
+    {
+      "title": "SR3: Image Super-Resolution via Iterative Refinement",
+      "authors": "Chitwan Saharia, Jonathan Ho, William Chan, Tim Salimans, David J. Fleet, Mohammad Norouzi, et al.",
+      "year": 2021,
+      "role": "Conditional diffusion for image restoration with strong perceptual quality but many sampling steps.",
+      "relationship_sentence": "SR3 highlights diffusion\u2019s detail reconstruction yet high sampling cost and PSNR gap; HI-Diff responds by using diffusion only to supply priors and delegating reconstruction to a fast regression module."
+    },
+    {
+      "title": "Denoising Diffusion Restoration Models",
+      "authors": "Sepehr H. Kawar, Michael Elad, Stefano Ermon, et al.",
+      "year": 2022,
+      "role": "Using pretrained diffusion models as powerful priors for general inverse problems including deblurring.",
+      "relationship_sentence": "DDRM shows diffusion priors can solve deblurring but often misalign with distortion metrics; HI-Diff addresses this by coupling diffusion priors with a regression-based deblurring head to improve PSNR/SSIM."
+    },
+    {
+      "title": "MPRNet: Multi-Stage Progressive Image Restoration",
+      "authors": "Syed Waqas Zamir, Aditya Arora, Salman Khan, Munawar Hayat, Fahad Shahbaz Khan, Ming-Hsuan Yang, Ling Shao",
+      "year": 2021,
+      "role": "Hierarchical, multi-stage design for restoration with cross-scale feature integration.",
+      "relationship_sentence": "HI-Diff\u2019s hierarchical integration module echoes MPRNet\u2019s effectiveness of progressive, multi-scale fusion, here adapted to integrate diffusion priors with content features across resolutions."
+    },
+    {
+      "title": "Restormer: Efficient Transformer for High-Resolution Image Restoration",
+      "authors": "Syed Waqas Zamir, Aditya Arora, Salman Khan, Munawar Hayat, Fahad Shahbaz Khan, Ming-Hsuan Yang, Ling Shao",
+      "year": 2022,
+      "role": "Strong regression-based restoration backbone prioritizing distortion metrics with hierarchical feature processing.",
+      "relationship_sentence": "Restormer exemplifies distortion-accurate regression restorers; HI-Diff adopts this regression philosophy while injecting diffusion priors, marrying PSNR-focused reconstruction with generative detail cues."
+    }
+  ],
+  "synthesis_narrative": "HI-Diff arises at the intersection of diffusion generative priors and distortion-accurate regression-based deblurring. DDPM established the iterative denoise-and-sample mechanism, while the SDE formulation unified diffusion/score models and showed how such priors can be exploited for inverse problems like deblurring. However, end-to-end diffusion restorers (e.g., SR3) and diffusion-prior solvers (e.g., DDRM) demonstrated two practical obstacles for deblurring benchmarks: high sampling cost and a mismatch with distortion-centric metrics (PSNR/SSIM). Latent Diffusion Models provided a decisive efficiency insight\u2014perform diffusion in a compact latent space to retain semantic priors at far lower computational cost. On the reconstruction side, modern regression-based restorers such as MPRNet and Restormer showed that hierarchical, multi-scale feature processing excels on distortion metrics, but can under-recover fine details in challenging, realistic blur. HI-Diff synthesizes these threads: it performs diffusion in a highly compact latent space purely to generate strong multi-scale priors, then hierarchically integrates these priors with content features inside a regression-based deblurring pipeline. This hierarchical integration preserves the efficiency and PSNR strengths of regression models while leveraging diffusion\u2019s capacity to hallucinate plausible details, effectively bridging the perceptual\u2013distortion gap and mitigating the sampling inefficiency endemic to pixel-space diffusion restorers.",
+  "analysis_timestamp": "2026-01-07T00:02:04.861586"
+}

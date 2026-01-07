@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Improving predictive inference under covariate shift by weighting the log-likelihood function",
+      "authors": "Hidetoshi Shimodaira",
+      "year": 2000,
+      "role": "Foundational importance weighting under covariate shift",
+      "relationship_sentence": "GIW explicitly reduces to classical importance weighting in cases with full or nested support and begins by analyzing exactly why Shimodaira-style IW fails when target support extends beyond the training support."
+    },
+    {
+      "title": "Covariate Shift Adaptation by Importance Weighted Cross-Validation",
+      "authors": "Masashi Sugiyama, Matthias Krauledat, Klaus-Robert M\u00fcller",
+      "year": 2007,
+      "role": "Practical IW methodology and training procedures",
+      "relationship_sentence": "The GIW framework inherits the IW empirical risk minimization paradigm and its model selection practices, using them on the in-training (overlap) region while generalizing beyond the assumptions IW-CV relies on."
+    },
+    {
+      "title": "Correcting Sample Selection Bias by Unlabeled Data",
+      "authors": "Jiayuan Huang, Arthur Gretton, Karsten M. Borgwardt, Bernhard Sch\u00f6lkopf, Alexander J. Smola",
+      "year": 2006,
+      "role": "Kernel Mean Matching (KMM) for estimating importance weights",
+      "relationship_sentence": "GIW\u2019s in-training component depends on estimating density ratios/weights; KMM is a canonical approach that GIW can leverage or replace, and GIW\u2019s critique of IW under support mismatch also applies to KMM-based weighting."
+    },
+    {
+      "title": "A Least-Squares Approach to Direct Importance Estimation",
+      "authors": "Takuya Kanamori, Shinichi Hido, Masashi Sugiyama",
+      "year": 2009,
+      "role": "Direct density-ratio estimation (uLSIF)",
+      "relationship_sentence": "GIW relies on density-ratio estimation for the overlap region and is built on techniques like uLSIF, while addressing their breakdown when the target has mass outside the training support."
+    },
+    {
+      "title": "Learning Bounds for Importance Weighting",
+      "authors": "Corinna Cortes, Yishay Mansour, Mehryar Mohri",
+      "year": 2010,
+      "role": "Theoretical analysis of IW variance and support assumptions",
+      "relationship_sentence": "GIW\u2019s diagnosis\u2014that IW becomes unstable or undefined without support overlap\u2014echoes the variance and tail-behavior concerns formalized by these generalization bounds, motivating GIW\u2019s support-aware decomposition."
+    },
+    {
+      "title": "Positive-Unlabeled Learning with Non-Negative Risk Estimator",
+      "authors": "Shion Kiryo, Gang Niu, Marthinus C. du Plessis, Masashi Sugiyama",
+      "year": 2017,
+      "role": "Risk rewriting using unlabeled data and partition-based estimators",
+      "relationship_sentence": "GIW\u2019s split of target risk into an in-training (labeled/overlap) part and an out-of-training (unlabeled-only) part mirrors PU-learning risk decompositions, inspiring how to estimate and regularize loss where labels or support are absent."
+    },
+    {
+      "title": "Doubly Robust Policy Evaluation and Learning",
+      "authors": "Miroslav Dud\u00edk, John Langford, Lihong Li",
+      "year": 2011,
+      "role": "Hybrid estimators that combine weighting with model-based terms under limited overlap",
+      "relationship_sentence": "GIW\u2019s idea of complementing importance-weighted estimation on the overlap with a separate treatment of unsupported regions conceptually parallels doubly robust strategies that remain valid when pure weighting is unreliable."
+    }
+  ],
+  "synthesis_narrative": "The core contribution of GIW is to generalize importance weighting (IW) into a universal solver that remains valid when test support extends beyond training support or only partially overlaps. This builds directly on the covariate-shift foundation established by Shimodaira\u2019s IW, and on practical IW training procedures such as importance-weighted cross-validation. GIW retains the IW machinery on the in-training (overlap) region and therefore depends on reliable density-ratio estimation\u2014canonical methods like Kernel Mean Matching and uLSIF provide the operational backbone for estimating weights.\n\nHowever, prior theory has long warned that IW\u2019s variance and generalization deteriorate when support assumptions are violated. The generalization bounds of Cortes, Mansour, and Mohri formalize the instability and tail sensitivity of importance weights, clarifying why standard IW fails when the target has probability mass where the source has none. GIW addresses this failure by explicitly partitioning the target domain into in-training and out-of-training regions and devising estimators for each part.\n\nThe design of risk estimators for regions lacking labeled coverage is inspired by risk-rewriting ideas from Positive\u2013Unlabeled learning, where one reconstructs target risk from components available under limited supervision. Complementarily, the off-policy evaluation literature\u2019s doubly robust estimators motivate combining weighting-based estimation on the overlap with alternative, model-driven terms where overlap is absent. Integrating these strands, GIW reduces to classical IW when supports match or nest, while providing principled, low-variance estimation in the unsupported regions\u2014thus unifying and extending IW to all common distribution-shift cases.",
+  "analysis_timestamp": "2026-01-07T00:02:04.836677"
+}

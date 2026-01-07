@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Intelligent Selection of Language Model Training Data",
+      "authors": "R. C. Moore, William Lewis",
+      "year": 2010,
+      "role": "Introduced cross-entropy difference scoring with reference and general LMs to select in-domain sentences for training.",
+      "relationship_sentence": "Rho-1\u2019s Selective Language Modeling extends Moore\u2013Lewis from sentence-level selection to token-level scoring with a reference model to align training toward a target distribution (e.g., math)."
+    },
+    {
+      "title": "Don\u2019t Stop Pretraining: Adapt Language Models to Domains and Tasks",
+      "authors": "Suchin Gururangan, Ana Marasovi\u0107, Swabha Swayamdipta, Kyle Lo, Iz Beltagy, Doug Downey, Noah A. Smith",
+      "year": 2020,
+      "role": "Established the effectiveness of continual domain-adaptive pretraining (DAPT) for LMs.",
+      "relationship_sentence": "Rho-1 operates in the DAPT setting (e.g., OpenWebMath) but improves efficiency and efficacy by selectively training only on high-utility tokens rather than uniformly updating on all tokens."
+    },
+    {
+      "title": "Dataset Cartography: Mapping and Diagnosing Datasets with Training Dynamics",
+      "authors": "Swabha Swayamdipta, Roy Schwartz, Nicholas Lourie, Yizhong Wang, Hannaneh Hajishirzi, Noah A. Smith, Yejin Choi",
+      "year": 2020,
+      "role": "Showed how example-level training dynamics (confidence, variability) reveal instance difficulty and utility for pruning/curricula.",
+      "relationship_sentence": "Rho-1\u2019s token-level analysis of loss patterns builds on the cartography idea, using training dynamics to decide which tokens are useful to update on."
+    },
+    {
+      "title": "DoReMi: Optimizing Data Mixtures for Language Model Pretraining",
+      "authors": "Shiori Sagawa, Pang Wei Koh, Tatsunori Hashimoto, Percy Liang, and colleagues",
+      "year": 2023,
+      "role": "Optimized dataset mixture weights for LM pretraining using a reference/teacher model to guide which data distributions to emphasize.",
+      "relationship_sentence": "Rho-1 similarly uses a reference model for selectivity, but pushes granularity from mixture/dataset-level weighting to token-level selection within sequences."
+    },
+    {
+      "title": "Focal Loss for Dense Object Detection",
+      "authors": "Tsung-Yi Lin, Priya Goyal, Ross Girshick, Kaiming He, Piotr Doll\u00e1r",
+      "year": 2017,
+      "role": "Proposed a loss that down-weights easy examples and focuses learning on informative hard examples.",
+      "relationship_sentence": "SLM echoes the focal-loss principle by concentrating updates on informative (high-scoring) tokens and reducing computation on low-utility ones."
+    },
+    {
+      "title": "CCNet: Extracting High Quality Monolingual Datasets from Web Crawl Data",
+      "authors": "Guillaume Wenzek, Marie-Anne Lachaux, Alexis Conneau, Vishrav Chaudhary, Francisco Guzm\u00e1n, Armand Joulin, \u00c9douard Grave",
+      "year": 2020,
+      "role": "Demonstrated large-scale perplexity-based filtering with reference LMs to improve web-crawl data quality.",
+      "relationship_sentence": "Rho-1 adopts the same reference-LM scoring spirit but applies it at token granularity to filter where the loss is applied during training rather than filtering entire documents."
+    },
+    {
+      "title": "An Empirical Study of Example Forgetting During Deep Neural Network Learning",
+      "authors": "Elena Toneva, Alessandro Sordoni, R\u00e9mi Tachet des Combes, Adam Trischler, Yoshua Bengio, Geoffrey J. Gordon",
+      "year": 2019,
+      "role": "Linked training dynamics (forgetting events) with example utility, inspiring selective retention/removal strategies.",
+      "relationship_sentence": "Rho-1\u2019s observation that tokens exhibit distinct loss/learning patterns parallels forgetting-based insights and motivates focusing updates on persistently informative tokens."
+    }
+  ],
+  "synthesis_narrative": "Rho-1\u2019s Selective Language Modeling (SLM) crystallizes two mature lines of work\u2014reference-model\u2013based data selection and difficulty-aware training\u2014into a token-level training objective. The Moore\u2013Lewis method established scoring with in-domain and generic language models to select data for domain adaptation, later widely adopted in web-scale filtering (e.g., CCNet\u2019s perplexity-based selection). Rho-1 inherits this idea of using a reference LM to align training toward a target distribution but refines the granularity from document or sentence selection to token-level scoring and masking of the loss.\n\nThe second thread is difficulty-aware learning: Dataset Cartography and example-forgetting studies showed that training dynamics expose which instances are consistently informative. Focal Loss and related hard-example mining operationalized this by down-weighting easy examples so models focus capacity on hard, informative ones. Rho-1 adapts this principle to autoregressive LM pretraining by concentrating updates on tokens with higher utility scores from a reference model.\n\nWithin the continual pretraining paradigm popularized by DAPT, Rho-1 aims to make domain adaptation (e.g., math via OpenWebMath) more compute- and sample-efficient. DoReMi\u2019s mixture optimization demonstrated that reference models can guide what data to emphasize at the distribution level; SLM advances this by choosing which individual tokens within sequences should drive gradient updates. Together, these prior works directly inform Rho-1\u2019s core innovation: reference-LM\u2013guided, token-level selectivity that reallocates training signal to the most distribution-aligned and informative tokens.",
+  "analysis_timestamp": "2026-01-06T23:33:36.279325"
+}

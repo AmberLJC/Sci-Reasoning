@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Mastering Diverse Domains through World Models (DreamerV3)",
+      "authors": "Danijar Hafner et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Baseline",
+      "relationship_sentence": "THICK replaces the flat dRSSM-style world model used in Dreamer with a hierarchical discrete-latent dynamics that learns adaptive temporal abstractions, and is explicitly evaluated by plugging into Dreamer-style planning to demonstrate improvements."
+    },
+    {
+      "title": "Temporal Difference Variational Auto-Encoder (TD-VAE)",
+      "authors": "Karol Gregor et al.",
+      "year": 2018,
+      "arxiv_id": "1806.03107",
+      "role": "Inspiration",
+      "relationship_sentence": "TD-VAE\u2019s jumpy latent predictions over variable time gaps directly inspired THICK\u2019s separation of slow, categorical high-level variables from fast low-level dynamics, while THICK addresses boundary discovery by learning when high-level changes should occur."
+    },
+    {
+      "title": "A Hierarchical Multiscale Recurrent Neural Network",
+      "authors": "Junyoung Chung et al.",
+      "year": 2017,
+      "arxiv_id": "1607.02024",
+      "role": "Extension",
+      "relationship_sentence": "HM-RNN\u2019s learned discrete boundary variables that gate multiscale updates are generalized in THICK to a probabilistic world-model setting, where subsets of the latent state update sparsely and a high-level process predicts change events."
+    },
+    {
+      "title": "CompILE: Compositional Imitation Learning and Execution",
+      "authors": "Thomas Kipf et al.",
+      "year": 2019,
+      "arxiv_id": "",
+      "role": "Related Problem",
+      "relationship_sentence": "CompILE\u2019s variational segmentation with a categorical code per segment informed THICK\u2019s use of discrete latents to represent invariant contexts and variable-length segments, adapted here to learn dynamics useful for model-based control rather than imitation."
+    },
+    {
+      "title": "Recurrent Independent Mechanisms",
+      "authors": "Anirudh Goyal et al.",
+      "year": 2019,
+      "arxiv_id": "1909.10893",
+      "role": "Inspiration",
+      "relationship_sentence": "RIMs\u2019 principle of sparsely updating independent modules underpins THICK\u2019s invariant context kernels, where only latents associated with changing mechanisms are updated while others remain persistent."
+    },
+    {
+      "title": "Causal Inference using Invariant Prediction",
+      "authors": "Jonas Peters et al.",
+      "year": 2016,
+      "arxiv_id": "1501.01332",
+      "role": "Foundation",
+      "relationship_sentence": "The invariant causal mechanisms principle in this work motivates THICK\u2019s design of latent \u2018contexts\u2019 that remain invariant until a mechanism change, aligning its high-level discrete variable with detected distributional shifts."
+    }
+  ],
+  "synthesis_narrative": "Dreamer-style world models demonstrated that latent dynamics trained from pixels can support planning and policy learning, but they typically rely on flat RSSM architectures that operate at a single time scale. TD-VAE introduced the idea of jumpy latent predictions, separating slower abstract latents from faster dynamics to capture long-range temporal structure. HM-RNN learned discrete boundary variables that gated updates at multiple time scales, enabling segments to persist without continuous higher-level changes. CompILE provided a variational approach to discover variable-length segments with a categorical latent per segment, showing that unsupervised boundary detection can yield compact, interpretable sequence structure. Recurrent Independent Mechanisms argued for sparsely updating modular components so that independent mechanisms remain unchanged unless driven by relevant inputs, offering a neural template for persistence and selective updates. Complementing these, invariant prediction formalized the idea that causal mechanisms remain stable across contexts, suggesting that learned representations should be constant until a genuine mechanism change occurs.\nTogether, these works reveal an opportunity: combine jumpy temporal abstraction with explicit boundary discovery and sparse, mechanism-aligned updates inside a predictive world model. THICK synthesizes these insights by learning invariant context kernels\u2014subsets of the latent state that remain fixed across segments\u2014and a high-level categorical process that predicts context changes. This yields interpretable, discrete temporal abstractions while preserving precise low-level predictions, and the resulting hierarchical world model slots directly into Dreamer-style planning to enhance model-based control.",
+  "target_paper": {
+    "title": "Learning Hierarchical World Models with Adaptive Temporal Abstractions from Discrete Latent Dynamics",
+    "authors": "Christian Gumbsch, Noor Sajid, Georg Martius, Martin V. Butz",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "world models, temporal abstraction, hierarchical learning, model-based reinforcement learning, hierarchical planning",
+    "abstract": "Hierarchical world models can significantly improve model-based reinforcement learning (MBRL) and planning by enabling reasoning across multiple time scales. Nonetheless, the majority of state-of-the-art MBRL methods employ flat, non-hierarchical models. We propose Temporal Hierarchies from Invariant Context Kernels (THICK), an algorithm that learns a world model hierarchy via discrete latent dynamics. The lower level of THICK updates parts of its latent state sparsely in time, forming invariant contexts. The higher level exclusively predicts situations involving context changes. Our experiments demonstrate that THICK learns categorical, interpretable, temporal abstractions on the high level, while maintaining precise low-level predictions. Furthermore, we show that the emergent hierarchical predictive model seamlessly enhances the abilities of MBRL or planning methods. We believe that THICK contributes to the further development of hierarchical agents capable of more sophisticated pla",
+    "openreview_id": "TjCDNssXKU",
+    "forum_id": "TjCDNssXKU"
+  },
+  "analysis_timestamp": "2026-01-06T12:01:10.733267"
+}

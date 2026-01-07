@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "NeRV: Neural Representations for Videos",
+      "authors": "Chen et al.",
+      "year": 2021,
+      "arxiv_id": "",
+      "role": "Baseline",
+      "relationship_sentence": "NeRV established INR-based video coding by storing a per-video network\u2019s quantized weights for compression\u2014typically retraining per target bitrate\u2014providing the baseline formulation that this work replaces with PTQ-driven QP adjustment for variable rate without retraining."
+    },
+    {
+      "title": "Quantization and Training of Neural Networks for Efficient Integer-Arithmetic-Only Inference",
+      "authors": "Jacob et al.",
+      "year": 2018,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "This paper introduced per-channel weight quantization and practical calibration procedures, which are directly adapted here as channel-wise QP control to achieve fine-grained, representation-preserving rate adjustment in INR-VC."
+    },
+    {
+      "title": "HAWQ: Hessian AWare Quantization of Neural Networks with Mixed-Precision",
+      "authors": "Dong et al.",
+      "year": 2019,
+      "arxiv_id": "",
+      "role": "Extension",
+      "relationship_sentence": "HAWQ\u2019s mixed-precision bit-allocation via Hessian-based sensitivity directly motivates redefining variable-rate INR-VC as a mixed-precision quantization problem and informs the sensitivity criteria used for rate control."
+    },
+    {
+      "title": "BRECQ: Pushing the Limit of Post-Training Quantization by Block Reconstruction",
+      "authors": "Li et al.",
+      "year": 2021,
+      "arxiv_id": "",
+      "role": "Inspiration",
+      "relationship_sentence": "BRECQ showed that layer-independent PTQ is suboptimal and proposed block-level reconstruction to capture cross-layer dependencies, inspiring the network-wise calibration that mitigates inter-layer coupling in INR-VC."
+    },
+    {
+      "title": "Up or Down? Adaptive Rounding for Post-Training Quantization",
+      "authors": "Nagel et al.",
+      "year": 2020,
+      "arxiv_id": "",
+      "role": "Related Problem",
+      "relationship_sentence": "AdaRound\u2019s idea of optimizing weight rounding via a reconstruction objective is leveraged here to formulate a representation-oriented PTQ calibration that minimizes quantization-induced distortion on decoded video signals."
+    },
+    {
+      "title": "GPTQ: Accurate Post-Training Quantization for Generative Pretrained Transformers",
+      "authors": "Frantar et al.",
+      "year": 2022,
+      "arxiv_id": "",
+      "role": "Gap Identification",
+      "relationship_sentence": "GPTQ models cross-channel dependencies with efficient second-order PTQ, but it neither targets INR-VC nor couples sensitivity to rate, motivating this work\u2019s task-specific sensitivity theory and rate-aware mixed-precision formulation."
+    }
+  ],
+  "synthesis_narrative": "Neural representations for video established that a single per-video network could store a sequence\u2019s content and be compressed by quantizing and entropy coding its weights, but this practice typically required retraining separate models for different bitrates. Practical quantization foundations showed that per-channel weight quantization and simple calibration substantially reduce quant error by addressing channel imbalance, while Hessian-aware mixed-precision quantization framed bit allocation as sensitivity-guided optimization under a bit budget. Subsequent PTQ advances demonstrated that independent layerwise treatment is inadequate: block reconstruction exposed strong cross-layer coupling that must be accounted for during calibration, and adaptive rounding optimized the discrete rounding decision itself by minimizing a reconstruction loss on calibration data. Efficient second-order PTQ for large generative models further highlighted that inter-channel dependencies matter and can be handled analytically, though without an explicit linkage between sensitivity and compression rate.\n\nTaken together, these works revealed a clear opportunity: treat bitrate control in INR-based video coding as a mixed-precision quantization problem, use sensitivity to guide bit allocation, and calibrate at the network level to respect inter-layer dependencies\u2014while adopting channel-wise granularity for finer control. By unifying sensitivity-driven bitwidth assignment with representation-oriented calibration and channel-wise quantization, the present work provides variable-rate INR-VC without retraining, naturally extending PTQ theory to a rate-distortion setting tailored to implicit video representations.",
+  "target_paper": {
+    "title": "On Quantizing Neural Representation for Variable-Rate Video Coding",
+    "authors": "Junqi Shi, Zhujia Chen, Hanfei Li, Qi Zhao, Ming Lu, Tong Chen, Zhan Ma",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "Variable Rate, Video Coding, Quantization, Neural Representation",
+    "abstract": "This work introduces NeuroQuant, a novel post-training quantization (PTQ) approach tailored to non-generalized Implicit Neural Representations for variable-rate Video Coding (INR-VC). Unlike existing methods that require extensive weight retraining for each target bitrate, we hypothesize that variable-rate coding can be achieved by adjusting quantization parameters (QPs) of pre-trained weights. Our study reveals that traditional quantization methods, which assume inter-layer independence, are ineffective for non-generalized INR-VC models due to significant dependencies across layers. To address this, we redefine variable-rate INR-VC as a mixed-precision quantization problem and establish a theoretical framework for sensitivity criteria aimed at simplified, fine-grained rate control. Additionally, we propose network-wise calibration and channel-wise quantization strategies to minimize quantization-induced errors, arriving at a unified formula for representation-oriented PTQ calibration.",
+    "openreview_id": "44cMlQSreK",
+    "forum_id": "44cMlQSreK"
+  },
+  "analysis_timestamp": "2026-01-06T11:29:36.867292"
+}

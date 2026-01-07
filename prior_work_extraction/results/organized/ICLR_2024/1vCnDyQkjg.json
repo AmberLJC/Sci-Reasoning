@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Do As I Can, Not As I Say: Grounding Language in Robotic Affordances (SayCan)",
+      "authors": "Ahn et al.",
+      "year": 2022,
+      "arxiv_id": "2204.01691",
+      "role": "Inspiration",
+      "relationship_sentence": "UniHSI\u2019s LLM Planner adopts SayCan\u2019s core idea of decomposing language instructions into a sequence of affordance-grounded substeps, but grounds each substep as a Chain-of-Contacts (joint\u2013object-part pair) rather than robot skills."
+    },
+    {
+      "title": "Language Models as Zero-Shot Planners: A Step-by-Step Approach",
+      "authors": "Huang et al.",
+      "year": 2022,
+      "arxiv_id": "",
+      "role": "Related Problem",
+      "relationship_sentence": "UniHSI leverages the step-by-step prompting strategy from this work to elicit coherent multi-step plans and formats those steps explicitly as contact-centric CoC plans."
+    },
+    {
+      "title": "OmniControl: Control at All Levels for Human Motion Generation",
+      "authors": "Zhang et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Extension",
+      "relationship_sentence": "UniHSI generalizes OmniControl\u2019s multi-signal motion conditioning paradigm to object-part-aware contact constraints, enabling a single controller to execute diverse human\u2013scene interactions from a unified CoC representation."
+    },
+    {
+      "title": "Human Motion Diffusion Model",
+      "authors": "Tevet et al.",
+      "year": 2023,
+      "arxiv_id": "2209.14916",
+      "role": "Baseline",
+      "relationship_sentence": "UniHSI builds its unified controller on an MDM-style diffusion backbone and augments it with explicit contact conditioning so that CoC steps can be faithfully executed in scenes."
+    },
+    {
+      "title": "PartNet: A Large-scale Benchmark for Fine-grained and Hierarchical Part-level 3D Object Understanding",
+      "authors": "Mo et al.",
+      "year": 2019,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "PartNet\u2019s object-part taxonomy underpins the \u2018object part\u2019 side of UniHSI\u2019s joint\u2013part CoC tokens and enables the LLM planner to reference parts (e.g., handle, seat) consistently across objects."
+    },
+    {
+      "title": "BEHAVE: Dataset and Method for Tracking the 3D Human Body in the Wild with Interactions",
+      "authors": "Bhatnagar et al.",
+      "year": 2022,
+      "arxiv_id": "",
+      "role": "Gap Identification",
+      "relationship_sentence": "BEHAVE evidences that interaction categories tightly correlate with consistent contact regions yet lacks a unified, language-driven control interface, motivating UniHSI\u2019s CoC formulation and LLM planning."
+    },
+    {
+      "title": "GRAB: A Dataset of Whole-Body Human Grasping of Objects",
+      "authors": "Taheri et al.",
+      "year": 2020,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "GRAB\u2019s dense joint\u2013object contact maps provide concrete supervision and validation for representing interactions via explicit joint-to-object contacts that UniHSI extends beyond grasping to whole-body, part-aware interactions."
+    }
+  ],
+  "synthesis_narrative": "SayCan introduced a practical recipe for translating natural language into sequences of executable steps by grounding each step in affordances, while subsequent work on zero-shot planning with language models showed that carefully prompted, step-by-step decomposition can reliably elicit such structured plans. In motion generation, OmniControl demonstrated that a single generator can be conditioned by heterogeneous control signals (e.g., trajectories, contacts), hinting that a unified controller can execute diverse behaviors if the control tokens are designed properly. The Human Motion Diffusion Model provided a strong diffusion backbone that can accept rich conditioning for high-quality motion synthesis. On the perception and representation side, PartNet established a fine-grained, hierarchical taxonomy of object parts\u2014handles, doors, seats\u2014that standardizes how parts are referenced across categories. BEHAVE presented real human\u2013object interaction sequences with contact, revealing that interaction categories correlate with consistent contact regions, though it did not offer a language-driven interface. GRAB supplied dense joint-to-object contact maps, validating contact as an explicit supervision signal for interaction representation.\nTogether, these works suggest a path: represent interaction steps explicitly as contacts with object parts, elicit those steps from language via LLM planning, and execute them with a unified, diffusion-based controller. UniHSI synthesizes these insights by defining a Chain-of-Contacts tokenization tied to object-part semantics (PartNet), planning CoC sequences from prompts (SayCan/zero-shot planning), and extending multi-signal motion control (OmniControl/MDM) to part-aware contact execution, thereby closing the gap left by datasets like BEHAVE and GRAB that lacked a unified, language-controllable interface.",
+  "target_paper": {
+    "title": "Unified Human-Scene Interaction via Prompted Chain-of-Contacts",
+    "authors": "Zeqi Xiao, Tai Wang, Jingbo Wang, Jinkun Cao, Wenwei Zhang, Bo Dai, Dahua Lin, Jiangmiao Pang",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Human-Scene Interaction, Chain-of-Contacts, Unified, LLM",
+    "abstract": "Human-Scene Interaction (HSI) is a vital component of fields like embodied AI and virtual reality. Despite advancements in motion quality and physical plausibility, two pivotal factors, versatile interaction control and the development of a user-friendly interface, require further exploration before the practical application of HSI. This paper presents a unified HSI framework, UniHSI, which supports unified control of diverse interactions through language commands. The framework defines interaction as ``Chain of Contacts (CoC)\", representing steps involving human joint-object part pairs. This concept is inspired by the strong correlation between interaction types and corresponding contact regions. Based on the definition, UniHSI constitutes a Large Language Model (LLM) Planner to translate language prompts into task plans in the form of CoC, and a Unified Controller that turns CoC into uniform task execution. To facilitate training and evaluation, we collect a new dataset named ScenePl",
+    "openreview_id": "1vCnDyQkjg",
+    "forum_id": "1vCnDyQkjg"
+  },
+  "analysis_timestamp": "2026-01-06T18:25:37.657511"
+}

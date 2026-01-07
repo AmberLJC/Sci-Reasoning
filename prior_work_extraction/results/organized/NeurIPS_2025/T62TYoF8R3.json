@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "FP8 Formats for Deep Learning",
+      "authors": "Paulius Micikevicius et al.",
+      "year": 2022,
+      "role": "Foundational FP8 quantization and scaling",
+      "relationship_sentence": "Established E4M3/E5M2 FP8 formats and per-tensor scaling that FPSAttention leverages to quantize attention projections and matmuls while remaining compatible with modern GPU tensor cores."
+    },
+    {
+      "title": "FlashAttention-3: Fast and Accurate Attention with FP8 and Hopper Tensor Cores",
+      "authors": "Tri Dao et al.",
+      "year": 2024,
+      "role": "Kernel-level attention acceleration with FP8 and tiling",
+      "relationship_sentence": "Informed FPSAttention\u2019s native, hardware-friendly attention kernel and tile-wise partitioning by showing how FP8-friendly tiling and on-chip memory scheduling yield large speedups without accuracy loss."
+    },
+    {
+      "title": "Video Diffusion Models",
+      "authors": "Jonathan Ho et al.",
+      "year": 2022,
+      "role": "Architectural basis for 3D attention in video diffusion",
+      "relationship_sentence": "Provided the 3D U-Net and spatiotemporal attention setting that FPSAttention specifically targets for co-designed quantization and sparsity."
+    },
+    {
+      "title": "Latent Video Diffusion Models (e.g., Stable Video Diffusion)",
+      "authors": "Andreas Blattmann et al.",
+      "year": 2023,
+      "role": "Practical video diffusion with latent 3D/temporal attention",
+      "relationship_sentence": "Motivated focusing on latent-space 3D bidirectional/temporal attention as the primary performance bottleneck where unified tile-wise quantization+sparsity delivers end-to-end gains."
+    },
+    {
+      "title": "Elucidating the Design Space of Diffusion-Based Generative Models",
+      "authors": "Tero Karras et al.",
+      "year": 2022,
+      "role": "Noise schedule and timestep sensitivity analysis",
+      "relationship_sentence": "Inspired FPSAttention\u2019s denoising-step\u2013aware strategy by highlighting how error tolerance varies with the SNR/noise schedule across timesteps."
+    },
+    {
+      "title": "SparseGPT: Massive Language Models Can Be Accurately Pruned in One-Shot",
+      "authors": "Andreas Frantar and Dan Alistarh",
+      "year": 2023,
+      "role": "Training-free sparsification of transformers",
+      "relationship_sentence": "Showed the limits of naively applying unstructured sparsity post hoc, motivating FPSAttention\u2019s training-aware co-optimization to prevent quality degradation in diffusion models."
+    },
+    {
+      "title": "SpQR: A Sparse-Quantized Representation for Near-Lossless LLM Compression",
+      "authors": "Andreas Frantar et al.",
+      "year": 2023,
+      "role": "Joint sparsity+quantization co-design",
+      "relationship_sentence": "Demonstrated that combining sparsity with low-bit quantization benefits from coordinated design, directly influencing FPSAttention\u2019s unified 3D tile granularity for both."
+    }
+  ],
+  "synthesis_narrative": "FPSAttention targets the principal performance bottleneck in modern video diffusion\u20143D spatiotemporal attention\u2014by co-designing FP8 quantization and sparsity with training awareness and a hardware-native kernel. The architectural context for this focus stems from Video Diffusion Models and latent video diffusion variants, which cemented 3D/temporal attention as core to high-quality video synthesis. On the quantization side, the FP8 formats and scaling recipes introduced by Micikevicius et al. provide the numerical foundation and hardware alignment that FPSAttention exploits; FlashAttention-3 further shows how tile-wise scheduling and FP8 tensor-core paths can be engineered for both speed and accuracy, guiding FPSAttention\u2019s native kernel and tiling choices. For sparsity, SparseGPT highlights both the promise and pitfalls of training-free, unstructured pruning in transformer blocks, underscoring the need for training-aware calibration to avoid catastrophic quality loss\u2014especially acute in diffusion. SpQR goes a step further by evidencing that sparsity and low-bit quantization should be coordinated rather than stacked independently, motivating FPSAttention\u2019s unified 3D tile granularity that simultaneously governs both mechanisms. Finally, Karras et al.\u2019s analysis of diffusion noise schedules clarifies that error tolerance is timestep-dependent, directly informing FPSAttention\u2019s denoising-step\u2013aware policy that adapts quantization and sparsity across the trajectory. Together, these works crystallize the need for a training-aware, tile-coherent, FP8-and-sparsity co-design specialized for 3D video attention.",
+  "analysis_timestamp": "2026-01-07T00:21:32.312434"
+}

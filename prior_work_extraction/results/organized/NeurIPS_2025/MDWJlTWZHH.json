@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Self-Attention with Relative Position Representations",
+      "authors": "Peter Shaw; Jakob Uszkoreit; Ashish Vaswani",
+      "year": 2018,
+      "role": "Conceptual foundation for relative positional encoding (RPE) in attention",
+      "relationship_sentence": "The paper\u2019s core idea\u2014injecting pairwise distance information directly into attention\u2014provides the exact template this work adapts to the spiking domain while preserving binary spike constraints."
+    },
+    {
+      "title": "Transformer-XL: Attentive Language Models Beyond a Fixed-Length Context",
+      "authors": "Zihang Dai; Zhilin Yang; Yiming Yang; Jaime Carbonell; Quoc V. Le; Ruslan Salakhutdinov",
+      "year": 2019,
+      "role": "Operational RPE formulation enabling long-context modeling",
+      "relationship_sentence": "Transformer-XL\u2019s content/position decomposition and relative shift trick informed how distance-dependent terms can be structured efficiently\u2014insights the authors translate into spike-friendly RPE components."
+    },
+    {
+      "title": "Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer (T5)",
+      "authors": "Colin Raffel; Noam Shazeer; Adam Roberts; Katherine Lee; Sharan Narang; Michael Matena; Yanqi Zhou; Wei Li; Peter J. Liu",
+      "year": 2020,
+      "role": "Learned relative position bias and distance bucketing",
+      "relationship_sentence": "T5 popularized learnable, bucketed relative biases, motivating the authors\u2019 discretized (bucket/quantized) distance encodings that can be realized with spike trains rather than dense real-valued embeddings."
+    },
+    {
+      "title": "Train Short, Test Long: Attention with Linear Biases (ALiBi)",
+      "authors": "Ofir Press; Noah A. Smith; Mike Lewis",
+      "year": 2021,
+      "role": "Simple distance-based bias for robust length extrapolation",
+      "relationship_sentence": "ALiBi demonstrated that lightweight, monotonic distance biases suffice for strong performance, guiding this work\u2019s design of low-overhead, spike-preserving relative biases compatible with spiking attention."
+    },
+    {
+      "title": "Attention Is All You Need",
+      "authors": "Ashish Vaswani; Noam Shazeer; Niki Parmar; Jakob Uszkoreit; Llion Jones; Aidan N. Gomez; \u0141ukasz Kaiser; Illia Polosukhin",
+      "year": 2017,
+      "role": "Transformer architecture and absolute positional encoding baseline",
+      "relationship_sentence": "The spiking Transformer inherits the self-attention framework and absolute positional encoding baseline from this work, against which relative, spike-friendly encodings are proposed and evaluated."
+    },
+    {
+      "title": "Spikformer: When Spiking Neural Networks Meet Transformers",
+      "authors": "Zhou et al.",
+      "year": 2022,
+      "role": "Establishes spiking self-attention and use of absolute PEs in SNNs",
+      "relationship_sentence": "By showing that absolute positional encodings benefit spiking Transformers, this work set the stage and exposed the gap this paper addresses\u2014bringing relative positional information to SNNs without breaking spiking discreteness."
+    },
+    {
+      "title": "Pulse Code Communication (Gray Code)",
+      "authors": "Frank Gray",
+      "year": 1953,
+      "role": "Coding-theoretic basis for minimal Hamming transitions",
+      "relationship_sentence": "The authors\u2019 proof leverages Gray code\u2019s minimal-bit-flip property to encode relative distances so successive distances alter few spikes, directly enabling RPE in a binary spiking representation."
+    }
+  ],
+  "synthesis_narrative": "This paper bridges two lines of work: relative positional encoding (RPE) in Transformers and the emerging literature on spiking Transformers. Shaw et al. (2018) established the core paradigm of injecting pairwise distance information into attention, while Transformer-XL (2019) operationalized RPE with content/position decompositions and efficient relative shifting, shaping how relative terms can be integrated without prohibitive cost. T5 (2020) further demonstrated that learnable, bucketed relative position biases are practical and effective, suggesting that discretized distance representations suffice\u2014an insight highly compatible with spike-based computation. ALiBi (2021) showed that simple, monotonic distance biases yield strong length extrapolation, encouraging low-overhead formulations that are friendlier to the binary and event-driven nature of SNNs.\nOn the spiking side, Spikformer (2022) validated self-attention within SNNs and found absolute positional encodings beneficial, thereby highlighting the missing piece tackled here: spike-preserving RPE. The present work\u2019s key move is to import the RPE principle into the spiking regime by representing relative distance with Gray code, whose minimal Hamming transition property (Gray, 1953) guarantees that adjacent distances require few bit flips, aligning naturally with the discrete spiking constraint. Grounded in the Transformer framework of Vaswani et al. (2017), the paper synthesizes these ideas into spike-compatible RPE strategies\u2014approximating relative biases and distance encodings without resorting to dense analog signals\u2014thus advancing spiking Transformers toward richer positional inductive biases.",
+  "analysis_timestamp": "2026-01-07T00:21:33.169100"
+}

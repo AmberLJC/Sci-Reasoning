@@ -1,0 +1,57 @@
+{
+  "prior_works": [
+    {
+      "title": "Privately Finding Second-Order Stationary Points",
+      "authors": "Ganesh et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "This work attempted a private SOSP algorithm with a saddle-escape subroutine whose flawed analysis led to weaker guarantees, directly motivating the corrected escape analysis and tighter \u03b1 bound achieved here."
+    },
+    {
+      "title": "SPIDERBoost and Momentum: Faster Variance Reduction Algorithms for Nonconvex Optimization",
+      "authors": "Wang et al.",
+      "year": 2019,
+      "arxiv_id": null,
+      "role": "Extension",
+      "relationship_sentence": "The proposed method explicitly builds on the SpiderBoost framework, modifying its variance-reduced estimator with adaptive batch sizes and privatized updates to enable reliable saddle-escape under DP."
+    },
+    {
+      "title": "SPIDER: Near-Optimal Nonconvex Optimization via Stochastic Path-Integrated Differential Estimator",
+      "authors": "Fang et al.",
+      "year": 2018,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "SPIDER\u2019s path-integrated gradient estimator underlies SpiderBoost and provides the variance-reduction backbone that the new adaptive, private estimator refines."
+    },
+    {
+      "title": "How to Escape Saddle Points Efficiently",
+      "authors": "Jin et al.",
+      "year": 2017,
+      "arxiv_id": "1703.00887",
+      "role": "Foundation",
+      "relationship_sentence": "The perturbed-gradient saddle-escape paradigm and the widely used \u03b1-SOSP notion originate here, forming the conceptual basis for the saddle-point escape procedure adapted in the private setting."
+    },
+    {
+      "title": "Private and Continual Release of Statistics",
+      "authors": "Chan et al.",
+      "year": 2011,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "The binary tree (tree-aggregation) mechanism introduced here is incorporated to release many noisy gradient/statistics with logarithmic privacy cost, enabling the adaptive-batch SpiderBoost updates to remain DP."
+    }
+  ],
+  "synthesis_narrative": "Jin et al. established the perturbed-gradient paradigm for escaping strict saddle points and formalized the \u03b1-second-order stationary point condition, showing that stochastic first-order methods can provably reach local minima by injecting carefully calibrated perturbations. Fang et al. introduced SPIDER, a path-integrated variance-reduced gradient estimator that sharply lowers stochastic noise in nonconvex optimization by periodically refreshing large-batch gradients and using recursive control variates. Building on SPIDER, Wang et al. proposed SpiderBoost, a practical and faster variance-reduction scheme that keeps gradient variance small with a simple estimator structure, making it a natural platform for nonconvex optimization at scale. Chan et al. developed the binary tree mechanism for continual release, enabling many running averages or partial sums to be privately published with only logarithmic privacy cost, a key tool for maintaining differential privacy across long optimization trajectories. Ganesh et al. attempted to combine private gradient-based optimization with a saddle-escape step to privately reach SOSPs, claiming a specific \u03b1 rate; however, a flaw in their escape analysis meant the privacy/noise tradeoff did not actually support the stated guarantee.\n\nTogether, these works highlighted that reliable saddle escape in a private, stochastic regime demands both low-variance gradient estimates and frugal privacy accounting across many updates. The natural synthesis is to retrofit SpiderBoost\u2019s variance-reduction with adaptive batch sizing and tree-aggregated privatization so the estimator remains accurate enough to trigger saddle escape under DP. Correcting the escape analysis while controlling privacy loss through tree aggregation yields a tighter \u03b1 bound, closing the gap exposed by the flawed prior guarantee.",
+  "target_paper": {
+    "title": "Adaptive Batch Size for Privately Finding Second-Order Stationary Points",
+    "authors": "Daogao Liu, Kunal Talwar",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "Differential privacy, non-convex optimization, adaptive batch size",
+    "abstract": "There is a gap between finding a first-order stationary point (FOSP) and a second-order stationary point (SOSP) under differential privacy constraints, and it remains unclear whether privately finding an SOSP is more challenging than finding an FOSP. Specifically, Ganesh et al. (2023) claimed that an $\\alpha$-SOSP can be found with $\\alpha=\\Tilde{O}(\\frac{1}{n^{1/3}}+(\\frac{\\sqrt{d}}{n\\epsilon})^{3/7})$, where $n$ is the dataset size, $d$ is the dimension, and $\\epsilon$ is the differential privacy parameter.\nHowever, a recent analysis revealed an issue in their saddle point escape procedure, leading to weaker guarantees.  \nBuilding on the SpiderBoost algorithm framework, we propose a new approach that uses adaptive batch sizes and incorporates the binary tree mechanism.\nOur method not only corrects this issue but also improves the results for privately finding an SOSP, achieving $\\alpha=\\Tilde{O}(\\frac{1}{n^{1/3}}+(\\frac{\\sqrt{d}}{n\\epsilon})^{1/2})$. \n This improved bound matches the",
+    "openreview_id": "ikkvC1UnnE",
+    "forum_id": "ikkvC1UnnE"
+  },
+  "analysis_timestamp": "2026-01-06T08:18:52.984441"
+}

@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "CodeRL: Mastering Code Generation through Deep Reinforcement Learning",
+      "authors": "Wang et al.",
+      "year": 2022,
+      "role": "Execution-feedback RL baseline for code",
+      "relationship_sentence": "CodeRL established the use of unit-test/execution feedback as rewards to train code generators with RL; \u03bcCODE departs from this multi-step RL framing by showing code generation is effectively one-step recoverable and can be optimized with single-step rewards."
+    },
+    {
+      "title": "LEVER: Learning to Verify and Repair for Code Generation",
+      "authors": "Wang et al.",
+      "year": 2023,
+      "role": "Verifier\u2013generator loop for code",
+      "relationship_sentence": "LEVER co-trains a verifier and a repair model using execution feedback; \u03bcCODE builds directly on this verifier\u2013generator paradigm but formalizes the task as a one-step recoverable MDP and trains using single-step rewards across multi-turn interaction."
+    },
+    {
+      "title": "Self-Refine: Iterative Refinement with Feedback",
+      "authors": "Madaan et al.",
+      "year": 2023,
+      "role": "Iterative self-improvement with feedback",
+      "relationship_sentence": "Self-Refine showed that iteratively soliciting and applying feedback can substantially improve model outputs; \u03bcCODE operationalizes this insight for code by learning a verifier to supply single-step rewards and a generator trained to exploit multi-turn feedback."
+    },
+    {
+      "title": "Reflexion: Language Agents with Verbal Reinforcement Learning",
+      "authors": "Shinn et al.",
+      "year": 2023,
+      "role": "Multi-turn improvement via feedback and self-critique",
+      "relationship_sentence": "Reflexion demonstrated multi-turn problem solving via feedback and self-critique; \u03bcCODE similarly leverages iterative feedback but replaces verbal reward with learned verifier scores and optimizes a single-step objective consistent with one-step recoverability."
+    },
+    {
+      "title": "Competition-Level Code Generation with AlphaCode",
+      "authors": "Yujia Li et al.",
+      "year": 2022,
+      "role": "Execution-based verification at scale",
+      "relationship_sentence": "AlphaCode used execution/unit tests as a verifier to filter large candidate pools; \u03bcCODE internalizes this idea by training a verifier to score candidates and using these single-step rewards to drive multi-turn improvement rather than pure sample-and-filter."
+    },
+    {
+      "title": "Direct Preference Optimization: Your Language Model is Secretly a Reward Model",
+      "authors": "Rafael Rafailov et al.",
+      "year": 2023,
+      "role": "Single-step reward optimization without online RL",
+      "relationship_sentence": "DPO showed that preference/reward learning can replace full RL with a supervised objective; \u03bcCODE echoes this reduction by optimizing code generation with single-step verifier rewards instead of hierarchical or multi-turn RL."
+    }
+  ],
+  "synthesis_narrative": "\u03bcCODE\u2019s key move is to cast multi-turn code generation as a one-step recoverable MDP, enabling learning from single-step rewards while still exploiting iterative execution feedback. This synthesis emerges from two converging lines of prior work. First, execution-driven code generation (CodeRL; AlphaCode) established that unit tests and runtime signals are powerful supervision, typically used either as multi-step RL rewards or sample-and-filter verifiers. Second, iterative self-improvement paradigms (Self-Refine; Reflexion) showed that models can repeatedly apply feedback to correct earlier outputs, but largely relied on prompting or verbal critique rather than a trained reward model.\n\nLEVER bridges these threads by jointly training a verifier and a repair/generator, demonstrating that a learned verifier can effectively guide code edits using execution feedback. \u03bcCODE directly extends this verifier\u2013generator loop but introduces a principled simplification: because the model can rewrite the entire program each turn, the task is one-step recoverable. This reframing justifies replacing complex hierarchical or multi-step RL with single-step rewards from a verifier, training the generator to condition on multi-turn feedback without credit assignment across long horizons. Finally, ideas from Direct Preference Optimization inform \u03bcCODE\u2019s learning signal: treating verifier scores as single-step rewards enables a stable, supervised-style optimization that scales. Together, these works motivate \u03bcCODE\u2019s design choices\u2014execution-informed verifier, iterative generation, and a single-step objective\u2014yielding a simple, scalable alternative to multi-turn RL for code.",
+  "analysis_timestamp": "2026-01-07T00:21:32.363531"
+}

@@ -1,0 +1,2419 @@
+[
+  {
+    "patterns": [
+      {
+        "name": "Cross\u2011Domain Synthesis",
+        "description": "Deliberately combine concepts, tools, or formalisms from two or more research domains to unlock new capabilities that neither domain provides alone. This often yields hybrid architectures or algorithms that address practical gaps by leveraging complementary strengths.",
+        "key_indicators": [
+          "combine",
+          "build on X and Y",
+          "bridge",
+          "draw connections from",
+          "classical+quantum / Bayesian+RL / SDE+RKHS"
+        ],
+        "cognitive_move": "Map and fuse methods across disciplinary boundaries to produce a new composite solution.",
+        "example_summary": "ALINE (Paper 1) fuses amortized Bayesian inference, active data acquisition, reinforcement learning and transformers to enable real\u2011time updating; QDSFormer (Paper 9) combines quantum circuits with transformers to produce doubly stochastic attention matrices."
+      },
+      {
+        "name": "Gap\u2011Driven Reframing",
+        "description": "Start from a concrete limitation or unmet requirement, then reframe the problem in a way that makes previously unsuitable methods applicable. Reframing transforms the objective or the variables of interest to open new solution paths.",
+        "key_indicators": [
+          "limitation",
+          "gap",
+          "lack of",
+          "reframed as",
+          "instead of X, we treat Y as"
+        ],
+        "cognitive_move": "Turn an observed weakness into a redefinition of the task that suggests alternative tools or architectures.",
+        "example_summary": "Authors reframed autoregressive image modeling from next\u2011token prediction to next\u2011scale (coarse\u2192fine) prediction to improve image generation (Paper 22); schedule\u2011free methods were reframed to address nonconvex optimization (Paper 4)."
+      },
+      {
+        "name": "Analogy\u2011Driven Insight",
+        "description": "Use an explicit analogy to a known technique, problem, or empirical trick to hypothesize a transferable mechanism. The analogy suggests a concrete transformation or compensation that can be tested and operationalized.",
+        "key_indicators": [
+          "inspired by",
+          "analogy",
+          "by analogy with",
+          "draw from X's approach",
+          "training\u2011free compensation"
+        ],
+        "cognitive_move": "Project properties or fixes from a familiar context onto the target problem to guide design choices.",
+        "example_summary": "RestoreLCC (Paper 2) used an analogy to training\u2011free compensation strategies (EORA) to justify restoring lost attention activations after pruning."
+      },
+      {
+        "name": "Dataset/Benchmark Construction",
+        "description": "Create new datasets, simulations, or benchmarks targeted at a precise conceptual gap so that the phenomena of interest can be measured, diagnosed, and optimized. Often this is the enabler for progress when metrics or data are lacking.",
+        "key_indicators": [
+          "we construct/introduce",
+          "dataset",
+          "benchmark",
+          "toolkit",
+          "essential for research"
+        ],
+        "cognitive_move": "Engineer a controlled measurement environment that isolates the phenomena you want to study or improve.",
+        "example_summary": "Who&When (Paper 3) and BirdSet (Paper 34) were built to enable automated failure attribution in multi\u2011agent systems and fine\u2011grained bird audio classification respectively."
+      },
+      {
+        "name": "Replace Synthetic Heuristics with Realistic Generators",
+        "description": "Swap brittle, hand\u2011crafted or unrealistic synthetic perturbations for generative, contextually plausible alternatives (often via large generative models), improving ecological validity of tests and robustness of inference.",
+        "key_indicators": [
+          "realistic counterfactuals",
+          "LLM\u2011generated edits",
+          "replace templates with",
+          "contextual instantiation",
+          "two\u2011stage LLM instantiation"
+        ],
+        "cognitive_move": "Increase the realism of controlled interventions by using learned generation to produce plausible variants for probing models.",
+        "example_summary": "Paper 6 uses an auxiliary LLM to generate realistic concept\u2011value swaps for probing explanation faithfulness; Paper 19 uses LLM instantiation to turn formal logic trees into natural scenarios."
+      },
+      {
+        "name": "Theoretical Generalization",
+        "description": "Take empirically observed phenomena or methods and extend/ground them within a broader theoretical framework to explain, bound, or guarantee behavior across settings. This often requires importing formal tools or novel definitions.",
+        "key_indicators": [
+          "extend to nonconvex",
+          "characterize",
+          "exists iff",
+          "bound / optimal",
+          "formalize"
+        ],
+        "cognitive_move": "Abstract empirical observations into formal statements and prove properties that generalize across cases.",
+        "example_summary": "The schedule\u2011free SGD work (Paper 4) extended theoretical optimality guarantees to nonconvex settings; Paper 18 links randomness complexity to Littlestone dimension for stable PAC learning."
+      },
+      {
+        "name": "Unify Separable Ideas",
+        "description": "Bring together two or more conceptually separate strands (e.g., algorithms, feedback types, desiderata) into a single framework that clarifies trade\u2011offs and enables joint optimization or analysis.",
+        "key_indicators": [
+          "bridge",
+          "unify",
+          "cast both X and Y",
+          "decouple effects",
+          "single framework"
+        ],
+        "cognitive_move": "Synthesize disparate theoretical or practical approaches to reveal their shared structure and create joint solutions.",
+        "example_summary": "Paper 14 unified positive and negative feedback within an EM+PU style optimization to handle paired/unpaired preference data; Paper 18 unified replicability and differential privacy analyses."
+      },
+      {
+        "name": "Exploit Data or Problem Structure",
+        "description": "Recognize and leverage domain\u2011specific structure (temporal paths, tree costs, graph topology, signatures) to design tests, representations, or algorithms that are more powerful or efficient than black\u2011box approaches.",
+        "key_indicators": [
+          "exploit path structure",
+          "tree\u2011structured cost",
+          "signature",
+          "edge weights / pairwise alignment",
+          "ancestral graphs"
+        ],
+        "cognitive_move": "Identify intrinsic structure and instantiate representations or tests that make that structure explicit and tractable.",
+        "example_summary": "Paper 23 uses path signatures and signature kernels to create CI tests for SDE trajectories; Paper 16 uses pairwise edge alignment to address graph domain adaptation."
+      },
+      {
+        "name": "Modular Pipeline Innovation",
+        "description": "Architect a multi\u2011component pipeline where each module addresses a specific subproblem (retrieval, interpolation, denoising, alignment) and combine them to solve a complex end\u2011to\u2011end task robustly.",
+        "key_indicators": [
+          "dual model",
+          "two\u2011stage",
+          "pipeline",
+          "component X + component Y",
+          "stitching workflow"
+        ],
+        "cognitive_move": "Decompose a complex system into modules whose specialized improvements produce compounding gains when integrated.",
+        "example_summary": "TANGO (Paper 27) combines audio\u2194motion retrieval (AuMoCLIP) with diffusion\u2011based interpolation (ACInterp) to improve gesture reenactment; SGCD (Paper 24) uses dual diffusion guided by stain consistency for UDA."
+      },
+      {
+        "name": "Principled Search\u2011Space Redesign",
+        "description": "Redefine the architecture/search space around theory\u2011backed primitives (e.g., linear state\u2011space models) rather than ad hoc choices, then use automated search to discover novel, deployment\u2011aware designs.",
+        "key_indicators": [
+          "search space",
+          "principled primitives",
+          "SSM/HiPPO lineage",
+          "genome encoding",
+          "population\u2011based evolution"
+        ],
+        "cognitive_move": "Replace unconstrained search with a numerically conditioned, interpretable space that yields robust, generalizable discoveries.",
+        "example_summary": "STAR (Paper 20) encodes linear input\u2011varying state\u2011space primitives into a hierarchical genome and uses evolutionary search to produce efficient sequence models beyond transformers."
+      },
+      {
+        "name": "Adversary Modeling / Reverse Engineering",
+        "description": "Instead of only defending against adversarial phenomena, model and reconstruct attacker strategies (often via inverse optimization or inverse RL) to generate realistic adversaries for robust training and analysis.",
+        "key_indicators": [
+          "inverse reinforcement learning",
+          "reconstruct attack policies",
+          "model attacker",
+          "generate adversarial samples",
+          "understand attackers' behaviors"
+        ],
+        "cognitive_move": "Turn defense into a generative modeling problem by inferring the adversary's policy to produce stronger training signals.",
+        "example_summary": "Paper 15 uses maximum\u2011entropy inverse RL to recover multi\u2011attacker policies and synthesize adversarial samples that improve GNN robustness."
+      },
+      {
+        "name": "Audit & Baseline Recalibration",
+        "description": "Construct rigorous auditing tests or invert typical evaluation pipelines (e.g., \u2018unprocessing\u2019) to reveal hidden issues, measure contamination or bias, and recalibrate baselines to reflect realistic operational settings.",
+        "key_indicators": [
+          "audit",
+          "test set contamination",
+          "unprocessing",
+          "meta\u2011analysis",
+          "postprocessing baseline"
+        ],
+        "cognitive_move": "Expose and quantify hidden failures by devising diagnostic protocols and by comparing against carefully constructed control baselines.",
+        "example_summary": "Paper 11 developed statistical auditing for test set contamination in language models; Paper 7\u2019s exhaustive meta\u2011analysis showed postprocessing often outperforms other fairness interventions."
+      },
+      {
+        "name": "Objective Space Abstraction",
+        "description": "Shift from standard reward or loss formulations to alternative objective spaces (e.g., visitation frequencies, likelihood of preferences) that better capture the task's true desiderata or make optimization tractable.",
+        "key_indicators": [
+          "recast as",
+          "visitation frequencies",
+          "preference likelihood",
+          "EM framing",
+          "general utility"
+        ],
+        "cognitive_move": "Abstract the optimization target into a representation that simplifies constraints or reveals new solution strategies.",
+        "example_summary": "GUMDPs (Paper 17) redefine objectives in terms of visitation frequencies; Paper 14 recasts preference learning as an EM\u2011style likelihood that accommodates unpaired feedback."
+      },
+      {
+        "name": "Multiscale / Hierarchical Modeling",
+        "description": "Design models or procedures that operate across multiple scales or hierarchical resolutions to better reflect natural generation/perception processes and improve efficiency and generalization.",
+        "key_indicators": [
+          "coarse\u2011to\u2011fine",
+          "hierarchical",
+          "multi\u2011scale",
+          "next\u2011scale",
+          "progressive prediction"
+        ],
+        "cognitive_move": "Exploit hierarchical inductive biases to decompose complexity and prioritize global structure before local detail.",
+        "example_summary": "VAR (Paper 22) predicts images across resolutions (next\u2011scale) rather than token order; HI\u2011Diff (Paper 29) integrates hierarchical multi\u2011scale detail fusion for deblurring."
+      },
+      {
+        "name": "Principled Probabilistic Replacement",
+        "description": "Replace heuristic or deterministic components with probabilistic or Bayesian approaches to quantify uncertainty, pool information, and produce principled inference with uncertainty estimates.",
+        "key_indicators": [
+          "Bayesian hierarchical",
+          "estimate causal effects",
+          "amortized inference",
+          "uncertainty",
+          "multilevel modeling"
+        ],
+        "cognitive_move": "Introduce probabilistic modeling to make implicit assumptions explicit and to aggregate evidence with calibrated uncertainty.",
+        "example_summary": "Paper 6 frames explanation faithfulness as causal set\u2011difference and uses Bayesian hierarchical modeling to estimate concept influences with uncertainty; ALINE (Paper 1) uses amortized Bayesian inference for fast updating."
+      },
+      {
+        "name": "Import Computational Primitives",
+        "description": "Leverage computationally powerful primitives (quantum circuits, tensor decompositions, signature kernels, tensor trains) from another subfield to overcome performance or scalability bottlenecks.",
+        "key_indicators": [
+          "quantum circuits",
+          "tensor train",
+          "signature kernel",
+          "state\u2011space models",
+          "compute efficient"
+        ],
+        "cognitive_move": "Adopt established algorithmic primitives that change asymptotic or constant performance characteristics in the new context.",
+        "example_summary": "QDSFormer (Paper 9) uses quantum circuits to generate doubly stochastic matrices; TTPI (Paper 28) uses Tensor Train decomposition to handle high\u2011dimensional control."
+      }
+    ],
+    "meta_observations": "Across these top\u2011tier ML narratives researchers repeatedly (1) begin with a concrete empirical or operational gap and then reframe the problem to admit new tools; (2) synthesize across domains\u2014borrowing primitives, formalisms, and evaluation strategies\u2014to create hybrids that outperform single\u2011domain methods; (3) alternate between building enabling artifacts (datasets, audits, kernels) and proving theoretical guarantees, recognizing that both are necessary to move a field; (4) prefer principled over ad\u2011hoc fixes (probabilistic models, structured search spaces, inverse modeling), and (5) decompose complex tasks into modular, hierarchical pipelines so improvements compound. These are learnable intellectual moves: look for structure, invent or curate data to make phenomena measurable, map analogies carefully, abstract for formal guarantees, and design modular systems that compose reliably."
+  },
+  {
+    "patterns": [
+      {
+        "name": "Reframe the Problem",
+        "description": "Replace the original framing with an alternative formalism that makes new tools applicable (e.g., game theory, latent-variable models, multi-objective vectors). This often exposes structure or constraints that were previously hidden and enables leveraging different bodies of results.",
+        "key_indicators": [
+          "frame as a game",
+          "reframe",
+          "latent-variable",
+          "lexicographic",
+          "view X as Y"
+        ],
+        "cognitive_move": "Map the problem into a different conceptual or mathematical setting to unlock new methods and theorems.",
+        "example_summary": "Paper 2 reframes preference alignment as a two\u2011player game (game theory + online mirror descent); Paper 6 reframes rewards as lexicographic vectors for MDPs."
+      },
+      {
+        "name": "Replace Hand-crafted with Learned",
+        "description": "Identify fixed, engineered components (rules, selections, priors) and replace them with overparameterized, differentiable, or learned modules to increase flexibility and adaptivity. The shift emphasizes inductive capacity over prior design assumptions.",
+        "key_indicators": [
+          "hand-crafted",
+          "fixed orbitals",
+          "replace with neural",
+          "learnable",
+          "differentiable"
+        ],
+        "cognitive_move": "Substitute hard-coded structure with parameterized, trainable functions so the model can discover optimal solutions from data.",
+        "example_summary": "Paper 1 replaces hand-crafted orbital constraints with a neural Pfaffian that enforces antisymmetry learnably."
+      },
+      {
+        "name": "Mathematical Generalization",
+        "description": "Generalize an existing mathematical object to a broader class that removes limiting assumptions (e.g., Slater \u2192 Pfaffian, discrete \u2192 weak optimal transport). This provides a principled way to cover previously excluded cases.",
+        "key_indicators": [
+          "generalize",
+          "lifts limitation",
+          "extend to continuous",
+          "Pfaffian",
+          "weak OT"
+        ],
+        "cognitive_move": "Abstract the core mathematical structure, then replace a restrictive instance with a richer, more general construct to broaden applicability.",
+        "example_summary": "Paper 1 generalizes Slater determinants to Pfaffians to naturally enforce antisymmetry across spins and orbitals; Paper 18 extends barycenters to weak optimal transport for continuous distributions."
+      },
+      {
+        "name": "Cross-domain Transfer",
+        "description": "Borrow concepts, tools, or proof techniques from a different field (control theory, optimal transport, automata, adversarial ML) and adapt them to the ML problem at hand. This transfers mature machinery into new contexts.",
+        "key_indicators": [
+          "borrow from",
+          "apply X techniques",
+          "Lyapunov",
+          "automata",
+          "optimal transport"
+        ],
+        "cognitive_move": "Identify isomorphisms or analogous structures between domains and import solution strategies or theoretical tools.",
+        "example_summary": "Paper 35 uses Lyapunov optimization ideas in online convex optimization with constraints; Paper 32 applies weighted transducers/automata to map token-level LMs to character-level probabilities."
+      },
+      {
+        "name": "Compose Complementary Methods",
+        "description": "Combine multiple methods each solving different subproblems so their strengths offset each other's weaknesses (e.g., splatting + tetrahedral SDF + NeRF loss). Composition prioritizes modularity and complementarity.",
+        "key_indicators": [
+          "combine",
+          "integrate",
+          "best of both",
+          "assume-guarantee",
+          "compositional"
+        ],
+        "cognitive_move": "Decompose the problem and assemble a pipeline where each component handles a distinct difficulty, enabling scalability or quality improvements.",
+        "example_summary": "Paper 10 composes tetrahedral deformation, NeRF-style loss, and splatting primitives to get both photometric accuracy and manifold meshes; Paper 4 uses assume-guarantee compositional verification."
+      },
+      {
+        "name": "From Observation to Theory",
+        "description": "Start with empirical phenomena or engineering success and seek a rigorous theoretical explanation; conversely, derive practical algorithms from theoretical gaps. The pattern closes the loop between practice and theory.",
+        "key_indicators": [
+          "empirical success but unexplained",
+          "theoretical gap",
+          "rigorous analysis",
+          "validate empirical",
+          "explain dynamics"
+        ],
+        "cognitive_move": "Take observed behavior as a hypothesis and develop formal models and proofs that explain or predict it, then test implications empirically.",
+        "example_summary": "Paper 3 formalizes why local Bayesian optimization works by deriving convergence results; Paper 8 uses DMFT and timescale analysis to explain training dynamics seen empirically in two\u2011layer networks."
+      },
+      {
+        "name": "Timescale Separation",
+        "description": "Model learning dynamics as processes operating on different timescales (fast error decay vs slow feature evolution) to simplify analysis and generate mechanistic insights. This often yields tractable reduced dynamics for each scale.",
+        "key_indicators": [
+          "separation of timescales",
+          "fast/slow manifold",
+          "singular perturbation",
+          "slow manifold"
+        ],
+        "cognitive_move": "Exploit scale disparities to decouple dynamics, analyze each regime separately, and then stitch conclusions together.",
+        "example_summary": "Paper 8 shows rapid error reduction occurs on a fast timescale while feature learning and complexity change on a slow timescale, explaining nonmonotone generalization."
+      },
+      {
+        "name": "Sampling-time Control",
+        "description": "Shift interventions from training-time (fine-tuning) to sampling-time (guidance, conditioning) to achieve controllable behavior while avoiding costly re-training. This reframes control as a runtime steering problem.",
+        "key_indicators": [
+          "guidance",
+          "sampling-time",
+          "no weight updates",
+          "control at generation",
+          "Mode Guidance"
+        ],
+        "cognitive_move": "Design mechanisms that modulate outputs during generation rather than altering model parameters, leveraging pre-trained generator capacity.",
+        "example_summary": "Paper 5 reconceptualizes dataset distillation as sampling-control using Mode Guidance and Stop Guidance with pre-trained latent diffusion models, avoiding costly fine\u2011tuning."
+      },
+      {
+        "name": "Mode Discovery and Conditioning",
+        "description": "Explicitly identify distinct data modes and condition the model or sampler to cover them, ensuring intra-class diversity and mode coverage. This addresses mode collapse or missing modes.",
+        "key_indicators": [
+          "mode discovery",
+          "intra-class coverage",
+          "mode guidance",
+          "push into modes"
+        ],
+        "cognitive_move": "Detect clusters or modes in data space, then craft targeted interventions (conditioning or guidance) to sample each mode reliably.",
+        "example_summary": "Paper 5 adds an explicit Mode Discovery step and Mode Guidance to latent diffusion sampling to ensure condensed datasets cover diverse intra-class modes."
+      },
+      {
+        "name": "Adversarial Repurposing",
+        "description": "Take tools originally used to attack models (adversarial examples, PGD) and repurpose them constructively (e.g., for unlearning or targeted boundary modification).",
+        "key_indicators": [
+          "adversarial examples used for",
+          "PGD",
+          "repurpose",
+          "constructive use",
+          "localized boundary movement"
+        ],
+        "cognitive_move": "Invert the original threat model: convert minimal adversarial perturbations into precise interventions that change model behavior in controlled ways.",
+        "example_summary": "Paper 24 reframes adversarial examples as instruments for unlearning: fine-tuning on adversarial points near forget samples moves decision boundaries like retraining."
+      },
+      {
+        "name": "Targeted Behavioral Testing",
+        "description": "Adopt fine-grained, controlled tests (invariants, minimal edits) to evaluate models beyond aggregate metrics; this reveals brittle failure modes and better predicts downstream behavior.",
+        "key_indicators": [
+          "behavioral testing",
+          "minimal edits",
+          "CheckList",
+          "sensitivity",
+          "targeted tests"
+        ],
+        "cognitive_move": "Design microbenchmarks and perturbation checks that probe specific capabilities and failure modes rather than relying solely on coarse accuracy measures.",
+        "example_summary": "Paper 33 adapts CheckList-style behavioral tests to evaluate reward models (RM-BENCH), revealing issues hidden by aggregate accuracy metrics."
+      },
+      {
+        "name": "Approximate Marginalization",
+        "description": "When exact inference or marginalization is intractable, design controlled approximations (beam search, sampling, variational surrogates) that preserve the target semantics while remaining practical.",
+        "key_indicators": [
+          "approximate marginalization",
+          "beam",
+          "sampling",
+          "tractable approximation"
+        ],
+        "cognitive_move": "Replace intractable exact computations with principled approximations that balance fidelity and computational cost.",
+        "example_summary": "Paper 32 composes a tokenizer transducer with a token-level model to compute exact character probabilities and provides beam/sampling approximations to make it practical on large LMs."
+      },
+      {
+        "name": "Leverage Pretrained Backbones",
+        "description": "Build on strong pre-trained models but change the interaction pattern (e.g., refined pseudolabels, guidance, adapters) rather than training from scratch, enabling efficient adaptation.",
+        "key_indicators": [
+          "pre-trained",
+          "adapter",
+          "pseudolabel",
+          "refinement",
+          "no re-training"
+        ],
+        "cognitive_move": "Exploit existing large models' representational power and add lightweight mechanisms to adapt them to new tasks or constraints.",
+        "example_summary": "Paper 22 introduces Candidate Pseudolabel Learning to refine labels and adapt vision-language models without heavy re-training; Paper 5 uses pre-trained latent diffusion models with sampling guidance."
+      },
+      {
+        "name": "Structural Modification for Optimization",
+        "description": "Introduce small architectural or structural changes (e.g., skip connections, decays) that improve optimization dynamics (prevent vanishing gradients, maintain flow) enabling new end-to-end training regimes.",
+        "key_indicators": [
+          "linearly decaying skip",
+          "sustain gradient flow",
+          "structural modification",
+          "end-to-end through LDM"
+        ],
+        "cognitive_move": "Identify optimization pathology and engineer minimal structural changes that restore gradient signal or improve conditioning.",
+        "example_summary": "Paper 15 adds a linearly decaying skip connection to latent diffusion models (LD3M) to preserve gradients and enable end-to-end dataset distillation."
+      },
+      {
+        "name": "Feature-space Reorientation",
+        "description": "Shift focus from loss functions or model outputs to the underlying feature representations and their geometry (orthogonal decompositions, intra-class incoherence) to improve downstream tasks.",
+        "key_indicators": [
+          "feature representation",
+          "orthogonal decomposition",
+          "intra-class incoherence",
+          "distinguishability"
+        ],
+        "cognitive_move": "Re-express problems in terms of representations and manipulate the feature space directly to obtain robustness or discriminability gains.",
+        "example_summary": "Paper 20 uses orthogonal decomposition and intra-class incoherence constraints to improve face recognition by modifying feature geometry rather than losses alone."
+      },
+      {
+        "name": "Optimization Reparametrization",
+        "description": "Recast update rules or parameterizations (e.g., low-rank gradient framing, gradient-manipulating adapters) to capture the essence of full optimization while remaining efficient and parameter-efficient.",
+        "key_indicators": [
+          "low-rank gradients",
+          "reframe gradients",
+          "LoRA",
+          "optimize gradients of low-rank matrices"
+        ],
+        "cognitive_move": "Identify algebraic equivalences or approximations that let cheap updates emulate richer optimization processes.",
+        "example_summary": "Paper 11 reframes LoRA performance by analyzing low-rank gradients and develops LoRA-Pro to optimize gradients of low-rank matrices, narrowing the gap with full fine-tuning."
+      },
+      {
+        "name": "Mechanistic Decomposition",
+        "description": "Decompose an opaque algorithm into interpretable mechanistic components (mean-shift, contrastive PCs, spectral laws) to explain why it works and guide improvements.",
+        "key_indicators": [
+          "decompose into",
+          "mean-shift",
+          "contrastive principal components",
+          "spectral law"
+        ],
+        "cognitive_move": "Break down complex behavior into simpler, analyzable effects and attribute empirical gains to specific mechanisms.",
+        "example_summary": "Paper 23 analyzes classifier-free guidance (CFG) by decomposing its effect into mean-shifts and Contrastive Principal Components, clarifying how CFG improves conditional sampling."
+      },
+      {
+        "name": "Constructive Lower-bound Hardening",
+        "description": "Design adversarial or hard-instance constructions (smoothing, truncation, calibrated scales) to prove tight lower bounds and clarify when existing algorithms are optimal.",
+        "key_indicators": [
+          "hard-instance",
+          "smoothing-based construction",
+          "matching lower bound",
+          "calibrate constructions"
+        ],
+        "cognitive_move": "Craft worst-case examples with controlled structure to establish impossibility/optimality results and guide algorithmic focus.",
+        "example_summary": "Paper 31 adapts smoothing-based hard-instance constructions and \u2113\u221e truncation to derive unified lower bounds for asymmetric high-order optimization regimes."
+      },
+      {
+        "name": "Plug-and-play Modularity",
+        "description": "Design modular, interoperable components (knowledge cards, retrieval modules, federated conjugate updates) that can be composed dynamically at inference or across clients for flexibility and updatability.",
+        "key_indicators": [
+          "plug-and-play",
+          "module",
+          "dynamically synthesize",
+          "server\u2013client",
+          "posterior server"
+        ],
+        "cognitive_move": "Favor decoupled components with clear interfaces so parts can be updated, replaced, or combined without retraining entire systems.",
+        "example_summary": "Paper 26's KNOWLEDGE CARD dynamically synthesizes knowledge from specialized models at inference-time; Paper 30 designs FEDGVI with conjugate client updates and a posterior server for modular federated updates."
+      },
+      {
+        "name": "Evaluation Reorientation",
+        "description": "Challenge standard evaluation metrics and propose new diagnostics or benchmarks that better predict downstream performance (e.g., beyond accuracy for reward models, CVE realistic benchmarks).",
+        "key_indicators": [
+          "beyond accuracy",
+          "new benchmark",
+          "realistic evaluation",
+          "predict downstream performance"
+        ],
+        "cognitive_move": "Critically examine what current metrics miss and construct evaluations that align more tightly with the true goals or failure modes.",
+        "example_summary": "Paper 12 argues RM accuracy poorly predicts policy performance and proposes richer evaluations; Paper 16 builds CVE-Bench to evaluate LLM agents on realistic vulnerability exploitation."
+      },
+      {
+        "name": "Spectral/Variance-based Insight",
+        "description": "Use spectral analysis or variance decomposition to explain learning dynamics (e.g., why certain features are learned faster) and to diagnose architectural biases.",
+        "key_indicators": [
+          "spectral law",
+          "inverse-variance",
+          "high-variance features",
+          "spectral bias"
+        ],
+        "cognitive_move": "Analyze the model's interaction with data spectrum to predict learning order, convergence speed, or which features will dominate.",
+        "example_summary": "Paper 13 derives an inverse-variance spectral law for diffusion models showing high-variance features are learned faster than low-variance details."
+      },
+      {
+        "name": "Efficient Approximation Engineering",
+        "description": "Take theoretically appealing but impractical algorithms and engineer approximations (conjugate updates, stochastic natural gradients, efficient client updates) to make them scalable in real systems.",
+        "key_indicators": [
+          "make practical",
+          "efficient updates",
+          "stochastic natural-gradient",
+          "conjugate client updates"
+        ],
+        "cognitive_move": "Identify the computational bottlenecks and replace expensive steps with principled, lower-cost approximations that preserve theoretical properties.",
+        "example_summary": "Paper 30 brings robust divergences into federated variational inference by designing conjugate/efficient client updates and stochastic natural-gradient protocols to keep the method scalable."
+      }
+    ],
+    "meta_observations": "Across these synthesis narratives, researchers repeatedly do three things: (1) reframe problems to map them onto richer, better-understood formalisms (games, latent models, transport, control), (2) compose and hybridize existing methods\u2014pairing strong pre-trained backbones or proven mathematical tools with lightweight, targeted interventions (guidance, adapters, modular servers), and (3) close the loop between theory and practice by explaining empirical phenomena with mechanistic or worst-case analyses and then engineering practical approximations. Common moves are abstraction/generalization, cross-domain borrowing, replacing brittle hand-engineering with learnable components, and shifting interventions from expensive retraining to inference-time control. These patterns are actionable: they suggest concrete research tactics (reframe, generalize, compose, analyze dynamics, design diagnostics, and engineer approximations) that can systematically produce novel and impactful ML contributions."
+  },
+  {
+    "patterns": [
+      {
+        "name": "Problem Reframing",
+        "description": "Take an existing problem specification or failure mode and restate it so different solutions become natural or possible. This often replaces an implicit assumption (e.g., \"hard labels\") with an alternative view (e.g., \"soft assignments\" or \"constraints\") that reveals new modeling opportunities.",
+        "key_indicators": [
+          "reframe",
+          "instead of X, consider Y",
+          "not merely",
+          "reconceptualize",
+          "view as",
+          "replace assumption"
+        ],
+        "cognitive_move": "Shift the lens used to describe the problem to expose different variables, constraints, or objectives that open new solution paths.",
+        "example_summary": "SoftCLT reframes contrastive learning for time series from hard positive/negative assignments to soft assignments that reflect temporal correlations (Paper 1)."
+      },
+      {
+        "name": "Exploit Mismatch Between Theory and Practice",
+        "description": "Identify gaps where theoretical results, lab assumptions, or simplified interfaces diverge from deployed constraints and turn that mismatch into a design lever. The move uses the practical constraint as a design objective rather than an obstacle.",
+        "key_indicators": [
+          "mismatch",
+          "practical deployments",
+          "ignored interface",
+          "not suitable for",
+          "reality shows",
+          "redirected effort"
+        ],
+        "cognitive_move": "Treat the divergence between academic assumptions and real-world interfaces as a source of structure and constraints to exploit rather than as merely a limitation.",
+        "example_summary": "Auction work recognizes that value-label ML methods ignore the demand-query interface in deployed CCAs and reframes the learning problem to jointly incorporate demand and value signals (Paper 2)."
+      },
+      {
+        "name": "Cross\u2011Domain Import",
+        "description": "Deliberately borrow concepts, theorems, or algorithms from another field (math, optimization, control theory, neuroscience) and adapt them to the current domain. The import is targeted: a specific idea (fixed-point iteration, Banach contraction, subspace unmixing) replaces a costly or brittle step.",
+        "key_indicators": [
+          "drawn from",
+          "inspired by",
+          "import",
+          "Banach fixed-point",
+          "proximal",
+          "unmixing/subspace embedding"
+        ],
+        "cognitive_move": "Map a problem subcomponent to an analogous object in another discipline and transplant a known, well-understood technique to solve or approximate it.",
+        "example_summary": "Gradient-free GRF uses Banach fixed-point and iterative contraction ideas to avoid costly Jacobian computations in tree splitting (Paper 4)."
+      },
+      {
+        "name": "Inject Domain Inductive Bias",
+        "description": "Introduce principled, domain-specific constraints (sparsity, locality, Markov structure, topography) to restrict the hypothesis space and turn otherwise ill-posed or unidentifiable problems into solvable ones.",
+        "key_indicators": [
+          "inductive bias",
+          "sparsity",
+          "locality",
+          "domain-motivated",
+          "penalize",
+          "regularizer"
+        ],
+        "cognitive_move": "Reduce ambiguity by encoding plausible structure about the domain into the model or loss, making inference or identifiability tractable.",
+        "example_summary": "IDOL enforces sparsity on both time-delayed and instantaneous influences to recover causal graphs from temporal data with contemporaneous interactions (Paper 16)."
+      },
+      {
+        "name": "Leverage Auxiliary/Contextual Signals",
+        "description": "Exploit side information (time, context, unlabeled examples, demand responses, pre-generated video states) as an auxiliary learning signal to enable identifiability, reduce label needs, or define tasks.",
+        "key_indicators": [
+          "auxiliary",
+          "contextual information",
+          "time-contrast",
+          "unlabeled data",
+          "self-supervised",
+          "visual goals"
+        ],
+        "cognitive_move": "Treat auxiliary signals as natural supervision or constraints that provide extra degrees of freedom for learning representations or structure.",
+        "example_summary": "Temporal structure is used as auxiliary information in identifiable VAEs to make nonlinear latent variables recoverable (Paper 16); TransCLIP uses transductive (unlabeled) data to improve few-shot performance (Paper 12)."
+      },
+      {
+        "name": "Hybridize Objectives or Modalities",
+        "description": "Combine objectives, losses, or modalities that were previously separated (e.g., next-token prediction + diffusion denoising, generative + discriminative) to get complementary strengths and avoid prior trade-offs.",
+        "key_indicators": [
+          "fuse",
+          "combine strengths",
+          "hybrid objective",
+          "multi-task",
+          "integrate",
+          "both X and Y"
+        ],
+        "cognitive_move": "Construct a single training objective or architecture that enforces multiple inductive pressures so the model acquires capabilities from each component.",
+        "example_summary": "Transfusion trains one transformer on both causal next-token and diffusion denoising objectives to unify language and image generation (Paper 15)."
+      },
+      {
+        "name": "Align Training with Evaluation Metric",
+        "description": "Discover that the usual training objective does not match the evaluation metric (e.g., pass@k), then derive unbiased/low-variance training objectives or estimators that directly optimize the true metric of interest.",
+        "key_indicators": [
+          "metric mismatch",
+          "optimize X directly",
+          "pass@k",
+          "multi-sample objective",
+          "IWAE",
+          "variance reduction"
+        ],
+        "cognitive_move": "Translate the target evaluation statistic into an expectation or objective amenable to gradient estimation and adapt training accordingly.",
+        "example_summary": "PKPO reframes pass@k as a batch-level expectation and derives low-variance, unbiased gradient estimators that directly optimize set-level success (Paper 19)."
+      },
+      {
+        "name": "Approximate to Scale (Practical Simplification)",
+        "description": "Replace exact, expensive computations (Hessians, Jacobians, full posterior solves) with controlled approximations (fixed-point iteration, SGD with early stopping, Hessian-free variants) that preserve essential properties while enabling large-scale use.",
+        "key_indicators": [
+          "avoid Hessian",
+          "Hessian-free",
+          "approximate",
+          "do not require full convergence",
+          "gradient-free",
+          "runtime improvement"
+        ],
+        "cognitive_move": "Trade some exactness for algorithmic simplicity and scalability, while either proving or empirically showing theoretical properties remain acceptable.",
+        "example_summary": "SGP/GP work shows SGD can produce accurate predictive distributions without fully solving GP equations, enabling large-scale posterior approximations (Paper 14)."
+      },
+      {
+        "name": "Exploit Pretrained Priors and Models",
+        "description": "Reuse large pre-trained models or their learned structures (teacher models, diffusion priors, pretrained video models) as scaffolding\u2014either as data generators, similarity graphs, or conditioning priors\u2014rather than training from scratch.",
+        "key_indicators": [
+          "pretrained",
+          "teacher model",
+          "reuse diffusion priors",
+          "leverage large models",
+          "off-the-shelf"
+        ],
+        "cognitive_move": "Treat pre-trained systems as rich, structured priors and convert their implicit knowledge into explicit constraints, training signals, or retrieval targets.",
+        "example_summary": "B3 uses a teacher to build a sparse similarity graph to mine hard negatives so smaller batches can be effective (Paper 18); MSI method repurposes RGB diffusion priors to reconstruct multispectral images (Paper 34)."
+      },
+      {
+        "name": "Unify Via Abstract Mechanism",
+        "description": "Look across divergent methods that achieve similar empirical results and abstract a unifying latent mechanism (e.g., representation scattering) that explains why they work and leads to principled variants.",
+        "key_indicators": [
+          "unify",
+          "underlying mechanism",
+          "it reveals that",
+          "central to",
+          "shows that X is doing Y"
+        ],
+        "cognitive_move": "Abstract across examples to isolate a core principle, then formalize it to unify prior art and derive new algorithms.",
+        "example_summary": "SGRL identifies representation scattering as the common mechanism behind diverse GCL methods and builds a regulated scattering objective (Paper 30)."
+      },
+      {
+        "name": "Integrate Heterogeneous Feedback",
+        "description": "Treat different types of human or system feedback (values, demands, retrieval tokens, reflection signals) as jointly informative rather than interchangeable, and design learning that exploits their structural differences.",
+        "key_indicators": [
+          "heterogeneous feedback",
+          "joint learning",
+          "value + demand",
+          "reflection tokens",
+          "structured signals"
+        ],
+        "cognitive_move": "Model multiple feedback modalities with a shared representation or joint objective that preserves their complementary constraints.",
+        "example_summary": "Auction MLHCA jointly learns from value labels and demand-style responses, treating demand responses as structured price-relative constraints not just proxies (Paper 2)."
+      },
+      {
+        "name": "Smart Sampling and Batch Construction",
+        "description": "Improve statistical efficiency by changing how data or negatives are chosen\u2014via hard-negative mining, clustering, sparse graphs, or multi-sample coupling\u2014rather than by scaling batch size alone.",
+        "key_indicators": [
+          "hard negatives",
+          "batch construction",
+          "sparse similarity graph",
+          "clustering",
+          "coupling samples"
+        ],
+        "cognitive_move": "Manipulate the sampling distribution or batch composition to provide more informative contrasts or lower-variance gradient estimates per computation unit.",
+        "example_summary": "B3 creates a sparse similarity graph to assemble higher-quality negatives so smaller batches match or beat larger-batch baselines (Paper 18)."
+      },
+      {
+        "name": "Defensive Reinterpretation (Role Reversal)",
+        "description": "Take a technique commonly used offensively (adversarial examples, unlearning) and reframe it as protective or corrective, designing it to achieve the opposite social/ethical outcome.",
+        "key_indicators": [
+          "reframed as protection",
+          "turn X into defense",
+          "concept erasure",
+          "safeguard",
+          "unlearn"
+        ],
+        "cognitive_move": "Invert the typical objective of a method and adapt its mechanisms to realize protective functionality instead of exploitation.",
+        "example_summary": "AdvDM reframes adversarial examples as a tool artists can use to protect style copyrights against diffusion models (Paper 29); EraseFlow reframes denoising trajectories for concept erasure (Paper 11)."
+      },
+      {
+        "name": "Architect and Optimize Agent Interactions",
+        "description": "Treat multi\u2011agent or modular systems as graphs or supernets and jointly optimize the node-level behaviors and edge-level interactions\u2014for flexible, adaptive coordination rather than static pipelines.",
+        "key_indicators": [
+          "agentic supernet",
+          "graph of agents",
+          "optimize prompts and interactions",
+          "dynamic allocation",
+          "auto design"
+        ],
+        "cognitive_move": "Elevate agent/module design to a system-level optimization problem and use structural representations (graphs, supernets) to search and adapt architectures.",
+        "example_summary": "GPTSwarm models agents as graph nodes and uses GNN-inspired theory to optimize both node prompting and edges for emergent collaboration (Paper 20)."
+      },
+      {
+        "name": "Decompose and Modularize",
+        "description": "Break complex tasks into interpretable subproblems (e.g., decompose language instructions into steps, split MSI into unmixing + diffusion refinement) and solve each with the method best suited to its properties.",
+        "key_indicators": [
+          "decompose",
+          "modular",
+          "pipeline",
+          "factorize",
+          "stage X then Y",
+          "subproblem"
+        ],
+        "cognitive_move": "Separate concerns so that different inductive biases, models, or computational tactics can be applied locally and then recombined coherently.",
+        "example_summary": "OpenHOI decomposes open-vocabulary instructions into actionable steps and combines affordance grounding with diffusion-based generation for hand-object interaction (Paper 32)."
+      },
+      {
+        "name": "Preserve Theory While Engineering",
+        "description": "Pursue practical algorithmic changes (simplifications, approximations) but explicitly preserve or re-establish the theoretical guarantees (consistency, identifiability, asymptotic normality) that motivated the original method.",
+        "key_indicators": [
+          "preserve guarantees",
+          "honest subsampling",
+          "consistency",
+          "asymptotic normality",
+          "theoretical underpinnings"
+        ],
+        "cognitive_move": "Design approximations that can be proven (or carefully argued) to maintain the essential formal properties of the original approach.",
+        "example_summary": "Gradient-free GRF substitutes fixed-point iterations but maintains the forest's consistency and asymptotic normality guarantees via careful subsampling and regularity conditions (Paper 4)."
+      },
+      {
+        "name": "Control Representation Geometry",
+        "description": "Explicitly manipulate geometric properties of learned representations (scattering, uniformity, topography, locality) via loss terms, sampling, or architectural constraints to improve downstream behavior or interpretability.",
+        "key_indicators": [
+          "scattering",
+          "uniformity",
+          "Topographic",
+          "TopoLoss",
+          "representation geometry",
+          "center-away"
+        ],
+        "cognitive_move": "Introduce objectives or regularizers that shape distances/arrangements in embedding space to induce desired functional properties (diversity, locality, interpretability).",
+        "example_summary": "TopoNets add TopoLoss that penalizes dissimilarity among neighboring units to induce brain-like maps without sacrificing task accuracy (Paper 35); SGRL enforces center-away scattering (Paper 30)."
+      },
+      {
+        "name": "Self\u2011Reflection / Iterative Critique",
+        "description": "Embed mechanisms that let a model inspect, critique, or iteratively refine its own outputs (reflection tokens, self-RAG), improving factuality or robustness by making retrieval/generation a looped process.",
+        "key_indicators": [
+          "self-reflect",
+          "reflection tokens",
+          "iterative retrieval",
+          "critique mechanism",
+          "self-reflective"
+        ],
+        "cognitive_move": "Turn the generation process into a feedback loop where intermediate outputs trigger adaptive retrieval or corrective actions before finalizing the result.",
+        "example_summary": "SELF-RAG uses reflection tokens to let the model iteratively retrieve and critique evidence, improving factual accuracy of generations (Paper 28)."
+      }
+    ],
+    "meta_observations": "Across these top ML synthesis narratives, breakthrough moves repeatedly arise from recombining existing ideas rather than inventing wholly new primitives: researchers spot mismatches (theory vs practice, objective vs metric), reframe problems, import mature tools from other fields, and inject domain-informed inductive biases. Practical scalability concerns (compute, batch size, sample efficiency) drive many choices, yielding approximations that are carefully justified to preserve key theoretical properties. There is heavy reliance on pre-trained models and auxiliary signals as scaffolding, and many papers unify disparate methods by abstracting a latent mechanism (e.g., scattering). Two recurring meta-strategies are (1) align the training objective with the intended evaluation or deployment constraint, and (2) turn an existing technique's role on its head (offense \u2192 defense, label \u2192 constraint). These patterns are learnable intellectual moves: explicitly look for mismatches to exploit, seek cross-domain analogies, add principled inductive bias to reduce solution space, and prefer modular decompositions plus controlled approximations that maintain theoretical guarantees."
+  },
+  {
+    "patterns": [
+      {
+        "name": "Gap Amplification",
+        "description": "Zoom in on mismatches between existing methods and real-world practice, then amplify that discrepancy into a concrete research opportunity. Authors use empirical or conceptual observations about where practice diverges from assumptions to motivate a new solution.",
+        "key_indicators": [
+          "recognized the limitations",
+          "pressing need",
+          "overlooked in",
+          "real-world tasks",
+          "memory fragmentation",
+          "inefficiencies in prior models"
+        ],
+        "cognitive_move": "Make an implicit or small discrepancy salient and treat it as the primary problem to solve.",
+        "example_summary": "MixEval-X: the team recognized disparate evaluation methods and real-world bias issues in multi-modal evaluation and turned that mismatch into the design goal of a universal any-to-any benchmark."
+      },
+      {
+        "name": "Assumption Probing",
+        "description": "Explicitly identify and then challenge a central assumption underlying prior work, replacing it with a different, more realistic or weaker assumption that opens new solution paths.",
+        "key_indicators": [
+          "the assumption that",
+          "overlooks",
+          "questioned whether",
+          "weight symmetry",
+          "free memory is a fungible commodity",
+          "n\u2011gram overlap framework insufficient"
+        ],
+        "cognitive_move": "Expose a hidden hypothesis, test its validity conceptually or empirically, and redesign methods that don't rely on it.",
+        "example_summary": "Coop: authors challenge the fungibility assumption of free memory (memory fragmentation) and co-optimize allocation and rematerialization strategies accordingly."
+      },
+      {
+        "name": "Reframe as Unified Abstraction",
+        "description": "Map diverse tasks, datasets, or subproblems to a single abstract problem formulation so techniques and evaluations can be shared across contexts.",
+        "key_indicators": [
+          "reframed as",
+          "unified framework",
+          "conditional graph completion",
+          "fill-in-the-blank graph",
+          "maps many subtasks into"
+        ],
+        "cognitive_move": "Create an abstraction that subsumes multiple instances, enabling reuse of models, metrics, and insights.",
+        "example_summary": "CBGBench: reframed structure-based drug design subtasks (linkers, fragments, scaffolds) as a single conditional graph completion problem to standardize evaluation."
+      },
+      {
+        "name": "Hybridization (Method Fusion)",
+        "description": "Synthesize two or more established techniques from different subfields to exploit complementary strengths, often yielding capabilities neither method had alone.",
+        "key_indicators": [
+          "combining these learnings",
+          "builds upon foundational works X and Y",
+          "integrates A with B",
+          "merging these paradigms",
+          "union of methodologies"
+        ],
+        "cognitive_move": "Select compatible elements from separate approaches and fuse them into a coherent algorithm or model.",
+        "example_summary": "TRIDENT: merged SMILES, textual descriptions, and hierarchical taxonomic annotations to create richer multimodal molecular representations."
+      },
+      {
+        "name": "From Heuristic to Learnable",
+        "description": "Take an engineering choice or heuristic (timestep schedules, discretization points, curriculum) and parameterize it so it can be optimized or learned from data.",
+        "key_indicators": [
+          "treated as a learnable object",
+          "learn time nodes",
+          "timestep selection as",
+          "lightweight learnable",
+          "optimize discretization points"
+        ],
+        "cognitive_move": "Convert a manual hyperparameter or fixed procedure into a differentiable or learnable module that adapts to the model/data.",
+        "example_summary": "LD3: reframed timestep selection for diffusion ODE samplers as a learnable set of discretization nodes to improve few-step sampling without retraining denoisers."
+      },
+      {
+        "name": "Principled Bound/Limit Analysis",
+        "description": "Formalize the problem in information-theoretic, minimax, or statistical terms to derive fundamental limits or lower/upper bounds that constrain what algorithms can achieve.",
+        "key_indicators": [
+          "proved a sharp limit",
+          "information\u2011theoretic",
+          "minimax",
+          "no method can",
+          "lower bounds",
+          "worst-case analysis"
+        ],
+        "cognitive_move": "Translate an empirical question into a formal model and derive provable performance limits to orient practitioners about what is or isn't possible.",
+        "example_summary": "Judge-based evaluation work: modeled judges as noisy annotators and proved that if judges are no more accurate than the evaluated model, debiasing cannot reduce required labels by more than half."
+      },
+      {
+        "name": "Structural Prior Exploitation",
+        "description": "Identify and encode domain-specific structure (symmetry, hierarchies, taxonomies, shared parts) into models to reduce ambiguity and improve generalization.",
+        "key_indicators": [
+          "symmetry-aware",
+          "hierarchical annotations",
+          "Lowest Common Ancestor",
+          "shared geometric priors",
+          "taxonomic information"
+        ],
+        "cognitive_move": "Leverage known invariants or structured relationships in the data as inductive biases in model architecture or loss design.",
+        "example_summary": "TRIDENT and Paper 3: used taxonomic annotations and symmetry-aware geometry to better align multimodal molecular data and disambiguate 3D pose estimation."
+      },
+      {
+        "name": "Numerics & Systems Co-design",
+        "description": "Co-design algorithmic math (solvers, transforms) and systems implementation (GPU kernels, memory patterns) so theoretical ideas realize practical speedups.",
+        "key_indicators": [
+          "IO-aware kernels",
+          "Halley\u2013bisection solver",
+          "tile, streaming pipeline",
+          "engineered kernels",
+          "drastically reducing solver cost"
+        ],
+        "cognitive_move": "Simultaneously optimize numerical methods and low-level implementation to close the theory/practice gap.",
+        "example_summary": "AdaSplash: reframed \u03b1\u2011entmax as a per-row root-finding problem and coupled numerical solver improvements with Triton GPU kernels to realize adaptive sparsity at speed."
+      },
+      {
+        "name": "Decompose & Diagonalize",
+        "description": "Break complex temporal/spatial dependencies into modal channels or independent components that are easier to analyze or learn from.",
+        "key_indicators": [
+          "whiten and decompose temporal correlations",
+          "modal channels",
+          "spectral filtering",
+          "delayed projections",
+          "per-row"
+        ],
+        "cognitive_move": "Apply transforms (spectral, whitening, Nystr\u00f6m, modal decomposition) to reduce coupling and enable tractable analysis or computation.",
+        "example_summary": "Paper 25: imported state-space and spectral filtering ideas to whiten temporal correlations and extend Saxe-style exact learning dynamics to recurrent models."
+      },
+      {
+        "name": "Metric & Benchmark Invention",
+        "description": "Create new evaluation metrics, risk definitions, or unified benchmarks to make previously fuzzy goals measurable and comparable across methods.",
+        "key_indicators": [
+          "meta-benchmarks",
+          "introduced PNS risk",
+          "standardized splits and evaluators",
+          "new framework for evaluating",
+          "delineates a new benchmark"
+        ],
+        "cognitive_move": "Design an operational measure or dataset that captures the phenomenon of interest and enables rigorous comparison and progress tracking.",
+        "example_summary": "CBGBench: standardized datasets, splits, and metrics for structure-based drug design to make different approaches directly comparable."
+      },
+      {
+        "name": "Turn Constraints into Objectives",
+        "description": "Treat an unavoidable constraint (privacy, limited memory, deployment mode) as an explicit optimization objective or design signal for new algorithms.",
+        "key_indicators": [
+          "differential privacy",
+          "privacy settings",
+          "co-optimizes allocation",
+          "Deploy mode vs Tune mode",
+          "memory savings while minimizing overhead"
+        ],
+        "cognitive_move": "Recast constraints as primary design criteria and optimize methods to satisfy or exploit them rather than work around them.",
+        "example_summary": "Coop: memory fragmentation and recomputation costs become co-optimization objectives to yield better memory management during training."
+      },
+      {
+        "name": "Localized Modeling (Decouple & Factorize)",
+        "description": "Separate global/shared components from local/specific ones (e.g., modality-shared vs modality-specific) so each can be modeled and regularized appropriately.",
+        "key_indicators": [
+          "decomposed into components",
+          "shared across modalities",
+          "modality-specific",
+          "modality decoupling",
+          "part-level feature extraction"
+        ],
+        "cognitive_move": "Factor the representation space into interpretable subspaces and design losses or architectures to enforce that factorization.",
+        "example_summary": "MDReID: decomposed modality information into shared and specific components and learned metric spaces tailored to each."
+      },
+      {
+        "name": "Benchmarking by Harmonization",
+        "description": "Reduce fragmentation in a nascent field by standardizing datasets, evaluations, and interfaces so different approaches can be fairly compared.",
+        "key_indicators": [
+          "harmonizes leading methods",
+          "standardize splits",
+          "clarifies which innovations matter",
+          "lowers barrier to fair comparison"
+        ],
+        "cognitive_move": "Construct an integrated benchmark and evaluation protocol that removes extraneous differences to reveal true algorithmic performance.",
+        "example_summary": "CBGBench: unified dataset choices and evaluators across protein-ligand generative methods to enable fair comparisons."
+      },
+      {
+        "name": "Problem Reduction to Solvable Subtask",
+        "description": "Transform a hard problem into a sequence of smaller or well-understood subproblems (root-finding per row, graph completion, conditional sampling) that can be solved efficiently.",
+        "key_indicators": [
+          "rethink as a per-row root-finding problem",
+          "iterative posterior sampling",
+          "convert into analyzable modal channels",
+          "fill-in-the-blank graph"
+        ],
+        "cognitive_move": "Map the original task to an existing, well-understood computational primitive that admits efficient algorithms or analysis.",
+        "example_summary": "AdaSplash: converted \u03b1\u2011entmax sparse-transform evaluation into per-row root-finding embedded in a streaming attention pipeline."
+      },
+      {
+        "name": "Formal-Experimental Tightening",
+        "description": "Alternate between theoretical formalization (limits, guarantees) and empirical tests to both bound expectations and validate practical performance, iterating to refine insights.",
+        "key_indicators": [
+          "proved a bound and confirmed empirically",
+          "theoretical account and empirical evaluation",
+          "numerical experiments validate",
+          "empirical tests confirmed the bound"
+        ],
+        "cognitive_move": "Use theory to guide experiments and experiments to validate/refine theory, producing robust and actionable conclusions.",
+        "example_summary": "Judge-based evaluation work: derived minimax limits on debiasing and validated their conservativeness via empirical tests."
+      },
+      {
+        "name": "Analogy-Driven Modeling",
+        "description": "Use analogies to cognitive, biological, or physical systems to suggest model structures, loss functions, or evaluation criteria that are more aligned with observed reality.",
+        "key_indicators": [
+          "inspired by biological plausibility",
+          "human cognitive processes as an analogy",
+          "three-factor learning rules",
+          "emergency room triage studies"
+        ],
+        "cognitive_move": "Map properties of natural or human systems onto algorithm design choices to gain new inductive biases or evaluation goals.",
+        "example_summary": "EBD: drew on biological learning rules and minimum mean square error ideas to design layer-specific loss functions avoiding weight symmetry."
+      },
+      {
+        "name": "Design-for-Deployment",
+        "description": "Prioritize constraints and behaviors that matter at inference or deployment (latency, memory access patterns, cache reuse), and redesign architectures or algorithms accordingly.",
+        "key_indicators": [
+          "improves transfer learning capabilities",
+          "key-value caching",
+          "memory access and processing speed",
+          "low-cost temporal modeling"
+        ],
+        "cognitive_move": "Start from deployment bottlenecks and fold those constraints into model architecture and training strategy to produce practically usable systems.",
+        "example_summary": "DEFT: redesigned KV grouping and tree-splitting to accelerate LLMs on tree-structured queries by optimizing memory access patterns."
+      },
+      {
+        "name": "Exploit Data Heterogeneity",
+        "description": "Leverage diverse data sources (modalities, embodiments, taxonomies) to build richer representations and improve transfer, robustness, or generalization.",
+        "key_indicators": [
+          "heterogeneous robotic data",
+          "multimodal feature fusion",
+          "aligning diverse modalities",
+          "global understanding and local correspondence"
+        ],
+        "cognitive_move": "Intentionally combine varied, complementary data types to capture facets of the problem that single-modality data miss.",
+        "example_summary": "HPT: used datasets across robot embodiments and modalities for pretraining to create a hybrid model with broad generalization in robotic tasks."
+      }
+    ],
+    "meta_observations": "Across these papers the dominant intellectual pattern is pragmatic synthesis: researchers repeatedly combine principled theory, domain structure, and engineering trade-offs. Breakthroughs often arise not from pure novelty but from (a) exposing and reframing a realistic mismatch, (b) mapping problems to a cleaner abstraction or limit, and (c) hybridizing complementary tools while co-designing algorithms and implementations. Successful strategies are learnable: question core assumptions, create or borrow formal models to bound possibility, transform heuristics into learnable components, and co-design numerics with systems engineering. Finally, many works emphasize measurement\u2014new metrics or benchmarks\u2014to make progress reproducible and comparable, showing that methodological clarity (how you evaluate) is as important as algorithmic ingenuity."
+  },
+  {
+    "patterns": [
+      {
+        "name": "Axiomatic Framing",
+        "description": "Explicitly state desiderata and derive a principled framework from first principles. Authors convert an intuitive gap into a small set of explicit axioms that constrain allowable solutions and guide design and evaluation.",
+        "key_indicators": [
+          "axiom",
+          "additivity / positivity / locality",
+          "principled / formal framework",
+          "decomposition"
+        ],
+        "cognitive_move": "Move from informal observation to an explicit, minimal specification (axioms) that narrows the solution space and enables analytic construction.",
+        "example_summary": "Paper 1 formulates three axioms (additivity, positivity, locality) to produce a principled decomposition of mutual information that is tractable and interpretable."
+      },
+      {
+        "name": "Cross-domain Analogy Transfer",
+        "description": "Borrow concepts, metaphors, or mechanisms from other fields (cognitive science, signal processing, physics) and map them onto the ML problem. This yields fresh perspectives and reusable techniques that the original literature overlooked.",
+        "key_indicators": [
+          "inspired by cognitive psychology",
+          "drawn from multi-view geometry / Shannon / diffusion physics",
+          "analogy to human planning / perception"
+        ],
+        "cognitive_move": "Identify a structurally similar phenomenon in another discipline and transfer its conceptual machinery to reframe or solve the target problem.",
+        "example_summary": "Paper 2 imports spatial reasoning ideas from cognitive psychology to design an AV benchmark for 3D dynamic environments; Paper 3 maps hierarchical human planning concepts into hierarchical reinforcement learning."
+      },
+      {
+        "name": "Representation Shift",
+        "description": "Replace or recast the core representation (e.g., meshes \u2192 implicit SDFs, scalar rounding \u2192 lattices, pixel \u2192 latent) to remove bottlenecks or enable new algorithmic options. The shift often makes previously infeasible computations tractable or unlocks better inductive biases.",
+        "key_indicators": [
+          "implicit signed-distance / latent space / triplane / lattice",
+          "reconceptualize as / represent shapes as / operate in latent space"
+        ],
+        "cognitive_move": "Change the language or data-structure in which the problem is expressed to transform its geometry, complexity, or amenability to learning.",
+        "example_summary": "Paper 25 replaces explicit meshes with neural implicit SDFs to avoid collision-graph blowup; Paper 16 swaps scalar rounding for lattice quantization to match vector quantizer geometry."
+      },
+      {
+        "name": "Problem Reframing",
+        "description": "Recast a familiar problem into a different computational or conceptual task (e.g., calibration as higher-order prediction, image generation as entanglement of representations). Reframing reveals neglected constraints and new solution paths.",
+        "key_indicators": [
+          "reframe / reconceptualize / treat X as Y",
+          "rather than X, we ask Y",
+          "shift perspective"
+        ],
+        "cognitive_move": "Transform the question being asked so that different tools become relevant and previously hidden structure is exposed.",
+        "example_summary": "Paper 4 reframes image generation as entangling low-level representations with high-level semantic tokens (REG); Paper 31 reframes calibration as a higher-order prediction object."
+      },
+      {
+        "name": "Benchmark and Task Engineering",
+        "description": "Design specific datasets, tasks, or evaluation protocols that expose the missing capabilities and direct community attention. Benchmarks are treated as research instruments that exemplify the desired behavior and drive architectures and metrics.",
+        "key_indicators": [
+          "benchmark / dataset / probe / task suite",
+          "designed to test / challenges X",
+          "evaluation aligned with domain practices"
+        ],
+        "cognitive_move": "Operationalize the target capability into a repeatable, measurable task that shapes research priorities and serves as an empirical oracle for success.",
+        "example_summary": "Paper 5 creates the YESBUT benchmark to probe comic juxtaposition understanding; Paper 15 builds MLE-bench (Kaggle problems + agent scaffolds) to measure end-to-end ML engineering."
+      },
+      {
+        "name": "Hierarchical and Temporal Abstraction",
+        "description": "Introduce multi-scale or hierarchical structure (in space, time, or abstraction level) so models can reason and plan at multiple granularities. This often enables long-horizon reasoning or compresses complexity.",
+        "key_indicators": [
+          "hierarchical / temporal abstractions",
+          "discrete latent dynamics / multi-level model",
+          "long-horizon planning"
+        ],
+        "cognitive_move": "Decompose dynamics or decision-making across scales and learn interactions between levels to trade short-term accuracy for long-term tractability.",
+        "example_summary": "Paper 3 (THICK) integrates discrete latent dynamics into a hierarchical world model so agents can plan across time scales."
+      },
+      {
+        "name": "Self-supervision and Autonomous Objectives",
+        "description": "Replace reliance on labeled data with objectives that the system can generate or validate itself (self-play, inverse dynamics, time-reversal). This reduces human supervision and enables scalable training regimes.",
+        "key_indicators": [
+          "unsupervised / self-play / self-critiquing / inverse dynamics",
+          "latent actions from video / model evaluates itself"
+        ],
+        "cognitive_move": "Construct surrogate learning signals derived from the model's own outputs or environment interactions to bootstrap capability without external labels.",
+        "example_summary": "Paper 9 (LAPO) infers latent actions from video without labels; Paper 11 (Absolute Zero) uses autonomous self-definition and self-evaluation to learn without human data."
+      },
+      {
+        "name": "Reuse and Memoization Optimization",
+        "description": "Exploit previously computed substructures or cached results to reduce worst-case complexity. The insight is to reorganize computation so shared subproblems are recognized and reused.",
+        "key_indicators": [
+          "reuse previously computed / transfer results from super cliques",
+          "memoize / dynamic programming / recursive partitioning"
+        ],
+        "cognitive_move": "Transform a brute-force enumeration into a divide-and-conquer with cached intermediate results, achieving lower asymptotic cost.",
+        "example_summary": "Paper 8 optimizes counting Markov equivalent DAGs by reusing computations associated with super-cliques in rooted clique trees."
+      },
+      {
+        "name": "Leverage Metadata and Structural Priors",
+        "description": "Use available side information (rig metadata, tabular attributes, timing cues) as inductive biases rather than treating data as IID. Encoding known structure improves sample efficiency and robustness.",
+        "key_indicators": [
+          "condition on rig metadata / tabular attributes / timing",
+          "structure-aware / rig-aware / context conditioning"
+        ],
+        "cognitive_move": "Explicitly fold domain-specific metadata into the model or representation so it constrains inference and reduces ambiguity.",
+        "example_summary": "Paper 7 (Rig3R) conditions reconstruction on rig metadata for multi-camera rigs; Paper 28 aligns image channels with tabular attributes to improve classification."
+      },
+      {
+        "name": "Reverse or Dual Operation",
+        "description": "Flip the usual directionality of a process (time reversal, backward prediction, dual-generator) to extract new signals or supervision. Operating in the inverse domain can reveal structure hidden in forward-only views.",
+        "key_indicators": [
+          "time reversed / backward prediction / dual-generative / scoring backward",
+          "reverse the typical directional operation"
+        ],
+        "cognitive_move": "Invert a generative or predictive mapping so the model must capture complementary constraints, yielding novel training signals or evaluation modalities.",
+        "example_summary": "Paper 12 introduces Time Reversed Language Models (TRLMs) that predict backward and produce unsupervised feedback signals for LLMs."
+      },
+      {
+        "name": "From Idealized Theory to Finite Guarantees",
+        "description": "Take results that hold in infinite or continuum limits and adapt them to realistic, finite, noisy algorithmic settings, providing provable rates or finite-sample guarantees.",
+        "key_indicators": [
+          "propagation of chaos / finite-particle / finite-sample",
+          "convergence rates / distribution-free guarantees"
+        ],
+        "cognitive_move": "Bridge abstract asymptotic theory and practical algorithmics by quantifying error terms and deriving concrete bounds applicable to implementation regimes.",
+        "example_summary": "Paper 22 adapts mean-field Langevin dynamics analysis to finite-particle approximations giving convergence rates; Paper 31 gives finite-sample semantic guarantees for higher-order calibration."
+      },
+      {
+        "name": "Component Replacement with Structured Alternatives",
+        "description": "Identify a failing module (quantizer, decoder, collision model) and replace it with a structurally richer alternative (lattice, implicit SDF, triplane) that better matches problem geometry or constraints.",
+        "key_indicators": [
+          "replace scalar rounding with lattice / replace mesh with implicit SDF",
+          "structured quantizer / nearest-neighbor algorithms / triplane representation"
+        ],
+        "cognitive_move": "Swap a primitive component for one with stronger theoretical properties or algorithmic primitives, preserving pipeline compatibility while improving performance.",
+        "example_summary": "Paper 16 develops Lattice Transform Coding to replace scalar rounding in learned compression; Paper 35 uses triplane representations to enable pose-free 3D reconstruction."
+      },
+      {
+        "name": "Pipeline Reconceptualization",
+        "description": "Treat the end-to-end application as an orchestrated pipeline (context extraction, retrieval, multi-role prompting, tool-calls) and redesign components for workflow integration rather than isolated task performance.",
+        "key_indicators": [
+          "integrated pipeline / workflow alignment / tool-integration",
+          "context extraction / AST-aware slicing / multi-role prompting"
+        ],
+        "cognitive_move": "Elevate the unit of analysis from individual models or tasks to entire human-in-the-loop systems; optimize interfaces and intermediate representations for usage scenarios.",
+        "example_summary": "Paper 18 reframes automated code review as a defect-centered pipeline combining AST-aware slicing, retrieval, and multi-role LLM prompting to align with developer workflows."
+      },
+      {
+        "name": "Prove Limitations then Engineer Remedies",
+        "description": "First provide formal or empirical counterexamples that expose a method's expressivity or geometric failure, then design targeted architectural or algorithmic fixes guided by the identified limitation.",
+        "key_indicators": [
+          "we prove limitations / counterexamples / show failure modes",
+          "then propose remedy / principled fix / scalable variant"
+        ],
+        "cognitive_move": "Use negative evidence as a diagnostic tool: make the failure explicit, analyze root cause, and derive a remedy that directly addresses that cause.",
+        "example_summary": "Paper 30 proves HOMP has topological blindspots and then develops MCN/SMCN to recover expressivity; Paper 16 shows scalar rounding limits and introduces LTC."
+      },
+      {
+        "name": "Constraint-driven Practicality",
+        "description": "Design models and evaluations with real-world constraints in mind (synthesizability, clinical relevance, compute budgets), explicitly trading abstract optimality for actionable utility.",
+        "key_indicators": [
+          "synthesizability / clinical decision-making / minimal compute overhead",
+          "domain-aligned evaluation metrics / practical constraints"
+        ],
+        "cognitive_move": "Bring domain constraints into the objective early so the solution space only contains practically deployable approaches.",
+        "example_summary": "Paper 14 (SynFlowNet) models molecular generation with synthesis constraints; Paper 6 develops a medical LVLM benchmark and Graph-of-Thoughts tuned to clinical needs."
+      },
+      {
+        "name": "Learnable Noise and Scheduling",
+        "description": "Treat noise schedules or regularizers as learnable functions conditioned on data rather than fixed hyperparameters, enabling adaptive training dynamics and improved likelihoods.",
+        "key_indicators": [
+          "learned adaptive noise / noise schedule / multivariate noise",
+          "rethink diffusion process / learned mechanism"
+        ],
+        "cognitive_move": "Replace hand-tuned stochasticity with parameterized, data-dependent components that the training process can optimize.",
+        "example_summary": "Paper 29 (MULAN) reframes diffusion noise scheduling as a learned adaptive mechanism to better fit dataset characteristics."
+      },
+      {
+        "name": "Algorithmic Optimization via Structural Decomposition",
+        "description": "Lower computational complexity by decomposing objects (cliques, kernels, volumes) into structured pieces for which faster sampling, counting, or quadrature is possible.",
+        "key_indicators": [
+          "randomly pivoted Cholesky / DPPs / volume sampling / swap methods",
+          "decomposed nodes / rooted clique trees / efficient quadrature"
+        ],
+        "cognitive_move": "Analyze algebraic or combinatorial structure to derive algorithms that avoid global enumeration and exploit locality or independence.",
+        "example_summary": "Paper 20 combines random pivoted Cholesky with continuous volume sampling for efficient kernel quadrature; Paper 8 uses rooted clique trees to speed UCCG generation."
+      },
+      {
+        "name": "Statistical Reinterpretation of Architectures",
+        "description": "Recast neural architectures as statistical procedures or algorithms (transformers as selectors of algorithms, model pre-training biases), enabling theoretical connections and optimization insights.",
+        "key_indicators": [
+          "frame as statistical theory / implement gradient descent / implicit bias",
+          "transformers implement algorithms / pre-training implicit bias"
+        ],
+        "cognitive_move": "Translate black-box architecture behavior into classical statistical concepts, thereby importing analysis tools and illuminating inductive biases.",
+        "example_summary": "Paper 13 frames transformers within statistical theory to explain in-context learning as algorithm selection; Paper 26 studies implicit biases in pre-training affecting downstream flatness."
+      },
+      {
+        "name": "Data-centric Synthesis and Augmentation",
+        "description": "When data scarcity or imbalance limits performance, synthesize targeted examples or focus generation onto critical regions (lesions, rare dialogues), improving downstream training without collecting massive new datasets.",
+        "key_indicators": [
+          "synthesize images / lesion-focused / user interaction dataset / synthetic augmentation",
+          "generate diverse / targeted examples"
+        ],
+        "cognitive_move": "Produce task-relevant synthetic data that amplifies rare phenomena or balances distributions, then validate that model performance improves on real tasks.",
+        "example_summary": "Paper 17 (LeFusion) uses lesion-focused diffusion synthesis to address medical data scarcity; Paper 27 (WILDCHAT) collects real user interactions to address conversational dataset gaps."
+      },
+      {
+        "name": "Calibration and Uncertainty Decomposition",
+        "description": "Explicitly separate and measure epistemic and aleatoric uncertainty via distribution-free procedures or higher-order predictors, turning qualitative notions into enforceable guarantees.",
+        "key_indicators": [
+          "calibration / distribution-free / higher-order predictors / k-snapshots",
+          "aleatoric vs epistemic decomposition / conformal guarantees"
+        ],
+        "cognitive_move": "Define uncertainty objects and design calibration procedures with provable semantics so that components of uncertainty have operational meaning.",
+        "example_summary": "Paper 31 generalizes calibration to higher-order predictions using k independent labels to decompose aleatoric and epistemic uncertainty with finite-sample guarantees."
+      }
+    ],
+    "meta_observations": "Across these synthesis narratives researchers follow a small set of recurrent intellectual routines: identify a precise practical or conceptual gap, then either (a) reframe the problem so different tools apply (axioms, reversing direction, statistical recasting), (b) change representations or components to better match geometry and constraints (implicit SDFs, lattices, latent spaces), or (c) combine ideas from disparate domains to form hybrid solutions (cognitive science, physics, optimization). Two recurring operational moves are building focused benchmarks/tasks that make the desiderata measurable and proving limits (theory or counterexample) immediately followed by targeted engineering fixes. There is a strong interplay between theoretical guarantees and pragmatic constraints: many papers translate asymptotic theory into finite-sample algorithms while keeping deployment realities (compute, synthesize-ability, workflows) central. These strategies are actionable: learn to (1) name the desiderata formally, (2) ask how changing representation alters geometry, (3) import analogies from other disciplines deliberately, (4) design probing benchmarks, and (5) prove a limitation before designing a remedy \u2014 repeating this loop accelerates reliable, transferable breakthroughs."
+  },
+  {
+    "patterns": [
+      {
+        "name": "Assumption-Mismatch Diagnosis",
+        "description": "Spot and call out core assumptions in prior work that no longer hold for the target setting, then treat those mismatches as the lever for change. This involves diagnosing where a method's implicit constraints (e.g., closed-world, stationarity) break down and re-centering the design around that failure mode.",
+        "key_indicators": [
+          "closed-world",
+          "stationary Gaussian noise",
+          "assumption",
+          "limitation",
+          "mismatch"
+        ],
+        "cognitive_move": "Explicitly surface and invert an implicit assumption to identify the real problem that must be solved.",
+        "example_summary": "Paper 1 diagnoses that fixed teacher-student frameworks assume closed-world class coverage; Paper 12 finds the Additive Noise Model's stationarity assumption misrepresents forecasting uncertainty."
+      },
+      {
+        "name": "Role Reversal / Adaptive Roles",
+        "description": "Re-imagine fixed roles or architectures as dynamic, feedback-driven systems so formerly passive components become adaptive agents. This reframing often yields feedback loops that close representation gaps or accelerate alignment between components.",
+        "key_indicators": [
+          "flipped classroom",
+          "adaptive teacher",
+          "feedback loop",
+          "dynamic update",
+          "synchronize"
+        ],
+        "cognitive_move": "Flip a static element into an interactive one to create mutual adaptation between system parts.",
+        "example_summary": "Paper 1 (FlipClass) turns the static teacher into an adaptive guide updated by student feedback to align attention patterns."
+      },
+      {
+        "name": "Cross-Domain Hybridization",
+        "description": "Deliberately combine methods, metaphors, or primitives from different subfields to create a hybrid approach that inherits strengths while mitigating weaknesses. The move is explicit: take X from domain A and Y from domain B and reason about their compatibility.",
+        "key_indicators": [
+          "merge",
+          "combine",
+          "borrow insights",
+          "symbolic + neural",
+          "bio-inspired + attention"
+        ],
+        "cognitive_move": "Selective transplantation of tools/ideas across domain boundaries to synthesize a novel method.",
+        "example_summary": "Paper 4 merges symbolic search (DSL) with neural latent spaces for program induction; Paper 5 blends spiking neural network properties with transformer positional encodings (Gray-PE, Log-PE)."
+      },
+      {
+        "name": "Contract Redesign for Scalability",
+        "description": "Re-express the system-level guarantees or 'training/inference contract' (e.g., synchronization frequency, routing guarantees) and redesign it to trade coordination for scalability while preventing known failure modes.",
+        "key_indicators": [
+          "relax synchronization",
+          "training contract",
+          "local updates",
+          "communication reduction",
+          "lightweight router"
+        ],
+        "cognitive_move": "Rewrite the operational assumptions between components to reduce resource coupling while engineering countermeasures for the induced risks.",
+        "example_summary": "Paper 3 (SMALLTALK) redesigns the MoE training contract to allow mostly-local expert updates with a prefix-based router to avoid async pathologies."
+      },
+      {
+        "name": "Sampling-as-Control",
+        "description": "Treat a generation/distillation problem as a sampling-time control problem instead of a weight-update problem; steer a pre-trained sampler at inference via guidance or conditioning to obtain desired properties without expensive fine-tuning.",
+        "key_indicators": [
+          "guidance",
+          "sampling control",
+          "mode guidance",
+          "avoid fine-tuning",
+          "stop guidance"
+        ],
+        "cognitive_move": "Shift intervention from parameter-space to sampling-time interventions to gain control over outputs cheaply and modularly.",
+        "example_summary": "Paper 18 reframes dataset distillation as sampling control: MGD^3 uses Mode Discovery and Mode Guidance to induce diverse, artifact-free condensed datasets from a pre-trained latent diffusion model."
+      },
+      {
+        "name": "Inference-Time Search / Test-Time Adaptation",
+        "description": "Shift compute and search to inference time (latent search, test-time optimization) so that models adapt to out-of-distribution inputs without retraining. This often produces improved OOD robustness and flexibility at the cost of per-query compute.",
+        "key_indicators": [
+          "test-time search",
+          "latent program space",
+          "inference search",
+          "adapt at test time",
+          "robust by search"
+        ],
+        "cognitive_move": "Trade upfront training generality for per-instance optimization to solve novel or shifted tasks.",
+        "example_summary": "Paper 4's Latent Program Network performs inference-time search in a latent program space to double OOD performance on programming-by-example tasks."
+      },
+      {
+        "name": "Foundation-Model Transfer",
+        "description": "Leverage large pre-trained 'foundation' models or their distilled knowledge to bootstrap downstream tasks or modalities, transferring representation power rather than training from scratch on specialized data.",
+        "key_indicators": [
+          "foundation models",
+          "pre-training",
+          "transferable knowledge",
+          "distill from VFMs",
+          "multi-modal pretraining"
+        ],
+        "cognitive_move": "Treat pre-trained models as modular knowledge sources and adapt or distill their capabilities to new domains or modalities.",
+        "example_summary": "Paper 2 leverages heterogeneous robotic data and foundation-model ideas for robotic pretraining (HPT); Paper 6 distills VFMs to improve point-cloud segmentation (Seal)."
+      },
+      {
+        "name": "Temporal/Horizon Abstraction",
+        "description": "Reduce effective problem horizon through temporal abstraction, hierarchical policies, or option-aware learning so long-horizon problems become tractable for existing algorithms.",
+        "key_indicators": [
+          "horizon reduction",
+          "temporal abstraction",
+          "options",
+          "subgoals",
+          "reduce effective horizon"
+        ],
+        "cognitive_move": "Introduce higher-level temporal structure (options, subgoals) to amortize or collapse planning depth.",
+        "example_summary": "Paper 9 (SHARSA) reduces planning horizons to scale offline RL; Paper 13 introduces Option-aware Temporally Abstracted value learning (OTA) to improve high-level policy learning."
+      },
+      {
+        "name": "Mechanistic Localization",
+        "description": "Search for concrete, localized mechanisms (heads, units, modules) that implement higher-level functions, then validate via causal interventions or ablations to tie behavior to structure.",
+        "key_indicators": [
+          "identify heads",
+          "causal pruning",
+          "ablation",
+          "mechanistic",
+          "localizable subroutine"
+        ],
+        "cognitive_move": "Map high-level capabilities onto specific architectural components and test causality through targeted interventions.",
+        "example_summary": "Paper 35 identifies sparse 'retrieval heads' in transformers and uses causal pruning to show these heads are necessary for factual retrieval."
+      },
+      {
+        "name": "Analytical Surrogates",
+        "description": "Replace an analytically intractable component (optimizer, nonlinearity) with a principled surrogate that preserves key behaviors, enabling formal analysis and insight into dynamics.",
+        "key_indicators": [
+          "surrogate",
+          "tractable proxy",
+          "sign-based optimization",
+          "analysis",
+          "training dynamics"
+        ],
+        "cognitive_move": "Introduce a simpler, analyzable model that captures essential properties of the real system to derive rigorous conclusions.",
+        "example_summary": "Paper 26 uses SignGD as a surrogate for Adam to analyze transformer attention training dynamics and explain generalization failures on noisy data."
+      },
+      {
+        "name": "Explicit Feedback Modeling",
+        "description": "Make neglected data regimes (one-sided, negative-only, unpaired feedback) explicit in the objective by modeling them probabilistically and borrowing techniques (e.g., PU learning, EM) to handle incomplete supervision.",
+        "key_indicators": [
+          "positive-only",
+          "negative feedback",
+          "PU learning",
+          "EM-style",
+          "unpaired data"
+        ],
+        "cognitive_move": "Rework the loss/likelihood to incorporate underused feedback types and design principled estimation or weighting strategies for them.",
+        "example_summary": "Paper 25 integrates positives and negatives into an EM-style preference optimization, using PU techniques to handle unpaired feedback."
+      },
+      {
+        "name": "Mode Discovery & Guided Diversity",
+        "description": "Explicitly detect distinct data modes and then guide a sampler or model to cover them, preventing mode collapse and improving downstream coverage without heavy retraining.",
+        "key_indicators": [
+          "mode discovery",
+          "mode guidance",
+          "intra-class coverage",
+          "avoid artifacts",
+          "diversity"
+        ],
+        "cognitive_move": "Separate diversity identification from generation control, then steer sampling to ensure representative coverage of discovered modes.",
+        "example_summary": "Paper 18's MGD^3 adds Mode Discovery and Mode Guidance steps to latent diffusion sampling to ensure mode coverage for distilled datasets."
+      },
+      {
+        "name": "Primitive Recasting",
+        "description": "Change the basic representational primitive (e.g., pixels\u21923D Gaussians, discrete tokens\u2192latent programs) when representational mismatch causes ambiguity, enabling simpler downstream reasoning.",
+        "key_indicators": [
+          "primitive",
+          "3D Gaussians",
+          "homography",
+          "reimagined representation",
+          "resolve ambiguity"
+        ],
+        "cognitive_move": "Replace low-level data units with higher-level primitives that make the core task easier or more unambiguous.",
+        "example_summary": "Paper 23 (BevSplat) replaces pixel primitives with 3D Gaussians to resolve height ambiguity in cross-view localization."
+      },
+      {
+        "name": "Objective Recasting / Theoretical Reframing",
+        "description": "Recast a practical problem into a different theoretical framework (e.g., Bayesian, EM, likelihood, scaling laws) to reveal new solution methods or predictive laws.",
+        "key_indicators": [
+          "reframe",
+          "EM framing",
+          "Bayesian",
+          "functional scaling law",
+          "theoretical perspective"
+        ],
+        "cognitive_move": "Map an applied task onto an abstract theoretical lens to borrow tools and gain predictive or prescriptive insight.",
+        "example_summary": "Paper 8 frames prompting in a Bayesian/meta-learning view; Paper 19 proposes a Functional Scaling Law by reframing learning progress in intrinsic time."
+      },
+      {
+        "name": "Analogy-to-Classical Systems",
+        "description": "Use analogies from well-understood classical systems (energy-based models, associative memory, Gray codes) to suggest mechanism-level interventions or encodings for modern architectures.",
+        "key_indicators": [
+          "Hopfield",
+          "energy minimization",
+          "associative memory",
+          "Gray Code",
+          "analogy"
+        ],
+        "cognitive_move": "Map contemporary model behavior to an established classical model to inherit intuition and mechanistic tools.",
+        "example_summary": "Paper 1 draws on Hopfield energy-based associative memory to design dynamic attention alignment; Paper 5 uses Gray Code inspiration for positional encodings in spiking transformers."
+      },
+      {
+        "name": "Cost-Aware Automation",
+        "description": "Optimize for real-world costs (API calls, annotation labor, compute) by automating logic creation or compressing processes (e.g., generating labeling programs instead of labels), often trading a bit of ideal optimality for big practical gains.",
+        "key_indicators": [
+          "reduce cost",
+          "generate programs",
+          "auditable logic",
+          "weak supervision",
+          "API cost"
+        ],
+        "cognitive_move": "Prioritize economically efficient architectures of solution (automation, program synthesis, reuse) over brute-force performance.",
+        "example_summary": "Paper 24 (ALCHEmist) has LLMs generate labeling programs rather than per-item labels to cut API costs and make annotation reusable and auditable."
+      },
+      {
+        "name": "Complementary-View Synthesis",
+        "description": "Intentionally construct multiple views or filters that capture complementary information (e.g., low-pass and high-pass spectral views), then merge them to produce richer representations than either alone.",
+        "key_indicators": [
+          "low-pass",
+          "high-pass",
+          "spectral filters",
+          "merge views",
+          "complementary"
+        ],
+        "cognitive_move": "Design orthogonal perspectives that together cover the representational needs of the problem and fuse them coherently.",
+        "example_summary": "Paper 15 develops POLYGCL, combining low-pass and high-pass spectral polynomial filters to handle heterophilic graphs."
+      },
+      {
+        "name": "Evaluation-Critique & New Metrics",
+        "description": "Critically analyze the limitations of prevailing evaluation metrics and propose alternative constructs or theoretical objects that better capture the desired phenomena.",
+        "key_indicators": [
+          "FID is insufficient",
+          "universal critic",
+          "quantify realism",
+          "evaluation shortcomings",
+          "new metric"
+        ],
+        "cognitive_move": "Turn measurement into the object of inquiry and design a more faithful evaluator that aligns with the phenomenon of interest.",
+        "example_summary": "Paper 17 argues FID is inadequate for assessing realism and proposes the idea of a 'universal critic' to more rigorously quantify realism in generated data."
+      },
+      {
+        "name": "Offload & Memory Strategy",
+        "description": "Identify compute/memory bottlenecks in deployment (e.g., KV caches, long-context attention) and design offloading or caching schemes that preserve correctness while improving throughput or scalability.",
+        "key_indicators": [
+          "KV offload",
+          "memory throughput",
+          "long-context",
+          "cache offloading",
+          "scalability"
+        ],
+        "cognitive_move": "Repartition state and computation across memory hierarchies or nodes to achieve practical scaling without redesigning core model semantics.",
+        "example_summary": "Paper 30 (SHADOWKV) strategically offloads the KV cache to increase throughput for long-context language-model inference."
+      },
+      {
+        "name": "Simulation + Ethological Inductive Biases",
+        "description": "Use realistic simulators and domain-specific augmentations or tasks inspired by natural behavior to create large-scale, task-relevant training data that reveals mechanisms aligning with biological systems or real-world dynamics.",
+        "key_indicators": [
+          "simulator",
+          "ethological principles",
+          "contrastive temporal objectives",
+          "active touch",
+          "task-driven representations"
+        ],
+        "cognitive_move": "Design training regimes that mirror real-world interaction statistics to yield models whose internal representations genuinely reflect the target system.",
+        "example_summary": "Paper 27 uses a physics-based whisker simulator and tactile-specific contrastive supervision to align ConvRNNs with rodent somatosensory cortex representations."
+      },
+      {
+        "name": "Quantization\u2013Fine-Tune Harmonization",
+        "description": "When combining compression (quantization) and parameter-efficient adaptation (LoRA), treat initialization and low-rank structure as first-order design choices to avoid compounding errors; harmonize both processes rather than apply them sequentially.",
+        "key_indicators": [
+          "LoRA",
+          "quantization",
+          "low-rank initialization",
+          "2-bit regime",
+          "information retention"
+        ],
+        "cognitive_move": "Jointly design adaptation and compression steps so the low-bit representation preserves the subspace where fine-tuning will operate.",
+        "example_summary": "Papers 31 and 34 (IR-QLoRA, LoftQ) propose low-rank initialization and structured approaches to retain accuracy in ultra-low-bit quantized fine-tuning."
+      },
+      {
+        "name": "Interactive Learning Loop",
+        "description": "Make human interaction the primary and continuous learning signal rather than a static training set, using bandit or online-learning frameworks to continuously refine agent behavior in context.",
+        "key_indicators": [
+          "real-time user feedback",
+          "TAMER",
+          "contextual bandit",
+          "continual refinement",
+          "interactive"
+        ],
+        "cognitive_move": "Shift learning from batch to online, privileging contextual, immediate feedback to adapt to user needs and non-stationary tasks.",
+        "example_summary": "Paper 28 reframes instruction-following as a continual learning problem solved via a contextual bandit that learns from immediate user feedback."
+      }
+    ],
+    "meta_observations": "Across these narratives researchers repeatedly use the same cognitive repertoire: identify a precise failure (assumption mismatch or bottleneck), reframe the problem at a different level (objective, sampling, role, representation), borrow a principled tool or analogy from another domain, and then validate via targeted mechanistic or empirical checks (ablations, causal pruning, benchmarks). Practical constraints\u2014compute, annotation cost, deployment memory\u2014strongly shape solution moves, pushing for surrogate analyses, inference-time control, offloading, and low-rank/quantized harmonization. Two recurrent levers produce breakthroughs: (1) reframing (change the lens: from training to sampling, static to adaptive roles, single-view to complementary views), and (2) selective hybridization (combine complementary primitives from different fields). These strategies are learnable: practice diagnosing implicit assumptions, sketch alternative contracts, and explicitly seek cross-domain analogies before building\u2014then validate with causal or operational checks rather than only aggregate metrics."
+  },
+  {
+    "patterns": [
+      {
+        "name": "Unifying Framework Synthesis",
+        "description": "Take several disparate methods that solve related problems and re-express them as instances of a single, parameterized framework. This exposes shared structure, clarifies trade-offs, and suggests principled new designs that inherit the best of each prior approach.",
+        "key_indicators": [
+          "unify",
+          "single framework",
+          "characterized by",
+          "instances of",
+          "bridge/bridging"
+        ],
+        "cognitive_move": "Abstract common primitives from varied approaches and find a minimal parameterization that subsumes them; then search that parameter space for gaps/optima.",
+        "example_summary": "Paper 1 unified LinFormer, SSMs, and RNN recurrences as linear-attention parameterizations (hidden state size, update, mapping), then used that shared view to derive MetaLA that satisfies optimality conditions."
+      },
+      {
+        "name": "Reframing through a Theoretical Lens",
+        "description": "Recast a practical or empirical problem in terms of a different formal theory (optimization, geometry, statistics, etc.) to make implicit structure explicit and unlock new solution techniques.",
+        "key_indicators": [
+          "reframe",
+          "lens of",
+          "condition numbers",
+          "as a gradient flow",
+          "optimization/statistics/geometric"
+        ],
+        "cognitive_move": "Map problem statements into a mature theoretical domain where tools and guarantees exist, then transfer methods/intuition back to design algorithms or derive bounds.",
+        "example_summary": "Paper 2 reframed model immunization as an optimization problem using Hessian/condition-number ideas; Paper 34 reframed energy minimization as a gradient flow on probability manifolds (Wasserstein QMC)."
+      },
+      {
+        "name": "Analogy-driven Cross-domain Transfer",
+        "description": "Spot structural analogies between domains and import methods or intuitions from one field to another, adapting them to domain-specific constraints.",
+        "key_indicators": [
+          "inspired by",
+          "borrowed from",
+          "analogy to",
+          "transfer",
+          "drawing from X to tackle Y"
+        ],
+        "cognitive_move": "Identify isomorphic or similar structures and map operations/assumptions across domains to create novel hybrid methods.",
+        "example_summary": "Paper 6 borrowed MCMC/SGLD sampling to convert ad-hoc Gaussian placement heuristics in neural rendering into principled stochastic updates; Paper 20 used manifold geometry concepts to analyze hippocampal place-cell encoding."
+      },
+      {
+        "name": "Optimality-condition Driven Design",
+        "description": "Derive necessary/sufficient conditions (theoretical or asymptotic) that characterize what an 'optimal' solution must satisfy, then design architectures or distributions that meet those conditions.",
+        "key_indicators": [
+          "optimality",
+          "must fulfill",
+          "derive conditions",
+          "asymptotic variance",
+          "optimal perturbation/distribution"
+        ],
+        "cognitive_move": "Perform analytic derivations to extract constraints or extremal properties, then reverse-engineer constructions that satisfy them.",
+        "example_summary": "Paper 1 identified three necessary conditions for optimal linear attention and designed MetaLA to meet them; Paper 35 derived asymptotic variance-optimal perturbation families (DAP) for two-point estimators."
+      },
+      {
+        "name": "Amortize Expensive Resources",
+        "description": "Treat costly computations as resources that can be scheduled, cached, or reused across steps instead of recomputed from scratch, reducing wall-clock cost while preserving theoretical guarantees.",
+        "key_indicators": [
+          "amortize",
+          "reuse",
+          "cache",
+          "infrequent refresh",
+          "stale-but-bounded"
+        ],
+        "cognitive_move": "Analyze error propagation from reusing approximations, design refresh schedules or bounds to ensure convergence, and trade computation for controlled approximation.",
+        "example_summary": "Paper 9 treated Hessians as amortizable: compute them infrequently, reuse across correction steps, and prove convergence with scheduled refreshes to reduce overall Hessian cost."
+      },
+      {
+        "name": "Stochasticize Heuristics",
+        "description": "Replace brittle, hand-tuned heuristics with stochastic/probabilistic processes so updates become principled samples from a distribution, improving robustness and tunability.",
+        "key_indicators": [
+          "turn into sampling",
+          "SGLD/MCMC",
+          "probabilistic updates",
+          "stochasticize heuristics",
+          "sampling-based"
+        ],
+        "cognitive_move": "Recognize heuristic updates as implicit optimization targets and reinterpret them as sampling from a posterior or noisy gradient process to gain stability and theoretical footing.",
+        "example_summary": "Paper 6 reframed Gaussian placement updates in 3D Gaussian Splatting as SGLD/MCMC sampling, converting heuristics into probabilistic update rules that improved robustness and quality."
+      },
+      {
+        "name": "Exploit Symmetry and Invariance",
+        "description": "Encode known physical, geometric, or task symmetries into representations or models (equivariance/invariance) to drastically reduce sample complexity and improve generalization.",
+        "key_indicators": [
+          "equivariant",
+          "SO(3)/SO(2)",
+          "symmetry",
+          "feature mapping to invariant space",
+          "spherical representation"
+        ],
+        "cognitive_move": "Identify transformation groups relevant to the task, design representation mappings or architectures that respect those groups, and thereby reduce the hypothesis space.",
+        "example_summary": "Paper 7 preserved SO(3)-equivariance for robotic manipulation by mapping RGB images to a spherical representation, enabling data-efficient policies using only monocular inputs."
+      },
+      {
+        "name": "Dual/Ensemble Consistency for Robustness",
+        "description": "Use multiple models or divergent learning paths and enforce consistency or complementarity between them to mitigate noise, initialization sensitivity, and artifacts.",
+        "key_indicators": [
+          "dual-model",
+          "asymmetric",
+          "consistency enforcement",
+          "masking strategies",
+          "divergent learning paths"
+        ],
+        "cognitive_move": "Leverage complementary inductive biases by simultaneously training models with varied tendencies and enforce constraints (consistency/matching) so their differences reveal and correct errors.",
+        "example_summary": "Paper 14 used an asymmetric dual 3D Gaussian Splatting architecture with special masking and consistency to reduce reconstruction artifacts from in-the-wild images."
+      },
+      {
+        "name": "Transplant Architectural Motifs",
+        "description": "Borrow an architectural idea (multi-scale blocks, normalization tweaks, latent representations) from one model family and adapt it to another to close efficiency or performance gaps.",
+        "key_indicators": [
+          "inspired by",
+          "U-Net-like block",
+          "BiasNorm",
+          "apply X to Y",
+          "architectural change"
+        ],
+        "cognitive_move": "Map the beneficial inductive bias of an architectural motif to a new problem setting, adjust interfaces (dimensions, normalization, skip connections) and validate improved behavior.",
+        "example_summary": "Paper 12 incorporated U-Net-like multi-scale blocks and introduced BiasNorm + ScaledAdam to produce the efficient Zipformer for ASR; Paper 24 adapted patch/UV sampling ideas to 3D generation (Atlas Gaussians)."
+      },
+      {
+        "name": "Sequential/Adaptive Training and Inference",
+        "description": "Adopt sequential, adaptive algorithms (curriculum, sequential Monte Carlo, sequential posterior estimation) that refine models or proposals over rounds to improve sample efficiency or fidelity.",
+        "key_indicators": [
+          "sequential",
+          "adaptive",
+          "SMC",
+          "sequential posterior estimation",
+          "curriculum / progressive"
+        ],
+        "cognitive_move": "Make training or inference iterative with intermediate feedback that guides subsequent sampling/learning towards high-value regions, reducing wasteful computation.",
+        "example_summary": "Paper 18 combined score-based models with sequential neural posterior estimation and SMC-style adaptive training to reduce simulation costs in likelihood-free inference (SNPSE)."
+      },
+      {
+        "name": "Stage-aware Decomposition & Scheduling",
+        "description": "Decompose an end-to-end task or pipeline into stages with distinct cost/latency profiles and design scheduling, caching, and elastic allocation that match per-stage demand.",
+        "key_indicators": [
+          "stage-aware",
+          "prefill vs decode",
+          "elastic partitioning",
+          "caching prefixes",
+          "per-stage partition"
+        ],
+        "cognitive_move": "Characterize workload heterogeneity across pipeline stages, then design dynamic allocation and caching mechanisms to overlap computation and minimize bottlenecks.",
+        "example_summary": "Paper 16 reframed multimodal serving as an elastic, stage-aware pipeline (ElasticMM): modality-aware load balancing, per-stage elastic partitioning, and multimodal prefix caching to cut TTFT and improve throughput."
+      },
+      {
+        "name": "Geometric / Manifold Abstraction",
+        "description": "Model high-dimensional neural or data activity as geometric objects (manifolds, distances, capacity) to quantify representational limits and derive principled trade-offs.",
+        "key_indicators": [
+          "manifold",
+          "geometric separability",
+          "embed in firing-rate space",
+          "capacity trade-off",
+          "distances between manifolds"
+        ],
+        "cognitive_move": "Translate empirical statistics into geometric descriptors and use capacity/separability analyses to produce quantitative predictions or constraints on system behavior.",
+        "example_summary": "Paper 20 modeled place-cell population activity as manifolds and derived a trade-off: narrower place fields (higher spatial precision) reduce hippocampal capacity to store distinct contexts."
+      },
+      {
+        "name": "Proxying Expensive Components with Learned Surrogates",
+        "description": "Replace slow, costly, oracles (large models, human annotations) with fast, trainable surrogate models that replicate their judgments at much lower inference cost.",
+        "key_indicators": [
+          "replace MLLM judges",
+          "train verifier",
+          "proxy evaluator",
+          "fast surrogate",
+          "learned checker"
+        ],
+        "cognitive_move": "Collect training data from the expensive oracle, design a smaller model to mimic its output or intermediate checks, and integrate the surrogate into search/training pipelines.",
+        "example_summary": "Paper 33 created WEB-SHEPHERD: a learned checklist-style process verifier trained to replace expensive MLLM evaluators for web navigation, improving accuracy and reducing latency/cost."
+      },
+      {
+        "name": "Data Editing for Robustness",
+        "description": "Intervene in the training data (prune, reweight, discover environments) guided by theory or fairness objectives to improve worst-group performance or mitigate bias.",
+        "key_indicators": [
+          "pruning",
+          "data removal",
+          "discover environments",
+          "worst-group accuracy",
+          "distributional robustness"
+        ],
+        "cognitive_move": "Question the default 'more data is better' assumption, analyze tail or group effects, and apply surgical data changes or environment discovery to improve targeted metrics.",
+        "example_summary": "Paper 3 showed that controlled data removal can improve worst-group accuracy under certain conditions; Paper 10 (XRM) automatically discovers environments to boost worst-group performance; Paper 5 designed DRoP to prune without introducing classification bias."
+      },
+      {
+        "name": "Probabilistic Reframing for Uncertainty",
+        "description": "Bring probabilistic modeling (Bayesian approximations, Laplace, score-based models, Gaussian processes) into deterministic function learners to obtain calibrated uncertainty and principled decisions.",
+        "key_indicators": [
+          "uncertainty quantification",
+          "Laplace approximation",
+          "score-based",
+          "Gaussian processes",
+          "posterior estimation"
+        ],
+        "cognitive_move": "Embed the deterministic predictor in a probabilistic scaffold (linearization, posterior emulator, scoring) to compute uncertainty estimates with tractable approximations.",
+        "example_summary": "Paper 27 merged neural operators with Gaussian-process-style uncertainty via a linearized Laplace (LUNO); Paper 18 used score-based models and sequential posterior estimation for simulator inference (SNPSE)."
+      },
+      {
+        "name": "Evaluation & Metric Reengineering",
+        "description": "Design richer evaluation frameworks (human-and-auto hybrids, diverse annotator pools, process-level verifiers) that expose real-world variation and better align with downstream objectives.",
+        "key_indicators": [
+          "evaluation suite",
+          "auto-eval aligned with humans",
+          "diversity in evaluations",
+          "process-level reward",
+          "human annotation variation"
+        ],
+        "cognitive_move": "Identify weaknesses in existing metrics or annotation practices, collect broader/diverse signals, and build either learned evaluators or composite metrics to better reflect true performance.",
+        "example_summary": "Paper 21 built the Gecko evaluation suite and an auto-eval metric better aligned with diverse human judgments for text-to-image alignment; Paper 33 trained a process-level verifier (WEB-SHEPHERD) to produce actionable rewards."
+      }
+    ],
+    "meta_observations": "Across these synthesis narratives certain meta-patterns dominate: authors commonly combine formal theory with practical systems constraints (efficiency, dataset scale, latency), and the principal intellectual moves are (1) reframing problems into a theory-rich domain that offers tools and guarantees, (2) unifying disparate prior approaches to reveal parameterized design spaces, and (3) importing motifs or algorithms from other domains (analogy/transfer) while adapting them to domain constraints. Another pervasive theme is cost-conscious innovation: rather than only improving accuracy, many papers seek to reduce expensive resources (Hessians, MLLM evaluators, pipeline stages) by amortization, caching, or surrogate modeling. Finally, many breakthroughs are incremental combinations\u2014not purely novel primitives\u2014where exposing a tension (efficiency vs. fidelity, fairness vs. pruning, model generality vs. latency) and directly targeting that trade-off with a principled synthesis yields high-impact contributions."
+  },
+  {
+    "patterns": [
+      {
+        "name": "Trade-off Reframing",
+        "description": "Make an explicit trade-off the central problem and design adaptive mechanisms that negotiate it rather than optimizing a single objective. This involves identifying practical constraints (latency, bit-width, sample budget) and reframing model design as a control problem over those resources.",
+        "key_indicators": [
+          "latency-quality trade-off",
+          "bit-width / quantized models",
+          "balancing speed and accuracy",
+          "adaptive framework",
+          "operational parameters"
+        ],
+        "cognitive_move": "Elevate a pragmatic constraint into the formal objective and engineer mechanisms to adapt along that trade-off frontier.",
+        "example_summary": "Paper 1 (FPX) reframes LLM design around the latency\u2013quality trade-off and builds an adaptive framework that adjusts model parameters to meet time-sensitive application needs."
+      },
+      {
+        "name": "Cross-domain Synthesis",
+        "description": "Deliberately combine ideas, algorithms, or data sources from two or more traditionally separate fields to unlock novel capabilities. The pattern emphasizes mapping complementary strengths across domains\u2014e.g., language models + Bayesian optimization or simulation physics + RL.",
+        "key_indicators": [
+          "drawing from X and Y",
+          "inspired by ... and ...",
+          "combine insights",
+          "integrated end-to-end solution",
+          "borrowed frameworks"
+        ],
+        "cognitive_move": "Map functional elements in one domain to unmet needs in another and compose them into an integrated pipeline or algorithm.",
+        "example_summary": "Paper 16 (CloneBO) fuses protein language models, Bayesian optimization, and immunology (clonal evolution) to create an exploration scheme tailored for antibody engineering."
+      },
+      {
+        "name": "Hybridize with Domain Theory",
+        "description": "Bring formal domain theory (physics, numerical analysis, biology) into ML models to enforce structural constraints, improve stability, or restore critical properties. Rather than pure data-driven modeling, this introduces principled corrections or hybrid training objectives.",
+        "key_indicators": [
+          "structure-preserving",
+          "geometric numerical integration",
+          "conservative consistency",
+          "physics-informed",
+          "safety-embedded"
+        ],
+        "cognitive_move": "Integrate principled, often mathematical, domain constraints into learning or training protocols to recover guarantees lost by naive data-driven methods.",
+        "example_summary": "Paper 3 combines geometric integrator theory with GNN pretraining/fine-tuning to exploit direct-force predictors while restoring energy-conservation needed for stable atomistic simulation."
+      },
+      {
+        "name": "Data-first Optimization",
+        "description": "Recast performance improvements as problems of selecting, generating, or mixing training data rather than changing model architectures. This includes regressing to optimal mixtures, synthetic data generation, or influence-based selection.",
+        "key_indicators": [
+          "data mixtures",
+          "rank invariance",
+          "influence functions",
+          "data selection",
+          "synthetic augmentation / diffusion + SSL"
+        ],
+        "cognitive_move": "Shift the locus of intervention from model architecture to the construction and curation of training data, often formalizing it as an optimization/regression problem.",
+        "example_summary": "Paper 26 (REGMIX) models the search for good training data mixtures as a regression problem to predict high-performing data allocations efficiently for language model pretraining."
+      },
+      {
+        "name": "Leverage Natural / Biological Priors",
+        "description": "Use processes, structures, or dynamics observed in natural/biological systems as inductive priors or training curricula. This strategy operationalizes biological mechanisms (e.g., affinity maturation, retinal sampling) into algorithms or simulators.",
+        "key_indicators": [
+          "affinity maturation",
+          "clonal-family trajectories",
+          "retinal simulator",
+          "bio-plausible",
+          "emergent representation"
+        ],
+        "cognitive_move": "Translate an observed natural mechanism into a computational model or prior that guides learning toward solutions that mirror robust biological behavior.",
+        "example_summary": "Paper 29 trains a cortical predictive model on simulated optic-nerve streams derived from realistic retinal physics to recover color dimensions as emergent invariants."
+      },
+      {
+        "name": "Pretrain-then-Constrain (Two-stage Learning)",
+        "description": "Use an efficient pretraining phase that optimizes an easy-to-obtain signal, followed by a fine-tuning or projection step that imposes constraints (conservation, safety, verification) missing from the pretraining objective. The two stages trade speed/scale for principled correctness.",
+        "key_indicators": [
+          "pretraining on X, fine-tuning for Y",
+          "two-stage training",
+          "pretrain then refine",
+          "harvest efficiency then enforce constraints"
+        ],
+        "cognitive_move": "Decouple learning into a scalable exploratory phase and a corrective alignment phase, using the former to access large-scale patterns and the latter to impose necessary structure.",
+        "example_summary": "Paper 3 pretrains on direct-force supervision for efficiency and then fine-tunes models to restore conservative (energy-gradient) consistency for stable evaluation."
+      },
+      {
+        "name": "Adversarial / Security Reframing",
+        "description": "Reinterpret robustness or evaluation issues as adversarial problems and analyze worst-case or game-theoretic failure modes. This reveals blind spots that benign empirical evaluation misses and motivates defensive or detection mechanisms.",
+        "key_indicators": [
+          "adversarial security problem",
+          "cheating outputs",
+          "null model exploits",
+          "transferable cheating",
+          "game-theoretic"
+        ],
+        "cognitive_move": "Flank normative assessment by generating adversarial scenarios that expose vulnerabilities, then design mitigations grounded in an attacker\u2013defender perspective.",
+        "example_summary": "Paper 10 reframes automatic LLM evaluation as an adversarial problem and demonstrates a null-model attack that exploits evaluator biases across benchmarks."
+      },
+      {
+        "name": "Proxy / Self-Guidance",
+        "description": "Use simpler, weaker, or proxy models/instances as guidance signals for training or sampling rather than relying on orthogonal auxiliary models. This aligns the guidance task with the main task and reduces mismatch between objectives.",
+        "key_indicators": [
+          "weaker instance",
+          "self-guidance",
+          "proxy model",
+          "inferior version as guide",
+          "twisted proposals"
+        ],
+        "cognitive_move": "Replace mismatched auxiliary guidance with an aligned, achievable proxy\u2014often a downgraded or reweighted version of the main model\u2014to steer learning or sampling more coherently.",
+        "example_summary": "Paper 33 replaces unconditional guidance with a weaker instance of the conditional diffusion model (autoguidance) to improve image quality without harming diversity."
+      },
+      {
+        "name": "Problem Recast as Optimization / Regression",
+        "description": "Transform a conceptual or heuristic task into a formal optimization/regression problem so that principled solvers and statistical guarantees can be applied. This often converts selection or combinatorial choices into continuous estimation.",
+        "key_indicators": [
+          "recast as regression",
+          "optimize mixture",
+          "treat quantization as optimization",
+          "objective / cost formulation"
+        ],
+        "cognitive_move": "Abstract a discrete or intuitive decision into a parametrized objective amenable to classical optimization or statistical estimation, enabling scalable algorithms and theory.",
+        "example_summary": "Paper 6 reinterprets quantization as a complex optimization over distributions and learns a Redistribution-driven Learnable Quantizer to improve low-bit SR models."
+      },
+      {
+        "name": "Leverage Symmetry and Inductive Biases",
+        "description": "Bring symmetry principles (equivariance, invariances) to the foreground of architecture and algorithm design to bake desirable generalization properties into models. This reduces sample complexity and improves robustness for structured data.",
+        "key_indicators": [
+          "equivariance",
+          "group equivariant convnets",
+          "symmetry",
+          "random walks as records",
+          "3-WL limitations"
+        ],
+        "cognitive_move": "Identify the symmetry structure intrinsic to the problem and encode it as an inductive bias in representation or computation to guide learning.",
+        "example_summary": "Paper 17 designs equivariant convolutional architectures to reduce adversarial vulnerability by embedding symmetry into network structure."
+      },
+      {
+        "name": "Simulation-driven Emergence",
+        "description": "Construct realistic simulators (physics, retinal optics, materials) to generate training distributions that expose the learner to the mechanistic signals necessary to discover latent invariants or behaviors. Use simulators as hypothesis tests about what data pressures produce.",
+        "key_indicators": [
+          "realistic simulator",
+          "predictive objective on simulated signals",
+          "operationalize anatomy / physics",
+          "emergent representations"
+        ],
+        "cognitive_move": "Build a mechanistic data generator that embodies hypothesized causal structure and train models on its outputs to see if the hypothesized representations or behaviors emerge.",
+        "example_summary": "Paper 29 builds a retinal simulator combining cone maps and spectral sensitivities to train a predictive cortical model that recovers color dimensions."
+      },
+      {
+        "name": "Adaptive Sampling & Twisting",
+        "description": "Use iterative, reweighted, or guided sampling strategies (e.g., twisted SMC, adaptive sampling, Zubov-inspired region expansion) to focus scarce labeling/compute resources on informative regions of data or state-space.",
+        "key_indicators": [
+          "iterative adaptive sampling",
+          "twisted proposals / SMC",
+          "Zubov-inspired",
+          "region of attraction expansion",
+          "mixture-of-time / attention stacks"
+        ],
+        "cognitive_move": "Convert passive data collection into an active, feedback-driven process that updates sampling policies based on intermediate model knowledge to improve efficiency and coverage.",
+        "example_summary": "Paper 16 uses sequential Monte Carlo (twisting) to bias LM proposals toward promising assay outcomes when experimental measurements are scarce."
+      },
+      {
+        "name": "Signal-domain Decomposition",
+        "description": "Analyze failure modes in transform domains (frequency, SDE integral forms) and design interventions that selectively act on components most responsible for degradation (e.g., adversarial perturbations, mean-reverting noise).",
+        "key_indicators": [
+          "frequency domain",
+          "SDE integral form",
+          "semi-analytical solutions",
+          "target specific frequency components",
+          "mean reverting"
+        ],
+        "cognitive_move": "Move to a representation where harmful and useful components are separable, then design targeted operators that remove damage while preserving semantics.",
+        "example_summary": "Paper 12 combines diffusion-based purification with frequency-domain analysis to selectively suppress adversarial noise while preserving image content."
+      },
+      {
+        "name": "From Heuristics to Principle",
+        "description": "Take widely-used heuristics or empirically tuned procedures and expose their underlying structure, replacing ad-hoc rules with principled decompositions or theoretical guarantees. The result is methods that are both simpler and more reliable.",
+        "key_indicators": [
+          "depicting heuristics as decomposed preconditioner",
+          "critiques of heuristic complexity",
+          "simpler, theoretically-grounded alternative",
+          "overturning heuristic assumptions"
+        ],
+        "cognitive_move": "Analyze an empirical method to uncover a core mathematical object or invariant, then derive a cleaner algorithm grounded in that structure.",
+        "example_summary": "Paper 23 decomposes Shampoo's preconditioner using Kronecker-factorization to replace heuristic steps with a principled, simpler optimizer variant."
+      },
+      {
+        "name": "Unify Weak Supervision",
+        "description": "Recognize a family of related noisy-annotation problems and design a unified framework that leverages the shared property that noisy annotations contain partially correct information. Integrate selection, identification, and correction techniques into a single pipeline.",
+        "key_indicators": [
+          "inaccurate annotations",
+          "selection-based, identification-based, correction-based",
+          "dynamic label refinement",
+          "model reliability detection",
+          "unified framework"
+        ],
+        "cognitive_move": "Abstract the common signal across heterogeneous imperfect supervision types and create mechanisms that harvest the reliable pieces while correcting or discounting noise.",
+        "example_summary": "Paper 35 (ULAREF) consolidates different noisy-label treatments into a single system that dynamically refines labels and detects model reliability."
+      },
+      {
+        "name": "Decouple Entangled Effects",
+        "description": "Identify when multiple desirable outcomes are being conflated by a single mechanism and design methods to disentangle control over each effect (e.g., quality vs. diversity, guidance vs. overshooting).",
+        "key_indicators": [
+          "entangles improvements in X with reductions in Y",
+          "overshooting effects",
+          "disentangle control over quality and variation",
+          "task mismatch"
+        ],
+        "cognitive_move": "Analyze the causal or functional entanglement, then construct mechanisms or alternative signals that isolate and permit independent control of each target.",
+        "example_summary": "Paper 33 diagnoses that classifier-free guidance mixes quality improvements with reduced diversity and introduces autoguidance to disentangle these effects."
+      }
+    ],
+    "meta_observations": "Across these top ML synthesis narratives, several recurrent intellectual habits appear: researchers routinely reframe practical constraints (latency, safety, annotation scarcity) into formal objectives and design adaptive or two-stage solutions; they favor cross-disciplinary compositions that graft principled domain knowledge (physics, biology, optimization) onto flexible learning systems; they increasingly treat data \u2014 its selection, simulation, mixture, and augmentation \u2014 as the primary lever for progress rather than model tweaks alone; and they prefer replacing brittle heuristics with decomposed, theory-aligned methods. Two operational motifs stand out: (1) building realistic simulators or proxies to produce the precise pressures that reveal desired invariants, and (2) converting informal engineering decisions into explicit optimization or sampling problems solvable with statistical tools. Finally, there is a growing preoccupation with adversarial modes \u2014 whether in evaluation, robustness, or sampling \u2014 that motivates framing many problems as attacker\u2013defender or worst-case analyses. These patterns form a portable toolbox: spot a constraint, ask which domain supplies a principled prior, simulate or generate the right data pressure, and then convert the insight into a constrained optimization or adaptive sampling procedure."
+  },
+  {
+    "patterns": [
+      {
+        "name": "Cross\u2011Domain Transfer",
+        "description": "Borrow techniques, formalisms, or intuitions from a different field and adapt them to an ML problem to unlock new capabilities. This often involves mapping entities and constraints from one domain into another and engineering the interface.",
+        "key_indicators": [
+          "drawing on X from the literature",
+          "leveraging insights from Y",
+          "inspired by [domain]",
+          "imported the ... formalism"
+        ],
+        "cognitive_move": "Analogical mapping and adaptation across disciplinary boundaries.",
+        "example_summary": "Paper 5: Fractional calculus (non\u2011local derivatives) is borrowed to model long\u2011range feature propagation in GNNs (FROND)."
+      },
+      {
+        "name": "Reframe the Problem",
+        "description": "Change the framing of the research question so that existing tools become applicable or so a previously hidden variable becomes central. Reframing often reveals a simpler or more actionable target for solution.",
+        "key_indicators": [
+          "reframed the problem",
+          "instead focused on",
+          "instead of X, consider Y",
+          "asked whether"
+        ],
+        "cognitive_move": "Conceptual inversion or redescription that exposes new leverage points.",
+        "example_summary": "Paper 3: Instead of seeking richer theory for deep RL broadly, authors define the 'effective horizon' as a predictive complexity measure tied to MDP success."
+      },
+      {
+        "name": "Gap \u2192 Design Constraint",
+        "description": "Turn an identified limitation, shortcoming or practical constraint into explicit design requirements that guide architecture or algorithm choices. The limitation becomes a constraint that shapes the solution space.",
+        "key_indicators": [
+          "identified limitation",
+          "gap in ... literature",
+          "real\u2011world constraints",
+          "leads them to seek"
+        ],
+        "cognitive_move": "Constraint-driven specification: transform problem diagnosis into engineering requirements.",
+        "example_summary": "Paper 6: Continual\u2011RL constraints (no labels, online adaptation) are turned into a requirement for output\u2011anchoring trust regions (LCPO)."
+      },
+      {
+        "name": "Principled Reduction / Compression",
+        "description": "Use a mathematically principled method to reduce model or data complexity while preserving essential structure (e.g., optimal transport, information theory). The reduction is derived rather than heuristic.",
+        "key_indicators": [
+          "principled reduction",
+          "optimal transport",
+          "Gaussian mixture reduction",
+          "preserve fidelity"
+        ],
+        "cognitive_move": "Formal optimization or divergence minimization to compress representations.",
+        "example_summary": "Paper 18: Apply optimal transport / composite transportation divergence to compact redundant Gaussian primitives in 3D Gaussian Splatting without quality loss."
+      },
+      {
+        "name": "Measurement\u2011Driven Reformulation",
+        "description": "Replace theoretical proxies with direct empirical measurement and use those measurements to change algorithms or training schedules. The method moves from assumed quantities to measurable signals.",
+        "key_indicators": [
+          "instead of relying on ... they measure",
+          "empirical observations over training",
+          "measure the evolution"
+        ],
+        "cognitive_move": "Empirical quantification used to inform and redesign procedures.",
+        "example_summary": "Paper 9: Rather than using gradient noise theory, authors measure the Critical Batch Size (CBS) evolution to guide batch warmup strategies."
+      },
+      {
+        "name": "Analogical Import / Human Analogy",
+        "description": "Use human or organizational analogies to structure ML systems or architectures, translating properties of human processes into algorithmic mechanisms.",
+        "key_indicators": [
+          "learning from organizational memory",
+          "analogies from human collaboration",
+          "inspired by human ..."
+        ],
+        "cognitive_move": "Metaphorical transfer: map human/social mechanisms to computational architectures.",
+        "example_summary": "Paper 12: Organizational memory ideas motivate a three\u2011tier hierarchical memory for multi\u2011agent G\u2011Memory."
+      },
+      {
+        "name": "Architectural Minimalism / Remove Inductive Bias",
+        "description": "Deliberately remove or minimize hand\u2011designed inductive biases in architectures to test whether data and learned components can internalize those biases, often relying on scalable learning.",
+        "key_indicators": [
+          "eschewing explicit ... bias",
+          "minimize inductive bias",
+          "learn across scenes",
+          "internalize geometry"
+        ],
+        "cognitive_move": "Abstraction and faith in learned representations over hand\u2011crafted priors.",
+        "example_summary": "Paper 16: LVSM uses transformer latents to learn multi\u2011view geometry without explicit NeRF rendering priors."
+      },
+      {
+        "name": "Local\u2011to\u2011Global Guarantees",
+        "description": "Prove or exploit a property that links local measurements on a small, controllable subset to global behavior of the whole system; use that link to make efficient decisions (e.g., pruning, selection) without full access.",
+        "key_indicators": [
+          "local reconstruction errors predict global degradation",
+          "Lipschitz\u2011continuous \u2192 bound",
+          "subset fidelity"
+        ],
+        "cognitive_move": "Mathematical bounding: deduce global outcomes from local estimates via continuity/regularity arguments.",
+        "example_summary": "Paper 24: Using Lipschitzness to show local subset fidelity on synthetic probes predicts global pruning impact (ModHiFi)."
+      },
+      {
+        "name": "Constructive Formalization",
+        "description": "Take a conceptual or negative result (e.g., 'not possible') and turn it into a constructive decision procedure or protocol that either realizes the target or certifies impossibility.",
+        "key_indicators": [
+          "formalized ... as",
+          "complete decision procedure",
+          "constructive sampling ideas",
+          "realizability"
+        ],
+        "cognitive_move": "Algorithmic realization of an abstract question into a yes/no + constructive output.",
+        "example_summary": "Paper 17: Formalize 'realizability' of counterfactuals and give a complete procedure that outputs sampling protocols when realizable."
+      },
+      {
+        "name": "Synthetic Supervision",
+        "description": "Replace or augment scarce/high\u2011cost human labels with generated/simulated labels or feedback (including LLMs), and carefully validate the fidelity and calibration of the synthetic supervision.",
+        "key_indicators": [
+          "simulate human feedback",
+          "synthetic probing",
+          "calibration data",
+          "low\u2011cost learning from feedback"
+        ],
+        "cognitive_move": "Substitution: trade expensive human data for cheaper simulated signals while preserving signal quality.",
+        "example_summary": "Paper 19: AlpacaFarm uses LLMs to simulate human feedback for instruction\u2011tuning at dramatically lower cost."
+      },
+      {
+        "name": "Output Anchoring / Behavioral Regularization",
+        "description": "Stabilize learning by anchoring new outputs to previous behaviors rather than constraining parameters directly. Treat outputs as the object of continuity instead of weights.",
+        "key_indicators": [
+          "output\u2011anchoring",
+          "match prior outputs",
+          "distillation\u2011style anchoring",
+          "behavioral anchoring"
+        ],
+        "cognitive_move": "Shift from parameter\u2011space regularization to function/output\u2011space regularization.",
+        "example_summary": "Paper 6: LCPO constrains on\u2011policy updates via distillation\u2011style matching to prior outputs to avoid forgetting."
+      },
+      {
+        "name": "Differential Cancellation",
+        "description": "Create a new signal by combining (often subtracting) multiple noisy views so that shared noise cancels and the true signal emerges; use this to induce sparsity or denoise attention/representations.",
+        "key_indicators": [
+          "compute two ... maps and subtract",
+          "cancel distracting mass",
+          "noise\u2011cancelling",
+          "emergent sparsity"
+        ],
+        "cognitive_move": "Constructive interference: combine complementary estimates so common components cancel and contrasts amplify.",
+        "example_summary": "Paper 7: DIFF Transformer subtracts two softmax attention maps to reduce attention noise and produce sparser salient attention."
+      },
+      {
+        "name": "Inject Inductive Bias",
+        "description": "Introduce architectural elements or training priors that encode domain assumptions (spatial locality, temporal coherence) to improve sample efficiency or model performance.",
+        "key_indicators": [
+          "endow with spatial inductive biases",
+          "convolutional kernels",
+          "logical OR pooling",
+          "isometric penalties"
+        ],
+        "cognitive_move": "Encode domain structure explicitly into model design rather than relying solely on data to learn it.",
+        "example_summary": "Paper 27: LogicTreeNets incorporate convolutional logic\u2011gate kernels and residuals to give LGNs spatial inductive bias for images."
+      },
+      {
+        "name": "Latent Abstraction Swap",
+        "description": "Move computation/regularization from high\u2011dimensional (pixel/word) spaces into a learned latent space where operations (diffusion, consistency, optimization) are cheaper or more effective.",
+        "key_indicators": [
+          "latent diffusion",
+          "operate in latent space",
+          "hard data consistency in reverse sampling",
+          "optimization in latent space"
+        ],
+        "cognitive_move": "Representation shift: perform inverse problems or generative tasks in compressed learned coordinates.",
+        "example_summary": "Paper 33: ReSample puts inverse problem solving into latent diffusion space and enforces hard data consistency for efficiency and quality."
+      },
+      {
+        "name": "Purification / Conversion",
+        "description": "Design procedures to transform a weaker, relaxed property into a stronger, purer one, often by using randomized post\u2011processing or strong composition to restore guarantees.",
+        "key_indicators": [
+          "transitioning from approximate to pure",
+          "randomized post\u2011processing",
+          "purification",
+          "restore privacy"
+        ],
+        "cognitive_move": "Constructive strengthening using probabilistic transformations and composition theorems.",
+        "example_summary": "Paper 15: Convert approximate differential privacy mechanisms into pure DP via randomized post\u2011processing and strong composition techniques."
+      },
+      {
+        "name": "Compositional Benchmarking",
+        "description": "Redesign evaluation benchmarks to expose practical, compositional failure modes (APIs, multi\u2011step composition, underspecification) rather than merely increasing difficulty of isolated puzzles.",
+        "key_indicators": [
+          "reframe benchmark difficulty",
+          "API\u2011centric tasks",
+          "compositional tasks",
+          "execution\u2011validated testing"
+        ],
+        "cognitive_move": "Problem reframing to test specific real\u2011world competencies via task design.",
+        "example_summary": "Paper 28: BigCodeBench focuses on library/API composition and instruction comprehension to stress capabilities missed by legacy code benchmarks."
+      },
+      {
+        "name": "Metric / Tool Invention",
+        "description": "When existing diagnostics are inadequate, invent a new metric, tensor, or tool that better captures the phenomenon of interest and enables both empirical and theoretical work.",
+        "key_indicators": [
+          "introduce the ... measure",
+          "interaction tensor",
+          "curvature metric",
+          "provides a practical new metric"
+        ],
+        "cognitive_move": "Analytical invention: create a measurement that operationalizes an otherwise fuzzy concept.",
+        "example_summary": "Paper 30: Use curvature of the loss as a new metric to quantify memorization and detect mislabeled examples."
+      },
+      {
+        "name": "Decouple & Solve Separately",
+        "description": "Break a complex nonconvex or coupled problem into parts (e.g., convex vs concave components, routing vs specialization), optimize them with tailored methods, and combine with theoretical guarantees.",
+        "key_indicators": [
+          "separate consideration of convex and concave",
+          "decouple",
+          "adaptive sampling",
+          "router learned from short prefixes"
+        ],
+        "cognitive_move": "Divide\u2011and\u2011conquer: isolate orthogonal subproblems so each can be addressed using the best available tools.",
+        "example_summary": "Paper 20: Online adaptive sampling for DC functions decouples convex and concave pieces and provides convergence guarantees."
+      },
+      {
+        "name": "Asynchronous Specialization",
+        "description": "Design systems where components (experts, nodes) specialize locally with minimal synchronization, but introduce mechanisms to avoid usual async pathologies (e.g., learned routing from prefixes).",
+        "key_indicators": [
+          "avoid costly coordination",
+          "mostly local updates",
+          "prefix\u2011based router",
+          "reduce inter\u2011node chatter"
+        ],
+        "cognitive_move": "System redesign that trades global synchrony for structured, controlled asynchrony to scale capacity.",
+        "example_summary": "Paper 32: SMALLTALK LM uses an almost\u2011asynchronous MoE training paradigm with a prefix router to reduce communication and maintain quality."
+      },
+      {
+        "name": "Empirical Microscopy",
+        "description": "Trace a practical failure or variability back to low\u2011level causes (hardware/FP rounding, kernel scheduling) using controlled experiments and then propose targeted mitigations.",
+        "key_indicators": [
+          "finite\u2011precision rounding",
+          "GEMM kernels and reduction orderings",
+          "batching, fusion change operator scheduling",
+          "trace causal chain"
+        ],
+        "cognitive_move": "Causal debugging: instrument and vary low\u2011level factors to reveal amplification mechanisms in complex systems.",
+        "example_summary": "Paper 29: Authors show how tiny kernel rounding differences in GPU libraries can amplify through autoregressive generation to cause nondeterministic LLM outputs and propose inference mitigations."
+      },
+      {
+        "name": "Regularizer\u2011as\u2011Geometry",
+        "description": "Translate a downstream analytical assumption (e.g., Euclidean latent structure) into a geometric regularizer during training (e.g., push Fisher metric toward identity) so learned representations become compatible with downstream tools.",
+        "key_indicators": [
+          "treat decoder's Fisher metric as target",
+          "isometric penalties",
+          "push metric toward identity",
+          "align representations with Euclidean assumptions"
+        ],
+        "cognitive_move": "Geometric alignment: craft training objectives that shape manifold geometry to satisfy downstream method assumptions.",
+        "example_summary": "Paper 34: FlatVI regularizes VAE decoder Fisher metric to make latent interpolations approximate geodesics for single\u2011cell analyses."
+      },
+      {
+        "name": "Leverage External Solvers",
+        "description": "Integrate efficient, domain\u2011specialized solvers (SMT, LP, SAT) as differentiable or tightly coupled layers within learning pipelines to impose logical/structural constraints without heavy annotation.",
+        "key_indicators": [
+          "leveraging efficient Z3 SMT solver",
+          "incorporation of logical constraints",
+          "solver layer",
+          "neuro\u2011symbolic"
+        ],
+        "cognitive_move": "Tool integration: embed external symbolic engines into learning to handle structured constraints and reduce label needs.",
+        "example_summary": "Paper 35: SMTLayer wraps the Z3 solver to inject logical constraints into neural training without massive supervised data."
+      },
+      {
+        "name": "Signal Cancellation for Sparsity",
+        "description": "Engineer complementary estimators or views whose algebraic combination suppresses background/noise components and reveals sparse, high\u2011signal parts (a practical variant of differential cancellation focused on sparsification).",
+        "key_indicators": [
+          "sparsity",
+          "cancel shared low\u2011signal components",
+          "emergent sparsity",
+          "sparse attention patterns"
+        ],
+        "cognitive_move": "Constructive contrast: synthesize contrastive signals to automatically sparsify and focus computation.",
+        "example_summary": "Paper 7: DIFF Transformer uses subtraction of attention views to obtain sparse salient attention and better retrieval."
+      },
+      {
+        "name": "Prediction\u2011Augmented Algorithms",
+        "description": "Treat learned predictions as first\u2011class inputs to classical algorithmic problems, quantify how prediction accuracy affects guarantees, and design algorithms that exploit predictions for better approximation or runtime.",
+        "key_indicators": [
+          "incorporating predictions",
+          "factor in the accuracy of predictions",
+          "learned predictions enhance approximation guarantees"
+        ],
+        "cognitive_move": "Hybridization: fuse ML predictions with algorithmic design to improve classical guarantees under quantified prediction error.",
+        "example_summary": "Paper 13: Use data\u2011driven predictions to strengthen approximation algorithms (e.g., for Steiner Tree) and provide performance bounds depending on prediction quality."
+      }
+    ],
+    "meta_observations": "Across these synthesis narratives a few recurring intellectual habits stand out. Breakthroughs often come from cross\u2011pollination \u2014 importing concepts (calculus, optimal transport, organizational memory, solver technology) into ML problems and carefully engineering interfaces. Authors commonly start by diagnosing a concrete limitation, convert that diagnosis into a design constraint, then reframe the problem so existing tools become applicable or new measurements become meaningful. Constructive formalization (turning conceptual questions into decision procedures or algorithms) and inventing metrics/tools to operationalize fuzzy notions are frequent moves. Practical systems constraints \u2014 compute, privacy, communication, dataset cost \u2014 strongly shape methodological choices, prompting strategies like synthetic supervision, principled compression, and asynchronous specialization. Finally, many papers pair a theoretical or geometric insight (local\u2192global bounds, Fisher metric regularization, purity conversions) with empirical validation, showing a methodological rhythm: identify gap \u2192 reframe \u2192 import/construct \u2192 prove/measure \u2192 engineer/validate. These patterns are learnable: practicing deliberate cross\u2011domain mapping, reframing problems as constraints, seeking measurable proxies, and building constructive procedures will reproduce many of the successful intellectual moves observed here."
+  },
+  {
+    "patterns": [
+      {
+        "name": "Neglected-Case Spotting",
+        "description": "Search deliberately for under-treated regimes, edge cases, or neglected assumptions in established paradigms. Researchers identify where standard tools fail (negative inputs, non-monotone cases, scarce labels) and make that gap the starting point for innovation.",
+        "key_indicators": [
+          "neglected",
+          "overlooked",
+          "scarcity of ... datasets",
+          "shortcomings",
+          "limitations of existing approaches"
+        ],
+        "cognitive_move": "Zoom in on boundary conditions or under-explored problem variants and treat them as first-class problems.",
+        "example_summary": "Paper 1: Noticed negative and non-monotone submodular functions were overlooked and developed universal solvers; Paper 5: identified lack of large-scale 3D medical datasets and created AbdomenAtlas."
+      },
+      {
+        "name": "Cross-Domain Synthesis",
+        "description": "Combine theories, tools or intuitions from different disciplines (math, physics, optimization, neuroscience) to construct hybrid solutions. This strategy crops up when a single field's toolkit is insufficient and another field offers a complementary handle.",
+        "key_indicators": [
+          "drawn from",
+          "inspired by ...",
+          "leveraging X and Y",
+          "bridging ... with ..."
+        ],
+        "cognitive_move": "Map concepts across domains and transplant methods, preserving essential structure while adapting to context.",
+        "example_summary": "Paper 6: united variational inference, ensembles, and Wasserstein gradient flows; Paper 14: fused PINNs with message-passing on irregular geometries."
+      },
+      {
+        "name": "Problem Reframing",
+        "description": "Recast the original task in a different conceptual language (e.g., dynamics, energy, routing, one-to-many) so different tools and guarantees become applicable. Reframing often reveals hidden structure or decouples difficult dependencies.",
+        "key_indicators": [
+          "reconceptualized as",
+          "reframe",
+          "treat X as a dynamic/system/energy/etc.",
+          "decouple"
+        ],
+        "cognitive_move": "Change the lens of the problem to expose new invariants, objective functions, or modular decompositions.",
+        "example_summary": "Paper 2: token sequences reconceptualized as dynamical systems; Paper 21: discrete generation cast as flow-matching with kinetic-energy objective."
+      },
+      {
+        "name": "Unify and Generalize",
+        "description": "Construct a unifying theory or family that subsumes several previously disparate methods, clarifying connections and enabling new algorithmic variants. This often produces principled algorithmic families with provable behavior.",
+        "key_indicators": [
+          "unify",
+          "linking",
+          "family of",
+          "bridging X and Y",
+          "provides theoretical connections"
+        ],
+        "cognitive_move": "Abstract commonalities into a single mathematical framework that explains and extends prior methods.",
+        "example_summary": "Paper 6: unified variational inference and ensembles via gradient flow theory; Paper 31: reframed low-rank OT as a structural oracle within a multiscale refinement."
+      },
+      {
+        "name": "From Single-to-Many Shift",
+        "description": "Transform tasks formulated as single-output problems into one-to-many settings (diversification) to improve robustness, coverage, or usability. This shift frequently unlocks application requirements like design diversity or multiple hypotheses.",
+        "key_indicators": [
+          "one-to-many",
+          "diversity",
+          "sample multiple",
+          "expand design space"
+        ],
+        "cognitive_move": "Relax uniqueness assumptions and design mechanisms (buffers, sampling, conditional generators) to produce diverse valid outputs.",
+        "example_summary": "Paper 8: recast inverse folding as one-to-many to generate diverse protein sequences; Paper 3: constructed Buffer of Thoughts to retrieve multiple thought-templates."
+      },
+      {
+        "name": "Create Enabling Resources",
+        "description": "When progress is blocked by lack of data, benchmarks, or toolsets, construct large-scale datasets, systematic benchmarks, or evaluation frameworks to enable the community and to set new standards.",
+        "key_indicators": [
+          "dataset",
+          "benchmark",
+          "framework for evaluation",
+          "pre-training corpus",
+          "establish a standard"
+        ],
+        "cognitive_move": "Invest engineering effort to produce shared infrastructure that makes previously infeasible experiments or comparisons possible.",
+        "example_summary": "Paper 5: AbdomenAtlas dataset for 3D medical transfer learning; Paper 20 & 22: SEAL and MultiOOD benchmarks to evaluate real-world degradations and multimodal OOD."
+      },
+      {
+        "name": "Transformation-Invariant Design",
+        "description": "Identify symmetries or reparameterization equivalences and design methods (optimizers, preconditioners, representations) invariant to these transformations, reducing sensitivity to arbitrary choices.",
+        "key_indicators": [
+          "invariant",
+          "equivalence classes",
+          "respect symmetry",
+          "parameterization-invariant",
+          "Burer\u2013Monteiro"
+        ],
+        "cognitive_move": "Expose the invariance, then adapt algorithms so their outputs or updates commute with the symmetry group.",
+        "example_summary": "Paper 10: designed LoRA-RITE respecting factorization symmetries; Paper 26: learnable transformations for quantization that preserve equivalence."
+      },
+      {
+        "name": "Exploit Model Internals",
+        "description": "Repurpose latent capabilities or internal components of existing models (attention heads, gradients, learned tokens) as resources for new tasks, often yielding training-free or lightweight methods.",
+        "key_indicators": [
+          "repurpose",
+          "leverage attention heads",
+          "use internal signals",
+          "training-free"
+        ],
+        "cognitive_move": "Probe model internals to find reusable signals and then design minimal interfaces to extract and use them.",
+        "example_summary": "Paper 23: used evaluator attention heads for prompt compression without retraining; Paper 7: predicted invariant subspaces with neural maps to guide Krylov iterations."
+      },
+      {
+        "name": "Decouple Hard Dependencies",
+        "description": "Separate tightly-coupled design choices (e.g., corruption path vs. dynamics, entropy vs. energy) so each subproblem can be addressed with appropriate theory or tooling, simplifying analysis and optimization.",
+        "key_indicators": [
+          "decouple",
+          "separate choice of",
+          "independent of path",
+          "orthogonal objectives"
+        ],
+        "cognitive_move": "Divide the problem into orthogonal axes and solve or optimize each under its own rationale before recombining them.",
+        "example_summary": "Paper 21: decoupled choice of discrete corruption path from velocity design; Paper 11: balanced entropy minimization with energy-based discriminative guidance."
+      },
+      {
+        "name": "Leverage Analogy & Physics Intuition",
+        "description": "Use metaphors and mathematical machinery from physics or other sciences (kinetic energy, statistical mechanics, automata) to model learning dynamics or derive algorithms, yielding new intuitions and formal tools.",
+        "key_indicators": [
+          "Benamou\u2013Brenier",
+          "kinetic-energy",
+          "statistical mechanics",
+          "glass-like",
+          "automaton"
+        ],
+        "cognitive_move": "Map ML phenomena to well-studied physical/dynamical systems to borrow both intuition and rigorous analytical techniques.",
+        "example_summary": "Paper 21: adopted Benamou\u2013Brenier style kinetic objective for discrete CTMCs; Paper 32: modeled grokking as a glass-like relaxation."
+      },
+      {
+        "name": "Factorization for Efficiency",
+        "description": "Introduce structured factorizations or sparse parameterizations that retain expressivity while drastically reducing computation and memory, often combined with customized hardware-aware algorithms.",
+        "key_indicators": [
+          "factorized",
+          "sparse routing",
+          "low-rank",
+          "diagonal plus low-rank",
+          "GPU-friendly"
+        ],
+        "cognitive_move": "Replace dense operators with structured components (P\u00d7D, low-rank, grid+MLP) and adapt algorithms to exploit that structure for speed or memory gains.",
+        "example_summary": "Paper 17: PD-SSM used sparse routing \u00d7 diagonal scaling to get FSA universality at diagonal cost; Paper 31: hierarchical low-rank refinement for scalable OT."
+      },
+      {
+        "name": "Regularize for Desired Emergence",
+        "description": "Design auxiliary losses or regularizers that steer emergent behavior (diversity, specialization, sharper routing) without changing architecture. These losses are crafted to be compatible with existing training objectives.",
+        "key_indicators": [
+          "orthogonality penalty",
+          "variance loss",
+          "encourage diversity",
+          "auxiliary loss"
+        ],
+        "cognitive_move": "Add targeted, usually lightweight objectives that bias the learning dynamics toward desired macroscopic properties.",
+        "example_summary": "Paper 30: added orthogonality and variance penalties to MoE training to produce specialized experts while preserving load balance."
+      },
+      {
+        "name": "Simulation & Proxy Substitution",
+        "description": "Replace expensive, rare, or impractical human-in-the-loop evaluations with proxies, simulators, or virtual agents to enable scalable development and reproducible benchmarking.",
+        "key_indicators": [
+          "proxy agents",
+          "simulation-based",
+          "virtual outlier synthesis",
+          "follow-the-virtual-advice"
+        ],
+        "cognitive_move": "Construct faithful substitutes that preserve the phenomena of interest sufficiently to permit iterative algorithm development and analysis.",
+        "example_summary": "Paper 9: used Follow-the-Virtual-Advice to avoid UGAP complexity; Paper 27: used proxy agents for human-AI coordination evaluations."
+      },
+      {
+        "name": "Reformulate Metrics & Evaluations",
+        "description": "Question standard evaluation protocols and design new metrics or stress tests that reveal practical shortcomings (security, real degradations, integration). This often exposes blind spots of correctness-only assessments.",
+        "key_indicators": [
+          "evaluation framework",
+          "new metrics",
+          "stress test",
+          "exploit harnesses"
+        ],
+        "cognitive_move": "Translate practical requirements into measurable benchmarks and construct experiments that surface failure modes.",
+        "example_summary": "Paper 35: BaxBench combined functional tests with exploit harnesses to test production readiness and security; Paper 20: SEAL clustered degradation spaces and introduced new evaluation metrics for real-SR."
+      },
+      {
+        "name": "Hierarchical & Multiscale Refinement",
+        "description": "Solve coarse approximations first, then iteratively refine them through hierarchical splits or local corrections; this enables handling large-scale problems with provable convergence or efficiency.",
+        "key_indicators": [
+          "multiscale",
+          "hierarchical refinement",
+          "coarse-to-fine",
+          "split clusters"
+        ],
+        "cognitive_move": "Use a sequence of increasingly detailed solves that bootstrap on cheaper approximations to reach high-resolution solutions efficiently.",
+        "example_summary": "Paper 31: HiRef used low-rank solves to iteratively refine partitions toward a Monge map; Paper 14: leveraged physics priors with learnable operators for spatiotemporal refinement."
+      },
+      {
+        "name": "Probe-Then-Theorize (Empirical\u2192Theory Loop)",
+        "description": "Start with empirical anomalies or patterns, probe them with controlled experiments, then build theoretical explanations and corrective algorithms. The loop strengthens plausibility and leads to principled fixes.",
+        "key_indicators": [
+          "controlled experiments",
+          "empirical findings",
+          "hypothesized causal",
+          "theoretical analysis"
+        ],
+        "cognitive_move": "Iterate between targeted experiments and formal analysis to move from observation to generalizable insight.",
+        "example_summary": "Paper 4: observed self-preference bias, ran controlled prompting/fine-tuning, and concluded a causal link with self-recognition; Paper 2: combined theory and experiments to refine SSM token dynamics."
+      },
+      {
+        "name": "Recast via Alternative Mathematical Forms",
+        "description": "Convert problem statements into alternative mathematical objects (energy vs entropy, hinge\u2192dominance similarity, coupling graphs) where optimization or approximation becomes easier or more interpretable.",
+        "key_indicators": [
+          "recast as",
+          "dominance similarity",
+          "energy proxy",
+          "alternative formulation"
+        ],
+        "cognitive_move": "Find an isomorphic or approximate mathematical representation that makes structure, constraints, or gradients tractable.",
+        "example_summary": "Paper 11: reframed entropy minimization as complementary energy-based guidance; Paper 33: recast hinge distance into a dominance similarity using Fourier transforms."
+      },
+      {
+        "name": "Make Fixed Things Learnable",
+        "description": "Turn previously hand-designed or hard-coded components (symmetries, quantization parameters, equivariances) into learnable modules, enabling adaptation to data and removing brittle assumptions.",
+        "key_indicators": [
+          "learnable",
+          "automatic discovery",
+          "learned symmetry",
+          "learnable clipping/transform"
+        ],
+        "cognitive_move": "Promote rigid prior structure to parameterized modules and allow optimization to discover the best instantiation from data.",
+        "example_summary": "Paper 28: learned layer-wise symmetries instead of hard-coding equivariance; Paper 26: learned weight clipping and equivalent transforms for quantization."
+      }
+    ],
+    "meta_observations": "Across these top ML synthesis narratives common cognitive patterns recur: researchers routinely start by spotting a concrete gap or anomaly, then reframe the problem to expose new structure, often by borrowing theory or metaphors from other fields. Two parallel themes dominate: (1) unification/abstraction \u2014 building frameworks that link disparate methods and yield principled guarantees, and (2) pragmatic engineering \u2014 creating datasets, benchmarks, factorizations, or proxies that make the new ideas actionable at scale. Learnable replacements for fixed assumptions, targeted regularizers to induce emergent behavior, and decoupling hard dependencies are reliable levers to turn conceptual advances into working systems. Finally, the most successful moves tightly couple theoretical insight with controlled empirical validation, producing solutions that are both explainable and practically deployable."
+  }
+]

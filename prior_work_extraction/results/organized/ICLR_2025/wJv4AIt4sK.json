@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Deep Compression: Compressing Deep Neural Networks with Pruning, Trained Quantization and Huffman Coding",
+      "authors": "Song Han, Huizi Mao, William J. Dally",
+      "year": 2016,
+      "role": "Seminal pipeline that first combined pruning and quantization at scale",
+      "relationship_sentence": "This work established the de facto assumption that pruning and quantization can be composed sequentially, providing the empirical baseline and orthogonality belief that the present paper formally interrogates and disproves."
+    },
+    {
+      "title": "Learning both Weights and Connections for Efficient Neural Networks",
+      "authors": "Song Han, Jeff Pool, John Tran, William J. Dally",
+      "year": 2015,
+      "role": "Foundational magnitude pruning method widely used as sparsity baseline",
+      "relationship_sentence": "As a standard approach to induce weight sparsity, this method underpins the sparsification step whose interaction with quantization the paper analyzes theoretically and empirically."
+    },
+    {
+      "title": "Optimal Brain Surgeon: Extensions and Performance Comparisons",
+      "authors": "Babak Hassibi, David G. Stork, Gregory J. Wolff",
+      "year": 1993,
+      "role": "Second-order pruning theory via Hessian-based sensitivity",
+      "relationship_sentence": "The paper\u2019s proof of non-orthogonality draws on the same sensitivity perspective\u2014weight perturbations interacting through curvature\u2014showing how pruning-induced perturbations couple with quantization noise via cross-terms."
+    },
+    {
+      "title": "Quantization and Training of Neural Networks for Efficient Integer-Arithmetic-Only Inference",
+      "authors": "Benoit Jacob et al.",
+      "year": 2018,
+      "role": "Canonical formulation of uniform integer quantization and error model",
+      "relationship_sentence": "The theoretical treatment of quantization error in this work provides the quantization operator and noise assumptions that the paper leverages to formalize how quantization errors interact with sparsity masks."
+    },
+    {
+      "title": "GPTQ: Accurate Post-Training Quantization for Generative Pretrained Transformers",
+      "authors": "Aleksandar Frantar et al.",
+      "year": 2023,
+      "role": "Hessian-aware PTQ for LLMs establishing state-of-the-art quantization baselines",
+      "relationship_sentence": "By modeling quantization as curvature-weighted perturbations, GPTQ motivates the present paper\u2019s coupling analysis and supplies practical LLM quantization baselines to test order effects with sparsity."
+    },
+    {
+      "title": "SparseGPT: Massive Language Models Can be Accurately Pruned in One-Shot",
+      "authors": "Aleksandar Frantar, Dan Alistarh",
+      "year": 2023,
+      "role": "State-of-the-art LLM pruning with sensitivity awareness",
+      "relationship_sentence": "Provides the sparsity mechanism and LLM benchmarks where the paper demonstrates that subsequent quantization interacts non-trivially, validating the theory in modern transformer settings."
+    },
+    {
+      "title": "SpQR: A Sparse-Quantized Representation for Near-Lossless LLM Inference",
+      "authors": "Aleksandar Frantar et al.",
+      "year": 2023,
+      "role": "Early evidence that sparsity and quantization should be co-designed",
+      "relationship_sentence": "This method\u2019s joint sparse-quantized design empirically hinted at non-orthogonality; the present paper generalizes and formalizes this insight, proving and measuring the order-dependent coupling."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core contribution\u2014a first formal proof that sparsity and quantization are non-orthogonal and order-dependent\u2014emerges from two converging lines of work. On the sparsity side, magnitude pruning and its second-order successors laid the sensitivity-theoretic groundwork. Han et al.\u2019s magnitude pruning provided the ubiquitous sparsity mechanism used in modern pipelines, while Optimal Brain Surgeon introduced a curvature-aware view of weight perturbations. On the quantization side, Jacob et al.\u2019s integer-only quantization established the operator and error model widely assumed in practice, and more recent Hessian-aware methods such as GPTQ characterized quantization as curvature-weighted perturbations, linking quantization noise to model sensitivity.\nHistorically, Deep Compression popularized a sequential composition of pruning and quantization, implicitly treating them as orthogonal. However, emerging LLM-centric methods\u2014SparseGPT for pruning and SpQR\u2019s hybrid sparse\u2013quantized representation\u2014showed empirically that co-design matters. These works supplied both the practical regimes (large transformers, post-training settings) and the algorithmic primitives (sensitivity-aware pruning/quantization) that the present paper leverages to derive and validate a general non-orthogonality result. By unifying quantization noise models with sensitivity-based views of pruning, the paper explains why the two perturbations couple through curvature and masking, making the application order consequential. It then substantiates this with experiments on OPT/LLaMA, ViT, and ResNet, converting prior empirical hints into a principled ordering guideline for combined compression.",
+  "analysis_timestamp": "2026-01-06T23:42:48.092315"
+}

@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Deep Learning with Differential Privacy",
+      "authors": "Mart\u00edn Abadi, Andy Chu, Ian Goodfellow, H. Brendan McMahan, Ilya Mironov, Kunal Talwar, Li Zhang",
+      "year": 2016,
+      "role": "Foundational algorithm for private training (DP-SGD)",
+      "relationship_sentence": "DP-RandP directly targets the DP-SGD utility gap introduced by per-sample clipping and noise formalized by Abadi et al., and builds a pipeline that preserves DP-SGD at the private stage while improving its efficacy via learned priors."
+    },
+    {
+      "title": "Scalable Private Learning with PATE",
+      "authors": "Nicolas Papernot, Mart\u00edn Abadi, \u00dalfar Erlingsson, Ian Goodfellow, Kunal Talwar",
+      "year": 2018,
+      "role": "Use of public/unlabeled data to transfer non-private knowledge under DP",
+      "relationship_sentence": "PATE established the paradigm of leveraging non-private priors and public data to aid private learning; DP-RandP adopts this transfer ethos but replaces real public data with images drawn from random processes to avoid dependency on real-world public datasets."
+    },
+    {
+      "title": "Domain Randomization for Transferring Deep Neural Networks from Simulation to the Real World",
+      "authors": "Josh Tobin, Rachel Fong, Alex Ray, Jonas Schneider, Wojciech Zaremba, Pieter Abbeel",
+      "year": 2017,
+      "role": "Procedural/synthetic data as a vehicle to learn transferable visual priors",
+      "relationship_sentence": "DP-RandP is conceptually aligned with domain randomization: it trains on procedurally generated, randomized imagery to acquire features that transfer to real images, here in service of improving DP training."
+    },
+    {
+      "title": "FractalDB: Fractal Image Database for General-Purpose Pretraining",
+      "authors": "Hirokatsu Kataoka, et al.",
+      "year": 2020,
+      "role": "Synthetic, randomly generated image dataset enabling pretraining without natural images",
+      "relationship_sentence": "FractalDB demonstrated that pretraining CNNs on procedurally generated fractal images yields transferable representations; DP-RandP generalizes this idea by learning priors from a broader class of random processes and then privately fine-tuning."
+    },
+    {
+      "title": "Deep Image Prior",
+      "authors": "Dmitry Ulyanov, Andrea Vedaldi, Victor Lempitsky",
+      "year": 2018,
+      "role": "Architecture- and noise-induced image priors without real data",
+      "relationship_sentence": "Deep Image Prior revealed that meaningful natural-image priors can emerge from network structure and noise; DP-RandP leverages the same insight\u2014that non-natural inputs can encode useful priors\u2014to bootstrap representations from random-process imagery."
+    },
+    {
+      "title": "A Simple Framework for Contrastive Learning of Visual Representations (SimCLR)",
+      "authors": "Ting Chen, Simon Kornblith, Mohammad Norouzi, Geoffrey Hinton",
+      "year": 2020,
+      "role": "Pretraining then transfer paradigm; powerful priors from unlabeled data",
+      "relationship_sentence": "SimCLR popularized learning strong visual priors via pretraining and transferring to downstream tasks; DP-RandP follows a similar stage-wise design, but sources its pretraining data from random processes to remain independent of real public datasets."
+    }
+  ],
+  "synthesis_narrative": "The key contribution of DP-RandP is to improve differentially private image classification by learning transferable visual priors from procedurally generated, random-process images and then privately fine-tuning on sensitive data. This idea grows directly out of two lines of work. First, Abadi et al.\u2019s DP-SGD defined the practical recipe for private deep learning, but also exposed the accuracy gap caused by clipping and noise, motivating strategies that strengthen model priors prior to DP optimization. Second, research on leveraging non-private priors showed that public data or external supervision can dramatically aid private learning\u2014exemplified by PATE\u2019s use of public/unlabeled data for knowledge transfer and by the broader pretrain-then-finetune paradigm popularized by SimCLR.\n\nDP-RandP\u2019s distinct step is to remove dependence on real public images by importing insights from synthetic-data transfer. Domain Randomization demonstrated that procedurally generated scenes can teach models features that generalize to the real world, while FractalDB showed that large corpora of algorithmically generated fractals can serve as effective pretraining data for CNNs. Complementing these, Deep Image Prior established that strong natural-image regularities can emerge from architecture and noise alone, suggesting that useful inductive biases need not come from real images. DP-RandP unifies these insights into a three-phase pipeline: learn general visual priors from random-process images, then transfer and fine-tune under DP-SGD on private datasets. By strengthening the representation before the noisy private phase, it materially narrows the DP-SGD utility gap and achieves state-of-the-art private accuracy without relying on real public data.",
+  "analysis_timestamp": "2026-01-07T00:02:04.835320"
+}

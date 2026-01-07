@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Bypassing the Kohn\u2013Sham equations with machine learning",
+      "authors": "F. Brockherde et al.",
+      "year": 2017,
+      "role": "Problem framing: ML surrogates to avoid SCF",
+      "relationship_sentence": "Established the feasibility and value of replacing the SCF loop with ML surrogates, directly motivating QHFlow\u2019s goal of predicting electronic-structure objects (here, Hamiltonians) conditioned on geometry."
+    },
+    {
+      "title": "Score-Based Generative Modeling through Stochastic Differential Equations",
+      "authors": "Y. Song et al.",
+      "year": 2020,
+      "role": "Generative dynamics: probability flow ODEs",
+      "relationship_sentence": "Introduced probability flow ODEs linking diffusion and deterministic flows, providing the continuous-time vector-field perspective that QHFlow adopts to model Hamiltonian distributions."
+    },
+    {
+      "title": "Stochastic Interpolants: A Unifying Framework for Diffusion Models and Generative Flows",
+      "authors": "M. B. A. Albergo, V. F. D. Boffi, E. Vanden-Eijnden",
+      "year": 2022,
+      "role": "Theory unifying flows and diffusion via interpolants",
+      "relationship_sentence": "Provided the theoretical basis for learning generative vector fields from stochastic interpolations between simple priors and targets, a core ingredient underlying flow/trajectory matching used in QHFlow."
+    },
+    {
+      "title": "Flow Matching for Generative Modeling",
+      "authors": "R. T. Q. Chen et al. / A. Lipman et al. (commonly cited variants)",
+      "year": 2023,
+      "role": "Training objective: flow matching",
+      "relationship_sentence": "Supplied the practical objective to learn time-dependent vector fields that transport a simple prior to complex data; QHFlow directly applies and extends this to conditional Hamiltonian generation."
+    },
+    {
+      "title": "SE(3)-Transformers: 3D Roto-Translation Equivariant Attention Networks",
+      "authors": "F. B. Fuchs, D. E. Worrall, V. Fischer, M. Welling",
+      "year": 2020,
+      "role": "Equivariant architecture for 3D geometry",
+      "relationship_sentence": "Provided an effective blueprint for SE(3)-equivariant neural operators on molecular geometries, which QHFlow leverages to ensure its learned vector fields respect physical symmetries."
+    },
+    {
+      "title": "MACE: Higher Order Equivariant Message Passing Neural Networks for Fast Accurate Force Fields",
+      "authors": "T. D. B. Batatia et al.",
+      "year": 2022,
+      "role": "High-order equivariant representations",
+      "relationship_sentence": "Demonstrated the benefits of high-order (l>0) tensor features for data efficiency and accuracy, directly informing QHFlow\u2019s \u201chigh-order\u201d equivariant design for Hamiltonian-valued outputs."
+    },
+    {
+      "title": "OrbNet: Deep Learning for Quantum Chemistry Using Symmetry-Adapted Atomic-Orbital Features (incl. OrbNet Denali)",
+      "authors": "Z. Qiao et al.",
+      "year": 2020,
+      "role": "Symmetry-aware AO features for electronic structure",
+      "relationship_sentence": "Showed that leveraging AO-level, symmetry-adapted features greatly improves mapping from geometry to electronic structure, influencing QHFlow\u2019s conditioning and representation choices for Hamiltonians."
+    }
+  ],
+  "synthesis_narrative": "QHFlow\u2019s core contribution\u2014learning a distribution over DFT Hamiltonians via high-order SE(3)-equivariant flow matching\u2014sits at the intersection of three prior lines of work. First, the ambition to bypass the SCF loop with machine learning traces directly to Brockherde et al., who crystallized the idea that one can replace the Kohn\u2013Sham solve with an ML surrogate. Practical representation lessons from OrbNet further emphasized that symmetry-aware, AO-level information is crucial when mapping geometries to electronic-structure quantities. Second, the generative modeling backbone comes from the flow/diffusion unification: Song et al. introduced probability flow ODEs that recast diffusion sampling as deterministic dynamics, while Albergo et al.\u2019s stochastic interpolants formalized learning vector fields along paths from simple priors to complex targets. Flow Matching operationalized this viewpoint into a simple and scalable training objective\u2014precisely the mechanism QHFlow adopts to learn conditional trajectories of Hamiltonian matrices rather than performing pointwise regression. Third, enforcing physical symmetry and improving generalization relies on SE(3)-equivariant architectures. SE(3)-Transformers established attention-based equivariant processing on 3D geometries, and MACE demonstrated the power of high-order tensor features, motivating QHFlow\u2019s high-order equivariant vector fields tailored to operator-valued (matrix) outputs. Together, these works directly shape QHFlow\u2019s design: a conditional flow-matching objective on Hamiltonians, parameterized by high-order SE(3)-equivariant networks, to surmount deterministic regression limits while honoring the symmetries and structure intrinsic to quantum Hamiltonians.",
+  "analysis_timestamp": "2026-01-07T00:05:12.548622"
+}

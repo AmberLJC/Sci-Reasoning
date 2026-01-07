@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Training language models to follow instructions with human feedback",
+      "authors": "Long Ouyang et al.",
+      "year": 2022,
+      "arxiv_id": "2203.02155",
+      "role": "Baseline",
+      "relationship_sentence": "The three-stage RLHF pipeline (SFT \u2192 reward model from human preferences \u2192 KL-regularized PPO) from this work is the primary baseline our method replaces with a single joint reward\u2013policy objective that also incorporates demonstration likelihood."
+    },
+    {
+      "title": "Deep Reinforcement Learning from Human Preferences",
+      "authors": "Paul F. Christiano et al.",
+      "year": 2017,
+      "arxiv_id": "1706.03741",
+      "role": "Foundation",
+      "relationship_sentence": "We adopt the Bradley\u2013Terry preference likelihood introduced here for modeling human comparisons and generalize the reward estimation to also condition on demonstrations within our joint optimization."
+    },
+    {
+      "title": "Fine-Tuning Language Models from Human Preferences",
+      "authors": "Daniel M. Ziegler et al.",
+      "year": 2019,
+      "arxiv_id": "1909.08593",
+      "role": "Foundation",
+      "relationship_sentence": "This work established KL-regularized RLHF for language models, whose KL-constrained policy optimization we embed inside our joint objective that couples reward learning with policy updates."
+    },
+    {
+      "title": "Reward learning from human preferences and demonstrations in Atari",
+      "authors": "Daniel Ibarz et al.",
+      "year": 2018,
+      "arxiv_id": "1811.06521",
+      "role": "Extension",
+      "relationship_sentence": "They showed reward learning improves by combining demonstrations with preferences; we extend this idea to LLM alignment and make it tractable by jointly fitting the reward with the policy using both data sources."
+    },
+    {
+      "title": "Direct Preference Optimization: Your Language Model Is Secretly a Reward Model",
+      "authors": "Avi Singh Rafailov et al.",
+      "year": 2023,
+      "arxiv_id": "2305.18290",
+      "role": "Gap Identification",
+      "relationship_sentence": "DPO derives a preference-odds objective that bypasses explicit reward learning and cannot exploit demonstrations, a limitation we address by learning an explicit reward from both demonstrations and preferences while optimizing the policy."
+    },
+    {
+      "title": "Learning Robust Rewards with Adversarial Inverse Reinforcement Learning",
+      "authors": "Justin Fu et al.",
+      "year": 2018,
+      "arxiv_id": "1710.11248",
+      "role": "Inspiration",
+      "relationship_sentence": "AIRL jointly trains reward and policy via adversarial learning; we borrow the joint-estimation principle but replace the adversarial setup with a tractable likelihood-based formulation tailored to human feedback and demonstrations."
+    }
+  ],
+  "synthesis_narrative": "Pairwise preference modeling for reward learning was formalized by Christiano et al., who introduced the Bradley\u2013Terry likelihood connecting human comparisons to reward differences. In language settings, Ziegler et al. extended this paradigm into a KL-regularized RLHF framework where a policy is optimized against a learned preference reward while constrained to a reference model. Ouyang et al. then popularized the three-stage RLHF pipeline\u2014SFT from demonstrations, reward modeling from human preferences, and KL-regularized PPO\u2014which became the de facto baseline but trained the reward solely on preference data. Ibarz et al. provided a crucial insight: reward estimation improves when demonstrations are combined with human preferences, showing better policy performance in Atari by leveraging both data sources. Independently, AIRL demonstrated that reward and policy can be learned jointly, using an adversarial objective to alternate reward inference and policy updates. More recently, DPO showed that policy optimization can be derived directly from preference odds without an explicit reward model, tightening the link between reward and policy but discarding the ability to ingest demonstrations into reward learning.\n\nTaken together, these works expose a gap: modern LLM alignment either learns rewards from preferences alone or bypasses rewards entirely, neglecting the complementary information in demonstrations and the benefits of joint estimation. The present work synthesizes these threads by unifying Bradley\u2013Terry preference modeling with a demonstration-informed likelihood under a KL-regularized policy update, yielding a tractable joint reward\u2013policy learning objective that leverages both demonstrations and human feedback to improve alignment.",
+  "target_paper": {
+    "title": "Joint Reward and Policy Learning with Demonstrations and Human Feedback Improves Alignment",
+    "authors": "Chenliang Li, Siliang Zeng, Zeyi Liao, Jiaxiang Li, Dongyeop Kang, Alfredo Garcia, Mingyi Hong",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "Alignment, Inverse Reinforcement Learning, Reinforment Learning from Human Feedback",
+    "abstract": "Aligning to human preferences and/or intentions is an important requirement for contemporary foundation models. To ensure alignment, popular approaches such as reinforcement learning with human feedback (RLHF) break down the task into three stages: (i) a model is computed with supervised fine-tuning (SFT) based upon large demonstrations data, (ii) a reward model (RM) is estimated based upon human feedback data, and (iii) reinforcement learning (RL) is used to further refine the SFT model by optimizing the estimated reward model.  Demonstrations and human feedback data reflect human user preferences in different ways. As a result, the reward model estimate obtained from only human feedback data is likely not as accurate as a reward model estimate obtained from both demonstration and human feedback data. A policy model that optimizes the reward model estimate obtained from both demonstration and human feedback data will likely exhibit better alignment performance. We introduce a tractabl",
+    "openreview_id": "VCbqXtS5YY",
+    "forum_id": "VCbqXtS5YY"
+  },
+  "analysis_timestamp": "2026-01-06T06:45:49.988277"
+}

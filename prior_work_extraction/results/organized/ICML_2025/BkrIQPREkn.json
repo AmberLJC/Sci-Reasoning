@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Towards Making Systems Forget with Machine Unlearning",
+      "authors": "Yinzhi Cao; Junfeng Yang",
+      "year": 2015,
+      "role": "Problem formulation and early unlearning framework",
+      "relationship_sentence": "Defined the machine unlearning objective and highlighted the computational gap between exact retraining and approximate methods, motivating AMUN\u2019s efficient approximate approach."
+    },
+    {
+      "title": "Machine Unlearning (SISA Training)",
+      "authors": "Ulysse Bourtoule; Varun Chandrasekaran; et al.",
+      "year": 2021,
+      "role": "Scalable approximate unlearning baseline",
+      "relationship_sentence": "Introduced SISA as a practical baseline that still lags exact retraining on accuracy/confidence, a gap that AMUN targets by using adversarial fine-tuning on forget samples."
+    },
+    {
+      "title": "Eternal Sunshine of the Spotless Net: Selective Forgetting in Deep Networks",
+      "authors": "Aditya Golatkar; Alessandro Achille; Stefano Soatto",
+      "year": 2020,
+      "role": "Approximate selective forgetting for deep nets",
+      "relationship_sentence": "Proposed Fisher-based weight perturbations for forgetting, showing limitations in preserving accuracy and confidence that AMUN aims to overcome via targeted adversarial examples."
+    },
+    {
+      "title": "Explaining and Harnessing Adversarial Examples",
+      "authors": "Ian J. Goodfellow; Jonathon Shlens; Christian Szegedy",
+      "year": 2015,
+      "role": "Foundational adversarial example generation (FGSM)",
+      "relationship_sentence": "Established efficient methods to generate adversarial examples that AMUN leverages to construct targeted perturbations of forget samples for confidence reduction."
+    },
+    {
+      "title": "Towards Deep Learning Models Resistant to Adversarial Attacks",
+      "authors": "Aleksander Madry; Aleksandar Makelov; Ludwig Schmidt; Dimitris Tsipras; Adrian Vladu",
+      "year": 2018,
+      "role": "Adversarial training via robust optimization (PGD)",
+      "relationship_sentence": "Provided the inner maximization framework to find nearest adversarial examples, directly informing AMUN\u2019s fine-tuning on closest adversaries to reshape local decision boundaries."
+    },
+    {
+      "title": "Adversarial Examples Are Not Bugs, They Are Features",
+      "authors": "Andrew Ilyas; Shibani Santurkar; Dimitris Tsipras; Logan Engstrom; Brandon Tran; Aleksander Madry",
+      "year": 2019,
+      "role": "Conceptual understanding of adversarial features and data distribution",
+      "relationship_sentence": "Argued adversarial examples exploit non-robust yet predictive features, supporting AMUN\u2019s premise that adversarial variants lie on the model-imposed distribution and can be used to unlearn specific signals."
+    },
+    {
+      "title": "TRADES: A Theoretically Principled Trade-off Between Robustness and Accuracy",
+      "authors": "Hongyang Zhang; Yaodong Yu; Jiantao Jiao; Eric P. Xing; Laurent El Ghaoui; Michael I. Jordan",
+      "year": 2019,
+      "role": "Objective design for adversarial fine-tuning and confidence control",
+      "relationship_sentence": "Demonstrated how adversarial example training with KL regularization balances performance and robustness, informing AMUN\u2019s loss design to lower forget-set confidence without sacrificing test accuracy."
+    }
+  ],
+  "synthesis_narrative": "AMUN\u2019s core insight is to use adversarial examples of the forget set to reduce model confidence on those samples while preserving accuracy on retained data and unseen test inputs. This builds directly on the machine unlearning problem formulation by Cao and Yang, which framed the need to emulate retraining after deletion but highlighted the computational cost of exact approaches. Subsequent scalable approximate methods, most notably SISA by Bourtoule et al., and selective forgetting via Fisher-based perturbations by Golatkar et al., exposed a persistent efficacy gap: approximate unlearning struggled to match retraining in both accuracy and calibrated confidence on forget/test data. AMUN targets this gap by importing tools and intuitions from adversarial robustness. Goodfellow et al. introduced efficient adversarial example generation, and Madry et al. formalized adversarial training as robust optimization, providing a principled inner maximization to find nearest adversaries that sculpt local decision boundaries. Ilyas et al.\u2019s finding that adversarial examples reflect non-robust yet predictive features offers a conceptual rationale for using adversarial variants as targeted, model-aligned perturbations for unlearning\u2014changing what the model relies on without broad accuracy collapse. Finally, TRADES shows how adversarial training objectives can explicitly manage the trade-off between robustness, accuracy, and confidence via KL-based regularization. By fine-tuning on closest adversarial examples of forget samples, AMUN operationalizes these ideas to selectively suppress confidence where deletion is requested while retaining generalization on the remaining distribution, thereby narrowing the gap to exact unlearning with modest computational overhead.",
+  "analysis_timestamp": "2026-01-07T00:04:09.135871"
+}

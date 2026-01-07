@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Differential Privacy for Functions and Functional Data",
+      "authors": "Rob Hall et al.",
+      "year": 2013,
+      "role": "Gap Identification",
+      "relationship_sentence": "Hall, Rinaldo, and Wasserman proposed general DP mechanisms for releasing functions such as KDEs, but their constructions for Gaussian kernels rely on high-dimensional discretizations/expansions whose runtime scales exponentially in d\u2014exactly the barrier this paper overcomes."
+    },
+    {
+      "title": "Random Features for Large-Scale Kernel Machines",
+      "authors": "Ali Rahimi et al.",
+      "year": 2007,
+      "role": "Extension",
+      "relationship_sentence": "The paper\u2019s LSQ framework privatizes Random Fourier Features by adding calibrated noise to the aggregated random-feature sketch, directly turning Rahimi\u2013Recht\u2019s kernel approximation into an efficient DP-KDE mechanism."
+    },
+    {
+      "title": "Improved Fast Gauss Transform and Efficient Kernel Density Estimation",
+      "authors": "Changjiang Yang et al.",
+      "year": 2003,
+      "role": "Extension",
+      "relationship_sentence": "LSQ treats the IFGT\u2019s cluster/Taylor-expansion coefficients as a linear sketch and privatizes them, effectively converting Yang\u2013Duraiswami\u2013Gumerov\u2013Davis\u2019s fast non-private Gaussian KDE into a differentially private counterpart."
+    },
+    {
+      "title": "The Fast Gauss Transform",
+      "authors": "Leslie Greengard et al.",
+      "year": 1991,
+      "role": "Foundation",
+      "relationship_sentence": "Greengard and Strain introduced the algorithmic framework underlying fast evaluation of Gaussian kernel sums; LSQ leverages this structure (via IFGT) as a building block to obtain private, fast Gaussian KDE."
+    },
+    {
+      "title": "Locality-sensitive hashing scheme based on p-stable distributions",
+      "authors": "Mayur Datar et al.",
+      "year": 2004,
+      "role": "Foundation",
+      "relationship_sentence": "LSQ uses LSH-based quantization for L2/shift-invariant kernels, relying on p-stable LSH collision structure to construct hash-based sketches whose privatized counts yield fast DP-KDE."
+    },
+    {
+      "title": "Hashing-Based Estimators for Kernel Density",
+      "authors": "Moses Charikar et al.",
+      "year": 2017,
+      "role": "Inspiration",
+      "relationship_sentence": "This work showed how LSH collision probabilities can yield unbiased, fast estimators for kernel densities; LSQ generalizes that perspective and wraps such LSH-based KDE estimators in a DP quantization-and-noise mechanism."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s key advance\u2014Locality Sensitive Quantization (LSQ) for fast differentially private KDE\u2014emerges by explicitly bridging classical fast KDE approximations with differential privacy. Prior DP work by Hall, Rinaldo, and Wasserman established mechanisms for privately releasing functions like KDEs but, when applied to Gaussian kernels in d dimensions, required discretizations or basis expansions whose complexity grows exponentially with d. This limitation directly motivates the central aim of the present work: to inherit the speed of modern non-private KDE approximations while preserving privacy. LSQ does so by observing that several leading KDE approximators produce linear sketches of the data. For shift-invariant kernels, Random Fourier Features (Rahimi\u2013Recht) yield finite-dimensional embeddings whose sums can be privatized to give DP-KDE with accuracy inherited from RFF. For Gaussian kernels, the (Improved) Fast Gauss Transform (Greengard\u2013Strain; Yang\u2013Duraiswami\u2013Gumerov\u2013Davis) represents kernel sums via cluster/Taylor expansions; LSQ privatizes these coefficients to obtain a fast private Gauss transform. Finally, LSH-based estimators (Datar\u2013Immorlica\u2013Indyk\u2013Mirrokni; Charikar\u2013Siminelakis) show how collision probabilities estimate kernel values; LSQ casts LSH as a quantization scheme, adds calibrated noise to bucket counts, and thereby privatizes hashing-based KDE. By turning these non-private sketches into differentially private ones in a black-box manner, LSQ breaks the exponential-in-d barrier while retaining the computational advantages of RFF, FGT/IFGT, and LSH.",
+  "analysis_timestamp": "2026-01-06T23:09:26.574590"
+}

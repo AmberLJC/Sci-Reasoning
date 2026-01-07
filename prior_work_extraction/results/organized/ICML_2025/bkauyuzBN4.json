@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Deep Learning with Differential Privacy",
+      "authors": "Martin Abadi, Andy Chu, Ian Goodfellow, H. Brendan McMahan, Ilya Mironov, Kunal Talwar, Li Zhang",
+      "year": 2016,
+      "role": "Foundational method (DP-SGD) and accounting baseline",
+      "relationship_sentence": "The paper\u2019s core contribution builds on DP-SGD, but departs from Abadi et al.\u2019s unstructured minibatch sampling assumption by deriving privacy amplification guarantees tailored to the structured batching used in time-series forecasting."
+    },
+    {
+      "title": "R\u00e9nyi Differential Privacy",
+      "authors": "Ilya Mironov",
+      "year": 2017,
+      "role": "Privacy accounting framework",
+      "relationship_sentence": "The authors rely on RDP calculus to tightly compose privacy loss under their structured subsampling scheme, extending Mironov\u2019s framework from standard sampling to the hierarchical, sequence-aware batching used for forecasting."
+    },
+    {
+      "title": "Subsampled R\u00e9nyi Differential Privacy and Analytical Moments Accountant",
+      "authors": "Yu-Xiang Wang, Borja Balle, Shiva Prasad Kasiviswanathan",
+      "year": 2019,
+      "role": "Amplification for sampled Gaussian mechanism and tight accounting",
+      "relationship_sentence": "Their analysis adapts the subsampled Gaussian mechanism\u2019s RDP bounds and the analytical moments accountant from Wang et al. to the multi-stage (series \u2192 subsequence \u2192 window) sampling pipeline, generalizing beyond i.i.d. record subsampling."
+    },
+    {
+      "title": "Privacy Amplification by Subsampling: Tight Analyses via Couplings and Divergences",
+      "authors": "Borja Balle, Gilles Barthe, Marco Gaboardi",
+      "year": 2018,
+      "role": "General theory of amplification by subsampling",
+      "relationship_sentence": "The work provides the mathematical foundation for amplification by (Poisson and uniform) subsampling that this paper extends to structured, dependent sampling over time-indexed data."
+    },
+    {
+      "title": "DeepAR: Probabilistic Forecasting with Autoregressive Recurrent Networks",
+      "authors": "David Salinas, Valentin Flunkert, Jan Gasthaus, Tim Januschowski",
+      "year": 2017,
+      "role": "Canonical forecasting training pipeline",
+      "relationship_sentence": "DeepAR popularized the training procedure of sampling time series, drawing contiguous subsequences, and splitting into context/forecast windows\u2014the exact structured data pipeline whose privacy amplification this paper formalizes."
+    },
+    {
+      "title": "N-BEATS: Neural basis expansion analysis for interpretable time series forecasting",
+      "authors": "Boris N. Oreshkin, Dmitri Carpov, Nicolas Chapados, Yoshua Bengio",
+      "year": 2020,
+      "role": "Sliding-window backcast/forecast paradigm",
+      "relationship_sentence": "By reinforcing the backcast\u2013forecast windowing and sliding-window batching paradigm, N-BEATS motivates the need to analyze DP guarantees when each training step consumes contiguous windows from sequences."
+    },
+    {
+      "title": "Privacy Amplification by Iteration",
+      "authors": "Vitaly Feldman, Ilya Mironov, Kunal Talwar, Abhradeep Thakurta",
+      "year": 2018,
+      "role": "Iterative algorithm amplification insights",
+      "relationship_sentence": "The iterative amplification perspective informs how repeated gradient steps with structured sampling compose, guiding the paper\u2019s end-to-end accounting across epochs under non-i.i.d., windowed batches."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s central innovation is a privacy analysis that matches the realities of time-series forecasting pipelines\u2014sampling series, extracting contiguous subsequences, and splitting them into context and prediction windows\u2014rather than the i.i.d., unstructured record minibatches assumed in standard DP-SGD analyses. Abadi et al. (2016) provide the algorithmic backbone (DP-SGD) and moments-based accounting that this work must remain compatible with, but the authors show those guarantees are misaligned with structured, sequence-based batching. To obtain tight, valid guarantees, the paper turns to Mironov\u2019s R\u00e9nyi Differential Privacy (2017) as the compositional language, and to Wang, Balle, and Kasiviswanathan (2019) for subsampled Gaussian mechanism bounds and the analytical moments accountant\u2014then generalizes these from flat subsampling to the hierarchical, dependent sampling over sequences.\nBalle, Barthe, and Gaboardi (2018) supply the core theory of privacy amplification by subsampling; the present work extends these ideas to the multi-stage, structured subsampling intrinsic to forecasting. On the modeling side, DeepAR (Salinas et al., 2017) and N-BEATS (Oreshkin et al., 2020) crystallize the field\u2019s de facto training procedure: sliding windows and explicit context/forecast splits, which define the structure whose privacy impact is analyzed here. Finally, Feldman et al. (2018) on privacy amplification by iteration informs how repeated SGD steps under such structured sampling compose over epochs. Together, these works directly scaffold the paper\u2019s new amplification results and practical DP accounting for deep time-series forecasting.",
+  "analysis_timestamp": "2026-01-07T00:21:32.382272"
+}

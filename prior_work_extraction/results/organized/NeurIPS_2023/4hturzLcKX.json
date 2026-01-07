@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Deep Reinforcement Learning from Human Preferences",
+      "authors": "Paul F. Christiano, Jan Leike, Tom B. Brown, Miljan Martic, Shane Legg, Dario Amodei",
+      "year": 2017,
+      "role": "Seminal RLHF framework using pairwise preference data to learn a reward model for policy optimization.",
+      "relationship_sentence": "AlpacaFarm\u2019s core idea\u2014simulating pairwise preference labels and training reward models/PPO policies\u2014directly instantiates the Christiano et al. RLHF pipeline while replacing costly human raters with LLM-based feedback."
+    },
+    {
+      "title": "Learning to Summarize from Human Feedback",
+      "authors": "Nisan Stiennon, Long Ouyang, Jeff Wu, Daniel M. Ziegler, Ryan Lowe, Chelsea Voss, Alec Radford, Dario Amodei, Paul Christiano",
+      "year": 2020,
+      "role": "Demonstrated large-scale preference data collection and reward modeling for language generation.",
+      "relationship_sentence": "AlpacaFarm mirrors the preference-data -> reward-model -> policy-optimization recipe from Stiennon et al., but contributes a simulator to generate such pairwise preferences cheaply and an accompanying evaluation protocol."
+    },
+    {
+      "title": "Training language models to follow instructions with human feedback",
+      "authors": "Long Ouyang, Jeff Wu, Xu Jiang, Diogo Almeida, Carroll L. Wainwright, Pamela Mishkin, et al.",
+      "year": 2022,
+      "role": "Established the modern instruction-following RLHF pipeline (SFT, reward modeling, PPO, and best-of-n sampling).",
+      "relationship_sentence": "AlpacaFarm provides reference implementations (e.g., PPO, best-of-n) and an evaluation setup explicitly designed to replicate and study the InstructGPT-style instruction-following workflow at low cost."
+    },
+    {
+      "title": "WebGPT: Browser-assisted question-answering with human feedback",
+      "authors": "Reiichiro Nakano, Jacob Hilton, Suchir Balaji, et al.",
+      "year": 2021,
+      "role": "Applied reward modeling and best-of-n selection for complex QA with human feedback.",
+      "relationship_sentence": "AlpacaFarm\u2019s inclusion and analysis of best-of-n and related preference-based selection methods trace directly to WebGPT\u2019s demonstration that sampling-and-selecting with a preference model can markedly improve output quality."
+    },
+    {
+      "title": "Constitutional AI: Harmlessness from AI Feedback",
+      "authors": "Yuntao Bai, Andy Jones, Kamal Ndousse, Amanda Askell, Jackson Kernion, Saurav Kadavath, et al.",
+      "year": 2022,
+      "role": "Pioneered replacing humans with AI feedback to reduce alignment data collection costs.",
+      "relationship_sentence": "AlpacaFarm generalizes the AI-as-feedback insight by formalizing an LLM-based preference simulator, quantifying its agreement with humans, and using it systematically for training and evaluation across methods."
+    },
+    {
+      "title": "Proximal Policy Optimization Algorithms",
+      "authors": "John Schulman, Filip Wolski, Prafulla Dhariwal, Alec Radford, Oleg Klimov",
+      "year": 2017,
+      "role": "Widely used policy optimization method in RLHF for stable on-policy updates.",
+      "relationship_sentence": "AlpacaFarm\u2019s reference PPO implementation for instruction-tuned LMs is built on PPO\u2019s clipped objective, enabling apples-to-apples comparisons with established RLHF training regimes."
+    },
+    {
+      "title": "Thinking Fast and Slow with Deep Learning and Tree Search (Expert Iteration)",
+      "authors": "Thomas Anthony, Zheng Tian, David Barber",
+      "year": 2017,
+      "role": "Introduced expert iteration, alternating between improving an expert signal and supervised policy learning.",
+      "relationship_sentence": "AlpacaFarm adapts expert iteration to the LLM alignment setting by using an LLM/reward model as an \u2018expert\u2019 to label candidates and then supervised fine-tuning a policy, providing a standardized implementation for comparison."
+    }
+  ],
+  "synthesis_narrative": "AlpacaFarm\u2019s core contribution\u2014a low-cost, trustworthy simulation framework for learning from human feedback\u2014builds on and unifies the RLHF lineage while replacing expensive human annotation with LLM-based feedback. The foundational paradigm from Christiano et al. (2017) and its large-scale language applications in Stiennon et al. (2020) established the preference-data \u2192 reward-model \u2192 policy-optimization pipeline that AlpacaFarm directly reproduces. Ouyang et al. (2022) extended this pipeline to instruction following, standardizing SFT, reward modeling, PPO, and best-of-n sampling; AlpacaFarm provides reference implementations of these components to enable reproducible, controlled comparisons.\n\nTwo lines of work motivate AlpacaFarm\u2019s simulator and method palette. First, WebGPT showed the practical gains from best-of-n and reward-model scoring in complex QA, which AlpacaFarm codifies as a baseline within a single testbed. Second, Constitutional AI demonstrated that AI feedback can substitute for human raters, providing a clear precedent for AlpacaFarm\u2019s LLM-based preference simulator; AlpacaFarm quantifies the agreement and cost benefits and scales this idea across tasks and methods.\n\nFinally, AlpacaFarm grounds its training loop in canonical optimization and iterative improvement procedures: PPO (Schulman et al., 2017) as the de facto RLHF optimizer, and expert iteration (Anthony et al., 2017) as an alternative alignment strategy that cycles between labeling by an expert signal and supervised policy updates. By integrating these strands, AlpacaFarm delivers a standardized, cheap, and credible environment to systematically study and benchmark methods that learn from feedback.",
+  "analysis_timestamp": "2026-01-07T00:02:04.825308"
+}

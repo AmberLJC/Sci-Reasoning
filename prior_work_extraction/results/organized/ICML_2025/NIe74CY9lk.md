@@ -1,0 +1,58 @@
+# Prior Work Analysis Report
+
+## Target Paper
+**Title:** NIe74CY9lk
+**Conference:** Unknown 
+**Authors:** Unknown
+
+---
+
+## Key Prior Works (7 papers)
+
+### 🏗️ Foundation
+
+**Dataset Distillation** (2018)
+- *Authors:* Tongzhou Wang et al.
+- *Connection:* Introduced the core problem formulation of compressing a large dataset into a small synthetic set that trains models to comparable accuracy, which MGD^3 adopts as its overarching objective.
+
+### 💡 Inspiration
+
+**Generative Teaching Networks: Accelerating Neural Architecture Search by Learning to Generate Synthetic Training Data** (2020)
+- *Authors:* Felix L. Such et al.
+- *Connection:* Demonstrated that generative models can produce synthetic training data via end-to-end distillation losses; MGD^3 retains the generative paradigm but avoids generator fine-tuning by leveraging a pre-trained diffusion model and mode-aware guidance.
+
+**Deep Clustering for Unsupervised Learning of Visual Features** (2018)
+- *Authors:* Mathilde Caron et al.
+- *Connection:* Showed that clustering in representation space can reveal semantic groupings; MGD^3’s Mode Discovery stage similarly clusters feature embeddings to identify data modes that directly condition and steer diffusion sampling.
+
+### 🔍 Gap Identification
+
+**Dataset Condensation with Differentiable Siamese Augmentation** (2021)
+- *Authors:* Bo Zhao et al.
+- *Connection:* Improved gradient-matching distillation with differentiable augmentations but still optimizes synthetic images via distillation losses and does not guarantee diverse mode coverage—limitations MGD^3 addresses via mode discovery and guided diffusion sampling.
+
+### 📊 Baseline
+
+**Dataset Condensation with Gradient Matching** (2020)
+- *Authors:* Bo Zhao et al.
+- *Connection:* Provided a leading optimization-based condensation baseline that learns synthetic data with distillation losses, whose reliance on fine-tuning and tendency toward limited diversity directly motivate MGD^3’s no-fine-tuning, diversity-focused approach.
+
+**Dataset Distillation by Matching Training Trajectories** (2022)
+- *Authors:* Justin Cazenavette et al.
+- *Connection:* Established a strong baseline by matching optimization trajectories, yet remains computationally heavy and prone to diversity issues; MGD^3 improves performance by generating diverse samples without bilevel training or distillation losses.
+
+### 🔧 Extension
+
+**Classifier-Free Diffusion Guidance** (2022)
+- *Authors:* Jonathan Ho et al.
+- *Connection:* Introduced guidance for steering diffusion sampling; MGD^3 extends this idea by conditioning guidance on discovered modes (Mode Guidance) and proposing Stop Guidance to halt guidance when artifacts emerge, improving diversity and fidelity without model fine-tuning.
+
+---
+
+## Synthesis
+
+MGD^3 builds squarely on the dataset distillation formulation introduced by Wang et al., aiming to replace large training sets with compact synthetic subsets. The prevailing optimization-based baselines—Gradient Matching and DSA—optimize synthetic images with distillation losses yet often collapse mode diversity, while MTT improves fidelity but incurs heavy bilevel training and still struggles to guarantee broad intra-class coverage. In parallel, Such et al. showed the promise of generative models for distillation but at the cost of training the generator with specialized losses. MGD^3 departs from these threads by using a pre-trained diffusion model and shifting the innovation to sampling-time control of diversity.
+Central to this shift are two ideas directly drawn from prior literature and extended here: representation-space clustering and diffusion guidance. Inspired by deep feature clustering (Caron et al.), MGD^3’s Mode Discovery identifies distinct modes within each class. It then adapts diffusion guidance (Ho et al.) to condition sampling on these modes (Mode Guidance), explicitly targeting intra-class diversity. Recognizing that strong guidance can induce artifacts and reduce diversity—a known trade-off in guided diffusion—MGD^3 introduces Stop Guidance, halting guidance when artifacts emerge to preserve fidelity and coverage. Together, these stages address the explicit limitations of prior distillation methods—dependence on distillation losses, lack of diversity guarantees, and artifact-prone guidance—yielding a practical, fine-tuning-free, diffusion-based distillation pipeline that advances performance on ImageNette, ImageIDC, ImageNet-100, and ImageNet-1K.
+
+---
+*Generated: 2026-01-06T23:07:19.567625*

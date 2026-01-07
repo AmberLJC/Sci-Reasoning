@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Categorizing Variants of Goodhart\u2019s Law",
+      "authors": "Manheim and Garrabrant",
+      "year": 2019,
+      "arxiv_id": "1803.04585",
+      "role": "Inspiration",
+      "relationship_sentence": "This work frames reward hacking as the breakdown of correlation between a proxy and true objective under optimization, directly inspiring the paper\u2019s formal correlation-based definition of reward hacking conditioned on a reference policy\u2019s distribution."
+    },
+    {
+      "title": "The Inverse Reward Design Problem",
+      "authors": "Hadfield-Menell et al.",
+      "year": 2017,
+      "arxiv_id": "1711.02827",
+      "role": "Foundation",
+      "relationship_sentence": "By formalizing designed rewards as proxies valid primarily on a training (reference) distribution and highlighting out-of-distribution failure, it provides the foundational proxy-vs-true reward framing and the distributional lens that this paper operationalizes via correlation on a reference policy\u2019s occupancy."
+    },
+    {
+      "title": "Concrete Problems in AI Safety",
+      "authors": "Amodei et al.",
+      "year": 2016,
+      "arxiv_id": "1606.06565",
+      "role": "Gap Identification",
+      "relationship_sentence": "This paper popularized reward hacking/specification gaming and explicitly noted the lack of principled definitions and mitigations, a gap the current work addresses with a precise definition and theory-backed mitigation."
+    },
+    {
+      "title": "Learning to Summarize with Human Feedback",
+      "authors": "Stiennon et al.",
+      "year": 2020,
+      "arxiv_id": "2009.01325",
+      "role": "Foundation",
+      "relationship_sentence": "It instantiated RLHF with a learned reward model and KL regularization to a reference model\u2014an empirical recipe whose observed overoptimization issues motivate the need for a formal definition and whose KL term is theoretically justified by this paper\u2019s analysis."
+    },
+    {
+      "title": "Training Language Models to Follow Instructions with Human Feedback",
+      "authors": "Ouyang et al.",
+      "year": 2022,
+      "arxiv_id": "2203.02155",
+      "role": "Baseline",
+      "relationship_sentence": "As the standard RLHF baseline using PPO with a KL penalty to a reference policy, it is the primary system whose reward-model overoptimization this work explains and mitigates via reference-policy regularization grounded in the new definition."
+    },
+    {
+      "title": "Direct Preference Optimization: Your Language Model is Secretly a Reward Model",
+      "authors": "Rafailov et al.",
+      "year": 2023,
+      "arxiv_id": "2305.18290",
+      "role": "Related Problem",
+      "relationship_sentence": "DPO\u2019s objective explicitly ties policy updates to a fixed reference model, and this paper\u2019s theory explains such reference-anchored objectives as mitigating reward hacking by preserving proxy\u2013true correlation on the reference occupancy."
+    },
+    {
+      "title": "Safe Policy Improvement with Baseline Bootstrapping",
+      "authors": "Laroche et al.",
+      "year": 2019,
+      "arxiv_id": null,
+      "role": "Related Problem",
+      "relationship_sentence": "SPIBB shows that constraining deviation from a baseline policy\u2019s occupancy yields safety guarantees, directly informing this paper\u2019s mitigation that regularization to a reference policy prevents correlation breakdown and reward hacking."
+    }
+  ],
+  "synthesis_narrative": "Manheim and Garrabrant articulated Goodhart\u2019s law in optimization settings as the collapse of correlation between a proxy and the true objective once the proxy is pushed hard, crystallizing the exact failure mode central to reward hacking. The Inverse Reward Design problem formalized designed rewards as proxies that are only reliable on a training or reference distribution, emphasizing distribution shift as the locus where proxies fail and providing a precise proxy\u2013true reward framing. Concrete Problems in AI Safety surfaced reward hacking and specification gaming as concrete risks and highlighted the lack of principled definitions and guarantees. In applied alignment, RLHF systems like Learning to Summarize with Human Feedback and the widely used InstructGPT setup introduced learned reward models with a KL penalty to a reference model, revealing both the practical prevalence of reward overoptimization and an empirical mitigation via reference-anchored updates. Direct Preference Optimization went further by baking a fixed reference model into a closed-form objective, implicitly constraining distribution shift. In parallel, SPIBB demonstrated in RL that constraining divergence from a baseline policy\u2019s occupancy can provably safeguard performance.\nTogether, these works reveal a consistent picture: proxies are reliable only on the reference distribution; optimizing them can break proxy\u2013true alignment; and anchoring to a reference policy can preserve reliability. The current paper synthesizes these insights by giving a formal, correlation-based definition of reward hacking on the reference policy\u2019s occupancy and proving that regularizing toward the reference policy prevents correlation breakdown\u2014thereby unifying and theoretically grounding the KL-regularization heuristics in RLHF and reference-anchored objectives like DPO, while directly addressing the long-standing definitional gap.",
+  "target_paper": {
+    "title": "Correlated Proxies: A New Definition and Improved Mitigation for Reward Hacking",
+    "authors": "Cassidy Laidlaw, Shivam Singhal, Anca Dragan",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "reward hacking, reward gaming, overoptimization, occupancy measures",
+    "abstract": "Because it is difficult to precisely specify complex objectives, reinforcement learning policies are often optimized using proxy reward functions that only approximate the true goal. However, optimizing proxy rewards frequently leads to reward hacking: the optimized reward function ceases to be a good proxy and the resulting policy performs poorly with respect to the unspecified true reward. Principled solutions to reward hacking have been impeded by the lack of a good definition for the problem. To address this gap, we introduce a definition of reward hacking based on the correlation between proxy and true rewards for states and actions seen by a \u201creference policy\u201d that breaks down under optimization. We show that this definition captures reward hacking behavior across several realistic settings, including in reinforcement learning from human feedback (RLHF). Using our formulation, we show theoretically that regularization to the reference policy can effectively prevent reward hacking",
+    "openreview_id": "msEr27EejF",
+    "forum_id": "msEr27EejF"
+  },
+  "analysis_timestamp": "2026-01-06T07:16:28.589579"
+}

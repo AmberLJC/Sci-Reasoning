@@ -1,0 +1,88 @@
+{
+  "prior_works": [
+    {
+      "title": "Generalized Category Discovery",
+      "authors": [
+        "Vaze et al."
+      ],
+      "year": 2022,
+      "role": "Task definition and baseline",
+      "relationship_sentence": "This work formalized the GCD setting and exposed the failure modes of closed-world SSL assumptions when unlabeled data contain both seen and novel classes, directly motivating FlipClass\u2019s focus on teacher misguidance under unknown-class presence."
+    },
+    {
+      "title": "SimGCD: A Simple Baseline for Generalized Category Discovery",
+      "authors": [
+        "Unknown et al."
+      ],
+      "year": 2023,
+      "role": "Strong GCD baseline using SSL-style training",
+      "relationship_sentence": "SimGCD demonstrated that adapting SSL pipelines can be effective for GCD yet still relies on static or pseudo-label-driven guidance, providing a practical baseline that FlipClass augments by aligning the teacher to the student\u2019s evolving attention."
+    },
+    {
+      "title": "Mean Teachers Are Better Role Models: Weight-Averaged Consistency Targets Improve Semi-Supervised Deep Learning",
+      "authors": [
+        "Antti Tarvainen",
+        "Harri Valpola"
+      ],
+      "year": 2017,
+      "role": "Foundational teacher\u2013student framework (EMA teacher)",
+      "relationship_sentence": "FlipClass critically re-examines the EMA teacher paradigm from Mean Teacher, arguing that a quasi-static teacher can misguide in GCD and proposing a teacher update driven by the student\u2019s attention to maintain synchronized pattern learning."
+    },
+    {
+      "title": "FixMatch: Simplifying Semi-Supervised Learning with Consistency and Confidence",
+      "authors": [
+        "Kihyuk Sohn",
+        "David Berthelot",
+        "Nicholas Carlini",
+        "Zizhao Zhang",
+        "Han Zhang",
+        "Colin Raffel",
+        "Ekin D. Cubuk",
+        "Alex Kurakin"
+      ],
+      "year": 2020,
+      "role": "Strong closed-world SSL baseline (pseudo-labeling + consistency)",
+      "relationship_sentence": "FixMatch\u2019s confidence-filtered pseudo-labeling highlights how teacher predictions steer student learning; FlipClass addresses the brittleness of such guidance in GCD by aligning the teacher with student attention rather than fixed confidence rules."
+    },
+    {
+      "title": "Emerging Properties in Self-Supervised Vision Transformers (DINO)",
+      "authors": [
+        "Mathilde Caron",
+        "Hugo Touvron",
+        "Ishan Misra",
+        "Herv\u00e9 J\u00e9gou",
+        "Julien Mairal",
+        "Piotr Bojanowski",
+        "Armand Joulin"
+      ],
+      "year": 2021,
+      "role": "Self-distillation with EMA teacher; attention emergence",
+      "relationship_sentence": "DINO showed that EMA teacher\u2013student training yields informative attention maps; FlipClass leverages this insight by explicitly updating the teacher using the student\u2019s attention to mitigate inconsistent pattern learning in GCD."
+    },
+    {
+      "title": "Paying More Attention to Attention: Improving the Performance of Convolutional Neural Networks via Attention Transfer",
+      "authors": [
+        "Sergey Zagoruyko",
+        "Nikos Komodakis"
+      ],
+      "year": 2017,
+      "role": "Attention alignment in knowledge distillation",
+      "relationship_sentence": "Attention Transfer established that aligning attention between networks improves learning; FlipClass adapts this idea to GCD by flipping the direction\u2014aligning the teacher to the student\u2019s attention to prevent teacher misguidance."
+    },
+    {
+      "title": "Meta Pseudo Labels",
+      "authors": [
+        "Hieu Pham",
+        "Zihang Dai",
+        "Qizhe Xie",
+        "Minh-Thang Luong",
+        "Quoc V. Le"
+      ],
+      "year": 2021,
+      "role": "Adaptive teacher updated by student feedback",
+      "relationship_sentence": "MPL\u2019s notion of updating a teacher using student-driven signals inspired FlipClass\u2019s principle that the teacher should adapt to the student\u2019s learning state\u2014here operationalized as attention alignment for robust GCD."
+    }
+  ],
+  "synthesis_narrative": "FlipClass sits at the intersection of semi-supervised learning (SSL), attention-guided distillation, and generalized category discovery (GCD). The ECCV 2022 GCD paper defined the problem of jointly discovering novel classes while recognizing known ones, revealing that closed-world SSL often fails because teacher signals become unreliable on unknown classes. SimGCD subsequently showed that minimalist SSL-style pipelines can work surprisingly well in GCD, but they still inherit a core weakness: teacher or pseudo-label guidance that does not adapt fast enough to the evolving student, creating inconsistent pattern learning.\nClassic teacher\u2013student SSL (Mean Teacher) and confidence-filtered pseudo-labeling (FixMatch) provide the scaffolding of consistency training and supervision transfer, yet they implicitly treat the teacher as a static or slowly moving reference. DINO demonstrated that EMA-based self-distillation produces rich attention maps, suggesting that attention is a powerful lens for guiding training without labels. Meanwhile, Attention Transfer established that aligning attention across networks can be a strong supervisory signal in distillation. Finally, Meta Pseudo Labels made explicit that teachers can be updated based on student feedback, hinting that teacher adaptation is beneficial for stability and performance.\nFlipClass integrates these threads by flipping the conventional direction of guidance: instead of the student chasing a static teacher, the teacher is dynamically updated to align with the student\u2019s current attention. This design directly tackles teacher misguidance in GCD, synchronizes representation learning, and yields more reliable discovery of novel categories.",
+  "analysis_timestamp": "2026-01-06T23:33:35.581332"
+}

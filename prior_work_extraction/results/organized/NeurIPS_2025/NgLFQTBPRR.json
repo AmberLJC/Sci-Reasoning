@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Adjusting the outputs of a classifier to new a priori probabilities: a simple procedure",
+      "authors": "Michel Saerens et al.",
+      "year": 2002,
+      "role": "Foundation",
+      "relationship_sentence": "EPHAD directly builds on Saerens et al.\u2019s post-hoc probability adjustment idea, generalizing it to anomaly detection by combining a black-box detector\u2019s outputs with test-time evidence rather than assuming known class priors."
+    },
+    {
+      "title": "Detecting and Correcting for Label Shift with Black Box Predictors",
+      "authors": "Zachary C. Lipton et al.",
+      "year": 2018,
+      "role": "Extension",
+      "relationship_sentence": "EPHAD extends the black-box adjustment paradigm of BBSE by replacing label-shift estimation with evidence from auxiliary sources (e.g., CLIP, LOF), enabling post-hoc correction without access to training pipelines or labeled data."
+    },
+    {
+      "title": "Deep One-Class Classification",
+      "authors": "Lukas Ruff et al.",
+      "year": 2018,
+      "role": "Baseline",
+      "relationship_sentence": "EPHAD treats deep one-class detectors like Deep SVDD as the primary baseline whose anomaly scores\u2014when trained on contaminated data\u2014are post-hoc updated using external evidence at test time."
+    },
+    {
+      "title": "Tent: Fully Test-Time Adaptation by Entropy Minimization",
+      "authors": "Dequan Wang et al.",
+      "year": 2021,
+      "role": "Gap Identification",
+      "relationship_sentence": "EPHAD explicitly addresses TENT\u2019s limitation of requiring access to model weights and backpropagation by proposing a black-box, output-level test-time adaptation that only needs auxiliary evidence."
+    },
+    {
+      "title": "Learning Transferable Visual Models From Natural Language Supervision",
+      "authors": "Alec Radford et al.",
+      "year": 2021,
+      "role": "Inspiration",
+      "relationship_sentence": "EPHAD leverages CLIP\u2019s zero-shot language\u2013image matching as a practical source of test-time evidence that is fused with detector outputs to correct for training-time contamination."
+    },
+    {
+      "title": "LOF: Identifying Density-Based Local Outliers",
+      "authors": "Markus M. Breunig et al.",
+      "year": 2000,
+      "role": "Foundation",
+      "relationship_sentence": "EPHAD uses LOF-style local density outlier scores computed at test time as an auxiliary evidence stream to modulate and update the base detector\u2019s anomaly scores."
+    },
+    {
+      "title": "Open Set Recognition using OpenMax",
+      "authors": "Abhijit Bendale et al.",
+      "year": 2016,
+      "role": "Related Problem",
+      "relationship_sentence": "EPHAD echoes OpenMax\u2019s post-hoc adjustment ethos\u2014recalibrating model outputs using auxiliary statistical evidence\u2014to handle uncertainty, but adapts it to anomaly detection under data contamination."
+    }
+  ],
+  "synthesis_narrative": "EPHAD\u2019s core idea\u2014post-hoc, black-box correction of anomaly detector outputs using test-time evidence\u2014stands on two conceptual pillars: post-hoc adjustment under prior shift and evidence aggregation from auxiliary models. The post-hoc lineage originates with Saerens et al., who formalized adjusting classifier posteriors to new class priors, and is modernized by black-box shift estimation (Lipton et al.), which demonstrates that output-level correction is feasible without retraining or internal access. EPHAD adapts this paradigm to anomaly detection, replacing estimated priors with concrete test-time evidence streams.\nOn the anomaly detection side, deep one-class methods such as Deep SVDD serve as the main baselines whose outputs degrade under contamination\u2014EPHAD treats their predictions as informative priors to be corrected. In contrast to test-time adaptation methods like TENT that require gradient updates and model access, EPHAD targets the black-box setting, filling a practical gap by operating purely on outputs.\nThe evidence sources EPHAD fuses are grounded in established methods: CLIP provides zero-shot semantic cues that flag atypical content, while classical LOF yields complementary, locality-based outlier evidence in feature space. Finally, OpenMax offers a precedent for post-hoc output recalibration using auxiliary statistics in open-set scenarios, conceptually paralleling EPHAD\u2019s evidence-weighted update but in a different problem domain. Collectively, these works directly enable EPHAD\u2019s evidence-based, post-hoc adjustment framework for anomaly detection under contaminated training data.",
+  "analysis_timestamp": "2026-01-06T23:08:23.945003"
+}

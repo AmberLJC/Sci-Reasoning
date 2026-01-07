@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "LLaVA: Large Language and Vision Assistant",
+      "authors": "Haotian Liu, Chunyuan Li, Qingyang Wu, Yong Jae Lee",
+      "year": 2023,
+      "role": "MLLM architecture establishing the modular pattern of a vision encoder plus projection module feeding an LLM.",
+      "relationship_sentence": "ElasticMM\u2019s modality-aware separation and stage decoupling are motivated by LLaVA\u2019s clear division between modality-specific front-ends and the LLM core, which creates heterogeneous inference stages that benefit from elastic, stage-specific parallelism."
+    },
+    {
+      "title": "BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models",
+      "authors": "Junnan Li, Dongxu Li, Silvio Savarese, Steven C. H. Hoi",
+      "year": 2023,
+      "role": "Bridging module (Q-Former) design that separates heavy visual feature extraction from lightweight alignment to the LLM.",
+      "relationship_sentence": "By highlighting distinct compute/memory profiles across encoder, bridge, and LLM decoding, BLIP-2 directly informs ElasticMM\u2019s decision to decouple inference stages and assign tailored parallelism and resources per stage."
+    },
+    {
+      "title": "Megatron-LM: Training Multi-Billion Parameter Language Models Using Model Parallelism",
+      "authors": "Mohammad Shoeybi, Mostofa Patwary, Raul Puri, Patrick LeGresley, Jared Casper, Bryan Catanzaro",
+      "year": 2019,
+      "role": "Foundational tensor and pipeline parallelism techniques for large Transformer models.",
+      "relationship_sentence": "ElasticMM extends Megatron-LM\u2019s tensor/pipeline parallelism concepts from training to serving, choosing stage-appropriate parallelism for modality encoders vs. LLM decoding and elastically resizing these choices across workloads."
+    },
+    {
+      "title": "PipeDream: Generalized Pipeline Parallelism for DNN Training",
+      "authors": "Deepak Narayanan, Aaron Harlap, Amar Phanishayee, Vivek Seshadri, Nikhil R. Devanur, Greg Ganger, Phillip B. Gibbons, Matei Zaharia",
+      "year": 2019,
+      "role": "Pipeline parallelism with stage-aware scheduling and throughput balancing.",
+      "relationship_sentence": "ElasticMM\u2019s decoupled, stage-specialized execution and load balancing across heterogeneous inference phases build on PipeDream\u2019s insight that different stages have different throughputs and need tailored scheduling to reduce bubbles and latency."
+    },
+    {
+      "title": "Alpa: Automating Inter- and Intra-Operator Parallelism for Distributed Deep Learning",
+      "authors": "Lianmin Zheng, Chengcheng Wan, Zhuohan Li, Yida Wang, Siyuan Feng, Hao Zhang, Joseph E. Gonzalez, Ion Stoica",
+      "year": 2022,
+      "role": "Automatic search and placement of parallelism strategies across devices and stages.",
+      "relationship_sentence": "ElasticMM adopts Alpa\u2019s spirit of automatically selecting and reconfiguring parallelism, but specializes it for serving by elastically reallocating resources across modality groups and inference stages as request mixes change."
+    },
+    {
+      "title": "vLLM: Easy, Fast, and Cheap LLM Serving with PagedAttention",
+      "authors": "Kwon et al.",
+      "year": 2023,
+      "role": "High-throughput LLM serving with KV-cache paging and effective batching.",
+      "relationship_sentence": "ElasticMM leverages vLLM-style memory-efficient attention and scheduling as a building block for the decode stage, then generalizes the serving runtime to multimodal pipelines with modality-aware load balancing and stage decoupling."
+    },
+    {
+      "title": "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness",
+      "authors": "Tri Dao, Daniel Y. Fu, Stefano Ermon, Atri Rudra, Christopher R\u00e9",
+      "year": 2022,
+      "role": "Kernel-level attention optimization improving latency and memory footprint.",
+      "relationship_sentence": "ElasticMM\u2019s goal of low TTFT and high throughput in decode is enabled by FlashAttention-class kernels, which free memory/compute headroom that the system then elastically reallocates to modality-specific front-ends."
+    }
+  ],
+  "synthesis_narrative": "ElasticMM\u2019s core contribution\u2014Elastic Multimodal Parallelism (EMP) for efficient MLLM serving\u2014rests on two pillars: the modular multimodal model design and the systems techniques that exploit stage heterogeneity. LLaVA and BLIP-2 crystallized the modern MLLM architecture: heavy modality-specific feature extractors and projection/bridging modules feeding a frozen or shared LLM. This separation exposes distinct inference stages with divergent compute and memory profiles, motivating ElasticMM\u2019s modality-aware load balancer and explicit decoupling of encoders/bridges from the LLM decoder. On the systems side, Megatron-LM and PipeDream provide the foundational vocabulary of tensor and pipeline parallelism and the need for stage-aware throughput balancing. ElasticMM translates these training-centric ideas to serving-time elasticity, choosing and resizing parallelism per stage (and per modality) to reduce time-to-first-token and improve utilization under mixed workloads. Alpa\u2019s automatic placement and parallelism search further inform ElasticMM\u2019s dynamic reconfiguration across heterogeneous resources, enabling rapid adaptation as the request mix shifts between images, video, audio, and text-only. Finally, vLLM and FlashAttention supply crucial runtime enablers at the decode stage\u2014paged KV caching, efficient batching, and IO-aware attention kernels\u2014freeing memory and compute that ElasticMM can reallocate elastically to upstream modality pipelines. Together, these works directly shape ElasticMM\u2019s design: a decoupled, stage-specialized, and elastically scheduled serving stack tuned to the unique heterogeneity of multimodal LLM inference.",
+  "analysis_timestamp": "2026-01-07T00:05:12.536219"
+}

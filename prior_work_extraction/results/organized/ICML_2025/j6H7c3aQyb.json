@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Geometric Horizon Models (GHMs)",
+      "authors": "Touati et al.",
+      "year": 2024,
+      "role": "Direct predecessor and problem formulation",
+      "relationship_sentence": "TD-Flow directly targets the limitations of GHMs\u2014bootstrapped training instability and poor long-horizon fidelity\u2014by re-architecting their learning rule with a Bellman equation on probability paths and flow-matching."
+    },
+    {
+      "title": "Temporal Difference Variational Auto-Encoder (TD-VAE)",
+      "authors": "Gregor et al.",
+      "year": 2018,
+      "role": "Generative TD bootstrapping ancestor",
+      "relationship_sentence": "TD-VAE pioneered a generative analogue of TD learning with bootstrapped latent predictions, highlighting both the promise and variance/bias pitfalls of TD-style generative training that TD-Flow explicitly addresses."
+    },
+    {
+      "title": "A Distributional Perspective on Reinforcement Learning",
+      "authors": "Bellemare, Dabney, Munos",
+      "year": 2017,
+      "role": "Bellman operator over distributions",
+      "relationship_sentence": "By casting value prediction as a distributional Bellman fixed point, this work motivates TD-Flow\u2019s formulation of a Bellman equation over probability paths rather than scalars, enabling principled training targets for generative state distributions."
+    },
+    {
+      "title": "DualDICE: Behavior-Agnostic Estimation of Discounted Stationary Distribution Corrections",
+      "authors": "Nachum et al.",
+      "year": 2019,
+      "role": "Bellman flow constraints on state distributions",
+      "relationship_sentence": "DualDICE\u2019s discounted state-distribution (occupancy) Bellman equations inform TD-Flow\u2019s probability-path perspective, connecting dynamics, discounting, and fixed-point structure that underlie the new Bellman operator."
+    },
+    {
+      "title": "Flow Matching for Generative Modeling",
+      "authors": "Lipman et al.",
+      "year": 2023,
+      "role": "Core training technique for probability paths",
+      "relationship_sentence": "TD-Flow leverages flow-matching to learn vector fields along probability paths, replacing high-variance bootstrapped targets with supervised velocity matching that empirically lowers gradient variance and improves long-horizon generation."
+    },
+    {
+      "title": "Score-Based Generative Modeling via Stochastic Differential Equations",
+      "authors": "Song et al.",
+      "year": 2021,
+      "role": "Probability flow and path-wise generative dynamics",
+      "relationship_sentence": "This work links generative modeling to probability flow ODE/SDE dynamics, conceptually grounding TD-Flow\u2019s view of learning distributions via path dynamics rather than stepwise unrolls."
+    },
+    {
+      "title": "Dreamer: Reinforcement Learning with World Models",
+      "authors": "Hafner et al.",
+      "year": 2020,
+      "role": "Motivation\u2014compounding rollout error in world models",
+      "relationship_sentence": "Dreamer exemplifies step-by-step model unrolling where small prediction errors accumulate, motivating TD-Flow\u2019s direct future prediction via GHMs to avoid cumulative inference errors."
+    }
+  ],
+  "synthesis_narrative": "Temporal Difference Flows (TD-Flow) sits at the intersection of generative modeling, RL theory, and world-model learning. Geometric Horizon Models (GHMs) introduced the central idea of predicting future states directly under a geometric horizon, but inherited the instability of bootstrapped TD-style training. TD-VAE had earlier demonstrated the appeal of temporal-difference bootstrapping for generative latent models and simultaneously exposed its variance and bias trade-offs, foreshadowing the need for a lower-variance alternative.\nDistributional RL reframed Bellman updates as operators over distributions, and DualDICE extended Bellman-style constraints to discounted state distributions (occupancies). TD-Flow synthesizes these ideas by posing a novel Bellman equation on probability paths, providing a principled fixed-point structure for the evolution of future-state distributions under discounting.\nOn the generative side, flow-matching offered a direct way to learn probability paths by supervising the vector field (path velocities) rather than relying on noisy bootstrapped targets, while score-based generative modeling formalized probability flow ODE/SDE views that make such pathwise training natural. This substitution of bootstrapping with flow-matching is the crux behind TD-Flow\u2019s reduced gradient variance and improved long-horizon fidelity.\nFinally, modern world-model approaches like Dreamer highlight how iterative unrolling compounds small errors, motivating GHMs and, in turn, TD-Flow\u2019s path-based approach. Collectively, these works directly shaped TD-Flow\u2019s core contribution: a Bellman-consistent, flow-matched training paradigm for GHMs that scales to substantially longer horizons with theoretical convergence guarantees.",
+  "analysis_timestamp": "2026-01-07T00:21:33.183539"
+}

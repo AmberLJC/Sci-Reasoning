@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Physics-Informed Neural Networks: A Deep Learning Framework for Solving Forward and Inverse Problems Involving Nonlinear Partial Differential Equations",
+      "authors": "M. Raissi, P. Perdikaris, G. E. Karniadakis",
+      "year": 2019,
+      "role": "Foundational method",
+      "relationship_sentence": "Established the PINN formulation and residual-based collocation loss that the paper analyzes and seeks to sample from more stably."
+    },
+    {
+      "title": "DeepXDE: A Deep Learning Library for Solving Differential Equations",
+      "authors": "Lu Lu, Xuhui Meng, Zhiping Mao, George E. Karniadakis",
+      "year": 2021,
+      "role": "Baseline high-residual adaptive sampling (RAR/RAR-G)",
+      "relationship_sentence": "Popularized residual-based adaptive refinement that repeatedly adds points with the largest PDE residuals; this is the high-residual strategy whose instability and neglect of medium/low residual regions the paper diagnoses and remedies."
+    },
+    {
+      "title": "When and Why PINNs Fail to Train and How to Fix It",
+      "authors": "Sifan Wang, Yujun Teng, Paris Perdikaris",
+      "year": 2022,
+      "role": "Problem diagnosis and stabilization in PINNs",
+      "relationship_sentence": "Analyzed gradient pathologies and sensitivity to training hyperparameters in PINNs, motivating the need for sampling and optimization schemes (like the proposed Langevin-based approach) that are robust to learning rate and model complexity."
+    },
+    {
+      "title": "hp-VPINNs: Variational Physics-Informed Neural Networks With Domain Decomposition and hp-Adaptivity",
+      "authors": "Mahyar Kharazmi, Zhongqiang Zhang, George E. Karniadakis",
+      "year": 2019,
+      "role": "Adaptive refinement for PINNs",
+      "relationship_sentence": "Demonstrated that adaptive refinement (h/p-adaptivity) improves efficiency/accuracy in PINNs, directly inspiring the paper\u2019s focus on adaptive sampling while highlighting stability trade-offs of aggressive refinement."
+    },
+    {
+      "title": "Bayesian Learning via Stochastic Gradient Langevin Dynamics",
+      "authors": "Max Welling, Yee Whye Teh",
+      "year": 2011,
+      "role": "Theoretical underpinning for Langevin dynamics",
+      "relationship_sentence": "Provides the discretized Langevin update with gradient and Gaussian noise that the paper adapts to input-space sampling, forming the core mechanism behind Langevin dynamics-based adaptive sampling (LAS)."
+    },
+    {
+      "title": "Stochastic Gradient Descent as Approximate Bayesian Inference",
+      "authors": "Stephan Mandt, Matthew D. Hoffman, David M. Blei",
+      "year": 2017,
+      "role": "Learning-rate\u2013distribution connection",
+      "relationship_sentence": "Shows how SGD and Langevin-like noise induce stationary distributions dependent on step size, informing the paper\u2019s analysis of learning-rate bounds and its design of LAS to be robust across learning rates."
+    },
+    {
+      "title": "Training Region-based Object Detectors with Online Hard Example Mining",
+      "authors": "Abhinav Shrivastava, Abhinav Gupta, Ross Girshick",
+      "year": 2016,
+      "role": "Precedent for hard-example (high-loss) sampling",
+      "relationship_sentence": "Demonstrates that focusing only on hard/high-loss samples boosts efficiency but can introduce bias/instability; this directly motivates tempering high-residual selection in PINNs with stochastic Langevin exploration to avoid neglecting medium/low residual regions."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core contribution\u2014Langevin dynamics-based adaptive sampling (LAS) for PINNs\u2014emerges at the intersection of residual-driven training, adaptive refinement, and Langevin-based stochastic exploration. Raissi et al. established the residual-minimization framework of PINNs, while DeepXDE\u2019s residual-based adaptive refinement (RAR/RAR-G) operationalized a practical, high-residual sampling pipeline. However, as highlighted by Wang, Teng, and Perdikaris, PINNs are highly sensitive to optimization hyperparameters and can exhibit gradient pathologies, a vulnerability exacerbated by aggressively prioritizing only the largest residuals. Parallel developments in hp-VPINNs showed that adaptivity improves accuracy and efficiency, but also underscored stability trade-offs inherent in concentrated refinement.\nTo resolve the bias\u2013stability tension of high-residual selection, the authors draw on Langevin dynamics. Welling and Teh\u2019s SGLD provides the noisy gradient update foundation, enabling sampling from a residual-derived energy landscape rather than deterministically chasing only the hardest points. Mandt et al. further connect step size to the stationary distribution of stochastic dynamics, motivating a design that remains robust across learning rates and model complexities. Finally, lessons from online hard example mining in vision clarify why pure hard-sample emphasis can destabilize training\u2014precisely the failure mode the paper mitigates by tempering residual emphasis with Langevin noise. Together, these works directly inform LAS: a principled sampler that explores medium/low residual regions while retaining focus on high-error areas, yielding improved stability and accuracy for PINNs.",
+  "analysis_timestamp": "2026-01-07T00:02:04.977243"
+}

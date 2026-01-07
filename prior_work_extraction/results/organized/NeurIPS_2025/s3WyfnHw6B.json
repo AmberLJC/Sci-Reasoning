@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Adaptive Subgradient Methods for Online Learning and Stochastic Optimization",
+      "authors": "John Duchi, Elad Hazan, Yoram Singer",
+      "year": 2011,
+      "role": "Foundational method (adaptive preconditioning)",
+      "relationship_sentence": "The paper\u2019s fairness claims about RMSProp hinge on the adaptive preconditioning principle introduced by AdaGrad, which normalizes updates by historical gradient magnitudes and thus can rebalance contributions from under-represented groups under imbalance."
+    },
+    {
+      "title": "Lecture 6.5\u2014RMSProp: Divide the gradient by a running average of its recent magnitude",
+      "authors": "Tijmen Tieleman, Geoffrey Hinton",
+      "year": 2012,
+      "role": "Algorithmic cornerstone (RMSProp definition)",
+      "relationship_sentence": "RMSProp is the focal adaptive optimizer compared against SGD; the paper\u2019s single-step fairness guarantees exploit RMSProp\u2019s exponential moving average of squared gradients to show fairer parameter updates than SGD under certain conditions."
+    },
+    {
+      "title": "The Marginal Value of Adaptive Gradient Methods in Machine Learning",
+      "authors": "Ashia C. Wilson, Rebecca Roelofs, Mitchell Stern, Nati Srebro, Benjamin Recht",
+      "year": 2017,
+      "role": "Empirical/theoretical comparison of optimizers",
+      "relationship_sentence": "By demonstrating that optimizer choice alters inductive biases and generalization, this work motivates the paper\u2019s core premise that optimizers can also shape group fairness outcomes, guiding a direct SGD vs. adaptive comparison."
+    },
+    {
+      "title": "Stochastic Gradient Descent as Approximate Bayesian Inference",
+      "authors": "Matthias Mandt, Matthew D. Hoffman, David M. Blei",
+      "year": 2017,
+      "role": "Analytical tool (SDE/diffusion view of SGD)",
+      "relationship_sentence": "The paper\u2019s stochastic differential equation analysis of optimization dynamics draws on this diffusion approximation framework to connect optimizer noise geometry to fairness-relevant convergence behavior."
+    },
+    {
+      "title": "Fairness Without Demographics in Repeated Loss Minimization",
+      "authors": "Tatsunori B. Hashimoto, Megha Srivastava, Hongseok Namkoong, Percy Liang",
+      "year": 2018,
+      "role": "Problem framing (minority harm under ERM)",
+      "relationship_sentence": "This work formalizes how standard ERM can disproportionately harm minority groups under imbalance, directly motivating the paper\u2019s focus on how optimizer dynamics, without changing objectives, can mitigate such disparities."
+    },
+    {
+      "title": "Distributionally Robust Neural Networks for Group Shifts: On the Importance of Regularization for Worst-Group Loss",
+      "authors": "Shiori Sagawa, Pang Wei Koh, Tatsunori B. Hashimoto, Percy Liang",
+      "year": 2020,
+      "role": "Benchmark and conceptual baseline (Group-DRO)",
+      "relationship_sentence": "As a leading approach to improving worst-group performance, Group-DRO provides the comparative and evaluative baseline that the paper complements by isolating optimizer choice as an orthogonal lever for fairness."
+    },
+    {
+      "title": "Equality of Opportunity in Supervised Learning",
+      "authors": "Moritz Hardt, Eric Price, Nati Srebro",
+      "year": 2016,
+      "role": "Foundational group fairness definitions and evaluation",
+      "relationship_sentence": "The paper\u2019s group-fairness framing and metrics build on foundational notions like equalized odds/opportunity, grounding the theoretical and empirical assessment of fairness effects induced by different optimizers."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s central insight\u2014that optimizer choice can systematically influence group fairness\u2014emerges from converging lines of prior work in fairness, optimization dynamics, and adaptive methods. Foundational fairness studies (Hardt et al., 2016) formalized group fairness criteria, while Hashimoto et al. (2018) and Sagawa et al. (2020) showed that ERM under imbalance can harm minorities and that reweighting or distributional robustness can improve worst-group performance. Rather than altering the objective, the present work examines the training dynamics themselves, building on evidence that optimizers impose distinct inductive biases (Wilson et al., 2017). To analyze these dynamics, the paper adopts the diffusion/SDE lens introduced by Mandt et al. (2017), which links stochastic optimization to continuous-time dynamics whose noise geometry and preconditioning shape convergence to different regions of the loss landscape. Within this framework, adaptive methods\u2014rooted in AdaGrad\u2019s per-coordinate normalization (Duchi et al., 2011) and instantiated by RMSProp (Tieleman & Hinton, 2012)\u2014naturally rescale updates using historical gradient magnitudes. Under severe group imbalance, this rescaling can amplify minority gradients relative to majority ones, tilting updates toward fairer minima. The paper formalizes this by proving single-step and update-level guarantees in which RMSProp, compared to SGD, more evenly allocates learning across groups and improves fairness under appropriate conditions. Empirically, the theory is validated on CelebA, FairFace, and MS-COCO, positioning optimizer choice as an orthogonal, theoretically grounded lever complementing Group-DRO-style objective modifications for improving group fairness.",
+  "analysis_timestamp": "2026-01-07T00:05:12.530843"
+}

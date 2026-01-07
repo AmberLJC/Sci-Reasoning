@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Bilevel Programming for Hyperparameter Optimization and Meta-Learning",
+      "authors": "Luca Franceschi et al.",
+      "year": 2018,
+      "arxiv_id": "1806.04910",
+      "role": "Foundation",
+      "relationship_sentence": "This work formalized the modern ML bilevel problem and hypergradient computation (via unrolling and implicit differentiation) that BO-REP retains while relaxing the standard outer-level Lipschitz-smoothness assumption."
+    },
+    {
+      "title": "Hyperparameter Optimization with Approximate Gradient (HOAG)",
+      "authors": "Fabian Pedregosa",
+      "year": 2016,
+      "arxiv_id": "1602.02355",
+      "role": "Extension",
+      "relationship_sentence": "HOAG introduced warm-started inexact inner solves with accuracy control for hypergradient computation, which directly inspires BO-REP\u2019s initialization refinement and periodic inner updates to control inner-solve error at reduced cost."
+    },
+    {
+      "title": "Truncated Back-propagation for Bilevel Optimization",
+      "authors": "Artem Shaban et al.",
+      "year": 2019,
+      "arxiv_id": "1810.10667",
+      "role": "Related Problem",
+      "relationship_sentence": "By showing how truncated unrolling trades computation for biased hypergradients, this paper motivates BO-REP\u2019s alternative cost-control mechanism (periodic updates) that manages inner-solve bias without relying on outer Lipschitz smoothness."
+    },
+    {
+      "title": "Optimizing Millions of Hyperparameters by Implicit Differentiation",
+      "authors": "Lucas Lorraine et al.",
+      "year": 2020,
+      "arxiv_id": "1911.02590",
+      "role": "Baseline",
+      "relationship_sentence": "This implicit-differentiation framework is a primary practical baseline whose analyses assume outer Lipschitz smoothness; BO-REP modifies the outer update (normalized momentum) and inner-solve schedule to remain convergent when that assumption fails."
+    },
+    {
+      "title": "StocBiO: A Single-Timescale Stochastic Bilevel Optimization Method",
+      "authors": "Kaiyi Ji et al.",
+      "year": 2021,
+      "arxiv_id": "",
+      "role": "Baseline",
+      "relationship_sentence": "As a leading single-loop stochastic bilevel method with convergence guarantees under Lipschitz-smooth outer objectives, StocBiO serves as the baseline that BO-REP directly improves upon by achieving convergence under unbounded smoothness."
+    },
+    {
+      "title": "On the Difficulty of Training Recurrent Neural Networks",
+      "authors": "Razvan Pascanu et al.",
+      "year": 2013,
+      "arxiv_id": "1211.5063",
+      "role": "Gap Identification",
+      "relationship_sentence": "This paper\u2019s demonstration of exploding gradients in RNNs/LSTMs exposed the unbounded-smoothness regime that invalidates standard bilevel assumptions, motivating BO-REP\u2019s normalized momentum for robust outer updates."
+    }
+  ],
+  "synthesis_narrative": "Bilevel programming for machine learning was crystallized by Franceschi et al., who specified the modern bilevel formulation and how to compute hypergradients either by unrolling the inner optimization or by implicit differentiation, setting the template for subsequent algorithmic designs. Pedregosa\u2019s HOAG showed that one can reliably approximate hypergradients by reusing and refining inner solutions, explicitly warm-starting the lower-level solver and controlling its accuracy to balance cost and error. Shaban et al. analyzed truncated backpropagation through the inner loop, revealing the bias\u2013compute trade-off created by truncation when estimating hypergradients. Lorraine et al. made large-scale hyperparameter optimization practical via implicit differentiation, but under the usual outer Lipschitz-smoothness assumptions. On the theoretical side of stochastic bilevel methods, Ji et al.\u2019s StocBiO delivered single-loop convergence rates, again predicated on bounded outer smoothness. In contrast, Pascanu et al. documented exploding gradients in RNNs/LSTMs, highlighting that outer gradients can be unbounded in prominent neural settings.\nTogether these works exposed a gap: provably convergent bilevel methods assumed outer Lipschitz smoothness, yet realistic neural architectures can violate it, and existing cost-reduction strategies either induce bias or rely on that very assumption. Synthesizing HOAG\u2019s warm-started accuracy control with single-loop bilevel updates, and taking cues from robustness practices for exploding gradients, the new approach combines normalized momentum for the outer updates with inner initialization refinement and periodic updates, achieving convergence guarantees tailored to the unbounded-smoothness regime.",
+  "target_paper": {
+    "title": "Bilevel Optimization under Unbounded Smoothness: A New Algorithm and Convergence Analysis",
+    "authors": "Jie Hao, Xiaochuan Gong, Mingrui Liu",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Bilevel Optimization, Unbounded Smoothness, Deep Learning",
+    "abstract": "Bilevel optimization is an important formulation for many machine learning problems, such as meta-learning and hyperparameter optimization. Current bilevel optimization algorithms assume that the gradient of the upper-level function is Lipschitz (i.e., the upper-level function has a bounded smoothness parameter). However, recent studies reveal that certain neural networks such as recurrent neural networks (RNNs) and long-short-term memory networks (LSTMs) exhibit potential unbounded smoothness, rendering conventional bilevel optimization algorithms unsuitable for these neural networks. In this paper, we design a new bilevel optimization algorithm, namely BO-REP, to address this challenge. This algorithm updates the upper-level variable using normalized momentum and incorporates two novel techniques for updating the lower-level variable: \\textit{initialization refinement} and \\textit{periodic updates}. Specifically, once the upper-level variable is initialized, a subroutine is invoked t",
+    "openreview_id": "LqRGsGWOTX",
+    "forum_id": "LqRGsGWOTX"
+  },
+  "analysis_timestamp": "2026-01-06T11:26:32.850004"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness",
+      "authors": "Tri Dao, Daniel Y. Fu, Stefano Ermon, Atri Rudra, Christopher R\u00e9",
+      "year": 2022,
+      "role": "Hardware/IO-aware attention kernel design",
+      "relationship_sentence": "MonarchAttention adopts FlashAttention\u2019s IO-aware tiling and tensor-core\u2013centric kernel design principles to achieve high throughput and Nd memory/IO efficiency while rearchitecting the computation around a structured approximation."
+    },
+    {
+      "title": "Linformer: Self-Attention with Linear Complexity",
+      "authors": "Sinong Wang, Belinda Z. Li, Madian Khabsa, Han Fang, Hao Ma",
+      "year": 2020,
+      "role": "Low-rank attention approximation",
+      "relationship_sentence": "Like Linformer, MonarchAttention targets low-rank/structured approximations of the attention map to reduce quadratic cost, but differs by computing a zero-shot, data-dependent projection onto Monarch matrices rather than learning projection matrices."
+    },
+    {
+      "title": "Rethinking Attention with Performers",
+      "authors": "Krzysztof Choromanski, Valerii Likhosherstov, David Dohan, Xingyou Song, Andreea Gane, Tamas Sarlos, Peter Hawkins, Jared Davis, Afroz Mohiuddin, Lukasz Kaiser, David Belanger, Lucy Colwell, Adrian Weller",
+      "year": 2021,
+      "role": "Kernelization of softmax attention for sub-quadratic complexity",
+      "relationship_sentence": "Performer shows that softmax attention can be approximated via kernel methods; MonarchAttention similarly approximates softmax but does so by optimizing over a deterministic, tensor-core\u2013friendly structured matrix class rather than random features."
+    },
+    {
+      "title": "Nystr\u00f6mformer: A Nystr\u00f6m-Based Algorithm for Approximating Self-Attention",
+      "authors": "Xiong et al.",
+      "year": 2021,
+      "role": "Low-rank/Nystr\u00f6m approximation of attention",
+      "relationship_sentence": "Nystr\u00f6mformer motivates approximating the attention matrix via constrained low-rank structure; MonarchAttention instead projects the softmax attention onto Monarch matrices, achieving sub-quadratic complexity with improved hardware utilization and zero-shot applicability."
+    },
+    {
+      "title": "Big Bird: Transformers for Longer Sequences",
+      "authors": "Manzil Zaheer, Guru Guruganesh, Avinava Dubey, Joshua Ainslie, Chris Alberti, Santiago Onta\u00f1\u00f3n, Philip Pham, Anirudh Ravula, Qifan Wang, Li Yang, Amr Ahmed",
+      "year": 2020,
+      "role": "Block-sparse attention patterns for long contexts",
+      "relationship_sentence": "BigBird\u2019s block-sparse designs illustrate that structured sparsity can retain accuracy while reducing complexity; MonarchAttention generalizes this idea by optimizing over Monarch-structured operators that are both expressive and directly map to high-throughput GEMMs."
+    },
+    {
+      "title": "Learning Fast Algorithms for Linear Transforms (Butterfly Factorization in Deep Learning)",
+      "authors": "Tri Dao, Atri Rudra, Christopher R\u00e9",
+      "year": 2019,
+      "role": "Structured matrices foundation (permutations + small dense blocks)",
+      "relationship_sentence": "MonarchAttention builds on the lineage of butterfly/structured matrix factorizations, leveraging block-permutation\u2013based expressivity to realize O(N\u221aN d) attention with GPU-friendly dense block multiplications."
+    },
+    {
+      "title": "Convex Optimization",
+      "authors": "Stephen Boyd, Lieven Vandenberghe",
+      "year": 2004,
+      "role": "Variational form of log-sum-exp/softmax via convex conjugacy",
+      "relationship_sentence": "The algorithmic core of MonarchAttention exploits the variational (convex conjugate) form of softmax/log-sum-exp to formulate and solve an optimization-based projection onto Monarch matrices efficiently."
+    }
+  ],
+  "synthesis_narrative": "MonarchAttention\u2019s core contribution\u2014zero-shot conversion of standard attention into a fast, tensor-core\u2013friendly structured approximation\u2014emerges by combining three strands of prior work. First, the structured approximation of the attention matrix traces to low-rank and sparse designs such as Linformer, Performer, Nystr\u00f6mformer, and BigBird. These works established that the softmax attention operator admits constrained representations that can reduce the quadratic cost while preserving accuracy, motivating MonarchAttention\u2019s decision to approximate the attention map itself rather than alter model architecture or retrain. Second, MonarchAttention\u2019s choice of Monarch-style structured operators is grounded in the butterfly/structured-matrix lineage, which shows that compositions of permutations and small dense blocks can be highly expressive while enabling sub-quadratic multiplication. This lineage provides both the theoretical expressivity and the practical building blocks for mapping the approximation to dense GEMMs that run well on modern GPUs. Third, the method\u2019s optimization-based projection leverages the variational (convex conjugate) form of log-sum-exp/softmax, allowing an efficient procedure to compute a data-dependent projection onto the Monarch class. Finally, the system-level performance and IO complexity reflect the design principles popularized by FlashAttention\u2014IO-aware tiling and tensor-core utilization\u2014ensuring that the theoretical savings translate into end-to-end wall-time speedups without additional training. Together, these influences enable a transferable, hardware-efficient, sub-quadratic attention approximation.",
+  "analysis_timestamp": "2026-01-07T00:05:12.528842"
+}

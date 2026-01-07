@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Fast Inference from Transformers via Speculative Decoding",
+      "authors": "Leviathan, Matias, Junczys-Dowmunt",
+      "year": 2023,
+      "role": "Foundational algorithm for draft-and-verify acceleration",
+      "relationship_sentence": "Sequoia builds directly on the speculative decoding paradigm introduced here\u2014using a fast draft model and a verifier model\u2014but generalizes it to larger speculation budgets with optimized tree structures and a more robust sampling/verification scheme across temperatures."
+    },
+    {
+      "title": "Blockwise Parallel Decoding for Deep Autoregressive Models",
+      "authors": "Stern, Shazeer, Uszkoreit",
+      "year": 2018,
+      "role": "Conceptual precursor: predict multiple steps ahead then verify",
+      "relationship_sentence": "Sequoia\u2019s verify-many-at-once spirit follows the blockwise predict-and-verify idea, but replaces fixed, heuristic block structures with a dynamic-programming\u2013optimized token tree tailored to hardware and budget constraints."
+    },
+    {
+      "title": "Medusa: Simple Framework for Accelerating LLM Generation via Multi-Token Prediction",
+      "authors": "Cai et al.",
+      "year": 2023,
+      "role": "Multi-branch/tree-style speculative generation via auxiliary heads",
+      "relationship_sentence": "Medusa demonstrated the benefits of tree-shaped multi-token proposals, and Sequoia advances this line by computing the optimal speculation tree (rather than fixed branching) and by introducing a verification procedure that remains accurate under diverse decoding temperatures."
+    },
+    {
+      "title": "SpecInfer: Accelerating Generative LLM Serving with Speculative Inference and Token Graphs",
+      "authors": "Gou et al.",
+      "year": 2024,
+      "role": "Systems-scale batched verification over token graphs/trees",
+      "relationship_sentence": "Sequoia tackles the same scalability challenge as SpecInfer\u2019s token-graph batching but contributes a principled DP that optimizes the tree topology for throughput and acceptance, yielding better scaling with larger speculation budgets."
+    },
+    {
+      "title": "Self-Speculative Decoding",
+      "authors": "Xia et al.",
+      "year": 2023,
+      "role": "Improved acceptance via using the target model\u2019s partial computations as the draft",
+      "relationship_sentence": "Motivated by prior efforts to raise acceptance rates and robustness, Sequoia refines the sampling and verification criteria to maintain speedups across temperatures and hyperparameters, complementing self-drafting ideas with temperature-stable acceptance."
+    },
+    {
+      "title": "EAGLE: Speculative Sampling for Efficient LLM Inference with Multi-Draft Proposals",
+      "authors": "Liu et al.",
+      "year": 2023,
+      "role": "Multi-draft/tree sampling and acceptance heuristics",
+      "relationship_sentence": "Sequoia extends multi-draft/tree-based speculative sampling by replacing heuristic branching and thresholds with an optimal-tree DP and a more reliable verifier, improving both scalability and robustness across decoding settings."
+    }
+  ],
+  "synthesis_narrative": "Sequoia\u2019s core innovation\u2014scalable, temperature-robust speculative decoding with an optimally chosen token tree\u2014sits at the intersection of two key trajectories in prior work. First, early predict-and-verify methods such as Blockwise Parallel Decoding established the idea of proposing multiple next steps and validating them efficiently. This concept was instantiated for modern LLMs by Speculative Decoding (Leviathan et al.), which formalized draft-and-verify using a small draft model and a larger verifier. Second, a subsequent wave of systems and algorithmic work sought to scale speculative decoding by proposing multiple candidates in tree or graph form and verifying them in batch. Medusa explored multi-branch draft structures via auxiliary heads, while EAGLE generalized to multi-draft proposals with heuristic branching/acceptance. SpecInfer pushed the systems side, introducing token graphs and batched verification for high-throughput serving. These efforts revealed two pain points that Sequoia directly addresses: (1) performance depends heavily on the choice of tree structure and speculation budget, and (2) speedups can degrade under higher temperatures or different decoding hyperparameters. Sequoia contributes a dynamic-programming algorithm that computes an optimal speculation tree under compute and memory constraints, subsuming prior fixed or heuristic trees, and a sampling/verification procedure that sustains high acceptance and quality across temperatures. Together, these advances unlock larger effective speculation budgets and stable gains, extending and unifying the ideas introduced across the above prior works.",
+  "analysis_timestamp": "2026-01-06T23:33:36.291938"
+}

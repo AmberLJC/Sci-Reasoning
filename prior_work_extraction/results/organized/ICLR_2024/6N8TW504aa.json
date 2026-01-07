@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Multi-task Gaussian Process Prediction",
+      "authors": "Edwin V. Bonilla et al.",
+      "year": 2008,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "This work formalized multi-output GP via shared task covariance (ICM), whose rigidity in capturing complex inter-output structure motivates replacing a fixed coregionalization matrix with learned, parent-based graphical dependencies weighted by attention."
+    },
+    {
+      "title": "Sparse Convolved Gaussian Processes for Multi-output Regression",
+      "authors": "Mauricio A. \u00c1lvarez et al.",
+      "year": 2009,
+      "arxiv_id": "",
+      "role": "Baseline",
+      "relationship_sentence": "Convolution processes provided a flexible mechanism for inter-output coupling and introduced inducing approximations for scalability, but their computational burden and global coupling motivate GMOGP\u2019s graph-structured dependencies and distributed learning to achieve scalable flexibility."
+    },
+    {
+      "title": "Gaussian Process Regression Networks",
+      "authors": "Andrew Gordon Wilson et al.",
+      "year": 2012,
+      "arxiv_id": "",
+      "role": "Inspiration",
+      "relationship_sentence": "GPRN\u2019s idea of outputs connected through input-dependent GP weight functions directly inspires modeling inter-output influence via learnable edge weights, which GMOGP operationalizes using attention over identified parents in a graphical structure."
+    },
+    {
+      "title": "The Gaussian Process Autoregressive Regression (GPAR) Model",
+      "authors": "James Requeima et al.",
+      "year": 2019,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "GPAR introduced a DAG/autoregressive factorization over outputs with GP conditionals, providing the core idea of parent-conditioned GP priors that GMOGP generalizes from chains to learned parent sets with attention."
+    },
+    {
+      "title": "DAGs with NOTEARS: Continuous Optimization for Structure Learning",
+      "authors": "Xun Zheng et al.",
+      "year": 2018,
+      "arxiv_id": "",
+      "role": "Extension",
+      "relationship_sentence": "The differentiable acyclicity constraint from NOTEARS enables learning directed parent sets via continuous optimization, a principle GMOGP adopts to identify valid graphical parents among outputs."
+    },
+    {
+      "title": "Multi-Task Learning as Multi-Objective Optimization",
+      "authors": "Ozan Sener et al.",
+      "year": 2018,
+      "arxiv_id": "1810.04650",
+      "role": "Inspiration",
+      "relationship_sentence": "Casting multi-task training as a Pareto-front problem directly motivates GMOGP\u2019s Pareto-optimal kernel hyperparameter learning across outputs within a distributed framework."
+    }
+  ],
+  "synthesis_narrative": "Early multi-output Gaussian processes modeled task relations with a global coregionalization matrix, as in Bonilla et al., capturing shared structure but imposing a fixed, often mis-specified inter-task covariance. Convolution-process MOGPs (\u00c1lvarez et al.) increased expressiveness by mixing latent processes through kernels and introduced sparse inducing approximations, yet their globally entangled dependencies and cubic costs remained a barrier at scale. Wilson and Ghahramani\u2019s Gaussian Process Regression Networks reframed outputs as nodes connected by input-dependent weight functions, showing that learning inter-output influence can be more flexible than fixed task covariances. The GPAR model advanced this perspective by factorizing multi-output regression along a directed graph, where each output is a GP conditioned on its parents, highlighting how DAG-structured dependencies improve sample efficiency and expressiveness. Meanwhile, NOTEARS established a practical, differentiable acyclicity constraint, enabling continuous optimization of directed graphs and thus tractable discovery of parent sets. In parallel, Sener and Koltun recast multi-task learning as multi-objective optimization, arguing for Pareto-optimal trade-offs across tasks rather than a single scalarized objective.\nCombining these advances reveals an opportunity: learn a directed dependency graph among outputs and weight influences flexibly, while achieving scalable training and principled trade-offs across outputs. GMOGP synthesizes parent-conditioned GP priors (GPAR) with learnable edge weights inspired by network-style connections (GPRN), identifies valid parents via continuous DAG learning (NOTEARS), replaces rigid coregionalization and heavy convolutional couplings, and tunes kernel hyperparameters toward Pareto-optimal solutions across outputs, yielding a more flexible, optimal, and scalable multi-output GP.",
+  "target_paper": {
+    "title": "Graphical Multioutput Gaussian Process with Attention",
+    "authors": "Yijue Dai, Wenzhong Yan, Feng Yin",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Gaussian process regression, Multioutput Gaussian process, Attention mechanism",
+    "abstract": "Integrating information while recognizing dependence from multiple data sources and enhancing the predictive performance of the multi-output regression are challenging tasks. Multioutput Gaussian Process (MOGP) methods offer outstanding solutions with tractable predictions and uncertainty quantification. However, their practical applications are hindered by high computational complexity and storage demand. Additionally, there exist model mismatches in existing MOGP models when dealing with non-Gaussian data. To improve the model representation ability in terms of flexibility, optimality, and scalability, this paper introduces a novel multi-output regression framework, termed Graphical MOGP (GMOGP), which is empowered by: (i) Generating flexible Gaussian process priors consolidated from dentified parents, (ii) providing dependent processes with attention-based graphical representations, and (iii) achieving Pareto optimal solutions of kernel hyperparameters via a distributed learning fra",
+    "openreview_id": "6N8TW504aa",
+    "forum_id": "6N8TW504aa"
+  },
+  "analysis_timestamp": "2026-01-06T13:08:30.541264"
+}

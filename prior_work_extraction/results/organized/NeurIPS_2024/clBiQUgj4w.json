@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "STL: A Seasonal-Trend Decomposition Procedure Based on Loess",
+      "authors": "Robert B. Cleveland, William S. Cleveland, Jean E. McRae, Irma Terpenning",
+      "year": 1990,
+      "role": "Foundational seasonal-trend-residual decomposition",
+      "relationship_sentence": "CycleNet\u2019s Residual Cycle Forecasting mirrors STL\u2019s principle of explicitly separating a learnable seasonal (periodic) component and forecasting the remaining residual, but implements the seasonal part as learnable recurrent cycles."
+    },
+    {
+      "title": "Forecasting at Scale (Prophet)",
+      "authors": "Sean J. Taylor, Benjamin Letham",
+      "year": 2017,
+      "role": "Decomposable additive model with explicit seasonality via Fourier terms",
+      "relationship_sentence": "Prophet\u2019s success with explicit, parameterized seasonal components informs CycleNet\u2019s decision to directly parameterize periodic patterns and then predict residuals for robust long-horizon forecasts."
+    },
+    {
+      "title": "N-BEATS: Neural Basis Expansion Analysis for Interpretable Time Series Forecasting",
+      "authors": "Boris N. Oreshkin, Dmitri Carpov, Nicolas Chapados, Yoshua Bengio",
+      "year": 2020,
+      "role": "Neural residual/backcast-forecast stacks with trend/seasonality bases",
+      "relationship_sentence": "CycleNet adopts N-BEATS\u2019 core idea of decomposing signal components and performing residual learning, but specializes the seasonal block as learnable recurrent cycles to target periodicity in LTSF."
+    },
+    {
+      "title": "Autoformer: Decomposition Transformers with Auto-Correlation for Long-Term Series Forecasting",
+      "authors": "Haixu Wu et al.",
+      "year": 2021,
+      "role": "Periodicity-aware attention with series decomposition",
+      "relationship_sentence": "Autoformer\u2019s autocorrelation mechanism underscores the value of explicitly modeling periodic dependencies, a motivation CycleNet operationalizes by directly learning recurrent cycles rather than relying on attention patterns."
+    },
+    {
+      "title": "FEDformer: Frequency Enhanced Decomposed Transformer for Long-term Series Forecasting",
+      "authors": "Zhou et al.",
+      "year": 2022,
+      "role": "Frequency-domain seasonal/trend decomposition for long-horizon forecasting",
+      "relationship_sentence": "FEDformer\u2019s frequency-enhanced seasonal modeling motivates CycleNet\u2019s explicit periodic component, while CycleNet achieves similar goals with a simpler time-domain learnable cycle plus residual prediction."
+    },
+    {
+      "title": "TimesNet: Temporal 2D-Variation Modeling for General Time Series Analysis",
+      "authors": "Haixu Wu et al.",
+      "year": 2023,
+      "role": "Learning multi-periodic patterns via 2D temporal mapping",
+      "relationship_sentence": "TimesNet demonstrates that multi-period structures drive LTSF accuracy, which CycleNet distills into compact, learnable recurrent cycles that capture dominant periods with far fewer parameters."
+    },
+    {
+      "title": "Are Transformers Effective for Time Series Forecasting? (DLinear)",
+      "authors": "Ailing Zeng et al.",
+      "year": 2023,
+      "role": "Simple linear baseline with series decomposition and strong parameter efficiency",
+      "relationship_sentence": "DLinear\u2019s finding that lightweight decomposition-based models rival heavy architectures directly inspires CycleNet\u2019s pairing of Residual Cycle Forecasting with a linear/shallow MLP head for accuracy and efficiency."
+    }
+  ],
+  "synthesis_narrative": "CycleNet\u2019s core contribution\u2014Residual Cycle Forecasting (RCF) with learnable recurrent cycles followed by residual prediction\u2014sits at the intersection of classic decomposition and modern periodicity-aware deep models. Foundationally, STL and Prophet established that explicitly modeling seasonality and then forecasting the residual is robust and interpretable. N-BEATS advanced this decomposition paradigm in neural form, using backcast/forecast residual stacks and basis expansions for trend/seasonality, showing that component-wise modeling plus residual refinement can scale to deep learning.\nModern LTSF models reinforced the centrality of periodic dependencies. Autoformer introduced autocorrelation to uncover repeating structures and coupled it with series decomposition, while FEDformer captured seasonality in the frequency domain. TimesNet further emphasized multi-periodicity by learning local-global periodic patterns via a 2D temporal view. These works collectively argue that long-horizon accuracy hinges on capturing periodic structures explicitly.\nCycleNet synthesizes these insights but opts for a minimalistic, plug-and-play implementation: it directly parameterizes periodicity as learnable recurrent cycles (instead of attention or spectral modules) and performs forecasting on the residual, akin to STL/Prophet/N-BEATS. The efficiency and simplicity are aligned with DLinear\u2019s revelations that decomposition-centric, lightweight models can outperform heavier transformers. Thus, CycleNet unifies decomposition-driven residual learning with explicit periodic modeling, yielding a compact architecture that preserves the performance gains of periodicity-aware methods while achieving strong parameter efficiency.",
+  "analysis_timestamp": "2026-01-06T23:33:35.557073"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Fast \u03b5-free inference of simulation models with Bayesian conditional density estimation",
+      "authors": "George Papamakarios; Iain Murray",
+      "year": 2016,
+      "role": "Foundational amortized neural posterior estimation for simulation-based inference (SBI)",
+      "relationship_sentence": "RoPE builds on the neural conditional density estimation paradigm to represent posteriors, adding a data-driven calibration layer to correct simulator misspecification without redesigning the amortized SBI machinery."
+    },
+    {
+      "title": "Automatic posterior transformation for likelihood-free inference",
+      "authors": "David Greenberg; Marcel Nonnenmacher; Jakob H. Macke",
+      "year": 2019,
+      "role": "Unified framework (SNPE/SNL/SNRE) for modern SBI pipelines",
+      "relationship_sentence": "RoPE is designed to wrap around and augment these SBI procedures, specifically addressing failures under simulator\u2013data mismatch that the APT framework itself does not handle."
+    },
+    {
+      "title": "Approximate Bayesian Computation with the Wasserstein distance",
+      "authors": "Espen Bernton; Pierre E. Jacob; Mathieu Gerber; Christian P. Robert",
+      "year": 2019,
+      "role": "Introduced optimal transport (Wasserstein) as a principled discrepancy in likelihood-free inference",
+      "relationship_sentence": "RoPE generalizes the use of OT in likelihood-free settings by casting the sim-to-real misspecification gap as an OT problem in learned representation space, rather than comparing raw observations directly."
+    },
+    {
+      "title": "Sinkhorn Distances: Lightspeed Computation of Optimal Transport",
+      "authors": "Marco Cuturi",
+      "year": 2013,
+      "role": "Computational backbone for scalable, differentiable optimal transport",
+      "relationship_sentence": "RoPE\u2019s practical learning of an OT-based misspecification correction relies on entropic-regularized OT (Sinkhorn) to make representation-level transport tractable and end-to-end trainable."
+    },
+    {
+      "title": "Joint Distribution Optimal Transport for Domain Adaptation",
+      "authors": "Nicolas Courty; R\u00e9mi Flamary; Devis Tuia; Alain Rakotomamonjy",
+      "year": 2017,
+      "role": "OT-based alignment of joint distributions using limited target labels",
+      "relationship_sentence": "RoPE mirrors JDOT\u2019s principle by leveraging a small labeled target (real) set\u2014pairs of observations and true parameters\u2014to learn an OT alignment that corrects simulator-to-real shifts for posterior estimation."
+    },
+    {
+      "title": "Validating Bayesian inference algorithms with simulation-based calibration",
+      "authors": "Michael Talts; Michael Betancourt; Daniel Simpson; Aki Vehtari; Andrew Gelman",
+      "year": 2018,
+      "role": "Defined coverage-based calibration diagnostics for Bayesian/SBI methods",
+      "relationship_sentence": "RoPE explicitly targets calibrated uncertainty under misspecification, operationalizing SBC\u2019s coverage goals via a learnable correction informed by real-world calibration data."
+    },
+    {
+      "title": "Asymptotic properties of approximate Bayesian computation under model misspecification",
+      "authors": "David T. Frazier; Guillaume M. Martin; Christian P. Robert",
+      "year": 2018,
+      "role": "Characterized the detrimental effects of model misspecification in likelihood-free inference",
+      "relationship_sentence": "RoPE is a direct response to the failure modes identified in this work, providing a principled, data-driven correction that restores reliable inference when the simulator is misspecified."
+    }
+  ],
+  "synthesis_narrative": "RoPE\u2019s core idea\u2014correcting simulator misspecification for SBI using a small real-world calibration set and an optimal transport (OT) formulation in learned representation space\u2014emerges by bridging advances in SBI, misspecification analysis, calibration, and OT-based domain alignment. Modern amortized SBI methods, from early neural conditional density estimation to the unified APT framework, made high-dimensional, likelihood-free posterior estimation practical but left open the problem of robustness under simulator\u2013data mismatch. The misspecification literature in likelihood-free inference formally documented how such mismatch corrupts inference and coverage, motivating methods that explicitly address this gap rather than ignoring it. In parallel, simulation-based calibration established concrete coverage diagnostics and a target notion of calibrated uncertainty that RoPE aims to satisfy.\nOT provided the mathematical and computational tools to model distributional discrepancies. Sinkhorn\u2019s scalable, differentiable OT made it feasible to incorporate transport objectives into deep learning. Wasserstein-ABC showed that OT can serve as a robust discrepancy for likelihood-free inference, while OT-driven domain adaptation, especially JDOT, demonstrated how a small labeled target set can guide alignment of joint distributions. RoPE synthesizes these threads: it learns representations in which an OT problem captures the misspecification gap between simulated and real observations, using a small calibration set of true parameters to guide alignment. The result is a calibration mechanism that can be layered onto standard SBI pipelines, balancing informative posteriors with calibrated uncertainty even under severe simulator misspecification.",
+  "analysis_timestamp": "2026-01-07T00:21:32.383971"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Efficient Global Optimization of Expensive Black-Box Functions",
+      "authors": "Donald R. Jones; Matthias Schonlau; William J. Welch",
+      "year": 1998,
+      "role": "Foundational acquisition function (EI)",
+      "relationship_sentence": "This paper introduced Expected Improvement (EI), the core improvement-based objective that LogEI transforms into log-space while preserving the optimizer."
+    },
+    {
+      "title": "Fast computation of the multi-points expected improvement with applications in batch optimization",
+      "authors": "Cl\u00e9ment Chevalier; David Ginsbourger",
+      "year": 2013,
+      "role": "Batch extension (qEI)",
+      "relationship_sentence": "Chevalier and Ginsbourger formalized multi-point/batch EI (qEI), one of the EI variants whose numerical pathologies the LogEI family explicitly stabilizes and makes easier to optimize."
+    },
+    {
+      "title": "Fast calculation of the expected hypervolume improvement for problems with independently normally distributed objectives",
+      "authors": "Dries Couckuyt; Dirk Deschrijver; Tom Dhaene",
+      "year": 2014,
+      "role": "Multi-objective acquisition (EHVI)",
+      "relationship_sentence": "This work provided analytic computation of EHVI, the multi-objective improvement criterion that LogEHVI targets to cure vanishing-value issues while keeping optima unchanged."
+    },
+    {
+      "title": "Differentiable Expected Hypervolume Improvement for Parallel Multi-Objective Bayesian Optimization",
+      "authors": "Sam Daulton; Maximilian Balandat; Eytan Bakshy",
+      "year": 2020,
+      "role": "Differentiable/parallel EHVI (qEHVI)",
+      "relationship_sentence": "qEHVI introduced a practical, differentiable (often Monte Carlo) formulation for parallel MOBO, which the LogEI paper builds upon by deriving log-space, numerically stable counterparts for robust gradient-based optimization."
+    },
+    {
+      "title": "Bayesian Optimization with Inequality Constraints",
+      "authors": "Jacob R. Gardner; Matt J. Kusner; Zhixiang (Ethan) Xu; Kilian Q. Weinberger; John P. Cunningham",
+      "year": 2014,
+      "role": "Constrained EI (EIC)",
+      "relationship_sentence": "Gardner et al. proposed feasibility-weighted EI for constrained BO, a setting where EI/EHVI values often underflow, motivating LogEI\u2019s log-space treatment of constrained improvement criteria."
+    },
+    {
+      "title": "Parallel Bayesian Optimization of Multiple Noisy Objectives with Constraints",
+      "authors": "Sam Daulton; Maximilian Balandat; Eytan Bakshy",
+      "year": 2021,
+      "role": "Noisy/constrained multi-objective extension (qNEHVI)",
+      "relationship_sentence": "This paper\u2019s noisy and constrained EHVI (qNEHVI) highlights severe numerical issues in modern MOBO, directly motivating the LogEI paper\u2019s log-transformed, stable variants for noisy and constrained settings."
+    },
+    {
+      "title": "BoTorch: A Framework for Efficient Monte-Carlo Bayesian Optimization",
+      "authors": "Maximilian Balandat; Brian Karrer; Daniel R. Jiang; Samuel Daulton; Ben Letham; Andrew Gordon Wilson; Eytan Bakshy",
+      "year": 2020,
+      "role": "Framework enabling MC-based, gradient-based acquisition optimization",
+      "relationship_sentence": "BoTorch established differentiable, Monte Carlo acquisition optimization workflows that the LogEI paper leverages and improves by eliminating numerical pathologies in EI/EHVI objective evaluations."
+    }
+  ],
+  "synthesis_narrative": "The core innovation of \u201cUnexpected Improvements to Expected Improvement for Bayesian Optimization\u201d is to recast improvement-based acquisition functions in log-space (LogEI and its variants) so that they retain the same maximizers but avoid numerical underflow and vanishing gradients that hamper acquisition optimization in practice. This contribution sits squarely on the lineage of improvement-based Bayesian optimization. The original EI of Jones, Schonlau, and Welch (1998) defined the improvement objective that LogEI transforms while preserving argmax equivalence. As practical BO evolved to batch settings, Chevalier and Ginsbourger (2013) established multi-point EI (qEI), where the numerical difficulties compound with batch size\u2014precisely the regime LogEI targets. In multi-objective BO, EHVI became the canonical improvement criterion; Couckuyt, Deschrijver, and Dhaene (2014) provided analytic computation that is widely used yet prone to underflow away from the Pareto frontier, motivating the LogEHVI reformulation. Modern scalable, differentiable MOBO\u2014exemplified by Daulton, Balandat, and Bakshy\u2019s qEHVI (2020)\u2014relies on gradient-based optimization of Monte Carlo objectives; the LogEI paper directly augments these formulations with log-space, numerically stable evaluations. Constraints and noise exacerbate vanishing-acquisition issues: Gardner et al. (2014) introduced constrained EI (EIC), and Daulton et al. (2021) extended to noisy, constrained MOBO (qNEHVI), both of which benefit from LogEI\u2019s stabilization. Finally, BoTorch (Balandat et al., 2020) provided the MC-differentiable infrastructure that makes the numerical pathologies salient in practice and serves as the platform where LogEI demonstrably improves acquisition optimization.",
+  "analysis_timestamp": "2026-01-06T23:42:49.089974"
+}

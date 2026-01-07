@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Documenting and Automating Collateral Evolutions in Linux Device Drivers",
+      "authors": "Yoann Padioleau, Julia Lawall, Ren\u00e9 Rydhof Hansen, Gilles Muller",
+      "year": 2008,
+      "role": "Problem formulation and rule-based baseline for Linux evolution",
+      "relationship_sentence": "This work introduced semantic patches to automate Linux driver adaptations across API changes, directly framing MigGPT\u2019s core task and motivating a move beyond hand-written rules to a learned, generalizable migration mechanism."
+    },
+    {
+      "title": "Fine-grained and Accurate Source Code Differencing (GumTree)",
+      "authors": "Didier Falleri, Flor\u00e9al Morandat, Xavier Blanc, Matias Martinez, Martin Monperrus",
+      "year": 2014,
+      "role": "Algorithmic basis for edit localization and code mapping",
+      "relationship_sentence": "GumTree\u2019s tree-to-tree mapping informs MigGPT\u2019s migration-point identification, inspiring structure-aware alignment signals that MigGPT encapsulates in its code fingerprint and localization modules."
+    },
+    {
+      "title": "Deckard: Scalable and Accurate Tree-Based Detection of Code Clones",
+      "authors": "Lingxiao Jiang, Ghassan Misherghi, Zhendong Su, St\u00e9phane Glondu",
+      "year": 2007,
+      "role": "Fingerprinting/representation for robust code similarity",
+      "relationship_sentence": "Deckard\u2019s notion of structural fingerprints for approximate code matching underpins MigGPT\u2019s novel code fingerprint design to retain snippet identity across kernel version drift and refactorings."
+    },
+    {
+      "title": "Learning Syntactic Program Transformations from Examples (Refazer)",
+      "authors": "Gabriel B. R. de Souza Rolim, Gustavo Soares, Rohit Gheyi, Lucas C. Cassiano, Daniel Simon, Sumit Gulwani, Rishabh Singh",
+      "year": 2017,
+      "role": "Learning edit patterns for automated code migration",
+      "relationship_sentence": "Refazer demonstrated learning generalized edit scripts from examples; MigGPT similarly guides LLM edits with learned, reusable structures\u2014here via fingerprints and migration modules rather than explicit rewrite grammars."
+    },
+    {
+      "title": "Evaluating Large Language Models Trained on Code",
+      "authors": "Mark Chen, Jerry Tworek, Heewoo Jun, Qiming Yuan, Henrique Ponde de Oliveira Pinto, et al.",
+      "year": 2021,
+      "role": "Establishes capabilities/limits of code LLMs",
+      "relationship_sentence": "By exposing LLM strengths and context limitations on code tasks, this work motivates MigGPT\u2019s design choices to augment LLMs with external code fingerprints and retrieval to overcome incomplete-context failures."
+    },
+    {
+      "title": "An Empirical Study on Learning Bug-Fixing Patches in the Wild",
+      "authors": "Michele Tufano, Cody Watson, Gabriele Bavota, Massimiliano Di Penta, Rocco Oliveto, Denys Poshyvanyk",
+      "year": 2019,
+      "role": "Neural patch generation and context sensitivity",
+      "relationship_sentence": "Findings that neural models struggle with localization and rich context inform MigGPT\u2019s split of responsibilities\u2014using fingerprints for precise migration-point identification and LLMs for context-aware edits."
+    },
+    {
+      "title": "Defects4J: A Database of Existing Faults to Enable Controlled Testing in Software Engineering Research",
+      "authors": "Ren\u00e9 Just, Darioush Jalali, Michael D. Ernst",
+      "year": 2014,
+      "role": "Benchmarking methodology for reproducible, executable evaluation",
+      "relationship_sentence": "Defects4J\u2019s rigorous, real-world, test-based evaluation approach influences MigGPT\u2019s creation of a robust out-of-tree kernel patch migration benchmark grounded in real projects and verifiable outcomes."
+    }
+  ],
+  "synthesis_narrative": "MigGPT\u2019s core contribution\u2014accurate, automated migration of out-of-tree Linux kernel patches using LLMs augmented by a novel code fingerprint\u2014sits at the intersection of three research lines. First, Coccinelle\u2019s collateral evolution work crystallized the problem of systematically adapting Linux code across API changes and showed the efficacy of semantic, rule-based transformations. MigGPT extends this premise by replacing hand-authored rules with LLM-driven edits that generalize to diverse changes. Second, structural analysis and representation advances\u2014GumTree\u2019s fine-grained AST differencing and Deckard\u2019s scalable structural fingerprints\u2014demonstrated how to robustly map and compare code across revisions. These ideas directly inform MigGPT\u2019s fingerprint design and its migration-point identification module, which must withstand the refactorings and syntactic drift typical of kernel evolution. Third, learning-based transformation research (Refazer) and empirical studies on neural patching (Tufano et al.) highlighted both the promise of learned edits and the pitfalls of context scarcity and poor localization in sequence models. MigGPT addresses these limitations by coupling an LLM with explicit fingerprint-guided retrieval and alignment to ensure edits are applied at the right place with sufficient context. Finally, the evaluation ethos of Defects4J (executable, real-world, reproducible) motivates MigGPT\u2019s dedicated benchmark of genuine out-of-tree kernel patches, enabling rigorous assessment beyond synthetic tasks. Together, these works shape MigGPT\u2019s architecture: structural fingerprints for stable snippet identity, modules for precise localization and edit guidance, and a realistic benchmark to validate gains.",
+  "analysis_timestamp": "2026-01-07T00:21:33.151464"
+}

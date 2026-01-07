@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Single-disperser design for coded aperture snapshot spectral imaging",
+      "authors": "Murad M. Wagadarikar et al.",
+      "year": 2008,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "This paper established the CASSI forward model that PSR-SCI inverts, directly defining the single-shot spectral compressive imaging problem and measurement operator the new method enforces during diffusion refinement."
+    },
+    {
+      "title": "Generalized Alternating Projection (GAP) for Compressive Sensing and Applications in High-Speed Video, Spectral Tomography and Other CS Problems",
+      "authors": "Xin Yuan",
+      "year": 2016,
+      "arxiv_id": "1605.07185",
+      "role": "Baseline",
+      "relationship_sentence": "GAP-based deterministic reconstructions for SCI provide the fast coarse estimates that inspire PSR-SCI\u2019s lightweight predictor stage and highlight the over-smoothing/high-frequency loss PSR-SCI explicitly addresses."
+    },
+    {
+      "title": "Hyperspectral subspace identification",
+      "authors": "Jos\u00e9 M. Bioucas-Dias et al.",
+      "year": 2008,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "HySime formalized data-driven spectral subspace estimation for HS/MS images, directly motivating PSR-SCI\u2019s reversible spectral embedding that represents an MSI with compact subspace images and coefficients."
+    },
+    {
+      "title": "Hyperspectral Unmixing Overview: Geometrical, Statistical, and Sparse Regression-Based Approaches",
+      "authors": "Jos\u00e9 M. Bioucas-Dias et al.",
+      "year": 2012,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "This overview codified the linear mixing model and abundance\u2013endmember factorization, providing the unmixing rationale that PSR-SCI adopts to decompose MSIs into spectral coefficients and subspace images in a reversible way."
+    },
+    {
+      "title": "Denoising Diffusion Restoration Models",
+      "authors": "Ofir Kawar et al.",
+      "year": 2022,
+      "arxiv_id": "2201.11793",
+      "role": "Extension",
+      "relationship_sentence": "DDRM showed how a pretrained diffusion model can be adapted to linear inverse problems via measurement consistency, which PSR-SCI extends by enforcing SCI physics while refining in a learned spectral subspace with an RGB diffusion prior."
+    },
+    {
+      "title": "Diffusion Posterior Sampling for General Noisy Inverse Problems",
+      "authors": "Hyungjin Chung et al.",
+      "year": 2022,
+      "arxiv_id": "2209.14687",
+      "role": "Related Problem",
+      "relationship_sentence": "DPS introduced posterior sampling with pretrained diffusion guided by the forward operator, directly informing PSR-SCI\u2019s physics-guided refinement of subspace images under the SCI measurement model."
+    },
+    {
+      "title": "Palette: Image-to-Image Diffusion Models",
+      "authors": "Chitwan Saharia et al.",
+      "year": 2022,
+      "arxiv_id": "2111.05826",
+      "role": "Inspiration",
+      "relationship_sentence": "Palette demonstrated coarse-to-fine, conditional diffusion that recovers high-frequency details from lightweight predictors, inspiring PSR-SCI\u2019s predict-then-diffuse design where diffusion focuses on high-frequency refinement in a compact embedding."
+    }
+  ],
+  "synthesis_narrative": "Coded aperture snapshot spectral imaging (CASSI) established a single-shot acquisition model that compresses spectral cubes into a coded 2D measurement, setting the forward operator that reconstruction methods must invert. Deterministic physics-based solvers such as Generalized Alternating Projection (GAP) became fast baselines for SCI, but their TV-like priors often oversmooth fine textures and high-frequency spectral-spatial details. In hyperspectral representation, HySime showed that HS/MS data reside in a low-dimensional spectral subspace that can be estimated from the data, while unmixing theory formalized linear mixture factorization into spectra and abundances; together, these works provided a compact, physically meaningful embedding of spectra that can be inverted. On the generative side, Denoising Diffusion Restoration Models proved that pretrained diffusion models can be adapted to linear inverse problems by enforcing measurement consistency, and Diffusion Posterior Sampling generalized posterior-guided sampling using the known forward operator. Complementarily, Palette illustrated that conditional, coarse-to-fine diffusion can inject high-frequency details starting from a lightweight predictor\u2019s rough estimate.\nCollectively, these insights suggested a path: map the high-dimensional MSI into a low-dimensional, reversible spectral subspace where powerful pretrained RGB diffusion priors are applicable, use a fast physics-based predictor for an initial estimate, and perform physics-guided diffusion refinement focused on recovering lost high frequencies. PSR-SCI naturalizes this synthesis by unmixing-driven spectral embedding to bridge MSIs with RGB diffusion, and by integrating SCI measurement consistency during sampling to overcome data scarcity and computational burdens of training MSI-specific diffusion models.",
+  "target_paper": {
+    "title": "Spectral Compressive Imaging via Unmixing-driven Subspace Diffusion Refinement",
+    "authors": "Haijin Zeng, Benteng Sun, Yongyong Chen, Jingyong Su, Yong Xu",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "Spectral compressive imaging, subspace, diffusion, fine-tune",
+    "abstract": "Spectral Compressive Imaging (SCI) reconstruction is inherently ill-posed because a single observation admits multiple plausible reconstructions. Traditional deterministic methods struggle to effectively recover high-frequency details. Although diffusion models offer promising solutions to this challenge, their application is constrained by the limited training data and high computational demands associated with multispectral images (MSIs), making direct diffusion training impractical. To address these issues, we propose a novel Predict-and-unmixing-driven-Subspace-Refine framework (PSR-SCI). This framework begins with a light-weight predictor that produces an initial, rough estimate of the MSI. Subsequently, we introduce a unmixing-driven reversible spectral embedding module that decomposes the MSI into subspace images and spectral coefficients. This compact representation facilitates the adaptation of pre-trained RGB diffusion models and focuses refinement processes on high-frequency",
+    "openreview_id": "Q150eWkQ4I",
+    "forum_id": "Q150eWkQ4I"
+  },
+  "analysis_timestamp": "2026-01-06T12:04:33.722445"
+}

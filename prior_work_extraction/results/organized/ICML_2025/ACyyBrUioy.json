@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Classification and Regression Trees",
+      "authors": "Leo Breiman et al.",
+      "year": 1984,
+      "role": "Foundation",
+      "relationship_sentence": "CART established the greedy, top\u2011down decision tree paradigm that is fast but provably suboptimal, directly motivating SPLIT\u2019s aim to retain greedy\u2011level scalability while recovering (near\u2011)optimal accuracy."
+    },
+    {
+      "title": "Optimal Classification Trees",
+      "authors": "Dimitris Bertsimas et al.",
+      "year": 2017,
+      "role": "Foundation",
+      "relationship_sentence": "OCT formalized globally optimal decision tree learning via mixed\u2011integer optimization and showed accuracy/sparsity gains at high computational cost, defining the optimality target that SPLIT seeks to approximate far more efficiently."
+    },
+    {
+      "title": "Learning Optimal Classification Trees Using a Binary Linear Program",
+      "authors": "Sicco Verwer et al.",
+      "year": 2019,
+      "role": "Gap Identification",
+      "relationship_sentence": "This MILP formulation (BinOCT) demonstrated that exact trees are attainable but highlighted severe scalability limits of solving all subproblems to optimality\u2014limits SPLIT overcomes by switching to greedy completion near leaves."
+    },
+    {
+      "title": "Learning Optimal Decision Trees Using Caching Branch-and-Bound Search (DL8.5)",
+      "authors": "Thibaut Aglin et al.",
+      "year": 2020,
+      "role": "Extension",
+      "relationship_sentence": "DL8.5 introduced dynamic\u2011programming subproblem caching and tight bounds for branch\u2011and\u2011bound over tree substructures; SPLIT builds on this framework but departs by not solving every subproblem exactly, employing sparse lookahead and greediness near leaves to avoid the exponential blow\u2011up."
+    },
+    {
+      "title": "Generalized and Scalable Optimal Sparse Decision Trees (GOSDT)",
+      "authors": "Aaron Y. Lin et al.",
+      "year": 2020,
+      "role": "Baseline",
+      "relationship_sentence": "GOSDT provided the L0\u2011regularized objective and a scalable exact B&B/DP solver for sparse trees; SPLIT directly modifies this line by selectively relaxing optimality in deeper subproblems to achieve orders\u2011of\u2011magnitude speedups with negligible performance loss."
+    },
+    {
+      "title": "Learning Certifiably Optimal Rule Lists",
+      "authors": "William R. Angelino et al.",
+      "year": 2017,
+      "role": "Inspiration",
+      "relationship_sentence": "CORELS pioneered certifiable discrete optimization for interpretable models using prefix\u2011based caching and tight bounds, techniques that informed the optimal\u2011search infrastructure in OSDT/GOSDT that SPLIT adapts with selective greediness."
+    }
+  ],
+  "synthesis_narrative": "SPLIT sits at the intersection of two traditions: fast but myopic greedy trees and globally optimal yet costly discrete optimization for trees. CART created the dominant greedy, top\u2011down formulation and exposed its suboptimality, setting the stage for optimal formulations such as Optimal Classification Trees (OCT), which showed that exact global optimization can markedly improve accuracy and sparsity but at prohibitive computational cost. Subsequent MILP approaches, notably BinOCT, reinforced both the benefits of exact trees and the scalability barrier that arises from solving every subtree to optimality.\n\nThe breakthrough toward scalable exactness came from branch\u2011and\u2011bound with dynamic programming over subproblems. DL8.5 introduced subproblem caching and tight bounds to reuse computations across overlapping subtrees, while GOSDT advanced an L0\u2011regularized objective and a highly engineered B&B/DP solver that produced certifiably optimal sparse trees. However, these methods still attempt to optimally resolve an exponential number of deep subproblems, which is the core scalability bottleneck.\n\nSPLIT\u2019s key innovation is to explicitly break that bottleneck: using sparse lookahead to prioritize where optimal search matters and switching to greediness near the leaves, it avoids solving deep subproblems to optimality while preserving near\u2011optimal quality. This idea directly extends the B&B/DP infrastructure of DL8.5 and GOSDT, and is inspired by certifiable discrete\u2011optimization design principles from CORELS. The result is a method that effectively marries the accuracy of optimal trees with the speed of greedy induction.",
+  "analysis_timestamp": "2026-01-06T23:07:19.568789"
+}

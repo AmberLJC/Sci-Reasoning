@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Outrageously Large Neural Networks: The Sparsely-Gated Mixture-of-Experts Layer",
+      "authors": "Noam Shazeer et al.",
+      "year": 2017,
+      "arxiv_id": "1701.06538",
+      "role": "Foundation",
+      "relationship_sentence": "This work introduced sparse MoE layers with discrete top-k token-to-expert routing and load-balancing losses, the core framework that Soft MoE keeps in spirit while replacing non-differentiable routing with a soft, fully differentiable assignment to avoid token dropping and instability."
+    },
+    {
+      "title": "Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity",
+      "authors": "William Fedus et al.",
+      "year": 2021,
+      "arxiv_id": "2101.03961",
+      "role": "Gap Identification",
+      "relationship_sentence": "Switch\u2019s top-1 token-choice routing exposed key limitations\u2014training instability, expert overload, and token dropping due to capacity\u2014that Soft MoE explicitly targets with its soft routing and differentiable sparse design."
+    },
+    {
+      "title": "Scaling Vision with Sparse Mixture of Experts",
+      "authors": "Carlos Riquelme et al.",
+      "year": 2021,
+      "arxiv_id": "2106.05974",
+      "role": "Baseline",
+      "relationship_sentence": "V-MoE brought token-choice MoE to ViTs and introduced router z-loss for stability, providing the principal vision baseline and revealing finetuning fragility and token-drop issues that Soft MoE resolves with its soft token-to-expert mixing."
+    },
+    {
+      "title": "GLaM: Efficient Scaling of Language Models with Mixture-of-Experts",
+      "authors": "Nan Du et al.",
+      "year": 2022,
+      "arxiv_id": "2112.06905",
+      "role": "Related Problem",
+      "relationship_sentence": "GLaM\u2019s large-scale top-2 token routing demonstrated MoE\u2019s capacity benefits but retained discrete routing and capacity-based token drops, motivating Soft MoE\u2019s fully differentiable sparse routing that scales experts without dropping tokens."
+    },
+    {
+      "title": "Mixture-of-Experts with Expert Choice Routing",
+      "authors": "Barret Zoph et al.",
+      "year": 2022,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "Expert-Choice routing showed that letting experts select tokens can scale the number of experts, a key comparator that Soft MoE surpasses by using soft token mixtures per expert to remove hard assignments while keeping sparsity."
+    },
+    {
+      "title": "DSelect-k: Differentiable Selection in the Mixture-of-Experts Model",
+      "authors": "Yassine Hazimeh et al.",
+      "year": 2021,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "DSelect-k proposed a continuous relaxation for expert selection, directly inspiring Soft MoE\u2019s pursuit of fully differentiable sparse routing but leading Soft MoE to a different mechanism\u2014soft token mixing to experts\u2014to avoid brittle relaxed top-k selection."
+    }
+  ],
+  "synthesis_narrative": "Sparsely-Gated Mixture-of-Experts established the core recipe of conditional computation with discrete top-k token-to-expert routing and balancing losses, enabling massive capacity without proportional compute but introducing non-differentiable decisions and capacity-driven token drops. Switch Transformers simplified routing to top-1 and scaled MoEs impressively, yet surfaced instability, expert overload, and dropped tokens, revealing brittleness in discrete routing under load constraints. In vision, V-MoE adapted token-choice MoE to ViTs, adding router z-loss to stabilize routing while still relying on hard capacity limits that hinder fine-tuning and cause token dropping. GLaM demonstrated the benefits of top-2 token routing at extreme scale, but maintained the same discrete mechanisms and capacity truncation, constraining expert count scalability. Expert-Choice routing inverted the assignment by allowing experts to select tokens, improving scalability to many experts but still using hard, non-differentiable selections. In parallel, DSelect-k introduced a differentiable relaxation for expert selection, pointing toward end-to-end trainable routers yet tied to relaxed top-k choices that can be brittle. Taken together, these works defined the sparse MoE paradigm, exposed its discrete routing pathologies, and explored scalability via token- or expert-centric assignments. The natural next step is a fully differentiable sparse router that preserves MoE\u2019s conditional compute while eliminating hard selection and token dropping; by softly mixing tokens per expert and maintaining sparse expert computation, Soft MoE synthesizes these insights to stabilize training, scale expert counts, and improve fine-tuning in vision.",
+  "target_paper": {
+    "title": "From Sparse to Soft Mixtures of Experts",
+    "authors": "Joan Puigcerver, Carlos Riquelme Ruiz, Basil Mustafa, Neil Houlsby",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "transformers, mixtures of experts, computer vision",
+    "abstract": "Sparse mixture of expert architectures (MoEs) scale model capacity without significant increases in training or inference costs.\nDespite their success, MoEs suffer from a number of issues: training instability, token dropping, inability to scale the number of experts, or ineffective finetuning.\nIn this work, we propose Soft MoE, a fully-differentiable sparse Transformer that addresses these challenges, while maintaining the benefits of MoEs.\nSoft MoE performs an implicit soft assignment by passing different weighted combinations of all input tokens to each expert.\nAs in other MoEs, experts in Soft MoE only process a subset of the (combined) tokens, enabling larger model capacity (and performance) at lower inference cost.\nIn the context of visual recognition, Soft MoE greatly outperforms dense Transformers (ViTs) and popular MoEs (Tokens Choice and Experts Choice).\nSoft MoE scales well: Soft MoE Huge/14 with 128 experts in 16 MoE layers has over 40x more parameters than ViT Huge/14, wit",
+    "openreview_id": "jxpsAj7ltE",
+    "forum_id": "jxpsAj7ltE"
+  },
+  "analysis_timestamp": "2026-01-06T15:14:06.782612"
+}

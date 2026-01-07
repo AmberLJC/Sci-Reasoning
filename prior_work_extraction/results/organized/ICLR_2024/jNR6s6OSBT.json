@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Closing the Sim-to-Real Loop: Adapting Simulation Randomization with Real World Experience",
+      "authors": "Yevgen Chebotar et al.",
+      "year": 2019,
+      "arxiv_id": "1810.05687",
+      "role": "Baseline",
+      "relationship_sentence": "ASID directly improves on SimOpt by replacing its passive, task-driven rollouts and BO-based parameter tuning with an explicitly information-seeking exploration policy and posterior update targeted at identifying simulator parameters."
+    },
+    {
+      "title": "Sim-to-Real Transfer of Robotic Control with Dynamics Randomization",
+      "authors": "Xue Bin Peng et al.",
+      "year": 2018,
+      "arxiv_id": "1710.06537",
+      "role": "Foundation",
+      "relationship_sentence": "ASID builds on the dynamics randomization and online system identification formulation introduced here by providing a principled way to actively gather trajectories that disambiguate the latent physical parameters those approaches aim to infer."
+    },
+    {
+      "title": "BayesSim: Likelihood-Free Inference for Simulation-based System Identification",
+      "authors": "Fabio Ramos et al.",
+      "year": 2019,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "ASID adopts the core idea of inferring a posterior over simulator parameters from real trajectories, but augments it with actively selected, maximally informative interactions instead of relying on passively collected data."
+    },
+    {
+      "title": "Data-Efficient Domain Randomization with Bayesian Optimization",
+      "authors": "Marco Muratore et al.",
+      "year": 2021,
+      "arxiv_id": "2106.01377",
+      "role": "Gap Identification",
+      "relationship_sentence": "ASID explicitly addresses this work\u2019s limitation of tuning parameter distributions from task returns by instead optimizing exploration actions to reduce parameter uncertainty before policy learning or planning."
+    },
+    {
+      "title": "Plan2Explore: Planning to Explore via Self-Supervised World Models",
+      "authors": "Ramanan Sekar et al.",
+      "year": 2020,
+      "arxiv_id": "2005.05960",
+      "role": "Inspiration",
+      "relationship_sentence": "ASID adapts Plan2Explore\u2019s principle of planning for information gain\u2014originally applied to latent world models\u2014to the specific goal of reducing uncertainty over physics parameters in a simulator."
+    },
+    {
+      "title": "Active Information Acquisition with Mobile Robots",
+      "authors": "Nikolay Atanasov et al.",
+      "year": 2014,
+      "arxiv_id": "1403.0519",
+      "role": "Related Problem",
+      "relationship_sentence": "ASID instantiates the mutual-information-based experimental design ideas from active perception to plan manipulation interactions that maximize identifiability of dynamics parameters."
+    }
+  ],
+  "synthesis_narrative": "SimOpt showed that the gap between simulation and reality can be reduced by iteratively adapting domain randomization distributions using real-world feedback, but its data collection remained task-driven and passive, depending on Bayesian optimization over parameter distributions matched to task outcomes. Dynamics randomization work demonstrated that robust control and online system identification could be achieved by conditioning policies on latent dynamics and inferring them from rollouts, formalizing the goal of estimating hidden physical parameters for transfer. BayesSim introduced likelihood-free inference to recover posteriors over simulator parameters from real trajectories, establishing a general recipe for simulator parameter identification without requiring analytic likelihoods. Data-efficient domain randomization with Bayesian optimization further emphasized tuning parameter distributions from limited real trials, yet it also relied on passively obtained task executions rather than explicitly informative experiments. Plan2Explore advanced the idea of planning to reduce model uncertainty\u2014using disagreement or information-theoretic objectives\u2014showing the power of targeted exploration when the objective is epistemic uncertainty reduction. Active information acquisition framed mutual-information objectives for experiment design in robotics, offering formal criteria for selecting actions that maximally reduce parameter uncertainty.\nTogether, these works revealed a gap: while parameter inference and distribution adaptation were feasible, the data used to do so was not purposefully chosen to identify dynamics. The natural next step was to fuse posterior-based system identification with information-theoretic planning, yielding an exploration policy that selects manipulation interactions explicitly to disambiguate simulator parameters, thereby enabling more accurate sim refinement and stronger sim-to-real transfer from a small amount of real data.",
+  "target_paper": {
+    "title": "ASID: Active Exploration for System Identification in Robotic Manipulation",
+    "authors": "Marius Memmel, Andrew Wagenmaker, Chuning Zhu, Dieter Fox, Abhishek Gupta",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "oral",
+    "keywords": "sim2real, system identification, exploration",
+    "abstract": "Model-free control strategies such as reinforcement learning have shown the ability to learn control strategies without requiring an accurate model or simulator of the world. While this is appealing due to the lack of modeling requirements, such methods can be sample inefficient, making them impractical in many real-world domains. On the other hand, model-based control techniques leveraging accurate simulators can circumvent these challenges and use a large amount of cheap simulation data to learn controllers that can effectively transfer to the real world. The challenge with such model-based techniques is the requirement for an extremely accurate simulation, requiring both the specification of appropriate simulation assets and physical parameters. This requires considerable human effort to design for every environment being considered. In this work, we propose a learning system that can leverage a small amount of real-world data to autonomously refine a simulation model and then plan ",
+    "openreview_id": "jNR6s6OSBT",
+    "forum_id": "jNR6s6OSBT"
+  },
+  "analysis_timestamp": "2026-01-06T16:32:14.737086"
+}

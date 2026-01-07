@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Deep Gradient Compression: Reducing the Communication Bandwidth for Distributed Training",
+      "authors": "Yujun Lin et al.",
+      "year": 2018,
+      "role": "Inspiration",
+      "relationship_sentence": "DGC showed that small updates can be safely dropped when momentum is used to preserve their effect, directly motivating ExCP\u2019s weight\u2013momentum joint criterion for safely discarding many parameters at checkpoint time."
+    },
+    {
+      "title": "Sparse Communication for Distributed Gradient Descent",
+      "authors": "Alham Fikri Aji et al.",
+      "year": 2017,
+      "role": "Foundation",
+      "relationship_sentence": "This work established the top-k/sparsification principle that most updates are redundant, which ExCP applies temporally by sparsifying residuals between adjacent checkpoints."
+    },
+    {
+      "title": "RigL: Pruning and Growing Sparse Neural Networks",
+      "authors": "Utku Evci et al.",
+      "year": 2020,
+      "role": "Inspiration",
+      "relationship_sentence": "RigL uses momentum-informed signals to decide which connections to keep or regrow; ExCP adopts the same insight\u2014using momentum magnitude as an importance signal\u2014to decide which residual parameters must be preserved in compressed checkpoints."
+    },
+    {
+      "title": "Deep Compression: Compressing Deep Neural Networks with Pruning, Trained Quantization and Huffman Coding",
+      "authors": "Song Han et al.",
+      "year": 2016,
+      "role": "Foundation",
+      "relationship_sentence": "Deep Compression demonstrated near-lossless accuracy after aggressive parameter pruning, directly underpinning ExCP\u2019s premise that many parameters (here, residuals across checkpoints) can be discarded while retaining performance."
+    },
+    {
+      "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+      "authors": "Edward J. Hu et al.",
+      "year": 2021,
+      "role": "Inspiration",
+      "relationship_sentence": "LoRA popularized representing training progress as compact parameter deltas to a base model; ExCP similarly stores changes rather than full weights by computing and sparsifying residuals between adjacent checkpoints."
+    },
+    {
+      "title": "8-bit Optimizers via Block-wise Quantization",
+      "authors": "Tim Dettmers et al.",
+      "year": 2022,
+      "role": "Gap Identification",
+      "relationship_sentence": "8-bit optimizers compress optimizer states but do not exploit them to guide what to store; ExCP addresses this gap by explicitly using momentum information to decide which parameters can be discarded from checkpoints."
+    }
+  ],
+  "synthesis_narrative": "ExCP\u2019s core idea has two pillars: store only the information that changes between checkpoints, and let optimizer momentum tell you which changes truly matter. The first pillar is rooted in the sparsification literature. Aji and Heafield (2017) established that most updates are redundant, while Han et al. (2016) showed that large-scale pruning can be near-lossless\u2014together legitimizing ExCP\u2019s aggressive pruning of checkpoint deltas. LoRA (Hu et al., 2021) further popularized representing training as compact deltas to a base model; ExCP transposes this notion temporally by computing residuals between adjacent checkpoints and sparsifying them instead of saving full states.\n\nThe second pillar\u2014weight\u2013momentum joint shrinking\u2014builds on momentum-aware sparsification ideas. Deep Gradient Compression (Lin et al., 2018) demonstrated that momentum can preserve the effect of dropped small updates, providing a clear mechanism for safely discarding many entries. RigL (Evci et al., 2020) reinforced momentum as a powerful importance signal for deciding which connections to keep. ExCP synthesizes these insights by jointly considering weight residual magnitude and momentum to retain only critical parameters when saving checkpoints.\n\nFinally, while 8-bit optimizers (Dettmers et al., 2022) shrink optimizer states, they do not use optimizer statistics to guide storage. ExCP explicitly leverages momentum to decide what to keep, achieving extreme checkpoint compression with negligible loss\u2014bridging sparsification theory, delta-based storage, and momentum-informed selection into a single checkpoint-centric framework.",
+  "analysis_timestamp": "2026-01-06T23:09:26.419716"
+}

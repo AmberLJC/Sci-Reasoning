@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "LaMa: Resolution-robust Large Mask Inpainting with Fourier Convolutions",
+      "authors": "Roman Suvorov et al.",
+      "year": 2022,
+      "role": "Mask-aligned image inpainting baseline",
+      "relationship_sentence": "LaMa exemplifies strictly mask-aligned inpainting that reconstructs only the masked area, motivating GeoRemover\u2019s claim that such training cannot remove unmasked causal artifacts like shadows and reflections."
+    },
+    {
+      "title": "InstructPix2Pix: Learning to Follow Image Editing Instructions",
+      "authors": "Tim Brooks, Aleksander Holynski, Alexei A. Efros",
+      "year": 2023,
+      "role": "Loosely mask-aligned diffusion editing",
+      "relationship_sentence": "Instruction-driven diffusion shows powerful but weakly controllable edits that can spill beyond intended regions, directly informing GeoRemover\u2019s critique of loosely mask-aligned strategies and its need for a geometry-constrained alternative."
+    },
+    {
+      "title": "Adding Conditional Control to Text-to-Image Diffusion Models (ControlNet)",
+      "authors": "Lvmin Zhang, Maneesh Agrawala",
+      "year": 2023,
+      "role": "Depth/structure-conditioned image synthesis",
+      "relationship_sentence": "ControlNet demonstrated robust photorealistic rendering conditioned on structural controls such as depth; GeoRemover leverages this insight to render appearance from edited geometry, ensuring that causal visual effects follow geometric changes."
+    },
+    {
+      "title": "Towards Robust Monocular Depth Estimation: Mixing Datasets for Zero-shot Cross-dataset Transfer (MiDaS)",
+      "authors": "Ren\u00e9 Ranftl, Katrin Lasinger, David Hafner, Konrad Schindler, Vladlen Koltun",
+      "year": 2020,
+      "role": "Monocular depth prior enabling geometry reasoning",
+      "relationship_sentence": "MiDaS established reliable monocular depth as a generic geometry proxy, directly enabling GeoRemover\u2019s first-stage geometry removal on depth maps for structure-aware editing."
+    },
+    {
+      "title": "3D Photography using Context-aware Layered Depth Inpainting",
+      "authors": "Shih, Su, Kopf, Huang",
+      "year": 2020,
+      "role": "Geometry-aware completion via layered depth",
+      "relationship_sentence": "Layered depth inpainting showed that editing/completion in geometry space leads to coherent view-consistent appearance, inspiring GeoRemover\u2019s decoupling of geometry removal from subsequent RGB rendering."
+    },
+    {
+      "title": "Semantic Image Synthesis with Spatially-Adaptive Normalization (SPADE / GauGAN)",
+      "authors": "Taesung Park, Ming-Yu Liu, Ting-Chun Wang, Jun-Yan Zhu",
+      "year": 2019,
+      "role": "Structure-to-appearance rendering paradigm",
+      "relationship_sentence": "SPADE established the effectiveness of synthesizing photorealistic images from structural maps, directly supporting GeoRemover\u2019s second-stage design that renders appearance conditioned on edited geometry."
+    },
+    {
+      "title": "NeRFactor: Neural Factorization of Shape, Reflectance, and Illumination",
+      "authors": "Zhengqi Zhang, Pratul P. Srinivasan, Ben Mildenhall, Peter Hedman, Jonathan T. Barron, Paul Debevec",
+      "year": 2021,
+      "role": "Inverse rendering linking geometry to shadows/reflections",
+      "relationship_sentence": "NeRFactor\u2019s decomposition of geometry, materials, and lighting clarifies the causal origin of shadows and specularities; GeoRemover operationalizes this causal view by editing geometry first so that rendering removes resulting visual artifacts."
+    }
+  ],
+  "synthesis_narrative": "GeoRemover\u2019s key contribution is to treat object removal as a causal geometry-to-appearance problem: first remove the object in geometry space, then render RGB so that shadows and reflections\u2014effects caused by the object\u2019s presence\u2014disappear coherently. This stance arises from two observed limitations in prior art. On one side, mask-aligned inpainting methods like LaMa excel at reconstructing only the masked region, but by design they do not alter unmasked pixels, leaving behind causal artifacts (e.g., shadows, reflections) that lie outside the mask. On the other side, loosely mask-aligned diffusion editors such as InstructPix2Pix can modify broader context but often lack controllability, risking over-erasure of unrelated content.\nTo overcome this, GeoRemover builds on a lineage of structure-conditioned synthesis. MiDaS popularized robust monocular depth as a geometry proxy, making depth a practical canvas for structure-aware edits. Geometry-first completion, as in 3D Photography using Context-aware Layered Depth Inpainting, showed that operating in layered/depth space yields coherent spatial reasoning before rendering appearance. SPADE/GauGAN established the general paradigm of synthesizing photorealistic images conditioned on structural maps, while ControlNet demonstrated that modern diffusion can faithfully follow depth and other controls at high fidelity. Finally, inverse rendering advances like NeRFactor explicitly connect geometry, materials, and illumination to shadows/specularities, providing the theoretical underpinning for GeoRemover\u2019s causal claim: if the object is removed in geometry, its visual effects should be re-rendered away. Collectively, these works directly inform GeoRemover\u2019s two-stage, geometry-aware design that achieves controllable object removal along with principled elimination of causal visual artifacts.",
+  "analysis_timestamp": "2026-01-07T00:05:12.553162"
+}

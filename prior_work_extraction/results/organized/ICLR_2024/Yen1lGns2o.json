@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Emerging Properties in Self-Supervised Vision Transformers",
+      "authors": "Mathilde Caron et al.",
+      "year": 2021,
+      "arxiv_id": "2104.14294",
+      "role": "Baseline",
+      "relationship_sentence": "DoRA builds on DINO\u2019s teacher\u2013student ViT framework and its emergent object-centric attention, using it as the starting point that DoRA explicitly extends temporally via tracking rather than only across image augmentations."
+    },
+    {
+      "title": "iBOT: Image BERT Pre-Training with Online Tokenizer",
+      "authors": "Junyuan Zhou et al.",
+      "year": 2022,
+      "arxiv_id": "2111.07832",
+      "role": "Extension",
+      "relationship_sentence": "DoRA generalizes iBOT\u2019s token-level self-distillation by aligning tokens not just between augmented views of the same image but along temporally tracked correspondences across video frames."
+    },
+    {
+      "title": "LOST: Localizing Objects with Self-Supervised Transformers",
+      "authors": "Amir Bar et al.",
+      "year": 2022,
+      "arxiv_id": "2109.14279",
+      "role": "Inspiration",
+      "relationship_sentence": "LOST showed that self-supervised ViT features/attentions localize foreground objects, which DoRA leverages by turning such object-like regions into trackable entities to drive its learning signal over time."
+    },
+    {
+      "title": "VideoMAE: Masked Autoencoders are Data-Efficient Learners for Self-Supervised Video Pre-Training",
+      "authors": "Chen Wei et al.",
+      "year": 2022,
+      "arxiv_id": "2203.12602",
+      "role": "Gap Identification",
+      "relationship_sentence": "VideoMAE typifies adapting image SSL by simply ingesting more frames with spatiotemporal masking, a limitation DoRA targets by exploiting instance-level temporal identity via tracking rather than treating video as extra data."
+    },
+    {
+      "title": "Tracking Emerges by Colorizing Videos",
+      "authors": "Carl Vondrick et al.",
+      "year": 2018,
+      "arxiv_id": "1806.09594",
+      "role": "Inspiration",
+      "relationship_sentence": "This work established that temporal correspondence (tracking) can provide a powerful supervisory signal for recognition, an insight DoRA operationalizes by using tracked patches across time as positives for image representation learning."
+    },
+    {
+      "title": "Ego4D: Around the World in 3,000 Hours of Egocentric Video",
+      "authors": "Kristen Grauman et al.",
+      "year": 2022,
+      "arxiv_id": "2110.07058",
+      "role": "Foundation",
+      "relationship_sentence": "Ego4D motivated first-person, long-form, uncurated video as a rich self-supervised source, directly informing DoRA\u2019s focus on egocentric \u201cWalking Tours\u201d and the continuous-video learning setup."
+    }
+  ],
+  "synthesis_narrative": "Self-distilled vision transformers demonstrated that object-centric signals can emerge from purely image-based pretraining: DINO introduced a teacher\u2013student ViT regime whose attention maps often highlight foreground regions, revealing a path to object discovery without labels. iBOT pushed this further with token-level self-distillation, showing that aligning patch tokens across augmented views strengthens object-aware features. LOST converted these observations into concrete unsupervised localization, using self-supervised ViT features and attentions to extract object-like regions. In parallel, video pretraining methods such as VideoMAE largely treated videos as additional data for masking and reconstruction, focusing on spatiotemporal cubes but not on preserving instance identity over time. Earlier, a key insight from Tracking Emerges by Colorizing Videos was that exploiting temporal correspondence can bootstrap recognition-quality features, highlighting tracking as a supervisory signal. Complementing these methodological advances, the Ego4D effort established long-form egocentric video as a dense, diverse, and realistic stream for self-supervision, underscoring the potential of continuous first-person footage.\nTogether, these works revealed a gap: while ViTs naturally expose objectness and video SSL scales to more frames, neither directly capitalized on instance-level temporal identity for image representation learning. The natural synthesis is to fuse object-centric self-distillation with temporal correspondence\u2014discover object-like regions and align them across time with tracking. Building on DINO/iBOT mechanics, guided by LOST\u2019s object cues and inspired by tracking-as-supervision, the approach learns from a single continuous egocentric stream (as motivated by Ego4D), directly addressing VideoMAE\u2019s limitation by making tracking the core signal for recognition.",
+  "target_paper": {
+    "title": "Is ImageNet worth 1 video? Learning strong image encoders from 1 long unlabelled video",
+    "authors": "Shashanka Venkataramanan, Mamshad Nayeem Rizve, Joao Carreira, Yuki M Asano, Yannis Avrithis",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "oral",
+    "keywords": "self-supervised image-pretraining, egocentric video, Walking Tour dataset, multi-object tracking",
+    "abstract": "Self-supervised learning has unlocked the potential of scaling up pretraining to billions of images, since annotation is unnecessary. But are we making the best use of data? How more economical can we be? In this work, we attempt to answer this question by making two contributions. First, we investigate first-person videos and introduce a ``Walking Tours'' dataset. These videos are high-resolution, hours-long, captured in a single uninterrupted take, depicting a large number of objects and actions with natural scene transitions. They are unlabeled and uncurated, thus realistic for self-supervision and comparable with human learning. \n\nSecond, we introduce a novel self-supervised image pretraining method tailored for learning from continuous videos. Existing methods typically adapt image-based pretraining approaches to incorporate more frames. Instead, we advocate a ``tracking to learn to recognize'' approach. Our method called DoRA, leads to attention maps that **D**isc**O**ver and t**",
+    "openreview_id": "Yen1lGns2o",
+    "forum_id": "Yen1lGns2o"
+  },
+  "analysis_timestamp": "2026-01-06T18:12:26.818072"
+}

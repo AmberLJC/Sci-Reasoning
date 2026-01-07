@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "MLP-Mixer: An all-MLP Architecture for Vision",
+      "authors": "Ilya Tolstikhin, Neil Houlsby, Alexander Kolesnikov, Lucas Beyer, Xiaohua Zhai, Thomas Unterthiner, Jessica Yung, Sylvia Steiner, Daniel Keysers, Jakob Uszkoreit, Mario Lucic, Alexey Dosovitskiy",
+      "year": 2021,
+      "role": "Architectural template for decoupled token/channel mixing",
+      "relationship_sentence": "MLP-Mixer\u2019s separable token and channel mixing directly motivates Monarch Mixer\u2019s use of the same linear mixing primitive along both sequence and model dimensions."
+    },
+    {
+      "title": "FNet: Mixing Tokens with Fourier Transforms",
+      "authors": "James Lee-Thorp, Joshua Ainslie, Ilya Eckstein, Santiago Onta\u00f1\u00f3n",
+      "year": 2021,
+      "role": "Evidence that fixed/global structured transforms can replace attention",
+      "relationship_sentence": "FNet showed that a global structured linear transform (Fourier) can replace attention with sub-quadratic cost, inspiring Monarch Mixer\u2019s replacement of attention with a learnable structured matrix."
+    },
+    {
+      "title": "Learning Fast Algorithms for Linear Transforms using Butterfly Factorizations",
+      "authors": "Tri Dao, Albert Gu, Matthew Eichhorn, Atri Rudra, Christopher R\u00e9",
+      "year": 2020,
+      "role": "Structured-matrix foundation and expressivity",
+      "relationship_sentence": "Butterfly factorizations provided the key precedent for expressive, sub-quadratic structured matrices implemented efficiently via batched GEMMs, a core design principle behind Monarch matrices."
+    },
+    {
+      "title": "ACDC: A Structured Efficient Linear Layer",
+      "authors": "Marcin Moczulski, Misha Denil, Jeremy Appleyard, Nando de Freitas",
+      "year": 2016,
+      "role": "Early structured linear layers as dense replacements",
+      "relationship_sentence": "ACDC\u2019s diagonal\u2013circulant structured layers demonstrated that dense layers can be replaced by fast, expressive structured transforms, informing Monarch\u2019s GEMM-friendly structured design."
+    },
+    {
+      "title": "Linformer: Self-Attention with Linear Complexity",
+      "authors": "Sinong Wang, Belinda Z. Li, Madian Khabsa, Han Fang, Hao Ma",
+      "year": 2020,
+      "role": "Sub-quadratic sequence mixing via low-rank projection",
+      "relationship_sentence": "Linformer established that self-attention can be linearized with low-rank structure, motivating Monarch Mixer\u2019s pursuit of sub-quadratic sequence scaling with a single linear primitive."
+    },
+    {
+      "title": "Rethinking Attention with Performers",
+      "authors": "Krzysztof Choromanski, Valerii Likhosherstov, David Dohan, Xingyou Song, Andreea Gane, Tam\u00e1s Sarlos, Peter Hawkins, Jared Davis, Afroz Mohiuddin, Lukasz Kaiser, David Belanger, Lucy Colwell, Adrian Weller",
+      "year": 2020,
+      "role": "Kernel-based linear attention baseline",
+      "relationship_sentence": "Performer\u2019s FAVOR+ showed practical linear-time token mixing, providing a key baseline and reinforcing the viability of sub-quadratic global mixing that Monarch Mixer generalizes with structured matrices."
+    },
+    {
+      "title": "Synthesizer: Rethinking Self-Attention in Transformer Models",
+      "authors": "Yi Tay, Mostafa Dehghani, Dara Bahri, Donald Metzler",
+      "year": 2021,
+      "role": "Learned mixing in place of content-based attention",
+      "relationship_sentence": "Synthesizer replaced attention with learned mixing matrices, directly supporting Monarch Mixer\u2019s shift from content-based attention to a learnable structured linear operator for token and channel mixing."
+    }
+  ],
+  "synthesis_narrative": "Monarch Mixer\u2019s core idea is to replace quadratic attention and dense mixing with a single, learnable, sub\u2011quadratic, GEMM\u2011friendly structured matrix\u2014applied symmetrically across sequence and model dimensions. The architectural decision to decouple token and channel mixing is rooted in MLP\u2011Mixer, which established that competitive performance is possible when the same operator family is applied along each axis. FNet and Synthesizer further validated that global linear transforms\u2014whether fixed (Fourier) or learned\u2014can effectively substitute for attention, paving the way for a learned structured transform to handle token mixing at scale. On the mathematical and systems side, ACDC and Butterfly factorizations provided the key lineage for expressive structured matrices that approximate dense operators while enabling fast implementations with batched GEMMs/FFTs; Butterfly, in particular, demonstrated how a small number of structured factors can capture a wide class of linear transforms with sub\u2011quadratic cost. Finally, Linformer and Performer crystallized the community\u2019s pursuit of sub\u2011quadratic sequence scaling through low\u2011rank and kernel methods, respectively, setting performance and efficiency baselines that Monarch Mixer aims to match or exceed while unifying both token and channel mixing under a single structured\u2011matrix primitive. Together, these works directly inform Monarch Mixer\u2019s choice of a GEMM\u2011based, expressive structured matrix as the universal mixing building block, enabling sub\u2011quadratic scaling without sacrificing hardware efficiency.",
+  "analysis_timestamp": "2026-01-07T00:02:04.791342"
+}

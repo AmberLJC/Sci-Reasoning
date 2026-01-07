@@ -1,0 +1,74 @@
+{
+  "prior_works": [
+    {
+      "title": "Gaussian Process Optimization in the Bandit Setting: No-Regret Algorithms and Experimental Design",
+      "authors": [
+        "Niranjan Srinivas",
+        "Andreas Krause",
+        "Sham Kakade",
+        "Matthias Seeger"
+      ],
+      "year": 2010,
+      "role": "Foundational GP bandit theory (GP-UCB) establishing confidence bounds and no-regret guarantees for BO.",
+      "relationship_sentence": "The paper\u2019s BO core and its no-harm comparison baseline rest on GP-UCB-style confidence sets and regret analysis, to which the new expert-collaboration layer is added without worsening regret."
+    },
+    {
+      "title": "Preferential Bayesian Optimization",
+      "authors": [
+        "Javier Gonz\u00e1lez",
+        "Zhenwen Dai",
+        "Neil D. Lawrence"
+      ],
+      "year": 2017,
+      "role": "Human-in-the-loop BO using binary preference signals (pairwise comparisons) modeled with GPs.",
+      "relationship_sentence": "This work motivates modeling binary human feedback within BO, which is generalized here from pairwise preferences to accept/reject labels with reliability and effort-aware querying."
+    },
+    {
+      "title": "Gaussian Process Bandit Optimization with Multi-fidelity Evaluations",
+      "authors": [
+        "Kirthevasan Kandasamy",
+        "Gautam Dasarathy",
+        "Jeff Schneider",
+        "Barnab\u00e1s P\u00f3czos"
+      ],
+      "year": 2016,
+      "role": "Multi-fidelity bandits providing regret guarantees while adaptively allocating cheap, noisy queries versus costly, accurate ones.",
+      "relationship_sentence": "Treating human advice as a low-fidelity source, this line directly inspires the handover behavior\u2014heavy early reliance on auxiliary signals with a provably vanishing query rate over time."
+    },
+    {
+      "title": "Multi-Information Source Bayesian Optimization",
+      "authors": [
+        "Wolfgang B. Poloczek",
+        "Jialei Wang",
+        "Peter I. Frazier"
+      ],
+      "year": 2017,
+      "role": "BO with biased, noisy, and cost-varying information sources; acquisition policies that weigh source bias and cost.",
+      "relationship_sentence": "It provides the formal lens to model experts as biased, noisy sources and underpins the paper\u2019s data-driven trust weighting of expert labels in the acquisition logic."
+    },
+    {
+      "title": "Corralling a Band of Bandit Algorithms",
+      "authors": [
+        "Alekh Agarwal",
+        "Haipeng Luo",
+        "Robert E. Schapire"
+      ],
+      "year": 2017,
+      "role": "Meta-learning for bandits that guarantees regret close to the best base algorithm (\u201cno-harm\u201d style).",
+      "relationship_sentence": "The adaptive trust mechanism echoes corralling by ensuring that combining BO with expert input is never worse (up to sublinear terms) than running BO alone."
+    },
+    {
+      "title": "Predict Responsibly: Improving Accuracy by Learning to Defer to Humans",
+      "authors": [
+        "Shiori Madras",
+        "Toniann Pitassi",
+        "Richard Zemel"
+      ],
+      "year": 2018,
+      "role": "Joint human\u2013AI decision-making with selective deferral and performance safeguards.",
+      "relationship_sentence": "Conceptually motivates the selective consultation and trust calibration that yield both a no-harm guarantee and an asymptotic reduction in expert queries."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core contribution\u2014principled Bayesian optimization that consults human experts via binary accept/reject signals while providing (i) a handover guarantee on label usage and (ii) a no-harm guarantee via adaptive trust\u2014builds on three converging threads. First, the regret-theoretic backbone of GP-BO (Srinivas et al., 2010) supplies the confidence-based sampling and the baseline to which performance is compared; the proposed method must preserve this regret to satisfy no-harm. Second, prior work on human feedback within BO (Gonz\u00e1lez et al., 2017) demonstrates how binary human signals can be integrated into GP inference, a modeling idea the authors repurpose from pairwise preferences to single-point accept/reject labels. Third, the multi-source/multi-fidelity literature (Kandasamy et al., 2016; Poloczek et al., 2017) provides the abstraction of humans as a biased, noisy, and costly auxiliary source whose utility is greatest early; this directly influences the handover design and its sublinear label-complexity bound, mirroring how low-fidelity queries fade as learning proceeds. To ensure collaboration never degrades BO, the method adopts a meta-level perspective akin to corralling (Agarwal et al., 2017), adaptively tuning trust so the combined policy tracks the best single strategy (pure BO) up to sublinear terms. Finally, the selective consultation and deferral perspective from human\u2013AI collaboration (Madras et al., 2018) informs the data-driven gating of expert input, yielding principled trust calibration and an asymptotically vanishing reliance on labels without sacrificing BO regret.",
+  "analysis_timestamp": "2026-01-06T23:33:35.582713"
+}

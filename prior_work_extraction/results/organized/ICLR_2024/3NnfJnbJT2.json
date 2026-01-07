@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Intelligent Selection of Language Model Training Data",
+      "authors": "Robert C. Moore and William Lewis",
+      "year": 2010,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "This paper established the unlabeled target-set, KL/cross-entropy\u2013based data selection paradigm that GIO generalizes from language-model likelihoods to a gradient-based, task-agnostic information objective."
+    },
+    {
+      "title": "Dynamic Data Selection for Neural Machine Translation",
+      "authors": "Marlies van der Wees et al.",
+      "year": 2017,
+      "arxiv_id": "1708.00712",
+      "role": "Baseline",
+      "relationship_sentence": "It operationalized cross-entropy\u2013difference data selection for NMT, providing a primary in-domain selection baseline that GIO aims to outperform with a principled, modality-agnostic, gradient-information criterion."
+    },
+    {
+      "title": "GradMatch: Gradient Matching based Data Subset Selection for Efficient Deep Learning",
+      "authors": "Saurabh Killamsetty et al.",
+      "year": 2021,
+      "arxiv_id": "2102.10459",
+      "role": "Gap Identification",
+      "relationship_sentence": "By framing subset selection as matching full-dataset gradients without target-distribution awareness and at notable computational cost, it motivates GIO\u2019s target-aware, information-theoretic reformulation with a scalable relaxation."
+    },
+    {
+      "title": "GLISTER: Generalization based Data Subset Selection for Efficient and Robust Learning",
+      "authors": "Saurabh Killamsetty et al.",
+      "year": 2021,
+      "arxiv_id": "2012.10630",
+      "role": "Gap Identification",
+      "relationship_sentence": "Its bilevel optimization maximizes validation performance but requires labeled validation data and is expensive, directly motivating GIO\u2019s unlabeled-target, KL-driven objective and efficient implementation."
+    },
+    {
+      "title": "Coresets for Data-efficient Training of Machine Learning Models",
+      "authors": "Baharan Mirzasoleiman et al.",
+      "year": 2020,
+      "arxiv_id": "1906.01827",
+      "role": "Related Problem",
+      "relationship_sentence": "This work\u2019s submodular gradient-matching coreset idea informs GIO\u2019s use of gradient coverage, which GIO reorients to optimize information about a specific target distribution."
+    },
+    {
+      "title": "Bayesian Active Learning for Classification and Preference Learning (BALD)",
+      "authors": "Neil Houlsby et al.",
+      "year": 2011,
+      "arxiv_id": "1112.5745",
+      "role": "Inspiration",
+      "relationship_sentence": "BALD\u2019s mutual information/KL view of example utility inspires GIO\u2019s starting point: an information-theoretic objective measuring how training examples change uncertainty with respect to a target distribution."
+    },
+    {
+      "title": "Dataset Condensation with Gradient Matching",
+      "authors": "Bo Zhao et al.",
+      "year": 2021,
+      "arxiv_id": "2006.05929",
+      "role": "Extension",
+      "relationship_sentence": "Its demonstration that gradient matching can act as a surrogate for dataset informativeness underpins GIO\u2019s relaxation from an intractable KL objective to a tractable gradient-based scoring and selection scheme."
+    }
+  ],
+  "synthesis_narrative": "Moore and Lewis showed that a small unlabeled target set can guide data selection by ranking pool examples via cross-entropy differences\u2014an implicit KL criterion\u2014providing a practical, domain-adaptation template. Van der Wees et al. turned this into an effective NMT pipeline with dynamic schedules, cementing cross-entropy\u2013based in-domain selection as the baseline approach in text. In parallel, BALD formalized example utility through mutual information, framing selection as maximizing expected information gain about model parameters via KL quantities. On the efficiency front, Mirzasoleiman et al. introduced gradient-matching coresets to approximate full training dynamics with a small subset, while GradMatch refined this idea but remained target-agnostic and computationally heavy. GLISTER moved toward generalization-aware selection with a bilevel objective tied to validation performance, yet required labeled validation sets and significant compute. Zhao et al. demonstrated that gradient matching can faithfully stand in for richer information criteria by aligning gradients to capture dataset content.\nTogether, these threads reveal a gap: target-aware, information-theoretic selection (Moore\u2013Lewis, BALD) is effective but modality-specific or not tied to training dynamics, whereas gradient-based subset selection (CRAIG, GradMatch, GLISTER, condensation) is scalable yet target-unaware or label- and compute-hungry. GIO naturally emerges by starting from a KL-based, information objective defined with respect to an unlabeled target distribution and relaxing it into a scalable gradient-based selection rule, unifying target-awareness with efficient gradient surrogates across NLP and vision.",
+  "target_paper": {
+    "title": "GIO: Gradient Information Optimization for Training Dataset Selection",
+    "authors": "Dante Everaert, Christopher Potts",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "data selection, data-centric AI, information theory, kl divergence, gradient, natural language processing, computer vision",
+    "abstract": "It is often advantageous to train models on a subset of the available train examples, because the examples are of variable quality or because one would like to train with fewer examples, without sacrificing performance. We present Gradient Information Optimization (GIO), a scalable, task-agnostic approach to this data selection problem that requires only a small set of (unlabeled) examples representing a target distribution. GIO begins from a natural, information-theoretic objective that is intractable in practice. Our contribution is in showing that it can be made highly scalable through a simple relaxation of the objective and a highly efficient implementation. In experiments with machine translation, spelling correction, and image recognition, we show that GIO delivers outstanding results with very small train sets. These findings are robust to different representation models and hyperparameters for GIO itself. GIO is task- and domain-agnostic and can be applied out-of-the-box to ne",
+    "openreview_id": "3NnfJnbJT2",
+    "forum_id": "3NnfJnbJT2"
+  },
+  "analysis_timestamp": "2026-01-06T14:09:15.026504"
+}

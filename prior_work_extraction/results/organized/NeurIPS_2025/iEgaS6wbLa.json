@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "A Reduction of Imitation Learning and Structured Prediction to No-Regret Online Learning (DAgger)",
+      "authors": "St\u00e9phane Ross, Geoffrey J. Gordon, J. Andrew Bagnell",
+      "year": 2011,
+      "role": "Foundational imitation learning method using an oracle expert",
+      "relationship_sentence": "Provides the core framework for imitating an expert that observes the full Markovian state, directly underpinning the paper\u2019s notion of privileged expert distillation and the comparison to learning to act without privileged access."
+    },
+    {
+      "title": "Learning Using Privileged Information (LUPI): Similarity Control and Knowledge Transfer",
+      "authors": "Vladimir Vapnik, Akshay Vashist",
+      "year": 2009,
+      "role": "Conceptual foundation for training-time privileged information",
+      "relationship_sentence": "Introduces the principle of exploiting information available only during training, which the paper instantiates in RL by distilling from a privileged (latent-state) expert to an observation-based policy."
+    },
+    {
+      "title": "Distilling the Knowledge in a Neural Network",
+      "authors": "Geoffrey Hinton, Oriol Vinyals, Jeff Dean",
+      "year": 2015,
+      "role": "General teacher\u2013student distillation paradigm",
+      "relationship_sentence": "Supplies the technical mechanism of teacher\u2013student transfer that the paper leverages to formalize privileged expert distillation and analyze when such distillation helps or hurts."
+    },
+    {
+      "title": "Policy Distillation",
+      "authors": "Andrei A. Rusu, Sergio Gomez Colmenarejo, Caglar Gulcehre, Guillaume Desjardins, James Kirkpatrick, Razvan Pascanu, Volodymyr Mnih, Koray Kavukcuoglu, Raia Hadsell",
+      "year": 2016,
+      "role": "RL-specific distillation technique",
+      "relationship_sentence": "Demonstrates how policies learned with different information or tasks can be distilled into a student policy, directly motivating the paper\u2019s privileged expert-to-student training protocol."
+    },
+    {
+      "title": "Asymmetric Actor-Critic for Image-Based Robot Learning",
+      "authors": "Lerrel Pinto et al.",
+      "year": 2018,
+      "role": "Privileged-information RL where the critic (or teacher) sees state while the actor sees observations",
+      "relationship_sentence": "Provides a practical template for leveraging simulator state during training to accelerate learning from raw observations, whose empirical strengths and failure modes the paper systematizes and explains."
+    },
+    {
+      "title": "Provably Efficient Reinforcement Learning with Rich Observations via Latent State Decoding (Block MDPs)",
+      "authors": "Wen Sun, Nan Jiang, Akshay Krishnamurthy, Alekh Agarwal",
+      "year": 2019,
+      "role": "Theoretical framework for rich-observation MDPs with latent states (Block MDPs)",
+      "relationship_sentence": "Establishes the Block MDP formalism that the paper extends with perturbations, enabling a clean analysis of how stochastic latent dynamics affect the distillation-versus-RL trade-off."
+    },
+    {
+      "title": "Deep Recurrent Q-Learning for Partially Observable MDPs",
+      "authors": "Matthew Hausknecht, Peter Stone",
+      "year": 2015,
+      "role": "Baseline approach for handling partial observability via history-dependent policies",
+      "relationship_sentence": "Represents the alternative to privileged distillation\u2014learning history-dependent policies directly from observations\u2014serving as a conceptual and empirical counterpoint in the paper\u2019s trade-off analysis."
+    }
+  ],
+  "synthesis_narrative": "The paper dissects when to rely on privileged expert distillation versus directly learning history-dependent policies under partial observability. This question traces to three converging lines of prior work. First, the principle of training-time-only information (Vapnik & Vashist, LUPI) and the mechanics of knowledge transfer (Hinton et al., knowledge distillation; Rusu et al., policy distillation) provide the methodological backbone for distilling a policy that acts from observations from a teacher that enjoys privileged latent state. Second, imitation learning with an oracle (Ross et al., DAgger) crystallizes the learning-to-act-from-an-expert paradigm the paper scrutinizes\u2014especially relevant because the expert\u2019s access to full state yields a Markovian teacher that may not translate cleanly to an observation-based student. Third, practical asymmetric-training schemes in robotics (e.g., Pinto et al.) show large empirical gains from simulator-state privilege yet expose brittleness, motivating a principled account of when such gains persist.\nOn the theoretical side, the Block MDP framework (Sun et al.) enables clean separation between latent dynamics and observation generation. By introducing a perturbed Block MDP, the paper precisely probes how stochasticity in latent dynamics and slight observation-model violations reshape sample-efficiency and error-propagation, clarifying when distillation inherits the teacher\u2019s optimality versus when direct RL with memory (e.g., DRQN; Hausknecht & Stone) is preferable. Together, these works directly scaffold both the paper\u2019s modeling choice and its central trade-off analysis.",
+  "analysis_timestamp": "2026-01-07T00:21:32.303578"
+}

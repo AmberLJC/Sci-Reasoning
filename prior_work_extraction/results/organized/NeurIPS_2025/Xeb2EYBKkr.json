@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Generating Long Sequences with Sparse Transformers",
+      "authors": "Rewon Child et al.",
+      "year": 2019,
+      "role": "Foundation",
+      "relationship_sentence": "Introduced sliding\u2011window and dilated sparse attention masks; the paper\u2019s \u201csliding\u2011window masking\u201d regime formalizes this pattern and proves an O(N/M) small\u2011transformer simulation bound tailored to exactly this mask."
+    },
+    {
+      "title": "Longformer: The Long-Document Transformer",
+      "authors": "Iz Beltagy et al.",
+      "year": 2020,
+      "role": "Related Problem",
+      "relationship_sentence": "Operationalized sliding\u2011window + limited global tokens for long inputs; this work analyzes essentially the same masking structure and provides tight asymptotic bounds on how many M\u2011length transformers suffice to emulate an N\u2011length Longformer\u2011style model."
+    },
+    {
+      "title": "Big Bird: Transformers for Longer Sequences",
+      "authors": "Manzil Zaheer et al.",
+      "year": 2020,
+      "role": "Extension",
+      "relationship_sentence": "Provided theoretical guarantees for sparse attention\u2019s expressivity; the new results extend this line by quantifying the exact multiplicity of short\u2011context models needed to emulate long\u2011context BigBird\u2011style transformers and by giving matching lower bounds."
+    },
+    {
+      "title": "StreamingLLM: Efficient Streaming Language Models with Attention Sinks",
+      "authors": "Guangxuan Xiao et al.",
+      "year": 2023,
+      "role": "Foundation",
+      "relationship_sentence": "Introduced attention sinks to enable streaming with bounded context; the paper proves that under attention sinks, the optimal O(N/M) number of M\u2011length simulators suffices, giving a theoretical explanation for this practical mechanism."
+    },
+    {
+      "title": "Train Short, Test Long: Attention with Linear Biases",
+      "authors": "Ofir Press et al.",
+      "year": 2021,
+      "role": "Gap Identification",
+      "relationship_sentence": "Posed the central question of leveraging short\u2011context models for long inputs via positional design; this work addresses the same goal by a different route\u2014multi\u2011pass simulation\u2014and overcomes the limitation of relying on specialized positional biases."
+    },
+    {
+      "title": "On the Turing Completeness of Transformers",
+      "authors": "P\u00e9rez et al.",
+      "year": 2019,
+      "role": "Foundation",
+      "relationship_sentence": "Established a formal computational model for transformers; the present paper uses this lens to state general simulation theorems, showing how arbitrary N\u2011length transformer computations can be orchestrated by many M\u2011length transformers."
+    },
+    {
+      "title": "Theoretical Limitations of Self-Attention in Sequence Modeling",
+      "authors": "Michael Hahn",
+      "year": 2020,
+      "role": "Gap Identification",
+      "relationship_sentence": "Identified worst\u2011case limitations of self\u2011attention; the new work complements this perspective by proving a matching \u03a9((N/M)^2) worst\u2011case lower bound on the number of short\u2011context simulators required."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core innovation\u2014a tight characterization of how many short\u2011context transformers are needed to simulate a long\u2011context transformer\u2014rests on two concrete lines of prior work. First, sparse and local attention designs such as Sparse Transformers and Longformer defined the sliding\u2011window masking regimes that practitioners actually use for long sequences. BigBird strengthened this direction with theoretical guarantees on sparse attention\u2019s expressivity. Building directly on these masks and guarantees, the paper proves that sliding\u2011window structures admit optimal O(N/M) simulation with M\u2011length models, and quantifies the exact tradeoff in general settings, including matching lower bounds.\n\nSecond, recent practice showed that \u201cattention sinks\u201d enable streaming with bounded KV state (StreamingLLM). The authors formalize this mechanism and prove that sink tokens reduce the simulation requirement from the worst\u2011case O((N/M)^2) to the optimal O(N/M), thereby offering a principled explanation of why these heuristics work.\n\nSurrounding these architectural threads, foundational theory on transformers\u2019 computational power (On the Turing Completeness of Transformers) provides a rigorous framework to talk about simulating arbitrary transformer computations. Meanwhile, works probing self\u2011attention\u2019s limitations and length extrapolation strategies (Hahn\u2019s lower bounds; ALiBi\u2019s train\u2011short\u2011test\u2011long framing) crystallize the central gap: how to systematically leverage short\u2011context models for long inputs with guarantees. This paper closes that gap by giving constructive upper bounds and matching lower bounds across worst\u2011case and practically relevant masking/sink scenarios.",
+  "analysis_timestamp": "2026-01-06T23:08:23.949138"
+}

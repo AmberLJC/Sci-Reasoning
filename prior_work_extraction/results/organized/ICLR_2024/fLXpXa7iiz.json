@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Practical Bayesian Optimization of Machine Learning Algorithms",
+      "authors": "Jasper Snoek et al.",
+      "year": 2012,
+      "arxiv_id": "1206.2944",
+      "role": "Foundation",
+      "relationship_sentence": "This work established the standard bilevel HPO pipeline\u2014outer Bayesian optimization tuning hyperparameters with inner SGD-trained models\u2014which is precisely the setting whose convergence this paper formalizes and analyzes."
+    },
+    {
+      "title": "Gaussian Process Optimization in the Bandit Setting: No Regret Algorithms and Experimental Design",
+      "authors": "Niranjan Srinivas et al.",
+      "year": 2010,
+      "arxiv_id": "0912.3995",
+      "role": "Foundation",
+      "relationship_sentence": "The regret framework for GP-UCB with (sub-Gaussian) noisy observations underpins the outer-level analysis, enabling this paper to cast SGD-induced excess risk as observation noise and obtain sublinear regret guarantees."
+    },
+    {
+      "title": "On Kernelized Multi-Armed Bandits",
+      "authors": "Shipra Agrawal Chowdhury et al.",
+      "year": 2017,
+      "arxiv_id": "1704.00445",
+      "role": "Extension",
+      "relationship_sentence": "The RKHS-based GP bandit analysis and information-gain machinery from this paper are directly leveraged to derive regret bounds once the SGD approximation error is modeled as the BO observation noise."
+    },
+    {
+      "title": "Bilevel Programming for Hyperparameter Optimization and Meta-Learning",
+      "authors": "Luca Franceschi et al.",
+      "year": 2018,
+      "arxiv_id": "1806.04910",
+      "role": "Foundation",
+      "relationship_sentence": "This paper formalized HPO as a bilevel program with approximate inner solutions, providing the precise problem formulation that the present work instantiates with outer BO and inner SGD and then studies for convergence."
+    },
+    {
+      "title": "Train faster, generalize better: Stability of stochastic gradient descent",
+      "authors": "Moritz Hardt et al.",
+      "year": 2016,
+      "arxiv_id": "1509.01240",
+      "role": "Inspiration",
+      "relationship_sentence": "Its stability-based bounds on SGD\u2019s generalization/excess risk supply the key insight that the inner-loop error can be quantified as a function of the number of SGD steps, justifying its treatment as BO observation noise."
+    },
+    {
+      "title": "Stochastic First- and Zeroth-Order Methods for Nonconvex Stochastic Programming",
+      "authors": "Saeed Ghadimi et al.",
+      "year": 2013,
+      "arxiv_id": "1309.5549",
+      "role": "Extension",
+      "relationship_sentence": "The iteration-dependent convergence rates for SGD from this work are used to translate the inner unit horizon into a decay schedule for the observation noise magnitude in the outer BO regret analysis."
+    },
+    {
+      "title": "Freeze-Thaw Bayesian Optimization",
+      "authors": "Kevin Swersky et al.",
+      "year": 2014,
+      "arxiv_id": "1406.3896",
+      "role": "Gap Identification",
+      "relationship_sentence": "By exploiting partially trained models, this work highlighted that BO evaluations depend critically on training budget, revealing a lack of theory on how the inner horizon affects BO\u2014a gap this paper closes with convergence guarantees."
+    }
+  ],
+  "synthesis_narrative": "Bayesian optimization became the de facto tool for hyperparameter tuning when it was shown to efficiently select configurations while the underlying models were trained with SGD, establishing the bilevel pipeline of outer BO and inner learning. The theoretical backbone for BO\u2019s performance came from GP-UCB\u2019s no-regret guarantees under noisy observations, later strengthened in an RKHS framework with information-gain tools that precisely characterize regret under sub-Gaussian noise. In parallel, bilevel programming formalized hyperparameter tuning as an upper-level objective over hyperparameters with an approximate inner solution, making explicit the role of inner-loop optimization accuracy. Crucially, stability-based analyses of SGD quantified how generalization/excess risk scales with training iterations, while nonconvex SGD convergence rates tied optimization error to the number of steps, together offering iteration-dependent error bounds. Empirically driven works like Freeze-Thaw BO revealed that early-stopped, partially trained models provide biased, budget-dependent evaluations, but lacked theory linking training horizon to BO convergence. Building on these pieces, it became natural to reinterpret the inner-loop excess risk\u2014from both optimization and generalization\u2014as the observation noise seen by BO, whose magnitude decays with the inner horizon. With this mapping, GP-UCB/RKHS regret machinery can be applied to the bilevel setting, yielding sublinear regret for both hyperparameters and model parameters and, importantly, prescribing how the inner unit horizon should be scheduled to optimize convergence and efficiency.",
+  "target_paper": {
+    "title": "Convergence of Bayesian Bilevel Optimization",
+    "authors": "Shi Fu, Fengxiang He, Xinmei Tian, Dacheng Tao",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Hyperparameter optimization, Bayesian optimization, Convergence rate, Bilevel optimization, Learning theory",
+    "abstract": "This paper presents the first theoretical guarantee for Bayesian bilevel optimization (BBO) that we term for the prevalent bilevel framework combining Bayesian optimization at the outer level to tune hyperparameters, and the inner-level stochastic gradient descent (SGD) for training the model. We prove sublinear regret bounds suggesting simultaneous convergence of the inner-level model parameters and outer-level hyperparameters to optimal configurations for generalization capability. A pivotal, technical novelty in the proofs is modeling the excess risk of the SGD-trained parameters as evaluation noise during Bayesian optimization. Our theory implies the inner unit horizon, defined as the number of SGD iterations, shapes the convergence behavior of BBO. This suggests practical guidance on configuring the inner unit horizon to enhance training efficiency and model performance.",
+    "openreview_id": "fLXpXa7iiz",
+    "forum_id": "fLXpXa7iiz"
+  },
+  "analysis_timestamp": "2026-01-06T17:57:51.412522"
+}

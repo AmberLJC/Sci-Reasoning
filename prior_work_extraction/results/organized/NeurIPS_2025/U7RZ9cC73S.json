@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+      "authors": "Edward J. Hu et al.",
+      "year": 2022,
+      "role": "Foundational PEFT method",
+      "relationship_sentence": "RobustMerge\u2019s entire setting\u2014merging parameter-efficient modules\u2014builds on LoRA\u2019s low-rank decomposition, and its analysis of singular vectors/values directly leverages the LoRA parameterization."
+    },
+    {
+      "title": "Model Soups: Averaging weights of multiple fine-tuned models improves accuracy without increasing inference time",
+      "authors": "Mitchell Wortsman et al.",
+      "year": 2022,
+      "role": "Training-free weight-space merging",
+      "relationship_sentence": "RobustMerge extends the soup-style, training-free merging idea to PEFT modules, diagnosing why naive averaging fails for adapters and introducing pruning/scaling to make merging robust in the low-rank setting."
+    },
+    {
+      "title": "Merging Models with Fisher-Weighted Averaging",
+      "authors": "Sebastian M. Matena and Colin Raffel",
+      "year": 2022,
+      "role": "Importance-aware merging for full fine-tunes",
+      "relationship_sentence": "The curvature/importance-aware spirit of Fisher-weighted merging motivates RobustMerge\u2019s coefficient scaling and selective integration, while RobustMerge adapts these ideas to PEFT by focusing on direction robustness rather than curvature alone."
+    },
+    {
+      "title": "TIES-Merging: Resolving Interference When Merging Models",
+      "authors": "Prateek Yadav et al.",
+      "year": 2023,
+      "role": "Conflict-aware, sparse merging",
+      "relationship_sentence": "RobustMerge inherits the objective of mitigating destructive interference during merging, but shows that for low-rank adapters the core issue is directional mismatch; it therefore prunes and complements parameters with direction-aware scaling instead of full-weight masking."
+    },
+    {
+      "title": "DoRA: Weight-Decomposed Low-Rank Adaptation",
+      "authors": "Liu et al.",
+      "year": 2024,
+      "role": "Direction vs. magnitude in LoRA",
+      "relationship_sentence": "DoRA\u2019s decomposition foregrounds the role of weight direction, directly informing RobustMerge\u2019s thesis that maintaining direction robustness is critical when combining multiple low-rank updates across tasks."
+    },
+    {
+      "title": "PiSSA: Principal Singular Values and Subspace Alignment for LoRA",
+      "authors": "Xiao et al.",
+      "year": 2024,
+      "role": "SVD-based subspace/singular-value handling for LoRA",
+      "relationship_sentence": "PiSSA\u2019s SVD-centered view links singular value spectra with effective adaptation, underpinning RobustMerge\u2019s insight that compensating for stark singular value gaps can preserve stable directions during PEFT merging."
+    }
+  ],
+  "synthesis_narrative": "RobustMerge targets a rising practical need: combining many task-specific, parameter-efficient experts into a single, multi-task MLLM without extra training. The core idea is that PEFT merging fails when the low-rank update directions misalign across tasks, and that stabilizing these directions requires compensating for singular-value disparities. This view is rooted in LoRA\u2019s low-rank parameterization, which makes singular vectors and values central to how updates shape model behavior. Earlier training-free weight-space approaches, like Model Soups and Fisher-weighted merging, show that simple averaging or importance-weighted interpolation can succeed for full fine-tunes; however, RobustMerge explains why such strategies are brittle for adapters, where directional consistency is the bottleneck rather than just global scaling or curvature. Conflict-aware methods such as TIES-Merging highlight that interference must be explicitly controlled; RobustMerge adapts this principle to the PEFT regime via pruning and complementary parameter scaling to guard update directions. On the PEFT mechanics side, DoRA\u2019s emphasis on decoupling magnitude from direction and PiSSA\u2019s SVD-based alignment both elevate the role of spectral structure, directly motivating RobustMerge\u2019s compensation for uneven singular spectra to preserve direction robustness. Together, these threads crystallize into a training-free, parameter-efficient merging algorithm that prunes, scales, and complements adapter parameters to maintain stable low-rank directions across tasks.",
+  "analysis_timestamp": "2026-01-07T00:21:32.345387"
+}

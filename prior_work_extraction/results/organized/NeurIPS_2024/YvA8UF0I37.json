@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Estimating or Propagating Gradients Through Stochastic Neurons for Conditional Computation",
+      "authors": "Yoshua Bengio, Nicholas L\u00e9onard, Aaron Courville",
+      "year": 2013,
+      "role": "Foundational estimator",
+      "relationship_sentence": "Introduced the straight-through estimator (STE), the de facto gradient surrogate for discrete/quantized variables that PV-Tuning explicitly questions and aims to improve upon for extreme LLM compression."
+    },
+    {
+      "title": "Trained Ternary Quantization",
+      "authors": "Chenzhuo Zhu, Song Han, Huizi Mao, William J. Dally",
+      "year": 2017,
+      "role": "Early extreme low-bit training",
+      "relationship_sentence": "Demonstrated effective ternary (\u22482-bit) weight training using STE-based quantization-aware updates, directly motivating PV-Tuning\u2019s focus on ultra-low-bit representations while addressing STE\u2019s limitations during fine-tuning."
+    },
+    {
+      "title": "Learned Step Size Quantization",
+      "authors": "Steven K. Esser et al.",
+      "year": 2019,
+      "role": "Quantization-aware training with learnable parameters",
+      "relationship_sentence": "Showed that learning quantization scales with STE-based gradients substantially improves QAT, providing a key baseline paradigm that PV-Tuning revisits by proposing an alternative representation and optimization pathway beyond STE."
+    },
+    {
+      "title": "GPTQ: Accurate Post-Training Quantization for Generative Pretrained Transformers",
+      "authors": "Elias Frantar, Saleh Ashkboos, Torsten Hoefler, Dan Alistarh",
+      "year": 2022,
+      "role": "Strong PTQ baseline for LLMs",
+      "relationship_sentence": "Established high-accuracy one-shot PTQ for LLMs and highlighted diminishing returns at ultra-low bit-widths, motivating PV-Tuning\u2019s move from pure PTQ toward better fine-tuning of compressed weights."
+    },
+    {
+      "title": "AWQ: Activation-Aware Weight Quantization for LLMs",
+      "authors": "Lin et al.",
+      "year": 2023,
+      "role": "LLM-specific PTQ with activation-awareness",
+      "relationship_sentence": "Provided a leading PTQ method for LLMs that mitigates activation outliers, serving as a practical predecessor and baseline; PV-Tuning targets the remaining gap at 1\u20132 bits where PTQ alone struggles."
+    },
+    {
+      "title": "QuIP#: Extreme Low-Bit Quantization of LLMs with Calibration-Aware Fine-Tuning",
+      "authors": "Frantar et al.",
+      "year": 2024,
+      "role": "Extreme low-bit LLM quantization with STE fine-tuning",
+      "relationship_sentence": "Demonstrated that limited-data fine-tuning of 1\u20132 bit weights improves accuracy but relies on STE; PV-Tuning directly evolves this line by proposing a more principled alternative to STE during such fine-tuning."
+    },
+    {
+      "title": "AQLM: Accuracy-Aware Quantization for Language Models",
+      "authors": "Authors unknown (et al.)",
+      "year": 2024,
+      "role": "Accuracy-aware low-bit LLM quantization with STE-based updates",
+      "relationship_sentence": "Showed that accuracy-aware calibration plus fine-tuning can push ultra-low-bit LLMs, yet still depends on STE; PV-Tuning addresses this dependency by introducing a different representation/optimization strategy that improves extreme-bit performance."
+    }
+  ],
+  "synthesis_narrative": "PV-Tuning targets the hard regime of 1\u20132 bit LLM compression, where purely post-training methods begin to plateau. The early success of STE-based quantization-aware training for discrete weights\u2014from Trained Ternary Quantization\u2014established that extreme weight discretization is feasible, while Bengio et al. provided the ubiquitous STE that enables gradients through non-differentiable quantizers. Subsequent QAT advances such as LSQ demonstrated that learning quantizer parameters (e.g., step sizes) with STE can substantially close accuracy gaps, setting a strong but still STE-reliant template for fine-tuning.\nIn parallel, LLM-specific PTQ methods like GPTQ and AWQ delivered compelling one-shot quantization results, but their performance tapers at ultra-low precision, indicating that some form of fine-tuning is necessary. Recent extreme-low-bit LLM approaches\u2014QuIP# and AQLM\u2014validated that limited-data fine-tuning of quantized weights can recover accuracy, yet both continued to rely on STE, whose behavior and optimality in this setting remain poorly understood.\nPV-Tuning builds directly on these threads: it embraces the practical need for fine-tuning at 1\u20132 bits established by QuIP# and AQLM, and it inherits the QAT toolbox shaped by LSQ and earlier binary/ternary training. Its core contribution is to move beyond STE by proposing a different representation/optimization strategy for quantized weights during fine-tuning, yielding improved accuracy in the extreme-bit regime while preserving the deployment benefits unlocked by GPTQ/AWQ-style compression.",
+  "analysis_timestamp": "2026-01-06T23:39:42.965744"
+}

@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Sequential Monte Carlo Samplers",
+      "authors": "Pierre Del Moral et al.",
+      "year": 2006,
+      "role": "Foundation",
+      "relationship_sentence": "The paper directly instantiates the Del Moral\u2013Doucet\u2013Jasra SMC framework\u2014importance weighting, resampling, and tempering\u2014to construct a test-time particle sampler that targets the reward-tilted posterior over diffusion trajectories."
+    },
+    {
+      "title": "Annealed Importance Sampling",
+      "authors": "Radford M. Neal",
+      "year": 2001,
+      "role": "Foundation",
+      "relationship_sentence": "Neal\u2019s annealing/tempering idea provides the bridge of intermediate target distributions; the proposed method adopts AIS-style temperature schedules within an SMC sampler to safely move from the pretrained diffusion prior to the reward-aligned target."
+    },
+    {
+      "title": "Diffusion Models Beat GANs",
+      "authors": "Prafulla Dhariwal et al.",
+      "year": 2021,
+      "role": "Gap Identification",
+      "relationship_sentence": "This work introduced classifier guidance as an approximate gradient-based test-time steering; the current paper explicitly addresses its limitation\u2014biased guidance that does not truly optimize external rewards\u2014by sampling the exact reward-tilted distribution via SMC."
+    },
+    {
+      "title": "Deep Reinforcement Learning from Human Preferences",
+      "authors": "Paul F. Christiano et al.",
+      "year": 2017,
+      "role": "Foundation",
+      "relationship_sentence": "Christiano et al. established preference-based reward modeling that underlies modern alignment; the present work adopts the same learned-reward formulation but avoids the known pitfall of reward over-optimization by eliminating training-time optimization in favor of test-time sampling."
+    },
+    {
+      "title": "Direct Preference Optimization: Your Language Model is Secretly a Reward Model",
+      "authors": "Rafael Rafailov et al.",
+      "year": 2023,
+      "role": "Baseline",
+      "relationship_sentence": "DPO exemplifies preference-based fine-tuning that can over-optimize learned rewards; the proposed test-time SMC method is positioned as a training-free alternative that achieves comparable or better reward without over-optimization or loss of diversity."
+    },
+    {
+      "title": "ImageReward: Learning and Evaluating Human Preferences for Text-to-Image Generation",
+      "authors": "Xu et al.",
+      "year": 2023,
+      "role": "Foundation",
+      "relationship_sentence": "ImageReward provides the concrete reward models and problem setup for aligning diffusion generators to human preferences; the new method treats such rewards as black-box likelihoods and samples from the corresponding reward-tilted distribution."
+    }
+  ],
+  "synthesis_narrative": "The core idea of this paper is to replace biased, approximate guidance and over-optimizing fine-tuning with a principled, training-free sampler that targets the true reward-aligned distribution. Two strands of prior work directly converge to this solution. From the probabilistic inference side, Del Moral\u2013Doucet\u2013Jasra\u2019s Sequential Monte Carlo samplers and Neal\u2019s Annealed Importance Sampling establish the exact machinery used here: a sequence of tempered targets, importance weighting, and resampling to transport particles from a base prior to a complex posterior. The authors tailor this SMC backbone to the diffusion sampling process, effectively turning reward-aligned generation into posterior sampling with a reward-as-likelihood view.\n\nFrom the alignment side, Christiano et al. introduced preference-based reward modeling that powers contemporary diffusion alignment. Methods like DPO (Rafailov et al.) demonstrate how reward models can guide fine-tuning but also expose a central failure mode: reward over-optimization and diversity collapse. In the diffusion literature, Dhariwal & Nichol\u2019s classifier guidance popularized test-time gradient steering; however, such approximate guidance does not truly maximize external reward and can be biased. ImageReward concretizes the text-to-image preference objective, providing the learned rewards the present paper directly consumes as black-box signals. By marrying SMC/AIS with the preference-reward formulation, the paper arrives at a test-time, tempered SMC sampler that optimizes target rewards while preserving diversity and avoiding reward over-optimization\u2014addressing the explicit gaps left by gradient guidance and fine-tuning-based alignment.",
+  "analysis_timestamp": "2026-01-06T23:09:26.628386"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Jonathan Ho, Ajay Jain, Pieter Abbeel",
+      "year": 2020,
+      "role": "foundational methodology",
+      "relationship_sentence": "Provides the core diffusion training and sampling framework that PuzzleFusion adopts to model and denoise continuous pose variables for puzzle piece placement."
+    },
+    {
+      "title": "Score-Based Generative Modeling through Stochastic Differential Equations",
+      "authors": "Yang Song, Jascha Sohl-Dickstein, Diederik P. Kingma, Abhishek Kumar, Stefano Ermon, Ben Poole",
+      "year": 2021,
+      "role": "foundational methodology",
+      "relationship_sentence": "Establishes continuous-time score-based generative modeling that underpins PuzzleFusion\u2019s formulation of pose denoising in a continuous noise space and enables flexible conditioning."
+    },
+    {
+      "title": "Classifier-Free Diffusion Guidance",
+      "authors": "Jonathan Ho, Tim Salimans",
+      "year": 2022,
+      "role": "conditioning technique",
+      "relationship_sentence": "Introduces guidance for conditioning diffusion without external classifiers, a mechanism PuzzleFusion can leverage to condition generation on observed piece geometry and puzzle context."
+    },
+    {
+      "title": "Equivariant Diffusion for Molecule Generation in 3D",
+      "authors": "Emiel Hoogeboom, Victor Garcia Satorras, Cl\u00e9ment Vignac, Max Welling",
+      "year": 2022,
+      "role": "methodological inspiration (equivariance on rigid motions)",
+      "relationship_sentence": "Demonstrates diffusion over rigid-body transformations with rotational/translation equivariance, directly informing PuzzleFusion\u2019s treatment of SE(2) poses for aligning puzzle pieces."
+    },
+    {
+      "title": "DiffDock: Diffusion Steps, Twists, and Turns for Molecular Docking",
+      "authors": "Gabriele Corso, Hannes St\u00e4rk, Bowen Jing, Regina Barzilay, Tommi Jaakkola",
+      "year": 2023,
+      "role": "methodological inspiration (spatial arrangement via diffusion)",
+      "relationship_sentence": "Shows that diffusion models can solve spatial arrangement problems by predicting translations and rotations, an analogous setup to PuzzleFusion\u2019s piece alignment in 2D."
+    },
+    {
+      "title": "A Fully Automated Greedy Square Jigsaw Puzzle Solver",
+      "authors": "Refael Pomeranz, Eli Shemesh, Ohad Ben-Shahar",
+      "year": 2011,
+      "role": "problem formulation and evaluation baseline",
+      "relationship_sentence": "Defines large-scale jigsaw puzzle solving with compatibility metrics and evaluation protocols, grounding PuzzleFusion\u2019s task setup and comparisons."
+    },
+    {
+      "title": "Jigsaw Puzzles with Pieces of Unknown Orientation",
+      "authors": "Andrew C. Gallagher",
+      "year": 2012,
+      "role": "problem variant and constraints",
+      "relationship_sentence": "Introduces rotation-unknown jigsaw solving, directly aligning with PuzzleFusion\u2019s need to estimate both translations and rotations for puzzle pieces."
+    }
+  ],
+  "synthesis_narrative": "PuzzleFusion\u2019s key contribution is to recast spatial puzzle solving\u2014estimating 2D translations and rotations for jigsaw or room-layout pieces\u2014as conditional generative modeling with diffusion. This reframing stands on the methodological foundations of diffusion models: DDPM provides the denoising objective and sampling mechanics, while score-based SDEs offer a continuous-time perspective that facilitates stable training and flexible conditioning in continuous pose spaces. To condition generation on observed piece shapes and puzzle context, the work draws on classifier-free guidance, enabling controllable sampling without a separate classifier.\nA second pillar is the adaptation of diffusion to rigid-body transformations. Equivariant diffusion for molecules established how to model rotations and translations with appropriate symmetries, and DiffDock concretely demonstrated that diffusion can solve complex spatial arrangement tasks by predicting SE(3) poses; PuzzleFusion mirrors these ideas in SE(2), using diffusion to place parts coherently in 2D.\nFinally, classical jigsaw literature shaped the task\u2019s formulation and constraints. Pomeranz et al. provided compatibility-based assembly and evaluation protocols for large-scale puzzles, while Gallagher\u2019s unknown-orientation setting directly motivates PuzzleFusion\u2019s joint rotation-translation estimation. Together, these works converge to the insight that diffusion can replace combinatorial search with end-to-end conditional generation over piece poses, enabling robust spatial puzzle solving and guiding the dataset design and evaluation choices in PuzzleFusion.",
+  "analysis_timestamp": "2026-01-07T00:02:04.869615"
+}

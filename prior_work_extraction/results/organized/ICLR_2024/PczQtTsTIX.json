@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Soft Actor-Critic: Off-Policy Maximum Entropy Deep Reinforcement Learning with a Stochastic Actor",
+      "authors": "Tuomas Haarnoja et al.",
+      "year": 2018,
+      "arxiv_id": "1801.01290",
+      "role": "Foundation",
+      "relationship_sentence": "CrossQ adopts the SAC off-policy actor\u2013critic framework and objective as its base and then modifies the critic update by removing target networks and introducing carefully shared batch-normalization statistics."
+    },
+    {
+      "title": "Randomized Ensembled Double Q-learning: Learning Fast Without a Break (REDQ)",
+      "authors": "Chen et al.",
+      "year": 2021,
+      "arxiv_id": "2101.05982",
+      "role": "Baseline",
+      "relationship_sentence": "REDQ established that very high update-to-data ratios with large Q-ensembles drive strong sample efficiency but incur heavy computation, which CrossQ directly targets by matching/exceeding REDQ\u2019s sample efficiency at UTD=1 without ensembles."
+    },
+    {
+      "title": "DroQ: Dropout Q-Functions for Doubly Efficient Reinforcement Learning",
+      "authors": "Hiraoka et al.",
+      "year": 2022,
+      "arxiv_id": "",
+      "role": "Baseline",
+      "relationship_sentence": "DroQ showed that high-UTD training with dropout-based implicit ensembles improves sample efficiency but remains compute-intensive, motivating CrossQ\u2019s simpler alternative that attains similar gains with UTD=1."
+    },
+    {
+      "title": "Addressing Function Approximation Error in Actor-Critic Methods (TD3)",
+      "authors": "Scott Fujimoto et al.",
+      "year": 2018,
+      "arxiv_id": "1802.09477",
+      "role": "Related Problem",
+      "relationship_sentence": "TD3\u2019s clipped double Q and target-policy smoothing exemplify bias-reduction machinery and reliance on target networks that CrossQ deliberately avoids by stabilizing learning through batch normalization instead."
+    },
+    {
+      "title": "Human-level control through deep reinforcement learning (DQN)",
+      "authors": "Volodymyr Mnih et al.",
+      "year": 2015,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "DQN introduced target networks to stabilize bootstrapped TD learning, and CrossQ\u2019s core contribution is to make such target networks unnecessary by synchronizing normalization across bootstrapped targets."
+    },
+    {
+      "title": "Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift",
+      "authors": "Sergey Ioffe et al.",
+      "year": 2015,
+      "arxiv_id": "1502.03167",
+      "role": "Inspiration",
+      "relationship_sentence": "CrossQ directly leverages the batch normalization mechanism, applying shared batch statistics across both sides of the Bellman update to control distribution shift and stabilize training without target networks."
+    }
+  ],
+  "synthesis_narrative": "Off-policy actor\u2013critic methods such as Soft Actor-Critic established a sample-efficient, entropy-regularized objective and training loop for continuous control, typically stabilized by target networks. DQN earlier introduced target networks as a core device to steady bootstrapped temporal-difference updates, which subsequently became standard in value-based deep RL. To mitigate overestimation and stabilize learning, TD3 added clipped double Q and target policy smoothing, exemplifying a line of bias-reduction techniques that improve stability at the cost of added machinery. REDQ demonstrated that pushing the update-to-data ratio high and using large critic ensembles markedly boosts sample efficiency, but this benefit comes with substantial computational overhead. DroQ replaced explicit ensembles with dropout-based implicit ensembles and similarly relied on high UTD to gain efficiency, again raising compute budgets. Independently, batch normalization provided a simple way to align activation distributions using mini-batch statistics, suggesting a potential lever to control the distribution shift inside bootstrapped targets.\nTogether these works revealed a trade-off: strong sample efficiency often hinges on heavy bias-reduction machinery, target networks, and high UTD. The natural next step is to ask whether a principled normalization of the critic\u2019s computations can tame bootstrapping instability directly, making target networks and high UTD unnecessary. CrossQ synthesizes SAC\u2019s training setting with the insight from batch normalization, replacing ensembles and target networks by carefully sharing batch-norm statistics across the online and target paths, thereby retaining or surpassing REDQ/DroQ-level sample efficiency while keeping UTD at 1 and the implementation simple.",
+  "target_paper": {
+    "title": "CrossQ: Batch Normalization in Deep Reinforcement Learning for Greater Sample Efficiency and Simplicity",
+    "authors": "Aditya Bhatt, Daniel Palenicek, Boris Belousov, Max Argus, Artemij Amiranashvili, Thomas Brox, Jan Peters",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Deep Reinforcement Learning",
+    "abstract": "Sample efficiency is a crucial problem in deep reinforcement learning. Recent algorithms, such as REDQ and DroQ, found a way to improve the sample efficiency by increasing the update-to-data (UTD) ratio to 20 gradient update steps on the critic per environment sample.\nHowever, this comes at the expense of a greatly increased computational cost. To reduce this computational burden, we introduce CrossQ:\nA lightweight algorithm for continuous control tasks that makes careful use of Batch Normalization and removes target networks to surpass the current state-of-the-art in sample efficiency while maintaining a low UTD ratio of 1. Notably, CrossQ does not rely on advanced bias-reduction schemes used in current methods. CrossQ's contributions are threefold: (1) it matches or surpasses current state-of-the-art methods in terms of sample efficiency, (2) it substantially reduces the computational cost compared to REDQ and DroQ, (3) it is easy to implement, requiring just a few lines of code on t",
+    "openreview_id": "PczQtTsTIX",
+    "forum_id": "PczQtTsTIX"
+  },
+  "analysis_timestamp": "2026-01-06T08:39:42.299948"
+}

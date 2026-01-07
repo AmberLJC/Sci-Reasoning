@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP",
+      "authors": "Patrick Lewis et al.",
+      "year": 2020,
+      "role": "Foundational RAG paradigm",
+      "relationship_sentence": "Established the RAG framework separating retrieval from generation, framing the core challenge GraphFlow tackles\u2014learning a retrieval mechanism that reliably surfaces knowledge needed for LLM answers."
+    },
+    {
+      "title": "PullNet: Open Domain Question Answering with Iterative Retrieval on Knowledge Bases and Text",
+      "authors": "Haitian Sun et al.",
+      "year": 2019,
+      "role": "Iterative retrieval over text-rich KGs",
+      "relationship_sentence": "Demonstrated iterative, policy-like retrieval over mixed KB+text settings, directly motivating GraphFlow\u2019s learned retrieval policy over text-rich KGs for complex multi-hop queries."
+    },
+    {
+      "title": "Go for a Walk and Arrive at the Right Answer: Reasoning Over Paths in Knowledge Bases Using Reinforcement Learning (MINERVA)",
+      "authors": "Rajarshi Das et al.",
+      "year": 2018,
+      "role": "Policy learning for KG traversal",
+      "relationship_sentence": "Showed how to learn a traversal policy on KGs with delayed outcome rewards, a precursor to GraphFlow\u2019s learned retrieval policy that must assign credit across multi-step graph navigation."
+    },
+    {
+      "title": "Generative Flow Networks",
+      "authors": "Yoshua Bengio et al.",
+      "year": 2021,
+      "role": "Flow-based credit assignment framework",
+      "relationship_sentence": "Introduced learning stochastic policies over compositional trajectories with flows that factor terminal rewards across intermediate states, directly inspiring GraphFlow\u2019s flow estimator and reward factorization across retrieval states."
+    },
+    {
+      "title": "A Trajectory Balance Objective for Training Generative Flow Networks",
+      "authors": "Andrei Malkin et al.",
+      "year": 2022,
+      "role": "Training objective for flow/policy consistency",
+      "relationship_sentence": "Provided a practical objective to jointly learn flows and policies consistent with terminal rewards, which GraphFlow adapts as a transition-based flow matching objective for retrieval over KGs."
+    },
+    {
+      "title": "RUDDER: Return Decomposition for Delayed Rewards",
+      "authors": "Manuel Arjona-Medina et al.",
+      "year": 2019,
+      "role": "Reward redistribution/credit assignment",
+      "relationship_sentence": "Proposed redistributing delayed rewards to earlier decisions to address long-horizon credit assignment, conceptually aligning with GraphFlow\u2019s factorization of outcome reward into intermediate retrieval states."
+    },
+    {
+      "title": "Rewarding Progress: Training Process Reward Models for Step-by-Step Reasoning",
+      "authors": "Eric Lightman et al.",
+      "year": 2023,
+      "role": "Process reward models (PRMs) for step-level supervision",
+      "relationship_sentence": "Showed the benefits of process-level rewards for aligning intermediate reasoning steps, motivating GraphFlow\u2019s PRM-leaning goal but replacing expensive supervision with learned flow-based reward factorization on KGs."
+    }
+  ],
+  "synthesis_narrative": "GraphFlow\u2019s central contribution is a learned retrieval policy for text-rich knowledge graphs whose credit assignment is driven by a flow-based factorization of terminal rewards into intermediate retrieval states. This builds directly on the RAG paradigm of Lewis et al. (2020), which framed the core problem of coupling retrieval with generation for knowledge-intensive tasks. Prior KG QA and retrieval systems such as PullNet (Sun et al., 2019) and MINERVA (Das et al., 2018) demonstrated that policy-driven, multi-step navigation over KGs (and mixed KG+text) is essential for complex questions, but they relied on reinforcement signals that make credit assignment over long paths difficult and often brittle.\n\nGenerative Flow Networks (Bengio et al., 2021) provide the key insight that terminal rewards can be propagated as flows through intermediate states, enabling stochastic policies to sample multi-step objects proportional to their rewards. The Trajectory Balance objective (Malkin et al., 2022) operationalizes this idea, jointly learning a policy and a flow estimator with a consistency constraint\u2014precisely the mechanism GraphFlow adapts into a transition-based flow matching objective tailored to retrieval trajectories on KGs. Complementing this, RUDDER (Arjona-Medina et al., 2019) established the value of redistributing delayed rewards for improved credit assignment, conceptually reinforcing GraphFlow\u2019s decomposition of outcome rewards across retrieval states. Finally, work on Process Reward Models (Lightman et al., 2023) highlighted the power of step-level supervision for aligning reasoning processes; GraphFlow targets the same alignment in KG-based RAG but circumvents costly process annotations by learning the reward factorization via flows, enabling accurate and diverse retrieval without dense process labels.",
+  "analysis_timestamp": "2026-01-07T00:21:32.321563"
+}

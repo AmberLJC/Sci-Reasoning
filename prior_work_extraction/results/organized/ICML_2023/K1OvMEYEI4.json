@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Score-Based Generative Modeling through Stochastic Differential Equations",
+      "authors": "Yang Song et al.",
+      "year": 2021,
+      "role": "Foundation",
+      "relationship_sentence": "Establishes the continuous-time score-based diffusion framework and sampling SDE whose drift the present work explicitly augments with a discriminator-derived gradient during generation."
+    },
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Jonathan Ho et al.",
+      "year": 2020,
+      "role": "Foundation",
+      "relationship_sentence": "Introduces modern denoising diffusion training and sampling, providing the noise-conditioned denoising trajectory that Discriminator Guidance supervises and refines post hoc."
+    },
+    {
+      "title": "Diffusion Models Beat GANs on Image Synthesis",
+      "authors": "Prafulla Dhariwal et al.",
+      "year": 2021,
+      "role": "Baseline",
+      "relationship_sentence": "Proposes classifier guidance (adding \u2207x log p(y|x) to the score) and sets the ImageNet diffusion baseline that the new method directly improves upon by replacing classifier gradients with discriminator-based corrections."
+    },
+    {
+      "title": "Classifier-Free Diffusion Guidance",
+      "authors": "Jonathan Ho et al.",
+      "year": 2021,
+      "role": "Inspiration",
+      "relationship_sentence": "Demonstrates that augmenting the score with an auxiliary guidance term at sampling boosts fidelity, directly inspiring the paper\u2019s idea to add a post-trained discriminator-derived term without retraining the score network."
+    },
+    {
+      "title": "f-GAN: Training Generative Neural Samplers using Variational Divergence Minimization",
+      "authors": "Sebastian Nowozin et al.",
+      "year": 2016,
+      "role": "Foundation",
+      "relationship_sentence": "Provides the density-ratio view of adversarial training, which the paper leverages to show an optimal discriminator yields log-density ratio whose gradient equals the difference between data and model scores, underpinning Discriminator Guidance."
+    },
+    {
+      "title": "Generative Adversarial Nets",
+      "authors": "Ian Goodfellow et al.",
+      "year": 2014,
+      "role": "Related Problem",
+      "relationship_sentence": "Introduces the discriminator paradigm and the optimal discriminator form D*(x)=p_data/(p_data+p_model), a key identity used here while avoiding GAN-style joint training by learning the discriminator post hoc."
+    },
+    {
+      "title": "Your Classifier is Secretly an Energy Based Model and You Should Treat it Like One",
+      "authors": "Will Grathwohl et al.",
+      "year": 2019,
+      "role": "Inspiration",
+      "relationship_sentence": "Shows classifier/discriminator logits define energies whose input gradients can guide sampling, directly motivating the use of discriminator logit gradients as an auxiliary guidance term along the diffusion path."
+    }
+  ],
+  "synthesis_narrative": "Discriminator Guidance sits at the intersection of score-based diffusion and adversarial density-ratio estimation. The score-based foundations of Ho et al. (DDPM) and Song et al. (SDE) formalized training noise-conditioned score networks and sampling dynamics\u2014precisely the denoising trajectory this work refines by modifying the drift with an auxiliary gradient. Building on Dhariwal and Nichol\u2019s classifier guidance, which adds the gradient of a classifier\u2019s log-likelihood to the score to improve fidelity and control, the present paper replaces the classifier with a discriminator that can be trained post hoc, thereby avoiding the need for external labels or retraining the score network. Ho and Salimans\u2019 classifier-free guidance further inspired the notion that a simple, additive guidance term at sampling can dramatically sharpen generations, motivating a plug-in guidance mechanism that is decoupled from score training.\n\nThe key theoretical step comes from adversarial learning: Goodfellow\u2019s GAN framework and the f-GAN density-ratio perspective imply that the optimal discriminator recovers the log-density ratio between data and model. Differentiating this logit shows its gradient equals the difference between the data score and model score\u2014exactly the corrective signal needed to refine a pre-trained score toward the true data score. Grathwohl et al.\u2019s energy-based view of classifier/discriminator logits reinforces using input gradients of the discriminator as a principled guidance term. Together, these works directly enable a stable, post-trained discriminator to guide diffusion sampling, yielding improved fidelity and recall on ImageNet without joint adversarial training.",
+  "analysis_timestamp": "2026-01-06T23:09:26.531698"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Flow Matching for Generative Modeling",
+      "authors": "Lipman et al.",
+      "year": 2022,
+      "role": "Foundational method for training continuous-time deterministic flows by matching vector fields along probability paths.",
+      "relationship_sentence": "CompFlow adopts the flow-matching objective to learn a conditional vector field, enabling it to train a target-dynamics flow efficiently without simulation or likelihood maximization."
+    },
+    {
+      "title": "Stochastic Interpolants: A Unifying Framework for Flow-based and Score-based Generative Modeling",
+      "authors": "Albergo and Vanden-Eijnden",
+      "year": 2023,
+      "role": "Conceptual bridge linking flow/diffusion models to transport-based interpolations and path measures.",
+      "relationship_sentence": "The unifying perspective clarifies why transporting mass between source and target distributions via learned interpolants is preferable to KL/MI penalties when supports are disjoint, underpinning CompFlow\u2019s transport-centric formulation."
+    },
+    {
+      "title": "A Computational Fluid Mechanics Solution to the Monge\u2013Kantorovich Mass Transfer Problem",
+      "authors": "Benamou and Brenier",
+      "year": 2000,
+      "role": "Dynamic optimal transport formulation connecting minimal kinetic-energy flows to distributional transport under the continuity equation.",
+      "relationship_sentence": "CompFlow leverages this dynamic OT viewpoint to justify learning target dynamics as a transport starting from the source-flow output, providing a well-posed alternative to divergence-based gap estimation."
+    },
+    {
+      "title": "OT-Flow: Fast and Accurate Continuous Normalizing Flows via Optimal Transport",
+      "authors": "Onken, Ruthotto, et al.",
+      "year": 2021,
+      "role": "Practical linkage of continuous normalizing flows with OT-inspired regularization and transport costs.",
+      "relationship_sentence": "Evidence that OT-regularized flows generalize better motivates CompFlow\u2019s choice to condition on a meaningful source distribution and to align learning with transport geometry rather than a Gaussian prior."
+    },
+    {
+      "title": "Residual Flows for Invertible Generative Modeling",
+      "authors": "Behrmann, Grathwohl, Chen, Duvenaud, Jacobsen",
+      "year": 2019,
+      "role": "Demonstrated the effectiveness of composing invertible flows to build complex mappings.",
+      "relationship_sentence": "CompFlow\u2019s composite architecture\u2014learning a target flow on top of a source-domain flow\u2014draws on the principle that composing flows yields stable, expressive transformations tailored to data structure."
+    },
+    {
+      "title": "Optimal Transport for Domain Adaptation",
+      "authors": "Courty, Flamary, Tuia, Rakotomamonjy",
+      "year": 2017,
+      "role": "Introduced OT as a robust tool for aligning distributions across domains with potentially disjoint supports.",
+      "relationship_sentence": "This work directly motivates replacing KL/MI-based dynamics-gap handling with transport-based alignment to safely leverage source transitions despite large dynamics shifts."
+    },
+    {
+      "title": "Conservative Q-Learning for Offline Reinforcement Learning",
+      "authors": "Kumar et al.",
+      "year": 2020,
+      "role": "Canonical offline RL approach that mitigates distributional shift via conservative penalties tied to data support.",
+      "relationship_sentence": "CQL exemplifies divergence/penalty-based handling of mismatch that struggles under support disjointness, highlighting the need for CompFlow\u2019s transport-grounded, model-based reuse of shifted-dynamics data."
+    }
+  ],
+  "synthesis_narrative": "CompFlow\u2019s core innovation\u2014modeling target dynamics as a conditional flow built atop a learned source-domain flow\u2014emerges from intertwining advances in flow-based generative modeling and optimal transport (OT) with practical challenges in offline/transfer RL. Flow Matching (Lipman et al., 2022) provides the training primitive: matching vector fields along interpolating paths to learn continuous flows efficiently and simulation-free. Stochastic Interpolants (Albergo & Vanden-Eijnden, 2023) unify flow and diffusion perspectives, clarifying how learned transport paths can replace fragile divergence-based criteria. The dynamic OT foundation of Benamou & Brenier (2000) justifies viewing dynamics adaptation as transporting mass from the source to the target transition distribution along minimal-energy flows, which remain well-defined even when supports are disjoint.\n\nOT-Flow (Onken et al., 2021) demonstrates that aligning flows with transport geometry improves generalization, directly informing CompFlow\u2019s choice to condition on a meaningful source distribution rather than a Gaussian prior. Residual Flows (Behrmann et al., 2019) motivate the composite architecture: composing flows yields expressive, stable transformations; CompFlow exploits this by stacking a target flow on the source-flow output to capture dynamics shifts.\n\nOn the RL side, divergence- and penalty-based offline methods such as CQL (Kumar et al., 2020) typify the limitations of KL/MI alignment under support mismatch. OT-based domain adaptation (Courty et al., 2017) provides a principled alternative, suggesting transport-based reweighting/mapping of samples. CompFlow synthesizes these threads into a transport-grounded, composite flow that directly maps source transitions to target dynamics, enabling robust reuse of shifted-dynamics data and improved sample efficiency.",
+  "analysis_timestamp": "2026-01-07T00:05:12.527058"
+}

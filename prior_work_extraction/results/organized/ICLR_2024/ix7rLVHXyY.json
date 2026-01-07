@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Competition-Level Code Generation with AlphaCode",
+      "authors": "Yujia Li et al.",
+      "year": 2022,
+      "arxiv_id": "2203.07814",
+      "role": "Foundation",
+      "relationship_sentence": "AlphaCode established the competitive-programming setting with curated Codeforces-style problems and unit tests, providing the exact problem domain and test-driven verification substrate from which the present work mines performance-improving edit pairs."
+    },
+    {
+      "title": "APPS: A Benchmark for Code Generation",
+      "authors": "Dan Hendrycks et al.",
+      "year": 2021,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "APPS codified unit-test\u2013based evaluation for code generation, directly underpinning this work\u2019s requirement to verify semantic equivalence of edits while optimizing runtime."
+    },
+    {
+      "title": "Self-Refine: Iterative Refinement with Self-Feedback",
+      "authors": "Aman Madaan et al.",
+      "year": 2023,
+      "arxiv_id": "2303.17651",
+      "role": "Inspiration",
+      "relationship_sentence": "Self-Refine introduced an LLM self-editing loop guided by feedback, which this work adapts by substituting textual feedback with simulator-based performance signals to iteratively propose performance-improving edits."
+    },
+    {
+      "title": "Reflexion: Language Agents with Verbal Reinforcement Learning",
+      "authors": "Noah Shinn et al.",
+      "year": 2023,
+      "arxiv_id": "2303.11366",
+      "role": "Inspiration",
+      "relationship_sentence": "Reflexion demonstrated that iterative reflection across attempts improves code solutions, directly informing the self-play/iterate-and-evaluate editing procedure used for performance optimization."
+    },
+    {
+      "title": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+      "authors": "Lili Chen et al.",
+      "year": 2021,
+      "arxiv_id": "2106.01345",
+      "role": "Inspiration",
+      "relationship_sentence": "Decision Transformer\u2019s return-conditioned generation inspired this work\u2019s goal-conditioned training, where models condition on desired runtime/speedup targets when producing code edits."
+    },
+    {
+      "title": "Discovering faster sorting algorithms using deep reinforcement learning",
+      "authors": "Daniel J. Mankowitz et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Related Problem",
+      "relationship_sentence": "AlphaDev showed learning-based discovery of faster implementations at the assembly level, motivating a learning approach to performance but highlighting the gap in high-level, semantics-preserving code edits addressed here."
+    },
+    {
+      "title": "OpenTuner: An Extensible Framework for Program Autotuning",
+      "authors": "Jason Ansel et al.",
+      "year": 2014,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "OpenTuner exemplifies search-based autotuning over numeric parameters, whose inability to perform semantic API/algorithm changes directly motivates learning from human performance-improving code edits."
+    }
+  ],
+  "synthesis_narrative": "Competitive-programming benchmarks such as AlphaCode established a rich, test-driven domain where solutions are validated by comprehensive unit tests, and APPS generalized this notion by framing program synthesis evaluation around unit-test correctness. These settings provided abundant, verifiable code artifacts and the methodology to assert semantic equivalence. Beyond correctness, Self-Refine introduced an LLM-centric paradigm of iterative self-editing guided by feedback, while Reflexion showed that reflective, multi-trial refinement can systematically improve code outcomes. In parallel, Decision Transformer demonstrated that conditioning sequence models on target returns can steer behavior toward desired outcomes, an idea naturally extensible to performance targets in code. Learning-driven performance optimization has also been explored at lower levels: AlphaDev revealed that RL can discover faster implementations, and OpenTuner popularized autotuning over parameter spaces\u2014both illuminating opportunities yet remaining limited to low-level or parametric changes rather than high-level semantic edits.\nCollectively, these works suggested a path: leverage unit-test\u2013verified programming tasks to ensure semantic preservation; couple iterative self-editing with an objective signal; and condition generation on explicit performance goals. The natural next step was to mine real human optimization trajectories from competitive programming, evaluate edits deterministically, and train a goal-conditioned editor that iterates with reliable performance feedback\u2014thereby moving beyond low-level autotuning to high-level, semantics-preserving performance improvements.",
+  "target_paper": {
+    "title": "Learning Performance-Improving Code Edits",
+    "authors": "Alexander G Shypula, Aman Madaan, Yimeng Zeng, Uri Alon, Jacob R. Gardner, Yiming Yang, Milad Hashemi, Graham Neubig, Parthasarathy Ranganathan, Osbert Bastani, Amir Yazdanbakhsh",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Large Language Models, Retrieval Augmented Generation, Program Synthesis, Program Optimization, Fine-Tuning, Goal-Conditioning, Data Augmentation, Self-Play, Synthetic Dataset, Performance Optimization, Machine Learning for Code Optimization, Dataset",
+    "abstract": "With the decline of Moore's law, optimizing program performance has become a major focus of software research. However, high-level optimizations such as API and algorithm changes remain elusive due to the difficulty of understanding the semantics of code. Simultaneously, pretrained large language models (LLMs) have demonstrated strong capabilities at solving a wide range of programming tasks. To that end, we introduce a framework for adapting LLMs to high-level program optimization. First, we curate a dataset of performance-improving edits made by human programmers of over 77,000 competitive C++ programming submission pairs, accompanied by extensive unit tests. A major challenge is the significant variability of measuring performance on commodity hardware, which can lead to spurious \"improvements.\" To isolate and reliably evaluate the impact of program optimizations, we design an environment based on the gem5 full system simulator, the de facto simulator used in academia and industry. ",
+    "openreview_id": "ix7rLVHXyY",
+    "forum_id": "ix7rLVHXyY"
+  },
+  "analysis_timestamp": "2026-01-06T16:44:36.769195"
+}

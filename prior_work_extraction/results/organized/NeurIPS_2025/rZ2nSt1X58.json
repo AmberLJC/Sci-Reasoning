@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Language Models are Few-Shot Learners",
+      "authors": "Tom B. Brown et al.",
+      "year": 2020,
+      "role": "Problem framing and baseline",
+      "relationship_sentence": "Established in-context learning as a powerful but inference-costly few-shot adaptation mechanism for LLMs, motivating OFA\u2019s search for more efficient, trainable adaptation."
+    },
+    {
+      "title": "Parameter-Efficient Transfer Learning for NLP (Adapters)",
+      "authors": "Neil Houlsby et al.",
+      "year": 2019,
+      "role": "PEFT foundation and limitations",
+      "relationship_sentence": "Introduced adapter-based PEFT as a lightweight alternative to full fine-tuning, whose overfitting risks in ultra-low-data regimes help motivate OFA\u2019s optimization-regularized, parameter-frugal approach."
+    },
+    {
+      "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+      "authors": "Edward J. Hu et al.",
+      "year": 2022,
+      "role": "PEFT comparator and design foil",
+      "relationship_sentence": "Showed that low-rank updates can efficiently adapt LLMs but still introduce extra parameters and can overfit few shots; OFA instead learns preconditioning effects without adding trainable parameters."
+    },
+    {
+      "title": "Learning Fast Approximations of Sparse Coding (LISTA)",
+      "authors": "Karol Gregor, Yann LeCun",
+      "year": 2010,
+      "role": "Optimization unrolling blueprint",
+      "relationship_sentence": "Demonstrated that forward passes can emulate iterative preconditioned proximal-gradient steps, directly inspiring OFA\u2019s view of transformer computations as optimization steps on representations."
+    },
+    {
+      "title": "Learning to learn by gradient descent by gradient descent",
+      "authors": "Marcin Andrychowicz et al.",
+      "year": 2016,
+      "role": "Meta-learned optimizer precedent",
+      "relationship_sentence": "Provided the template for learning optimization dynamics (e.g., step sizes/preconditioners), which OFA adapts by embedding learned preconditioning into the model\u2019s forward pass for few-shot adaptation."
+    },
+    {
+      "title": "Meta-SGD: Learning to Learn Quickly",
+      "authors": "Zhenguo Li, Fengwei Zhou, Fei Chen, Hang Li",
+      "year": 2017,
+      "role": "Learned preconditioning for fast adaptation",
+      "relationship_sentence": "Showed that learning per-parameter step sizes (a diagonal preconditioner) accelerates few-shot learning; OFA generalizes this idea to internal representation updates without adding new parameters."
+    },
+    {
+      "title": "Transformers Learn In-Context by Gradient Descent",
+      "authors": "Johannes von Oswald et al.",
+      "year": 2022,
+      "role": "Conceptual link between transformers and optimization",
+      "relationship_sentence": "Argued that transformer forward passes can implement gradient-descent-like adaptation, directly underpinning OFA\u2019s reinterpretation of LLM computation as a sequence of preconditioned gradient steps."
+    }
+  ],
+  "synthesis_narrative": "OFA\u2019s core idea\u2014treating the LLM forward pass as a sequence of preconditioned gradient steps and leveraging this view to enable few-shot adaptation without extra parameters\u2014sits at the intersection of three lines of work. First, few-shot adaptation baselines and their limits: Brown et al. (2020) established in-context learning for LLMs but at high inference-time cost, while adapter-based PEFT (Houlsby et al., 2019) and LoRA (Hu et al., 2022) reduced training cost yet can overfit in ultra-low-data settings and still add parameters. These motivate an approach that is both efficient and explicitly regularized by optimization structure.\nSecond, optimization-as-network computation: LISTA (Gregor & LeCun, 2010) showed that networks can be viewed as unrolled, preconditioned iterative solvers, providing a precise template for interpreting layers as gradient-like updates on latent codes. OFA extends this unrolling lens from sparse coding to transformer representations, casting attention/FFN transformations as preconditioned descent steps refining internal states.\nThird, meta-learning and learned optimization: Andrychowicz et al. (2016) and Meta-SGD (Li et al., 2017) demonstrated that learning optimizers and per-parameter step sizes (preconditioners) yields rapid few-shot adaptation. OFA internalizes this insight by learning effective preconditioning within the forward dynamics, but crucially does so without introducing additional trainable parameters, mitigating overfitting and preserving deployment efficiency. Finally, the mechanistic link that transformers can implement gradient descent in-context (von Oswald et al., 2022) grounds OFA\u2019s reinterpretation, unifying ICL phenomena with an explicit, optimization-inspired parameterization and objective that improve adaptation efficiency in the true few-shot regime.",
+  "analysis_timestamp": "2026-01-07T00:27:38.142986"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Jonathan Ho, Ajay Jain, Pieter Abbeel",
+      "year": 2020,
+      "role": "Foundational method",
+      "relationship_sentence": "Established the denoising diffusion framework and iterative refinement sampling that LaViDa adapts for sequence decoding, including timestep scheduling ideas underlying its timestep-related training and inference strategies."
+    },
+    {
+      "title": "Structured Denoising Diffusion Models in Discrete State-Spaces (D3PM)",
+      "authors": "Jacob Austin, Daniel D. Johnson, Jonathan Ho, Daniel Tarlow, Rianne van den Berg",
+      "year": 2021,
+      "role": "Core discrete diffusion formulation",
+      "relationship_sentence": "Provided the theoretical and algorithmic basis for diffusion over categorical tokens, directly enabling LaViDa\u2019s discrete token diffusion decoder for text with bidirectional context and parallel denoising."
+    },
+    {
+      "title": "Diffusion-LM Improves Controllable Text Generation",
+      "authors": "Xuechen Li et al.",
+      "year": 2022,
+      "role": "Controllability and infilling with diffusion for language",
+      "relationship_sentence": "Demonstrated that diffusion-based language models support text infilling and constraint satisfaction; LaViDa transfers these controllability benefits to the multimodal VLM setting and builds training/inference mechanisms to exploit them."
+    },
+    {
+      "title": "Mask-Predict: Parallel Decoding of Conditional Masked Language Models",
+      "authors": "Marjan Ghazvininejad, Omer Levy, Yinhan Liu, Luke Zettlemoyer",
+      "year": 2019,
+      "role": "Parallel non-autoregressive decoding",
+      "relationship_sentence": "Popularized iterative masked refinement for parallel generation, a paradigm closely mirrored by diffusion decoding; LaViDa leverages this lineage to achieve fast, non-AR decoding and text infilling behavior."
+    },
+    {
+      "title": "UL2: Unifying Language Learning Paradigms",
+      "authors": "Yi Tay et al.",
+      "year": 2022,
+      "role": "Denoising objectives and complementary masking",
+      "relationship_sentence": "Introduced a mixture of denoisers and complementary masking strategies that inform LaViDa\u2019s complementary masking design, improving training effectiveness for infilling-style objectives."
+    },
+    {
+      "title": "BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models",
+      "authors": "Junnan Li, Dongxu Li, Silvio Savarese, Steven C. H. Hoi",
+      "year": 2023,
+      "role": "Vision-language connector",
+      "relationship_sentence": "Showed how to couple a strong vision encoder to a language model via cross-attention/adapter modules; LaViDa adopts a similar vision-encoder-to-text-decoder coupling, but with a diffusion-based decoder."
+    },
+    {
+      "title": "LLaVA: Large Language and Vision Assistant",
+      "authors": "Haotian Liu, Chunyuan Li, Qingyang Wu, Yong Jae Lee",
+      "year": 2023,
+      "role": "Instruction-tuned VLM baseline and data recipe",
+      "relationship_sentence": "Provided the multimodal instruction-following setup and benchmarks that LaViDa targets, while motivating LaViDa\u2019s non-AR diffusion design as a response to LLaVA\u2019s latency and controllability limitations."
+    }
+  ],
+  "synthesis_narrative": "LaViDa\u2019s core contribution\u2014replacing an autoregressive text decoder with a discrete diffusion decoder inside a vision-language model\u2014builds on two converging lines of work. From the diffusion side, DDPM established iterative denoising as a practical generative paradigm, while D3PM extended it to categorical spaces, making token-level diffusion feasible. Diffusion-LM then demonstrated that language diffusion models naturally enable text infilling and constraint satisfaction, highlighting controllability advantages that LaViDa explicitly seeks in multimodal settings. In parallel, the non-autoregressive NLP literature (e.g., Mask-Predict) validated iterative, parallel refinement as an efficient decoding strategy, conceptually aligning with diffusion sampling and motivating LaViDa\u2019s push for faster inference over AR VLMs. UL2\u2019s mixture-of-denoisers and complementary masking further informed LaViDa\u2019s training design, suggesting how varied and complementary corruption patterns can stabilize learning for infilling-style objectives.\nOn the vision-language side, BLIP-2 provided a robust recipe to attach a pre-trained vision encoder to a powerful text model via cross-attention/adapter mechanisms; LaViDa adopts this connector pattern but swaps the AR decoder for a diffusion-based decoder. Finally, LLaVA crystallized the instruction-tuning paradigm and offered widely used data/benchmarks, serving both as a training blueprint and a key baseline whose limitations (latency, output control) LaViDa addresses. Together, these works directly shaped LaViDa\u2019s discrete diffusion backbone, multimodal coupling, complementary masking objective, and its focus on fast, controllable VLM generation.",
+  "analysis_timestamp": "2026-01-07T00:21:32.319998"
+}

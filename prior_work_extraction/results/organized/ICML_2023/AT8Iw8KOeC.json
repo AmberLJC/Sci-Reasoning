@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Deep Reinforcement Learning from Human Preferences",
+      "authors": "Paul F. Christiano et al.",
+      "year": 2017,
+      "role": "Foundation",
+      "relationship_sentence": "Introduced learning a scalar reward model from human pairwise preferences\u2014the exact signal this paper repurposes for pretraining, providing the foundational formulation of preference-derived scores used to guide LM behavior."
+    },
+    {
+      "title": "Fine-Tuning Language Models from Human Preferences",
+      "authors": "Daniel M. Ziegler et al.",
+      "year": 2019,
+      "role": "Extension",
+      "relationship_sentence": "Demonstrated RLHF for LMs by training a reward model from human preferences and optimizing a policy post hoc; the current paper directly extends this pipeline by moving the same preference signal into the pretraining objective rather than only post-training."
+    },
+    {
+      "title": "Learning to Summarize with Human Feedback",
+      "authors": "Nisan Stiennon et al.",
+      "year": 2020,
+      "role": "Extension",
+      "relationship_sentence": "Established practical RLHF with reward models and best-of-n/rejection sampling; these techniques form key baselines the paper adapts to the pretraining setting and ultimately shows conditional training outperforms."
+    },
+    {
+      "title": "Training language models to follow instructions with human feedback",
+      "authors": "Long Ouyang et al.",
+      "year": 2022,
+      "role": "Baseline",
+      "relationship_sentence": "Provided the state-of-the-art RLHF pipeline (SFT + reward model + PPO with KL) as the primary post-pretraining alignment baseline that this work seeks to improve by integrating preference signals during pretraining."
+    },
+    {
+      "title": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+      "authors": "Lili Chen et al.",
+      "year": 2021,
+      "role": "Inspiration",
+      "relationship_sentence": "Showed that conditioning sequence models on a scalar return-to-go can steer behavior; this directly inspires the paper\u2019s core idea of conditional training p(x|s) by conditioning a language model on human preference scores to target high-preference generations."
+    },
+    {
+      "title": "CTRL: A Conditional Transformer Language Model for Controllable Generation",
+      "authors": "Nitish Shirish Keskar et al.",
+      "year": 2019,
+      "role": "Inspiration",
+      "relationship_sentence": "Demonstrated control via conditioning on control codes during LM training; the paper generalizes this conditional LM paradigm to continuous human preference scores, turning preference values into the conditioning variable."
+    },
+    {
+      "title": "Training a Helpful and Harmless Assistant with RL from Human Feedback",
+      "authors": "Yuntao Bai et al.",
+      "year": 2022,
+      "role": "Gap Identification",
+      "relationship_sentence": "Documented that post-hoc RLHF still exhibits failures under adversarial prompts and safety trade-offs, motivating this paper\u2019s shift to pretraining with preferences to reduce undesirable content even under adversarial prompting."
+    }
+  ],
+  "synthesis_narrative": "The core innovation of pretraining language models with human preferences\u2014particularly the conditional training objective p(x|s) using human-derived scores\u2014emerges by fusing two mature strands of work. First, preference learning (Christiano et al., 2017) and its LM instantiations (Ziegler et al., 2019; Stiennon et al., 2020; Ouyang et al., 2022) provided the mechanism for turning pairwise human judgments into scalar reward models that guide generation. These works, however, applied the signal post hoc, aligning already-pretrained models and facing trade-offs in robustness and capability. Second, controllable sequence modeling showed that conditioning can steer behavior: CTRL (Keskar et al., 2019) conditioned on discrete control codes, while Decision Transformer (Chen et al., 2021) conditioned on scalar returns to select high-return behaviors. The present paper unifies these insights by treating the human preference score as the conditioning variable during pretraining, yielding a simple, Pareto-optimal method to emphasize aligned text without sacrificing downstream performance. Methodologically, it evaluates pretraining analogs of established RLHF baselines\u2014rejection sampling and reward-optimizing objectives\u2014from Stiennon et al. and Ouyang et al., and demonstrates conditional training\u2019s superiority. The motivation is sharpened by evidence from Bai et al. (2022) that post-training RLHF remains vulnerable to adversarial prompts, a failure mode the proposed pretraining approach directly addresses by reducing undesirable generations even under adversarial prompting.",
+  "analysis_timestamp": "2026-01-06T23:09:26.535242"
+}

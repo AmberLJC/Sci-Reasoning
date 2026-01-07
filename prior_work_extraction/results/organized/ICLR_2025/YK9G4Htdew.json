@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Mastering Diverse Domains via World Models",
+      "authors": "Danijar Hafner et al.",
+      "year": 2023,
+      "role": "Baseline",
+      "relationship_sentence": "DreamerV3 is the primary RNN-based world-model baseline whose strong performance and next-step training objective motivate replacing RNNs with Transformers and rethinking the prediction loss."
+    },
+    {
+      "title": "Dream to Control: Learning Behaviors by Latent Imagination",
+      "authors": "Danijar Hafner et al.",
+      "year": 2020,
+      "role": "Foundation",
+      "relationship_sentence": "Dreamer introduced the latent imagination framework (actor-critic learning atop an RSSM world model), which TWISTER retains while altering the architecture to Transformers and the training objective to contrastive long-horizon prediction."
+    },
+    {
+      "title": "Learning Latent Dynamics for Planning from Pixels",
+      "authors": "Danijar Hafner et al.",
+      "year": 2019,
+      "role": "Gap Identification",
+      "relationship_sentence": "PlaNet established the RSSM and highlighted the limitation of purely next-step training\u2014prompting multi-step consistency via latent overshooting\u2014a limitation TWISTER tackles with a stronger contrastive long-horizon objective suited to Transformers."
+    },
+    {
+      "title": "Representation Learning with Contrastive Predictive Coding",
+      "authors": "A\u00e4ron van den Oord et al.",
+      "year": 2018,
+      "role": "Foundation",
+      "relationship_sentence": "CPC provides the core InfoNCE-based objective for predicting future representations across time, which TWISTER adapts to train Transformer world models over longer horizons."
+    },
+    {
+      "title": "Unsupervised State Representation Learning in Atari",
+      "authors": "Ankesh Anand et al.",
+      "year": 2019,
+      "role": "Extension",
+      "relationship_sentence": "This work\u2019s action-conditional CPC (CPC|A) demonstrates how to condition temporal contrastive prediction on actions, directly informing TWISTER\u2019s action-conditioned, multi-step contrastive training of a world model."
+    },
+    {
+      "title": "Trajectory Transformer: Learning to Model and Plan Trajectories",
+      "authors": "Michael Janner et al.",
+      "year": 2021,
+      "role": "Related Problem",
+      "relationship_sentence": "Trajectory Transformer shows masked self-attention can model long temporal dependencies in control, motivating TWISTER\u2019s adoption of Transformer sequence modeling within a Dreamer-style world model."
+    },
+    {
+      "title": "Data-Efficient Reinforcement Learning with Self-Predictive Representations",
+      "authors": "Max Schwarzer et al.",
+      "year": 2021,
+      "role": "Inspiration",
+      "relationship_sentence": "SPR demonstrates that multi-step predictive objectives improve control representations, inspiring TWISTER\u2019s shift from myopic next-state losses to longer-horizon predictive training with a discriminative contrastive objective."
+    }
+  ],
+  "synthesis_narrative": "TWISTER grows directly out of the Dreamer lineage of latent world models. PlaNet and Dreamer established the core problem formulation: learn a latent dynamics model (RSSM) and use imagined rollouts to optimize a policy. DreamerV3 then set the state-of-the-art baseline but still relied on RNN world models and largely next-step training, which these authors target as the bottleneck for leveraging Transformers. Parallel work on sequence modeling for control showed that Transformers\u2019 masked self-attention can capture long temporal dependencies; Trajectory Transformer demonstrated this at the trajectory level, motivating a move from RNNs to Transformers inside world models. However, simply swapping architectures and retaining a one-step prediction loss (as in many Transformer world-model attempts) underdelivered in performance, echoing PlaNet\u2019s earlier finding that myopic training is insufficient and prompting multi-step consistency (via latent overshooting). TWISTER directly addresses this gap by replacing next-state losses with a long-horizon, discriminative predictive objective drawn from Contrastive Predictive Coding. CPC supplies the InfoNCE framework for predicting future latents, and CPC|A shows how to condition contrastive prediction on actions\u2014a crucial ingredient for control. Complementing this, SPR empirically established that multi-step predictive objectives yield stronger control representations. Synthesizing these threads, TWISTER couples a Transformer world model with action-conditioned, multi-step CPC to better exploit long-range dependencies, thereby improving performance over RNN-based DreamerV3 while retaining the Dreamer training and planning paradigm.",
+  "analysis_timestamp": "2026-01-06T23:09:26.604265"
+}

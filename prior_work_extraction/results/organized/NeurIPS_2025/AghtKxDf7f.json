@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Jonathan Ho, Ajay Jain, Pieter Abbeel",
+      "year": 2020,
+      "role": "Backbone generative modeling method",
+      "relationship_sentence": "STITCH-OPE builds directly on DDPM\u2019s denoising machinery to model high-dimensional, long-horizon trajectory distributions from behavior data and to sample synthetic rollouts via iterative denoising."
+    },
+    {
+      "title": "Score-Based Generative Modeling through Stochastic Differential Equations",
+      "authors": "Yang Song, Jascha Sohl-Dickstein, Diederik P. Kingma, Abhishek Kumar, Stefano Ermon, Ben Poole",
+      "year": 2021,
+      "role": "Score-based view enabling gradient guidance during sampling",
+      "relationship_sentence": "By framing generation as integrating a score field, this work underpins STITCH-OPE\u2019s use of policy score terms to steer the denoising dynamics toward trajectories consistent with the target policy."
+    },
+    {
+      "title": "Diffusion Models Beat GANs on Image Synthesis",
+      "authors": "Prafulla Dhariwal, Alex Nichol",
+      "year": 2021,
+      "role": "Classifier-guided diffusion sampling",
+      "relationship_sentence": "STITCH-OPE adapts classifier guidance\u2014adding gradients of a conditioning log-likelihood during denoising\u2014by replacing the classifier gradient with the target policy\u2019s score to guide trajectory generation."
+    },
+    {
+      "title": "Classifier-Free Diffusion Guidance",
+      "authors": "Jonathan Ho, Tim Salimans",
+      "year": 2022,
+      "role": "Guidance via subtracting an unconditional score to control over-regularization",
+      "relationship_sentence": "Analogous to subtracting the unconditional score in classifier-free guidance, STITCH-OPE subtracts the behavior policy\u2019s score during guidance to prevent over-regularization and collapse back to the behavior distribution."
+    },
+    {
+      "title": "Diffuser: Diffusion Models for Planning, Control, and Reinforcement Learning",
+      "authors": "Michael Janner, Yilun Du, Joshua B. Tenenbaum, Sergey Levine",
+      "year": 2022,
+      "role": "Trajectory-level diffusion for sequential decision making",
+      "relationship_sentence": "Diffuser demonstrated that diffusion models can generate coherent trajectories and be guided/conditioned for control; STITCH-OPE extends this paradigm to OPE by guiding with a target policy score to synthesize target-policy rollouts from behavior data."
+    },
+    {
+      "title": "DualDICE: Behavior-Agnostic Estimation of Discounted Stationary Distribution Corrections",
+      "authors": "Ofir Nachum, Yinlam Chow, Bo Dai, Lihong Li",
+      "year": 2019,
+      "role": "Distribution correction for off-policy evaluation without per-decision IS",
+      "relationship_sentence": "STITCH-OPE\u2019s score-difference guidance (target minus behavior) echoes DualDICE\u2019s principle of correcting the behavior distribution toward the target, but performs this correction during generative sampling to avoid IS variance and model compounding."
+    },
+    {
+      "title": "Offline Reinforcement Learning with Implicit Q-Learning",
+      "authors": "Ilya Kostrikov, Ashvin Nair, Sergey Levine",
+      "year": 2022,
+      "role": "Trajectory stitching concept in offline learning",
+      "relationship_sentence": "IQL popularized stitching good segments of behavior trajectories via value-based objectives; STITCH-OPE operationalizes a related stitching idea generatively by guiding diffusion with policy scores to compose plausible target-policy trajectories."
+    }
+  ],
+  "synthesis_narrative": "STITCH-OPE\u2019s core innovation\u2014synthesizing long-horizon, high-dimensional target-policy trajectories from behavior data via guided diffusion\u2014emerges at the intersection of trajectory diffusion, guidance mechanisms, and distribution correction for OPE. The denoising diffusion foundation of Ho et al. provides the scalable generative backbone for modeling complex trajectory distributions, while the score-based SDE view from Song et al. formalizes how external gradients can be injected into the generative dynamics. Dhariwal and Nichol\u2019s classifier guidance directly informs STITCH-OPE\u2019s replacement of classifier gradients with target-policy scores, transforming conditional image guidance into policy-conditioned trajectory synthesis. Ho and Salimans\u2019 classifier-free guidance motivates subtracting a neutral score to avoid over-regularization; STITCH-OPE analogously subtracts the behavior-policy score, stabilizing guidance strength and preventing collapse back to the behavior distribution.\nDiffuser demonstrates that diffusion can operate over trajectories and be guided for control, which STITCH-OPE repurposes for evaluation: rather than conditioning on rewards or goals, it uses the target policy\u2019s score to generate rollouts reflective of the target distribution. Finally, OPE-specific insights from DualDICE inform the need for distribution shift from behavior to target without high-variance importance sampling; STITCH-OPE achieves a principled, low-variance correction by performing this shift in score space during generation. The stitching perspective, popularized in IQL, influences STITCH-OPE\u2019s emphasis on composing plausible segments into full trajectories, now realized through policy-guided generative sampling tailored to OPE.",
+  "analysis_timestamp": "2026-01-07T00:21:32.336459"
+}

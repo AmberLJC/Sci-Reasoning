@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP",
+      "authors": "Patrick Lewis et al.",
+      "year": 2020,
+      "role": "Foundation",
+      "relationship_sentence": "RAP directly instantiates the retrieve-then-generate paradigm of RAG in the visual domain by replacing text passages with image crops to overcome high-resolution perception limits."
+    },
+    {
+      "title": "Self-RAG: Learning to Retrieve, Generate, and Critique for Language Models",
+      "authors": "Akari Asai et al.",
+      "year": 2023,
+      "role": "Inspiration",
+      "relationship_sentence": "RAP\u2019s Retrieved-Exploration Search mirrors Self-RAG\u2019s confidence-aware retrieval policy by adaptively deciding how much evidence to retrieve based on model confidence and retrieval scores."
+    },
+    {
+      "title": "Leveraging Passage Retrieval with Generative Models for Open-Domain Question Answering (FiD)",
+      "authors": "Gautier Izacard et al.",
+      "year": 2020,
+      "role": "Extension",
+      "relationship_sentence": "RAP extends FiD\u2019s core idea of fusing multiple retrieved evidences by fusing multiple retrieved image crops into a single context via a Spatial-Awareness Layout rather than textual concatenation."
+    },
+    {
+      "title": "LLaVA-1.5: Improved Visual Instruction Tuning",
+      "authors": "Haotian Liu et al.",
+      "year": 2023,
+      "role": "Baseline",
+      "relationship_sentence": "RAP is a training-free wrapper around LLaVA-1.5-13B and demonstrates large HR gains over this primary baseline, showing that retrieval-driven cropping overcomes its single-view resolution bottleneck."
+    },
+    {
+      "title": "LLaVA-NeXT: Better Reasoning, Broader Knowledge, and Any-Resolution Images",
+      "authors": "Haotian Liu et al.",
+      "year": 2024,
+      "role": "Gap Identification",
+      "relationship_sentence": "LLaVA-NeXT\u2019s heuristic any-resolution tiling/mosaic packing highlights the limitations of fixed, non-adaptive cropping; RAP replaces these heuristics with retrieval-based crop selection and spatially coherent fusion."
+    },
+    {
+      "title": "Qwen-VL: A Versatile Vision-Language Model for Understanding, Localization, Text Reading, and Beyond",
+      "authors": "Jinze Bai et al.",
+      "year": 2023,
+      "role": "Gap Identification",
+      "relationship_sentence": "Qwen-VL\u2019s high-resolution handling relies on fixed tiling and resizing heuristics, whose inefficiencies and context loss motivate RAP\u2019s retrieval-guided crop selection with dynamic crop count."
+    },
+    {
+      "title": "LayoutLMv3: Pre-training for Document AI with Unified Text and Image Masking",
+      "authors": "Yiheng Xu et al.",
+      "year": 2022,
+      "role": "Related Problem",
+      "relationship_sentence": "LayoutLMv3 evidences the importance of preserving 2D spatial layout for visual-language understanding, a principle RAP transfers to HR natural images via its Spatial-Awareness Layout for crop fusion."
+    }
+  ],
+  "synthesis_narrative": "RAP reframes high-resolution visual understanding as a retrieval-augmented problem, drawing its central blueprint from RAG (Lewis et al., 2020): rather than forcing a model to process a whole HR image at once, it retrieves the most relevant evidence and reasons over it. This retrieve-then-fuse design directly extends FiD\u2019s multi-evidence fusion to the visual domain by replacing textual passages with image crops and introducing a Spatial-Awareness Layout to maintain 2D context during fusion. The adaptive retrieval controller in RAP (RE-Search) is inspired by Self-RAG\u2019s confidence-aware retrieval scheduling, using model confidence and retrieval scores to decide how many crops are necessary, avoiding both under- and over-retrieval. \n\nEmpirically, RAP targets the precise shortcomings of widely used HR heuristics in state-of-the-art MLLMs. While LLaVA-1.5 serves as the main baseline, subsequent any-resolution pipelines such as LLaVA-NeXT and Qwen-VL rely on fixed tiling or mosaic packing that can waste budget on irrelevant regions and blur spatial relationships. RAP replaces these heuristics with targeted, retrieval-driven crop selection and a layout that preserves spatial structure, a principle long validated in document understanding by works like LayoutLMv3. By unifying retrieval planning with spatially coherent fusion, RAP brings the benefits of RAG-style evidence selection to HR image perception and achieves large gains without additional training.",
+  "analysis_timestamp": "2026-01-06T23:07:19.622230"
+}

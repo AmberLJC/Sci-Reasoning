@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Attention Is All You Need",
+      "authors": "Vaswani et al.",
+      "year": 2017,
+      "role": "Foundation",
+      "relationship_sentence": "DiJiang starts from pre-trained vanilla Transformers and explicitly targets converting this standard self-attention architecture into a linear-complexity form with minimal retraining."
+    },
+    {
+      "title": "Transformers are RNNs: Fast Autoregressive Transformers with Linear Attention",
+      "authors": "Katharopoulos et al.",
+      "year": 2020,
+      "role": "Foundation",
+      "relationship_sentence": "DiJiang adopts the kernel-feature reformulation of attention introduced here to achieve O(n) complexity and then improves the feature approximation and implementation via QMC sampling and DCT."
+    },
+    {
+      "title": "Rethinking Attention with Performers (Fast Attention via Positive Orthogonal Random Features)",
+      "authors": "Choromanski et al.",
+      "year": 2021,
+      "role": "Baseline",
+      "relationship_sentence": "Performer\u2019s FAVOR+ random-feature approximation of softmax is the primary linear-attention baseline that DiJiang directly improves upon by replacing Monte Carlo random features with weighted Quasi-Monte Carlo and using DCT-based computation."
+    },
+    {
+      "title": "Random Features for Large-Scale Kernel Machines",
+      "authors": "Rahimi et al.",
+      "year": 2007,
+      "role": "Foundation",
+      "relationship_sentence": "DiJiang\u2019s kernelization of attention is rooted in the random-feature paradigm of approximating kernels via sampled feature maps introduced by Rahimi and Recht."
+    },
+    {
+      "title": "Quasi-Monte Carlo Feature Maps for Shift-Invariant Kernels",
+      "authors": "Yang et al.",
+      "year": 2014,
+      "role": "Extension",
+      "relationship_sentence": "Building on the idea that QMC yields lower-variance kernel feature maps than plain Monte Carlo, DiJiang extends this line by designing weighted QMC sampling tailored to softmax-kernelization for attention."
+    },
+    {
+      "title": "Fastfood: Approximating Kernel Expansions in Loglinear Time",
+      "authors": "Le et al.",
+      "year": 2013,
+      "role": "Related Problem",
+      "relationship_sentence": "Fastfood\u2019s use of fast orthogonal transforms to accelerate kernel feature computations directly informs DiJiang\u2019s choice to realize kernelization with efficient frequency-domain operations, here instantiated with DCT."
+    },
+    {
+      "title": "FNet: Mixing Tokens with Fourier Transforms",
+      "authors": "Lee-Thorp et al.",
+      "year": 2021,
+      "role": "Inspiration",
+      "relationship_sentence": "FNet demonstrated that frequency-domain transforms can replace or approximate attention while retaining accuracy, motivating DiJiang\u2019s frequency-domain (DCT) realization of attention kernelization for low training cost."
+    }
+  ],
+  "synthesis_narrative": "DiJiang\u2019s core innovation\u2014turning a pre-trained vanilla Transformer into a linear-complexity model via frequency-domain kernelization\u2014stands on two intertwined foundations: kernel-based linear attention and variance-reduced kernel feature approximation. The problem setting and target architecture derive from the original Transformer, while the linearization mechanism follows the kernel-feature reformulation of attention introduced by Katharopoulos et al. and advanced by Performer\u2019s FAVOR+, which approximates softmax with nonnegative random features. However, Performer\u2019s reliance on standard Monte Carlo sampling leaves variance and sample-efficiency limitations that can require substantial retraining to match accuracy.\n\nTo address this, DiJiang draws directly from the random-features lineage inaugurated by Rahimi and Recht and specifically extends Yang et al.\u2019s Quasi-Monte Carlo feature maps: it introduces weighted QMC sampling tailored to attention\u2019s kernel, improving approximation efficiency over plain Monte Carlo and orthogonal-feature variants. Complementing the sampling advance, DiJiang realizes the kernelization with fast frequency-domain primitives, inspired by Fastfood\u2019s insight that structured orthogonal transforms accelerate kernel features and by FNet\u2019s evidence that frequency-domain operators can replace attention while preserving quality. Concretely, DiJiang employs DCT-based operations to reduce compute and enable a post-hoc conversion of pre-trained Transformers, thus avoiding large-scale retraining. Together, these threads\u2014linear attention via kernel features, QMC-driven variance reduction, and efficient frequency-domain transforms\u2014directly shape DiJiang\u2019s frequency-domain kernelization with weighted QMC and DCT, yielding linear-complexity inference with minimal fine-tuning.",
+  "analysis_timestamp": "2026-01-06T23:09:26.502874"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "TabNet: Attentive Interpretable Tabular Learning",
+      "authors": "Arik et al.",
+      "year": 2021,
+      "role": "Extension",
+      "relationship_sentence": "InterpreTabNet directly modifies TabNet\u2019s sequential attentive feature-masking by replacing its deterministic/sparse masks with latent Gumbel-Softmax masks to remedy TabNet\u2019s tendency toward dense, overlapping selections."
+    },
+    {
+      "title": "Categorical Reparameterization with Gumbel-Softmax",
+      "authors": "Jang et al.",
+      "year": 2017,
+      "role": "Foundation",
+      "relationship_sentence": "InterpreTabNet relies on the Gumbel-Softmax reparameterization to sample attention masks as differentiable categorical latent variables, enabling end-to-end training of discrete feature selection."
+    },
+    {
+      "title": "The Concrete Distribution: A Continuous Relaxation of Discrete Random Variables",
+      "authors": "Maddison et al.",
+      "year": 2017,
+      "role": "Foundation",
+      "relationship_sentence": "The Concrete distribution underpins InterpreTabNet\u2019s continuous relaxation of binary/categorical attention masks, making stochastic, sparse feature selection differentiable."
+    },
+    {
+      "title": "Learning Sparse Neural Networks through L0 Regularization",
+      "authors": "Louizos et al.",
+      "year": 2018,
+      "role": "Inspiration",
+      "relationship_sentence": "InterpreTabNet adopts the hard-concrete/stochastic gating perspective from L0-regularized networks to drive sparsity in feature selection, but applies it to attention masks within TabNet."
+    },
+    {
+      "title": "Feature Selection Using Stochastic Gates",
+      "authors": "Yamada et al.",
+      "year": 2020,
+      "role": "Extension",
+      "relationship_sentence": "Building on STG\u2019s idea of per-feature stochastic gates with distributional regularization, InterpreTabNet extends this mechanism to TabNet\u2019s attention masks and regularizes their distributions to curtail overlap across decision steps."
+    },
+    {
+      "title": "Concrete Autoencoders: Differentiable Feature Selection and Reconstruction",
+      "authors": "Abid et al.",
+      "year": 2019,
+      "role": "Inspiration",
+      "relationship_sentence": "InterpreTabNet draws on Concrete Autoencoders\u2019 use of Concrete/Gumbel gates for discrete feature selection in tabular data, adapting the same relaxation to mask features within an attentive predictor."
+    },
+    {
+      "title": "beta-VAE: Learning Basic Visual Concepts with a Constrained Variational Framework",
+      "authors": "Higgins et al.",
+      "year": 2017,
+      "role": "Inspiration",
+      "relationship_sentence": "InterpreTabNet\u2019s KL-divergence regularizer on attention latents is motivated by beta-VAE-style latent regularization to encourage disentangled, non-overlapping \u2018concepts\u2019 across attention steps."
+    }
+  ],
+  "synthesis_narrative": "InterpreTabNet is a targeted rethinking of TabNet\u2019s attentive feature selection aimed at making the masks sparser and more conceptually distinct. The core change is to treat each attention mask as a latent discrete variable and train it end-to-end via the Gumbel-Softmax/Concrete relaxation (Jang et al.; Maddison et al.), directly extending TabNet\u2019s architecture (Arik et al.). This shift enables principled stochastic gating of features inside the attention mechanism rather than relying on deterministic sparse activations that can still produce dense, overlapping masks. The move toward stochastic gates is inspired by the L0-regularization framework (Louizos et al.), STG\u2019s distributionally regularized per-feature gates (Yamada et al.), and Concrete Autoencoders\u2019 differentiable feature subset selection for tabular data (Abid et al.), all of which demonstrate that Concrete/Gumbel-style relaxations can enforce sparsity while remaining trainable by gradient methods. InterpreTabNet then introduces a KL-divergence regularizer on the attention latents\u2014motivated by the disentanglement literature in variational models, particularly beta-VAE (Higgins et al.)\u2014to reduce redundancy across decision steps and promote distinct, interpretable \u2018concepts\u2019 in the masks. Together, these strands directly produce InterpreTabNet\u2019s core innovation: a TabNet variant with stochastic, KL-regularized attention masks that prevent overlapping feature selection and yield clearer, sparser rationales without sacrificing predictive performance.",
+  "analysis_timestamp": "2026-01-06T23:09:26.461652"
+}

@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Learning to Branch in Mixed Integer Programming with Graph Convolutional Neural Networks",
+      "authors": "Maxime Gasse, Didier Ch\u00e9telat, Nicola Ferroni, Laurent Charlin, Andrea Lodi",
+      "year": 2019,
+      "role": "MILP-as-graph representation and GNN encoding",
+      "relationship_sentence": "G2MILP adopts the bipartite MILP representation (variables\u2013constraints with coefficient edges) popularized by Gasse et al., using it as the foundational graph structure on which its generative model operates."
+    },
+    {
+      "title": "GraphVAE: Towards Generation of Small Graphs Using Variational Autoencoders",
+      "authors": "Martin Simonovsky, Nikos Komodakis",
+      "year": 2018,
+      "role": "VAE framework for discrete graph generation",
+      "relationship_sentence": "G2MILP builds on the idea that VAEs can model discrete graph structures, extending the VAE paradigm to bipartite MILP graphs with validity-aware decoding."
+    },
+    {
+      "title": "Variational Graph Auto-Encoders",
+      "authors": "Thomas N. Kipf, Max Welling",
+      "year": 2016,
+      "role": "Foundational variational inference on graphs",
+      "relationship_sentence": "The variational treatment of graphs in VGAE underpins G2MILP\u2019s masked variational autoencoder, informing the encoder\u2013decoder design and latent-variable training objective."
+    },
+    {
+      "title": "GraphRNN: Generating Realistic Graphs with Deep Auto-regressive Models",
+      "authors": "Jiaxuan You, Rex Ying, Xiang Ren, William L. Hamilton, Jure Leskovec",
+      "year": 2018,
+      "role": "Strong baseline for realistic graph generation",
+      "relationship_sentence": "GraphRNN established principles for capturing graph statistics and dependencies; G2MILP contrasts its masked, non-autoregressive generation with such autoregressive baselines for discrete graphs."
+    },
+    {
+      "title": "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding",
+      "authors": "Jacob Devlin, Ming-Wei Chang, Kenton Lee, Kristina Toutanova",
+      "year": 2019,
+      "role": "Masked corruption-and-reconstruction objective",
+      "relationship_sentence": "G2MILP\u2019s iterative corrupt-and-replace strategy is conceptually aligned with BERT\u2019s masked modeling, repurposed from tokens to substructures of MILP graphs for parallel, refinement-style generation."
+    },
+    {
+      "title": "Masked Autoencoders Are Scalable Vision Learners",
+      "authors": "Kaiming He, Xinlei Chen, Saining Xie, Yanghao Li, Piotr Doll\u00e1r, Ross Girshick",
+      "year": 2022,
+      "role": "High-ratio masking and reconstruction for representation learning",
+      "relationship_sentence": "The effectiveness of high masking ratios and reconstruction in MAE motivates G2MILP\u2019s masked autoencoding on graphs, enabling learning from limited data by predicting masked components."
+    }
+  ],
+  "synthesis_narrative": "G2MILP\u2019s core innovation\u2014learning to generate realistic MILP instances from limited data via a masked variational autoencoder on bipartite graphs\u2014stands at the intersection of MILP-specific graph modeling and modern masked generative learning. The bipartite encoding of MILPs introduced by Gasse et al. provides the precise structural substrate: variables and constraints as node types with coefficients as edges. This representation has become the de facto interface for applying GNNs in MILP and enables G2MILP to manipulate and reconstruct semantically meaningful subgraphs.\n\nOn the generative side, variational approaches for graphs (VGAE) and their instantiation for discrete graph generation (GraphVAE) demonstrate that latent-variable models can capture global graph distributions while decoding valid discrete structures. These works directly motivate G2MILP\u2019s choice of a VAE-style latent space and graph-aware decoders rather than purely autoregressive sequence models. While GraphRNN established strong baselines for modeling complex graph dependencies, G2MILP departs from its sequential generation by adopting a masked, parallel refinement procedure.\n\nFinally, the learning and sampling mechanics of G2MILP are inspired by masked modeling paradigms: BERT\u2019s corrupt-and-reconstruct objective and MAE\u2019s high-ratio masking show that masking can yield robust representation learning under data scarcity and support iterative fill-in strategies. By transferring these ideas from text and vision to MILP bipartite graphs, G2MILP leverages masked denoising to iteratively replace subgraphs, yielding diverse, valid, and solver-relevant MILP instances without hand-crafted generators.",
+  "analysis_timestamp": "2026-01-06T23:42:48.023719"
+}

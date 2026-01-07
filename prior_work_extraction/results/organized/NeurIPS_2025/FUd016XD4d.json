@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "A Reduction of Imitation Learning and Structured Prediction to No-Regret Online Learning (DAgger)",
+      "authors": "St\u00e9phane Ross, Geoffrey J. Gordon, J. Andrew Bagnell",
+      "year": 2011,
+      "role": "Foundational problem framing and baseline mitigation for covariate shift in behavior cloning",
+      "relationship_sentence": "LPB explicitly targets the covariate shift that DAgger addresses with human-in-the-loop aggregation, proposing an alternative that enforces in-distribution behavior at inference without continual expert relabeling."
+    },
+    {
+      "title": "Control Barrier Function based Quadratic Programs for Safety Critical Systems",
+      "authors": "Aaron D. Ames, Xiangru Xu, Jessy W. Grizzle, Paulo Tabuada",
+      "year": 2017,
+      "role": "Theoretical inspiration for barrier-based safety with minimally invasive action corrections",
+      "relationship_sentence": "LPB translates the CBF idea of a constraint-defined safe set into a learned latent-space barrier over expert embeddings, applying small, targeted corrections to keep the policy within the safe manifold."
+    },
+    {
+      "title": "A Predictive Safety Filter for Learning-Based Control of Constrained Nonlinear Systems",
+      "authors": "Dominik Baumann Wabersich, Melanie N. Zeilinger",
+      "year": 2021,
+      "role": "Methodological template for runtime safety filtering using learned/predicted dynamics",
+      "relationship_sentence": "LPB\u2019s dynamics-driven inference-time adjustment plays the role of a safety filter, using a learned model to minimally alter actions so trajectories remain within the in-distribution latent region."
+    },
+    {
+      "title": "Recovery RL: Safe Reinforcement Learning with Learned Recovery Zones",
+      "authors": "Ashish Thananjeyan, Abhishek Gupta, Sehoon Ha, et al.",
+      "year": 2021,
+      "role": "Architectural precedent for decoupling task performance from recovery near unsafe states",
+      "relationship_sentence": "LPB similarly decouples expert imitation from OOD recovery, training a separate module on off-expert rollouts to steer the system back toward the safe latent set when deviations occur."
+    },
+    {
+      "title": "Batch-Constrained deep Q-learning (BCQ)",
+      "authors": "Scott Fujimoto, David Meger, Doina Precup",
+      "year": 2019,
+      "role": "Behavior-regularized offline RL principle to stay within dataset support",
+      "relationship_sentence": "LPB extends the \u201cstay in-support\u201d principle from offline RL by enforcing an implicit barrier around expert data in latent space, preventing OOD actions/states during visuomotor execution."
+    },
+    {
+      "title": "Diffusion Policy: Visuomotor Policy Learning via Action Diffusion",
+      "authors": "Cheng Chi, Yilun Du, Zhenjia Xu, Shuran Song, et al.",
+      "year": 2023,
+      "role": "Direct algorithmic backbone for the base visuomotor imitation module",
+      "relationship_sentence": "LPB builds on a diffusion-based imitation policy trained purely on expert data, delegating robustness and OOD handling to a separate dynamics-guided barrier mechanism."
+    },
+    {
+      "title": "Diffuser: Diffusion Models for Sequential Decision Making",
+      "authors": "Michael Janner, Yilun Hao, Sergey Levine",
+      "year": 2022,
+      "role": "Inference-time guidance of diffusion samplers using auxiliary objectives/dynamics",
+      "relationship_sentence": "LPB leverages a related idea of guiding a diffusion sampler at inference with gradients from a learned model, but repurposes it to enforce a latent safety barrier rather than optimize reward."
+    }
+  ],
+  "synthesis_narrative": "Latent Policy Barrier (LPB) reframes robustness in visuomotor imitation as an in-distribution control problem. The paper\u2019s core idea\u2014treating expert latent embeddings as a safety set and using a learned dynamics model to minimally correct actions at inference\u2014draws theoretical grounding from Control Barrier Functions (Ames et al., 2017), which formalize safe sets and minimal interventions. Practically, LPB adopts the runtime safety-filter paradigm (Wabersich & Zeilinger, 2021), replacing hard-coded constraints with a learned latent barrier and using a predictive model to certify and adjust actions on-the-fly. Its architectural decoupling of precise imitation and recovery echoes Recovery RL (Thananjeyan et al., 2021), which separates task execution from near-boundary correction using a dedicated recovery mechanism trained on off-nominal experience.\nAt the policy level, LPB stands on the diffusion-based visuomotor backbone introduced by Diffusion Policy (Chi et al., 2023), ensuring high-fidelity imitation on expert data. To keep sampling constrained, LPB extends the behavior-regularization ethos of offline RL\u2014exemplified by BCQ (Fujimoto et al., 2019)\u2014from action-space support constraints to a latent-state barrier around expert trajectories. Finally, its inference-time guidance of a generative policy by a learned model parallels Diffuser (Janner et al., 2022), but channels this mechanism toward staying in-distribution rather than reward improvement. Together, these strands replace human-in-the-loop aggregation (DAgger) with a principled, learned safety barrier in latent space, yielding robust visuomotor control that preserves expert-like behavior while recovering from OOD deviations.",
+  "analysis_timestamp": "2026-01-07T00:21:32.269524"
+}

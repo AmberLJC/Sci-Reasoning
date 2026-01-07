@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+      "authors": "Lili Chen; Kevin Lu; Aravind Srinivas; Trevor Darrell; Pieter Abbeel",
+      "year": 2021,
+      "role": "Foundational architecture for return-conditioned sequence modeling",
+      "relationship_sentence": "Provides the core paradigm (RTG-conditioned autoregressive policies) that the paper fine-tunes online; the identified RTG\u2013expected-return mismatch arises directly from this formulation."
+    },
+    {
+      "title": "Twin Delayed Deep Deterministic Policy Gradient (TD3)",
+      "authors": "Scott Fujimoto; Herke van Hoof; David Meger",
+      "year": 2018,
+      "role": "Practical deterministic actor-critic with low-variance policy gradients",
+      "relationship_sentence": "Supplies the specific, stable critic-driven policy gradients that the paper injects into Decision Transformer finetuning as the proposed \"vitamin.\""
+    },
+    {
+      "title": "Deterministic Policy Gradient Algorithms",
+      "authors": "David Silver; Guy Lever; Nicolas Heess; Thomas Degris; Daan Wierstra; Martin Riedmiller",
+      "year": 2014,
+      "role": "Theoretical basis for actor updates via Q-function gradients",
+      "relationship_sentence": "Justifies updating a parameterized policy using \u2207aQ(s,a), underpinning the paper\u2019s use of critic gradients to correct RTG-conditioned sequence policies during online finetuning."
+    },
+    {
+      "title": "Advantage-Weighted Actor-Critic (AWAC): Accelerating Online Reinforcement Learning with Offline Datasets",
+      "authors": "Ashvin Nair; Aviral Kumar; Ofir Nachum; George Tucker; Sergey Levine",
+      "year": 2020,
+      "role": "Evidence that advantage/value guidance corrects behavior-cloning bias",
+      "relationship_sentence": "Demonstrates how advantage-weighted updates leverage learned value estimates to improve policies from suboptimal data, motivating the paper\u2019s move from raw RTG targets to value/advantage-informed gradients."
+    },
+    {
+      "title": "Conservative Q-Learning for Offline Reinforcement Learning",
+      "authors": "Aviral Kumar; Aurick Zhou; George Tucker; Sergey Levine",
+      "year": 2020,
+      "role": "Value-learning approach robust to suboptimal and distribution-shifted data",
+      "relationship_sentence": "Supports the paper\u2019s claim that learned value functions offer reliable anchors when data are low-reward, contrasting with potentially mis-specified RTG conditioning."
+    },
+    {
+      "title": "Offline Reinforcement Learning with Implicit Q-Learning",
+      "authors": "Ilya Kostrikov; Ashvin Nair; Sergey Levine",
+      "year": 2021,
+      "role": "Policy improvement via values/advantages without on-policy rollouts",
+      "relationship_sentence": "Further evidences that advantage/value-based targets can outperform return-conditioned supervision on imperfect datasets, aligning with the paper\u2019s rationale for adding RL gradients to Decision Transformer finetuning."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core idea\u2014augmenting online finetuning of Decision Transformers with RL gradients\u2014sits at the intersection of return-conditioned sequence modeling and advantage/value-driven policy improvement. Decision Transformer established the return-to-go (RTG) conditioning paradigm, but this supervisory target can drift from the true expected return during online finetuning, especially with low-reward pretraining data. Deterministic Policy Gradient theory formalized how actor updates can directly follow the gradient of a learned Q-function, and TD3 translated this into a stable, practical algorithm with twin critics and delayed updates. Together, they provide the exact gradient signal the paper leverages as a \"vitamin\" to correct RTG mis-specification.\nConcurrently, offline-to-online methods like AWAC, CQL, and IQL showed that value and advantage estimates are robust anchors when data are suboptimal or distribution-shifted, outperforming pure behavior cloning on raw returns. AWAC\u2019s advantage-weighted updates exemplify how learned value baselines rectify biases from na\u00efve supervision, while CQL and IQL emphasize conservative or implicit value learning to avoid overestimation and exploit imperfect datasets. These insights directly motivate replacing or supplementing RTG-conditioned training with critic-driven policy improvement during finetuning.\nBy unifying DT\u2019s sequence modeling with TD3\u2019s deterministic actor-critic gradients\u2014grounded in DPG theory and supported by advantage/value-centric offline RL results\u2014the paper explains and demonstrates why injecting RL gradients reliably improves online finetuning, particularly when pretraining used low-reward trajectories.",
+  "analysis_timestamp": "2026-01-06T23:42:49.043374"
+}

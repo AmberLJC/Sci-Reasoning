@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Long Short-Term Memory",
+      "authors": "Sepp Hochreiter; J\u00fcrgen Schmidhuber",
+      "year": 1997,
+      "role": "Foundational architecture",
+      "relationship_sentence": "xLSTM explicitly extends the LSTM\u2019s constant error carousel and gating paradigm by reparameterizing the gates (exponential gating with normalization) and redesigning the memory structure while retaining the core LSTM recurrence."
+    },
+    {
+      "title": "Learning to Forget: Continual Prediction with LSTM",
+      "authors": "Felix A. Gers; J\u00fcrgen Schmidhuber; Fred Cummins",
+      "year": 2000,
+      "role": "Gate design and stability",
+      "relationship_sentence": "The introduction of the forget gate and refined LSTM gating dynamics directly informs xLSTM\u2019s motivation to replace standard sigmoid gating with stabilized exponential/normalized gates to mitigate saturation and improve long-horizon credit assignment."
+    },
+    {
+      "title": "Using Fast Weights to Attend to the Recent Past",
+      "authors": "Jimmy Ba; Geoffrey Hinton; et al.",
+      "year": 2016,
+      "role": "Matrix memory with outer\u2011product updates",
+      "relationship_sentence": "xLSTM\u2019s mLSTM introduces a matrix memory with a covariance/outer\u2011product style update and decay, directly echoing fast\u2011weight memories\u2019 exponential moving average of outer products while integrating this mechanism into an LSTM cell."
+    },
+    {
+      "title": "Neural Turing Machines",
+      "authors": "Alex Graves; Greg Wayne; Ivo Danihelka",
+      "year": 2014,
+      "role": "Differentiable memory architectures",
+      "relationship_sentence": "The idea of an internal, differentiable memory matrix with learnable read/write inspired xLSTM\u2019s shift from purely vector memory to matrix memory in mLSTM, but with a lightweight, recurrently updated form compatible with LSTM dynamics."
+    },
+    {
+      "title": "Quasi-Recurrent Neural Networks",
+      "authors": "James Bradbury; Stephen Merity; Caiming Xiong; Richard Socher",
+      "year": 2017,
+      "role": "Parallelizable recurrent computation",
+      "relationship_sentence": "QRNN demonstrated that appropriate gating/recurrence restructuring permits efficient time-parallel computation, a principle xLSTM leverages in mLSTM to achieve full parallelizability via associative updates and scans."
+    },
+    {
+      "title": "Retentive Network: A Successor to Transformer",
+      "authors": "Sun et al.",
+      "year": 2023,
+      "role": "Exponential retention with normalization and parallel scan",
+      "relationship_sentence": "RetNet\u2019s normalized exponential retention informed xLSTM\u2019s exponential gating with proper normalization/stabilization, enabling stable long-context behavior and compatibility with parallel scan algorithms."
+    },
+    {
+      "title": "Mamba: Linear-Time Sequence Modeling with Selective State Spaces",
+      "authors": "Albert Gu; Tri Dao",
+      "year": 2023,
+      "role": "Scalable recurrent alternatives to Transformers",
+      "relationship_sentence": "Mamba\u2019s demonstration that carefully stabilized, parallelizable recurrent/state-space models can compete with Transformers at scale motivates xLSTM\u2019s design and scaling recipe for billion-parameter LSTM-like LMs."
+    }
+  ],
+  "synthesis_narrative": "xLSTM\u2019s core contribution\u2014replacing standard LSTM gating with exponential, normalized gates and re-architecting the memory from a vector to both scalar (sLSTM) and matrix (mLSTM) forms while enabling full parallelization\u2014stands on three intertwined lines of prior work. First, the LSTM lineage (Hochreiter & Schmidhuber, and Gers et al.) established the constant error carousel and forget gating as the essential mechanism for long-range credit assignment; xLSTM keeps this backbone but revisits the gate parameterization to address saturation and stability. Second, a thread of memory-augmented models (Neural Turing Machines) and, more directly, fast-weight methods (Ba et al.) showed that outer-product, exponentially decayed matrix memories provide rich, short-term associative capacity; xLSTM\u2019s mLSTM internalizes this idea with a covariance-style update that remains lightweight and trainable within an LSTM cell. Third, modern efforts to make recurrence competitive at scale\u2014via time-parallelizable recurrences (QRNN) and normalized exponential retention with scan-friendly updates (RetNet)\u2014demonstrated how to reconcile recurrence with GPU efficiency; xLSTM adopts analogous normalization and relies on associative updates to parallelize mLSTM. Finally, the recent success of scalable recurrent/state-space models such as Mamba provided the blueprint and motivation to revisit LSTMs with contemporary stabilization and scaling techniques. Together, these works directly shaped xLSTM\u2019s exponential gating, matrix-memory update rule, and fully parallelizable design that targets LLM-scale language modeling.",
+  "analysis_timestamp": "2026-01-06T23:33:35.554100"
+}

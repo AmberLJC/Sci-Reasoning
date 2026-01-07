@@ -1,0 +1,84 @@
+{
+  "prior_works": [
+    {
+      "title": "LLaVA: Large Language and Vision Assistant",
+      "authors": [
+        "Haotian Liu",
+        "Chunyuan Li",
+        "Qingyang Wu",
+        "Yong Jae Lee"
+      ],
+      "year": 2023,
+      "role": "Baseline MLLM with a single linear vision-to-LLM projector and instruction tuning",
+      "relationship_sentence": "ChartMoE explicitly replaces LLaVA-style single linear connectors with a Mixture-of-Experts connector, addressing the modality gap and stability limitations observed in projector-based MLLMs like LLaVA."
+    },
+    {
+      "title": "MiniGPT-4: Enhancing Vision-Language Understanding with Advanced Large Language Models",
+      "authors": [
+        "Deyao Zhu",
+        "Jun Chen",
+        "et al."
+      ],
+      "year": 2023,
+      "role": "Projector-based VLM demonstrating instruction tuning and domain adaptation on top of a frozen LLM",
+      "relationship_sentence": "The reliance of MiniGPT-4 on a single linear mapping motivated ChartMoE\u2019s move to multiple task-specialized connector experts and expert routing for more faithful chart understanding."
+    },
+    {
+      "title": "BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models",
+      "authors": [
+        "Junnan Li",
+        "Dongxu Li",
+        "Silvio Savarese",
+        "Steven C. H. Hoi"
+      ],
+      "year": 2023,
+      "role": "Cross-modal alignment via lightweight connectors (Q-Former + projection) between frozen vision encoders and LLMs",
+      "relationship_sentence": "BLIP-2 established the centrality of the cross-modal connector; ChartMoE builds on this by diversifying the connector into multiple experts initialized from distinct alignment tasks (chart\u2192table/JSON/code)."
+    },
+    {
+      "title": "Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity",
+      "authors": [
+        "William Fedus",
+        "Barret Zoph",
+        "Noam Shazeer"
+      ],
+      "year": 2021,
+      "role": "Foundational Mixture-of-Experts architecture with sparse routing",
+      "relationship_sentence": "ChartMoE adopts the MoE principle of routing inputs to specialized experts, applying it at the vision\u2013language connector level to select among diversely aligned chart experts."
+    },
+    {
+      "title": "ViT-MoE: Scaling Vision with Sparse Mixture of Experts",
+      "authors": [
+        "Carlos Riquelme",
+        "Joan Puigcerver",
+        "Basil Mustafa",
+        "et al."
+      ],
+      "year": 2021,
+      "role": "MoE applied to vision models demonstrating expert specialization and performance gains",
+      "relationship_sentence": "Evidence that MoE yields domain-specific expertise for visual inputs informed ChartMoE\u2019s design to encourage specialized chart connectors trained on different alignment signals."
+    },
+    {
+      "title": "ChartQA: A Benchmark for Question Answering on Charts",
+      "authors": [
+        "Mohamed Masry",
+        "et al."
+      ],
+      "year": 2022,
+      "role": "Chart understanding benchmark with underlying data supervision",
+      "relationship_sentence": "The need for faithful, data-grounded chart reasoning in ChartQA motivated ChartMoE\u2019s alignment tasks and its chart-table/JSON interfaces to ensure reliable numerical grounding."
+    },
+    {
+      "title": "DePlot: Converting Charts to Tables for Reliable Chart Understanding",
+      "authors": [
+        "Xinyu Liu",
+        "et al."
+      ],
+      "year": 2023,
+      "role": "Chart-to-table conversion paradigm enabling structured supervision for chart reasoning",
+      "relationship_sentence": "ChartMoE\u2019s chart\u2192table and chart\u2192JSON alignment experts and the ChartMoE-Align quadruples echo DePlot\u2019s insight that converting charts to structured data improves faithfulness."
+    }
+  ],
+  "synthesis_narrative": "ChartMoE\u2019s core contribution\u2014replacing the standard single linear projector with a Mixture-of-Experts (MoE) connector composed of diversely aligned experts\u2014sits at the intersection of two influential threads. First, projector-based multimodal LLMs such as LLaVA and MiniGPT-4, and connector-centric designs like BLIP-2, crystallized the cross-modal \u2018connector\u2019 as a key bottleneck for visual-language grounding. Their successes and observed brittleness with a single mapping motivated ChartMoE to rethink the connector as a set of specialized experts, each initialized by distinct alignment tasks, rather than one-size-fits-all linear projection.\n\nSecond, advances in sparse MoE\u2014Switch Transformers and ViT-MoE\u2014demonstrated that routing to specialized experts improves capacity and domain specialization without prohibitive compute. ChartMoE strategically applies these MoE principles at the connector level, using a router to select among task-initialized experts, thereby bridging modality gaps more robustly for charts.\n\nFinally, the chart-understanding literature shaped the specific alignment signals. ChartQA underscored the need for faithful, numerically grounded reasoning, while DePlot showed that converting chart images into structured tables boosts reliability. ChartMoE operationalizes these insights by curating ChartMoE-Align\u2014a large-scale chart-table-JSON-code dataset\u2014and by training separate connector experts on chart\u2192table/JSON/code alignments. The resulting MoE connector, initialized from these specialized pre-alignments and refined with high-quality supervision, directly addresses the faithfulness and reliability challenges endemic to chart understanding.",
+  "analysis_timestamp": "2026-01-07T00:02:04.911596"
+}

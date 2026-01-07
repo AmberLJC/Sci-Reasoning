@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Score-Based Generative Modeling through Stochastic Differential Equations",
+      "authors": "Yang Song et al.",
+      "year": 2021,
+      "arxiv_id": "2011.13456",
+      "role": "Foundation",
+      "relationship_sentence": "This work introduced the probability flow ODE that turns diffusion sampling into solving an ODE, providing the exact formulation whose time grid LD3 learns to discretize."
+    },
+    {
+      "title": "Denoising Diffusion Implicit Models",
+      "authors": "Jiaming Song et al.",
+      "year": 2020,
+      "arxiv_id": "2010.02502",
+      "role": "Foundation",
+      "relationship_sentence": "DDIM showed that deterministic sampling corresponds to an ODE with a chosen timestep schedule, directly motivating LD3\u2019s goal of learning the timestep schedule rather than hand-designing it."
+    },
+    {
+      "title": "Elucidating the Design Space of Diffusion-Based Generative Models",
+      "authors": "Tero Karras et al.",
+      "year": 2022,
+      "arxiv_id": "2206.00364",
+      "role": "Gap Identification",
+      "relationship_sentence": "This paper demonstrated the outsized impact of hand-crafted noise/time discretization (e.g., the Karras \u03c1-schedule) on sample quality, highlighting the limitation of heuristic schedules that LD3 replaces with a learned discretization."
+    },
+    {
+      "title": "DPM-Solver: A Fast ODE Solver for Diffusion Probabilistic Models",
+      "authors": "Cheng Lu et al.",
+      "year": 2022,
+      "arxiv_id": "2206.00927",
+      "role": "Baseline",
+      "relationship_sentence": "DPM-Solver\u2019s high-order ODE methods rely on fixed or heuristic timesteps, and LD3 directly plugs in by learning the timestep sequence to improve quality for a given NFE without retraining the score network."
+    },
+    {
+      "title": "UniPC: A Unified Predictor-Corrector Framework for Fast Sampling of Diffusion Models",
+      "authors": "Chenyang Zhao et al.",
+      "year": 2023,
+      "arxiv_id": "2302.04867",
+      "role": "Baseline",
+      "relationship_sentence": "UniPC\u2019s performance is tightly coupled to the chosen discretization schedule, and LD3 provides a learned schedule that consistently boosts UniPC\u2019s sampling efficiency across pretrained models."
+    },
+    {
+      "title": "Pseudo Numerical Methods for Diffusion Models on Manifolds",
+      "authors": "Luping Liu et al.",
+      "year": 2022,
+      "arxiv_id": "2202.09778",
+      "role": "Extension",
+      "relationship_sentence": "By framing diffusion sampling as linear multistep numerical integration (PNDM), this work set up the discretization\u2013solver interplay that LD3 extends by optimizing the time grid itself rather than only the solver coefficients."
+    }
+  ],
+  "synthesis_narrative": "Score-based diffusion via SDEs established that sampling can be recast as integrating the probability flow ODE, making diffusion generation a numerical ODE problem whose accuracy depends on discretization. DDIM made this concrete by showing that deterministic diffusion sampling is an ODE with an explicit timestep schedule, implying that the placement of time points is a first-class design variable. Karras and colleagues then revealed that the particular choice of noise/time schedule (e.g., the \u03c1-parameterized sigma discretization) can dominate quality\u2013efficiency trade-offs, but their schedules are heuristic. On the solver side, DPM-Solver introduced fast high-order ODE integrators specialized for diffusion ODEs, while UniPC unified predictor\u2013corrector solvers; both report strong gains yet ultimately hinge on the chosen time grid. Earlier, PNDM cast diffusion sampling as a linear multistep method, illuminating how discretization and solver order interact to control error under a fixed NFE budget. Collectively, these works converged on a clear opportunity: solvers are strong and widely applicable, but their performance is bottlenecked by hand-crafted time discretizations. The natural next step is to directly learn the discretization of the diffusion ODE from pretrained models, keeping the solver and network fixed. LD3 synthesizes these insights by optimizing the timestep sequence itself\u2014plug-and-play across DPM-Solver, UniPC, and related methods\u2014thereby turning a key heuristic into a learned component that more efficiently allocates error across steps without retraining.",
+  "target_paper": {
+    "title": "Learning to Discretize Denoising Diffusion ODEs",
+    "authors": "Vinh Tong, Dung Trung Hoang, Anji Liu, Guy Van den Broeck, Mathias Niepert",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "oral",
+    "keywords": "Diffusion models, Efficient Sampling, Ordinary Differentiable Equations",
+    "abstract": "Diffusion Probabilistic Models (DPMs) are generative models showing competitive performance in various domains, including image synthesis and 3D point cloud generation. Sampling from pre-trained DPMs involves multiple neural function evaluations (NFEs) to transform Gaussian noise samples into images, resulting in higher computational costs compared to single-step generative models such as GANs or VAEs. Therefore, reducing the number of NFEs while preserving generation quality is crucial. To address this, we propose LD3, a lightweight framework designed to learn the optimal time discretization for sampling. LD3 can be combined with various samplers and consistently improves generation quality without having to retrain resource-intensive neural networks. We demonstrate analytically and empirically that LD3 improves sampling efficiency with much less computational overhead. We evaluate our method with extensive experiments on 7 pre-trained models, covering unconditional and conditional sa",
+    "openreview_id": "xDrFWUmCne",
+    "forum_id": "xDrFWUmCne"
+  },
+  "analysis_timestamp": "2026-01-06T11:44:11.758562"
+}

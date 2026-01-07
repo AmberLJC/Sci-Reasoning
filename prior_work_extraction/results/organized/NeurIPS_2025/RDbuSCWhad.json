@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Efficiently Modeling Long Sequences with Structured State Spaces (S4)",
+      "authors": "Albert Gu, Karan Goel, Christopher R\u00e9",
+      "year": 2022,
+      "role": "Foundational SSM architecture linking linear state-space recurrences to parallel convolution with structured transitions",
+      "relationship_sentence": "PD-SSM inherits the SSM formulation and efficiency goals of S4, but replaces S4\u2019s specific structure with a P\u00b7D factorization to recover automata-like expressivity while retaining diagonal-SSM-level compute."
+    },
+    {
+      "title": "HiPPO: Recurrent Memory with Optimal Polynomial Projections",
+      "authors": "Albert Gu, Karan Goel, Christopher R\u00e9",
+      "year": 2020,
+      "role": "Stability and discretization blueprint for SSMs with complex-valued spectra",
+      "relationship_sentence": "PD-SSM\u2019s use of complex-valued diagonal dynamics and its BIBO-stability analysis follow the stability/discretization principles popularized by HiPPO-based SSMs."
+    },
+    {
+      "title": "Mamba: Linear-Time Sequence Modeling with Selective State Spaces",
+      "authors": "Albert Gu, Tri Dao",
+      "year": 2024,
+      "role": "Scan-based linear-time inference for SSMs and hardware-efficient implementations",
+      "relationship_sentence": "PD-SSM leverages the same parallel-scan paradigm emphasized by Mamba, showing that its sparse P\u00b7D transition keeps scan cost linear in state size while improving expressivity."
+    },
+    {
+      "title": "MONARCH: Expressive Structured Matrices for Efficient Transformers",
+      "authors": "Tri Dao, Beidi Chen, Atri Rudra, Christopher R\u00e9",
+      "year": 2022,
+      "role": "Structured matrix design using products of permutations and (block-)diagonals for fast multiplies with low memory",
+      "relationship_sentence": "PD-SSM\u2019s transition as a product of a column-one-hot (permutation-like) matrix and a diagonal matrix directly echoes Monarch-style permute\u2013diagonal factorizations to achieve expressivity with linear-time multiplies."
+    },
+    {
+      "title": "Weighted finite-state transducers in speech recognition",
+      "authors": "Mehryar Mohri, Fernando Pereira, Michael Riley",
+      "year": 2002,
+      "role": "Formal WFA/WFST framework clarifying state transitions as weighted linear operators",
+      "relationship_sentence": "PD-SSM\u2019s FSA-tracking view maps naturally onto the WFST formalism, with P encoding next-state routing and D encoding transition weights, grounding its automata emulation claims."
+    },
+    {
+      "title": "Linear automaton transformations",
+      "authors": "Anil Nerode",
+      "year": 1958,
+      "role": "Automata minimality theory (Myhill\u2013Nerode) establishing optimal number of states",
+      "relationship_sentence": "PD-SSM\u2019s proof that it emulates any N-state FSA with optimal state size relies on Myhill\u2013Nerode-style minimality, tying its dimension guarantees to classical automata theory."
+    },
+    {
+      "title": "Spectral Learning of Weighted Automata",
+      "authors": "Borja Balle, Xavier Carreras, Ariadna Quattoni",
+      "year": 2014,
+      "role": "Linear-algebraic representation and learning of weighted automata via Hankel/spectral methods",
+      "relationship_sentence": "By viewing automata transitions as linear maps, this work underpins PD-SSM\u2019s construction of transition operators (P\u00b7D) that realize WFA behavior within an SSM layer."
+    }
+  ],
+  "synthesis_narrative": "PD-SSM targets the core tension in state-space models between computational efficiency and expressivity. S4 established the modern SSM blueprint\u2014linear recurrences discretized from continuous-time dynamics with structured transition operators that enable parallel convolution\u2014while HiPPO provided stability and complex-eigenvalue machinery that made such discretizations robust. Mamba advanced this line with hardware-friendly, linear-time scan-based inference, showing state updates can be parallelized without sacrificing sequential fidelity. PD-SSM embraces these efficiency and stability pillars but rethinks the transition matrix: instead of dense or purely diagonal structures, it uses a product of a column one-hot (routing/permutation-like) matrix and a complex diagonal, achieving the O(n)-per-scan cost characteristic of diagonal SSMs.\n\nThis P\u00b7D parameterization draws directly on the structured-matrix literature typified by Monarch, where alternating permutation and diagonal factors yield expressive yet fast linear maps. Crucially, PD-SSM links SSM dynamics to automata theory: the WFST/WFA perspective (Mohri\u2013Pereira\u2013Riley) casts state transitions as weighted linear operators; spectral WFA results (Balle\u2013Carreras\u2013Quattoni) further ground their linear-algebraic realization; and Myhill\u2013Nerode minimality justifies the claim of optimal state size for tracking N-state FSAs. The result is an SSM layer that preserves diagonal-level compute and stability while restoring the discrete state-tracking power of finite automata via a sparse, permutation\u2013diagonal transition\u2014providing provable expressive guarantees and practical parallelism.",
+  "analysis_timestamp": "2026-01-06T23:42:48.105128"
+}

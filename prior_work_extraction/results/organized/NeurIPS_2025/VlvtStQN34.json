@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+      "authors": "Edward J. Hu et al.",
+      "year": 2022,
+      "role": "Parameter-efficient adaptation foundation",
+      "relationship_sentence": "LoRAShop\u2019s core mechanism\u2014using multiple concept-specific adapters and blending them\u2014directly builds on LoRA\u2019s idea of injecting low-rank weight updates, extending it by spatially gating these updates within concept-localized regions."
+    },
+    {
+      "title": "DreamBooth: Fine Tuning Text-to-Image Diffusion Models for Subject-Driven Generation",
+      "authors": "Nataniel Ruiz et al.",
+      "year": 2022,
+      "role": "Personalization baseline",
+      "relationship_sentence": "DreamBooth established subject-driven personalization as a key task; LoRAShop targets the same identity preservation goal but avoids per-concept retraining by composing pre-trained LoRA adapters with spatially selective application."
+    },
+    {
+      "title": "Custom Diffusion: Multi-Concept Customization of Text-to-Image Diffusion",
+      "authors": "Nupur Kumari et al.",
+      "year": 2023,
+      "role": "Multi-concept personalization precedent",
+      "relationship_sentence": "Custom Diffusion tackled interference between multiple personalized concepts via joint finetuning and attention constraints; LoRAShop achieves multi-concept composition training-free by regionally blending concept LoRAs using disentangled masks."
+    },
+    {
+      "title": "Prompt-to-Prompt Image Editing with Cross Attention Control",
+      "authors": "Amir Hertz et al.",
+      "year": 2022,
+      "role": "Attention-based spatial control",
+      "relationship_sentence": "By showing that cross-attention maps localize prompt concepts and can guide edits, Prompt-to-Prompt motivates LoRAShop\u2019s use of internal transformer signals; LoRAShop extends this idea by extracting early denoising features to automatically derive concept masks."
+    },
+    {
+      "title": "Plug-and-Play Diffusion Features for Text-Driven Image Editing",
+      "authors": "Narek Tumanyan et al.",
+      "year": 2023,
+      "role": "Training-free feature manipulation",
+      "relationship_sentence": "PnP demonstrated training-free editing by steering internal diffusion features; LoRAShop similarly performs a prior forward pass to read out feature activations, but uses them to spatially gate LoRA weight application for multi-concept edits."
+    },
+    {
+      "title": "Scalable Diffusion Models with Transformers (DiT)",
+      "authors": "William Peebles and Saining Xie",
+      "year": 2023,
+      "role": "Architectural basis (diffusion transformers)",
+      "relationship_sentence": "DiT established transformer-based diffusion backbones whose attention/feature maps exhibit spatial coherence; LoRAShop exploits these properties in Flux-style diffusion transformers to identify concept regions early in denoising."
+    },
+    {
+      "title": "Blended Latent Diffusion",
+      "authors": "Omer Avrahami, Dani Lischinski, and Ohad Fried",
+      "year": 2022,
+      "role": "Mask-guided editing precursor",
+      "relationship_sentence": "Blended Latent Diffusion showed that masked latent-space editing preserves scene context; LoRAShop advances this by inferring masks from transformer features and applying them to selectively blend LoRA weights rather than pixels/latents."
+    }
+  ],
+  "synthesis_narrative": "LoRAShop\u2019s key contribution\u2014training-free multi-concept image generation and editing by spatially blending LoRA adapters guided by transformer features\u2014emerges from three converging threads of prior work. First, parameter-efficient personalization methods provide the plug-in building blocks: LoRA introduced low-rank adapters that can be composed without altering the base model, while DreamBooth and Custom Diffusion defined the personalization and multi-concept goals but relied on (costly) finetuning and attention constraints to mitigate identity drift and concept interference. LoRAShop inherits the personalization objective yet sidesteps retraining by composing several concept LoRAs.\nSecond, training-free control via internal model signals laid the groundwork for mask derivation. Prompt-to-Prompt established that diffusion cross-attention maps spatially localize semantic tokens for editing, and Plug-and-Play Diffusion Features showed that one can steer or edit images by manipulating intermediate diffusion features without training. LoRAShop extends these ideas by observing that, in Flux-style diffusion transformers, concept-specific features activate spatially coherent regions early in denoising; it leverages a prior forward pass to extract disentangled masks per concept. Compared to Blended Latent Diffusion, which requires external masks, LoRAShop automatically infers them and uses them not for pixel/latent blending but to gate LoRA weight application regionally.\nThird, diffusion transformers (DiT) furnish the architectural substrate whose spatially coherent features make such masking reliable. By uniting these threads, LoRAShop delivers identity-preserving, multi-concept edits via regional LoRA blending, without additional training or external constraints.",
+  "analysis_timestamp": "2026-01-07T00:29:42.068048"
+}

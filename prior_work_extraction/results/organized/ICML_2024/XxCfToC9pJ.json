@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Learning Transferable Visual Models From Natural Language Supervision",
+      "authors": "Alec Radford et al.",
+      "year": 2021,
+      "role": "Foundation",
+      "relationship_sentence": "UEO directly builds on CLIP\u2019s image\u2013text classification paradigm, using its text prompts and visual encoder as the starting point to perform unsupervised adaptation in the presence of unknown classes."
+    },
+    {
+      "title": "Do We Really Need to Access the Source Data? Source Hypothesis Transfer for Unsupervised Domain Adaptation (SHOT)",
+      "authors": "Jian Liang et al.",
+      "year": 2020,
+      "role": "Extension",
+      "relationship_sentence": "UEO extends SHOT\u2019s information maximization principle\u2014minimizing conditional entropy while encouraging prediction diversity (marginal entropy maximization)\u2014by making it sample-adaptive via confidence, tailored to CLIP and universal (known/unknown) unlabeled data."
+    },
+    {
+      "title": "Semi-Supervised Learning by Entropy Minimization",
+      "authors": "Yves Grandvalet et al.",
+      "year": 2005,
+      "role": "Foundation",
+      "relationship_sentence": "UEO\u2019s core idea of conditional entropy minimization for confident instances is rooted in this classic entropy minimization principle for unlabeled data."
+    },
+    {
+      "title": "FixMatch: Simplifying Semi-Supervised Learning with Consistency and Confidence",
+      "authors": "Kihyuk Sohn et al.",
+      "year": 2020,
+      "role": "Inspiration",
+      "relationship_sentence": "UEO adopts the key FixMatch insight of leveraging sample-level confidence to decide how to use unlabeled examples, applying conditional entropy minimization to confident samples while treating low-confidence ones differently."
+    },
+    {
+      "title": "OpenMatch: Open-set Semi-supervised Learning with Open-set Consistency Regularization",
+      "authors": "Kuniaki Saito et al.",
+      "year": 2021,
+      "role": "Related Problem",
+      "relationship_sentence": "UEO mirrors OpenMatch\u2019s open-set SSL treatment\u2014learning from unlabeled data containing unknown classes by combining confident-sample learning with entropy-increasing regularization for suspected unknowns\u2014but implements it universally within CLIP via confidence-driven conditional vs. marginal entropy objectives."
+    },
+    {
+      "title": "Universal Domain Adaptation",
+      "authors": "Kaichao You et al.",
+      "year": 2019,
+      "role": "Foundation",
+      "relationship_sentence": "UEO\u2019s problem setting\u2014unlabeled data containing both known and unknown classes\u2014follows the universal/open-set formulation introduced here, motivating simultaneous recognition and OOD handling during adaptation."
+    },
+    {
+      "title": "Tent: Fully Test-Time Adaptation by Entropy Minimization",
+      "authors": "Dequan Wang et al.",
+      "year": 2021,
+      "role": "Gap Identification",
+      "relationship_sentence": "UEO addresses Tent\u2019s limitation that pure entropy minimization at test time can over-confidently fit OOD/unknown samples by complementing it with marginal entropy maximization for low-confidence instances."
+    }
+  ],
+  "synthesis_narrative": "UEO\u2019s core innovation\u2014confidence-driven universal entropy optimization for realistic unsupervised CLIP fine-tuning\u2014emerges from unifying two lines of prior work. First, information-theoretic training with unlabeled data: Grandvalet and Bengio established conditional entropy minimization as a driver for confident predictions, while SHOT operationalized information maximization in practice by coupling conditional entropy minimization with prediction diversity (marginal entropy maximization). Second, handling unlabeled data with unknown classes: Universal/Open-set formulations (You et al.) and open-set semi-supervised learning (OpenMatch) demonstrated that treating confident and ambiguous samples differently is crucial when unknown categories contaminate the unlabeled set. UEO synthesizes these ideas within CLIP\u2019s vision\u2013language framework (Radford et al.), using sample-level confidence as the switch: minimize conditional entropy on confident samples to sharpen recognition of known classes, but maximize marginal entropy on less-confident ones to avoid collapsing onto spurious known labels and thereby improve OOD detection.\n\nPractically, UEO also addresses limitations of pure entropy-minimization adaptation (e.g., Tent), which tends to overfit unknown data, by explicitly regularizing predictions toward higher marginal entropy when confidence is low. The confidence-driven mechanism echoes FixMatch\u2019s selective use of unlabeled data, but is adapted to a universal setting where unknowns are expected. By embedding this principled treatment into CLIP\u2019s prompt-based classification, UEO yields a simple, efficient approach that simultaneously enhances known-class recognition and OOD detection without relying on label-associated class-name priors.",
+  "analysis_timestamp": "2026-01-06T23:09:26.508363"
+}

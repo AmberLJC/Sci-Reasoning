@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "High-Resolution Image Synthesis with Latent Diffusion Models",
+      "authors": "Robin Rombach, Andreas Blattmann, Dominik Lorenz, Patrick Esser, Bj\u00f6rn Ommer",
+      "year": 2022,
+      "role": "Established operating diffusion in a VAE latent space for efficient, high-quality image generation.",
+      "relationship_sentence": "The proposed joint image\u2013feature diffusion is built directly on LDM\u2019s latent-space formulation, extending it to model a second, high-level semantic latent alongside the VAE image latent."
+    },
+    {
+      "title": "Scalable Diffusion Models with Transformers",
+      "authors": "William Peebles, Saining Xie",
+      "year": 2023,
+      "role": "Introduced the Diffusion Transformer (DiT) architecture as a strong, scalable backbone for latent diffusion.",
+      "relationship_sentence": "The paper\u2019s claim of requiring only minimal architectural changes leverages DiT as the base denoiser, adapting its tokenization to jointly process image latents and semantic features."
+    },
+    {
+      "title": "Emerging Properties in Self-Supervised Vision Transformers (DINO)",
+      "authors": "Mathilde Caron, Hugo Touvron, Ishan Misra, Herv\u00e9 J\u00e9gou, Julien Mairal, Piotr Bojanowski, Armand Joulin",
+      "year": 2021,
+      "role": "Provided high-level, label-free semantic representations from a pretrained vision transformer.",
+      "relationship_sentence": "The method explicitly conditions on\u2014or co-models\u2014DINO-like features, using these semantics both during training and for the proposed \u201cRepresentation Guidance\u201d at inference."
+    },
+    {
+      "title": "Diffusion Models Beat GANs on Image Synthesis",
+      "authors": "Prafulla Dhariwal, Alexander Nichol",
+      "year": 2021,
+      "role": "Introduced classifier guidance for diffusion, showing how external semantic gradients can steer sampling.",
+      "relationship_sentence": "Representation Guidance in this work mirrors classifier guidance conceptually, but replaces an external classifier with gradients derived from learned semantic features within the joint model."
+    },
+    {
+      "title": "Classifier-Free Diffusion Guidance",
+      "authors": "Jonathan Ho, Tim Salimans",
+      "year": 2022,
+      "role": "Showed guidance without an auxiliary classifier by interpolating conditional and unconditional scores.",
+      "relationship_sentence": "The paper\u2019s guidance mechanism similarly avoids extra networks or distillation, using the joint model\u2019s own semantic variable to modulate generation strength and fidelity."
+    },
+    {
+      "title": "DreamFusion: Text-to-3D using 2D Diffusion",
+      "authors": "Ben Poole, Ajay Jain, Jonathan T. Barron, Ben Mildenhall",
+      "year": 2022,
+      "role": "Popularized Score Distillation Sampling (SDS) as a powerful but complex distillation-based guidance strategy.",
+      "relationship_sentence": "By jointly learning image and semantic features, the proposed method sidesteps SDS-style distillation, achieving controllability via learned representations rather than teacher-model gradients."
+    },
+    {
+      "title": "Auto-Encoding Variational Bayes",
+      "authors": "Diederik P. Kingma, Max Welling",
+      "year": 2014,
+      "role": "Introduced VAEs, enabling encoder\u2013decoder latents that underpin latent diffusion\u2019s image space.",
+      "relationship_sentence": "The approach depends on VAE latents as the low-level image representation that is co-modeled with high-level semantic features in a unified diffusion process."
+    }
+  ],
+  "synthesis_narrative": "The core idea of jointly modeling low-level image latents with high-level semantic features emerges by synthesizing several threads in generative modeling and representation learning. Latent Diffusion Models established that operating in a VAE latent space yields efficient, high-quality image synthesis, providing the substrate on which this paper layers an additional semantic variable. The reliance on VAE latents follows directly from Auto-Encoding Variational Bayes, which supplies the encoder\u2013decoder interface that LDMs leverage.\n\nArchitecturally, the work adopts the Diffusion Transformer as a scalable denoiser and shows that only minimal modifications are needed to token-encode and co-process two correlated modalities: VAE image latents and semantic features. The semantic side is grounded in self-supervised features from DINO, whose label-free, high-level representations are explicitly co-modeled with the image latents so the model learns a joint distribution over image\u2013feature pairs.\n\nOn the inference side, the paper\u2019s Representation Guidance is conceptually tied to the lineage of diffusion guidance. Classifier guidance demonstrated steering via external semantic gradients, while classifier-free guidance removed the need for an auxiliary classifier. The proposed approach pushes this further by using the jointly learned semantic representations themselves to guide sampling, avoiding auxiliary models and the complexity of distillation schemes such as DreamFusion\u2019s SDS. Together, these influences crystallize into a unified framework that marries generative modeling with representation learning, improving sample quality and efficiency while enabling semantics-aware control without extra teachers or distillation losses.",
+  "analysis_timestamp": "2026-01-07T00:05:12.542286"
+}

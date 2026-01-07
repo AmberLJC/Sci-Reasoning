@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Mutual Information Neural Estimation",
+      "authors": "Belghazi et al.",
+      "year": 2018,
+      "role": "Baseline",
+      "relationship_sentence": "MINE introduced DV-based neural MI estimation that requires training a critic on the target dataset; InfoNet uses the same dual MI principle but amortizes it into a single network to eliminate per-dataset test-time optimization."
+    },
+    {
+      "title": "Representation Learning with Contrastive Predictive Coding",
+      "authors": "van den Oord et al.",
+      "year": 2018,
+      "role": "Baseline",
+      "relationship_sentence": "CPC/InfoNCE provided a widely used contrastive lower bound for MI estimation that still needs dataset-specific training and many negatives; InfoNet targets the same MI estimation goal while replacing test-time optimization with a pre-trained estimator."
+    },
+    {
+      "title": "Estimating Divergence Functionals and the Likelihood Ratio by Convex Risk Minimization",
+      "authors": "Nguyen et al.",
+      "year": 2010,
+      "role": "Foundation",
+      "relationship_sentence": "The NWJ variational bound established a convex dual formulation for MI (as KL between joint and product-of-marginals), which underpins the dual objective InfoNet maximizes during large-scale training."
+    },
+    {
+      "title": "On Variational Lower Bounds of Mutual Information",
+      "authors": "Poole et al.",
+      "year": 2019,
+      "role": "Gap Identification",
+      "relationship_sentence": "This work analyzed DV/NWJ/InfoNCE bounds and highlighted bias\u2013variance trade-offs and saturation issues, motivating InfoNet\u2019s shift from tighter per-task optimization to an amortized, generalizable MI estimator."
+    },
+    {
+      "title": "Estimating mutual information",
+      "authors": "Kraskov et al.",
+      "year": 2004,
+      "role": "Gap Identification",
+      "relationship_sentence": "The kNN-based KSG estimator is a standard nonparametric baseline but is non-differentiable and computationally heavy for high-dimensional/time-series data, a limitation InfoNet explicitly overcomes with a neural, end-to-end differentiable approach."
+    },
+    {
+      "title": "Auto-Encoding Variational Bayes",
+      "authors": "Kingma and Welling",
+      "year": 2014,
+      "role": "Inspiration",
+      "relationship_sentence": "By introducing amortized inference to replace per-instance optimization with an inference network, this work inspired InfoNet\u2019s core idea of amortizing MI estimation to avoid test-time critic optimization."
+    }
+  ],
+  "synthesis_narrative": "InfoNet\u2019s core contribution\u2014direct, test-time-free neural estimation of mutual information\u2014emerges from the variational/dual lineage of MI estimation combined with the amortization principle. The variational foundations laid by Nguyen\u2013Wainwright\u2013Jordan formalized MI as a dual (convex) optimization over functions distinguishing the joint from the product of marginals. This idea was operationalized for neural estimators by MINE, which maximizes the Donsker\u2013Varadhan MI objective but requires training a critic on each new dataset. In parallel, CPC/InfoNCE popularized contrastive bounds for MI estimation, yet in practice also demands dataset-specific optimization and large numbers of negatives. Poole et al. unified these bounds and documented their bias\u2013variance trade-offs and saturation behaviors, sharpening the understanding that merely tightening variational bounds does not resolve the practical inefficiencies and instability of per-task training. On the nonparametric side, the KSG estimator provided a classic baseline for MI but is non-differentiable and slow, constraining its use in end-to-end learning and real-time settings. InfoNet synthesizes these threads by adopting the dual MI formulation as the learning signal while importing the amortized inference idea from variational autoencoders: it trains a neural network offline on large simulated corpora to map pairs of data streams to MI, thus replacing test-time optimization with a single forward pass. This delivers differentiability, real-time efficiency, and generalization across tasks that prior estimators could not simultaneously achieve.",
+  "analysis_timestamp": "2026-01-06T23:09:26.491709"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Jonathan Ho et al.",
+      "year": 2020,
+      "role": "Foundation",
+      "relationship_sentence": "Establishes the denoising-based training objective and forward/reverse diffusion formulation that the paper analyzes by contrasting network denoisers with theoretically optimal empirical denoisers under the same objective."
+    },
+    {
+      "title": "Generative Modeling by Estimating Gradients of the Data Distribution",
+      "authors": "Yang Song et al.",
+      "year": 2019,
+      "role": "Foundation",
+      "relationship_sentence": "Introduces multi-noise-scale denoising score matching, directly grounding the view that diffusion denoisers approximate scores at each noise level\u2014the theoretical basis for comparing learned denoisers to empirical (optimal) denoisers."
+    },
+    {
+      "title": "Score-Based Generative Modeling through Stochastic Differential Equations",
+      "authors": "Yang Song et al.",
+      "year": 2021,
+      "role": "Foundation",
+      "relationship_sentence": "Provides the continuous-time SDE framing of forward and reverse diffusion processes that the paper uses to compare behavior across both directions when evaluating network versus empirical denoisers."
+    },
+    {
+      "title": "A Connection Between Score Matching and Denoising Autoencoders",
+      "authors": "Pascal Vincent",
+      "year": 2011,
+      "role": "Foundation",
+      "relationship_sentence": "Proves that denoising learns the score of the corrupted data distribution, directly supporting the paper\u2019s hypothesis that localized denoising operations can approximate the training objective and explain generalization."
+    },
+    {
+      "title": "Tweedie\u2019s Formula and Selection Bias",
+      "authors": "Bradley Efron",
+      "year": 2011,
+      "role": "Inspiration",
+      "relationship_sentence": "Tweedie\u2019s formula links the posterior mean denoiser to the score of the noise-corrupted density, enabling the paper\u2019s construction of theoretically optimal empirical denoisers from data as a training-free comparator to neural denoisers."
+    },
+    {
+      "title": "From Learning Models of Natural Image Patches to Whole Image Restoration",
+      "authors": "Daniel Zoran et al.",
+      "year": 2011,
+      "role": "Extension",
+      "relationship_sentence": "EPLL pioneered aggregating local patch-wise empirical denoisers into a full-image solution; the paper directly extends this aggregation paradigm to the noise-conditioned setting of diffusion denoisers to mimic network behavior."
+    },
+    {
+      "title": "A Non-Local Algorithm for Image Denoising",
+      "authors": "Antoni Buades et al.",
+      "year": 2005,
+      "role": "Inspiration",
+      "relationship_sentence": "Non-Local Means introduced training-free, data-driven local averaging as a denoiser, inspiring the paper\u2019s localized empirical denoising mechanism and its hypothesis that diffusion networks generalize via local operations."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core claim\u2014that diffusion models generalize through localized denoising operations\u2014rests on a precise convergence of denoising-based generative modeling and classical patch-wise denoising. DDPM formalized the discrete-time denoising objective and reverse process that modern diffusion models optimize, while score-based methods and their SDE formulation established that these denoisers approximate gradients of noise-smoothed densities at each noise level. Vincent\u2019s connection between denoising and score matching provides the mechanistic bridge: denoisers are local estimators of the score, implying that accurate local operations can approximate the training objective over much of the data distribution. Tweedie\u2019s formula then supplies the practical route to a theoretically optimal, training-free comparator: it connects the posterior mean denoiser to the score of the corrupted density, allowing an empirical Bayes-style construction of optimal empirical denoisers from data. On the algorithmic side, classical image restoration demonstrated that strong denoising can be achieved by aggregating local patch-wise estimators\u2014EPLL explicitly turns local patch denoisers into whole-image restoration and Non-Local Means shows that data-driven local averaging is effective without training. The present work synthesizes these threads: it instantiates Tweedie/score-based optimal empirical denoisers locally and aggregates them in an EPLL-like fashion, then shows these training-free constructions closely track neural diffusion denoisers across forward and reverse processes, offering a mechanistic explanation of generalization and improving MSE over prior approximations.",
+  "analysis_timestamp": "2026-01-06T23:07:19.562502"
+}

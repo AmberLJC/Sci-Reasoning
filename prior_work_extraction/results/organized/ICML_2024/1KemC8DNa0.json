@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Scalable don't-care-based logic optimization and resubstitution",
+      "authors": "Mishchenko et al.",
+      "year": 2006,
+      "role": "Baseline",
+      "relationship_sentence": "This work introduced the resubstitution (Resub) heuristic that PruneX explicitly targets by learning to prune its many ineffective per-node transformation attempts."
+    },
+    {
+      "title": "DAG-aware AIG rewriting: a fresh look at combinational logic synthesis",
+      "authors": "Mishchenko et al.",
+      "year": 2006,
+      "role": "Foundation",
+      "relationship_sentence": "Established the node-rooted, window-based subgraph transformation paradigm on AIG/DAGs that PruneX operates on when deciding whether to apply or skip a transformation."
+    },
+    {
+      "title": "ABC: A System for Sequential Synthesis and Verification",
+      "authors": "Mishchenko et al.",
+      "year": 2007,
+      "role": "Foundation",
+      "relationship_sentence": "Provided the standard AIG/DAG-based LS workflow and pass-level heuristics (including Resub and Mfs2) into which PruneX is integrated to reduce runtime by pruning ineffective calls."
+    },
+    {
+      "title": "Invariant Risk Minimization",
+      "authors": "Arjovsky et al.",
+      "year": 2019,
+      "role": "Foundation",
+      "relationship_sentence": "Introduced the invariance-based domain generalization principle that PruneX adapts by treating each circuit as an environment to learn predictors that generalize to unseen circuits."
+    },
+    {
+      "title": "Distributionally Robust Neural Networks for Group Shifts",
+      "authors": "Sagawa et al.",
+      "year": 2020,
+      "role": "Related Problem",
+      "relationship_sentence": "GroupDRO\u2019s worst-group training objective directly motivates PruneX\u2019s group-aware (per-circuit) training to avoid overfitting to specific designs and improve OOD generalization."
+    },
+    {
+      "title": "CIGA: Causality Inspired Invariant Graph Learning",
+      "authors": "Liu et al.",
+      "year": 2022,
+      "role": "Extension",
+      "relationship_sentence": "Proposed invariant learning for graphs under distribution shift; PruneX extends this idea to circuit DAGs by learning circuit-invariant signals specifically for predicting transformation effectiveness."
+    }
+  ],
+  "synthesis_narrative": "PruneX occupies the junction between classic AIG-based logic synthesis and modern domain generalization. The ABC lineage\u2014particularly DAG-aware AIG rewriting and the don\u2019t-care-based Resub heuristic\u2014defines the precise operational setting: node-rooted, windowed subgraph transformations applied sequentially across a circuit DAG. These heuristics deliver strong QoR but expend significant time on ineffective attempts; PruneX\u2019s central idea is to predict and prune those attempts. Thus, the resubstitution framework (and related Mfs-style don\u2019t-care optimizations housed in ABC) forms both the problem substrate and the main baseline PruneX accelerates.\n\nThe paper\u2019s core technical contribution\u2014circuit domain generalization\u2014derives from invariance-based OOD learning. Invariant Risk Minimization seeds the principle of learning predictors stable across environments. GroupDRO contributes the robust, group-aware training perspective for handling group shifts, directly aligning with circuits-as-domains in PruneX. CIGA brings these invariance ideas into the graph setting, showing how to learn invariant graph signals under distribution shift; PruneX extends this to circuit DAGs and tailors the invariance objective to the task of predicting whether a local transformation will be effective. By marrying these DG principles with the ABC-style node-level transformation workflow, PruneX inherits the optimization power of traditional LS while addressing its runtime inefficiency through circuit-invariant, OOD-robust pruning.",
+  "analysis_timestamp": "2026-01-06T23:09:26.416188"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "An iteration method for the solution of the eigenvalue problem of linear differential and integral operators",
+      "authors": "Cornelius Lanczos",
+      "year": 1950,
+      "role": "Foundational algorithm",
+      "relationship_sentence": "Provides the Lanczos iteration that underpins modern evaluation of symmetric matrix functions, whose recurrence structure the paper differentiates via a bespoke adjoint."
+    },
+    {
+      "title": "The principle of minimized iterations in the solution of the matrix eigenvalue problem",
+      "authors": "Walter E. Arnoldi",
+      "year": 1951,
+      "role": "Foundational algorithm",
+      "relationship_sentence": "Introduces the Arnoldi process for non-symmetric matrices; the paper derives its discrete adjoint to enable gradients of functions of general large matrices."
+    },
+    {
+      "title": "Analysis of some Krylov subspace approximations to the matrix exponential operator",
+      "authors": "Yousef Saad",
+      "year": 1992,
+      "role": "Krylov methods for matrix functions",
+      "relationship_sentence": "Establishes Krylov subspace approximation principles for matrix functions f(A)b that the new adjoint systems differentiate efficiently rather than treating as black-box computations."
+    },
+    {
+      "title": "Matrices, Moments and Quadrature",
+      "authors": "Gene H. Golub, G\u00e9rard Meurant",
+      "year": 1994,
+      "role": "Lanczos\u2013Gauss quadrature for bilinear forms",
+      "relationship_sentence": "Provides the Gauss quadrature interpretation of Lanczos for u\u1d40f(A)u and related quantities, the backbone of practical evaluations whose recurrences the paper differentiates."
+    },
+    {
+      "title": "Fast Estimation of tr(f(A)) via Stochastic Lanczos Quadrature",
+      "authors": "Shashanka Ubaru, Jie Chen, Yousef Saad",
+      "year": 2017,
+      "role": "Scalable evaluation of matrix-function traces",
+      "relationship_sentence": "Popularizes SLQ for log-determinants and trace terms in GPs/BNNs; the present work supplies the missing efficient adjoint to obtain gradients through the same Lanczos runs."
+    },
+    {
+      "title": "The Fr\u00e9chet derivative of a matrix function",
+      "authors": "Nicholas J. Higham, Samuel D. Relton",
+      "year": 2013,
+      "role": "Theoretical foundation for derivatives of matrix functions",
+      "relationship_sentence": "Defines and analyzes the Fr\u00e9chet derivative of f(A), clarifying the target Jacobian\u2013vector products that the derived adjoint Lanczos/Arnoldi recurrences compute efficiently."
+    },
+    {
+      "title": "Evaluating Derivatives: Principles and Techniques of Algorithmic Differentiation (2nd ed.)",
+      "authors": "Andreas Griewank, Andrea Walther",
+      "year": 2008,
+      "role": "Adjoint/AD methodology for iterative algorithms",
+      "relationship_sentence": "Provides the general reverse-mode/adjoint framework for differentiating programs, which the paper specializes to derive memory- and compute-efficient adjoints of Krylov iterations."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core contribution\u2014efficiently differentiating functions of large matrices by deriving discrete adjoints for Lanczos and Arnoldi iterations\u2014rests on two intertwined lines of prior work. First are the Krylov subspace foundations: the Lanczos (1950) and Arnoldi (1951) algorithms, which remain the default tools for evaluating f(A)b and u\u1d40f(A)u at scale. Saad\u2019s 1992 analysis established how Krylov subspaces approximate matrix functions, while Golub\u2013Meurant (1994) connected Lanczos recurrences to Gauss quadrature, enabling accurate estimates of bilinear forms and traces of matrix functions. Building directly on this, Ubaru\u2013Chen\u2013Saad (2017) introduced stochastic Lanczos quadrature (SLQ), which has become a workhorse for scalable log-determinant and trace computations in Gaussian processes and Bayesian models. These evaluation techniques create the precise computational structure\u2014short three-term recurrences, orthogonalization, and tridiagonal projections\u2014that the present work differentiates.\nA second line provides the differentiation target and tools. Higham and Relton formalized the Fr\u00e9chet derivative of matrix functions, clarifying what gradients/JVPs of f(A) should compute. Griewank and Walther\u2019s AD/adjoint principles show how to derive reverse-mode sensitivities for iterative programs. Synthesizing these strands, the paper constructs specialized adjoint recurrences for Lanczos/Arnoldi that respect their numerical structure, yielding memory- and compute-efficient gradients. This closes a long-standing gap: practitioners could evaluate with Krylov methods but lacked equally efficient differentiation. The resulting adjoints unlock end-to-end training and calibration for PDEs, GPs, and BNNs using the same Krylov workhorses without resorting to problem-specific tricks or costly factorizations.",
+  "analysis_timestamp": "2026-01-06T23:42:49.036304"
+}

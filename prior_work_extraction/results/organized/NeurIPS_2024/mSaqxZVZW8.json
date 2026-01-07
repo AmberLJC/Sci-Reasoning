@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "A Formal Basis for the Heuristic Determination of Minimum Cost Paths",
+      "authors": "Peter E. Hart, Nils J. Nilsson, Bertram Raphael",
+      "year": 1968,
+      "role": "Foundational algorithm",
+      "relationship_sentence": "SeeA* builds directly on the A* framework\u2019s OPEN/CLOSED architecture and f=g+h ordering, altering only the node-selection policy within OPEN via selective sampling."
+    },
+    {
+      "title": "Heuristic Search Viewed as Path Finding in a Graph",
+      "authors": "I. N. Pohl",
+      "year": 1970,
+      "role": "Tradeoff via heuristic inflation (Weighted A*)",
+      "relationship_sentence": "Weighted A* established that deviating from strict best-f expansion can accelerate search, a principle SeeA* echoes by sometimes bypassing the globally best node to encourage exploration through sampled subsets."
+    },
+    {
+      "title": "Bandit Based Monte-Carlo Planning",
+      "authors": "Levente Kocsis, Csaba Szepesv\u00e1ri",
+      "year": 2006,
+      "role": "Exploration\u2013exploitation via selective sampling (UCT/MCTS)",
+      "relationship_sentence": "SeeA* adapts the MCTS ethos of selective, probabilistically guided sampling to tree search by sampling a subset of OPEN to balance exploitation of good heuristics with exploration of alternatives."
+    },
+    {
+      "title": "Mastering the game of Go with deep neural networks and tree search",
+      "authors": "David Silver et al.",
+      "year": 2016,
+      "role": "Demonstration of heuristic evaluation + MCTS synergy",
+      "relationship_sentence": "The AlphaGo/AlphaZero line showed that combining learned evaluation with exploration-aware tree search yields major gains, motivating SeeA*\u2019s integration of exploration into a heuristic A* backbone."
+    },
+    {
+      "title": "Anytime Repairing A* (ARA*): Anytime A* with Provable Bounds",
+      "authors": "Maxim Likhachev, Geoffrey J. Gordon, Sebastian Thrun",
+      "year": 2004,
+      "role": "Anytime heuristic search via controlled suboptimality",
+      "relationship_sentence": "ARA*\u2019s success with inflated heuristics underscores the value of occasionally prioritizing nodes other than the strict best-f, informing SeeA*\u2019s strategy of sampled, exploration-permitting selection."
+    },
+    {
+      "title": "Beam-Stack Search: Integrating Backtracking with Beam Search",
+      "authors": "Rong Zhou, Eric A. Hansen",
+      "year": 2005,
+      "role": "Subset-based frontier selection",
+      "relationship_sentence": "Beam-style methods restrict attention to a subset of promising frontier nodes, a structural idea SeeA* refines by dynamically sampling a subset of OPEN and expanding the best within it."
+    },
+    {
+      "title": "Multi-Heuristic A* (MHA*)",
+      "authors": "Aravind Aine, Maxim Likhachev",
+      "year": 2016,
+      "role": "Exploration via multiple queues/principled deviations from best-f",
+      "relationship_sentence": "MHA*\u2019s practice of sometimes expanding from inadmissible or exploratory queues directly inspires SeeA*\u2019s deliberate departures from the globally best node to improve coverage of promising regions."
+    }
+  ],
+  "synthesis_narrative": "SeeA*\u2019s core innovation is to replace A*\u2019s deterministic selection of the globally best OPEN node with a selective sampling scheme: it samples a dynamic subset of OPEN\u2014biased toward good heuristic values\u2014and expands the best node within that subset. This rethinks the node selection stage as an exploration\u2013exploitation problem. The foundation is classical A* (Hart, Nilsson, Raphael), whose OPEN/CLOSED mechanism and f=g+h ordering define the baseline that SeeA* modifies. Early work on intentional suboptimality\u2014Weighted A* (Pohl) and the anytime ARA*\u2014showed that relaxing strict best-f expansion can dramatically improve time-to-first-solution and efficiency; SeeA* adopts a different but related lever, using probabilistic subset selection to occasionally bypass the global best and thus escape heuristic traps. From the MCTS lineage, UCT (Kocsis & Szepesv\u00e1ri) provides the selective sampling mindset: sample and focus on promising choices while preserving exploration, a philosophy directly mirrored in SeeA*\u2019s OPEN-subset sampling. AlphaGo/AlphaZero further validated that combining strong heuristics with exploration-aware tree control yields large practical gains, motivating a revisit of A*\u2019s selection policy. Structurally, beam and beam-stack search (Zhou & Hansen) demonstrated the power of restricting attention to a subset of frontier nodes; SeeA* refines this by sampling rather than deterministically truncating the frontier. Finally, MHA* (Aine & Likhachev) embodies principled deviations from strict best-f via multiple queues, reinforcing the idea that occasional exploration improves robustness\u2014an idea operationalized in SeeA* through selective sampling of OPEN.",
+  "analysis_timestamp": "2026-01-06T23:33:36.294365"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "A Watermark for Large Language Models",
+      "authors": "Kirchenbauer et al.",
+      "year": 2023,
+      "role": "Foundational LLM text watermark",
+      "relationship_sentence": "Established the greenlist/redlist, windowed biasing scheme and z-statistic detection that define the core scrubbing\u2013spoofing trade-off SEEK explicitly expands by redesigning token support within each window."
+    },
+    {
+      "title": "SWEET: Soft Watermarks for Language Models",
+      "authors": "Zhao et al.",
+      "year": 2024,
+      "role": "Soft/distributed watermark signal",
+      "relationship_sentence": "Showed that distributing watermark signal across many candidate tokens improves robustness to edits, motivating SEEK\u2019s idea of multiple equivalent tokens per window to create redundancy without sacrificing detectability."
+    },
+    {
+      "title": "SemStamp: A Semantic Watermark for Large Language Models",
+      "authors": "Zhang et al.",
+      "year": 2024,
+      "role": "Robust-to-paraphrasing watermark",
+      "relationship_sentence": "Targeted scrubbing (e.g., paraphrasing) via semantics-preserving redundancy, informing SEEK\u2019s focus on resilience to content-preserving edits while keeping the detector keyed and statistical."
+    },
+    {
+      "title": "Attacking LLM Watermarks via Reverse Engineering and Likelihood Shaping",
+      "authors": "Carlini et al.",
+      "year": 2024,
+      "role": "Spoofing/reverse-engineering attacks",
+      "relationship_sentence": "Demonstrated that small-window, statistics-based watermarks can be spoofed by reconstructing token partitions, motivating SEEK\u2019s sub-vocabulary decomposition that preserves spoofing resistance despite added redundancy."
+    },
+    {
+      "title": "Optimal Probabilistic Fingerprinting Codes",
+      "authors": "G\u00e1bor Tardos",
+      "year": 2003,
+      "role": "Redundancy and code design against deletion/collusion",
+      "relationship_sentence": "Provided the coding-theoretic instinct that multiple valid symbols (redundant code support) can yield robustness to deletions, inspiring SEEK\u2019s equivalent texture keys as a within-window redundancy mechanism."
+    },
+    {
+      "title": "Collusion-Secure Fingerprinting for Digital Data",
+      "authors": "Dan Boneh and James Shaw",
+      "year": 1998,
+      "role": "Foundations of robust, keyed marking under adversaries",
+      "relationship_sentence": "Introduced principles for keyed, collusion-resistant marks that influenced SEEK\u2019s emphasis on maintaining high key entropy and spoofing resistance while adding redundancy."
+    },
+    {
+      "title": "WaterBench: Benchmarking LLM Watermarking under Paraphrasing and Spoofing",
+      "authors": "Wang et al.",
+      "year": 2024,
+      "role": "Systematic evaluation of scrubbing/spoofing trade-offs",
+      "relationship_sentence": "Documented the empirical Pareto frontier between scrubbing and spoofing robustness, against which SEEK positions its Pareto improvement via equivalent token supports per window."
+    }
+  ],
+  "synthesis_narrative": "SEEK builds directly on the canonical greenlist/redlist watermark of Kirchenbauer et al., where a keyed partition of the vocabulary within sliding windows yields a z-statistic for detection. That framework exposes a structural trade-off: smaller windows better survive scrubbing (e.g., paraphrasing and token deletions) but are easier to reverse-engineer, enabling low-cost spoofing. Two contemporaneous strands informed SEEK\u2019s solution. First, soft and semantic watermarks such as SWEET and SemStamp demonstrated that distributing signal across many candidate tokens or semantics-preserving alternatives enhances edit resilience\u2014an idea SEEK generalizes by introducing equivalent texture keys: multiple tokens inside each window that independently contribute to the same detection statistic. Second, recent spoofing work (e.g., reverse engineering and likelihood shaping attacks) showed that naively increasing redundancy or shrinking windows can leak the keyed partition, enabling counterfeit watermarked text. SEEK counters this by decomposing the vocabulary into keyed sub-vocabularies that preserve high entropy per window, hindering inversion while keeping multiple equivalent supports.\nCoding-theoretic insights from Tardos codes and Boneh\u2013Shaw fingerprinting underlie SEEK\u2019s redundancy design: robustness to deletions and tampering comes from spreading evidence across independently valid symbols, while secrecy hinges on a strong key and randomized assignment. Evaluations like WaterBench framed the Pareto frontier between scrubbing and spoofing; SEEK\u2019s sub-vocabulary equivalent keys expand that frontier, achieving higher scrubbing resilience without compromising spoofing robustness.",
+  "analysis_timestamp": "2026-01-07T00:21:32.357254"
+}

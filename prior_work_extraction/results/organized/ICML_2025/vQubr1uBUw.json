@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Fast Inference from Transformers via Speculative Decoding",
+      "authors": "Leviathan et al.",
+      "year": 2023,
+      "role": "Foundational speculative decoding algorithm (same vocabulary, lossless).",
+      "relationship_sentence": "This work introduced the drafter\u2013target acceptance scheme that guarantees exact target distributions but assumes a shared tokenizer; the ICML 2025 paper generalizes that scheme to heterogeneous vocabularies while preserving losslessness."
+    },
+    {
+      "title": "Neural Machine Translation of Rare Words with Subword Units",
+      "authors": "Rico Sennrich, Barry Haddow, Alexandra Birch",
+      "year": 2016,
+      "role": "Introduced BPE subword tokenization widely used in LLMs.",
+      "relationship_sentence": "Because BPE produces model-specific vocabularies and segmentations, this paper\u2019s methods directly address the resulting tokenizer heterogeneity when pairing different off-the-shelf drafters and targets."
+    },
+    {
+      "title": "SentencePiece: A simple and language independent subword tokenizer and detokenizer for Neural Text Processing",
+      "authors": "Taku Kudo, John Richardson",
+      "year": 2018,
+      "role": "Standard framework for Unigram and BPE tokenization used by many models.",
+      "relationship_sentence": "The heterogeneous-vocabulary setting arises prominently from SentencePiece-based Unigram tokenizers versus BPE; the new algorithms explicitly accommodate such mismatches without retraining."
+    },
+    {
+      "title": "Subword Regularization: Improving Neural Network Translation Models with Multiple Subword Candidates",
+      "authors": "Taku Kudo",
+      "year": 2018,
+      "role": "Lattice view of multiple valid subword segmentations of the same string.",
+      "relationship_sentence": "The paper leverages the idea of multiple compatible segmentations (lattices) to reconcile drafter outputs with target tokenizations, enabling exact verification across different vocabularies."
+    },
+    {
+      "title": "Weighted Finite-State Transducers in Speech Recognition",
+      "authors": "Mehryar Mohri, Fernando Pereira, Michael Riley",
+      "year": 2002,
+      "role": "Canonical framework for lossless string-to-string mapping via WFST composition and lattices.",
+      "relationship_sentence": "Concepts from WFSTs inform constructing efficient, exact mappings between tokenization schemes, which the new methods use to validate and translate drafter proposals to the target\u2019s vocabulary."
+    },
+    {
+      "title": "Various techniques used in connection with random digits",
+      "authors": "John von Neumann",
+      "year": 1951,
+      "role": "Acceptance\u2013rejection sampling, foundational for unbiased proposal correction.",
+      "relationship_sentence": "The lossless guarantee in speculative decoding rests on accept\u2013reject style correction; the new algorithms extend this principle to operate over cross-tokenizer proposal/verification steps."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core innovation\u2014lossless speculative decoding that works even when drafter and target use different tokenizers\u2014rests on two pillars: the speculative decoding accept\u2013verify paradigm and principled mappings across heterogeneous subword segmentations. Leviathan et al. (2023) established the drafter\u2013target framework and its exactness guarantee, but assumed a shared vocabulary. The present work preserves that lossless acceptance logic while relaxing the shared-tokenizer constraint, drawing on classical acceptance\u2013rejection theory (von Neumann, 1951) to maintain distributional correctness under more complex proposal/verification pipelines.\n\nHandling tokenizer heterogeneity is grounded in subword tokenization advances. BPE (Sennrich et al., 2016) and SentencePiece Unigram/BPE (Kudo & Richardson, 2018) created today\u2019s diverse vocabularies; reconciling outputs across them requires operating over multiple valid segmentations of the same string. Subword Regularization (Kudo, 2018) contributed the key perspective of a segmentation lattice, making it natural to align and translate between tokenizations while keeping the underlying text identical. To implement such translations efficiently and exactly, the methods are inspired by WFST-based string mapping (Mohri et al., 2002), which offers a mature algebra for composing tokenization and detokenization graphs into a single, lossless transduction. Together, these works directly enable the paper\u2019s contribution: using any off-the-shelf model as a drafter, mapping its proposals through a rigorously defined cross-tokenizer lattice, and applying an accept\u2013reject verification with the target to deliver lossless, accelerated decoding without retraining.",
+  "analysis_timestamp": "2026-01-07T00:05:12.562021"
+}

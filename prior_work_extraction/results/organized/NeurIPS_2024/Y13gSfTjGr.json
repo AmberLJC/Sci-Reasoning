@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "SGDR: Stochastic Gradient Descent with Warm Restarts",
+      "authors": "Ilya Loshchilov, Frank Hutter",
+      "year": 2017,
+      "role": "Baseline schedule critiqued",
+      "relationship_sentence": "Introduced cosine annealing, the de facto schedule this paper argues complicates scaling experiments by tying the schedule to a fixed total duration; the new constant-LR-with-cooldown alternative is positioned as a drop-in replacement that preserves performance while enabling variable-length, reusable runs."
+    },
+    {
+      "title": "Scaling Laws for Neural Language Models",
+      "authors": "Jared Kaplan, Sam McCandlish, Tom Henighan, et al.",
+      "year": 2020,
+      "role": "Scaling laws foundation",
+      "relationship_sentence": "Established predictable loss\u2013compute\u2013size scaling for LMs, motivating the need for robust training setups across scales; the present work seeks a schedule that preserves these predictable trends while allowing efficient reuse of runs to reduce the cost of scaling-law studies."
+    },
+    {
+      "title": "Training Compute-Optimal Large Language Models (Chinchilla)",
+      "authors": "Jordan Hoffmann, Sebastian Borgeaud, Arthur Mensch, et al.",
+      "year": 2022,
+      "role": "Compute-optimal scaling foundation",
+      "relationship_sentence": "Derived compute-optimal trade-offs between model size and tokens under fixed training durations; this paper extends the compute-optimal perspective by decoupling schedules from total steps, enabling compute-efficient exploration of training lengths beyond fixed-duration assumptions."
+    },
+    {
+      "title": "Averaging Weights Leads to Wider Optima and Better Generalization (SWA)",
+      "authors": "Pavel Izmailov, Dmitrii Podoprikhin, Timur Garipov, Dmitry Vetrov, Andrew Gordon Wilson",
+      "year": 2018,
+      "role": "Method enabling trajectory improvements",
+      "relationship_sentence": "Provides the technique the authors leverage\u2014stochastic weight averaging\u2014to improve checkpoints along the training trajectory at essentially no extra cost, a key ingredient in making reusable runs competitive across scales."
+    },
+    {
+      "title": "Don\u2019t Decay the Learning Rate, Increase the Batch Size",
+      "authors": "Samuel L. Smith, Pieter-Jan Kindermans, Chris Ying, Quoc V. Le",
+      "year": 2018,
+      "role": "Schedule/batch-size equivalence underpinning constant LR",
+      "relationship_sentence": "Shows the interchangeability of LR decay and batch size, supporting the viability of long constant-LR phases and brief cooldowns instead of tightly-coupled decay schedules, aligning with the paper\u2019s constant-LR-with-cooldown design."
+    },
+    {
+      "title": "Accurate, Large Minibatch SGD: Training ImageNet in 1 Hour",
+      "authors": "Priya Goyal, Piotr Doll\u00e1r, Ross Girshick, Pieter Noordhuis, Lukasz Wesolowski, Aapo Kyrola, Andrew Tulloch, Yangqing Jia, Kaiming He",
+      "year": 2017,
+      "role": "Empirical basis for warmup and step-like schedules",
+      "relationship_sentence": "Popularized warmup and long constant-LR plateaus with step decays independent of total steps, empirically grounding the idea that schedules not tied to a fixed horizon can train stably\u2014supporting the paper\u2019s constant LR plus cooldown alternative."
+    }
+  ],
+  "synthesis_narrative": "This paper\u2019s core contribution\u2014replacing cosine annealing with a constant learning rate plus cooldown to enable reusable runs across training lengths, while maintaining predictable scaling and boosting trajectory performance via SWA\u2014draws directly from several strands of prior work. SGDR (Loshchilov & Hutter, 2017) established cosine annealing as a default, but its dependence on a predefined total duration makes it awkward for varying-length experiments. By explicitly critiquing this coupling, the authors motivate a schedule that retains performance without binding training to fixed horizons.\n\nThe overarching aim is grounded in the scaling-law literature: Kaplan et al. (2020) and Hoffmann et al. (2022) demonstrated predictable loss\u2013compute\u2013size trade-offs and compute-optimality, but typically under fixed-duration assumptions that require many bespoke runs. The proposed constant-LR plateau with a late cooldown decouples schedule from horizon, allowing a single run to serve multiple effective training lengths\u2014substantially reducing compute for scaling studies while preserving the predictability those laws rely on.\n\nTwo optimization lines make this feasible. First, SWA (Izmailov et al., 2018) provides a no-cost mechanism to improve checkpoints along the trajectory, making intermediate-length evaluations stronger and more comparable. Second, practical evidence that constant-LR phases train stably comes from large-batch ImageNet training (Goyal et al., 2017) and the demonstrated interchangeability of LR decay and batch-size adjustments (Smith et al., 2018), which together justify long constant-LR regimes and brief cooldowns. Integrating these ideas yields a schedule and evaluation protocol tailored to compute-efficient, predictable scaling beyond fixed training durations.",
+  "analysis_timestamp": "2026-01-06T23:33:36.259389"
+}

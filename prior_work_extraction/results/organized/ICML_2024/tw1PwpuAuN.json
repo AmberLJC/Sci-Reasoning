@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Understanding Neural Networks through Representation Erasure",
+      "authors": "Jiwei Li et al.",
+      "year": 2016,
+      "role": "Foundation",
+      "relationship_sentence": "Introduced token-level erasure (mask/delete and measure performance drop) as a direct operationalization of faithfulness that this paper keeps but makes reliable by bringing masked inputs in-distribution."
+    },
+    {
+      "title": "ERASER: A Benchmark to Evaluate Rationalized NLP Models",
+      "authors": "Jay DeYoung et al.",
+      "year": 2020,
+      "role": "Foundation",
+      "relationship_sentence": "Established comprehensiveness and sufficiency\u2014masking-based faithfulness metrics widely used in NLP\u2014which the current work preserves while removing their out-of-distribution pitfalls via masking-aware fine-tuning."
+    },
+    {
+      "title": "Pathologies of Neural Models Make Interpretations Difficult",
+      "authors": "Shi Feng et al.",
+      "year": 2018,
+      "role": "Gap Identification",
+      "relationship_sentence": "Demonstrated that deletion/masking causes out-of-distribution inputs and counterintuitive \u2018input reduction,\u2019 directly motivating the paper\u2019s core idea of training models so that masking becomes in-distribution by design."
+    },
+    {
+      "title": "A Benchmark for Interpretability Methods in Deep Neural Networks (ROAR)",
+      "authors": "Sarah Hooker et al.",
+      "year": 2019,
+      "role": "Baseline",
+      "relationship_sentence": "Proposed Remove-And-Retrain to mitigate OOD effects of feature removal, but at high computational cost; the new method achieves ROAR\u2019s goal inherently during fine-tuning, avoiding repeated retraining and proxy models."
+    },
+    {
+      "title": "Rationalizing Neural Predictions",
+      "authors": "Tao Lei et al.",
+      "year": 2016,
+      "role": "Inspiration",
+      "relationship_sentence": "Showed that incorporating masking into training (selector\u2013predictor with rationales) can make explanations measurable; this inspired the paper\u2019s train-time masking to render post-hoc masking tests faithful without changing the model class."
+    },
+    {
+      "title": "Interpretable Neural Predictions with Differentiable Masking",
+      "authors": "Yova Kementchedjhieva Bastings et al.",
+      "year": 2019,
+      "role": "Inspiration",
+      "relationship_sentence": "Demonstrated train-time, differentiable masking (HardKuma) to ensure predictions depend on selected tokens; the present work adapts the same principle\u2014bake masking into training\u2014to standard masked LMs for faithfulness measurement."
+    },
+    {
+      "title": "Attention is not Explanation",
+      "authors": "Sarthak Jain et al.",
+      "year": 2019,
+      "role": "Gap Identification",
+      "relationship_sentence": "Provided strong evidence that popular importance measures can be persuasive yet unfaithful, underscoring the need for faithful, perturbation-based evaluation that this paper makes practical and robust."
+    }
+  ],
+  "synthesis_narrative": "The core of this paper is to make masking-based faithfulness testing valid and scalable by ensuring masks are in-distribution through a masking-aware fine-tuning procedure for masked language models. This builds directly on the erasure paradigm introduced by Li et al., and on ERASER\u2019s comprehensiveness/sufficiency metrics, which formalize faithfulness as the performance impact of masking important tokens. However, prior work has shown that naive masking creates out-of-distribution artifacts: Feng et al. documented input-reduction pathologies, and the community\u2019s trust in post-hoc importance scores was further eroded by Jain and Wallace\u2019s demonstrations that persuasive explanations can be unfaithful. One influential workaround, ROAR (Hooker et al.), addresses OOD by removing features and retraining models, but its computational burden and reliance on retrained proxies limit practical use. The present work\u2019s key insight is to import a lesson from rationalization methods\u2014such as Lei et al.\u2019s selector\u2013predictor framework and Bastings et al.\u2019s differentiable masking\u2014that train with masking so the model\u2019s decision truly depends on the revealed tokens. By integrating masking during fine-tuning of standard masked LMs, the paper preserves the simplicity and generality of erasure/ERASER-style tests while eliminating OOD shift and the need for remove-and-retrain. The result is an inherently faithfulness-measurable model family that makes deletion-based evaluation both principled and practical across many NLP tasks.",
+  "analysis_timestamp": "2026-01-06T23:09:26.459687"
+}

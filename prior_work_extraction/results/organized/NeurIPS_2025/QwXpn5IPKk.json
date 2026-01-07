@@ -1,0 +1,80 @@
+{
+  "prior_works": [
+    {
+      "title": "High-Resolution Image Synthesis with Latent Diffusion Models",
+      "authors": [
+        "Robin Rombach",
+        "Andreas Blattmann",
+        "Dominik Lorenz",
+        "Patrick Esser",
+        "Bj\u00f6rn Ommer"
+      ],
+      "year": 2022,
+      "role": "foundational architecture",
+      "relationship_sentence": "RepLDM directly reprograms the Stable Diffusion-style LDM backbone introduced by Rombach et al., leveraging its latent-space U-Net and self-/cross-attention blocks while modifying inference to target higher-than-trained resolutions without retraining."
+    },
+    {
+      "title": "SDEdit: Image Synthesis and Editing with Stochastic Differential Equations",
+      "authors": [
+        "Chenlin Meng",
+        "et al."
+      ],
+      "year": 2021,
+      "role": "technique inspiration (noise reintroduction/img2img)",
+      "relationship_sentence": "RepLDM\u2019s progressive upsampling stage follows the SDEdit/img2img principle of adding noise to an existing image and denoising to refine content, enabling stable refinement after pixel-space upscaling."
+    },
+    {
+      "title": "Attend-and-Excite: Attention-Based Semantic Guidance for Text-to-Image Diffusion Models",
+      "authors": [
+        "Hila Chefer",
+        "et al."
+      ],
+      "year": 2023,
+      "role": "attention-guidance inspiration",
+      "relationship_sentence": "RepLDM\u2019s parameter-free self-attention guidance to enhance structural consistency at training resolution is informed by attention-centric, training-free guidance that enforces semantic/structural fidelity during denoising."
+    },
+    {
+      "title": "Prompt-to-Prompt Image Editing with Cross-Attention Control",
+      "authors": [
+        "Amir Hertz",
+        "et al."
+      ],
+      "year": 2022,
+      "role": "attention manipulation framework",
+      "relationship_sentence": "RepLDM similarly manipulates internal attention dynamics to preserve structure across denoising steps, extending the idea from cross-attention control for editing to self-attention guidance for high-resolution generation."
+    },
+    {
+      "title": "Cascaded Diffusion Models for High Fidelity Image Generation",
+      "authors": [
+        "Jonathan Ho",
+        "Tim Salimans",
+        "et al."
+      ],
+      "year": 2022,
+      "role": "progressive upsampling paradigm",
+      "relationship_sentence": "The two-stage cascade concept\u2014generate at a base scale then progressively super-resolve\u2014inspires RepLDM\u2019s progressive pixel-space upsampling, but RepLDM achieves it without training separate SR models by reusing the pretrained LDM via reprogrammed inference."
+    },
+    {
+      "title": "SR3: Image Super-Resolution via Repeated Refinement",
+      "authors": [
+        "Chitwan Saharia",
+        "et al."
+      ],
+      "year": 2021,
+      "role": "pixel-space super-resolution rationale",
+      "relationship_sentence": "SR3 shows diffusion-based pixel-space upscaling can yield high-quality HR images; RepLDM adapts this insight into a training-free, progressive upsampling procedure driven by the base LDM."
+    },
+    {
+      "title": "MultiDiffusion: Fusing Diffusion Paths for Controlled Image Generation",
+      "authors": [
+        "Omer Bar-Tal",
+        "et al."
+      ],
+      "year": 2023,
+      "role": "training-free high-resolution baseline",
+      "relationship_sentence": "As a prominent inference-time, no-retraining approach to high-resolution generation via tiling and fusion, MultiDiffusion frames the problem space that RepLDM improves upon by reducing seams and runtime through global attention guidance and progressive pixel upsampling."
+    }
+  ],
+  "synthesis_narrative": "RepLDM\u2019s core contribution\u2014training-free reprogramming of pretrained latent diffusion models to produce high-quality, structurally consistent images at resolutions beyond training\u2014emerges from two converging lines of prior work. First, the latent diffusion framework of Rombach et al. established the U-Net-with-attention backbone RepLDM reuses, while attention-manipulation methods such as Prompt-to-Prompt and Attend-and-Excite demonstrated that inference-time control of internal attention maps can enforce semantic and structural fidelity without parameter updates. RepLDM extends these attention-centric ideas to a novel, parameter-free self-attention guidance stage, using the model\u2019s own attention to distill a higher-quality latent at the training resolution that preserves global structure before any upscaling.\n\nSecond, the progressive, coarse-to-fine generation paradigm exemplified by Cascaded Diffusion Models and diffusion-based super-resolution (SR3) motivates RepLDM\u2019s progressive upsampling in pixel space. Rather than train separate super-resolution models, RepLDM couples SDEdit-style noise reintroduction with the pretrained LDM to iteratively upscale and refine, achieving cascaded benefits using a single model. In contrast to tiled fusion approaches like MultiDiffusion\u2014which suffer from seams and high compute\u2014RepLDM\u2019s global attention-guided base generation plus pixel-space progressive refinement yields better structural coherence and efficiency. Together, these works directly inform RepLDM\u2019s two-stage design: attention-guided latent consolidation at base scale followed by training-free, progressive pixel upsampling that preserves structure while scaling resolution and reducing runtime.",
+  "analysis_timestamp": "2026-01-07T00:21:32.239408"
+}

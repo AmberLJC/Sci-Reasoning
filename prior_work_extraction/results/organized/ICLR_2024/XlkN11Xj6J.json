@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Adding Conditional Control to Text-to-Image Diffusion Models",
+      "authors": "Lvmin Zhang et al.",
+      "year": 2023,
+      "arxiv_id": "2302.05543",
+      "role": "Extension",
+      "relationship_sentence": "3D-DST directly adopts ControlNet\u2019s conditional branch to inject Canny edge maps rendered from 3D CAD models, enabling structure-preserving generation while text controls the style."
+    },
+    {
+      "title": "Contrastive Learning for Unpaired Image-to-Image Translation (CUT)",
+      "authors": "Taesung Park et al.",
+      "year": 2020,
+      "arxiv_id": "2007.15651",
+      "role": "Gap Identification",
+      "relationship_sentence": "CUT represents the state-of-the-art GAN-based synthetic-to-real style transfer whose tendency to distort fine object geometry highlights the need for a diffusion-based transfer that preserves 3D structure."
+    },
+    {
+      "title": "Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks (CycleGAN)",
+      "authors": "Jun-Yan Zhu et al.",
+      "year": 2017,
+      "arxiv_id": "1703.10593",
+      "role": "Baseline",
+      "relationship_sentence": "As a primary unpaired translation baseline for sim-to-real, CycleGAN\u2019s label drift and geometry changes motivate replacing GAN translation with a controllable diffusion process to maintain CAD-derived structure."
+    },
+    {
+      "title": "Render for CNN: Viewpoint Estimation in Images Using CNNs Trained with Rendered 3D Model Views",
+      "authors": "Hao Su et al.",
+      "year": 2015,
+      "arxiv_id": "1505.05641",
+      "role": "Foundation",
+      "relationship_sentence": "Render for CNN established the pipeline of rendering 3D models across viewpoints to obtain precise 6-DoF annotations, which 3D-DST uses as the geometry source before diffusion stylization."
+    },
+    {
+      "title": "ShapeNet: An Information-Rich 3D Model Repository",
+      "authors": "Angel X. Chang et al.",
+      "year": 2015,
+      "arxiv_id": "1512.03012",
+      "role": "Foundation",
+      "relationship_sentence": "ShapeNet provides the category-aligned CAD assets that are rendered from diverse poses to produce the edge prompts underpinning the method\u2019s 3D-controllable image generation."
+    },
+    {
+      "title": "Objaverse: A Universe of Annotated 3D Objects",
+      "authors": "Nate Deitke et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "Objaverse supplies large-scale, diverse 3D meshes whose multi-view renders enable broad coverage of object shapes and poses for edge-conditioned diffusion generation with 3D annotations."
+    },
+    {
+      "title": "Domain Randomization for Transferring Deep Neural Networks from Simulation to the Real World",
+      "authors": "Josh Tobin et al.",
+      "year": 2017,
+      "arxiv_id": "1703.06907",
+      "role": "Related Problem",
+      "relationship_sentence": "Domain randomization showed synthetic training can transfer but leaves a realism gap and limited pose-specific control, motivating a photorealistic yet geometry-preserving alternative using diffusion."
+    }
+  ],
+  "synthesis_narrative": "Conditional diffusion offered a way to inject structural constraints into text-to-image generation when ControlNet introduced a parallel conditioning branch that faithfully follows signals like Canny edges while preserving the semantic power of large T2I models. In parallel, unpaired image-to-image translation methods such as CycleGAN and CUT sought to bridge the synthetic-to-real gap for rendered assets, but both were prone to label drift and geometry distortion, especially under large domain shifts from CAD renders to photographs. Earlier, Render for CNN established the practical pipeline of rendering 3D models from multiple viewpoints to obtain precise 6-DoF labels, highlighting the value of 3D repositories as a source of richly annotated training imagery. ShapeNet created the category-aligned CAD corpus that made such rendering pipelines systematic, and Objaverse later expanded the scale and diversity of 3D assets, enabling broader coverage of object shapes, materials, and poses. Meanwhile, domain randomization demonstrated that heavy appearance randomization on renders can yield some transfer to real data, but at the cost of realism and without explicit control over geometry-specific factors like pose and distance.\nTogether these works reveal a clear opportunity: use large 3D repositories to generate perfectly annotated geometry, then replace GAN-based or randomized stylization with a controllable diffusion mechanism that locks geometry while achieving photorealistic style. By conditioning on edge maps rendered from CAD models, the approach inherits exact 3D annotations and explicit pose control from the rendering pipeline while leveraging ControlNet\u2019s faithful structure following to avoid geometry drift, naturally yielding scalable, realistic images with reliable 3D labels.",
+  "target_paper": {
+    "title": "Generating Images with 3D Annotations Using Diffusion Models",
+    "authors": "Wufei Ma, Qihao Liu, Jiahao Wang, Angtian Wang, Xiaoding Yuan, Yi Zhang, Zihao Xiao, Guofeng Zhang, Beijia Lu, Ruxiao Duan, Yongrui Qi, Adam Kortylewski, Yaoyao Liu, Alan Yuille",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Synthetic Data, Transfer Learning, Diffusion Models, 3D",
+    "abstract": "Diffusion models have emerged as a powerful generative method, capable of producing stunning photo-realistic images from natural language descriptions. However, these models lack explicit control over the 3D structure in the generated images. Consequently, this hinders our ability to obtain detailed 3D annotations for the generated images or to craft instances with specific poses and distances. In this paper, we propose 3D Diffusion Style Transfer (3D-DST), which incorporates 3D geometry control into diffusion models. Our method exploits ControlNet, which extends diffusion models by using visual prompts in addition to text prompts. We generate images of the 3D objects taken from 3D shape repositories~(e.g., ShapeNet and Objaverse), render them from a variety of poses and viewing directions, compute the edge maps of the rendered images, and use these edge maps as visual prompts to generate realistic images. With explicit 3D geometry control, we can easily change the 3D structures of the",
+    "openreview_id": "XlkN11Xj6J",
+    "forum_id": "XlkN11Xj6J"
+  },
+  "analysis_timestamp": "2026-01-06T18:47:02.454723"
+}

@@ -1,0 +1,85 @@
+{
+  "prior_works": [
+    {
+      "title": "Learning to forget: Continual prediction with LSTM",
+      "authors": [
+        "Felix A. Gers",
+        "J\u00fcrgen Schmidhuber",
+        "Fred Cummins"
+      ],
+      "year": 2000,
+      "role": "Introduced the forget gate in LSTMs, establishing gating inside the recurrence to control memory decay.",
+      "relationship_sentence": "HGRN\u2019s core idea of using a forget gate within the linear recurrence directly builds on the LSTM forget gate mechanism, but adds a learnable lower bound to explicitly regulate minimum retention."
+    },
+    {
+      "title": "Learning Phrase Representations using RNN Encoder\u2013Decoder for Statistical Machine Translation",
+      "authors": [
+        "Kyunghyun Cho",
+        "Bart van Merri\u00ebnboer",
+        "Dzmitry Bahdanau",
+        "Yoshua Bengio"
+      ],
+      "year": 2014,
+      "role": "Proposed GRU with update/reset gates that modulate information flow and forgetting in recurrent dynamics.",
+      "relationship_sentence": "HGRN generalizes the principle of gated forgetting from GRUs by incorporating a structured, layer-wise constrained forget gate to shape timescales."
+    },
+    {
+      "title": "Can recurrent neural networks warp time?",
+      "authors": [
+        "Corentin Tallec",
+        "Yann Ollivier"
+      ],
+      "year": 2018,
+      "role": "Linked forget-gate biases to target time constants (chrono initialization), giving a theoretical handle on memory timescales.",
+      "relationship_sentence": "HGRN\u2019s learnable lower bounds on forget gates and their monotonic increase across layers operationalize chrono-style timescale control in a hierarchical way."
+    },
+    {
+      "title": "Hierarchical Multiscale Recurrent Neural Networks",
+      "authors": [
+        "Junyoung Chung",
+        "Sungjin Ahn",
+        "Yoshua Bengio"
+      ],
+      "year": 2016,
+      "role": "Demonstrated hierarchical timescales in RNNs via boundary/gating mechanisms that update at different temporal resolutions.",
+      "relationship_sentence": "HGRN\u2019s layer-wise increasing lower bounds implement a simpler, explicit hierarchy of timescales akin to HM-LSTM\u2019s multiscale updates."
+    },
+    {
+      "title": "Ordered Neurons: Integrating Tree Structures into Recurrent Neural Networks",
+      "authors": [
+        "Yikang Shen",
+        "Shawn Tan",
+        "Alessandro Sordoni",
+        "Aaron Courville"
+      ],
+      "year": 2019,
+      "role": "Introduced monotonic gating (cumax) to enforce hierarchical information storage in RNNs.",
+      "relationship_sentence": "HGRN echoes ON-LSTM\u2019s monotonic-gating philosophy by enforcing a monotonic schedule on forget-gate lower bounds across layers to induce hierarchical memory."
+    },
+    {
+      "title": "Language Modeling with Gated Convolutional Networks",
+      "authors": [
+        "Yann N. Dauphin",
+        "Angela Fan",
+        "Michael Auli",
+        "David Grangier"
+      ],
+      "year": 2017,
+      "role": "Popularized output-side multiplicative gating (GLU) for efficient sequence modeling.",
+      "relationship_sentence": "HGRN addresses a gap in many modern linear models that rely on output gating (e.g., GLU-style) by reinstating and constraining the forget gate inside the recurrence."
+    },
+    {
+      "title": "Efficiently Modeling Long Sequences with Structured State Spaces",
+      "authors": [
+        "Albert Gu",
+        "Karan Goel",
+        "Christopher R\u00e9"
+      ],
+      "year": 2022,
+      "role": "Catalyzed the resurgence of linear recurrent/state-space sequence models with long-context efficiency.",
+      "relationship_sentence": "HGRN builds on the linear-recurrence renaissance sparked by S4, adding principled within-recurrence gating to improve long-term dependency modeling."
+    }
+  ],
+  "synthesis_narrative": "HGRN\u2019s key contribution\u2014introducing a forget gate inside a linear recurrence with a learnable, layer-wise increasing lower bound\u2014sits at the intersection of classic gated RNN design and the recent revival of efficient linear sequence models. The conceptual foundation comes from LSTM and GRU, which established that internal gating of the recurrent state controls memory decay and stability. Tallec and Ollivier\u2019s chrono initialization provided the theoretical link between forget-gate biases and time constants, suggesting that one can target desired retention scales by tuning gate parameters. HGRN leverages this insight but turns it into an architectural constraint: a learnable, minimum forget level per layer, with bounds that increase monotonically upward to induce longer timescales in higher layers.\n\nThe hierarchical aspect connects to multiscale RNNs like HM-LSTM and to monotonic gating ideas in ON-LSTM; both works show that organizing memory across different temporal resolutions benefits long-range structure. HGRN offers a simpler, deterministic hierarchy via gate floors, rather than event-driven boundaries or complex master gates. Finally, in the context of the linear-model renaissance (e.g., S4) and widespread output-side gating popularized by GLUs, HGRN directly addresses a gap: many efficient linear RNN/SSM formulations apply gating after the recurrence while neglecting within-state forgetting. By reinstating and constraining the forget gate internally\u2014and structuring it hierarchically\u2014HGRN marries the efficiency of linear recurrences with principled, controllable long-term memory.",
+  "analysis_timestamp": "2026-01-06T23:42:49.053038"
+}

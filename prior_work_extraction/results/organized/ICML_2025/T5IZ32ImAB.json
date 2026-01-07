@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Planning with Diffusion for Flexible Behavior Synthesis",
+      "authors": "Michael Janner et al.",
+      "year": 2022,
+      "role": "Baseline",
+      "relationship_sentence": "MCGD inherits the offline trajectory-diffusion planning paradigm from Diffuser, but replaces independent per-agent diffusion with a graph-structured diffusion that explicitly couples agents via coordination edges, directly addressing Diffuser\u2019s inability to model multi-agent coordination."
+    },
+    {
+      "title": "Offline Reinforcement Learning via Trajectory Diffusion",
+      "authors": "Anikait Ajay et al.",
+      "year": 2022,
+      "role": "Foundation",
+      "relationship_sentence": "MCGD builds on Decision Diffuser\u2019s core idea that generative trajectory diffusion mitigates OOD issues in offline RL, extending it to multi-agent settings by conditioning diffusion on an explicitly learned coordination graph."
+    },
+    {
+      "title": "Structured Denoising Diffusion Models in Discrete State Spaces",
+      "authors": "Jacob Austin et al.",
+      "year": 2021,
+      "role": "Extension",
+      "relationship_sentence": "MCGD\u2019s adaptive categorical diffusion over discrete edge types directly modifies the D3PM categorical transition kernel by learning context-dependent edge-type transition probabilities to capture diverse coordination structures."
+    },
+    {
+      "title": "DiGress: Discrete Denoising Diffusion for Graph Generation",
+      "authors": "Thomas Vignac et al.",
+      "year": 2022,
+      "role": "Extension",
+      "relationship_sentence": "MCGD adapts graph diffusion ideas from DiGress\u2014jointly denoising graph structure\u2014by tailoring them to MARL: continuous node attributes (states/actions) with discrete edge categories that encode coordination, rather than purely discrete molecular graphs."
+    },
+    {
+      "title": "Coordinated Reinforcement Learning",
+      "authors": "Carlos Guestrin et al.",
+      "year": 2002,
+      "role": "Foundation",
+      "relationship_sentence": "MCGD\u2019s sparse coordination graph follows the coordination-graph formalism introduced by Guestrin et al., factorizing multi-agent interaction via edges and enabling tractable modeling of inter-agent dependencies."
+    },
+    {
+      "title": "Neural Relational Inference for Interacting Systems",
+      "authors": "Thomas Kipf et al.",
+      "year": 2018,
+      "role": "Inspiration",
+      "relationship_sentence": "MCGD\u2019s use of discrete edge categories to represent latent interaction modes, and learning transitions between them from trajectories, is inspired by NRI\u2019s approach to inferring discrete relational types from observed dynamics."
+    },
+    {
+      "title": "Actor-Attention-Critic for Multi-Agent Reinforcement Learning",
+      "authors": "Shariq Iqbal et al.",
+      "year": 2019,
+      "role": "Gap Identification",
+      "relationship_sentence": "Attention-based MARL like MAAC highlights the need to model inter-agent influence, but it is on-policy and lacks an offline generative mechanism; MCGD addresses this gap by learning a robust graph-diffusion policy from static data."
+    }
+  ],
+  "synthesis_narrative": "MCGD sits at the intersection of offline generative RL, graph-structured modeling, and multi-agent coordination. Diffuser and Decision Diffuser established that denoising diffusion of trajectories can mitigate out-of-distribution errors endemic to offline RL, but these methods model each agent (or a single agent) independently and thus fail to encode coordination dynamics. MCGD tackles this by importing the coordination-graph perspective from classical Coordinated Reinforcement Learning, representing inter-agent dependencies through a sparse graph whose edges capture pairwise coordination. To operationalize such structure within a generative policy, MCGD draws on graph diffusion modeling from DiGress, but adapts it to the MARL setting by combining continuous node attributes (states/actions) with discrete edge categories that denote interaction modes. The discrete edge modeling is enabled by categorical diffusion advances from D3PM (Austin et al.), which MCGD extends via adaptive, context-dependent transition matrices that learn edge-type transition probabilities and thus capture structural diversity across tasks and time. Finally, Neural Relational Inference informs MCGD\u2019s use of latent, discrete relation types learned from trajectories, grounding the notion that interaction categories can be inferred rather than prescribed. Compared to attention-based MARL (e.g., MAAC), which demonstrates the value of modeling inter-agent influence but does not address offline robustness, MCGD integrates these strands into a unified graph-diffusion framework that yields robust, coordinated policies from offline data.",
+  "analysis_timestamp": "2026-01-06T23:07:19.618419"
+}

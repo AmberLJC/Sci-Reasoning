@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Deep Image Prior",
+      "authors": "Dmitry Ulyanov, Andrea Vedaldi, Victor Lempitsky",
+      "year": 2018,
+      "role": "Untrained single-image prior for inverse problems",
+      "relationship_sentence": "ZS-NCD adopts the DIP insight that an untrained network optimized on a single degraded image can act as a powerful prior, but replaces DIP\u2019s fragile early-stopping regularization with an explicit entropy constraint inherited from neural compression architectures."
+    },
+    {
+      "title": "Zero-Shot Super-Resolution",
+      "authors": "Micha\u00ebl Shocher, Nadav Cohen, Michal Irani",
+      "year": 2018,
+      "role": "Internal learning on patches from a single test image",
+      "relationship_sentence": "ZS-NCD follows ZSSR\u2019s paradigm of training on patches extracted from the test image itself and aggregating outputs, extending this internal-learning strategy from super-resolution to denoising with a compression-driven regularizer."
+    },
+    {
+      "title": "Self2Self with Dropout: Learning from Single Image for Image Denoising",
+      "authors": "Yanhong Quan, Shuhang Gu, Yuanhao Dong, Hui Ji (often cited with co-authors: Y. Quan, S. Chen, Y. Pang, H. Ji)",
+      "year": 2020,
+      "role": "Zero-shot single-image denoising via self-supervision",
+      "relationship_sentence": "ZS-NCD targets the same zero-shot single-image denoising regime as Self2Self but avoids handcrafted masking/dropout schemes by using the neural compressor\u2019s entropy model as a built-in regularizer against overfitting noise."
+    },
+    {
+      "title": "BM3D: Image Denoising by Sparse 3-D Transform-Domain Collaborative Filtering",
+      "authors": "Kostadin Dabov, Alessandro Foi, Vladimir Katkovnik, Karen Egiazarian",
+      "year": 2007,
+      "role": "Classical patch-based zero-shot denoising with aggregation",
+      "relationship_sentence": "ZS-NCD echoes BM3D\u2019s core idea of leveraging intra-image self-similarity and aggregating overlapping patches, but learns the patch mapping via optimization of a neural compressor rather than fixed transforms and block-matching."
+    },
+    {
+      "title": "Variational Image Compression with a Scale Hyperprior",
+      "authors": "Johannes Ball\u00e9, David Minnen, Saurabh Singh, Sung Jin Hwang, Nick Johnston",
+      "year": 2018,
+      "role": "Foundational neural compression with learned entropy models",
+      "relationship_sentence": "ZS-NCD relies on the hyperprior-style entropy model introduced here; the rate term (estimated code length) provides the principled entropy constraint that regularizes single-image optimization and curbs overfitting to noise."
+    },
+    {
+      "title": "Joint Autoregressive and Hierarchical Priors for Learned Image Compression",
+      "authors": "David Minnen, Johannes Ball\u00e9, George Toderici",
+      "year": 2018,
+      "role": "Stronger latent priors for learned compression",
+      "relationship_sentence": "By demonstrating powerful priors that combine hyperpriors with autoregressive context models, this work underpins ZS-NCD\u2019s choice of compression backbones whose expressive entropy models serve as effective regularizers during zero-shot fitting."
+    },
+    {
+      "title": "Compressed Sensing using Generative Models",
+      "authors": "Ashish Bora, Ajil Jalal, Eric Price, Alexandros G. Dimakis",
+      "year": 2017,
+      "role": "Model-based priors for inverse problems via learned generative structure",
+      "relationship_sentence": "ZS-NCD builds on the principle that restricting reconstructions to a model\u2019s representation space regularizes ill-posed recovery; it instantiates this with a compression network and an explicit rate penalty instead of a pre-trained generator."
+    }
+  ],
+  "synthesis_narrative": "ZS-NCD\u2019s core contribution\u2014zero-shot denoising by optimizing an untrained neural compression model on patches from a single noisy image and using the compressor\u2019s entropy model as an implicit regularizer\u2014emerges from two converging lines of work. From the internal-learning/zero-shot side, Deep Image Prior and Zero-Shot Super-Resolution established that a network\u2019s architecture and intra-image patch recurrence can serve as powerful priors when optimized on the test image alone. Self2Self then demonstrated that truly single-image denoising is feasible, while highlighting the risk of overfitting noise and the need for principled regularization. Classical BM3D provided the patch-overlap aggregation blueprint and showed the enduring strength of intra-image self-similarity without external training.\n\nFrom the compression side, Ball\u00e9 et al.\u2019s hyperprior model and Minnen et al.\u2019s joint autoregressive\u2013hierarchical priors introduced end-to-end neural compression with accurate entropy models and an explicit rate\u2013distortion trade-off. These architectures embed a learnable code-length (entropy) constraint that naturally penalizes overly complex representations. ZS-NCD fuses these strands: it replaces ad-hoc early stopping or masking with the compressor\u2019s rate term as an MDL-like regularizer during single-image optimization, and it applies internal learning over overlapping patches with aggregation to exploit self-similarity. The broader concept of using model structure as a prior for inverse problems, exemplified by Bora et al., supports ZS-NCD\u2019s view that constraining reconstructions to a model family\u2014in this case, a neural compressor with an entropy model\u2014yields robust, data-free denoising across noise types.",
+  "analysis_timestamp": "2026-01-07T00:02:04.971558"
+}

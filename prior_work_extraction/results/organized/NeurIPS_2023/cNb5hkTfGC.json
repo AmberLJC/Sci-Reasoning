@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Optimal Auctions through Deep Learning",
+      "authors": "R. D\u00fctting, Z. Feng, H. Narasimhan, D. C. Parkes",
+      "year": 2019,
+      "role": "Introduced the RegretNet paradigm that learns multi-item auctions by penalizing ex post regret, achieving strong empirical revenue but only approximate DSIC.",
+      "relationship_sentence": "AMenuNet is positioned as a DSIC-guaranteed alternative to RegretNet-like methods, replacing regret-penalized training with an AMA-based parameterization that ensures exact DSIC/IR while retaining neural scalability."
+    },
+    {
+      "title": "The Characterization of Implementable Choice Rules",
+      "authors": "Kevin W. S. Roberts",
+      "year": 1979,
+      "role": "Proved that, on rich type domains, dominant-strategy implementable social choice functions are precisely affine maximizers.",
+      "relationship_sentence": "Roberts\u2019 theorem directly motivates restricting the hypothesis class to affine maximizer auctions, giving AMenuNet its DSIC and IR guarantees by construction."
+    },
+    {
+      "title": "Incentive Compatible Public Decision Making / Incentives in Teams (VCG mechanisms)",
+      "authors": "William Vickrey; Edward H. Clarke; Theodore Groves",
+      "year": 1973,
+      "role": "Established the Vickrey\u2013Clarke\u2013Groves family as truthful, IR mechanisms that select welfare-maximizing allocations with appropriate payments; VCG is a special case of AMAs.",
+      "relationship_sentence": "AMenuNet learns AMA parameters (e.g., bidder weights/reserves and allocation menu) that generalize VCG, inheriting truthfulness and IR from this foundational lineage."
+    },
+    {
+      "title": "The Menu-Size Complexity of Auctions",
+      "authors": "Sergiu Hart, Noam Nisan",
+      "year": 2013,
+      "role": "Formalized how the number of options (menu size) governs expressiveness and revenue in multi-dimensional auctions, showing inherent scalability tensions.",
+      "relationship_sentence": "Their menu-complexity lens underpins AMenuNet\u2019s core idea of learning a compact, high-quality allocation menu via a neural generator to balance expressivity and tractability."
+    },
+    {
+      "title": "Deep Sets",
+      "authors": "Manzil Zaheer, Satwik Kottur, Siamak Ravanbakhsh, Barnab\u00e1s Po\u00f3czos, Ruslan Salakhutdinov, Alexander Smola",
+      "year": 2017,
+      "role": "Provided the canonical architecture for permutation-invariant/equivariant processing of sets and proved universal approximation results for set functions.",
+      "relationship_sentence": "AMenuNet\u2019s permutation equivariance over bidders and items and its scale-free parameterization are architecturally grounded in the Deep Sets principle."
+    },
+    {
+      "title": "Set Transformer: A Framework for Attention-based Permutation-Invariant Neural Networks",
+      "authors": "Juho Lee, Yoonho Lee, Jungtaek Kim, Adam R. Kosiorek, Seungjin Choi, Yee Whye Teh",
+      "year": 2019,
+      "role": "Introduced attention-based set encoders/decoders enabling expressive interactions within unordered inputs while preserving permutation invariance.",
+      "relationship_sentence": "AMenuNet\u2019s design goal of capturing rich bidder\u2013item interactions without breaking permutation symmetry aligns with Set Transformer-style set processing to keep parameters independent of auction scale."
+    }
+  ],
+  "synthesis_narrative": "AMenuNet\u2019s core contribution\u2014an exactly DSIC, scalable neural mechanism that learns the parameters of an affine maximizer auction including its allocation menu\u2014sits at the intersection of mechanism design theory and modern set-structured neural architectures. On the theoretical side, Vickrey\u2013Clarke\u2013Groves and Roberts\u2019 characterization together justify the paper\u2019s decision to constrain the hypothesis space to affine maximizers: within rich type domains these are precisely the DSIC, IR mechanisms, with VCG as a canonical special case. This choice directly addresses the primary limitation of the dominant learning-based baseline, RegretNet (D\u00fctting et al.), which optimizes revenue under regret penalties but only enforces incentive compatibility approximately. By adopting AMAs, AMenuNet guarantees DSIC/IR by construction while keeping the search space expressive via learned weights, reserves, and a learned allocation menu.\n\nScalability and generalization are enabled by insights from menu complexity and set-based neural modeling. Hart\u2013Nisan\u2019s results highlight why naive enumeration of large menus is computationally prohibitive, motivating AMenuNet\u2019s neural generation of a compact candidate allocation set that preserves revenue performance. To make the architecture robust to variable numbers of bidders and items and to avoid parameter growth with auction scale, AMenuNet builds on permutation-invariant/equivariant design principles from Deep Sets and Set Transformer, which provide expressive, symmetry-preserving encoders for unordered collections. Together, these works directly inform AMenuNet\u2019s design choices: restrict to AMAs for exact DSIC/IR, and use permutation-equivariant, set-based neural components to learn a compact, high-quality allocation menu that scales to larger markets.",
+  "analysis_timestamp": "2026-01-07T00:02:04.843918"
+}

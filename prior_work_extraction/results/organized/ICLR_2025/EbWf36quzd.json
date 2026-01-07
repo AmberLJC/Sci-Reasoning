@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Scalable Diffusion Models with Transformers",
+      "authors": "William Peebles et al.",
+      "year": 2023,
+      "arxiv_id": "2212.09748",
+      "role": "Extension",
+      "relationship_sentence": "Flag-DiT directly builds on DiT\u2019s transformer-based diffusion backbone and AdaLN-Zero conditioning, extending it with flow-matching training and architectural changes (zero-initialized attention and modality-agnostic token sequencing) to scale across flexible spatial\u2013temporal resolutions."
+    },
+    {
+      "title": "Conditional Flow Matching: Training Continuous-Time Dynamics for Generative Modeling",
+      "authors": "Alexander Tong et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "Lumina-T2X adopts the conditional flow-matching objective to learn a velocity field from noise to data, replacing score-based diffusion with a flow-based formulation that underpins the paper\u2019s training paradigm."
+    },
+    {
+      "title": "Stable Diffusion 3",
+      "authors": "Patrick Esser et al.",
+      "year": 2024,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "SD3 demonstrated that rectified/flow-matching objectives combined with a DiT-style transformer (with RoPE/KQ-Norm) yield scalable, high-fidelity, flexible-resolution text-to-image generation, directly motivating Lumina-T2X\u2019s flow-based large DiT recipe."
+    },
+    {
+      "title": "Sora: Creating video from text",
+      "authors": "OpenAI et al.",
+      "year": 2024,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "Sora revealed that scaling DiT over spatiotemporal latents can produce arbitrary resolutions, aspect ratios, and durations but withheld key architectural/tokenization details that Lumina-T2X explicitly provides (e.g., learned |[nextline]| and |[nextframe]| separators)."
+    },
+    {
+      "title": "HunyuanVideo: A System for Large-Scale Text-to-Video Generation",
+      "authors": "Wen Wang et al.",
+      "year": 2024,
+      "arxiv_id": null,
+      "role": "Related Problem",
+      "relationship_sentence": "HunyuanVideo\u2019s use of a 3D latent tokenizer and a DiT-based generator for variable-length/size videos informed Lumina-T2X\u2019s spatiotemporal latent representation that is then unified across modalities with learned separator tokens."
+    },
+    {
+      "title": "ReZero: Fast Convergence at Large Depth",
+      "authors": "Thomas Bachlechner et al.",
+      "year": 2020,
+      "arxiv_id": "2003.04887",
+      "role": "Inspiration",
+      "relationship_sentence": "The zero-initialized residual gating idea in ReZero motivates Lumina-T2X\u2019s zero-initialized attention design to stabilize and ease optimization in very deep diffusion transformers."
+    },
+    {
+      "title": "MAGVIT-v2: Scalable Video Generation with Autoregressive Transformers",
+      "authors": "Jiahui Yu et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "MAGVIT-v2\u2019s explicit delimiter tokens to mark spatial/temporal structure in flattened video sequences inspired Lumina-T2X\u2019s learned |[nextline]| and |[nextframe]| tokens for organizing continuous latent tokens across rows and frames."
+    }
+  ],
+  "synthesis_narrative": "A transformer-first diffusion backbone for images was crystallized by Scalable Diffusion Models with Transformers, which introduced AdaLN-Zero conditioning and a pure-Transformer denoiser that scales training and inference while operating on flattened latent grids. Conditional Flow Matching then reframed diffusion learning as matching a time-dependent velocity field, providing a simpler, stable objective to drive continuous-time generative dynamics. Stable Diffusion 3 validated that marrying a DiT-style architecture with rectified/flow-matching plus training stabilizers can scale text-to-image to high fidelity and flexible aspect ratios. In parallel, HunyuanVideo demonstrated that 3D latent tokenization with a DiT generator can handle variable video durations and resolutions. MAGVIT-v2 showed that inserting explicit delimiter tokens into rasterized visual sequences helps a Transformer track spatial rows and temporal frame boundaries. Finally, ReZero established that zero-initialized residual pathways can dramatically stabilize optimization in deep Transformers.\nSynthesizing these strands, Lumina-T2X replaces score-based diffusion with a flow-matching objective inside a DiT-derived backbone, while adopting zero-initialized attention for stability at scale. It tokenizes spatiotemporal latents and, echoing autoregressive delimiter designs, introduces learned |[nextline]| and |[nextframe]| tokens to unify spatial\u2013temporal structure across images, videos, multi-view 3D, and audio. Motivated by Sora\u2019s tantalizing but undisclosed blueprint for arbitrary resolution/duration generation, these pieces naturally converge into a single, scalable Flag-DiT framework that makes the missing implementation details explicit and extensible across modalities.",
+  "target_paper": {
+    "title": "Lumina-T2X: Scalable Flow-based Large Diffusion Transformer for Flexible Resolution Generation",
+    "authors": "Peng Gao, Le Zhuo, Dongyang Liu, Ruoyi Du, Xu Luo, Longtian Qiu, Yuhang Zhang, Rongjie Huang, Shijie Geng, Renrui Zhang, Junlin Xie, Wenqi Shao, Zhengkai Jiang, Tianshuo Yang, Weicai Ye, Tong He, Jingwen He, Junjun He, Yu Qiao, Hongsheng Li",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "Generative Models, Text-to-Image Generation, Diffusion Models, Flow Matching",
+    "abstract": "Sora unveils the potential of scaling Diffusion Transformer (DiT) for generating photorealistic images and videos at arbitrary resolutions, aspect ratios, and durations, yet it still lacks sufficient implementation details. In this paper, we introduce the Lumina-T2X family -- a series of Flow-based Large Diffusion Transformers (Flag-DiT) equipped with zero-initialized attention, as a simple and scalable generative framework that can be adapted to various modalities, e.g., transforming noise into images, videos, multi-view 3D objects, or audio clips conditioned on text instructions. By tokenizing the latent spatial-temporal space and incorporating learnable placeholders such as |[nextline]| and |[nextframe]| tokens, Lumina-T2X seamlessly unifies the representations of different modalities across various spatial-temporal resolutions. Advanced techniques like RoPE, KQ-Norm, and flow matching enhance the stability, flexibility, and scalability of Flag-DiT, enabling models of Lumina-T2X to ",
+    "openreview_id": "EbWf36quzd",
+    "forum_id": "EbWf36quzd"
+  },
+  "analysis_timestamp": "2026-01-06T20:03:42.656806"
+}

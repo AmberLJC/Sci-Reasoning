@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Planning chemical syntheses with deep neural networks and symbolic AI",
+      "authors": "Marcus W. Segler et al.",
+      "year": 2018,
+      "role": "Foundation",
+      "relationship_sentence": "Established the modern formulation of retrosynthetic route planning as search guided by learned one-step models, which this paper adopts but augments with a route-level energy to optimize global, user-specified objectives."
+    },
+    {
+      "title": "Retro*: Learning Retrosynthetic Planning with Neural Guided A* Search",
+      "authors": "Chen et al.",
+      "year": 2020,
+      "role": "Baseline",
+      "relationship_sentence": "Serves as a primary baseline and target of improvement; unlike Retro*, which relies on heuristics/value functions without explicit preference control, the proposed method learns a residual energy to reweight route probabilities toward desired criteria (cost, yield, steps)."
+    },
+    {
+      "title": "AiZynthFinder: a fast, robust and flexible open-source software for retrosynthetic planning",
+      "authors": "Anders Genheden et al.",
+      "year": 2020,
+      "role": "Gap Identification",
+      "relationship_sentence": "Represents widely used MCTS-based planners that expand using local scores and hand-crafted heuristics; its lack of principled, learnable control over route-level preferences is a gap directly addressed by the conditional residual EBM."
+    },
+    {
+      "title": "Direct Preference Optimization: Your Language Model Is Secretly a Reward Model",
+      "authors": "Yifan M. Rafailov et al.",
+      "year": 2023,
+      "role": "Inspiration",
+      "relationship_sentence": "Provides the key preference-learning insight that an aligned policy arises from an exponential tilt of a reference model; the paper instantiates this by learning a conditional residual energy over full synthesis routes to tilt a base route distribution toward preferred criteria."
+    },
+    {
+      "title": "Reward Augmented Maximum Likelihood",
+      "authors": "Mohammad Norouzi et al.",
+      "year": 2016,
+      "role": "Foundation",
+      "relationship_sentence": "Introduces exponentiated-reward reweighting of a model\u2019s distribution, the statistical mechanism the paper leverages by learning an energy (reward) that reshapes route probabilities toward desired global properties."
+    },
+    {
+      "title": "Your Classifier is Secretly an Energy Based Model",
+      "authors": "Will Grathwohl et al.",
+      "year": 2019,
+      "role": "Foundation",
+      "relationship_sentence": "Grounds the EBM view that adding an energy term yields a log-linear composition with a base model; the proposed conditional residual EBM directly operationalizes this to compose a learned route-level energy with a probabilistic planner."
+    },
+    {
+      "title": "Plug and Play Language Models: A Simple Approach to Controlled Text Generation",
+      "authors": "Siddharth Dathathri et al.",
+      "year": 2020,
+      "role": "Related Problem",
+      "relationship_sentence": "Demonstrates post-hoc control of a base generator via an auxiliary scorer; the paper adopts this control-without-retraining principle by learning an energy over complete routes to steer generation according to preferences."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core contribution\u2014controlling retrosynthetic route generation via a conditional residual energy that tilts a base probabilistic planner toward user-specified preferences\u2014emerges from two converging lineages. From synthesis planning, Segler et al. established the modern framework of neural-guided search over retrosynthetic trees, later embodied in practical planners like AiZynthFinder and Retro*. These systems demonstrated the effectiveness of one-step models plus search, but also exposed a gap: route generation is dominated by local policies and handcrafted heuristics, offering little principled control over global objectives such as cost, yield, or step count. From learning-to-align generative models, Norouzi et al.\u2019s Reward Augmented Maximum Likelihood introduced exponentiated-reward reweighting, and Rafailov et al.\u2019s Direct Preference Optimization clarified that alignment can be achieved by an exponential tilt of a reference policy based on preferences. Grathwohl et al. provided the EBM formalism that makes this tilt a learned energy added to the base log-probability. Inspired by plug-and-play control in text generation (Dathathri et al.), the present work keeps the base retrosynthesis model while learning a conditional residual energy over entire routes, trained from preferences/criteria, to reshuffle probability mass toward globally superior syntheses. In doing so, it directly addresses the lack of lookahead-aware, preference-controllable route quality in Retro*/AiZynthFinder-style planners with a principled, learnable energy-based reweighting.",
+  "analysis_timestamp": "2026-01-06T23:09:26.501471"
+}

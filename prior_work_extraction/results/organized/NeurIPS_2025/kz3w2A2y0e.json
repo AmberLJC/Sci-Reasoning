@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Jonathan Ho, Ajay Jain, Pieter Abbeel",
+      "year": 2020,
+      "role": "Foundational diffusion generative modeling paradigm",
+      "relationship_sentence": "DSD adopts the DDPM forward-noise/learned reverse denoise recipe but replaces Gaussian, per-pixel diffusion with a conservative discrete-state process that moves counts spatially while preserving totals."
+    },
+    {
+      "title": "Score-Based Generative Modeling through Stochastic Differential Equations",
+      "authors": "Yang Song, Jascha Sohl-Dickstein, Diederik P. Kingma, Abhishek Kumar, Stefano Ermon, Ben Poole",
+      "year": 2021,
+      "role": "Continuous-time formulation and reverse-time dynamics",
+      "relationship_sentence": "DSD extends the continuous-time view of diffusion models to continuous-time Markov jump processes, using the analogous reverse-time construction to define generative sampling for discrete, count-preserving dynamics."
+    },
+    {
+      "title": "Structured Denoising Diffusion Models in Discrete State Spaces",
+      "authors": "Jacob Austin, Daniel D. Johnson, Jonathan Ho, Daniel Tarlow, Rianne van den Berg",
+      "year": 2021,
+      "role": "Discrete diffusion modeling for categorical variables",
+      "relationship_sentence": "DSD builds on discrete diffusion objectives and parameterizations introduced here, but replaces independent categorical corruption with spatial jump transitions that strictly conserve the global particle count."
+    },
+    {
+      "title": "Argmax Flows and Multinomial Diffusion: Learning Categorical Distributions with Normalizing Flows",
+      "authors": "Emiel Hoogeboom, Didrik Nielsen, Ole Winther, Max Welling",
+      "year": 2021,
+      "role": "Multinomial/categorical diffusion mechanisms and training for discrete data",
+      "relationship_sentence": "DSD leverages insights from multinomial diffusion about modeling and training over discrete states, while introducing a conservative jump generator that moves mass between neighboring sites instead of re-sampling symbols independently."
+    },
+    {
+      "title": "Interacting Particle Systems (2nd ed.)",
+      "authors": "Thomas M. Liggett",
+      "year": 2005,
+      "role": "Theory of conservative lattice gases and continuous-time jump processes",
+      "relationship_sentence": "DSD\u2019s forward noising resembles conservative lattice-gas/Kawasaki dynamics from interacting particle systems, providing the rigorous template for local exchanges that exactly conserve total particle number."
+    },
+    {
+      "title": "Markov Chains",
+      "authors": "J. R. Norris",
+      "year": 1997,
+      "role": "Time-reversal and marginal-dependent rate formulas for CTMCs",
+      "relationship_sentence": "DSD relies on CTMC time-reversal results to derive reverse jump rates from forward generators and time-marginals, enabling principled reverse diffusion in discrete, conservative settings."
+    },
+    {
+      "title": "Diffusion Constants near the Critical Point for Time-Dependent Ising Models II",
+      "authors": "K. Kawasaki",
+      "year": 1966,
+      "role": "Conservative spin-exchange (Kawasaki) dynamics",
+      "relationship_sentence": "DSD\u2019s spatial hop-based noise is conceptually aligned with Kawasaki spin-exchange dynamics, the classic conservative alternative to Glauber updates, ensuring conservation laws hold throughout the diffusion."
+    }
+  ],
+  "synthesis_narrative": "Discrete Spatial Diffusion (DSD) reframes diffusion generative modeling by making the forward corruption a conservative, continuous-time Markov jump process that exchanges unit mass between neighboring sites, thereby preserving global particle counts. The overall generative recipe follows DDPM and the score-SDE line of work: define a simple-to-sample forward process and learn its reverse-time dynamics for sampling. Song et al.\u2019s continuous-time perspective is crucial, as DSD works in continuous time but with discrete states, translating reverse-time SDE ideas to CTMCs. Prior discrete diffusion models\u2014Austin et al.\u2019s structured discrete diffusion and Hoogeboom et al.\u2019s multinomial diffusion\u2014provide practical parameterizations and training losses for discrete state spaces; however, they corrupt sites independently and do not enforce conservation. DSD departs by encoding noise as spatial hops, which inherently conserve the total count.\nThe construction of a valid reverse process for jump dynamics depends on classical CTMC time-reversal theory (as in Norris), which supplies the form of reverse rates in terms of forward generators and time-marginals. The choice of a conservative forward operator is grounded in the interacting particle systems literature (Liggett), specifically Kawasaki-type exchange dynamics that maintain conserved quantities by local swaps. Together, these strands yield a diffusion framework that is discrete, spatial, and exactly intensity-preserving, enabling generative modeling for domains where conservation laws (e.g., mass or particle number) are non-negotiable.",
+  "analysis_timestamp": "2026-01-06T23:42:48.139790"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Thinking Like Transformers",
+      "authors": "Gail Weiss; Yoav Goldberg; Eran Yahav",
+      "year": 2021,
+      "role": "DSL and compilation foundation",
+      "relationship_sentence": "Learning Transformer Programs directly builds on RASP from Weiss et al., using its human-readable, transformer-executable primitives as the target program space and the basis for compiling learned models into discrete programs."
+    },
+    {
+      "title": "A Mathematical Framework for Transformer Circuits",
+      "authors": "Nelson Elhage; Neel Nanda; Catherine Olsson; et al.",
+      "year": 2021,
+      "role": "Mechanistic interpretability framework and motivation",
+      "relationship_sentence": "The paper positions itself as an alternative to labor-intensive circuit-level reverse engineering articulated in this framework, motivating a design that is interpretable by construction rather than post hoc."
+    },
+    {
+      "title": "In-Context Learning and Induction Heads",
+      "authors": "Catherine Olsson; Nelson Elhage; Neel Nanda; et al.",
+      "year": 2022,
+      "role": "Canonical algorithmic mechanism in transformers",
+      "relationship_sentence": "The discovery of induction heads provided a concrete, mechanistic algorithm that Learning Transformer Programs aims to learn and then recover as a discrete program, informing both model design and evaluation tasks."
+    },
+    {
+      "title": "Interpretability in the Wild: A Circuit for Indirect Object Identification in GPT-2",
+      "authors": "Wang et al.",
+      "year": 2022,
+      "role": "Benchmark circuit and evaluation paradigm",
+      "relationship_sentence": "This work\u2019s IOI circuit exemplifies end-to-end circuit extraction in real models, supplying a benchmark-style task and interpretability standard that LTP targets with its automatically extracted programs."
+    },
+    {
+      "title": "Categorical Reparameterization with Gumbel-Softmax",
+      "authors": "Eric Jang; Shixiang Gu; Ben Poole",
+      "year": 2017,
+      "role": "Differentiable relaxation for discrete choices",
+      "relationship_sentence": "LTP relies on differentiable relaxation of discrete program choices; Gumbel-Softmax provides the core technique enabling gradient-based learning over categorical RASP operators before discretization."
+    },
+    {
+      "title": "Estimating or Propagating Gradients Through Stochastic Neurons for Conditional Computation",
+      "authors": "Yoshua Bengio; Nicholas L\u00e9onard; Aaron Courville",
+      "year": 2013,
+      "role": "Straight-through estimator for hard discretization",
+      "relationship_sentence": "The straight-through estimator underpins LTP\u2019s soft-to-hard conversion, allowing backpropagation through argmax/rounding steps when mapping trained models to discrete programs."
+    },
+    {
+      "title": "Neural Programmer-Interpreters",
+      "authors": "Scott Reed; Nando de Freitas",
+      "year": 2016,
+      "role": "Program induction paradigm",
+      "relationship_sentence": "NPI established the learn-then-interpret program-execution view; LTP adapts this paradigm to transformers by learning within a constrained, RASP-like instruction set that compiles to transparent transformer weights."
+    }
+  ],
+  "synthesis_narrative": "Learning Transformer Programs (LTP) unifies three strands of prior work to make transformers interpretable by design. First, RASP (Weiss et al., 2021) provides the crucial substrate: a concise, human-readable DSL whose primitives map cleanly onto transformer computations and can be compiled into weights. Instead of hand-writing RASP programs, LTP learns within this program space, then compiles the learned, discrete specification back into a transformer\u2014preserving mechanistic transparency. Second, the mechanistic interpretability line (Elhage et al., 2021; Olsson et al., 2022; Wang et al., 2022) supplies both the motivation and the concrete targets. Findings such as induction heads and the IOI circuit identify algorithmic behaviors that real transformers implement; LTP is explicitly designed to recover such behaviors as discrete programs, reducing manual circuit reconstruction and providing faithful, end-to-end descriptions. Third, LTP depends on differentiable program selection methods from neural program induction: Gumbel-Softmax reparameterization (Jang et al., 2017) and straight-through estimators (Bengio et al., 2013) enable gradient-based learning over inherently discrete choices (e.g., selecting RASP operators or control flow) and a principled transition from soft models to hard, executable programs. Conceptually, this mirrors the Neural Programmer-Interpreter paradigm (Reed & de Freitas, 2016), but instantiates it in the transformer/RASP setting with a compiler-backed guarantee of mechanistic interpretability. Together, these works directly enable LTP\u2019s core contribution: trainable transformers whose behaviors can be automatically and faithfully rendered as human-readable programs.",
+  "analysis_timestamp": "2026-01-06T23:42:49.054399"
+}

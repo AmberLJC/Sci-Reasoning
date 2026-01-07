@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Classifier Chains for Multi-label Classification",
+      "authors": "Jesse Read, Bernhard Pfahringer, Geoff Holmes, Eibe Frank",
+      "year": 2011,
+      "role": "Methodological foundation",
+      "relationship_sentence": "ARECHO adapts the classifier chain paradigm\u2014sequentially predicting dependent targets\u2014to the speech assessment setting by modeling inter-metric dependencies (e.g., PESQ, STOI, MOS) in an autoregressive chain with a learnable/dynamic order."
+    },
+    {
+      "title": "Efficient Inference for Probabilistic Classifier Chains",
+      "authors": "Jesse Read, Luca Martino, David Luengo",
+      "year": 2014,
+      "role": "Inference/decoding strategy",
+      "relationship_sentence": "ARECHO\u2019s two-step, confidence-oriented decoding is conceptually aligned with PCC-style search-based inference (e.g., beam/MCMC over label sequences), using uncertainty-aware hypothesis exploration and selection rather than greedy chaining."
+    },
+    {
+      "title": "Quality-Net: An End-to-End Non-intrusive Speech Quality Assessment Model",
+      "authors": "Szu-Wei Fu, Chi-Fang Liao, Yu Tsao, Hsin-Min Wang",
+      "year": 2018,
+      "role": "Task baseline",
+      "relationship_sentence": "Quality-Net established end-to-end, non-intrusive MOS prediction from speech, which ARECHO generalizes to multi-metric estimation and recasts within a tokenized, autoregressive dependency framework."
+    },
+    {
+      "title": "NISQA: A Deep CNN-Self-Attention Model for Non-Intrusive Speech Quality Assessment",
+      "authors": "Patrick G. Mittag, Sebastian M\u00f6ller",
+      "year": 2021,
+      "role": "Task baseline and multi-dimensional quality",
+      "relationship_sentence": "NISQA\u2019s strong non-intrusive MOS modeling and extensions to quality dimensions highlight inter-metric correlations; ARECHO explicitly encodes these dependencies via a dynamic classifier chain rather than implicit multi-task sharing."
+    },
+    {
+      "title": "Neural Discrete Representation Learning (VQ-VAE)",
+      "authors": "Aaron van den Oord, Oriol Vinyals, Koray Kavukcuoglu",
+      "year": 2017,
+      "role": "Tokenization foundation",
+      "relationship_sentence": "ARECHO\u2019s comprehensive speech information tokenization pipeline is grounded in VQ-style discretization, enabling continuous speech characteristics to be represented as tokens suitable for autoregressive modeling."
+    },
+    {
+      "title": "HuBERT: Self-Supervised Speech Representation Learning by Masked Prediction of Hidden Units",
+      "authors": "Wei-Ning Hsu, Benjamin Bolte, Yao-Hung Hubert Tsai, Kushal Lakhotia, Ruslan Salakhutdinov, Abdelrahman Mohamed",
+      "year": 2021,
+      "role": "Representation/token units",
+      "relationship_sentence": "HuBERT\u2019s use of discretized hidden units and powerful SSL features informs ARECHO\u2019s tokenization and input representation choices for capturing a broad range of speech attributes relevant to multiple metrics."
+    },
+    {
+      "title": "AudioLM: a Language Modeling Approach to Audio Generation",
+      "authors": "Zal\u00e1n Borsos et al.",
+      "year": 2022,
+      "role": "Autoregressive modeling over audio tokens",
+      "relationship_sentence": "AudioLM demonstrates effective AR modeling over multi-stream audio tokens; ARECHO leverages this idea to autoregress over metric tokens and apply hypothesis search with confidence-aware decoding."
+    }
+  ],
+  "synthesis_narrative": "ARECHO\u2019s core idea\u2014predicting multiple speech assessment metrics via a chain-based autoregressive model with explicit dependency modeling\u2014draws directly from the classifier chain literature. Read et al. (2011) introduced classifier chains to sequentially model label dependencies, while subsequent probabilistic variants formalized search-based inference over label sequences; ARECHO inherits this dependency-aware formulation and advances it through a dynamic chain ordering and a confidence-oriented, two-step decoding procedure inspired by PCC\u2019s beam/MCMC-style inference.\n\nOn the task side, Quality-Net (2018) and NISQA (2021) established robust, non-intrusive speech quality assessment from raw audio features, revealing both the feasibility of end-to-end learning and the presence of correlated quality dimensions. ARECHO departs from their predominantly multi-task/independent scoring setups by explicitly encoding inter-metric structure through an autoregressive chain, targeting joint consistency across PESQ, STOI, MOS, and related measures.\n\nA second pillar of ARECHO is its comprehensive tokenization pipeline for speech information. Foundational work on discrete representation learning (VQ-VAE) and SSL-based unit discovery (HuBERT) demonstrated that continuous speech can be mapped to informative token sequences. Building on this, ARECHO tokenizes speech attributes to make them amenable to AR decoding. Finally, AudioLM showed that language-model-style AR decoding over audio tokens can be both expressive and controllable; ARECHO adapts this paradigm to the evaluation domain, combining tokenized representations with chain-based dependency modeling and a confidence-aware hypothesis optimization algorithm to jointly estimate multiple, interdependent speech quality metrics.",
+  "analysis_timestamp": "2026-01-06T23:42:48.119202"
+}

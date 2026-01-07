@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Effective gene expression prediction from sequence by integrating long-range interactions",
+      "authors": "\u017diga Avsec et al.",
+      "year": 2021,
+      "arxiv_id": "",
+      "role": "Baseline",
+      "relationship_sentence": "This work provides the primary sequence-to-expression formulation and long-range modeling baseline that Seq2Exp builds upon, motivating explicit discovery of causal regulatory elements beyond Enformer\u2019s implicit attention."
+    },
+    {
+      "title": "Deep learning sequence-based ab initio prediction of variant effects on gene expression and disease risk",
+      "authors": "Jian Zhou et al.",
+      "year": 2018,
+      "arxiv_id": "",
+      "role": "Extension",
+      "relationship_sentence": "Seq2Exp extends ExPecto\u2019s two-stage sequence\u2192epigenome\u2192expression paradigm by jointly modeling epigenomic signals and sequence under a learned causal regulatory-element selector instead of fixed-window aggregation with a linear model."
+    },
+    {
+      "title": "Activity-by-contact model of enhancer\u2013promoter regulation from thousands of CRISPR perturbations",
+      "authors": "Charles P. Fulco et al.",
+      "year": 2019,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "Seq2Exp operationalizes the ABC insight that enhancer 'activity' causally drives gene expression by conditioning sequence and epigenomic decompositions on latent active regulatory elements."
+    },
+    {
+      "title": "Deep Variational Information Bottleneck",
+      "authors": "Alexander A. Alemi et al.",
+      "year": 2017,
+      "arxiv_id": "1612.00410",
+      "role": "Foundation",
+      "relationship_sentence": "Seq2Exp\u2019s Beta-parameterized bottleneck that filters non-causal components is grounded in the VIB objective of maximizing predictive information while compressing nuisance inputs."
+    },
+    {
+      "title": "Learning to Explain: An Information-Theoretic Perspective on Model Interpretation",
+      "authors": "Jianbo Chen et al.",
+      "year": 2018,
+      "arxiv_id": "1802.07814",
+      "role": "Inspiration",
+      "relationship_sentence": "Seq2Exp adapts L2X\u2019s instance-wise, IB-based feature selection by learning element-level gates that select regulatory regions most informative for target gene expression."
+    },
+    {
+      "title": "Learning Sparse Neural Networks through L0 Regularization",
+      "authors": "Christos Louizos et al.",
+      "year": 2018,
+      "arxiv_id": "1712.01312",
+      "role": "Inspiration",
+      "relationship_sentence": "Seq2Exp\u2019s differentiable gating over candidate regulatory elements parallels L0/Hard-Concrete sparsification, but replaces it with Beta-distributed mixing to achieve soft yet selective causal attribution."
+    },
+    {
+      "title": "Model-based Analysis of ChIP-Seq (MACS)",
+      "authors": "Yong Zhang et al.",
+      "year": 2008,
+      "arxiv_id": "",
+      "role": "Gap Identification",
+      "relationship_sentence": "By outperforming MACS-style peak detection at identifying influential regions, Seq2Exp directly addresses the limitation that enrichment-based peak callers do not isolate causal regulatory elements for expression."
+    }
+  ],
+  "synthesis_narrative": "Long-range sequence-to-expression modeling established that distal regulatory DNA contributes to transcriptional output, with Enformer showing how wide receptive fields can predict gene expression from sequence while leaving the identity of causal regulatory elements implicit. ExPecto demonstrated a two-stage route, predicting epigenomic signals from sequence and then aggregating them to explain expression, but relied on fixed windows and a downstream linear model. The Activity-by-Contact framework articulated a causal view: enhancer \u2018activity\u2019 measured by epigenomic signals, coupled with regulatory linkage, drives gene expression, concretizing the notion of active regulatory elements as the mechanistic units of control. In parallel, the Deep Variational Information Bottleneck formalized how to retain only predictive information while discarding nuisances, and L2X showed that IB can be used to learn instance-wise sparse feature selectors. Complementing these, L0/Hard-Concrete regularization provided differentiable gates to sparsify contributions in neural networks. Meanwhile, practical discovery of regulatory elements often relied on MACS peak calling, which detects enrichment but not causality with respect to expression.\n\nTogether these strands expose a gap: sequence-to-expression models and peak callers do not directly learn causal regulatory elements, while IB-based selection offers a principled way to isolate informative subsets. Seq2Exp synthesizes these ideas by conditioning both sequence and epigenomic representations on latent active elements and applying an information bottleneck with Beta-distributed gates to combine their effects, filtering non-causal components. This unifies Enformer-like long-range sequence modeling with ExPecto\u2019s epigenomic mediation under an ABC-inspired causal definition of activity, yielding an end-to-end framework that discovers influential regulatory regions beyond enrichment-based peaks.",
+  "target_paper": {
+    "title": "Learning to Discover Regulatory Elements for Gene Expression Prediction",
+    "authors": "Xingyu Su, Haiyang Yu, Degui Zhi, Shuiwang Ji",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "oral",
+    "keywords": "Gene Expression, Deep Learning, Sequence Modeling",
+    "abstract": "We consider the problem of predicting gene expressions from DNA sequences. A key challenge of this task is to find the regulatory elements that control gene expressions. Here, we introduce Seq2Exp, a Sequence to Expression network explicitly designed to discover and extract regulatory elements that drive target gene expression, enhancing the accuracy of the gene expression prediction. Our approach captures the causal relationship between epigenomic signals, DNA sequences and their associated regulatory elements. Specifically, we propose to decompose the epigenomic signals and the DNA sequence conditioned on the causal active regulatory elements, and apply an information bottleneck with the Beta distribution to combine their effects while filtering out non-causal components. Our experiments demonstrate that Seq2Exp outperforms existing baselines in gene expression prediction tasks and discovers influential regions compared to commonly used statistical methods for peak detection such as ",
+    "openreview_id": "Mfnh1Sqdwf",
+    "forum_id": "Mfnh1Sqdwf"
+  },
+  "analysis_timestamp": "2026-01-06T07:11:53.424825"
+}

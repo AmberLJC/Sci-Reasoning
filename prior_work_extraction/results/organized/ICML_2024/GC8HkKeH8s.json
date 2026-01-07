@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Datamodels: Predicting Predictions from Training Data",
+      "authors": "Ilyas et al.",
+      "year": 2022,
+      "role": "Extension",
+      "relationship_sentence": "DsDm directly extends datamodels by using their learned mappings from training-set membership to model predictions as the optimization surrogate for selecting the subset of pretraining data that maximizes performance on target tasks."
+    },
+    {
+      "title": "GLISTER: Generalization based Data Subset Selection for Efficient and Robust Learning",
+      "authors": "Killamsetty et al.",
+      "year": 2021,
+      "role": "Foundation",
+      "relationship_sentence": "GLISTER formalized dataset selection as a bilevel optimization to maximize validation performance; DsDm adopts this model-aware objective but replaces influence-based approximations with datamodels and scales the formulation to language model pretraining."
+    },
+    {
+      "title": "Understanding Black-box Predictions via Influence Functions",
+      "authors": "Koh et al.",
+      "year": 2017,
+      "role": "Foundation",
+      "relationship_sentence": "The core idea of quantifying each training point\u2019s effect on predictions originates with influence functions, which DsDm embraces conceptually while using datamodels to overcome instability and computational intractability in large-scale LMs."
+    },
+    {
+      "title": "Estimating Training Data Influence by Tracing Gradient Descent",
+      "authors": "Pruthi et al.",
+      "year": 2020,
+      "role": "Related Problem",
+      "relationship_sentence": "TracIn provided a practical alternative for estimating data influence via gradient trajectory dot-products; DsDm pursues the same goal of model-aware selection but leverages datamodels as a more scalable, task-aware estimator for massive corpora."
+    },
+    {
+      "title": "The Shapley Value of Data",
+      "authors": "Jia et al.",
+      "year": 2019,
+      "role": "Related Problem",
+      "relationship_sentence": "Data Shapley framed data valuation as each example\u2019s marginal contribution to a target utility, a principle DsDm operationalizes efficiently by using datamodels to approximate per-example utility for subset optimization."
+    },
+    {
+      "title": "Intelligent Selection of Language Model Training Data",
+      "authors": "Moore et al.",
+      "year": 2010,
+      "role": "Gap Identification",
+      "relationship_sentence": "Moore\u2013Lewis cross-entropy difference introduced similarity-based LM data selection; DsDm explicitly shows such heuristics can underperform random selection and replaces them with a performance-aligned, model-aware optimization."
+    },
+    {
+      "title": "CCNet: Extracting High Quality Monolingual Datasets from Web Crawl Data",
+      "authors": "Wenzek et al.",
+      "year": 2019,
+      "role": "Gap Identification",
+      "relationship_sentence": "CCNet popularized perplexity- and classifier-based quality filtering for web-scale corpora, whose limitations in improving LM performance motivate DsDm\u2019s shift from heuristic \"quality\" toward task- and model-aware selection."
+    }
+  ],
+  "synthesis_narrative": "DsDm\u2019s core contribution\u2014model-aware dataset selection driven by how a learning algorithm actually uses training examples\u2014emerges from two intertwined lines of work. First, datamodels demonstrated that one can learn a predictive mapping from training-set membership to model outputs, providing a scalable, model-specific proxy for the influence of individual examples. DsDm directly extends this machinery to turn data valuation into an optimization problem over subsets that maximizes downstream task performance. Second, prior research on influence-based data valuation laid the conceptual groundwork for per-example impact. Influence functions and TracIn established ways to quantify how training points affect predictions, while Data Shapley cast valuation as marginal utility. DsDm embraces this objective but addresses these methods\u2019 instability and computational cost at scale by using datamodels as the estimator that is both task-aware and tractable for large LMs.\nIn contrast, widely adopted heuristic selection schemes in NLP\u2014exemplified by Moore\u2013Lewis domain similarity and CCNet-style perplexity/quality filters\u2014optimize proxies for \"quality\" or similarity rather than the model\u2019s end performance. DsDm explicitly identifies and overcomes these gaps, showing that such heuristics can fail or even harm performance relative to random sampling. Finally, GLISTER contributes the formal bilevel perspective: select a subset to maximize validation performance. DsDm inherits this formulation and supplies a practical, high-fidelity surrogate via datamodels, yielding a principled, scalable method that outperforms heuristic filtering and prior model-aware selection in language model training.",
+  "analysis_timestamp": "2026-01-06T23:09:26.397505"
+}

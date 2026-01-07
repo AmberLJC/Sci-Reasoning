@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis",
+      "authors": "Ben Mildenhall; Pratul P. Srinivasan; Matthew Tancik; Jonathan T. Barron; Ravi Ramamoorthi; Ren Ng",
+      "year": 2020,
+      "role": "Neural field backbone and multi-view consistency",
+      "relationship_sentence": "Contrastive Lift adopts a neural field to fuse evidence across views, directly inheriting NeRF\u2019s idea of training a continuous 3D representation from multi-view images to enforce cross-view consistency."
+    },
+    {
+      "title": "Mask2Former: Masked-attention Mask Transformer for Universal Image Segmentation",
+      "authors": "Bowen Cheng; Ishan Misra; Alexander G. Schwing; Alexander Kirillov; Rohit Girdhar",
+      "year": 2022,
+      "role": "Source of strong 2D instance masks/features",
+      "relationship_sentence": "The method\u2019s premise\u2014lifting reliable 2D instance segments to 3D\u2014relies on modern, high-quality 2D instance segmenters like Mask2Former to supply masks and per-pixel features that can be fused in the 3D field."
+    },
+    {
+      "title": "Mask R-CNN",
+      "authors": "Kaiming He; Georgia Gkioxari; Piotr Doll\u00e1r; Ross Girshick",
+      "year": 2017,
+      "role": "Foundational 2D instance segmentation paradigm",
+      "relationship_sentence": "Contrastive Lift builds on the instance-aware supervision paradigm popularized by Mask R-CNN, leveraging per-instance 2D masks as the primitive signals to be lifted and clustered in 3D."
+    },
+    {
+      "title": "Momentum Contrast for Unsupervised Visual Representation Learning (MoCo)",
+      "authors": "Kaiming He; Haoqi Fan; Yuxin Wu; Saining Xie; Ross Girshick",
+      "year": 2020,
+      "role": "Momentum (slow) targets and large memory for scalable contrastive learning",
+      "relationship_sentence": "The slow-fast clustering in Contrastive Lift echoes MoCo\u2019s use of a slowly updated (momentum) target and large memory, enabling scalable, stable contrastive association of many instances without fixing K."
+    },
+    {
+      "title": "Unsupervised Learning of Visual Features by Contrasting Cluster Assignments (SwAV)",
+      "authors": "Mathilde Caron; Ishan Misra; Julien Mairal; Priya Goyal; Piotr Bojanowski; Armand Joulin",
+      "year": 2020,
+      "role": "Online prototype-based contrastive clustering",
+      "relationship_sentence": "Contrastive Lift\u2019s instance fusion is prototypical and cluster-driven in spirit, drawing from SwAV\u2019s idea of learning via assignments to evolving prototypes rather than explicit labels."
+    },
+    {
+      "title": "Lift, Splat, Shoot: Encoding Images from Arbitrary Cameras to Bird\u2019s-Eye View",
+      "authors": "Julien Philion; Andrea Fidler",
+      "year": 2020,
+      "role": "2D-to-3D feature lifting",
+      "relationship_sentence": "The paper\u2019s central operation\u2014lifting per-view 2D predictions into a common 3D space\u2014follows the general lift-and-fuse paradigm popularized by Lift, Splat, Shoot, adapted here to instance masks and neural fields."
+    }
+  ],
+  "synthesis_narrative": "Contrastive Lift sits at the junction of three influential streams: neural fields for multi-view fusion, strong 2D instance segmentation, and scalable contrastive clustering. NeRF established that a continuous neural field trained from multiple views can enforce cross-view consistency\u2014a property Contrastive Lift exploits to aggregate lifted 2D evidence into a coherent 3D instance field. On the front end, the approach depends on highly capable 2D instance predictors such as Mask R-CNN and, more recently, Mask2Former to supply precise per-instance masks and features; these become the atomic observations to be lifted. The act of backprojecting 2D predictions into a shared 3D representation echoes the lift-and-fuse design exemplified by Lift, Splat, Shoot, though Contrastive Lift targets dense 3D instance fields rather than BEV detection.\nCrucially, the paper\u2019s slow-fast contrastive fusion objective is informed by advances in scalable self-supervised learning. From MoCo, it borrows the stability of a slowly updated (momentum) target and large memory, enabling robust association across many objects without tracking or a pre-specified number of instances. From SwAV, it inherits the idea of prototype-based, online clustering that circumvents explicit labels while remaining efficient. By uniting these threads\u20142D instance priors, 2D-to-3D lifting, neural-field fusion, and prototype-driven slow-fast contrastive learning\u2014the method achieves scalable 3D instance segmentation with strong multi-view consistency and no upper bound on instance count, outperforming 3D-native approaches especially in scenes with many objects.",
+  "analysis_timestamp": "2026-01-06T23:42:49.078062"
+}

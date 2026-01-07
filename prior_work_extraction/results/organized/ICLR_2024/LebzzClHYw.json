@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "DExperts: Decoding-Time Controlled Text Generation with Experts and Anti-Experts",
+      "authors": "Liu et al.",
+      "year": 2021,
+      "arxiv_id": "2105.03023",
+      "role": "Extension",
+      "relationship_sentence": "Instructive Decoding adopts DExperts\u2019 subtractive logit combination idea but replaces a separately trained anti-expert LM with the same instruction-tuned model conditioned on a deliberately noisy (e.g., opposite) instruction to form the negative distribution."
+    },
+    {
+      "title": "GeDi: Generative Discriminator for Robustly Controllable Text Generation",
+      "authors": "Ben Krause et al.",
+      "year": 2020,
+      "arxiv_id": null,
+      "role": "Related Problem",
+      "relationship_sentence": "Like GeDi\u2019s Bayes-style steering that downweights tokens indicative of undesired attributes, Instructive Decoding penalizes tokens favored by an undesired \u2018noisy-instruction\u2019 condition, effectively using the model-as-discriminator at decode time."
+    },
+    {
+      "title": "A Contrastive Framework for Neural Text Generation (Contrastive Search)",
+      "authors": "Yixuan Su et al.",
+      "year": 2022,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "The method\u2019s core contrasts next-token scores to suppress locally over-confident but undesirable continuations, and Instructive Decoding instantiates this principle by contrasting predictions under original versus perturbed instructions."
+    },
+    {
+      "title": "DoLa: Decoding by Contrasting Layers Improves Factuality",
+      "authors": "Liu et al.",
+      "year": 2023,
+      "arxiv_id": "2309.00986",
+      "role": "Extension",
+      "relationship_sentence": "Instructive Decoding parallels DoLa\u2019s self-contrastive decoding (contrasting internal distributions) by instead contrasting across prompts\u2014original vs. noisy\u2014in the same model to downweight hallucination-prone tokens."
+    },
+    {
+      "title": "Self-Instruct: Aligning Language Model with Self Generated Instructions",
+      "authors": "Yizhong Wang et al.",
+      "year": 2023,
+      "arxiv_id": "2212.10560",
+      "role": "Foundation",
+      "relationship_sentence": "Self-Instruct established instruction-tuned models and highlighted the importance of instruction diversity, which Instructive Decoding leverages by creating controlled noisy-instruction variants at decoding time."
+    },
+    {
+      "title": "Scaling Instruction-Finetuned Language Models",
+      "authors": "Hyung Won Chung et al.",
+      "year": 2022,
+      "arxiv_id": "2210.11416",
+      "role": "Gap Identification",
+      "relationship_sentence": "This work showed instruction-tuned models\u2019 strong zero-shot generalization yet persistent failures on out-of-distribution or ambiguous instructions, a limitation Instructive Decoding explicitly targets without additional training."
+    },
+    {
+      "title": "Plug and Play Language Models: A Simple Approach to Controlled Text Generation",
+      "authors": "Sumanth Dathathri et al.",
+      "year": 2020,
+      "arxiv_id": "1912.02164",
+      "role": "Related Problem",
+      "relationship_sentence": "In the spirit of decode-time control without finetuning, Instructive Decoding similarly steers generation at inference but does so via prompt-conditioned contrastive logits rather than external attribute models or gradients."
+    }
+  ],
+  "synthesis_narrative": "DExperts introduced a simple yet powerful decode-time control mechanism by subtracting an anti-expert model\u2019s logits from a base LM to suppress undesired attributes, concretely showing that subtractive logit combinations can steer generation without finetuning. GeDi further framed control as Bayes-guided decoding where a discriminator penalizes tokens aligned with unwanted attributes, emphasizing the effectiveness of conditioning-based, likelihood-ratio steering. Contrastive Search proposed contrastive scoring during decoding to penalize locally over-confident but low-quality continuations, crystallizing the idea that contrasting distributions can systematically improve generation quality. DoLa demonstrated a self-contrastive approach using the same model\u2019s internal layer distributions to downweight hallucinations, proving that contrastive signals need not come from separate models. Self-Instruct established the instruction-tuning paradigm and the value of diverse instructions for generalization, while Scaling Instruction-Finetuned LMs documented that even strong instruction-tuned models falter on out-of-distribution or noisy instructions. Plug and Play LMs showed that powerful decode-time control is feasible without additional training using external signals.\nTogether, these works suggest a natural next step: construct the negative signal from the model itself via an alternative conditioning that captures undesired semantics. Instructive Decoding unifies subtractive logit steering (DExperts/GeDi), contrastive scoring (Contrastive Search), and self-derived signals (DoLa) by prompting the same instruction-tuned model with noisy, semantically perturbed instructions to create a contrastive distribution, directly addressing instruction robustness gaps highlighted in instruction-tuning literature without any extra finetuning.",
+  "target_paper": {
+    "title": "Instructive Decoding: Instruction-Tuned Large Language Models are Self-Refiner from Noisy Instructions",
+    "authors": "Taehyeon Kim, Joonkee Kim, Gihun Lee, Se-Young Yun",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Instruction Following, Language Model, Decoding",
+    "abstract": "While instruction-tuned language models have demonstrated impressive zero-shot generalization, these models often struggle to generate accurate responses when faced with instructions that fall outside their training set. This paper presents Instructive Decoding (ID), a simple yet effective approach that augments the efficacy of instruction-tuned models. Specifically, ID adjusts the logits for next-token prediction in a contrastive manner, utilizing predictions generated from a manipulated version of the original instruction, referred to as a noisy instruction. This noisy instruction aims to elicit responses that could diverge from the intended instruction yet remain plausible. We conduct experiments across a spectrum of such noisy instructions, ranging from those that insert semantic noise via random words to others like 'opposite' that elicit the deviated responses. Our approach achieves considerable performance gains across various instruction-tuned models and tasks without necessita",
+    "openreview_id": "LebzzClHYw",
+    "forum_id": "LebzzClHYw"
+  },
+  "analysis_timestamp": "2026-01-06T13:34:06.099404"
+}

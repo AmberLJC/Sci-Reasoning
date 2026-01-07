@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Self-Instruct: Aligning Language Models with Self-Generated Instructions",
+      "authors": "Yizhong Wang et al.",
+      "year": 2023,
+      "arxiv_id": "2212.10560",
+      "role": "Inspiration",
+      "relationship_sentence": "MetaMath adopts the self-instruction paradigm\u2014using a strong teacher to synthesize supervision\u2014and adapts it to math by prompting multiple answer-preserving rewrites of seed problems to expand instruction coverage while maintaining label correctness."
+    },
+    {
+      "title": "WizardLM: Empowering Large Language Models to Follow Complex Instructions",
+      "authors": "Xu et al.",
+      "year": 2023,
+      "arxiv_id": "2304.12244",
+      "role": "Extension",
+      "relationship_sentence": "MetaMath extends Evol-Instruct\u2019s transformation-based data expansion by constraining the evolution to solution-invariant, mathematics-specific paraphrases, avoiding the validity drift that unconstrained evolution can introduce."
+    },
+    {
+      "title": "WizardMath: Empowering Large Language Models to Solve Math Problems",
+      "authors": "Luo et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "As the main math-specialized instruction-tuning baseline, WizardMath\u2019s reliance on unconstrained evolved problems (often with incorrect or noisy answers) motivates MetaMath\u2019s answer-preserving multi-perspective rewrites and serves as the primary system MetaMath improves upon."
+    },
+    {
+      "title": "STaR: Bootstrapping Reasoning With Reasoning",
+      "authors": "Hattie Zelikman et al.",
+      "year": 2022,
+      "arxiv_id": "2203.14465",
+      "role": "Inspiration",
+      "relationship_sentence": "MetaMath borrows STaR\u2019s core insight that verified model-generated content can bootstrap reasoning by filtering rewritten math problems and rationales with correctness checks before fine-tuning."
+    },
+    {
+      "title": "Training Verifiers to Solve Math Word Problems (GSM8K)",
+      "authors": "Dan Cobbe et al.",
+      "year": 2021,
+      "arxiv_id": "2110.14168",
+      "role": "Foundation",
+      "relationship_sentence": "GSM8K provides the grade-school math problem formulation and step-by-step solution style that MetaMathQA follows for seeding and evaluation, directly shaping the supervision format."
+    },
+    {
+      "title": "Measuring Mathematical Problem Solving With the MATH Dataset",
+      "authors": "Dan Hendrycks et al.",
+      "year": 2021,
+      "arxiv_id": "2103.03874",
+      "role": "Foundation",
+      "relationship_sentence": "MATH defines the competition-level problem distribution and rationale format that guide MetaMathQA\u2019s coverage and the paper\u2019s core evaluation targets."
+    }
+  ],
+  "synthesis_narrative": "Self-Instruct showed that a strong model can bootstrap high-quality supervision by generating new instructions from a small seed set, establishing a practical recipe for scaling instruction-tuning via synthetic data. WizardLM operationalized this idea at scale with Evol-Instruct, proposing transformation operators that systematically evolve instructions to increase diversity and difficulty, but with limited guarantees on label preservation. WizardMath specialized this evolution paradigm to mathematics, demonstrating strong gains from math-focused synthetic data while also revealing a key pain point: unconstrained evolution frequently yields invalid or mislabeled math problems that degrade downstream training. STaR introduced a complementary principle for reasoning\u2014leveraging model-generated rationales, but only after verifying correctness\u2014to ensure that bootstrapped data reliably improves reasoning quality. Concurrently, GSM8K and MATH defined the dominant math reasoning formulations, with step-by-step rationales and rigorous answer formats that enable automatic checking and consistent supervision.\nBuilding on these strands, the current work synthesizes a label-stable evolution strategy tailored to math: instead of unconstrained generation, it rewrites each seed problem from multiple perspectives while preserving the original solution, then filters with correctness checks inspired by verification-centric bootstrapping. This design combines Self-Instruct\u2019s scalable data synthesis, Evol-Instruct\u2019s transformation mindset, and STaR\u2019s verification principle, using GSM8K/MATH formats to ensure structure and evaluability. The result is a high-diversity, solution-invariant math dataset that directly addresses WizardMath-style noise, enabling substantially stronger math-specialized instruction tuning.",
+  "target_paper": {
+    "title": "MetaMath: Bootstrap Your Own Mathematical Questions for Large Language Models",
+    "authors": "Longhui Yu, Weisen Jiang, Han Shi, Jincheng YU, Zhengying Liu, Yu Zhang, James Kwok, Zhenguo Li, Adrian Weller, Weiyang Liu",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Large Language Model; Mathematical Reasoning",
+    "abstract": "Large language models (LLMs) have pushed the limits of natural language understanding and exhibited excellent problem-solving ability. Despite the great success, most existing open-source LLMs (\\eg, LLaMA-2) are still far away from satisfactory for solving mathematical problems due to the complex reasoning procedures. To bridge this gap, we propose \\emph{MetaMath}, a finetuned language model that specializes in mathematical reasoning. Specifically, we start by bootstrapping mathematical questions by rewriting the question from multiple perspectives, which results in a new dataset called MetaMathQA. Then we finetune the LLaMA-2 models on MetaMathQA. Experimental results on two popular benchmarks (\\ie, GSM8K and MATH) for mathematical reasoning demonstrate that MetaMath outperforms a suite of open-source LLMs by a significant margin.  Our MetaMath-7B model achieves $66.5\\%$ on GSM8K and $19.8\\%$ on MATH, exceeding the state-of-the-art models of the same size by $11.5\\%$ and $8.7\\%$. Part",
+    "openreview_id": "N8N0hgNDRt",
+    "forum_id": "N8N0hgNDRt"
+  },
+  "analysis_timestamp": "2026-01-06T13:28:50.488772"
+}

@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Denoising Diffusion Implicit Models",
+      "authors": "Jiaming Song et al.",
+      "year": 2020,
+      "role": "Foundation",
+      "relationship_sentence": "DITTO relies on DDIM\u2019s deterministic sampling path to backpropagate a feature-matching loss through the entire denoising trajectory and optimize the initial noise latent x_T."
+    },
+    {
+      "title": "Diffusion Models Beat GANs on Image Synthesis",
+      "authors": "Aditya Dhariwal et al.",
+      "year": 2021,
+      "role": "Inspiration",
+      "relationship_sentence": "The classifier-guidance idea\u2014adding gradients from an auxiliary objective at inference time\u2014directly inspires DITTO\u2019s training-free controllability, which generalizes guidance by optimizing the initial noise with arbitrary differentiable losses."
+    },
+    {
+      "title": "Diffusion Posterior Sampling for General Noisy Inverse Problems",
+      "authors": "Hyungjin Chung et al.",
+      "year": 2023,
+      "role": "Gap Identification",
+      "relationship_sentence": "DPS demonstrates training-free control via per-step gradient updates but is computationally heavy; DITTO addresses this limitation by moving optimization to the initial noise latent while still achieving inverse-problem-style constraints."
+    },
+    {
+      "title": "RePaint: Inpainting using Denoising Diffusion Probabilistic Models",
+      "authors": "Andreas Lugmayr et al.",
+      "year": 2022,
+      "role": "Baseline",
+      "relationship_sentence": "RePaint is the standard training-free diffusion inpainting/outpainting baseline; DITTO targets the same tasks but improves controllability and quality by optimizing the initial noise under task-specific differentiable losses."
+    },
+    {
+      "title": "AudioLDM: Text-to-Audio Generation with Latent Diffusion Models",
+      "authors": "Haohe Liu et al.",
+      "year": 2023,
+      "role": "Foundation",
+      "relationship_sentence": "AudioLDM established latent diffusion for text-to-audio/music; DITTO operates on such pre-trained text-to-audio diffusion models and provides inference-time control without any fine-tuning."
+    },
+    {
+      "title": "Riffusion: Stable diffusion for real-time music generation",
+      "authors": "Seth Forsgren et al.",
+      "year": 2022,
+      "role": "Related Problem",
+      "relationship_sentence": "Riffusion showed practical text-to-music via latent diffusion on spectrograms; DITTO builds on this modality by introducing a training-free optimization of the initial noise to achieve nuanced musical controls (e.g., looping, structure) across pre-trained models."
+    }
+  ],
+  "synthesis_narrative": "DITTO\u2019s core innovation\u2014training-free, inference-time control of text-to-music diffusion models via optimization of the initial noise latent\u2014emerges from a confluence of ideas in diffusion guidance, inverse problems, and latent diffusion for audio. DDIM provided the crucial deterministic sampler that makes the reverse process differentiable end-to-end, enabling gradients from a task objective to flow back to the starting noise. Building on the principle of inference-time guidance introduced by Dhariwal and Nichol, DITTO generalizes beyond classifier or textual guidance to any differentiable feature-matching loss (e.g., semantic, melodic, or structural objectives), but crucially shifts the optimization target from per-step states to the initial noise, yielding substantial computational and memory benefits. The inverse-problem viewpoint championed by Diffusion Posterior Sampling highlighted the power of training-free constraints but also its inefficiency due to stepwise gradient updates\u2014precisely the gap DITTO closes with initial-noise optimization plus memory-efficient checkpointing. In application, RePaint had established a training-free inpainting/outpainting baseline; DITTO surpasses it by directly optimizing toward user-defined audio features for stronger controllability and quality. Finally, AudioLDM and Riffusion anchored diffusion as a practical backbone for text-to-audio/music, providing the pre-trained models that DITTO can steer without fine-tuning. Together, these works directly shape DITTO\u2019s formulation and demonstrate how optimizing x_T unifies flexible control with efficiency across music generation tasks.",
+  "analysis_timestamp": "2026-01-06T23:09:26.434910"
+}

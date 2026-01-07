@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Noise-Contrastive Estimation: A New Estimation Principle for Unnormalized Statistical Models",
+      "authors": "Michael U. Gutmann, Aapo Hyv\u00e4rinen",
+      "year": 2010,
+      "role": "Foundational estimation technique enabling learning with positive vs. noise samples without normalized likelihoods.",
+      "relationship_sentence": "BBox-Adapter\u2019s core training signal is an NCE-style objective that contrasts target (positive) against source/previous (negative) data to shift the model\u2019s implicit preferences without requiring access to black-box probabilities."
+    },
+    {
+      "title": "Representation Learning with Contrastive Predictive Coding",
+      "authors": "A\u00e4ron van den Oord, Yazhe Li, Oriol Vinyals",
+      "year": 2018,
+      "role": "Popularized the InfoNCE ranking loss for learning from relative comparisons across positives and negatives.",
+      "relationship_sentence": "The paper\u2019s ranking-based NCE loss is directly inspired by InfoNCE-style objectives that promote positive samples over a set of negatives using only relative rankings."
+    },
+    {
+      "title": "Deep Reinforcement Learning from Human Preferences",
+      "authors": "Paul F. Christiano, Jan Leike, Tom B. Brown, Miljan Martic, Shane Legg, Dario Amodei",
+      "year": 2017,
+      "role": "Introduced learning from pairwise preference feedback to steer models toward desired behaviors.",
+      "relationship_sentence": "BBox-Adapter\u2019s online adaptation uses preference-like signals (positives from human/AI feedback vs. negatives from past outputs), operationalizing RLHF\u2019s core idea without training a reward model or accessing logits."
+    },
+    {
+      "title": "Training language models to follow instructions with human feedback",
+      "authors": "Long Ouyang, Jeff Wu, Xu Jiang, Diogo Almeida, Carroll L. Wainwright, et al.",
+      "year": 2022,
+      "role": "Practical pipeline for feedback-driven adaptation of LLM behavior (InstructGPT).",
+      "relationship_sentence": "BBox-Adapter extends feedback-driven alignment to a stricter black-box regime, replacing RL on logits with a contrastive, ranking-based adapter that learns solely from API interactions."
+    },
+    {
+      "title": "Constitutional AI: Harmlessness from AI Feedback",
+      "authors": "Yuntao Bai, Andy Jones, Kamal Ndousse, Amanda Askell, et al.",
+      "year": 2022,
+      "role": "Demonstrated that AI feedback can substitute for human labels to guide model behavior.",
+      "relationship_sentence": "The method\u2019s option to incorporate real-time positives from AI feedback directly leverages the Constitutional-AI insight that high-quality alignment signals can be sourced from AI rather than humans."
+    },
+    {
+      "title": "Prefix-Tuning: Optimizing Continuous Prompts for Generation",
+      "authors": "Xiang Lisa Li, Percy Liang",
+      "year": 2021,
+      "role": "Parameter-efficient adaptation by prepping small prefix vectors while keeping the LM frozen.",
+      "relationship_sentence": "Prefix-Tuning\u2019s lightweight-control paradigm informs BBox-Adapter\u2019s design of a small external adapter that steers a fixed, opaque LLM without modifying or accessing internal parameters."
+    },
+    {
+      "title": "The Power of Scale for Parameter-Efficient Prompt Tuning",
+      "authors": "Brian Lester, Rami Al-Rfou, Noah Constant",
+      "year": 2021,
+      "role": "Showed that tiny prompt parameters can effectively retarget large LMs across tasks.",
+      "relationship_sentence": "This work supports BBox-Adapter\u2019s claim that a compact adapter can deliver substantial domain adaptation even when full fine-tuning and logits are unavailable."
+    }
+  ],
+  "synthesis_narrative": "BBox-Adapter\u2019s central contribution is a lightweight, external adapter that adapts black-box LLMs using only API interactions, trained with a ranking-based NCE objective and online feedback. Two strands of prior work directly converge here. First, contrastive estimation\u2014particularly Noise-Contrastive Estimation (Gutmann & Hyv\u00e4rinen) and InfoNCE via Contrastive Predictive Coding (van den Oord et al.)\u2014establishes that models can be trained from relative comparisons between positives and negatives without normalized probabilities. BBox-Adapter operationalizes this insight for LLM adaptation: it treats target-domain data as positives and source-domain or previously produced outputs as negatives, optimizing a ranking-style NCE to shift the model\u2019s implicit likelihoods while never accessing logits.\n\nSecond, the feedback-driven alignment literature\u2014RLHF (Christiano et al.) and InstructGPT (Ouyang et al.)\u2014shows that pairwise or preference-like signals can robustly steer model behavior. BBox-Adapter inherits this idea but makes it compatible with black-box constraints, enabling online incorporation of positives drawn from ground-truth, human, or AI feedback. Constitutional AI (Bai et al.) further motivates replacing costly human labels with AI feedback, which BBox-Adapter explicitly supports.\n\nFinally, parameter-efficient control of LMs\u2014Prefix-Tuning (Li & Liang) and Prompt Tuning (Lester et al.)\u2014demonstrates the power of small controllers to retarget LMs without full fine-tuning. BBox-Adapter adapts this paradigm to the hardest setting: closed-source, API-only models that may not expose probabilities, combining lightweight control with contrastive, preference-style learning to yield practical black-box adaptation.",
+  "analysis_timestamp": "2026-01-06T23:42:48.051611"
+}

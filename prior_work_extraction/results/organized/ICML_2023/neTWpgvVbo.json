@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "The Effective Rank: A Measure of Effective Dimensionality",
+      "authors": "Olivier Roy and Martin Vetterli",
+      "year": 2007,
+      "role": "Foundation",
+      "relationship_sentence": "RankMe\u2019s core metric is the effective rank\u2014defined via the entropy of normalized singular values\u2014directly adopting Roy and Vetterli\u2019s formulation as the mathematical basis for assessing representation dimensionality."
+    },
+    {
+      "title": "Understanding Contrastive Representation Learning through Alignment and Uniformity",
+      "authors": "Tongzhou Wang and Phillip Isola",
+      "year": 2020,
+      "role": "Baseline",
+      "relationship_sentence": "RankMe is proposed explicitly as a more predictive, label-free alternative to the prevailing unsupervised proxies (alignment and uniformity) introduced by Wang and Isola, addressing their inconsistent correlation with downstream performance across JE-SSL methods and datasets."
+    },
+    {
+      "title": "A Simple Framework for Contrastive Learning of Visual Representations",
+      "authors": "Ting Chen et al.",
+      "year": 2020,
+      "role": "Foundation",
+      "relationship_sentence": "SimCLR established the modern JE-SSL setting that RankMe targets, providing canonical representations on which the paper demonstrates that effective rank reliably predicts downstream accuracy without labels."
+    },
+    {
+      "title": "Bootstrap Your Own Latent: A New Approach to Self-Supervised Learning",
+      "authors": "Jean-Bastien Grill et al.",
+      "year": 2020,
+      "role": "Gap Identification",
+      "relationship_sentence": "BYOL\u2019s non-contrastive objective yields loss values that are not indicative of representation quality or collapse, directly motivating RankMe\u2019s need for an unsupervised, post-hoc criterion that can assess learned features without labels."
+    },
+    {
+      "title": "Exploring Simple Siamese Representation Learning",
+      "authors": "Xinlei Chen and Kaiming He",
+      "year": 2021,
+      "role": "Gap Identification",
+      "relationship_sentence": "SimSiam further exposed that non-contrastive JE-SSL can train with uninformative losses, reinforcing the gap RankMe fills by evaluating representation quality through spectrum-based effective rank instead of training loss signals."
+    },
+    {
+      "title": "Barlow Twins: Self-Supervised Learning via Redundancy Reduction",
+      "authors": "Jure Zbontar et al.",
+      "year": 2021,
+      "role": "Inspiration",
+      "relationship_sentence": "By driving the cross-correlation matrix toward identity, Barlow Twins highlighted the centrality of covariance-spectrum structure in JE-SSL, inspiring RankMe to formalize representation quality via the embeddings\u2019 effective rank."
+    },
+    {
+      "title": "VICReg: Variance-Invariance-Covariance Regularization for Self-Supervised Learning",
+      "authors": "Adrien Bardes et al.",
+      "year": 2022,
+      "role": "Extension",
+      "relationship_sentence": "VICReg explicitly regularizes per-dimension variance and covariance to prevent dimensional collapse; RankMe extends this spectral perspective from a training objective to a method-agnostic evaluation metric based on effective rank."
+    }
+  ],
+  "synthesis_narrative": "RankMe emerges from two converging threads: the practical need to evaluate joint-embedding self-supervised (JE-SSL) representations without labels, and mounting evidence that the spectrum of representation covariances governs downstream utility. SimCLR crystallized the JE-SSL problem setting by showing strong transfer with contrastive learning, but subsequent non-contrastive methods like BYOL and SimSiam revealed a critical gap: training losses can be low and yet uninformative about collapse or transfer performance. Concurrently, the community relied on alignment and uniformity proxies to gauge quality without labels, but these measures were shown to correlate inconsistently across methods and datasets, leaving practitioners without a dependable unsupervised indicator.\nBarlow Twins and VICReg then made the role of the covariance spectrum explicit, demonstrating that controlling redundancy (cross-correlation) and enforcing per-dimension variance and covariance regularization are key to avoiding dimensional collapse. RankMe synthesizes these insights and grounds them in a principled metric by directly adopting the effective rank definition from Roy and Vetterli as the core construct. By measuring the entropy-based effective dimensionality of the learned embeddings, RankMe provides a simple, training- and hyperparameter-free criterion that predicts downstream performance across diverse JE-SSL methods, improving upon alignment/uniformity proxies while remaining agnostic to the training objective. In short, RankMe codifies the spectral intuition seeded by Barlow Twins and VICReg into a universal, label-free evaluation tool for JE-SSL.",
+  "analysis_timestamp": "2026-01-06T23:09:26.535912"
+}

@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Leveraging Passage Retrieval with Generative Models for Open-Domain Question Answering (FiD)",
+      "authors": "Izacard et al.",
+      "year": 2021,
+      "arxiv_id": "2007.01282",
+      "role": "Baseline",
+      "relationship_sentence": "BTR directly targets FiD\u2019s dominant bottleneck\u2014encoding and attending over all retrieved tokens per query\u2014by replacing FiD\u2019s per-query passage encoding with precomputed 1\u2011bit token vectors that the generator can consume."
+    },
+    {
+      "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+      "authors": "Lewis et al.",
+      "year": 2020,
+      "arxiv_id": "2005.11401",
+      "role": "Foundation",
+      "relationship_sentence": "BTR adopts the RAG formulation of retrieving passages and conditioning generation on them, but makes this pipeline efficient by storing passage-side token representations in a binary, precomputed form."
+    },
+    {
+      "title": "ColBERT: Efficient and Effective Passage Search via Contextualized Late Interaction over BERT",
+      "authors": "Khattab et al.",
+      "year": 2020,
+      "arxiv_id": "2004.12832",
+      "role": "Inspiration",
+      "relationship_sentence": "ColBERT\u2019s key idea of precomputable, token-level document embeddings for late interaction directly inspires BTR\u2019s design of passage-side token representations that can be stored offline and interacted with at query time."
+    },
+    {
+      "title": "ColBERTv2: Effective and Efficient Retrieval via Lightweight Late Interaction (and PLAID indexing)",
+      "authors": "Santhanam et al.",
+      "year": 2022,
+      "arxiv_id": null,
+      "role": "Extension",
+      "relationship_sentence": "ColBERTv2/PLAID shows how aggressive compression and bitpacking of token embeddings preserves effectiveness, motivating BTR\u2019s offline and runtime compression pipeline for its binary token store."
+    },
+    {
+      "title": "BinaryBERT: Pushing the Limit of BERT Quantization",
+      "authors": "Bai et al.",
+      "year": 2021,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "BinaryBERT demonstrates that 1\u2011bit representations with proper scaling and calibration can retain accuracy, which BTR adapts to token-level representations and extends with new calibration/training objectives for generation."
+    },
+    {
+      "title": "Improving language models by retrieving from trillions of tokens (RETRO)",
+      "authors": "Borgeaud et al.",
+      "year": 2022,
+      "arxiv_id": "2112.04426",
+      "role": "Gap Identification",
+      "relationship_sentence": "RETRO highlights the high inference cost of processing large retrieved contexts, a limitation BTR addresses by replacing float passage encodings with precomputed 1\u2011bit token vectors to cut compute and I/O."
+    },
+    {
+      "title": "Nearest Neighbor Language Models",
+      "authors": "Khandelwal et al.",
+      "year": 2021,
+      "arxiv_id": "1911.00172",
+      "role": "Related Problem",
+      "relationship_sentence": "kNN-LM shows that augmenting LMs with a large, precomputed vector datastore can improve knowledge use but suffers from memory/latency, informing BTR\u2019s choice of ultra-compact binary token stores and fast similarity operations."
+    }
+  ],
+  "synthesis_narrative": "Retrieval-augmented generation established that conditioning language models on retrieved passages substantially improves knowledge-intensive tasks, with RAG formalizing the retrieve-then-generate pipeline and FiD showing strong gains by exhaustively encoding and attending over all retrieved tokens. RETRO scaled this idea to massive corpora but made visible the inference cost of pushing large retrieved contexts through transformer layers. In parallel, ColBERT introduced precomputable, token-level document embeddings enabling late interaction at query time, and ColBERTv2/PLAID demonstrated that aggressive compression and bitpacking of token embeddings preserves effectiveness at scale. From the model compression side, BinaryBERT showed that 1-bit representations with appropriate scaling and calibration can largely retain accuracy, suggesting that binary activations/embeddings could be viable beyond classification. Finally, kNN-LM demonstrated the benefits of augmenting LMs with a large, precomputed external datastore, while also exposing memory/latency constraints that call for more compact representations.\nTogether, these works point to a natural opportunity: keep the RAG/FiD conditioning benefits but remove the per-query passage encoding and heavy float cross-attention by adopting precomputable, token-level representations\u2014compressed to the extreme. The synthesis is to port ColBERT-style late interaction to the generative cross-attention setting, store passage tokens as 1-bit vectors, and borrow binarization calibration insights to recover accuracy. This yields a retrieval-augmented LM that maintains performance while dramatically reducing compute and storage, directly addressing the runtime bottlenecks surfaced by FiD/RETRO.",
+  "target_paper": {
+    "title": "BTR: Binary Token Representations for Efficient Retrieval Augmented Language Models",
+    "authors": "Qingqing Cao, Sewon Min, Yizhong Wang, Hannaneh Hajishirzi",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "language models, question answering, binary representations, retrieval-augmented language models",
+    "abstract": "Retrieval augmentation addresses many critical problems in large language models such as hallucination, staleness, and privacy leaks.\nHowever, running retrieval-augmented language models (LMs) is slow and difficult to scale due to processing large amounts of retrieved text. \nWe introduce binary token representations (BTR), which use 1-bit vectors to precompute every token in passages, significantly reducing computation during inference. \nDespite the potential loss of accuracy, our new calibration techniques and training objectives restore performance. Combined with offline and runtime compression, this only requires 127GB of disk space for encoding 3 billion tokens in Wikipedia.\nOur experiments show that on five knowledge-intensive NLP tasks, BTR accelerates state-of-the-art inference by up to 4x and reduces storage by over 100x while maintaining over 95% task performance. Our code is publicly available at https://github.com/csarron/BTR.",
+    "openreview_id": "3TO3TtnOFl",
+    "forum_id": "3TO3TtnOFl"
+  },
+  "analysis_timestamp": "2026-01-06T16:36:16.757614"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis",
+      "authors": "Ben Mildenhall, Pratul P. Srinivasan, Matthew Tancik, Jonathan T. Barron, Ravi Ramamoorthi, Ren Ng",
+      "year": 2020,
+      "role": "Foundational 3D neural rendering paradigm",
+      "relationship_sentence": "LVSM explicitly positions itself as a geometry-free alternative to NeRF\u2019s volumetric 3D representation and ray-marching pipeline, seeking NeRF-level quality without imposing 3D inductive biases."
+    },
+    {
+      "title": "3D Gaussian Splatting for Real-Time Radiance Field Rendering",
+      "authors": "Bernhard Kerbl, Georgios Kopanas, Thomas Leimk\u00fchler, George Drettakis",
+      "year": 2023,
+      "role": "High-performance explicit 3D representation baseline",
+      "relationship_sentence": "By outperforming methods built on 3D Gaussian splats, LVSM underscores its core claim that large, data-driven transformers can replace strong explicit 3D priors while remaining scalable."
+    },
+    {
+      "title": "pixelNeRF: Neural Radiance Fields from One or Few Images",
+      "authors": "Alex Yu, Vickie Ye, Matthew Tancik, Angjoo Kanazawa",
+      "year": 2021,
+      "role": "Early generalizable novel view synthesis from sparse views",
+      "relationship_sentence": "LVSM builds on pixelNeRF\u2019s goal of across-scene generalization from sparse inputs, but replaces NeRF-style ray sampling with a fully learned transformer that avoids explicit 3D structure."
+    },
+    {
+      "title": "MVSNeRF: Fast Generalizable Radiance Field from Multi-View Stereo",
+      "authors": "Anpei Chen et al.",
+      "year": 2021,
+      "role": "Plane-sweep/cost-volume inductive bias for generalizable NVS",
+      "relationship_sentence": "LVSM targets the same generalization regime as MVSNeRF but removes plane-sweep and cost-volume priors, learning view synthesis end-to-end without geometry-specific network design."
+    },
+    {
+      "title": "Scene Representation Transformer: Geometry-Free Novel View Synthesis",
+      "authors": "Sajjadi et al.",
+      "year": 2022,
+      "role": "Transformer with learned scene tokens for geometry-free NVS",
+      "relationship_sentence": "LVSM directly extends SRT\u2019s geometry-free transformer idea, scaling it up and refining it into encoder\u2013decoder latents and a stronger decoder-only variant that improve quality and zero-shot generalization."
+    },
+    {
+      "title": "Generative Query Network: Learning to See by Asking Questions",
+      "authors": "S. M. Ali Eslami et al.",
+      "year": 2018,
+      "role": "Learned neural scene representations queried from novel viewpoints",
+      "relationship_sentence": "LVSM inherits GQN\u2019s core abstraction\u2014learn a scene representation from views and render queries\u2014while modernizing it with transformers and large-scale training for realistic NVS."
+    },
+    {
+      "title": "Perceiver IO: A General Architecture for Structured Inputs & Outputs",
+      "authors": "Andrew Jaegle et al.",
+      "year": 2021,
+      "role": "Latent-array transformer design for scalable token processing",
+      "relationship_sentence": "LVSM\u2019s fixed-size 1D latent tokens and cross-attention encoder\u2013decoder closely follow the Perceiver family\u2019s latent bottleneck design to achieve scalability with large image token sets."
+    }
+  ],
+  "synthesis_narrative": "LVSM\u2019s core contribution\u2014scalable, generalizable novel view synthesis with minimal 3D inductive bias\u2014arises at the intersection of three lines of work. First, NeRF and 3D Gaussian Splatting established that high-fidelity view synthesis often hinges on explicit 3D structure and rendering pipelines. LVSM explicitly rejects those priors, setting a target to match or exceed their quality purely through data-driven learning. Second, generalizable NVS methods such as pixelNeRF and MVSNeRF demonstrated across-scene performance from sparse views but relied on 3D sampling along rays or plane-sweep cost volumes, embedding strong geometry into architecture. LVSM retains the generalization objective while discarding these hand-crafted geometric operators, replacing them with learned attention over image tokens.\nThird, geometry-free scene representation work\u2014most notably the Scene Representation Transformer and the earlier Generative Query Network\u2014showed that a model can infer a latent scene from context views and render queries without explicit 3D supervision. LVSM directly builds on this abstraction but scales it: an encoder\u2013decoder variant uses a fixed number of 1D latent tokens as a learned scene memory, while a decoder-only variant removes intermediate latents entirely to maximize capacity and quality. This latent-token design tracks the Perceiver IO family\u2019s latent bottleneck for handling large token sets efficiently, enabling scalability in both views and resolution. Together, these influences shape LVSM\u2019s two architectures and training recipe, yielding a purely learned, transformer-based NVS system that attains state-of-the-art quality and zero-shot generalization without 3D inductive biases.",
+  "analysis_timestamp": "2026-01-06T23:42:48.085501"
+}

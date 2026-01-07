@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "BadNets: Identifying Vulnerabilities in the Machine Learning Model Supply Chain",
+      "authors": "Tianyu Gu et al.",
+      "year": 2017,
+      "arxiv_id": "1708.06733",
+      "role": "Foundation",
+      "relationship_sentence": "IBA adopts the core trigger-based data poisoning framework introduced by BadNets and adapts it from classification to the dense pixel-wise setting of semantic segmentation."
+    },
+    {
+      "title": "Hidden Trigger Backdoor Attacks",
+      "authors": "Aniruddha Saha et al.",
+      "year": 2020,
+      "arxiv_id": "",
+      "role": "Inspiration",
+      "relationship_sentence": "The idea of learning a stealthy, robust trigger that generalizes across inputs directly inspires IBA\u2019s design of a compact trigger, but IBA relocates it onto non\u2011victim (context) pixels to drive class-wide misclassification."
+    },
+    {
+      "title": "Pyramid Scene Parsing Network",
+      "authors": "Hengshuang Zhao et al.",
+      "year": 2017,
+      "arxiv_id": "1612.01105",
+      "role": "Foundation",
+      "relationship_sentence": "PSPNet established that segmentation relies on global multi-scale context aggregation, which IBA explicitly exploits by placing triggers on contextual (non\u2011victim) regions to influence victim-class pixels."
+    },
+    {
+      "title": "Encoder-Decoder with Atrous Separable Convolution for Semantic Image Segmentation (DeepLabv3+)",
+      "authors": "Liang-Chieh Chen et al.",
+      "year": 2018,
+      "arxiv_id": "1802.02611",
+      "role": "Foundation",
+      "relationship_sentence": "DeepLabv3+ demonstrates strong multi-scale context modeling via ASPP, a property IBA leverages so that a non\u2011local trigger can systematically sway predictions of all victim-class pixels."
+    },
+    {
+      "title": "Non-local Neural Networks",
+      "authors": "Xiaolong Wang et al.",
+      "year": 2018,
+      "arxiv_id": "1711.07971",
+      "role": "Inspiration",
+      "relationship_sentence": "By formalizing long-range pixel interactions, Non-local Networks provide the key insight that distant context can drive a pixel\u2019s label, enabling IBA\u2019s strategy of triggering misclassification from non\u2011victim regions."
+    },
+    {
+      "title": "BadDet: Backdoor Attacks on Object Detection",
+      "authors": "Xiang Li et al.",
+      "year": 2022,
+      "arxiv_id": "",
+      "role": "Related Problem",
+      "relationship_sentence": "BadDet extends backdoors to dense prediction and exposes task-specific challenges, directly motivating IBA to formulate a segmentation-specific backdoor that flips all victim-class pixels while preserving non\u2011victim accuracy."
+    }
+  ],
+  "synthesis_narrative": "Trigger-based poisoning was crystallized by BadNets, which showed that stamping a learned pattern during training can cause consistent misclassification when the trigger reappears at test time. Hidden Trigger Backdoor Attacks advanced the stealth and robustness of such patterns, demonstrating that compact, inconspicuous triggers can generalize across inputs while remaining hard to detect. In semantic segmentation, PSPNet revealed that per-pixel predictions are not purely local but depend critically on global, multi-scale context via pyramid pooling, while DeepLabv3+ further strengthened this paradigm with atrous spatial pyramid pooling that integrates broad contextual cues into each pixel\u2019s decision. Non-local Neural Networks formalized the idea that distant pixels can strongly influence each other\u2019s responses, grounding the notion that modifying seemingly unrelated regions can sway target predictions. In dense prediction security, BadDet pushed backdoors beyond classification to object detection, underscoring that task structure matters and that backdoors must be designed to exploit how dense models aggregate information. Together these works suggest a latent opportunity: if segmentation models rely on non-local context, a trigger placed on non-victim (context) regions could systematically bias predictions of victim-class pixels. Building on the poisoning framework and stealthy trigger design while explicitly exploiting long-range, multi-scale context, the current work unifies these insights into an influencer backdoor that flips all victim-class pixels per inference yet preserves non-victim accuracy.",
+  "target_paper": {
+    "title": "Influencer Backdoor Attack on Semantic Segmentation",
+    "authors": "Haoheng Lan, Jindong Gu, Philip Torr, Hengshuang Zhao",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Semantic Segmentation, Backdoor Attack",
+    "abstract": "When a small number of poisoned samples are injected into the training dataset of a deep neural network, the network can be induced to exhibit malicious behavior during inferences, which poses potential threats to real-world applications. While they have been intensively studied in classification, backdoor attacks on semantic segmentation have been largely overlooked. Unlike classification, semantic segmentation aims to classify every pixel within a given image. In this work, we explore backdoor attacks on segmentation models to misclassify all pixels of a victim class by injecting a specific trigger on non-victim pixels during inferences, which is dubbed Influencer Backdoor Attack (IBA). IBA is expected to maintain the classification accuracy of non-victim pixels and mislead classifications of all victim pixels in every single inference and could be easily applied to real-world scenes. Based on the context aggregation ability of segmentation models, we proposed a simple, yet effective",
+    "openreview_id": "VmGRoNDQgJ",
+    "forum_id": "VmGRoNDQgJ"
+  },
+  "analysis_timestamp": "2026-01-07T00:11:16.427501"
+}

@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Diffusion Models Beat GANs on Image Synthesis",
+      "authors": "Prafulla Dhariwal, Alex Nichol",
+      "year": 2021,
+      "role": "Foundational method: classifier guidance for diffusion sampling",
+      "relationship_sentence": "TFG generalizes classifier guidance\u2014adding \u2207 log p(y|x_t) from a noisy-image classifier to the score\u2014as a special case in its unified, training-free guidance design space and systematizes its noise-dependent strength and scheduling."
+    },
+    {
+      "title": "Classifier-Free Diffusion Guidance",
+      "authors": "Jonathan Ho, Tim Salimans",
+      "year": 2022,
+      "role": "Foundational guidance mechanism and key hyperparameter (guidance scale/schedule)",
+      "relationship_sentence": "TFG treats CFG as a limiting instance where the \u2018predictor\u2019 is the conditional score model itself, and it extends the notion of guidance strength and schedules with a principled, cross-task hyperparameter search strategy."
+    },
+    {
+      "title": "Score-Based Generative Modeling through Stochastic Differential Equations",
+      "authors": "Yang Song, Jascha Sohl-Dickstein, Diederik P. Kingma, Abhishek Kumar, Stefano Ermon, Ben Poole",
+      "year": 2021,
+      "role": "Theoretical foundation: conditional sampling via score decomposition",
+      "relationship_sentence": "TFG\u2019s theory builds directly on the SDE formulation where conditional sampling augments the prior score with \u2207 log p(y|x); TFG unifies diverse training-free guidance signals (classifiers, rewards, data terms) under this posterior-gradient view."
+    },
+    {
+      "title": "GLIDE: Towards Photorealistic Image Generation and Editing with Text-Guided Diffusion Models",
+      "authors": "Alex Nichol, Prafulla Dhariwal, Aditya Ramesh, Pranav Shyam, Pamela Mishkin, Bob McGrew, Ilya Sutskever, Mark Chen",
+      "year": 2021,
+      "role": "Representative training-free guidance with external predictor (CLIP) and practical scheduling",
+      "relationship_sentence": "TFG subsumes CLIP-guided sampling used in GLIDE as an instance of predictor-driven guidance, explaining when and how to inject such gradients and proposing robust hyperparameter search to avoid brittle tuning."
+    },
+    {
+      "title": "Denoising Diffusion Restoration Models",
+      "authors": "Bahjat Kawar, Jiaming Song, Stefano Ermon, Michael Elad",
+      "year": 2022,
+      "role": "Training-free conditioning for inverse problems using diffusion priors",
+      "relationship_sentence": "By framing restoration as inference-time conditioning without retraining the diffusion prior, DDRM motivates TFG\u2019s algorithm-agnostic design space that accommodates projection/consistency-based and gradient-based guidance under a unified lens."
+    },
+    {
+      "title": "Diffusion Posterior Sampling for General Inverse Problems",
+      "authors": "Hyungjin Chung, Byeongsu Sim, Jong Chul Ye",
+      "year": 2022,
+      "role": "General training-free, gradient-based guidance via data-consistency terms",
+      "relationship_sentence": "DPS exemplifies adding task-specific gradients to the diffusion score; TFG incorporates DPS-like updates as special cases and contributes a principled way to choose guidance schedules and strengths across noise levels and tasks."
+    }
+  ],
+  "synthesis_narrative": "TFG\u2019s core contribution\u2014an algorithm-agnostic, theoretically grounded framework that unifies training-free guidance for diffusion models\u2014builds on two pillars: the score-based theory of conditional generation and a diverse set of practical, inference-time guidance mechanisms. The SDE formulation of score-based generative modeling formalized that conditioning is achieved by augmenting the prior score with the gradient of the conditional likelihood, directly motivating TFG\u2019s view of guidance as adding a predictor-driven gradient term. Dhariwal and Nichol\u2019s classifier guidance instantiated this idea with \u2207 log p(y|x_t) from a noisy-image classifier, revealing practical knobs such as noise-dependent strength; Ho and Salimans\u2019 classifier-free guidance crystallized the notion of a tunable guidance scale and schedules that trade off fidelity and diversity.\n\nSubsequent training-free conditioning methods exposed the breadth and brittleness of these knobs. GLIDE\u2019s CLIP-guided sampling showed that external predictors can steer diffusion without retraining, but require delicate, task-specific tuning. Inverse-problem methods like DDRM and DPS demonstrated training-free conditioning via projection or data-consistency gradients, further diversifying where and how guidance can be injected in the sampling trajectory. TFG identifies the common structure across these approaches\u2014predictor choice, normalization, timing, and strength scheduling\u2014and provides theoretical analysis and a robust hyperparameter search strategy that applies uniformly across models and tasks. By encompassing classifier-guided, CLIP-guided, and inverse-problem guidance as special cases, TFG converts a fragmented set of heuristics into a unified design space, delivering consistent performance gains across a wide benchmark.",
+  "analysis_timestamp": "2026-01-06T23:33:35.559781"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "The Curious Case of Neural Text Degeneration",
+      "authors": "Ari Holtzman, Jan Buys, Li Du, Maxwell Forbes, Yejin Choi",
+      "year": 2020,
+      "role": "Decoding foundations",
+      "relationship_sentence": "Established how temperature and sampling strategies (e.g., nucleus sampling) shape output quality and diversity, motivating AdaReasoner\u2019s core idea of learning to adapt decoding hyperparameters per instance."
+    },
+    {
+      "title": "Large Language Models are Zero-Shot Reasoners",
+      "authors": "Takeshi Kojima, Shixiang Shane Gu, Machel Reid, Yutaka Matsuo, Yusuke Iwasawa",
+      "year": 2022,
+      "role": "Reasoning prompting baseline",
+      "relationship_sentence": "Introduced chain-of-thought prompting as a fixed configuration for eliciting reasoning, which AdaReasoner generalizes by deciding when and how much reasoning to deploy adaptively."
+    },
+    {
+      "title": "Self-Consistency Improves Chain of Thought Reasoning in Language Models",
+      "authors": "Xuezhi Wang, Jason Wei, Dale Schuurmans, Quoc V. Le, Ed Chi, Sharan Narang, Adam Roberts, Denny Zhou",
+      "year": 2023,
+      "role": "Sampling-based reasoning",
+      "relationship_sentence": "Showed that reasoning quality depends on sampling temperature and the number of sampled reasoning paths, directly motivating AdaReasoner\u2019s learning of instance-specific temperature and sample/step counts."
+    },
+    {
+      "title": "Tree of Thoughts: Deliberate Problem Solving with Large Language Models",
+      "authors": "Shunyu Yao, Dian Yu, Jeffrey Zhao, Izhak Shafran, Thomas L. Griffiths, Yuan Cao, Karthik Narasimhan",
+      "year": 2023,
+      "role": "Search-based reasoning control",
+      "relationship_sentence": "Framed reasoning as a controlled search with tunable breadth/depth and evaluation, which AdaReasoner recasts as a policy over reasoning configurations learned via RL."
+    },
+    {
+      "title": "Training Language Models to Follow Instructions with Human Feedback",
+      "authors": "Long Ouyang, Jeffrey Wu, Xu Jiang, Diogo Almeida, Carroll Wainwright, et al.",
+      "year": 2022,
+      "role": "Reward-model driven optimization",
+      "relationship_sentence": "Established using a (pretrained) reward model to guide policy optimization; AdaReasoner leverages a reward model to evaluate outputs and optimize configuration policies via RL."
+    },
+    {
+      "title": "Adaptive Computation Time for Recurrent Neural Networks",
+      "authors": "Alex Graves",
+      "year": 2016,
+      "role": "Adaptive compute allocation",
+      "relationship_sentence": "Provided the principle of input-dependent adaptive computation steps, directly inspiring AdaReasoner\u2019s adaptive control of reasoning depth/steps at inference."
+    },
+    {
+      "title": "Action Branching Architectures for Deep Reinforcement Learning",
+      "authors": "Alireza Tavakoli, Fabio Pardo, Petar Kormushev",
+      "year": 2018,
+      "role": "Factorized action spaces in RL",
+      "relationship_sentence": "Demonstrated scalable RL over multi-dimensional discrete controls via factorization, informing AdaReasoner\u2019s factorized action space over configuration knobs (e.g., temperature, steps, samples)."
+    }
+  ],
+  "synthesis_narrative": "AdaReasoner\u2019s key contribution is to treat an LLM\u2019s reasoning setup\u2014temperature, number of steps/paths, and related knobs\u2014as a learnable policy that adapts per task and instance. Three lines of prior work converge to make this possible. First, decoding research (Holtzman et al., 2020) showed that generation quality is highly sensitive to temperature and sampling, while chain-of-thought prompting (Kojima et al., 2022) and self-consistency (Wang et al., 2023) revealed that reasoning accuracy hinges on how many paths are sampled and at what diversity\u2014precisely the levers AdaReasoner learns to set. Tree of Thoughts (Yao et al., 2023) further framed problem-solving as a search with tunable breadth/depth and evaluation, turning \u201creasoning configuration\u201d into a structured control problem.\nSecond, adaptive compute ideas (Graves, 2016) provided the conceptual foundation for input-dependent adjustment of reasoning depth, aligning with AdaReasoner\u2019s goal of varying steps or samples on demand rather than using fixed, one-size-fits-all settings.\nThird, RL with reward models (Ouyang et al., 2022) established how pretrained preference/reward models can guide policy optimization. AdaReasoner follows this paradigm by using a reward model to score outcomes and train a configuration policy. To make the control space tractable and sample-efficient, it draws on factored-action RL (Tavakoli et al., 2018), factorizing configuration choices across independent dimensions and enabling targeted exploration. Together, these works directly underpin AdaReasoner\u2019s LLM-agnostic, RL-trained, adaptively configured reasoning with theoretical guarantees and broad empirical gains.",
+  "analysis_timestamp": "2026-01-07T00:05:12.537272"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "HyperNetworks",
+      "authors": "David Ha, Andrew M. Dai, Quoc V. Le",
+      "year": 2016,
+      "role": "Methodological foundation",
+      "relationship_sentence": "Introduces using a network to generate weights of another network; the paper extends this idea to generate a diverse set of classifier experts covering different long-tail distribution scenarios."
+    },
+    {
+      "title": "Learning the Pareto Front with HyperNetworks (Pareto HyperNetworks)",
+      "authors": "Aviv Navon, Aviv Shamsian, Ethan Fetaya, Gal Chechik",
+      "year": 2021,
+      "role": "Controllable preference conditioning",
+      "relationship_sentence": "Shows how a hypernetwork can condition on a user preference vector to instantiate model parameters along a Pareto front; the paper leverages this paradigm to output expert models that match user-specified head\u2013tail trade-offs."
+    },
+    {
+      "title": "Mixture of Experts: An Empirical Bayes Approach to Combining Multiple Neural Networks",
+      "authors": "Robert A. Jacobs, Michael I. Jordan, Steven J. Nowlan, Geoffrey E. Hinton",
+      "year": 1991,
+      "role": "Conceptual foundation for experts/ensembles",
+      "relationship_sentence": "Provides the core principle of using multiple specialized experts and combining them; the paper realizes this with hypernetwork-generated diverse experts optimized to adapt to varying test distributions."
+    },
+    {
+      "title": "Deep Ensembles: A Simple and Scalable Predictive Uncertainty Estimation",
+      "authors": "Balaji Lakshminarayanan, Alexander Pritzel, Charles Blundell",
+      "year": 2017,
+      "role": "Empirical incentive for diversity/ensembling",
+      "relationship_sentence": "Demonstrates that diversity across models improves robustness under distribution shift; the paper operationalizes this by cheaply generating diverse experts via a hypernetwork and optimizing their ensemble."
+    },
+    {
+      "title": "Decoupling Representation and Classifier for Long-Tailed Recognition",
+      "authors": "Bingyi Kang, Saining Xie, Marcus Rohrbach, Zhicheng Yan, Jiashi Feng, Yannis Kalantidis",
+      "year": 2020,
+      "role": "Long-tailed learning insight",
+      "relationship_sentence": "Highlights the head\u2013tail imbalance and the benefits of separating representation learning from classifier balancing; the paper builds on this by creating specialized experts that can be reweighted/selected to match shifting class priors."
+    },
+    {
+      "title": "Long-tail Learning via Logit Adjustment",
+      "authors": "Aditya Krishna Menon, Shiori Sagawa, Suriya Gunasekar, Karthik S. Gurumurthy, Daniel S. Park, Scott M. Lundberg, et al.",
+      "year": 2021,
+      "role": "Distribution-shift-aware calibration",
+      "relationship_sentence": "Provides a principled way to adjust logits according to class priors at test time; the paper generalizes this idea by learning a family of experts spanning different priors and selecting/ensembling them for any target distribution."
+    },
+    {
+      "title": "Bayesian Classification with Estimated Class Priors",
+      "authors": "M. Saerens, P. Latinne, C. Decaestecker",
+      "year": 2002,
+      "role": "Foundational label-shift correction",
+      "relationship_sentence": "Establishes EM-based prior (label-shift) estimation and posterior recalibration; the paper adopts the same problem framing\u2014mismatch between train and test priors\u2014and addresses it by preparing experts for a continuum of prior scenarios."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core contribution\u2014controllable long-tailed recognition via hypernetwork-generated diverse experts that adapt to arbitrary test distributions\u2014sits at the intersection of three lines of work. First, HyperNetworks established that one network can generate the weights of another, while Pareto HyperNetworks showed how conditioning on a preference vector yields a continuum of models along a Pareto front. These ideas directly enable the paper\u2019s conditional weight generation: a single hypernetwork instantiates specialized experts tailored to user-specified head\u2013tail trade-offs. Second, the mixture/ensemble literature (Mixture of Experts and Deep Ensembles) motivates using multiple diverse models to improve robustness under shift. Rather than training many costly models, the paper uses a hypernetwork to efficiently produce a diverse expert set and then optimizes their ensemble to match the test distribution. Third, long-tailed recognition and label-shift calibration works (Decoupling Representation and Classifier, Logit Adjustment, and classical EM-based prior correction) formalize the key failure mode\u2014mismatch between train and test class priors\u2014and propose recalibration or decoupling strategies. The paper advances beyond per-model calibration by learning a distribution of experts spanning possible prior scenarios, enabling both automated adaptation to unknown test priors and explicit user control over head\u2013tail trade-offs. In sum, it fuses conditional hypernetworks (for controllable solution generation), expert ensembling (for robustness), and label-shift-aware long-tail theory (for principled adaptation) into a unified, controllable paradigm.",
+  "analysis_timestamp": "2026-01-06T23:33:35.531663"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Outrageously Large Neural Networks: The Sparsely-Gated Mixture-of-Experts Layer",
+      "authors": "Noam Shazeer, Azalia Mirhoseini, Krzysztof Maziarz, Andy Davis, Quoc V. Le, Geoffrey Hinton, Jeff Dean, et al.",
+      "year": 2017,
+      "role": "Foundational MoE/conditional computation",
+      "relationship_sentence": "MoBA directly borrows the sparsely-gated routing principle from this work, repurposing MoE gating to select attention blocks (experts) so only a subset of attention computation is activated per token."
+    },
+    {
+      "title": "Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity",
+      "authors": "William Fedus, Barret Zoph, Noam Shazeer",
+      "year": 2021,
+      "role": "Practical MoE scaling and load-balancing",
+      "relationship_sentence": "MoBA adapts Switch-style efficient top-k routing and load-balancing ideas to the attention mechanism itself, enabling scalable, sparse activation over block-attention experts."
+    },
+    {
+      "title": "Routing Transformers: Efficient Content-Based Sparse Attention",
+      "authors": "Aurko Roy, Mohammad Saffar, Ashish Vaswani, David Grangier",
+      "year": 2021,
+      "role": "Adaptive, content-based sparse attention",
+      "relationship_sentence": "Like Routing Transformer, MoBA lets content dynamically restrict attention neighborhoods; MoBA achieves this via MoE-style routing over blocks rather than k-means-based token routing."
+    },
+    {
+      "title": "Sinkhorn Transformers: Memory Efficient Transformers Using Sinkhorn Sorting",
+      "authors": "Yi Tay, Dara Bahri, Donald Metzler, Da-Cheng Juan, et al.",
+      "year": 2020,
+      "role": "Block-structured attention via learned permutations",
+      "relationship_sentence": "MoBA\u2019s notion of block-level attention echoes Sinkhorn\u2019s block organization, but replaces differentiable sorting with learned MoE gating to choose which blocks to compute."
+    },
+    {
+      "title": "Longformer: The Long-Document Transformer",
+      "authors": "Iz Beltagy, Matthew E. Peters, Arman Cohan",
+      "year": 2020,
+      "role": "Structured sparse (window + global) attention for long context",
+      "relationship_sentence": "MoBA is positioned as a \u2018less-structured\u2019 alternative to Longformer\u2019s fixed sliding-window/global patterns, aiming to keep efficiency while letting the model autonomously choose where to attend."
+    },
+    {
+      "title": "Performer: Rethinking Attention with Fast FAVOR+",
+      "authors": "Krzysztof Choromanski, Valerii Likhosherstov, David Dohan, Xingyou Song, et al.",
+      "year": 2021,
+      "role": "Linear-attention approximation baseline",
+      "relationship_sentence": "MoBA contrasts with Performer\u2019s kernel-based linearization by preserving exact dot-product attention within selected blocks, mitigating approximation errors on complex reasoning tasks."
+    },
+    {
+      "title": "StreamingLLM: Efficient Streaming Language Models with Attention Sinks",
+      "authors": "Xiao Liu, et al.",
+      "year": 2023,
+      "role": "Heuristic \u2018attention sink\u2019 strategy for long-context/streaming",
+      "relationship_sentence": "MoBA provides an alternative to attention-sink heuristics by conditionally routing computation to relevant blocks, avoiding task-specific tokens while maintaining long-context fidelity."
+    }
+  ],
+  "synthesis_narrative": "MoBA emerges at the intersection of conditional computation and efficient long-context attention. The sparsely-gated MoE idea from Shazeer et al. and its practical scaling via Switch Transformers supply the core mechanism: use a lightweight router to activate only a subset of heavy computations. MoBA\u2019s key step is to apply this not to feed-forward layers but to attention itself, treating block-attention modules as experts and learning per-token (or per-head) routing to them.\n\nOn the efficient attention side, prior structured sparsity designs such as Longformer reduced cost with fixed window/global patterns, but impose strong inductive biases and task-specific heuristics. In contrast, adaptive sparse approaches like Routing Transformer and Sinkhorn Transformer showed that content-based grouping into clusters or blocks can recover flexibility while maintaining subquadratic complexity. MoBA aligns with this \u201cless structure\u201d philosophy but replaces clustering/sorting machinery with MoE routing, simplifying the mechanism and integrating mature load-balancing and stability techniques from the MoE literature.\n\nFinally, linear-attention approximations such as Performer offered another path to longer contexts by altering the attention computation itself, trading exactness for speed; MoBA deliberately keeps exact dot-product attention within selected blocks to better preserve reasoning quality. And instead of heuristic attention sinks used in streaming settings, MoBA lets the model autonomously determine which blocks deserve computation. Together, these strands motivate and directly shape MoBA\u2019s mixture-of-block-attention design: conditional, learnable, and efficient without hardwired patterns or approximations.",
+  "analysis_timestamp": "2026-01-07T00:02:04.976316"
+}

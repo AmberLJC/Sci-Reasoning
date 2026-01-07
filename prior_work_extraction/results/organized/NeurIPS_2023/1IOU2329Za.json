@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Deep Equilibrium Models",
+      "authors": "Shaojie Bai, J. Zico Kolter, Vladlen Koltun",
+      "year": 2019,
+      "role": "Implicit/fixed-point layer foundation",
+      "relationship_sentence": "Banana adopts a DEQ-style fixed-point view, engineering its update as a contraction to guarantee existence/uniqueness and to backpropagate through the equilibrium, but extends it by making the operator SE(3)-equivariant and label-permutation aware so that assignments and per-part poses co-evolve equivariantly."
+    },
+    {
+      "title": "Tensor Field Networks: Rotation- and Translation-Equivariant Neural Networks for 3D Point Clouds",
+      "authors": "Nathaniel Thomas, Tess Smidt, Steven Kearnes, Lusann Yang, Li Li, Kai Kohlhoff, Patrick Riley",
+      "year": 2018,
+      "role": "Foundational SE(3)-equivariant representation for 3D",
+      "relationship_sentence": "Provides the steerable, SE(3)-equivariant feature parameterization that motivates Banana\u2019s per-step equivariant updates, ensuring that rigid motions act consistently on learned features."
+    },
+    {
+      "title": "SE(3)-Transformers: 3D Roto-Translation Equivariant Attention Networks",
+      "authors": "Fabian B. Fuchs, Daniel E. Worrall, Volker Fischer, Max Welling",
+      "year": 2020,
+      "role": "Equivariant attention/message passing in 3D",
+      "relationship_sentence": "Demonstrates how to build SE(3)-equivariant interactions over point sets, informing Banana\u2019s design of per-iteration, equivariant interactions between points and parts that preserve rigid-motion symmetry."
+    },
+    {
+      "title": "E(n) Equivariant Graph Neural Networks",
+      "authors": "Victor Garcia Satorras, Emiel Hoogeboom, Max Welling",
+      "year": 2021,
+      "role": "Lightweight equivariant geometric layers",
+      "relationship_sentence": "Shows practical, stable equivariant updates over coordinates and features; Banana leverages similar principles to keep each iteration SE(3)-equivariant while remaining efficient for large point sets."
+    },
+    {
+      "title": "Coherent Point Drift",
+      "authors": "Andriy Myronenko, Xubo Song",
+      "year": 2010,
+      "role": "EM-style co-optimization of soft assignments and rigid transforms",
+      "relationship_sentence": "The EM alternation between soft correspondences and SE(3) alignment in CPD directly inspires Banana\u2019s co-evolution of part assignments and per-part poses, which Banana recasts as a learnable, contracting equivariant fixed-point map."
+    },
+    {
+      "title": "Object-Centric Learning with Slot Attention",
+      "authors": "Francesco Locatello, Dirk Weissenborn, Thomas Unterthiner, Aravindh Mahendran, Georg Heigold, Jakob Uszkoreit, Alexey Dosovitskiy, Thomas Kipf",
+      "year": 2020,
+      "role": "Iterative assignment with permutation symmetry",
+      "relationship_sentence": "Slot Attention\u2019s iterative refinement of soft assignments under slot-permutation symmetry informs Banana\u2019s formulation of inter-part equivariance, where labels and part parameters are jointly updated in a permutation-equivariant manner."
+    },
+    {
+      "title": "Dynamic Routing Between Capsules",
+      "authors": "Sara Sabour, Geoffrey E. Hinton, Nicholas Frosst",
+      "year": 2017,
+      "role": "Part\u2013whole pose equivariance via routing",
+      "relationship_sentence": "Capsules\u2019 coupling of part assignments with pose parameters motivates Banana\u2019s explicit modeling of per-part SE(3) actions tied to segmentation, while Banana adds convergence guarantees and continuous 3D equivariance."
+    }
+  ],
+  "synthesis_narrative": "Banana\u2019s core contribution\u2014equivariant point-cloud segmentation with inter-part equivariance obtained as the fixed point of a contracting iteration\u2014emerges from unifying three lines of prior work. First, deep implicit layers and fixed-point training (Deep Equilibrium Models) provide the blueprint to pose inference as solving for a stable equilibrium and to differentiate through it. Banana adopts this perspective but engineers the update operator to be a contraction and strictly SE(3)-equivariant, enabling proofs of per-step equivariance and global convergence. Second, advances in 3D equivariance (Tensor Field Networks, SE(3)-Transformers, and E(n)-equivariant GNNs) supply the architectural tools to ensure rigid-motion symmetry at each iteration. These works demonstrate how features and interactions can be designed so that rotations and translations act predictably\u2014elements Banana leverages to keep its iterative map equivariant. Third, the co-evolution of assignments and transformations has deep roots in both classical registration (Coherent Point Drift\u2019s EM alternation between soft correspondences and rigid alignment) and object-centric grouping (Slot Attention and Capsule Networks), which tie grouping to pose-like parameters under permutation symmetry. Banana synthesizes these ideas by jointly updating soft part labels and per-part SE(3) parameters through an equivariant, contracting operator. This yields a unique, equivariant fixed point that resolves the entanglement between segmentation and per-part motion, operationalizing inter-part equivariance with theoretical guarantees and practical effectiveness.",
+  "analysis_timestamp": "2026-01-07T00:02:04.862262"
+}

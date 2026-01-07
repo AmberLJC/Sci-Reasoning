@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Communication-Efficient Learning of Deep Networks from Decentralized Data",
+      "authors": "McMahan et al.",
+      "year": 2017,
+      "arxiv_id": "arXiv:1602.05629",
+      "role": "Foundation",
+      "relationship_sentence": "CLAP operates under the privacy-preserving federated learning setup introduced by FedAvg and builds its collaborative adaptation and imputation protocol atop the standard federated aggregation loop."
+    },
+    {
+      "title": "Multimodal Generative Models for Scalable Weakly-Supervised Learning",
+      "authors": "Wu et al.",
+      "year": 2018,
+      "arxiv_id": "arXiv:1802.05335",
+      "role": "Foundation",
+      "relationship_sentence": "CLAP\u2019s cross-modal imputation mechanism is grounded in the MVAE/Product-of-Experts idea from Wu & Goodman, using observed modalities to infer missing ones via a shared latent space."
+    },
+    {
+      "title": "Generalized Multimodal ELBO",
+      "authors": "Sutter et al.",
+      "year": 2021,
+      "arxiv_id": "",
+      "role": "Baseline",
+      "relationship_sentence": "CLAP directly extends MoPoE-VAE\u2019s arbitrary-subset inference by coordinating modality experts across clients and tackling modality-combination heterogeneity that MoPoE handles only in a centralized, i.i.d. setting."
+    },
+    {
+      "title": "Federated Optimization in Heterogeneous Networks (FedProx)",
+      "authors": "Li et al.",
+      "year": 2020,
+      "arxiv_id": "arXiv:1812.06127",
+      "role": "Gap Identification",
+      "relationship_sentence": "CLAP addresses the client-drift under non-i.i.d. data highlighted by FedProx, but does so by aligning cross-client conditional dependencies for multimodal imputation rather than relying solely on a proximal regularizer."
+    },
+    {
+      "title": "Model-Contrastive Federated Learning",
+      "authors": "Li et al.",
+      "year": 2021,
+      "arxiv_id": "arXiv:2103.16257",
+      "role": "Gap Identification",
+      "relationship_sentence": "CLAP borrows the core insight of representation alignment from MOON to combat heterogeneity, re-purposing it to collaboratively align multimodal imputation models across clients with different modality mixes."
+    },
+    {
+      "title": "FedBN: Federated Learning on Non-IID Features via Local Batch Normalization",
+      "authors": "Li et al.",
+      "year": 2021,
+      "arxiv_id": "arXiv:2102.07623",
+      "role": "Gap Identification",
+      "relationship_sentence": "CLAP leverages FedBN\u2019s insight that client-specific statistics should be preserved by keeping client-specific components when fusing imputation models, mitigating feature-distribution shifts across clients."
+    },
+    {
+      "title": "Federated Learning with Personalization Layers",
+      "authors": "Arivazhagan et al.",
+      "year": 2019,
+      "arxiv_id": "arXiv:1912.00818",
+      "role": "Inspiration",
+      "relationship_sentence": "CLAP adopts the parameter decoupling principle of FedPer\u2014separating shared global parameters from client-specific adapters\u2014to enable collaborative adaptation of multimodal imputation across heterogeneous modality combinations."
+    }
+  ],
+  "synthesis_narrative": "Federated learning formalized a privacy-preserving collaboration protocol in which clients improve a shared model without exposing raw data, establishing the aggregation loop later methods refine. In parallel, multimodal generative modeling advanced practical imputation: MVAE introduced product-of-experts inference to reconstruct missing modalities from observed ones via a shared latent space, and MoPoE-VAE generalized the evidence bound to support arbitrary subsets of modalities, making cross-modal completion scalable and flexible in centralized settings. Yet, federated deployments face severe heterogeneity; FedProx exposed how client drift degrades aggregation under non-i.i.d. data, while MOON showed that aligning representations across local and global models can stabilize learning. FedBN further demonstrated the value of preserving client-specific normalization statistics to handle feature shifts. Finally, FedPer proposed splitting models into global and personalized parts, showing that decoupling shared knowledge from client-specific adaptations can better accommodate heterogeneity. Together, these threads revealed an opportunity: centralized multimodal imputation methods effectively handle missing modalities but assume i.i.d. data and unified training, whereas federated optimization methods address heterogeneity but do not transfer cross-modal dependencies. The natural next step is to synthesize arbitrary-subset multimodal inference with federated personalization and alignment: coordinate modality experts across clients, preserve client-specific components where distributions differ, and explicitly align conditional dependencies to combat drift. CLAP crystallizes this by extending PoE-style imputation into a collaborative federated regime with decoupled shared/personalized parameters and alignment mechanisms tailored to modality-combination heterogeneity.",
+  "target_paper": {
+    "title": "CLAP: Collaborative Adaptation for Patchwork Learning",
+    "authors": "Sen Cui, Abudukelimu Wuerkaixi, Weishen Pan, Jian Liang, Lei Fang, Changshui Zhang, Fei Wang",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Patchwork learning, robustness",
+    "abstract": "In this paper, we investigate a new practical learning scenario, where the data distributed in different sources/clients are typically generated with various modalities. Existing research on learning from multi-source data mostly assume that each client owns the data of all modalities, which may largely limit its practicability. In light of the expensiveness and sparsity of multimodal data, we propose patchwork learning to jointly learn from fragmented multimodal data in distributed clients. Considering the concerns on data privacy, patchwork learning aims to impute incomplete multimodal data for diverse downstream tasks without accessing the raw data directly. Local clients could miss different modality combinations. Due to the statistical heterogeneity induced by non-i.i.d. data, the imputation is more challenging since the learned dependencies fail to adapt to the imputation of other clients. In this paper, we provide a novel imputation framework to tackle modality combination heter",
+    "openreview_id": "8EyRkd3Qj2",
+    "forum_id": "8EyRkd3Qj2"
+  },
+  "analysis_timestamp": "2026-01-07T00:23:10.269824"
+}

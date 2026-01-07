@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Evidential Deep Learning to Quantify Classification Uncertainty",
+      "authors": "Sensoy et al.",
+      "year": 2018,
+      "arxiv_id": "1806.01768",
+      "role": "Baseline",
+      "relationship_sentence": "R-EDL directly relaxes EDL\u2019s fixed Dirichlet construction (alpha = evidence + 1) and its variance-minimizing training objective by introducing a tunable prior weight and a non\u2013variance-collapsing regularization, explicitly addressing EDL\u2019s tendency toward overconfident, delta-like Dirichlets."
+    },
+    {
+      "title": "Predictive Uncertainty Estimation via Prior Networks",
+      "authors": "Malinin et al.",
+      "year": 2018,
+      "arxiv_id": "1802.10501",
+      "role": "Inspiration",
+      "relationship_sentence": "Prior Networks formalized the separation between Dirichlet mean (proportions) and total concentration (evidence magnitude), an insight R-EDL uses to justify balancing proportion versus magnitude via a prior-weighted Dirichlet construction and adjusted scoring."
+    },
+    {
+      "title": "Subjective Logic: A Formalism for Reasoning Under Uncertainty",
+      "authors": "J\u00f8sang",
+      "year": 2016,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "Subjective logic provides the mapping alpha_k = r_k + a_k W with base rates a and prior weight W, which R-EDL reinstates (instead of fixing implicitly) to control the trade-off between evidence proportions and magnitude in predictive scoring."
+    },
+    {
+      "title": "Deep Evidential Regression",
+      "authors": "Amini et al.",
+      "year": 2020,
+      "arxiv_id": "1910.02600",
+      "role": "Related Problem",
+      "relationship_sentence": "By designing a loss that explicitly minimizes predictive variance in evidential regression, this work exemplified how variance-minimization can drive distributions toward degeneracy\u2014an effect R-EDL diagnoses in classification EDL and counteracts with a revised regularizer."
+    },
+    {
+      "title": "Posterior Network: Uncertainty Estimation Without OOD Data",
+      "authors": "Charpentier et al.",
+      "year": 2020,
+      "arxiv_id": "2006.09239",
+      "role": "Related Problem",
+      "relationship_sentence": "Posterior Networks leverage a Dirichlet posterior and highlight the role of concentration as an uncertainty signal, reinforcing R-EDL\u2019s decision to decouple scoring from raw evidence magnitude via an explicit prior weight."
+    },
+    {
+      "title": "Dirichlet Prior Networks for Out-of-Distribution Detection",
+      "authors": "Malinin et al.",
+      "year": 2019,
+      "arxiv_id": "1906.02530",
+      "role": "Extension",
+      "relationship_sentence": "This extension detailed how controlling Dirichlet strength shapes epistemic uncertainty, informing R-EDL\u2019s analysis that fixed-strength assumptions in EDL obscure the proportional-versus-magnitude trade-off that the prior weight is designed to regulate."
+    }
+  ],
+  "synthesis_narrative": "Evidential classification was instantiated by Sensoy et al., who mapped network outputs to Dirichlet parameters via alpha = evidence + 1 and trained with an evidential objective whose expected-error term implicitly rewards low Dirichlet variance; this pairing yields confident, concentrated posteriors and fixes the prior contribution. Subjective logic, formalized by J\u00f8sang, provides the more general mapping alpha_k = r_k + a_k W, where base rates a and prior weight W govern how much prior mass mixes with data-derived evidence, making explicit the dial that trades proportion against magnitude. Malinin and Gales\u2019 Prior Networks further dissected Dirichlet behavior by separating mean proportions from total concentration (strength), clarifying that uncertainty depends not just on the class proportions but also on the evidence magnitude. Amini et al. extended evidential learning to regression with a loss that directly minimizes predictive variance, illustrating how variance-minimization can collapse uncertainty. Posterior Networks continued to exploit Dirichlet posteriors without OOD data, emphasizing concentration as a primary uncertainty control. Building on these pieces, it became clear that evidential classifiers inherited two brittle choices: fixing the prior weight (thus overemphasizing proportions or magnitude by fiat) and minimizing variance during training, pushing Dirichlet posteriors toward delta-like distributions. R-EDL synthesizes these insights by reinstating and tuning the subjective-logic prior weight to balance proportions and magnitude in scoring, and by replacing variance-minimizing regularization with a relaxation that prevents collapse, yielding more reliable single-pass uncertainty.",
+  "target_paper": {
+    "title": "R-EDL: Relaxing Nonessential Settings of Evidential Deep Learning",
+    "authors": "Mengyuan Chen, Junyu Gao, Changsheng Xu",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "uncertainty quantification, evidential deep learning, subjective logic, single-forward-pass uncertainty method",
+    "abstract": "A newly-arising uncertainty estimation method named Evidential Deep Learning (EDL), which can obtain reliable predictive uncertainty in a single forward pass, has garnered increasing interest. Guided by the subjective logic theory, EDL obtains Dirichlet concentration parameters from deep neural networks, thus constructing a Dirichlet probability density function (PDF) to model the distribution of class probabilities. Despite its great success, we argue that EDL keeps nonessential settings in both stages of model construction and optimization.\nIn this work, our analysis indicates that (1) in the construction of the Dirichlet PDF, a commonly ignored parameter termed prior weight governs the balance between leveraging the proportion of evidence and its magnitude in deriving predictive scores, and (2) in model optimization, a variance-minimized regularization term adopted by traditional EDL encourages the Dirichlet PDF to approach a Dirac delta function, potentially exacerbating overconfid",
+    "openreview_id": "Si3YFA641c",
+    "forum_id": "Si3YFA641c"
+  },
+  "analysis_timestamp": "2026-01-06T23:41:17.174937"
+}

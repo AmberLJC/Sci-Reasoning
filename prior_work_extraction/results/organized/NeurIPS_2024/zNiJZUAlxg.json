@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "PaDiM: A Patch Distribution Modeling Framework for Anomaly Detection and Localization",
+      "authors": "Thomas Defard et al.",
+      "year": 2021,
+      "role": "Feature-distribution modeling baseline for industrial visual AD",
+      "relationship_sentence": "ResAD explicitly departs from PaDiM\u2019s practice of learning the raw feature distribution by instead learning the distribution of residual features, aiming to suppress class-dependent feature variance that PaDiM\u2019s per-class Gaussian modeling cannot generalize across."
+    },
+    {
+      "title": "CFLOW-AD: Real-Time Unsupervised Anomaly Detection with Localization via Conditional Normalizing Flows",
+      "authors": "Antonin Gudovskiy et al.",
+      "year": 2022,
+      "role": "Density estimation of deep features via conditional normalizing flows",
+      "relationship_sentence": "CFLOW-AD established modeling the density of patch features as an effective AD strategy; ResAD builds on this insight but models densities in a residualized feature space to obtain a distribution that is more stable across unseen classes."
+    },
+    {
+      "title": "Towards Total Recall in Industrial Anomaly Detection (PatchCore)",
+      "authors": "Karsten Roth et al.",
+      "year": 2022,
+      "role": "Nearest-neighbor/coreset memory in pre-trained feature space for AD",
+      "relationship_sentence": "PatchCore showed strong general-purpose feature reuse but still relies on the raw feature manifold, motivating ResAD\u2019s shift to residual features to reduce inter-class feature drift that hampers a single model\u2019s generalization."
+    },
+    {
+      "title": "DRAEM: A Discriminatively Trained Reconstruction Embedding for Surface Anomaly Detection",
+      "authors": "Marko Zavrtanik, Matej Kristan, Danijel Skocaj",
+      "year": 2021,
+      "role": "Reconstruction-based AD using residuals between input and reconstruction",
+      "relationship_sentence": "DRAEM demonstrated the power of residual signals as anomaly evidence; ResAD extends this principle from pixel-space reconstruction residuals to residualizing feature representations to learn a more class-invariant normal distribution."
+    },
+    {
+      "title": "Reverse Distillation for Industrial Anomaly Detection (RD4AD)",
+      "authors": "Z. Deng et al.",
+      "year": 2022,
+      "role": "Teacher\u2013student feature distillation with residual discrepancies for AD",
+      "relationship_sentence": "RD4AD popularized feature residuals (teacher\u2013student discrepancies) as reliable anomaly cues; ResAD generalizes this residual idea by learning the residual feature distribution itself to stabilize normality modeling across categories."
+    },
+    {
+      "title": "Deep SVDD: One-Class Classification Objective for Deep Anomaly Detection",
+      "authors": "Lukas Ruff et al.",
+      "year": 2018,
+      "role": "Foundational one-class learning objective for compact normal representations",
+      "relationship_sentence": "Deep SVDD framed learning a compact normal region but suffers from class-specific embeddings; ResAD\u2019s residual distribution learning can be viewed as an invariance-inducing transformation that makes a single density/compactness model applicable to unseen classes."
+    }
+  ],
+  "synthesis_narrative": "ResAD\u2019s central insight\u2014modeling residual feature distributions rather than raw feature distributions\u2014sits at the intersection of two trajectories in anomaly detection: (1) density/memory modeling in pre-trained feature spaces, and (2) leveraging residual signals as robust anomaly evidence. PaDiM and CFLOW-AD crystallized the effectiveness of learning probability models over deep patch features (Gaussian modeling and normalizing flows, respectively), yet both operate on class-dependent raw features, which impedes cross-class generalization. PatchCore further highlighted the strength of generic pre-trained features for AD, but its nearest-neighbor search still inherits inter-class feature drift. These works collectively motivate ResAD\u2019s pivot: keep the successful idea of modeling normality in feature space, but reduce class-specific variance before modeling.\n\nConcurrently, DRAEM and RD4AD showed that residuals\u2014either input\u2013reconstruction differences or teacher\u2013student feature discrepancies\u2014are highly informative for anomaly detection. ResAD abstracts and generalizes this notion by residualizing features themselves and then learning the distribution over these residuals, targeting a representation whose normal distribution is more stationary across categories. Finally, the classical Deep SVDD perspective underscores the challenge of learning compact normal regions that transfer; ResAD\u2019s residualization can be viewed as an invariance-inducing transformation that makes a single compact/density model viable across unseen classes. Together, these prior works directly shaped ResAD\u2019s shift from modeling raw features to modeling residual feature distributions to achieve class-generalizable anomaly detection without target-time adaptation.",
+  "analysis_timestamp": "2026-01-07T00:02:04.764425"
+}

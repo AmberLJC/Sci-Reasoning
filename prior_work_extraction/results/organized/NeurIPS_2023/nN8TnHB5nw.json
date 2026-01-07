@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "8-bit Optimizers via Block-wise Quantization",
+      "authors": "Tim Dettmers, Mike Lewis, Sam Shleifer, Luke Zettlemoyer",
+      "year": 2021,
+      "role": "Direct baseline and methodological precursor",
+      "relationship_sentence": "Introduced block-wise quantization to store Adam\u2019s first and second moments in 8 bits, establishing the feasibility and practical recipe (block scaling, dynamic range tracking) for low-precision optimizer states that this paper extends to 4-bit by shrinking block sizes, adding 2D (row/column) structure, and addressing new failure modes."
+    },
+    {
+      "title": "Adafactor: Adaptive Learning Rates with Sublinear Memory",
+      "authors": "Noam Shazeer, Mitchell Stern",
+      "year": 2018,
+      "role": "Structural inspiration for row/column statistics",
+      "relationship_sentence": "Adafactor exploits row- and column-wise structure to approximate second-moment matrices with reduced memory; this paper borrows the insight that per-row and per-column information captures key variation and uses it to design a 2D quantization scheme for optimizer moments to better handle heterogeneous/outlier patterns."
+    },
+    {
+      "title": "LLM.int8(): 8-bit Matrix Multiplication for Transformers at Scale",
+      "authors": "Tim Dettmers, Mike Lewis, Younes Belkada, Luke Zettlemoyer",
+      "year": 2022,
+      "role": "Outlier analysis informing quantization design",
+      "relationship_sentence": "Showed that activation outlier channels break naive low-precision schemes and motivated outlier-aware strategies; the present work identifies similarly complex outlier patterns in optimizer moments and moves beyond simple block-wise quantization by incorporating both row- and column-wise information and smaller blocks."
+    },
+    {
+      "title": "QLoRA: Efficient Finetuning of Quantized LLMs",
+      "authors": "Tim Dettmers, Artidoro Pagnoni, Ari Holtzman, Luke Zettlemoyer",
+      "year": 2023,
+      "role": "Demonstrated viability of 4-bit precision with tailored quantizers",
+      "relationship_sentence": "Established that 4-bit quantization (e.g., NF4 with double quantization) can be stable for LLMs when distribution-aware design is used; this paper translates that ambition to optimizer states, coupling distributional analysis of moments with a 4-bit scheme tailored to their statistics."
+    },
+    {
+      "title": "Mixed Precision Training",
+      "authors": "Paulius Micikevicius, Sharan Narang, Jonah Alben, et al.",
+      "year": 2018,
+      "role": "Problem framing: memory bottleneck in training from optimizer states",
+      "relationship_sentence": "Identified that, even with FP16 activations/gradients, FP32 master weights and optimizer states dominate memory; this directly motivates compressing optimizer moments further, a gap this paper targets by pushing states from 8-bit to 4-bit."
+    },
+    {
+      "title": "Quantization and Training of Neural Networks for Efficient Integer-Arithmetic-Only Inference",
+      "authors": "Benoit Jacob, Skirmantas Kligys, Bo Chen, Menglong Zhu, et al.",
+      "year": 2018,
+      "role": "Quantization framework and zero-point conventions",
+      "relationship_sentence": "Popularized asymmetric linear quantization with zero-points; the present work diagnoses a zero-point patholog y for the second moment and proposes a linear quantizer that excludes the zero-point, effectively adapting core quantization principles to optimizer-state peculiarities."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s key contribution\u2014stable 4-bit storage of optimizer moments via fine-grained, 2D-aware quantization and a zero-point\u2013free linear quantizer for the second moment\u2014sits at the intersection of three prior lines of work. First, block-wise compression of optimizer states (Dettmers et al., 8-bit Optimizers) proved that Adam\u2019s moments can be quantized without destabilizing training, but it plateaued at 8 bits and struggled with heterogeneity inside blocks. Second, memory-reduction strategies that exploit matrix structure (Adafactor) showed that row- and column-wise statistics capture much of the variation in second moments; this structural insight directly inspires using both row- and column-wise information in the quantization scheme to tame complex, anisotropic outlier patterns observed in moment tensors. Third, advances in low-bit quantization for LLMs (LLM.int8, QLoRA) revealed that outliers and distribution shape are decisive at ultra-low precision, and that carefully tailored quantizers can make 4-bit viable. Building on the general quantization framework and zero-point conventions of Jacob et al., the authors identify a specific pathology: asymmetric zero-points bias second-moment quantization near zero. They resolve it with a linear quantizer that excludes the zero point, aligning the codebook with the second moment\u2019s distribution. Framed by the mixed-precision training observation that optimizer states dominate memory, these ingredients combine into a principled path from 8-bit to 4-bit optimizer states: smaller blocks, 2D-aware scaling, and zero-point\u2013free quantization for the second moment.",
+  "analysis_timestamp": "2026-01-06T23:33:35.590606"
+}

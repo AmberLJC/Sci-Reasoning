@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "DeepSeek-R1: Incentivizing LLMs to Reason via Reinforcement Learning",
+      "authors": "DeepSeek-AI et al.",
+      "year": 2024,
+      "role": "Baseline",
+      "relationship_sentence": "FAST-GRPO directly modifies the GRPO-based reinforcement learning setup popularized in DeepSeek-R1 by adding difficulty-aware KL and adaptive length rewards to avoid the universal, often verbose slow-thinking behavior induced by plain GRPO."
+    },
+    {
+      "title": "Training language models to follow instructions with human feedback",
+      "authors": "Long Ouyang et al.",
+      "year": 2022,
+      "role": "Foundation",
+      "relationship_sentence": "The FAST-GRPO difficulty-aware KL regularization is an explicit adaptation of the KL-control in RLHF introduced by Ouyang et al., changing the static KL penalty into one that depends on estimated question difficulty."
+    },
+    {
+      "title": "Learning to Summarize with Human Feedback",
+      "authors": "Nisan Stiennon et al.",
+      "year": 2020,
+      "role": "Extension",
+      "relationship_sentence": "FAST-GRPO generalizes the length/verbosity-aware reward shaping used in RLHF summarization by making the length-based reward adaptive to item difficulty, directly tackling verbosity-vs-accuracy trade-offs observed by Stiennon et al."
+    },
+    {
+      "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+      "authors": "Jason Wei et al.",
+      "year": 2022,
+      "role": "Foundation",
+      "relationship_sentence": "The paper\u2019s fast\u2013slow thinking paradigm builds on Chain-of-Thought\u2019s core finding that longer, stepwise reasoning improves accuracy, while motivating the need to selectively invoke such slow reasoning rather than applying it uniformly."
+    },
+    {
+      "title": "Complexity-Based Prompting for Multi-Step Reasoning",
+      "authors": "Yao Fu et al.",
+      "year": 2023,
+      "role": "Inspiration",
+      "relationship_sentence": "FAST-GRPO\u2019s two difficulty estimators and policy to choose fast vs slow reasoning are directly inspired by complexity-based prompting, which predicts problem difficulty to decide when to elicit CoT."
+    },
+    {
+      "title": "Adaptive Computation Time for Recurrent Neural Networks",
+      "authors": "Alex Graves",
+      "year": 2016,
+      "role": "Inspiration",
+      "relationship_sentence": "The core idea of allocating variable computation per input underpins FAST-GRPO\u2019s adaptive reasoning depth, transposed from ACT\u2019s dynamic halting to dynamic reasoning-length control in LVLMs with RL."
+    },
+    {
+      "title": "Visual Instruction Tuning (LLaVA)",
+      "authors": "Haotian Liu et al.",
+      "year": 2023,
+      "role": "Foundation",
+      "relationship_sentence": "FAST-GRPO operates in the LVLM setting and inherits the visual-instruction tuning problem formulation and benchmarks from LLaVA-style models, targeting the specific gap of inefficient, overly long reasoning in LVLMs."
+    }
+  ],
+  "synthesis_narrative": "FAST-GRPO\u2019s core contribution\u2014adapting reasoning depth to problem difficulty within a GRPO-based RL framework for LVLMs\u2014stands on three intertwined lineages. First, reinforcement-learning-from-feedback with KL control (Stiennon et al.; Ouyang et al.) established the PPO-style/KL-regularized paradigm and exposed verbosity\u2013quality trade-offs. FAST-GRPO directly extends this by making the KL coefficient difficulty-aware and by shaping rewards with an adaptive length term, rather than a one-size-fits-all penalty. Second, the reasoning literature (Wei et al.) showed that chain-of-thought improves accuracy but often at the cost of longer outputs; subsequent complexity-based prompting (Fu et al.) demonstrated that predicting difficulty to selectively trigger CoT can preserve accuracy while saving compute. FAST-GRPO internalizes this selectivity during RL, using learned difficulty metrics to decide when to encourage fast or slow thinking. Third, the algorithmic principle of input-conditional compute (Graves) provides the conceptual backbone for dynamic reasoning length, now instantiated for LVLMs trained with GRPO. Practically, the work targets the LVLM regime popularized by LLaVA, and its baseline is the GRPO-style reasoning RL exemplified by DeepSeek-R1; FAST-GRPO modifies that baseline to avoid universal slow thinking, yielding difficulty-aware, compute-efficient reasoning that scales accuracy without unnecessary verbosity.",
+  "analysis_timestamp": "2026-01-06T23:08:23.971688"
+}

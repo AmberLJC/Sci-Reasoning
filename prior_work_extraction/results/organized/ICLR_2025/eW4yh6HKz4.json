@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "GPTQ: Accurate Post-Training Quantization for Generative Pretrained Transformers",
+      "authors": "Jacob Frantar et al.",
+      "year": 2022,
+      "arxiv_id": "2210.17323",
+      "role": "Baseline",
+      "relationship_sentence": "CBQ identifies GPTQ\u2019s limitation of independently quantizing layers and replaces the per-layer reconstruction with a cross-block reconstruction objective that couples multiple transformer blocks to capture long-range error dependencies at ultra-low bits."
+    },
+    {
+      "title": "BRECQ: Pushing the Limit of Post-Training Quantization by Block Reconstruction",
+      "authors": "Y. Li et al.",
+      "year": 2021,
+      "arxiv_id": "",
+      "role": "Extension",
+      "relationship_sentence": "CBQ generalizes BRECQ\u2019s block-reconstruction idea from a single residual block to multi-block coupling, explicitly controlling inter-layer error propagation via a cross-block loss during PTQ."
+    },
+    {
+      "title": "Up or Down? Adaptive Rounding for Post-Training Quantization",
+      "authors": "Markus Nagel et al.",
+      "year": 2020,
+      "arxiv_id": "2004.10568",
+      "role": "Foundation",
+      "relationship_sentence": "CBQ adopts the reconstruction-based rounding framework pioneered by AdaRound but optimizes rounding jointly across blocks to respect cross-block dependencies that AdaRound treats as independent."
+    },
+    {
+      "title": "SmoothQuant: Accurate and Efficient Post-Training Quantization for Large Language Models",
+      "authors": "Xiao et al.",
+      "year": 2023,
+      "arxiv_id": "2211.10438",
+      "role": "Gap Identification",
+      "relationship_sentence": "CBQ targets the residual accuracy loss that persists after SmoothQuant\u2019s outlier migration by modeling inter- and intra-layer dependencies that SmoothQuant ignores when scaling layers independently."
+    },
+    {
+      "title": "AWQ: Activation-aware Weight Quantization for LLMs",
+      "authors": "Lin et al.",
+      "year": 2023,
+      "arxiv_id": "2306.00978",
+      "role": "Gap Identification",
+      "relationship_sentence": "CBQ addresses AWQ\u2019s layer-local saliency focus by reconstructing across blocks so weight rounding accounts for downstream activation interactions that dominate at ultra-low precision."
+    },
+    {
+      "title": "OmniQuant: Omnidirectionally Calibrated Quantization for Large Language Models",
+      "authors": "Shao et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Baseline",
+      "relationship_sentence": "CBQ builds upon OmniQuant\u2019s calibration-driven PTQ setup but augments it with a cross-block reconstruction term that links multiple blocks, overcoming OmniQuant\u2019s largely local optimization."
+    },
+    {
+      "title": "LLM.int8(): 8-bit Matrix Multiplication for Transformers at Scale",
+      "authors": "Tim Dettmers et al.",
+      "year": 2022,
+      "arxiv_id": "2208.07339",
+      "role": "Foundation",
+      "relationship_sentence": "CBQ moves beyond the outlier-centric view established by LLM.int8() by demonstrating that ultra-low-bit failures stem from cross-layer dependencies and by designing reconstruction that directly models those dependencies."
+    }
+  ],
+  "synthesis_narrative": "GPTQ introduced a highly effective PTQ procedure for transformers that greedily reconstructs each weight matrix using second-order information, but it treats layers independently and accumulates errors across depth. BRECQ advanced reconstruction-based PTQ by optimizing groups of layers as a block to suppress inter-layer error propagation, showing that coupling adjacent layers reduces quantization damage. AdaRound provided the core technique of optimizing rounding decisions with an output-reconstruction loss, establishing the reconstruction-based PTQ paradigm that many later LLM methods inherit. SmoothQuant attacked the LLM activation outlier problem by shifting activation magnitude into weights via per-channel scaling, enabling lower precisions but leaving cross-layer interactions untouched. AWQ further mitigated outlier harms by preserving activation-sensitive weight channels through activation-aware saliency, yet its optimization remained layer-local. OmniQuant broadened calibration to both weights and activations with an omnidirectional objective, improving robustness but still optimizing primarily within layers or short blocks. LLM.int8() crystallized the outlier phenomenon in LLMs and popularized mixed-precision pathways, catalyzing outlier-centric PTQ. Taken together, these works revealed two threads: reconstruction-based PTQ is crucial, and outlier handling helps\u2014but at ultra-low bits, locally optimized or outlier-only strategies leave significant residual error that grows with depth. A natural next step is to marry reconstruction-based rounding with an explicit mechanism that ties multiple blocks together, so optimization captures long-range inter- and intra-layer dependencies. By extending block reconstruction beyond single blocks and embedding cross-block dependency modeling into the PTQ objective, the new approach preserves accuracy in ultra-low-bit regimes where prior per-layer or outlier-centric methods falter.",
+  "target_paper": {
+    "title": "CBQ: Cross-Block Quantization for Large Language Models",
+    "authors": "Xin Ding, Xiaoyu Liu, Zhijun Tu, Yun Zhang, Wei Li, Jie Hu, Hanting Chen, Yehui Tang, Zhiwei Xiong, Baoqun Yin, Yunhe Wang",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "Large Language Model Compression, ultra-low bits precision",
+    "abstract": "Post-training quantization (PTQ) has played a pivotal role in compressing large language models (LLMs) at ultra-low costs. Although current PTQ methods have achieved promising results by addressing outliers and employing layer- or block-wise loss optimization techniques, they still suffer from significant performance degradation at ultra-low bits precision. To dissect this issue, we conducted an in-depth analysis of quantization errors specific to LLMs and surprisingly discovered that, unlike traditional sources of quantization errors, the growing number of model parameters, combined with the reduction in quantization bits, intensifies inter-layer and intra-layer dependencies, which severely impact quantization accuracy. This finding highlights a critical challenge in quantizing LLMs. To address this, we propose CBQ, a cross-block reconstruction-based PTQ method for LLMs. CBQ leverages a cross-block dependency to establish long-range dependencies across multiple blocks and integrates a",
+    "openreview_id": "eW4yh6HKz4",
+    "forum_id": "eW4yh6HKz4"
+  },
+  "analysis_timestamp": "2026-01-06T12:06:56.061404"
+}

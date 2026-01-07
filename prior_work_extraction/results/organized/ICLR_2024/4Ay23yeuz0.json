@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "TabDDPM: Modelling Tabular Data with Diffusion Models",
+      "authors": "Sergey Kotelnikov et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Baseline",
+      "relationship_sentence": "TabSyn directly replaces TabDDPM\u2019s data-space diffusion (with ad\u2011hoc categorical handling and long sampling chains) by running score-based diffusion in a learned VAE latent, addressing both mixed-type difficulty and sampling speed."
+    },
+    {
+      "title": "STaSy: Score-based Tabular Data Synthesis",
+      "authors": "Kim et al.",
+      "year": 2021,
+      "arxiv_id": "",
+      "role": "Gap Identification",
+      "relationship_sentence": "STaSy showed the promise of score-based diffusion for tables but struggled with discrete/continuous mixtures and slow reverse processes, which TabSyn overcomes by unifying all types in a continuous latent and using far fewer diffusion steps."
+    },
+    {
+      "title": "High-Resolution Image Synthesis with Latent Diffusion Models",
+      "authors": "Robin Rombach et al.",
+      "year": 2022,
+      "arxiv_id": "2112.10752",
+      "role": "Inspiration",
+      "relationship_sentence": "Latent Diffusion\u2019s core idea\u2014train diffusion in an autoencoder\u2019s latent to ease optimization and accelerate sampling\u2014directly inspires TabSyn\u2019s decision to perform diffusion in a VAE latent for tabular data."
+    },
+    {
+      "title": "Handling Incomplete Heterogeneous Data using VAEs",
+      "authors": "M. Nazabal et al.",
+      "year": 2020,
+      "arxiv_id": "",
+      "role": "Extension",
+      "relationship_sentence": "By introducing per-variable likelihoods in a VAE to encode mixed categorical and continuous variables into a unified continuous space, HIVAE provides the template that TabSyn extends to craft a latent space suitable for downstream diffusion."
+    },
+    {
+      "title": "Modeling Tabular Data using Conditional GAN",
+      "authors": "Lei Xu et al.",
+      "year": 2019,
+      "arxiv_id": "1907.00503",
+      "role": "Baseline",
+      "relationship_sentence": "CTGAN defined a widely used conditional formulation for mixed-type tabular synthesis that TabSyn targets as a primary baseline, replacing adversarial training with latent-score diffusion to improve fidelity and mode coverage."
+    },
+    {
+      "title": "CTAB-GAN+: Enhancing Tabular Data Synthesis by Type-Aware Transformations",
+      "authors": "Zhao et al.",
+      "year": 2022,
+      "arxiv_id": "",
+      "role": "Gap Identification",
+      "relationship_sentence": "CTAB-GAN+\u2019s engineered, type-specific preprocessing (e.g., mode-specific normalization) highlights the challenge of reconciling skewed continuous and categorical distributions, which TabSyn replaces with a learned latent unification."
+    },
+    {
+      "title": "Structured Denoising Diffusion Models in Discrete State-Spaces",
+      "authors": "Jacob Austin et al.",
+      "year": 2021,
+      "arxiv_id": "2107.03006",
+      "role": "Related Problem",
+      "relationship_sentence": "D3PM formalized discrete-state diffusion for categorical variables, but its computational and integration burdens with continuous features motivate TabSyn\u2019s choice to avoid discrete diffusion by operating in a continuous latent space."
+    }
+  ],
+  "synthesis_narrative": "CTGAN introduced a conditional framework tailored to mixed-type tables, addressing imbalanced categorical modes but suffering from adversarial instability and limited coverage. CTAB-GAN+ pushed this line further with type-aware transformations like mode-specific normalization to better handle skewed continuous and categorical variables, yet relied on hand-engineered preprocessing and still inherited GAN training fragility. HIVAE offered a principled way to encode heterogeneous variables by assigning type-specific likelihoods within a VAE, yielding a unified continuous latent that preserves mixed-type semantics. In parallel, STaSy demonstrated that score-based diffusion can preserve inter-column dependencies in tabular synthesis, though it struggled with discrete features and required many reverse steps. TabDDPM generalized denoising diffusion to tables by operating in data space with special handling for categories, but incurred long sampling chains and ad hoc treatments for mixed types. D3PM formalized discrete diffusion for categorical variables, revealing that categorical noise schedules are possible but often computationally heavy and awkward to integrate with continuous fields. Latent Diffusion showed that moving diffusion into an autoencoder latent can dramatically ease training and speed sampling while preserving quality.\nTogether, these works exposed a gap: diffusion models produce high-fidelity tables but are slow and brittle with mixed types, while VAEs can unify heterogeneous variables yet underperform in generation quality. The natural synthesis is to learn a mixed-type-aware VAE that maps all columns into a well-behaved continuous latent and to run score-based diffusion there, as in latent diffusion, thus explicitly capturing inter-column relations, improving the latent distribution for diffusion training, and yielding far fewer reverse steps than prior tabular diffusion models.",
+  "target_paper": {
+    "title": "Mixed-Type Tabular Data Synthesis with Score-based Diffusion in Latent Space",
+    "authors": "Hengrui Zhang, Jiani Zhang, Zhengyuan Shen, Balasubramaniam Srinivasan, Xiao Qin, Christos Faloutsos, Huzefa Rangwala, George Karypis",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "oral",
+    "keywords": "Tabular data, tabular generation, diffusion models",
+    "abstract": "Recent advances in tabular data generation have greatly enhanced synthetic data quality. However, extending diffusion models to tabular data is challenging due to the intricately varied distributions and a blend of data types of tabular data. This paper introduces TabSyn, a methodology that synthesizes tabular data by leveraging a diffusion model within a variational autoencoder (VAE) crafted latent space. The key advantages of the proposed Tabsyn include (1) Generality: the ability to handle a broad spectrum of data types by converting them into a single unified space and explicitly capturing inter-column relations; (2) Quality: optimizing the distribution of latent embeddings to enhance the subsequent training of diffusion models, which helps generate high-quality synthetic data; (3) Speed: much fewer number of reverse steps and faster synthesis speed than existing diffusion-based methods. Extensive experiments on six datasets with five metrics demonstrate that Tabsyn outperforms exi",
+    "openreview_id": "4Ay23yeuz0",
+    "forum_id": "4Ay23yeuz0"
+  },
+  "analysis_timestamp": "2026-01-06T09:08:57.288180"
+}

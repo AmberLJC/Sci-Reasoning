@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Jonathan Ho et al.",
+      "year": 2020,
+      "role": "Foundation",
+      "relationship_sentence": "Introduces the diffusion training objective that Transfusion directly applies to the image modality, forming the continuous-data half of its unified recipe."
+    },
+    {
+      "title": "High-Resolution Image Synthesis with Latent Diffusion Models",
+      "authors": "Robin Rombach et al.",
+      "year": 2022,
+      "role": "Extension",
+      "relationship_sentence": "Provides the latent-space diffusion strategy and autoencoder interface that Transfusion leverages to make image diffusion efficient and to aggressively compress images (e.g., to ~16 patches) within a single transformer."
+    },
+    {
+      "title": "Scalable Diffusion Models with Transformers",
+      "authors": "William Peebles et al.",
+      "year": 2023,
+      "role": "Extension",
+      "relationship_sentence": "Demonstrates a transformer-native diffusion backbone (DiT), enabling Transfusion to share one transformer architecture across text (next-token prediction) and images (diffusion) instead of using separate U-Nets."
+    },
+    {
+      "title": "Taming Transformers for High-Resolution Image Synthesis",
+      "authors": "Patrick Esser et al.",
+      "year": 2021,
+      "role": "Gap Identification",
+      "relationship_sentence": "Establishes the VQ quantize-then-autoregress paradigm for images that Transfusion explicitly argues scales worse than diffusion, motivating its shift away from discrete image tokens."
+    },
+    {
+      "title": "Zero-Shot Text-to-Image Generation",
+      "authors": "Aditya Ramesh et al.",
+      "year": 2021,
+      "role": "Baseline",
+      "relationship_sentence": "Serves as a canonical discrete-image-token AR baseline (DALL\u00b7E) that Transfusion aims to surpass by replacing image autoregression with diffusion inside the same multimodal model."
+    },
+    {
+      "title": "A Generalist Agent",
+      "authors": "Scott Reed et al.",
+      "year": 2022,
+      "role": "Foundation",
+      "relationship_sentence": "Pioneers training a single transformer over interleaved multimodal sequences with an NTP loss; Transfusion adopts this unified sequence formulation and extends it by adding a diffusion objective for continuous modalities."
+    },
+    {
+      "title": "Flamingo: a Visual Language Model for Few-Shot Learning",
+      "authors": "Jean-Baptiste Alayrac et al.",
+      "year": 2022,
+      "role": "Inspiration",
+      "relationship_sentence": "Shows the benefit of modality-specific interface layers around a shared language transformer, directly inspiring Transfusion\u2019s modality-specific encoding/decoding layers wrapped around a unified backbone."
+    }
+  ],
+  "synthesis_narrative": "Transfusion\u2019s core innovation\u2014training one transformer over mixed-modality sequences by unifying next-token prediction for text with diffusion for images\u2014stands on two pillars: unified sequence modeling and transformer-native diffusion. On the unified modeling side, Gato established that a single transformer can operate over interleaved multimodal tokens with an NTP objective, providing the problem formulation Transfusion adopts for mixed data streams. Flamingo further showed that attaching modality-specific interface layers around a shared language backbone is a powerful design pattern, which Transfusion adapts as modality-specific encoders/decoders to improve multimodal performance without fragmenting the core model.\nOn the generative side, DDPM supplies the denoising objective that powers Transfusion\u2019s image generation. Latent Diffusion makes diffusion practical by operating in a learned latent space, a key enabler for Transfusion\u2019s aggressive image compression (down to roughly 16 patches) while keeping quality. DiT proves that diffusion can be implemented with a pure transformer backbone, which Transfusion leverages to share one transformer across text (NTP) and images (diffusion) rather than relying on separate U-Nets.\nFinally, the VQGAN+Transformer paradigm and DALL\u00b7E represent the discrete-image-token autoregressive baseline that Transfusion explicitly challenges. Their scaling and fidelity limitations with quantized image tokens motivate Transfusion\u2019s shift to diffusion for images within the same model, leading to better scaling across uni- and cross-modal tasks.",
+  "analysis_timestamp": "2026-01-06T23:09:26.601366"
+}

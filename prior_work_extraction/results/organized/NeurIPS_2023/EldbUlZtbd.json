@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Locating and Editing Factual Associations in GPT (ROME)",
+      "authors": "Kevin Meng et al.",
+      "year": 2022,
+      "role": "Introduced causal tracing (representation denoising) to localize where a fact is stored and proposed rank-one edits to MLP layers for knowledge editing.",
+      "relationship_sentence": "The present paper directly tests and challenges ROME\u2019s core assumption that causal tracing pinpoints the best layer to edit, showing that editability does not align with ROME\u2019s localized layer."
+    },
+    {
+      "title": "Mass-Editing Memory in a Transformer (MEMIT)",
+      "authors": "Kevin Meng et al.",
+      "year": 2023,
+      "role": "Scaled ROME-style weight edits for many facts and relied on the notion that factual associations reside in mid-layer MLP modules identified via causal analyses.",
+      "relationship_sentence": "By demonstrating successful edits at layers different from those suggested by localization, the paper questions MEMIT\u2019s reliance on localization heuristics for selecting edit layers."
+    },
+    {
+      "title": "Transformer Feed-Forward Layers Are Key-Value Memories",
+      "authors": "Mor Geva, Roee Schuster, Jonathan Berant",
+      "year": 2021,
+      "role": "Established that transformer MLP layers act as key-value memories storing factual associations, motivating MLP-focused localization and editing strategies.",
+      "relationship_sentence": "The paper builds on this memory view but shows that even if MLPs store facts, the layer where a fact appears most \u2018localized\u2019 via causal tracing need not be the most effective edit target."
+    },
+    {
+      "title": "Transformer Feed-Forward Layers Build Predictions by Promoting Associations",
+      "authors": "Mor Geva, Roee Schuster, Jonathan Berant",
+      "year": 2022,
+      "role": "Deepened the mechanistic account of how MLP layers implement associations that drive predictions.",
+      "relationship_sentence": "This mechanistic framing underpins why prior work chose MLPs for editing, which the current paper re-examines by decoupling causal localization signals from practical edit success."
+    },
+    {
+      "title": "Editing Factual Knowledge in Language Models (Knowledge Editor, KE)",
+      "authors": "Marco De Cao et al.",
+      "year": 2021,
+      "role": "Pioneered gradient-based model editing and articulated desiderata (locality, generalization) and evaluation settings for factual edits.",
+      "relationship_sentence": "The paper situates its layer-selection analysis within the broader model-editing literature inaugurated by KE, questioning whether localization should guide where parametric edits are applied."
+    },
+    {
+      "title": "MEND: Fast Model Editing at Scale",
+      "authors": "Eric Mitchell et al.",
+      "year": 2022,
+      "role": "Proposed a learned hypernetwork to generate local parameter updates, commonly applied to specific layers in practice.",
+      "relationship_sentence": "The findings caution against using causal-tracing\u2013based localization as a heuristic to choose MEND\u2019s target layers, since the best edit layer can differ from localized layers."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s central contribution is to disentangle causality-based localization from practical editability in language models. Earlier editing work established both the need for post hoc factual updates and concrete ways to do so: KE framed the task and desiderata for factual model edits, while MEND introduced a scalable way to produce local parameter updates. In parallel, mechanistic studies of transformers by Geva and colleagues argued that MLP layers serve as key-value memories implementing factual associations, naturally focusing attention on MLP modules as the locus of stored knowledge. Building on this foundation, ROME operationalized a causal tracing (representation denoising) procedure to localize a fact within a model\u2019s computation and then proposed rank-one MLP edits at the layer identified by this localization, an approach that strongly influenced subsequent methods like MEMIT for large-scale editing. The present paper probes the implicit assumption linking these two strands\u2014namely, that the layer where a fact is causally localized is the optimal site for editing. By systematically varying the edit layer and comparing outcomes, the authors show that edits can succeed at layers different from those highlighted by causal tracing, and that localization signals provide little guidance for choosing edit layers. This result challenges prevailing practice in ROME/MEMIT-style methods and cautions against directly translating causal localization findings into layer-selection policies for knowledge editing.",
+  "analysis_timestamp": "2026-01-06T23:39:42.975377"
+}

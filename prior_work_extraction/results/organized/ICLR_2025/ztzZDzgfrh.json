@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP",
+      "authors": "Patrick Lewis et al.",
+      "year": 2020,
+      "role": "Foundation",
+      "relationship_sentence": "This paper formalized the RAG paradigm that ReDeEP targets, defining the core setting where outputs must reconcile retrieved evidence with parametric knowledge\u2014exactly the conflict ReDeEP mechanistically diagnoses and detects."
+    },
+    {
+      "title": "Transformer Feed-Forward Layers Are Key-Value Memories",
+      "authors": "Mor Geva et al.",
+      "year": 2021,
+      "role": "Foundation",
+      "relationship_sentence": "By showing that FFNs store factual associations as key\u2013value memories, this work directly motivates ReDeEP\u2019s identification of Knowledge FFNs as the locus of parametric knowledge that can overpower retrieved evidence in the residual stream."
+    },
+    {
+      "title": "Locating and Editing Factual Associations in GPT",
+      "authors": "Kevin Meng et al.",
+      "year": 2022,
+      "role": "Extension",
+      "relationship_sentence": "ROME\u2019s methodology for localizing and intervening on factual associations in specific MLP layers informs ReDeEP\u2019s layer-wise attribution and intervention logic for diagnosing when FFNs drive hallucinations against retrieved content."
+    },
+    {
+      "title": "In-context Learning and Induction Heads",
+      "authors": "Catherine Olsson et al.",
+      "year": 2022,
+      "role": "Foundation",
+      "relationship_sentence": "The characterization of induction (copying) heads that propagate tokens from context directly underpins ReDeEP\u2019s notion of Copying Heads as the mechanism expected to carry retrieved evidence into generation."
+    },
+    {
+      "title": "Interpretability in the Wild: A Circuit for Indirect Object Identification in GPT-2",
+      "authors": "Kevin Wang et al.",
+      "year": 2022,
+      "role": "Extension",
+      "relationship_sentence": "This circuit-level analysis (e.g., name-mover and copy-suppression heads) provides the concrete attention-head behaviors ReDeEP operationalizes to test whether Copying Heads effectively retain and integrate retrieved knowledge."
+    },
+    {
+      "title": "SelfCheckGPT: Zero-Resource Black-Box Hallucination Detection for Generative Large Language Models",
+      "authors": "Potsawee Manakul et al.",
+      "year": 2023,
+      "role": "Gap Identification",
+      "relationship_sentence": "SelfCheckGPT\u2019s reliance on self-consistency signals without disentangling parametric versus retrieved knowledge highlights the precise gap ReDeEP fills with a mechanistic, source-specific detector."
+    },
+    {
+      "title": "DetectGPT: Zero-Shot Machine-Generated Text Detection using Probability Curvature",
+      "authors": "Eric Mitchell et al.",
+      "year": 2023,
+      "role": "Baseline",
+      "relationship_sentence": "As a widely used hallucination/detection baseline that is agnostic to retrieval and model internals, DetectGPT motivates ReDeEP\u2019s improvement via interpretability-grounded signals that separate FFN-driven parametric bias from copying of retrieved evidence."
+    }
+  ],
+  "synthesis_narrative": "ReDeEP\u2019s core idea\u2014detecting RAG hallucinations by disentangling parametric and retrieved knowledge signals through mechanistic interpretability\u2014stands on two intellectual pillars. First, the RAG problem formulation by Lewis et al. defines the setting where external evidence must be integrated with model internals, creating the very conflict ReDeEP seeks to diagnose. Second, mechanistic interpretability of transformer components reveals where and how these two knowledge sources act: Geva et al. demonstrate that FFNs function as key\u2013value stores for factual associations, and Meng et al. show such associations can be localized and manipulated at specific MLP layers. In parallel, Olsson et al. identify induction (copying) heads that propagate information from context, while Wang et al. map concrete circuits (name-movers, copy-suppression) that operationalize how attention heads transmit or inhibit token identity. Together, these works directly inspire ReDeEP\u2019s two mechanistic levers: Knowledge FFNs (parametric knowledge) and Copying Heads (retrieved evidence). On the application side, prevailing detectors like SelfCheckGPT and DetectGPT provide practical but source-agnostic baselines; their inability to separate the roles of retrieval versus parametric memory crystallizes the gap ReDeEP addresses. By monitoring the balance between FFN contributions in the residual stream and copying-head effectiveness, ReDeEP offers a principled, component-level detector tailored to RAG\u2019s unique failure mode: conflicts between retrieved and internal knowledge.",
+  "analysis_timestamp": "2026-01-06T23:09:26.616236"
+}

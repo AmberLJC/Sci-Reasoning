@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Fully Test-Time Adaptation by Entropy Minimization",
+      "authors": "Dequan Wang et al.",
+      "year": 2021,
+      "arxiv_id": "2006.10726",
+      "role": "Extension",
+      "relationship_sentence": "TCR extends TENT\u2019s entropy-minimization principle to the retrieval setting by optimizing confidence over a query\u2019s ranked matches while constraining updates so adaptation on online queries does not distort the learned cross-modal space."
+    },
+    {
+      "title": "Test-Time Training with Self-Supervision for Generalization under Distribution Shift",
+      "authors": "Yu Sun et al.",
+      "year": 2020,
+      "arxiv_id": "1909.13231",
+      "role": "Inspiration",
+      "relationship_sentence": "TCR adopts the core idea of leveraging self-supervised signals at test time, replacing TTT\u2019s rotation pretext with retrieval-derived signals from the query\u2019s own predictions to drive on-the-fly adaptation."
+    },
+    {
+      "title": "CoTTA: Continual Test-Time Adaptation",
+      "authors": "Wang et al.",
+      "year": 2022,
+      "arxiv_id": "2203.13591",
+      "role": "Gap Identification",
+      "relationship_sentence": "By exposing the instability and catastrophic forgetting in continual TTA, CoTTA motivates TCR\u2019s joint objective that explicitly prevents query-shift updates from corrupting the shared cross-modal embedding space."
+    },
+    {
+      "title": "Do We Really Need Source Data? Source Hypothesis Transfer for Unsupervised Domain Adaptation (SHOT)",
+      "authors": "Jian Liang et al.",
+      "year": 2020,
+      "arxiv_id": "2002.08546",
+      "role": "Extension",
+      "relationship_sentence": "TCR adapts SHOT\u2019s information maximization/diversity idea to the retrieval scenario, preserving decision structure while updating features without source data by operating directly in the cross-modal embedding space."
+    },
+    {
+      "title": "Understanding Contrastive Representation Learning through Alignment and Uniformity on the Hypersphere",
+      "authors": "Tongzhou Wang et al.",
+      "year": 2020,
+      "arxiv_id": "2005.10242",
+      "role": "Foundation",
+      "relationship_sentence": "TCR\u2019s diagnosis that query shift reduces within-modality scatter and its uniformity regularization are grounded in the alignment\u2013uniformity framework introduced by this work."
+    },
+    {
+      "title": "Learning Transferable Visual Models From Natural Language Supervision (CLIP)",
+      "authors": "Alec Radford et al.",
+      "year": 2021,
+      "arxiv_id": "2103.00020",
+      "role": "Baseline",
+      "relationship_sentence": "TCR is built on and evaluated against CLIP-style contrastive image\u2013text retrieval encoders, serving as the primary baseline whose retrieval performance degrades under query shift."
+    },
+    {
+      "title": "Relevance Feedback in Information Retrieval (Rocchio Algorithm)",
+      "authors": "J. J. Rocchio",
+      "year": 1971,
+      "arxiv_id": "",
+      "role": "Inspiration",
+      "relationship_sentence": "TCR\u2019s query prediction refinement operationalizes pseudo-relevance feedback by using top-ranked gallery items to refine the query\u2019s effective representation and guide test-time updates."
+    }
+  ],
+  "synthesis_narrative": "Entropy-based test-time adaptation demonstrated that models can self-correct to distribution shift by minimizing prediction uncertainty without access to source data, while test-time training showed that auxiliary self-supervision on the test stream can serve as an adaptation signal. Continual TTA highlighted that naively adapting online induces catastrophic forgetting and feature drift, requiring mechanisms that maintain stability as inputs evolve. Source-free adaptation via information maximization preserved decision structure by increasing output confidence and diversity, providing a way to adapt features without collapsing class structure. The alignment\u2013uniformity view of contrastive learning formalized how representations should remain well-aligned across modalities yet uniformly dispersed within each modality, offering a quantitative lens for diagnosing and regularizing scatter. CLIP established the prevailing cross-modal embedding and retrieval formulation, against which shifts in query distribution materially degrade rankings. Classic pseudo-relevance feedback introduced the idea of refining queries using their own top retrieved results, turning initial predictions into a supervisory signal. Together, these works reveal an opportunity: retrieval systems need online, source-free adaptation that leverages retrieval outputs as self-supervision, yet safeguards the shared cross-modal space from drift and preserves within-modality uniformity. Building on these insights, the present work adapts entropy/info-max style objectives to the retrieval ranking signal, uses feedback from top matches to refine query predictions, and regularizes with alignment\u2013uniformity constraints so that adaptation from streaming, shifted queries improves recall without disturbing the common embedding space.",
+  "target_paper": {
+    "title": "Test-time Adaptation for Cross-modal Retrieval with Query Shift",
+    "authors": "Haobin Li, Peng Hu, Qianjun Zhang, Xi Peng, XitingLiu, Mouxing Yang",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "Test-time adaptation, Cross-modal retrieval, Query shift",
+    "abstract": "The success of most existing cross-modal retrieval methods heavily relies on the assumption that the given queries follow the same distribution of the source domain. \nHowever, such an assumption is easily violated in real-world scenarios due to the complexity and diversity of queries, thus leading to the query shift problem.\nSpecifically, query shift refers to the online query stream originating from the domain that follows a different distribution with the source one.\nIn this paper, we observe that query shift would not only diminish the uniformity (namely, within-modality scatter) of the query modality but also amplify the gap between query and gallery modalities. \nBased on the observations, we propose a novel method dubbed Test-time adaptation for Cross-modal Retrieval (TCR). \nIn brief, TCR employs a novel module to refine the query predictions (namely, retrieval results of the query) and a joint objective to prevent query shift from disturbing the common space, thus achieving onlin",
+    "openreview_id": "BmG88rONaU",
+    "forum_id": "BmG88rONaU"
+  },
+  "analysis_timestamp": "2026-01-06T10:10:11.975049"
+}

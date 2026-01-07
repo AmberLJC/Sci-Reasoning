@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "When to Trust Your Model: Model-Based Policy Optimization (MBPO)",
+      "authors": "Michael Janner et al.",
+      "year": 2019,
+      "arxiv_id": "1906.08253",
+      "role": "Foundation",
+      "relationship_sentence": "The paper adopts the MBPO rollout-and-training pipeline and inserts a learned dynamics-reward transition filter directly into MBPO-style short-horizon model rollouts to keep synthetic data within reliable regions."
+    },
+    {
+      "title": "MOPO: Model-Based Offline Policy Optimization",
+      "authors": "Tianhe Yu et al.",
+      "year": 2020,
+      "arxiv_id": "2005.13239",
+      "role": "Baseline",
+      "relationship_sentence": "MOPO\u2019s uncertainty-penalized rollouts are the primary baseline that this work augments by replacing heuristic uncertainty penalties with a learned reward-consistency filter that more directly screens out OOD model transitions."
+    },
+    {
+      "title": "MOReL: Model-Based Offline Reinforcement Learning",
+      "authors": "Kiran Kidambi et al.",
+      "year": 2020,
+      "arxiv_id": "2005.05951",
+      "role": "Baseline",
+      "relationship_sentence": "Building on MOReL\u2019s pessimistic MDP construction that terminates uncertain model rollouts, the paper generalizes this idea into a soft, data-derived dynamics-reward that filters transitions without hard absorbing-state cutoffs."
+    },
+    {
+      "title": "COMBO: Conservative Offline Model-Based Policy Optimization",
+      "authors": "Yu et al.",
+      "year": 2021,
+      "arxiv_id": "2102.08363",
+      "role": "Extension",
+      "relationship_sentence": "The method directly extends COMBO\u2019s model-based training by interposing a dynamics-reward filter on model-generated data, complementing COMBO\u2019s conservative Q-regularization with transition-level data-support control."
+    },
+    {
+      "title": "Conservative Q-Learning for Offline Reinforcement Learning",
+      "authors": "Aviral Kumar et al.",
+      "year": 2020,
+      "arxiv_id": "2006.04779",
+      "role": "Inspiration",
+      "relationship_sentence": "Adopting CQL\u2019s core pessimism principle to avoid overestimation on unsupported data, the paper transfers this conservatism from value space to dynamics by learning a reward-consistent signal that penalizes unsupported transitions."
+    },
+    {
+      "title": "Batch-Constrained deep Q-learning",
+      "authors": "Scott Fujimoto et al.",
+      "year": 2019,
+      "arxiv_id": "1812.02900",
+      "role": "Inspiration",
+      "relationship_sentence": "BCQ\u2019s action-support constraint motivates the paper\u2019s transition-level support idea, where a learned dynamics-reward serves as a data-driven gate that restricts model rollouts to transitions consistent with the dataset."
+    }
+  ],
+  "synthesis_narrative": "Model-based policy optimization established a practical template for mixing learned dynamics with short-horizon rollouts to generate synthetic training data, but it exposed a core vulnerability: model error during imagination can derail learning. One offline line of work addressed this by shaping the imagined reward with uncertainty penalties so rollouts avoid regions where the model is untrustworthy. Another took a more categorical stance, constructing a pessimistic MDP that routes uncertain transitions to an absorbing failure state, thus strictly curtailing exposure to OOD states. A complementary direction combined model-generated data with conservative value regularization, lowering Q-values on unsupported states to counter overestimation from model bias. In parallel, conservative model-free methods formalized the principle of pessimism against distribution shift, and batch-constrained policy learning showed that staying within the data\u2019s support\u2014via an action generative constraint\u2014can be a powerful antidote to extrapolation error. Together, these works crystallized two actionable insights: enforce data support during imagination and do so with principled conservatism. However, uncertainty surrogates can be miscalibrated and value-level conservatism does not directly control the transitions a model proposes. The natural next step is a transition-level, data-derived criterion that is consistent across the dynamics: learning a dynamics-reward from offline data that scores whether a transition is support-consistent and then filtering model rollouts by maximizing this reward. This synthesis embeds directly into MBPO-style pipelines and complements MOPO/COMBO mechanisms, yielding dynamics that generalize by construction.",
+  "target_paper": {
+    "title": "Reward-Consistent Dynamics Models are Strongly Generalizable for Offline Reinforcement Learning",
+    "authors": "Fan-Ming Luo, Tian Xu, Xingchen Cao, Yang Yu",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "model-based offline reinforcement learning, dynamics reward, reward-consistent dynamics model learning",
+    "abstract": "Learning a precise dynamics model can be crucial for offline reinforcement learning, which, unfortunately, has been found to be quite challenging. Dynamics models that are learned by fitting historical transitions often struggle to generalize to unseen transitions. In this study, we identify a hidden but pivotal factor termed dynamics reward that remains consistent across transitions, offering a pathway to better generalization. Therefore, we propose the idea of reward-consistent dynamics models: any trajectory generated by the dynamics model should maximize the dynamics reward derived from the data. We implement this idea as the MOREC (Model-based Offline reinforcement learning with Reward Consistency) method, which can be seamlessly integrated into previous offline model-based reinforcement learning (MBRL) methods. MOREC learns a generalizable dynamics reward function from offline data, which is subsequently employed as a transition filter in any offline MBRL method: when generating ",
+    "openreview_id": "GSBHKiw19c",
+    "forum_id": "GSBHKiw19c"
+  },
+  "analysis_timestamp": "2026-01-06T08:06:53.102679"
+}

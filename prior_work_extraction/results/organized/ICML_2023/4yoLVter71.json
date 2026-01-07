@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "A Distributional Perspective on Reinforcement Learning",
+      "authors": "Bellemare et al.",
+      "year": 2017,
+      "role": "Foundation",
+      "relationship_sentence": "Introduced learning the full return distribution, creating the conceptual and mathematical basis that QCA leverages by using return quantiles to quantify 'luck' and form baselines for policy gradients."
+    },
+    {
+      "title": "Distributional Reinforcement Learning with Quantile Regression",
+      "authors": "Dabney et al.",
+      "year": 2018,
+      "role": "Extension",
+      "relationship_sentence": "Provided the quantile-regression machinery and quantile network parameterization that QCA directly adopts to estimate return quantiles used in its luck-dependent baseline."
+    },
+    {
+      "title": "Implicit Quantile Networks for Distributional Reinforcement Learning",
+      "authors": "Dabney et al.",
+      "year": 2018,
+      "role": "Inspiration",
+      "relationship_sentence": "Introduced conditioning on quantile levels (\u03c4) to represent the quantile function, an idea QCA repurposes by interpreting \u03c4 as a latent 'luck level' for constructing unbiased, variance-reducing baselines; HQCA further uses this perspective with future information."
+    },
+    {
+      "title": "Variance Reduction Techniques for Gradient Estimates in Reinforcement Learning",
+      "authors": "Greensmith et al.",
+      "year": 2004,
+      "role": "Foundation",
+      "relationship_sentence": "Established the theory of unbiased policy-gradient estimators with control variates/baselines, which QCA extends by designing a state-and-luck-dependent baseline that preserves unbiasedness while reducing variance."
+    },
+    {
+      "title": "High-Dimensional Continuous Control Using Generalized Advantage Estimation",
+      "authors": "Schulman et al.",
+      "year": 2016,
+      "role": "Baseline",
+      "relationship_sentence": "GAE is the de facto value-based baseline that QCA/HQCA are designed to improve upon; QCA\u2019s variance-reduction claims and empirical comparisons are stated relative to this standard baseline."
+    },
+    {
+      "title": "Action-Dependent Control Variates for Policy Optimization via Stein\u2019s Identity",
+      "authors": "Liu et al.",
+      "year": 2018,
+      "role": "Gap Identification",
+      "relationship_sentence": "Showed variance reduction with action-dependent control variates but at the cost of extra critics/assumptions; QCA addresses this gap by achieving significant variance reduction with an unbiased, action-independent (luck-dependent) baseline built from distributional value estimates."
+    },
+    {
+      "title": "RUDDER: Return Decomposition for Delayed Rewards",
+      "authors": "Arjona-Medina et al.",
+      "year": 2019,
+      "role": "Inspiration",
+      "relationship_sentence": "Targeted credit assignment using hindsight (future) information to reduce variance/delay, directly inspiring HQCA\u2019s use of future trajectory information alongside quantile estimates for improved credit assignment."
+    }
+  ],
+  "synthesis_narrative": "Quantile Credit Assignment (QCA) fuses two lines of prior work: distributional value estimation and variance-reduced policy gradients. The distributional RL foundation laid by Bellemare et al. introduced modeling full return distributions, which QR-DQN operationalized via quantile regression and quantile networks. Implicit Quantile Networks extended this by conditioning on quantile levels \u03c4, a mechanism QCA reinterprets as a latent measure of environmental luck. This reinterpretation is the key step that transforms distributional estimates into a luck-dependent baseline for policy gradients.\n\nOn the policy-gradient side, Greensmith et al. formalized unbiased baselines/control variates for variance reduction, while GAE became the dominant practical baseline; QCA explicitly improves upon this standard by replacing a single value baseline with a distribution-aware, \u03c4-conditioned baseline that remains unbiased yet lowers variance. Prior variance-reduction methods with action-dependent control variates (e.g., Liu et al.) exposed a gap: large variance reductions often required stronger critics or action dependence. QCA addresses this by exploiting distributional critics to obtain a powerful action-independent control variate rooted in quantile estimation. Finally, the HQCA variant draws inspiration from hindsight-based credit assignment exemplified by RUDDER, explicitly incorporating future trajectory information to better separate luck from skill. Together, these works directly enable QCA/HQCA\u2019s core innovation: unbiased policy-gradient estimators that use quantile-conditioned baselines to substantially reduce variance and improve credit assignment.",
+  "analysis_timestamp": "2026-01-06T23:09:26.534226"
+}

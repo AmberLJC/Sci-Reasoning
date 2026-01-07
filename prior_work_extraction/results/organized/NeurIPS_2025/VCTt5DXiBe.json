@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Diffuser: Diffusion Models for Planning",
+      "authors": "Janner et al.",
+      "year": 2022,
+      "role": "Foundational method for trajectory-level diffusion planning",
+      "relationship_sentence": "CompDiffuser builds directly on the idea of modeling trajectory distributions with diffusion and extends it from single-shot trajectory generation to compositionally stitching multiple trajectory chunks with cross-segment conditioning."
+    },
+    {
+      "title": "Trajectory Transformer: Off-Policy Reinforcement Learning via Sequence Modeling",
+      "authors": "Janner et al.",
+      "year": 2021,
+      "role": "Precursor showing sequence models can plan by modeling full trajectories",
+      "relationship_sentence": "The paper motivates learning generative sequence models over trajectories; CompDiffuser adopts this paradigm but replaces autoregression with a bidirectional diffusion process over overlapping chunks to enable long-horizon stitching."
+    },
+    {
+      "title": "Compositional Visual Generation with Composable Diffusion Models",
+      "authors": "Du et al.",
+      "year": 2023,
+      "role": "Core concept of compositionality in diffusion via conditioning/product-of-experts",
+      "relationship_sentence": "CompDiffuser adapts compositional diffusion principles\u2014combining multiple conditions within a single diffusion model\u2014to compose and jointly denoise overlapping trajectory segments so constraints propagate across segments."
+    },
+    {
+      "title": "RePaint: Inpainting using Denoising Diffusion Probabilistic Models",
+      "authors": "Lugmayr et al.",
+      "year": 2022,
+      "role": "Technique for conditional diffusion with masked/known regions and iterative resampling",
+      "relationship_sentence": "The paper\u2019s inpainting mechanism informs CompDiffuser\u2019s design of conditioning each chunk on overlapping neighbors, effectively \u2018inpainting\u2019 transitions to ensure consistent stitching at chunk boundaries."
+    },
+    {
+      "title": "Human Motion Diffusion Model (MDM): Generating Human Motion with Diffusion",
+      "authors": "Tevet et al.",
+      "year": 2022,
+      "role": "Diffusion-based sequence generation with constraints and transition/in-betweening",
+      "relationship_sentence": "MDM demonstrates generating physically consistent transitions between motion segments; CompDiffuser generalizes this idea to robotic trajectories by learning bidirectional denoising over overlapping chunks to ensure smooth, feasible connections."
+    },
+    {
+      "title": "CompILE: Compositional Imitation Learning and Execution",
+      "authors": "Kipf et al.",
+      "year": 2019,
+      "role": "Segmentation of demonstrations into reusable sub-trajectories for composition",
+      "relationship_sentence": "CompDiffuser echoes CompILE\u2019s core insight\u2014decomposing long behaviors into segments\u2014while introducing a generative diffusion mechanism that jointly models overlapping segments so they can be compositionally stitched for new tasks."
+    }
+  ],
+  "synthesis_narrative": "The core contribution of CompDiffuser\u2014learning to compositionally stitch overlapping trajectory chunks with a single bidirectional diffusion model\u2014emerges from two converging lines of work. First, trajectory-level generative planning showed that sequence models can plan by modeling entire behavior distributions. Trajectory Transformer established the feasibility of modeling long-horizon behaviors as sequences, and Diffuser reframed decision making as trajectory sampling with diffusion, offering strong planning performance but largely within-task generalization. Second, advances in compositional and conditional diffusion demonstrated how to integrate multiple constraints within a single generative process. Compositional diffusion (Du et al.) provided the mechanism to combine conditions via shared score functions, while RePaint\u2019s inpainting highlighted how diffusion can condition on observed regions and iteratively resample to maintain boundary consistency.\nIn parallel, diffusion for motion generation (MDM) validated that transitions between segments can be synthesized to be physically consistent, foreshadowing trajectory \u201cstitching\u201d in control domains. Complementing these generative advances, CompILE showed that decomposing demonstrations into sub-trajectories enables reusable building blocks for long-horizon tasks. CompDiffuser synthesizes these ideas: it decomposes trajectories into overlapping chunks (CompILE-style segmentation), then uses a single diffusion model to jointly denoise chunks under mutual conditioning (compositional diffusion/inpainting), allowing information to propagate bidirectionally across overlaps. This yields robust, physically consistent stitching that generalizes to novel task compositions beyond the training distribution.",
+  "analysis_timestamp": "2026-01-07T00:05:12.551304"
+}

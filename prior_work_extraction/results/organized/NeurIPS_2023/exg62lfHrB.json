@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Taskonomy: Disentangling Task Transfer Learning",
+      "authors": "Amir R. Zamir et al.",
+      "year": 2018,
+      "role": "method/theory",
+      "relationship_sentence": "By constructing a transfer matrix across tasks and revealing a structure that predicts which sources help which targets, Taskonomy directly motivates Model Spider\u2019s idea of learning a compatibility function from cross-task performance signals to generalize selection to new tasks."
+    },
+    {
+      "title": "Task2Vec: Task Embedding for Meta-Learning",
+      "authors": "Alessandro Achille, Giovanni Paolini, Stefano Soatto",
+      "year": 2019,
+      "role": "method",
+      "relationship_sentence": "Task2Vec\u2019s representation of tasks as fixed vectors via Fisher information inspires Model Spider\u2019s core design of tokenizing tasks (and analogously PTMs) into compact embeddings to score task\u2013model fitness in an embedding space."
+    },
+    {
+      "title": "LEEP: A New Measure to Evaluate Transferability of Learned Representations",
+      "authors": "Thanh Tran Nguyen, M. Raghu, Simon Kornblith",
+      "year": 2020,
+      "role": "baseline/method",
+      "relationship_sentence": "LEEP proposes an efficient, forward-pass\u2013based transferability score for ranking pretrained models, providing both a strong baseline and a problem framing that Model Spider advances by learning representations that avoid exhaustive evaluation over the whole model zoo."
+    },
+    {
+      "title": "LogME: Practical Assessment of Pre-trained Models for Transfer Learning",
+      "authors": "Junxiao You et al.",
+      "year": 2021,
+      "role": "baseline/method",
+      "relationship_sentence": "LogME estimates model suitability via Bayesian evidence with minimal fine-tuning, directly shaping Model Spider\u2019s objective to predict PTM\u2013task compatibility efficiently while improving scalability beyond per-model probing."
+    },
+    {
+      "title": "Do Better ImageNet Models Transfer Better?",
+      "authors": "Simon Kornblith, Jonathon Shlens, Quoc V. Le",
+      "year": 2019,
+      "role": "empirical finding/metricization",
+      "relationship_sentence": "This work systematizes transfer behavior across pretrained models and datasets, underscoring the need for principled model selection criteria that Model Spider operationalizes via learned model\u2013task embeddings and ranking."
+    },
+    {
+      "title": "Auto-sklearn: Efficient and Robust Automated Machine Learning",
+      "authors": "Matthias Feurer et al.",
+      "year": 2015,
+      "role": "meta-learning/algorithm selection",
+      "relationship_sentence": "Auto-sklearn\u2019s meta-learning over dataset meta-features and historical performance directly informs Model Spider\u2019s meta-level strategy: use performance on training tasks plus learned meta-representations to recommend models for new tasks."
+    },
+    {
+      "title": "Learning to Rank using Gradient Descent (RankNet)",
+      "authors": "Christopher J.C. Burges et al.",
+      "year": 2005,
+      "role": "optimization/objective",
+      "relationship_sentence": "RankNet\u2019s pairwise learning-to-rank framework underpins Model Spider\u2019s objective of optimizing a scoring function that orders PTMs by expected fitness for a target task rather than predicting absolute accuracy."
+    }
+  ],
+  "synthesis_narrative": "Model Spider tackles the problem of efficiently selecting a suitable pretrained model from a large, heterogeneous zoo by learning a compatibility function between model and task representations. Two foundational ideas motivate this design. First, Taskonomy showed that cross-task transfer patterns form a structured signal that can be learned and generalized, while Task2Vec introduced the notion of embedding tasks into vector spaces for downstream meta-learning. Building on these, Model Spider tokenizes both tasks and PTMs into embeddings and learns a fitness score to rank model candidates without exhaustively evaluating each model.\nTransferability metrics such as LEEP and LogME directly shape the problem formulation and baselines for Model Spider: they estimate how well a pretrained representation will transfer to a target with minimal adaptation. However, they still require per-model probing on the target data. Model Spider advances this line by training on a separate set of tasks and their approximate performances to amortize selection, enabling efficient ranking across many PTMs with limited computation.\nEmpirical insights from \u201cDo Better ImageNet Models Transfer Better?\u201d motivate robust, dataset-aware model selection beyond simple pretraining accuracy, aligning with Model Spider\u2019s emphasis on learned compatibility rather than naive heuristics. Finally, Auto-sklearn\u2019s meta-learning for algorithm selection and RankNet\u2019s pairwise learning-to-rank objective inform Model Spider\u2019s meta-level training and optimization: use historical task\u2013model outcomes to learn embeddings and a ranking loss, then re-rank with PTM-specific semantics to refine final selection.",
+  "analysis_timestamp": "2026-01-06T23:42:48.029734"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Physics-Informed Neural Networks: A deep learning framework for solving forward and inverse problems involving nonlinear partial differential equations",
+      "authors": "Maziar Raissi, Paris Perdikaris, George E. Karniadakis",
+      "year": 2019,
+      "role": "Established the PINN paradigm of minimizing PDE residuals at collocation points using automatic differentiation.",
+      "relationship_sentence": "SPINN directly builds on the PINN objective and training setup, targeting its core computational bottleneck (point-wise residual evaluation via reverse-mode AD) with an axis-wise architecture and forward-mode AD."
+    },
+    {
+      "title": "DGM: A deep learning algorithm for solving partial differential equations",
+      "authors": "Justin Sirignano, Konstantinos Spiliopoulos",
+      "year": 2018,
+      "role": "Early neural PDE solver that trains on point samples to satisfy PDEs without grids, highlighting point-wise processing costs.",
+      "relationship_sentence": "SPINN replaces the point-wise evaluation style typified by DGM with per-axis computations that amortize cost across dimensions and vastly more collocation points."
+    },
+    {
+      "title": "XPINNs: Generalized space-time domain decomposition for physics-informed neural networks",
+      "authors": "Ameya D. Jagtap, Kenji Kawaguchi, George E. Karniadakis",
+      "year": 2021,
+      "role": "Introduced domain decomposition to scale PINNs to larger, multi-physics problems by partitioning space-time.",
+      "relationship_sentence": "While XPINNs address scalability via domain decomposition, SPINN provides a complementary, architectural route\u2014separable per-axis networks\u2014that reduces per-iteration cost and memory for dense collocation without subdomain interfaces."
+    },
+    {
+      "title": "Recent advances and new challenges in the use of the Proper Generalized Decomposition for solving multidimensional models",
+      "authors": "Francisco Chinesta, Amine Ammar, Elias Cueto",
+      "year": 2010,
+      "role": "Pioneered separated (low-rank) representations for high-dimensional PDEs to alleviate the curse of dimensionality.",
+      "relationship_sentence": "SPINN\u2019s separable, per-axis function representation is a neural instantiation of PGD\u2019s separated representations, leveraging axis-wise factors to cut computational complexity."
+    },
+    {
+      "title": "Tensor-Train Decomposition",
+      "authors": "Ivan V. Oseledets",
+      "year": 2011,
+      "role": "Established low-rank tensor formats enabling separable approximations of multivariate functions with reduced storage and compute.",
+      "relationship_sentence": "SPINN echoes TT-style low-rank separability by factorizing multi-dimensional dependence into axis components, enabling efficient evaluation over massive collocation sets."
+    },
+    {
+      "title": "Tensorizing Neural Networks",
+      "authors": "Alexander Novikov, Dmitry Podoprikhin, Anton Osokin, Dmitry P. Vetrov",
+      "year": 2015,
+      "role": "Showed that neural network layers can be factorized via tensor decompositions to reduce parameters and computation.",
+      "relationship_sentence": "SPINN\u2019s axis-wise networks embody a similar principle of tensor factorization in coordinate MLPs, cutting the number of full network passes needed for multi-D PDE residuals."
+    },
+    {
+      "title": "Automatic differentiation in machine learning: a survey",
+      "authors": "Atilim Gune\u015f Baydin, Barak A. Pearlmutter, Alexey Andreyevich Radul, Jeffrey Mark Siskind",
+      "year": 2018,
+      "role": "Comprehensive survey clarifying trade-offs of forward- vs reverse-mode AD and mixed-mode strategies.",
+      "relationship_sentence": "SPINN\u2019s choice of forward-mode AD for PDE residuals is grounded in these AD trade-offs, using forward-mode to lower memory and compute for input-derivative evaluations at scale."
+    }
+  ],
+  "synthesis_narrative": "Separable PINN (SPINN) sits at the intersection of physics-informed training, separable representations, and practical automatic differentiation strategies. The original PINN formulation by Raissi et al. provided the residual-based objective and demonstrated the feasibility of training neural solvers directly on collocation points, but incurred heavy reverse-mode AD and memory costs as dimensionality and point counts grew. DGM similarly emphasized point-wise processing, reinforcing the fundamental cost structure that SPINN targets. To scale PINNs, domain-decomposition methods like XPINNs partition space-time, but they introduce interface conditions and communication overhead; SPINN instead attacks the per-iteration complexity with an architectural change.\n\nFrom numerical methods, PGD and low-rank tensor formats (e.g., the Tensor-Train decomposition) established that many high-dimensional PDE solutions admit separated, low-rank structure. SPINN adapts this insight to neural representations, constructing the solution via per-axis subnetworks whose compositions act like tensor factors, drastically reducing the number of full network propagations relative to point-wise schemes. Complementing this, insights from tensorized neural networks showed how factorization of neural computations yields sizable efficiency gains\u2014principles that SPINN applies to coordinate MLPs for PDEs.\n\nFinally, SPINN\u2019s use of forward-mode automatic differentiation draws on established AD theory clarifying when forward-mode is preferable for input-derivative computations. By leveraging forward-mode for PDE residuals, SPINN reduces memory footprints and unlocks training with over ten million collocation points on a single GPU, operationalizing separability with a scalable differentiation pipeline.",
+  "analysis_timestamp": "2026-01-07T00:02:04.834381"
+}

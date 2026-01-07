@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Understanding Contrastive Representation Learning through Alignment and Uniformity on the Hypersphere",
+      "authors": "Tongzhou Wang, Phillip Isola",
+      "year": 2020,
+      "role": "Conceptual foundation",
+      "relationship_sentence": "GH explicitly pivots from the sample-level uniformity objective analyzed by Wang & Isola to enforce category-level uniformity, reframing the geometric target of SSL to mitigate minority collapse in long-tailed data."
+    },
+    {
+      "title": "A Simple Framework for Contrastive Learning of Visual Representations (SimCLR)",
+      "authors": "Ting Chen, Simon Kornblith, Mohammad Norouzi, Geoffrey Hinton",
+      "year": 2020,
+      "role": "Baseline SSL framework and source of sample-level uniformity pressure",
+      "relationship_sentence": "GH is designed to sit on top of contrastive SSL like SimCLR, correcting its instance-level uniformity that lets head classes dominate feature space under long-tailed distributions."
+    },
+    {
+      "title": "Momentum Contrast for Unsupervised Visual Representation Learning (MoCo)",
+      "authors": "Kaiming He, Haoqi Fan, Yuxin Wu, Saining Xie, Ross Girshick",
+      "year": 2020,
+      "role": "Baseline SSL framework and negative sampling mechanism",
+      "relationship_sentence": "By highlighting how queue-based negatives can amplify head-class dominance, MoCo provides a practical backbone where GH\u2019s geometric harmonization counters distribution-induced representation disparity."
+    },
+    {
+      "title": "Debiased Contrastive Learning",
+      "authors": "Ching-Yao Chuang, Joshua Robinson, Yen-Chen Lin, Stefanie Jegelka, Antonio Torralba",
+      "year": 2020,
+      "role": "Distribution-bias correction precedent in contrastive objectives",
+      "relationship_sentence": "DCL motivates correcting sampling-induced biases in contrastive learning; GH extends this spirit by correcting geometry at the category level using population statistics rather than only reweighting negatives."
+    },
+    {
+      "title": "Whitening for Self-Supervised Representation Learning",
+      "authors": "Alex Ermolov, Aliaksandr Siarohin, Enver Sangineto, Nicu Sebe",
+      "year": 2021,
+      "role": "Geometric/statistical tool for feature-space shaping",
+      "relationship_sentence": "GH\u2019s use of embedding population statistics and an explicit geometric transform to reshape the representation space is inspired by whitening-style covariance-aware regularization, but targeted to class-level harmonization."
+    },
+    {
+      "title": "Unsupervised Learning of Visual Features by Contrasting Cluster Assignments (SwAV)",
+      "authors": "Mathilde Caron, Ishan Misra, Julien Mairal, Piotr Bojanowski, Armand Joulin",
+      "year": 2020,
+      "role": "Prototype/cluster-based SSL that informs category-level structuring",
+      "relationship_sentence": "SwAV\u2019s use of prototypes/clusters motivates GH\u2019s shift from instance-level to population/category-level geometry, enabling class- (or cluster-) aware uniformity without full supervision."
+    },
+    {
+      "title": "Supervised Contrastive Learning",
+      "authors": "Prannay Khosla, Piotr Teterwak, Chen Wang, Aaron Sarna, Yonglong Tian, Phillip Isola, Aaron Maschinot, Ce Liu, Dilip Krishnan",
+      "year": 2020,
+      "role": "Class-aware contrastive objective precedent",
+      "relationship_sentence": "SupCon demonstrates benefits of class-level pulling/pushing; GH adapts the idea to the unsupervised/long-tailed regime by inferring and harmonizing category-level geometry via statistics rather than labels."
+    }
+  ],
+  "synthesis_narrative": "Geometric Harmonization (GH) targets a central weakness of mainstream self-supervised learning (SSL): instance-level uniformity can let head classes dominate the embedding space while tail classes collapse. This diagnosis is grounded in Wang and Isola\u2019s analysis of contrastive learning, which formalized alignment and uniformity on the hypersphere; GH reframes the objective from sample- to category-level uniformity. The practical need for such a correction arises from widely used contrastive frameworks such as SimCLR and MoCo, whose negative sampling mechanics and instance discrimination intensify head-class effects in long-tailed settings\u2014precisely where GH is designed to be plugged in.\nBeyond objectives, GH leverages population statistics to enact a geometric transform that equalizes class-level representation geometry. This echoes whitening-based SSL, where covariance-aware operations shape feature distributions, but GH directs this power toward class-level harmonization rather than global decorrelation. GH\u2019s category-aware perspective also draws inspiration from prototype/cluster-based SSL like SwAV, suggesting a move from instance-centric to population-centric structuring even without full supervision. Finally, the ethos of correcting distribution-induced bias in contrastive learning, exemplified by Debiased Contrastive Learning, informs GH\u2019s strategy: instead of merely reweighting negatives, GH directly rebalances the geometry of categories. Together with insights from Supervised Contrastive Learning about class-level separation, these works converge to motivate GH\u2019s core innovation\u2014statistically guided, category-level uniformity that combats representation disparity in long-tailed SSL.",
+  "analysis_timestamp": "2026-01-06T23:42:49.061548"
+}

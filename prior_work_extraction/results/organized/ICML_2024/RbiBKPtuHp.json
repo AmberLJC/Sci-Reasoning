@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Attention Is All You Need",
+      "authors": "Ashish Vaswani et al.",
+      "year": 2017,
+      "role": "Foundational architecture",
+      "relationship_sentence": "Defines multi-head attention (MHA) with independently operating heads\u2014the baseline mechanism DCMHA replaces while preserving Transformer compatibility."
+    },
+    {
+      "title": "Are Sixteen Heads Really Better than One?",
+      "authors": "Paul Michel, Omer Levy, Graham Neubig",
+      "year": 2019,
+      "role": "Empirical diagnosis of head redundancy",
+      "relationship_sentence": "Shows many attention heads can be pruned with little loss, motivating DCMHA\u2019s design goal to reduce head redundancy by composing heads dynamically instead of keeping them independent."
+    },
+    {
+      "title": "Analyzing Multi-Head Self-Attention: Specialized Heads Do the Heavy Lifting, the Rest Can Be Pruned",
+      "authors": "Elena Voita et al.",
+      "year": 2019,
+      "role": "Head specialization and pruning",
+      "relationship_sentence": "Demonstrates uneven utility across heads and successful pruning, directly supporting DCMHA\u2019s premise that coordinated, selective cross-head composition can improve efficiency and expressivity."
+    },
+    {
+      "title": "Talking-Heads Attention",
+      "authors": "Noam Shazeer et al.",
+      "year": 2020,
+      "role": "Cross-head mixing mechanism",
+      "relationship_sentence": "Introduces learned, static pre/post-softmax mixing across heads; DCMHA generalizes this idea by making head composition input-dependent and transforming both score and weight matrices."
+    },
+    {
+      "title": "Linformer: Self-Attention with Linear Complexity",
+      "authors": "Sinong Wang, Belinda Li, Madian Khabsa, Han Fang, Hao Ma",
+      "year": 2020,
+      "role": "Low-rank perspective on attention",
+      "relationship_sentence": "Posits and exploits the low-rank structure of attention; DCMHA explicitly targets the low-rank bottleneck by composing heads to increase effective rank and model capacity under similar compute."
+    },
+    {
+      "title": "On the Expressive Power of Self-Attention",
+      "authors": "Chulhee Yun, Srinadh Bhojanapalli, Ankit Singh Rawat, Sashank J. Reddi, Sanjiv Kumar",
+      "year": 2020,
+      "role": "Theory of attention expressivity",
+      "relationship_sentence": "Analyzes how attention architecture and head interactions affect expressivity, underpinning DCMHA\u2019s claim that dynamic head composition amplifies representational power."
+    },
+    {
+      "title": "GQA: Training General Purpose Multimodal Transformers with Grouped-Query Attention",
+      "authors": "Josh Ainslie et al.",
+      "year": 2023,
+      "role": "Altering head structure for efficiency",
+      "relationship_sentence": "Shows modifying head independence (via grouped queries and shared keys/values) can boost efficiency; DCMHA similarly restructures head interactions but does so dynamically to improve both efficiency and accuracy."
+    }
+  ],
+  "synthesis_narrative": "DCMHA\u2019s core idea\u2014breaking the independence of attention heads through input-dependent composition\u2014emerges directly from two lines of prior work: empirical analyses of head redundancy and architectural mechanisms that couple heads. Foundationally, Vaswani et al. (2017) established multi-head attention with independent heads, a design later scrutinized by Michel et al. (2019) and Voita et al. (2019), who showed many heads are redundant or prunable and that a few specialized heads dominate. These findings motivate replacing naive head parallelism with mechanisms that coordinate or consolidate head computation.\nTalking-Heads Attention (Shazeer et al., 2020) provided the first widely used cross-head communication, mixing logits and weights with learned static matrices. DCMHA extends this line by making composition input-dependent and operating on both score and weight matrices, enabling dynamic, context-specific head cooperation that can better capture complex patterns.\nA second thread concerns the rank and expressivity of attention. Linformer (Wang et al., 2020) argues attention is effectively low-rank and exploits this for efficiency, while Yun et al. (2020) analyze attention\u2019s expressive limits and how architectural choices affect capacity. DCMHA explicitly targets the low-rank bottleneck: by composing heads dynamically, it increases effective rank and expressivity without proportionally increasing compute.\nFinally, efficiency-driven head restructuring, exemplified by Grouped-Query Attention (Ainslie et al., 2023), shows modifying head independence can yield strong compute\u2013accuracy trade-offs. DCMHA aligns with this ethos, offering a drop-in MHA replacement that couples heads adaptively, improving perplexity and downstream performance at roughly constant parameters and compute.",
+  "analysis_timestamp": "2026-01-07T00:02:04.875314"
+}

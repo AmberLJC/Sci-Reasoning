@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Maximum Entropy Inverse Reinforcement Learning",
+      "authors": "Brian D. Ziebart, Andrew Maas, J. Andrew Bagnell, Anind K. Dey",
+      "year": 2008,
+      "role": "Foundational principle: MaxEnt IRL",
+      "relationship_sentence": "DxMI directly instantiates the MaxEnt IRL paradigm by treating the diffusion sampler as a policy optimized under entropy regularization with rewards given by learned log-densities."
+    },
+    {
+      "title": "Linearly Solvable Markov Decision Problems",
+      "authors": "Emanuel Todorov",
+      "year": 2006,
+      "role": "Algorithmic building block: entropy-regularized DP",
+      "relationship_sentence": "DxDP\u2019s soft Bellman-style dynamic programming and log-sum-exp backups trace to entropy-regularized control, providing the DP machinery that enables planning-style updates over diffusion timesteps."
+    },
+    {
+      "title": "Guided Cost Learning: Deep Inverse Optimal Control via Policy Optimization",
+      "authors": "Chelsea Finn, Sergey Levine, Pieter Abbeel",
+      "year": 2016,
+      "role": "Methodological bridge: deep MaxEnt IRL with learned costs",
+      "relationship_sentence": "The joint optimization between a policy and a learned deep cost in Guided Cost Learning informs DxMI\u2019s minimax coupling of a diffusion model (policy) and an EBM (reward/log-density)."
+    },
+    {
+      "title": "Learning Robust Rewards with Adversarial Inverse Reinforcement Learning (AIRL)",
+      "authors": "Justin Fu, Katie Luo, Sergey Levine",
+      "year": 2018,
+      "role": "Minimax IRL and density-ratio view",
+      "relationship_sentence": "AIRL\u2019s adversarial, occupancy-matching formulation and its connection between rewards and (shaped) log-density ratios underpin DxMI\u2019s minimax equilibrium where the diffusion policy and EBM converge to the data distribution."
+    },
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Jonathan Ho, Ajay Jain, Pieter Abbeel",
+      "year": 2020,
+      "role": "Base generative framework: diffusion models",
+      "relationship_sentence": "DxMI builds directly on DDPM\u2019s discrete-time diffusion architecture, using it as the policy to be optimized via IRL and to demonstrate quality gains at low sampling steps."
+    },
+    {
+      "title": "Score-Based Generative Modeling through Stochastic Differential Equations",
+      "authors": "Yang Song, Jascha Sohl-Dickstein, Diederik P. Kingma, Abhishek Kumar, Stefano Ermon, Ben Poole",
+      "year": 2021,
+      "role": "Training perspective: score matching and continuous-time diffusion",
+      "relationship_sentence": "The score-based/SDE view informs DxMI\u2019s use of gradients of log densities and the coupling between data log-probabilities and diffusion trajectories when shaping rewards and exploration."
+    },
+    {
+      "title": "Implicit Generation and Generalization in Energy-Based Models",
+      "authors": "Yilun Du, Igor Mordatch",
+      "year": 2019,
+      "role": "Modeling choice: modern deep EBMs for log density",
+      "relationship_sentence": "DxMI relies on deep EBMs to represent log p_data(x); Du & Mordatch\u2019s advances in training EBMs with MCMC and stabilizing deep energies directly motivate the EBM component and its joint training with the generator."
+    }
+  ],
+  "synthesis_narrative": "DxMI reframes diffusion model training as a maximum-entropy inverse reinforcement learning problem where the diffusion sampler acts as a policy and the reward is the data log-density learned by an energy-based model. The MaxEnt IRL foundation (Ziebart) supplies the core objective\u2014entropy-regularized policy optimization guided by a learned reward\u2014while Guided Cost Learning demonstrates a practical joint optimization between a policy and a deep cost function that DxMI mirrors via its diffusion\u2013EBM coupling. AIRL\u2019s minimax, occupancy-measure perspective and its reward/log-density-ratio interpretation clarify why DxMI\u2019s saddle-point formulation reaches equilibrium precisely when both the diffusion policy and the EBM match the data distribution. On the generative side, DDPM provides the discrete-time diffusion architecture that DxMI fine-tunes, and the score-based/SDE viewpoint highlights the centrality of log-density gradients, aligning naturally with the EBM reward shaping and exploration incentives. Deep EBM advances by Du and Mordatch motivate representing log p_data with a trainable energy and inform the use of MCMC-based updates and stabilization techniques in joint training. Finally, DxDP\u2019s dynamic programming foundation draws from entropy-regularized control and linearly solvable MDPs (Todorov), yielding soft Bellman-style recursions that operationalize RL over diffusion timesteps, ensuring both effective exploration and convergence of the learned EBM\u2013diffusion pair.",
+  "analysis_timestamp": "2026-01-06T23:33:35.544154"
+}

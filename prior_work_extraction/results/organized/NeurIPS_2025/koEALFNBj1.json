@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Scalable Diffusion Models with Transformers",
+      "authors": "William Peebles, Saining Xie",
+      "year": 2023,
+      "role": "Backbone/architecture",
+      "relationship_sentence": "REG builds on the DiT backbone and its token- and class-conditional interfaces, modifying the transformer denoiser to inject and entangle a single high-level token with latent features for much easier training."
+    },
+    {
+      "title": "High-Resolution Image Synthesis with Latent Diffusion Models",
+      "authors": "Robin Rombach, Andreas Blattmann, Dominik Lorenz, Patrick Esser, Bj\u00f6rn Ommer",
+      "year": 2022,
+      "role": "Latent-space denoising and conditioning",
+      "relationship_sentence": "REG operates over low-level image latents in an LDM-style space and entangles them with a high-level token, leveraging the efficiency and representational separation that LDM popularized."
+    },
+    {
+      "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+      "authors": "Alexey Dosovitskiy, Lucas Beyer, Alexander Kolesnikov, Dirk Weissenborn, et al.",
+      "year": 2020,
+      "role": "Source of class-token representation",
+      "relationship_sentence": "REG repurposes the ViT class token as a compact, high-level semantic vector to be intertwined with denoiser latents, directly inheriting the class-token design introduced by ViT."
+    },
+    {
+      "title": "Learning Transferable Visual Models From Natural Language Supervision",
+      "authors": "Alec Radford, Jong Wook Kim, Chris Hallacy, Aditya Ramesh, et al.",
+      "year": 2021,
+      "role": "Pretrained foundation representations (CLIP)",
+      "relationship_sentence": "REG leverages CLIP\u2019s robust pretrained vision encoder, using its global token/embedding as the discriminative representation to entangle with diffusion latents for coherent image\u2013class pairs."
+    },
+    {
+      "title": "Hierarchical Text-Conditional Image Generation with CLIP Latents (\"unCLIP\" / DALL\u00b7E 2)",
+      "authors": "Aditya Ramesh, Prafulla Dhariwal, Alex Nichol, Casey Chu, Mark Chen",
+      "year": 2022,
+      "role": "Decoding from a single high-level embedding",
+      "relationship_sentence": "unCLIP showed that a single CLIP image embedding can drive high-fidelity generation; REG internalizes this idea by directly integrating a single high-level token into the denoising transformer across timesteps."
+    },
+    {
+      "title": "Diffusion Models Beat GANs on Image Synthesis",
+      "authors": "Prafulla Dhariwal, Alexander Nichol",
+      "year": 2021,
+      "role": "Discriminative guidance improves diffusion",
+      "relationship_sentence": "By demonstrating that external classifiers can steer diffusion to higher quality, this work motivates REG\u2019s tighter coupling of discriminative signals with the generative denoiser\u2014now via an entangled token instead of costly inference-time guidance."
+    },
+    {
+      "title": "Classifier-Free Diffusion Guidance",
+      "authors": "Jonathan Ho, Tim Salimans",
+      "year": 2022,
+      "role": "Built-in conditioning without extra models",
+      "relationship_sentence": "CFG established that strong conditioning can be embedded in the model; REG adopts a similar philosophy but replaces text/label conditioning with a pretrained representation token that is persistently fused with latents during denoising."
+    }
+  ],
+  "synthesis_narrative": "REG\u2019s core insight\u2014entangling low-level diffusion latents with a single high-level token from a pretrained foundation encoder\u2014stands at the intersection of advances in diffusion architectures, latent-space modeling, and discriminative\u2013generative coupling. DiT provided a transformer-based denoiser and clean interfaces for token-based conditioning, making it natural to inject and propagate an external token throughout denoising. LDM contributed the efficiency and inductive bias of operating in a compressed latent space, which REG exploits by binding a compact semantic token to these low-level latents. ViT and CLIP supply precisely the kind of global, robust representation REG needs: a class/global token encapsulating high-level semantics learned at massive scale. unCLIP demonstrated that a single CLIP embedding can deterministically decode to images with diffusion, directly foreshadowing REG\u2019s use of one high-level token\u2014yet REG integrates that token directly into the denoiser rather than relying on a separate prior/decoder stack. Concurrently, Guided Diffusion and Classifier-Free Guidance established that discriminative signals\u2014whether from external classifiers or learned conditioning\u2014can markedly boost fidelity and control. REG synthesizes these strands by internalizing a pretrained discriminative token into the diffusion transformer\u2019s feature flow. Unlike prior alignment-style approaches that supervise against external features only during training (and then vanish at inference), the entangled token remains present and active throughout denoising, yielding coherent image\u2013class pairs from pure noise while improving training stability and efficiency with negligible inference overhead.",
+  "analysis_timestamp": "2026-01-07T00:21:32.303082"
+}

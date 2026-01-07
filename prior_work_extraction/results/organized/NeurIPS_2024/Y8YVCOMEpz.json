@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Attention Is All You Need",
+      "authors": "Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, \u0141ukasz Kaiser, Illia Polosukhin",
+      "year": 2017,
+      "role": "Foundational baseline (softmax attention)",
+      "relationship_sentence": "Defines the softmax attention map that MetaLA explicitly seeks to approximate optimally with a linear-time operator."
+    },
+    {
+      "title": "Linformer: Self-Attention with Linear Complexity",
+      "authors": "Sinong Wang, Belinda Z. Li, Madian Khabsa, Han Fang, Hao Ma",
+      "year": 2020,
+      "role": "Low-rank static approximation of attention",
+      "relationship_sentence": "Demonstrates linear complexity via low-rank projections of keys/values, shaping MetaLA\u2019s \u2018static approximation ability\u2019 criterion while revealing the absence of dynamic memory."
+    },
+    {
+      "title": "Transformers are RNNs: Fast Autoregressive Transformers with Linear Attention",
+      "authors": "Angelos Katharopoulos, Apoorv Vyas, Nikolaos Pappas, Fran\u00e7ois Fleuret",
+      "year": 2020,
+      "role": "Kernelized linear attention and streaming updates",
+      "relationship_sentence": "Introduces the linear attention factorization with kernel feature maps and efficient prefix updates, directly informing MetaLA\u2019s unified linear attention form and \u2018dynamic memory ability\u2019 requirement."
+    },
+    {
+      "title": "Rethinking Attention with Performers",
+      "authors": "Krzysztof Choromanski, Valerii Likhosherstov, David Dohan, Andrii Melesko, Adrian Weller, et al.",
+      "year": 2021,
+      "role": "Random-feature approximation to softmax attention",
+      "relationship_sentence": "Provides provable softmax approximation (FAVOR+) in linear time, motivating MetaLA\u2019s \u2018static approximation ability\u2019 while exposing trade-offs in parameterization and stability."
+    },
+    {
+      "title": "Nystr\u00f6mformer: A Nystr\u00f6m-Based Algorithm for Approximating Self-Attention",
+      "authors": "Yunyang Xiong, Zhanpeng Zeng, Rudrasis Chakraborty, Mingxing Tan, Glenn Fung, Yin Li, Vikas Singh",
+      "year": 2021,
+      "role": "Matrix sketching-based attention approximation",
+      "relationship_sentence": "Shows attention can be approximated via Nystr\u00f6m landmarks, reinforcing the static low-rank view that MetaLA unifies and evaluates against its optimality conditions."
+    },
+    {
+      "title": "Efficiently Modeling Long Sequences with Structured State Spaces",
+      "authors": "Albert Gu, Karan Goel, Christopher R\u00e9",
+      "year": 2022,
+      "role": "State space models with long-range dynamic memory",
+      "relationship_sentence": "Establishes SSMs as linear-time sequence models with strong dynamic memory, directly informing MetaLA\u2019s \u2018dynamic memory ability\u2019 criterion while highlighting the gap to softmax map approximation."
+    },
+    {
+      "title": "Mamba: Linear-Time Sequence Modeling with Selective State Spaces",
+      "authors": "Tri Dao, Albert Gu, et al.",
+      "year": 2024,
+      "role": "Input-dependent SSMs for powerful streaming memory",
+      "relationship_sentence": "Demonstrates selective, content-dependent memory in linear time, motivating MetaLA to combine such dynamic capability with principled softmax approximation and parameter efficiency."
+    }
+  ],
+  "synthesis_narrative": "MetaLA targets an optimal linear-time approximation to the softmax attention map by unifying prior linear-complexity approaches and formalizing three necessary conditions: dynamic memory ability, static approximation ability, and least parameter approximation. The core objective is anchored in the canonical softmax mechanism introduced by Vaswani et al. (2017), which sets the ground truth attention map MetaLA seeks to match. Early linear-efficiency attempts, such as Linformer (Wang et al., 2020) and Nystr\u00f6mformer (Xiong et al., 2021), framed attention as a low-rank/static approximation problem, achieving linear complexity but lacking dynamic, online memory. In parallel, kernelized linear attention (Katharopoulos et al., 2020) and Performers (Choromanski et al., 2021) recast softmax via feature maps and random features, enabling streaming prefix updates and offering explicit softmax approximation guarantees\u2014yet still trading off stability and parameter efficiency. Separately, state space models like S4 (Gu et al., 2022) and selective SSMs like Mamba (Dao & Gu et al., 2024) advanced linear-time architectures with strong, content-dependent dynamic memory, but without directly approximating the softmax attention map. MetaLA synthesizes these threads: it adopts the linear attention factorization to enable dynamic memory, incorporates a principled static approximation to the softmax kernel to close the gap left by SSMs and low-rank sketches, and enforces parameter minimality to avoid Performer-style overheads. By explicitly satisfying all three conditions that earlier lines only partially met, MetaLA provides a unified and theoretically grounded design for optimal linear attention.",
+  "analysis_timestamp": "2026-01-07T00:02:04.772626"
+}

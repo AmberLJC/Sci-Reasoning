@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Plug-and-Play Diffusion Features for Text-Driven Image Editing",
+      "authors": "Tumanyan et al.",
+      "year": 2023,
+      "arxiv_id": "2211.12572",
+      "role": "Inspiration",
+      "relationship_sentence": "RB-Modulation adopts the plug-and-play, training-free guidance philosophy of PnP and replaces its heuristic feature-copy control with an optimal-control-derived drift plus a principled cross-attention feature aggregation for reference-driven style extraction."
+    },
+    {
+      "title": "Prompt-to-Prompt Image Editing with Cross-Attention Control",
+      "authors": "Hertz et al.",
+      "year": 2022,
+      "arxiv_id": "2208.01626",
+      "role": "Extension",
+      "relationship_sentence": "RB-Modulation directly extends Prompt-to-Prompt\u2019s cross-attention manipulation by aggregating reference-derived key/value features to decouple style from content during sampling rather than only swapping or reweighting attention conditioned on text."
+    },
+    {
+      "title": "MasaCtrl: Tuning-Free Controllable Text-to-Image Generation",
+      "authors": "Li et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "RB-Modulation explicitly addresses MasaCtrl\u2019s limitations\u2014weak style extraction without auxiliary text and content leakage\u2014by introducing a reference-driven controller and a cross-attention aggregation that separates style from content."
+    },
+    {
+      "title": "IP-Adapter: Text-Compatible Image Prompt Adapter for Text-to-Image Diffusion Models",
+      "authors": "Ye et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "Targeting the same reference-based personalization goal as IP-Adapter, RB-Modulation removes the need for training by substituting the learned adapter with test-time optimal-control modulation and explicit cross-attention aggregation to reduce content leakage."
+    },
+    {
+      "title": "Diffusion Posterior Sampling for General Noisy Inverse Problems",
+      "authors": "Chung et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "RB-Modulation builds on DPS\u2019s core idea of modifying the diffusion drift with a posterior term by instantiating a terminal-cost style descriptor whose gradient steers sampling toward the desired reference style."
+    },
+    {
+      "title": "Classifier-Free Diffusion Guidance",
+      "authors": "Ho and Salimans",
+      "year": 2022,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "RB-Modulation generalizes classifier-free guidance by casting guidance as adding the gradient of a terminal cost to the drift and defining that cost via a learned style descriptor instead of a class/text conditional."
+    }
+  ],
+  "synthesis_narrative": "Plug-and-Play Diffusion Features showed that test-time, training-free steering of diffusion can reuse internal features to preserve content while following text edits, introducing a practical plug-and-play paradigm. Prompt-to-Prompt demonstrated that manipulating cross-attention maps is a powerful handle for precise, localized control, establishing attention-space operations as a mechanism to align semantics without retraining. MasaCtrl further explored tuning-free controllability by transporting attention information across steps, but reported challenges in achieving strong style extraction without extra text and in avoiding content leakage from references. IP-Adapter provided a highly effective reference-based personalization route by learning an image-prompt adapter, yet it requires training and tends to entangle style with content, often leaking object layout from the style image. From a probabilistic perspective, Diffusion Posterior Sampling formalized how to incorporate task constraints by modifying the drift with a posterior term, suggesting a recipe for principled test-time conditioning. Classifier-Free Guidance established that guidance can be implemented as a drift modification driven by a target log-density, providing a general template for conditioning signals. Together these works reveal a gap: we need a principled, training-free way to extract and compose reference style with prompt content without leakage. RB-Modulation synthesizes the plug-and-play and attention-control insights with posterior-guided drift modification, introducing a stochastic optimal controller with a terminal-cost style descriptor and a cross-attention feature aggregation that explicitly decouples style from content, yielding faithful style transfer aligned with text prompts\u2014without any finetuning.",
+  "target_paper": {
+    "title": "RB-Modulation: Training-Free Stylization using Reference-Based Modulation",
+    "authors": "Litu Rout, Yujia Chen, Nataniel Ruiz, Abhishek Kumar, Constantine Caramanis, Sanjay Shakkottai, Wen-Sheng Chu",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "oral",
+    "keywords": "Inverse Problems, Generative Modeling, Diffusion Models, Posterior Sampling, Optimal Control, Test-time Optimization",
+    "abstract": "We propose Reference-Based Modulation (RB-Modulation), a new plug-and-play solution for training-free personalization of diffusion models.\nExisting training-free approaches exhibit difficulties in (a) style extraction from reference images in the absence of additional style or content text descriptions, (b) unwanted content leakage from reference style images, and (c) effective composition of style and content. \nRB-Modulation is built on a novel stochastic optimal controller where a style descriptor encodes the desired attributes through a terminal cost. \nThe resulting drift not only overcomes the difficulties above, but also ensures high fidelity to the reference style and adheres to the given text prompt. \nWe also introduce a cross-attention-based feature aggregation scheme that allows RB-Modulation to decouple content and style from the reference image.\nWith theoretical justification and empirical evidence, our test-time optimization framework demonstrates precise extraction and con",
+    "openreview_id": "bnINPG5A32",
+    "forum_id": "bnINPG5A32"
+  },
+  "analysis_timestamp": "2026-01-06T09:43:14.715027"
+}

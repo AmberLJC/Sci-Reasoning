@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+      "authors": "Edward J. Hu, Yelong Shen, Phillip Wallis, Zeyuan Allen-Zhu, Yuanzhi Li, Shean Wang, Weizhu Chen",
+      "year": 2022,
+      "role": "PEFT baseline and low-rank parameterization",
+      "relationship_sentence": "ReFT\u2019s LoReFT carries LoRA\u2019s core low-rank idea from weight space into activation space, learning low-rank linear subspace transforms on hidden states instead of low-rank weight updates to achieve stronger parameter efficiency."
+    },
+    {
+      "title": "Adapter Tuning for BERT",
+      "authors": "Neil Houlsby, Andrei Giurgiu, Stanislaw Jastrzebski, et al.",
+      "year": 2019,
+      "role": "PEFT via small inserted modules",
+      "relationship_sentence": "Adapters established the viability of inserting lightweight modules into frozen models; ReFT retains the frozen-backbone philosophy but replaces nonlinear adapter blocks with learned linear interventions directly on representations, yielding lower parameter counts."
+    },
+    {
+      "title": "Prefix-Tuning: Optimizing Continuous Prompts for Generation",
+      "authors": "Xiang Lisa Li, Percy Liang",
+      "year": 2021,
+      "role": "PEFT via learned continuous prompts that influence internal states",
+      "relationship_sentence": "Prefix-tuning showed that modifying inputs to steer internal activations can rival full fine-tuning; ReFT makes this influence explicit and targeted by directly transforming hidden representations at chosen layers rather than only injecting prefix keys/values."
+    },
+    {
+      "title": "P-Tuning v2: Prompt Tuning Can Be Comparable to Fine-tuning Universally Across Scales and Tasks",
+      "authors": "Xiao Liu, Yanan Zheng, Zhengxiao Du, Ming Ding, Yujie Qian, Zhilin Yang, Jie Tang",
+      "year": 2022,
+      "role": "Deep prompt learning that injects signals at many layers",
+      "relationship_sentence": "By demonstrating the gains from layer-wise prompt injection, P-Tuning v2 motivates ReFT\u2019s design choice to target specific layers and positions, but ReFT learns compact linear subspace edits on activations instead of maintaining large deep prompts."
+    },
+    {
+      "title": "ROME: Locating and Editing Factual Associations in GPT",
+      "authors": "Kevin Meng, David Bau, Alex Andonian, Yonatan Belinkov",
+      "year": 2022,
+      "role": "Targeted model editing via localized updates",
+      "relationship_sentence": "ROME\u2019s success with surgical edits inspired the notion that small, targeted interventions can produce large behavioral changes; ReFT operationalizes this principle as learned, task-specific interventions on hidden representations rather than weight edits."
+    },
+    {
+      "title": "MEMIT: Mass Editing Memory in a Transformer",
+      "authors": "Kevin Meng, Arnab Sen Sharma, David Bau, Yonatan Belinkov",
+      "year": 2023,
+      "role": "Scalable model editing with composable updates",
+      "relationship_sentence": "MEMIT\u2019s scalable, composable edits inform ReFT\u2019s goal of highly parameter-efficient, broadly applicable interventions, with ReFT achieving this by composing low-rank activation-space transforms across layers and tasks."
+    },
+    {
+      "title": "A Structural Probe for Finding Syntax in Word Representations",
+      "authors": "John Hewitt, Christopher D. Manning",
+      "year": 2019,
+      "role": "Interpretability evidence that linguistic structure is linearly encoded in hidden states",
+      "relationship_sentence": "Evidence that syntax lives in linear subspaces of representations strengthens ReFT\u2019s premise: if key semantics are linearly encoded, then low-rank linear subspace interventions (LoReFT) are a principled and efficient way to steer model behavior."
+    }
+  ],
+  "synthesis_narrative": "ReFT\u2019s central move is to shift parameter-efficient adaptation from weight space to representation space and to do so with compact, structured updates. This advances a trajectory launched by PEFT methods\u2014Adapters, Prefix-Tuning, and P-Tuning v2\u2014that kept base weights frozen while injecting compact task information to influence internal activations. LoRA contributed the crucial low-rank parameterization lens, showing that much of fine-tuning\u2019s effect can be captured by low-dimensional updates; LoReFT transfers this economy to hidden states by learning low-rank linear subspace transforms at selected layers, yielding large parameter savings while preserving expressivity.\nInterpretability and model-editing work directly motivate operating on representations. The structural probe of Hewitt and Manning demonstrated that core linguistic structure is linearly embedded in hidden states, suggesting that linear subspace manipulations can be both principled and effective. ROME and MEMIT then showed that small, localized interventions can reliably alter model behavior, with MEMIT further illustrating scalability and composability. ReFT synthesizes these insights: it treats finetuning as learning targeted, low-rank representation interventions that are drop-in replacements for PEFT modules but far more parameter-efficient. By focusing on hidden-state transformations rather than weight updates or large prompt tensors, ReFT captures the benefits of earlier PEFT techniques, the causal precision of model editing, and the linear structure revealed by interpretability\u2014yielding a practical, general recipe for efficient adaptation across reasoning and instruction-following tasks.",
+  "analysis_timestamp": "2026-01-06T23:33:35.538975"
+}

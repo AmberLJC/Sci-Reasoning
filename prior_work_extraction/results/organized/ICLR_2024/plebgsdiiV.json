@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Balanced Off-Policy Evaluation in Finite MDPs",
+      "authors": "Nathan Kallus et al.",
+      "year": 2020,
+      "arxiv_id": "",
+      "role": "Inspiration",
+      "relationship_sentence": "This work cast OPE as an in-sample, RKHS/IPM balancing problem with an explicit bias\u2013variance trade-off, directly inspiring the idea to learn a kernel (and its metric) that minimizes the mean-squared error of Bellman update estimates."
+    },
+    {
+      "title": "Fitted Q Evaluation (FQE): Off-Policy Evaluation via Supervised Learning",
+      "authors": "Hoang Le et al.",
+      "year": 2019,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "FQE formalized policy evaluation by regressing TD targets, and the present method targets the MSE of precisely these TD update vectors while modifying the sampling via a kernel relaxation of the deterministic policy."
+    },
+    {
+      "title": "Kernel-based Reinforcement Learning",
+      "authors": "Daniel Ormoneit et al.",
+      "year": 2002,
+      "arxiv_id": "",
+      "role": "Inspiration",
+      "relationship_sentence": "By showing how kernel smoothing over state\u2013action space can approximate Bellman backups and how kernel bandwidth controls bias\u2013variance, this paper motivated relaxing actions via a kernel and learning its metric for accurate TD update estimation."
+    },
+    {
+      "title": "DualDICE: Behavior-Agnostic Estimation of Discounted Stationary Distribution Corrections",
+      "authors": "Ofir Nachum et al.",
+      "year": 2019,
+      "arxiv_id": "1906.04733",
+      "role": "Baseline",
+      "relationship_sentence": "DualDICE provides a leading in-sample OPE approach that avoids action-density ratios via stationary distribution correction, serving as a principal comparator that the kernel-relaxation strategy seeks to outperform in deterministic continuous-action settings."
+    },
+    {
+      "title": "Breaking the Curse of Horizon: Off-Policy Evaluation with Marginalized Importance Sampling",
+      "authors": "Qiang Liu et al.",
+      "year": 2018,
+      "arxiv_id": "",
+      "role": "Gap Identification",
+      "relationship_sentence": "MIS reduces variance by marginalizing actions but still presumes stochastic policies/coverage, highlighting the gap for deterministic continuous-action targets that motivates smoothing the target with a kernel."
+    },
+    {
+      "title": "Balanced Policy Evaluation and Learning",
+      "authors": "Nathan Kallus",
+      "year": 2019,
+      "arxiv_id": "",
+      "role": "Inspiration",
+      "relationship_sentence": "This paper introduced kernel/IPM balancing with explicit MSE control, providing the key insight of learning weighting metrics to trade bias for variance that is adapted here to learn action-kernel metrics for TD estimation."
+    }
+  ],
+  "synthesis_narrative": "Kernel/IPM-based balancing methods established that off-policy evaluation can be performed in-sample by learning weights that minimize a bias\u2013variance objective rather than relying purely on likelihood ratios. Balanced Policy Evaluation and Learning provided the core idea of kernel-induced discrepancies and regularization to control MSE, while Balanced Off-Policy Evaluation in Finite MDPs demonstrated this principle for MDPs with explicit finite-horizon guarantees and an RKHS formulation that connects weighting choice to error in Bellman residuals. Independently, Fitted Q Evaluation (FQE) framed policy evaluation as regression on Bellman targets, making the mean-squared error of estimated TD update vectors the central quantity governing accuracy. Classic kernel-based reinforcement learning showed how kernel smoothing in state\u2013action space approximates Bellman backups and how kernel bandwidth/metric dictates the bias\u2013variance trade-off of such estimates. DualDICE further advanced in-sample OPE by eschewing action-density ratios through stationary distribution correction, becoming a strong baseline for continuous-action settings. Finally, Marginalized Importance Sampling revealed that marginalizing actions can reduce variance but still assumes stochastic policies or sufficient support, leaving deterministic continuous-action targets problematic. Together these works suggest a natural next step: retain the in-sample, MSE-centric viewpoint of FQE and kernel/IPM balancing, but address the deterministic-action singularity by softening the target with a kernel over actions and learning its metric to optimally trade bias and variance of TD updates. This synthesis both generalizes kernel smoothing to state-conditional action neighborhoods and operationalizes MSE-optimal metric selection, yielding an OPE method tailored to deterministic policies in continuous action spaces.",
+  "target_paper": {
+    "title": "Kernel Metric Learning for In-Sample Off-Policy Evaluation of Deterministic RL Policies",
+    "authors": "Haanvid Lee, Tri Wahyu Guntara, Jongmin Lee, Yung-Kyun Noh, Kee-Eung Kim",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "off-policy evaluation, reinforcement learning, deterministic policy, continuous actions, metric learning",
+    "abstract": "We consider off-policy evaluation (OPE) of deterministic target policies for reinforcement learning (RL) in environments with continuous action spaces. While it is common to use importance sampling for OPE, it suffers from high variance when the behavior policy deviates significantly from the target policy. In order to address this issue, some recent works on OPE proposed in-sample learning with importance resampling. Yet, these approaches are not applicable to deterministic target policies for continuous action spaces. To address this limitation, we propose to relax the deterministic target policy using a kernel and learn the kernel metrics that minimize the overall mean squared error of the estimated temporal difference update vector of an action value function, where the action value function is used for policy evaluation. We derive the bias and variance of the estimation error due to this relaxation and provide analytic solutions for the optimal kernel metric. In empirical studies ",
+    "openreview_id": "plebgsdiiV",
+    "forum_id": "plebgsdiiV"
+  },
+  "analysis_timestamp": "2026-01-06T13:46:58.362887"
+}

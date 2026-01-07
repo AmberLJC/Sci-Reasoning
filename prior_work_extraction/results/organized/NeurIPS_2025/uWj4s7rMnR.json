@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Stochastic Interpolants: A Unifying Framework for Flows and Diffusions",
+      "authors": "Michael D. Albergo; Eric Vanden-Eijnden",
+      "year": 2023,
+      "role": "Unified theory for flow/diffusion training via interpolants and (conditional) flow matching losses",
+      "relationship_sentence": "MeanFlow\u2019s formulation of training a velocity field and exploiting identities along an interpolation path is directly grounded in the stochastic-interpolant view that links pathwise averages and instantaneous velocities used in flow-matching methods."
+    },
+    {
+      "title": "Rectified Flow: Straightening Flows for Probabilistic Modeling",
+      "authors": "Liu et al.",
+      "year": 2023,
+      "role": "Flow-matching variant that encourages straight-line trajectories with near-constant velocity",
+      "relationship_sentence": "By showing that good generative flows can be \u2018straightened\u2019 so the instantaneous velocity is approximately constant, Rectified Flow motivates MeanFlow\u2019s focus on learning a time-averaged (mean) velocity that directly maps source to data in one step."
+    },
+    {
+      "title": "Consistency Models",
+      "authors": "Yang Song et al.",
+      "year": 2023,
+      "role": "One-step/few-step generative modeling via consistency training and (self-)distillation",
+      "relationship_sentence": "Consistency Models established the viability of high-quality one-step sampling, a central goal that MeanFlow attains without teacher models by replacing consistency constraints with a principled average\u2013instantaneous velocity identity for training."
+    },
+    {
+      "title": "Progressive Distillation for Fast Sampling of Diffusion Models",
+      "authors": "Tim Salimans; Jonathan Ho",
+      "year": 2022,
+      "role": "Teacher\u2013student distillation to reduce NFE while preserving quality",
+      "relationship_sentence": "MeanFlow contrasts with distillation-based acceleration by achieving 1-NFE generation from scratch, positioning its average-velocity learning as a principled alternative to teacher-driven compression."
+    },
+    {
+      "title": "Denoising Diffusion Implicit Models (DDIM)",
+      "authors": "Jiaming Song; Chenlin Meng; Stefano Ermon",
+      "year": 2020,
+      "role": "Deterministic probability-flow ODE sampling and link between diffusion and ODE trajectories",
+      "relationship_sentence": "DDIM\u2019s probability-flow perspective frames generation as integrating a velocity field; MeanFlow advances this by training the network to predict the time-averaged velocity that effects the end-to-end displacement in a single evaluation."
+    },
+    {
+      "title": "Score-Based Generative Modeling through Stochastic Differential Equations",
+      "authors": "Yang Song; Jascha Sohl-Dickstein; Diederik P. Kingma; Abhishek Kumar; Stefano Ermon; Ben Poole",
+      "year": 2021,
+      "role": "Foundational SDE/ODE formulations for diffusion models and probability flow",
+      "relationship_sentence": "MeanFlow builds on the probability-flow ODE view where instantaneous drift (velocity) drives sample trajectories, but departs by training via an identity that links this drift to the learnable average velocity over time."
+    },
+    {
+      "title": "Neural Ordinary Differential Equations",
+      "authors": "Ricky T. Q. Chen; Yulia Rubanova; Jesse Bettencourt; David Duvenaud",
+      "year": 2018,
+      "role": "Introduced continuous-time generative modeling via ODEs with learnable velocity fields",
+      "relationship_sentence": "The MeanFlow idea of predicting a velocity that integrates to a displacement in one step is rooted in the Neural ODE view of dynamics; MeanFlow leverages this by learning the integral (mean velocity) directly rather than integrating many instantaneous steps."
+    }
+  ],
+  "synthesis_narrative": "MeanFlow\u2019s core contribution\u2014learning a time-averaged velocity and exploiting an identity that links it to instantaneous velocities\u2014emerges from the evolution of flow/diffusion modeling toward efficient, few-step generation. Foundationally, score-based diffusion and DDIM reframed generation as integrating a probability-flow ODE, where a learned instantaneous drift transports data along time. Neural ODEs established the general paradigm of parameterizing velocity fields whose integrals yield end-to-end displacements, providing the mathematical backbone for MeanFlow\u2019s focus on the integral quantity.\n\nFlow-matching developments then targeted direct learning of the ODE velocity. Stochastic Interpolants unified diffusion and flow training via conditional flow matching, emphasizing identities along an interpolation path\u2014precisely the type of relation MeanFlow formalizes between average and instantaneous velocities. Rectified Flow further revealed that high-quality models can \u2018straighten\u2019 trajectories so velocity becomes near-constant, suggesting that learning the time-averaged velocity could be both tractable and effective.\n\nParallel attempts at 1-NFE sampling, notably Consistency Models and progressive distillation, achieved impressive one-step performance but relied on teachers, curricula, or multi-stage compression. MeanFlow dispenses with these by using a self-contained objective grounded in a well-defined average\u2013instantaneous identity, directly regressing the mean velocity that maps source to target in one evaluation. In doing so, it preserves the principled ODE/flow semantics of prior work while closing the performance gap to multi-step models and offering a clean theoretical lens for one-step generative modeling.",
+  "analysis_timestamp": "2026-01-07T00:21:33.173047"
+}

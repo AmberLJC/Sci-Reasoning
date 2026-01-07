@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Sequential Monte Carlo Samplers",
+      "authors": "Pierre Del Moral, Arnaud Doucet, Ajay Jasra",
+      "year": 2006,
+      "role": "Foundational SMC framework and normalizing-constant estimation",
+      "relationship_sentence": "Provides the Feynman\u2013Kac SMC formalism for sampling from unnormalized targets and estimating partition functions, which the paper adopts to cast sequence-level LLM objectives as probabilistic inference and to produce log Z estimates."
+    },
+    {
+      "title": "Twisted Particle Filters",
+      "authors": "Nick Whiteley et al.",
+      "year": 2016,
+      "role": "Variance reduction in SMC via twisting/controlled potentials",
+      "relationship_sentence": "Introduces twisting functions that incorporate lookahead information to reduce weight degeneracy, directly motivating the paper\u2019s learned twist functions that guide partial-sequence exploration toward high-potential completions."
+    },
+    {
+      "title": "Controlled Sequential Monte Carlo",
+      "authors": "Jeremy Heng et al.",
+      "year": 2021,
+      "role": "SMC as an optimal control problem linking twists to value functions",
+      "relationship_sentence": "Formalizes optimal twisting as a control problem and connects SMC to value-function learning, which the paper extends by learning data-driven twist functions for language models and drawing explicit parallels to soft RL."
+    },
+    {
+      "title": "Soft Actor-Critic: Off-Policy Maximum Entropy Deep Reinforcement Learning with a Stochastic Actor",
+      "authors": "Tuomas Haarnoja, Aurick Zhou, Pieter Abbeel, Sergey Levine",
+      "year": 2018,
+      "role": "Soft RL and entropy-regularized value functions",
+      "relationship_sentence": "Provides the soft value/Q-function machinery and control-as-inference perspective that the paper leverages to interpret twist functions as estimators of expected future potential and to derive learning objectives aligned with soft RL."
+    },
+    {
+      "title": "Annealed Importance Sampling",
+      "authors": "Radford M. Neal",
+      "year": 2001,
+      "role": "Estimating log partition functions via annealed bridging distributions",
+      "relationship_sentence": "Supplies the core idea of using forward annealed transitions to estimate log Z, which the paper adapts within SMC to create principled, sequence-aware estimators and as groundwork for bidirectional bounds."
+    },
+    {
+      "title": "Estimating the Partition Function by Bidirectional Monte Carlo",
+      "authors": "Roger B. Grosse, Chris J. Maddison, Daniel Tarlow",
+      "year": 2015,
+      "role": "Two-sided bounds on log partition functions via forward/reverse chains",
+      "relationship_sentence": "Inspires the paper\u2019s bidirectional SMC bounds by extending the forward\u2013reverse estimator concept to sequential settings, yielding practical accuracy diagnostics for LLM inference procedures."
+    },
+    {
+      "title": "Plug and Play Language Models: A Simple Approach to Controlled Text Generation",
+      "authors": "Siddharth Dathathri et al.",
+      "year": 2020,
+      "role": "LLM generation under global potentials/attributes",
+      "relationship_sentence": "Demonstrates controlled generation by sampling from an LM guided by an unnormalized attribute model, directly motivating the paper\u2019s more principled SMC-based approach to sampling from sequence-level potentials."
+    }
+  ],
+  "synthesis_narrative": "This paper\u2019s core contribution\u2014casting a variety of LLM tasks as sampling from unnormalized sequence-level potentials and solving them with twisted Sequential Monte Carlo\u2014rests on three converging lines of prior work. First, the SMC literature (Del Moral, Doucet, Jasra) provides the Feynman\u2013Kac framework for sampling from unnormalized targets and estimating partition functions, establishing the backbone on which sequence-level inference is conducted. Building on this, the twisting/controlled SMC strand (Whiteley et al.; Heng et al.) shows how future information can be incorporated via twist functions that act like optimal controls to reduce variance and focus particles, a concept the paper operationalizes by learning twist functions tailored to language modeling.\nSecond, the control-as-inference and soft RL literature (Haarnoja et al.) supplies the interpretation of twists as soft value functions (expected future potential under entropy regularization), guiding the paper\u2019s learning objective and theoretical connections; their contrastive training can be viewed as a practical surrogate for learning such soft value estimates on text.\nThird, for evaluating inference quality, classical normalizing-constant estimation via AIS (Neal) and two-sided guarantees via Bidirectional Monte Carlo (Grosse et al.) directly inform the paper\u2019s bidirectional SMC bounds, adapting forward\u2013reverse estimators to sequential, particle-based settings. Finally, applications like Plug and Play Language Models underscore the relevance of sampling from globally reweighted sequence distributions in NLP, with the present work providing a principled, general SMC mechanism that unifies and strengthens such techniques.",
+  "analysis_timestamp": "2026-01-07T00:02:04.871489"
+}

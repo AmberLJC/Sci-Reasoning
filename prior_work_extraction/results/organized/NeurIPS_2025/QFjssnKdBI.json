@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Self-Consistency Improves Chain of Thought Reasoning in Language Models",
+      "authors": "Xuezhi Wang, Jason Wei, Dale Schuurmans, Quoc V. Le, Ed H. Chi, et al.",
+      "year": 2022,
+      "role": "Aggregation-by-voting baseline for multi-sample reasoning",
+      "relationship_sentence": "This work popularized sampling multiple chains of thought and majority-vote aggregation, directly motivating the paper\u2019s theoretical accuracy bounds on aggregation and its critique of the 'more samples \u21d2 better' assumption."
+    },
+    {
+      "title": "Tree of Thoughts: Deliberate Problem Solving with Large Language Models",
+      "authors": "Shunyu Yao, Dian Yu, Jeffrey Zhao, Izhak Shafran, Thomas L. Griffiths, Yuan Cao, Karthik Narasimhan",
+      "year": 2023,
+      "role": "Planning/search-style reasoning method",
+      "relationship_sentence": "As a core planning-based reasoning strategy producing multiple candidate trajectories, ToT provides a key method family that EPIC aims to select among and calibrate via its learned compatibility representation and probabilistic bounds."
+    },
+    {
+      "title": "ReAct: Synergizing Reasoning and Acting in Language Models",
+      "authors": "Shunyu Yao, Jeffrey Zhao, Dian Yu, Izhak Shafran, Thomas L. Griffiths, Yuan Cao, Karthik Narasimhan",
+      "year": 2022,
+      "role": "Reasoning-plus-tool/use trajectory framework",
+      "relationship_sentence": "ReAct exemplifies a distinct reasoning paradigm with external actions, underscoring the need for query-conditioned method selection that EPIC learns to perform in a shared representation space."
+    },
+    {
+      "title": "Least-to-Most Prompting Enables Complex Reasoning in Large Language Models",
+      "authors": "Denny Zhou, Nathanael Sch\u00e4rli, Le Hou, Jason Wei, et al.",
+      "year": 2022,
+      "role": "Alternative reasoning strategy with staged decomposition",
+      "relationship_sentence": "As a prominent yet qualitatively different reasoning method, L2M expands the method set over which EPIC learns query\u2013method compatibility and performs utility-aware selection."
+    },
+    {
+      "title": "A PAC-Bayesian Approach for the Risk of the Majority Vote and the C-Bound",
+      "authors": "Pascal Germain, Alexandre Lacasse, Fran\u00e7ois Laviolette, Mario Marchand",
+      "year": 2015,
+      "role": "Theoretical foundations for majority-vote accuracy bounds",
+      "relationship_sentence": "Classical PAC-Bayesian analyses of majority vote inform the paper\u2019s derivation of accuracy bounds for LLM aggregation, which EPIC then operationalizes as a regularizer in its optimization."
+    },
+    {
+      "title": "A Simple Framework for Contrastive Learning of Visual Representations (SimCLR)",
+      "authors": "Ting Chen, Simon Kornblith, Mohammad Norouzi, Geoffrey Hinton",
+      "year": 2020,
+      "role": "Contrastive learning paradigm for representation alignment",
+      "relationship_sentence": "EPIC\u2019s contrastive objective to learn a shared space encoding model reasoning ability and query\u2013method compatibility is directly inspired by contrastive learning principles as popularized by SimCLR."
+    }
+  ],
+  "synthesis_narrative": "The paper targets a central open problem in LLM reasoning: selecting the right reasoning method per query rather than blindly aggregating more samples. Self-Consistency (Wang et al.) established the now-standard paradigm of sampling multiple chains of thought and applying majority vote, implicitly suggesting that increased sample counts boost accuracy. Building on this, the paper develops formal accuracy bounds for common aggregation rules under fixed generation distributions and sample sizes, drawing on majority-vote theory from PAC-Bayesian C-bound analyses (Germain et al.), thereby exposing when and why aggregation saturates or fails.\n\nSimultaneously, the growing diversity of reasoning paradigms\u2014Tree of Thoughts\u2019 deliberate search, ReAct\u2019s intertwined reasoning and acting, and Least-to-Most Prompting\u2019s staged decomposition\u2014creates a selection problem: different queries benefit from different methods. These works provide the concrete families of strategies that EPIC must discriminate among. EPIC addresses this by learning a shared representation that reflects both model-side reasoning competence and query\u2013method compatibility, using a contrastive learning objective inspired by SimCLR to separate well-matched from mismatched pairs.\n\nCrucially, the paper closes the loop between theory and practice: the derived probabilistic bounds on aggregation accuracy are not merely diagnostic but are incorporated as a regularizer in a utility-driven objective that weighs accuracy against computational cost. This unifies (i) rigorous limits of multi-sample aggregation with (ii) representation-learned routing across heterogenous reasoning methods, yielding a principled planner that improves accuracy while reducing unnecessary sampling.",
+  "analysis_timestamp": "2026-01-07T00:02:04.954501"
+}

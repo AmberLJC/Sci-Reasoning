@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "ALVINN: An Autonomous Land Vehicle in a Neural Network",
+      "authors": "Dean A. Pomerleau",
+      "year": 1989,
+      "role": "Foundational method (Behavior Cloning)",
+      "relationship_sentence": "Established behavior cloning as supervised learning of actions from observations\u2014the objective PALR directly augments with a conditional-independence regularizer to prevent reliance on leaked past-action cues."
+    },
+    {
+      "title": "A Reduction of Imitation Learning and Structured Prediction to No-Regret Online Learning (DAgger)",
+      "authors": "St\u00e9phane Ross, Geoffrey J. Gordon, J. Andrew Bagnell",
+      "year": 2011,
+      "role": "Sequential IL and covariate-shift motivation",
+      "relationship_sentence": "Diagnosed compounding errors from train\u2013test mismatch in BC and motivated mechanisms to avoid self-reinforcing mistakes; PALR targets a complementary mismatch\u2014past-action leakage\u2014without requiring interaction like DAgger."
+    },
+    {
+      "title": "Deep Recurrent Q-Learning for Partially Observable MDPs",
+      "authors": "Matthew Hausknecht, Peter Stone",
+      "year": 2015,
+      "role": "History-based control in POMDPs",
+      "relationship_sentence": "Popularized using observation histories via recurrent models in partially observable settings\u2014the same ILOH setup where past-action information can leak and that PALR is designed to safeguard."
+    },
+    {
+      "title": "A Kernel Statistical Test of Independence",
+      "authors": "Arthur Gretton, Kenji Fukumizu, Choon H. Teo, Le Song, Bernhard Sch\u00f6lkopf, Alexander J. Smola",
+      "year": 2007,
+      "role": "Independence metric (HSIC)",
+      "relationship_sentence": "Provides a practical, differentiable dependence measure (HSIC) that the authors instantiate as a core conditional-independence penalty to suppress correlations between the policy\u2019s action and past-action proxies in the history."
+    },
+    {
+      "title": "Kernel Measures of Conditional Dependence",
+      "authors": "Kenji Fukumizu, Arthur Gretton, Xiaoming Sun, Bernhard Sch\u00f6lkopf",
+      "year": 2008,
+      "role": "Conditional-independence measurement",
+      "relationship_sentence": "Introduces kernel-based measures/tests for conditional independence, giving PALR principled tools to enforce that current actions be independent of leaked past-action information given the relevant history."
+    },
+    {
+      "title": "Mutual Information Neural Estimation (MINE)",
+      "authors": "Mohamed I. Belghazi, Aristide Baratin, Sai Rajeswar, Sherjil Ozair, Yoshua Bengio, Aaron Courville, Devon Hjelm",
+      "year": 2018,
+      "role": "Information-theoretic regularization",
+      "relationship_sentence": "Provides neural estimators for mutual information that the authors can leverage to instantiate MI/CMI-based versions of PALR\u2019s conditional-independence regularizers."
+    },
+    {
+      "title": "Scheduled Sampling for Sequence Prediction with Recurrent Neural Networks",
+      "authors": "Samy Bengio, Oriol Vinyals, Navdeep Jaitly, Noam Shazeer",
+      "year": 2015,
+      "role": "Exposure-bias motivation in sequence models",
+      "relationship_sentence": "Highlights train\u2013test mismatch from conditioning on ground-truth past outputs vs. model outputs; PALR addresses an analogous exposure-bias mechanism in BC by discouraging dependence on history features that encode expert\u2019s past actions."
+    }
+  ],
+  "synthesis_narrative": "PALR\u2019s core contribution\u2014regularizing behavior cloning to block leakage of past actions embedded in observation histories\u2014sits at the intersection of imitation learning under partial observability and statistical dependence control. The work builds directly on behavior cloning (Pomerleau), the supervised objective it augments, and is motivated by the sequential error amplification recognized in DAgger: while DAgger remedies distribution shift via interaction, PALR targets a complementary mismatch\u2014history features that encode an expert\u2019s past actions\u2014which can cause a learned policy to imitate its own previous decisions at test time.\n\nThe partially observable, history-based control setting popularized by recurrent policies (Hausknecht & Stone) is precisely where such leakage can arise, as observations inadvertently carry information about earlier actions. PALR\u2019s key idea is to enforce conditional independence so that the policy\u2019s action does not depend on past-action proxies once the relevant history is accounted for. This is operationalized using established dependence measures: HSIC (Gretton et al.) supplies a differentiable objective for independence, while kernel conditional dependence measures (Fukumizu et al.) provide principled tools for conditioning on history when penalizing residual dependence on leaked action signals. Complementarily, neural MI estimators like MINE (Belghazi et al.) enable MI/CMI-based instantiations of the regularizer.\n\nConceptually, PALR echoes exposure-bias remedies in sequence modeling (Scheduled Sampling) by addressing a train\u2013test mismatch, but does so without interaction by directly regularizing conditional independence. Together, these strands yield a practical, theoretically grounded approach to robust offline imitation with observation histories.",
+  "analysis_timestamp": "2026-01-06T23:42:49.060108"
+}

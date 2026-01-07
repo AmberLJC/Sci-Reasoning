@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Self-Instruct: Aligning Language Models with Self-Generated Instructions",
+      "authors": "Yizhong Wang, Swaroop Mishra, Pegah Alipoormolabashi, Yao Fu, et al.",
+      "year": 2023,
+      "role": "Enabling technique for synthetic-data-integrated training",
+      "relationship_sentence": "Established the now-standard practice of training/fine-tuning LLMs on model-generated instructions, defining the synthetic data pipeline that VIA specifically targets and exploits for attack propagation."
+    },
+    {
+      "title": "Constitutional AI: Harmlessness from AI Feedback",
+      "authors": "Yuntao Bai, Andy Jones, Kamal Ndousse, Amanda Askell, et al.",
+      "year": 2022,
+      "role": "Key synthetic data alignment pipeline",
+      "relationship_sentence": "Showed large-scale use of AI-generated critiques and revisions to produce alignment data; VIA\u2019s threat model and evaluation hinge on this synthetic-feedback loop as a conduit through which poisoning/backdoors can spread under clean queries."
+    },
+    {
+      "title": "Sleeper Agent: Scalable Targeted Data Poisoning Attacks on Large Language Models",
+      "authors": "Nicholas Carlini, Milad Nasr, Matthew Jagielski, Florian Tram\u00e8r, Eric Wallace, et al.",
+      "year": 2024,
+      "role": "State-of-the-art LLM data poisoning baseline",
+      "relationship_sentence": "Provided strong targeted poisoning methods for LLMs; the paper shows such mainstream attacks are blunted by synthetic-data training and then introduces VIA to overcome this by making poisons propagate via generated data."
+    },
+    {
+      "title": "BadNets: Identifying Vulnerabilities of Deep Learning to Backdoor Attacks",
+      "authors": "Tianyu Gu, Brendan Dolan-Gavitt, Siddharth Garg",
+      "year": 2017,
+      "role": "Foundational backdoor attack paradigm",
+      "relationship_sentence": "Supplied the canonical backdoor framework (triggered behaviors learned from poisoned data) that VIA generalizes to the synthetic-data setting by causing backdoors to be replicated into newly generated samples."
+    },
+    {
+      "title": "Weight Poisoning Attacks on Pre-trained Models",
+      "authors": "Keita Kurita, Paul Michel, Graham Neubig",
+      "year": 2020,
+      "role": "Backdoors in pre-trained language models via fine-tuning",
+      "relationship_sentence": "Demonstrated that small amounts of poisoned fine-tuning data can implant backdoors in NLP models; VIA builds on this mechanism but adds a propagation channel through synthetic data generation."
+    },
+    {
+      "title": "Universal Adversarial Triggers for Attacking and Analyzing NLP",
+      "authors": "Eric Wallace, Shi Feng, Nikhil Kandpal, Matt Gardner, Sameer Singh",
+      "year": 2019,
+      "role": "Trigger design and analysis in NLP",
+      "relationship_sentence": "Introduced robust, model-agnostic trigger patterns; informs VIA\u2019s design of triggers/patterns that survive generation and rephrasing so they can be copied by LLMs into synthetic data and persist through subsequent training."
+    },
+    {
+      "title": "Self-Consuming Generative Models Go MAD",
+      "authors": "Ilia Shumailov, Yarin Gal, Florian Tram\u00e8r, Nicholas Carlini, et al.",
+      "year": 2023,
+      "role": "Conceptual foundation on training-on-generated-data feedback loops",
+      "relationship_sentence": "Showed pathologies when models are trained on their own outputs; VIA leverages this feedback-loop insight but in a security context, crafting poisons that \u2018infect\u2019 the synthetic generation process and spread."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core contribution\u2014a universal Virus Infection Attack (VIA) that makes poisoning/backdoors propagate through synthetic data even when queries are clean\u2014sits at the intersection of two lines of work: synthetic-data-based LLM training and adversarial manipulation of model behavior via poisoning/backdoors. Self-Instruct and Constitutional AI established mainstream pipelines where models (or AI feedback) generate training data, making synthetic data integral to instruction tuning and alignment. VIA directly targets this loop, hypothesizing and demonstrating that the same mechanism that scales data can also amplify and spread malicious patterns.\n\nOn the attack side, BadNets defined the modern backdoor paradigm, while Kurita et al. showed how small poisoned fine-tunes can implant backdoors in language models. Sleeper Agent advanced scalable, targeted poisoning for LLMs. The paper first observes that such mainstream poisoning/backdoor methods are surprisingly weakened by the distribution shift between poisoned data and the clean queries used to elicit synthetic samples. To overcome this, VIA designs poisons and triggers that are preferentially reproduced by the generator itself, ensuring that the synthetic outputs contain and amplify the malicious pattern.\n\nTwo additional insights underpin VIA\u2019s propagation mechanism. Wallace et al.\u2019s universal triggers inspire trigger patterns that survive paraphrasing and model rewrites, making them more likely to be replicated during generation. Shumailov et al.\u2019s \u201cself-consuming\u201d results on feedback loops motivate treating synthetic generation as a contagion channel: once the seed poison is learned, the model\u2019s own outputs carry the infection forward into subsequent training rounds. Together, these works directly inform VIA\u2019s central idea: transform the synthetic data pipeline from a defense-by-distribution-shift into an attack vector that self-propagates.",
+  "analysis_timestamp": "2026-01-07T00:21:32.271546"
+}

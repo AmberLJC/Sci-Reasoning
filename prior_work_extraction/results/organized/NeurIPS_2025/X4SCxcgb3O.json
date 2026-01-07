@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Communication-Efficient Learning of Deep Networks from Decentralized Data (FedAvg)",
+      "authors": "H. Brendan McMahan, Eider Moore, Daniel Ramage, Seth Hampson, Blaise Aguera y Arcas",
+      "year": 2017,
+      "role": "Foundational local-update paradigm",
+      "relationship_sentence": "FedAvg introduced the core idea of performing multiple local steps between synchronizations, the central synchronization-relaxation mechanism DiLoCo leverages and the present paper scales/analyzes."
+    },
+    {
+      "title": "Local SGD Converges Fast and Communicates Little",
+      "authors": "Sebastian U. Stich",
+      "year": 2019,
+      "role": "Theoretical underpinning of periodic averaging",
+      "relationship_sentence": "This work provides convergence guarantees for periodic model averaging, directly supporting DiLoCo\u2019s reduced-communication training regime whose scaling behavior this paper studies."
+    },
+    {
+      "title": "Don\u2019t Use Large Mini-Batches, Use Local SGD",
+      "authors": "Tao Lin, Sebastian U. Stich, Kumar Kshitij Patel, Martin Jaggi",
+      "year": 2020,
+      "role": "Practical recipe for communication-efficient data-parallel training",
+      "relationship_sentence": "By showing that local updates can replace large-batch synchronization without quality loss, this paper informs the practical hyperparameter and synchronization choices explored in DiLoCo\u2019s scaling laws."
+    },
+    {
+      "title": "Deep Learning with Elastic Averaging SGD (EASGD)",
+      "authors": "Sixin Zhang, Anna Choromanska, Yann LeCun",
+      "year": 2015,
+      "role": "Early method for relaxed coupling among replicas",
+      "relationship_sentence": "EASGD\u2019s elastic coupling formalizes how loosely synchronized replicas can still cohere, conceptually motivating DiLoCo\u2019s replica dynamics and the paper\u2019s analysis of how replica count affects scaling."
+    },
+    {
+      "title": "Model soups: averaging weights of multiple fine-tuned models improves accuracy without increasing inference time",
+      "authors": "Mitchell Wortsman, Gabriel Ilharco, Samir Ya Gadre, et al.",
+      "year": 2022,
+      "role": "Empirical validation of weight averaging from shared initialization",
+      "relationship_sentence": "Model soups demonstrates that averaging independently trained models from the same initialization preserves or improves quality, bolstering DiLoCo\u2019s premise that infrequently averaged replicas can match data-parallel quality."
+    },
+    {
+      "title": "Scaling Laws for Neural Language Models",
+      "authors": "Jared Kaplan, Sam McCandlish, Tom Henighan, et al.",
+      "year": 2020,
+      "role": "Baseline scaling-law framework",
+      "relationship_sentence": "Kaplan et al. established predictive loss\u2013compute\u2013size relationships for LMs, providing the methodological template this paper adapts to analyze DiLoCo under fixed-compute constraints."
+    },
+    {
+      "title": "Training Compute-Optimal Large Language Models",
+      "authors": "Jordan Hoffmann, Sebastian Borgeaud, Arthur Mensch, et al.",
+      "year": 2022,
+      "role": "Compute-optimal scaling refinement (Chinchilla)",
+      "relationship_sentence": "Chinchilla refines scaling laws by emphasizing token\u2013parameter tradeoffs under fixed compute, directly informing this paper\u2019s fixed-compute protocol and its analysis of token budgets and model sizes for DiLoCo."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s key contribution\u2014establishing reliable scaling laws for DiLoCo under fixed compute\u2014rests on two converging lines of prior work: reduced-synchronization training and language model scaling laws. On the algorithmic side, FedAvg and Local SGD (McMahan et al.; Stich) introduced and theoretically grounded the central mechanism of performing multiple local updates between synchronizations, the very strategy DiLoCo employs to cut communication. Lin et al. operationalized this idea into a practical recipe for large-scale deep learning, showing that local steps can supplant large-batch synchronization without degrading quality\u2014guidance this paper extends by mapping hyperparameters (local steps, replica count) into predictable scaling behavior. EASGD contributed the conceptual framing of loosely coupled replicas, clarifying how decoupling influences optimization dynamics; this informs the current analysis of how the number of replicas affects both reliability and scaling efficiency. Complementing these, Model Soups demonstrated that averaging weights of independently trained models from a shared initialization can preserve or improve performance, supporting DiLoCo\u2019s periodic averaging of diverged replicas.\nOn the modeling side, Kaplan et al. established the empirical methodology for scaling laws in language models, while Chinchilla (Hoffmann et al.) refined compute-optimal tradeoffs between model size and training tokens. The present paper unifies these threads: it applies compute-constrained scaling-law methodology to a low-communication training regime, showing that when hyperparameters and token budgets are chosen in line with these laws, DiLoCo scales predictably and can outperform standard data-parallel training even at small scales.",
+  "analysis_timestamp": "2026-01-07T00:02:04.945530"
+}

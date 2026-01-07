@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+      "authors": "Edward J. Hu et al.",
+      "year": 2022,
+      "role": "Foundational PEFT method using frozen base weights and trainable low-rank adapters",
+      "relationship_sentence": "PiSSA keeps LoRA\u2019s architecture but replaces LoRA\u2019s random/zero initialization with an SVD-based initialization from the pretrained weight W, directly addressing LoRA\u2019s slower convergence from updating \u201cnoise & zero\u201d adapters."
+    },
+    {
+      "title": "AdaLoRA: Adaptive Low-Rank Adaptation of Large Language Models",
+      "authors": "Zhang et al.",
+      "year": 2023,
+      "role": "Adaptive rank allocation for LoRA using spectral cues to focus capacity on important directions",
+      "relationship_sentence": "AdaLoRA\u2019s emphasis on spectral importance motivates PiSSA\u2019s choice to update principal components; PiSSA goes further by initializing A and B with W\u2019s top singular vectors/values and freezing the residual."
+    },
+    {
+      "title": "DoRA: Weight-Decomposed Low-Rank Adaptation",
+      "authors": "Liu et al.",
+      "year": 2024,
+      "role": "Reparameterizes pretrained weights into interpretable components to improve PEFT effectiveness",
+      "relationship_sentence": "PiSSA similarly rethinks what to modify in a frozen model by decomposing W into principal and residual parts, but specifically targets the principal singular subspace for adaptation rather than decomposing into magnitude/direction."
+    },
+    {
+      "title": "Exploiting Linear Structure Within Convolutional Networks for Efficient Evaluation",
+      "authors": "Denton et al.",
+      "year": 2014,
+      "role": "Early use of SVD for neural network compression showing layers are approximately low-rank",
+      "relationship_sentence": "This work empirically established that neural weight matrices have dominant principal components; PiSSA leverages this by updating those components and freezing the low-energy residual during fine-tuning."
+    },
+    {
+      "title": "Spectral Normalization for Generative Adversarial Networks",
+      "authors": "Takeru Miyato et al.",
+      "year": 2018,
+      "role": "Introduced practical training techniques centered on controlling the top singular value/vectors of weight matrices",
+      "relationship_sentence": "By emphasizing the role and tractable computation of leading singular components, this work underpins PiSSA\u2019s focus on principal singular values/vectors as the most effective subspace to adapt."
+    },
+    {
+      "title": "The Approximation of One Matrix by Another of Lower Rank (Eckart\u2013Young\u2013Mirsky Theorem)",
+      "authors": "Carl Eckart and Gale Young",
+      "year": 1936,
+      "role": "Theoretical foundation for best low-rank approximation via top singular vectors/values",
+      "relationship_sentence": "PiSSA\u2019s decision to initialize adapters with W\u2019s principal singular vectors/values is directly justified by Eckart\u2013Young, ensuring the adapted subspace captures maximal energy of W."
+    }
+  ],
+  "synthesis_narrative": "PiSSA\u2019s core idea\u2014updating the principal singular components of pretrained weights while freezing the residual\u2014emerges at the intersection of LoRA-style PEFT and spectral views of neural weights. LoRA established the practical recipe for low-rank adapters with frozen base weights but relies on random/zero initialization, often causing slow convergence. AdaLoRA sharpened the insight that not all directions are equal, using spectral cues to allocate rank capacity adaptively; PiSSA operationalizes this by directly selecting the principal singular subspace of W as the adaptation target. DoRA further encouraged reparameterizing what we tune in a frozen model, demonstrating gains from modifying strategically chosen components rather than arbitrary deltas\u2014PiSSA echoes this by decomposing W into principal and residual parts and focusing updates where capacity matters most.\n\nEarlier SVD-based compression (Denton et al., 2014) provided strong empirical evidence that neural layers are approximately low-rank and dominated by a few principal components, suggesting that these directions are particularly impactful. Spectral Normalization (Miyato et al., 2018) showed the feasibility and utility of explicitly working with leading singular values/vectors during training, reinforcing that spectral control can yield stable, effective optimization dynamics. The Eckart\u2013Young\u2013Mirsky theorem provides the formal backbone: the top singular vectors/values capture the best low-rank approximation of W, making them a principled choice for initializing the adaptation subspace. Together, these works motivate PiSSA\u2019s SVD-initialized adapters and frozen residual, explaining its faster convergence and stronger performance compared to conventional LoRA while preserving PEFT efficiency.",
+  "analysis_timestamp": "2026-01-06T23:33:36.280242"
+}

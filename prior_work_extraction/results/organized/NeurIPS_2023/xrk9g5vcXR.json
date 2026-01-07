@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "GPTQ: Accurate Post-Training Quantization for Generative Pretrained Transformers",
+      "authors": "Michele Frantar; Saleh Ashkboos; Dan Alistarh",
+      "year": 2022,
+      "role": "Second-order quadratic proxy for post-training LLM quantization",
+      "relationship_sentence": "QuIP\u2019s adaptive rounding minimizes a quadratic (Hessian/Fisher) proxy much like GPTQ; QuIP formalizes guarantees for this proxy and shows its theory also covers GPTQ-style methods."
+    },
+    {
+      "title": "Up or Down? Adaptive Rounding for Post-Training Quantization",
+      "authors": "Markus Nagel; Mart van Baalen; Tijmen Blankevoort; Max Welling",
+      "year": 2020,
+      "role": "Adaptive rounding via optimization",
+      "relationship_sentence": "QuIP\u2019s Step (1) is an adaptive rounding procedure; AdaRound introduced optimizing rounding decisions rather than naive nearest rounding, a core idea QuIP refines using a quadratic proxy tailored to LLMs."
+    },
+    {
+      "title": "HAWQ: Hessian Aware Quantization of Neural Networks with Mixed-Precision",
+      "authors": "Zhen Dong; Zhewei Yao; Amir Gholami; Michael W. Mahoney; Kurt Keutzer",
+      "year": 2019,
+      "role": "Hessian-aware sensitivity modeling for quantization",
+      "relationship_sentence": "QuIP leverages the insight that Hessian curvature identifies sensitive directions for accurate rounding; this principle was established in HAWQ and underpins QuIP\u2019s quadratic objective."
+    },
+    {
+      "title": "Iterative Quantization: A Procrustean Approach to Learning Binary Codes",
+      "authors": "Yunchao Gong; Svetlana Lazebnik",
+      "year": 2011,
+      "role": "Orthogonal rotation to reduce binarization/quantization error",
+      "relationship_sentence": "QuIP\u2019s incoherence processing uses orthogonal transforms so important directions are misaligned with coordinate axes, echoing ITQ\u2019s use of rotations to lower quantization error when mapping to few bits."
+    },
+    {
+      "title": "Optimized Product Quantization",
+      "authors": "Tiezheng Ge; Kaiming He; Qifa Ke; Jian Sun",
+      "year": 2013,
+      "role": "Learned rotation to make quantization error isotropic",
+      "relationship_sentence": "OPQ showed that inserting an orthogonal rotation before quantization reduces distortion by spreading energy across coordinates; QuIP adopts the same principle via random orthogonal matrices to enforce incoherence with guarantees."
+    },
+    {
+      "title": "Fastfood: Approximating Kernel Expansions in Loglinear Time",
+      "authors": "Quoc V. Le; Tam\u00e1s Sarl\u00f3s; Alexander J. Smola",
+      "year": 2013,
+      "role": "Efficient randomized orthogonal transforms (Hadamard-based)",
+      "relationship_sentence": "QuIP\u2019s efficient pre/post-processing relies on fast structured random orthogonal multiplications (e.g., Hadamard with random signs), a technique popularized by Fastfood to make such transforms practical at LLM scale."
+    },
+    {
+      "title": "Optimal Brain Surgeon and general network pruning",
+      "authors": "Bahram Hassibi; David G. Stork",
+      "year": 1993,
+      "role": "Second-order (Hessian) sensitivity and quadratic approximations",
+      "relationship_sentence": "QuIP\u2019s theoretical framing of rounding error via a quadratic form in the Hessian traces back to OBS, which established second-order analyses for weight perturbations that later methods (GPTQ/HAWQ) adapted to quantization."
+    }
+  ],
+  "synthesis_narrative": "QuIP fuses and extends two major lines of work: second-order, optimization-based post-training quantization and rotation-based preconditioning to make quantization easier. On the quantization objective side, Optimal Brain Surgeon introduced modeling weight perturbations with a quadratic form in the Hessian, a foundation later adapted to quantization in HAWQ for sensitivity-aware bit allocation and in GPTQ for LLM-scale, blockwise quadratic proxy minimization. AdaRound added the key practical insight that rounding itself should be optimized rather than fixed, catalyzing methods that explicitly solve for discrete rounding decisions. QuIP\u2019s Step (1) is a targeted synthesis of these ideas: it performs adaptive rounding that minimizes a Hessian-based quadratic proxy, and provides the first guarantees at LLM scale, showing the theory also applies to GPTQ-style methods.\nComplementing this, QuIP tackles a structural impediment to ultra-low-bit quantization: coherence between important curvature directions and coordinate axes. Prior work in hashing and vector quantization (ITQ and OPQ) demonstrated that inserting an orthogonal rotation before quantization can distribute information more evenly, reducing distortion. QuIP operationalizes this principle for neural weights and curvature by multiplying with random orthogonal matrices, creating weight/Hessian incoherence so that crucial directions are misaligned with quantization axes. To make this scalable, QuIP leverages fast structured random transforms akin to Fastfood\u2019s Hadamard-based constructions. Together, these ingredients enable robust 2-bit LLM quantization with both empirical performance and theoretical guarantees.",
+  "analysis_timestamp": "2026-01-06T23:42:49.116737"
+}

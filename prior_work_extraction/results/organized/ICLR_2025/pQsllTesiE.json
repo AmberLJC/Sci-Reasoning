@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Between MDPs and Semi-MDPs: A Framework for Temporal Abstraction in Reinforcement Learning",
+      "authors": "Richard S. Sutton et al.",
+      "year": 1999,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "This work formalized temporally extended actions (\u201coptions\u201d), providing the core abstraction that L-MAP instantiates by learning and planning over discrete macro-actions rather than primitive controls."
+    },
+    {
+      "title": "Neural Discrete Representation Learning",
+      "authors": "Aaron van den Oord et al.",
+      "year": 2017,
+      "arxiv_id": "1711.00937",
+      "role": "Extension",
+      "relationship_sentence": "L-MAP directly builds on VQ-VAE\u2019s vector-quantized codebook to discretize multi-step action chunks into latent codes, adapting the framework with state conditioning to make macro-actions context-dependent."
+    },
+    {
+      "title": "Learning Latent Plans from Play",
+      "authors": "Corey Lynch et al.",
+      "year": 2019,
+      "arxiv_id": "1903.01973",
+      "role": "Inspiration",
+      "relationship_sentence": "This paper introduced conditioning a VQ-VAE on state context with a learned prior over discrete plan codes to generate coherent multi-step behaviors, which L-MAP repurposes to sample plausible latent macro-actions for planning."
+    },
+    {
+      "title": "Batch-Constrained deep Q-learning",
+      "authors": "Scott Fujimoto et al.",
+      "year": 2019,
+      "arxiv_id": "1812.02900",
+      "role": "Gap Identification",
+      "relationship_sentence": "BCQ showed that constraining offline decisions to the support of a learned behavior model mitigates OOD actions, motivating L-MAP\u2019s learned prior that restricts planning to plausible macro-actions under a stochastic behavior policy."
+    },
+    {
+      "title": "Mastering Atari, Go, Chess and Shogi by Planning with a Learned Model (MuZero)",
+      "authors": "Julian Schrittwieser et al.",
+      "year": 2019,
+      "arxiv_id": "1911.08265",
+      "role": "Inspiration",
+      "relationship_sentence": "MuZero demonstrated effective MCTS over a learned latent dynamics model, directly inspiring L-MAP\u2019s use of MCTS on a learned latent transition model to plan over discrete macro-action latents."
+    },
+    {
+      "title": "MOPO: Model-Based Offline Policy Optimization",
+      "authors": "Tianhe Yu et al.",
+      "year": 2020,
+      "arxiv_id": "2005.13239",
+      "role": "Baseline",
+      "relationship_sentence": "As a primary model-based offline RL baseline, MOPO highlights compounding-model-error and OOD-action issues that L-MAP addresses by searching in a discretized macro-action space guided by a behavior-consistent prior."
+    }
+  ],
+  "synthesis_narrative": "Temporal abstraction via the options framework established that multi-step behaviors can be treated as decision-making primitives, offering a route to reduce planning depth and complexity. Neural discrete representation learning with VQ-VAE introduced vector quantization and codebooks that convert continuous objects into discrete latent tokens with efficient sampling, a mechanism later adapted to sequence generation. Building on this, Learning Latent Plans from Play showed that a state- (e.g., start/goal-) conditioned VQ-VAE with a learned prior over discrete codes can produce coherent multi-step action sequences, indicating that discrete latent plans can be sampled plausibly from offline data. In offline RL, Batch-Constrained deep Q-learning demonstrated that a generative behavior model is crucial to keep action choices within the dataset\u2019s support, directly motivating behavior-aware priors. Meanwhile, MuZero established that MCTS over a learned latent transition model enables effective planning without explicit environment models. Finally, MOPO revealed the pitfalls of model-based offline RL\u2014namely compounding model error and out-of-distribution actions\u2014when planning in continuous spaces.\nCombining these insights, the next step was to discretize continuous control into state-conditioned macro-action tokens learned from offline trajectories, use a learned prior to sample behavior-supported latents, and plan with MCTS over a latent transition model. This synthesis reduces branching and action dimensionality, preserves plausibility under a stochastic behavior policy, and leverages tree search to handle environmental stochasticity\u2014yielding scalable offline planning in high-dimensional stochastic domains.",
+  "target_paper": {
+    "title": "Scalable Decision-Making in Stochastic Environments through Learned Temporal Abstraction",
+    "authors": "Baiting Luo, Ava Pettet, Aron Laszka, Abhishek Dubey, Ayan Mukhopadhyay",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "Sequential Decision-Making, Monte Carlo Tree Search, Temporal Abstraction, Planning, Model-based Reinforcement Learning, Offline Reinforcement Learning",
+    "abstract": "Sequential decision-making in high-dimensional continuous action spaces, particularly in stochastic environments, faces significant computational challenges. We explore this challenge in the traditional offline RL setting, where an agent must learn how to make decisions based on data collected through a stochastic behavior policy. We present \\textit{Latent Macro Action Planner} (L-MAP), which addresses this challenge by learning a set of temporally extended macro-actions through a state-conditional Vector Quantized Variational Autoencoder (VQ-VAE), effectively reducing action dimensionality. L-MAP employs a (separate) learned prior model that acts as a latent transition model and allows efficient sampling of plausible actions. During planning, our approach accounts for stochasticity in both the environment and the behavior policy by using Monte Carlo tree search (MCTS). In offline RL settings, including stochastic continuous control tasks, L-MAP efficiently searches over discrete laten",
+    "openreview_id": "pQsllTesiE",
+    "forum_id": "pQsllTesiE"
+  },
+  "analysis_timestamp": "2026-01-06T06:36:42.670439"
+}

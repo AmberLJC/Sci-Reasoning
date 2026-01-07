@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Deep Reinforcement Learning from Human Preferences",
+      "authors": "Paul F. Christiano, Jan Leike, Tom B. Brown, Miljan Martic, Shane Legg, Dario Amodei",
+      "year": 2017,
+      "role": "Foundational RLHF and pairwise preference-based reward modeling",
+      "relationship_sentence": "Provides the core Bradley\u2013Terry style pairwise preference likelihood and reward-model/PPO pipeline that this paper augments by conditioning the reward and policy on a learned user-specific latent to handle heterogeneous preferences."
+    },
+    {
+      "title": "Learning to Summarize with Human Feedback",
+      "authors": "Nisan Stiennon, Long Ouyang, Jeffrey Wu, Daniel M. Ziegler, et al.",
+      "year": 2020,
+      "role": "Large-scale RLHF recipe and practical reward modeling for LMs",
+      "relationship_sentence": "Establishes the modern LM RLHF workflow (preference data, reward model, PPO tuning) and highlights sensitivities like reward scaling and architecture that the present work revisits while inserting a user-latent into the reward model."
+    },
+    {
+      "title": "Training Language Models to Follow Instructions with Human Feedback (InstructGPT)",
+      "authors": "Long Ouyang, Jeff Wu, Xu Jiang, Diogo Almeida, et al.",
+      "year": 2022,
+      "role": "Canonical instruction-following RLHF framework for foundation models",
+      "relationship_sentence": "Serves as the standard RLHF pipeline into which the paper\u2019s variational, user-conditioned reward/policy can be dropped to achieve pluralistic alignment rather than averaging across rater preferences."
+    },
+    {
+      "title": "Crowd-BT: Crowdsourcing with Pairwise Comparisons and a Crowd-Variability Model",
+      "authors": "Xi Chen, Paul N. Bennett, Kevyn Collins-Thompson, Eric Horvitz",
+      "year": 2013,
+      "role": "Annotator-heterogeneity in Bradley\u2013Terry preference models",
+      "relationship_sentence": "Directly motivates modeling rater-specific variability with latent parameters; the new method extends this idea to RLHF by inferring user-specific latents via variational inference and conditioning reward/policy on them."
+    },
+    {
+      "title": "BPR: Bayesian Personalized Ranking from Implicit Feedback",
+      "authors": "Steffen Rendle, Christoph Freudenthaler, Zeno Gantner, Lars Schmidt-Thieme",
+      "year": 2009,
+      "role": "User-conditioned pairwise ranking with latent factors",
+      "relationship_sentence": "Inspires the paper\u2019s core insight that pairwise preference learning benefits from per-user latent embeddings; the authors adapt this personalized ranking principle to learn user-conditioned reward models for RLHF."
+    },
+    {
+      "title": "InfoGAIL: Interpretable Imitation Learning from Visual Demonstrations",
+      "authors": "Yunzhu Li, Jiaming Song, Stefano Ermon",
+      "year": 2017,
+      "role": "Latent-variable imitation learning for multimodal behaviors",
+      "relationship_sentence": "Conceptually supports learning a latent that captures unobserved modes (styles/preferences) and conditioning policies on it using variational techniques, paralleling the paper\u2019s user-latent for multimodal RLHF."
+    },
+    {
+      "title": "Direct Preference Optimization: Your Language Model is Secretly a Reward Model",
+      "authors": "Jonathan Ho, Stephen Tu, Xuechen Li, Tianjun Zhang, et al. (often attributed to Ilya Kostrikov, Alexander M. Rush, et al.; Rafailov et al.)",
+      "year": 2023,
+      "role": "Preference-based policy optimization without explicit reward",
+      "relationship_sentence": "Highlights alternatives to PPO and emphasizes pairwise preference learning objectives; the proposed user-conditioned preference modeling can be plugged into DPO-style training, and the paper\u2019s discussion of reward scaling relates to such preference-only objectives."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s key contribution\u2014pluralistic RLHF via a user-specific latent inferred with variational preference learning\u2014builds by merging the standard RLHF pipeline with personalized, annotator-aware preference modeling. Christiano et al. (2017) and subsequent large-scale implementations in Stiennon et al. (2020) and Ouyang et al. (2022) provide the backbone: learn a reward model from pairwise preferences and use it to optimize a policy (typically via PPO). These works also surfaced practical sensitivities in reward modeling and scaling that the present paper revisits when inserting a user-conditional component.\nA central departure from prior RLHF is to avoid averaging over heterogeneous raters. Crowd-BT (Chen et al., 2013) directly motivates this by modeling annotator-specific variability within Bradley\u2013Terry, showing that preference data contain systematic, user-level structure. From recommender systems, BPR (Rendle et al., 2009) demonstrates that pairwise ranking benefits from user latent embeddings, offering a clear blueprint for conditioning preference likelihoods on user factors. The paper adapts this insight to reward modeling, learning a user latent without extra per-user supervision.\nFinally, the latent-variable perspective of InfoGAIL (Li et al., 2017) supports capturing multi-modality through unsupervised latent inference and conditioning policies on the latent. And DPO (2023) emphasizes direct preference optimization as an alternative to RL, indicating compatibility of user-conditioned preference models with modern preference objectives and motivating the paper\u2019s attention to reward/objective scaling. Together, these works converge on the authors\u2019 contribution: a variationally inferred user latent that conditions both reward and policy, enabling pluralistic alignment in RLHF.",
+  "analysis_timestamp": "2026-01-07T00:02:04.744804"
+}

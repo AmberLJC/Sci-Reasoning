@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift",
+      "authors": "Sergey Ioffe et al.",
+      "year": 2015,
+      "arxiv_id": "1502.03167",
+      "role": "Foundation",
+      "relationship_sentence": "This work defines the Conv+BN block and its train/eval behavior (including folding BN into Conv for inference), which the paper formalizes as Train/Eval/Deploy modes and analytically builds upon to derive the new Tune mode."
+    },
+    {
+      "title": "Batch Renormalization: Towards Reducing Minibatch Dependence in Batch-Normalized Models",
+      "authors": "Sergey Ioffe",
+      "year": 2017,
+      "arxiv_id": "1702.03275",
+      "role": "Related Problem",
+      "relationship_sentence": "Batch Renorm explicitly bridges BN\u2019s train/eval statistics to stabilize training when batch statistics are unreliable, directly motivating this paper\u2019s goal of retaining Eval-mode stability while avoiding the extra BN computation cost via a more efficient ConvBN mode."
+    },
+    {
+      "title": "How Does Batch Normalization Help Optimization?",
+      "authors": "Shibani Santurkar et al.",
+      "year": 2018,
+      "arxiv_id": "1805.11604",
+      "role": "Inspiration",
+      "relationship_sentence": "Its finding that normalization smooths the loss landscape underpins this paper\u2019s theoretical explanation for why Deploy (BN-fused) training becomes unstable and guides the design of a Tune mode that reinstates BN-like stability without BN\u2019s full overhead."
+    },
+    {
+      "title": "Rethinking ImageNet Pre-Training",
+      "authors": "Kaiming He et al.",
+      "year": 2019,
+      "arxiv_id": "1811.08883",
+      "role": "Baseline",
+      "relationship_sentence": "This work popularized freezing BN (Eval mode) for transfer learning with small batches, providing the main practical baseline whose stability the paper preserves while substantially improving computational efficiency."
+    },
+    {
+      "title": "RepVGG: Making VGG-style ConvNets Great Again",
+      "authors": "Xiaohan Ding et al.",
+      "year": 2021,
+      "arxiv_id": "2101.03697",
+      "role": "Foundation",
+      "relationship_sentence": "RepVGG formalizes the Deploy mode by structurally re-parameterizing and fusing BN into Conv for efficient inference, which this paper scrutinizes for fine-tuning instability and then bridges to Eval stability via the proposed Tune mode."
+    },
+    {
+      "title": "Tent: Fully Test-Time Adaptation by Entropy Minimization",
+      "authors": "Dequan Wang et al.",
+      "year": 2021,
+      "arxiv_id": "2006.10726",
+      "role": "Inspiration",
+      "relationship_sentence": "By updating only BN affine parameters while keeping Eval-mode statistics, TENT demonstrates a stable, efficient adaptation mechanism that inspires this paper\u2019s idea of maintaining Eval-style normalization during tuning while achieving Deploy-like compute."
+    }
+  ],
+  "synthesis_narrative": "Batch Normalization introduced the Conv+BN block and delineated distinct training and inference behaviors, with BN parameters and running statistics enabling normalization during training and foldable affine transforms at inference. Batch Renormalization showed that explicitly tying training-time normalization to evaluation statistics can stabilize optimization when batch statistics are unreliable, foreshadowing a bridge between train and eval behaviors. Santurkar et al. explained BN\u2019s stabilizing effect through loss landscape smoothing and controlled gradient scales, identifying exactly what is lost when normalization is removed or altered. In practical transfer learning, He et al. established the effectiveness of freezing BN (Eval mode) under small target batches, cementing Eval as the standard stable setting for fine-tuning. RepVGG popularized a Deploy mode by fusing BN into convolution for highly efficient inference via structural re-parameterization, but such BN-free computation during training risks losing BN\u2019s stabilizing effects. TENT further evidenced that retaining Eval-style statistics while only tuning lightweight BN affine parameters can deliver stable, efficient adaptation without batch-statistics updates. Together these works expose a gap: Deploy-mode compute is attractive for speed, but removing normalization destabilizes tuning, while Eval-mode stability incurs BN overhead. The paper synthesizes BN\u2019s smoothing insights with renormalization-style bridging and Deploy-style fusion to create a Tune mode that computes almost like Deploy yet preserves Eval stability by retaining the right normalization behavior during backpropagation, yielding efficient, stable transfer learning.",
+  "target_paper": {
+    "title": "Efficient ConvBN Blocks for Transfer Learning and Beyond",
+    "authors": "Kaichao You, Guo Qin, Anchang Bao, Meng Cao, Ping Huang, Jiulong Shan, Mingsheng Long",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "transfer learning, batch normalization, efficient training",
+    "abstract": "Convolution-BatchNorm (ConvBN) blocks are integral components in various computer vision tasks and other domains. A ConvBN block can operate in three modes: Train, Eval, and Deploy. While the Train mode is indispensable for training models from scratch, the Eval mode is suitable for transfer learning and beyond, and the Deploy mode is designed for the deployment of models. This paper focuses on the trade-off between stability and efficiency in ConvBN blocks: Deploy mode is efficient but suffers from training instability; Eval mode is widely used in transfer learning but lacks efficiency. To solve the dilemma, we theoretically reveal the reason behind the diminished training stability observed in the Deploy mode. Subsequently, we propose a novel Tune mode to bridge the gap between Eval mode and Deploy mode. The proposed Tune mode is as stable as Eval mode for transfer learning, and its computational efficiency closely matches that of the Deploy mode. Through extensive experiments in obj",
+    "openreview_id": "lHZm9vNm5H",
+    "forum_id": "lHZm9vNm5H"
+  },
+  "analysis_timestamp": "2026-01-06T16:20:43.306416"
+}

@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Equality of Opportunity in Supervised Learning",
+      "authors": "Moritz Hardt et al.",
+      "year": 2016,
+      "arxiv_id": "1610.02413",
+      "role": "Foundation",
+      "relationship_sentence": "This work formalized group fairness notions (demographic parity and equality of opportunity/odds) that are the target constraints Aranyani operationalizes via online-computable surrogates."
+    },
+    {
+      "title": "Fairness Constraints: Mechanisms for Fair Classification",
+      "authors": "Muhammad Bilal Zafar et al.",
+      "year": 2017,
+      "arxiv_id": "1507.05259",
+      "role": "Extension",
+      "relationship_sentence": "Aranyani extends Zafar et al.\u2019s covariance-based surrogate (linking the sensitive attribute to the signed distance to a linear decision boundary) by embedding it at oblique splits and updating it online with streaming moment estimates."
+    },
+    {
+      "title": "Learning Fair Classifiers: A Regularization Approach",
+      "authors": "Yossi Bechavod et al.",
+      "year": 2017,
+      "arxiv_id": "1707.00044",
+      "role": "Inspiration",
+      "relationship_sentence": "The idea of training with a joint objective that mixes task loss with a fairness regularizer directly motivates Aranyani\u2019s in-processing objective at each node and across the forest."
+    },
+    {
+      "title": "A Reductions Approach to Fair Classification",
+      "authors": "Alekh Agarwal et al.",
+      "year": 2018,
+      "arxiv_id": "1803.02453",
+      "role": "Gap Identification",
+      "relationship_sentence": "This constrained-reduction framework requires repeated access to global group statistics and costly inner-loop optimization, highlighting the computational bottleneck that Aranyani resolves with a single-pass, per-instance fairness update."
+    },
+    {
+      "title": "Online Convex Optimization with Long Term Constraints",
+      "authors": "M. Mahdavi et al.",
+      "year": 2012,
+      "arxiv_id": "1206.4600",
+      "role": "Foundation",
+      "relationship_sentence": "Aranyani adopts the primal\u2013dual, long-term constraints perspective to update fairness Lagrange multipliers online while optimizing accuracy in the stream."
+    },
+    {
+      "title": "Mondrian Forests: Efficient Online Random Forests",
+      "authors": "Balaji Lakshminarayanan et al.",
+      "year": 2014,
+      "arxiv_id": "1406.2673",
+      "role": "Related Problem",
+      "relationship_sentence": "The online forest paradigm for incremental tree growth and ensemble updates informs Aranyani\u2019s streaming architecture, which replaces axis-aligned splits with learnable oblique, fairness-regularized splits."
+    }
+  ],
+  "synthesis_narrative": "Group fairness criteria such as demographic parity and equality of opportunity were precisely formulated by Hardt et al., establishing the population-level rates that fairness-aware learners seek to control. Bechavod and Ligett showed how to incorporate fairness into learning by adding a regularization term to the task loss, introducing differentiable proxies that enable in-processing optimization. Zafar et al. proposed covariance-based surrogates that connect sensitive attributes to linear decision boundaries, yielding tractable constraints and penalties for demographic parity and error-rate disparities in linear models. Agarwal et al. reframed fair classification as a constrained reduction to cost-sensitive classification, but their method relies on repeated estimation of group-wide statistics and solver calls, making it ill-suited to per-instance online learning. From the optimization side, Mahdavi et al. developed online convex optimization with long-term constraints via primal\u2013dual updates, enabling constraint satisfaction over time rather than per-step. In online modeling, Lakshminarayanan et al. introduced Mondrian forests, demonstrating how to incrementally grow and update tree ensembles on streams.\nCollectively, these works revealed a gap: fairness objectives are defined over expectations and are computationally heavy in streaming settings, while online forests lack mechanisms to control group rates. The natural next step was to marry linear fairness surrogates with online tree architectures: use oblique (linear) splits so covariance-based fairness penalties apply locally, maintain streaming moment estimates to avoid global passes, and regulate fairness via lightweight dual updates across an online forest\u2014precisely the synthesis operationalized by Aranyani.",
+  "target_paper": {
+    "title": "Enhancing Group Fairness in Online Settings Using Oblique Decision Forests",
+    "authors": "Somnath Basu Roy Chowdhury, Nicholas Monath, Ahmad Beirami, Rahul Kidambi, Kumar Avinava Dubey, Amr Ahmed, Snigdha Chaturvedi",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Fairness, Online Learning, Oblique Decision Trees",
+    "abstract": "Fairness, especially group fairness, is an important consideration in the context of machine learning systems. The most commonly adopted group fairness-enhancing techniques are in-processing methods that rely on a mixture of a fairness objective (e.g., demographic parity) and a task-specific objective (e.g., cross-entropy) during the training process. However, when data arrives in an online fashion \u2013 one instance at a time \u2013 optimizing such fairness objectives poses several challenges. In particular, group fairness objectives are defined using expectations of predictions across different demographic groups. In the online setting, where the algorithm has access to a single instance at a time, estimating the group fairness objective requires additional storage and significantly more computation (e.g., forward/backward passes) than the task-specific objective at every time step. In this paper, we propose Aranyani, an ensemble of oblique decision trees, to make fair decisions in online set",
+    "openreview_id": "E1NxN5QMOE",
+    "forum_id": "E1NxN5QMOE"
+  },
+  "analysis_timestamp": "2026-01-06T13:12:27.365464"
+}

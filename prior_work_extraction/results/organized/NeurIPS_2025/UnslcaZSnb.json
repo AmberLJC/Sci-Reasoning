@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Scalable Diffusion Models with Transformers (DiT)",
+      "authors": "William Peebles, Saining Xie",
+      "year": 2023,
+      "role": "Transformer-based diffusion backbone and scaling reference",
+      "relationship_sentence": "DiCo directly critiques DiT\u2019s global self-attention as computationally heavy and often locally-focused, using DiT as the primary baseline and motivating a convolutional alternative with comparable expressivity but lower cost."
+    },
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Jonathan Ho, Ajay Jain, Pieter Abbeel",
+      "year": 2020,
+      "role": "Foundational diffusion objective and ConvNet U-Net denoiser",
+      "relationship_sentence": "DiCo returns to the conv-based denoiser roots introduced by DDPM, but augments them with channel-diversity mechanisms to close the performance gap to Transformer denoisers."
+    },
+    {
+      "title": "Diffusion Models Beat GANs on Image Synthesis",
+      "authors": "Prafulla Dhariwal, Alex Nichol",
+      "year": 2021,
+      "role": "Strong conv U-Net diffusion baseline and scaling practices",
+      "relationship_sentence": "ADM established high-performing conv U-Nets and practical design choices; DiCo builds on these lessons while eliminating attention and improving channel utilization for efficiency."
+    },
+    {
+      "title": "ConvNeXt: A ConvNet for the 2020s",
+      "authors": "Zhuang Liu, Hanzi Mao, Chao-Yuan Wu, Christoph Feichtenhofer, Trevor Darrell, Saining Xie",
+      "year": 2022,
+      "role": "Modern ConvNet design principles rivaling ViTs",
+      "relationship_sentence": "DiCo leverages modern ConvNet primitives (e.g., depthwise convs, large kernels, inverted bottlenecks) popularized by ConvNeXt to create a scalable, Transformer-competitive diffusion backbone."
+    },
+    {
+      "title": "Squeeze-and-Excitation Networks",
+      "authors": "Jie Hu, Li Shen, Gang Sun",
+      "year": 2018,
+      "role": "Channel attention to recalibrate feature responses",
+      "relationship_sentence": "DiCo\u2019s compact channel attention is conceptually rooted in SE\u2019s idea of channel-wise recalibration to mitigate channel redundancy and improve representational diversity."
+    },
+    {
+      "title": "ECA-Net: Efficient Channel Attention for Deep Convolutional Neural Networks",
+      "authors": "Qilong Wang, Banggu Wu, Pengfei Zhu, Peihua Li, Wanggang Luo, Qinghua Hu",
+      "year": 2020,
+      "role": "Lightweight, locality-aware channel attention mechanism",
+      "relationship_sentence": "DiCo\u2019s emphasis on compact channel attention with minimal overhead echoes ECA-Net\u2019s efficient design, guiding how to boost channel diversity without inflating compute."
+    },
+    {
+      "title": "On the Relationship Between Self-Attention and Convolution",
+      "authors": "Valentin Cordonnier, Andreas Loukas, Martin Jaggi",
+      "year": 2020,
+      "role": "Theoretical link between attention and (dynamic) convolution",
+      "relationship_sentence": "This work supports DiCo\u2019s premise that attention often behaves like local convolution, reinforcing the claim that global self-attention is frequently redundant for vision denoising."
+    }
+  ],
+  "synthesis_narrative": "DiCo\u2019s key innovation\u2014replacing global self-attention with a fully convolutional diffusion backbone while preserving expressivity and scaling\u2014stands on two converging lines of prior work. On the diffusion side, DDPM introduced the denoising objective with U-Net ConvNets, and ADM showed that carefully engineered conv U-Nets could scale to state of the art. DiT then reframed the denoiser as a Transformer, revealing strong scaling but incurring high compute; DiCo takes DiT as both target and diagnostic, arguing that DiT\u2019s attention predominantly captures local structure and is thus over-provisioned. This contention is grounded theoretically by work showing self-attention can reduce to (dynamic) convolution, and empirically by the success of local/windowed vision Transformers.\nOn the architecture side, ConvNeXt demonstrated that modernized ConvNets\u2014with depthwise separable convolutions, larger kernels, and simplified designs\u2014can rival ViTs, providing a template for scalable conv-based denoisers. Yet ConvNets historically suffer higher channel redundancy than Transformers. Here, channel attention mechanisms are pivotal: SE-Nets established channel-wise recalibration to enhance informative channels, while ECA-Net showed how to realize this efficiently without heavy MLPs. DiCo integrates these insights into a compact channel attention module that activates more diverse channels, mitigating redundancy and restoring performance lost when naively replacing attention with convolution\u2014yielding a scalable, efficient, all-conv diffusion model.",
+  "analysis_timestamp": "2026-01-07T00:05:12.557358"
+}

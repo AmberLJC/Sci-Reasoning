@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Trellis-Coded Quantization of Memoryless Sources",
+      "authors": "Michael W. Marcellin, Thomas R. Fischer",
+      "year": 1990,
+      "role": "Foundational TCQ method",
+      "relationship_sentence": "Introduces TCQ with Viterbi decoding and set-partitioned labeling, the core idea QTIP adapts to enable ultra\u2013high-dimensional quantization with a stateful decoder that decouples effective dimension from codebook size."
+    },
+    {
+      "title": "Vector Quantization and Signal Compression",
+      "authors": "Allen Gersho, Robert M. Gray",
+      "year": 1992,
+      "role": "Theory of VQ/TCQ and shaping",
+      "relationship_sentence": "Provides the theoretical underpinnings for high-dimensional quantization and shaping gains, and formalizes the exponential codebook-scaling barrier in VQ that QTIP overcomes via TCQ."
+    },
+    {
+      "title": "Channel Coding with Multilevel/Phase Signals (Trellis-Coded Modulation)",
+      "authors": "Gottfried Ungerboeck",
+      "year": 1982,
+      "role": "Trellis/set-partitioning design",
+      "relationship_sentence": "Ungerboeck\u2019s set-partitioning and trellis construction principles directly inform the code design and labeling strategies QTIP uses to build hardware-efficient \u2018bitshift\u2019 trellises."
+    },
+    {
+      "title": "Error Bounds for Convolutional Codes and an Asymptotically Optimum Decoding Algorithm",
+      "authors": "Andrew J. Viterbi",
+      "year": 1967,
+      "role": "Decoding algorithm for trellises",
+      "relationship_sentence": "The Viterbi algorithm is the dynamic-programming backbone for TCQ; QTIP relies on this stateful decoding to quantize sequences of weights efficiently across very high effective dimensions."
+    },
+    {
+      "title": "Product Quantization for Nearest Neighbor Search",
+      "authors": "Herv\u00e9 J\u00e9gou, Matthijs Douze, Cordelia Schmid",
+      "year": 2011,
+      "role": "Scalable VQ via low-dimensional subspaces",
+      "relationship_sentence": "Demonstrates how practical VQ resorts to low-dimensional subspaces to avoid exponential codebooks\u2014exactly the limitation QTIP removes by using TCQ to achieve high-dimensional shaping without massive codebooks."
+    },
+    {
+      "title": "Additive Quantization for Extreme Vector Compression",
+      "authors": "Artem Babenko, Victor Lempitsky",
+      "year": 2014,
+      "role": "Compositional codebook design",
+      "relationship_sentence": "Shows that combining simple codebooks can approximate rich, high-dimensional structure; QTIP\u2019s spectrum from lookup-only to computed lookup-free trellis codes echoes this compositional efficiency in a trellis framework."
+    },
+    {
+      "title": "Additive Power-of-Two Quantization: An Efficient Non-uniform Quantization for Deep Neural Networks",
+      "authors": "Yanyu Li et al.",
+      "year": 2020,
+      "role": "Hardware-friendly shift-based quantization",
+      "relationship_sentence": "Introduces shift/add-friendly quantization levels; QTIP\u2019s \u2018bitshift\u2019 trellis codes are directly aligned with this idea, enabling computed, lookup-free codewords optimized for hardware efficiency."
+    }
+  ],
+  "synthesis_narrative": "QTIP\u2019s central advance is to replace conventional vector quantization in post-training quantization with trellis-coded quantization (TCQ), achieving high-dimensional shaping without the exponential codebook growth that constrains prior VQ-based PTQ. This builds squarely on the TCQ lineage: Marcellin and Fischer established TCQ\u2019s stateful quantizer using Viterbi decoding and set-partitioned labeling, while Gersho and Gray\u2019s classic text formalized both the shaping benefits of high-dimensional quantization and the codebook-scaling barrier in VQ that TCQ circumvents. The trellis and labeling principles trace to Ungerboeck\u2019s trellis-coded modulation, whose set-partitioning directly informs how QTIP designs practical, hardware-efficient trellises.\nCrucially, QTIP operationalizes TCQ in the LLM PTQ regime by leveraging the Viterbi algorithm as a lightweight dynamic program across weight sequences, turning the stateful decoder into a throughput benefit rather than a bottleneck. Against the prevailing VQ toolkit, product quantization exemplifies the need to limit subvector dimension to keep codebooks manageable; QTIP avoids this compromise by separating bitrate from effective dimensionality. Moreover, ideas from compositional coding (Additive Quantization) motivate QTIP\u2019s spectrum between lookup-based and computed codes, trading memory for arithmetic while retaining expressivity. Finally, hardware-aware quantization with power-of-two levels (APoT) directly inspires QTIP\u2019s computed, lookup-free \u201cbitshift\u201d trellis codes, aligning the TCQ design with efficient bitshift/add execution. Together, these works converge to enable QTIP\u2019s ultra\u2013high-dimensional, stateful, and hardware-friendly quantization for LLMs.",
+  "analysis_timestamp": "2026-01-06T23:42:49.039467"
+}

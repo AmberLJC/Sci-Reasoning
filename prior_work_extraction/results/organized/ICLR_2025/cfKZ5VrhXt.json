@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Direct Preference Optimization: Your Language Model is Secretly a Reward Model",
+      "authors": "Rafailov et al.",
+      "year": 2023,
+      "arxiv_id": "2305.18290",
+      "role": "Baseline",
+      "relationship_sentence": "The method reformulates preference alignment as a DPO loss, which this paper directly augments with an optimism-driven exploration bonus to create an online, exploration-aware DPO objective."
+    },
+    {
+      "title": "Deep Reinforcement Learning from Human Preferences",
+      "authors": "Christiano et al.",
+      "year": 2017,
+      "arxiv_id": "1706.03741",
+      "role": "Foundation",
+      "relationship_sentence": "This work established pairwise-preference feedback and reward-model-based alignment, providing the core preference-learning formulation that the online exploration analysis in this paper is built upon."
+    },
+    {
+      "title": "Training language models to follow instructions with human feedback",
+      "authors": "Ouyang et al.",
+      "year": 2022,
+      "arxiv_id": "2203.02155",
+      "role": "Gap Identification",
+      "relationship_sentence": "By relying largely on fixed preference datasets and reward models that can struggle out-of-distribution, this work highlights the data coverage and generalization gaps that the paper addresses via online exploration."
+    },
+    {
+      "title": "Improved Algorithms for Linear Stochastic Bandits",
+      "authors": "Abbasi-Yadkori et al.",
+      "year": 2011,
+      "arxiv_id": "1102.2670",
+      "role": "Inspiration",
+      "relationship_sentence": "Under a linear reward assumption, their UCB confidence sets yield an optimism term that this paper adapts to define an optimistic reward for provably efficient exploration in online RLHF."
+    },
+    {
+      "title": "Relative Upper Confidence Bound for the K-armed Dueling Bandit Problem",
+      "authors": "Zoghi et al.",
+      "year": 2014,
+      "arxiv_id": null,
+      "role": "Related Problem",
+      "relationship_sentence": "This work applies UCB-style optimism to pairwise preference (dueling) feedback, directly informing the paper\u2019s use of UCB for exploration with human comparisons in RLHF."
+    },
+    {
+      "title": "Unifying Count-Based Exploration and Intrinsic Motivation",
+      "authors": "Bellemare et al.",
+      "year": 2016,
+      "arxiv_id": "1606.01868",
+      "role": "Extension",
+      "relationship_sentence": "Their connection between uncertainty bonuses and (pseudo-)counts is leveraged to convert the paper\u2019s UCB term into a practical count-based exploration bonus over LLM responses."
+    },
+    {
+      "title": "Exploration by Count-Based Intrinsic Motivation Using Hashing",
+      "authors": "Tang et al.",
+      "year": 2017,
+      "arxiv_id": "1611.04717",
+      "role": "Inspiration",
+      "relationship_sentence": "By demonstrating scalable approximate counting in high-dimensional spaces, this work motivates the paper\u2019s simple, scalable count mechanism for encouraging novel LLM responses during online alignment."
+    }
+  ],
+  "synthesis_narrative": "Preference-based alignment was framed by work showing that human comparisons can train reward models to steer policies, grounding the learning signal in pairwise feedback rather than hand-crafted rewards (Christiano et al., 2017). In large language models, instruction-following RLHF operationalized this pipeline at scale, but largely on fixed preference datasets and reward models, exposing limited coverage and brittle out-of-distribution generalization (Ouyang et al., 2022). Direct Preference Optimization then reparameterized preference alignment as a supervised logistic objective on comparisons, avoiding explicit reward modeling and enabling stable, efficient training (Rafailov et al., 2023). Separately, optimism under uncertainty in linear bandits established that, with a linear reward assumption, upper confidence bounds yield provably efficient exploration via confidence-set bonuses (Abbasi-Yadkori et al., 2011), and UCB principles were extended to pairwise preference feedback through dueling bandits (Zoghi et al., 2014). In reinforcement learning, exploration bonuses were tied to (pseudo-)counts, providing a practical bridge from uncertainty quantification to scalable exploration signals (Bellemare et al., 2016), with hashing-based approximate counts enabling application in high-dimensional spaces (Tang et al., 2017). Together, these strands reveal a gap: DPO-style preference alignment lacks a principled exploration mechanism for online data collection, while UCB theory and count-based bonuses offer exactly such a tool. The present work synthesizes these insights by deriving an optimistic reward via linear-UCB, mapping the confidence bonus into a count-based term, and embedding it directly into a DPO-style objective\u2014yielding a practical online RLHF algorithm that explores beyond fixed datasets while retaining preference-optimized stability.",
+  "target_paper": {
+    "title": "Online Preference Alignment for Language Models via Count-based Exploration",
+    "authors": "Chenjia Bai, Yang Zhang, Shuang Qiu, Qiaosheng Zhang, Kang Xu, Xuelong Li",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "Reinforcement Learning from Human Feedback, RLHF, Preference Alignment, Exploration, LLMs",
+    "abstract": "Reinforcement Learning from Human Feedback (RLHF) has shown great potential in fine-tuning Large Language Models (LLMs) to align with human preferences. Existing methods perform preference alignment from a fixed dataset, which can be limited in data coverage and the resulting reward model is hard to generalize in out-of-distribution responses. Thus, online RLHF is more desirable to empower the LLM to explore outside the support of the initial dataset by iteratively collecting the prompt-response pairs. In this paper, we study the fundamental problem in online RLHF, i.e., how to explore for LLM. We give a theoretical motivation in linear reward assumption to show that an optimistic reward with an upper confidence bound (UCB) term leads to a provably efficient RLHF policy. Then, we reformulate our objective to direct preference optimization with an exploration term, where the UCB-term can be converted to a count-based exploration bonus. We further propose a practical algorithm, named Cou",
+    "openreview_id": "cfKZ5VrhXt",
+    "forum_id": "cfKZ5VrhXt"
+  },
+  "analysis_timestamp": "2026-01-06T06:16:34.649245"
+}

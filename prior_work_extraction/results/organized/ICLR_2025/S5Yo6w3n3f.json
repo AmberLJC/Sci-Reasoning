@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Neural Ordinary Differential Equations",
+      "authors": "Ricky T. Q. Chen et al.",
+      "year": 2018,
+      "arxiv_id": "1806.07366",
+      "role": "Foundation",
+      "relationship_sentence": "This work provides the continuous-time ODE formulation that SmODE uses to implement a neuron as a first-order dynamical system, enabling the interpretation and training of a learnable low-pass filtering flow inside the policy network."
+    },
+    {
+      "title": "Liquid Time-constant Networks",
+      "authors": "Ramin Hasani et al.",
+      "year": 2021,
+      "arxiv_id": "2006.04439",
+      "role": "Inspiration",
+      "relationship_sentence": "LTC introduces neurons with state-dependent, learnable time constants, directly inspiring SmODE\u2019s use of a state-based \u03c4(x) to dynamically filter high-frequency components in hidden states."
+    },
+    {
+      "title": "Neural Circuit Policies Enabling Auditable Autonomy",
+      "authors": "Ramin Hasani et al.",
+      "year": 2021,
+      "arxiv_id": null,
+      "role": "Related Problem",
+      "relationship_sentence": "By showing that ODE-based liquid neurons yield smooth, robust control policies under sensor noise, this paper motivated SmODE\u2019s explicit use of continuous-time filtering dynamics for RL control smoothness."
+    },
+    {
+      "title": "Sorting Out Lipschitz Function Approximation",
+      "authors": "Cem Anil et al.",
+      "year": 2019,
+      "arxiv_id": "1907.06211",
+      "role": "Gap Identification",
+      "relationship_sentence": "This paper\u2019s construction of globally 1-Lipschitz networks via GroupSort highlights the rigidity of static Lipschitz constraints, which SmODE addresses by introducing a state-based mapping g that locally bounds a neuron\u2019s Lipschitz constant without sacrificing expressivity."
+    },
+    {
+      "title": "Spectral Normalization for Generative Adversarial Networks",
+      "authors": "Takeru Miyato et al.",
+      "year": 2018,
+      "arxiv_id": "1802.05957",
+      "role": "Gap Identification",
+      "relationship_sentence": "Spectral normalization offers a practical global Lipschitz bound, and SmODE replaces this uniform control with a neuron-level, state-conditioned Lipschitz mechanism tailored to stabilize the ODE flow that generates actions."
+    },
+    {
+      "title": "Stable Architectures for Deep Neural Networks",
+      "authors": "Eldad Haber and Lars Ruthotto",
+      "year": 2017,
+      "arxiv_id": "1705.03341",
+      "role": "Foundation",
+      "relationship_sentence": "By framing deep networks as ODE discretizations and advocating stable/contractive dynamics, this work underpins SmODE\u2019s choice of a provably stable first-order low-pass ODE and its analysis of Lipschitz-controlled dynamics."
+    }
+  ],
+  "synthesis_narrative": "Neural Ordinary Differential Equations introduced the core idea of parameterizing a network\u2019s hidden evolution as a continuous-time ODE, establishing a training paradigm and interpretability lens for designing dynamical layers. Liquid Time-constant Networks then showed that neuron dynamics can have learnable, state-dependent time constants, demonstrating how \u03c4(x) grants adaptive temporal filtering and robustness in sequential control. Neural Circuit Policies used such liquid neurons in real control settings, evidencing that continuous-time dynamics can yield smooth, noise-robust actions. Parallel to these developments, Stable Architectures for Deep Neural Networks cast deep nets as discretized ODEs and emphasized stability/contractivity, motivating architectural choices that ensure well-behaved flows. On the regularization side, Sorting Out Lipschitz Function Approximation provided explicit 1-Lipschitz constructions (e.g., GroupSort), while Spectral Normalization popularized practical global Lipschitz bounding\u2014both clarifying the trade-off between stability and expressivity under static, uniform constraints.\n\nTogether, these works revealed an opportunity: combine ODE-based dynamic filtering with principled Lipschitz control tailored to the neuron\u2019s flow. The liquid-neuron insight suggested a learnable, state-based time constant for adaptive low-pass behavior, while the Lipschitz literature exposed limitations of global, static bounds. Leveraging the ODE stability perspective, the present work formalizes a first-order low-pass neuron with a state-conditioned \u03c4(x) to suppress high-frequency noise and introduces a state-based mapping g that directly controls the neuron\u2019s Lipschitz constant, yielding smooth, robust RL policies without sacrificing representational capacity.",
+  "target_paper": {
+    "title": "ODE-based Smoothing Neural Network for Reinforcement Learning Tasks",
+    "authors": "Yinuo Wang, Wenxuan Wang, Xujie Song, Tong Liu, Yuming Yin, Liangfa Chen, Likun Wang, Jingliang Duan, Shengbo Eben Li",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "Reinforcement Learning, Smooth Control, Low-pass Filter, Neural ODE",
+    "abstract": "The smoothness of control actions is a significant challenge faced by deep reinforcement learning (RL) techniques in solving optimal control problems. Existing RL-trained policies tend to produce non-smooth actions due to high-frequency input noise and unconstrained Lipschitz constants in neural networks. This article presents a Smooth ODE (SmODE) network capable of simultaneously addressing both causes of unsmooth control actions, thereby enhancing policy performance and robustness under noise condition. We first design a smooth ODE neuron with first-order low-pass filtering expression, which can dynamically filter out high frequency noises of hidden state by a learnable state-based system time constant. Additionally, we construct a state-based mapping function, $g$, and theoretically demonstrate its capacity to control the ODE neuron's Lipschitz constant. Then, based on the above neuronal structure design, we further advanced the SmODE network serving as RL policy approximators. This",
+    "openreview_id": "S5Yo6w3n3f",
+    "forum_id": "S5Yo6w3n3f"
+  },
+  "analysis_timestamp": "2026-01-06T15:35:39.549796"
+}

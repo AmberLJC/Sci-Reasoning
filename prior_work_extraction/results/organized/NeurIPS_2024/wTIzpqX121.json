@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "GraphCast: Learning skilful medium-range global weather forecasting",
+      "authors": "Lam et al. (DeepMind)",
+      "year": 2023,
+      "role": "Graph-based weather forecasting framework",
+      "relationship_sentence": "Graph-EFM builds directly on the graph-based paradigm popularized by GraphCast\u2014operating on spherical meshes with message passing\u2014and extends it from deterministic prediction to a latent-variable, probabilistic ensemble forecaster."
+    },
+    {
+      "title": "MeshGraphNets: Learning Mesh-Based Simulation with Graph Networks",
+      "authors": "Tobias Pfaff, Meire Fortunato, Alvaro Sanchez-Gonzalez, Peter W. Battaglia",
+      "year": 2021,
+      "role": "GNNs for physical fields on meshes",
+      "relationship_sentence": "MeshGraphNets established how graph networks can model spatiotemporal dynamics on irregular meshes; Graph-EFM leverages the same mesh-based message passing to represent atmospheric dynamics while layering probabilistic latent variables on top."
+    },
+    {
+      "title": "A Recurrent Latent Variable Model for Sequential Data (VRNN)",
+      "authors": "Junyoung Chung, Kyle Kastner, Laurent Dinh, Krzysztof J. Geras, Alexandre Courville, Yoshua Bengio",
+      "year": 2015,
+      "role": "Latent-variable sequence modeling",
+      "relationship_sentence": "Graph-EFM\u2019s flexible latent-variable formulation for time-evolving forecasts follows the VRNN principle of augmenting recurrent dynamics with stochastic latent states to capture uncertainty with amortized inference."
+    },
+    {
+      "title": "Ladder Variational Autoencoders",
+      "authors": "Casper Kaae S\u00f8nderby, Tapani Raiko, Lars Maal\u00f8e, S\u00f8ren Kaae S\u00f8nderby, Ole Winther",
+      "year": 2016,
+      "role": "Hierarchical latent-variable modeling",
+      "relationship_sentence": "The hierarchical graph construction in Graph-EFM mirrors Ladder VAE\u2019s top-down hierarchical latent sampling to induce global-to-local coherence, applied here across graph resolutions to yield spatially coherent weather ensembles."
+    },
+    {
+      "title": "Skillful Precipitation Nowcasting using Deep Generative Models of Radar",
+      "authors": "Aditya Ravuri et al.",
+      "year": 2021,
+      "role": "Probabilistic weather nowcasting via deep generative modeling",
+      "relationship_sentence": "This work demonstrated the value of generative, probabilistic ensembles in operational meteorology; Graph-EFM generalizes that idea from radar nowcasting to global/limited-area forecasting on meshes with a learned latent prior."
+    },
+    {
+      "title": "Hierarchical Graph Representation Learning with Differentiable Pooling (DiffPool)",
+      "authors": "Rex Ying, Jiaxuan You, Christopher Morris, Xiang Ren, William L. Hamilton, Jure Leskovec",
+      "year": 2018,
+      "role": "Hierarchical graph construction",
+      "relationship_sentence": "DiffPool introduced principled hierarchical graph abstractions; Graph-EFM adopts a hierarchical graph design to sample coarse-to-fine latent structure that enforces spatial coherence across scales."
+    },
+    {
+      "title": "Graph U-Nets",
+      "authors": "Hongyang Gao, Shuiwang Ji",
+      "year": 2019,
+      "role": "Pooling/unpooling for multi-scale graph processing",
+      "relationship_sentence": "Graph U-Nets\u2019 pooling\u2013unpooling mechanism informed Graph-EFM\u2019s multi-resolution graph processing, enabling information flow from coarse to fine nodes that makes single-pass, spatially coherent ensemble sampling efficient."
+    }
+  ],
+  "synthesis_narrative": "Graph-EFM sits at the intersection of graph-based weather prediction and probabilistic latent-variable modeling. On the deterministic side, GraphCast established graph neural networks on spherical meshes as a state-of-the-art framework for global NWP surrogates, while MeshGraphNets showed how message passing over irregular meshes can faithfully represent physical dynamics. Graph-EFM adopts this mesh-based, local-neighborhood computation as its forecasting backbone. To turn deterministic predictions into calibrated ensembles, the model borrows from the VRNN tradition of augmenting recurrent dynamics with stochastic latent states, enabling a learned latent prior that captures process uncertainty with amortized inference and requires only a single forward pass per time step to generate arbitrarily many samples.\nA core innovation is spatially coherent sampling via a hierarchical graph. This design is conceptually aligned with hierarchical latent-variable generators such as Ladder VAE, where top-down latents impose global structure refined at finer scales. In the graph domain, DiffPool and Graph U-Nets provide the architectural toolkit for constructing and propagating representations across resolutions, which Graph-EFM adapts to broadcast coarse-scale stochasticity to fine-scale nodes, ensuring coherent fields. Finally, deep generative nowcasting (e.g., DGMR) demonstrated the operational value of probabilistic ensembles in meteorology; Graph-EFM extends this insight beyond radar nowcasting to global and limited-area forecasting on meshes, delivering ensembles with errors comparable to deterministic models while accurately representing forecast uncertainty.",
+  "analysis_timestamp": "2026-01-07T00:02:04.752581"
+}

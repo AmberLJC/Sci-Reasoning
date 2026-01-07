@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "EigenPro: Accelerating Kernel Learning with Preconditioned Stochastic Gradient Descent",
+      "authors": "Siyuan Ma et al.",
+      "year": 2017,
+      "role": "Extension",
+      "relationship_sentence": "This paper introduced the PSGD framework with a spectral (eigenvector-based) projection used each iteration; the present work directly modifies that mechanism by delaying the projection step to remove its per-iteration bottleneck and enable much larger models."
+    },
+    {
+      "title": "EigenPro 2.0: Fast Kernel Learning",
+      "authors": "Siyuan Ma et al.",
+      "year": 2019,
+      "role": "Baseline",
+      "relationship_sentence": "EigenPro 2.0 is the immediate practical predecessor whose per-iteration projection/preconditioning cost limits model size; the new EP4 algorithm keeps the same PSGD preconditioner but performs projections intermittently (delayed), overcoming EigenPro 2.0\u2019s memory and latency constraints."
+    },
+    {
+      "title": "FALKON: An optimal large scale kernel method",
+      "authors": "Alessandro Rudi et al.",
+      "year": 2017,
+      "role": "Baseline",
+      "relationship_sentence": "FALKON uses Nystr\u00f6m-based preconditioning and iterative solvers to scale kernel ridge regression; EP4 targets the same scaling challenge but replaces CG with PSGD and introduces delayed projections, yielding comparable or faster training with exact kernels."
+    },
+    {
+      "title": "Using the Nystr\u00f6m method to speed up kernel machines",
+      "authors": "Christopher Williams et al.",
+      "year": 2001,
+      "role": "Foundation",
+      "relationship_sentence": "Nystr\u00f6m approximations from this work underpin the construction of low-rank eigenspace estimates used in EigenPro-style preconditioners, which EP4 continues to use while altering only when the projection is applied."
+    },
+    {
+      "title": "Fast randomized kernel ridge regression with statistical guarantees",
+      "authors": "Ahmed Alaoui et al.",
+      "year": 2015,
+      "role": "Foundation",
+      "relationship_sentence": "This paper formalized Nystr\u00f6m subsampling for KRR with guarantees, directly motivating EP4\u2019s use of small Nystr\u00f6m sketches to build effective preconditioners whose application can be safely delayed without accuracy loss."
+    },
+    {
+      "title": "Random Features for Large-Scale Kernel Machines",
+      "authors": "Ali Rahimi et al.",
+      "year": 2007,
+      "role": "Gap Identification",
+      "relationship_sentence": "Random features provided a dominant scaling route but at the cost of approximation error; EP4 explicitly addresses this gap by retaining exact kernel models and achieving speed via delayed projections rather than kernel approximation."
+    }
+  ],
+  "synthesis_narrative": "The core idea in EP4\u2014delaying the spectral projection within preconditioned stochastic gradient descent\u2014emerges directly from the EigenPro lineage. EigenPro established the use of a spectral preconditioner computed from a Nystr\u00f6m-style eigenspace estimate and applied it at every SGD step to accelerate kernel learning. EigenPro 2.0 refined this pipeline and became the practical baseline, but its per-iteration projection cost and memory footprint constrained model size. EP4 targets this precise bottleneck: it preserves the EigenPro preconditioner but decouples when it is applied, performing projections intermittently to amortize cost while maintaining the conditioning benefits, thereby unlocking much larger models.\n\nThis trajectory rests on the Nystr\u00f6m foundation. Williams and Seeger introduced Nystr\u00f6m approximations, which are used in EigenPro/EP4 to estimate leading eigenspaces of the kernel operator. Alaoui and Mahoney provided statistical guarantees and efficient constructions for Nystr\u00f6m-based KRR, justifying small sketches as strong preconditioners\u2014crucial for EP4\u2019s ability to delay their application without degrading accuracy.\n\nIn the broader scalable-kernel landscape, FALKON demonstrated that Nystr\u00f6m preconditioning paired with iterative solvers (CG) can yield near-optimal large-scale performance; EP4 addresses the same regime but achieves speed via PSGD with delayed projections instead of CG. Finally, random features offered a widely used scaling path, but their approximation error motivates EP4\u2019s focus on exact kernels: by reducing training cost through delayed projections rather than kernel surrogates, EP4 attains drastic speedups without sacrificing performance.",
+  "analysis_timestamp": "2026-01-06T23:08:23.958875"
+}

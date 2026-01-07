@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "A Data\u2013Driven Approximation of the Koopman Operator: Extended Dynamic Mode Decomposition",
+      "authors": "Matthew O. Williams et al.",
+      "year": 2015,
+      "role": "Foundation",
+      "relationship_sentence": "EDMD established the principle that nonlinear dynamics can be modeled as linear evolution in a lifted observable space, which K^2VAE operationalizes by learning such a lift (KoopmanNet) to obtain a linear latent dynamical system for forecasting."
+    },
+    {
+      "title": "Deep learning for universal linear embeddings of nonlinear dynamics",
+      "authors": "B. Lusch et al.",
+      "year": 2018,
+      "role": "Extension",
+      "relationship_sentence": "This work showed that autoencoders can learn a Koopman-invariant latent space with linear dynamics; K^2VAE extends that idea to probabilistic time-series forecasting by integrating a learned Koopman embedding with variational inference."
+    },
+    {
+      "title": "Embed to Control: A Locally Linear Latent Dynamics Model for Control from Raw Images",
+      "authors": "Manuel Watter et al.",
+      "year": 2015,
+      "role": "Inspiration",
+      "relationship_sentence": "E2C introduced learning a latent space with (locally) linear Gaussian dynamics to enable filtering and long-rollout prediction, directly inspiring K^2VAE\u2019s strategy of performing inference and multi-step forecasting in a linear latent system\u2014now realized globally via a Koopman lift."
+    },
+    {
+      "title": "Deep Kalman Filters",
+      "authors": "Rahul G. Krishnan et al.",
+      "year": 2017,
+      "role": "Baseline",
+      "relationship_sentence": "Deep Kalman Filters marry variational autoencoding with linear-Gaussian state space models; K^2VAE improves on this baseline by replacing the assumed linear dynamics with a learned Koopman-linear latent system and employing a learned Kalman updater to better handle nonlinear time series and uncertainty."
+    },
+    {
+      "title": "KalmanNet: Neural Network Aided Kalman Filtering for Partially Known Dynamics",
+      "authors": "Gadi Revach et al.",
+      "year": 2022,
+      "role": "Extension",
+      "relationship_sentence": "KalmanNet proposed learning the Kalman gain to refine estimates when dynamics are imperfectly known; K^2VAE adopts this idea to refine predictions and quantify uncertainty within its Koopman-linear latent system (KalmanNet module)."
+    },
+    {
+      "title": "Deep State Space Models for Time Series Forecasting",
+      "authors": "Syama S. Rangapuram et al.",
+      "year": 2018,
+      "role": "Gap Identification",
+      "relationship_sentence": "DeepState formalized probabilistic forecasting with Kalman filtering but relied on linear-Gaussian dynamics, a limitation K^2VAE addresses by learning a Koopman lift that captures nonlinear dynamics while retaining linear filtering structure."
+    },
+    {
+      "title": "TimeGrad: Score-based Generative Modeling for Time Series Forecasting",
+      "authors": "A. Rasul et al.",
+      "year": 2021,
+      "role": "Gap Identification",
+      "relationship_sentence": "TimeGrad\u2019s diffusion-based probabilistic forecasting requires iterative sampling whose cost grows with horizon; K^2VAE targets this inefficiency by forecasting via closed-form propagation in a linear latent system with Kalman-based uncertainty handling."
+    }
+  ],
+  "synthesis_narrative": "K^2VAE\u2019s core innovation emerges from uniting Koopman-based latent linearization with learned Kalman refinement inside a VAE framework to achieve accurate and efficient long-horizon probabilistic forecasting. The theoretical foundation is EDMD, which established that nonlinear dynamics can be modeled as linear evolution in a lifted observable space. Building directly on this, Lusch et al. demonstrated that deep autoencoders can learn Koopman-invariant embeddings with linear latent dynamics, providing the architectural blueprint for K^2VAE\u2019s KoopmanNet. E2C further inspired the strategy of conducting inference and long-rollout prediction in a (locally) linear latent space; K^2VAE generalizes this idea by learning a global Koopman lift for real-world time series. \nOn the probabilistic modeling side, Deep Kalman Filters provided the baseline recipe for combining variational autoencoding with linear-Gaussian state-space models, but struggled with nonlinear dynamics; K^2VAE instead learns a Koopman-linear latent system and augments it with KalmanNet to refine predictions and quantify uncertainty when dynamics are only approximately linear. DeepState crystallized the practical value of Kalman-filtered probabilistic forecasting yet remained limited to linear-Gaussian dynamics\u2014precisely the gap K^2VAE closes with Koopman-based lifting. Finally, diffusion-style forecasters like TimeGrad highlight the inefficiency of iterative sampling for long horizons; K^2VAE sidesteps this by propagating predictions in closed form in the linear latent space, mitigating error accumulation while reducing computational burden.",
+  "analysis_timestamp": "2026-01-06T23:07:19.623555"
+}

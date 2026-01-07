@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Deep Equilibrium Models",
+      "authors": "Shaojie Bai et al.",
+      "year": 2019,
+      "arxiv_id": "1909.01377",
+      "role": "Foundation",
+      "relationship_sentence": "Introduced the fixed-point (equilibrium) formulation with weight tying and implicit differentiation, which MIND adopts to reuse a compact parameter set while allocating compute via convergence-based, input-dependent iterations."
+    },
+    {
+      "title": "Adaptive Computation Time for Recurrent Neural Networks",
+      "authors": "Alex Graves",
+      "year": 2016,
+      "arxiv_id": "1603.08983",
+      "role": "Inspiration",
+      "relationship_sentence": "Pioneered halting units that let models dynamically choose the number of computation steps per input, directly inspiring MIND\u2019s introspective mechanism for per-input adaptive compute."
+    },
+    {
+      "title": "Universal Transformers",
+      "authors": "Mostafa Dehghani et al.",
+      "year": 2019,
+      "arxiv_id": "1807.03819",
+      "role": "Related Problem",
+      "relationship_sentence": "Showed how weight sharing across depth combined with ACT yields per-position adaptive computation, informing MIND\u2019s coupling of parameter reuse with dynamic, input-conditioned computation beyond Transformers."
+    },
+    {
+      "title": "PonderNet: Learning to Ponder",
+      "authors": "Andrea Banino et al.",
+      "year": 2021,
+      "arxiv_id": "2107.05407",
+      "role": "Gap Identification",
+      "relationship_sentence": "Exposed training instabilities of ACT and proposed probabilistic halting with a ponder loss, whose limitations (discrete halting and architecture specificity) motivate MIND\u2019s differentiable, fixed-point\u2013based introspective stopping."
+    },
+    {
+      "title": "Outrageously Large Neural Networks: The Sparsely-Gated Mixture-of-Experts Layer",
+      "authors": "Noam Shazeer et al.",
+      "year": 2017,
+      "arxiv_id": "1701.06538",
+      "role": "Baseline",
+      "relationship_sentence": "Established input-dependent routing to sparsely activate experts; MIND contrasts and improves on this by not only routing parameters but also varying computation time via state-dependent iteration and convergence."
+    },
+    {
+      "title": "Routing Networks: Adaptive Selection of Non-Linear Functions for Multi-Task Learning",
+      "authors": "Clemens Rosenbaum et al.",
+      "year": 2017,
+      "arxiv_id": "1711.01239",
+      "role": "Inspiration",
+      "relationship_sentence": "Proposed a controller that routes inputs to function blocks for parameter reuse across tasks, which MIND generalizes with introspective, iterative routing that adapts effective depth until consistency is reached."
+    },
+    {
+      "title": "Dynamic Routing Between Capsules",
+      "authors": "Sara Sabour et al.",
+      "year": 2017,
+      "arxiv_id": "1710.09829",
+      "role": "Related Problem",
+      "relationship_sentence": "Introduced iterative, agreement-based dynamic routing, providing the iterative, input-driven routing principle that MIND extends to general networks with a learned convergence/halting signal."
+    }
+  ],
+  "synthesis_narrative": "Deep Equilibrium Models introduced the idea that deep networks can be cast as fixed-point solvers with tied parameters, trained via implicit differentiation; crucially, their convergence tolerance offers a natural, state-dependent stopping signal. Adaptive Computation Time showed that networks can learn to halt computation per input through a halting unit, trading accuracy for speed on the fly. Universal Transformers coupled depth-wise weight sharing with per-position ACT, demonstrating that adaptive steps and parameter reuse can coexist within a single architecture. PonderNet addressed ACT\u2019s training pathologies via a probabilistic halting distribution and ponder loss, clarifying both the promise of adaptive steps and the limitations of discrete/stochastic halting. Sparsely-gated Mixture-of-Experts made input-dependent routing practical, activating only a subset of experts to scale capacity efficiently. Routing Networks extended routing to multi-task learning, using a controller to select function blocks and thus reuse parameters conditioned on task identity. Dynamic routing in Capsule Networks further established iterative, input-driven routing as a powerful mechanism for refining internal representations.\nCollectively, these works revealed a gap: methods either reused parameters without varying compute time (e.g., MoE) or varied compute time without a principled, architecture-agnostic introspection signal (e.g., ACT/PonderNet), while fixed-point models lacked explicit routing across modules. MIND synthesizes these threads by using fixed-point convergence as an introspective criterion to adapt the number of iterations per input, while dynamically routing through a compact set of shared modules, enabling both parameter reuse across tasks and computation commensurate with input complexity.",
+  "target_paper": {
+    "title": "MIND over Body: Adaptive Thinking using Dynamic Computation",
+    "authors": "Mrinal Mathur, Barak A. Pearlmutter, Sergey M. Plis",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "oral",
+    "keywords": "Interpretability, Fixed points, Dynamic routing, Dynamic input processing, Deep Learning Framework",
+    "abstract": "While the human brain efficiently handles various computations with a limited number of neurons, traditional deep learning networks require a significant increase in parameters to improve performance.\n  Yet, these parameters are used inefficiently as the networks employ the same amount of computation for inputs of the same size, regardless of the input's complexity.\n  We address this inefficiency by introducing self-introspection capabilities to the network, enabling it to adjust the number of used parameters based on the internal representation of the task and adapt the computation time based on the task complexity.\n  This enables the network to adaptively reuse parameters across tasks, dynamically adjusting the computational effort to match the complexity of the input.\n  We demonstrate the effectiveness of this method on language modeling and computer vision tasks.\n  Notably, our model achieves 96.62\\% accuracy on ImageNet with just a three-layer network, surpassing much larger ResNe",
+    "openreview_id": "EjJGND0m1x",
+    "forum_id": "EjJGND0m1x"
+  },
+  "analysis_timestamp": "2026-01-06T12:37:53.788737"
+}

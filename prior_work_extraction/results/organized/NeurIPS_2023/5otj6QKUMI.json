@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Implicit Neural Representations with Periodic Activation Functions (SIREN)",
+      "authors": "Vincent Sitzmann; Julien N. P. Martel; Alexander W. Bergman; David B. Lindell; Gordon Wetzstein",
+      "year": 2020,
+      "role": "Foundational INR architecture enabling accurate coordinate-based signal fitting with high-frequency detail.",
+      "relationship_sentence": "This work adopts the INR paradigm\u2014overfitting a compact coordinate MLP to a single signal\u2014and SIREN established the effectiveness of such models for high-frequency signals, motivating INR-based compression."
+    },
+    {
+      "title": "Fourier Features Let Networks Learn High Frequency Functions in Low Dimensional Domains",
+      "authors": "Matthew Tancik; Pratul P. Srinivasan; Ben Mildenhall; Sara Fridovich-Keil; Nithin Raghavan; Jonathan T. Barron; Ren Ng",
+      "year": 2020,
+      "role": "Introduced positional/Fourier feature encodings that boost coordinate MLP capacity for high-frequency signals.",
+      "relationship_sentence": "The proposed Bayesian INR inherits the coordinate-MLP plus frequency-encoding design pioneered here to compactly represent images and other signals."
+    },
+    {
+      "title": "Weight Uncertainty in Neural Networks",
+      "authors": "Charles Blundell; Julien Cornebise; Koray Kavukcuoglu; Daan Wierstra",
+      "year": 2015,
+      "role": "Introduced variational Bayesian neural networks and ELBO-based training over weight distributions.",
+      "relationship_sentence": "Fitting a variational posterior over INR weights and optimizing an ELBO (here, a \u03b2-ELBO) directly builds on Bayes by Backprop."
+    },
+    {
+      "title": "Practical Lossless Compression with Latent Variables Using Bits-Back Coding and Asymmetric Numeral Systems",
+      "authors": "James Townsend; Thomas Bird; David Barber",
+      "year": 2019,
+      "role": "Established bits-back/relative-entropy coding to transmit posterior samples with cost equal to a KL term.",
+      "relationship_sentence": "The key novelty\u2014encoding a posterior weight sample via relative entropy coding instead of quantization\u2014rests on the bits-back/REC principle demonstrated here."
+    },
+    {
+      "title": "beta-VAE: Learning Basic Visual Concepts with a Constrained Variational Framework",
+      "authors": "Irina Higgins; Lo\u00efc Matthey; Arka Pal; Christopher Burgess; Xavier Glorot; Matthew Botvinick; Shakir Mohamed; Alexander Lerchner",
+      "year": 2017,
+      "role": "Introduced the \u03b2-ELBO, explicitly controlling the trade-off between rate (KL) and distortion (reconstruction).",
+      "relationship_sentence": "The paper tunes rate\u2013distortion for a fixed INR architecture by varying \u03b2, directly following the \u03b2-ELBO framework."
+    },
+    {
+      "title": "Variational Image Compression with a Scale Hyperprior",
+      "authors": "Johannes Ball\u00e9; David Minnen; Saurabh Singh; Sung Jin Hwang; Nick Johnston",
+      "year": 2018,
+      "role": "Showed that learning priors/hyperpriors improves compression by better matching code statistics and reducing coding cost.",
+      "relationship_sentence": "Their iterative procedure to learn weight priors mirrors the hyperprior idea\u2014learning adaptable priors to reduce KL and improve rate\u2013distortion."
+    },
+    {
+      "title": "Bayesian Compression for Deep Learning",
+      "authors": "Christos Louizos; Karen Ullrich; Max Welling",
+      "year": 2017,
+      "role": "Applied variational sparsity-inducing priors to compress network weights under an MDL/ELBO view.",
+      "relationship_sentence": "Treating network weights probabilistically for compression and measuring codelength via KL in the ELBO directly informs the Bayesian INR compression strategy."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core contribution\u2014compressing implicit neural representations by fitting a variational Bayesian neural network to a single signal and transmitting a posterior weight sample via relative entropy coding\u2014sits at the intersection of INR modeling, Bayesian inference over weights, and information-theoretic coding. SIREN and Fourier features established that compact coordinate MLPs can faithfully represent high-frequency signals, creating a natural path to per-instance compression by sending model parameters. However, prior INR compression pipelines predominantly relied on low-bit quantization and traditional entropy coding, which often impaired fidelity.\n\nReplacing quantization with a Bayesian route draws directly on Bayes by Backprop: optimize an ELBO over weight distributions so that the KL term measures coding cost while the reconstruction term captures distortion. The \u03b2-VAE framework then supplies the explicit rate\u2013distortion control via a \u03b2-ELBO, letting the same architecture target different operating points. Crucially, bits-back/relative entropy coding (as operationalized with ANS) provides the mechanism to actually transmit a posterior sample at an expected cost equal to the KL divergence to a prior, turning the variational objective into a practical compressor for weights.\n\nFinally, learned priors from the neural image compression literature (e.g., hyperpriors) and Bayesian compression for deep nets motivate the paper\u2019s iterative prior-learning procedure: better-matched priors reduce KL and improve rate\u2013distortion. Together, these strands yield a principled, end-to-end RD-optimized alternative to weight quantization for INR-based compression.",
+  "analysis_timestamp": "2026-01-06T23:42:49.124703"
+}

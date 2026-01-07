@@ -1,0 +1,69 @@
+# Prior Work Analysis Report
+
+## Target Paper
+
+**Title:** X-ALMA: Plug & Play Modules and Adaptive Rejection for Quality Translation at Scale
+
+**Conference:** ICLR 2025 (spotlight)
+
+**Authors:** Haoran Xu, Kenton Murray, Philipp Koehn, Hieu Hoang, Akiko Eriguchi, Huda Khayrallah
+
+**Keywords:** Large Language Model, Machine Translation, Multilingual
+
+**Abstract:** 
+> Large language models (LLMs) have achieved remarkable success across various NLP tasks with a focus on English due to English-centric pre-training and limited multilingual data. In this work, we focus on the problem of translation, and 
+while some multilingual LLMs claim to support for hundreds of languages, models often fail to provide high-quality responses for mid- and low-resource languages, leading to imbalanced performance heavily skewed in favor of high-resource languages. We introduce **...
+
+---
+
+## Key Prior Works (7 papers with direct influence)
+
+### 🏗️ Foundation
+
+**Parameter-Efficient Transfer Learning for NLP** (2019)
+- *Authors:* Neil Houlsby et al.
+- *Direct Connection:* Introduced adapter modules inserted between Transformer layers, providing the architectural mechanism that X-ALMA instantiates as language-specific plug-and-play components to isolate parameters per language.
+
+**COMET-22: Unbabel’s Submission to the WMT 2022 Metrics Shared Task** (2022)
+- *Authors:* Ricardo Rei et al.
+- *Direct Connection:* Provides the neural quality estimation metric X-ALMA leverages as the automatic signal for its adaptive rejection regimen and as the primary yardstick for balanced multilingual gains.
+
+**FLORES-200: Evaluating Machine Translation in Low-Resource Languages** (2022)
+- *Authors:* Naman Goyal et al.
+- *Direct Connection:* Defines the multilingual evaluation benchmark and language coverage that shape X-ALMA’s target set, module granularity, and success criteria for balanced performance across 50 diverse languages.
+
+### 💡 Inspiration
+
+**MAD-X: An Adapter-based Framework for Multilingual Transfer** (2020)
+- *Authors:* Jonas Pfeiffer et al.
+- *Direct Connection:* Demonstrated that separate, composable language and task adapters mitigate cross-lingual interference, directly inspiring X-ALMA’s language-specific modularization to prevent language conflicts during training.
+
+### 🔍 Gap Identification
+
+**Dual Conditional Cross-Entropy Filtering of Noisy Parallel Corpora** (2018)
+- *Authors:* Marcin Junczys-Dowmunt
+- *Direct Connection:* Established static, heuristic QE-style data filtering for MT, whose limitations (non-adaptive, model-agnostic, and not language- or stage-aware) are addressed by X-ALMA’s online, model-in-the-loop adaptive rejection.
+
+### 📊 Baseline
+
+**Aya: An Open-Source Instruction-Tuned Multilingual Language Model** (2024)
+- *Authors:* Cohere For AI et al.
+- *Direct Connection:* Serves as the primary multilingual LLM baseline whose monolithic training exhibits high-resource bias that X-ALMA aims to overcome with language-specific modules and adaptive rejection.
+
+### 🔧 Extension
+
+**Minimum Bayes Risk Decoding for Neural Machine Translation with Neural Evaluation Metrics** (2022)
+- *Authors:* Markus Freitag et al.
+- *Direct Connection:* Showed that reranking n-best translations with COMET via MBR yields higher quality, which X-ALMA generalizes into training by adaptively rejecting low-scoring samples rather than only using metric-guided selection at inference.
+
+---
+
+## Synthesis: How Prior Work Led to This Paper
+
+Adapter research established a way to add small, trainable modules to frozen Transformers: Houlsby et al. introduced bottleneck adapters that can be inserted between layers to enable parameter-efficient specialization. Building on this, MAD-X showed that separating language adapters from task adapters and composing them at inference time mitigates cross-lingual interference and enables plug-and-play transfer, highlighting modularity as a practical route to multilingual robustness. On the quality-selection front, Freitag et al. demonstrated that Minimum Bayes Risk decoding guided by a neural metric (e.g., COMET) consistently improves translation by choosing the best candidate among samples, revealing the power of metric-driven selection. COMET-22 provided a strong, language-agnostic learned metric that correlates with human judgments, making it suitable as an automatic signal for both evaluation and decision-making. Earlier, Junczys-Dowmunt’s dual conditional cross-entropy filtering showed that data quality filtering matters, but did so statically and without model or language adaptivity. FLORES-200 defined a standardized, wide-coverage benchmark emphasizing low- and mid-resource languages, setting the stage for truly balanced multilingual evaluation. Taken together, these works suggest two converging opportunities: use modular, per-language parameterization to avoid interference, and use strong automatic metrics to prefer high-quality supervision. X-ALMA synthesizes these by instantiating language-specific, plug-and-play modules to isolate learning per language and by extending metric-guided selection from inference to training via adaptive rejection, enabling balanced, high-quality translation at scale.
+
+---
+
+*Analysis generated on: 2026-01-06T13:52:22.259651*
+
+*Pipeline: Prior Work Extraction v2.0 (Direct Lineage Focus)*

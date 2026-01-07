@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Jonathan Ho et al.",
+      "year": 2020,
+      "arxiv_id": "2006.11239",
+      "role": "Baseline",
+      "relationship_sentence": "The DDPM forward noising process x_t = \u03b1_t x_0 + \u03c3_t \u03b5 and denoising objective provide the density-based anomaly scoring baseline that this work shows is effective yet computationally costly, motivating the simplified Diffusion Time Estimation (DTE) alternative built directly on the same formulation."
+    },
+    {
+      "title": "Score-Based Generative Modeling through Stochastic Differential Equations",
+      "authors": "Yang Song et al.",
+      "year": 2021,
+      "arxiv_id": "2011.13456",
+      "role": "Foundation",
+      "relationship_sentence": "The SDE view formalizes continuous noise/time conditioning and the Gaussian-smoothed marginals p_t(x) that underlie defining and computing the posterior over diffusion time p(t|x) used by DTE for anomaly scoring."
+    },
+    {
+      "title": "Variational Diffusion Models",
+      "authors": "Prafulla Dhariwal and Alexander Nichol (often attributed with Kingma et al.; here: Jonathan Ho et al.)",
+      "year": 2021,
+      "arxiv_id": "2107.00630",
+      "role": "Foundation",
+      "relationship_sentence": "The likelihood/ELBO framing of diffusion models clarifies how diffusion can be used for density-based anomaly detection and highlights the inference cost of likelihood evaluation that DTE avoids by replacing reverse diffusion with a closed-form time-posterior."
+    },
+    {
+      "title": "A Connection Between Score Matching and Denoising Autoencoders: Theoretical Insights and Practical Implications",
+      "authors": "Pascal Vincent",
+      "year": 2011,
+      "arxiv_id": "1105.1170",
+      "role": "Foundation",
+      "relationship_sentence": "The identity that optimal denoisers estimate the score of the Gaussian-smoothed data distribution provides the key analytic link used to express the density over diffusion time p(t|x) without simulating the reverse process."
+    },
+    {
+      "title": "Likelihood Ratios for Out-of-Distribution Detection",
+      "authors": "Jie Ren et al.",
+      "year": 2019,
+      "arxiv_id": "1906.02845",
+      "role": "Related Problem",
+      "relationship_sentence": "By showing that comparing likelihoods across noise-smoothed distributions improves OOD detection, this work motivates using the sample-specific noise scale as a statistic\u2014operationalized here by estimating the posterior over diffusion time and using its mode/mean as the anomaly score."
+    },
+    {
+      "title": "Do Deep Generative Models Know What They Don't Know?",
+      "authors": "Eric Nalisnick et al.",
+      "year": 2019,
+      "arxiv_id": "1810.09136",
+      "role": "Gap Identification",
+      "relationship_sentence": "Their demonstration that raw likelihoods from powerful generative models can mis-rank anomalies directly motivates moving from p(x) to noise-level\u2013aware criteria like p(t|x) that better capture typicality for anomaly detection."
+    }
+  ],
+  "synthesis_narrative": "Denoising Diffusion Probabilistic Models introduced the discrete-time forward noising process and denoising objective that turn density estimation into time-conditioned noise prediction; this provides both the mechanism for constructing likelihood-based anomaly scores and a clear computational bottleneck due to costly reverse diffusion. The stochastic differential equation view of score-based modeling formalized continuous-time noise conditioning and made explicit that each noise level induces a Gaussian-smoothed marginal p_t(x), establishing a natural continuum of scales at which data typicality can be assessed. Variational Diffusion Models further framed diffusion training and evaluation in likelihood/ELBO terms, making precise how diffusion grants density-based anomaly detection while revealing the inference expense of likelihood computation. Vincent\u2019s denoising score matching result connected optimal denoisers to the score of the smoothed data distribution, an identity that enables analytic manipulations of p_t(x) without simulating the reverse process. Ren et al. showed that judging samples via likelihoods at perturbed/noisy scales improves OOD detection, highlighting noise scale as a discriminative statistic. Nalisnick et al. exposed failures of raw likelihood for anomaly detection, motivating typicality-aware alternatives.\nTogether, these works suggest that anomaly detection should leverage the family of smoothed densities across noise scales rather than a single p(x), and that reverse-time sampling or exact likelihood evaluation is unnecessary if one can reason analytically about p_t(x). Synthesizing these insights, the current work replaces expensive DDPM-based scoring with Diffusion Time Estimation, which computes the posterior over diffusion time p(t|x) from the smoothed densities and uses its mean or mode as an efficient, principled anomaly score.",
+  "target_paper": {
+    "title": "On Diffusion Modeling for Anomaly Detection",
+    "authors": "Victor Livernoche, Vineet Jain, Yashar Hezaveh, Siamak Ravanbakhsh",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Diffusion based models, Anomaly detection, Probabilistic Inference",
+    "abstract": "Known for their impressive performance in generative modeling, diffusion models are attractive candidates for density-based anomaly detection. This paper investigates different variations of diffusion modeling for unsupervised and semi-supervised anomaly detection. In particular, we find that Denoising Diffusion Probability Models (DDPM) are performant on anomaly detection benchmarks yet computationally expensive. By simplifying DDPM in application to anomaly detection, we are naturally led to an alternative approach called Diffusion Time Estimation (DTE). DTE estimates the distribution over diffusion time for a given input and uses the mode or mean of this distribution as the anomaly score. We derive an analytical form for this density and leverage a deep neural network to improve inference efficiency. Through empirical evaluations on the ADBench benchmark, we demonstrate that all diffusion-based anomaly detection methods perform competitively for both semi-supervised and unsupervised",
+    "openreview_id": "lR3rk7ysXz",
+    "forum_id": "lR3rk7ysXz"
+  },
+  "analysis_timestamp": "2026-01-06T07:40:09.764386"
+}

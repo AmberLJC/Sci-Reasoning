@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Physics-informed neural networks: A deep learning framework for solving forward and inverse problems involving nonlinear partial differential equations",
+      "authors": "M. Raissi, P. Perdikaris, G.E. Karniadakis",
+      "year": 2019,
+      "role": "Foundational physics-informed learning",
+      "relationship_sentence": "HyPINO\u2019s unlabeled training objective directly builds on PINNs\u2019 residual and boundary-condition losses, but amortizes them by generating task-specific PINNs via a hypernetwork."
+    },
+    {
+      "title": "Fourier Neural Operator for Parametric Partial Differential Equations",
+      "authors": "Z. Li, N. Kovachki, K. Azizzadenesheli, B. Liu, K. Bhattacharya, A.M. Stuart, A. Anandkumar",
+      "year": 2020,
+      "role": "Operator learning across PDE families",
+      "relationship_sentence": "HyPINO pursues the operator-learning goal of mapping PDE parameters to solutions across discretizations like FNO, but does so by producing a PINN solver via a hypernetwork to handle multi-physics and boundary variations."
+    },
+    {
+      "title": "Physics-Informed Neural Operator for Learning PDEs",
+      "authors": "Z. Li, N. Kovachki, K. Azizzadenesheli, A.M. Stuart, A. Anandkumar",
+      "year": 2021,
+      "role": "Physics-informed operator training",
+      "relationship_sentence": "PINO\u2019s combination of supervised data with physics-informed losses directly motivates HyPINO\u2019s mixed supervision; HyPINO extends this by supervising with MMS-generated solutions and amortizing physics constraints through generated PINNs."
+    },
+    {
+      "title": "Learning nonlinear operators via DeepONet based on the universal approximation theorem of operators",
+      "authors": "Lu Lu, Pengzhan Jin, George E. Karniadakis",
+      "year": 2021,
+      "role": "Universal operator approximation",
+      "relationship_sentence": "DeepONet established the paradigm of mapping input functions (e.g., forcing, coefficients) to solution fields; HyPINO adopts this operator-learning perspective but targets a multi-physics setting by outputting a solver (PINN) rather than solutions directly."
+    },
+    {
+      "title": "HyperNetworks",
+      "authors": "David Ha, Andrew M. Dai, Quoc V. Le",
+      "year": 2016,
+      "role": "Weight-generating meta-models",
+      "relationship_sentence": "HyPINO\u2019s core mechanism\u2014mapping PDE parameterizations to the weights of a target PINN\u2014is a direct application of hypernetworks to PDE solving (HyperPINNs), enabling zero-shot task adaptation."
+    },
+    {
+      "title": "Code verification by the method of manufactured solutions",
+      "authors": "Patrick J. Roache",
+      "year": 2002,
+      "role": "Manufactured solutions for supervised signals",
+      "relationship_sentence": "HyPINO leverages MMS to synthesize exact solutions across diverse PDEs for labeled supervision, grounding its supervised branch in a principled code-verification methodology."
+    },
+    {
+      "title": "Swin Transformer: Hierarchical Vision Transformer using Shifted Windows",
+      "authors": "Ze Liu, Yutong Lin, Yue Cao, Han Hu, Zheng Zhang, Stephen Lin, Baining Guo",
+      "year": 2021,
+      "role": "Scalable backbone for conditional generation",
+      "relationship_sentence": "HyPINO employs a Swin Transformer as the hypernetwork backbone to efficiently encode PDE parameter fields and geometries, enabling scalable, locality-aware weight generation for target PINNs."
+    }
+  ],
+  "synthesis_narrative": "HyPINO unifies three threads of prior work\u2014physics-informed learning, operator learning, and hypernetwork-based weight generation\u2014into a single framework for zero-shot multi-physics generalization. Physics-Informed Neural Networks (Raissi et al., 2019) supply the core unsupervised objective: PDE residuals and boundary terms that evaluate solution fidelity without labels. Operator-learning methods such as the Fourier Neural Operator (Li et al., 2020) and DeepONet (Lu et al., 2021) demonstrate that mapping from PDE parameterizations to solution functions enables generalization across problem instances; PINO (Li et al., 2021) further shows that blending supervised data with physics-informed losses improves robustness and data efficiency. HyPINO extends these concepts by amortizing the physics constraints: rather than outputting a solution, a Swin Transformer-based hypernetwork (Liu et al., 2021) outputs the weights of a task-specific PINN solver, enabling rapid adaptation to new PDEs, geometries, and mixed boundary conditions. To furnish reliable supervised signals spanning diverse equations, HyPINO adopts the Method of Manufactured Solutions (Roache, 2002), systematically generating analytic solutions and corresponding PDEs/boundaries for mixed supervision. Finally, the hypernetwork design draws directly from HyperNetworks (Ha et al., 2016), allowing the model to condition on PDE descriptors and produce solver parameters in a single forward pass. Together, these works enable HyPINO\u2019s key contributions: zero-shot generalization across elliptic, hyperbolic, and parabolic PDEs; mixed supervision that couples MMS-derived labels with physics losses; and an amortized, refinable PINN solver that supports iterative residual-based improvement.",
+  "analysis_timestamp": "2026-01-07T00:02:04.964227"
+}

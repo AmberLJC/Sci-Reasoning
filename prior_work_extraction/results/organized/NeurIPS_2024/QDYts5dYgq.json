@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Interaction Networks for Learning about Objects, Relations and Physics",
+      "authors": "Peter W. Battaglia, Razvan Pascanu, Matthew Lai, Danilo J. Rezende, Koray Kavukcuoglu",
+      "year": 2016,
+      "role": "Foundational relational inductive bias for physics via graph message passing",
+      "relationship_sentence": "SDF-Sim adopts the interaction-centric, message-passing paradigm introduced by Interaction Networks as the backbone for modeling multi-object rigid-body dynamics at scale."
+    },
+    {
+      "title": "Learning to Simulate Complex Physics with Graph Networks",
+      "authors": "Alvaro Sanchez-Gonzalez, Jonathan Godwin, Tobias Pfaff, Rex Ying, Jure Leskovec, Peter W. Battaglia",
+      "year": 2020,
+      "role": "State-of-the-art learned simulator (GNS) showing generalization across physical systems",
+      "relationship_sentence": "SDF-Sim directly builds on the GNS paradigm for data-driven dynamics prediction and extends it to rigid-body contact while replacing mesh-based geometry with SDFs for scalability."
+    },
+    {
+      "title": "Learning Mesh-Based Simulation with Graph Networks (MeshGraphNets)",
+      "authors": "Tobias Pfaff, Joe Walker, Kelsey R. Allen, Peter W. Battaglia",
+      "year": 2021,
+      "role": "Graph-network simulator operating on meshes for fluids/solids",
+      "relationship_sentence": "MeshGraphNets established mesh-centric geometry handling in learned simulators; SDF-Sim explicitly targets and removes its mesh-resolution bottleneck by substituting implicit SDF shape queries."
+    },
+    {
+      "title": "DeepSDF: Learning Continuous Signed Distance Functions for Shape Representation",
+      "authors": "Jeong Joon Park, Peter Florence, Julian Straub, Richard Newcombe, Steven Lovegrove",
+      "year": 2019,
+      "role": "Neural implicit SDF representation enabling fast distance and normal queries",
+      "relationship_sentence": "SDF-Sim leverages the DeepSDF-style neural SDF parameterization to compactly represent detailed object geometry and to obtain distances/gradients needed for contact reasoning."
+    },
+    {
+      "title": "Sign Agnostic Learning of Shapes from Raw Data (SAL)",
+      "authors": "Matan Atzmon, Yaron Lipman",
+      "year": 2020,
+      "role": "Robust SDF learning from partial/noisy observations",
+      "relationship_sentence": "By enabling SDF learning without watertight meshes, SAL underpins SDF-Sim\u2019s vision-to-geometry pipeline, letting the simulator consume learned implicit shapes from real observations."
+    },
+    {
+      "title": "KinectFusion: Real-time dense surface mapping and tracking",
+      "authors": "Richard A. Newcombe, Shahram Izadi, Otmar Hilliges, David Molyneaux, Andrew J. Davison, et al.",
+      "year": 2011,
+      "role": "Demonstrated TSDF/SDF as a fast, GPU-friendly geometric representation",
+      "relationship_sentence": "KinectFusion established SDFs as efficient distance fields for real-time geometry; SDF-Sim adopts the same distance-query idea for scalable collision/contact computation in a learned engine."
+    },
+    {
+      "title": "MuJoCo: A physics engine for model-based control",
+      "authors": "Emanuel Todorov, Tom Erez, Yuval Tassa",
+      "year": 2012,
+      "role": "Canonical analytic rigid-body simulator and contact model baseline",
+      "relationship_sentence": "SDF-Sim positions itself as a learned alternative to engines like MuJoCo, inheriting insights about rigid contact while addressing computational bottlenecks via SDF-based distance queries."
+    }
+  ],
+  "synthesis_narrative": "SDF-Sim\u2019s core contribution\u2014scalable learned rigid-body simulation over implicit shapes\u2014arises by fusing two mature lines of work: graph-based learned physics and SDF-based shape representations. Interaction Networks introduced the relational, message-passing view of physical systems, which Learning to Simulate Complex Physics with Graph Networks (GNS) scaled into a practical, general-purpose learned simulator. MeshGraphNets then showed how to incorporate geometry via meshes, but also exposed the computational bottleneck of mesh resolution and expensive distance computations when scaling to many objects and complex shapes.\n\nTo remove that bottleneck, SDF-Sim turns to implicit neural geometry. DeepSDF provided a compact, continuous SDF representation with efficient distance and normal queries\u2014exactly the primitives needed for collision detection and contact response. SAL further enabled training SDFs directly from partial or noisy observations, aligning with SDF-Sim\u2019s ambition to operate \u201cfor vision,\u201d i.e., to learn simulators that can consume shapes derived from real-world sensing. The practical viability of SDFs for fast geometric queries was established at scale by KinectFusion\u2019s TSDF pipeline, which demonstrated the speed and robustness of distance-field representations for real-time applications.\n\nFinally, analytic engines like MuJoCo crystallized the modeling targets and pain points in rigid contact simulation\u2014accuracy, stability, and computation\u2014against which learned alternatives are measured. SDF-Sim synthesizes these threads: it retains GNN-based relational dynamics, swaps meshes for learned SDFs to achieve scalable distance/contact computation, and thereby delivers a learned rigid-body simulator designed for large, object-dense scenes and vision-driven settings.",
+  "analysis_timestamp": "2026-01-06T23:33:35.555094"
+}

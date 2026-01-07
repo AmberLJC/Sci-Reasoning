@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Learning to Predict by the Methods of Temporal Differences",
+      "authors": "Richard S. Sutton",
+      "year": 1988,
+      "role": "Foundational method",
+      "relationship_sentence": "Introduces temporal-difference (TD) learning and bootstrapped targets; the paper\u2019s core loss directly adapts TD-style temporal consistency to supervise successive prefix predictions."
+    },
+    {
+      "title": "Temporal-Difference Networks",
+      "authors": "Richard S. Sutton; Brian Tanner",
+      "year": 2005,
+      "role": "Conceptual bridge for prediction-as-target",
+      "relationship_sentence": "Formalizes networks whose predictions serve as targets for future predictions, providing the precise conceptual underpinning for enforcing consistency between adjacent incremental predictions in sequences."
+    },
+    {
+      "title": "Predictive Representations of State",
+      "authors": "Michael L. Littman; Richard S. Sutton; Satinder Singh",
+      "year": 2001,
+      "role": "Theoretical foundation for prediction-based state",
+      "relationship_sentence": "Models state as a vector of predictions about future observations; this motivates viewing partial-sequence classification as maintaining temporally updated, self-consistent predictions."
+    },
+    {
+      "title": "SpeedBoost: Anytime Prediction with Uniform Near-Optimality",
+      "authors": "Alexander M. Grubb; J. Andrew Bagnell",
+      "year": 2012,
+      "role": "Anytime/early prediction paradigm",
+      "relationship_sentence": "Establishes the anytime prediction setting where outputs must be useful at intermediate computation stages, directly aligning with incremental classification on growing prefixes."
+    },
+    {
+      "title": "DeeBERT: Dynamic Early Exiting for Accelerating BERT Inference",
+      "authors": "Ji Xin; Raphael Tang; Jaejun Lee; Yaoliang Yu; Jimmy Lin",
+      "year": 2020,
+      "role": "Architectural precedent for intermediate outputs",
+      "relationship_sentence": "Shows how intermediate classifiers can make early decisions in text models; the present work complements this by training those incremental predictions with a principled temporal-consistency loss across prefixes."
+    },
+    {
+      "title": "Mean Teachers Are Better Role Models: Weight-Averaged Consistency Targets Improve Semi-Supervised Learning",
+      "authors": "Antti Tarvainen; Harri Valpola",
+      "year": 2017,
+      "role": "Consistency-regularization precedent",
+      "relationship_sentence": "Demonstrates that constraining predictions to be consistent across views/epochs improves data efficiency; the new loss instantiates consistency along the temporal axis via TD-style bootstrapping."
+    },
+    {
+      "title": "Training Verifiers to Solve Math Word Problems",
+      "authors": "Adam Cobbe; Vineet Kosaraju; Michael Bavarian; Jacob Hilton; et al.",
+      "year": 2021,
+      "role": "Application driver (LLM verifier paradigm)",
+      "relationship_sentence": "Introduces learned verifiers for evaluating generated math solutions; the proposed method strengthens verifiers\u2019 ability to judge partial generations by enforcing temporal consistency over growing solution prefixes."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s key contribution\u2014deriving a temporal-consistency loss for incremental sequence classification\u2014rests on importing the temporal-difference (TD) principle from reinforcement learning into supervised sequence modeling. Sutton\u2019s TD learning established bootstrapping with targets defined by subsequent predictions, while TD Networks extended this to systems where predictions are targets for future predictions. Together with predictive representations of state, these works provide the conceptual mechanism and justification for enforcing self-consistency between adjacent predictions as a sequence unfolds.\nIn parallel, the need for accurate early predictions is grounded in the anytime/early decision literature. SpeedBoost formalized the anytime prediction objective, motivating models whose outputs remain useful under partial computation or partial observation. In NLP, DeeBERT showed that intermediate classifiers can provide early exits for text tasks; however, prior methods largely lacked a principled way to couple those intermediate predictions over time. The present work fills that gap by using a TD-inspired, temporally consistent supervision that ties together successive prefix predictions.\nFinally, consistency-regularization methods such as Mean Teacher empirically validated that constraining predictions across related views improves data efficiency\u2014a theme the paper operationalizes along the temporal dimension with bootstrapped targets. The application to verifying large language model generations builds directly on verifier-based evaluation for math problem solving, where the proposed loss improves early discrimination between promising and unpromising solution prefixes. Overall, these strands converge to yield a theoretically grounded and practically effective loss for incremental sequence classification.",
+  "analysis_timestamp": "2026-01-07T00:21:32.249532"
+}

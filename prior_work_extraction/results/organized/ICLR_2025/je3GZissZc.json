@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Language Models are Few-Shot Learners",
+      "authors": "Tom B. Brown et al.",
+      "year": 2020,
+      "arxiv_id": "2005.14165",
+      "role": "Inspiration",
+      "relationship_sentence": "This work popularized in-context learning by conditioning on a handful of prompt examples, directly inspiring the test-time, no-gradient-update ICIL setting adopted and operationalized in this paper."
+    },
+    {
+      "title": "One-Shot Imitation Learning",
+      "authors": "Yan Duan et al.",
+      "year": 2017,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "It formalized the problem of learning new tasks from a single demonstration in robotics, providing the problem setup and evaluation paradigm that this paper targets but achieves via pure in-context conditioning instead of meta-updates."
+    },
+    {
+      "title": "Trajectory Transformer: Off-Policy Reinforcement Learning via Sequence Modeling",
+      "authors": "Michael Janner et al.",
+      "year": 2021,
+      "arxiv_id": null,
+      "role": "Related Problem",
+      "relationship_sentence": "By casting control as sequence modeling over trajectories, it established the idea of conditioning policy behavior on context trajectories, a principle this paper retains while changing the representation to structured graphs and the generator to diffusion."
+    },
+    {
+      "title": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+      "authors": "Lili Chen et al.",
+      "year": 2021,
+      "arxiv_id": "2106.01345",
+      "role": "Related Problem",
+      "relationship_sentence": "It showed that transformers can exploit trajectory context for in-context policy adaptation, motivating the paper\u2019s pursuit of ICIL but with a graph-based diffusion model instead of an autoregressive sequence model."
+    },
+    {
+      "title": "Diffuser: Diffusion Models for Planning",
+      "authors": "Michael Janner et al.",
+      "year": 2022,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "This work reframed control as conditional denoising diffusion over trajectories, providing the key generative-control insight that is extended here to graph-structured diffusion conditioned on demonstration graphs."
+    },
+    {
+      "title": "DiGress: Discrete Denoising Diffusion for Graph Generation",
+      "authors": "Thibaut Vignac et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Extension",
+      "relationship_sentence": "The paper adapts DiGress-style permutation-equivariant diffusion over node/edge types to generate policy outputs on a structured demonstration\u2013observation\u2013action graph, enabling the core graph-diffusion formulation of ICIL."
+    },
+    {
+      "title": "Learning Latent Plans from Play",
+      "authors": "Corey Lynch et al.",
+      "year": 2019,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "It demonstrated that large, task-agnostic play can train generalist policies but relies on human collection, motivating this paper\u2019s use of virtually unlimited simulation pseudo-demonstrations to remove expert data dependency."
+    }
+  ],
+  "synthesis_narrative": "Few-shot conditioning without parameter updates was crystallized by the discovery that large sequence models can perform in-context learning when given example prompts; Brown et al. showed that behavior can be steered by a handful of demonstrations in-context. In robotics, Duan et al. defined the one-shot imitation problem\u2014execute a new task from a single demonstration\u2014typically solved through meta-learning, while Janner et al.\u2019s Trajectory Transformer and Chen et al.\u2019s Decision Transformer recast control as sequence modeling, indicating that trajectories themselves can serve as powerful contextual prompts for adaptation. Complementing these sequence models, Diffuser established that denoising diffusion can generate feasible, multi-modal control trajectories under rich conditioning, suggesting a robust generative mechanism for policies. In parallel, DiGress introduced discrete, permutation-equivariant diffusion over graphs, enabling generation over structured node/edge types and relations rather than flat sequences. Finally, Lynch et al. showed that broad, unlabeled play data can substitute for curated demonstrations to build generalist manipulation behaviors, albeit with costly human collection.\nTogether, these works expose an opportunity: use in-context demonstrations to specify a task at test time, but process them with an object- and relation-centric representation and a powerful generative engine, and train not from scarce expert demos but from abundant synthetic trajectories. The present paper synthesizes these ideas by representing demonstrations, observations, and actions as a graph and learning a diffusion process over that graph, while scaling training via simulation-generated pseudo-demonstrations\u2014an immediate next step given the convergence of in-context conditioning, diffusion-based control, and graph generative modeling.",
+  "target_paper": {
+    "title": "Instant Policy: In-Context Imitation Learning via Graph Diffusion",
+    "authors": "Vitalis Vosylius, Edward Johns",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "oral",
+    "keywords": "In-context Imitation Learning, Robotic Manipulation, Graph Neural Networks, Diffusion Models",
+    "abstract": "Following the impressive capabilities of in-context learning with large transformers, In-Context Imitation Learning (ICIL) is a promising opportunity for robotics. We introduce Instant Policy, which learns new tasks instantly from just one or two demonstrations, achieving ICIL through two key components. First, we introduce inductive biases through a graph representation and model ICIL as a graph generation problem using a learned diffusion process, enabling structured reasoning over demonstrations, observations, and actions. Second, we show that such a model can be trained using pseudo-demonstrations \u2013 arbitrary trajectories generated in simulation \u2013 as a virtually infinite pool of training data. Our experiments, in both simulation and reality, show that Instant Policy enables rapid learning of various everyday robot tasks. We also show how it can serve as a foundation for cross-embodiment and zero-shot transfer to language-defined tasks.",
+    "openreview_id": "je3GZissZc",
+    "forum_id": "je3GZissZc"
+  },
+  "analysis_timestamp": "2026-01-06T10:12:38.372271"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Evaluating Large Language Models Trained on Code",
+      "authors": "Mark Chen, Jerry Tworek, Heewoo Jun, Qiming Yuan, Henrique Ponde de Oliveira Pinto, et al.",
+      "year": 2021,
+      "role": "Origin and estimator of pass@k metric",
+      "relationship_sentence": "PKPO elevates pass@k from an evaluation metric (and its standard unbiased estimator over finite samples) popularized by Chen et al. to a training objective, generalizing it and deriving unbiased gradient estimators for both binary and continuous rewards."
+    },
+    {
+      "title": "Simple statistical gradient-following algorithms for connectionist reinforcement learning (REINFORCE)",
+      "authors": "Ronald J. Williams",
+      "year": 1992,
+      "role": "Foundational unbiased policy-gradient estimator",
+      "relationship_sentence": "PKPO\u2019s unbiased gradient estimators are built on the REINFORCE framework, adapting it to a set-coupled objective by transforming group rewards while preserving unbiasedness."
+    },
+    {
+      "title": "Importance Weighted Autoencoders",
+      "authors": "Yuri Burda, Roger Grosse, Ruslan Salakhutdinov",
+      "year": 2015,
+      "role": "Multi-sample training objective coupling multiple draws",
+      "relationship_sentence": "IWAE introduced optimizing objectives that depend jointly on multiple samples, a key conceptual precedent for PKPO\u2019s set-level (max-over-k) objective and its need for coupled-sample gradient estimators."
+    },
+    {
+      "title": "Variational Inference for Monte Carlo Objectives (VIMCO)",
+      "authors": "Andriy Mnih, Danilo J. Rezende",
+      "year": 2016,
+      "role": "Low-variance control variates for multi-sample objectives",
+      "relationship_sentence": "VIMCO\u2019s leave-one-out control variates for multi-sample objectives directly inform PKPO\u2019s design of low-variance, unbiased gradient estimators when rewards are jointly transformed across k samples."
+    },
+    {
+      "title": "The Cross-Entropy Method: A Unified Approach to Combinatorial Optimization, Monte-Carlo Simulation and Machine Learning",
+      "authors": "Reuven Y. Rubinstein, Dirk P. Kroese",
+      "year": 2004,
+      "role": "Elite/top-k based distribution updates via batchwise reward transforms",
+      "relationship_sentence": "CEM\u2019s practice of updating distributions using elite (top-k) samples motivates PKPO\u2019s stable joint transformation of batch rewards to emphasize the best sample in a set while maintaining learnability."
+    },
+    {
+      "title": "Evolution Strategies as a Scalable Alternative to Reinforcement Learning",
+      "authors": "Tim Salimans, Jonathan Ho, Xi Chen, Szymon Sidor, Ilya Sutskever",
+      "year": 2017,
+      "role": "Batchwise rank/utility shaping for variance reduction",
+      "relationship_sentence": "The rank-based, batch-normalized utility shaping from ES anticipates PKPO\u2019s insight that stable, jointly defined transformations of a batch of rewards can greatly reduce variance while targeting set-level objectives."
+    },
+    {
+      "title": "Self-Consistency Improves Chain of Thought Reasoning in Language Models",
+      "authors": "Xuezhi Wang, Jason Wei, Dale Schuurmans, Quoc V. Le, Ed Chi, et al.",
+      "year": 2022,
+      "role": "Empirical motivation for multi-sample success (pass@k) on difficult problems",
+      "relationship_sentence": "Self-consistency shows that drawing multiple samples per problem boosts success on hard tasks, motivating PKPO\u2019s direct optimization of the probability that at least one of k samples succeeds."
+    }
+  ],
+  "synthesis_narrative": "PKPO\u2019s core idea is to make the pass@k notion\u2014success across a set of attempts\u2014an explicit training objective with provably unbiased, low-variance gradient estimators. This builds directly on two pillars. First, the pass@k metric and its commonly used unbiased estimator emerged from code-generation evaluation (Chen et al., 2021), but was not previously treated as a primary optimization target; PKPO formalizes and generalizes this, including continuous rewards. Second, policy-gradient foundations (REINFORCE; Williams, 1992) provide unbiasedness, while work on multi-sample objectives (IWAE; Burda et al., 2015) and their low-variance control variates (VIMCO; Mnih & Rezende, 2016) demonstrates how gradients can remain tractable when samples are coupled by a joint objective. \nBeyond estimator mechanics, PKPO\u2019s batchwise, stable reward transformation is foreshadowed by optimization methods that emphasize elites or use rank-based utilities. The Cross-Entropy Method (Rubinstein & Kroese, 2004) updates distributions using top-k samples, conceptually mirroring PKPO\u2019s focus on the maximum reward in a set. Similarly, Evolution Strategies (Salimans et al., 2017) show that jointly defined, normalized utilities across a batch drastically improve stability and variance\u2014an idea PKPO adapts to pass@k-specific transformations within policy gradient. Finally, empirical advances such as Self-Consistency (Wang et al., 2022) highlight that multiple attempts materially increase success on hard instances, providing practical motivation for optimizing set-level success directly. Together, these works converge to enable PKPO\u2019s unbiased pass@k and gradient estimators and its stable, joint reward shaping that targets the hardest problems.",
+  "analysis_timestamp": "2026-01-06T23:42:48.116213"
+}

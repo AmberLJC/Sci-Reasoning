@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Jonathan Ho; Ajay Jain; Pieter Abbeel",
+      "year": 2020,
+      "role": "Foundational diffusion framework",
+      "relationship_sentence": "CAR-Flow targets a core limitation established by DDPM\u2014the standard Gaussian source that ignores conditioning\u2014by learning a condition-aware shift so the model need not learn both mass transport and conditional injection entirely within the vector field."
+    },
+    {
+      "title": "Diffusion Models Beat GANs on Image Synthesis",
+      "authors": "Prafulla Dhariwal; Alex Nichol",
+      "year": 2021,
+      "role": "Introduced classifier guidance and strong class-conditional diffusion baselines",
+      "relationship_sentence": "Where classifier guidance injects condition at sampling time, CAR-Flow injects it at the source via a learned reparameterization, shortening the probability path and reducing reliance on guidance to achieve strong conditional generation."
+    },
+    {
+      "title": "Classifier-Free Diffusion Guidance",
+      "authors": "Jonathan Ho; Tim Salimans",
+      "year": 2022,
+      "role": "Key conditioning mechanism without external classifiers",
+      "relationship_sentence": "CAR-Flow complements and can reduce the need for classifier-free guidance by embedding conditional information directly into the base distribution through a lightweight, learned shift."
+    },
+    {
+      "title": "Stochastic Interpolants: A Unifying Framework for Flows and Diffusions",
+      "authors": "Michael D. Albergo; Nicholas M. Boffi; Eric Vanden-Eijnden",
+      "year": 2023,
+      "role": "Theoretical foundation for flow matching training",
+      "relationship_sentence": "CAR-Flow builds on the flow-matching/stochastic-interpolant formulation by introducing a condition-aware reparameterization that aligns source and target, simplifying the vector field the flow-matching objective must learn."
+    },
+    {
+      "title": "Elucidating the Design Space of Diffusion Models",
+      "authors": "Tero Karras; Miika Aittala; Samuli Laine; Timo Aila",
+      "year": 2022,
+      "role": "Preconditioning and reparameterization principles for easier diffusion training",
+      "relationship_sentence": "Inspired by EDM\u2019s preconditioning spirit, CAR-Flow performs an analogous reparameterization\u2014but in conditional space\u2014so training focuses on a shorter, better-conditioned transport path."
+    },
+    {
+      "title": "DiT: Diffusion Models with Transformers",
+      "authors": "William Peebles; Saining Xie",
+      "year": 2023,
+      "role": "High-performing transformer backbone for class-conditional ImageNet diffusion",
+      "relationship_sentence": "CAR-Flow is instantiated on strong DiT-style backbones (e.g., XL/2), demonstrating that a plug-in, condition-aware shift can consistently reduce FID by easing the flow learning problem."
+    },
+    {
+      "title": "Learning Structured Output Representation using Deep Conditional Generative Models (Conditional VAE)",
+      "authors": "Kihyuk Sohn; Xinchen Yan; Honglak Lee",
+      "year": 2015,
+      "role": "Introduced conditioning via latent reparameterization (mean shift) in VAEs",
+      "relationship_sentence": "CAR-Flow generalizes the CVAE idea of condition-dependent latent reparameterization to flow/diffusion training, learning a condition-aware shift of the source/target distributions to align them before transport."
+    }
+  ],
+  "synthesis_narrative": "CAR-Flow\u2019s core contribution is a condition-aware reparameterization that aligns source and target distributions via a lightweight learned shift, thereby shortening the probability path a flow/diffusion model must learn. This addresses a well-known limitation in DDPM-style and score-based models (Ho et al., Song et al.) where training begins from a condition-agnostic Gaussian; the model must both inject conditioning and perform mass transport. Prior conditioning strategies like classifier guidance (Dhariwal & Nichol) and classifier-free guidance (Ho & Salimans) inject condition during sampling, but still leave the base distribution misaligned, causing the vector field to shoulder unnecessary work.\n\nThe flow-matching and stochastic-interpolant literature (Albergo, Boffi, Vanden-Eijnden) provides the training formalism CAR-Flow builds upon: learning a vector field that transports a source to a target along an interpolant. CAR-Flow augments this with a learnable, condition-dependent shift of the source, the target, or both, which reduces the path length and simplifies the field the flow-matching loss must fit. Conceptually, this echoes EDM\u2019s preconditioning (Karras et al.), but applies it to conditional alignment rather than time/scale reparameterization, and it resonates with CVAE\u2019s conditional reparameterization of a Gaussian latent. Empirically, integrating this mechanism into modern ImageNet backbones such as DiT (Peebles & Xie) demonstrates faster training and improved FID, substantiating that moving conditional signal into the base distribution yields more efficient and accurate transport.",
+  "analysis_timestamp": "2026-01-07T00:02:04.977687"
+}

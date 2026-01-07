@@ -1,0 +1,57 @@
+{
+  "prior_works": [
+    {
+      "title": "Automatic Chemical Design Using a Data-Driven Continuous Representation of Molecules",
+      "authors": "G\u00f3mez-Bombarelli et al.",
+      "year": 2018,
+      "arxiv_id": "1610.02415",
+      "role": "Foundation",
+      "relationship_sentence": "This work established the latent-space Bayesian optimization paradigm using VAEs (optimize in z, decode to x), whose encoder\u2013decoder non-invertibility causes the reconstruction/value mismatch that NF-BO eliminates by switching to a bijective flow."
+    },
+    {
+      "title": "Bayesian Optimization of Combinatorial Structures",
+      "authors": "Baptista and Poloczek",
+      "year": 2018,
+      "arxiv_id": "1806.08838",
+      "role": "Foundation",
+      "relationship_sentence": "They formalized BO over learned continuous embeddings for high-dimensional, structured/discrete domains via autoencoders, a setup directly adopted by NF-BO but addressed with an invertible mapping to avoid latent\u2013input discrepancies."
+    },
+    {
+      "title": "Junction Tree Variational Autoencoder for Molecular Graph Generation",
+      "authors": "Jin et al.",
+      "year": 2018,
+      "arxiv_id": "1802.04364",
+      "role": "Gap Identification",
+      "relationship_sentence": "As a leading VAE-based latent optimization model for molecules, JT-VAE highlights persistent reconstruction errors and non-bijective mappings in LBO, the precise limitation NF-BO targets by enforcing a one-to-one encoder/decoder."
+    },
+    {
+      "title": "Density Estimation Using Real NVP",
+      "authors": "Dinh et al.",
+      "year": 2017,
+      "arxiv_id": "1605.08803",
+      "role": "Foundation",
+      "relationship_sentence": "Real NVP introduced tractable, exactly invertible normalizing flows with explicit left-inverses, providing the core mechanism NF-BO leverages to remove the reconstruction gap in latent Bayesian optimization."
+    },
+    {
+      "title": "Masked Autoregressive Flow for Density Estimation",
+      "authors": "Papamakarios et al.",
+      "year": 2017,
+      "arxiv_id": "1705.07057",
+      "role": "Inspiration",
+      "relationship_sentence": "MAF\u2019s autoregressive, invertible parameterization directly inspires NF-BO\u2019s SeqFlow design, enabling expressive bijections that preserve exact encode\u2013decode consistency during BO."
+    }
+  ],
+  "synthesis_narrative": "Early work showed that expensive objective optimization could be carried out in a learned latent space: G\u00f3mez-Bombarelli et al. mapped molecules into a VAE\u2019s continuous latent variables, optimized properties with a surrogate, and decoded candidates back to molecules. Baptista and Poloczek generalized this idea to high-dimensional, structured combinatorial domains by training autoencoders to provide the continuous embedding on which BO operates. Despite architectural advances like Junction Tree VAE, which improved molecular graph reconstruction via a structured decoder, these approaches retained a fundamental issue: the encoder\u2013decoder mapping was not bijective, so optimizing in latent space did not guarantee that decoded designs faithfully reflected the optimized latent values. In parallel, normalizing flows provided a principled solution for exact, learnable bijections. Real NVP demonstrated tractable, invertible transformations with explicit left-inverses, and Masked Autoregressive Flow introduced highly expressive autoregressive, invertible parameterizations capable of modeling complex, high-dimensional distributions while guaranteeing exact forward and inverse maps.\n\nTogether, these lines of work revealed both the promise and the bottleneck of latent-space BO: autoencoder-based embeddings enabled search over complex domains, but non-invertibility induced a value discrepancy between latent and input spaces. Normalizing flows, and especially autoregressive flows, offered the missing ingredient\u2014an expressive, one-to-one mapping with an exact inverse. The current paper synthesizes these insights by replacing VAEs with an autoregressive normalizing flow (SeqFlow), maintaining encode\u2013decode consistency and thereby eliminating the reconstruction gap that previously propagated errors through the BO loop.",
+  "target_paper": {
+    "title": "Latent Bayesian Optimization via Autoregressive Normalizing Flows",
+    "authors": "Seunghun Lee, Jinyoung Park, Jaewon Chu, Minseo Yoon, Hyunwoo J. Kim",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "oral",
+    "keywords": "Bayesian optimization, normalizing flow",
+    "abstract": "Bayesian Optimization (BO) has been recognized for its effectiveness in optimizing expensive and complex objective functions.\nRecent advancements in Latent Bayesian Optimization (LBO) have shown promise by integrating generative models such as variational autoencoders (VAEs) to manage the complexity of high-dimensional and structured data spaces.\nHowever, existing LBO approaches often suffer from the value discrepancy problem, which arises from the reconstruction gap between input and latent spaces.\nThis value discrepancy problem propagates errors throughout the optimization process, leading to suboptimal outcomes.\nTo address this issue, we propose a Normalizing Flow-based Bayesian Optimization (NF-BO), which utilizes normalizing flow as a generative model to establish one-to-one encoding function from the input space to the latent space, along with its left-inverse decoding function, eliminating the reconstruction gap. Specifically, we introduce SeqFlow, an autoregressive normalizing ",
+    "openreview_id": "ZCOwwRAaEl",
+    "forum_id": "ZCOwwRAaEl"
+  },
+  "analysis_timestamp": "2026-01-06T10:56:13.344719"
+}

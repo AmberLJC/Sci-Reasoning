@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Denoising Diffusion Probabilistic Models for Discrete Data (D3PM)",
+      "authors": "Jacob Austin et al.",
+      "year": 2021,
+      "role": "Foundational discrete diffusion framework",
+      "relationship_sentence": "Defined discrete-state forward/reverse processes and factorized reverse modeling for tokens, establishing the DDM setting whose slow multi-step sampling LSD accelerates while explicitly addressing compounding decoding errors."
+    },
+    {
+      "title": "Multinomial Diffusion",
+      "authors": "Emiel Hoogeboom et al.",
+      "year": 2021,
+      "role": "Alternative discrete corruption and denoising for sequences",
+      "relationship_sentence": "Introduced multinomial corruption and categorical denoising transitions for discrete variables, a key DDM family that LSD targets with a learnable few-step sampler to preserve quality under aggressive step sizes."
+    },
+    {
+      "title": "Progressive Distillation for Fast Sampling of Diffusion Models",
+      "authors": "Tim Salimans and Jonathan Ho",
+      "year": 2022,
+      "role": "Teacher\u2013student distillation for faster diffusion sampling",
+      "relationship_sentence": "Pioneered compressing many-step diffusion into few steps via teacher\u2013student distillation; LSD extends this paradigm to discrete diffusion and focuses on aligning intermediate score trajectories rather than only terminal outputs."
+    },
+    {
+      "title": "Consistency Models / Consistency Distillation",
+      "authors": "Yang Song et al.",
+      "year": 2023,
+      "role": "Trajectory/consistency-based few-step sampling",
+      "relationship_sentence": "Showed that enforcing consistency across noise levels yields few-step samplers; LSD adopts a related trajectory-alignment view but adapts it to discrete score trajectories with learnable sampler coefficients optimized against a teacher."
+    },
+    {
+      "title": "DPM-Solver and DPM-Solver++",
+      "authors": "Lu et al.",
+      "year": "2022\u20132023",
+      "role": "High-order ODE solvers exposing discretization error\u2013step size tradeoffs",
+      "relationship_sentence": "Clarified how numerical discretization and solver coefficients govern fast sampling quality; LSD operationalizes this by making the sampler coefficients learnable and distilling them to minimize discretization error in discrete domains."
+    },
+    {
+      "title": "UniPC: A Unified Predictor\u2013Corrector Framework for Fast Sampling of Diffusion Models",
+      "authors": "Zhao et al.",
+      "year": 2023,
+      "role": "Parameterized sampler family with tunable coefficients",
+      "relationship_sentence": "Provided a flexible coefficientized sampler design that informs LSD\u2019s parameterization; LSD differs by end-to-end learning of these coefficients to match a teacher\u2019s intermediate score trajectory in discrete diffusion."
+    },
+    {
+      "title": "DiGress: Discrete Denoising Diffusion for Graph Generation",
+      "authors": "Thomas Vignac et al.",
+      "year": 2023,
+      "role": "Application and analysis of DDMs on graphs",
+      "relationship_sentence": "Demonstrated strong but computationally heavy discrete diffusion on combinatorial structures, motivating LSD\u2019s need to deliver few-step, high-fidelity samplers for discrete modalities."
+    }
+  ],
+  "synthesis_narrative": "Learnable Sampler Distillation (LSD) sits at the intersection of discrete diffusion modeling and accelerated sampling via distillation and improved numerical integration. D3PM and Multinomial Diffusion established the core machinery for discrete denoising processes\u2014defining discrete forward transitions, categorical reverse modeling, and the factorized decoding schemes whose errors can compound under aggressive step sizes. These works created the discrete generative setting that LSD targets and clarified the accuracy\u2013efficiency tension in practice. The acceleration thread stems from two complementary lines: distillation and solver design. Progressive Distillation showed that a many-step teacher can be compressed into a few-step student, while Consistency Models reframed acceleration as enforcing agreement across noise levels, suggesting trajectory-aware objectives. LSD inherits this teacher\u2013student mindset but moves beyond endpoint matching by explicitly aligning intermediate score trajectories, which is crucial in discrete spaces where deviations compound. In parallel, DPM-Solver/++ and UniPC revealed how discretization error and solver coefficients determine fast-sampling fidelity, motivating LSD\u2019s central idea to parameterize the sampler and learn its coefficients. Finally, applications like DiGress documented the substantial sampling cost of discrete diffusion on structured data, underscoring the need for a method like LSD that jointly combats compounding decoding and discretization errors through trajectory-aligned distillation and learnable sampler design.",
+  "analysis_timestamp": "2026-01-07T00:21:32.246313"
+}

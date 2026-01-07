@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Conservative Q-Learning for Offline Reinforcement Learning",
+      "authors": "Aviral Kumar, Aurick Zhou, George Tucker, Sergey Levine",
+      "year": 2020,
+      "role": "Direct baseline; value-function pessimism via Q-penalties",
+      "relationship_sentence": "EPQ explicitly targets the core weakness of CQL\u2014uniform conservatism that induces underestimation\u2014by making the Q-penalty state-selective, penalizing only states prone to extrapolation error instead of all states/actions."
+    },
+    {
+      "title": "Batch-Constrained deep Q-learning",
+      "authors": "Scott Fujimoto, David Meger, Doina Precup",
+      "year": 2019,
+      "role": "Problem framing; identifies extrapolation error and dataset-support constraints",
+      "relationship_sentence": "EPQ adopts BCQ\u2019s insight that OOD actions/states cause extrapolation error, but operationalizes it through selective state-dependent value penalties rather than hard action constraints."
+    },
+    {
+      "title": "BEAR: Bootstrapping Error Accumulation Reduction for Offline Reinforcement Learning",
+      "authors": "Aviral Kumar, Justin Fu, George Tucker, Sergey Levine",
+      "year": 2019,
+      "role": "Policy-support constraint to limit bootstrapping error",
+      "relationship_sentence": "EPQ is motivated by BEAR\u2019s focus on controlling bootstrapping error, replacing global policy-support constraints with a targeted Q-penalty applied only where bootstrapping error is likely to arise."
+    },
+    {
+      "title": "BRAC: Behavior Regularized Actor Critic",
+      "authors": "Yifan Wu, George Tucker, Ofir Nachum",
+      "year": 2019,
+      "role": "Behavior-policy regularization paradigm in offline RL",
+      "relationship_sentence": "Contrasting with BRAC\u2019s uniform policy regularization, EPQ advances the idea that conservatism should be applied sparingly, introducing a selective, state-aware value penalty to avoid unnecessary underestimation."
+    },
+    {
+      "title": "SPIBB: Safe Policy Improvement with Baseline Bootstrapping",
+      "authors": "Romain Laroche, Paul Trichelair, R\u00e9mi Tachet des Combes",
+      "year": 2019,
+      "role": "Selective conservatism based on data coverage",
+      "relationship_sentence": "EPQ echoes SPIBB\u2019s principle of selective conservatism\u2014being cautious only where data are scarce\u2014by penalizing value estimates primarily in poorly supported, error-prone states."
+    },
+    {
+      "title": "Implicit Q-Learning (IQL): Off-Policy Reinforcement Learning without Explicit Behavior Cloning",
+      "authors": "Ilya Kostrikov, Ashvin Nair, Sergey Levine",
+      "year": 2021,
+      "role": "Alternative to Q-penalty approaches; robust value estimation to mitigate distribution shift",
+      "relationship_sentence": "EPQ is aligned with IQL\u2019s goal of avoiding unnecessary pessimism, but achieves this via a selective penalty on Q-values rather than expectile-based value estimation."
+    }
+  ],
+  "synthesis_narrative": "Exclusively Penalized Q-learning (EPQ) is situated within the constraint-based offline RL literature that combats distributional shift by injecting conservatism, but it specifically addresses underestimation bias created by overly broad value penalties. The foundational motivation traces to BCQ, which crystallized the notion of extrapolation error from out-of-distribution actions and advocated remaining within dataset support. BEAR and BRAC subsequently formalized this principle through behavior-policy regularization, showing that constraining the learned policy can curb bootstrapping error, albeit sometimes at the cost of undue conservatism. CQL shifted the locus of conservatism from the policy to the critic, introducing pessimistic Q-function regularization that is highly effective but can uniformly depress values and lead to underestimation. SPIBB provided an important complementary idea: conservatism should be selective and data-dependent, with stronger caution where coverage is weak. EPQ synthesizes these strands by keeping the simplicity and practicality of value-function penalties (as in CQL) while adopting a SPIBB-like selectivity principle, operationalized at the state level\u2014penalizing only states likely to induce estimation errors due to distributional shift. This stands in contrast to IQL, which reduces over/underestimation through robust value estimation rather than explicit penalties; EPQ preserves the penalty framework but makes it targeted. The result is a method that maintains the safety benefits of pessimism where needed while mitigating unnecessary underestimation elsewhere, improving accuracy and performance across offline control tasks.",
+  "analysis_timestamp": "2026-01-07T00:02:04.754066"
+}

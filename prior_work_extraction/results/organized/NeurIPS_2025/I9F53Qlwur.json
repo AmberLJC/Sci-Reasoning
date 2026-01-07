@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "High-Resolution Image Synthesis with Latent Diffusion Models",
+      "authors": "Robin Rombach, Andreas Blattmann, Dominik Lorenz, Patrick Esser, Bj\u00f6rn Ommer",
+      "year": 2022,
+      "role": "Foundational latent diffusion architecture",
+      "relationship_sentence": "SP4D\u2019s use of a shared image VAE and operating diffusion in latent space\u2014together with its trick of mapping part masks to RGB-like images so both branches share the same VAE\u2014directly builds on the Latent Diffusion paradigm introduced by Rombach et al."
+    },
+    {
+      "title": "ControlNet: Adding Conditional Control to Text-to-Image Diffusion Models",
+      "authors": "Lvmin Zhang, Maneesh Agrawala",
+      "year": 2023,
+      "role": "Structural guidance for diffusion via auxiliary branches",
+      "relationship_sentence": "The idea of tightly coupling structure and appearance generation in diffusion models informed SP4D\u2019s dual-branch design and bidirectional fusion to enforce cross-branch (RGB\u2194parts) consistency."
+    },
+    {
+      "title": "Imagen Video: High Definition Video Generation with Diffusion Models",
+      "authors": "Jonathan Ho, William Chan, Chitwan Saharia, et al.",
+      "year": 2022,
+      "role": "Video diffusion and temporal consistency mechanisms",
+      "relationship_sentence": "SP4D\u2019s video generation branch and strategies for temporally coherent synthesis are grounded in video diffusion advances exemplified by Imagen Video."
+    },
+    {
+      "title": "DreamFusion: Text-to-3D using 2D Diffusion",
+      "authors": "Ben Poole, Ajay Jain, Jonathan T. Barron, Ben Mildenhall",
+      "year": 2022,
+      "role": "Multi-view consistency with diffusion priors",
+      "relationship_sentence": "SP4D\u2019s multi-view generation objective echoes DreamFusion\u2019s core idea of enforcing cross-view consistency by leveraging a 2D diffusion prior, here extended to paired RGB and kinematic parts over time."
+    },
+    {
+      "title": "Unsupervised Learning of Object Landmarks by Factorized Spatial Embeddings",
+      "authors": "James Thewlis, Hakan Bilen, Andrea Vedaldi",
+      "year": 2017,
+      "role": "Articulation-aligned, view-consistent structural cues",
+      "relationship_sentence": "SP4D\u2019s notion of kinematic parts that remain stable under deformation is conceptually rooted in unsupervised landmark discovery that learns deformation-consistent structural tokens."
+    },
+    {
+      "title": "PartNet-Mobility: A Dataset of 3D Articulated Objects",
+      "authors": "He Wang, Kaichun Mo, Jingwei Huang, Angel X. Chang, Leonidas J. Guibas, Hao Su, et al.",
+      "year": 2020,
+      "role": "Kinematic parts and articulation priors/datasets",
+      "relationship_sentence": "The definition of kinematic parts and their articulation semantics in SP4D is aligned with PartNet-Mobility\u2019s taxonomy and provides priors and evaluation targets for part-level consistency."
+    },
+    {
+      "title": "A Simple Framework for Contrastive Learning of Visual Representations (SimCLR)",
+      "authors": "Ting Chen, Simon Kornblith, Mohammad Norouzi, Geoffrey Hinton",
+      "year": 2020,
+      "role": "Contrastive objectives for representation alignment",
+      "relationship_sentence": "SP4D\u2019s contrastive part-consistency loss adapts InfoNCE-style contrastive learning to enforce alignment of corresponding parts across views and frames."
+    }
+  ],
+  "synthesis_narrative": "Stable Part Diffusion 4D (SP4D) fuses advances in latent diffusion, video generation, and structure-aware conditioning to jointly synthesize RGB and kinematic part videos from a single view. At its core, SP4D inherits the latent autoencoding backbone of Latent Diffusion Models, enabling efficient high-resolution generation. This architectural choice makes it natural to encode segmentation masks as continuous, RGB-like images so that both appearance and parts share the same VAE and latent space, simplifying multi-head design and allowing variable part counts.\n\nTo ensure temporal coherence, SP4D leverages principles from video diffusion (e.g., Imagen Video) that stabilize motion and content across frames. For multi-view consistency, it borrows the key idea from DreamFusion: use a strong 2D diffusion prior to regularize cross-view agreement\u2014here extended to simultaneously maintain consistency between views and across modalities (RGB and parts) through a Bidirectional Diffusion Fusion pathway.\n\nOn the structure side, SP4D\u2019s kinematic parts philosophy connects to unsupervised landmark learning (Thewlis et al.), treating parts as deformation-stable structural tokens aligned with articulation rather than purely semantic appearance. PartNet-Mobility informs the notion of articulated components and provides a kinematics-aware taxonomy useful for supervision or evaluation. Finally, SP4D\u2019s contrastive part-consistency objective traces to SimCLR\u2019s InfoNCE formulation, adapted at the dense/part level to tighten spatial-temporal alignment between modalities and viewpoints. Together, these strands yield a dual-branch, cross-consistent 4D generator that produces synchronized RGB and kinematic part sequences.",
+  "analysis_timestamp": "2026-01-07T00:21:32.345875"
+}

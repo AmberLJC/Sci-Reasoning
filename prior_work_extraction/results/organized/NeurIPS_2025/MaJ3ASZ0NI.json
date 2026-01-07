@@ -1,0 +1,94 @@
+{
+  "prior_works": [
+    {
+      "title": "Attention Is All You Need",
+      "authors": [
+        "Ashish Vaswani",
+        "Noam Shazeer",
+        "Niki Parmar",
+        "Jakob Uszkoreit",
+        "Llion Jones",
+        "Aidan N. Gomez",
+        "Lukasz Kaiser",
+        "Illia Polosukhin"
+      ],
+      "year": 2017,
+      "role": "Architectural foundation",
+      "relationship_sentence": "BAPO explicitly models attention heads as constrained communication channels, abstracting the core mechanism introduced by Vaswani et al. to reason about bandwidth limits inside transformers."
+    },
+    {
+      "title": "Theoretical Limitations of Self-Attention",
+      "authors": [
+        "Michael Hahn"
+      ],
+      "year": 2020,
+      "role": "Theoretical precedent on expressivity limits",
+      "relationship_sentence": "Hahn\u2019s formal lower bounds for bounded-depth/width self-attention motivate the present paper\u2019s focus on intrinsic limitations, which BAPO sharpens by targeting the bandwidth of information flow needed for global reasoning."
+    },
+    {
+      "title": "Thinking Like Transformers (RASP)",
+      "authors": [
+        "Omri Weiss",
+        "Yoav Goldberg",
+        "Eran Yahav"
+      ],
+      "year": 2021,
+      "role": "Formal abstraction of transformer computation",
+      "relationship_sentence": "RASP models transformer programs via restricted selection/aggregation operations; BAPO builds on this abstractionist line by adding explicit per-head bandwidth constraints and analyzing algorithmic hardness under such limits."
+    },
+    {
+      "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+      "authors": [
+        "Jason Wei",
+        "Xuezhi Wang",
+        "Denny Zhou",
+        "Dale Schuurmans",
+        "Maarten Bosma",
+        "Ed H. Chi",
+        "Quoc V. Le",
+        "Samy Bengio"
+      ],
+      "year": 2022,
+      "role": "Empirical technique enabling reasoning",
+      "relationship_sentence": "This work shows CoT improves reasoning; the BAPO framework gives a theoretical explanation\u2014step-wise decomposition reduces required within-model communication, turning BAPO-hard tasks into BAPO-easy ones."
+    },
+    {
+      "title": "Lost in the Middle: How Language Models Use Long Context",
+      "authors": [
+        "Nelson F. Liu",
+        "Kevin Lin",
+        "John Hewitt",
+        "Ashwin Paranjape",
+        "Percy Liang",
+        "Christopher D. Manning"
+      ],
+      "year": 2023,
+      "role": "Empirical evidence of long-context failures",
+      "relationship_sentence": "Observed difficulty in using information dispersed across long inputs is explained by BAPO as bandwidth-limited transmission, predicting success on local tasks and failure on global, communication-intensive ones."
+    },
+    {
+      "title": "Rounds in Communication Complexity",
+      "authors": [
+        "Noam Nisan",
+        "Avi Wigderson"
+      ],
+      "year": 1993,
+      "role": "Communication-complexity underpinning",
+      "relationship_sentence": "Classic lower bounds (e.g., for pointer chasing) establish that problems like reachability require substantial communication; BAPO leverages these insights to define and prove BAPO-hardness for global reasoning tasks."
+    },
+    {
+      "title": "In-Context Learning and Induction Heads",
+      "authors": [
+        "Catherine Olsson",
+        "Nelson Elhage",
+        "Neel Nanda",
+        "et al."
+      ],
+      "year": 2022,
+      "role": "Mechanistic view of attention as information routing",
+      "relationship_sentence": "By identifying attention-head circuits that propagate tokens across positions, this work motivates modeling heads as finite-bandwidth communication links, which BAPO formalizes and analyzes."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core contribution\u2014a bounded attention prefix oracle (BAPO) that formalizes bandwidth limits on attention as the driver of LLM failures in global reasoning\u2014sits at the intersection of architectural, mechanistic, theoretical, and empirical lines of work. Vaswani et al. introduced attention as the channel through which tokens communicate; mechanistic studies of induction heads later sharpened this view by showing specific heads carry and copy information across positions, naturally suggesting a bandwidth perspective. On the theoretical side, Hahn\u2019s limits on self-attention highlighted that even powerful transformers face structural constraints, while RASP provided an algorithmic formalism for what transformers can compute using selection/aggregation primitives. BAPO extends this formalization by explicitly constraining per-head throughput, enabling communication-style hardness arguments. That bridge is completed by classic communication complexity, especially Nisan\u2013Wigderson\u2019s round/bandwidth lower bounds for problems like pointer chasing and (closely related) reachability, which the authors adapt to classify BAPO-hard tasks that demand high internal communication. Empirically, the framework explains and predicts phenomena observed in long-context studies such as Lost in the Middle: when necessary evidence is dispersed, limited-bandwidth heads fail to faithfully transmit it across the network. Finally, Chain-of-Thought prompting, known to improve reasoning, is given a principled interpretation: by decomposing problems into smaller steps, CoT reduces the instantaneous communication burden, converting BAPO-hard instances into BAPO-easy ones. Together, these works directly scaffold the paper\u2019s model, hardness results, and explanatory experiments.",
+  "analysis_timestamp": "2026-01-07T00:21:33.132650"
+}

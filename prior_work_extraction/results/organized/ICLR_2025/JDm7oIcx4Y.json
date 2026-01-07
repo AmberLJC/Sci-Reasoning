@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Deep Residual Learning for Image Recognition",
+      "authors": "Kaiming He et al.",
+      "year": 2016,
+      "arxiv_id": "1512.03385",
+      "role": "Foundation",
+      "relationship_sentence": "By introducing identity skip connections that preserve gradient flow, this work provides the residual \u201chighway\u201d that the proposed algorithm explicitly exploits to accumulate and transmit gradient estimates."
+    },
+    {
+      "title": "Identity Mappings in Deep Residual Networks",
+      "authors": "Kaiming He et al.",
+      "year": 2016,
+      "arxiv_id": "1603.05027",
+      "role": "Inspiration",
+      "relationship_sentence": "Its analysis of pre-activation residual blocks formalized the additive decomposition of signals across the skip and residual branches, directly motivating the paper\u2019s path-wise gradient-sum formulation used for parallel propagation."
+    },
+    {
+      "title": "Residual Networks Behave Like Ensembles of Relatively Shallow Networks",
+      "authors": "Andreas Veit et al.",
+      "year": 2016,
+      "arxiv_id": "1605.06431",
+      "role": "Inspiration",
+      "relationship_sentence": "By showing that ResNets can be viewed as ensembles of many short paths, this paper provides the key insight that gradients decompose over paths\u2014an idea the new method operationalizes via iterative accumulation along residual routes."
+    },
+    {
+      "title": "Highway Networks",
+      "authors": "Rupesh K. Srivastava et al.",
+      "year": 2015,
+      "arxiv_id": "1505.00387",
+      "role": "Foundation",
+      "relationship_sentence": "Highway Networks introduced gated shortcut paths that carry information and gradients across depth, inspiring the notion of a dedicated residual \u2018highway\u2019 channel along which gradient estimates can be accumulated."
+    },
+    {
+      "title": "Highway and Residual Networks learn Unrolled Iterative Estimation",
+      "authors": "Klaus Greff et al.",
+      "year": 2017,
+      "arxiv_id": "unknown",
+      "role": "Inspiration",
+      "relationship_sentence": "The view that residual/highway architectures implement iterative refinement underpins the algorithm\u2019s alternating scheme of accumulating estimates along the shortcut and then distributing gradients in parallel."
+    },
+    {
+      "title": "Decoupled Neural Interfaces using Synthetic Gradients",
+      "authors": "Max Jaderberg et al.",
+      "year": 2016,
+      "arxiv_id": "1608.05343",
+      "role": "Baseline",
+      "relationship_sentence": "As a primary approach to remove backpropagation\u2019s sequential dependency via synthetic gradients, it motivates a parallel alternative whose residual-path estimates avoid DNI\u2019s instability and bias while preserving end-to-end objectives."
+    },
+    {
+      "title": "Greedy Layerwise Learning Can Scale to ImageNet",
+      "authors": "Eugene Belilovsky et al.",
+      "year": 2019,
+      "arxiv_id": "1901.08164",
+      "role": "Gap Identification",
+      "relationship_sentence": "This local-loss decoupling strategy allows parallel layer updates but optimizes mismatched objectives, highlighting the need for a method that retains global gradients\u2014addressed here by residual-path gradient accumulation."
+    }
+  ],
+  "synthesis_narrative": "Highway Networks introduced gated shortcuts that carry information and gradients across depth, establishing a dedicated path for stable signal transport. Deep Residual Learning then popularized identity skip connections, turning the shortcut into a universal architectural ingredient and making additive residual updates the default in modern deep models. Identity Mappings clarified how both forward activations and backpropagated gradients decompose additively across the skip and residual branches, especially in pre-activation form, formalizing the algebra of signal flow through residual blocks. Complementing this, Residual Networks Behave Like Ensembles showed that computation in ResNets can be interpreted as an ensemble of many short paths, implying that gradients naturally sum over path-specific contributions. Building on these structural insights, Highway and Residual Networks learn Unrolled Iterative Estimation framed residual/highway architectures as iterative refinement mechanisms, suggesting that repeated accumulation and correction steps are a natural fit for their shortcut geometry. In parallel, Decoupled Neural Interfaces proposed synthetic gradients to break backpropagation\u2019s strict layerwise dependency, and Greedy Layerwise Learning enabled parallel training with local losses\u2014both exposing the cost of sequential backpropagation but suffering from bias or objective mismatch.\nTogether, these works reveal a gap: there was no method that leverages the residual path\u2019s additive, pathwise structure to parallelize backward computation while preserving a global end-to-end objective. The current paper synthesizes the ensemble/path decomposition with the iterative-refinement view, yielding an iterative scheme that accumulates gradient estimates along the residual highway and then backpropagates them in parallel across layers\u2014achieving parallelism without resorting to synthetic signals or local objectives.",
+  "target_paper": {
+    "title": "Accelerated training through iterative gradient propagation along the residual path",
+    "authors": "Erwan Fagnou, Paul Caillon, Blaise Delattre, Alexandre Allauzen",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "oral",
+    "keywords": "optimization, efficient training",
+    "abstract": "Despite being the cornerstone of deep learning, backpropagation is criticized for its inherent sequentiality, which can limit the scalability of very deep models.\nSuch models faced convergence issues due to vanishing gradient, later resolved using residual connections. Variants of these are now widely used in modern architectures.\nHowever, the computational cost of backpropagation remains a major burden, accounting for most of the training time.\nTaking advantage of residual-like architectural designs, we introduce Highway backpropagation, a parallelizable iterative algorithm that approximates backpropagation, by alternatively i) accumulating the gradient estimates along the residual path, and ii) backpropagating them through every layer in parallel. This algorithm is naturally derived from a decomposition of the gradient as the sum of gradients flowing through all paths, and is adaptable to a diverse set of common architectures, ranging from ResNets and Transformers to recurrent neural",
+    "openreview_id": "JDm7oIcx4Y",
+    "forum_id": "JDm7oIcx4Y"
+  },
+  "analysis_timestamp": "2026-01-06T08:55:09.883642"
+}

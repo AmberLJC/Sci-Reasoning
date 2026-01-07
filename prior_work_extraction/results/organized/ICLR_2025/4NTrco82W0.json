@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Trajectory Balance: Improved Credit Assignment in GFlowNets",
+      "authors": "Denis Malkin et al.",
+      "year": 2022,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "Trajectory Balance establishes the dominant GFlowNet training constraint and optimizes the log-space equality with a squared regression loss, which this paper directly generalizes by replacing the L2 objective with principled alternative losses."
+    },
+    {
+      "title": "Subtrajectory Balance for Generative Flow Networks",
+      "authors": "Abhishek Madan et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Extension",
+      "relationship_sentence": "Subtrajectory Balance retains the same squared log-error regression while enforcing TB constraints on partial trajectories, and the proposed loss design plugs into and generalizes this regression component to alter exploration\u2013exploitation behavior without changing the constraint."
+    },
+    {
+      "title": "GFlowNet Foundations",
+      "authors": "Yoshua Bengio et al.",
+      "year": 2021,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "Foundational GFlowNet work formalized forward/backward flow matching and standard training via log-space regression, providing the core constraint to which this paper applies alternative, theoretically motivated loss functions."
+    },
+    {
+      "title": "f-GAN: Training Generative Neural Samplers using Variational Divergence Minimization",
+      "authors": "Sebastian Nowozin et al.",
+      "year": 2016,
+      "arxiv_id": "1606.00709",
+      "role": "Inspiration",
+      "relationship_sentence": "f-GAN showed that choosing different f-divergences yields distinct generator behaviors (mode-seeking vs. mode-covering), an insight this paper transfers to GFlowNet training by mapping loss choices to f-divergence preferences."
+    },
+    {
+      "title": "Black-box \u03b1-divergence minimization",
+      "authors": "Jos\u00e9 Miguel Hern\u00e1ndez-Lobato, Yingzhen Li, Richard E. Turner",
+      "year": 2016,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "This work established how \u03b1 controls the trade-off between mode-seeking and mode-covering in variational inference, directly motivating the use of divergence-parameterized losses to tune exploration vs. exploitation in GFlowNets."
+    },
+    {
+      "title": "Information, Divergence and Risk",
+      "authors": "Mark D. Reid and Robert C. Williamson",
+      "year": 2011,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "Their theory linking proper scoring rules, Bregman risks, and f-divergences underpins the paper\u2019s derivation that specific regression losses correspond to particular divergence preferences in flow matching."
+    }
+  ],
+  "synthesis_narrative": "Trajectory Balance introduced a single-trajectory constraint equating the product of forward/backward flows to an (unnormalized) reward and trained it by minimizing a squared error in log-space, cementing L2 as the default regression loss for GFlowNet flow matching. Subtrajectory Balance generalized the constraint to partial paths while preserving the same squared log regression, making the L2 choice deeply embedded in practical GFlowNet training. Foundational GFlowNet work formalized the forward\u2013backward flow equality over edges and trajectories and implemented training as regression in log space, establishing the precise targets and residuals on which losses operate. Outside GFlowNets, f-GAN framed generative modeling as minimizing a chosen f-divergence and showed that different divergences induce distinct behaviors such as mode-seeking or mode-covering. Black-box \u03b1-divergence minimization made this trade-off explicit via a tunable \u03b1 that shifts between exploration-like mode-covering and exploitation-like mode-seeking objectives. Reid and Williamson provided the theoretical bridge by characterizing how proper scoring rules and Bregman risks correspond to f-divergences, enabling principled mappings from loss functions to divergence preferences.\n\nTogether, these works exposed a gap: while GFlowNet constraints are well defined, the regression loss shaping policy behavior remained a fixed, unexamined L2 choice. By leveraging the f-divergence perspective and the \u03b1-controlled trade-offs, the present work replaces the squared log-error with a family of theoretically grounded losses, showing how loss curvature and tails modulate exploration vs. exploitation while remaining drop-in compatible with TB/SubTB-style constraints.",
+  "target_paper": {
+    "title": "Beyond Squared Error: Exploring Loss Design for Enhanced Training of Generative Flow Networks",
+    "authors": "Rui Hu, Yifan Zhang, Zhuoran Li, Longbo Huang",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "GFlowNet, Generative Models, f-Divergence, Loss Function",
+    "abstract": "Generative Flow Networks (GFlowNets) are a novel class of generative models designed to sample from unnormalized distributions and have found applications in various important tasks, attracting great research interest in their training algorithms. In general, GFlowNets are trained by fitting the forward flow to the backward flow on sampled training objects. Prior work focused on the choice of training objects, parameterizations, sampling and resampling strategies, and backward policies, aiming to enhance credit assignment, exploration, or exploitation of the training process. However, the choice of regression loss, which can highly influence the exploration and exploitation behavior of the under-training policy, has been overlooked. Due to the lack of theoretical understanding for choosing an appropriate regression loss, most existing algorithms train the flow network by minimizing the squared error of the forward and backward flows in log-space, i.e., using the quadratic regression lo",
+    "openreview_id": "4NTrco82W0",
+    "forum_id": "4NTrco82W0"
+  },
+  "analysis_timestamp": "2026-01-06T12:32:00.864667"
+}

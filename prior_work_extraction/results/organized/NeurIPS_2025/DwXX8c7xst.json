@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Stealing Machine Learning Models via Prediction APIs",
+      "authors": "Florian Tram\u00e8r, Fan Zhang, Ari Juels, Michael K. Reiter, Thomas Ristenpart",
+      "year": 2016,
+      "role": "Foundational evidence for transparency\u2013risk trade-off and observable signal design",
+      "relationship_sentence": "Showed that access to rich outputs (probabilities/logits) dramatically accelerates model extraction compared to label-only access, directly motivating this paper\u2019s modeling of the observable signal Z and the need to quantify bits leaked per query under different output granularities."
+    },
+    {
+      "title": "Membership Inference Attacks Against Machine Learning Models",
+      "authors": "Reza Shokri, Marco Stronati, Congzheng Song, Vitaly Shmatikov",
+      "year": 2017,
+      "role": "Empirical precedent linking output detail to privacy leakage",
+      "relationship_sentence": "Demonstrated that confidence scores materially increase privacy leakage versus hard labels, which this work formalizes by comparing information-theoretic leakage across signals Z (labels, scores/logits, tokens) via mutual-information-based bounds."
+    },
+    {
+      "title": "Extracting Training Data from Large Language Models",
+      "authors": "Nicholas Carlini et al.",
+      "year": 2021,
+      "role": "Motivation and empirical grounding for text-based leakage",
+      "relationship_sentence": "Provided concrete evidence that LLM outputs can reveal memorized training data, motivating an information-theoretic treatment that views answer tokens (and related emissions) as signals Z whose bits can enable adversarial inference of hidden properties T."
+    },
+    {
+      "title": "Towards Making Systems Forget with Machine Unlearning",
+      "authors": "Yinzhi Cao, Junfeng Yang",
+      "year": 2015,
+      "role": "Problem setting for target property T (unlearning recoverability)",
+      "relationship_sentence": "Introduced machine unlearning as a security/privacy goal; this paper explicitly models the recoverability of unlearned content as a target property T and provides auditors with bounds that quantify how much interaction evidence could reconstruct or refute unlearning."
+    },
+    {
+      "title": "Universal and Transferable Adversarial Attacks on Aligned Language Models",
+      "authors": "Andy Zou, Zifan Wang, et al.",
+      "year": 2023,
+      "role": "Adversarial objective and guardrail-targeted attacks",
+      "relationship_sentence": "Showed that jailbreak prompts can systematically elicit harmful behavior across aligned LLMs; this work abstracts such guardrail states (e.g., harm/reject flags) into a binary target T and derives per-query information bounds on how quickly an attacker can infer or flip that state."
+    },
+    {
+      "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+      "authors": "Jason Wei, Xuezhi Wang, Dale Schuurmans, Maarten Bosma, et al.",
+      "year": 2022,
+      "role": "Signal choice: thinking-process tokens as potential leakage",
+      "relationship_sentence": "Established chain-of-thought as an explicit reasoning transcript; this paper treats such \u2018thinking tokens\u2019 as an observable signal Z and quantifies their additional leakage relative to terse answers, informing the transparency\u2013safety trade-off."
+    },
+    {
+      "title": "Controlling Generalization Error via Mutual Information",
+      "authors": "Daniel Russo, James Zou",
+      "year": 2016,
+      "role": "Methodological basis for mutual-information bounds",
+      "relationship_sentence": "Pioneered using mutual information to upper-bound learning/generalization behavior; this work adapts MI-based reasoning (with data-processing and related inequalities) to bound adversarial inference of hidden properties T per LLM query."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core innovation\u2014an information-theoretic framework that upper-bounds how many bits an adversary can extract per LLM query about a hidden target T\u2014sits at the intersection of transparency-driven attacks and MI-based analysis. Empirical attack lines showed that richer outputs amplify risk: model extraction (Tram\u00e8r et al., 2016) and membership inference (Shokri et al., 2017) both demonstrated that returning probabilities/logits, rather than labels alone, increases adversarial power. In the LLM setting, Carlini et al. (2021) established that the text itself can leak memorized data, sharpening the need to treat generated tokens as information-bearing signals. In parallel, jailbreak research (Zou et al., 2023) clarified an attacker\u2019s objective against aligned models\u2014probing guardrail states\u2014naturally casting the harmful/rejection gate as a binary target property T whose inference rate should be bounded.\nMethodologically, the work draws on mutual-information tools (Russo & Zou, 2016), leveraging data-processing and related inequalities to translate observable signals Z into principled per-query leakage bounds. This directly supports comparing output regimes\u2014labels, logits, answer tokens, and reasoning traces\u2014under a unified metric (bits leaked). Chain-of-thought prompting (Wei et al., 2022) is pivotal for analyzing \u201cthinking tokens\u201d as an additional channel of leakage, enabling a formal treatment of the transparency\u2013risk trade-off. Finally, unlearning (Cao & Yang, 2015) provides a salient instance of T\u2014the recoverability of removed information\u2014so the framework can offer auditors quantitative guidance on whether their probes approach theoretical limits and how much disclosure is safe under different interface designs.",
+  "analysis_timestamp": "2026-01-06T23:42:48.123372"
+}

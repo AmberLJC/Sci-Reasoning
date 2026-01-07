@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Model-Agnostic Meta-Learning for Fast Adaptation of Deep Networks",
+      "authors": "Chelsea Finn et al.",
+      "year": 2017,
+      "arxiv_id": "1703.03400",
+      "role": "Baseline",
+      "relationship_sentence": "This work\u2019s gradient-based inner-loop adaptation is the primary baseline whose costly unrolled computational graph the new hierarchical Bayesian NIW approach replaces with closed-form episode-level Bayesian updates."
+    },
+    {
+      "title": "Recasting Gradient-Based Meta-Learning as Hierarchical Bayes",
+      "authors": "Erin Grant et al.",
+      "year": 2018,
+      "arxiv_id": "1801.08930",
+      "role": "Foundation",
+      "relationship_sentence": "It formalized meta-learning as hierarchical Bayesian inference with task-specific parameters drawn from a shared prior, directly motivating the paper\u2019s global\u2013local latent variable formulation."
+    },
+    {
+      "title": "Probabilistic Model-Agnostic Meta-Learning",
+      "authors": "Chelsea Finn et al.",
+      "year": 2018,
+      "arxiv_id": "1806.02817",
+      "role": "Gap Identification",
+      "relationship_sentence": "By introducing a Bayesian treatment of task-specific parameters via variational/SG-MCMC approximations, it highlighted the lack of tractable conjugate updates that the new NIW-based model addresses with approximate closed-form local posteriors."
+    },
+    {
+      "title": "Towards a Neural Statistician",
+      "authors": "Harrison Edwards et al.",
+      "year": 2017,
+      "arxiv_id": "1606.02185",
+      "role": "Inspiration",
+      "relationship_sentence": "It introduced dataset/episode-level latent variables governed by global variables, inspiring the explicit episode-wise random variables controlled by a global prior in the proposed hierarchical model."
+    },
+    {
+      "title": "Meta-Learning Probabilistic Inference for Prediction",
+      "authors": "Jonathan Gordon et al.",
+      "year": 2018,
+      "arxiv_id": "1805.09921",
+      "role": "Foundation",
+      "relationship_sentence": "By framing meta-learning as learning to perform Bayesian inference and output posterior predictive distributions, it underpins the paper\u2019s view of novel-episode prediction as Bayesian inference under a learned hierarchical prior."
+    },
+    {
+      "title": "Prototypical Networks for Few-shot Learning",
+      "authors": "Jake Snell et al.",
+      "year": 2017,
+      "arxiv_id": "1703.05175",
+      "role": "Extension",
+      "relationship_sentence": "Its class-mean (Gaussian-like) assumption connects directly to conjugate Gaussian modeling, which the new work generalizes by placing an NIW prior over class means and covariances to obtain principled Bayesian predictive distributions."
+    }
+  ],
+  "synthesis_narrative": "Gradient-based meta-learning established a dominant template in which a model quickly adapts to new tasks via inner-loop updates, but doing so requires unrolling costly computational graphs (Finn et al., 2017). A pivotal perspective then showed that such procedures can be understood as hierarchical Bayesian inference, with task-specific parameters drawn from a shared prior that is learned across tasks (Grant et al., 2018). Pushing this further, probabilistic MAML introduced an explicit Bayesian treatment of task parameters, but relied on variational sampling or SG-MCMC to approximate intractable posteriors, revealing the need for tractable per-task Bayesian updates (Finn et al., 2018). In parallel, the Neural Statistician demonstrated that dataset/episode-level latent variables governed by a global variable can capture across-episode regularities in a principled hierarchical generative model (Edwards & Storkey, 2017). Meta-learning as probabilistic inference was further crystallized by ML-PIP, which emphasized learning to compute posterior predictives for new tasks (Gordon et al., 2018). Finally, Prototypical Networks exposed the practical value of Gaussian-like class-conditional assumptions in embedding space, hinting at conjugate Bayesian treatments when moving beyond point estimates of class means (Snell et al., 2017).\nTogether these works suggested a natural opportunity: retain the hierarchical Bayesian view with explicit episode-level variables and global priors, but replace approximate, gradient-heavy inner loops with conjugate Bayesian updates. The present work synthesizes these strands by adopting a Normal\u2013Inverse\u2013Wishart prior over Gaussian episode-level parameters, yielding approximate closed-form local posteriors and posterior predictives. This preserves the hierarchical sharing and Bayesian task adaptation of prior probabilistic meta-learners while avoiding MAML\u2019s expensive unrolled computation, realizing a principled and efficient few-shot meta-learning algorithm.",
+  "target_paper": {
+    "title": "A Hierarchical Bayesian Model for Few-Shot Meta Learning",
+    "authors": "Minyoung Kim, Timothy Hospedales",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Bayesian models, Meta learning, Few-shot learning",
+    "abstract": "We propose a novel hierarchical Bayesian model for the few-shot meta learning problem. We consider episode-wise random variables to model episode-specific generative processes, where these local random variables are governed by a higher-level global random variable. The global variable captures information shared across episodes, while controlling how much the model needs to be adapted to new episodes in a principled Bayesian manner. Within our  framework, prediction on a novel episode/task can be seen as a Bayesian inference problem. For tractable training, we need to be able to relate each local episode-specific solution to the global higher-level parameters. We propose a Normal-Inverse-Wishart model, for which establishing this local-global relationship becomes feasible due to the approximate closed-form solutions for the local posterior distributions. The resulting algorithm is more attractive than the MAML in that it does not maintain a costly computational graph for the sequence ",
+    "openreview_id": "mQ72XRfYRZ",
+    "forum_id": "mQ72XRfYRZ"
+  },
+  "analysis_timestamp": "2026-01-06T18:59:03.917320"
+}

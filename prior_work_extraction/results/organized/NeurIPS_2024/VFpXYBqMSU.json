@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Jonathan Ho, Ajay Jain, Pieter Abbeel",
+      "year": 2020,
+      "role": "Foundational method for training diffusion models and the conditional DM objective used in modern image, class, and text conditioned generation.",
+      "relationship_sentence": "This paper provides the core diffusion training framework and conditional setups that the present work perturbs via slight corruption during pre-training."
+    },
+    {
+      "title": "Classifier-Free Diffusion Guidance",
+      "authors": "Jonathan Ho, Tim Salimans",
+      "year": 2022,
+      "role": "Introduced deliberate corruption of conditioning (randomly dropping the condition) during training to enable powerful guidance at sampling.",
+      "relationship_sentence": "It establishes the precedent that weakening or corrupting the conditioning signal in diffusion training can improve generation, directly motivating the study of slight pair corruption."
+    },
+    {
+      "title": "High-Resolution Image Synthesis with Latent Diffusion Models",
+      "authors": "Robin Rombach, Andreas Blattmann, Dominik Lorenz, Patrick Esser, Bj\u00f6rn Ommer",
+      "year": 2022,
+      "role": "Scaled text-to-image diffusion on noisy web image\u2013text data and commonly used caption drop/conditioning dropout during training.",
+      "relationship_sentence": "By succeeding on inherently noisy web pairs and using conditioning dropout, this work suggests noise in conditions can be tolerated or beneficial\u2014foreshadowing the current paper\u2019s systematic corruption study."
+    },
+    {
+      "title": "StackGAN: Text to Photo-realistic Image Synthesis with Stacked Generative Adversarial Networks",
+      "authors": "Han Zhang, Tao Xu, Hongsheng Li, Shaoting Zhang, Xiaogang Wang, Xiaolei Huang, Dimitris Metaxas",
+      "year": 2017,
+      "role": "Introduced Conditioning Augmentation that adds Gaussian noise to text embeddings to improve diversity and stability in text-to-image generation.",
+      "relationship_sentence": "StackGAN\u2019s conditioning augmentation is an early, direct example that slight stochastic corruption of the conditioning improves generative models, conceptually mirrored here for diffusion pre-training."
+    },
+    {
+      "title": "Mixup: Beyond Empirical Risk Minimization",
+      "authors": "Hongyi Zhang, Moustapha Ciss\u00e9, Yann N. Dauphin, David Lopez-Paz",
+      "year": 2018,
+      "role": "Showed that mixing inputs and labels (a controlled label/input corruption) acts as a regularizer that improves generalization.",
+      "relationship_sentence": "Mixup provides a supervised-learning analogue where mild target/input corruption benefits performance, supporting the hypothesis that slight condition corruption can regularize diffusion training."
+    },
+    {
+      "title": "Rethinking the Inception Architecture for Computer Vision (Label Smoothing)",
+      "authors": "Christian Szegedy, Vincent Vanhoucke, Sergey Ioffe, Jon Shlens, Zbigniew Wojna",
+      "year": 2016,
+      "role": "Popularized label smoothing, a principled slight corruption of one-hot labels that improves calibration and generalization.",
+      "relationship_sentence": "Label smoothing is a canonical instance of beneficial slight supervision corruption, paralleling the paper\u2019s finding that small condition misalignment can help diffusion models."
+    },
+    {
+      "title": "Training with Noise is Equivalent to Tikhonov Regularization",
+      "authors": "Christopher M. Bishop",
+      "year": 1995,
+      "role": "Theoretical foundation linking injected noise during training to explicit regularization.",
+      "relationship_sentence": "This result provides the theoretical underpinning for why slight corruption (noise) in the conditioning or pairs can yield better generalization, echoed by the paper\u2019s Gaussian mixture analysis."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s key insight\u2014that slight corruption in pre-training pairs can improve diffusion models\u2014builds on two converging threads. First, diffusion-specific practice has long embraced weakening the conditioning signal to gain robustness and control: Denoising Diffusion Probabilistic Models established the conditional diffusion objective; Classifier-Free Diffusion Guidance then explicitly corrupted conditioning by random dropout to enable guidance, and Latent Diffusion Models scaled training on inherently noisy web image\u2013text pairs while also using caption/conditioning dropout. Earlier in generative modeling, StackGAN\u2019s Conditioning Augmentation added Gaussian noise to text embeddings, demonstrating that small stochastic perturbations to conditions can increase diversity and stabilize training. Second, supervised learning has repeatedly shown that mild corruption of targets or inputs improves generalization: label smoothing replaces brittle one-hot labels with softened targets, and Mixup perturbs inputs and labels in a controlled manner to regularize learners. These empirical practices are grounded in Bishop\u2019s classic result that training with noise acts as Tikhonov regularization, offering a principled rationale for performance gains under small perturbations. The present paper unifies and extends these ideas to diffusion pre-training: it systematically corrupts image\u2013condition pairs (on ImageNet-1K and CC3M), shows consistent gains across conditional DMs and downstream adaptation, and supports the phenomenon with a Gaussian mixture model analysis that formalizes when and why slight corruption acts as beneficial regularization rather than harmful noise.",
+  "analysis_timestamp": "2026-01-06T23:42:49.045656"
+}

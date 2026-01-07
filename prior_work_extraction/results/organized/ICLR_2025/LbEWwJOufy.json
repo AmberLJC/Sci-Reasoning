@@ -1,0 +1,57 @@
+{
+  "prior_works": [
+    {
+      "title": "Gesture Video Reenactment",
+      "authors": "Unknown et al.",
+      "year": 2024,
+      "arxiv_id": "",
+      "role": "Baseline",
+      "relationship_sentence": "TANGO preserves GVR\u2019s directed-graph clip-retrieval formulation but directly replaces GVR\u2019s heuristic audio matching and GAN-based transition synthesis with a learned audio\u2013motion latent distance (AuMoClip) and a diffusion-based interpolator (ACInterp) to fix misalignment and artifacts."
+    },
+    {
+      "title": "AudioCLIP: Extending CLIP to Image, Text and Audio",
+      "authors": "Andrey Guzhov et al.",
+      "year": 2021,
+      "arxiv_id": "",
+      "role": "Inspiration",
+      "relationship_sentence": "TANGO borrows AudioCLIP\u2019s contrastive learning blueprint for building a joint audio-centered embedding space, repurposing it to align speech audio with gesture motion features for retrieval rather than with text or images."
+    },
+    {
+      "title": "MotionCLIP: Exposing Human Motion to CLIP",
+      "authors": "Guy Tevet et al.",
+      "year": 2022,
+      "arxiv_id": "",
+      "role": "Extension",
+      "relationship_sentence": "TANGO extends MotionCLIP\u2019s idea of encoding human motion into a CLIP-like latent by coupling a motion encoder with a speech-audio encoder and adding a hierarchical temporal design to form the AuMoClip space used for clip retrieval."
+    },
+    {
+      "title": "Learning Individual Styles of Conversational Gesture",
+      "authors": "Shiry Ginosar et al.",
+      "year": 2019,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "By establishing the speech-to-gesture generation task and revealing the difficulty of robustly aligning prosody to motion with direct regression, this work motivates TANGO\u2019s retrieval-based alignment via a learned audio\u2013motion embedding."
+    },
+    {
+      "title": "Animate Anyone: Consistent and Controllable Image-to-Video Synthesis for Human Characters",
+      "authors": "Unknown et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Extension",
+      "relationship_sentence": "TANGO\u2019s ACInterp adapts Animate Anyone\u2019s appearance-consistent diffusion conditioning to generate identity-preserving in-between frames, directly addressing the visual artifacts of GAN-generated transitions in GVR."
+    }
+  ],
+  "synthesis_narrative": "Gesture Video Reenactment introduced a retrieval-centric formulation: represent a reference video as a directed graph of clips and navigate it by selecting clip transitions to reenact target content, but it matched audio to clips with simple heuristics and synthesized transitions with a GAN that produced artifacts. AudioCLIP demonstrated that contrastive training can align audio with other modalities in a shared latent, enabling robust cross-modal retrieval rather than hand-crafted similarity. MotionCLIP showed how human motion sequences can be embedded into a CLIP-like space, indicating that motion encoders trained with contrastive objectives can produce semantics-aligned latents. Earlier, Learning Individual Styles of Conversational Gesture formalized the speech-to-gesture task and exposed the challenge of mapping prosody to motion via direct prediction, often causing misalignment and limited expressivity. Animate Anyone established a diffusion-based pipeline that preserves a person\u2019s appearance while following structural controls (e.g., poses), revealing a path to high-fidelity, identity-consistent frame synthesis.\nTogether these works exposed a gap: retrieval-based reenactment was compelling but hampered by weak audio\u2013motion alignment and GAN artifacts at clip boundaries. The natural synthesis was to replace heuristic matching with a learned joint audio\u2013motion space\u2014drawing on AudioCLIP\u2019s contrastive recipe and MotionCLIP\u2019s motion encoding\u2014while preserving retrieval\u2019s controllability. Complementing this, diffusion-based appearance-consistent generation, as in Animate Anyone, offered a principled way to inpaint and interpolate transitions without identity drift. TANGO integrates these insights by coupling a hierarchical audio\u2013motion embedding (for precise cross-modal retrieval) with a diffusion interpolator (for artifact-free clip stitching) within the GVR framework.",
+  "target_paper": {
+    "title": "TANGO: Co-Speech Gesture Video Reenactment with Hierarchical Audio Motion Embedding and Diffusion Interpolation",
+    "authors": "Haiyang Liu, Xingchao Yang, Tomoya Akiyama, Yuantian Huang, Qiaoge Li, Shigeru Kuriyama, Takafumi Taketomi",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "oral",
+    "keywords": "co-speech video generation, cross-modal retrieval, audio repsentation learning, motion repsentation learning, video frame interpolation",
+    "abstract": "We present TANGO, a framework for generating co-speech body-gesture videos. Given a few-minute, single-speaker reference video and target speech audio, TANGO produces high-fidelity videos with synchronized body gestures. TANGO builds on Gesture Video Reenactment (GVR), which splits and retrieves video clips using a directed graph structure - representing video frames as nodes and valid transitions as edges. We address two key limitations of GVR: audio-motion misalignment and visual artifacts in GAN-generated transition frames. In particular, i) we propose retrieving gestures using latent feature distance to improve cross-modal alignment. To ensure the latent features could effectively model the relationship between speech audio and gesture motion, we implement a hierarchical joint embedding space (AuMoClip); ii) we introduce the diffusion-based model to generate high-quality transition frames. Our diffusion model, Appearance Consistent Interpolation (ACInterp), is built upon AnimateAny",
+    "openreview_id": "LbEWwJOufy",
+    "forum_id": "LbEWwJOufy"
+  },
+  "analysis_timestamp": "2026-01-06T15:40:03.246092"
+}

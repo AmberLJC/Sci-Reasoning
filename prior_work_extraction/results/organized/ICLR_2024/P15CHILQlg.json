@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "GFlowNet Foundations",
+      "authors": "Yoshua Bengio et al.",
+      "year": 2021,
+      "arxiv_id": "2106.04399",
+      "role": "Foundation",
+      "relationship_sentence": "This work formalized sampling from unnormalized Boltzmann rewards via flows over sequential construction graphs, providing the state/action/terminal-reward framework that LED-GFN adopts when learning transition-level energy potentials."
+    },
+    {
+      "title": "A Trajectory Balance Objective for Generative Flow Networks",
+      "authors": "Mikhail Malkin et al.",
+      "year": 2022,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "Trajectory Balance is the principal training objective/baseline that LED-GFN reparameterizes with learned transition potentials to enable partial inference without relying on exact intermediate energy evaluations."
+    },
+    {
+      "title": "Forward-Looking GFlowNets",
+      "authors": "Unknown et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "This method reparameterizes flow functions using evaluated intermediate-state energies, and LED-GFN directly addresses its stated limitations by replacing expensive and potentially misleading intermediate energy evaluations with learned transition-level energy decompositions."
+    },
+    {
+      "title": "Subtrajectory Balance for Credit Assignment in Generative Flow Networks",
+      "authors": "Unknown et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Related Problem",
+      "relationship_sentence": "By enforcing balance on subpaths to improve credit assignment, this work motivates LED-GFN\u2019s design of informative local training signals, which it achieves via learned transition potentials consistent with the global energy."
+    },
+    {
+      "title": "Policy Invariance under Reward Transformations: Theory and Application to Reward Shaping",
+      "authors": "Andrew Y. Ng et al.",
+      "year": 1999,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "The potential-based shaping principle (using differences of a scalar potential across transitions) directly inspires LED-GFN\u2019s energy decomposition into transition potentials that reparameterize flows while preserving the target Boltzmann distribution."
+    },
+    {
+      "title": "RUDDER: Return Decomposition for Delayed Rewards",
+      "authors": "Marc G. Bellemare (Arjona-Medina) et al.",
+      "year": 2019,
+      "arxiv_id": "1806.07857",
+      "role": "Inspiration",
+      "relationship_sentence": "RUDDER\u2019s idea of learning a decomposition of delayed returns to provide informative local credit signals informs LED-GFN\u2019s strategy of learning transition-level energy contributions for partial inference training."
+    }
+  ],
+  "synthesis_narrative": "Generative Flow Networks were grounded by GFlowNet Foundations, which framed the problem of sampling from unnormalized Boltzmann rewards through flows over a directed construction graph, tying terminal energies to path-wise flows. Building on this, the Trajectory Balance objective established a practical, stable global consistency constraint\u2014equating products of forward policies and backward flows along complete trajectories to terminal rewards\u2014that became the standard training baseline. Subtrajectory Balance moved beyond purely terminal credit by enforcing consistency on subpaths, highlighting the importance of local signals for long horizons. A complementary direction, Forward-Looking GFlowNets, reparameterized flows with evaluated intermediate-state energies to inject more informative local guidance, but revealed critical limitations: intermediate energies can be expensive or infeasible to compute and may mislead training when energies fluctuate sharply along sequences. Independently, the reinforcement learning literature provided two key insights: potential-based reward shaping (Ng et al.) showed that differences of a learned scalar potential across transitions can redistribute credit without changing the target optimum, and RUDDER demonstrated that learning return decompositions can transform delayed rewards into informative local signals. Together, these strands suggested an opportunity to replace brittle intermediate energy evaluations with learnable, transition-level surrogates. LED-GFN synthesizes these ideas by learning a potential whose differences decompose terminal energy across transitions, then reparameterizing the GFlowNet flow functions with these potentials to enable partial inference. This preserves the global Boltzmann target while supplying robust, informative local credit\u2014naturally addressing forward-looking GFlowNets\u2019 limitations and integrating smoothly with trajectory-balance style training.",
+  "target_paper": {
+    "title": "Learning Energy Decompositions for Partial Inference in GFlowNets",
+    "authors": "Hyosoon Jang, Minsu Kim, Sungsoo Ahn",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "oral",
+    "keywords": "Generative flow networks, reinforcement learning, generative models",
+    "abstract": "This paper studies generative flow networks (GFlowNets) to sample objects from the Boltzmann energy distribution via a sequence of actions. In particular, we focus on improving GFlowNet with partial inference: training flow functions with the evaluation of the intermediate states or transitions. To this end, the recently developed forward-looking GFlowNet reparameterizes the flow functions based on evaluating the energy of intermediate states. However, such an evaluation of intermediate energies may (i) be too expensive or impossible to evaluate and (ii) even provide misleading training signals under large energy fluctuations along the sequence of actions. To resolve this issue, we propose learning energy decompositions for GFlowNets (LED-GFN). Our main idea is to (i) decompose the energy of an object into learnable potential functions defined on state transitions and (ii) reparameterize the flow functions using the potential functions. In particular, to produce informative local credi",
+    "openreview_id": "P15CHILQlg",
+    "forum_id": "P15CHILQlg"
+  },
+  "analysis_timestamp": "2026-01-06T15:41:24.473521"
+}

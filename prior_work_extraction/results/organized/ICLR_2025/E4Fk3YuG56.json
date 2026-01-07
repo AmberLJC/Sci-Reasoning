@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness",
+      "authors": "Tri Dao, Daniel Y. Fu, Stefano Ermon, Atri Rudra, Christopher R\u00e9",
+      "year": 2022,
+      "role": "I/O-aware tiling and on-the-fly softmax computation",
+      "relationship_sentence": "CCE mirrors FlashAttention\u2019s core idea of avoiding materialization of a large intermediate by tiling the computation and performing the softmax normalizer on the fly in SRAM, but applies it to the output-loss layer over the vocabulary."
+    },
+    {
+      "title": "Online Normalizer Calculation for Softmax",
+      "authors": "Andrey (A.) Milakov, Ilya Gimelshein",
+      "year": 2018,
+      "role": "Streaming, numerically stable log-sum-exp",
+      "relationship_sentence": "CCE\u2019s ability to compute the log-sum-exp across the vocabulary without storing all logits directly builds on the online softmax/normalizer algorithm that maintains a running max and sum for numerical stability."
+    },
+    {
+      "title": "Megatron-LM: Training Multi-Billion Parameter Language Models Using Model Parallelism",
+      "authors": "Mohammad Shoeybi, Mostofa Patwary, Raul Puri, Patrick LeGresley, Jared Casper, Bryan Catanzaro",
+      "year": 2019,
+      "role": "Fused GPU kernels for transformer training",
+      "relationship_sentence": "CCE extends the kernel-fusion philosophy popularized by Megatron-LM (e.g., fused softmax/xent) by further fusing the output matmul with the loss reduction to eliminate the global-logit write entirely."
+    },
+    {
+      "title": "Efficient Softmax Approximation for GPUs (Adaptive Softmax)",
+      "authors": "Edouard Grave, Armand Joulin, Nicolas Usunier",
+      "year": 2017,
+      "role": "Large-vocabulary softmax efficiency via approximation",
+      "relationship_sentence": "Adaptive Softmax highlighted the computational/memory burden of large-vocabulary losses; CCE addresses the same bottleneck but achieves exact cross-entropy through an on-the-fly reduction rather than approximation."
+    },
+    {
+      "title": "On Using Very Large Target Vocabulary for Neural Machine Translation",
+      "authors": "S\u00e9bastien Jean, Kyunghyun Cho, Roland Memisevic, Yoshua Bengio",
+      "year": 2015,
+      "role": "Importance-sampled/sampled softmax for large vocabularies",
+      "relationship_sentence": "This work established sampled/importance-sampling strategies to mitigate the softmax cost; CCE departs by retaining exactness and instead reduces memory traffic via streaming log-sum-exp and fused matmul."
+    },
+    {
+      "title": "Using the Output Embedding to Improve Language Models (Weight Tying)",
+      "authors": "Ofir Press, Lior Wolf",
+      "year": 2017,
+      "role": "Output layer design and parameter efficiency",
+      "relationship_sentence": "Weight tying made the output layer central and parameter-heavy in LMs; CCE complements this by attacking the activation-memory footprint of the tied output softmax through a targeted, on-the-fly loss computation."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core contribution\u2014computing exact cross-entropy for large vocabularies without materializing the full logit matrix\u2014emerges from two converging lines of prior work: I/O-aware kernel design that avoids large intermediates and streaming formulations of softmax. FlashAttention demonstrated that exact attention can be computed efficiently by tiling into on-chip memory and performing softmax normalization online, eliminating the need to write the full attention matrix to global memory. CCE adopts this same IO-aware, tile-and-reduce paradigm for the loss layer, where the vocabulary dimension is the bottleneck, fusing the output matmul with a running softmax reduction to keep data in fast memory.\n\nTechnically, the feasibility of on-the-fly normalization stems from the online softmax normalizer (Milakov & Gimelshein), which maintains a numerically stable running maximum and sum of exponentials. CCE relies on this streaming log-sum-exp to sweep over vocabulary tiles while computing only the target-class logit explicitly, thereby avoiding the global logit tensor altogether. System-level precedents in Megatron-LM, which popularized fused kernels (e.g., fused softmax/cross-entropy), showed the training benefits of reducing memory traffic and kernel launches; CCE advances this by fully eliminating the logits write and fusing the reduction within the matmul.\n\nHistorically, large-vocabulary efficiency was tackled via approximations\u2014hierarchical/adaptive softmax and sampled/importance-sampled objectives (Jean et al.; Grave et al.)\u2014which trade exactness for speed/memory. CCE charts a different course: retain exact cross-entropy but redesign its execution to be IO-optimal. Finally, with weight tying making the output head a major locus of computation and memory, CCE directly addresses the dominant activation footprint during training, unlocking substantial memory savings without changing the objective.",
+  "analysis_timestamp": "2026-01-06T23:42:48.086451"
+}

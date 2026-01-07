@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+      "authors": "Jason Wei et al.",
+      "year": 2022,
+      "role": "Foundational supervision signal",
+      "relationship_sentence": "CodeIO adopts CoT-style natural language rationales as targets, extending Wei et al.\u2019s idea by generating rationales from code-driven input\u2013output prediction rather than from task-specific explanations."
+    },
+    {
+      "title": "Least-to-Most Prompting Enables Complex Reasoning in Large Language Models",
+      "authors": "Denny Zhou et al.",
+      "year": 2022,
+      "role": "Decomposition strategy",
+      "relationship_sentence": "CodeIO\u2019s emphasis on modular decomposition and stepwise planning is aligned with Least-to-Most\u2019s curriculum-like breakdown, but operationalizes it by mining such structures from code semantics and test I/O rather than manual decomposition."
+    },
+    {
+      "title": "Tree of Thoughts: Deliberate Problem Solving with Large Language Models",
+      "authors": "Shunyu Yao et al.",
+      "year": 2023,
+      "role": "Search over reasoning state space",
+      "relationship_sentence": "The paper\u2019s focus on exposing universal primitives like state-space search and decision-tree traversal is directly inspired by ToT\u2019s deliberate branching and evaluation, with CodeIO distilling analogous structures from executable code behavior."
+    },
+    {
+      "title": "ReAct: Synergizing Reasoning and Acting in Language Models",
+      "authors": "Shunyu Yao et al.",
+      "year": 2023,
+      "role": "Logic flow with procedural grounding",
+      "relationship_sentence": "CodeIO mirrors ReAct\u2019s interleaving of reasoning and actions by grounding logical flows in code execution traces and I/O effects, then abstracting them into natural-language rationales."
+    },
+    {
+      "title": "PAL: Program-Aided Language Models",
+      "authors": "Luyu Gao et al.",
+      "year": 2023,
+      "role": "Using code as a reasoning substrate",
+      "relationship_sentence": "PAL shows that delegating computation to code improves reasoning; CodeIO generalizes this insight by using code not just at inference but as a training generator to distill procedural reasoning patterns into NL CoT."
+    },
+    {
+      "title": "RobustFill: Neural Program Learning under Noisy I/O",
+      "authors": "Jacob Devlin et al.",
+      "year": 2017,
+      "role": "I/O as semantic carrier of programs",
+      "relationship_sentence": "RobustFill established I/O pairs as concise summaries of program semantics; CodeIO inverts this lens by predicting I/O from given code to harvest and verbalize the underlying procedural structure."
+    },
+    {
+      "title": "DeepCoder: Learning to Write Programs",
+      "authors": "Matej Balog et al.",
+      "year": 2017,
+      "role": "Program synthesis from I/O examples",
+      "relationship_sentence": "DeepCoder\u2019s framing of program behavior via I/O informs CodeIO\u2019s core move to leverage code-plus-tests as a rich, domain-agnostic source of reasoning patterns for training."
+    }
+  ],
+  "synthesis_narrative": "CodeIO\u2019s core contribution\u2014condensing diverse, transferable reasoning patterns by transforming code plus tests into natural-language input\u2013output prediction with chain-of-thought\u2014sits at the intersection of three threads. First, Chain-of-Thought prompting demonstrated that textual rationales improve reasoning; CodeIO adopts this supervision but sources it systematically from executable artifacts instead of task-specific explanations. Second, the deliberation literature (Least-to-Most Prompting and Tree of Thoughts) articulated modular decomposition, state-space exploration, and decision-tree evaluation as key primitives; CodeIO operationalizes these by extracting analogous structures implicit in control flow, branching, and data transformation present in code and revealed through test I/O. Third, work that uses code as a reasoning substrate (PAL and ReAct) showed that procedural execution can scaffold LLM reasoning; CodeIO extends this by shifting from inference-time tool use to training-time distillation\u2014using code semantics to teach logic flow planning and procedural rigor while decoupling from language-specific syntax.\nProgram-synthesis research (RobustFill and DeepCoder) established I/O examples as compact carriers of program semantics. CodeIO leverages this premise inversely: given code and tests, it formulates input\u2013output prediction tasks and verbalizes the reasoning path in natural language, yielding broad coverage of reasoning motifs (search, branching, modularity) without bespoke datasets for each task. Together, these strands directly inform CodeIO\u2019s design: use executable code to systematically generate diverse, structured CoT signals that generalize beyond coding to many reasoning domains.",
+  "analysis_timestamp": "2026-01-07T00:04:09.158585"
+}

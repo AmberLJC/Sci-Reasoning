@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Generative Infinite-Vocabulary Transformers",
+      "authors": "Michael Tschannen et al.",
+      "year": 2024,
+      "role": "Foundational method enabling token-free, continuous autoregressive generation",
+      "relationship_sentence": "This paper provides the continuous-output transformer parameterization (GIVT) that the authors directly adopt to eliminate action quantization and model policies autoregressively in the native continuous action space."
+    },
+    {
+      "title": "Trajectory Transformer: Off-Policy Reinforcement Learning via Sequence Modeling",
+      "authors": "Michael Janner, Qiyang Li, Sergey Levine",
+      "year": 2021,
+      "role": "Precursor sequence model for control that discretizes continuous variables",
+      "relationship_sentence": "Trajectory Transformer established autoregressive transformers for control by discretizing states/actions into tokens, a design the present work replaces with a quantization-free continuous alternative."
+    },
+    {
+      "title": "A Generalist Agent (Gato)",
+      "authors": "Scott Reed et al.",
+      "year": 2022,
+      "role": "Large-scale multimodal transformer using tokenized continuous sensorimotor signals",
+      "relationship_sentence": "Gato popularized discretizing continuous robot actions for a single transformer, directly motivating the need addressed here to avoid breaking action-space continuity."
+    },
+    {
+      "title": "RT-1: Robotics Transformer for Real-World Control at Scale",
+      "authors": "Anthony Brohan et al.",
+      "year": 2022,
+      "role": "Real-world imitation learning with discretized action tokens",
+      "relationship_sentence": "RT-1 exemplifies the prevailing practice of per-dimension action discretization for transformer policies that the proposed quantization-free approach seeks to supersede."
+    },
+    {
+      "title": "Neural Discrete Representation Learning (VQ-VAE)",
+      "authors": "Aaron van den Oord, Oriol Vinyals, Koray Kavukcuoglu",
+      "year": 2017,
+      "role": "Core quantization technique underpinning action tokenization pipelines",
+      "relationship_sentence": "Many imitation-learning transformers rely on VQ-VAE-style quantizers to tokenize continuous actions, which this work replaces by modeling actions directly without vector quantization."
+    },
+    {
+      "title": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+      "authors": "Lili Chen et al.",
+      "year": 2021,
+      "role": "Autoregressive transformer formulation for control without model-based planning",
+      "relationship_sentence": "Decision Transformer inspires the use of autoregressive transformers as policies, while the present paper advances this paradigm by using a continuous, token-free output parameterization."
+    },
+    {
+      "title": "The Curious Case of Neural Text Degeneration",
+      "authors": "Ari Holtzman, Jan Buys, Li Du, Maxwell Forbes, Yejin Choi",
+      "year": 2019,
+      "role": "Sampling methodology (nucleus/top-p) for autoregressive generation",
+      "relationship_sentence": "Their analysis and nucleus sampling procedure inform the paper\u2019s study of sampling strategies to improve policy rollouts from an autoregressive generator."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core contribution\u2014replacing action quantization with a continuous, token-free autoregressive policy\u2014builds directly on Generative Infinite-Vocabulary Transformers, which furnish a principled way to model continuous outputs with transformers without introducing discrete vocabularies. This tackles a limitation in influential transformer-for-control lines that discretize continuous signals: Trajectory Transformer showed the viability of sequence modeling for control via discretization; Gato and RT-1 entrenched tokenization of continuous robot actions to fit the language-modeling toolkit at scale. Those systems\u2019 reliance on binning or vector quantization (often via VQ-VAE) breaks the topology of the action space and can hinder fine motor precision and coverage\u2014precisely the issue the present work addresses by maintaining continuity end-to-end.\n\nAt the same time, the authors keep the successful autoregressive policy view crystallized by Decision Transformer but swap the output layer and training objective to a GIVT-style continuous parameterization. Finally, because rollout quality from autoregressive generators is sensitive to decoding, their improvements draw on established sampling insights from the language modeling literature (e.g., nucleus/top-p), adapting them to continuous policy sampling. Together, these prior works define the problem setting (transformers for control), the dominant but limiting discretization approach (trajectory modeling, Gato, RT-1, VQ-VAE), the enabling alternative (GIVT), and the practical decoding tools, directly shaping the paper\u2019s quantization-free autoregressive action transformer.",
+  "analysis_timestamp": "2026-01-07T00:05:12.532662"
+}

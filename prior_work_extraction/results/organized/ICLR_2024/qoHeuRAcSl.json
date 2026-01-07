@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Sampling-Based Methods for Factored Task and Motion Planning",
+      "authors": "Caelan R. Garrett et al.",
+      "year": 2018,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "This work formalizes modes and mode families that group continuous robot configurations under shared discrete constraints, the exact abstraction this paper adopts to bridge language-level structure and low-level trajectories."
+    },
+    {
+      "title": "Logic-Geometric Programming: An Optimization-based Approach to Combined Task and Motion Planning",
+      "authors": "Marc Toussaint",
+      "year": 2018,
+      "arxiv_id": null,
+      "role": "Related Problem",
+      "relationship_sentence": "By modeling manipulation as sequences of mode switches with explicit kinematic/physical constraints, this paper provides the concrete notion of constraint-governed segments that motivates representing demonstrations via mode-family structure."
+    },
+    {
+      "title": "Hindsight Experience Replay",
+      "authors": "Marcin Andrychowicz et al.",
+      "year": 2017,
+      "arxiv_id": "1707.01495",
+      "role": "Inspiration",
+      "relationship_sentence": "HER\u2019s central idea of replay-based counterfactual relabeling directly inspires this paper\u2019s synthetic perturbations of demonstrations to create paired successes and failures that supervise learning of task constraints."
+    },
+    {
+      "title": "Do As I Can, Not As I Say: Grounding Language in Robotic Affordances",
+      "authors": "Michael Ahn et al.",
+      "year": 2022,
+      "arxiv_id": "2204.01691",
+      "role": "Gap Identification",
+      "relationship_sentence": "This work uses LLMs for high-level planning grounded by predefined skill affordances, highlighting the limitation that motivates this paper\u2019s shift to discovering latent task constraints from demonstrations rather than relying on fixed skill sets."
+    },
+    {
+      "title": "Language Models as Zero-Shot Planners: Extracting Actionable Knowledge for Embodied Agents",
+      "authors": "Huang et al.",
+      "year": 2022,
+      "arxiv_id": "2201.07207",
+      "role": "Gap Identification",
+      "relationship_sentence": "By performing direct symbolic planning with LLMs, this paper illustrates weak physical grounding of plans, motivating the present work to use LLMs only to guide hypothesis search while grounding through demonstration-derived mode constraints."
+    },
+    {
+      "title": "Explanation-Based Learning: An Alternative View",
+      "authors": "Gerald DeJong and Raymond Mooney",
+      "year": 1986,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "The EBL principle of using domain constraints to explain why examples succeed or fail is instantiated here by training a differentiable model on counterfactual success/failure pairs to infer constraints that predict feasible trajectories."
+    }
+  ],
+  "synthesis_narrative": "Work on task and motion planning established the notion that manipulation can be decomposed into modes\u2014discrete contact/attachment structures with associated continuous constraint manifolds\u2014and that families of such modes compactly group configurations sharing the same constraint template. In particular, sampling-based factored TAMP formalized modes and mode families as the backbone for search over constrained motion segments, while logic-geometric programming operationalized planning as sequences of mode switches governed by explicit geometric and kinematic constraints. Separately, hindsight experience replay showed that counterfactual relabeling of rollouts can transform failures into informative supervision signals by constructing alternative goal-consistent views of the same experience. Concurrently, language-enabled robotics explored using LLMs as planners: zero-shot planners demonstrated that LLMs can produce symbolic action sequences, and SayCan grounded LLM choices in affordance estimates over predefined skills\u2014both effective but limited in discovering task-specific constraints from data. Finally, explanation-based learning articulated how examples can be generalized by explaining successes and failures with a domain theory of constraints. Together these strands expose a gap and a path forward: use LLMs not to output full plans, but to guide hypothesis search over latent task structure; represent that structure with mode-family abstractions that tie directly to physical constraints; and generate supervision by replaying demonstrations with synthetic perturbations to produce counterfactual successes and failures. By framing learning as explanation-based inference of constraints from these pairs, an end-to-end differentiable model can predict which trajectories satisfy the inferred mode-family constraints, thereby grounding language plans in physically executable behavior.",
+  "target_paper": {
+    "title": "Grounding Language Plans in Demonstrations Through Counterfactual Perturbations",
+    "authors": "Yanwei Wang, Tsun-Hsuan Wang, Jiayuan Mao, Michael Hagenow, Julie Shah",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Grounding LLM, Learning Mode Abstractions for Manipulation, Learning from Demonstration, Robotics, Task and Motion Planning",
+    "abstract": "Grounding the common-sense reasoning of Large Language Models in physical domains remains a pivotal yet unsolved problem for embodied AI. Whereas prior works have focused on leveraging LLMs directly for planning in symbolic spaces, this work uses LLMs to guide the search of task structures and constraints implicit in multi-step demonstrations. Specifically, we borrow from manipulation planning literature the concept of mode families, which group robot configurations by specific motion constraints, to serve as an abstraction layer between the high-level language representations of an LLM and the low-level physical trajectories of a robot. By replaying a few human demonstrations with synthetic perturbations, we generate coverage over the demonstrations' state space with additional successful executions as well as counterfactuals that fail the task. Our explanation-based learning framework trains an end-to-end differentiable neural network to predict successful trajectories from failures ",
+    "openreview_id": "qoHeuRAcSl",
+    "forum_id": "qoHeuRAcSl"
+  },
+  "analysis_timestamp": "2026-01-06T09:16:42.857382"
+}

@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "TabDDPM: Modelling Tabular Data with Diffusion Models",
+      "authors": "Kotelnikov et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "TabWak relies on the TabDDPM formulation where each table row is synthesized from an independently seeded Gaussian latent, enabling watermark embedding by controlling those per-row seeds without modifying the diffusion backbone."
+    },
+    {
+      "title": "STaSy: Score-based Tabular Data Synthesis",
+      "authors": "Kim et al.",
+      "year": 2021,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "By establishing score-based diffusion for mixed-type tabular data with Gaussian noise initialization per instance, STaSy provides the latent-noise mechanism that TabWak exploits to encode signatures in the sampling noise for each row."
+    },
+    {
+      "title": "Tree-Ring Watermarks: Invisible Watermarks for Diffusion Models",
+      "authors": "Wen et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "Tree-Ring showed that robust diffusion watermarks can be embedded by manipulating the initial Gaussian noise rather than model weights, directly motivating TabWak\u2019s choice to watermark tabular diffusion by controlling the latent noise via seeded randomness."
+    },
+    {
+      "title": "A Watermark for Large Language Models",
+      "authors": "Kirchenbauer et al.",
+      "year": 2023,
+      "arxiv_id": "2301.10226",
+      "role": "Extension",
+      "relationship_sentence": "TabWak adapts the LLM watermark\u2019s secret-keyed, position-dependent hashing and statistical detection idea by self-cloning and shuffling seed positions for row-wise keys and introducing a valid-bit selection analogous to green-listing to improve robustness."
+    },
+    {
+      "title": "Watermarking Relational Databases",
+      "authors": "Agrawal and Kiernan",
+      "year": 2002,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "Classic tuple-level database watermarking motivated TabWak\u2019s row-wise detectability and permutation-tolerant design, inspiring the use of key-driven selection/shuffling so watermarks persist under row reordering and common table edits."
+    },
+    {
+      "title": "Stable Signature: Watermarking for Generative Image Models",
+      "authors": "Zhao et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "Model-embedded diffusion watermarks like Stable Signature require access and retraining, highlighting a practical gap that TabWak addresses by embedding watermarks purely through seed control without modifying tabular diffusion models."
+    }
+  ],
+  "synthesis_narrative": "Score-based and denoising diffusion approaches for tabular data established that each synthetic row is generated from an independently sampled Gaussian latent, with TabDDPM codifying a widely used backbone and STaSy demonstrating effective handling of mixed-type columns via per-instance noise initialization. Concurrently, diffusion watermarking for images revealed a crucial lever: manipulating the initial noise can embed robust, model-agnostic signatures, as Tree-Ring Watermarks showed by encoding signals directly in the Gaussian latent rather than retraining the generator. In parallel, LLM watermarking introduced secret-keyed, position-dependent hashing to steer generation toward detectable distributions, with statistical detection that remains resilient to post-editing. Longstanding database watermarking further showed how key-driven tuple selection and permutation-tolerant embedding can enable row-wise traceability despite row reordering and common table operations. By contrast, model-embedded diffusion watermarks (e.g., Stable Signature) underscored deployment limitations when generator access or retraining is required. Together, these works suggested a natural opportunity: harness the per-row Gaussian latent in tabular diffusion as the watermark carrier, but encode the key through the positional structure of seeds rather than content perturbations, enabling row-level detectability at scale. Building on LLM-style keyed hashing, seed self-cloning and shuffling realize position-aware signaling, while a valid-bit focus on distribution tails analogizes green-list selection to boost robustness against noisy post-edits\u2014all without modifying the diffusion backbone.",
+  "target_paper": {
+    "title": "TabWak: A Watermark for Tabular Diffusion Models",
+    "authors": "Chaoyi Zhu, Jiayi Tang, Jeroen M. Galjaard, Pin-Yu Chen, Robert Birke, Cornelis Bos, Lydia Y. Chen",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "Watermarking, Tabular data, Generative models, Tabular diffusion models",
+    "abstract": "Synthetic data offers alternatives for data augmentation and sharing. Till date, it remains unknown how to use watermarking techniques to trace and audit synthetic tables generated by tabular diffusion models to mitigate potential misuses. In this paper, we design TabWak, the first watermarking method to embed invisible signatures that control the sampling of Gaussian latent codes used to synthesize table rows via the diffusion backbone. TabWak has two key features. Different from existing image watermarking techniques, TabWak uses self-cloning and shuffling to embed the secret key in positional information of random seeds that control the Gaussian latents, allowing to use different seeds at each row for high inter-row diversity and enabling row-wise detectability. To further boost the robustness of watermark detection against post-editing attacks, TabWak uses a valid-bit mechanism that focuses on the tail of the latent code distribution for superior noise resilience. We provide theore",
+    "openreview_id": "71pur4y8gs",
+    "forum_id": "71pur4y8gs"
+  },
+  "analysis_timestamp": "2026-01-06T09:11:40.719802"
+}

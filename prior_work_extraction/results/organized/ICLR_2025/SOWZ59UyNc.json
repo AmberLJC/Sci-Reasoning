@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Self-Taught Reasoner: Bootstrapping Reasoning With Reasoning",
+      "authors": "Tomer Zelikman et al.",
+      "year": 2022,
+      "arxiv_id": "",
+      "role": "Extension",
+      "relationship_sentence": "Lean-STaR directly extends STaR\u2019s self-improvement loop by fine-tuning on proofs the model itself samples and that are verified by a proof assistant, but adapts the target to interleave learned thoughts with formal tactics at each step."
+    },
+    {
+      "title": "ReAct: Synergizing Reasoning and Acting in Language Models",
+      "authors": "Shunyu Yao et al.",
+      "year": 2023,
+      "arxiv_id": "2210.03629",
+      "role": "Inspiration",
+      "relationship_sentence": "ReAct\u2019s explicit interleaving of natural language \u2018thoughts\u2019 with actions directly inspired Lean-STaR\u2019s design of generating an informal thought before each Lean tactic during proof construction."
+    },
+    {
+      "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+      "authors": "Jason Wei et al.",
+      "year": 2022,
+      "arxiv_id": "2201.11903",
+      "role": "Inspiration",
+      "relationship_sentence": "The finding that explicitly generating rationales improves reasoning motivated Lean-STaR\u2019s use of synthetic \u2018thoughts\u2019 to guide tactic prediction at every proof step."
+    },
+    {
+      "title": "Thinking Fast and Slow with Deep Learning and Tree Search (Expert Iteration)",
+      "authors": "Thomas Anthony et al.",
+      "year": 2017,
+      "arxiv_id": "1705.08439",
+      "role": "Foundation",
+      "relationship_sentence": "Lean-STaR adopts the expert-iteration paradigm by iteratively training on data produced by a stronger \u2018expert\u2019 (verified proofs sampled by the model), mirroring the expert-iteration loop without MCTS."
+    },
+    {
+      "title": "LeanDojo: Theorem Proving with Retrieval-Augmented Language Models",
+      "authors": "Michihiro Yasunaga et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "LeanDojo\u2019s formulation of step-wise Lean tactic prediction and its access to ground-truth tactic traces enable Lean-STaR\u2019s retrospective generation of step-aligned synthetic thoughts and proof verification."
+    },
+    {
+      "title": "Generative Language Modeling for Automated Theorem Proving in Metamath (GPT-f)",
+      "authors": "Stanislas Polu and Ilya Sutskever",
+      "year": 2020,
+      "arxiv_id": "",
+      "role": "Related Problem",
+      "relationship_sentence": "GPT-f\u2019s LM+verifier loop for formal proofs informed Lean-STaR\u2019s verify-and-train scheme, which similarly samples candidate proofs and filters by a proof assistant before updating the model."
+    }
+  ],
+  "synthesis_narrative": "Self-Taught Reasoner demonstrated that language models can bootstrap their reasoning by generating rationales and then fine-tuning on the model\u2019s own verified correct solutions, establishing a self-improvement loop grounded in correctness. ReAct showed that interleaving natural-language \u2018thoughts\u2019 with concrete actions/tool calls helps models plan and execute complex tasks, highlighting the value of coupling internal deliberation with stepwise acting. Chain-of-Thought revealed that explicitly producing intermediate rationales improves performance across reasoning tasks, suggesting that latent reasoning can be externalized and trained. Expert Iteration provided the general recipe of iteratively improving a policy by training on data produced by a stronger expert obtained via search/verification, crystallizing a powerful self-training loop. LeanDojo framed Lean proving as stepwise tactic prediction with verifiable trajectories and accessible ground-truth tactic sequences, making it possible to align supervision precisely to each proof step. GPT-f established that language models can perform formal proof search when paired with a symbolic verifier, validating the practicality of sample-and-verify pipelines in theorem proving. Together, these works exposed a gap: formal proof traces lack the informal reasoning that humans use between steps, yet iterative self-training and verifier feedback can reliably improve models. Lean-STaR synthesizes these insights by retrofitting step-aligned, synthetic thoughts onto ground-truth tactics, training a model to think before each action, and then applying an expert-iteration, verify-and-fine-tune loop to progressively strengthen both its thoughts and its tactic choices\u2014an immediate next step given the evidence that interleaved thought\u2013action and verified self-improvement are synergistic.",
+  "target_paper": {
+    "title": "Lean-STaR: Learning to Interleave Thinking and Proving",
+    "authors": "Haohan Lin, Zhiqing Sun, Sean Welleck, Yiming Yang",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "Automated Theorem Proving, Chain-of-Thought, Reinforcement Learning, Reasoning",
+    "abstract": "Traditional language model-based theorem proving assumes that by training on a sufficient amount of formal proof data, a model will learn to prove theorems. Our key observation is that a wealth of informal information that is not present in formal proofs can be useful for learning to prove theorems. For instance, humans think through steps of a proof, but this thought process is not visible in the resulting code. We present Lean-STaR, a framework for training language models to produce informal thoughts prior to each step of a proof, thereby boosting the model's theorem-proving capabilities. Lean-STaR uses retrospective ground-truth tactics to generate synthetic thoughts for training the language model. At inference time, the trained model directly generates the thoughts prior to the prediction of the tactics in each proof step. Building on the self-taught reasoner framework, we then apply expert iteration to further fine-tune the model on the correct proofs it samples and verifies usi",
+    "openreview_id": "SOWZ59UyNc",
+    "forum_id": "SOWZ59UyNc"
+  },
+  "analysis_timestamp": "2026-01-06T11:55:34.617320"
+}

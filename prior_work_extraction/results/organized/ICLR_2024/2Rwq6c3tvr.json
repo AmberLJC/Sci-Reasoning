@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "The Secret Sharer: Measuring Unintended Memorization in Neural Networks",
+      "authors": "Nicholas Carlini et al.",
+      "year": 2019,
+      "arxiv_id": "1802.08232",
+      "role": "Foundation",
+      "relationship_sentence": "The paper\u2019s instance-level test directly builds on Secret Sharer\u2019s prefix-based elicitation and exact/near-match criteria for identifying memorized continuations, repurposing them to flag contaminated evaluation instances."
+    },
+    {
+      "title": "Extracting Training Data from Large Language Models",
+      "authors": "Nicholas Carlini et al.",
+      "year": 2021,
+      "arxiv_id": "2012.07805",
+      "role": "Extension",
+      "relationship_sentence": "Their demonstration that targeted prefixes can elicit verbatim training sequences inspired the guided prompting mechanism (using the instance\u2019s prefix) to test whether an LLM reproduces the instance\u2019s suffix as evidence of contamination."
+    },
+    {
+      "title": "Quantifying Memorization Across Neural Language Models",
+      "authors": "Nicholas Carlini et al.",
+      "year": 2023,
+      "arxiv_id": "2202.07646",
+      "role": "Extension",
+      "relationship_sentence": "The work\u2019s operationalization of memorization via exact and fuzzy matching over variable-length prefixes informs the paper\u2019s decision rule for flagging instance contamination with exact or near matches under random-length prefixes."
+    },
+    {
+      "title": "Deduplicating Training Data Makes Language Models Better",
+      "authors": "Katherine Lee et al.",
+      "year": 2022,
+      "arxiv_id": "2107.06499",
+      "role": "Gap Identification",
+      "relationship_sentence": "By showing memorization is driven by duplicated training spans but requiring access to training corpora, this work motivates the paper\u2019s black-box method that detects contamination at instance and partition levels without training data."
+    },
+    {
+      "title": "Scaling Instruction-Finetuned Language Models",
+      "authors": "Hyung Won Chung et al.",
+      "year": 2022,
+      "arxiv_id": "2210.11416",
+      "role": "Inspiration",
+      "relationship_sentence": "Because FLAN-style instruction tuning conditions on dataset-specific prompts, the paper exploits this by explicitly naming the dataset and split in its guided instruction to trigger any memorized examples from those sources."
+    },
+    {
+      "title": "Multitask Prompted Training Enables Zero-Shot Generalization",
+      "authors": "Victor Sanh et al.",
+      "year": 2022,
+      "arxiv_id": "2110.08207",
+      "role": "Related Problem",
+      "relationship_sentence": "T0\u2019s use of Natural Instructions with dataset-referential prompt templates motivates the paper\u2019s hypothesis that including dataset names and partition indicators in prompts can cue models to recall memorized instances."
+    }
+  ],
+  "synthesis_narrative": "Secret Sharer established how to detect unintended memorization by prompting models with variable-length prefixes and measuring exact or near-duplicate continuation matches, crystallizing the exposure-based view of memorized content. Building on this, Extracting Training Data from Large Language Models showed that well-chosen prefixes can elicit verbatim sequences from real LMs, demonstrating the practical extractability of memorized text without access to the training set. Quantifying Memorization Across Neural Language Models refined these ideas into robust measurement protocols that test different prefix lengths and tolerate approximate matches, clarifying how to operationalize \u201cmemorization\u201d at the instance level. In parallel, Deduplicating Training Data Makes Language Models Better linked memorization to duplication in pretraining corpora, but crucially required access to the data itself, highlighting the need for black-box, model-only contamination tests. Separately, FLAN\u2019s instruction-tuning paradigm conditioned models on dataset-specific prompts, and T0 leveraged Natural Instructions with dataset-referential templates; together, these works showed that naming tasks and splits can act as strong cues that shape model behavior, including recall. Taken together, these threads suggested a gap: a practical, black-box way to detect when evaluation instances or entire partitions have leaked into a model\u2019s training distribution. The current paper synthesizes prefix-based memorization testing with instruction-tuned, dataset-named prompts\u2014\u201cguided instruction\u201d\u2014to flag instance-level contamination via exact/near suffix matches and then aggregate this signal to diagnose partition-level contamination, turning memorization measurement into a scalable contamination tracer.",
+  "target_paper": {
+    "title": "Time Travel in LLMs: Tracing Data Contamination in Large Language Models",
+    "authors": "Shahriar Golchin, Mihai Surdeanu",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Data Contamination, Large Language Models (LLMs), Guided Instruction, Memorization",
+    "abstract": "Data contamination, i.e., the presence of test data from downstream tasks in the training data of large language models (LLMs), is a potential major issue in measuring LLMs' real effectiveness on other tasks. We propose a straightforward yet effective method for identifying data contamination within LLMs. At its core, our approach starts by identifying potential contamination at the instance level; using this information, our approach then assesses wider contamination at the partition level. To estimate contamination of individual instances, we employ \"guided instruction:\" a prompt consisting of the dataset name, partition type, and the random-length initial segment of a reference instance, asking the LLM to complete it. An instance is flagged as contaminated if the LLM's output either exactly or nearly matches the latter segment of the reference. To understand if an entire partition is contaminated, we propose two ideas. The first idea marks a dataset partition as contaminated if the ",
+    "openreview_id": "2Rwq6c3tvr",
+    "forum_id": "2Rwq6c3tvr"
+  },
+  "analysis_timestamp": "2026-01-06T23:13:35.688109"
+}

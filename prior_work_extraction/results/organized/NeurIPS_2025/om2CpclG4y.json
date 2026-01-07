@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Monte Carlo Tree Diffusion",
+      "authors": "Hyeonseo Cho, Jaesik Yoon, Sungjin Ahn",
+      "year": 2024,
+      "role": "Immediate predecessor integrating diffusion models with MCTS for trajectory-level reasoning",
+      "relationship_sentence": "C-MCTD directly generalizes MCTD\u2019s trajectory-local tree search by lifting the search space from single trajectories to compositions of subplans, addressing MCTD\u2019s horizon and locality limits."
+    },
+    {
+      "title": "Diffuser: Diffusion Models for Sequential Decision Making",
+      "authors": "Michael Janner, Yang Gao, Sergey Levine",
+      "year": 2022,
+      "role": "Generative backbone for trajectory modeling and guidance",
+      "relationship_sentence": "C-MCTD\u2019s use of diffusion-based trajectory proposals and denoising-guided rollouts builds on Diffuser\u2019s formulation of planning as conditional trajectory generation."
+    },
+    {
+      "title": "Bandit Based Monte-Carlo Planning (UCT)",
+      "authors": "Levente Kocsis, Csaba Szepesv\u00e1ri",
+      "year": 2006,
+      "role": "Search foundation for exploration\u2013exploitation in tree search",
+      "relationship_sentence": "C-MCTD\u2019s Online Composer relies on UCT-style selection to evaluate and expand nodes over plan compositions, transferring the exploration\u2013exploitation tradeoff from trajectory trees to composition graphs."
+    },
+    {
+      "title": "Parallelization of Monte-Carlo Tree Search",
+      "authors": "Guillaume M. J.-B. Chaslot, Mark H. M. Winands, H. Jaap van den Herik",
+      "year": 2008,
+      "role": "Parallel/distributed MCTS methodology",
+      "relationship_sentence": "C-MCTD\u2019s Distributed Composer adapts established root/tree/leaf parallelization ideas to concurrently explore multiple starting points and composition branches."
+    },
+    {
+      "title": "Fast Planning Through Planning Graph Analysis (GraphPlan)",
+      "authors": "Avrim L. Blum, Merrick L. Furst",
+      "year": 1997,
+      "role": "Plan-graph representation and reuse for accelerated planning",
+      "relationship_sentence": "C-MCTD\u2019s Preplan Composer leverages cached plan graphs conceptually akin to GraphPlan\u2019s planning graphs to prune search and quickly retrieve feasible subplan combinations."
+    },
+    {
+      "title": "Probabilistic Roadmaps for Path Planning in High-Dimensional Configuration Spaces",
+      "authors": "Lydia E. Kavraki, Petr \u0160vestka, Jean-Claude Latombe, Mark H. Overmars",
+      "year": 1996,
+      "role": "Offline roadmap construction and reuse for fast online queries",
+      "relationship_sentence": "The idea of precomputing and caching a reusable connectivity graph in C-MCTD\u2019s Preplan Composer parallels PRM\u2019s offline roadmap that accelerates subsequent planning queries."
+    },
+    {
+      "title": "Go-Explore: A New Approach for Hard-Exploration Problems",
+      "authors": "Adrien Ecoffet, Joost Huizinga, Joel Lehman, Kenneth O. Stanley, Jeff Clune",
+      "year": 2021,
+      "role": "Archive-based multi-start exploration",
+      "relationship_sentence": "C-MCTD\u2019s Distributed/Preplan Composers echo Go-Explore\u2019s principle of maintaining and revisiting an archive of promising states to launch parallel explorations and compose long-horizon solutions."
+    }
+  ],
+  "synthesis_narrative": "C-MCTD\u2019s core contribution\u2014elevating diffusion-guided planning from local trajectory optimization to globally aware plan composition\u2014builds directly on three intertwined lines of prior work. First, it extends Monte Carlo Tree Diffusion (MCTD) by addressing the horizon and locality limits of trajectory-level search: rather than exploring within a single rollout, C-MCTD constructs and searches over compositions of subplans. This extension retains diffusion-based trajectory generation from Diffuser, using conditional denoising to propose and refine segments while enabling combinatorial recomposition. Second, C-MCTD\u2019s Online Composer relies on UCT to evaluate and expand nodes across a composition graph, transferring classical exploration\u2013exploitation principles from trajectory trees to higher-level compositional structures. To manage search complexity, the Distributed Composer draws from the parallel MCTS literature, distributing rollouts across multiple starting points and branches for broader, deeper coverage. Third, the Preplan Composer accelerates inference through cached plan graphs, combining GraphPlan\u2019s planning-graph abstraction (for pruning and reuse) with the PRM idea of precomputing reusable connectivity that can be rapidly queried at test time. Finally, the design of an archive of promising subplans and parallel exploration seeds resonates with Go-Explore\u2019s multi-start strategy, ensuring robust long-horizon discovery. Together, these influences enable globally coherent, extendable planning that composes and reuses subplans efficiently while preserving the strengths of diffusion-guided search.",
+  "analysis_timestamp": "2026-01-06T23:42:48.159243"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "The Variational Fair Autoencoder",
+      "authors": "Christos Louizos, Kevin Swersky, Yujia Li, Max Welling, Richard Zemel",
+      "year": 2016,
+      "role": "Early utility-preserving sensitive-attribute removal via a variational objective",
+      "relationship_sentence": "VFAE formalized the goal of removing sensitive attributes while preserving task utility, a formulation PASS adopts but critiques for its vulnerability, motivating PASS\u2019s non-adversarial, information-theoretic redesign."
+    },
+    {
+      "title": "Mitigating Unwanted Biases with Adversarial Learning",
+      "authors": "Brian Hu Zhang, Blake Lemoine, Margaret Mitchell",
+      "year": 2018,
+      "role": "Canonical adversarial representation learning for sensitive attribute removal",
+      "relationship_sentence": "PASS explicitly targets the same sensitive-attribute scrub-and-utility objective but exposes weaknesses inherent to adversarial training outlined in this work, replacing minimax games with a stochastic substitution mechanism."
+    },
+    {
+      "title": "Learning Adversarially Fair and Transferable Representations",
+      "authors": "Ananya Madras, Elliot Creager, Toniann Pitassi, Richard Zemel",
+      "year": 2018,
+      "role": "Adversarial debiasing framework and transfer evaluation baseline",
+      "relationship_sentence": "This minimax template and its known instability served as a key baseline and negative example for PASS, which is designed to avoid adversary leakage and training fragility while preserving downstream transfer utility."
+    },
+    {
+      "title": "Deep Variational Information Bottleneck",
+      "authors": "Alexander A. Alemi, Ian Fischer, Joshua V. Dillon, Kevin Murphy",
+      "year": 2017,
+      "role": "Information-theoretic foundation trading predictive utility against compressed information",
+      "relationship_sentence": "PASS\u2019s loss is derived from an information-theoretic objective analogous to the bottleneck, explicitly balancing utility retention with suppression of private-attribute information."
+    },
+    {
+      "title": "Mutual Information Neural Estimation (MINE)",
+      "authors": "Mohamed Ishmael Belghazi, Aristide Baratin, Sai Rajeswar, Sherjil Ozair, Yoshua Bengio, Aaron Courville, R. Devon Hjelm",
+      "year": 2018,
+      "role": "Neural estimators for optimizing mutual information objectives",
+      "relationship_sentence": "PASS relies on MI-based criteria; neural MI bounds like MINE provide the practical machinery to instantiate and optimize PASS\u2019s information-theoretic loss without closed-form distributions."
+    },
+    {
+      "title": "Randomized Response: A Survey Technique for Eliminating Evasive Answer Bias",
+      "authors": "Stanley L. Warner",
+      "year": 1965,
+      "role": "Foundational stochastic mechanism for local privacy",
+      "relationship_sentence": "PASS generalizes randomized response from scalar answers to data samples, using learned probabilities to stochastically substitute examples and mask private attributes while preserving utility."
+    },
+    {
+      "title": "Data-swapping: A Technique for Disclosure Control",
+      "authors": "Tore Dalenius, Steven P. Reiss",
+      "year": 1982,
+      "role": "Record-level substitution for privacy in statistical data",
+      "relationship_sentence": "PASS\u2019s core idea of sample substitution is conceptually rooted in data swapping, but it learns substitution distributions end-to-end to optimize the privacy\u2013utility trade-off for ML tasks."
+    }
+  ],
+  "synthesis_narrative": "PASS sits at the intersection of two lines of work: sensitive-attribute removal for utility-preserving ML and information-theoretic formulations of representation learning. Early approaches such as the Variational Fair Autoencoder and adversarial debiasing methods (Zhang et al.; Madras et al.) framed the problem as learning representations from which private attributes are unpredictable while preserving downstream task accuracy. However, these methods hinge on minimax training, which is known to be unstable and can leave residual leakage exploitable by stronger or mismatched adversaries\u2014precisely the vulnerability PASS highlights theoretically and empirically.\n\nTo replace adversarial games with principled objectives, PASS draws on the information bottleneck perspective (Alemi et al.), recasting private-attribute protection as minimizing mutual information with sensitive variables while maximizing utility-relevant information. Neural MI estimators such as MINE enable practical optimization of these objectives within deep models. Crucially, PASS departs from prior deterministic representation-scrubbing by introducing stochastic data substitution: instead of editing features, it probabilistically replaces a sample with another according to learned probabilities. This mechanism is conceptually grounded in classical disclosure-control ideas\u2014randomized response (Warner) and data swapping (Dalenius & Reiss)\u2014but operationalized for modern ML via end-to-end learning to align substitution with utility-preservation.\n\nBy marrying information-theoretic training with learned stochastic substitution, PASS directly addresses adversarial training\u2019s leakage and instability, yielding a modality-agnostic pipeline that masks private attributes while retaining performance on downstream tasks.",
+  "analysis_timestamp": "2026-01-07T00:21:32.377414"
+}

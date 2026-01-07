@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Masked Autoencoders Are Scalable Vision Learners",
+      "authors": "Kaiming He et al.",
+      "year": 2022,
+      "arxiv_id": "2111.06377",
+      "role": "Inspiration",
+      "relationship_sentence": "This work introduced the mask-based reconstruction pretext that MRVM-NeRF adapts to rays and multi-view features, guiding the core idea of predicting complete representations from partially observed inputs."
+    },
+    {
+      "title": "pixelNeRF: Neural Radiance Fields from One or Few Images",
+      "authors": "Alex Yu et al.",
+      "year": 2021,
+      "arxiv_id": "2012.02190",
+      "role": "Foundation",
+      "relationship_sentence": "pixelNeRF formulated generalizable NeRFs by conditioning radiance fields on image features, whose lack of explicit cross-ray/view interaction directly motivates MRVM-NeRF\u2019s masked interaction-driven pretraining."
+    },
+    {
+      "title": "IBRNet: Learning Multi-View Image-Based Rendering",
+      "authors": "Qianqian Wang et al.",
+      "year": 2021,
+      "arxiv_id": "2102.13090",
+      "role": "Gap Identification",
+      "relationship_sentence": "IBRNet aggregates per-ray features from source views but does not enforce learning global correlations across rays/views, a limitation MRVM-NeRF explicitly addresses via masked ray/view modeling."
+    },
+    {
+      "title": "MVSNeRF: Fast Generalizable Radiance Field Reconstruction from Multi-View Stereo",
+      "authors": "Anpei Chen et al.",
+      "year": 2021,
+      "arxiv_id": "2103.15595",
+      "role": "Baseline",
+      "relationship_sentence": "MVSNeRF provides a primary generalizable NeRF baseline that relies on cost volumes instead of an interaction mechanism across rays, which MRVM-NeRF improves upon through mask-based pretraining that couples rays and views."
+    },
+    {
+      "title": "Scene Representation Transformer: Geometry-Free Novel View Synthesis Through Set-Latent Scene Representations",
+      "authors": "Mehdi S. M. Sajjadi et al.",
+      "year": 2022,
+      "arxiv_id": "2206.11894",
+      "role": "Related Problem",
+      "relationship_sentence": "SRT showed the benefit of transformer-based cross-view reasoning for generalizable rendering, an idea MRVM-NeRF leverages by enforcing cross-view/ray correlations through a masked prediction objective rather than architecture alone."
+    },
+    {
+      "title": "Point-MAE: Masked Autoencoders Are Scalable Learners for Point Clouds",
+      "authors": "Qiang Zhang et al.",
+      "year": 2022,
+      "arxiv_id": "2203.13496",
+      "role": "Inspiration",
+      "relationship_sentence": "By demonstrating that masked modeling benefits 3D geometric learning via reconstructing masked tokens, Point-MAE directly inspires MRVM-NeRF\u2019s extension of mask-based pretraining to implicit radiance fields along rays and views."
+    }
+  ],
+  "synthesis_narrative": "Masked Autoencoders established that reconstructing heavily masked inputs is a powerful self-supervised signal, showing that a model can learn global structure by inferring missing content from sparse observations. Extending this principle to 3D, Point-MAE represented point clouds as tokens and reconstructed masked regions, revealing that masked modeling can capture geometric priors beyond 2D images. In parallel, pixelNeRF introduced the generalizable NeRF setting by conditioning on image features to render novel views, but the approach relies mostly on per-ray conditioning without explicit mechanisms for cross-ray or cross-view interaction. IBRNet advanced learned view synthesis by aggregating features along sampled points on a ray, yet its per-ray aggregation remained largely local, limiting global scene reasoning. MVSNeRF leveraged multi-view stereo cost volumes for generalization, but its pipeline maintained limited coupling among rays and views. The Scene Representation Transformer demonstrated that set-based transformer inference can help models reason across views, underscoring the value of global context sharing during representation learning.\nBuilding on these insights, a clear opportunity emerged: combine the structural benefits of masked pretraining with the multi-view, ray-based nature of radiance fields to explicitly encourage global interactions. MRVM-NeRF realizes this by masking along rays and across views and training to predict complete scene representations from partial evidence, thereby imposing cross-ray and cross-view consistency as a pretraining target. This synthesis naturally follows from masked modeling\u2019s success at learning global structure and from generalizable NeRFs\u2019 need for effective interaction mechanisms, yielding stronger geometry-aware representations that generalize across diverse scenes.",
+  "target_paper": {
+    "title": "Mask-Based Modeling for Neural Radiance Fields",
+    "authors": "Ganlin Yang, Guoqiang Wei, Zhizheng Zhang, Yan Lu, Dong Liu",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "NeRF, Pretraining, Mask-Based Modeling",
+    "abstract": "Most Neural Radiance Fields (NeRFs) exhibit limited generalization capabilities,which restrict their applicability in representing multiple scenes using a single model. To address this problem, existing generalizable NeRF methods simply condition the model on image features. These methods still struggle to learn precise global representations over diverse scenes since they lack an effective mechanism for interacting among different points and views. In this work, we unveil that 3D implicit representation learning can be significantly improved by mask-based modeling. Specifically, we propose **m**asked **r**ay and **v**iew **m**odeling for generalizable **NeRF** (**MRVM-NeRF**), which is a self-supervised pretraining target to predict complete scene representations from partially masked features along each ray. With this pretraining target, MRVM-NeRF enables better use of correlations across different rays and views as the geometry priors, which thereby strengthens the capability of cap",
+    "openreview_id": "SEiuSzlD1d",
+    "forum_id": "SEiuSzlD1d"
+  },
+  "analysis_timestamp": "2026-01-07T00:14:19.187757"
+}

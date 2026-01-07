@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "LoRAT: Low-Rank Adaptation for Visual Tracking",
+      "authors": "Liting Lin et al.",
+      "year": 2024,
+      "role": "Direct predecessor in parameter-efficient adaptation for one-stream trackers",
+      "relationship_sentence": "LoRATv2 directly extends LoRAT\u2019s PEFT paradigm by keeping the ViT backbone frozen and pushes it further with Stream-Specific LoRA Adapters (separate adapters for template and search), addressing the temporal asymmetry introduced by causal attention."
+    },
+    {
+      "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+      "authors": "Edward J. Hu et al.",
+      "year": 2021,
+      "role": "Foundational PEFT technique",
+      "relationship_sentence": "LoRATv2\u2019s SSLA builds on LoRA\u2019s core idea of injecting low-rank adapters into attention/MLP modules, reusing the efficiency benefits while innovating on stream-specific placement tailored to tracking\u2019s template/search pathways."
+    },
+    {
+      "title": "OSTrack: One-Stream Tracker with Template-Search Joint Representation",
+      "authors": "Ye et al.",
+      "year": 2022,
+      "role": "One-stream transformer tracking backbone",
+      "relationship_sentence": "LoRATv2 targets the computational bottlenecks of one-stream trackers like OSTrack by replacing standard joint attention with frame-wise full attention plus cross-frame causal attention, preserving accuracy while cutting quadratic temporal costs."
+    },
+    {
+      "title": "STARK: Learning Spatio-Temporal Transformer for Visual Tracking",
+      "authors": "Bin Yan et al.",
+      "year": 2021,
+      "role": "Transformer-based tracking with temporal modeling",
+      "relationship_sentence": "STARK established the efficacy of Transformers for tracking and motivated explicit temporal modeling; LoRATv2 advances this by introducing causal temporal dependencies and KV reuse to achieve real-time efficiency."
+    },
+    {
+      "title": "Transformer-XL: Attentive Language Models Beyond a Fixed-Length Context",
+      "authors": "Zihang Dai et al.",
+      "year": 2019,
+      "role": "Causal attention with segment-level recurrence and KV caching",
+      "relationship_sentence": "LoRATv2 adapts Transformer-XL\u2019s idea of causal attention with cached keys/values to the video domain, enabling efficient reuse of past embeddings across frames for streaming tracking."
+    },
+    {
+      "title": "MeMViT: Memory-Augmented Multiscale Vision Transformers for Efficient Long-Term Video Recognition",
+      "authors": "Haoqi Fan et al.",
+      "year": 2021,
+      "role": "Memory/caching for video transformers",
+      "relationship_sentence": "The memory-augmented design in MeMViT informs LoRATv2\u2019s KV caching strategy, demonstrating how past visual tokens can be reused for long-range temporal reasoning without quadratic growth."
+    },
+    {
+      "title": "TimeSformer: Is Space-Time Attention All You Need for Video Understanding?",
+      "authors": "Gedas Bertasius, Heng Wang, Lorenzo Torresani",
+      "year": 2021,
+      "role": "Factorized space\u2013time attention",
+      "relationship_sentence": "LoRATv2\u2019s frame-wise full self-attention with separate (causal) cross-frame attention echoes TimeSformer\u2019s factorization of spatial and temporal attention, but specializes it for streaming causality and tracking efficiency."
+    }
+  ],
+  "synthesis_narrative": "LoRATv2\u2019s core advance\u2014low-cost temporal modeling for one-stream trackers\u2014sits at the intersection of three lines of work: transformer-based tracking, parameter-efficient adaptation, and streaming/causal attention with memory. OSTrack and STARK established strong transformer backbones for tracking and highlighted the need to model temporal dynamics within the template\u2013search paradigm. LoRAT then demonstrated that low-rank adapters can adapt powerful one-stream trackers efficiently by freezing the ViT backbone. Building directly on this, LoRATv2 introduces Stream-Specific LoRA Adapters, a targeted refinement that acknowledges the asymmetric temporal roles of template and search streams created by causal attention, thereby preserving efficiency while improving specialization.\nOn the temporal modeling side, LoRATv2 replaces standard quadratic attention across frames with frame-wise full attention combined with causal cross-frame dependencies. This design is conceptually aligned with TimeSformer\u2019s factorization of spatial and temporal attention, but tailored to the streaming setting. The efficiency leap draws on Transformer-XL\u2019s causal attention and key\u2013value caching, transposed to vision, and is further informed by MeMViT\u2019s memory-based reuse of past features for long-range video reasoning. Together, these influences yield a tracker that maintains rich intra-frame modeling, introduces principled causal temporal dependencies, and leverages KV caching to avoid recomputation\u2014delivering real-time performance without sacrificing accuracy.",
+  "analysis_timestamp": "2026-01-07T00:21:32.231729"
+}

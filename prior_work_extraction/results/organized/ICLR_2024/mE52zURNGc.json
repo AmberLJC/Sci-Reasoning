@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "An Iterative Image Registration Technique with an Application to Stereo Vision",
+      "authors": "Bruce D. Lucas and Takeo Kanade",
+      "year": 1981,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "The paper\u2019s analytic treatment relies on the Gauss\u2013Newton linearization of the Lucas\u2013Kanade alignment objective, which provides the mathematical basis for defining and optimizing a Gauss\u2013Newton\u2013style loss."
+    },
+    {
+      "title": "Lucas-Kanade 20 Years On: A Unifying Framework: Part 1: The Inverse Compositional Algorithm",
+      "authors": "Simon Baker and Iain Matthews",
+      "year": 2004,
+      "arxiv_id": null,
+      "role": "Extension",
+      "relationship_sentence": "The inverse compositional formulation and constant-Jacobian/Hessian approximations supply the specific analytic structure that enables a closed-form characterization of the expected Gauss\u2013Newton optimum used in this work."
+    },
+    {
+      "title": "LSD-SLAM: Large-Scale Direct Monocular SLAM",
+      "authors": "Jakob Engel et al.",
+      "year": 2014,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "Established direct (feature-/photo-metric) alignment as a practical VO/SLAM objective and exposed its limited convergence basin, motivating learning feature spaces and losses that explicitly widen convergence."
+    },
+    {
+      "title": "Direct Sparse Odometry",
+      "authors": "Jakob Engel, Vladlen Koltun, and Daniel Cremers",
+      "year": 2018,
+      "arxiv_id": "1607.02565",
+      "role": "Gap Identification",
+      "relationship_sentence": "DSO demonstrated state-of-the-art direct alignment but highlighted strong sensitivity to initialization, a limitation this paper addresses by analytically controlling the Gauss\u2013Newton loss\u2019s convergence basin under uncertainty."
+    },
+    {
+      "title": "DeepV2D: Video to Depth with Differentiable Structure from Motion",
+      "authors": "Zachary Teed and Jia Deng",
+      "year": 2019,
+      "arxiv_id": null,
+      "role": "Related Problem",
+      "relationship_sentence": "Introduced differentiable Gauss\u2013Newton updates over learned feature volumes, directly inspiring the idea of training feature representations via alignment-driven objectives that this paper generalizes analytically."
+    },
+    {
+      "title": "DROID-SLAM: Deep Visual SLAM for Monocular, Stereo, and RGB-D Cameras",
+      "authors": "Zachary Teed and Jia Deng",
+      "year": 2021,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "Serves as a leading learned featuremetric alignment system built on Gauss\u2013Newton-style bundle adjustment, providing the primary comparison point that this work aims to match in accuracy while using a principled, feature-agnostic Gauss\u2013Newton loss formulation."
+    }
+  ],
+  "synthesis_narrative": "Classical Lucas\u2013Kanade framed image alignment as minimizing a photometric objective via Gauss\u2013Newton steps, and later inverse compositional refinements by Baker and Matthews clarified when Jacobians and Hessians could be treated as (approximately) constant, making analytic reasoning about convergence possible. Building on this, LSD\u2011SLAM showed direct alignment could drive full SLAM but exposed its limited convergence basin and dependence on the brightness constancy assumption. Direct Sparse Odometry advanced accuracy but further underscored sensitivity to initialization\u2014tight basins that fail under realistic perturbations. In parallel, DeepV2D brought differentiable Gauss\u2013Newton updates over learned feature volumes, effectively moving from raw intensities to featuremetric residuals and using alignment-driven training to expand convergence. DROID\u2011SLAM pushed this paradigm further with dense correlations and iterative Gauss\u2013Newton\u2011style updates inside a learned BA layer, demonstrating that learned features plus alignment objectives can achieve strong robustness but remain tied to the training motion/initialization distribution. Together, these works suggested that Gauss\u2013Newton\u2011based alignment is the right mechanism, learned features can enlarge the basin, yet training remains distribution\u2011biased and lacks principled control. The present paper synthesizes these insights by deriving a closed\u2011form solution for the expected optimum of the Gauss\u2013Newton loss, making the objective feature\u2011agnostic and enabling explicit, uncertainty\u2011aware control over the convergence basin\u2014addressing the initialization sensitivity highlighted by direct methods while retaining the practical strengths of learned featuremetric alignment.",
+  "target_paper": {
+    "title": "An Analytical Solution to Gauss-Newton Loss for Direct Image Alignment",
+    "authors": "Sergei Solonets, Daniil Sinitsyn, Lukas Von Stumberg, Nikita Araslanov, Daniel Cremers",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "oral",
+    "keywords": "featuremetric image alignment",
+    "abstract": "Direct image alignment is a widely used technique for relative 6DoF pose estimation between two images, but its accuracy strongly depends on pose initialization.\nTherefore, recent end-to-end frameworks increase the convergence basin of the learned feature descriptors with special training objectives, such as the Gauss-Newton loss.\nHowever, the training data may exhibit bias toward a specific type of motion and pose initialization,\nthus limiting the generalization of these methods.\nIn this work, we derive a closed-form solution to the expected optimum of the Gauss-Newton loss. \nThe solution is agnostic to the underlying feature representation and allows us to dynamically adjust the basin of convergence according to our assumptions about the uncertainty in the current estimates. These properties allow for effective control over the convergence in the alignment process.\nDespite using self-supervised feature embeddings, our solution achieves compelling accuracy w.r.t. the state-of-the-art ",
+    "openreview_id": "mE52zURNGc",
+    "forum_id": "mE52zURNGc"
+  },
+  "analysis_timestamp": "2026-01-06T15:36:47.123823"
+}

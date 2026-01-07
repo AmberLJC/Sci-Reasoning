@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Sequence Transduction with Recurrent Neural Networks (RNN-Transducer)",
+      "authors": "Alex Graves",
+      "year": 2012,
+      "role": "Foundational transducer framework with encoder, prediction network (text-only recurrence), and DP over alignments",
+      "relationship_sentence": "Aligner-Encoder keeps the RNN-T\u2019s lightweight text-only prediction network while discarding its dynamic-programming alignment, showing that alignment can be pushed into the encoder itself."
+    },
+    {
+      "title": "Listen, Attend and Spell",
+      "authors": "William Chan, Navdeep Jaitly, Quoc V. Le, Oriol Vinyals",
+      "year": 2016,
+      "role": "Attention-based Encoder\u2013Decoder (AED) baseline with cross-attention and cross-entropy training",
+      "relationship_sentence": "The paper adopts AED-style cross-entropy training but eliminates learned cross-attention, contrasting with LAS and motivating a simpler objective once alignment is handled by the encoder."
+    },
+    {
+      "title": "Online and Linear-Time Attention by Enforcing Monotonic Alignments (Monotonic/Chunkwise Attention)",
+      "authors": "Chung-Cheng Chiu, Colin Raffel",
+      "year": 2018,
+      "role": "Monotonic attention mechanisms enabling streaming, alignment-constrained decoding",
+      "relationship_sentence": "Demonstrates that imposing monotonicity can relocate alignment burden away from complex search, foreshadowing the idea that encoders can pre-align representations for simple left-to-right decoding."
+    },
+    {
+      "title": "Hybrid CTC/Attention Architecture for End-to-End Speech Recognition",
+      "authors": "Shinji Watanabe, Takaaki Hori, Suyoun Kim, John R. Hershey, Tomoki Hayashi",
+      "year": 2017,
+      "role": "CTC-guided attention to encourage monotonic, token-synchronous alignments",
+      "relationship_sentence": "Provides evidence that encoder representations can emit sharp, token-synchronous cues that guide decoding, anticipating an encoder that fully internalizes alignment before decoding."
+    },
+    {
+      "title": "Conformer: Convolution-augmented Transformer for Speech Recognition",
+      "authors": "Anmol Gulati, James Qin, et al.",
+      "year": 2020,
+      "role": "High-capacity self-attention encoders widely adopted in ASR",
+      "relationship_sentence": "Establishes that transformer-based encoders can model long-range context and subsample time, enabling the hypothesis that they can compress and align audio to token-rate sequences in a forward pass."
+    },
+    {
+      "title": "FastEmit: Low-latency Streaming ASR with Sequence-level Emission Regularization for RNN-T",
+      "authors": "Yu Zhang, Rohit Prabhavalkar, et al.",
+      "year": 2021,
+      "role": "Training regularizer to encourage earlier, sharper emissions in RNN-T",
+      "relationship_sentence": "Shows that training can shift emission timing and sharpen alignments, supporting the feasibility of encoder-side alignment that allows simple sequential scanning at decode time."
+    }
+  ],
+  "synthesis_narrative": "Aligner-Encoders sit at the intersection of transducer and attention-based paradigms, drawing on core ideas about where alignment is computed and how decoding should proceed. RNN-Transducer established the split between an acoustic encoder and a lightweight, text-only prediction network, but relied on dynamic programming over alignments; Aligner-Encoders preserve the text-side recurrence while eliminating the alignment DP, shifting that burden into the encoder. On the attention side, Listen, Attend and Spell popularized cross-attention and cross-entropy training, yet required expensive attention search; the new work retains a simple cross-entropy-style objective while removing cross-attention entirely once the encoder pre-aligns frames.\nMonotonic attention advances\u2014particularly monotonic/chunkwise attention\u2014demonstrated that constraining alignment makes online decoding feasible, hinting that alignment can be localized and simplified. The hybrid CTC/attention line further showed that encoders can produce token-synchronous spikes that guide decoding, reinforcing the premise that alignment signals can reside in encoder representations. These insights meet the modern capacity of Conformer-style transformer encoders, which effectively integrate long-range context and temporal subsampling, making it plausible for the encoder to compress speech into a token-rate, already-aligned sequence.\nFinally, FastEmit revealed that training objectives can advance and sharpen emissions in RNN-T, reducing latency and strengthening alignment. Together, these works directly inform the Aligner-Encoder\u2019s key idea: a self-attention encoder can internalize alignment during its forward pass, enabling a decoder that simply scans encoder outputs left-to-right with only text-side recurrence and no learned cross-attention or alignment DP.",
+  "analysis_timestamp": "2026-01-06T23:42:49.031091"
+}

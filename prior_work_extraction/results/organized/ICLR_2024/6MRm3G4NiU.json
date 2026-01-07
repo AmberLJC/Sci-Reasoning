@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Foldseek: fast and accurate protein structure search",
+      "authors": "van Kempen et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "SaProt directly adopts Foldseek\u2019s 3Di structural alphabet to discretize 3D environments into structure tokens that are concatenated with residue tokens to form its structure-aware vocabulary."
+    },
+    {
+      "title": "Language models of protein sequences at scale (ESM-2)",
+      "authors": "Zeming Lin et al.",
+      "year": 2022,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "ESM-2 provides the strong sequence-only PLM baseline and masked language modeling paradigm that SaProt augments by injecting explicit structure tokens into the tokenization space."
+    },
+    {
+      "title": "Biological structure and function emerge from scaling unsupervised learning to 250 million protein sequences",
+      "authors": "Alexander Rives et al.",
+      "year": 2021,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "This work shows powerful emergent representations from sequence-only pretraining while explicitly lacking structural inputs, a limitation SaProt addresses by integrating structure into the vocabulary itself."
+    },
+    {
+      "title": "The AlphaFold Protein Structure Database: massively expanding the structural coverage of protein-sequence space",
+      "authors": "Mihaly Varadi et al.",
+      "year": 2022,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "AlphaFold DB supplies the large-scale paired structures that enable SaProt to generate structure tokens for ~40M proteins, making structure-aware pretraining feasible at scale."
+    },
+    {
+      "title": "Learning inverse folding from protein language models (ESM-IF1)",
+      "authors": "Benjamin Hsu et al.",
+      "year": 2022,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "ESM-IF1 demonstrates that conditioning on backbone structure improves language-modeling of proteins, directly motivating SaProt\u2019s design to expose structural information during pretraining via a token vocabulary."
+    },
+    {
+      "title": "LM-GVP: Integrating a protein language model with geometric vector perceptrons for function prediction",
+      "authors": "Hsu et al.",
+      "year": 2022,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "LM-GVP shows gains from combining sequence LMs with explicit 3D encoders but relies on separate structural networks, a complexity SaProt avoids by embedding structure directly into the LM\u2019s tokenization."
+    }
+  ],
+  "synthesis_narrative": "Foldseek introduced the 3Di structural alphabet that discretizes local 3D environments into tokens suitable for fast structure comparison, establishing a practical route to represent continuous protein geometry as sequences. ESM-2 scaled masked language modeling on amino-acid tokens to hundreds of millions of sequences, setting a dominant pretraining recipe and performance baseline for protein LMs. Earlier, large-scale sequence-only pretraining (Rives et al.) revealed strong emergent structural and functional signals but notably did not inject explicit structural inputs. In parallel, the AlphaFold Protein Structure Database dramatically expanded access to reliable 3D structures across sequence space, creating the data substrate necessary to pair sequences with structural descriptors at scale. ESM-IF1 showed that explicitly conditioning language modeling on backbone structures improves generative performance, highlighting the value of structural context. LM-GVP further demonstrated that combining sequence LMs with dedicated geometric encoders boosts downstream function prediction, though at the cost of added architectural complexity.\nTogether these works revealed both the feasibility and value of injecting structural information into protein representation learning, while exposing a gap: dominant PLMs tokenize only residues, and structure-aware methods often require separate geometric modules. Building on Foldseek\u2019s discrete 3D tokens and enabled by AlphaFold DB\u2019s coverage, SaProt naturally merges structure with residues at the vocabulary level within the established ESM-style masked LM framework, unifying sequence and structure in a single scalable pretraining pipeline.",
+  "target_paper": {
+    "title": "SaProt: Protein Language Modeling with Structure-aware Vocabulary",
+    "authors": "Jin Su, Chenchen Han, Yuyang Zhou, Junjie Shan, Xibin Zhou, Fajie Yuan",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Protein Language Models, Universal Representations, Downstream Tasks, Protein Structure Modeling",
+    "abstract": "Large-scale protein language models (PLMs), such as the ESM family, have achieved remarkable performance in various downstream tasks related to protein structure and function by undergoing unsupervised training on residue sequences. They have become essential tools for researchers and practitioners in biology.  However, a limitation of vanilla PLMs is their lack of explicit consideration for protein structure information, which suggests the potential for further improvement. Motivated by this, we introduce the concept of a ``structure-aware vocabulary\" that  integrates residue tokens with structure tokens.    The structure tokens are  derived  by encoding the 3D structure of proteins using Foldseek. We then propose SaProt, a large-scale general-purpose PLM trained on an extensive dataset comprising approximately 40 million protein sequences and structures. Through extensive evaluation, our SaProt model surpasses well-established and renowned baselines across 10 significant downstream t",
+    "openreview_id": "6MRm3G4NiU",
+    "forum_id": "6MRm3G4NiU"
+  },
+  "analysis_timestamp": "2026-01-06T19:22:59.461946"
+}

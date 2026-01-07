@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Distilling the Knowledge in a Neural Network",
+      "authors": "Geoffrey Hinton, Oriol Vinyals, Jeff Dean",
+      "year": 2015,
+      "role": "Foundational teacher\u2013student framework using KL/soft-label matching",
+      "relationship_sentence": "IMM extends KD by matching the teacher only on the induced, context-restricted version of the student, exploiting the known restriction of the teacher rather than aligning full-model outputs indiscriminately."
+    },
+    {
+      "title": "Born-Again Networks: Improving Generalization by Iterative Knowledge Transfer",
+      "authors": "Luca Furlanello, Alessandro Lipton, Michael Tschannen, Laurent Itti, Anima Anandkumar",
+      "year": 2018,
+      "role": "Self/reverse distillation where the teacher can be as weak as or weaker than the student",
+      "relationship_sentence": "IMM clarifies when distilling from a weak teacher is principled by restricting the comparison to the student\u2019s induced submodel, avoiding inconsistencies that arise when matching a full student to a weaker teacher without accounting for feature restriction."
+    },
+    {
+      "title": "Unifying Distillation and Privileged Information",
+      "authors": "David Lopez-Paz, L\u00e9on Bottou, Bernhard Sch\u00f6lkopf, Vladimir Vapnik",
+      "year": 2016,
+      "role": "Links knowledge distillation with Vapnik\u2019s LUPI, leveraging side-information teachers at training time",
+      "relationship_sentence": "IMM operates in the same spirit of using side models during training but targets the complementary regime\u2014teachers based on restricted features\u2014and formalizes alignment with the student\u2019s restricted view rather than the full model."
+    },
+    {
+      "title": "Training with Noise is Equivalent to Tikhonov Regularization",
+      "authors": "Christopher M. Bishop",
+      "year": 1995,
+      "role": "Classical analysis of input noising as a regularization mechanism",
+      "relationship_sentence": "IMM contrasts with noising-based approximations: rather than implicitly encouraging robustness via input noise, IMM explicitly aligns the induced restricted predictor with the restricted model, highlighting where noising can be an inconsistent surrogate."
+    },
+    {
+      "title": "Dropout Training as Adaptive Regularization",
+      "authors": "Stefan Wager, Sida Wang, Percy Liang",
+      "year": 2013,
+      "role": "Theoretical characterization of dropout/noising effects, especially for generalized linear models",
+      "relationship_sentence": "By analyzing logistic regression as a motivating case, IMM builds on insights that feature noising induces specific penalties and shows that such approximations need not enforce the correct restricted-model alignment the way IMM does."
+    },
+    {
+      "title": "Posterior Regularization for Structured Latent Variable Models",
+      "authors": "Kuzman Ganchev, Jo\u00e3o Gra\u00e7a, Jennifer Gillenwater, Ben Taskar",
+      "year": 2010,
+      "role": "Framework for imposing auxiliary constraints via KL penalties between model posteriors and target distributions",
+      "relationship_sentence": "IMM can be viewed as a targeted posterior- (or prediction-) matching constraint: it penalizes divergence between the student\u2019s induced restricted posterior and the restricted model, providing a principled KL-based route to inject side-model knowledge."
+    },
+    {
+      "title": "Mean Teachers are Better Role Models: Weight-Averaged Consistency Targets Improve Semi-Supervised Learning",
+      "authors": "Antti Tarvainen, Harri Valpola",
+      "year": 2017,
+      "role": "Consistency regularization across perturbations using a teacher signal",
+      "relationship_sentence": "IMM replaces generic perturbation consistency with structure-aware consistency: the student must agree with a restricted teacher specifically on inputs under feature restriction (the induced view), rather than across arbitrary noise."
+    }
+  ],
+  "synthesis_narrative": "The core idea of Induced Model Matching (IMM) is to leverage a strong but restricted-feature model as side information by aligning it with the induced, context-restricted version of a larger full-featured model. This directly builds on knowledge distillation (Hinton et al., 2015) and its variants, but departs in a crucial way: IMM does not match the full student to the teacher. Instead, it matches the student only under the same feature restriction that defines the teacher, ensuring the comparison is well-posed. This addresses a weakness in reverse/self-distillation from potentially weak teachers (Furlanello et al., 2018): IMM shows such transfers are principled only when the student\u2019s predictions are conditioned on the teacher\u2019s restricted view.\nA second thread concerns noising-based approaches. Classical results (Bishop, 1995) and analyses of dropout as adaptive regularization (Wager et al., 2013) explain how input corruption induces robustness and regularization, which practitioners might use to mimic restriction. IMM clarifies that such noising is merely an approximation to the desired restricted-view alignment and can be inconsistent with the target restricted predictor. Methodologically, IMM also resonates with posterior- or prediction-level constraint frameworks such as Posterior Regularization (Ganchev et al., 2010): it imposes a KL-style agreement between the student\u2019s induced posterior and the restricted model. Finally, consistency-regularization methods like Mean Teacher (Tarvainen & Valpola, 2017) motivate aligning predictions across transformations; IMM specializes this to a structure-aware consistency\u2014agreement under a precise feature restriction\u2014yielding a principled and consistent transfer from restricted to full models.",
+  "analysis_timestamp": "2026-01-06T23:33:36.266971"
+}

@@ -1,0 +1,57 @@
+{
+  "prior_works": [
+    {
+      "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+      "authors": "Hu et al.",
+      "year": 2022,
+      "arxiv_id": "2106.09685",
+      "role": "Baseline",
+      "relationship_sentence": "HiRA directly addresses LoRA\u2019s core limitation\u2014updates constrained to a fixed low rank\u2014by replacing the BA low-rank update with a Hadamard-based parameterization that preserves high-rank update capacity under a similar parameter budget."
+    },
+    {
+      "title": "AdaLoRA: Adaptive Budget Allocation for Parameter-Efficient Fine-Tuning",
+      "authors": "Zhang et al.",
+      "year": 2023,
+      "arxiv_id": "2303.10512",
+      "role": "Gap Identification",
+      "relationship_sentence": "AdaLoRA highlights that fixed-rank LoRA can be under-expressive and proposes dynamic rank allocation, a limitation HiRA resolves more directly by enabling inherently high-rank updates via a Hadamard product without relying on rank scheduling."
+    },
+    {
+      "title": "DoRA: Weight-Decomposed Low-Rank Adaptation",
+      "authors": "Liu et al.",
+      "year": 2024,
+      "arxiv_id": "",
+      "role": "Related Problem",
+      "relationship_sentence": "By decomposing weight direction and magnitude to improve LoRA\u2019s expressiveness, DoRA motivates HiRA\u2019s alternative route to boosting capacity\u2014achieving high-rank weight updates through element-wise (Hadamard) modulation rather than only reparameterizing low-rank factors."
+    },
+    {
+      "title": "Few-Shot Parameter-Efficient Fine-Tuning is Better and Cheaper than In-Context Learning (IA3)",
+      "authors": "Liu et al.",
+      "year": 2022,
+      "arxiv_id": "2205.05638",
+      "role": "Inspiration",
+      "relationship_sentence": "IA3 introduces learned element-wise multiplicative scaling (Hadamard gating) within Transformer layers, inspiring HiRA\u2019s use of an element-wise (Hadamard) mechanism to modulate weights so that the resulting updates can be high-rank while staying parameter-efficient."
+    },
+    {
+      "title": "Compacter: Efficient Low-Rank Adaptation via Parameterized Hypercomplex Multiplication",
+      "authors": "Mahabadi et al.",
+      "year": 2021,
+      "arxiv_id": "2106.04647",
+      "role": "Inspiration",
+      "relationship_sentence": "Compacter demonstrates that structured parameterizations using composition operations (e.g., PHM-based factorization) can yield expressive, effectively full-rank adapter transforms with few parameters, a principle HiRA echoes using a Hadamard product to realize high-rank updates efficiently."
+    }
+  ],
+  "synthesis_narrative": "Low-Rank Adaptation (LoRA) established the dominant PEFT formulation by expressing update matrices as BA with small rank, greatly reducing trainable parameters but necessarily constraining the update\u2019s rank and expressiveness. AdaLoRA exposed the brittleness of a fixed rank by allocating budget adaptively across layers and steps, indicating that capacity bottlenecks\u2014not just parameter count\u2014limit downstream performance. DoRA further probed LoRA\u2019s capacity issue by decomposing weight magnitude and direction, showing that reparameterizing how updates are represented can recover substantial accuracy under similar budgets. IA3 introduced learned element-wise multiplicative scaling within Transformer components, validating that Hadamard-style modulation is a lightweight yet powerful means to steer model behavior without large parameter overhead. Compacter, via PHM-style structured parameterization, showed that carefully designed compositions can synthesize expressive, effectively high-rank adapter transformations while remaining compact.\nTogether, these works reveal a clear opportunity: LoRA\u2019s low-rank constraint systematically limits update expressiveness, while element-wise multiplicative modulation and structured parameterizations can unlock far higher capacity without abandoning parameter efficiency. Building on these insights, the current work synthesizes the benefits by using a Hadamard product to parameterize updates so they remain high-rank under a modest parameter budget, sidestepping rank tuning and complementing prior reparameterizations like DoRA while retaining LoRA\u2019s practical simplicity.",
+  "target_paper": {
+    "title": "HiRA: Parameter-Efficient Hadamard High-Rank Adaptation for Large Language Models",
+    "authors": "Qiushi Huang, Tom Ko, Zhan Zhuang, Lilian Tang, Yu Zhang",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "oral",
+    "keywords": "Parametric-efficient fine-tuning, Large Language Model",
+    "abstract": "We propose Hadamard High-Rank Adaptation (HiRA), a parameter-efficient fine-tuning (PEFT) method that enhances the adaptability of Large Language Models (LLMs). While Low-rank Adaptation (LoRA) is widely used to reduce resource demands, its low-rank updates may limit its expressiveness for new tasks. HiRA addresses this by using a Hadamard product to retain high-rank update parameters, improving the model capacity. Empirically, HiRA outperforms LoRA and its variants on several tasks, with extensive ablation studies validating its effectiveness. Our code is available at https://github.com/hqsiswiliam/hira.",
+    "openreview_id": "TwJrTz9cRS",
+    "forum_id": "TwJrTz9cRS"
+  },
+  "analysis_timestamp": "2026-01-06T18:17:47.794415"
+}

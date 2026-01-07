@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Navigating the protein fitness landscape with Gaussian processes",
+      "authors": "Romero et al.",
+      "year": 2013,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "This work established the experimental protein engineering framework of Bayesian optimization with Gaussian processes, which CloneBO adopts conceptually while replacing generic priors with a clone-informed generative model to propose mutations."
+    },
+    {
+      "title": "Machine learning\u2013assisted directed evolution for protein engineering",
+      "authors": "Wittmann et al.",
+      "year": 2021,
+      "arxiv_id": "",
+      "role": "Gap Identification",
+      "relationship_sentence": "By showing that ML-guided directed evolution can squander experimental budget when library design is not sufficiently targeted, this paper motivates CloneBO\u2019s use of a clonal-family\u2013aware generative prior to concentrate proposals on mutations most likely to improve function."
+    },
+    {
+      "title": "LaMBO: Language Model Bayesian Optimization for Biological Sequences",
+      "authors": "Daulton et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Extension",
+      "relationship_sentence": "LaMBO introduced LM-guided Bayesian optimization over discrete sequences, and CloneBO extends this idea by training the language model on antibody clonal families and integrating it into the BO loop to emulate affinity maturation in the lab."
+    },
+    {
+      "title": "Mutation effects predicted from sequence co-variation",
+      "authors": "Hopf et al.",
+      "year": 2017,
+      "arxiv_id": "",
+      "role": "Inspiration",
+      "relationship_sentence": "EVmutation demonstrated that evolutionary generative models provide strong priors for functional variants, directly inspiring CloneLM\u2019s use of evolutionary signals\u2014here, from clonal family trajectories\u2014to bias mutation proposals toward fitness-improving changes."
+    },
+    {
+      "title": "Population-level inference of immune receptor selection (SONIA)",
+      "authors": "Sethna et al.",
+      "year": 2020,
+      "arxiv_id": "",
+      "role": "Gap Identification",
+      "relationship_sentence": "SONIA modeled repertoire-level generation and selection of BCRs but did not capture within-clone evolutionary trajectories, a limitation CloneBO addresses by learning a generative model explicitly from clonal families to guide optimization."
+    },
+    {
+      "title": "partis: rapid and accurate inference of B-cell receptor clonal families",
+      "authors": "Ralph et al.",
+      "year": 2016,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "partis formalized and enabled large-scale inference of B-cell clonal families, providing the data structure and methodology that make training a clonal-family\u2013aware generative model (CloneLM) feasible."
+    },
+    {
+      "title": "AntiBERTa: antibody-specific language modeling for sequence representation",
+      "authors": "Ruffolo et al.",
+      "year": 2021,
+      "arxiv_id": "",
+      "role": "Gap Identification",
+      "relationship_sentence": "Antibody LMs like AntiBERTa showed that \u2018naturalness\u2019 priors from repertoire-wide training correlate with function but lack lineage context, motivating CloneBO\u2019s lineage-informed LM to propose somatic-hypermutation\u2013like, affinity-maturation\u2013consistent edits."
+    }
+  ],
+  "synthesis_narrative": "Gaussian-process Bayesian optimization demonstrated that experimental protein engineering can be cast as a sample-efficient search over sequence space, with acquisition-driven proposals guiding lab rounds of mutation and measurement. Machine learning\u2013assisted directed evolution then highlighted how model-guided libraries improve success rates, while also revealing that poorly targeted libraries waste scarce assays. Language-model\u2013driven Bayesian optimization extended BO to discrete biological sequences by using a generative model to structure the proposal space. In parallel, evolutionary generative models such as EVmutation showed that unsupervised evolutionary constraints provide powerful priors for predicting fitness effects of mutations. Within immunology, repertoire models like SONIA captured VDJ generation biases and selection at the population level but did not model the stepwise, within-lineage dynamics of affinity maturation. Tools such as partis defined and inferred clonal families from repertoire sequencing, enabling large-scale datasets of related, evolving antibody sequences. Finally, antibody-specific language models (e.g., AntiBERTa) established that repertoire-trained LMs encode \u2018naturalness\u2019 signals correlated with expression and binding, yet they typically ignore lineage and antigen-driven evolutionary context. Together, these works expose a gap: BO for proteins is powerful but untailored to antibody affinity maturation; generative models provide strong priors but either operate on global repertoires or MSAs rather than clonal evolution; and MLDE needs targeted, budget-efficient libraries. The natural next step is to train a generative model directly on clonal families to internalize somatic hypermutation and selection patterns, and to embed that model within a BO loop so mutation proposals emulate immune optimization\u2014thereby focusing experimental effort on lineage-consistent edits most likely to improve binding and developability under tight budgets.",
+  "target_paper": {
+    "title": "Bayesian Optimization of Antibodies Informed by a Generative Model of Evolving Sequences",
+    "authors": "Alan Nawzad Amin, Nate Gruver, Yilun Kuang, Yucen Lily Li, Hunter Elliott, Calvin McCarter, Aniruddh Raghu, Peyton Greenside, Andrew Gordon Wilson",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "Bayesian optimization, generative model, antibody, biological sequence",
+    "abstract": "To build effective therapeutics, biologists iteratively mutate antibody sequences to improve binding and stability. Proposed mutations can be informed by previous measurements or by learning from large antibody databases to predict only typical antibodies. Unfortunately, the space of typical antibodies is enormous to search, and experiments often fail to find suitable antibodies on a budget. We introduce Clone-informed Bayesian Optimization (CloneBO), a Bayesian optimization procedure that efficiently optimizes antibodies in the lab by teaching a generative model how our immune system optimizes antibodies. Our immune system makes antibodies by iteratively evolving specific portions of their sequences to bind their target strongly and stably, resulting in a set of related, evolving sequences known as a *clonal family*. We train a large language model, CloneLM, on hundreds of thousands of clonal families and use it to design sequences with mutations that are most likely to optimize an an",
+    "openreview_id": "E48QvQppIN",
+    "forum_id": "E48QvQppIN"
+  },
+  "analysis_timestamp": "2026-01-06T08:45:46.223143"
+}

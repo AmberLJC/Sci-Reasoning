@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Counterexample-Guided Abstraction Refinement",
+      "authors": "Edmund M. Clarke, Orna Grumberg, Somesh Jha, Yuan Lu, Helmut Veith",
+      "year": 2000,
+      "role": "Foundational refinement paradigm",
+      "relationship_sentence": "CoVeNN\u2019s iterative assumption refinement loop mirrors CEGAR: spurious counterexamples from sub-problems trigger targeted strengthening of interface assumptions until proofs succeed or real counterexamples are found."
+    },
+    {
+      "title": "Automated Assume-Guarantee Reasoning by Learning",
+      "authors": "Dimitra Giannakopoulou, Corina S. Pasareanu",
+      "year": 2005,
+      "role": "Automated assumption synthesis for compositional verification",
+      "relationship_sentence": "CoVeNN adapts the idea of automatically synthesizing assumptions in assume-guarantee reasoning, instantiating it for neural networks by learning/refining numeric interface predicates that preserve verification precision across sub-problems."
+    },
+    {
+      "title": "Reluplex: An Efficient SMT Solver for Verifying Deep Neural Networks",
+      "authors": "Guy Katz, Clark Barrett, David L. Dill, Kyle Julian, Mykel J. Kochenderfer",
+      "year": 2017,
+      "role": "Exact NN verification baseline and motivation",
+      "relationship_sentence": "Reluplex exposed the scalability and memory bottlenecks of exact NN verification; CoVeNN addresses these by decomposing properties and delegating to such solvers as parameterized back-ends within a compositional framework."
+    },
+    {
+      "title": "An Abstract Domain for Certifying Neural Networks (DeepPoly)",
+      "authors": "Gagandeep Singh, Timon Gehr, Markus P\u00fcschel, Martin Vechev",
+      "year": 2019,
+      "role": "Scalable abstract-interpretation based verifier",
+      "relationship_sentence": "CoVeNN leverages abstract domains like DeepPoly as underlying verifiers for sub-problems and uses their propagated bounds as sound guarantees/assumptions at component interfaces."
+    },
+    {
+      "title": "Branch and Bound for Piecewise Linear Neural Network Verification",
+      "authors": "Rudy Bunel, Jingyue Lu, Pushmeet Kohli, Philip H. S. Torr, M. Pawan Kumar",
+      "year": 2020,
+      "role": "Decomposition and global search framework for NN verification",
+      "relationship_sentence": "CoVeNN is inspired by BaB\u2019s systematic decomposition but shifts the split dimension from input regions to assume-guarantee interface partitions, combining local proofs under assumptions to control memory usage."
+    },
+    {
+      "title": "alpha/beta-CROWN: Certified Robustness for Neural Networks via Linear Bound Propagation and Branch-and-Bound",
+      "authors": "Huan Zhang, Shiqi Wang, Kaidi Xu, et al.",
+      "year": 2021,
+      "role": "State-of-the-art bound propagation with BaB",
+      "relationship_sentence": "CoVeNN can wrap alpha/beta-CROWN as the underlying verifier, reusing its strong bounds to form and validate assumptions while reducing its memory footprint through compositional sub-problems."
+    }
+  ],
+  "synthesis_narrative": "CoVeNN\u2019s core contribution is to import assume-guarantee compositionality into neural network verification and make it practical by automating the synthesis and refinement of interface assumptions while delegating each sub-problem to a chosen verifier. The CEGAR paradigm by Clarke et al. provides the backbone for CoVeNN\u2019s iterative loop: if a sub-proof fails, counterexamples guide targeted strengthening of assumptions rather than global re-analysis. Giannakopoulou and Pasareanu\u2019s automated assume-guarantee work directly informs how CoVeNN constructs and refines assumptions, here realized as numeric predicates/bounds at network cut-points so that sub-results compose soundly.\nAt the verification back-end, prior NN verifiers motivate and enable CoVeNN\u2019s parameterization. Reluplex exemplifies exact, memory-intensive reasoning that benefits from decomposition. Abstract-interpretation techniques such as DeepPoly show how to propagate tight linear bounds efficiently; CoVeNN uses these bounds as both guarantees from upstream components and assumptions for downstream analysis. Modern bound-propagation + branch-and-bound systems like alpha/beta-CROWN and the general BaB framework of Bunel et al. contribute decomposition and bounding strategies; CoVeNN reorients decomposition from input-space partitioning to interface-based partitioning, which yields significant memory savings while preserving proof strength via CEGAR-style refinement. Together, these works supply the compositional logic, the automated assumption machinery, and the high-performance verification engines that CoVeNN orchestrates to scale verification and increase the number of properties it can prove.",
+  "analysis_timestamp": "2026-01-07T00:21:33.137134"
+}

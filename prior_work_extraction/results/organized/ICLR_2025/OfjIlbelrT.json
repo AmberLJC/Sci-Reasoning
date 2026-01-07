@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Sparse Transformers",
+      "authors": "Rewon Child, Scott Gray, Alec Radford, Ilya Sutskever",
+      "year": 2019,
+      "role": "Fixed sparse attention baseline for long-sequence efficiency",
+      "relationship_sentence": "FlexPrefill explicitly moves beyond the fixed strided/local sparsity patterns of Sparse Transformers by selecting patterns dynamically per input/head rather than committing to a single static design."
+    },
+    {
+      "title": "Big Bird: Transformers for Longer Sequences",
+      "authors": "Manzil Zaheer, Guru Guruganesh, Kumar Avinava Dubey, Joshua Ainslie, Chris Alberti, et al.",
+      "year": 2020,
+      "role": "Block-sparse (local + global + random) attention with theoretical guarantees",
+      "relationship_sentence": "BigBird\u2019s predefined sparse layouts are a key comparison point; FlexPrefill inherits the idea of cost-effective sparse layouts but adds a query-aware switch that can choose or depart from such predefined patterns on-the-fly."
+    },
+    {
+      "title": "Reformer: The Efficient Transformer",
+      "authors": "Nikita Kitaev, \u0141ukasz Kaiser, Anselm Levskaya",
+      "year": 2020,
+      "role": "Content-aware sparse attention via LSH",
+      "relationship_sentence": "Reformer showed that content-driven grouping can realize sparse attention; FlexPrefill leverages this insight by triggering query-specific sparse patterns when attention distributions indicate content-dependent structure."
+    },
+    {
+      "title": "Routing Transformer: Learning to Route in Self-Attention",
+      "authors": "Apoorv Roy, Michael J. I. Jordan, Ashish Vaswani (various versions often list Peter J. Liu, Aidan N. Gomez, et al.)",
+      "year": 2021,
+      "role": "Clustered, content-based sparse attention",
+      "relationship_sentence": "Routing Transformer\u2019s dynamic, data-dependent routing directly motivates FlexPrefill\u2019s query-aware pattern determination, where per-head patterns adapt based on the current query\u2019s needs."
+    },
+    {
+      "title": "Informer: Beyond Efficient Transformer for Long Sequence Time-Series Forecasting",
+      "authors": "Haoyi Zhou, Shanghang Zhang, Jieqi Peng, Shuai Zhang, Gang Luo, et al.",
+      "year": 2021,
+      "role": "ProbSparse attention and divergence-from-uniform\u2013style sparsity measurement",
+      "relationship_sentence": "Informer\u2019s principle of allocating attention budget to queries with peaked (non-uniform) attention distributions informs FlexPrefill\u2019s use of a divergence criterion (Jensen\u2013Shannon) to decide when to apply query-specific patterns versus predefined ones."
+    },
+    {
+      "title": "Adaptive Attention Span in Transformers",
+      "authors": "Sainbayar Sukhbaatar, \u00c9douard Grave, Piotr Bojanowski, Armand Joulin",
+      "year": 2019,
+      "role": "Per-head, input-adaptive attention span/budgeting",
+      "relationship_sentence": "FlexPrefill\u2019s head-wise, context-dependent budget allocation echoes Adaptive Attention Span\u2019s insight that each head benefits from a dynamically determined receptive field."
+    },
+    {
+      "title": "Analyzing Multi-Head Self-Attention: Specialized and Redundant Heads",
+      "authors": "Elena Voita, David Talbot, Fedor Moiseev, Rico Sennrich, Ivan Titov",
+      "year": 2019,
+      "role": "Jensen\u2013Shannon divergence for comparing attention distributions across heads",
+      "relationship_sentence": "FlexPrefill\u2019s JSD-based gating mechanism is directly inspired by Voita et al.\u2019s use of JSD to quantify similarity/diversity in attention, enabling a principled switch between query-specific and predefined sparse patterns."
+    }
+  ],
+  "synthesis_narrative": "FlexPrefill addresses the prefill-phase bottleneck for long contexts by making sparsity patterns and compute budgets adaptive to each input and attention head. This builds on two major lines of prior work. First, fixed sparse attention designs such as Sparse Transformers and BigBird demonstrated that structured sparsity (strided, local, global/random) can drastically reduce quadratic costs for long sequences, but their static patterns limit responsiveness to the specific needs of each input. FlexPrefill preserves the efficiency advantages of such layouts while adding the ability to select or deviate from them dynamically.\nSecond, content-aware sparse attention methods\u2014Reformer\u2019s LSH attention and the Routing Transformer\u2019s clustered routing\u2014showed that leveraging query/key content can yield adaptive sparsity with strong empirical efficiency. Informer further contributed a principled criterion for when sparsification is warranted by relating attention distributions to divergence-from-uniform behavior, a key idea that FlexPrefill makes explicit by using Jensen\u2013Shannon divergence to gate between query-specific and predefined patterns. Complementing these, Adaptive Attention Span established that each head benefits from an input-adaptive receptive field, directly motivating FlexPrefill\u2019s head-wise budget control. Finally, Voita et al.\u2019s use of JSD to assess attention-head specialization provides the statistical tool that underpins FlexPrefill\u2019s query-aware switching logic. Together, these works converge in FlexPrefill\u2019s core contribution: a real-time, per-head mechanism that selects the appropriate sparse pattern and allocates compute based on measured attention characteristics, yielding efficient, context-aware prefill for long-sequence LLM inference.",
+  "analysis_timestamp": "2026-01-06T23:42:48.089791"
+}

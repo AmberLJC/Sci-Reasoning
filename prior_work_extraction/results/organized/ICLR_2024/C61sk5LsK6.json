@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Not All Samples Are Equal: Deep Learning with Importance Sampling",
+      "authors": "Angelos Katharopoulos et al.",
+      "year": 2018,
+      "arxiv_id": "1803.09820",
+      "role": "Foundation",
+      "relationship_sentence": "InfoBatch adopts the inverse-probability weighting principle from importance sampling to rescale gradients after non-uniform pruning so that the expected gradient remains unbiased."
+    },
+    {
+      "title": "Training Region-based Object Detectors with Online Hard Example Mining",
+      "authors": "Abhinav Shrivastava et al.",
+      "year": 2016,
+      "arxiv_id": "1604.03540",
+      "role": "Gap Identification",
+      "relationship_sentence": "By showing that deterministic top-loss selection accelerates training but biases learning, OHEM motivates InfoBatch\u2019s randomized pruning and reweighting to avoid gradient expectation bias."
+    },
+    {
+      "title": "An Empirical Study of Example Forgetting During Deep Neural Network Learning",
+      "authors": "Elena Toneva et al.",
+      "year": 2019,
+      "arxiv_id": "1812.05159",
+      "role": "Inspiration",
+      "relationship_sentence": "The finding that many \u2018unforgettable\u2019 examples contribute little later in training directly motivates InfoBatch\u2019s focus on pruning low-informative (typically low-loss) samples."
+    },
+    {
+      "title": "Dataset Cartography: Mapping and Diagnosing Datasets with Training Dynamics",
+      "authors": "Swabha Swayamdipta et al.",
+      "year": 2020,
+      "arxiv_id": "2009.10795",
+      "role": "Inspiration",
+      "relationship_sentence": "Cartography\u2019s use of loss/consistency dynamics to distinguish easy versus informative samples informs InfoBatch\u2019s loss-distribution-driven policy for identifying prune-worthy examples."
+    },
+    {
+      "title": "GradMatch: Gradient Matching based Data Subset Selection for Efficient Deep Learning",
+      "authors": "Saurabh Killamsetty et al.",
+      "year": 2021,
+      "arxiv_id": "",
+      "role": "Baseline",
+      "relationship_sentence": "GradMatch\u2019s goal of selecting subsets whose gradients approximate the full-data gradient is the primary baseline that InfoBatch improves upon by guaranteeing unbiasedness via stochastic pruning and scaling."
+    },
+    {
+      "title": "GLISTER: Generalization based Data Subset Selection for Efficient and Robust Learning",
+      "authors": "Saurabh Killamsetty et al.",
+      "year": 2021,
+      "arxiv_id": "",
+      "role": "Related Problem",
+      "relationship_sentence": "GLISTER\u2019s bilevel subset selection highlights the accuracy\u2013efficiency trade-off of static pruning, which InfoBatch overcomes by dynamic, per-iteration pruning with unbiased gradient estimates."
+    }
+  ],
+  "synthesis_narrative": "Importance sampling for deep networks established that non-uniformly chosen training examples can be made statistically sound by inverse-probability weighting, ensuring that the stochastic gradient remains an unbiased estimate of the full gradient. Online Hard Example Mining then popularized loss-driven selection, but its deterministic top-k filtering introduced training bias by over-focusing on hard samples. Work on example dynamics deepened this picture: example forgetting revealed that many samples become \u2018unforgettable\u2019 and add little learning signal later, while dataset cartography used loss and confidence trajectories to map easy, ambiguous, and hard regions\u2014showing that low-loss, stable points are typically less informative for continued updates. In parallel, subset selection approaches such as GradMatch sought to match full-dataset gradients with small subsets, and GLISTER formalized generalization-driven selection via bilevel optimization, but both incurred optimization overheads and, being static or episodic, risked selection bias or loss of fidelity to full-data training.\nTogether, these lines suggested a natural opportunity: prune predominantly low-information examples during training, but retain the statistical guarantees of full-data SGD. By combining loss-dynamics signals to identify low-informative samples with the inverse-probability weighting principle from importance sampling, and by making pruning randomized rather than deterministic, the current work arrives at a plug-and-play, architecture-agnostic scheme that preserves unbiased gradient expectations while delivering consistent, lossless speedups across tasks.",
+  "target_paper": {
+    "title": "InfoBatch: Lossless Training Speed Up by Unbiased Dynamic Data Pruning",
+    "authors": "Ziheng Qin, Kai Wang, Zangwei Zheng, Jianyang Gu, Xiangyu Peng, xu Zhao Pan, Daquan Zhou, Lei Shang, Baigui Sun, Xuansong Xie, Yang You",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "oral",
+    "keywords": "Dynamic Data Pruning; Training acceleration",
+    "abstract": "Data pruning aims to obtain lossless performances with less overall cost. A common approach is to filter out samples that make less contribution to the training. This could lead to gradient expectation bias compared to the original data. To solve this problem, we propose InfoBatch, a novel framework aiming to achieve lossless training acceleration by unbiased dynamic data pruning. Specifically, InfoBatch\nrandomly prunes a portion of less informative samples based on the loss distribution and rescales the gradients of the remaining samples to approximate the original gradient. As a plug-and-play and architecture-agnostic framework, InfoBatch consistently obtains lossless training results on classification, semantic segmentation, vision pertaining, and instruction fine-tuning tasks. On CIFAR10/100, ImageNet-\n1K, and ADE20K, InfoBatch losslessly saves 40% overall cost. For pertaining MAE and diffusion model, InfoBatch can respectively save 24.8% and 27% cost. For LLaMA instruction fine-tu",
+    "openreview_id": "C61sk5LsK6",
+    "forum_id": "C61sk5LsK6"
+  },
+  "analysis_timestamp": "2026-01-06T20:10:35.981422"
+}

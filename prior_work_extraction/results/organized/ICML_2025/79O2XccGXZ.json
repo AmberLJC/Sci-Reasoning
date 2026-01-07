@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Equivariant Diffusion for Molecule Generation in 3D",
+      "authors": "Maarten Hoogeboom et al.",
+      "year": 2022,
+      "role": "Baseline",
+      "relationship_sentence": "GeoRCG wraps the EDM formulation as the second-stage equivariant generator and alters it by conditioning on a learned geometric representation, directly building on EDM\u2019s E(3)-equivariant score-based formulation for 3D molecules."
+    },
+    {
+      "title": "GeoDiff: A Geometric Diffusion Model for Molecular Conformation Generation",
+      "authors": "Minkai Xu et al.",
+      "year": 2022,
+      "role": "Related Problem",
+      "relationship_sentence": "GeoDiff showed that modeling internal geometric variables (e.g., torsions) simplifies 3D generative modeling; GeoRCG generalizes this insight by first generating an easy-to-model geometric representation and then decoding a full molecule conditioned on it."
+    },
+    {
+      "title": "GeoMol: Torsional Geometric Generation of Molecular 3D Conformations",
+      "authors": "Octavian-Eugen Ganea et al.",
+      "year": 2021,
+      "role": "Inspiration",
+      "relationship_sentence": "GeoMol\u2019s success with internal-coordinate (torsion) parameterizations motivated GeoRCG\u2019s choice to generate a geometry-sufficient representation first, then use it to guide equivariant molecule generation."
+    },
+    {
+      "title": "Classifier-Free Diffusion Guidance",
+      "authors": "Jonathan Ho et al.",
+      "year": 2022,
+      "role": "Inspiration",
+      "relationship_sentence": "GeoRCG extends the guidance paradigm by replacing label/property guidance with a learned geometric representation that steers sampling, providing a principled, geometry-aware conditioning mechanism with theoretical guarantees."
+    },
+    {
+      "title": "Cascaded Diffusion Models for High Fidelity Image Synthesis",
+      "authors": "Jonathan Ho et al.",
+      "year": 2021,
+      "role": "Inspiration",
+      "relationship_sentence": "The paper\u2019s cascade\u2014generate an easier intermediate, then refine\u2014directly inspires GeoRCG\u2019s two-stage design where an easy-to-generate geometric representation guides the final equivariant molecule generator."
+    },
+    {
+      "title": "High-Resolution Image Synthesis with Latent Diffusion Models",
+      "authors": "Robin Rombach et al.",
+      "year": 2022,
+      "role": "Inspiration",
+      "relationship_sentence": "GeoRCG adopts the latent-first-then-conditional-decoding principle of LDMs but instantiates it with a geometry-sufficient, E(3)-aware representation to steer 3D molecular generation."
+    },
+    {
+      "title": "Torsional Diffusion for Molecular Conformer Generation",
+      "authors": "Bowen Jing et al.",
+      "year": 2022,
+      "role": "Gap Identification",
+      "relationship_sentence": "Torsional diffusion evidenced that internal-coordinate spaces are easier to model yet did not address goal-directed molecule generation; GeoRCG explicitly tackles this gap by using a learned geometric representation to guide conditional 3D molecule synthesis."
+    }
+  ],
+  "synthesis_narrative": "GeoRCG\u2019s core idea\u2014first generate an informative geometric representation, then condition an equivariant 3D generator on it\u2014emerges from two converging lines of work. On the 3D molecule side, Equivariant Diffusion for Molecule Generation in 3D established E(3)-equivariant diffusion as the de facto backbone for atomic positions and types, while GeoDiff and GeoMol demonstrated that internal geometric parameterizations (e.g., torsions, distances) are simpler targets than raw coordinates. These works collectively suggested that geometry-aware factorization improves learnability but left open principled, goal-directed conditional generation of full molecules. Concurrently, guidance and two-stage strategies in diffusion for images\u2014Classifier-Free Diffusion Guidance, Cascaded Diffusion Models, and Latent Diffusion Models\u2014showed that sampling can be steered by generating an easier intermediate (labels/low-res/latent) and conditioning a powerful generator on it. GeoRCG unifies these insights in the molecular domain: it learns a geometry-sufficient, easy-to-generate representation that admits theoretical guarantees (sufficiency up to E(3) symmetries), and then conditions a strong equivariant generator (e.g., EDM) on this representation to drive high-quality, goal-oriented molecule synthesis. By addressing the gap highlighted by torsional/conformation-focused methods\u2014lack of controllable, property-conditional molecule generation\u2014GeoRCG provides a general, plug-in conditioning framework that elevates state-of-the-art equivariant diffusion/flow baselines.",
+  "analysis_timestamp": "2026-01-06T23:07:19.600743"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Acquiring the Reflectance Field of a Human Face",
+      "authors": "Paul Debevec et al.",
+      "year": 2000,
+      "role": "Foundation",
+      "relationship_sentence": "IC-Light\u2019s core constraint\u2014that an appearance under mixed illumination equals a linear blend of appearances under individual illuminations\u2014directly leverages the reflectance-field linearity and relighting-by-linear-combination principle demonstrated by Debevec et al."
+    },
+    {
+      "title": "An Efficient Representation for Irradiance Environment Maps",
+      "authors": "Ravi Ramamoorthi et al.",
+      "year": 2001,
+      "role": "Foundation",
+      "relationship_sentence": "By formulating Lambertian response as a linear mapping from spherical-harmonic lighting coefficients to image irradiance, this work underpins IC-Light\u2019s assumption that mixing complex environment lights should produce linearly consistent appearances used as a training-time constraint."
+    },
+    {
+      "title": "Lambertian Reflectance and Linear Subspaces",
+      "authors": "Ronen Basri et al.",
+      "year": 2003,
+      "role": "Foundation",
+      "relationship_sentence": "Basri and Jacobs\u2019 proof that images of a fixed object under varying distant illumination lie near a low-dimensional linear subspace provides the theoretical basis for IC-Light\u2019s imposed linearity of light transport while preserving intrinsic properties like albedo."
+    },
+    {
+      "title": "Dual Photography",
+      "authors": "Pradeep Sen et al.",
+      "year": 2005,
+      "role": "Inspiration",
+      "relationship_sentence": "Casting image formation as a linear light-transport matrix, Sen et al. made explicit the superposition property that IC-Light reuses as a consistency constraint to stabilize diffusion training across heterogeneous, in-the-wild lighting."
+    },
+    {
+      "title": "Intrinsic Images in the Wild",
+      "authors": "Sean Bell et al.",
+      "year": 2014,
+      "role": "Gap Identification",
+      "relationship_sentence": "This work exposed the difficulty and ambiguity of large-scale albedo\u2013shading disentanglement in real imagery; IC-Light addresses this gap by avoiding explicit inversion and instead enforcing light-transport consistency so albedo remains unchanged during illumination edits."
+    },
+    {
+      "title": "Shape, Illumination, and Reflectance from Shading",
+      "authors": "Jonathan T. Barron et al.",
+      "year": 2015,
+      "role": "Gap Identification",
+      "relationship_sentence": "SIRFS highlighted the ill-posedness and sensitivity of recovering intrinsic properties from single images; IC-Light is motivated by these limitations and replaces explicit intrinsic inference with a physics-grounded linearity constraint to maintain intrinsic consistency during training."
+    },
+    {
+      "title": "Adding Conditional Control to Text-to-Image Diffusion Models",
+      "authors": "Lvmin Zhang et al.",
+      "year": 2023,
+      "role": "Baseline",
+      "relationship_sentence": "IC-Light builds on structure-guided diffusion (\u00e0 la ControlNet) but overcomes the tendency of naive conditional training to become a structure-guided random generator by imposing light-transport linearity during training for precise illumination manipulation."
+    }
+  ],
+  "synthesis_narrative": "IC-Light\u2019s central idea is to stabilize and scale diffusion-based illumination harmonization by imposing a physically grounded light-transport consistency during training: the appearance under mixed illumination should equal a linear blend of appearances under the component illuminations. This principle traces directly to classic reflectance and relighting research. Debevec et al. demonstrated that reflectance fields enable relighting by linear recombination of images captured under basis lights, while Ramamoorthi and Hanrahan formalized the linear mapping from spherical-harmonic lighting to image irradiance for Lambertian materials. Basri and Jacobs proved that images under varying distant illumination occupy a low-dimensional linear subspace, further cementing linearity as a core property of image formation with fixed intrinsic attributes. Sen et al. made the superposition explicit through the light-transport matrix, reinforcing that mixing illumination should produce linearly consistent results.\n\nOn the learning side, Bell et al. (Intrinsic Images in the Wild) and Barron and Malik (SIRFS) documented how difficult and ambiguous it is to disentangle albedo and shading at scale, especially in in-the-wild data. IC-Light sidesteps explicit intrinsic inversion yet achieves intrinsic preservation by enforcing the linearity constraint during training, preventing albedo drift. Finally, the method situates within structure-guided diffusion (ControlNet): whereas naive conditional training over diverse data can degrade into a structure-guided random generator, IC-Light injects a physics-based consistency loss that turns the conditioning into precise, scalable illumination control across heterogeneous sources.",
+  "analysis_timestamp": "2026-01-06T23:09:26.607685"
+}

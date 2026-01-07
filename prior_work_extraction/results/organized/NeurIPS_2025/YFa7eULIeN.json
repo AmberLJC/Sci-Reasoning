@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Direct Preference Optimization: Your Language Model is Secretly a Reward Model",
+      "authors": "Rafailov et al.",
+      "year": 2023,
+      "role": "Methodological foundation for preference-based tuning without an explicit reward model",
+      "relationship_sentence": "DenseDPO builds directly on the DPO objective, adapting its pairwise preference optimization to video diffusion models and extending it from clip-level to temporally localized segment-level supervision."
+    },
+    {
+      "title": "Deep Reinforcement Learning from Human Preferences",
+      "authors": "Christiano et al.",
+      "year": 2017,
+      "role": "Foundational demonstration of learning from pairwise human comparisons over short trajectory clips",
+      "relationship_sentence": "The idea of labeling short temporal segments instead of whole trajectories informs DenseDPO\u2019s fine-grained segment-level preference annotations for videos."
+    },
+    {
+      "title": "T-REX: A Scalable Approach to Learning Reward Functions from Human Preferences",
+      "authors": "Brown et al.",
+      "year": 2019,
+      "role": "Segment/trajectory ranking to extract dense learning signals from pairwise preferences",
+      "relationship_sentence": "DenseDPO echoes T-REX\u2019s insight that ranking shorter segments yields richer supervision, leveraging temporally aligned segment comparisons to strengthen the optimization signal."
+    },
+    {
+      "title": "DDPO: Reinforcement Learning for Text-to-Image Diffusion Models",
+      "authors": "Black et al.",
+      "year": 2023,
+      "role": "Pioneered preference/RL-based alignment for diffusion generators",
+      "relationship_sentence": "By showing diffusion models can be aligned with human feedback, DDPO directly motivates DenseDPO\u2019s preference-driven post-training, while DenseDPO targets video and replaces global comparisons with dense temporal ones."
+    },
+    {
+      "title": "Video Diffusion Models",
+      "authors": "Ho et al.",
+      "year": 2022,
+      "role": "Core generative framework for video via diffusion",
+      "relationship_sentence": "DenseDPO operates on text-to-video diffusion backbones introduced by VDMs, providing the base denoising process and temporal structure that its preference optimization refines."
+    },
+    {
+      "title": "Noise2Noise: Learning Image Restoration without Clean Data",
+      "authors": "Lehtinen et al.",
+      "year": 2018,
+      "role": "Corrupt-and-denoise paradigm using paired corruptions of the same underlying content",
+      "relationship_sentence": "DenseDPO\u2019s strategy of generating aligned video pairs by denoising corrupted copies of the same ground-truth video draws on the Noise2Noise-style insight that shared underlying content enables controlled, comparable outputs."
+    }
+  ],
+  "synthesis_narrative": "DenseDPO\u2019s core idea is to adapt DPO-style preference optimization to video diffusion models while eliminating label bias and amplifying supervision density through temporal alignment. The DPO objective provides the backbone: it aligns generators from pairwise preferences without training a separate reward model, but prior work applied it mostly at response/clip level. From the RL-from-preferences literature, Christiano et al. demonstrated that asking humans to compare short trajectory segments produces reliable, data-efficient signals; T-REX extended this with scalable segment/trajectory ranking to learn robust reward functions. DenseDPO carries these insights to video generation by shifting from whole-clip to fine-grained segment preferences.\nOn the generative side, Video Diffusion Models established the denoising framework for video, which DenseDPO fine-tunes post hoc. To obtain fair, comparable pairs, DenseDPO denoises different corruptions of the same ground-truth video\u2014an idea that echoes Noise2Noise\u2019s principle of leveraging paired corruptions sharing underlying content. This construction yields motion-aligned pairs that vary mainly in local fidelity, counteracting annotator bias toward low-motion clips that plagues pairs sampled from independent noise. Finally, DDPO showed diffusion generators can be aligned with human feedback, paving the way for preference optimization in diffusion; DenseDPO extends this to the video domain and innovates by exploiting temporal alignment to collect dense, segment-level labels. Together, these strands enable DenseDPO\u2019s fine-grained temporal preference optimization that is both more precise and label-efficient.",
+  "analysis_timestamp": "2026-01-07T00:05:12.523123"
+}

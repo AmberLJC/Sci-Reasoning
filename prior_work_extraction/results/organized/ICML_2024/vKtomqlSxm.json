@@ -1,0 +1,41 @@
+{
+  "prior_works": [
+    {
+      "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+      "authors": "Jason Wei et al.",
+      "year": 2022,
+      "role": "Foundation",
+      "relationship_sentence": "CoC inherits the core idea of eliciting step-by-step intermediate reasoning, but structures these steps as code plus intermediate function outputs, directly extending CoT from free-form text to code-like traces."
+    },
+    {
+      "title": "PAL: Program-Aided Language Models",
+      "authors": "Luyu Gao et al.",
+      "year": 2023,
+      "role": "Baseline",
+      "relationship_sentence": "PAL is the main code-execution baseline CoC builds on; CoC directly addresses PAL\u2019s limitation to purely executable tasks by letting the LM emulate outputs of non-implementable semantic functions while still executing the rest of the program."
+    },
+    {
+      "title": "ReAct: Synergizing Reasoning and Acting in Language Models",
+      "authors": "Shunyu Yao et al.",
+      "year": 2023,
+      "role": "Inspiration",
+      "relationship_sentence": "ReAct\u2019s thought\u2013act\u2013observe loop directly inspires CoC\u2019s interleaving of code reasoning (thought), interpreter execution (act), and LM-emulated returns (observe), enabling progress when tool outputs are unavailable."
+    },
+    {
+      "title": "Toolformer: Language Models Can Teach Themselves to Use Tools",
+      "authors": "Timo Schick et al.",
+      "year": 2023,
+      "role": "Gap Identification",
+      "relationship_sentence": "Toolformer motivates tool-augmented LMs but depends on available tools; CoC explicitly tackles the gap when the needed \u2018tool\u2019 (e.g., a semantic detector) does not exist by letting the LM emulate the tool\u2019s return within code."
+    },
+    {
+      "title": "Code as Policies: Language Model Programs for Embodied Control",
+      "authors": "Jacky Liang et al.",
+      "year": 2023,
+      "role": "Inspiration",
+      "relationship_sentence": "CaP established code as a general-purpose interface for composing capabilities; CoC carries this code-as-structure idea to mixed symbolic\u2013semantic reasoning and augments it with LM-emulated function outputs to handle non-executable components."
+    }
+  ],
+  "synthesis_narrative": "Chain of Code (CoC) sits at the intersection of chain-of-thought reasoning and code-driven tool use. Chain-of-Thought (Wei et al., 2022) provided the foundational insight that eliciting intermediate steps improves reasoning; CoC preserves this principle but concretizes the steps as code statements and intermediate returns. Program-Aided Language Models (Gao et al., 2023) established code execution as a powerful scaffold for reasoning, yet PAL is largely confined to tasks where all subroutines are implementable and executable. CoC\u2019s core innovation\u2014letting the LM selectively emulate a function\u2019s return when the interpreter cannot implement it\u2014directly addresses this limitation, enabling progress on mixed symbolic\u2013semantic tasks.\nReAct (Yao et al., 2023) demonstrated that interleaving internal reasoning with actions and observations can drive problem solving. CoC mirrors this loop: write code (reason), execute what\u2019s executable (act), and insert LM-emulated outputs where tools are missing (observe), then continue execution. Toolformer (Schick et al., 2023) showed that LMs can learn to call tools, but implicitly assumes tool availability; CoC closes this gap by creating a principled fallback\u2014LM-emulated tool outputs within a code scaffold. Finally, Code as Policies (Liang et al., 2023) motivated code as a modular, compositional interface; CoC generalizes this motif from embodied control to general reasoning, preserving the benefits of executable structure while overcoming non-executable bottlenecks via targeted LM emulation.",
+  "analysis_timestamp": "2026-01-06T23:09:26.449769"
+}

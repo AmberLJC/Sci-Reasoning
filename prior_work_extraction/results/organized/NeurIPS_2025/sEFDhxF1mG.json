@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+      "authors": "Edward J. Hu et al.",
+      "year": 2022,
+      "role": "foundational concept",
+      "relationship_sentence": "LoRA established that attention projection matrices (including Q/K/V) can be effectively constrained to low-rank subspaces with minimal accuracy loss, directly motivating QSVD\u2019s use of SVD-based low-rank factorization on Q\u2013K\u2013V weights."
+    },
+    {
+      "title": "AdaLoRA: Adaptive Budget Allocation for Parameter-Efficient Fine-Tuning",
+      "authors": "Zhang et al.",
+      "year": 2023,
+      "role": "method inspiration",
+      "relationship_sentence": "AdaLoRA introduced sensitivity-driven, per-layer adaptive rank allocation; QSVD adopts a similar principle to dynamically set SVD ranks where they matter most for accuracy, under a fixed efficiency budget."
+    },
+    {
+      "title": "Exploiting Linear Structure Within Convolutional Networks",
+      "authors": "Emily L. Denton et al.",
+      "year": 2014,
+      "role": "foundational concept",
+      "relationship_sentence": "This classic SVD-based compression work showed how to decompose weight matrices to reduce compute and memory, providing the core technical precedent for QSVD\u2019s SVD of concatenated Q\u2013K\u2013V weights."
+    },
+    {
+      "title": "Linformer: Self-Attention with Linear Complexity",
+      "authors": "Sinong Wang, Belinda Z. Li, Madian Khabsa, Han Fang, Hao Ma",
+      "year": 2020,
+      "role": "problem framing",
+      "relationship_sentence": "Linformer demonstrated the inherent low-rank structure of attention, informing QSVD\u2019s premise that joint low-rank approximations over Q\u2013K\u2013V can cut memory/compute (including KV-related costs) without large accuracy drops."
+    },
+    {
+      "title": "QLoRA: Efficient Finetuning of Quantized LLMs",
+      "authors": "Tim Dettmers et al.",
+      "year": 2023,
+      "role": "enabling technology",
+      "relationship_sentence": "QLoRA showed the strong synergy between low-rank methods and low-precision quantization, directly influencing QSVD\u2019s combined pipeline of SVD-based compression with quantization of weights and activations."
+    },
+    {
+      "title": "GPTQ: Accurate Post-Training Quantization for Generative Pretrained Transformers",
+      "authors": "Aitor Frantar, Dan Alistarh",
+      "year": 2022,
+      "role": "technical tool",
+      "relationship_sentence": "GPTQ provided a practical, accuracy-preserving PTQ method for transformer weights, informing QSVD\u2019s post-training quantization stage after SVD to maintain accuracy at low precision."
+    },
+    {
+      "title": "SmoothQuant: Accurate and Efficient Post-Training Quantization for Large Language Models",
+      "authors": "Xiao et al.",
+      "year": 2023,
+      "role": "enabling technology",
+      "relationship_sentence": "SmoothQuant\u2019s strategy to make both weights and activations quantization-friendly underpins QSVD\u2019s extension to low-precision W/A, helping preserve VLM accuracy after SVD-based compression."
+    }
+  ],
+  "synthesis_narrative": "QSVD\u2019s core contribution\u2014joint SVD over Q, K, and V projection weights with adaptive rank allocation and integrated low-precision quantization\u2014sits at the intersection of three threads: low-rank parameterization of attention, sensitivity-driven budget allocation, and robust post-training quantization for transformers. LoRA crystallized the idea that attention projections can be restricted to low-rank subspaces without sacrificing accuracy, while Linformer provided complementary evidence that the attention mechanism itself admits low-rank structure, motivating QSVD\u2019s unified treatment of Q\u2013K\u2013V. Building on the long-standing SVD compression lineage of Denton et al., QSVD operationalizes a direct SVD factorization of concatenated Q\u2013K\u2013V matrices to jointly reduce compute and KV-related memory. The method\u2019s dynamic rank allocation echoes AdaLoRA\u2019s insight that ranks should be distributed according to layer-wise importance, enabling QSVD to target accuracy-critical layers while keeping an aggressive efficiency budget.\nIn parallel, the quantization literature guides QSVD\u2019s low-precision design. QLoRA demonstrated that low-rank methods and quantization are synergistic, while GPTQ delivered practical, accurate post-training weight quantization that QSVD can leverage after SVD. SmoothQuant further informs how to make both weights and activations quantization-friendly, allowing QSVD to extend beyond weight-only schemes and reduce runtime cost without large accuracy drops. Together, these works directly shape QSVD\u2019s unified SVD of Q\u2013K\u2013V, its adaptive rank allocation policy, and its end-to-end, low-precision VLM pipeline aimed at minimizing KV memory and compute for real-time deployment.",
+  "analysis_timestamp": "2026-01-07T00:02:04.984978"
+}

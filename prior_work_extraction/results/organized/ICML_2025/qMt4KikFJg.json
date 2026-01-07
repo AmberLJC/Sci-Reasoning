@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Neural Processes",
+      "authors": "Marta Garnelo et al.",
+      "year": 2018,
+      "role": "Baseline",
+      "relationship_sentence": "Introduced the latent NP objective with a KL term between q(z|C\u222aT) and p(z|C) using shared encoders, whose parameter-coupled prior/posterior is exactly the training setup RNP modifies by replacing the KL with a R\u00e9nyi divergence."
+    },
+    {
+      "title": "Conditional Neural Processes",
+      "authors": "Marta Garnelo et al.",
+      "year": 2018,
+      "role": "Foundation",
+      "relationship_sentence": "Established the neural-process formulation of conditioning on context sets to model stochastic functions, providing the core problem setting that RNP retains while changing the divergence used for learning."
+    },
+    {
+      "title": "Attentive Neural Processes",
+      "authors": "Hyunjik Kim et al.",
+      "year": 2019,
+      "role": "Baseline",
+      "relationship_sentence": "State-of-the-art NP variant that keeps the same ELBO/KL training but improves representation via attention; RNP targets the same models\u2019 training objective by altering the divergence and reports consistent improvements over ANP."
+    },
+    {
+      "title": "R\u00e9nyi Divergence Variational Inference",
+      "authors": "Yingzhen Li et al.",
+      "year": 2016,
+      "role": "Extension",
+      "relationship_sentence": "Provided the variational R\u00e9nyi (VR) bound and showed how \u03b1-R\u00e9nyi divergences can replace the KL in latent-variable training; RNP directly adapts this technique to the NP objective to downweight misspecified priors during posterior updates."
+    },
+    {
+      "title": "Black-box alpha divergence minimization",
+      "authors": "Jos\u00e9 Miguel Hern\u00e1ndez-Lobato et al.",
+      "year": 2016,
+      "role": "Inspiration",
+      "relationship_sentence": "Demonstrated that tuning \u03b1-divergences controls mode-seeking vs mass-covering behavior under model mismatch; this insight motivates RNP\u2019s use of \u03b1<1 R\u00e9nyi divergence to mitigate prior misspecification effects in NPs."
+    },
+    {
+      "title": "Importance Weighted Autoencoders",
+      "authors": "Yuri Burda et al.",
+      "year": 2015,
+      "role": "Foundation",
+      "relationship_sentence": "Established tighter Monte Carlo bounds for latent-variable models and connected to \u03b1-type objectives; RNP leverages the same Monte Carlo estimation paradigm underlying the variational R\u00e9nyi bound used to train its NP objective."
+    },
+    {
+      "title": "beta-VAE: Learning Basic Visual Concepts with a Constrained Variational Framework",
+      "authors": "Irina Higgins et al.",
+      "year": 2017,
+      "role": "Related Problem",
+      "relationship_sentence": "Showed that tempering the KL term can improve learning by modulating the influence of the prior; RNP generalizes this tempering by replacing KL with R\u00e9nyi divergence to systematically dampen a misspecified conditional prior in NPs."
+    }
+  ],
+  "synthesis_narrative": "R\u00e9nyi Neural Processes sit squarely within the neural process family introduced by Garnelo et al., which framed learning stochastic functions by conditioning on context sets (CNP) and, in its latent variant (NP), training with an ELBO containing a KL between q(z|C\u222aT) and p(z|C). This KL-based objective, together with the shared encoders used to parameterize both prior and posterior, is the precise locus of the parameterization coupling and prior misspecification that the RNP paper diagnoses and addresses. While Attentive Neural Processes improved representation quality with attention, they retained the same KL-based training; RNP targets the objective itself, reporting gains over ANP and other NP variants.\n\nThe technical lever enabling RNP\u2019s core idea is the variational R\u00e9nyi framework of Li and Turner, which replaces the KL with an \u03b1-R\u00e9nyi divergence to yield a tunable bound; RNP directly extends this to the NP objective. Black-box \u03b1-divergence minimization further clarified how \u03b1 controls mode-seeking versus mass-covering behavior under mismatch, providing the motivation for using \u03b1<1 to damp the effect of a misspecified conditional prior during posterior updates. Importance Weighted Autoencoders supplied the Monte Carlo estimation perspective and connections to \u03b1-type bounds that make practical training feasible. Finally, the \u03b2-VAE line showed that tempering the KL can improve robustness to prior/posterior mismatch; RNP generalizes this intuition by swapping in R\u00e9nyi divergence rather than merely reweighting KL, thus directly addressing the coupling-driven prior misspecification unique to NPs.",
+  "analysis_timestamp": "2026-01-06T23:07:19.619396"
+}

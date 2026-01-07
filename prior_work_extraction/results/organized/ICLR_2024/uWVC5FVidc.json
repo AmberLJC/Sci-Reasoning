@@ -1,0 +1,57 @@
+{
+  "prior_works": [
+    {
+      "title": "A Watermark for Large Language Models",
+      "authors": "Kirchenbauer et al.",
+      "year": 2023,
+      "arxiv_id": "2301.10226",
+      "role": "Baseline",
+      "relationship_sentence": "This work\u2019s PRF-driven greenlist/whitelist scheme established the de facto LLM watermarking baseline and highlighted the strength\u2013quality trade-off caused by sampling bias, which the unbiased watermark explicitly removes while retaining a similar keyed detection interface."
+    },
+    {
+      "title": "An Information-Theoretic Model for Steganography",
+      "authors": "Christian Cachin",
+      "year": 1998,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "Cachin\u2019s definition of steganographic security as distributional indistinguishability directly motivates the unbiased watermark\u2019s core goal of preserving the model\u2019s output distribution so users cannot tell whether a watermark is present."
+    },
+    {
+      "title": "Provably Secure Steganography",
+      "authors": "Nicholas Hopper, John Langford, Luis von Ahn",
+      "year": 2002,
+      "arxiv_id": "",
+      "role": "Inspiration",
+      "relationship_sentence": "This paper provides constructive algorithms for embedding information while exactly matching the cover channel distribution, inspiring the unbiased watermark\u2019s distribution-preserving embedding adapted to autoregressive LM sampling."
+    },
+    {
+      "title": "Information-Theoretic Analysis of Information Hiding",
+      "authors": "Pierre Moulin, Joseph A. O\u2019Sullivan",
+      "year": 2003,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "Their capacity and detectability trade-off analysis for perfectly secure steganography informs the unbiased watermark\u2019s design choices on achievable embedding rate versus indistinguishability under a fixed output distribution."
+    },
+    {
+      "title": "RNN-Stega: Linguistic Steganography Based on Recurrent Neural Networks",
+      "authors": "Yang et al.",
+      "year": 2018,
+      "arxiv_id": "",
+      "role": "Related Problem",
+      "relationship_sentence": "By showing how to encode bits into text using language-model probabilities while maintaining fluency, this work provides the practical LM-driven steganographic paradigm that the unbiased watermark adapts for zero-bit watermarking without altering token probabilities."
+    }
+  ],
+  "synthesis_narrative": "Cachin formalized steganographic security via indistinguishability, requiring that the stegotext\u2019s distribution match the cover channel; this crystallized the notion that a watermark can be truly imperceptible only if the observable distribution is unchanged. Hopper, Langford, and von Ahn went further, constructing provably secure steganographic encoders that embed information while sampling exactly from the channel distribution, providing concrete algorithmic principles\u2014keyed randomness usage and distribution-preserving encoding\u2014to realize such indistinguishability. Moulin and O\u2019Sullivan analyzed the fundamental limits of information hiding under perfect-security constraints, clarifying the capacity\u2013detectability trade-offs inherent when the cover distribution must be preserved. In parallel, RNN-Stega demonstrated that language models can act as practical channels for embedding bits by leveraging model probabilities during generation, showing feasibility of LM-driven, distribution-aware steganography in practice. More recently, Kirchenbauer et al. introduced the widely used greenlist watermark for LLMs, achieved by biasing token sampling via a PRF; effective yet it inherently shifts the output distribution, manifesting a strength\u2013quality trade-off and leaving statistical footprints.\n\nTogether, these works expose a gap: LLM watermarks that are both detectable to the provider and distributionally indistinguishable to users. The unbiased watermark synthesizes information-theoretic perfect-security criteria with LM-aware embedding, replacing greenlist biasing with a keyed, distribution-preserving procedure inspired by provably secure steganography. This closes the quality\u2013strength gap by keeping the LM\u2019s token probabilities intact, while enabling reliable verification under the classic steganographic framework and respecting capacity limits highlighted by prior theory.",
+  "target_paper": {
+    "title": "Unbiased Watermark for Large Language Models",
+    "authors": "Zhengmian Hu, Lichang Chen, Xidong Wu, Yihan Wu, Hongyang Zhang, Heng Huang",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "watermark, bias",
+    "abstract": "The recent advancements in large language models (LLMs) have sparked a growing apprehension regarding the potential misuse. One approach to mitigating this risk is to incorporate watermarking techniques into LLMs, allowing for the tracking and attribution of model outputs. This study examines a crucial aspect of watermarking: how significantly watermarks impact the quality of model-generated outputs. Previous studies have suggested a trade-off between watermark strength and output quality. However, our research demonstrates that it is possible to integrate watermarks without affecting the output probability distribution with appropriate implementation. We refer to this type of watermark as an unbiased watermark. This has significant implications for the use of LLMs, as it becomes impossible for users to discern whether a service provider has incorporated watermarks or not. Furthermore, the presence of watermarks does not compromise the performance of the model in downstream tasks, ensu",
+    "openreview_id": "uWVC5FVidc",
+    "forum_id": "uWVC5FVidc"
+  },
+  "analysis_timestamp": "2026-01-06T11:46:22.101311"
+}

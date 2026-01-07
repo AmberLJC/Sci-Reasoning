@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP",
+      "authors": "Patrick Lewis et al.",
+      "year": 2020,
+      "arxiv_id": "2005.11401",
+      "role": "Extension",
+      "relationship_sentence": "RAG provided the core idea of conditioning generation on retrieved, verified contexts to reduce hallucinations, which RAG-SR adapts by retrieving semantically validated symbolic subtrees to guide equation generation."
+    },
+    {
+      "title": "Learning Feature Representations with Genetic Programming (FEAT)",
+      "authors": "William La Cava et al.",
+      "year": 2019,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "FEAT established the evolutionary feature construction paradigm\u2014evolving symbolic trees as features for a predictor\u2014that RAG-SR directly adopts and augments with a neural generator trained online."
+    },
+    {
+      "title": "Distilling Free-Form Natural Laws from Experimental Data",
+      "authors": "Michael Schmidt and Hod Lipson",
+      "year": 2009,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "This seminal GP-based symbolic regression work introduced the expression-tree search framework that RAG-SR retains while replacing purely stochastic variation with neural, retrieval-guided proposal of trees."
+    },
+    {
+      "title": "DeepCoder: Learning to Write Programs",
+      "authors": "Matej Balog et al.",
+      "year": 2017,
+      "arxiv_id": "1611.01989",
+      "role": "Related Problem",
+      "relationship_sentence": "DeepCoder demonstrated coupling a learned model with search to synthesize programs from input\u2013output specifications, directly inspiring RAG-SR\u2019s learned proposer that guides symbolic tree search from data semantics."
+    },
+    {
+      "title": "DreamCoder: Growing Generalizable, Interpretable Knowledge with Wake-Sleep Program Induction",
+      "authors": "Kevin Ellis et al.",
+      "year": 2021,
+      "arxiv_id": "2006.08381",
+      "role": "Inspiration",
+      "relationship_sentence": "DreamCoder\u2019s library learning and reuse of discovered program fragments motivated RAG-SR\u2019s retrieval of previously validated subexpressions as building blocks to steer generation and reduce hallucinations."
+    },
+    {
+      "title": "Deep Symbolic Regression",
+      "authors": "Felix Petersen et al.",
+      "year": 2021,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "DSR\u2019s neural policy for generating expression trees is the primary neural SR baseline that RAG-SR improves upon by replacing unstable RL with online supervised learning and augmenting proposals with retrieval."
+    },
+    {
+      "title": "AI Feynman: A Physics-Inspired Method for Symbolic Regression",
+      "authors": "Mihai Udrescu and Max Tegmark",
+      "year": 2020,
+      "arxiv_id": "1905.11481",
+      "role": "Related Problem",
+      "relationship_sentence": "AI Feynman\u2019s robust heuristics for equation discovery highlight the strengths and limitations of non-neural SR, motivating RAG-SR\u2019s integration of neural guidance with search to better handle unseen functions and variables."
+    }
+  ],
+  "synthesis_narrative": "Genetic programming for symbolic regression formalized searching over expression trees to discover data-consistent laws, with Eureqa showing that evolutionary operators over trees can recover concise equations from measurements. Building on this, FEAT reframed the task as evolutionary feature construction, evolving symbolic trees that feed a simple predictor\u2014demonstrating that search over reusable features can outperform end-to-end model search. In program synthesis, DeepCoder showed that a learned model can predict useful primitives from specifications to guide enumerative search, while DreamCoder introduced wake\u2013sleep library learning, reusing verified subprograms to make future search more reliable and sample-efficient. In neural symbolic regression, DSR proposed a neural policy that directly generates expression trees, exposing both the promise of neural guidance and the pitfalls of hallucination and unstable RL training. Orthogonally, Retrieval-Augmented Generation established that conditioning generation on retrieved, relevant, verified contexts reduces hallucinations and improves factual grounding.\nTaken together, these works expose a natural opportunity: combine evolutionary feature construction with a learned, data-conditioned generator, and stabilize neural proposals by retrieving validated building blocks during search. RAG-SR seizes this by training a lightweight language model online to propose symbolic trees aligned with dataset semantics, embedding it within FEAT-style feature evolution, and using RAG-style retrieval of previously verified expressions to curb hallucinations\u2014yielding a pretraining-free, search-integrated neural SR framework that generalizes to unseen functions and variables.",
+  "target_paper": {
+    "title": "RAG-SR: Retrieval-Augmented Generation for Neural Symbolic Regression",
+    "authors": "Hengzhe Zhang, Qi Chen, Bing XUE, Wolfgang Banzhaf, Mengjie Zhang",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "Symbolic Regression, Genetic Programming, Transformers, Deep Learning",
+    "abstract": "Symbolic regression is a key task in machine learning, aiming to discover mathematical expressions that best describe a dataset. While deep learning has increased interest in using neural networks for symbolic regression, many existing approaches rely on pre-trained models. These models require significant computational resources and struggle with regression tasks involving unseen functions and variables. A pre-training-free paradigm is needed to better integrate with search-based symbolic regression algorithms. To address these limitations, we propose a novel framework for symbolic regression that integrates evolutionary feature construction with a neural network, without the need for pre-training. Our approach adaptively generates symbolic trees that align with the desired semantics in real-time using a language model trained via online supervised learning, providing effective building blocks for feature construction. To mitigate hallucinations from the language model, we design a re",
+    "openreview_id": "NdHka08uWn",
+    "forum_id": "NdHka08uWn"
+  },
+  "analysis_timestamp": "2026-01-06T18:42:47.796132"
+}

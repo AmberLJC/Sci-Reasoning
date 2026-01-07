@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Generative Models for Graph-Based Protein Design",
+      "authors": "John Ingraham, Vikas K. Garg, Regina Barzilay, Tommi Jaakkola",
+      "year": 2019,
+      "role": "Foundational inverse folding formulation and autoregressive policy",
+      "relationship_sentence": "Established structure-conditioned, position-by-position sequence generation on protein contact/structure graphs, providing the autoregressive decision process ProtInvTree reframes as a search tree."
+    },
+    {
+      "title": "Robust deep learning based protein sequence design using ProteinMPNN",
+      "authors": "Justas Dauparas et al.",
+      "year": 2022,
+      "role": "State-of-the-art baseline and motivation for diversity-aware design",
+      "relationship_sentence": "Showed high native-sequence recovery via autoregressive GNNs but largely single-path decoding, motivating ProtInvTree\u2019s exploration\u2013exploitation search to capture the one-to-many mapping."
+    },
+    {
+      "title": "Mastering the game of Go without human knowledge (AlphaGo Zero/AlphaZero)",
+      "authors": "David Silver et al.",
+      "year": 2017,
+      "role": "Algorithmic blueprint for reward-guided tree search (MCTS with policy/value)",
+      "relationship_sentence": "Provided the core mechanics\u2014lookahead, self-evaluation, backpropagation of rewards, and UCT-style exploration\u2014that ProtInvTree adapts to sequence design over structural constraints."
+    },
+    {
+      "title": "Tree of Thoughts: Deliberate Problem Solving with Large Language Models",
+      "authors": "Shunyu Yao et al.",
+      "year": 2023,
+      "role": "Deliberate multi-step generation via branching, self-evaluation, and backtracking",
+      "relationship_sentence": "Inspired ProtInvTree\u2019s framing of sequence design as deliberate, multi-branch reasoning with intermediate scoring to select promising partial sequences."
+    },
+    {
+      "title": "Insertion Transformer: Flexible Sequence Generation via Insertion Operations",
+      "authors": "Mitchell Stern, William Chan, Jamie Kiros, Jakob Uszkoreit",
+      "year": 2019,
+      "role": "Action-space design: decoupling where-to-act from what-to-insert",
+      "relationship_sentence": "Informed ProtInvTree\u2019s two-stage focus-and-grounding mechanism by separating position selection from residue assignment to enable flexible, non-left-to-right construction."
+    },
+    {
+      "title": "Design of a novel globular protein fold with atomic-level accuracy (RosettaDesign)",
+      "authors": "Brian Kuhlman et al.",
+      "year": 2003,
+      "role": "Reward/score-driven protein design on fixed backbones",
+      "relationship_sentence": "Pioneered optimizing sequences against a structural scoring function; ProtInvTree echoes this by using reward signals (oracle/self-evaluation) to guide discrete search over sequences."
+    },
+    {
+      "title": "De novo protein design by deep network hallucination",
+      "authors": "Ivan Anishchenko et al.",
+      "year": 2021,
+      "role": "Oracle-guided optimization using structure predictors as rewards",
+      "relationship_sentence": "Demonstrated leveraging learned structure predictors to steer sequence search, directly motivating ProtInvTree\u2019s reward-guided evaluation of partial and complete candidates."
+    }
+  ],
+  "synthesis_narrative": "ProtInvTree\u2019s core idea\u2014casting inverse folding as deliberate, reward-guided tree search\u2014sits at the intersection of three lines of work. First, deep inverse folding models (Ingraham et al., ProteinMPNN) crystallized the structure-conditioned, autoregressive paradigm for residue assignment on protein graphs and achieved strong recovery. However, their mostly single-path decoding underplays the one-to-many mapping between structure and sequence, highlighting the need for explicit exploration that preserves structural consistency. Second, the protein design community has long optimized sequences against structural objectives: RosettaDesign established score-driven search on fixed backbones, while deep hallucination (Anishchenko et al.) showed how learned structure predictors can act as powerful oracles, turning sequence design into reward optimization. ProtInvTree leverages this tradition by using self-evaluation and oracle-like rewards to assess partial and complete designs. Third, advances in decision-time search and deliberate generation provide the algorithmic scaffold. AlphaZero\u2019s MCTS offers lookahead, backpropagation of value estimates, and principled exploration\u2013exploitation balancing, which ProtInvTree adapts to discrete residue assignment under structural constraints. Tree of Thoughts translates these planning ideas to generative modeling, motivating ProtInvTree\u2019s self-evaluation, branching, and backtracking during sequence construction. Finally, the two-stage focus-and-grounding action design\u2014separating where to act from what residue to place\u2014draws on insertion-based decoding (Insertion Transformer), enabling flexible, non-monotonic construction and better global consistency. Together, these works directly inform ProtInvTree\u2019s reward-guided tree search that balances diversity with structure fidelity.",
+  "analysis_timestamp": "2026-01-07T00:21:33.173622"
+}

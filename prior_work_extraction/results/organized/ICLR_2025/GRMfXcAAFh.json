@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Structured State Space Models for Sequence Modeling",
+      "authors": "Albert Gu et al.",
+      "year": 2022,
+      "arxiv_id": "2111.00396",
+      "role": "Foundation",
+      "relationship_sentence": "S4 formalized the continuous-time linear SSM layer and discretization pipeline for long-sequence modeling, establishing the formulation LinOSS adopts while motivating LinOSS\u2019s departure from S4\u2019s restrictive stability parameterizations."
+    },
+    {
+      "title": "Simplified State Space Layers for Sequence Modeling (S4D)",
+      "authors": "Albert Gu et al.",
+      "year": 2022,
+      "arxiv_id": "2206.11893",
+      "role": "Gap Identification",
+      "relationship_sentence": "S4D showed that diagonal state-space parameterizations can be effective but rely on enforcing negative real parts for stability, a limitation directly addressed by LinOSS\u2019s oscillator-based construction that requires only nonnegative diagonal entries."
+    },
+    {
+      "title": "Linear Recurrent Units for Sequence Modeling",
+      "authors": "Alessio Orvieto et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Baseline",
+      "relationship_sentence": "LRU provided a strong diagonal linear recurrence baseline with efficient scan-based inference, which LinOSS improves upon by replacing leaky-integrator dynamics with harmonic oscillators to better capture long-range oscillatory interactions under stable discretization."
+    },
+    {
+      "title": "Mamba: Linear-Time Sequence Modeling with Selective State Spaces",
+      "authors": "Albert Gu et al.",
+      "year": 2024,
+      "arxiv_id": "2312.00752",
+      "role": "Related Problem",
+      "relationship_sentence": "Mamba popularized hardware-friendly associative scan implementations for SSM recurrences, a technique LinOSS leverages to parallelize its time integration while contrasting Mamba\u2019s input-dependent dynamics with LinOSS\u2019s structure-preserving oscillator discretization."
+    },
+    {
+      "title": "Liquid Time-Constant Networks",
+      "authors": "Ramin Hasani et al.",
+      "year": 2021,
+      "arxiv_id": "2006.04439",
+      "role": "Inspiration",
+      "relationship_sentence": "LTC introduced biologically inspired continuous-time neural dynamics with provable stability, directly motivating LinOSS\u2019s use of physically grounded oscillator ODEs and stability-aware discretization for sequence modeling."
+    },
+    {
+      "title": "Hamiltonian Neural Networks",
+      "authors": "Sam Greydanus et al.",
+      "year": 2019,
+      "arxiv_id": "1906.01563",
+      "role": "Inspiration",
+      "relationship_sentence": "HNN showed that structure-preserving, time-reversible integrators confer stable learned dynamics, informing LinOSS\u2019s implicit\u2013explicit discretization that exactly preserves the oscillator\u2019s time-reversal symmetry."
+    }
+  ],
+  "synthesis_narrative": "Structured State Space models (S4) established the modern continuous-time SSM layer by parameterizing linear ODEs and discretizing them to handle long sequences efficiently, but did so under stability constraints that tightly control eigenvalues. S4D then demonstrated that simpler, diagonal state parameterizations can still be competitive, yet they hinged on enforcing negative real parts for stability, narrowing the class of allowable dynamics. Linear Recurrent Units (LRU) produced a strong diagonal linear recurrence baseline with efficient scan-based inference, but their leaky-integrator dynamics tend to underrepresent sustained oscillatory phenomena that often mediate long-range interactions. In parallel, Mamba popularized associative selective-scan implementations that make SSM-style recurrences hardware-friendly at scale, solidifying scans as the practical engine for linear-time sequence processing. From a modeling perspective, Liquid Time-Constant networks grounded sequence dynamics in biological continuous-time systems with provable stability, encouraging physically meaningful ODE-based architectures. Complementarily, Hamiltonian Neural Networks underscored that structure-preserving, time-reversible schemes can stabilize learned dynamics and conserve invariants when the underlying physics demands it.\n\nTaken together, these works exposed a gap: efficient SSMs either impose restrictive stability parameterizations or forgo dynamics that naturally exhibit oscillation and reversibility. LinOSS synthesizes the SSM formulation and scan-based inference with biologically inspired oscillator dynamics, introducing a stable discretization that requires only nonnegative diagonal parameters and an implicit\u2013explicit scheme that exactly preserves time-reversal symmetry. This combination delivers long-range interaction modeling via oscillatory states, retains linear-time parallelism through associative scans, and\u2014backed by a universality result\u2014ensures expressive coverage of causal operators, making it a natural next step in the SSM lineage.",
+  "target_paper": {
+    "title": "Oscillatory State-Space Models",
+    "authors": "T. Konstantin Rusch, Daniela Rus",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "oral",
+    "keywords": "state-space models, sequence models, oscillators, long-range interactions, time-series",
+    "abstract": "We propose Linear Oscillatory State-Space models (LinOSS) for efficiently learning on long sequences. Inspired by cortical dynamics of biological neural networks, we base our proposed LinOSS model on a system of forced harmonic oscillators. A stable discretization, integrated over time using fast associative parallel scans, yields the proposed state-space model. We prove that LinOSS produces stable dynamics only requiring nonnegative diagonal state matrix. This is in stark contrast to many previous state-space models relying heavily on restrictive parameterizations. Moreover, we rigorously show that LinOSS is universal, i.e., it can approximate any continuous and causal operator mapping between time-varying functions, to desired accuracy. In addition, we show that an implicit-explicit discretization of LinOSS perfectly conserves the symmetry of time reversibility of the underlying dynamics. Together, these properties enable efficient modeling of long-range interactions, while ensuring ",
+    "openreview_id": "GRMfXcAAFh",
+    "forum_id": "GRMfXcAAFh"
+  },
+  "analysis_timestamp": "2026-01-06T10:49:28.368022"
+}

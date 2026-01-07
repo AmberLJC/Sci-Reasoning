@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Diffusion Models Beat GANs on Image Synthesis",
+      "authors": "Prafulla Dhariwal, Alexander Nichol",
+      "year": 2021,
+      "role": "Established the power of semantic conditioning (via class labels and classifier guidance) and documented the large quality gap between unconditional and conditional generation.",
+      "relationship_sentence": "RCG is motivated by this gap; it removes human labels yet recovers the benefits of semantic conditioning by conditioning on embeddings from a self-supervised encoder."
+    },
+    {
+      "title": "High-Resolution Image Synthesis with Latent Diffusion Models",
+      "authors": "Robin Rombach, Andreas Blattmann, Dominik Lorenz, Patrick Esser, Bj\u00f6rn Ommer",
+      "year": 2022,
+      "role": "Introduced conditioning via cross-attention to external embeddings and efficient generation in a learned latent space.",
+      "relationship_sentence": "RCG adopts a similar conditioning interface but supplies label-free, self-supervised visual representations as the conditioning signal, enabling conditional-quality synthesis without annotations."
+    },
+    {
+      "title": "Hierarchical Text-Conditional Image Generation with CLIP Latents (DALL\u00b7E 2 / unCLIP)",
+      "authors": "Aditya Ramesh, Prafulla Dhariwal, Alex Nichol, Casey Chu, Mark Chen",
+      "year": 2022,
+      "role": "Showed that generating in a semantic embedding space (CLIP image features) and decoding with a diffusion model yields high-fidelity images.",
+      "relationship_sentence": "RCG generalizes the unCLIP recipe to the fully unlabeled regime by replacing CLIP (text-supervised) embeddings with self-supervised image representations and learning to generate these embeddings unconditionally."
+    },
+    {
+      "title": "Momentum Contrast for Unsupervised Visual Representation Learning (MoCo)",
+      "authors": "Xinlei Chen, Haoqi Fan, Ross Girshick, Kaiming He",
+      "year": 2020,
+      "role": "Provided strong self-supervised encoders whose features capture semantics without labels.",
+      "relationship_sentence": "RCG relies on such SSL encoders to define the representation space; the generator models this space and uses it to condition the image decoder, substituting labels with learned semantics."
+    },
+    {
+      "title": "Emerging Properties in Self-Supervised Vision Transformers (DINO)",
+      "authors": "Mathilde Caron, Hugo Touvron, Ishan Misra, Herv\u00e9 J\u00e9gou, Julien Mairal, Piotr Bojanowski, Armand Joulin",
+      "year": 2021,
+      "role": "Demonstrated that self-supervised ViT features discover object- and part-level semantics without supervision.",
+      "relationship_sentence": "RCG leverages exactly these emergent semantic properties: the self-supervised representation space serves as a rich, label-free conditioning signal for image generation."
+    },
+    {
+      "title": "Masked Autoencoders Are Scalable Vision Learners",
+      "authors": "Kaiming He, Xinlei Chen, Saining Xie, Yanghao Li, Piotr Doll\u00e1r, Ross Girshick",
+      "year": 2022,
+      "role": "Introduced scalable masked image modeling producing high-quality visual representations with no labels.",
+      "relationship_sentence": "RCG can instantiate its encoder with MAE, using its latent features as the target representation distribution to generate and as the conditioning input to the image generator."
+    },
+    {
+      "title": "Taming Transformers for High-Resolution Image Synthesis (VQGAN)",
+      "authors": "Patrick Esser, Robin Rombach, Bj\u00f6rn Ommer",
+      "year": 2021,
+      "role": "Decoupled high-level token generation from image rendering via a learned code space and a powerful decoder.",
+      "relationship_sentence": "RCG adopts the same decoupling principle\u2014model semantics first, render later\u2014but replaces discrete codebooks with continuous self-supervised embeddings to obtain label-free, semantically meaningful conditioning."
+    }
+  ],
+  "synthesis_narrative": "The core contribution of Representation-Conditioned Generation (RCG) is to close the long-standing quality gap between unconditional and conditional image generation by conditioning on semantic features learned without labels. Dhariwal and Nichol (2021) crystallized this gap, showing that class-conditional diffusion with guidance far outperforms unconditional models; RCG directly targets this by providing semantic conditioning without human annotations. Architecturally, RCG builds on the conditioning mechanisms popularized by Latent Diffusion Models (Rombach et al., 2022)\u2014cross-attending to external embeddings in a compact latent space\u2014while changing the source of semantics.\n\nThe key insight is inspired by two lines of prior work. First, unCLIP (Ramesh et al., 2022) illustrated that generating in a semantic embedding space and then decoding with a diffusion model yields strong fidelity and control; RCG preserves this two-stage design but replaces text-supervised CLIP embeddings with self-supervised visual representations. Second, advances in self-supervised learning such as MoCo (Chen et al., 2020), DINO (Caron et al., 2021), and MAE (He et al., 2022) established that label-free encoders can learn features with rich, class-like semantics. RCG leverages these encoders both as the target distribution to model in representation space and as the conditioning signal for image synthesis.\n\nFinally, the decoupling principle from VQGAN (Esser et al., 2021)\u2014separating high-level latent modeling from pixel rendering\u2014provides a practical template that RCG adapts to continuous, semantically meaningful SSL embeddings. Together, these works directly enable RCG\u2019s label-free yet semantically conditioned generation paradigm.",
+  "analysis_timestamp": "2026-01-06T23:33:36.288272"
+}

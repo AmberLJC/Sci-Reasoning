@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Segment Anything",
+      "authors": "Alexander Kirillov et al.",
+      "year": 2023,
+      "role": "Inspiration",
+      "relationship_sentence": "SemiRES\u2019s core idea\u2014using SAM\u2019s highly accurate boundaries to denoise pseudo-labels\u2014directly builds on SAM\u2019s promptable mask proposals and boundary precision, which it selectively matches and composes via IOM/CPI to supervise the student."
+    },
+    {
+      "title": "Mean teachers are better role models: Weight-averaged consistency targets improve semi-supervised deep learning results",
+      "authors": "Antti Tarvainen et al.",
+      "year": 2017,
+      "role": "Foundation",
+      "relationship_sentence": "SemiRES adopts the teacher\u2013student pseudo-labeling paradigm established by Mean Teacher and adds SAM-guided refinement as a targeted mechanism to correct noisy supervision, especially along boundaries."
+    },
+    {
+      "title": "Semi-Supervised Semantic Segmentation with Cross Pseudo Supervision",
+      "authors": "Xiaokang Chen et al.",
+      "year": 2021,
+      "role": "Gap Identification",
+      "relationship_sentence": "CPS exposed the susceptibility of semi-supervised segmentation to confirmation bias and noisy pseudo-labels; SemiRES addresses this gap by injecting SAM-derived masks and matching/composition (IOM/CPI) to clean boundary noise before supervising the student."
+    },
+    {
+      "title": "Semi-Supervised Semantic Segmentation with Unreliable Pseudo Labels (U2PL)",
+      "authors": "Wang et al.",
+      "year": 2022,
+      "role": "Gap Identification",
+      "relationship_sentence": "U2PL explicitly models unreliable pseudo labels and treats uncertain pixels conservatively; SemiRES tackles the same unreliability\u2014particularly at edges\u2014by actively correcting pseudo-labels with SAM-selected or part-composed masks and using PWA when no reliable SAM candidate exists."
+    },
+    {
+      "title": "Segmentation from Natural Language Expressions",
+      "authors": "Ronghang Hu et al.",
+      "year": 2016,
+      "role": "Foundation",
+      "relationship_sentence": "This work formulated the RES task\u2014segmenting the region referred to by a natural language expression\u2014which is precisely the problem setting that SemiRES pursues in a semi-supervised regime."
+    },
+    {
+      "title": "Grounded Segment Anything",
+      "authors": "Shilong Liu et al.",
+      "year": 2023,
+      "role": "Related Problem",
+      "relationship_sentence": "By showing how SAM masks can be linked to language via external grounding, Grounded-SAM motivated SemiRES\u2019s strategy of leveraging SAM proposals for language-conditioned supervision and informed its design of mask selection (IOM) and part integration (CPI) to align with textual intent."
+    }
+  ],
+  "synthesis_narrative": "SemiRES sits at the intersection of referring expression segmentation (RES) and semi-supervised learning. The task itself is rooted in the formulation of segmenting a natural-language\u2013specified region (Hu et al., 2016), which defines the supervision target SemiRES seeks even when labels are scarce. The training strategy follows the teacher\u2013student pseudo-labeling paradigm established by Mean Teacher, yet SemiRES recognizes a central limitation of such approaches\u2014noisy and confirmation-biased pseudo-labels\u2014highlighted by CPS (Chen et al., 2021) and U2PL (Wang et al., 2022), with boundary pixels being particularly error-prone. The breakthrough enabling SemiRES\u2019s key contribution is SAM (Kirillov et al., 2023): its promptable, high-fidelity masks provide the boundary precision that raw pseudo-labels lack. SemiRES operationalizes this through two concrete mechanisms: IoU-based Optimal Matching (IOM) to select the most compatible SAM mask and Composite Parts Integration (CPI) to assemble multiple SAM parts when a single mask does not capture the referred object. In instances where SAM candidates remain imperfect, SemiRES\u2019s Pixel-Wise Adjustment (PWA) still guides the student while mitigating noise. Finally, insights from Grounded-SAM (Liu et al., 2023) show how SAM can be harnessed in language-conditioned contexts, reinforcing SemiRES\u2019s strategy of aligning SAM proposals with textual intent. Together, these works directly shape SemiRES\u2019s innovation: SAM-guided pseudo-label refinement tailored to RES.",
+  "analysis_timestamp": "2026-01-06T23:09:26.426452"
+}

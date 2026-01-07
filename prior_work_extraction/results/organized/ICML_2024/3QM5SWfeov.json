@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Practical Bayesian Optimization of Machine Learning Algorithms",
+      "authors": "Jasper Snoek, Hugo Larochelle, Ryan P. Adams",
+      "year": 2012,
+      "role": "Foundational BO framework (GP surrogate + acquisition)",
+      "relationship_sentence": "Established the surrogate-based BO paradigm and acquisition-driven querying that MALIBO departs from by learning query utility directly without an explicit probabilistic surrogate."
+    },
+    {
+      "title": "Multi-Task Bayesian Optimization",
+      "authors": "Kevin Swersky, Jasper Snoek, Ryan P. Adams",
+      "year": 2013,
+      "role": "Task transfer and similarity modeling in BO",
+      "relationship_sentence": "Introduced explicit modeling of task relatedness in BO, motivating MALIBO\u2019s focus on handling uncertainty over task similarity to ensure robust transfer when tasks are dissimilar."
+    },
+    {
+      "title": "Initializing Bayesian Hyperparameter Optimization via Meta-Learning",
+      "authors": "Matthias Feurer, Aaron Klein, Katharina Eggensperger, Jost Tobias Springenberg, Manuel Blum, Frank Hutter",
+      "year": 2015,
+      "role": "Meta-learning for warm-starting BO",
+      "relationship_sentence": "Demonstrated leveraging prior tasks to accelerate BO, which MALIBO advances by meta-learning the query utility itself and by explicitly accounting for uncertainty during adaptation."
+    },
+    {
+      "title": "Scalable Bayesian Optimization Using Deep Neural Networks (DNGO)",
+      "authors": "Jasper Snoek, Oren Rippel, Kevin Swersky, Ryan Kiros, Nadathur Satish, Narendra Sundaram, Mostofa Patwary, Prabhat, Ryan P. Adams",
+      "year": 2015,
+      "role": "Scalable surrogate modeling for BO",
+      "relationship_sentence": "Addressed GP scalability via deep surrogates but retained sensitivity to input scale/noise; MALIBO sidesteps such surrogate sensitivities by learning a likelihood-free utility across tasks."
+    },
+    {
+      "title": "Conditional Neural Processes",
+      "authors": "Marta Garnelo, Jonathan Schwarz, Dan Rosenbaum, Fabio Viola, Danilo J. Rezende, S. M. A. Eslami, Yee Whye Teh",
+      "year": 2018,
+      "role": "Meta-learned surrogate models across tasks",
+      "relationship_sentence": "Inspired meta-learning across task distributions for function modeling; MALIBO builds on this meta perspective while avoiding explicit surrogates that can be brittle or costly across heterogeneous tasks."
+    },
+    {
+      "title": "Probabilistic Model-Agnostic Meta-Learning (PLATIPUS)",
+      "authors": "Chelsea Finn, Kelvin Xu, Sergey Levine",
+      "year": 2018,
+      "role": "Task-uncertainty in meta-learning",
+      "relationship_sentence": "Introduced explicit uncertainty over task identity in meta-learning, directly informing MALIBO\u2019s explicit task uncertainty component for safer adaptation on novel or out-of-distribution tasks."
+    },
+    {
+      "title": "Meta-Learning Acquisition Functions for Bayesian Optimization",
+      "authors": "Michel Volpp, Luigi Nardi, Andreas Doerr, Christian Daniel, Lars Schmitt, Frank Hutter, Christian Kersting",
+      "year": 2020,
+      "role": "Learning acquisition/utility across tasks",
+      "relationship_sentence": "Showed that acquisition strategies can be meta-learned across tasks; MALIBO advances this idea by learning query utility in a likelihood-free manner and coupling it with task-uncertainty and auxiliary modeling for robustness."
+    }
+  ],
+  "synthesis_narrative": "MALIBO\u2019s core contribution\u2014meta-learning a likelihood-free query utility that transfers across tasks while explicitly modeling task uncertainty\u2014grows from two converging lines of work. Classical Bayesian optimization (Snoek et al., 2012) established surrogate-driven acquisition strategies, while subsequent transfer extensions (Swersky et al., 2013) modeled task similarity to accelerate optimization on new problems. Practical meta-learning for BO emerged via warm-starting (Feurer et al., 2015) and scalable deep surrogates (DNGO; Snoek et al., 2015), but these approaches remained tied to explicit surrogates that can become sensitive to heterogeneous input scales and noise across tasks. In parallel, the meta-learning community developed task-distribution modeling: Conditional Neural Processes (Garnelo et al., 2018) enabled meta-learned surrogates across functions, and probabilistic meta-learning (PLATIPUS; Finn et al., 2018) emphasized representing uncertainty over task identity for robust adaptation. The idea of learning the acquisition mechanism itself (Volpp et al., 2020) demonstrated that query selection can be meta-learned, yet still typically depended on surrogate predictions. MALIBO synthesizes these insights by discarding explicit surrogates and directly learning a transferable utility of queries, while incorporating an explicit task-uncertainty component to guard against negative transfer when new tasks are dissimilar or sparsely observed. An auxiliary model further stabilizes adaptation, yielding a scalable, robust meta-BO procedure that outperforms surrogate-centric meta-learners on diverse benchmarks.",
+  "analysis_timestamp": "2026-01-07T00:02:04.893837"
+}

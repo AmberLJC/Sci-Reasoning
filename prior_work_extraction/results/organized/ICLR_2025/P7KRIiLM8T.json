@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Tensor Programs V: Tuning Large Neural Networks via Zero-shot Hyperparameter Transfer",
+      "authors": "Greg Yang et al.",
+      "year": 2022,
+      "arxiv_id": "2203.03466",
+      "role": "Baseline",
+      "relationship_sentence": "u-\u03bcP directly builds on \u03bcP\u2019s maximal-update parameterization to preserve width-invariant hyperparameters, then simplifies and strengthens it by fixing the absolute scale via Unit Scaling to improve sweep efficiency and stability."
+    },
+    {
+      "title": "Unit Scaling: Training Deep Networks at Unit Scale",
+      "authors": "Luke Yuri Prince et al.",
+      "year": 2024,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "u-\u03bcP integrates Unit Scaling\u2019s design\u2014initializing and parametrizing networks so weights, activations, and gradients start at scale one\u2014to supply the missing absolute scale in \u03bcP and enable out-of-the-box FP8 training."
+    },
+    {
+      "title": "Neural Tangent Kernel: Convergence and Generalization in Neural Networks",
+      "authors": "Arthur Jacot et al.",
+      "year": 2018,
+      "arxiv_id": "1806.07572",
+      "role": "Foundation",
+      "relationship_sentence": "By formalizing how parametrization fixes learning dynamics in the infinite-width limit, NTK provided the theoretical backdrop \u03bcP contrasted against, motivating u-\u03bcP\u2019s choice to stay in a feature-learning, size-stable regime while controlling absolute scales."
+    },
+    {
+      "title": "FP8 Formats for Deep Learning",
+      "authors": "Paulius Micikevicius et al.",
+      "year": 2022,
+      "arxiv_id": "2209.05433",
+      "role": "Gap Identification",
+      "relationship_sentence": "This work highlighted the sensitivity of FP8 training to value scales and the need for bespoke per-tensor scaling, a limitation u-\u03bcP addresses by designing networks to operate near unit magnitude throughout so FP8 works out-of-the-box."
+    },
+    {
+      "title": "Fixup Initialization: Residual Learning Without Normalization",
+      "authors": "Hongyi Zhang et al.",
+      "year": 2019,
+      "arxiv_id": "1901.09321",
+      "role": "Related Problem",
+      "relationship_sentence": "Fixup demonstrated that carefully chosen initialization and residual scaling can control signal magnitudes without normalization, a principle u-\u03bcP adopts at unit scale and merges with \u03bcP\u2019s update-preserving parametrization."
+    },
+    {
+      "title": "DeepNet: Scaling Transformers to 1,000 Layers",
+      "authors": "Wang et al.",
+      "year": 2022,
+      "arxiv_id": null,
+      "role": "Related Problem",
+      "relationship_sentence": "DeepNet\u2019s residual-branch and depth-wise scaling to stabilize activations/gradients informed the idea that architectural scalings can enforce well-behaved magnitudes, which u-\u03bcP generalizes to unit-scale signals combined with \u03bcP\u2019s hyperparameter invariance."
+    }
+  ],
+  "synthesis_narrative": "Maximal Update Parametrization (\u03bcP) established that choosing a specific width scaling preserves update magnitudes and makes optimal hyperparameters transferable across model sizes, enabling zero-shot hyperparameter transfer. Unit Scaling showed that careful initialization and parametrization can set weights, activations, and gradients to unit magnitude at the start of training, making low-precision numerics far more robust. The Neural Tangent Kernel framework clarified how parametrization dictates infinite-width dynamics, underscoring why standard or NTK parametrizations can either distort hyperparameter transfer or linearize learning, motivating update-preserving regimes like \u03bcP. FP8 formats documented the numerical fragility of low-precision training and the reliance on ad hoc per-tensor scaling, emphasizing that stable value ranges are essential for practicality. Fixup demonstrated that targeted initialization and residual scaling can maintain healthy signal magnitudes without normalization, while DeepNet extended this idea with residual and depth-wise scalings to stabilize very deep Transformers, reinforcing the importance of architecture-level magnitude control.\n\nTogether, these works revealed a gap: \u03bcP delivers size-invariant update dynamics but leaves absolute signal scales under-specified, while low-precision training demands tight, predictable magnitudes without heavy per-tensor heuristics. u-\u03bcP synthesizes \u03bcP\u2019s width-invariant hyperparameter transfer with Unit Scaling\u2019s unit-magnitude design, fixing both relative (across width) and absolute (numerical) scales. This unification yields near-default, near-optimal hyperparameters, simplifies sweeps, and makes models naturally FP8-ready\u2014an immediate next step given the combined insights on parametrization, initialization, and precision-aware stability.",
+  "target_paper": {
+    "title": "u-$\\mu$P: The Unit-Scaled Maximal Update Parametrization",
+    "authors": "Charlie Blake, Constantin Eichenberg, Josef Dean, Lukas Balles, Luke Yuri Prince, Bj\u00f6rn Deiseroth, Andres Felipe Cruz-Salinas, Carlo Luschi, Samuel Weinbach, Douglas Orr",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "maximal update parametrization, learning dynamics, hyperparameter transfer, efficiency, training, stability, scaling, numerics, fp8, low precision",
+    "abstract": "The Maximal Update Parametrization ($\\mu$P) aims to make the optimal hyperparameters (HPs) of a model independent of its size, allowing them to be swept using a cheap proxy model rather than the full-size target model. We present a new scheme, u-$\\mu$P, which improves upon $\\mu$P by combining it with Unit Scaling, a method for designing models that makes them easy to train in low-precision. The two techniques have a natural affinity: $\\mu$P ensures that the scale of activations is independent of model size, and Unit Scaling ensures that activations, weights and gradients begin training with a scale of one. This synthesis opens the door to a simpler scheme, whose default values are near-optimal. This in turn facilitates a more efficient sweeping strategy, with u-$\\mu$P models reaching a lower loss than comparable $\\mu$P models and working out-of-the-box in FP8.",
+    "openreview_id": "P7KRIiLM8T",
+    "forum_id": "P7KRIiLM8T"
+  },
+  "analysis_timestamp": "2026-01-06T17:31:09.419179"
+}

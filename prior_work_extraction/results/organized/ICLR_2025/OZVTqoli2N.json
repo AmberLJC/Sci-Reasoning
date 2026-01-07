@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Editing Models with Task Arithmetic",
+      "authors": "Ilharco et al.",
+      "year": 2023,
+      "arxiv_id": "2212.04089",
+      "role": "Inspiration",
+      "relationship_sentence": "This work\u2019s task\u2011vector view\u2014treating fine\u2011tuning as additive weight updates that can be linearly combined\u2014directly motivates our analysis, which generalizes beyond linearized assumptions via a second\u2011order Taylor model to state when and how such compositions remain valid."
+    },
+    {
+      "title": "Model Soups: Averaging weights of multiple fine-tuned models improves accuracy without additional training",
+      "authors": "Wortsman et al.",
+      "year": 2022,
+      "arxiv_id": "2203.05482",
+      "role": "Baseline",
+      "relationship_sentence": "Their finding that simple parameter averaging works when fine\u2011tuned models lie in the same loss basin informs our formalization of the pre\u2011training basin condition and motivates training rules that explicitly keep modules in\u2011basin to enable composability."
+    },
+    {
+      "title": "Merging Models with Fisher-Weighted Averaging",
+      "authors": "Matena and Raffel",
+      "year": 2022,
+      "arxiv_id": "2111.09832",
+      "role": "Extension",
+      "relationship_sentence": "We extend the Fisher\u2011weighted merging principle\u2014derived from a local quadratic (second\u2011order) loss approximation\u2014by using the same second\u2011order lens not only for post\u2011hoc merging but to design dual incremental optimization procedures for modules and their composition."
+    },
+    {
+      "title": "Overcoming catastrophic forgetting in neural networks",
+      "authors": "Kirkpatrick et al.",
+      "year": 2017,
+      "arxiv_id": "1612.00796",
+      "role": "Foundation",
+      "relationship_sentence": "We adapt EWC\u2019s Fisher\u2011weighted quadratic penalty, originally used to retain past tasks, into a mechanism for staying near the pre\u2011trained optimum so that incrementally learned modules remain mutually compatible for composition."
+    },
+    {
+      "title": "Git Re-Basin: Merging Models modulo Permutation Symmetries",
+      "authors": "Ainsworth et al.",
+      "year": 2023,
+      "arxiv_id": "2209.04836",
+      "role": "Related Problem",
+      "relationship_sentence": "Where they resolve permutation symmetries to enable model merging, our theory explains when such re\u2011basining is unnecessary\u2014namely when updates remain within the pre\u2011training basin\u2014and our algorithms enforce this during training."
+    },
+    {
+      "title": "TIES-Merging: Resolving Interference When Merging Models",
+      "authors": "Yadav et al.",
+      "year": 2023,
+      "arxiv_id": "2306.01181",
+      "role": "Gap Identification",
+      "relationship_sentence": "We address the interference that TIES mitigates via sign\u2011pruning heuristics by providing principled second\u2011order criteria for safe composition and training procedures that avoid creating conflicting directions in the first place."
+    }
+  ],
+  "synthesis_narrative": "Task arithmetic introduced the idea that fine-tuning creates task vectors\u2014parameter offsets from a common pre-trained model\u2014that can be additively combined to edit capabilities, an effect largely justified by local linearity around the pre-training point. Model soups then showed that simple weight averaging of fine-tuned models can improve performance, but only when the models reside in a shared basin of the loss landscape, hinting at geometric conditions for successful composition. Merging models with Fisher-weighted averaging grounded composition in a second-order Taylor expansion of the loss, using Fisher information to weight parameters during post-hoc merging. Elastic Weight Consolidation further established the practical power of second-order (Fisher-based) quadratic approximations by constraining updates to remain near previous optima to prevent forgetting. Git Re-Basin revealed that when models drift into different symmetry-equivalent basins, permutation alignment is required before merging. Finally, TIES-Merging highlighted interference between fine-tuned updates and proposed heuristic sign-pruning to reduce destructive interactions when combining models.\n\nTogether, these works expose a gap: empirical weight-space composition is effective but fragile, with success tied to implicit basin proximity and ad hoc fixes for interference, and theory often limited to linearized regimes or post-hoc merging. Building on their insights, a second-order perspective naturally emerges to formalize the pre-training basin as the safe region for compositionality and to transform Fisher-based quadratic reasoning into training-time, dual incremental procedures that keep modules compatible while also directly optimizing their composed model.",
+  "target_paper": {
+    "title": "A Second-Order Perspective on Model Compositionality and Incremental Learning",
+    "authors": "Angelo Porrello, Lorenzo Bonicelli, Pietro Buzzega, Monica Millunzi, Simone Calderara, Rita Cucchiara",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "Continual Learning, Model Compositionality, Ensemble Learning, Task Arithmetic",
+    "abstract": "The fine-tuning of deep pre-trained models has revealed compositional properties, with multiple specialized modules that can be arbitrarily composed into a single, multi-task model. However, identifying the conditions that promote compositionality remains an open issue, with recent efforts concentrating mainly on linearized networks. We conduct a theoretical study that attempts to demystify compositionality in standard non-linear networks through the second-order Taylor approximation of the loss function. The proposed formulation highlights the importance of staying within the pre-training basin to achieve composable modules. Moreover, it provides the basis for two dual incremental training algorithms: the one from the perspective of multiple models trained individually, while the other aims to optimize the composed model as a whole. We probe their application in incremental classification tasks and highlight some valuable skills. In fact, the pool of incrementally learned modules not ",
+    "openreview_id": "OZVTqoli2N",
+    "forum_id": "OZVTqoli2N"
+  },
+  "analysis_timestamp": "2026-01-06T11:53:34.464727"
+}

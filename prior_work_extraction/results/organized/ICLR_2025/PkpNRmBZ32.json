@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Efficiently Modeling Long Sequences with Structured State Spaces",
+      "authors": "Albert Gu et al.",
+      "year": 2022,
+      "arxiv_id": "2111.00396",
+      "role": "Foundation",
+      "relationship_sentence": "This work introduced the SSM-as-convolution formulation and the prevalent depthwise-SSM + pointwise-mixing block pattern that Centaurus generalizes by reframing SSM computations as tensor contractions to enable richer (group/full) channel coupling."
+    },
+    {
+      "title": "Mamba: Linear-Time Sequence Modeling with Selective State Spaces",
+      "authors": "Albert Gu et al.",
+      "year": 2024,
+      "arxiv_id": "2312.00752",
+      "role": "Baseline",
+      "relationship_sentence": "Mamba established highly efficient per-channel (depthwise) selective SSM blocks that serve as Centaurus\u2019s primary baseline and whose limited intra-block channel mixing motivated Centaurus\u2019s contraction-order-optimized group/full/bottleneck SSM designs."
+    },
+    {
+      "title": "Xception: Deep Learning with Depthwise Separable Convolutions",
+      "authors": "Fran\u00e7ois Chollet",
+      "year": 2017,
+      "arxiv_id": "1610.02357",
+      "role": "Inspiration",
+      "relationship_sentence": "The depthwise-separable convolution paradigm formalized here is the direct analogue of the homogeneous, separable SSM blocks that Centaurus departs from when importing a broader convolutional design taxonomy into SSMs."
+    },
+    {
+      "title": "Aggregated Residual Transformations for Deep Neural Networks (ResNeXt)",
+      "authors": "Saining Xie et al.",
+      "year": 2017,
+      "arxiv_id": "1611.05431",
+      "role": "Inspiration",
+      "relationship_sentence": "ResNeXt\u2019s group convolution idea directly inspires Centaurus\u2019s grouped SSM blocks, translating partial channel coupling into the SSM parameterization while maintaining efficiency through optimized contraction ordering."
+    },
+    {
+      "title": "Deep Residual Learning for Image Recognition",
+      "authors": "Kaiming He et al.",
+      "year": 2016,
+      "arxiv_id": "1512.03385",
+      "role": "Inspiration",
+      "relationship_sentence": "The ResNet bottleneck (compress\u2013transform\u2013expand) pattern motivates Centaurus\u2019s bottleneck SSM blocks, balancing compute/memory and capacity once SSMs are expressed as tensor contractions."
+    },
+    {
+      "title": "Optimized Einsum: Speeding up Einstein Summation in NumPy",
+      "authors": "Daniel G. A. Smith et al.",
+      "year": 2018,
+      "arxiv_id": null,
+      "role": "Extension",
+      "relationship_sentence": "Centaurus extends contraction-path optimization from einsum/tensor-network literature to SSM computation graphs, systematically selecting near-optimal contraction orders that make non-separable SSM blocks trainable and memory-efficient."
+    }
+  ],
+  "synthesis_narrative": "Structured State Spaces (S4) established that linear state-space dynamics can be recast as long 1D convolutions, yielding an SSM layer typically implemented as depthwise per-channel filtering followed by pointwise channel mixing\u2014a design that became the default SSM block. Mamba advanced this line by introducing selective (input-dependent) SSMs with linear-time scanning, but it retained the depthwise block structure that limits intra-block channel coupling. In convolutional networks, Xception codified depthwise separable convolutions, clarifying the accuracy\u2013efficiency tradeoffs of fully separable operators and cementing a taxonomy that many SSM blocks implicitly mirror. ResNeXt introduced group convolutions to recover partial cross-channel interactions at controlled compute, while ResNet\u2019s bottleneck pattern (1\u00d71 reduce\u20133\u00d73 compute\u20131\u00d71 expand) showed how to trade width for efficiency without sacrificing representational power. Independently, the optimized einsum/tensor-network literature demonstrated that reordering tensor contractions can dramatically reduce memory and FLOPs by finding near-optimal contraction paths for a given computation graph.\nTaken together, these works reveal both a design space and a bottleneck: SSMs inherited the separable-conv template for efficiency, but lacked a principled way to realize group/full/bottleneck variants without prohibitive training cost. By recasting SSM computations as explicit tensor contractions and importing contraction-path optimization, the current work unlocks efficient non-separable SSM blocks, directly instantiating group and bottleneck analogues from CNNs. This makes a heterogeneous mixture of SSM block types feasible, naturally extending S4/Mamba\u2019s formulation to richer architectures that better balance capacity and efficiency for raw audio tasks.",
+  "target_paper": {
+    "title": "Let SSMs be ConvNets: State-space Modeling with Optimal Tensor Contractions",
+    "authors": "Yan Ru Pei",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "state-space models; convolution; tensor networks; audio processing; speech recognition",
+    "abstract": "We introduce Centaurus, a class of networks composed of generalized state-space model (SSM) blocks, where the SSM operations can be treated as tensor contractions during training. The optimal order of tensor contractions can then be systematically determined for every SSM block to maximize training efficiency. This allows more flexibility in designing SSM blocks beyond the depthwise-separable configuration commonly implemented. The new design choices will take inspiration from classical convolutional blocks including group convolutions, full convolutions, and bottleneck blocks. We architect the Centaurus network with a mixture of these blocks, to balance between network size and performance, as well as memory and computational efficiency during both training and inference. We show that this heterogeneous network design outperforms its homogeneous counterparts in raw audio processing tasks including keyword spotting, speech denoising, and automatic speech recognition (ASR). For ASR, Cen",
+    "openreview_id": "PkpNRmBZ32",
+    "forum_id": "PkpNRmBZ32"
+  },
+  "analysis_timestamp": "2026-01-06T18:19:55.279572"
+}

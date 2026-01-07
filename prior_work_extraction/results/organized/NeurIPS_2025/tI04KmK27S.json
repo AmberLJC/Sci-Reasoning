@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "beta-VAE: Learning Basic Visual Concepts with a Constrained Variational Framework",
+      "authors": "Irina Higgins, Loic Matthey, Arka Pal, Christopher Burgess, Xavier Glorot, Matthew Botvinick, Shakir Mohamed, Alexander Lerchner",
+      "year": 2017,
+      "role": "Foundational method for disentangled representation learning",
+      "relationship_sentence": "scMRDR\u2019s core design\u2014separating modality-shared and modality-specific latents\u2014directly builds on the beta-VAE idea of controlling the KL term to encourage disentanglement in the latent space."
+    },
+    {
+      "title": "Deep generative modeling for single-cell transcriptomics (scVI)",
+      "authors": "Romain Lopez, Jeffrey Regier, Michael I. Jordan, Nir Yosef",
+      "year": 2018,
+      "role": "Foundational probabilistic VAE for single-cell count data",
+      "relationship_sentence": "scMRDR adopts the scVI-style generative modeling paradigm (e.g., likelihoods for count data and amortized inference) to build scalable VAEs tailored to single-cell omics."
+    },
+    {
+      "title": "MultiVI: Joint probabilistic modeling of paired and unpaired multimodal single-cell data",
+      "authors": "Adam Gayoso et al.",
+      "year": 2021,
+      "role": "Direct predecessor for generative modeling of multi-omics with missing modalities",
+      "relationship_sentence": "scMRDR extends MultiVI\u2019s ability to handle unpaired/missing modalities by adding explicit shared/private disentanglement and new regularizers (adversarial alignment, isometry, masked reconstruction)."
+    },
+    {
+      "title": "MOFA+: a statistical framework for comprehensive integration of multi-modal data",
+      "authors": "Ricard Argelaguet, Britta Velten, Damien Arnol, John C. Marioni, Oliver Stegle",
+      "year": 2020,
+      "role": "Conceptual template for shared and view-specific factors in multi-omics",
+      "relationship_sentence": "scMRDR neuralizes MOFA+\u2019s shared and modality-specific factorization idea within a VAE, enabling flexible deep generative disentanglement across omics."
+    },
+    {
+      "title": "Domain-Adversarial Training of Neural Networks (DANN)",
+      "authors": "Yaroslav Ganin, Evgeniya Ustinova, Hana Ajakan, Pascal Germain, Hugo Larochelle, Fran\u00e7ois Laviolette, Mario Marchand, Victor Lempitsky",
+      "year": 2016,
+      "role": "Adversarial objective for domain alignment",
+      "relationship_sentence": "scMRDR\u2019s adversarial objective that aligns shared latents across modalities is directly inspired by DANN-style domain confusion to enforce modality-invariant representations."
+    },
+    {
+      "title": "SCOT: Single-cell alignment using optimal transport",
+      "authors": "Hilal Demetci et al.",
+      "year": 2020,
+      "role": "Contrasted baseline using global pairwise coupling (OT)",
+      "relationship_sentence": "By avoiding SCOT\u2019s global coupling matrix, scMRDR targets better scalability while achieving cross-modal alignment through generative/disentangled latent modeling instead of OT couplings."
+    },
+    {
+      "title": "Masked Autoencoders Are Scalable Vision Learners (MAE)",
+      "authors": "Kaiming He, Xinlei Chen, Saining Xie, Yanghao Li, Piotr Doll\u00e1r, Ross Girshick",
+      "year": 2022,
+      "role": "Learning with masked reconstruction",
+      "relationship_sentence": "scMRDR\u2019s masked reconstruction loss for missing or non-overlapping features across modalities is motivated by MAE-style masking to make reconstruction robust to missing inputs."
+    }
+  ],
+  "synthesis_narrative": "scMRDR\u2019s key contribution\u2014an efficient, flexible generative framework that integrates unpaired single-cell multi-omics by disentangling shared and modality-specific signals\u2014emerges from three converging threads. First, the representational backbone draws on disentangled VAEs: beta-VAE provides the mechanism to separate factors via KL scaling, while MOFA+ supplies a domain-specific blueprint for decomposing multi-omics variation into shared and view-specific components. Second, scMRDR is grounded in deep probabilistic modeling for single-cell data. scVI established scalable VAE-based likelihood modeling for sparse, overdispersed counts; MultiVI extended this to multi-omics and explicitly addressed unpaired or missing modalities. scMRDR builds on these ideas but pushes further by explicitly partitioning shared/private latents and adding regularizers tailored to cross-omic integration.\nTo align modalities without pairwise supervision, scMRDR adopts domain-adversarial training (DANN) to encourage modality-invariant shared representations\u2014sidestepping reliance on anchors or correspondences typical of integration toolkits and reducing dependence on global coupling. In contrast to optimal-transport approaches such as SCOT, which construct computationally heavy coupling matrices, scMRDR achieves alignment in latent space, improving scalability. Finally, to cope with incomplete and non-overlapping feature sets across omics, scMRDR leverages masked reconstruction\u2014an idea popularized by MAE\u2014to train robust decoders despite missing inputs. Together, these influences yield a principled disentangled generative model with isometry-preserving regularization, adversarial alignment, and masked reconstruction that scales to large, unpaired single-cell multi-omics datasets.",
+  "analysis_timestamp": "2026-01-07T00:21:33.167403"
+}

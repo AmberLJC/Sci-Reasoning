@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding",
+      "authors": "Jacob Devlin, Ming-Wei Chang, Kenton Lee, Kristina Toutanova",
+      "year": 2019,
+      "role": "Foundational masked modeling paradigm",
+      "relationship_sentence": "SimMTM inherits the masked prediction pre-training principle from BERT and adapts it to continuous time-series, while rethinking the reconstruction target to avoid the pitfalls of naive random masking on temporal signals."
+    },
+    {
+      "title": "Masked Autoencoders Are Scalable Vision Learners (MAE)",
+      "authors": "Kaiming He, Xinlei Chen, Saining Xie, Yanghao Li, Piotr Doll\u00e1r, Ross Girshick",
+      "year": 2022,
+      "role": "Immediate baseline for simple masked reconstruction",
+      "relationship_sentence": "MAE showed the effectiveness of simple reconstruction with high mask ratios; SimMTM follows the simplicity ethos but replaces direct value reconstruction with neighbor-aggregation targets tailored to time-series temporal variation."
+    },
+    {
+      "title": "wav2vec 2.0: A Framework for Self-Supervised Learning of Speech Representations",
+      "authors": "Alexei Baevski, Henry Zhou, Abdelrahman Mohamed, Michael Auli",
+      "year": 2020,
+      "role": "Masked modeling for continuous time series (audio)",
+      "relationship_sentence": "By demonstrating the power of masked modeling on raw continuous signals, wav2vec 2.0 motivates SimMTM\u2019s masked time-step training while highlighting the need for domain-appropriate targets beyond raw value prediction."
+    },
+    {
+      "title": "A Transformer-based Framework for Multivariate Time Series Representation Learning",
+      "authors": "Andreas Zerveas et al.",
+      "year": 2021,
+      "role": "Direct time-series masked reconstruction baseline",
+      "relationship_sentence": "This work applies Transformer pre-training via masked value recovery on time series; SimMTM directly addresses its limitation\u2014that random masking destroys temporal variation\u2014by reconstructing masked points from multiple neighbors."
+    },
+    {
+      "title": "TS2Vec: Towards Universal Representation of Time Series",
+      "authors": "Haixu Wu et al.",
+      "year": 2022,
+      "role": "Strong contrastive pre-training reference in time series",
+      "relationship_sentence": "TS2Vec established robust contrastive pre-training for time series; SimMTM offers a non-contrastive alternative, using manifold-guided reconstruction targets to achieve similar universality without negative sampling."
+    },
+    {
+      "title": "Nonlinear Dimensionality Reduction by Locally Linear Embedding",
+      "authors": "Sam T. Roweis, Lawrence K. Saul",
+      "year": 2000,
+      "role": "Core theoretical inspiration (manifold learning via neighbor reconstruction)",
+      "relationship_sentence": "SimMTM\u2019s key idea\u2014recovering masked time points by weighted aggregation of neighbors\u2014directly echoes LLE\u2019s reconstruction-from-neighbors principle, linking masked modeling to manifold learning."
+    },
+    {
+      "title": "mixup: Beyond Empirical Risk Minimization",
+      "authors": "Hongyi Zhang, Moustapha Cisse, Yann N. Dauphin, David Lopez-Paz",
+      "year": 2018,
+      "role": "Off-manifold interpolation regularization",
+      "relationship_sentence": "SimMTM\u2019s use of weighted aggregation to form targets outside the data manifold parallels mixup\u2019s off-manifold interpolation, easing reconstruction and encouraging smoother, more robust representations."
+    }
+  ],
+  "synthesis_narrative": "SimMTM\u2019s core contribution is to reframe masked time-series modeling through the lens of manifold learning: instead of directly reconstructing raw masked values\u2014which random masking can make overly difficult by destroying temporal variation\u2014it predicts masked points as weighted aggregations of multiple neighbors. This idea is grounded in two lines of prior art. First, masked modeling from BERT and its vision adaptation MAE established simple, scalable pre-training via reconstruction, and wav2vec 2.0 demonstrated the viability of masked objectives on continuous signals. However, direct value reconstruction with random masks, as commonly done in time-series pre-training (e.g., the Transformer framework by Zerveas et al.), can misalign with time-series semantics concentrated in temporal dynamics. SimMTM keeps the simplicity of masked modeling while redefining the target to better suit temporal data.\nSecond, the neighbor-aggregation design explicitly draws on manifold learning, especially LLE, where each sample is reconstructed from local neighbors. SimMTM operationalizes this by assembling complementary temporal variations from multiple neighbors, which both simplifies the reconstruction task and preserves meaningful dynamics. The notion of forming targets outside the data manifold resonates with mixup\u2019s off-manifold interpolation, acting as a regularizer that encourages smoother representations. Relative to contrastive baselines like TS2Vec, SimMTM provides a non-contrastive, reconstruction-driven route that avoids negative sampling and leverages manifold locality. Together, these influences yield a simple, general pre-training framework that better harnesses temporal structure during masked modeling.",
+  "analysis_timestamp": "2026-01-06T23:42:48.025335"
+}

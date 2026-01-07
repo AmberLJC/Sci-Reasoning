@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Consistency Models",
+      "authors": "Yang Song et al.",
+      "year": 2023,
+      "arxiv_id": "2303.01469",
+      "role": "Baseline",
+      "relationship_sentence": "Consistency Models introduced time-conditioned self-consistency for one- and few-step generation, which Shortcut Models surpass by directly conditioning on the desired step size to learn skip-ahead mappings without teacher distillation or multi-phase training."
+    },
+    {
+      "title": "Progressive Distillation for Fast Sampling of Diffusion Models",
+      "authors": "Tim Salimans et al.",
+      "year": 2022,
+      "arxiv_id": "2202.00512",
+      "role": "Gap Identification",
+      "relationship_sentence": "Progressive Distillation\u2019s multi-phase, teacher\u2013student halving schedule crystallized the complexity and fragility of existing speedup pipelines that Shortcut Models explicitly remove by learning a single network that handles arbitrary step sizes in one training phase."
+    },
+    {
+      "title": "Flow Matching for Generative Modeling",
+      "authors": "Yaron Lipman et al.",
+      "year": 2023,
+      "arxiv_id": "2210.02747",
+      "role": "Foundation",
+      "relationship_sentence": "Flow Matching provides the vector-field learning framework that Shortcut Models build on, with the key modification of conditioning the learned field on a target step size to enable accurate long-step integration in one or few evaluations."
+    },
+    {
+      "title": "Rectified Flow",
+      "authors": "Ruiqi Gao Liu et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "Rectified Flow\u2019s insight that straightened transport paths support larger stable integration steps directly motivates Shortcut Models\u2019 idea of training a single field to execute variable-length jumps by conditioning on the intended step size."
+    },
+    {
+      "title": "ReFlow",
+      "authors": "X. Liu et al.",
+      "year": 2024,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "ReFlow aims to refit or resample the generative path to enable long-step sampling, which Shortcut Models improve upon by learning skip-ahead behavior in a single network without fragile resampling schedules or multiple training phases."
+    },
+    {
+      "title": "Latent Consistency Models",
+      "authors": "Shangchen Luo et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Related Problem",
+      "relationship_sentence": "Latent Consistency Models demonstrate practical fast sampling via consistency distillation in latent space, whose reliance on a pretrained teacher and schedule design is avoided by Shortcut Models through direct step-size conditioning learned end-to-end."
+    }
+  ],
+  "synthesis_narrative": "Flow Matching formalized learning a time-conditioned vector field that transports noise to data, enabling deterministic ODE sampling and creating a natural interface for conditioning on continuous variables like time. Rectified Flow showed that choosing straightened transport paths stabilizes training and permits much larger integration steps without catastrophic drift, highlighting that the learned field can be shaped to support long-step moves. Consistency Models introduced the idea of enforcing time-wise self-consistency so a single network can yield one- or few-step samples, but their training typically relies on teacher trajectories or delicate objectives tied to integration schedules. Latent Consistency Models brought this idea to latent diffusion, yielding practical speedups but still depending on a pretrained teacher and tuned schedules. Progressive Distillation achieved faster sampling by repeatedly halving the number of steps through multi-stage teacher\u2013student distillation, making speedups costly and fragile due to many phases and networks. ReFlow pursued fast sampling by reshaping or resampling the transport path to tolerate large steps, yet typically requires bespoke schedules or multi-phase procedures. Together these works reveal that long-step transport is feasible and desirable, but existing routes often hinge on teachers, multiple phases, or brittle scheduling. The natural next step is to directly learn a single time-conditioned vector field that also conditions on the desired step size, so the model itself learns to \u201cskip ahead\u201d across variable budgets. By marrying flow-matching\u2019s vector-field supervision with the consistency insight\u2014while replacing schedule/teacher dependence with explicit step-size conditioning\u2014one network can produce high-quality samples in one or multiple steps with a single, simple training phase.",
+  "target_paper": {
+    "title": "One Step Diffusion via Shortcut Models",
+    "authors": "Kevin Frans, Danijar Hafner, Sergey Levine, Pieter Abbeel",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "oral",
+    "keywords": "diffusion, flow-matching, fast inference, distillation",
+    "abstract": "Diffusion models and flow matching models have enabled generating diverse and realistic images by learning to transfer noise to data. However, sampling from these models involves iterative denoising over many neural network passes, making generation slow and expensive. Previous approaches for speeding up sampling require complex training regimes, such as multiple training phases, multiple networks, or fragile scheduling. We introduce Shortcut Models, a family of generative models that use a single network and training phase to produce high-quality samples in a single or multiple sampling steps. Shortcut models condition the network not only on the current noise level but also on the desired step size, allowing the model to skip ahead in the generation process. Across a wide range of sampling step budgets, shortcut models consistently produce higher quality samples than previous approaches, such as consistency models and reflow. Compared to distillation, shortcut models reduce complexit",
+    "openreview_id": "OlzB6LnXcS",
+    "forum_id": "OlzB6LnXcS"
+  },
+  "analysis_timestamp": "2026-01-06T19:12:10.287346"
+}

@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Highly accurate protein structure prediction with AlphaFold",
+      "authors": "John Jumper et al.",
+      "year": 2021,
+      "role": "Foundation",
+      "relationship_sentence": "Pallatom directly adopts and extends AlphaFold\u2019s atom14 representation and recycling paradigm, repurposing them from discriminative prediction to generative decoding to enable faithful all-atom sampling while handling side\u2011chain symmetries and missing atoms."
+    },
+    {
+      "title": "Accurate prediction of protein structures and interactions using a three-track neural network (RoseTTAFold)",
+      "authors": "Minkyung Baek et al.",
+      "year": 2021,
+      "role": "Inspiration",
+      "relationship_sentence": "Pallatom\u2019s dual-track design that tightly couples token-level (residue) and atomic-level states with iterative cross-updates is a direct generative adaptation of RoseTTAFold\u2019s multi-track mixing of 1D/2D/3D representations."
+    },
+    {
+      "title": "Chroma: Generative modeling for protein design",
+      "authors": "Andrew Ingraham et al.",
+      "year": 2023,
+      "role": "Baseline",
+      "relationship_sentence": "Chroma established joint sequence\u2013structure generative modeling; Pallatom positions itself as a direct improvement by modeling P(all\u2011atom) explicitly and decoding at atomic resolution to overcome Chroma\u2019s coarser treatment of side chains."
+    },
+    {
+      "title": "RFdiffusion: Diffusion models for protein structure generation",
+      "authors": "Zachary J. W. Watson et al.",
+      "year": 2023,
+      "role": "Gap Identification",
+      "relationship_sentence": "RFdiffusion\u2019s backbone-only generation with post\u2011hoc sequence design (e.g., via ProteinMPNN) exposes the decoupling of sequence and structure; Pallatom explicitly targets this gap by learning the joint P(structure, seq) at all\u2011atom granularity."
+    },
+    {
+      "title": "Diffusion Probabilistic Modeling of Protein Backbones in 3D",
+      "authors": "Bryan Trippe et al.",
+      "year": 2023,
+      "role": "Gap Identification",
+      "relationship_sentence": "Backbone-only SE(3)-equivariant diffusion highlighted the absence of side-chain and sequence co\u2011generation; Pallatom extends beyond this limitation to all\u2011atom coordinates while jointly modeling sequence\u2013structure dependencies."
+    },
+    {
+      "title": "Robust deep learning\u2013based protein sequence design using ProteinMPNN",
+      "authors": "Justas Dauparas et al.",
+      "year": 2022,
+      "role": "Related Problem",
+      "relationship_sentence": "ProteinMPNN popularized the two\u2011step pipeline (structure then sequence) used with backbone generators; Pallatom replaces this decoupled strategy by integrating sequence and structure generation in a single all\u2011atom joint model."
+    }
+  ],
+  "synthesis_narrative": "Pallatom\u2019s central advance is to model the joint distribution over protein sequence and structure directly at all\u2011atom resolution. Two architectural pillars trace directly to AlphaFold and RoseTTAFold: AlphaFold\u2019s atom14 representation and recycling loop are reinterpreted for generative decoding, allowing Pallatom to sample physically consistent side chains and manage symmetric or missing atoms; RoseTTAFold\u2019s multi\u2011track mixing inspires Pallatom\u2019s dual\u2011track (token/atom) design with traversing updates that tightly couple residue\u2011level and atomic\u2011level states. Recent generative baselines motivated the shift to true joint all\u2011atom modeling. Chroma demonstrated joint sequence\u2013structure generation but relied on coarser side\u2011chain handling; Pallatom explicitly targets P(all\u2011atom) to improve fidelity. Diffusion backbones such as RFdiffusion and Trippe et al. showcased powerful structure generation yet exposed a key gap: sequence is added post hoc (often via ProteinMPNN), breaking the interdependence between sequence and structure. Pallatom addresses this limitation head\u2011on by unifying sequence and all\u2011atom structure within a single model and decoding process, eliminating the need for a two\u2011stage pipeline. Collectively, these works form a clear lineage: AlphaFold/RoseTTAFold provide the representational and iterative-update blueprint; Chroma frames the co\u2011design objective; diffusion backbones plus ProteinMPNN expose the shortcomings of decoupled generation that Pallatom resolves.",
+  "analysis_timestamp": "2026-01-06T23:07:19.605767"
+}

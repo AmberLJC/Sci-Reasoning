@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Deep generative modeling for single-cell transcriptomics (scVI)",
+      "authors": "Romain Lopez, Jeffrey Regier, Michael I. Jordan, Nir Yosef",
+      "year": 2018,
+      "role": "Foundational single-cell VAE with discrete (NB/ZINB) likelihoods",
+      "relationship_sentence": "FlatVI builds directly on the scVI paradigm of variational autoencoders tailored to single-cell count data, inheriting the discrete-likelihood modeling and practical training setup that make VAEs effective for scRNA-seq."
+    },
+    {
+      "title": "scGen: Predicting single-cell perturbation responses",
+      "authors": "Mohammad Lotfollahi, F. Alexander Wolf, Fabian J. Theis",
+      "year": 2019,
+      "role": "Established linear latent arithmetic/interpolation for single-cell applications",
+      "relationship_sentence": "By relying on straight-line interpolations in a Euclidean latent space to model cellular state shifts, scGen motivates FlatVI\u2019s core goal: enforce Euclidean latent geometry so that such linear operations align with manifold geodesics."
+    },
+    {
+      "title": "Latent Space Oddity: On the Curvature of Deep Generative Models",
+      "authors": "Georgios Arvanitidis, Lars Kai Hansen, S\u00f8ren Hauberg",
+      "year": 2018,
+      "role": "Theoretical basis for Riemannian geometry of decoder-induced manifolds",
+      "relationship_sentence": "This work formalized the pullback Riemannian metric of decoders and showed that straight lines in latent space generally miss data-manifold geodesics, directly motivating FlatVI\u2019s metric-regularization to \u2018flatten\u2019 the latent space."
+    },
+    {
+      "title": "Fast and Flexible Interpolation in Deep Generative Models via Riemannian Geometry",
+      "authors": "Georgios Arvanitidis, Lars Kai Hansen, S\u00f8ren Hauberg",
+      "year": 2019,
+      "role": "Practical geodesic computation for deep generative models",
+      "relationship_sentence": "By demonstrating geodesic path computation under the decoder\u2019s pullback metric, this paper provides the operational target that FlatVI seeks to approximate with straight lines through training-time regularization rather than costly post hoc geodesic solvers."
+    },
+    {
+      "title": "Analyzing and Improving the Image Quality of StyleGAN (StyleGAN2)",
+      "authors": "Tero Karras, Samuli Laine, Miika Aittala, Janne Hellsten, Jaakko Lehtinen, Timo Aila",
+      "year": 2020,
+      "role": "Introduced path length regularization to control decoder Jacobian and latent isotropy",
+      "relationship_sentence": "StyleGAN2\u2019s path length regularization showed that penalizing variations in the generator\u2019s Jacobian can align latent steps with consistent output changes; FlatVI adapts the principle to VAEs and single-cell likelihoods to encourage Euclidean latent geometry."
+    },
+    {
+      "title": "Contractive Auto-Encoders: Explicit Invariance During Feature Extraction",
+      "authors": "Salah Rifai, Pascal Vincent, Xavier Muller, Xavier Glorot, Yoshua Bengio",
+      "year": 2011,
+      "role": "Pioneered Jacobian-based regularization to shape manifold geometry",
+      "relationship_sentence": "FlatVI\u2019s use of Jacobian/metric regularization to control local geometry echoes the contractive AE idea of constraining derivatives, but targets the decoder\u2019s pullback metric to make latent straight lines approximate manifold geodesics."
+    }
+  ],
+  "synthesis_narrative": "FlatVI targets a long-standing mismatch between how single-cell VAEs are used and the geometry those models actually induce. scVI established the practical and statistical foundation for VAEs with discrete likelihoods tailored to scRNA-seq count data, providing the core framework FlatVI operates within. Building on that, applications like scGen popularized linear latent arithmetic and straight-line interpolations to model cellular state shifts, implicitly assuming Euclidean geometry in the latent space. However, theoretical work by Arvanitidis, Hansen, and Hauberg demonstrated that decoders endow latent spaces with a non-Euclidean pullback Riemannian metric; straight lines in latent coordinates rarely trace geodesics on the decoded data manifold. Their subsequent contributions on computing geodesic paths in deep generative models defined the geometric target for faithful interpolation but at a substantial computational cost.\n\nFlatVI\u2019s key contribution is to reconcile practice and geometry by regularizing the VAE so that straight lines in latent space approximate manifold geodesics for single-cell count likelihoods. Two strands of prior methodology inform how to achieve this: contractive autoencoders introduced derivative-based penalties to sculpt local manifold geometry, and StyleGAN2\u2019s path length regularization showed that controlling the generator\u2019s Jacobian can yield isotropic, Euclidean-like latent behavior. FlatVI integrates these insights into a variational framework with discrete likelihoods, explicitly steering the decoder\u2019s pullback metric toward identity. The result is a latent space whose linear paths better correspond to geodesic interpolations on the single-cell manifold, increasing the validity and utility of downstream methods that assume Euclidean latent geometry.",
+  "analysis_timestamp": "2026-01-07T00:04:09.140719"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "MARINA: Faster Non-Convex Distributed Learning with Compressed Gradient",
+      "authors": "Eduard Gorbunov et al.",
+      "year": 2021,
+      "role": "Foundational algorithmic template",
+      "relationship_sentence": "The proposed MARINA-P and M3 build directly on the MARINA architecture\u2014reference vectors plus compressed deviations\u2014adapting it to downlink (server-to-worker) compression and then combining it with uplink compression and momentum."
+    },
+    {
+      "title": "DIANA: Communication-Efficient Distributed Learning with Gradient Sparsification and Quantization",
+      "authors": "Dmitry Mishchenko et al.",
+      "year": 2019,
+      "role": "Variance-reduction with compression",
+      "relationship_sentence": "DIANA\u2019s idea of correcting compressed updates with a control/shift (variance-reduction) mechanism underpins rigorous convergence with compression and informs the analysis framework extended here to downlink and bidirectional settings."
+    },
+    {
+      "title": "Doubly-Compressed Communication for Distributed Optimization",
+      "authors": "Samuel Horv\u00e1th et al.",
+      "year": 2019,
+      "role": "First treatment of bidirectional compression",
+      "relationship_sentence": "Prior theory on compressing both uplink and downlink established the feasibility and pitfalls of bidirectional compression, which M3 surpasses by achieving improved worst-case communication that scales favorably with the number of workers."
+    },
+    {
+      "title": "Error Feedback Fixes SignSGD and Other Gradient Compression Schemes",
+      "authors": "Sai Praneeth Karimireddy, Quentin Rebjock, Sebastian Stich, Martin Jaggi",
+      "year": 2019,
+      "role": "Stability of compressed methods via memory",
+      "relationship_sentence": "The error-feedback principle motivating memory/momentum-like corrections under compression is leveraged in M3\u2019s momentum step to stabilize and improve the efficiency of bidirectionally compressed updates."
+    },
+    {
+      "title": "FedProx: Federated Optimization in Heterogeneous Networks",
+      "authors": "Tian Li, Anit Kumar Sahu, Ameet Talwalkar, Virginia Smith",
+      "year": 2020,
+      "role": "Function similarity/dissimilarity paradigm",
+      "relationship_sentence": "The paper adopts and sharpens the function-similarity (bounded client heterogeneity) lens popularized by FedProx to derive communication complexity that improves with more workers under similarity."
+    },
+    {
+      "title": "PermK: Random Permutation Sparsification for Communication-Efficient Distributed Learning",
+      "authors": "Alexander Tyurin, Peter Richt\u00e1rik",
+      "year": 2023,
+      "role": "Correlated compressors via permutations",
+      "relationship_sentence": "MARINA-P\u2019s core innovation\u2014using correlated compressors, notably permutation-based sparsifiers\u2014directly relies on the theory of permutation compressors to reduce downlink information without sacrificing convergence."
+    },
+    {
+      "title": "EF21: A New Look at Error Feedback for Communication-Efficient Training",
+      "authors": "Eduard Gorbunov, Dmitry Kovalev, Peter Richt\u00e1rik",
+      "year": 2021,
+      "role": "Refined analysis of error-feedback under compression",
+      "relationship_sentence": "EF21\u2019s simplified and stronger theory for error-feedback informs the momentum/memory design and analysis used when extending MARINA-P to the bidirectionally compressed M3 method."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core contribution\u2014showing that server-to-worker communication can be strictly improved by correlating downlink compressors and that total bidirectional communication can improve with the number of workers\u2014emerges at the intersection of three lines of prior work. First, MARINA provided the architectural blueprint for compressed distributed optimization with nonconvex guarantees through a reference vector and compressed deviation updates; this work repurposes that template to the downlink and then extends it to M3 for bidirectional compression. Second, a sequence of compression methods\u2014DIANA and the broader literature on doubly-compressed communication\u2014established how to rigorously control variance and bias when both directions are compressed, but did not exploit inter-worker correlation on the downlink; the present paper closes this gap by introducing correlated compressors (instantiated via permutation sparsifiers) that provably reduce downlink complexity as workers increase. Third, stability tools for compression, from error feedback (Karimireddy et al.) to its refined analyses (EF21), motivate the momentum/memory step in M3 that preserves convergence while compounding communication savings. Finally, the function-similarity perspective popularized in federated optimization (FedProx) supplies the heterogeneity model under which worker-scaling gains can be formalized. Together, these strands directly inform MARINA-P\u2019s design with permutation compressors and M3\u2019s bidirectional extension, yielding improved worst-case bidirectional communication complexity under nonconvex objectives with similarity.",
+  "analysis_timestamp": "2026-01-06T23:33:35.576419"
+}

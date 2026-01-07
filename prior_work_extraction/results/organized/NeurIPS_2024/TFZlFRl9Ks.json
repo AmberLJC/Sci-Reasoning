@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis",
+      "authors": "Ben Mildenhall, Pratul P. Srinivasan, Matthew Tancik, Jonathan T. Barron, Ravi Ramamoorthi, Ren Ng",
+      "year": 2020,
+      "role": "Foundational 3D reconstruction method",
+      "relationship_sentence": "Established that posed multi-view images can be converted into high-fidelity 3D via differentiable volumetric rendering, enabling CAT3D\u2019s \u201csimulate capture, then reconstruct\u201d strategy."
+    },
+    {
+      "title": "Mip-NeRF 360: Unbounded Anti-Aliased Neural Radiance Fields",
+      "authors": "Jonathan T. Barron, Ben Mildenhall, Matthew Tancik, Peter Hedman, Ricardo Martin-Brualla, Pratul P. Srinivasan",
+      "year": 2022,
+      "role": "Robust large-scale reconstruction from many views",
+      "relationship_sentence": "Showed robust, anti-aliased NeRF training on large, unbounded scenes from dense imagery\u2014the kind of downstream reconstructor CAT3D can feed with its generated multi-view images."
+    },
+    {
+      "title": "Zip-NeRF: Anti-Aliased Grid-Based Neural Radiance Fields",
+      "authors": "Jonathan T. Barron, Ben Mildenhall, Dor Verbin, Peter Hedman, Pratul P. Srinivasan",
+      "year": 2023,
+      "role": "High-quality scalable reconstructor",
+      "relationship_sentence": "Provided a practical, high-quality NeRF variant that benefits from many, well-posed views, directly aligning with CAT3D\u2019s goal of supplying consistent novel views for robust 3D reconstruction."
+    },
+    {
+      "title": "3D Gaussian Splatting for Real-Time Radiance Field Rendering",
+      "authors": "Bernhard Kerbl, Georgios Kopanas, Thomas Leimk\u00fchler, George Drettakis",
+      "year": 2023,
+      "role": "Real-time reconstruction and rendering engine",
+      "relationship_sentence": "Enabled fast training and real-time rendering from posed images; CAT3D leverages such methods to turn generated multi-view images into real-time 3D assets in minutes."
+    },
+    {
+      "title": "DreamFusion: Text-to-3D using 2D Diffusion",
+      "authors": "Ben Poole, Ajay Jain, Jonathan T. Barron, Ben Mildenhall",
+      "year": 2022,
+      "role": "Diffusion prior for 3D and motivation to avoid SDS pitfalls",
+      "relationship_sentence": "Demonstrated using 2D diffusion priors to supervise 3D, but also exposed limitations (instability, geometry issues) that CAT3D sidesteps by first generating multi-view images then reconstructing."
+    },
+    {
+      "title": "Zero-1-to-3: Zero-Shot Novel View Synthesis from a Single Image",
+      "authors": "Liu et al.",
+      "year": 2023,
+      "role": "Camera-conditioned image-to-novel-view diffusion",
+      "relationship_sentence": "Introduced pose-conditioned, image-conditioned diffusion for producing novel views from a single input, directly informing CAT3D\u2019s multi-view diffusion design and target-view conditioning."
+    },
+    {
+      "title": "EG3D: Efficient Geometry-aware 3D Generative Adversarial Networks",
+      "authors": "Eric R. Chan et al.",
+      "year": 2022,
+      "role": "3D-aware camera-conditioned generative modeling",
+      "relationship_sentence": "Pioneered explicit camera conditioning and multi-view consistency in generative image models, a principle CAT3D adopts within a diffusion framework for consistent multi-view synthesis."
+    }
+  ],
+  "synthesis_narrative": "CAT3D reframes 3D asset creation as simulating a real capture: generate a dense, pose-controlled set of novel views with a multi-view diffusion model, then hand these to a robust 3D reconstructor. This pipeline stands on two pillars. First, the reconstruction side is grounded in NeRF-style methods\u2014NeRF and its robust successors Mip-NeRF 360 and Zip-NeRF\u2014which demonstrate that high-quality 3D emerges reliably from many well-posed views. For speed and deployment, 3D Gaussian Splatting provides the real-time training and rendering engine that turns CAT3D\u2019s generated views into interactive assets within minutes.\nOn the generative side, CAT3D builds on camera-conditioned generative modeling. EG3D established the value of explicit camera conditioning and enforcing multi-view consistency in generative models. Zero-1-to-3 brought this idea into diffusion-based, image-conditioned novel view synthesis, showing that a single input can guide pose-conditioned generation. CAT3D extends these ideas to produce many strongly consistent novel views across arbitrary target cameras and variable numbers of inputs, effectively simulating dense capture.\nFinally, DreamFusion showed that 2D diffusion priors can supervise 3D but also highlighted instability and geometric artifacts of score-distillation optimization. CAT3D avoids those pitfalls by decoupling generation and reconstruction: it uses a multi-view diffusion model to create view-consistent images first, then leverages mature, robust 3D reconstruction to obtain accurate, real-time 3D scenes.",
+  "analysis_timestamp": "2026-01-07T00:02:04.748497"
+}

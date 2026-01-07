@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Multi-Task Learning as Multi-Objective Optimization",
+      "authors": "Ozan Sener, Vladlen Koltun",
+      "year": 2018,
+      "role": "Foundational MTL formulation with descent guarantees via convex combinations of task gradients (MGDA).",
+      "relationship_sentence": "PiKE\u2019s objective of maximizing per-step loss decrease builds on the MGDA view of using gradient geometry to guarantee descent, but it learns sampling weights that exploit positive gradient interactions rather than solving a per-step direction-combination problem."
+    },
+    {
+      "title": "Gradient Surgery for Multi-Task Learning (PCGrad)",
+      "authors": "Yu et al.",
+      "year": 2020,
+      "role": "Conflict-mitigation method projecting away components of conflicting gradients.",
+      "relationship_sentence": "PiKE departs from PCGrad\u2019s conflict-centric surgery by focusing on low-conflict regimes and leveraging positive gradient dot-products to adapt data sampling weights, turning gradient alignment into a proactive mixing policy."
+    },
+    {
+      "title": "Conflict-Averse Gradient Descent for Multi-Task Learning (CAGrad)",
+      "authors": "Liu et al.",
+      "year": 2021,
+      "role": "Coordinated gradient aggregation that constrains updates to reduce conflicts.",
+      "relationship_sentence": "Where CAGrad coordinates updates to avoid interference, PiKE uses the same gradient-interaction signal (inner products) to drive adaptive task weighting for sampling, optimizing a tight bound on expected loss decrease under low-conflict conditions."
+    },
+    {
+      "title": "Nash-MTL: Nash Bargaining for Multi-Task Learning",
+      "authors": "Navon et al.",
+      "year": 2022,
+      "role": "Game-theoretic gradient combination ensuring fair, conflict-aware updates.",
+      "relationship_sentence": "PiKE complements Nash-MTL by shifting from fair, conflict-aware aggregation to efficiency-driven sampling that exploits synergistic (positive) gradient interactions to accelerate average loss reduction."
+    },
+    {
+      "title": "GradNorm: Gradient Normalization for Adaptive Loss Balancing in Deep Multitask Networks",
+      "authors": "Zhao Chen, Vijay Badrinarayanan, Chen-Yu Lee, Andrew Rabinovich",
+      "year": 2018,
+      "role": "Adaptive loss weighting using gradient norms to balance task training rates.",
+      "relationship_sentence": "PiKE extends the idea of adaptive weighting beyond balancing norms, using gradient inner products to adapt task sampling so as to maximize immediate training progress with negligible overhead."
+    },
+    {
+      "title": "DoReMi: Optimizing Data Mixtures for Language Model Pretraining",
+      "authors": "Xie et al.",
+      "year": 2023,
+      "role": "Adaptive data mixture optimization for large-scale pretraining.",
+      "relationship_sentence": "PiKE targets the same data-mixing problem as DoReMi but introduces a lightweight, gradient-interaction-based estimator with convergence guarantees, obviating reliance on proxy teachers or distribution-matching objectives."
+    },
+    {
+      "title": "Massively Multilingual Neural Machine Translation in the Wild: Findings and Challenges",
+      "authors": "Arivazhagan et al.",
+      "year": 2019,
+      "role": "Introduced temperature-based (e.g., square-root) sampling heuristics for multilingual data mixing.",
+      "relationship_sentence": "PiKE provides a principled, adaptive alternative to heuristic temperature sampling by tuning task weights from measured positive gradient interactions, especially relevant in multilingual low-conflict regimes."
+    }
+  ],
+  "synthesis_narrative": "PiKE sits at the intersection of multi-task optimization and large-scale data mixture design. Early MTL work framed the problem as multi-objective optimization (MGDA), combining task gradients to guarantee descent, which established the importance of gradient geometry. Subsequent methods\u2014PCGrad, CAGrad, and Nash-MTL\u2014primarily addressed destructive interference by projecting, constraining, or bargaining over conflicting gradients. In parallel, adaptive weighting methods like GradNorm dynamically balanced losses using gradient magnitudes rather than the geometry of inter-task interactions. On the data side, multilingual and multi-domain pretraining practice relied on heuristic temperature-based sampling to rebalance datasets, while more recent approaches like DoReMi learned data mixtures via teacher-guided distribution reweighting.\nPiKE\u2019s key insight is that many large-scale pretraining settings exhibit low gradient conflict, shifting the optimization bottleneck from avoiding interference to exploiting synergy. It formalizes this shift by deriving a near-tight upper bound on average loss decrease that depends on gradient inner products across tasks, and then adapts task sampling weights to maximize this bound with negligible overhead. Conceptually, PiKE marries MGDA\u2019s descent-centric reasoning with the practical need for scalable data mixing, replacing conflict mitigation (PCGrad/CAGrad/Nash-MTL) and heuristic or teacher-driven mixture design (temperature sampling/DoReMi) with a single, gradient-interaction-driven rule. The result is a principled, efficient scheduler that leverages positive gradient interactions to accelerate multi-task pretraining while retaining theoretical convergence guarantees.",
+  "analysis_timestamp": "2026-01-07T00:05:12.543645"
+}

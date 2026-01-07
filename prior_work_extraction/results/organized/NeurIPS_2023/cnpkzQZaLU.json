@@ -1,0 +1,78 @@
+{
+  "prior_works": [
+    {
+      "title": "TAP-Vid: A Benchmark for Tracking Any Point in Video",
+      "authors": [
+        "Carl Doersch",
+        "et al."
+      ],
+      "year": 2022,
+      "role": "Task definition and benchmark establishing TAP/PIPs with metrics and evaluation protocol",
+      "relationship_sentence": "Context-PIPs directly builds on the TAP-Vid formulation and metrics (ATE, A-PCK), targeting the same \u2018track-any-point\u2019 setting while addressing a key gap\u2014lack of spatial context\u2014in dominant independent point trackers evaluated on TAP-Vid."
+    },
+    {
+      "title": "PIPs: Persistent Independent Particles for Point Tracking",
+      "authors": [
+        "Adam W. Harley",
+        "et al."
+      ],
+      "year": 2022,
+      "role": "Core independent point-tracking paradigm and baseline",
+      "relationship_sentence": "Context-PIPs explicitly revisits the PIPs paradigm and augments it with spatial context via SOFE and TAFA, demonstrating that even independent particle trackers benefit significantly from aggregating spatial features."
+    },
+    {
+      "title": "TAPIR: Tracking Any Point with Iterative Refinement",
+      "authors": [
+        "Carl Doersch",
+        "et al."
+      ],
+      "year": 2023,
+      "role": "State-of-the-art independent point tracker with recurrent/iterative refinement and occlusion handling",
+      "relationship_sentence": "While TAPIR improves long-range point tracking with iterative refinement, Context-PIPs targets its residual weakness\u2014limited spatial context\u2014by explicitly aggregating source and target spatial features to further reduce ATE and boost A-PCK."
+    },
+    {
+      "title": "CoTracker: It Is Better to Track Points Together",
+      "authors": [
+        "Ignacio Rocco",
+        "et al."
+      ],
+      "year": 2023,
+      "role": "Joint multi-point tracking demonstrating the value of spatial context across points",
+      "relationship_sentence": "CoTracker evidences the power of leveraging spatial context by jointly tracking many points; Context-PIPs transfers this insight to the \u2018independent\u2019 tracking regime via SOFE/TAFA, showing that contextual aggregation can be decoupled from joint optimization."
+    },
+    {
+      "title": "RAFT: Recurrent All-Pairs Field Transforms for Optical Flow",
+      "authors": [
+        "Zachary Teed",
+        "Jia Deng"
+      ],
+      "year": 2020,
+      "role": "High-quality correspondence backbone with all-pairs correlation volumes and iterative updates",
+      "relationship_sentence": "Context-PIPs\u2019 design of enhancing source features and aggregating target features aligns with RAFT-style correlation and iterative refinement, but extends it by injecting explicit spatial context to stabilize point trajectories over long time spans."
+    },
+    {
+      "title": "SuperGlue: Learning Feature Matching with Graph Neural Networks",
+      "authors": [
+        "Paul-Edouard Sarlin",
+        "Daniel DeTone",
+        "Tomasz Malisiewicz",
+        "Andrew Rabinovich"
+      ],
+      "year": 2020,
+      "role": "Context-aware matching via attention over sets of keypoints",
+      "relationship_sentence": "SuperGlue\u2019s success with context-conditioned matching motivates Context-PIPs\u2019 premise that spatial neighborhood information improves correspondence, inspiring SOFE/TAFA to inject context into per-point tracking."
+    },
+    {
+      "title": "LoFTR: Detector-Free Local Feature Matching with Transformers",
+      "authors": [
+        "Jiaming Sun",
+        "et al."
+      ],
+      "year": 2021,
+      "role": "Dense, detector-free matching leveraging global spatial context with transformers",
+      "relationship_sentence": "LoFTR shows that dense spatial context greatly stabilizes correspondences; Context-PIPs adapts this principle to video point trajectories, explicitly aggregating spatial context at source and target to handle occlusion and drift."
+    }
+  ],
+  "synthesis_narrative": "The key contribution of Context-PIPs is to demonstrate that independent point tracking (PIPs/TAP) benefits markedly from explicit spatial context, operationalized through Source Feature Enhancement (SOFE) and Target Feature Aggregation (TAFA). This builds directly on the TAP-Vid formulation, which popularized the track-any-point (TAP/PIPs) task and standardized metrics like ATE and A-PCK. Foundationally, PIPs established the now-dominant independent particle paradigm for point tracking, prioritizing scalability and long-range persistence but largely omitting spatial context. TAPIR advanced this line with iterative refinement and occlusion reasoning, yet it remains predominantly per-point, leaving contextual cues under-exploited.\n\nIn parallel, CoTracker showed that jointly tracking many points via attention confers strong robustness by leveraging spatial context across points\u2014evidence that context is crucial for overcoming drift and occlusions. Context-PIPs imports this insight into the independent regime, proving that context need not require joint optimization; it can be injected via principled feature aggregation at source and target locations.\n\nArchitecturally, RAFT\u2019s all-pairs correlation and iterative updates provide a successful template for correspondence refinement, while SuperGlue and LoFTR demonstrate that context-conditioned matching (via graph attention or transformers) improves reliability in challenging correspondence tasks. Context-PIPs synthesizes these ideas: preserve the efficiency and simplicity of independent tracking (PIPs/TAPIR) but augment it with spatial context (inspired by CoTracker, SuperGlue, LoFTR), yielding significant gains on TAP-Vid/CroHD benchmarks, particularly under occlusion and long-range motion.",
+  "analysis_timestamp": "2026-01-06T23:42:48.046280"
+}

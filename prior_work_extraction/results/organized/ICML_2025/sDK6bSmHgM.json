@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Drag Your GAN: Interactive Point-based Manipulation on the Generative Image Manifold",
+      "authors": "Xingang Pan et al.",
+      "year": 2023,
+      "role": "Foundation",
+      "relationship_sentence": "FlowDrag builds directly on DragGAN\u2019s handle-to-target point formulation for interactive dragging, but addresses its core geometric inconsistency by introducing 3D-aware, mesh-regularized deformations rather than optimizing purely for point matches on a 2D/manifold."
+    },
+    {
+      "title": "As-Rigid-As-Possible Surface Modeling",
+      "authors": "Olga Sorkine and Marc Alexa",
+      "year": 2007,
+      "role": "Foundation",
+      "relationship_sentence": "FlowDrag\u2019s mesh-deformation energy explicitly relies on ARAP-style regularization to preserve local rigidity during handle-driven deformations, providing the mathematical backbone that keeps edits globally coherent while matching drag constraints."
+    },
+    {
+      "title": "Laplacian Surface Editing",
+      "authors": "Olga Sorkine et al.",
+      "year": 2004,
+      "role": "Foundation",
+      "relationship_sentence": "The paper directly adopts the handle-based mesh editing paradigm from Laplacian surface editing\u2014optimizing an energy with positional constraints\u2014to convert user drag points into globally consistent mesh displacements."
+    },
+    {
+      "title": "Moving Least Squares Deformation",
+      "authors": "Scott Schaefer et al.",
+      "year": 2006,
+      "role": "Inspiration",
+      "relationship_sentence": "FlowDrag\u2019s design of smooth, constraint-driven deformations echoes the MLS deformation principle of propagating sparse handle constraints into dense, artifact-resistant displacement fields."
+    },
+    {
+      "title": "ControlNet: Adding Conditional Control to Text-to-Image Diffusion Models",
+      "authors": "Lvmin Zhang and Maneesh Agrawala",
+      "year": 2023,
+      "role": "Extension",
+      "relationship_sentence": "FlowDrag extends the ControlNet idea of spatial conditioning in a diffusion U-Net by injecting a learned vector displacement (flow) field projected from the deformed mesh, turning geometric guidance into effective denoising control."
+    },
+    {
+      "title": "Vision Transformers for Dense Prediction",
+      "authors": "Ren\u00e9 Ranftl et al.",
+      "year": 2021,
+      "role": "Inspiration",
+      "relationship_sentence": "FlowDrag\u2019s step of constructing a 3D proxy mesh from a single image is enabled by modern monocular depth estimation (e.g., DPT), which supplies the geometry needed to lift 2D drags into a 3D-regularized deformation."
+    },
+    {
+      "title": "Drag Anything: Interactive Point-based Editing with Diffusion Models",
+      "authors": "Xiangyu Chen et al.",
+      "year": 2024,
+      "role": "Baseline",
+      "relationship_sentence": "As a diffusion-based dragging approach that still prioritizes point alignment over holistic geometry, Drag Anything serves as a primary baseline FlowDrag improves upon by enforcing mesh-consistent, 3D-aware transformations."
+    }
+  ],
+  "synthesis_narrative": "FlowDrag\u2019s core innovation\u2014turning user drags into globally consistent image edits by lifting them into a 3D mesh deformation and then guiding diffusion with a projected flow\u2014sits at the intersection of interactive dragging, classical mesh editing, and spatially conditioned diffusion. Drag Your GAN established the handle-to-target formulation and interactive point-tracking loss that defined the drag-editing problem, but its 2D/manifold optimization often breaks object geometry. Diffusion-based successors (e.g., Drag Anything) inherit the same limitation by focusing narrowly on point correspondence. FlowDrag identifies this gap and brings in the well-established machinery of handle-driven mesh deformation: Laplacian surface editing provides the constraint-based energy formulation; ARAP regularization preserves local rigidity to avoid shearing and folding; and MLS informs how sparse handles propagate to smooth, dense displacement fields. To instantiate 3D awareness from a single image, FlowDrag leverages modern monocular depth (e.g., DPT) to construct a proxy mesh, enabling physically plausible deformations tied to scene structure. Finally, to make these deformations operative inside a diffusion model, FlowDrag adapts the ControlNet philosophy of spatial conditioning, injecting the mesh-projected 2D displacement (a vector flow field) directly into the U-Net denoiser. This lineage\u2014from DragGAN\u2019s interaction model, through classical mesh energies, to ControlNet-style conditioning\u2014directly enables FlowDrag\u2019s precise point alignment while preserving global geometry, and motivates its new benchmark to measure target-matching fidelity objectively.",
+  "analysis_timestamp": "2026-01-06T23:07:19.569255"
+}

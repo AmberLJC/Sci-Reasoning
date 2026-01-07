@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Value Iteration Networks",
+      "authors": "Aviv Tamar et al.",
+      "year": 2016,
+      "arxiv_id": "1602.02867",
+      "role": "Foundation",
+      "relationship_sentence": "VIN established that core planning computations can be embedded as differentiable modules trained end-to-end, a principle D-TSN adopts by making best-first tree construction amenable to gradient-based learning."
+    },
+    {
+      "title": "TreeQN and ATreeC: Differentiable Tree-Structured Models for Deep Reinforcement Learning",
+      "authors": "Gregory Farquhar et al.",
+      "year": 2018,
+      "arxiv_id": "1710.11417",
+      "role": "Extension",
+      "relationship_sentence": "TreeQN introduced latent dynamics, value back-ups, and differentiable lookahead trees, whose encoder\u2013world model\u2013value factorization D-TSN retains while extending to learning which nodes to expand in a best-first manner."
+    },
+    {
+      "title": "Learning to Search with MCTSnets",
+      "authors": "Avraham Guez et al.",
+      "year": 2019,
+      "arxiv_id": null,
+      "role": "Extension",
+      "relationship_sentence": "MCTSnets demonstrated end-to-end differentiable tree search by relaxing MCTS operations, which D-TSN generalizes by optimizing a stochastic best-first expansion policy from demonstrations rather than relying on soft relaxations."
+    },
+    {
+      "title": "Mastering Atari, Go, Chess and Shogi by Planning with a Learned Model (MuZero)",
+      "authors": "Julian Schrittwieser et al.",
+      "year": 2020,
+      "arxiv_id": "1911.08265",
+      "role": "Inspiration",
+      "relationship_sentence": "MuZero\u2019s joint learning of an encoder, dynamics model, and value to guide tree search directly inspires D-TSN\u2019s joint training of these submodules while additionally learning the tree expansion policy from trajectories."
+    },
+    {
+      "title": "A Reduction of Imitation Learning and Structured Prediction to No-Regret Online Learning (DAgger)",
+      "authors": "St\u00e9phane Ross et al.",
+      "year": 2011,
+      "arxiv_id": "1011.0686",
+      "role": "Gap Identification",
+      "relationship_sentence": "DAgger identified compounding errors and distribution shift when learning solely from demonstration sequences, a limitation D-TSN addresses by learning an explicit search procedure that explores and evaluates unseen states."
+    },
+    {
+      "title": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+      "authors": "Lili Chen et al.",
+      "year": 2021,
+      "arxiv_id": "2106.01345",
+      "role": "Baseline",
+      "relationship_sentence": "Decision Transformer frames offline trajectories as supervised sequence modeling without explicit planning, serving as a primary baseline that D-TSN improves upon by learning a differentiable best-first search tree from the same kind of data."
+    }
+  ],
+  "synthesis_narrative": "Value Iteration Networks showed that planning operators can be embedded as differentiable layers and trained by backpropagation, establishing that gradient-based learning can directly shape planning computations. TreeQN extended this idea to tree-structured lookahead with a learned encoder, latent dynamics, and differentiable value backups, making it possible to learn model-based planning components jointly. MCTSnets further parameterized the tree search process itself, relaxing MCTS operations so that gradients could pass through the construction and backup of the search tree. MuZero unified encoder, dynamics, and value learning to guide tree search effectively, demonstrating that learned world models and values can steer powerful best-first expansions when coupled with a search policy. DAgger revealed that na\u00efvely imitating action sequences incurs compounding errors due to distribution shift, highlighting the need for mechanisms that deliberately explore beyond demonstrated states. Decision Transformer epitomized the supervised sequence-modeling approach to offline trajectories, yet omitted an explicit search mechanism to handle vast, unseen state spaces that arise at deployment.\n\nTogether these works suggested that end-to-end training of planning modules is feasible, that learned dynamics and values can guide search, but that purely supervised sequence imitation fails to address exploration over unseen parts of the search tree. The natural next step was to make the act of tree construction itself a learnable, optimizable component: leveraging differentiable backups and joint model\u2013value learning while treating node expansion as a stochastic decision process. By optimizing a best-first expansion policy from demonstrations, the resulting approach marries the strengths of differentiable planning and model-based search with robustness to distribution shift inherent in learning how to search.",
+  "target_paper": {
+    "title": "Learning to Search from Demonstration Sequences",
+    "authors": "Dixant Mittal, Liwei Kang, Wee Sun Lee",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "oral",
+    "keywords": "planning, reasoning, learning to search, reinforcement learning, large language model",
+    "abstract": "Search and planning are essential for solving many real-world problems. However, in numerous learning scenarios, only action-observation sequences, such as demonstrations or instruction sequences, are available for learning. Relying solely on supervised learning with these sequences can lead to sub-optimal performance due to the vast, unseen search space encountered during training. In this paper, we introduce Differentiable Tree Search Network (D-TSN), a novel neural network architecture that learns to construct search trees from just sequences of demonstrations by performing gradient descent on a best-first search tree construction algorithm. D-TSN enables the joint learning of submodules, including an encoder, value function, and world model, which are essential for planning. To construct the search tree, we employ a stochastic tree expansion policy and formulate it as another decision-making task. Then, we optimize the tree expansion policy via REINFORCE with an effective variance ",
+    "openreview_id": "v593OaNePQ",
+    "forum_id": "v593OaNePQ"
+  },
+  "analysis_timestamp": "2026-01-06T06:20:38.187701"
+}

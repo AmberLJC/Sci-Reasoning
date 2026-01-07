@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Calibrate Before Use: Improving Few-Shot Performance of Language Models",
+      "authors": "Zhao et al.",
+      "year": 2021,
+      "arxiv_id": null,
+      "role": "Extension",
+      "relationship_sentence": "PriDe generalizes contextual calibration\u2019s idea of estimating and removing label-word prior bias by instead estimating option-ID token priors via option-content permutations and using this correction for MCQ selection."
+    },
+    {
+      "title": "Long-Tailed Classification via Logit Adjustment",
+      "authors": "Menon et al.",
+      "year": 2020,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "PriDe adopts the logit-adjustment principle\u2014subtracting log class priors from logits\u2014to debias predictions, applying it at inference by dividing out estimated priors over option IDs."
+    },
+    {
+      "title": "Self-Diagnosis and Self-Debiasing: A Proposal for Reducing Toxicity in Language Models",
+      "authors": "Schick et al.",
+      "year": 2021,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "PriDe echoes the self-debiasing strategy of separating a bias-only component from the model\u2019s output and subtracting it, here instantiating the bias component as the option-ID prior rather than toxicity cues."
+    },
+    {
+      "title": "Lost in the Middle: How Language Models Use Long Context",
+      "authors": "Liu et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "Evidence of strong positional effects in long contexts motivates examining and mitigating the specific option-position sensitivity that PriDe targets in MCQs."
+    },
+    {
+      "title": "Rethinking the Role of Demonstrations: What Makes In-Context Learning Work?",
+      "authors": "Min et al.",
+      "year": 2022,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "Findings that label mappings and prompt formatting can dominate ICL performance directly motivate isolating and correcting the option-ID token prior that skews multiple-choice selection."
+    },
+    {
+      "title": "Measuring Massive Multitask Language Understanding",
+      "authors": "Hendrycks et al.",
+      "year": 2021,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "This benchmark standardized MCQ evaluation with A/B/C/D options, providing the task formulation and datasets on which the selection-bias phenomenon and PriDe\u2019s debiasing are demonstrated."
+    },
+    {
+      "title": "Detecting and Correcting for Label Shift with Black Box Predictors",
+      "authors": "Lipton et al.",
+      "year": 2018,
+      "arxiv_id": null,
+      "role": "Related Problem",
+      "relationship_sentence": "PriDe parallels label-shift correction by estimating test-time label priors and adjusting predictions, but innovates by inferring option-ID priors from unlabeled test permutations without requiring labeled validation data."
+    }
+  ],
+  "synthesis_narrative": "Contextual calibration showed that prompt-based classifiers in language models carry systematic label-word priors and that subtracting a context-induced bias improves few-shot classification. Logit adjustment from long-tailed recognition formalized a simple and effective way to correct predictions by removing the influence of class priors at logit level. Self-diagnosis and self-debiasing demonstrated that one can construct a bias-only signal from the model itself and attenuate it at inference, separating spurious cues from the desired conditional prediction. Studies of long-context processing revealed strong positional effects\u2014models overweight earlier or later spans\u2014highlighting that order alone can sway predictions independent of content. Work dissecting in-context learning further showed that label mappings and format choices, rather than task understanding, often drive performance, implicating superficial biases around label tokens. Finally, MMLU codified MCQ evaluation with A/B/C/D options as a standard, making option-identifier tokens central to widely used assessments, while label-shift correction established the general recipe of estimating test-time priors and reweighting posteriors. Together, these strands expose an opportunity: MCQ evaluations hinge on fixed option-ID tokens that can carry strong priors, and order-induced effects can amplify them; yet prior correction has not been tailored to this setting. The present work synthesizes these insights by explicitly estimating option-ID priors via content permutations on a small test subset and removing them through logit-level prior adjustment, yielding a label-free, inference-time debiasing method that targets selection bias in multiple-choice selection.",
+  "target_paper": {
+    "title": "Large Language Models Are Not Robust Multiple Choice Selectors",
+    "authors": "Chujie Zheng, Hao Zhou, Fandong Meng, Jie Zhou, Minlie Huang",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "large language model, bias, robustness, multiple choice question, evaluation",
+    "abstract": "Multiple choice questions (MCQs) serve as a common yet important task format in the evaluation of large language models (LLMs). This work shows that modern LLMs are vulnerable to option position changes in MCQs due to their inherent \u201cselection bias\u201d, namely, they prefer to select specific option IDs as answers (like \u201cOption A\u201d). Through extensive empirical analyses with 20 LLMs on three benchmarks, we pinpoint that this behavioral bias primarily stems from LLMs\u2019 token bias, where the model a priori assigns more probabilistic mass to specific option ID tokens (e.g., A/B/C/D) when predicting answers from the option IDs. To mitigate selection bias, we propose a label-free, inference-time debiasing method, called PriDe, which separates the model\u2019s prior bias for option IDs from the overall prediction distribution. PriDe first estimates the prior by permutating option contents on a small number of test samples, and then applies the estimated prior to debias the remaining samples. We demonst",
+    "openreview_id": "shr9PXz7T0",
+    "forum_id": "shr9PXz7T0"
+  },
+  "analysis_timestamp": "2026-01-07T00:17:03.500594"
+}

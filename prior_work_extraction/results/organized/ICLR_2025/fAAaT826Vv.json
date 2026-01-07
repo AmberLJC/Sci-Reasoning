@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Probabilistic Reasoning in Intelligent Systems: Networks of Plausible Inference",
+      "authors": "Judea Pearl",
+      "year": 1988,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "BIRD adopts the Bayesian network formalism and the abduction\u2013deduction view of probabilistic reasoning introduced by Pearl, using it as the backbone onto which LLM-generated hypotheses are aligned."
+    },
+    {
+      "title": "Probabilistic Horn abduction and Bayesian networks",
+      "authors": "David Poole",
+      "year": 1993,
+      "arxiv_id": null,
+      "role": "Extension",
+      "relationship_sentence": "BIRD directly builds on Poole\u2019s linkage between abduction and Bayesian networks by replacing logical hypothesis generation with LLM-produced abductions that are then scored with BN inference."
+    },
+    {
+      "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+      "authors": "Jason Wei et al.",
+      "year": 2022,
+      "arxiv_id": "2201.11903",
+      "role": "Inspiration",
+      "relationship_sentence": "BIRD leverages the Chain-of-Thought insight that prompting can elicit intermediate factors and assumptions, mapping these natural-language steps to BN variables and edges for structured inference."
+    },
+    {
+      "title": "Abductive Commonsense Reasoning",
+      "authors": "Chandra Bhagavatula et al.",
+      "year": 2020,
+      "arxiv_id": "1908.05739",
+      "role": "Foundation",
+      "relationship_sentence": "BIRD treats LLM-produced explanations as abductive hypotheses in the sense formalized by \u03b1NLI, but quantifies them by embedding them into a BN for posterior estimation."
+    },
+    {
+      "title": "Language Models (Mostly) Know What They Know",
+      "authors": "Saurav Kadavath et al.",
+      "year": 2022,
+      "arxiv_id": "2207.05221",
+      "role": "Gap Identification",
+      "relationship_sentence": "BIRD is motivated by the miscalibration and overconfidence documented by Kadavath et al., addressing this gap by offloading probability computation to a calibrated BN rather than relying on raw LLM confidence."
+    },
+    {
+      "title": "Self-Consistency Improves Chain of Thought Reasoning in Language Models",
+      "authors": "Xuezhi Wang et al.",
+      "year": 2022,
+      "arxiv_id": "2203.11171",
+      "role": "Baseline",
+      "relationship_sentence": "BIRD improves over self-consistency-style probability estimation that uses sample frequencies from multiple CoT trajectories by replacing majority-vote heuristics with Bayesian deduction over an LLM-elicited factor graph."
+    },
+    {
+      "title": "Conformal Language Modeling",
+      "authors": "Anastasios N. Angelopoulos et al.",
+      "year": 2023,
+      "arxiv_id": "2305.07347",
+      "role": "Related Problem",
+      "relationship_sentence": "BIRD complements conformal language modeling\u2019s set-valued uncertainty by providing calibrated scalar probabilities via BN inference, using conformal methods as a comparative baseline for trustworthiness."
+    }
+  ],
+  "synthesis_narrative": "Bayesian networks provide a principled structure for uncertainty propagation and the classical abduction\u2013deduction cycle, as established by Pearl\u2019s formulation of graphical models and Poole\u2019s explicit bridge between abduction and Bayesian networks. Abductive reasoning in natural language was operationalized in NLP through abductive commonsense benchmarks (\u03b1NLI), which cast the task as generating hypotheses that best explain observations. Chain-of-thought prompting then showed that large language models can be prompted to articulate intermediate assumptions and latent factors, surfacing the very hypotheses and variable dependencies that map naturally onto nodes and edges in a Bayesian network. Meanwhile, work on model confidence revealed a critical weakness: even when LLMs articulate plausible reasoning steps, their probability-of-correctness is often miscalibrated, as demonstrated by studies on elicited confidence. Popular practice to obtain reliability\u2014self-consistency over multiple reasoning samples\u2014approximates probabilities via vote fractions, and conformal language modeling shifts to set-valued guarantees, but neither yields calibrated scalar probabilities grounded in an explicit causal or dependency structure.\n\nAgainst this backdrop, the natural next step is to fuse LLMs\u2019 abductive capacity with the deductive rigor of Bayesian inference. By treating LLM-generated rationales as explicit hypotheses and factor proposals, mapping them into a Bayesian network as variables and dependencies, and then performing posterior inference, the approach directly addresses miscalibration and replaces heuristic vote counts with principled probability estimates. The synthesis exploits CoT\u2019s factor elicitation, \u03b1NLI\u2019s abductive framing, and the BN abduction\u2013deduction paradigm to deliver trustworthy, context-conditioned probabilities that surpass baseline LLM confidence schemes and complement conformal set predictions.",
+  "target_paper": {
+    "title": "BIRD: A Trustworthy Bayesian Inference Framework for Large Language Models",
+    "authors": "Yu Feng, Ben Zhou, Weidong Lin, Dan Roth",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "oral",
+    "keywords": "Large language models, Reasoning, Planning, Trustworthiness, Interpretability, Probability Estimation, Bayesian Methods",
+    "abstract": "Predictive models often need to work with incomplete information in real-world tasks. Consequently, they must provide reliable probability or confidence estimation, especially in large-scale decision-making and planning tasks. Current large language models (LLMs) are insufficient for accurate estimations, but they can generate relevant factors that may affect the probabilities, produce coarse-grained probabilities when the information is more complete, and help determine which factors are relevant to specific downstream contexts. In this paper, we make use of these capabilities of LLMs to provide a significantly more accurate probabilistic estimation. We propose BIRD, a novel probabilistic inference framework that aligns a Bayesian network with LLM abductions and then estimates more accurate probabilities in a deduction step. We show BIRD provides reliable probability estimations that are 30% better than those provided directly by LLM baselines. These estimates further contribute to be",
+    "openreview_id": "fAAaT826Vv",
+    "forum_id": "fAAaT826Vv"
+  },
+  "analysis_timestamp": "2026-01-06T14:48:36.635707"
+}

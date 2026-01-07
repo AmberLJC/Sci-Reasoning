@@ -1,0 +1,67 @@
+# Prior Work Analysis Report
+
+## Target Paper
+
+**Title:** On Scaling Up 3D Gaussian Splatting Training
+
+**Conference:** ICLR 2025 (oral)
+
+**Authors:** Hexu Zhao, Haoyang Weng, Daohan Lu, Ang Li, Jinyang Li, Aurojit Panda, Saining Xie
+
+**Keywords:** Gaussian Splatting, Machine Learning System, Distributed Training
+
+**Abstract:** 
+> 3D Gaussian Splatting (3DGS) is increasingly popular for 3D reconstruction due to its superior visual quality and rendering speed. However, 3DGS training currently occurs on a single GPU, limiting its ability to handle high-resolution and large-scale 3D reconstruction tasks due to memory constraints. We introduce Grendel, a distributed system designed to partition 3DGS parameters and parallelize computation across multiple GPUs. As each Gaussian affects a small, dynamic subset of rendered pixels...
+
+---
+
+## Key Prior Works (7 papers with direct influence)
+
+### 🏗️ Foundation
+
+**Mega-NeRF: Scalable Construction of Large-Scale NeRFs** (2022)
+- *Authors:* Turki et al.
+- *Direct Connection:* By partitioning large scenes and distributing radiance-field training across devices, this paper crystallizes the ‘scale-by-spatial-sharding’ problem formulation that motivates distributing 3DGS parameters rather than confining training to one GPU.
+
+**A Sorting Classification of Parallel Rendering** (1994)
+- *Authors:* Molnar et al.
+- *Direct Connection:* The sort-first paradigm of partitioning the image plane and routing primitives to tiles underpins the decision to partition pixels and send only overlapping Gaussians to those partitions.
+
+### 💡 Inspiration
+
+**GShard: Scaling Giant Models with Conditional Computation and Automatic Sharding** (2021)
+- *Authors:* Lepikhin et al.
+- *Direct Connection:* GShard’s sparse all-to-all token routing and load-balancing mechanisms directly inspire routing only the necessary parameters (Gaussians) to pixel shards with dynamic balancing across GPUs.
+
+**ZeRO: Memory Optimizations Toward Training Trillion Parameter Models** (2020)
+- *Authors:* Rajbhandari et al.
+- *Direct Connection:* ZeRO’s idea of partitioning model/optimizer states across devices informs the sharding of millions of 3DGS parameters and the communication schedule for distributed updates.
+
+**Measuring the Effects of Data Parallelism on Neural Network Training** (2018)
+- *Authors:* Shallue et al.
+- *Direct Connection:* Its analysis of optimal learning-rate/batch-size scaling motivates exploring batch-dependent hyperparameter scaling, leading to the adoption of a simple sqrt(batch-size) rule for batched multi-view training.
+
+### 🔍 Gap Identification
+
+**Block-NeRF: Scalable Large Scene Neural View Synthesis** (2022)
+- *Authors:* Tancik et al.
+- *Direct Connection:* Its block-wise scene partitioning highlights load-imbalance and cross-partition interaction challenges that the new system addresses via dynamic load balancing and sparse all-to-all routing of Gaussians to pixel partitions.
+
+### 📊 Baseline
+
+**3D Gaussian Splatting for Real-Time Radiance Field Rendering** (2023)
+- *Authors:* Kerbl et al.
+- *Direct Connection:* This work establishes the 3DGS representation and single-view training pipeline that the new system directly scales by sharding Gaussian parameters, enabling multi-view batched training and distributed optimization.
+
+---
+
+## Synthesis: How Prior Work Led to This Paper
+
+Gaussian Splatting introduced a differentiable splat-based representation and a single-view training loop that couples millions of per-Gaussian parameters to rendered pixels, delivering real-time rendering but constraining training to a single GPU. Mega-NeRF presented a scene-partitioned, multi-GPU recipe for scaling radiance fields, showing that spatial sharding and distributed training can unlock city-scale reconstructions. Block-NeRF refined this idea with block-wise decomposition, revealing practical issues of load imbalance and cross-block interactions when rendering rays traverse partitions. In parallel, GShard showed that sparse all-to-all communication can efficiently route only the necessary tokens to experts while maintaining balance via explicit load objectives, and ZeRO demonstrated that partitioning model/optimizer states across devices is a pragmatic path to fit and train models far beyond single-GPU memory. Long before, Molnar’s taxonomy of parallel rendering codified the sort-first strategy of partitioning the image plane and routing primitives to tiles, a natural match to splatting-based rasterization. Complementing these system ideas, Shallue et al. characterized how optimal hyperparameters depend on batch size, motivating principled scaling of learning rates and related settings.
+Together, these works reveal a path: treat Gaussians as sparsely routed parameters, tile the image plane, and shard states so training scales while staying memory-efficient. The synthesis is to marry sort-first pixel partitioning with MoE-style sparse all-to-all routing and ZeRO-like sharding, then exploit multi-view batching guided by batch-size scaling insights—yielding distributed, load-balanced 3DGS training that transcends single-view, single-GPU limitations.
+
+---
+
+*Analysis generated on: 2026-01-06T15:54:53.290751*
+
+*Pipeline: Prior Work Extraction v2.0 (Direct Lineage Focus)*

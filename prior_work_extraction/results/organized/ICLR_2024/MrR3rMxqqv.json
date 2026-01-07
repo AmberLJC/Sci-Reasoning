@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Are Transformers universal approximators of sequence-to-sequence functions?",
+      "authors": "Chulhee Yun et al.",
+      "year": 2020,
+      "arxiv_id": "1912.10077",
+      "role": "Foundation",
+      "relationship_sentence": "Their universality proof for self-attention crucially uses softmax saturation and a general-position assumption; this paper repurposes the same saturation mechanism while explicitly replacing general position with a linear-independence assumption to obtain memorization capacity lower bounds."
+    },
+    {
+      "title": "On the Relationship between Self-Attention and Convolutional Layers",
+      "authors": "Jonathan Cordonnier et al.",
+      "year": 2020,
+      "arxiv_id": "1911.03584",
+      "role": "Inspiration",
+      "relationship_sentence": "By showing that attention can implement near-hard selection via sharply peaked softmax and that multiple heads enable parallelized, localized computations, this work directly motivates the paper\u2019s construction that routes different examples to different heads to achieve capacity scaling with H."
+    },
+    {
+      "title": "On the Computational Power of Transformers",
+      "authors": "Abhishek Bhattamishra et al.",
+      "year": 2020,
+      "arxiv_id": "2009.06732",
+      "role": "Gap Identification",
+      "relationship_sentence": "Their analysis of transformer limitations (under standard assumptions) and reliance on strong positional/general-position conditions highlights a gap this paper targets by proposing alternate linear-independence assumptions and proving explicit memorization capacity lower bounds."
+    },
+    {
+      "title": "Transformer Feed-Forward Layers Are Key-Value Memories",
+      "authors": "Mor Geva et al.",
+      "year": 2021,
+      "arxiv_id": "2002.09402",
+      "role": "Inspiration",
+      "relationship_sentence": "By framing transformer components as key\u2013value memories that store and retrieve examples, this work directly informs the paper\u2019s formalization of memorization and its head-wise allocation of examples enabled by saturated attention."
+    },
+    {
+      "title": "Theoretical Limitations of Self-Attention in Neural Sequence Models",
+      "authors": "Michael Hahn",
+      "year": 2020,
+      "arxiv_id": "1906.06755",
+      "role": "Related Problem",
+      "relationship_sentence": "This paper\u2019s formal limits on what self-attention can compute motivate a complementary analysis of what it can memorize, which the current work addresses by constructing explicit per-head memorization schemes."
+    },
+    {
+      "title": "Analyzing Multi-Head Self-Attention: Specialized Heads Do the Heavy Lifting, the Rest Can Be Pruned",
+      "authors": "Elena Voita et al.",
+      "year": 2019,
+      "arxiv_id": "1905.09418",
+      "role": "Inspiration",
+      "relationship_sentence": "Empirical evidence that attention heads specialize underpins the paper\u2019s theoretical design where different heads memorize disjoint subsets of examples, yielding linear capacity growth in the number of heads."
+    }
+  ],
+  "synthesis_narrative": "Universality results for transformers established that self-attention can simulate hard selection by driving softmax to saturation, often under a general-position assumption that prevents ties and simplifies routing (Yun et al., 2020). Complementing this, it was shown that attention can implement localized, convolution-like operations, and that multiple heads enable parallelized selection over different substructures by sharpening attention distributions (Cordonnier et al., 2020). Beyond capability results, formal analyses documented limitations of self-attention and highlighted reliance on strong data-position assumptions, signaling a need for alternative modeling assumptions and finer-grained capacity characterizations (Bhattamishra et al., 2020; Hahn, 2020). In parallel, empirical mechanistic studies argued that transformer components act as key\u2013value memories that store and retrieve examples, clarifying how parameters realize content-addressable lookup (Geva et al., 2021). Moreover, multi-head specialization was observed: a few heads perform most of the essential work while others can be pruned, suggesting head-wise partitioning of functionality (Voita et al., 2019).\nTaken together, these works suggested a path: use softmax saturation to realize hard routing, justify head-wise parallelization via specialization, and reconceptualize attention as a memory system\u2014but do so under milder data assumptions. The current paper synthesizes these insights by replacing general position with a linear-independence condition and constructing explicit per-head routing schemes that allocate distinct example sequences to different heads. This yields a clean, head-linear memorization capacity lower bound for multi-head attention, aligning the mechanistic \u201cheads-as-specialized memories\u201d picture with rigorous guarantees.",
+  "target_paper": {
+    "title": "Memorization Capacity of Multi-Head Attention in Transformers",
+    "authors": "Sadegh Mahdavi, Renjie Liao, Christos Thrampoulidis",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Learning Theory, Expressivity, Multi-Head Attention, Transformers",
+    "abstract": "Transformers have become the go-to architecture for language and vision tasks, yet their theoretical properties, especially memorization capacity, remain elusive. This paper investigates the memorization abilities of multi-head attention mechanisms, examining how many example sequences they can memorize, as a function of the number of heads and sequence length. Motivated by experimental findings on vision transformers, we introduce novel assumptions about the linear independence of input data, distinct from the commonly used general-position assumption. Under these assumptions, we demonstrate that an attention layer with $H$ heads, dimension $d$, and context size $n < d,$ featuring $\\Theta(Hd^2)$ parameters, can memorize $\\Omega(Hn)$ examples. Our analysis sheds light on how different attention heads handle various example sequences, aided by the softmax operator\u2019s saturation property. We validate our findings through experiments on synthetic data.",
+    "openreview_id": "MrR3rMxqqv",
+    "forum_id": "MrR3rMxqqv"
+  },
+  "analysis_timestamp": "2026-01-06T07:25:19.504751"
+}

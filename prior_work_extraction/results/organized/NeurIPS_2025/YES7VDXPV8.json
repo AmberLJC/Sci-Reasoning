@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "A Watermark for Large Language Models",
+      "authors": "John Kirchenbauer et al.",
+      "year": 2023,
+      "role": "Foundational LLM watermarking scheme and detector",
+      "relationship_sentence": "Introduced the greenlist/redlist watermark with a z-test based on an i.i.d. pivotal statistic under human text; this paper directly generalizes that detection principle by replacing the bespoke z-test with a battery of general-purpose goodness-of-fit tests and benchmarking across watermark schemes."
+    },
+    {
+      "title": "The Power Divergence Family of Goodness-of-Fit Statistics",
+      "authors": "Noel A. C. Cressie, Timothy R. C. Read",
+      "year": 1984,
+      "role": "Core GoF methodology for multinomial data (includes Pearson\u2019s \u03c72 and the G-test)",
+      "relationship_sentence": "Provides a unifying framework for multinomial GoF tests that this work operationalizes on token/bin counts (e.g., green vs. red or hash buckets), enabling more powerful and robust detection than the single z-stat used in earlier watermark detectors."
+    },
+    {
+      "title": "Goodness-of-Fit Test Statistics that Dominate the Kolmogorov Statistics",
+      "authors": "Robert H. Berk, Douglas H. Jones",
+      "year": 1979,
+      "role": "Introduced the Berk\u2013Jones statistic for sensitive GoF",
+      "relationship_sentence": "Motivates the use of Berk\u2013Jones\u2013type tests that can be more sensitive to distributional shifts typical of weak watermarks, forming part of the evaluated GoF toolkit that yields higher empirical detection power."
+    },
+    {
+      "title": "Higher Criticism for Detecting Sparse Heterogeneous Mixtures",
+      "authors": "David L. Donoho, Jiashun Jin",
+      "year": 2004,
+      "role": "Powerful GoF test for sparse/weak deviations",
+      "relationship_sentence": "Inspires using Higher Criticism to detect subtle, sparse deviations in token-bin frequencies induced by watermarks, a setting where classical detectors may be underpowered."
+    },
+    {
+      "title": "The Kolmogorov\u2013Smirnov Test for Goodness of Fit",
+      "authors": "Frank J. Massey Jr.",
+      "year": 1951,
+      "role": "Canonical distribution-free GoF test",
+      "relationship_sentence": "Serves as a classic baseline GoF test included in the paper\u2019s systematic evaluation, illustrating how general EDF-based tests can be repurposed for watermark detection under i.i.d. null assumptions."
+    },
+    {
+      "title": "GLTR: Statistical Detection and Visualization of Generated Text",
+      "authors": "Sebastian Gehrmann, Hendrik Strobelt, Alexander M. Rush",
+      "year": 2019,
+      "role": "Early statistical detection of machine text via token-rank distributions",
+      "relationship_sentence": "Demonstrates that simple distributional statistics over token ranks can expose generation artifacts, motivating the paper\u2019s broader thesis that generic statistical GoF tools can outperform bespoke watermark detectors."
+    },
+    {
+      "title": "The Curious Case of Neural Text Degeneration",
+      "authors": "Ari Holtzman, Jan Buys, Li Du, Maxwell Forbes, Yejin Choi",
+      "year": 2020,
+      "role": "Characterized repetition and low-temperature sampling effects in neural text",
+      "relationship_sentence": "Identifies repetition phenomena at low temperature that this paper exploits\u2014showing GoF tests gain unique power in such regimes, surpassing prior watermark-specific detectors that do not capitalize on repetition patterns."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core idea\u2014recasting watermark detection as a general goodness-of-fit (GoF) problem\u2014builds directly on the original watermark framework of Kirchenbauer et al., which relies on an i.i.d. pivotal statistic (a z-test over greenlist indicators) under human-written text. By recognizing that such pivotal constructions naturally yield multinomial or empirical distribution function testing problems, the authors draw from the GoF canon: Cressie\u2013Read\u2019s power-divergence family provides a unified, multinomial test bed (including Pearson\u2019s chi-square and the likelihood-ratio G-test), while Berk\u2013Jones and Higher Criticism furnish powerful tests tailored to subtle or sparse deviations\u2014precisely the watermark regime where signal is weak and dispersed across tokens. Classic, distribution-free EDF tests such as Kolmogorov\u2013Smirnov offer robust baselines that can be broadly applied without heavy modeling assumptions, fitting the paper\u2019s goal of practical, model-agnostic detection.\nAt the same time, prior work in text generation and detection shapes the empirical lens. GLTR showed that simple distributional statistics over token ranks can effectively flag machine text, motivating the hypothesis that generic statistical tests may outperform bespoke detectors in practice. Holtzman et al. documented degeneration and repetition under low-temperature sampling; this paper leverages that phenomenon to reveal a distinct advantage for GoF tests that aggregate count patterns, especially when repetition amplifies deviations from the null. Together, these threads directly inform the paper\u2019s systematic evaluation showing that general GoF tests can both improve power and robustness across watermark schemes and post-editing settings.",
+  "analysis_timestamp": "2026-01-07T00:21:32.276797"
+}

@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models",
+      "authors": "Junnan Li, Dongxu Li, Silvio Savarese, Steven C.H. Hoi",
+      "year": 2023,
+      "role": "Baseline VL framework using a frozen LLM with a learned visual query module (Q-Former) trained on image\u2013text pairs",
+      "relationship_sentence": "The paper directly builds on BLIP-2\u2019s paradigm of prompting a frozen LLM with visual features and reorients the alignment problem from the vision side (Q-Former) to the language side via a prompt-predicting module trained using only text."
+    },
+    {
+      "title": "Flamingo: a Visual Language Model for Few-Shot Learning",
+      "authors": "Jean-Baptiste Alayrac, Jeffrey De Fauw, Lucas Smaira, et al.",
+      "year": 2022,
+      "role": "Pioneered using a frozen LLM with a learned visual adapter (Perceiver Resampler) for multimodal prompting",
+      "relationship_sentence": "By showing that frozen LLMs can be steered by learned visual prompts, Flamingo set the stage for this work\u2019s idea that shifting optimization to the language prompting side can further reduce reliance on image\u2013text pairs."
+    },
+    {
+      "title": "LLaVA: Large Language and Vision Assistant",
+      "authors": "Haotian Liu, Chunyuan Li, Qingyang Wu, Yong Jae Lee",
+      "year": 2023,
+      "role": "Connector-based approach aligning a vision encoder to a (largely) frozen LLM via lightweight adapters and instruction tuning",
+      "relationship_sentence": "LLaVA\u2019s success with minimalistic vision-to-LLM connectors informs the paper\u2019s design choice to keep the LLM frozen and instead learn an external module that supplies effective prompts to the LLM."
+    },
+    {
+      "title": "Prefix-Tuning: Optimizing Continuous Prompts for Generation",
+      "authors": "Xiang Lisa Li, Percy Liang",
+      "year": 2021,
+      "role": "Foundational method showing soft, continuous prompts can steer frozen language models",
+      "relationship_sentence": "The proposed Prompt-Transformer extends the core idea of continuous prompts by learning to predict these prompts (rather than directly optimizing them per task) using only text data, then applying them in VL settings."
+    },
+    {
+      "title": "The Power of Scale for Parameter-Efficient Prompt Tuning",
+      "authors": "Brian Lester, Rami Al-Rfou, Noah Constant",
+      "year": 2021,
+      "role": "Demonstrated that soft prompt tuning at scale is an effective, text-only, parameter-efficient alternative to full fine-tuning",
+      "relationship_sentence": "This result underpins the paper\u2019s decoupled training philosophy: learn strong prompt distributions purely from language to efficiently condition a frozen LLM without multimodal supervision."
+    },
+    {
+      "title": "Learning to Prompt for Vision-Language Models (CoOp)",
+      "authors": "Kaiyang Zhou, Jingkang Yang, Chen Change Loy, Ziwei Liu",
+      "year": 2022,
+      "role": "Showed that learnable textual context tokens (prompts) can adapt CLIP to downstream tasks",
+      "relationship_sentence": "CoOp\u2019s success with learned prompts for vision-language models motivates treating prompts as primary trainable interfaces; this paper generalizes that insight by predicting prompts in a text-only stage and deploying them to guide a frozen LLM for VL."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s central insight\u2014decoupling vision-language pre-training by shifting optimization to the language side and learning a prompt-predictor on text alone\u2014emerges from two converging threads. First, recent VL systems using frozen LLMs, notably Flamingo and BLIP-2, proved that a powerful LLM can act as a multimodal decoder if provided with the right visual prompts via an adapter (Perceiver Resampler or Q-Former). LLaVA further showed that lightweight connectors to a largely frozen LLM suffice, reinforcing the view that the LLM should remain untouched while the interface does the heavy lifting. Second, NLP prompt-learning advances\u2014Prefix-Tuning and Prompt Tuning\u2014established that continuous, learnable prompts can effectively steer frozen LMs with minimal parameters and purely text supervision. CoOp extended this prompting paradigm to VL by learning textual context vectors for CLIP, highlighting prompts as the key adaptation surface across modalities.\nBringing these lines together, the paper proposes training a Prompt-Transformer solely on linguistic data to predict \u201cideal\u201d prompts for a frozen LLM, then using those prompts to align visual features at VL pre-training time. This decoupling retains the frozen-LM design of Flamingo/BLIP-2/LLaVA, but replaces data-hungry multimodal alignment with a text-only prompt learning stage inspired by parameter-efficient prompting in NLP. The result is improved performance over BLIP-2 and a markedly reduced dependence on massive image\u2013text corpora, demonstrating that language-side prompt learning can bootstrap vision-language training.",
+  "analysis_timestamp": "2026-01-06T23:42:49.116190"
+}

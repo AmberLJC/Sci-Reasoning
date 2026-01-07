@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Attention Is All You Need",
+      "authors": "Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, \u0141ukasz Kaiser, Illia Polosukhin",
+      "year": 2017,
+      "role": "Foundational architecture (encoder\u2013decoder with cross-attention)",
+      "relationship_sentence": "YOCO\u2019s cross-decoder explicitly reuses the Transformer cross-attention mechanism while restructuring the stack so the overall system behaves like a decoder-only LM but caches keys/values only once."
+    },
+    {
+      "title": "Transformer-XL: Attentive Language Models Beyond a Fixed-Length Context",
+      "authors": "Zihang Dai, Zhilin Yang, Yiming Yang, Jaime Carbonell, Quoc V. Le, Ruslan Salakhutdinov",
+      "year": 2019,
+      "role": "Memory reuse for long context",
+      "relationship_sentence": "The idea of reusing past representations as a fixed memory to extend context and reduce recomputation in Transformer-XL directly informs YOCO\u2019s reuse of a single global KV cache across decoding layers and timesteps."
+    },
+    {
+      "title": "Perceiver IO: A General Architecture for Structured Inputs & Outputs",
+      "authors": "Andrew Jaegle et al.",
+      "year": 2021,
+      "role": "Cross-attention decoders to a latent memory",
+      "relationship_sentence": "Perceiver IO\u2019s separation of an encoder that builds a latent memory and a decoder that queries it via cross-attention parallels YOCO\u2019s self-decoder (building global KVs once) and cross-decoder (querying them), enabling global attention at lower cost."
+    },
+    {
+      "title": "Fast Transformer Decoding: One Write-Head is All You Need (Multi-Query Attention)",
+      "authors": "Noam Shazeer",
+      "year": 2019,
+      "role": "KV cache reduction across heads",
+      "relationship_sentence": "MQA\u2019s insight that sharing K/V across heads cuts decoding-time memory/latency motivates YOCO\u2019s more aggressive sharing\u2014reusing a single set of K/V across layers via cross-attention to slash cache footprint."
+    },
+    {
+      "title": "Grouped-Query Attention (GQA)",
+      "authors": "Josh Ainslie et al.",
+      "year": 2023,
+      "role": "Scalable attention with reduced KV duplication",
+      "relationship_sentence": "GQA generalizes MQA to balance quality and cache footprint; YOCO extends the same principle of minimizing redundant K/V storage from the head dimension to the depth dimension by caching once and reusing across layers."
+    },
+    {
+      "title": "DeeBERT: Dynamic Early Exiting for Accelerating BERT Inference",
+      "authors": "Ji Xin et al.",
+      "year": 2020,
+      "role": "Early-exit computation",
+      "relationship_sentence": "Prior early-exit methods established that partial forward passes can save compute; YOCO\u2019s architecture enables a stronger variant\u2014prefill early exit that provably does not change outputs\u2014by decoupling self-encoding from cross-decoder usage."
+    }
+  ],
+  "synthesis_narrative": "YOCO\u2019s core idea\u2014compute global keys/values once and reuse them throughout generation\u2014emerges by marrying cross-attention decoders with principled memory reuse. The Transformer introduced the encoder\u2013decoder template and cross-attention, which YOCO re-purposes: a self-decoder first computes a global representation and associated K/V caches, and a cross-decoder then queries this memory, preserving the behavior of a decoder-only LM while caching only once. Perceiver IO demonstrated that decoupling representation building from decoding via cross-attention can preserve global context at reduced computational cost; YOCO brings this paradigm to LLMs, aligning it with autoregressive semantics and KV caching.\n\nOn the efficiency side, Transformer-XL showed how reusing past states as a persistent memory extends context and reduces recomputation; YOCO applies this reuse across depth by sharing a single global cache across layers. Complementary advances in Multi-Query Attention and Grouped-Query Attention highlighted that KV duplication\u2014first across heads\u2014is a dominant decoding bottleneck; YOCO generalizes the same spirit of sharing to the layer dimension, collapsing per-layer caches into one. Finally, insights from early-exit literature inform YOCO\u2019s prefill optimization: by structuring computation so the cross-decoder\u2019s outputs are independent during prompt processing, YOCO enables an early-exiting prefill that does not alter final outputs. Together, these threads yield a decoder\u2013decoder architecture that retains global attention, sharply lowers inference memory, accelerates prefill, and scales to very long contexts.",
+  "analysis_timestamp": "2026-01-07T00:02:04.763703"
+}

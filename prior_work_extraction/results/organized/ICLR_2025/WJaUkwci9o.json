@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Reward Augmented Maximum Likelihood for Neural Structured Prediction",
+      "authors": "Norouzi et al.",
+      "year": 2016,
+      "arxiv_id": "1609.00150",
+      "role": "Foundation",
+      "relationship_sentence": "Sharpening instantiates a RAML-style objective by matching a verifier-reweighted target distribution over sequences, directly using the idea of exponential reward reweighting as the training signal."
+    },
+    {
+      "title": "Direct Preference Optimization: Your Language Model is Secretly a Reward Model",
+      "authors": "Rafailov et al.",
+      "year": 2023,
+      "arxiv_id": "2305.18290",
+      "role": "Extension",
+      "relationship_sentence": "The work leverages DPO\u2019s insight that the optimal policy under a KL prior satisfies \u03c0*/\u03c00 \u221d exp(\u03b2 r), providing the closed-form reweighting that the sharpening mechanism aims to realize with self-verifier scores instead of external feedback."
+    },
+    {
+      "title": "Constitutional AI: Harmlessness from AI Feedback",
+      "authors": "Bai et al.",
+      "year": 2022,
+      "arxiv_id": "2212.08073",
+      "role": "Inspiration",
+      "relationship_sentence": "Constitutional AI operationalized AI-as-judge supervision, directly motivating the self-verifier setting that sharpening formalizes and analyzes in a statistical/sample-complexity framework."
+    },
+    {
+      "title": "Self-Consistency Improves Chain-of-Thought Reasoning in Language Models",
+      "authors": "Wang et al.",
+      "year": 2022,
+      "arxiv_id": "2203.11171",
+      "role": "Gap Identification",
+      "relationship_sentence": "Self-Consistency showed large gains from inference-time generate-and-select with many samples, whose computational burden the sharpening mechanism explicitly seeks to amortize into post-training."
+    },
+    {
+      "title": "STaR: Bootstrapping Reasoning With Reasoning",
+      "authors": "Zelikman et al.",
+      "year": 2022,
+      "arxiv_id": "2203.14465",
+      "role": "Related Problem",
+      "relationship_sentence": "STaR\u2019s self-training on self-verified correct solutions is a hard-selection instance of using a verifier signal, which sharpening generalizes to soft, distributional reweighting with explicit learning guarantees."
+    },
+    {
+      "title": "Self-Rewarding Language Models",
+      "authors": "Yuan et al.",
+      "year": 2024,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "This line of work fine-tunes LMs using rewards scored by the model itself, and the sharpening framework provides the theoretical justification and sample-complexity conditions under which such self-rewarding yields real capability gains."
+    },
+    {
+      "title": "Let\u2019s Verify Step by Step",
+      "authors": "Lightman et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "By showing LMs can be stronger verifiers than generators on multi-step reasoning, this work underpins the asymmetry that sharpening exploits\u2014using the model-as-verifier to guide reweighting toward high-quality sequences."
+    }
+  ],
+  "synthesis_narrative": "Reward Augmented Maximum Likelihood introduced the idea of training sequence models to match a reward-reweighted target distribution, using exponential weighting of sequence quality as a principled alternative to pure MLE. Direct Preference Optimization crystallized this reweighting under a KL prior, showing that the optimal policy is the base model scaled by an exponential of reward, thereby eliminating the need for on-policy RL while preserving the essence of reward-driven distribution shift. Constitutional AI established that language models can act as judges, generating supervisory signals without humans, demonstrating the practical viability of AI feedback. Self-Consistency revealed that generate-and-select at inference\u2014sampling diverse solutions and aggregating by consistency\u2014substantially boosts reasoning, albeit at high computational cost. STaR showed that training on self-verified correct solutions can bootstrap reasoning, embodying a hard-selection version of verifier-guided supervision. Self-Rewarding Language Models extended this by having models produce their own rewards for fine-tuning, offering a scalable self-improvement template. Let\u2019s Verify Step by Step documented that LMs often verify better than they generate, highlighting a systematic asymmetry that can be leveraged. Together these works expose a gap: we can obtain higher-quality outputs via verification and selection, but mostly at inference-time or with ad hoc self-labeling. The sharpening perspective synthesizes RAML/DPO-style exponential reweighting with AI-as-judge verification, amortizing generate-and-select into post-training and yielding a principled, sample-efficient path to shift probability mass toward verified high-quality sequences under clear conditions for when self-improvement is possible.",
+  "target_paper": {
+    "title": "Self-Improvement in Language Models: The Sharpening Mechanism",
+    "authors": "Audrey Huang, Adam Block, Dylan J Foster, Dhruv Rohatgi, Cyril Zhang, Max Simchowitz, Jordan T. Ash, Akshay Krishnamurthy",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "oral",
+    "keywords": "Learning theory, Sample complexity, Self-Improvement, Language Models",
+    "abstract": "Recent work in language modeling has raised the possibility of \u201cself-improvement,\u201d where an LLM evaluates and refines its own generations to achieve higher performance without external feedback. It is impossible for this self-improvement to create information that is not already in the model, so why should we expect that this will lead to improved capabilities? We offer a new theoretical perspective on the capabilities of self-improvement through a lens we refer to as \u201csharpening.\u201d Motivated by the observation that language models are often better at verifying response quality than they are at generating correct responses, we formalize self-improvement as using the model itself as a verifier during post-training in order to \u2018sharpen\u2019 the model to one placing large mass on high-quality sequences, thereby amortizing the expensive inference-time computation of generating good sequences. We begin by introducing a new statistical framework for sharpening in which the learner has sample acce",
+    "openreview_id": "WJaUkwci9o",
+    "forum_id": "WJaUkwci9o"
+  },
+  "analysis_timestamp": "2026-01-06T08:07:04.601843"
+}

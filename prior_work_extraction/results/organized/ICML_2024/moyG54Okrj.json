@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP",
+      "authors": "Patrick Lewis et al.",
+      "year": 2020,
+      "role": "Foundation",
+      "relationship_sentence": "Established the RAG paradigm that Repoformer builds on, introducing the core idea of conditioning generation on retrieved evidence that Repoformer selectively invokes rather than using invariable retrieval."
+    },
+    {
+      "title": "Improving language models by retrieving from trillions of tokens",
+      "authors": "Sebastian Borgeaud et al.",
+      "year": 2022,
+      "role": "Foundation",
+      "relationship_sentence": "RETRO integrated large-scale retrieval directly into LM training/inference and highlighted retrieval\u2019s impact on generation quality, providing the foundational retrieval-conditioning mechanism that Repoformer adapts to the repository-level code setting."
+    },
+    {
+      "title": "Self-RAG: Learning to Retrieve, Generate, and Critique for Language Models",
+      "authors": "Akari Asai et al.",
+      "year": 2023,
+      "role": "Inspiration",
+      "relationship_sentence": "Directly inspired Repoformer\u2019s selective RAG policy by showing that an LM can self-evaluate usefulness of retrieved context and control retrieval; Repoformer operationalizes this with a self-supervised signal tailored to code completion and uses the same LM as both policy and generator."
+    },
+    {
+      "title": "REPLUG: Retrieval-Augmented Black-Box Language Models",
+      "authors": "Wenhao Shi et al.",
+      "year": 2023,
+      "role": "Related Problem",
+      "relationship_sentence": "Showed that retrieval quality/noise critically affects RAG and trained retrievers with LM feedback; Repoformer addresses this noise sensitivity on repositories by training the LM to robustly leverage (or skip) potentially noisy retrieved code contexts."
+    },
+    {
+      "title": "Lost in the Middle: How Language Models Use Long Context",
+      "authors": "Nelson F. Liu et al.",
+      "year": 2023,
+      "role": "Gap Identification",
+      "relationship_sentence": "Demonstrated that adding long or poorly placed context can hurt LM performance, motivating Repoformer\u2019s core decision to avoid retrieval when unhelpful and to be selective about incorporating repository context."
+    },
+    {
+      "title": "Language models (mostly) know what they know",
+      "authors": "Kshitij Kadavath et al.",
+      "year": 2022,
+      "role": "Inspiration",
+      "relationship_sentence": "Showed LMs can self-assess their answer correctness, motivating Repoformer\u2019s self-supervised training for a code LM to predict when retrieval will improve completion quality (i.e., learn when it needs external context)."
+    }
+  ],
+  "synthesis_narrative": "Repoformer\u2019s core innovation is a selective retrieval-augmented generation framework for repository-level code completion in which the same code LM learns, via self-supervision, to predict whether retrieval will help and to robustly use potentially noisy retrieved context. This builds squarely on the RAG lineage established by Lewis et al. (2020) and RETRO (Borgeaud et al., 2022), which codified conditioning generation on retrieved evidence but typically assumed retrieval is always beneficial. Two lines of prior work directly shaped Repoformer\u2019s selectivity and robustness. First, Self-RAG (Asai et al., 2023) demonstrated that an LM can self-critique and control retrieval, providing the template for learning a retrieval policy; Repoformer adapts this idea to code, training the generator itself to decide if repository retrieval will improve completion. Second, REPLUG (Shi et al., 2023) showed that retrieval noise and relevance are pivotal and can be optimized with LM feedback; Repoformer addresses this by teaching the LM to ignore or downweight unhelpful repository snippets and even skip retrieval. The motivation for selectivity is reinforced by Lost in the Middle (Liu et al., 2023), which revealed that extraneous long context can degrade performance, a risk magnified in repositories. Finally, Kadavath et al. (2022) provided the evidence that LMs can self-assess their knowledge, underpinning Repoformer\u2019s self-supervised signal for predicting retrieval helpfulness. Together, these works lead directly to Repoformer\u2019s selective, self-evaluative RAG for repository-level code completion.",
+  "analysis_timestamp": "2026-01-06T23:09:26.429541"
+}

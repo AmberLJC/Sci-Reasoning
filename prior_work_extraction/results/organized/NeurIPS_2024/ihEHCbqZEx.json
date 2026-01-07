@@ -1,0 +1,91 @@
+{
+  "prior_works": [
+    {
+      "title": "Outrageously Large Neural Networks: The Sparsely-Gated Mixture-of-Experts Layer",
+      "authors": [
+        "Noam Shazeer",
+        "Azalia Mirhoseini",
+        "Krzysztof Maziarz",
+        "Andy Davis",
+        "Quoc V. Le",
+        "Geoffrey Hinton",
+        "Jeff Dean"
+      ],
+      "year": 2017,
+      "role": "Foundational sparse MoE routing and load-balancing objective",
+      "relationship_sentence": "Flex-MoE\u2019s uniquely designed Sparse MoE builds directly on the sparsely gated expert paradigm and routing/loss machinery introduced by Shazeer et al., adapting it to condition routing on available modality combinations."
+    },
+    {
+      "title": "Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity",
+      "authors": [
+        "William Fedus",
+        "Barret Zoph",
+        "Noam Shazeer"
+      ],
+      "year": 2021,
+      "role": "Scalable, simplified MoE routing (single-expert) and practical training recipes",
+      "relationship_sentence": "Flex-MoE leverages Switch-style efficient sparse routing principles to keep its expert selection scalable while tailoring gates to modality presence/missingness."
+    },
+    {
+      "title": "Modeling Task Relationships in Multi-task Learning with Multi-gate Mixture-of-Experts (MMoE)",
+      "authors": [
+        "Jiaqi Ma",
+        "Zhe Zhao",
+        "Xinyang Yi",
+        "Jilin Chen",
+        "Lichan Hong",
+        "Ed H. Chi"
+      ],
+      "year": 2018,
+      "role": "Decoupled gating over shared experts for different conditions",
+      "relationship_sentence": "The idea of sharing a pool of experts with different gates maps naturally to Flex-MoE\u2019s need to reuse experts across many modality subsets while routing via modality-conditioned gates."
+    },
+    {
+      "title": "Multimodal Generative Models with Product-of-Experts",
+      "authors": [
+        "Y. Wu",
+        "Noah D. Goodman"
+      ],
+      "year": 2018,
+      "role": "Formalism for combining arbitrary subsets of modalities and handling missing ones",
+      "relationship_sentence": "Flex-MoE\u2019s focus on arbitrary modality combinations echoes the MVAE/PoE insight that learning should support any subset; this motivates its missing-modality bank to pair observed sets with their missing counterparts."
+    },
+    {
+      "title": "Generalized Multimodal ELBO (MoPoE-VAE): Unifying Modalities in the ELBO",
+      "authors": [
+        "T. Sutter",
+        "I. Daunhawer",
+        "J. Vogt"
+      ],
+      "year": 2021,
+      "role": "Mixture-of-Products-of-Experts objective enabling training over all modality subsets",
+      "relationship_sentence": "MoPoE\u2019s explicit treatment of the combinatorics of modality subsets directly informs Flex-MoE\u2019s systematic coverage of combinations via the missing modality bank rather than ad hoc fusion."
+    },
+    {
+      "title": "ModDrop: Adaptive Multi-Modal Gesture Recognition",
+      "authors": [
+        "Natalia Neverova",
+        "Christian Wolf",
+        "Graham W. Taylor",
+        "Florian Nebout"
+      ],
+      "year": 2016,
+      "role": "Stochastic modality dropping for robustness to missing inputs",
+      "relationship_sentence": "Flex-MoE generalizes the ModDrop training principle by constructing a structured bank that pairs observed sets with their corresponding missing configurations, yielding stronger coverage than random drops."
+    },
+    {
+      "title": "Gated Multimodal Units for Information Fusion",
+      "authors": [
+        "John Arevalo",
+        "Thamar Solorio",
+        "Manuel Montes-y-G\u00f3mez",
+        "Fabio A. Gonz\u00e1lez"
+      ],
+      "year": 2017,
+      "role": "Gating-based fusion to weight modalities conditioned on their utility/presence",
+      "relationship_sentence": "Flex-MoE\u2019s modality-aware gating of experts conceptually extends GMU\u2019s gating idea from feature fusion to expert routing, leveraging presence/missingness signals to guide computation."
+    }
+  ],
+  "synthesis_narrative": "Flex-MoE\u2019s core contribution\u2014robust modeling of arbitrary modality combinations through a missing-modality bank followed by a modality-aware Sparse MoE\u2014sits at the intersection of two influential threads: principled handling of missing modalities and scalable sparse expert routing. On the missing-modality side, MVAE\u2019s product-of-experts and MoPoE-VAE\u2019s generalized ELBO formalize learning from any subset of modalities, establishing that models should natively support combinatorial subsets rather than rely on complete data. ModDrop operationalized robustness by dropping modalities during training, while GMU introduced gating to adaptively weight modalities. Flex-MoE synthesizes these ideas by replacing stochastic or purely feature-level fusion with a structured missing-modality bank that explicitly enumerates and links observed subsets to their complementary missing configurations, ensuring systematic coverage during training.\nOn the scaling/compute side, the sparsely gated MoE of Shazeer et al. provides the backbone for conditional computation and load balancing, and Switch Transformers demonstrate how simplified, efficient routing can scale expert models. Inspired by MMoE, Flex-MoE decouples gating from experts so that different modality subsets can share experts while using distinct gates. The result is a flexible expert pool whose routing is conditioned on modality availability, combining principled subset coverage (from PoE/MoPoE) with efficient sparse computation (from MoE/Switch) and modality-aware gating (from GMU/MMoE). This integration directly enables Flex-MoE\u2019s key capability: high performance across arbitrary modality combinations with resilience to missing data.",
+  "analysis_timestamp": "2026-01-06T23:33:35.529356"
+}

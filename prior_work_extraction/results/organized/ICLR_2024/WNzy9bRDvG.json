@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Consistency Models",
+      "authors": "Yang Song et al.",
+      "year": 2023,
+      "arxiv_id": "2303.01469",
+      "role": "Baseline",
+      "relationship_sentence": "The improved training directly builds on the consistency training/distillation formulation of Song et al. (2023), fixing its EMA-teacher-based consistency target and LPIPS-dependent objective to enable higher-quality data-only consistency training."
+    },
+    {
+      "title": "Score-Based Generative Modeling through Stochastic Differential Equations",
+      "authors": "Yang Song et al.",
+      "year": 2021,
+      "arxiv_id": "2011.13456",
+      "role": "Foundation",
+      "relationship_sentence": "The probability flow ODE and continuous-time noise-level parameterization from this work underpin the consistency mapping and time/\u03c3 parametrization that the improved consistency objective is derived from."
+    },
+    {
+      "title": "Elucidating the Design Space of Diffusion Models",
+      "authors": "Tero Karras et al.",
+      "year": 2022,
+      "arxiv_id": "2206.00364",
+      "role": "Extension",
+      "relationship_sentence": "The lognormal distribution over noise levels introduced in EDM is adapted as a lognormal noise schedule for consistency training to stabilize gradients and improve sample quality."
+    },
+    {
+      "title": "Mean teachers are better role models: Weight-averaged consistency targets improve semi-supervised deep learning",
+      "authors": "Antti Tarvainen et al.",
+      "year": 2017,
+      "arxiv_id": "1703.01780",
+      "role": "Foundation",
+      "relationship_sentence": "The EMA teacher\u2013student consistency paradigm from Mean Teacher is the mechanism consistency training borrowed, and this work identifies and removes the EMA teacher because it introduces a bias in the generative consistency target."
+    },
+    {
+      "title": "The Unreasonable Effectiveness of Deep Features as a Perceptual Metric",
+      "authors": "Richard Zhang et al.",
+      "year": 2018,
+      "arxiv_id": "1801.03924",
+      "role": "Gap Identification",
+      "relationship_sentence": "Because prior consistency training used LPIPS as a learned metric, whose deep-feature bias skews optimization and evaluation, this work replaces it with a non-learned robust Pseudo-Huber loss."
+    },
+    {
+      "title": "Progressive Distillation for Fast Sampling of Diffusion Models",
+      "authors": "Jonathan Ho et al.",
+      "year": 2022,
+      "arxiv_id": "2202.00512",
+      "role": "Gap Identification",
+      "relationship_sentence": "This distillation-based acceleration shows that student quality is bounded by the teacher, motivating the shift to data-only consistency training to avoid the teacher-quality ceiling."
+    },
+    {
+      "title": "A General and Adaptive Robust Loss Function",
+      "authors": "Jonathan T. Barron",
+      "year": 2019,
+      "arxiv_id": "1701.03077",
+      "role": "Inspiration",
+      "relationship_sentence": "The Pseudo-Huber robust loss from Barron\u2019s family is adopted as a principled, smooth L1-like alternative to learned perceptual losses for training consistency objectives without metric-induced bias."
+    }
+  ],
+  "synthesis_narrative": "Consistency Models introduced the idea of learning a mapping that is invariant across noise levels so that a single evaluation can jump to a clean sample, operationalized via a teacher\u2013student scheme and often realized with LPIPS as the distance metric; their highest-quality results came from distilling a strong diffusion teacher. This framework rests on the score-based diffusion view that models data via an SDE and its probability flow ODE, which defines the continuous-time trajectory and \u03c3-parameterization that consistency mappings approximate. EDM showed that sampling and training benefit from choosing \u03c3 according to a lognormal distribution, shaping gradient magnitudes via signal-to-noise-aware weighting. In parallel, the Mean Teacher paradigm popularized EMA-weighted teachers as stability-inducing targets in consistency regularization, a mechanism later inherited by consistency training. LPIPS provided a learned perceptual metric whose deep-feature alignment improves perceptual fidelity but can introduce bias tied to the feature extractor. Progressive Distillation demonstrated speeding up diffusion sampling via student-teacher distillation while revealing the intrinsic ceiling: student quality cannot surpass the teacher. Barron\u2019s robust loss family, including Pseudo-Huber, offered smooth, heavy-tailed alternatives to L2 that retain detail while reducing sensitivity to outliers. Taken together, these works exposed a clear opportunity: escape the distillation quality ceiling and metric-induced biases while preserving stable training across \u03c3. The natural synthesis is to keep the consistency formulation grounded in the diffusion ODE, drop the EMA teacher to remove target bias, replace learned perceptual metrics with a robust Pseudo-Huber loss, and import EDM\u2019s lognormal \u03c3 schedule to balance gradients\u2014yielding data-only consistency training that closes the quality gap without relying on a diffusion teacher.",
+  "target_paper": {
+    "title": "Improved Techniques for Training Consistency Models",
+    "authors": "Yang Song, Prafulla Dhariwal",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "oral",
+    "keywords": "Consistency Models, Consistency Training, Diffusion Models, Score-Based Generative Models, Score-Based Diffusion Models, Distillation",
+    "abstract": "Consistency models are a nascent family of generative models that can sample high quality data in one step without the need for adversarial training. Current consistency models achieve optimal sample quality by distilling from pre-trained diffusion models and employing learned metrics such as LPIPS. However, distillation limits the quality of consistency models to that of the pre-trained diffusion model, and LPIPS causes undesirable bias in evaluation. To tackle these challenges, we present improved techniques for consistency training, where consistency models learn directly from data without distillation. We delve into the theory behind consistency training and identify a previously overlooked flaw, which we address by eliminating Exponential Moving Average from the teacher consistency model. To replace learned metrics like LPIPS, we adopt Pseudo-Huber losses from robust statistics. Additionally, we introduce a lognormal noise schedule for the consistency training objective, and propo",
+    "openreview_id": "WNzy9bRDvG",
+    "forum_id": "WNzy9bRDvG"
+  },
+  "analysis_timestamp": "2026-01-06T07:00:29.255196"
+}

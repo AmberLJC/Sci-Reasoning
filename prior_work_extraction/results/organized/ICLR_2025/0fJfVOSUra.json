@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness",
+      "authors": "Tri Dao et al.",
+      "year": 2022,
+      "arxiv_id": "2205.14135",
+      "role": "Inspiration",
+      "relationship_sentence": "ThunderKittens adopts FlashAttention\u2019s key IO-aware insight\u2014fusing attention with online softmax and tiling to minimize HBM traffic\u2014and turns that schedule into first-class, reusable 16x16 warp-tile primitives."
+    },
+    {
+      "title": "FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning",
+      "authors": "Tri Dao et al.",
+      "year": 2023,
+      "arxiv_id": "2307.08691",
+      "role": "Extension",
+      "relationship_sentence": "ThunderKittens\u2019 thread-block templates encapsulate FA-2\u2019s multistage pipeline and improved block-level parallelism (overlapping async loads with tensor-core compute) so developers can inherit that schedule without hand-coding synchronization."
+    },
+    {
+      "title": "Triton: An Intermediate Language and Compiler for GPU Programming",
+      "authors": "Philippe Tillet et al.",
+      "year": 2019,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "Triton demonstrated a productive kernel DSL but made warp-level tensor-core tiles and Hopper-era async pipeline patterns awkward to express, a limitation ThunderKittens directly targets with 16x16 tile types and built-in pipeline templates."
+    },
+    {
+      "title": "CUTLASS: Fast Linear Algebra in CUDA C++ for Tensor Cores",
+      "authors": "Andrew Kerr et al.",
+      "year": 2018,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "ThunderKittens borrows CUTLASS\u2019s tile-centric, tensor-core\u2013aligned design (e.g., 16x16 MMA tiles) but repackages it into a minimal, PyTorch-like API that generalizes GEMM-style tiling to broader AI kernels."
+    },
+    {
+      "title": "CudaDMA: Optimizing GPU Memory Bandwidth via Warp Specialization",
+      "authors": "Michael Bauer et al.",
+      "year": 2011,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "ThunderKittens\u2019 block-level producer\u2013consumer templates operationalize the warp-specialization idea from CudaDMA to overlap data movement and compute within a thread block by construction."
+    },
+    {
+      "title": "Persistent RNNs: Stashing Recurrent Weights On-Chip",
+      "authors": "Greg Diamos et al.",
+      "year": 2016,
+      "arxiv_id": "1608.05126",
+      "role": "Foundation",
+      "relationship_sentence": "ThunderKittens\u2019 grid-level support for persistent kernels that hide launch, tear-down, and memory costs generalizes the persistent-threads technique established in Persistent RNNs beyond RNNs to modern attention/LLM kernels."
+    }
+  ],
+  "synthesis_narrative": "IO-aware attention showed that attention speed is bounded by memory traffic, not FLOPs: FlashAttention fused QK^T, softmax, and AV with an online accumulation scheme that tiles data movement to match GPU memory hierarchies, proving exact attention can be both fast and memory-efficient. FlashAttention-2 refined this into a multistage pipeline and better work partitioning, explicitly overlapping asynchronous loads with tensor-core computation to further raise utilization. Independently, CUTLASS demonstrated the effectiveness of tensor-core\u2013aligned, tile-centric programming (notably 16x16 warp tiles) and showed how templated C++ can capture high-performance patterns, albeit with considerable complexity. Triton established that a DSL can democratize GPU kernel authoring, but left warp-level MMA, tensor-core tiling, and Hopper-era async pipelines hard to express cleanly. Earlier GPU systems work, like CudaDMA, introduced warp specialization to overlap DMA-like copies with compute within a block, while Persistent RNNs showed how persistent kernels amortize launch and memory costs by holding state on-chip across iterations. Together these works reveal a repeating recipe for performance\u2014tensor-core\u2013sized warp tiles, block-level producer\u2013consumer pipelines with async copies, and grid-level persistence\u2014but also that these patterns are hand-rolled, brittle, and scattered across libraries. ThunderKittens synthesizes them into a tiny, coherent set of abstractions: first-class 16x16 warp tiles with PyTorch-like ops, block templates that bake in async overlap via warp specialization, and grid-level primitives for persistence, making IO-optimal schedules easy to write and reuse.",
+  "target_paper": {
+    "title": "ThunderKittens: Simple, Fast, and $\\textit{Adorable}$ Kernels",
+    "authors": "Benjamin Frederick Spector, Simran Arora, Aaryan Singhal, Arjun Parthasarathy, Daniel Y Fu, Christopher Re",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "Systems, Kernels, Efficiency, Efficient Models, IO Awareness, GPUs",
+    "abstract": "The challenge of mapping AI architectures to GPU hardware is creating a critical bottleneck in AI progress. Despite substantial efforts, hand-written custom kernels fail to meet their theoretical performance thresholds, even on well-established operations like linear attention. The diverse capabilities of GPUs suggests we might we need a wide variety of techniques to achieve high performance. However, our work explores if a small number of key abstractions can drastically simplify the process. We present ThunderKittens (TK), a framework for writing performant AI kernels while remaining easy to use. Our abstractions map to the three levels of the GPU hierarchy: (1) at the warp-level, we provide 16x16 matrix tiles as basic data structures and PyTorch-like operations, (2) at the thread-block level, we provide templates for asynchronously overlapping operations, and (3) at the grid-level, TK helps hide block launch, tear-down, and memory costs. We show the value of TK by providing simple &",
+    "openreview_id": "0fJfVOSUra",
+    "forum_id": "0fJfVOSUra"
+  },
+  "analysis_timestamp": "2026-01-06T11:48:10.263630"
+}

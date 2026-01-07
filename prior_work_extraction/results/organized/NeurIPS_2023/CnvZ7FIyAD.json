@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Interaction Networks for Learning about Objects, Relations and Physics",
+      "authors": "Peter W. Battaglia, Razvan Pascanu, Matthew Lai, Danilo Jimenez Rezende, Koray Kavukcuoglu",
+      "year": 2016,
+      "role": "Foundational GNN dynamics model",
+      "relationship_sentence": "Established message-passing plus explicit state updates for physical systems, effectively using an Euler (zero-order, constant-in-time) integrand\u2014precisely the baseline integration view that Newton\u2013Cotes GNNs generalize beyond."
+    },
+    {
+      "title": "Neural Relational Inference for Interacting Systems",
+      "authors": "Thomas N. Kipf, Ethan Fetaya, Kuan-Chieh Wang, Max Welling, Richard Zemel",
+      "year": 2018,
+      "role": "Latent-interaction GNN for dynamics",
+      "relationship_sentence": "Showed that learned pairwise interactions combined with discrete-time updates can predict future states, reinforcing the paradigm of single-point (constant) velocity estimates over a time step that the proposed Newton\u2013Cotes integration replaces with multi-point estimates."
+    },
+    {
+      "title": "Learning to Simulate Complex Physics with Graph Networks",
+      "authors": "Alvaro Sanchez-Gonzalez, Jonathan Godwin, Tobias Pfaff, Rex Ying, Jure Leskovec, Peter W. Battaglia",
+      "year": 2020,
+      "role": "State-of-the-art graph network simulator baseline",
+      "relationship_sentence": "Operationalizes long-horizon rollouts via message passing and explicit Euler-like updates, exemplifying the constant-in-interval integrand assumption that Newton\u2013Cotes GNNs upgrade to higher-order quadrature."
+    },
+    {
+      "title": "Neural Ordinary Differential Equations",
+      "authors": "Ricky T. Q. Chen, Yulia Rubanova, Jesse Bettencourt, David K. Duvenaud",
+      "year": 2018,
+      "role": "Continuous-time modeling and numerical integration lens",
+      "relationship_sentence": "Provides the integral viewpoint x(t1) = x(t0) + \u222b v(x,t) dt and the practice of evaluating vector fields at multiple time nodes, motivating the authors\u2019 use of multi-point quadrature (Newton\u2013Cotes) within GNN-based dynamics."
+    },
+    {
+      "title": "Hamiltonian Neural Networks",
+      "authors": "Sam Greydanus, Misko Dzamba, Jason Yosinski",
+      "year": 2019,
+      "role": "Structure-preserving dynamics and integrator motivation",
+      "relationship_sentence": "Demonstrates that integrator choice critically affects long-term accuracy and stability in learned dynamics, supporting the paper\u2019s focus on improving the time-integration scheme rather than only the force/velocity encoder."
+    },
+    {
+      "title": "E(n) Equivariant Graph Neural Networks",
+      "authors": "Victor Garcia Satorras, Emiel Hoogeboom, Max Welling",
+      "year": 2021,
+      "role": "Equivariant inductive bias for velocity/force estimation",
+      "relationship_sentence": "Provides an architecture to produce physically consistent velocity/force estimates, which the proposed method can evaluate at multiple intermediate times for Newton\u2013Cotes aggregation."
+    },
+    {
+      "title": "Methods of Numerical Integration (2nd ed.)",
+      "authors": "Philip J. Davis, Philip Rabinowitz",
+      "year": 1984,
+      "role": "Mathematical foundation for Newton\u2013Cotes quadrature",
+      "relationship_sentence": "Supplies the Newton\u2013Cotes family (e.g., trapezoidal, Simpson) that underpins the paper\u2019s multi-point velocity integration strategy and its theoretical error guarantees."
+    }
+  ],
+  "synthesis_narrative": "The core contribution of Newton\u2013Cotes Graph Neural Networks is to reinterpret GNN-based simulators as performing time integration of velocities and to replace the ubiquitous single-point, constant-in-time integrand with a principled multi-point quadrature. Early dynamic GNNs such as Interaction Networks and Neural Relational Inference established the template of message passing followed by explicit discrete updates, effectively implementing an Euler step that assumes velocity is constant over each interval. Graph Network-based Simulators scaled this paradigm to complex scenes and long rollouts, further entrenching the single-point approximation. Neural Ordinary Differential Equations supplied the continuous-time lens\u2014states evolve by integrating a velocity field\u2014and highlighted that higher-order accuracy arises from evaluating the vector field at multiple intermediate times, a concept the present work adapts to GNN simulators. Classical numerical analysis, codified in Davis and Rabinowitz, provides the Newton\u2013Cotes rules (trapezoidal, Simpson, etc.) that the authors use to aggregate several velocity estimates into a higher-order integral approximation with analyzable error. Concurrently, Hamiltonian Neural Networks emphasized the importance of integrator choice for stability and long-horizon fidelity, motivating attention to the integration scheme itself rather than solely to architectural tweaks. Finally, equivariant GNNs like EGNN offer physically consistent velocity/force estimators that can be queried at multiple time nodes, making the Newton\u2013Cotes construction plug-and-play across modern simulators. Together, these works directly inform the paper\u2019s key insight: keep the interaction encoder but upgrade the time integration to a multi-point Newton\u2013Cotes rule for consistently improved accuracy.",
+  "analysis_timestamp": "2026-01-06T23:42:49.112408"
+}

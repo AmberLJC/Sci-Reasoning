@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+      "authors": "Patrick Lewis et al.",
+      "year": 2020,
+      "arxiv_id": "2005.11401",
+      "role": "Foundation",
+      "relationship_sentence": "This work formalized the RAG paradigm and highlighted that evaluation typically conflates retrieval and generation, directly motivating a metric that isolates and quantifies retrieval\u2019s standalone utility."
+    },
+    {
+      "title": "Retrieval Augmented Language Model Pre-Training",
+      "authors": "Kelvin Guu et al.",
+      "year": 2020,
+      "arxiv_id": "2002.08909",
+      "role": "Inspiration",
+      "relationship_sentence": "REALM framed retrieval as latent knowledge that improves language modeling likelihood, inspiring SePer\u2019s core idea of measuring retrieval utility via changes in an LM\u2019s uncertainty/perplexity as an information-gain signal."
+    },
+    {
+      "title": "Leveraging Passage Retrieval with Generative Models for Open-Domain Question Answering",
+      "authors": "Gautier Izacard et al.",
+      "year": 2021,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "FiD demonstrated large gains from retrieved evidence but evaluated primarily with end-to-end QA accuracy, underscoring the need for a retrieval-specific metric that doesn\u2019t conflate generator strength with retriever quality."
+    },
+    {
+      "title": "BEIR: A Heterogeneous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      "authors": "Nandan Thakur et al.",
+      "year": 2021,
+      "arxiv_id": "2104.08663",
+      "role": "Baseline",
+      "relationship_sentence": "BEIR popularized NDCG-based evaluation for retrieval, providing the standard baseline that SePer explicitly challenges by arguing NDCG may not reflect a passage\u2019s true utility to downstream generation."
+    },
+    {
+      "title": "Language Models (Mostly) Know What They Know",
+      "authors": "Saurabh Kadavath et al.",
+      "year": 2022,
+      "arxiv_id": "2207.05221",
+      "role": "Inspiration",
+      "relationship_sentence": "This paper showed that LMs\u2019 probabilities can reflect calibrated internal beliefs about correctness, directly informing SePer\u2019s use of the LM\u2019s own belief state to quantify the utility of retrieved information."
+    },
+    {
+      "title": "Semantic Entropy: Interpretable and Calibrated Uncertainty for Text Generation",
+      "authors": "Kuhn et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Extension",
+      "relationship_sentence": "By introducing semantic-level uncertainty via clustering paraphrastic generations, this work provides the technical blueprint that SePer adapts to define semantic perplexity and measure its reduction after retrieval."
+    },
+    {
+      "title": "Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection",
+      "authors": "Akari Asai et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Related Problem",
+      "relationship_sentence": "Self-RAG operationalizes an LM\u2019s internal critique to judge whether retrieved content is helpful, closely informing SePer\u2019s idea of using the model\u2019s own signals to assess retrieval utility, but without requiring training."
+    }
+  ],
+  "synthesis_narrative": "Retrieval-augmented generation was crystallized by Lewis et al., who showed that feeding retrieved evidence to a generator improves knowledge-intensive tasks but leaves evaluation entangled between retriever and generator. Guu et al. took an information-theoretic stance by treating retrieval as latent knowledge that improves language modeling likelihood, establishing that changes in model uncertainty can indicate knowledge utility. Izacard and Grave demonstrated that stronger generators (e.g., FiD) benefit from more evidence, yet performance was still reported as end-to-end accuracy, masking the retriever\u2019s true contribution. Thakur et al. standardized NDCG-based evaluation across retrieval benchmarks (BEIR), reinforcing relevance-centric metrics that don\u2019t necessarily track what helps generation. Kadavath et al. showed that LMs\u2019 predicted probabilities reflect calibrated internal beliefs about correctness, suggesting that model belief can be an evaluative signal. Complementarily, work on semantic entropy proposed clustering semantically equivalent outputs to capture uncertainty at the meaning level, offering a way to measure uncertainty beyond surface probabilities. Self-RAG leveraged an LM\u2019s self-critique to judge the helpfulness of retrieved content, illustrating that internal model signals can guide retrieval decisions. Together these works revealed a gap: relevance metrics don\u2019t capture generative utility, and end-to-end scores conflate components, while internal LM signals can reflect belief and helpfulness. Seizing this opportunity, the current paper synthesizes semantic-level uncertainty with information-gain reasoning to define semantic perplexity and measure its reduction after retrieval, yielding a retrieval-specific utility metric grounded in the LM\u2019s own belief rather than surface relevance or final-task accuracy.",
+  "target_paper": {
+    "title": "SePer: Measure Retrieval Utility Through The Lens Of Semantic Perplexity Reduction",
+    "authors": "Lu Dai, Yijie Xu, Jinhui Ye, Hao Liu, Hui Xiong",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "information retrieval, metric",
+    "abstract": "Large Language Models (LLMs) have demonstrated improved generation performance by incorporating externally retrieved knowledge, a process known as retrieval-augmented generation (RAG). Despite the potential of this approach, existing studies evaluate RAG effectiveness by 1) assessing retrieval and generation components jointly, which obscures retrieval's distinct contribution, or 2) examining retrievers using traditional metrics such as NDCG, which creates a gap in understanding retrieval's true utility in the overall generation process. To address the above limitations, in this work, we introduce an automatic evaluation method that measures retrieval quality through the lens of information gain within the RAG framework. Specifically, we propose Semantic Perplexity (SePer), a metric that captures the LLM's internal belief about the correctness of the retrieved information. We quantify the utility of retrieval by the extent to which it reduces semantic perplexity post-retrieval. Extensi",
+    "openreview_id": "ixMBnOhFGd",
+    "forum_id": "ixMBnOhFGd"
+  },
+  "analysis_timestamp": "2026-01-06T16:36:21.591253"
+}

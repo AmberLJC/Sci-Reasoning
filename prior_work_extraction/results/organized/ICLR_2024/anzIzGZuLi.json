@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "FT-Transformer: Highly Efficient Transformer for Tabular Data",
+      "authors": "Sergey Gorishniy et al.",
+      "year": 2021,
+      "arxiv_id": "2106.11959",
+      "role": "Baseline",
+      "relationship_sentence": "FT-Transformer established the feature-token paradigm and serves as the primary Transformer-based tabular baseline that TP-BERTa outperforms while structurally reframing feature tokens as LM-friendly name\u2013value token pairs with intra-feature attention."
+    },
+    {
+      "title": "On Embeddings of Numerical Features for Tabular Deep Learning",
+      "authors": "Sergey Gorishniy et al.",
+      "year": 2022,
+      "arxiv_id": "2203.05556",
+      "role": "Extension",
+      "relationship_sentence": "Building on the finding that discretizing numerical features (e.g., quantile/bin encodings) boosts Transformer performance, TP-BERTa extends this idea into relative magnitude tokenization that yields discrete, column-relative tokens compatible with language model vocabularies."
+    },
+    {
+      "title": "TabTransformer: Tabular Data Modeling Using Contextual Embeddings",
+      "authors": "Huang et al.",
+      "year": 2020,
+      "arxiv_id": "2012.06678",
+      "role": "Inspiration",
+      "relationship_sentence": "TabTransformer\u2019s column-aware contextualization of feature tokens via attention directly motivated TP-BERTa\u2019s intra-feature attention that explicitly ties each value token to its corresponding feature-name token."
+    },
+    {
+      "title": "TAPAS: Weakly Supervised Table Parsing via Pre-training",
+      "authors": "Jonathan Herzig et al.",
+      "year": 2020,
+      "arxiv_id": "2004.02349",
+      "role": "Inspiration",
+      "relationship_sentence": "TAPAS showed that BERT can model tables when augmented with row/column structure and numeric-aware ranking features, inspiring TP-BERTa to make LMs numerically sensitive through magnitude-aware tokenization for tabular prediction."
+    },
+    {
+      "title": "TaBERT: Pretraining for Joint Understanding of Textual and Tabular Data",
+      "authors": "Pengcheng Yin et al.",
+      "year": 2020,
+      "arxiv_id": "2005.08314",
+      "role": "Foundation",
+      "relationship_sentence": "TaBERT established that column headers convey rich semantics learnable by LMs, which TP-BERTa leverages by using feature names as anchors and binding them to value tokens via intra-feature attention."
+    },
+    {
+      "title": "VIME: Extending the Success of Self- and Semi-supervised Learning to Tabular Domain",
+      "authors": "Jinsung Yoon et al.",
+      "year": 2020,
+      "arxiv_id": "2006.13265",
+      "role": "Gap Identification",
+      "relationship_sentence": "VIME\u2019s within-table masked-imputation pretraining highlights the lack of robust cross-table transfer under schema heterogeneity, a gap TP-BERTa addresses by exploiting feature-name semantics and LM pretraining across diverse tables."
+    }
+  ],
+  "synthesis_narrative": "TaBERT demonstrated that language models can absorb the semantics of column headers by pretraining on table\u2013text pairs, indicating that column names carry transferable signals about feature meaning. TAPAS further showed that BERT can operate directly on tables when given row/column structure and numeric-aware ranking cues, highlighting the importance of encoding relative magnitudes for numerical reasoning. TabTransformer introduced column-aware contextual embeddings, where attention among feature tokens captures inter-feature dependencies conditioned on column identity. FT-Transformer refined the feature-token design for tabular data and set a strong supervised baseline that treats numeric features as continuous embeddings rather than text-compatible tokens. Complementing these architectures, work on embeddings of numerical features established that discretization (e.g., binning or piecewise encodings) can materially improve Transformers on tabular data, underscoring that the representation of numbers is pivotal. Meanwhile, VIME showed self-supervised pretraining benefits within a table but struggles to transfer across heterogeneous schemas, surfacing the need for a pretraining strategy that works across tables.\nSynthesizing these insights, TP-BERTa treats feature names as semantically rich anchors (per TaBERT) and makes LMs table-aware (per TAPAS) while addressing the numeric\u2013text mismatch via a new relative magnitude tokenization grounded in discretization principles. It adopts a feature-token view (TabTransformer/FT-Transformer) but introduces intra-feature attention to explicitly bind value tokens to their corresponding names, enabling cross-table transfer under schema heterogeneity that prior self-supervised tabular methods like VIME could not achieve.",
+  "target_paper": {
+    "title": "Making Pre-trained Language Models Great on Tabular Prediction",
+    "authors": "Jiahuan Yan, Bo Zheng, Hongxia Xu, Yiheng Zhu, Danny Chen, Jimeng Sun, Jian Wu, Jintai Chen",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "language models, classification and regression, model pre-training, tabular data",
+    "abstract": "The transferability of deep neural networks (DNNs) has made significant progress in image and language processing. However, due to the heterogeneity among tables, such DNN bonus is still far from being well exploited on tabular data prediction (e.g., regression or classification tasks). Condensing knowledge from diverse domains, language models (LMs) possess the capability to comprehend feature names from various tables, potentially serving as versatile learners in transferring knowledge across distinct tables and diverse prediction tasks, but their discrete text representation space is inherently incompatible with numerical feature values in tables. In this paper, we present TP-BERTa, a specifically pre-trained LM for tabular data prediction. Concretely, a novel relative magnitude tokenization converts scalar numerical feature values to finely discrete, high-dimensional tokens, and an intra-feature attention approach integrates feature values with the corresponding feature names. Comp",
+    "openreview_id": "anzIzGZuLi",
+    "forum_id": "anzIzGZuLi"
+  },
+  "analysis_timestamp": "2026-01-06T12:51:19.569502"
+}

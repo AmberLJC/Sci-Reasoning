@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Segment Anything",
+      "authors": "Alexander Kirillov et al.",
+      "year": 2023,
+      "role": "Foundational promptable segmentation model",
+      "relationship_sentence": "Provides the point/box-prompted mask generation mechanism and multi-mask scoring that the paper seeks to drive automatically and efficiently, motivating dynamic positive/negative point selection and reducing redundant SAM invocations."
+    },
+    {
+      "title": "PerSAM: Personalize Segment Anything Model",
+      "authors": "X. Zhang et al.",
+      "year": 2023,
+      "role": "SAM-based one/few-shot personalization via prompt transfer",
+      "relationship_sentence": "Directly precedes this work in adapting SAM to one/few-shot settings by generating prompts from limited annotations, but suffers from prompt sensitivity and repeated SAM calls\u2014limitations the proposed graph-based positive\u2013negative alignment and clustering explicitly target."
+    },
+    {
+      "title": "PANet: Few-Shot Image Semantic Segmentation with Prototype Alignment",
+      "authors": "K. Wang et al.",
+      "year": 2019,
+      "role": "Prototype alignment for FSS with implicit positive/negative guidance",
+      "relationship_sentence": "Inspires the paper\u2019s idea of aligning foreground and background evidence\u2014here reformulated as explicit positive\u2013negative point alignment to guide a promptable segmenter rather than a conventional FSS head."
+    },
+    {
+      "title": "PFENet: Prior Guided Feature Enrichment Network for Few-Shot Segmentation",
+      "authors": "J. Liu et al.",
+      "year": 2020,
+      "role": "Use of priors/background cues in FSS",
+      "relationship_sentence": "Motivates leveraging background context as a powerful negative reference; the proposed Positive\u2013Negative Alignment operationalizes this insight at the prompt level to robustly select SAM point prompts."
+    },
+    {
+      "title": "HSNet: Hypercorrelation Squeeze for Few-Shot Segmentation",
+      "authors": "J. Min et al.",
+      "year": 2021,
+      "role": "Dense support\u2013query correlation reasoning",
+      "relationship_sentence": "Influences the paper\u2019s graph-based view by highlighting the effectiveness of constructing and operating on dense relational structures between support and query to localize target regions from few examples."
+    },
+    {
+      "title": "GrabCut: Interactive Foreground Extraction using Iterated Graph Cuts",
+      "authors": "Carsten Rother, Vladimir Kolmogorov, Andrew Blake",
+      "year": 2004,
+      "role": "Seeded (positive/negative) graph-based segmentation",
+      "relationship_sentence": "Provides the classical paradigm of using foreground/background seeds and graph energies; the proposed Positive\u2013Negative Alignment echoes this principle to turn background context into effective negative point prompts for SAM."
+    },
+    {
+      "title": "Efficient Graph-Based Image Segmentation",
+      "authors": "Pedro F. Felzenszwalb, Daniel P. Huttenlocher",
+      "year": 2004,
+      "role": "Graph partitioning and clustering for segmentation",
+      "relationship_sentence": "Inspires the paper\u2019s Point\u2013Mask Clustering by framing segmentation as graph partitioning, enabling selection and consolidation of reliable masks without repeatedly querying SAM."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s central idea is to transform few-shot semantic segmentation with SAM from ad hoc prompt tuning into a principled graph-driven process that (1) selects robust positive and negative point prompts and (2) clusters point\u2013mask hypotheses to minimize redundant SAM calls. This builds directly on Segment Anything, whose promptable mask decoder and multi-mask outputs create both the opportunity and the bottleneck\u2014accurate masks depend on good points, but repeated calls are costly. PerSAM demonstrates the practicality of one/few-shot SAM by transferring prompts from limited supervision, yet it also exposes sensitivity to prompt choice and heavy SAM usage; these are the precise pain points addressed here.\nPrototype-based FSS works such as PANet and PFENet provide the conceptual grounding for treating background as a first-class negative signal and aligning foreground with background evidence; the paper operationalizes this through a Positive\u2013Negative Alignment module that explicitly mines background context to form negative point prompts. HSNet\u2019s success with dense support\u2013query correlations motivates representing relations as graphs, guiding the move from feature-level matching to prompt-level graph reasoning. Finally, classical graph segmentation (GrabCut and Felzenszwalb\u2013Huttenlocher) directly informs the paper\u2019s Point\u2013Mask Clustering perspective: treat candidate points and masks as a graph and partition/aggregate them to select reliable masks with far fewer SAM invocations. Together, these threads converge into a graph-based pipeline that automates prompt selection, leverages negative background cues, and accelerates one-shot inference while maintaining strong accuracy.",
+  "analysis_timestamp": "2026-01-06T23:42:49.041963"
+}

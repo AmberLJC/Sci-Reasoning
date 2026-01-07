@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Communication-Efficient Learning of Deep Networks from Decentralized Data (FedAvg)",
+      "authors": "H. Brendan McMahan, Eider Moore, Daniel Ramage, Seth Hampson, Blaise Aguera y Arcas",
+      "year": 2017,
+      "role": "Foundational federated learning aggregation",
+      "relationship_sentence": "DapperFL builds on the FedAvg paradigm for collaborative training and aggregation, and its model-fusion/pruning and domain-regularized personalization are layered atop the standard global\u2013local update scheme introduced by FedAvg."
+    },
+    {
+      "title": "Federated Optimization in Heterogeneous Networks (FedProx)",
+      "authors": "Tian Li, Anit Kumar Sahu, Ameet Talwalkar, Virginia Smith",
+      "year": 2020,
+      "role": "Handling system/statistical heterogeneity via proximal regularization",
+      "relationship_sentence": "FedProx\u2019s proximal term to stabilize local updates under heterogeneity directly motivates DapperFL\u2019s Domain Adaptive Regularization, which generalizes the idea of regularizing client drift with a domain-aware signal rather than a uniform proximal penalty."
+    },
+    {
+      "title": "MOON: Model-Contrastive Federated Learning",
+      "authors": "Qinbin Li, Bingsheng He, Dawn Song",
+      "year": 2021,
+      "role": "Regularization to align local and global representations",
+      "relationship_sentence": "MOON\u2019s contrastive consistency between local and global models informs DapperFL\u2019s DAR module, which similarly constrains local learning but tailors the constraint to cross-domain alignment to improve robustness to domain shift."
+    },
+    {
+      "title": "FedBN: Federated Learning on Non-IID Features via Local Batch Normalization",
+      "authors": "Li et al.",
+      "year": 2021,
+      "role": "Domain shift handling in federated learning",
+      "relationship_sentence": "FedBN highlights the importance of per-client feature statistics to mitigate domain shift; DapperFL\u2019s DAR expands this idea by explicitly regularizing toward domain-aligned representations rather than relying solely on BN locality."
+    },
+    {
+      "title": "Distilling the Knowledge in a Neural Network",
+      "authors": "Geoffrey Hinton, Oriol Vinyals, Jeff Dean",
+      "year": 2015,
+      "role": "Knowledge distillation for model fusion",
+      "relationship_sentence": "The MFP module\u2019s use of fused knowledge from local and other domains echoes the distillation principle of transferring soft knowledge to guide a smaller (pruned) model while retaining performance."
+    },
+    {
+      "title": "Ensemble Distillation for Robust Model Fusion in Federated Learning (FedDF)",
+      "authors": "Lin et al.",
+      "year": 2020,
+      "role": "Federated model fusion via distillation",
+      "relationship_sentence": "FedDF demonstrates aggregating client knowledge through ensemble distillation; DapperFL adapts this fusion idea to construct pruning criteria that keep cross-domain knowledge when shrinking client models."
+    },
+    {
+      "title": "Deep Compression: Compressing Deep Neural Networks with Pruning, Trained Quantization and Huffman Coding",
+      "authors": "Song Han, Huizi Mao, William J. Dally",
+      "year": 2016,
+      "role": "Model compression and pruning for edge efficiency",
+      "relationship_sentence": "DapperFL\u2019s Model Fusion Pruning is grounded in the pruning literature epitomized by Deep Compression, but innovates by coupling pruning decisions with fused multi-domain knowledge to yield compact, personalized edge models."
+    }
+  ],
+  "synthesis_narrative": "DapperFL sits at the intersection of three trajectories: collaborative optimization in federated learning, robustness to domain shift, and model compression for edge devices. FedAvg established the basic global\u2013local training loop upon which DapperFL operates. As practitioners confronted client heterogeneity, FedProx introduced proximal regularization to stabilize local updates, while MOON further showed that constraining local learning via consistency with the global model mitigates drift. DapperFL\u2019s Domain Adaptive Regularization (DAR) extends this thread by tailoring the constraint to cross-domain alignment, targeting the specific challenge of domain shift that FedBN underscored through localizing batch normalization.\n\nThe second trajectory is knowledge fusion. Hinton et al.\u2019s knowledge distillation provided a mechanism to transfer information via soft predictions, and FedDF adapted this to federated settings by ensembling client knowledge without direct parameter averaging. DapperFL\u2019s Model Fusion Pruning (MFP) borrows this fusion principle but redirects it: instead of producing another full model, it uses fused cross-domain signals to guide which parameters to retain when pruning, preserving features that generalize across domains.\n\nFinally, model compression for edge deployment, epitomized by Deep Compression, motivates producing compact models. MFP integrates pruning with knowledge fusion to deliver personalized, resource-aware submodels that remain robust to domain shift. Together, these lines of work directly scaffold DapperFL\u2019s core contribution: domain-adaptive, fused-knowledge-guided pruning that personalizes FL models for heterogeneous edge devices while maintaining cross-domain performance.",
+  "analysis_timestamp": "2026-01-06T23:33:35.556049"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Neural Operator: Learning Maps Between Function Spaces",
+      "authors": "Boris M. Kovachki et al.",
+      "year": 2021,
+      "role": "Foundation",
+      "relationship_sentence": "Established the operator-learning formulation (learning PDE solution operators between function spaces) that Transolver adopts, while instantiating it with a transformer and physics-aware tokenization."
+    },
+    {
+      "title": "Fourier Neural Operator for Parametric Partial Differential Equations",
+      "authors": "Zongyi Li et al.",
+      "year": 2021,
+      "role": "Baseline",
+      "relationship_sentence": "Provided the primary neural-operator baseline and highlighted limitations on complex/non-rectangular geometries, directly motivating Transolver\u2019s physics-attention slices to capture global correlations beyond regular grids."
+    },
+    {
+      "title": "Learning Nonlinear Operators via DeepONet Based on Neural Networks",
+      "authors": "Lu Lu et al.",
+      "year": 2021,
+      "role": "Foundation",
+      "relationship_sentence": "Introduced a grid-agnostic operator-learning paradigm (branch\u2013trunk decomposition) that Transolver builds upon conceptually, while addressing scalability by compressing inputs into physics-aware tokens."
+    },
+    {
+      "title": "Learning Mesh-Based Simulation with Graph Networks",
+      "authors": "Tobias Pfaff et al.",
+      "year": 2021,
+      "role": "Gap Identification",
+      "relationship_sentence": "Showed that mesh-based GNN simulators struggle with long-range interactions and scalability on complex geometries, a limitation Transolver explicitly addresses with global physics-attention over learned slices."
+    },
+    {
+      "title": "Set Transformer: A Framework for Attention-based Permutation-Invariant Neural Networks",
+      "authors": "Juho Lee et al.",
+      "year": 2019,
+      "role": "Inspiration",
+      "relationship_sentence": "Introduced inducing-point attention to summarize large sets; Transolver adapts this idea by learning physics-aware slices/tokens and attending to them to efficiently capture PDE correlations across many mesh points."
+    },
+    {
+      "title": "Object-Centric Learning with Slot Attention",
+      "authors": "Francesco Locatello et al.",
+      "year": 2020,
+      "role": "Inspiration",
+      "relationship_sentence": "Pioneered soft assignment of elements to a fixed number of learned slots; Transolver\u2019s Physics-Attention directly echoes this mechanism by assigning mesh points with similar physical states to shared learnable slices."
+    },
+    {
+      "title": "Perceiver: General Perception with Iterative Attention",
+      "authors": "Andrew Jaegle et al.",
+      "year": 2021,
+      "role": "Extension",
+      "relationship_sentence": "Demonstrated latent-bottleneck cross-attention to scale to massive inputs; Transolver extends this by using physics-aware latent tokens so large meshes can be summarized while preserving global interactions."
+    }
+  ],
+  "synthesis_narrative": "Transolver\u2019s core innovation\u2014Physics-Attention that adaptively partitions a discretized PDE domain into learnable, physics-aware slices and attends to their tokens\u2014emerges from the operator-learning lineage and recent advances in token-based attention for sets. The operator-learning paradigm defined by Neural Operator (Kovachki et al.) and DeepONet (Lu et al.) provides the foundational problem setting of learning mappings between function spaces, independent of specific discretizations. Within that paradigm, Fourier Neural Operator (Li et al.) set the state of the art but exposed two key gaps that Transolver targets: reliance on regular grids and difficulty modeling complex geometries while retaining global interactions. On irregular domains, mesh-based GNN simulators like MeshGraphNets (Pfaff et al.) capture local physics but struggle with long-range dependencies and scalability, sharpening the need for a global-yet-efficient attention mechanism. Methodologically, Transolver\u2019s Physics-Attention is directly inspired by attention-based set summarization: Set Transformer\u2019s inducing points suggest learned global representatives, Slot Attention supplies the soft-assignment mechanism to group elements by shared latent state, and Perceiver contributes a scalable latent bottleneck via cross-attention. Transolver fuses these ideas into a physics-grounded tokenization\u2014learning slices that reflect intrinsic physical states rather than superficial mesh structure\u2014thereby enabling efficient global reasoning and geometry generalization. In short, it marries operator learning (Neural Operator/DeepONet/FNO) with object-/set-centric token attention (Set Transformer/Slot Attention/Perceiver) to deliver a fast, geometry-agnostic PDE transformer.",
+  "analysis_timestamp": "2026-01-06T23:09:26.507403"
+}

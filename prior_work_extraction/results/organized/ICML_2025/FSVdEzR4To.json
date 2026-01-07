@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Off-Policy Deep Reinforcement Learning without Exploration (BCQ)",
+      "authors": "Scott Fujimoto, David Meger, Doina Precup",
+      "year": 2019,
+      "role": "Identified extrapolation error as the central failure mode in offline RL and proposed constraining the policy to the data support via a generative action model.",
+      "relationship_sentence": "PARS directly builds on BCQ\u2019s diagnosis of extrapolation error by attacking the same root cause, but replaces action-generation constraints with an explicit penalty on infeasible (OOD) actions while also shaping Q-values outside the data range."
+    },
+    {
+      "title": "Conservative Q-Learning for Offline Reinforcement Learning (CQL)",
+      "authors": "Aviral Kumar, Aurick Zhou, George Tucker, Sergey Levine",
+      "year": 2020,
+      "role": "Introduced conservative penalties that lower Q-values for out-of-distribution actions to combat overestimation in offline settings.",
+      "relationship_sentence": "The PA component of PARS generalizes CQL\u2019s idea of penalizing OOD actions by explicitly targeting infeasible actions and combining this with controlled Q-value decay via reward scaling and layer normalization."
+    },
+    {
+      "title": "Stabilizing Off-Policy Q-Learning via Bootstrapping Error Reduction (BEAR)",
+      "authors": "Aviral Kumar, Justin Fu, Matthew Soh, George Tucker, Sergey Levine",
+      "year": 2019,
+      "role": "Constrained learned policies to remain within the support of the dataset using MMD, directly addressing OOD action selection.",
+      "relationship_sentence": "PARS shares BEAR\u2019s aim of avoiding unsupported actions but operationalizes it through a Q-penalty on infeasible actions rather than a support constraint in policy space, enabling tighter control of Q outside the data manifold."
+    },
+    {
+      "title": "Behavior Regularized Actor-Critic (BRAC)",
+      "authors": "Yifan Wu, George Tucker, Ofir Nachum",
+      "year": 2019,
+      "role": "Proposed behavior policy regularization (e.g., KL to behavior) to reduce distribution shift in offline RL.",
+      "relationship_sentence": "PARS echoes BRAC\u2019s principle of discouraging OOD actions, but moves the regularization into value-space via penalties on infeasible actions and augments it with reward/Q scaling to avoid harmful linear extrapolation."
+    },
+    {
+      "title": "Offline Reinforcement Learning with Implicit Q-Learning (IQL)",
+      "authors": "Sergey Kostrikov, Ashvin Nair, Sergey Levine",
+      "year": 2021,
+      "role": "Avoided querying Q for unseen actions by extracting policies from value estimates (e.g., expectile regression), mitigating extrapolation without explicit behavior constraints.",
+      "relationship_sentence": "PARS complements IQL\u2019s avoidance of OOD actions by explicitly penalizing infeasible actions and shaping Q-values beyond the data range, providing a more direct mechanism to control extrapolation."
+    },
+    {
+      "title": "Layer Normalization",
+      "authors": "Jimmy Lei Ba, Jamie Ryan Kiros, Geoffrey E. Hinton",
+      "year": 2016,
+      "role": "Introduced layer normalization as a mechanism to stabilize and standardize activations independent of batch statistics.",
+      "relationship_sentence": "PARS\u2019s RS-LN component leverages layer normalization to stabilize reward and Q-value scaling, ensuring controlled Q decay outside the data range."
+    },
+    {
+      "title": "Learning Values Across Many Orders of Magnitude (Pop-Art)",
+      "authors": "Hado van Hasselt, Matteo Hessel, John Aslanides",
+      "year": 2016,
+      "role": "Proposed adaptive rescaling of targets to stabilize learning when value magnitudes vary widely.",
+      "relationship_sentence": "PARS adopts the principle of adaptive target/value scaling from Pop-Art to regulate Q magnitudes, preventing harmful linear extrapolation by guiding Q-values to decrease outside observed ranges."
+    }
+  ],
+  "synthesis_narrative": "PARS is rooted in the offline RL literature that pinpointed extrapolation error as the primary failure mode when learning from static datasets. BCQ crystallized this diagnosis and mitigated it through action-space constraints, while BEAR and BRAC formalized behavior support and regularization to keep learned policies within the dataset\u2019s distribution. CQL reframed the solution directly in value-space, penalizing Q-values for out-of-distribution (OOD) actions to counter overestimation. IQL took another angle by avoiding explicit evaluation of OOD actions, extracting policies from value estimates to sidestep extrapolation. These works collectively established that controlling how Q-functions behave on unsupported actions is essential.\nPARS advances this line by targeting a specific pathology: linear extrapolation of Q beyond the data range. It introduces two complementary mechanisms. First, RS-LN applies principled reward/Q scaling inspired by Pop-Art\u2019s adaptive target rescaling and stabilized via Layer Normalization, directly shaping the magnitude and curvature of Q so it gradually decreases outside the data range. Second, PA explicitly penalizes infeasible actions\u2014aligning with the conservative/value-space perspective of CQL but refined to focus on actions the dataset deems implausible. The synthesis of adaptive scaling (from normalization literature) with targeted value penalties (from conservative/offline RL) yields a method that both curbs OOD overestimation and actively regularizes extrapolative behavior, enabling strong offline and fine-tuning performance, including on challenging AntMaze Ultra tasks.",
+  "analysis_timestamp": "2026-01-07T00:21:32.393093"
+}

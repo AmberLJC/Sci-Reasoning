@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Jonathan Ho, Ajay Jain, Pieter Abbeel",
+      "year": 2020,
+      "role": "Foundational diffusion modeling that introduces the generation process whose artifacts DRCT aims to learn and detect",
+      "relationship_sentence": "DRCT\u2019s premise of learning diffusion-specific artifacts, and its use of diffusion processes for reconstruction, builds directly on the DDPM formulation of forward/reverse noising."
+    },
+    {
+      "title": "Denoising Diffusion Implicit Models",
+      "authors": "Jiaming Song, Chenlin Meng, Stefano Ermon",
+      "year": 2021,
+      "role": "Deterministic sampling and inversion mechanism enabling high-fidelity reconstruction",
+      "relationship_sentence": "DRCT\u2019s hard-sample generation via high-quality diffusion reconstruction is practically enabled by DDIM sampling/inversion, which preserves semantics while re-imposing diffusion-induced traces."
+    },
+    {
+      "title": "SDEdit: Image Synthesis and Editing with Stochastic Differential Equations",
+      "authors": "Chenlin Meng, Yang Song, Jiaming Song, Jonathan Ho, Stefano Ermon",
+      "year": 2022,
+      "role": "Image editing/reconstruction via adding noise and denoising to keep content while adopting diffusion priors",
+      "relationship_sentence": "SDEdit demonstrates that starting from a noised real image and denoising yields reconstructions close to the original; DRCT leverages this paradigm to create \u2018hard\u2019 near-real synthetic samples embedding diffusion artifacts."
+    },
+    {
+      "title": "Null-text Inversion for Editing Real Images Using Guided Diffusion Models",
+      "authors": "Daniel Mokady, Michal Yarom Hertz, Amir Kovalenko Aberman, Inbar Mosseri Pritch, Daniel Cohen-Or",
+      "year": 2023,
+      "role": "High-fidelity Stable Diffusion inversion preserving image identity",
+      "relationship_sentence": "DRCT\u2019s requirement for high-quality reconstructions that are nearly indistinguishable from reals is directly facilitated by null-text inversion techniques that faithfully project real images into diffusion latent space."
+    },
+    {
+      "title": "Supervised Contrastive Learning",
+      "authors": "Prannay Khosla, Piotr Teterwak, et al.",
+      "year": 2020,
+      "role": "Contrastive training objective for robust, class-discriminative representations",
+      "relationship_sentence": "DRCT adopts a supervised contrastive paradigm to pull together real samples and push apart diffusion-reconstructed hard negatives, explicitly steering features toward diffusion artifacts rather than content."
+    },
+    {
+      "title": "Attributing Fake Images to GANs: Learning to Recognize GAN Fingerprints",
+      "authors": "Ning Yu, Larry S. Davis, Mario Fritz",
+      "year": 2019,
+      "role": "Generator fingerprinting concept showing model-specific artifacts can be learned",
+      "relationship_sentence": "DRCT\u2019s focus on learning intrinsic \u2018diffusion artifacts\u2019 echoes the fingerprinting view that generative processes leave learnable traces that can generalize across content and, with proper training, across models."
+    },
+    {
+      "title": "Do GANs Leave Artificial Fingerprints?",
+      "authors": "Francesco Marra, Diego Gragnaniello, Luisa Verdoliva",
+      "year": 2019,
+      "role": "Empirical evidence and analysis of universal artifacts left by generative models",
+      "relationship_sentence": "By validating that generative models imprint telltale patterns, this work motivates DRCT\u2019s strategy to amplify such traces via reconstruction and learn them robustly through contrastive objectives for cross-model detection."
+    }
+  ],
+  "synthesis_narrative": "DRCT\u2019s central idea\u2014improving generalization of AI-generated image detectors by training on \u2018hard\u2019 diffusion-reconstructed samples and using contrastive learning to focus on generator artifacts\u2014rests on two pillars: faithful diffusion-based reconstruction and artifact-centric representation learning. Foundational diffusion works (DDPM) formalize the forward/reverse noising process that induces characteristic traces in generated images, while DDIM enables deterministic sampling and practical inversion, making it feasible to reconstruct real images with minimal semantic drift. Building on this, methods like SDEdit and Null-text Inversion demonstrate that diffusion models can produce reconstructions nearly indistinguishable from the originals, yet still imbued with subtle diffusion priors; DRCT leverages precisely this property to create hard negatives that closely mimic real images while embedding detectable diffusion artifacts.\n\nOn the representation side, Supervised Contrastive Learning provides an objective to explicitly separate such hard negatives from real images while preserving content-invariant, artifact-focused features. This aligns with the forensics literature on generator fingerprints, notably the GAN fingerprinting line of work, which established that generative processes leave identifiable, learnable traces that can generalize across content. DRCT extends this fingerprinting intuition to diffusion models and operationalizes it by synthesizing especially challenging training pairs via high-quality reconstruction. By uniting high-fidelity diffusion inversion with supervised contrastive learning, DRCT turns the most confounding, near-real reconstructions into a training signal, yielding detectors that better transfer to unseen diffusion models.",
+  "analysis_timestamp": "2026-01-06T23:42:48.052719"
+}

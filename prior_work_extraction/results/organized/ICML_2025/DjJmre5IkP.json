@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Discrete Denoising Diffusion Probabilistic Models (D3PM)",
+      "authors": "Jacob Austin et al.",
+      "year": 2021,
+      "role": "Foundational discrete diffusion framework",
+      "relationship_sentence": "Establishes diffusion-style corruption/denoising for categorical tokens, providing the core training and inference lens that the paper analyzes when contrasting masked diffusion training hardness with autoregressive models."
+    },
+    {
+      "title": "Multinomial Diffusion for Multivariate Discrete Data",
+      "authors": "Emiel Hoogeboom; Victor Garcia Satorras; Jakub M. Tomczak; Max Welling",
+      "year": 2022,
+      "role": "Discrete diffusion transition design",
+      "relationship_sentence": "Introduces categorical/multinomial transition kernels for discrete diffusion, underpinning the masking/noising processes whose choice affects the spectrum of infilling subproblems examined in this paper."
+    },
+    {
+      "title": "Mask-Predict: Parallel Decoding with Iterative Refinement for Non-Autoregressive Translation",
+      "authors": "Marjan Ghazvininejad; Omer Levy; Yinhan Liu; Luke Zettlemoyer",
+      "year": 2019,
+      "role": "Adaptive masked infilling and token scheduling",
+      "relationship_sentence": "Demonstrates iterative masked decoding with confidence-based token selection, a direct precursor to the paper\u2019s claim that adaptively choosing token order at inference can sidestep hard subproblems in masked generative models."
+    },
+    {
+      "title": "MaskGIT: Masked Generative Image Transformer",
+      "authors": "Huiwen Chang et al.",
+      "year": 2022,
+      "role": "Parallel masked generation with confidence-based ordering",
+      "relationship_sentence": "Shows that choosing which tokens to reveal next based on model confidence accelerates and improves generation, directly informing the paper\u2019s adaptive ordering strategy for MDM inference."
+    },
+    {
+      "title": "Insertion Transformer: Flexible Sequence Generation via Insertion Operations",
+      "authors": "Mitchell Stern; Noam Shazeer; Jakob Uszkoreit",
+      "year": 2019,
+      "role": "Non-monotonic, order-adaptive decoding",
+      "relationship_sentence": "Provides a concrete mechanism for adaptive, non-left-to-right token ordering that motivates the paper\u2019s \u2018plan for the best\u2019 inference idea of choosing an easy order to avoid combinatorially hard infills."
+    },
+    {
+      "title": "XLNet: Generalized Autoregressive Pretraining for Language Understanding",
+      "authors": "Zhilin Yang; Zihang Dai; Yiming Yang; Jaime Carbonell; Ruslan Salakhutdinov; Quoc V. Le",
+      "year": 2019,
+      "role": "Permutation-based, order-agnostic training",
+      "relationship_sentence": "Introduces permutation language modeling to train over many factorization orders, conceptually paralleling the paper\u2019s view that masked training must handle worst-case orders while inference can pick favorable ones."
+    },
+    {
+      "title": "BERT has a Mouth, and It Must Speak: BERT as a Markov Random Field Language Model",
+      "authors": "Alex Wang; Kyunghyun Cho",
+      "year": 2019,
+      "role": "Masked modeling as MRF and infilling complexity",
+      "relationship_sentence": "Frames masked language modeling as MRF-style conditional inference, highlighting the inherent difficulty of exact infilling that underlies the paper\u2019s theoretical arguments about the intractability of MDM training subproblems."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core contribution\u2014characterizing a train\u2013inference tradeoff for masked diffusion models (MDMs) and exploiting adaptive token ordering to mitigate hard subproblems\u2014rests on three intertwined threads of prior work. First, discrete diffusion formalisms such as D3PM and Multinomial Diffusion established principled corruption\u2013denoising processes for categorical data, making masked infilling a first-class training target. These works define the transition kernels and learning objectives that, in this paper, are shown to implicitly require solving computationally intractable conditional inference tasks compared to autoregressive factorization.\nSecond, a body of non-autoregressive, masked, and non-monotonic generation methods\u2014Mask-Predict and MaskGIT for iterative masked decoding, and the Insertion Transformer for flexible, non-left-to-right construction\u2014demonstrated that token order at inference is a powerful degree of freedom. Their confidence- or utility-based token selection policies directly inspire the paper\u2019s adaptive decoding strategy, which \u201cplans for the best\u201d by choosing easy tokens first to avoid combinatorially challenging infills.\nThird, permutation- and MRF-based perspectives (XLNet and BERT-as-MRF) provide the conceptual backdrop: training over many (even all) orders equips a model for worst-case conditioning patterns, but computing exact conditionals can be hard in general graphical structures. Building on these insights, the paper formalizes why MDM training faces inherently harder subproblems than autoregressive training, and shows empirically that inference-time order selection leverages MDMs\u2019 flexibility to bypass hard constraints\u2014yielding large gains on structured logic tasks like Sudoku.",
+  "analysis_timestamp": "2026-01-07T00:29:41.035753"
+}

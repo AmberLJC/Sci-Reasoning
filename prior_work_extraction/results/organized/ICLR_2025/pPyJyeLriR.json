@@ -1,0 +1,90 @@
+{
+  "prior_works": [
+    {
+      "title": "Semi-Supervised Classification with Graph Convolutional Networks",
+      "authors": [
+        "Thomas N. Kipf",
+        "Max Welling"
+      ],
+      "year": 2017,
+      "role": "Foundational GNN propagation model",
+      "relationship_sentence": "Defined the exact message-passing/propagation operator that certified graph unlearning methods must recompute; ScaleGUN targets this propagation bottleneck while preserving guarantees."
+    },
+    {
+      "title": "Convolutional Neural Networks on Graphs with Fast Localized Spectral Filtering",
+      "authors": [
+        "Micha\u00ebl Defferrard",
+        "Xavier Bresson",
+        "Pierre Vandergheynst"
+      ],
+      "year": 2016,
+      "role": "Error-controlled polynomial approximations of graph filters",
+      "relationship_sentence": "Introduced Chebyshev polynomial approximations with explicit operator-norm control, informing ScaleGUN\u2019s strategy to bound propagation-induced embedding error while accelerating computation."
+    },
+    {
+      "title": "APPNP: Predicting with Personalized PageRank",
+      "authors": [
+        "Johannes Klicpera",
+        "Aleksandar Bojchevski",
+        "Stephan G\u00fcnnemann"
+      ],
+      "year": 2019,
+      "role": "Decoupled propagation via PPR",
+      "relationship_sentence": "Showed that decoupling learning and propagation (via PPR-style diffusion) scales GNNs; ScaleGUN builds on this modular view but adds certification-compatible error bounds for the propagation step."
+    },
+    {
+      "title": "SIGN: Scalable Inception Graph Neural Networks",
+      "authors": [
+        "Emanuele Rossi",
+        "Ben Chamberlain",
+        "Fabrizio Frasca",
+        "Davide Eynard",
+        "Federico Monti",
+        "Michael M. Bronstein"
+      ],
+      "year": 2020,
+      "role": "Precomputed multi-hop propagation for scalability",
+      "relationship_sentence": "Demonstrated precomputing multi-scale graph features to reach web-scale graphs; ScaleGUN adapts this idea while quantifying the resulting approximation error to keep certified unlearning valid."
+    },
+    {
+      "title": "PPRGo: Scalable Personalized PageRank for Node Classification",
+      "authors": [
+        "Aleksandar Bojchevski",
+        "Johannes Gasteiger",
+        "Stephan G\u00fcnnemann"
+      ],
+      "year": 2020,
+      "role": "Approximate PPR with theoretical guarantees for large graphs",
+      "relationship_sentence": "Used sparse approximate PPR (push-based) to scale inference with controllable approximation; ScaleGUN leverages such PPR approximations but explicitly translates their error bounds into certification-safe embedding bounds."
+    },
+    {
+      "title": "Machine Unlearning",
+      "authors": [
+        "Lucas Bourtoule",
+        "Varun Chandrasekaran",
+        "Christopher A. Choquette-Choo",
+        "Hengrui Jia",
+        "Adelin Travers",
+        "Shafi Goldwasser",
+        "Michael Carbin",
+        "Nicolas Papernot"
+      ],
+      "year": 2021,
+      "role": "Certified unlearning paradigm (SISA)",
+      "relationship_sentence": "Formalized certified unlearning and practical training schemes; ScaleGUN extends the certification mindset to GNNs by ensuring bounded model error despite accelerated propagation."
+    },
+    {
+      "title": "Local Graph Partitioning using PageRank Vectors",
+      "authors": [
+        "Reid Andersen",
+        "Fan R. K. Chung",
+        "Kevin J. Lang"
+      ],
+      "year": 2006,
+      "role": "Push-based approximate PPR with l1 error control",
+      "relationship_sentence": "Established push algorithms and l1-error bounds for approximate PageRank; ScaleGUN relies on such principled approximation controls to map propagation errors to certified unlearning guarantees."
+    }
+  ],
+  "synthesis_narrative": "ScaleGUN\u2019s core innovation is to make certified graph unlearning practical at billion-edge scale by replacing exact, per-request propagation with accelerated propagation whose approximation error is provably bounded at the embedding level\u2014tight enough to preserve certificates. Two strands of prior work directly shaped this solution. On the unlearning side, Machine Unlearning (SISA) crystallized the certification paradigm\u2014i.e., guarantees that a model with deletions is indistinguishable from a retrained counterpart\u2014thereby setting the bar that graph unlearning must meet. On the graph learning side, a sequence of propagation-acceleration methods\u2014APPNP\u2019s decoupled PPR diffusion, SIGN\u2019s precomputed multi-hop features, and PPRGo\u2019s sparse approximate PPR\u2014demonstrated that propagation can be modularized and scaled, but they introduce approximation error that na\u00efvely breaks certification. ScaleGUN addresses this gap by importing error-controlled approximation techniques from spectral filtering and PageRank theory: Chebyshev polynomial filters (Defferrard et al.) provide operator-norm control over graph filter approximation, while push-based PPR (Andersen\u2013Chung\u2013Lang) offers explicit l1 error bounds for localized diffusion. By bridging these bounds to deviations in node embeddings and, ultimately, model outputs, ScaleGUN converts acceleration-induced errors into certification-compatible budgets. The result is a scalable, certifiable unlearning pipeline: propagation is accelerated with quantified error, and certificates remain valid without full recomputation for each unlearning request.",
+  "analysis_timestamp": "2026-01-06T23:42:48.093676"
+}

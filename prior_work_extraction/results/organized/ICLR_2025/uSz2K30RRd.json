@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Learning Transferable Visual Models From Natural Language Supervision",
+      "authors": "Alec Radford et al.",
+      "year": 2021,
+      "arxiv_id": "2103.00020",
+      "role": "Baseline",
+      "relationship_sentence": "CLIP instantiated symmetric InfoNCE with single-vector image/text encoders, providing the exact objective and one-point representation baseline whose limitations in modeling rich similarity the present work targets and generalizes via weighted point sets."
+    },
+    {
+      "title": "Representation Learning with Contrastive Predictive Coding",
+      "authors": "Aaron van den Oord et al.",
+      "year": 2018,
+      "arxiv_id": "1807.03748",
+      "role": "Foundation",
+      "relationship_sentence": "CPC introduced InfoNCE and established that the optimal critic is a log density ratio, a theoretical starting point that this paper extends to the multimodal symmetric setting and identifies explicitly with pointwise mutual information (PMI)."
+    },
+    {
+      "title": "On Variational Bounds of Mutual Information",
+      "authors": "Ben Poole et al.",
+      "year": 2019,
+      "arxiv_id": "1905.06922",
+      "role": "Foundation",
+      "relationship_sentence": "This work formalized InfoNCE as a variational MI bound where the optimal score is the joint\u2013product-of-marginals log-density ratio, which directly underpins the paper\u2019s proof that symmetric InfoNCE\u2019s optimal similarity is PMI."
+    },
+    {
+      "title": "A Theoretical Analysis of Contrastive Unsupervised Representation Learning",
+      "authors": "Nikunj Saunshi et al.",
+      "year": 2019,
+      "arxiv_id": "1902.09229",
+      "role": "Extension",
+      "relationship_sentence": "Their downstream classification risk guarantees for contrastive representations provide the template that this paper extends by deriving an excess-risk bound specifically for representations achieving the PMI-optimal similarity."
+    },
+    {
+      "title": "Neural Word Embedding as Implicit Matrix Factorization",
+      "authors": "Omer Levy et al.",
+      "year": 2014,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "By showing SGNS implicitly factorizes shifted PMI, this paper motivates PMI as the target similarity learned by negative-sampling/contrastive objectives, guiding the present work\u2019s goal of explicitly achieving PMI with weighted set similarities."
+    },
+    {
+      "title": "Stacked Cross Attention for Image-Text Matching",
+      "authors": "Kuang-Huei Lee et al.",
+      "year": 2018,
+      "arxiv_id": "1803.08024",
+      "role": "Related Problem",
+      "relationship_sentence": "SCAN\u2019s word\u2013region late-interaction demonstrates that multi-vector, set-to-set similarities capture fine-grained multimodal alignment, directly motivating a set-based representation rather than a single embedding point."
+    },
+    {
+      "title": "ColBERT: Efficient and Effective Passage Search via Contextualized Late Interaction over BERT",
+      "authors": "Omar Khattab et al.",
+      "year": 2020,
+      "arxiv_id": "2004.12832",
+      "role": "Inspiration",
+      "relationship_sentence": "ColBERT\u2019s multi-vector late interaction and weighted token-level matching concretely inspired representing instances as weighted point sets and designing a permutation-invariant similarity that preserves fine-grained semantics."
+    }
+  ],
+  "synthesis_narrative": "Contrastive Predictive Coding introduced the InfoNCE objective and showed that its optimal critic is a log density ratio, while subsequent work on variational MI bounds unified this view and emphasized that InfoNCE attains the joint\u2013product-of-marginals density ratio at optimum. Independently, research on word embeddings revealed that negative-sampling objectives implicitly factorize shifted PMI, establishing PMI as the operative similarity target that contrastive learning tends to recover. In multimodal learning, CLIP popularized symmetric InfoNCE with dual encoders trained on image\u2013text pairs, but relied on a single point embedding for each instance. Prior image\u2013text retrieval models such as SCAN, and late-interaction retrieval like ColBERT, demonstrated that multi-vector, set-to-set similarities preserve fine-grained alignment by aggregating token/region-level matches instead of compressing everything into one vector. On the theory side, analyses of contrastive learning provided downstream classification guarantees, linking properties of the learned similarity to excess risk under linear evaluation.\nTogether, these strands left a clear opportunity: if the optimal objective value of (symmetric) InfoNCE corresponds to PMI, then a representation and similarity family should be engineered to realize PMI while retaining the fine-grained alignment benefits of multi-vector interactions. Building on the MI/density-ratio perspective and the empirical success of late interaction, the paper replaces one-point embeddings with weighted point sets and devises a permutation-invariant similarity that is provably consistent with PMI, then transfers the theory-to-practice bridge by deriving excess-risk bounds for downstream classification under this PMI-achieving similarity.",
+  "target_paper": {
+    "title": "Weighted Point Set Embedding for Multimodal Contrastive Learning Toward Optimal Similarity Metric",
+    "authors": "Toshimitsu Uesaka, Taiji Suzuki, Yuhta Takida, Chieh-Hsin Lai, Naoki Murata, Yuki Mitsufuji",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "contrastive learning, representation learning, multimodal representation learning, theoretical analysis, InfoNCE, pointwise mutual information",
+    "abstract": "In typical multimodal contrastive learning, such as CLIP, encoders produce one\npoint in the latent representation space for each input. However, one-point representation\nhas difficulty in capturing the relationship and the similarity structure of a\nhuge amount of instances in the real world. For richer classes of the similarity, we\npropose the use of weighted point sets, namely, sets of pairs of weight and vector,\nas representations of instances. In this work, we theoretically show the benefit\nof our proposed method through a new understanding of the contrastive loss of\nCLIP, which we call symmetric InfoNCE. We clarify that the optimal similarity\nthat minimizes symmetric InfoNCE is the pointwise mutual information, and show\nan upper bound of excess risk on downstream classification tasks of representations\nthat achieve the optimal similarity. In addition, we show that our proposed\nsimilarity based on weighted point sets consistently achieves the optimal similarity.\nTo verify the effect",
+    "openreview_id": "uSz2K30RRd",
+    "forum_id": "uSz2K30RRd"
+  },
+  "analysis_timestamp": "2026-01-06T10:02:07.929401"
+}

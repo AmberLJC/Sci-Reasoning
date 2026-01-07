@@ -1,0 +1,86 @@
+{
+  "prior_works": [
+    {
+      "title": "GLISTER: Generalization based Data Subset Selection for Efficient and Robust Learning",
+      "authors": [
+        "Kaleem S. Killamsetty",
+        "Durga S.",
+        "Ganesh Ramakrishnan",
+        "Rishabh Iyer"
+      ],
+      "year": 2020,
+      "role": "Foundational online subset selection via first-order (Taylor) approximations and greedy optimization",
+      "relationship_sentence": "GREATS adopts GLISTER\u2019s core idea of using a first-order Taylor surrogate and greedy selection for per-iteration data choice, but reorients the objective to directly approximate immediate training-loss decrease and scales the procedure to LLM training."
+    },
+    {
+      "title": "GradMatch: Gradient Matching based Data Subset Selection for Efficient Deep Model Training",
+      "authors": [
+        "Kaleem S. Killamsetty",
+        "Durga S.",
+        "Ganesh Ramakrishnan",
+        "Rishabh Iyer"
+      ],
+      "year": 2021,
+      "role": "Gradient-based coreset/subset selection seeking batches that approximate the full gradient",
+      "relationship_sentence": "GREATS is closely related in spirit to GradMatch\u2019s gradient-centric selection, but replaces gradient-matching with a principled Taylor approximation of the loss decrease from an SGD step, enabling efficient online batch selection without full-gradient access."
+    },
+    {
+      "title": "Deep Batch Active Learning by Diverse, Uncertain Gradient Embeddings (BADGE)",
+      "authors": [
+        "Jordan T. Ash",
+        "Chicheng Zhang",
+        "Akshay Krishnamurthy",
+        "John Langford",
+        "Alekh Agarwal"
+      ],
+      "year": 2020,
+      "role": "Batch selection using gradient embeddings to capture informativeness and diversity with greedy k-means++",
+      "relationship_sentence": "GREATS draws on BADGE\u2019s insight that gradient information is a powerful batch-level signal, but formalizes batch utility via a Taylor-series objective and uses greedy selection to optimize predicted loss reduction rather than heuristic diversity."
+    },
+    {
+      "title": "Understanding Black-box Predictions via Influence Functions",
+      "authors": [
+        "Pang Wei Koh",
+        "Percy Liang"
+      ],
+      "year": 2017,
+      "role": "Theoretical basis for using Taylor expansions to estimate the effect of training points on loss",
+      "relationship_sentence": "GREATS leverages the same first-order Taylor rationale as influence functions\u2014estimating loss change from small parameter updates\u2014but focuses on immediate post-update training loss to guide per-iteration batch selection without Hessian inverses."
+    },
+    {
+      "title": "Not All Samples Are Created Equal: Deep Learning with Importance Sampling",
+      "authors": [
+        "Angelos Katharopoulos",
+        "Fran\u00e7ois Fleuret"
+      ],
+      "year": 2018,
+      "role": "Online per-example selection/sampling based on gradient-norm-related criteria to accelerate SGD",
+      "relationship_sentence": "GREATS advances beyond importance sampling heuristics by turning per-example gradient information into a principled Taylor-based objective that greedily constructs high-quality batches at each training step."
+    },
+    {
+      "title": "Pruning Convolutional Neural Networks for Resource Efficient Inference",
+      "authors": [
+        "Pavel Molchanov",
+        "Stephen Tyree",
+        "Tero Karras",
+        "Timo Aila",
+        "Jan Kautz"
+      ],
+      "year": 2016,
+      "role": "Introduced first-order Taylor criteria to approximate loss change from structural modifications",
+      "relationship_sentence": "GREATS adapts the Taylor criterion idea\u2014estimating loss change via first-order terms\u2014from network pruning to the domain of data selection, using it to score and greedily select training examples that maximize expected loss decrease."
+    },
+    {
+      "title": "Online Batch Selection for Faster Training of Neural Networks",
+      "authors": [
+        "Ilya Loshchilov",
+        "Frank Hutter"
+      ],
+      "year": 2015,
+      "role": "Early online batch selection using loss/heuristic signals to speed convergence",
+      "relationship_sentence": "GREATS directly addresses the limitations of heuristic online batch selection exemplified by this work by replacing ad-hoc scoring with a principled, Taylor-approximated objective and an efficient greedy optimizer."
+    }
+  ],
+  "synthesis_narrative": "GREATS sits at the intersection of online subset selection, gradient/Taylor-based utility estimation, and greedy optimization. Its most direct antecedent is GLISTER, which formalized data selection as maximizing a first-order (Taylor) surrogate of generalization performance and solved it greedily each iteration; GREATS adopts the same core machinery but pivots the objective to the immediate training-loss decrease induced by an SGD step, a choice that removes reliance on validation surrogates and scales more naturally to LLM training. GradMatch likewise established that gradients provide a faithful target for subset construction by matching the full-batch gradient; GREATS retains the gradient-centric view but replaces gradient matching with a Taylor approximation of loss reduction, which is more directly aligned with per-step optimization and computationally lighter.\nActive learning advances such as BADGE demonstrated that gradient embeddings encode both informativeness and diversity, often optimized via greedy selection; GREATS echoes this but grounds selection in an explicit loss-decrease objective, letting diversity emerge through diminishing returns in the greedy process. The theoretical legitimacy for using Taylor expansions to quantify data influence traces to influence functions, which approximate loss changes from small parameter updates; GREATS applies a similar first-order perspective without expensive Hessian computations. Earlier efficiency-oriented selection methods, including importance sampling and online batch selection based on losses or gradient norms, motivated the need for principled scoring but were heuristic or variance-focused; GREATS unifies these signals into a single Taylor-based criterion. Finally, Taylor saliency from network pruning provided a template for estimating loss impact via first-order terms, which GREATS repurposes from pruning parameters to selecting training examples in every iteration.",
+  "analysis_timestamp": "2026-01-07T00:02:04.733147"
+}

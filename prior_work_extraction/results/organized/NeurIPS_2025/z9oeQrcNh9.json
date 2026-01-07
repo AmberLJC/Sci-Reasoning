@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+      "authors": "Jason Wei, Xuezhi Wang, Dale Schuurmans, Maarten Bosma, Ed H. Chi, Quoc V. Le, Denny Zhou",
+      "year": 2022,
+      "role": "Foundational technique for explicit reasoning",
+      "relationship_sentence": "ARM\u2019s Long CoT and Short CoT formats build directly on CoT prompting, operationalizing it as selectable reasoning modes whose token cost can be adaptively controlled."
+    },
+    {
+      "title": "Self-Consistency Improves Chain of Thought Reasoning in Language Models",
+      "authors": "Xuezhi Wang, Jason Wei, Dale Schuurmans, Ed H. Chi, Quoc V. Le, Denny Zhou",
+      "year": 2023,
+      "role": "Evidence of performance\u2013compute tradeoff in CoT",
+      "relationship_sentence": "Self-Consistency\u2019s gains via sampling multiple CoTs highlight overthinking and token inefficiency, motivating ARM\u2019s need to adaptively avoid long chains when unnecessary."
+    },
+    {
+      "title": "PAL: Program-Aided Language Models",
+      "authors": "Luyu Gao, Aman Madaan, Shuyan Zhou, Uri Alon, Yiming Yang, Jamie Callan, Graham Neubig",
+      "year": 2023,
+      "role": "Introduces code as a reasoning modality",
+      "relationship_sentence": "ARM includes a Code format inspired by PAL\u2019s finding that delegating computation to Python can yield accurate, efficient reasoning for suitable tasks."
+    },
+    {
+      "title": "Toolformer: Language Models Can Teach Themselves to Use Tools",
+      "authors": "Timo Schick, Jane Dwivedi-Yu, Roberto Dess\u00ec, Roberta Raileanu, Maria Lomeli, Luke Zettlemoyer, Nicola Cancedda, Thomas Scialom",
+      "year": 2023,
+      "role": "General framework for tool-augmented reasoning",
+      "relationship_sentence": "ARM\u2019s decision to route to code execution when beneficial aligns with Toolformer\u2019s insight that LLMs can learn when to invoke external computation."
+    },
+    {
+      "title": "Adaptive Computation Time for Recurrent Neural Networks",
+      "authors": "Alex Graves",
+      "year": 2016,
+      "role": "Conceptual foundation for adaptive compute per input",
+      "relationship_sentence": "ARM extends the ACT principle of input-dependent computation by learning to allocate different reasoning token budgets (direct answer vs short/long CoT vs code) based on difficulty."
+    },
+    {
+      "title": "Universal Transformers",
+      "authors": "Mostafa Dehghani, Stephan Gouws, Oriol Vinyals, Jakob Uszkoreit, Lukasz Kaiser",
+      "year": 2019,
+      "role": "Adaptive halting in sequence models",
+      "relationship_sentence": "ARM\u2019s adaptive selection among reasoning formats parallels Universal Transformers\u2019 dynamic halting, but at the level of discrete reasoning styles and token budgets."
+    },
+    {
+      "title": "Group Relative Policy Optimization (GRPO)",
+      "authors": "DeepSeek-AI Team",
+      "year": 2024,
+      "role": "Optimization baseline extended by ARM",
+      "relationship_sentence": "ARM\u2019s Ada-GRPO directly modifies GRPO to prevent format collapse, enabling stable learning of multiple reasoning formats with differing token costs."
+    }
+  ],
+  "synthesis_narrative": "ARM\u2019s core contribution\u2014adaptive selection among Direct Answer, Short CoT, Code, and Long CoT with a training method (Ada-GRPO) that avoids format collapse\u2014sits at the intersection of explicit reasoning, tool/code use, and adaptive compute. Chain-of-Thought prompting established explicit reasoning traces as a powerful mechanism, which ARM formalizes as selectable formats. Self-Consistency showed that more samples and longer chains often boost accuracy but at substantial token cost, crystallizing the overthinking problem ARM targets with adaptive budgets. On the modality side, PAL and Toolformer demonstrated that offloading computation to code/tools can improve both accuracy and efficiency for certain tasks; ARM internalizes this by routing to a Code format when the task benefits from programmatic execution. Conceptually, ARM inherits from adaptive computation work (ACT and Universal Transformers), reframing token usage as input-dependent compute that should vary with difficulty rather than being fixed. Finally, at the training level, ARM\u2019s Ada-GRPO advances preference-optimization methods by addressing GRPO\u2019s tendency toward mode/format collapse, ensuring the policy maintains competence across diverse reasoning styles while learning when to use each. Together these threads directly shape ARM\u2019s design: a router over reasoning formats grounded in CoT and tool-use, principled by adaptive compute, and made trainable via a stabilization of group-relative preference optimization.",
+  "analysis_timestamp": "2026-01-07T00:02:04.961336"
+}

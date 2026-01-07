@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP",
+      "authors": "Patrick Lewis et al.",
+      "year": 2020,
+      "arxiv_id": "2005.11401",
+      "role": "Foundation",
+      "relationship_sentence": "This work defines the core RAG formulation\u2014retrieve K documents then generate conditioned on them\u2014which the current paper adopts while studying how to scale the retrieval budget and other inference-time knobs."
+    },
+    {
+      "title": "Leveraging Passage Retrieval with Generative Pre-trained Models for Open-Domain Question Answering (FiD)",
+      "authors": "Gautier Izacard et al.",
+      "year": 2021,
+      "arxiv_id": "2007.01282",
+      "role": "Baseline",
+      "relationship_sentence": "FiD established that fusing many retrieved passages in the decoder can improve QA and provided the standard baseline for scaling K, which this paper extends to long-context settings and combines with additional inference-time scaling strategies."
+    },
+    {
+      "title": "Lost in the Middle: How Language Models Use Long Context",
+      "authors": "Nelson F. Liu et al.",
+      "year": 2023,
+      "arxiv_id": "2307.03172",
+      "role": "Gap Identification",
+      "relationship_sentence": "By showing LLMs underuse long contexts and are distracted by irrelevant passages, this work motivates the paper\u2019s focus on optimally allocating inference compute (beyond just adding more context) across retrieval depth, in-context exemplars, and iterative prompting."
+    },
+    {
+      "title": "Self-Consistency Improves Chain of Thought Reasoning in Language Models",
+      "authors": "Xuezhi Wang et al.",
+      "year": 2023,
+      "arxiv_id": "2203.11171",
+      "role": "Inspiration",
+      "relationship_sentence": "Self-consistency introduced scaling test-time computation via multiple reasoning samples, directly inspiring the paper\u2019s use of generation steps as a controllable inference-scaling dimension in knowledge-intensive RAG."
+    },
+    {
+      "title": "ReAct: Synergizing Reasoning and Acting in Language Models",
+      "authors": "Shunyu Yao et al.",
+      "year": 2023,
+      "arxiv_id": "2210.03629",
+      "role": "Inspiration",
+      "relationship_sentence": "ReAct\u2019s interleaving of reasoning with retrieval/tool calls instantiated iterative prompting loops that the paper treats as a principal axis of test-time compute to scale and study in long-context RAG."
+    },
+    {
+      "title": "Self-RAG: Learning to Retrieve, Generate, and Critique for Improved Language Modeling",
+      "authors": "Akari Asai et al.",
+      "year": 2023,
+      "arxiv_id": "2310.11511",
+      "role": "Baseline",
+      "relationship_sentence": "Self-RAG provides a concrete iterative retrieval\u2013generation\u2013critique baseline whose strengths and limitations inform the paper\u2019s systematic analysis of inference-scaling and its performance predictability."
+    }
+  ],
+  "synthesis_narrative": "Retrieval-Augmented Generation formalized a semi-parametric approach where a model retrieves a set of documents and conditions generation on them, establishing retrieval depth as a controllable knob. Fusion-in-Decoder demonstrated that fusing many retrieved passages in the decoder can improve knowledge-intensive QA and popularized scaling the number of passages K as a practical baseline. Subsequent analyses revealed limits of simply expanding context: Lost in the Middle showed that as context grows, models often underutilize evidence and are distracted by irrelevant text. In parallel, inference-time computation emerged as a lever for reasoning quality: Self-Consistency showed that sampling multiple reasoning paths and aggregating them improves accuracy by spending more test-time compute. ReAct introduced iterative prompting that interleaves reasoning with retrieval/tool calls, suggesting a compute-scalable loop for acquiring missing knowledge. Building on this, Self-RAG operationalized a retrieve\u2013generate\u2013critique cycle, showing iterative retrieval and self-reflection can better use external evidence.\nTogether, these works expose a gap: while retrieval depth, iterative prompting, and multi-sample reasoning each scale test-time compute, there was no unified, long-context study of how to optimally allocate compute across them or to predict gains. The current paper synthesizes these ideas by treating retrieved documents, in-context exemplars, and iterative steps as coordinated inference-scaling axes in RAG, systematically measuring their interactions in long contexts and developing predictors for when additional compute will translate into better knowledge utilization.",
+  "target_paper": {
+    "title": "Inference Scaling for Long-Context Retrieval Augmented Generation",
+    "authors": "Zhenrui Yue, Honglei Zhuang, Aijun Bai, Kai Hui, Rolf Jagerman, Hansi Zeng, Zhen Qin, Dong Wang, Xuanhui Wang, Michael Bendersky",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "oral",
+    "keywords": "inference scaling, long-context LLM, retrieval augmented generation",
+    "abstract": "The scaling of inference computation has unlocked the potential of long-context large language models (LLMs) across diverse settings. For knowledge-intensive tasks, the increased compute is often allocated to incorporate more external knowledge.  However, without effectively utilizing such knowledge, solely expanding context does not always enhance performance. In this work, we investigate inference scaling for retrieval augmented generation (RAG), exploring the combination of multiple strategies beyond simply increasing the quantity of knowledge, including in-context learning and iterative prompting. These strategies provide additional flexibility to scale test-time computation (e.g., by increasing retrieved documents or generation steps), thereby enhancing LLMs\u2019 ability to effectively acquire and utilize contextual information. We address two key questions: (1) How does RAG performance benefit from the scaling of inference computation when optimally configured? (2) Can we predict the",
+    "openreview_id": "FSjIrOm1vz",
+    "forum_id": "FSjIrOm1vz"
+  },
+  "analysis_timestamp": "2026-01-06T07:51:52.784766"
+}

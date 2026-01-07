@@ -1,0 +1,426 @@
+{
+  "taxonomy": [
+    {
+      "id": "P01",
+      "name": "Gap-Driven Reframing",
+      "category": "Problem Diagnosis & Reframing",
+      "description": "Start from a concrete empirical, operational, or assumption gap and reframe the problem so different tools or objectives become applicable. This pattern turns observed limitations into a new problem statement or constraint that unlocks solutions previously ruled out.",
+      "key_indicators": [
+        "limitation",
+        "gap",
+        "reframed as",
+        "instead of X, we treat Y as",
+        "assumption questioned"
+      ],
+      "cognitive_move": "Turn a specific failure or mismatched assumption into an explicit design constraint or alternate formulation that maps the problem onto better-suited methods.",
+      "variants_merged": [
+        "Gap-Driven Reframing",
+        "Gap Amplification",
+        "Assumption Probing",
+        "Gap \u2192 Design Constraint",
+        "Problem Reframing (many variants)"
+      ],
+      "example": "Reframing autoregressive image modeling from next-token prediction to next-scale (coarse\u2192fine) prediction to improve generation quality (VAR-like approach).",
+      "learnable_insight": "When you notice a recurring failure, write it as an explicit constraint or alternative objective; ask 'if this limitation were the problem, what methods would apply?' then test the reframed formulation on a minimal prototype."
+    },
+    {
+      "id": "P02",
+      "name": "Cross-Domain Synthesis",
+      "category": "Synthesis & Transfer",
+      "description": "Deliberately combine ideas, primitives, and formalisms from distinct fields to construct hybrid methods that leverage complementary strengths. The move is targeted \u2014 identify which element from another domain resolves a concrete shortcoming and adapt its interface carefully.",
+      "key_indicators": [
+        "borrow from",
+        "combine",
+        "drawn from",
+        "inspired by",
+        "fuse X and Y"
+      ],
+      "cognitive_move": "Map components across disciplinary boundaries and transplant them into the target problem while engineering the compatibility layer.",
+      "variants_merged": [
+        "Cross-Domain Synthesis",
+        "Cross-domain Import",
+        "Cross-domain Hybridization",
+        "Analogy-driven Transfer",
+        "Analogy-to-Classical Systems"
+      ],
+      "example": "Fusing quantum circuits with transformer attention to obtain doubly stochastic attention matrices (QDSFormer) or importing Lyapunov/optimal-transport ideas into ML optimization proofs.",
+      "learnable_insight": "List constraints your method fails to satisfy, search other fields for primitives addressing those constraints, and prototype by isolating the imported primitive with a thin adapter to evaluate compatibility before deeper integration."
+    },
+    {
+      "id": "P03",
+      "name": "Representation Shift & Primitive Recasting",
+      "category": "Representation & Abstraction",
+      "description": "Change the core data or model primitive (representation, discretization, latent space) to better match the problem geometry or computational affordances. Shifting primitives often converts an intractable task into a tractable one or uncovers simpler inductive structure.",
+      "key_indicators": [
+        "recast as",
+        "operate in latent space",
+        "implicit SDF",
+        "lattice / triplane",
+        "primitive"
+      ],
+      "cognitive_move": "Replace the problem's language (pixels, tokens, meshes) with an alternative primitive that simplifies inference, learning, or constraints.",
+      "variants_merged": [
+        "Representation Shift",
+        "Primitive Recasting",
+        "Component Replacement with Structured Alternatives",
+        "Latent Abstraction Swap",
+        "Feature-space Reorientation"
+      ],
+      "example": "Replacing explicit meshes with neural implicit signed-distance functions (implicit SDFs) for 3D reconstruction to avoid collision-graph blowup.",
+      "learnable_insight": "When a task struggles with geometry or combinatorics, enumerate alternative primitives (continuous vs discrete, latent vs observed), pick one that aligns with constraints, and reimplement a minimal pipeline to test whether the new primitive reduces complexity."
+    },
+    {
+      "id": "P04",
+      "name": "Modular Pipeline Composition",
+      "category": "Systems & Pipelines",
+      "description": "Decompose an end-to-end task into specialized modules (retrieval, denoising, alignment, synthesis) and design interfaces so improvements in modules compound. Emphasizes composability, updatability, and clear contracts between stages.",
+      "key_indicators": [
+        "pipeline",
+        "two-stage",
+        "component X + component Y",
+        "plug-and-play",
+        "stitching workflow"
+      ],
+      "cognitive_move": "Factor a complex goal into subproblems and engineer interoperable modules with well-defined inputs/outputs so each can be improved or swapped independently.",
+      "variants_merged": [
+        "Modular Pipeline Innovation",
+        "Plug-and-play Modularity",
+        "Pipeline Reconceptualization",
+        "Decompose and Modularize",
+        "Compose Complementary Methods"
+      ],
+      "example": "TANGO: combine audio\u2194motion retrieval with diffusion-based interpolation modules to produce robust gesture reenactment.",
+      "learnable_insight": "Sketch the full workflow and identify crisp module boundaries; implement a minimal interface that allows independent replacement and run ablations to measure marginal gains from each module."
+    },
+    {
+      "id": "P05",
+      "name": "Data & Evaluation Engineering",
+      "category": "Data, Metrics & Benchmarks",
+      "description": "Engineer datasets, benchmarks, metrics, and synthetic supervisors that make target phenomena measurable, comparable, and optimizable. This pattern recognizes that progress often requires the right measurement instrument.",
+      "key_indicators": [
+        "dataset",
+        "benchmark",
+        "metric",
+        "we introduce",
+        "synthetic supervision"
+      ],
+      "cognitive_move": "Convert an informal desideratum into a measurable task or proxy and release resources that standardize evaluation and drive community progress.",
+      "variants_merged": [
+        "Dataset/Benchmark Construction",
+        "Metric & Benchmark Invention",
+        "Benchmarking by Harmonization",
+        "Synthetic Supervision",
+        "Evaluation Reorientation",
+        "Compositional Benchmarking"
+      ],
+      "example": "Creating CBGBench to unify structure-based drug-design subtasks as conditional graph completion, enabling fair comparisons.",
+      "learnable_insight": "When a capability is ill-defined, write a concise task spec and metric, assemble a small diagnostic dataset or simulator, and validate that improvements on the metric correlate with the intended downstream behavior."
+    },
+    {
+      "id": "P06",
+      "name": "Principled Probabilistic Modeling & Uncertainty",
+      "category": "Probabilistic & Theoretical Methods",
+      "description": "Replace heuristics or deterministic components with probabilistic models (Bayesian, score-based, GP-like) to quantify uncertainty, pool evidence, and obtain principled inference or calibration guarantees.",
+      "key_indicators": [
+        "Bayesian",
+        "amortized inference",
+        "uncertainty",
+        "calibration",
+        "Laplace"
+      ],
+      "cognitive_move": "Introduce explicit probability models or approximate posteriors to make assumptions explicit and provide uncertainty-aware decisions with analyzable properties.",
+      "variants_merged": [
+        "Principled Probabilistic Replacement",
+        "Calibration and Uncertainty Decomposition",
+        "Probabilistic Reframing for Uncertainty",
+        "Proxying Expensive Components with Learned Surrogates (as probabilistic proxies)"
+      ],
+      "example": "Using Bayesian hierarchical modeling to estimate causal concept influences with uncertainty rather than pointwise heuristics.",
+      "learnable_insight": "If decisions require trust or risk accounting, recast parts of the pipeline probabilistically (even with crude approximations) and prioritize calibration checks (holdout, conformal tests) before deployment."
+    },
+    {
+      "id": "P07",
+      "name": "Formal-Experimental Tightening",
+      "category": "Theory \u2194 Practice Loop",
+      "description": "Iterate between empirical probes and formal analysis: use controlled experiments to formulate conjectures, then develop formal models and proofs that explain observations and guide remedies. The loop increases both explanatory power and robustness.",
+      "key_indicators": [
+        "characterize",
+        "bound / optimal",
+        "prove",
+        "empirical success but unexplained",
+        "theoretical gap"
+      ],
+      "cognitive_move": "Treat empirical anomalies as hypotheses, build formal abstractions to explain them, and close the loop by testing theory-derived predictions experimentally.",
+      "variants_merged": [
+        "Theoretical Generalization",
+        "From Observation to Theory",
+        "Formal-Experimental Tightening",
+        "Prove Limitations then Engineer Remedies",
+        "Probe-Then-Theorize (Empirical\u2192Theory Loop)"
+      ],
+      "example": "Deriving finite-sample convergence rates for schedule-free SGD after observing empirical performance in nonconvex settings.",
+      "learnable_insight": "When you observe a robust empirical pattern, distill it into the simplest mathematical model that captures it and attempt to prove one useful property (convergence, bound, or limit); use the formal result to propose a focused engineering fix and validate it."
+    },
+    {
+      "id": "P08",
+      "name": "Approximation Engineering for Scalability",
+      "category": "Approximation & Algorithmics",
+      "description": "Design controlled approximations, surrogates, or amortization schemes that preserve essential theoretical properties while making algorithms practical at scale. Emphasizes principled trade-offs between exactness and cost.",
+      "key_indicators": [
+        "approximate",
+        "Hessian-free",
+        "amortize",
+        "fixed-point iteration",
+        "efficient approximation"
+      ],
+      "cognitive_move": "Identify the expensive component, replace it with a principled approximation whose error can be bounded or empirically validated, and integrate refresh/correction schedules if needed.",
+      "variants_merged": [
+        "Approximate to Scale",
+        "Efficient Approximation Engineering",
+        "Amortize Expensive Resources",
+        "Approximate Marginalization",
+        "Practical Simplification"
+      ],
+      "example": "Computing Hessians infrequently and reusing them across correction steps with scheduled refreshes to maintain convergence guarantees.",
+      "learnable_insight": "Profile runtime and identify dominating costs; design the cheapest principled approximation (e.g., sketching, low-rank, randomized) and either prove bounded error accumulation or measure it under representative workloads."
+    },
+    {
+      "id": "P09",
+      "name": "Inference-Time Control & Guided Sampling",
+      "category": "Runtime Steering & Adaptation",
+      "description": "Shift interventions from retraining to sampling- or inference-time controls (guidance, conditioning, mode guidance). This yields fast, flexible behavioral changes and avoids costly weight updates.",
+      "key_indicators": [
+        "sampling-time",
+        "guidance",
+        "no weight updates",
+        "mode discovery",
+        "test-time search"
+      ],
+      "cognitive_move": "Design mechanisms that steer a pre-trained model's outputs at generation-time to satisfy new constraints or promote diversity without changing parameters.",
+      "variants_merged": [
+        "Sampling-time Control",
+        "Sampling-as-Control",
+        "Mode Discovery and Conditioning",
+        "Inference-Time Search / Test-Time Adaptation"
+      ],
+      "example": "Using Mode Discovery and Mode Guidance with a pre-trained latent diffusion model to produce condensed datasets that cover intra-class modes without retraining.",
+      "learnable_insight": "Start from a pre-trained generator; identify runtime hooks (logit modification, classifier-free guidance, conditional sampling) and implement lightweight controllers that can be turned on/off to evaluate trade-offs between fidelity and desired constraint satisfaction."
+    },
+    {
+      "id": "P10",
+      "name": "Inject Structural Inductive Bias",
+      "category": "Inductive Bias & Geometry",
+      "description": "Encode domain structure (symmetry, locality, sparsity, taxonomy) directly into architectures, losses, or representations to reduce hypothesis space and improve sample efficiency and robustness.",
+      "key_indicators": [
+        "inductive bias",
+        "equivariance",
+        "sparsity",
+        "locality",
+        "taxonomic / hierarchy"
+      ],
+      "cognitive_move": "Turn known invariants or structure into explicit constraints or model motifs so learning data can be used more efficiently and reliably.",
+      "variants_merged": [
+        "Inject Domain Inductive Bias",
+        "Exploit Symmetry and Invariance",
+        "Structural Prior Exploitation",
+        "Control Representation Geometry",
+        "Signal Cancellation / Differential Cancellation (as geometry shaping)"
+      ],
+      "example": "Designing SO(3)-equivariant representations for robotic manipulation to enable data-efficient policies from monocular inputs.",
+      "learnable_insight": "Catalog symmetries and structural priors in your domain; prefer architectures or losses that enforce them (equivariant layers, locality-promoting regularizers) before attempting brute-force data scaling."
+    },
+    {
+      "id": "P11",
+      "name": "Multiscale & Hierarchical Modeling",
+      "category": "Scale & Abstraction",
+      "description": "Employ multi-resolution or hierarchical architectures and procedures (coarse-to-fine, temporal abstraction) so models can capture long-range structure efficiently and compose local details on top of global structure.",
+      "key_indicators": [
+        "coarse-to-fine",
+        "hierarchical",
+        "multi-scale",
+        "temporal abstraction",
+        "next-scale"
+      ],
+      "cognitive_move": "Decompose the problem across scales and design interactions so global context guides local refinement and planning amortizes over time horizons.",
+      "variants_merged": [
+        "Multiscale / Hierarchical Modeling",
+        "Hierarchical and Temporal Abstraction",
+        "Hierarchical & Multiscale Refinement",
+        "Temporal/Horizon Abstraction"
+      ],
+      "example": "Predicting images across resolution scales rather than token order (next-scale) to improve image generation efficiency and quality.",
+      "learnable_insight": "When facing long-horizon or high-resolution problems, prototype a coarse representation and iteratively add refinements; measure how much the coarse stage reduces downstream search or compute."
+    },
+    {
+      "id": "P12",
+      "name": "Mechanistic Decomposition & Causal Localization",
+      "category": "Interpretability & Analysis",
+      "description": "Break complex learned behavior into interpretable mechanisms (heads, units, spectral components), then validate causality with interventions or ablations to explain and improve models.",
+      "key_indicators": [
+        "decompose into",
+        "identify heads",
+        "causal pruning",
+        "mechanistic",
+        "timescale separation"
+      ],
+      "cognitive_move": "Isolate candidate mechanisms, attribute observed effects to them, and test causal hypotheses via controlled interventions.",
+      "variants_merged": [
+        "Mechanistic Decomposition",
+        "Mechanistic Localization",
+        "Timescale Separation",
+        "Spectral/Variance-based Insight",
+        "Empirical Microscopy"
+      ],
+      "example": "Decomposing classifier-free guidance into mean-shifts and contrastive principal components to explain conditional sampling improvements.",
+      "learnable_insight": "Use targeted probes (ablation, mean-shift decomposition, spectral analysis) on a small trained model to identify which components matter; design minimally invasive fixes informed by the causal attribution."
+    },
+    {
+      "id": "P13",
+      "name": "Adversary Modeling & Defensive Repurposing",
+      "category": "Robustness & Security",
+      "description": "Model adversarial behaviors explicitly (inverse RL, attacker models) to synthesize realistic adversaries for robust training, or repurpose offensive tools constructively (unlearning, privacy, defense).",
+      "key_indicators": [
+        "inverse reinforcement learning",
+        "generate adversarial samples",
+        "repurpose",
+        "defensive reinterpretation",
+        "adversarial security problem"
+      ],
+      "cognitive_move": "Turn defense into a generative or inverse problem: infer attacker objectives and use them to harden, detect, or reverse undesirable behaviors.",
+      "variants_merged": [
+        "Adversary Modeling / Reverse Engineering",
+        "Adversarial Repurposing",
+        "Defensive Reinterpretation",
+        "Adversarial / Security Reframing"
+      ],
+      "example": "Using maximum-entropy inverse RL to recover attacker policies and synthesize adversarial samples that improve GNN robustness.",
+      "learnable_insight": "If robustness is critical, build an explicit attacker model (even simple) and generate adversarial examples for training and auditing; consider whether attack mechanisms can be flipped into corrective interventions (e.g., unlearning)."
+    },
+    {
+      "id": "P14",
+      "name": "Numerics & Systems Co-design",
+      "category": "Systems & Deployment",
+      "description": "Co-design numerical algorithms and system implementations (GPU kernels, memory patterns, caching, offloading) so theoretical improvements yield real-world speed, memory, and latency gains under deployment constraints.",
+      "key_indicators": [
+        "IO-aware kernels",
+        "tile, streaming pipeline",
+        "KV offload",
+        "cache offloading",
+        "co-design"
+      ],
+      "cognitive_move": "Simultaneously optimize algorithms and low-level implementations, accounting for hardware/software stack to turn asymptotic ideas into practical throughput improvements.",
+      "variants_merged": [
+        "Numerics & Systems Co-design",
+        "Design-for-Deployment",
+        "Offload & Memory Strategy",
+        "Contract Redesign for Scalability",
+        "Cost-Aware Automation",
+        "Quantization\u2013Fine-Tune Harmonization"
+      ],
+      "example": "Reframing \u03b1-entmax as a per-row root-finding problem and implementing Triton GPU kernels to realize adaptive sparsity at production speed (AdaSplash-like).",
+      "learnable_insight": "Before claiming practical speedups, prototype a critical kernel with realistic IO patterns and measure end-to-end throughput; iterate interfaces between algorithm and implementation to resolve bottlenecks."
+    },
+    {
+      "id": "P15",
+      "name": "Data-Centric Optimization & Active Sampling",
+      "category": "Data, Sampling & Efficiency",
+      "description": "Treat data selection, augmentation, or synthetic generation as the primary lever for performance: optimize data mixtures, synthesize targeted examples, and use adaptive sampling/twisting to focus resources on informative regions.",
+      "key_indicators": [
+        "data mixture",
+        "synthesize",
+        "hard negatives",
+        "adaptive sampling",
+        "twisted proposals"
+      ],
+      "cognitive_move": "Shift effort from architecture changes to choosing or generating the right data; use adaptive sampling strategies to concentrate labeling or compute where it most reduces uncertainty or improves metrics.",
+      "variants_merged": [
+        "Replace Synthetic Heuristics with Realistic Generators",
+        "Data-first Optimization",
+        "Smart Sampling and Batch Construction",
+        "Adaptive Sampling & Twisting",
+        "Data Editing for Robustness",
+        "Simulation-driven Emergence"
+      ],
+      "example": "Using a teacher model to build a sparse similarity graph for hard-negative mining so smaller batches achieve the effect of larger ones (B3).",
+      "learnable_insight": "Instrument learning curves to find where more data would help; design synthetic or selection methods targeted to those failure modes (hard negatives, rare classes) and validate improvements on held-out realistic benchmarks."
+    }
+  ],
+  "categories": [
+    {
+      "name": "Problem Diagnosis & Reframing",
+      "description": "Patterns that start by identifying gaps, assumptions, or mismatches and then change the problem statement or constraints to enable new solution classes.",
+      "pattern_ids": [
+        "P01"
+      ]
+    },
+    {
+      "name": "Synthesis & Transfer",
+      "description": "Patterns that deliberately import, combine, or adapt ideas from other disciplines or subfields to create hybrid solutions.",
+      "pattern_ids": [
+        "P02"
+      ]
+    },
+    {
+      "name": "Representation & Abstraction",
+      "description": "Patterns focused on changing core representations or primitives so problems become more tractable or align with model geometry.",
+      "pattern_ids": [
+        "P03"
+      ]
+    },
+    {
+      "name": "Systems & Pipelines",
+      "description": "Patterns centered on modular decomposition, pipelines, and system-level design that enable composability and staged improvements.",
+      "pattern_ids": [
+        "P04",
+        "P14"
+      ]
+    },
+    {
+      "name": "Data, Metrics & Benchmarks",
+      "description": "Patterns that create the measurement instruments \u2014 datasets, benchmarks, metrics, and synthetic supervision \u2014 which enable focused progress and fair comparison.",
+      "pattern_ids": [
+        "P05",
+        "P15"
+      ]
+    },
+    {
+      "name": "Probabilistic & Theoretical Methods",
+      "description": "Patterns that replace heuristics with probabilistic formalisms or that close the theory\u2013practice loop via formalization and empirical validation.",
+      "pattern_ids": [
+        "P06",
+        "P07"
+      ]
+    },
+    {
+      "name": "Approximation & Algorithmics",
+      "description": "Patterns that design principled approximations, surrogates, and amortization strategies to make provable methods scalable and practical.",
+      "pattern_ids": [
+        "P08"
+      ]
+    },
+    {
+      "name": "Runtime Steering & Adaptation",
+      "description": "Patterns that favor inference-time controls, guided sampling, or test-time adaptation as cheaper, faster ways to change behavior than retraining.",
+      "pattern_ids": [
+        "P09"
+      ]
+    },
+    {
+      "name": "Inductive Bias & Geometry",
+      "description": "Patterns that inject domain structure and geometric constraints into models and objectives to improve sample efficiency and generalization.",
+      "pattern_ids": [
+        "P10",
+        "P11",
+        "P12"
+      ]
+    },
+    {
+      "name": "Robustness & Security",
+      "description": "Patterns that explicitly model adversaries or repurpose attack tools to improve robustness, privacy, and security.",
+      "pattern_ids": [
+        "P13"
+      ]
+    }
+  ],
+  "taxonomy_rationale": "I condensed the 190 discovered patterns into 15 mutually informative, non-overlapping patterns organized into categories that reflect the common intellectual stages and levers observed across the papers. The top-level organization follows the research lifecycle and levers: (1) detect and reframe practical gaps (Problem Diagnosis & Reframing), (2) import and hybridize ideas across fields (Synthesis & Transfer), (3) change representations to simplify geometry (Representation & Abstraction), (4) design modular systems and implement them efficiently (Systems & Pipelines; Numerics & Deployment), (5) treat data and evaluation as first-class instruments (Data, Metrics & Benchmarks), (6) replace heuristics with probabilistic/theoretical formalism and close the theory\u2194practice loop (Probabilistic & Theoretical Methods), (7) engineer approximations for scalability (Approximation & Algorithmics), and (8) prefer runtime/adaptive controls and robustness strategies when retraining is costly (Runtime Steering; Robustness & Security). Each pattern merges tightly related variants from the original list (listed in variants_merged) to eliminate redundancy while preserving the actionable core \u2014 indicators, cognitive move, concrete example, and a concise guidance item that researchers can apply deliberately. This organization emphasizes transferable intellectual moves (reframe, import, represent, compose, measure, formalize, approximate, and steer) that recur across successful ML contributions and maps them to practical tactical advice."
+}

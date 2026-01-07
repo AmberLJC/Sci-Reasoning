@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Understanding Black-box Predictions via Influence Functions",
+      "authors": "Pang Wei Koh et al.",
+      "year": 2017,
+      "role": "Foundation",
+      "relationship_sentence": "TRAK targets the same core objective\u2014attributing a test prediction to training points\u2014as influence functions, but replaces the brittle Hessian-inversion\u2013based formulation with an after-training kernel view that remains tractable and reliable for deep, non-convex models."
+    },
+    {
+      "title": "Estimating Training Data Influence by Tracing Gradient Descent",
+      "authors": "Garima Pruthi et al.",
+      "year": 2020,
+      "role": "Baseline",
+      "relationship_sentence": "TracIn\u2019s gradient-similarity along the training trajectory is a primary scalable baseline that TRAK improves upon, achieving higher-quality attributions with only a handful of trained models instead of many checkpoints over the entire trajectory."
+    },
+    {
+      "title": "Representer Point Selection for Explaining Deep Neural Networks",
+      "authors": "Chih-Kuan Yeh et al.",
+      "year": 2018,
+      "role": "Extension",
+      "relationship_sentence": "TRAK extends the representer-point perspective\u2014decomposing predictions into contributions from training examples\u2014by replacing the L2-regularized representer theorem with an after-training gradient kernel that works broadly for deep networks and can be efficiently approximated via random projections."
+    },
+    {
+      "title": "Neural Tangent Kernel: Convergence and Generalization in Neural Networks",
+      "authors": "Arthur Jacot et al.",
+      "year": 2018,
+      "role": "Foundation",
+      "relationship_sentence": "TRAK\u2019s \"after kernel\" is the NTK evaluated at the trained parameters; the method operationalizes this kernel to score train\u2013test influence, and uses random projections plus a small ensemble of trained models to compute these NTK-based similarities at scale."
+    },
+    {
+      "title": "Data Shapley: Equitable Valuation of Data for Machine Learning",
+      "authors": "Amirata Ghorbani et al.",
+      "year": 2019,
+      "role": "Gap Identification",
+      "relationship_sentence": "Data Shapley provides a high-fidelity notion of data value but requires training thousands of models; TRAK is explicitly designed to match such high-quality attributions while eliminating this prohibitive computational cost."
+    },
+    {
+      "title": "Exploiting Generative Models in Discriminative Classifiers (Fisher Kernels)",
+      "authors": "Tommi Jaakkola et al.",
+      "year": 1999,
+      "role": "Foundation",
+      "relationship_sentence": "TRAK leverages the Fisher-kernel idea of using parameter gradients as features to define similarities between examples, instantiating it for modern deep nets by computing gradient-based kernels after training."
+    }
+  ],
+  "synthesis_narrative": "TRAK\u2019s core innovation\u2014accurate, scalable data attribution for deep networks via an after-training kernel\u2014emerges from unifying three lines of prior work. First, influence functions (Koh & Liang) formalized the modern data-attribution problem: quantify how each training point affects a specific prediction. However, their reliance on Hessian inversion and local convexity limits reliability for deep nets, motivating a more stable formulation. Second, representer-point selection (Yeh et al.) demonstrated that predictions can be decomposed into contributions from training examples, but required restrictive regularization. TRAK generalizes this representer viewpoint by adopting a kernel built from parameter gradients after training\u2014connecting directly to the Neural Tangent Kernel (Jacot et al.), but evaluated at the learned parameters rather than at initialization. This yields a principled, model-agnostic similarity between train and test points. Third, practical scalability lessons come from TracIn (Pruthi et al.), which uses gradient similarity along the training trajectory; TRAK preserves the gradient-based intuition but dispenses with full-trajectory dependence, using random projections and only a handful of trained models to approximate the after-training kernel efficiently. Finally, TRAK positions itself against the computationally intensive gold standard of data valuation (Data Shapley), aiming to match its attribution fidelity without thousands of retrainings. The Fisher kernel provides the historical foundation for gradient-feature kernels that TRAK operationalizes at scale for modern deep learning, completing the direct intellectual lineage.",
+  "analysis_timestamp": "2026-01-06T23:09:26.559720"
+}

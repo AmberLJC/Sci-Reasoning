@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "A learning algorithm for continually running fully recurrent neural networks (RTRL)",
+      "authors": "Ronald J. Williams, David Zipser",
+      "year": 1989,
+      "role": "Forward-mode gradient for RNNs",
+      "relationship_sentence": "RTRL established forward-in-time sensitivity propagation for RNNs, directly inspiring SOFO\u2019s use of forward-mode differentiation to avoid backpropagation-through-time while still accessing temporal derivatives."
+    },
+    {
+      "title": "Backpropagation through time: what it does and how to do it",
+      "authors": "Paul J. Werbos",
+      "year": 1990,
+      "role": "Baseline training method (BPTT)",
+      "relationship_sentence": "BPTT is the standard but memory-hungry approach SOFO explicitly avoids; its limitations on long horizons and memory framed the need for a forward-mode, non-backprop optimizer."
+    },
+    {
+      "title": "Fast Exact Multiplication by the Hessian",
+      "authors": "Barak A. Pearlmutter",
+      "year": 1994,
+      "role": "Hessian-vector products (HVP)",
+      "relationship_sentence": "Pearlmutter\u2019s HVP idea underpins curvature-aware optimization; SOFO adopts the same curvature-vector product philosophy, realized via batched forward-mode JVPs to obtain second-order information without forming Hessians or using reverse mode."
+    },
+    {
+      "title": "Learning Recurrent Neural Networks with Hessian-Free Optimization",
+      "authors": "James Martens, Ilya Sutskever",
+      "year": 2011,
+      "role": "Second-order optimization for RNNs",
+      "relationship_sentence": "This work showed second-order (Gauss\u2013Newton/Hessian-free) methods tame RNN ill-conditioning; SOFO inherits the curvature-aware spirit while redesigning the computation around forward-mode to remove backprop\u2019s memory bottleneck."
+    },
+    {
+      "title": "Natural gradient works efficiently in learning",
+      "authors": "Shun-ichi Amari",
+      "year": 1998,
+      "role": "Curvature-aware preconditioning",
+      "relationship_sentence": "Natural gradient framed optimization as geometry-aware updates using local curvature; SOFO\u2019s second-order preconditioning similarly leverages curvature information to navigate ill-conditioned loss landscapes in vanilla RNNs."
+    },
+    {
+      "title": "Unbiased Online Recurrent Optimization (UORO)",
+      "authors": "Julien Tallec, Yann Ollivier",
+      "year": 2017,
+      "role": "Forward-mode/online RNN training",
+      "relationship_sentence": "UORO demonstrated scalable forward-mode alternatives to BPTT by propagating low-cost eligibility traces; SOFO likewise exploits forward-mode propagation, but couples it with curvature-vector products to build a second-order optimizer."
+    },
+    {
+      "title": "On the difficulty of training recurrent neural networks",
+      "authors": "Razvan Pascanu, Tomas Mikolov, Yoshua Bengio",
+      "year": 2013,
+      "role": "Theory of RNN ill-conditioning",
+      "relationship_sentence": "By diagnosing exploding/vanishing gradients and curvature pathologies, this work motivates curvature-aware, stable training; SOFO directly targets these issues with a forward-mode second-order scheme tailored to vanilla RNNs."
+    }
+  ],
+  "synthesis_narrative": "SOFO sits at the intersection of two lines of work: forward-mode training of recurrent networks and curvature-aware second-order optimization. Williams and Zipser\u2019s RTRL established that RNN sensitivities can be propagated forward in time without backpropagation, while Werbos\u2019s BPTT, despite being the default, exposes severe memory and horizon limitations that are especially constraining in neuroscience applications. Building on this forward-mode perspective, UORO showed that scalable, online approximations to forward-mode gradients are possible, validating the practicality of forward-in-time sensitivity propagation as an alternative computational primitive to reverse-mode.\nIn parallel, the second-order literature demonstrated how curvature information alleviates ill-conditioning in RNNs. Pearlmutter introduced efficient Hessian\u2013vector products as the core operation for second-order methods, avoiding explicit Hessian formation. Martens and Sutskever applied Hessian-free/Gauss\u2013Newton techniques to RNNs, showing that curvature-aware updates dramatically improve optimization on tough sequence problems. Amari\u2019s natural gradient provided a unifying geometric view of curvature-preconditioned updates.\nSOFO synthesizes these strands: it forgoes backpropagation and instead performs batched forward-mode differentiation to obtain the directional derivatives needed to build curvature-vector products, enabling second-order updates that are memory-light and parallelizable over long time horizons. Motivated by Pascanu et al.\u2019s analysis of exploding/vanishing gradients and ill-conditioning, SOFO targets vanilla RNNs common in neuroscience, preserving biological plausibility constraints while delivering the stabilization benefits of second-order optimization.",
+  "analysis_timestamp": "2026-01-06T23:39:42.948069"
+}

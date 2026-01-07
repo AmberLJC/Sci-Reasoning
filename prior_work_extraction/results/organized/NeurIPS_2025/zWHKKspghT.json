@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Outrageously Large Neural Networks: The Sparsely-Gated Mixture-of-Experts Layer",
+      "authors": "Noam Shazeer, Azalia Mirhoseini, Krzysztof Maziarz, Andy Davis, Quoc V. Le, Geoffrey Hinton, Jeff Dean",
+      "year": 2017,
+      "role": "Algorithmic foundation of MoE",
+      "relationship_sentence": "Established the modular expert-and-gating formulation and sparse token-to-expert routing that Mozart preserves and exploits by mapping experts to chiplets and orchestrating token streams across hardware modules."
+    },
+    {
+      "title": "GShard: Scaling Giant Models with Conditional Computation and Automatic Sharding",
+      "authors": "Dmitry Lepikhin et al.",
+      "year": 2020,
+      "role": "Distributed MoE with expert parallelism and all-to-all",
+      "relationship_sentence": "Formalized expert parallelism and the all-to-all token exchange pattern; Mozart\u2019s expert allocation explicitly reshapes this all-to-all to remain on\u2011package, reducing off\u2011package traffic and aligning routing with chiplet topology."
+    },
+    {
+      "title": "Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity",
+      "authors": "William Fedus, Barret Zoph, Noam Shazeer",
+      "year": 2021,
+      "role": "Routing simplification and load balancing for MoE",
+      "relationship_sentence": "Showed that top\u20111 routing and capacity management make MoE practical at scale; Mozart\u2019s fine\u2011grained streaming leverages such sparse, capacity\u2011constrained routing to pipeline tokens and experts and improve overlap."
+    },
+    {
+      "title": "DeepSpeed-MoE: Advancing Mixture-of-Experts Inference and Training with System Innovations",
+      "authors": "Samyam Rajbhandari, Jeff Rasley, Olatunji Ruwase, Yuxiong He",
+      "year": 2021,
+      "role": "System-level MoE scaling with hierarchical all-to-all and overlap",
+      "relationship_sentence": "Introduced hierarchical all\u2011to\u2011all, optimized token dispatchers, and comm\u2011compute overlap; Mozart adapts these ideas to a chiplet NoP by making the hierarchy physical (on\u2011package vs off\u2011package) and scheduling for on\u2011fabric overlap."
+    },
+    {
+      "title": "Tutel: High-Performance Mixture-of-Experts Distributed Training",
+      "authors": "Zhengda Jia et al.",
+      "year": 2022,
+      "role": "Runtime/dispatcher optimizations and fused MoE kernels",
+      "relationship_sentence": "Demonstrated that efficient token packing, fused dispatch/combine, and topology-aware routing are critical; Mozart extends this with token/expert streaming schedules that fuse and pipeline across chiplet boundaries on the NoP."
+    },
+    {
+      "title": "MegaBlocks: Efficient Mixture-of-Experts Training with Universal Block-Sparse Operations",
+      "authors": "Lewis Tunstall et al. (MosaicML)",
+      "year": 2023,
+      "role": "Block-sparse compute and utilization for MoE",
+      "relationship_sentence": "Showed that organizing tokens/experts into structured blocks improves utilization and reduces overhead; Mozart\u2019s fine-grained scheduling exploits similar block-structured transfers to maximize compute\u2013communication overlap on chiplets."
+    },
+    {
+      "title": "The Cerebras Wafer-Scale Engine: A Platform for Deep Learning",
+      "authors": "Andrew Feldman, Sean Lie, et al.",
+      "year": 2021,
+      "role": "Wafer-scale accelerator and on-wafer communication fabric",
+      "relationship_sentence": "Established the benefits of wafer-scale integration and localized communication for DL workloads; Mozart\u2019s 3.5D chiplet design and 2.5D NoP-Tree build on these principles to co-locate heterogeneous modules and confine MoE traffic on-package."
+    }
+  ],
+  "synthesis_narrative": "Mozart\u2019s key contribution\u2014an algorithm\u2013hardware co-design that confines MoE all-to-all within a 3.5D wafer-scale chiplet package and overlaps communication with computation via token/expert streaming\u2014sits at the intersection of two lines of prior work. On the algorithmic and systems side, Shazeer et al. defined the sparse, modular expert paradigm, while GShard operationalized expert parallelism and its signature all-to-all exchange. Switch Transformers demonstrated that simplified (top-1) routing with capacity management can make sparse dispatch efficient, shaping the traffic patterns that Mozart ultimately pipelines. DeepSpeed-MoE and Tutel then pushed the MoE runtime forward with hierarchical all-to-all, fused dispatch/combine, and topology-aware token packing, directly informing Mozart\u2019s expert placement and its fine-grained, streaming scheduler that maximizes compute\u2013communication overlap. Complementing these, MegaBlocks showed that structured, block-sparse organization improves utilization\u2014an idea Mozart echoes when structuring token/expert streams to match chiplet granularities. On the hardware side, the Cerebras Wafer-Scale Engine established the efficacy of wafer-scale integration and localized fabrics for deep learning, motivating Mozart\u2019s 3.5D approach that marries a 2.5D network-on-package tree with vertically integrated memory/logic to co-locate heterogeneous modules. Together, these works converge in Mozart: it physically grounds MoE\u2019s modularity by aligning experts to chiplets, transforms logical hierarchical all-to-all into on-package NoP-tree exchanges, and uses streaming schedules inspired by MoE runtimes to fully exploit the wafer-scale chiplet fabric.",
+  "analysis_timestamp": "2026-01-07T00:05:12.549528"
+}

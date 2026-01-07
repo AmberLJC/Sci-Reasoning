@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "The CLRS Algorithmic Reasoning Benchmark",
+      "authors": "Andreea Deac et al.",
+      "year": 2021,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "This benchmark formalized step-by-step algorithmic supervision (with hints) and popularized CLRS-style architectures that explicitly carry historical node embeddings across execution steps, which ForgetNet removes and evaluates against on CLRS-30."
+    },
+    {
+      "title": "Neural Algorithmic Reasoning",
+      "authors": "Petar Veli\u010dkovi\u0107 et al.",
+      "year": 2022,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "This position paper codified the paradigm of emulating algorithms step-by-step using learned latent \"algorithmic state,\" directly motivating the present work\u2019s reframing of that state as strictly Markov and its consequent elimination of extraneous historical dependencies."
+    },
+    {
+      "title": "Gated Graph Sequence Neural Networks",
+      "authors": "Yujia Li et al.",
+      "year": 2016,
+      "arxiv_id": "1511.05493",
+      "role": "Extension",
+      "relationship_sentence": "GGNN introduced GRU-style gating for selectively integrating prior graph states, and G-ForgetNet directly adapts this gating idea to allow controlled, early-stage integration of historical embeddings before converging to a Markovian predictor."
+    },
+    {
+      "title": "Pointer Graph Networks",
+      "authors": "Petar Veli\u010dkovi\u0107 et al.",
+      "year": 2020,
+      "arxiv_id": "",
+      "role": "Baseline",
+      "relationship_sentence": "PGN models algorithmic execution with recurrent stateful graph updates and pointer outputs, embodying the historical-embedding paradigm that ForgetNet replaces with a history-free, Markov-consistent design."
+    },
+    {
+      "title": "Neural Algorithmic Reasoning with Transformers (NAR-Former)",
+      "authors": "Anonymous et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Gap Identification",
+      "relationship_sentence": "Transformer-based NAR models mix historical embeddings across timesteps to stabilize and boost accuracy, and their reliance on temporal memory\u2014despite algorithmic Markovian structure\u2014is the explicit limitation this work identifies and addresses."
+    },
+    {
+      "title": "Neural GPU: Learning Algorithms Using Neural Networks",
+      "authors": "\u0141ukasz Kaiser and Ilya Sutskever",
+      "year": 2015,
+      "arxiv_id": "",
+      "role": "Inspiration",
+      "relationship_sentence": "Neural GPU demonstrated learning algorithmic execution via recurrent updates with persistent hidden states, exemplifying the history-accumulation paradigm that motivated the present paper\u2019s Markov-consistent \u2018forgetting\u2019 architecture."
+    }
+  ],
+  "synthesis_narrative": "The CLRS Algorithmic Reasoning Benchmark established a standard for supervising algorithmic execution step-by-step with intermediate hints and encouraged architectures that explicitly propagate latent embeddings across time, turning historical state into a default design choice. Neural Algorithmic Reasoning articulated the broader agenda of learning to emulate classical algorithms, centering the notion of a learned latent algorithmic state that is updated each step. Pointer Graph Networks instantiated this paradigm concretely for graph algorithms and pointer-style outputs, relying on recurrent hidden states that accumulate history across execution steps. Transformer-based NAR variants (often dubbed NAR-Former) continued this trend, mixing historical embeddings through temporal attention or residual pathways to stabilize training and improve accuracy on CLRS tasks. Separately, Gated Graph Sequence Neural Networks introduced GRU-style gating for graph representations, providing a principled mechanism for selectively integrating prior states during iterative computation. Earlier, Neural GPU showed that neural systems can learn algorithmic procedures via recurrent update dynamics with persistent memory, further entrenching the historical-embedding approach. Together, these works revealed a field-wide assumption: effective neural execution should carry and mix past embeddings over time, even when full algorithmic state is, in principle, sufficient. Recognizing that classical algorithms are Markov when their state is fully specified, the current paper identifies a mismatch between this assumption and the task structure. It synthesizes these insights by removing the historical pathway altogether with a Markov-consistent predictor (ForgetNet) and then borrows GGNN-style gating to create G-ForgetNet, which permits temporary, selective history integration only to ease early training before converging to purely Markov behavior.",
+  "target_paper": {
+    "title": "On the Markov Property of Neural Algorithmic Reasoning: Analyses and Methods",
+    "authors": "Montgomery Bohde, Meng Liu, Alexandra Saxton, Shuiwang Ji",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Neural Algorithmic Reasoning",
+    "abstract": "Neural algorithmic reasoning is an emerging research direction that endows neural networks with the ability to mimic algorithmic executions step-by-step. A common paradigm in existing designs involves the use of historical embeddings in predicting the results of future execution steps. Our observation in this work is that such historical dependence intrinsically contradicts the Markov nature of algorithmic reasoning tasks. Based on this motivation, we present our ForgetNet, which does not use historical embeddings and thus is consistent with the Markov nature of the tasks. To address challenges in training ForgetNet at early stages, we further introduce G-ForgetNet, which uses a gating mechanism to allow for the selective integration of historical embeddings. Such an enhanced capability provides valuable computational pathways during the model's early training phase. Our extensive experiments, based on the CLRS-30 algorithmic reasoning benchmark, demonstrate that both ForgetNet and G-F",
+    "openreview_id": "Kn7tWhuetn",
+    "forum_id": "Kn7tWhuetn"
+  },
+  "analysis_timestamp": "2026-01-06T11:16:47.736971"
+}

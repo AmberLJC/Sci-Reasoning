@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Decoupled Weight Decay Regularization (AdamW)",
+      "authors": "Ilya Loshchilov, Frank Hutter",
+      "year": 2019,
+      "role": "Base optimizer and practical target for integration; structural foundation for the MGUP-AdamW variant and its analysis.",
+      "relationship_sentence": "MGUP augments AdamW by allocating larger steps to a selected subset of coordinates and smaller non-zero steps to the rest, and the convergence proof for MGUP-AdamW leverages AdamW\u2019s decoupled formulation and standard Adam-style analysis settings."
+    },
+    {
+      "title": "On the Convergence of Adam and Beyond (AMSGrad)",
+      "authors": "Sashank J. Reddi, Satyen Kale, Sanjiv Kumar",
+      "year": 2018,
+      "role": "Theoretical template for analyzing adaptive moment methods in stochastic nonconvex settings.",
+      "relationship_sentence": "MGUP\u2019s convergence guarantee adapts Adam/AMSGrad-style proof techniques, modifying descent lemmas and bias/variance bounds to accommodate selective large/small per-coordinate steps."
+    },
+    {
+      "title": "Symbolic Discovery of Optimization Algorithms (introducing Lion)",
+      "authors": "Chen et al.",
+      "year": 2023,
+      "role": "Momentum-direction (sign of momentum) optimizer that MGUP is designed to plug into.",
+      "relationship_sentence": "MGUP-Lion exploits Lion\u2019s momentum-direction updates and uses momentum\u2013gradient alignment as a principled criterion to choose which parameters receive larger steps each iteration."
+    },
+    {
+      "title": "AdaBelief Optimizer: Adapting Stepsizes by the Belief in Observed Gradients",
+      "authors": "Juntang Zhuang et al.",
+      "year": 2020,
+      "role": "Introduces the idea of exploiting the relationship between gradient and momentum to modulate per-parameter aggressiveness.",
+      "relationship_sentence": "MGUP\u2019s core selection metric\u2014alignment between momentum and current gradient\u2014echoes AdaBelief\u2019s use of the gradient\u2013momentum discrepancy to gauge trust, but uses it to select a top proportion for larger steps rather than to scale second moments."
+    },
+    {
+      "title": "meProp: Sparsified Back Propagation",
+      "authors": "Xu Sun, Xuancheng Ren, Shuming Ma, Houfeng Wang",
+      "year": 2017,
+      "role": "Early intra-layer selective update scheme using top-k gradients to reduce computation.",
+      "relationship_sentence": "MGUP generalizes meProp-style intra-layer selection by choosing a fixed proportion via momentum\u2013gradient alignment and, crucially, applying smaller non-zero updates to the unselected coordinates to preserve convergence."
+    },
+    {
+      "title": "Error Feedback Fixes SignSGD and other Gradient Compression Schemes",
+      "authors": "Sai Praneeth Karimireddy, Quentin Rebjock, Sebastian U. Stich, Martin Jaggi",
+      "year": 2019,
+      "role": "Theoretical insight on mitigating bias from sparsified/quantized updates to ensure convergence.",
+      "relationship_sentence": "MGUP\u2019s use of non-zero updates on the non-selected coordinates serves a role analogous to error feedback in reducing selection-induced bias, which is key to establishing convergence under selective updates."
+    },
+    {
+      "title": "Coordinate Descent Converges Faster with the Gauss\u2013Southwell Rule Than Random Selection",
+      "authors": "Julie Nutini et al.",
+      "year": 2015,
+      "role": "Greedy coordinate selection principle for maximizing per-iteration progress.",
+      "relationship_sentence": "MGUP\u2019s top-p selection via momentum\u2013gradient alignment acts as a stochastic Gauss\u2013Southwell-like rule, preferentially updating coordinates expected to yield larger descent while maintaining progress on the rest."
+    }
+  ],
+  "synthesis_narrative": "MGUP fuses two lines of ideas: adaptive momentum optimizers and selective per-parameter updates. On the optimizer side, AdamW provides the practical base and analytical scaffolding; MGUP\u2019s convergence argument mirrors Adam/AMSGrad analyses by Reddi et al., adapting descent bounds to accommodate per-iteration, per-coordinate step heterogeneity. Lion extends this plug-and-play story, since MGUP\u2019s momentum\u2013gradient alignment naturally complements Lion\u2019s momentum-direction (sign) updates, yielding MGUP-Lion.\nOn the selection side, intra-layer sparsification such as meProp demonstrated that focusing computation on a top-k subset can be effective, but zeroing out the rest risks bias and unstable convergence. MGUP addresses this by assigning smaller, non-zero steps to unselected coordinates, a design choice aligned with the theoretical lessons of error-feedback in compressed gradients, which shows how to mitigate selection-induced bias to preserve convergence. The criterion MGUP uses\u2014momentum\u2013gradient alignment\u2014connects to AdaBelief\u2019s insight that the gradient\u2013momentum relationship encodes trustworthiness: high alignment merits aggressive updates. Finally, the decision rule echoes Gauss\u2013Southwell coordinate selection, which prioritizes coordinates promising maximal progress, but MGUP deploys it stochastically at scale with momentum-informed signals.\nTogether, these works underpin MGUP\u2019s key contribution: a general, convergence-backed, fine-grained selective update policy that is nearly plug-and-play across momentum-based optimizers and scales to large-model training.",
+  "analysis_timestamp": "2026-01-07T00:05:12.533972"
+}

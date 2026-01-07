@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Physics-Informed Neural Networks: A deep learning framework for solving forward and inverse problems involving nonlinear partial differential equations",
+      "authors": "M. Raissi, P. Perdikaris, G.E. Karniadakis",
+      "year": 2019,
+      "role": "Foundational framework establishing the multi-term PINN loss (IC/BC and PDE residual) that exhibits conflicting objectives.",
+      "relationship_sentence": "ConFIG directly targets the core optimization difficulty introduced by Raissi et al.\u2019s PINN loss\u2014conflicts between data/IC-BC and physics residual terms\u2014by designing update rules that are conflict-free across these components."
+    },
+    {
+      "title": "Multi-Task Learning as Multi-Objective Optimization",
+      "authors": "O. Sener, V. Koltun",
+      "year": 2018,
+      "role": "Pioneered viewing multi-task learning as multi-objective optimization and using a common descent direction (MGDA) via convex combinations of task gradients.",
+      "relationship_sentence": "ConFIG builds on the MGDA principle of finding a direction that descends all objectives, enforcing positive inner products with each loss gradient to achieve conflict-free PINN updates."
+    },
+    {
+      "title": "Gradient Surgery for Multi-Task Learning",
+      "authors": "T. Yu, S. Kumar, A. Gupta, S. Levine, K. Hausman, C. Finn",
+      "year": 2020,
+      "role": "Introduced PCGrad to mitigate conflicting gradients by projecting away components causing negative dot products between task gradients.",
+      "relationship_sentence": "ConFIG extends the gradient-surgery idea from PCGrad by guaranteeing a final update with positive dot products to all loss-specific gradients, rather than only reducing pairwise conflicts."
+    },
+    {
+      "title": "Conflict-Averse Gradient Descent for Multi-Task Learning",
+      "authors": "X. Liu, et al.",
+      "year": 2021,
+      "role": "Formulated conflict-averse updates via optimization under inner-product constraints to control task conflicts while staying close to an average gradient.",
+      "relationship_sentence": "ConFIG adopts a similar conflict-averse philosophy, explicitly imposing positive inner-product constraints and dynamically scaling gradients according to conflict levels, with a convergence guarantee."
+    },
+    {
+      "title": "GradNorm: Gradient Normalization for Adaptive Loss Balancing in Deep Multitask Networks",
+      "authors": "Z. Chen, V. Badrinarayanan, C.-Y. Lee, A. Rabinovich",
+      "year": 2018,
+      "role": "Proposed balancing training rates across tasks by normalizing gradient magnitudes to equalize objective progress.",
+      "relationship_sentence": "ConFIG\u2019s maintenance of consistent optimization rates across PINN losses echoes GradNorm\u2019s goal, but achieves it through conflict-aware gradient scaling rather than global norm equalization."
+    },
+    {
+      "title": "Characterizing Possible Failure Modes of Physics-Informed Neural Networks",
+      "authors": "A. Krishnapriyan, A. Gholami, S. Zhe, R.M. Kirby, M.W. Mahoney",
+      "year": 2021,
+      "role": "Diagnosed PINN failures, highlighting gradient pathologies and loss-term imbalances between data/BC and PDE constraints.",
+      "relationship_sentence": "ConFIG directly addresses the documented PINN failure modes by constructing updates that avoid destructive interference between IC/BC and PDE residual terms."
+    },
+    {
+      "title": "Self-Adaptive Physics-Informed Neural Networks",
+      "authors": "X. Wang, Y. Teng, P. Perdikaris",
+      "year": 2021,
+      "role": "Introduced adaptive weighting of PINN loss terms based on gradient signals to mitigate imbalance during training.",
+      "relationship_sentence": "ConFIG advances beyond adaptive loss weighting by operating in gradient space to enforce positive alignment across terms while adaptively scaling magnitudes, yielding principled conflict-free updates with convergence guarantees."
+    }
+  ],
+  "synthesis_narrative": "ConFIG\u2019s key contribution\u2014producing conflict-free updates for PINNs with guaranteed positive alignment to each loss-specific gradient while maintaining consistent optimization rates\u2014sits at the intersection of two lines of work: (1) multi-objective optimization for deep multi-task learning and (2) training pathologies and weighting strategies in PINNs. On the multi-task side, Sener and Koltun\u2019s MGDA established that a convex combination of task gradients yields a common descent direction, framing conflict handling as multi-objective optimization. PCGrad later operationalized conflict mitigation via gradient surgery, projecting away negative components between task gradients, while CAGrad formalized conflict-averse directions under inner-product constraints to remain close to the average gradient. These ideas inform ConFIG\u2019s core mechanism: ensuring the final update has a positive dot product with every loss gradient, and dynamically modulating magnitudes based on measured conflict.\nOn the PINN side, Raissi et al. introduced the composite PINN objective (IC/BC versus PDE residual) whose imbalance is a central source of failure. Krishnapriyan et al. documented how such conflicts manifest as gradient pathologies and optimization stalls. Responding to these issues, adaptive weighting methods like GradNorm and Self-Adaptive PINNs sought to equalize training progress across terms. ConFIG integrates these threads by moving from heuristic loss weighting to principled gradient-space control: it enforces conflict-free alignment, balances optimization rates, and accelerates with momentum via alternating backpropagation, while providing a convergence proof tailored to the PINN setting.",
+  "analysis_timestamp": "2026-01-06T23:42:48.086952"
+}

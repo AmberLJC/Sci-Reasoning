@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Segment Anything",
+      "authors": "Alexander Kirillov et al.",
+      "year": 2023,
+      "role": "Foundation",
+      "relationship_sentence": "OpenWorldSAM inherits SAM\u2019s promptable mask-generation formulation (points/boxes/masks) and extends this paradigm by adding language as a first-class prompt."
+    },
+    {
+      "title": "Segment Anything in Images and Videos (SAM 2)",
+      "authors": "Alexander Kirillov et al.",
+      "year": 2024,
+      "role": "Baseline",
+      "relationship_sentence": "SAM2 is the core baseline whose pre-trained components OpenWorldSAM freezes while injecting VLM-derived multi-modal embeddings to enable open-vocabulary, language-driven masks."
+    },
+    {
+      "title": "CLIP: Learning Transferable Visual Models From Natural Language Supervision",
+      "authors": "Alec Radford et al.",
+      "year": 2021,
+      "role": "Foundation",
+      "relationship_sentence": "OpenWorldSAM\u2019s use of a lightweight VLM and text embeddings to drive zero-shot category and sentence-level segmentation directly relies on CLIP\u2019s vision\u2013language alignment paradigm."
+    },
+    {
+      "title": "CLIPSeg: Image Segmentation using Text and Image Prompts",
+      "authors": "Timo L\u00fcddecke et al.",
+      "year": 2022,
+      "role": "Inspiration",
+      "relationship_sentence": "CLIPSeg showed that text embeddings can be converted into spatial masks; OpenWorldSAM generalizes this idea by fusing VLM features into SAM2\u2019s promptable decoder for stronger masks and better instance disambiguation."
+    },
+    {
+      "title": "SEEM: Segment Everything Everywhere All at Once",
+      "authors": "Xueyan Zou et al.",
+      "year": 2023,
+      "role": "Inspiration",
+      "relationship_sentence": "SEEM\u2019s unified interface for text, point, and box prompts inspired OpenWorldSAM\u2019s unified prompting; OpenWorldSAM addresses SEEM\u2019s heavier training by freezing SAM2+VLM and training a lightweight head."
+    },
+    {
+      "title": "Grounded-Segment-Anything",
+      "authors": "Shilong Liu et al.",
+      "year": 2023,
+      "role": "Gap Identification",
+      "relationship_sentence": "The text-to-box-to-mask pipeline (Grounding DINO + SAM) motivates OpenWorldSAM to avoid external detectors; OpenWorldSAM instead injects language embeddings into SAM2 and adds positional tie-breakers to resolve multi-instance ambiguities."
+    },
+    {
+      "title": "Segmentation from Natural Language Expressions",
+      "authors": "Ronghang Hu et al.",
+      "year": 2016,
+      "role": "Foundation",
+      "relationship_sentence": "This work formalized referring (sentence-level) segmentation, which OpenWorldSAM explicitly supports via sentence prompts and instance-aware mechanisms."
+    }
+  ],
+  "synthesis_narrative": "OpenWorldSAM\u2019s core innovation\u2014making a promptable segmenter operate in open-vocabulary settings using language\u2014stands on two pillars: promptable mask generation from the SAM family and vision\u2013language alignment from CLIP-style models. Segment Anything (SAM) introduced the promptable segmentation paradigm that OpenWorldSAM preserves, while SAM2 provides the exact baseline system whose pre-trained encoder/decoder are frozen and augmented with multi-modal embeddings. On the language side, CLIP established the transferable text\u2013image embedding space that makes zero-shot category and sentence prompting feasible; CLIPSeg then demonstrated that text embeddings can be projected into pixel-level masks, directly inspiring OpenWorldSAM\u2019s strategy of fusing compact VLM features with a powerful mask generator. SEEM showed that a single model can support diverse prompts (text, points, boxes), shaping OpenWorldSAM\u2019s unified prompting objective; however, SEEM\u2019s training and model complexity motivate OpenWorldSAM\u2019s efficiency-first design that freezes SAM2 and the VLM and trains only a small head. The widely used Grounded-SAM pipeline exposed practical limitations of text-to-box grounding (dependency on an external detector and ambiguity across instances), motivating OpenWorldSAM\u2019s direct language\u2013mask fusion and its positional tie-breaker embeddings for instance awareness. Finally, classic referring segmentation work by Hu et al. formalized sentence-to-instance masks, which OpenWorldSAM directly targets by supporting both category-level and free-form sentence prompts in an open-world setting.",
+  "analysis_timestamp": "2026-01-06T23:08:23.941576"
+}

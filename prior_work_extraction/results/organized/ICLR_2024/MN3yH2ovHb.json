@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Zero-1-to-3: Zero-shot Novel View Synthesis from a Single Image",
+      "authors": "Liu et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "SyncDreamer directly builds on Zero-1-to-3\u2019s camera-conditioned 2D diffusion for single-image novel view synthesis and addresses its key limitation\u2014lack of multi-view geometry/color consistency\u2014by jointly sampling multiple views with synchronized denoising."
+    },
+    {
+      "title": "MultiDiffusion: Fusing Diffusion Paths for Controlled Image Generation",
+      "authors": "Bar-Tal et al.",
+      "year": 2023,
+      "arxiv_id": "2302.08113",
+      "role": "Inspiration",
+      "relationship_sentence": "The idea of coordinating multiple diffusion trajectories during a single reverse process informs SyncDreamer\u2019s synchronized multiview denoising, which fuses per-view states to enforce global consistency."
+    },
+    {
+      "title": "MVDream: Multi-view Diffusion for 3D Generation",
+      "authors": "Wang et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Extension",
+      "relationship_sentence": "MVDream showed that a diffusion model can learn a joint distribution over multiple camera views via cross-view interactions, which SyncDreamer extends to the image-conditioned setting with explicit 3D-aware feature attention for correspondence."
+    },
+    {
+      "title": "SV3D: Novel Multiview Synthesis and 3D Generation from a Single Image",
+      "authors": "Watson et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "SV3D demonstrated single-image multi-view generation using video diffusion but still struggled with strict geometric/color consistency, motivating SyncDreamer\u2019s explicit synchronization across views in one denoising pass."
+    },
+    {
+      "title": "pixelNeRF: Neural Radiance Fields from One or Few Images",
+      "authors": "Yu et al.",
+      "year": 2021,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "pixelNeRF\u2019s geometry-aware feature lifting/projection across views underlies SyncDreamer\u2019s 3D-aware attention, which correlates corresponding features across camera poses during denoising."
+    },
+    {
+      "title": "SynSin: End-to-end View Synthesis from a Single Image",
+      "authors": "Wiles et al.",
+      "year": 2020,
+      "arxiv_id": null,
+      "role": "Related Problem",
+      "relationship_sentence": "SynSin\u2019s principle of establishing cross-view correspondences by lifting and warping features inspires SyncDreamer\u2019s feature-level cross-view correlation mechanism embedded in the diffusion process."
+    }
+  ],
+  "synthesis_narrative": "Zero-1-to-3 established that a large 2D diffusion model, conditioned on camera pose and a single input image, can produce plausible novel views; however, the sampling is per-view and often yields geometry and color drift across views. MultiDiffusion introduced the notion that multiple diffusion trajectories can be synchronized during a single reverse process by aggregating intermediate states, enabling global constraints to be satisfied across concurrent generations. MVDream went further by modeling a joint distribution over multiple views, using cross-view interactions to encourage consistency when generating a set of images for 3D use cases. Meanwhile, SV3D leveraged video diffusion to generate view sequences from a single image, gaining some temporal coherence but still lacking strict multi-view geometric agreement. Earlier, pixelNeRF pioneered geometry-aware feature projection along camera rays to aggregate information across views, demonstrating how explicit 3D correspondences stabilize view synthesis. SynSin similarly showed that lifting and warping features can preserve cross-view consistency in end-to-end single-image novel view synthesis. Together these works exposed a clear opportunity: combine synchronized multi-trajectory diffusion with explicit 3D correspondences to truly model a joint multiview distribution. SyncDreamer takes this next step by jointly denoising all target views in one process and enforcing 3D-aware feature attention that correlates corresponding regions across poses, translating the synchronization and joint-distribution insights into a single-image\u2013conditioned, multiview-consistent generator.",
+  "target_paper": {
+    "title": "SyncDreamer: Generating Multiview-consistent Images from a Single-view Image",
+    "authors": "Yuan Liu, Cheng Lin, Zijiao Zeng, Xiaoxiao Long, Lingjie Liu, Taku Komura, Wenping Wang",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "diffusion model; single-view reconstruction; 3D generation; generative models",
+    "abstract": "In this paper, we present a novel diffusion model called SyncDreamer that generates multiview-consistent images from a single-view image. Using pretrained large-scale 2D diffusion models, recent work Zero123 demonstrates the ability to generate plausible novel views from a single-view image of an object. However, maintaining consistency in geometry and colors for the generated images remains a challenge. To address this issue, we propose a synchronized multiview diffusion model that models the joint probability distribution of multiview images, enabling the generation of multiview-consistent images in a single reverse process. SyncDreamer synchronizes the intermediate states of all the generated images at every step of the reverse process through a 3D-aware feature attention mechanism that correlates the corresponding features across different views. Experiments show that SyncDreamer generates images with high consistency across different views, thus making it well-suited for various 3",
+    "openreview_id": "MN3yH2ovHb",
+    "forum_id": "MN3yH2ovHb"
+  },
+  "analysis_timestamp": "2026-01-06T22:45:13.795085"
+}

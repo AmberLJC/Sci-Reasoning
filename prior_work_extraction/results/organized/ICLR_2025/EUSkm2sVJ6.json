@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Membership Inference Attacks against Machine Learning Models",
+      "authors": "Reza Shokri et al.",
+      "year": 2017,
+      "arxiv_id": "1610.05820",
+      "role": "Foundation",
+      "relationship_sentence": "This work established per-example membership scoring and calibration via shadow models, which the current paper repurposes\u2014after debiasing\u2014as the core sufficient statistics to estimate the fraction of a claimant dataset used in training."
+    },
+    {
+      "title": "Privacy Risk in Machine Learning: Analyzing the Connection to Overfitting",
+      "authors": "Samuel Yeom et al.",
+      "year": 2018,
+      "arxiv_id": "1709.01604",
+      "role": "Inspiration",
+      "relationship_sentence": "The simple loss-threshold membership test from Yeom et al. provides scalable, per-sample membership guesses that the proposed method explicitly debiases and aggregates to infer dataset usage cardinality."
+    },
+    {
+      "title": "Membership Inference Attacks From First Principles",
+      "authors": "Nicholas Carlini et al.",
+      "year": 2022,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "By casting membership testing as a likelihood-ratio problem and linking calibrated posteriors to optimal inference, this work motivates the paper\u2019s use of debiased per-sample posteriors and its claim of matching the optimal MLE while being far more efficient."
+    },
+    {
+      "title": "Comprehensive Privacy Analysis of Deep Learning: Passive and Active White-box Inference Attacks against Centralized and Federated Learning",
+      "authors": "Milad Nasr et al.",
+      "year": 2019,
+      "arxiv_id": null,
+      "role": "Extension",
+      "relationship_sentence": "Stronger white-box membership signals from Nasr et al. serve as plug-in membership scores whose systematic biases the new algorithm corrects before aggregating them to quantify dataset usage."
+    },
+    {
+      "title": "Radioactive Data: Tracing through training",
+      "authors": "Alexandre Sablayrolles et al.",
+      "year": 2020,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "This dataset-usage auditing approach framed the task as a binary presence test via data watermarking, a limitation that the present work overcomes by estimating the exact usage proportion without modifying the data."
+    },
+    {
+      "title": "Knock Knock, Who\u2019s There? Membership Inference on Aggregate Location Data",
+      "authors": "Ioannis Pyrgelis et al.",
+      "year": 2018,
+      "arxiv_id": null,
+      "role": "Related Problem",
+      "relationship_sentence": "Demonstrating that aggregating individual-membership evidence can answer a binary group-inclusion query directly informs the paper\u2019s move to aggregate debiased membership posteriors to estimate group cardinality rather than mere presence."
+    }
+  ],
+  "synthesis_narrative": "Early work on membership inference established that model outputs carry per-example signals distinguishing training members from non-members; shadow-model calibration provided a way to turn those outputs into membership scores with measurable error rates. A simple and scalable refinement showed that the loss itself can act as an effective membership statistic, motivating practical, per-sample guesses that are easy to compute. White-box analyses then expanded the space of usable signals and clarified how architectural and training choices shape the score distributions for members versus non-members. A first-principles treatment cast membership testing as a likelihood-ratio problem, connecting well-calibrated posteriors to optimal decision rules and implicitly to maximum-likelihood mixture estimation when multiple examples are considered. In parallel, dataset-usage auditing emerged as a binary presence test\u2014most notably via data watermarking that can verify if any of a marked dataset was used\u2014while work on aggregate privacy demonstrated that summing individual membership evidence can answer group-level inclusion questions, albeit still as yes/no decisions. Taken together, these lines revealed two opportunities: per-sample membership posteriors can be calibrated and combined, and current dataset-usage audits are overly binary. The natural next step is to debias per-example membership guesses and aggregate them as sufficient statistics for estimating the mixture proportion of members within a claimant dataset, yielding an estimator that matches the optimal MLE implied by likelihood-ratio theory while avoiding the heavy computation of explicit mixture-model fitting.",
+  "target_paper": {
+    "title": "How much of my dataset did you use? Quantitative Data Usage Inference in Machine Learning",
+    "authors": "Yao Tong, Jiayuan Ye, Sajjad Zarifzadeh, Reza Shokri",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "oral",
+    "keywords": "Machine Learning, Privacy, Dataset Usage Inference, Dataset Ownership, Membership Inference Attack, Dataset Copyright",
+    "abstract": "How much of my data was used to train a machine learning model? This is a critical question for data owners assessing the risk of unauthorized usage of their data to train models. However, previous work mistakenly treats this as a binary problem\u2014inferring whether all-or-none or any-or-none of the data was used\u2014which is fragile when faced with real, non-binary data usage risks. To address this, we propose a fine-grained analysis called Dataset Usage Cardinality Inference (DUCI), which estimates the exact proportion of data used. Our algorithm, leveraging debiased membership guesses, matches the performance of the optimal MLE approach (with a maximum error <0.1) but with significantly lower (e.g., $300 \\times$ less) computational cost.",
+    "openreview_id": "EUSkm2sVJ6",
+    "forum_id": "EUSkm2sVJ6"
+  },
+  "analysis_timestamp": "2026-01-06T18:27:44.349501"
+}

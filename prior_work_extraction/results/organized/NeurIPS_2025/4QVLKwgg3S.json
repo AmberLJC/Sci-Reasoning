@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Speculative Decoding",
+      "authors": "Yair Leviathan et al.",
+      "year": 2023,
+      "role": "Core algorithmic primitive",
+      "relationship_sentence": "SpecEdge builds directly on speculative decoding\u2019s draft-and-verify paradigm, but relocates the drafter to edge GPUs and restricts cross-machine exchange to token sequences, enabling WAN-friendly, low-bandwidth collaboration with a server verifier."
+    },
+    {
+      "title": "Medusa: Simple LLM Inference Acceleration with Multiple Decoding Heads",
+      "authors": "Xiao Liu et al.",
+      "year": 2023,
+      "role": "Improved drafting efficiency",
+      "relationship_sentence": "SpecEdge\u2019s proactive edge drafting echoes Medusa\u2019s insight that generating multiple lookahead tokens cheaply can raise verification acceptance and throughput, adapting the idea to an edge\u2013server split to overlap drafting with server verification."
+    },
+    {
+      "title": "EAGLE: Efficient Speculative Decoding for Autoregressive LMs",
+      "authors": "Zhe Chen et al.",
+      "year": 2023,
+      "role": "Acceptance-rate/verification optimization",
+      "relationship_sentence": "SpecEdge incorporates EAGLE-like principles for balancing drafter strength and verification cost to maximize accepted tokens per step, but operationalizes them across devices by tuning edge draft depth to network latency and server load."
+    },
+    {
+      "title": "vLLM: Easy, Fast, and Cheap LLM Serving with PagedAttention",
+      "authors": "Tianyi Zhang et al.",
+      "year": 2023,
+      "role": "High-throughput serving and batching",
+      "relationship_sentence": "SpecEdge\u2019s pipeline-aware scheduling that interleaves multiple user requests draws on vLLM\u2019s continuous batching and KV-cache\u2013aware scheduling to keep the server verifier saturated while edge drafting proceeds in parallel."
+    },
+    {
+      "title": "DistServe: Disaggregated Inference for Large Language Models",
+      "authors": "Ziheng Wang et al.",
+      "year": 2024,
+      "role": "System decomposition and token-centric communication lessons",
+      "relationship_sentence": "SpecEdge extends DistServe\u2019s system-level insight that token-level granularity and decoupling can improve utilization, but applies it to an edge\u2013server setting to minimize cross-site bandwidth by exchanging only token outputs."
+    },
+    {
+      "title": "Neurosurgeon: Collaborative Intelligence Between the Cloud and Mobile Edge",
+      "authors": "Youngjoo Kang et al.",
+      "year": 2017,
+      "role": "Foundational split-computing for edge/cloud",
+      "relationship_sentence": "SpecEdge inherits the core principle of partitioning computation between edge and cloud from Neurosurgeon, but specializes it for autoregressive LLMs using speculative decoding to avoid heavyweight activation transfers."
+    }
+  ],
+  "synthesis_narrative": "SpecEdge\u2019s key contribution\u2014an edge-assisted serving framework that splits LLM inference via speculative decoding while exchanging only tokens\u2014emerges at the intersection of speculative decoding algorithms and high-throughput serving systems. The foundational catalyst is speculative decoding, which introduced drafting by a cheap model and verification by a strong model; SpecEdge translates this primitive into a cross-device protocol, placing the drafter on consumer-grade edge GPUs and constraining communication to token streams for WAN efficiency. Advances like Medusa and EAGLE refined drafting efficiency and acceptance rates; SpecEdge leverages these insights to design proactive edge drafting depths that maximize accepted tokens given network latency and server load, overlapping edge generation with server verification to reduce per-token latency. On the systems side, vLLM established continuous batching and KV-aware scheduling to keep accelerators saturated; SpecEdge adapts these ideas to a two-tier pipeline, interleaving server-side verification across many users while edge devices independently draft future tokens. DistServe showed that disaggregation and token-centric interfaces can unlock utilization gains; SpecEdge applies a similar philosophy across the edge\u2013cloud boundary, avoiding bulky activation transfers. Finally, classic split-computing from Neurosurgeon provides the architectural precedent for collaborative edge\u2013cloud intelligence, which SpecEdge tailors to the autoregressive, token-stepped nature of LLM serving. Together, these works directly inform SpecEdge\u2019s proactive drafting, token-only communication, and pipeline-aware scheduling that yield higher server throughput and better cost efficiency.",
+  "analysis_timestamp": "2026-01-07T00:21:32.259969"
+}

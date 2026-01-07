@@ -1,0 +1,57 @@
+{
+  "prior_works": [
+    {
+      "title": "Outrageously Large Neural Networks: The Sparsely-Gated Mixture-of-Experts Layer",
+      "authors": "Noam Shazeer et al.",
+      "year": 2017,
+      "arxiv_id": "1701.06538",
+      "role": "Foundation",
+      "relationship_sentence": "This work introduced conditional computation via a learned router that sends inputs to specialized experts, providing the core idea of expert specialization that SMALLTALK LM retains while reimagining experts as independently trained language models without intra-step communication."
+    },
+    {
+      "title": "GShard: Scaling Giant Models with Conditional Computation and Automatic Sharding",
+      "authors": "Roman Lepikhin et al.",
+      "year": 2020,
+      "arxiv_id": "2006.16668",
+      "role": "Gap Identification",
+      "relationship_sentence": "GShard demonstrated that large MoE LMs achieve strong scaling but require high-bandwidth, tightly synchronized routing and communication across devices, a practical bottleneck that SMALLTALK LM removes by fully decoupling experts and training them asynchronously."
+    },
+    {
+      "title": "Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity",
+      "authors": "William Fedus et al.",
+      "year": 2021,
+      "arxiv_id": "2101.03961",
+      "role": "Baseline",
+      "relationship_sentence": "Switch established efficient single-expert routing for each token, and SMALLTALK LM preserves the \u2018one-expert\u2019 efficiency at inference by using a lightweight prefix-based router to select one expert model for the whole sequence while avoiding Switch\u2019s synchronous, communication-heavy training."
+    },
+    {
+      "title": "GLaM: Efficient Scaling of Language Models with Mixture-of-Experts",
+      "authors": "Nan Du et al.",
+      "year": 2021,
+      "arxiv_id": "2112.06905",
+      "role": "Gap Identification",
+      "relationship_sentence": "GLaM showed MoE specialization and strong perplexity/compute trade-offs but still relied on a centralized router and shared training pipeline, a coupling that SMALLTALK LM sidesteps by training experts independently and routing at sequence level without full-corpus clustering."
+    },
+    {
+      "title": "Don't Stop Pretraining: Adapt Language Models to Domains and Tasks",
+      "authors": "Suchin Gururangan et al.",
+      "year": 2020,
+      "arxiv_id": "2004.10964",
+      "role": "Inspiration",
+      "relationship_sentence": "By demonstrating that domain-specialized pretraining significantly improves performance, this work motivates training multiple specialist LMs on different data regions that SMALLTALK LM then selects among using only a short prefix at inference."
+    }
+  ],
+  "synthesis_narrative": "Sparsely-gated mixture-of-experts (MoE) established the central insight that learned routing can activate only a few specialized components, with Shazeer et al. showing that conditional computation and expert specialization yield large efficiency gains. GShard scaled this recipe for language models, but made stark the practical cost: high-bandwidth, tightly synchronized communication among devices for per-token routing and load balancing. Switch Transformers simplified MoE by routing each token to a single expert, preserving computational efficiency while still relying on a monolithic, communication-heavy training loop. GLaM further demonstrated that large-scale MoE delivers superior perplexity for comparable training FLOPs, yet continued to depend on centralized routers and shared training pipelines that entangle experts. In parallel, Gururangan et al. showed that pretraining on domain-specific slices of data can produce strong specialists, indicating that specialization emerges even without shared routers when data partitions are coherent.\nTogether these works exposed a clear opportunity: retain MoE-like specialization and single-expert efficiency while eliminating the communication and synchronization burden of token-level routing. The natural next step is to train specialists as independent language models on distinct data regions and replace in-flight routing with a lightweight sequence-level router driven by short prefixes. This synthesis yields an almost asynchronous training regime with minimal cross-node bandwidth, avoids full-corpus clustering or metadata dependencies, and preserves near-dense inference cost while realizing MoE-style gains in perplexity and downstream performance.",
+  "target_paper": {
+    "title": "No Need to Talk: Asynchronous Mixture of Language Models",
+    "authors": "Anastasiia Filippova, Angelos Katharopoulos, David Grangier, Ronan Collobert",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "language models, distributed learning, divide and conquer, efficient inference",
+    "abstract": "We introduce SMALLTALK LM, an innovative method for training a mixture of language models in an almost asynchronous manner. Each\nmodel of the mixture specializes in distinct parts of the data distribution, without the need of high-bandwidth communication between the nodes training each model. At inference, a lightweight router directs a given sequence to a single expert, according to a short prefix. This inference scheme naturally uses a fraction of the parameters from the overall mixture model. Unlike prior works on asynchronous LLM training, our routing method does not rely on full corpus clustering or access to metadata, making it more suitable for real-world applications.  Our experiments on language modeling demonstrate that SMALLTALK LM achieves significantly lower perplexity than dense model baselines for the same total training FLOPs and an almost identical inference cost. Finally, in our downstream evaluations we outperform the dense baseline on 75% of the tasks.",
+    "openreview_id": "pHOH8FVrTp",
+    "forum_id": "pHOH8FVrTp"
+  },
+  "analysis_timestamp": "2026-01-06T07:06:12.770498"
+}

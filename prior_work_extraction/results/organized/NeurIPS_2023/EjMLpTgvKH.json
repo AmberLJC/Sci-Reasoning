@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Boltzmann Generators: Sampling Equilibrium States of Many-Body Systems with Deep Learning",
+      "authors": "Frank No\u00e9, Simon Olsson, Jan K\u00f6hler, Hao Wu",
+      "year": 2019,
+      "role": "Direct algorithmic inspiration for flow-based global moves targeting Boltzmann distributions",
+      "relationship_sentence": "Timewarp extends Boltzmann Generators by learning a conditional, time-coarsened transition operator with a normalizing flow and using Metropolis\u2013Hastings correction, enabling large, dynamics-informed jumps rather than unconditional equilibrium sampling."
+    },
+    {
+      "title": "Flow-based sampling for fast Monte Carlo on toroidal lattices",
+      "authors": "Michael S. Albergo, Gurtej Kanwar, Phiala E. Shanahan",
+      "year": 2019,
+      "role": "Methodological foundation for MH-corrected normalizing-flow proposals in physics",
+      "relationship_sentence": "Timewarp adopts the core principle that normalizing-flow proposals can be embedded in an MH scheme to retain exactness while making nonlocal moves, repurposing it from lattice field theory to molecular equilibrium sampling with dynamics-learned proposals."
+    },
+    {
+      "title": "Nonequilibrium candidate Monte Carlo is an efficient tool for equilibrium simulation",
+      "authors": "Robert A. Nilmeier, Gavin E. Crooks, David L. Minh, John D. Chodera",
+      "year": 2011,
+      "role": "Conceptual precursor for using guided, large, nonlocal proposals with MH acceptance to preserve detailed balance",
+      "relationship_sentence": "Timewarp similarly uses informed proposals\u2014here learned from MD time-coarsened dynamics\u2014and corrects them by MH to maintain the Boltzmann target, echoing NCMC\u2019s strategy of leveraging informative moves without biasing equilibrium."
+    },
+    {
+      "title": "VAMPnets for deep learning of molecular kinetics",
+      "authors": "Andreas Mardt, Luca Pasquali, Hao Wu, Frank No\u00e9",
+      "year": 2018,
+      "role": "Domain-specific methodology for learning time-lagged kinetic operators from MD data",
+      "relationship_sentence": "Timewarp builds on the VAMP/VAMPnets idea of modeling dynamics at a lag time \u03c4 by instead learning a conditional generative transition (p(x_{t+\u03c4}|x_t)) that can propose long-time jumps used within MCMC."
+    },
+    {
+      "title": "Time-lagged autoencoders: Deep learning of slow collective variables for molecular kinetics",
+      "authors": "Christoph Wehmeyer, Frank No\u00e9",
+      "year": 2018,
+      "role": "Representation-learning precursor for capturing slow, time-coarsened dynamics from trajectory pairs",
+      "relationship_sentence": "Timewarp leverages the same time-lagged supervision signal (pairs separated by \u03c4) but trains a normalizing flow to generate future states, turning slow-dynamics learning into a proposal mechanism."
+    },
+    {
+      "title": "Transport Map Accelerated Bayesian Inference",
+      "authors": "Matthew D. Parno, Youssef M. Marzouk",
+      "year": 2018,
+      "role": "Methodological foundation: learned transport maps to precondition/accelerate MCMC while preserving exactness",
+      "relationship_sentence": "Timewarp can be viewed as a conditional transport map (parameterized by a normalizing flow) that moves states forward in coarse time and is embedded in MH to ensure unbiased Boltzmann sampling, mirroring transport-map\u2013accelerated MCMC principles."
+    }
+  ],
+  "synthesis_narrative": "Timewarp\u2019s core contribution\u2014accelerating equilibrium sampling by learning time-coarsened molecular dynamics and deploying them as large MCMC proposals\u2014sits at the intersection of flow-based sampling, transport maps, and data-driven kinetic modeling. Boltzmann Generators demonstrated that normalizing flows can learn global moves for Boltzmann distributions and be combined with reweighting or MH correction; Timewarp generalizes this to conditional transitions p(x_{t+\u03c4}|x_t), transforming flows from equilibrium samplers into dynamics-informed proposal mechanisms. Flow-based sampling for lattice field theory established that MH-corrected flow proposals can remain exact while dramatically improving exploration in rugged, high-dimensional physics systems\u2014an idea Timewarp repurposes for molecular systems. In parallel, transport-map accelerated MCMC provided the blueprint for learning mappings that precondition samplers without biasing targets; Timewarp instantiates a conditional transport that advances states by a large effective time step. From the molecular kinetics side, VAMP/VAMPnets and time-lagged autoencoders formalized how to learn slow processes from MD using lagged pairs, directly motivating Timewarp\u2019s training signal for time-coarsened dynamics. Finally, Nonequilibrium Candidate Monte Carlo showed how guided, nonlocal proposals can be MH-corrected to preserve equilibrium; Timewarp mirrors this strategy with proposals learned from trajectories. Together, these threads yield a transferable, offline-trained normalizing-flow operator that proposes millisecond-scale effective jumps while MH correction guarantees exact Boltzmann sampling.",
+  "analysis_timestamp": "2026-01-07T00:02:04.851236"
+}

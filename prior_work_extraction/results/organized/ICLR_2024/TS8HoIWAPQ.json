@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "N-BEATS: Neural basis expansion analysis for interpretable time series forecasting",
+      "authors": "Boris N. Oreshkin et al.",
+      "year": 2020,
+      "arxiv_id": "1905.10437",
+      "role": "Extension",
+      "relationship_sentence": "The proposed model directly extends N-BEATS\u2019 doubly residual stacking by defining per-stack feature measures from its residual/feature-extraction operators and aligning these measures across domains while preserving N-BEATS\u2019 forecasting head."
+    },
+    {
+      "title": "Interpolating between Optimal Transport and Maximum Mean Discrepancy using Sinkhorn Divergences",
+      "authors": "Jean Feydy et al.",
+      "year": 2019,
+      "arxiv_id": "1810.08278",
+      "role": "Foundation",
+      "relationship_sentence": "The alignment loss is precisely the Sinkhorn divergence introduced here, providing a stable, unbiased OT-based distance to compare empirical feature distributions between domains at each N-BEATS stack."
+    },
+    {
+      "title": "Sinkhorn Distances: Lightspeed Computation of Optimal Transport",
+      "authors": "Marco Cuturi",
+      "year": 2013,
+      "arxiv_id": "1306.0895",
+      "role": "Inspiration",
+      "relationship_sentence": "Efficient entropic OT and Sinkhorn iterations from this work make differentiable, minibatch-scale distribution alignment computationally feasible for stack-wise feature matching during training."
+    },
+    {
+      "title": "Optimal Transport for Domain Adaptation",
+      "authors": "Nicolas Courty et al.",
+      "year": 2017,
+      "arxiv_id": "1507.00504",
+      "role": "Inspiration",
+      "relationship_sentence": "This paper established OT-based alignment as an effective principle for learning domain-invariant representations, directly motivating the use of OT (via Sinkhorn divergence) to align feature measures across source time series domains."
+    },
+    {
+      "title": "Domain-Adversarial Training of Neural Networks",
+      "authors": "Yaroslav Ganin et al.",
+      "year": 2016,
+      "arxiv_id": "1505.07818",
+      "role": "Gap Identification",
+      "relationship_sentence": "Adversarial feature alignment framed the goal of domain invariance but suffers from instability and implicit metrics, a limitation addressed here by explicit metric alignment of stack-wise features using Sinkhorn divergence."
+    },
+    {
+      "title": "Learning Transferable Features with Deep Adaptation Networks",
+      "authors": "Mingsheng Long et al.",
+      "year": 2015,
+      "arxiv_id": "1502.02791",
+      "role": "Gap Identification",
+      "relationship_sentence": "MMD-based alignment introduced the ERM+alignment recipe that this work adopts, while its moment-matching limitations (ignoring geometry) are overcome by OT-based Sinkhorn divergence on per-stack feature distributions."
+    },
+    {
+      "title": "Invariant Risk Minimization",
+      "authors": "Martin Arjovsky et al.",
+      "year": 2019,
+      "arxiv_id": "1907.02893",
+      "role": "Foundation",
+      "relationship_sentence": "IRM formalized learning predictors invariant across environments, directly informing the paper\u2019s objective of learning invariant features across multiple source domains via explicit stack-wise distribution alignment."
+    }
+  ],
+  "synthesis_narrative": "N-BEATS introduced a doubly residual stacking architecture in which each block extracts features and passes residuals downstream; this design yields interpretable decompositions and strong forecasting performance. Sinkhorn divergences provided a principled, unbiased optimal transport discrepancy for comparing empirical distributions, capturing geometry while remaining differentiable and sample efficient. The underlying entropic optimal transport and Sinkhorn iterations made large-scale, minibatch computations practical for deep learning settings. Earlier work on optimal transport for domain adaptation demonstrated that OT-based alignment can learn domain-invariant representations that respect the geometry of data distributions, offering advantages over simple moment matching. Domain-adversarial training established the goal of learning invariant features via adversarial loss but exposed instability and the lack of an explicit metric. Deep Adaptation Networks showed an effective ERM-plus-alignment template using MMD, yet moment matching can blur structure by ignoring transport geometry. Invariant Risk Minimization formulated an explicit objective to seek predictors stable across environments, sharpening the conceptual target of invariance for multi-domain learning.\n\nTogether, these works suggested a path: combine a powerful, stack-structured forecaster whose intermediate features are interpretable (N-BEATS) with a principled, efficient geometric alignment mechanism (Sinkhorn-based OT) to explicitly enforce invariance across domains. The natural next step is to treat each stack\u2019s extracted features as empirical measures and align them across source domains during training, following the ERM-plus-alignment recipe but replacing adversarial and MMD losses with a metric-grounded Sinkhorn divergence. This synthesis addresses instability and geometry-ignorance while preserving forecasting strength, yielding stack-wise invariant representations tailored for domain-generalized time series forecasting.",
+  "target_paper": {
+    "title": "Feature-aligned N-BEATS with Sinkhorn divergence",
+    "authors": "Joonhun Lee, Myeongho Jeon, Myungjoo Kang, Kyunghyun Park",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Time series forecasting, Deep learning, Domain generalization, Representation learning, Sinkhorn divergence",
+    "abstract": "We propose Feature-aligned N-BEATS as a domain-generalized time series forecasting model. It is a nontrivial extension of N-BEATS with doubly residual stacking principle (Oreshkin et al. [45]) into a representation learning framework. In particular, it revolves around marginal feature probability measures induced by the intricate composition of residual and feature extracting operators of N-BEATS in each stack and aligns them stack-wise via an approximate of an optimal transport distance referred to as the Sinkhorn divergence. The training loss consists of an empirical risk minimization from multiple source domains, i.e., forecasting loss, and an alignment loss calculated with the Sinkhorn divergence, which allows the model to learn invariant features stack-wise across multiple source data sequences while retaining N-BEATS\u2019s interpretable design and forecasting power. Comprehensive experimental evaluations with ablation studies are provided and the corresponding results demonstrate the",
+    "openreview_id": "TS8HoIWAPQ",
+    "forum_id": "TS8HoIWAPQ"
+  },
+  "analysis_timestamp": "2026-01-06T13:32:20.515122"
+}

@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Editing Factual Knowledge in Language Models",
+      "authors": "Nicola De Cao et al.",
+      "year": 2021,
+      "role": "Foundation",
+      "relationship_sentence": "This paper formalized parametric knowledge editing\u2014targeted updates to a language model\u2019s parameters for specific facts\u2014which AlphaEdit adopts while adding a null-space preservation constraint to keep unaffected knowledge unchanged."
+    },
+    {
+      "title": "Fast Model Editing at Scale",
+      "authors": "Eric Mitchell et al.",
+      "year": 2022,
+      "role": "Baseline",
+      "relationship_sentence": "Introducing MEND (learned low-rank parametric edits) and SERAC (memory-based edits), this work established scalable editing baselines that AlphaEdit can augment by projecting their proposed parameter updates into the null space of preserved-knowledge sensitivities to avoid collateral changes."
+    },
+    {
+      "title": "Locating and Editing Factual Associations in GPT",
+      "authors": "Kevin Meng et al.",
+      "year": 2022,
+      "role": "Baseline",
+      "relationship_sentence": "ROME operationalized the locate-then-edit paradigm with rank-one parameter updates in specific MLP layers; AlphaEdit directly modifies this step by replacing unconstrained updates with null-space\u2013projected updates to guarantee invariance on preserved queries."
+    },
+    {
+      "title": "Mass-Editing Memory in a Transformer",
+      "authors": "Kevin Meng et al.",
+      "year": 2023,
+      "role": "Gap Identification",
+      "relationship_sentence": "MEMIT exposed that sequential or mass edits in parametric methods can accumulate interference and degrade previously preserved knowledge, a limitation AlphaEdit addresses by enforcing a null-space constraint that provably leaves preserved outputs unchanged."
+    },
+    {
+      "title": "Gradient Episodic Memory for Continual Learning",
+      "authors": "David Lopez-Paz et al.",
+      "year": 2017,
+      "role": "Inspiration",
+      "relationship_sentence": "GEM\u2019s core idea of projecting updates to satisfy constraints on stored examples directly inspires AlphaEdit\u2019s projection-based approach, here instantiated as projecting parameter perturbations into the null space of preserved-knowledge Jacobians for non-interference."
+    },
+    {
+      "title": "Efficient Lifelong Learning with A-GEM",
+      "authors": "Arslan Chaudhry et al.",
+      "year": 2019,
+      "role": "Inspiration",
+      "relationship_sentence": "A-GEM\u2019s efficient gradient projection to prevent interference in continual learning motivates AlphaEdit\u2019s efficient computation of projection subspaces when enforcing invariance over many preserved queries during sequential editing."
+    }
+  ],
+  "synthesis_narrative": "AlphaEdit sits squarely within the locate-then-edit tradition of knowledge editing while introducing a principled non-interference mechanism. The problem formulation\u2014parametrically updating a language model to correct or inject facts\u2014was crystalized by De Cao et al., which framed the task and evaluation that AlphaEdit retains. Practical editing machinery was then advanced by Mitchell et al., who proposed MEND (learned low-rank parametric updates) and SERAC (non-parametric memory), and by Meng et al.\u2019s ROME, which precisely locates intervention sites and applies rank-one updates. However, MEMIT revealed a central weakness of parametric editors: sequential or mass edits often disrupt previously preserved knowledge, creating cascading interference. AlphaEdit directly targets this weakness. Drawing on projection-based constraints from continual learning\u2014particularly GEM/A-GEM\u2019s gradient-projection viewpoint\u2014AlphaEdit reformulates the edit step as projecting any candidate parameter perturbation (e.g., from ROME or MEND) onto the null space defined by preserved-knowledge sensitivities. This yields a theoretical guarantee: queries about preserved knowledge produce unchanged outputs after the edit. In effect, AlphaEdit is a drop-in constraint that can wrap around leading editors, converting their unconstrained deltas into non-interfering ones and specifically addressing the sequential-edit degradation surfaced by MEMIT. The result is a principled bridge between knowledge editing and continual-learning projections, delivering robust, provably non-disruptive edits.",
+  "analysis_timestamp": "2026-01-06T23:09:26.608184"
+}

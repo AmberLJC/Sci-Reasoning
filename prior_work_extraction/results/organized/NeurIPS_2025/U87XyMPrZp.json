@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Jonathan Ho, Ajay Jain, Pieter Abbeel",
+      "year": 2020,
+      "role": "Foundational diffusion modeling framework",
+      "relationship_sentence": "ConforMix operates by modifying the reverse diffusion process at inference time, a procedure that directly builds on the DDPM formulation of forward/reverse noising and denoising dynamics."
+    },
+    {
+      "title": "Diffusion Models Beat GANs on Image Synthesis",
+      "authors": "Prafulla Dhariwal, Alex Nichol",
+      "year": 2021,
+      "role": "Introduced classifier guidance for diffusion",
+      "relationship_sentence": "ConforMix\u2019s guidance component draws directly on classifier-guided sampling to steer diffusion trajectories, adapting the idea to target diverse biomolecular conformations rather than class labels."
+    },
+    {
+      "title": "Classifier-Free Diffusion Guidance",
+      "authors": "Jonathan Ho, Tim Salimans",
+      "year": 2021,
+      "role": "Guidance without an external classifier",
+      "relationship_sentence": "By leveraging conditional/unconditional score interpolation, classifier-free guidance informs ConforMix\u2019s practical, model-agnostic guidance mechanism that can be applied without training a separate classifier."
+    },
+    {
+      "title": "DiffDock: Diffusion Steps, Twists, and Turns for Molecular Docking",
+      "authors": "Giuseppe Corso, Hannes St\u00e4rk, Bowen Jing, Regina Barzilay, Tommi S. Jaakkola",
+      "year": 2023,
+      "role": "Inference-time scoring/filtering in molecular diffusion",
+      "relationship_sentence": "ConforMix\u2019s filtering stage parallels DiffDock\u2019s confidence-based ranking of diffusion samples, using learned scoring to cull implausible structures and enrich physically realistic hypotheses."
+    },
+    {
+      "title": "Boltzmann Generators: Sampling Equilibrium States of Many-Body Systems with Deep Learning",
+      "authors": "Frank No\u00e9, Simon Olsson, Jonas K\u00f6hler, Hao Wu",
+      "year": 2019,
+      "role": "Generative sampling with free-energy-consistent reweighting",
+      "relationship_sentence": "ConforMix\u2019s free energy estimation and population reweighting echo Boltzmann Generators\u2019 core idea of estimating thermodynamic quantities from generative samples via principled reweighting."
+    },
+    {
+      "title": "RFdiffusion: Generative modeling of protein structures using diffusion",
+      "authors": "Ben H. L. Watson et al.",
+      "year": 2023,
+      "role": "Diffusion applied to protein backbone/structure generation",
+      "relationship_sentence": "As a prominent protein-structure diffusion model trained for static structures, RFdiffusion exemplifies the class of models that ConforMix can upgrade at inference to discover hidden conformational variability."
+    },
+    {
+      "title": "Score-Based Generative Modeling through Stochastic Differential Equations",
+      "authors": "Yang Song, Jascha Sohl-Dickstein, Diederik P. Kingma, Abhishek Kumar, Stefano Ermon, Ben Poole",
+      "year": 2021,
+      "role": "Continuous-time score-based formulation and guidance-friendly sampler",
+      "relationship_sentence": "The SDE view underpins ConforMix\u2019s gradient-based steering of sampling paths and supports principled combination of prior scores with auxiliary guidance terms during inference."
+    }
+  ],
+  "synthesis_narrative": "ConforMix\u2019s central idea\u2014retrofitting diffusion models at inference time to uncover biomolecular conformational landscapes\u2014sits at the intersection of diffusion guidance, molecular structure generation, and thermodynamic reweighting. The method inherits its generative backbone from DDPM and the continuous-time SDE perspective, which together define how scores and stepwise denoising can be perturbed during sampling. Building on this foundation, ConforMix adopts classifier-driven steering pioneered by Dhariwal and Nichol and the classifier-free alternative of Ho and Salimans to bias trajectories toward diverse, biophysically plausible conformations without retraining. In molecular settings, DiffDock provided a concrete blueprint for coupling diffusion sampling with an inference-time confidence model to filter candidates; ConforMix generalizes this idea from docking poses to conformational ensembles by learning to score and cull trajectories that violate geometric or energetic plausibility.\n\nCrucially, ConforMix integrates free energy estimation akin to Boltzmann Generators, using generative samples with principled reweighting to approximate equilibrium populations across discovered conformational states. This thermodynamic lens both prioritizes low-free-energy regions and enables quantitative comparisons among sampled states. Finally, the approach targets protein-structure diffusion models originally trained for static backbones\u2014exemplified by RFdiffusion\u2014demonstrating that inference-time guidance, filtering, and reweighting can unlock hidden variability without altering pretraining or specifying collective variables. Together, these works enable ConforMix\u2019s orthogonal, plug-in upgrade: steer diffusion paths toward conformational diversity, filter to maintain physical realism, and reweight to recover free-energy-consistent ensembles.",
+  "analysis_timestamp": "2026-01-07T00:02:04.984099"
+}

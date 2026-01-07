@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "DeepSeek-V2: A Strong, Economical, and Efficient Mixture-of-Experts Language Model",
+      "authors": "DeepSeek-AI Team",
+      "year": 2024,
+      "role": "Introduces Multi-head Latent Attention (MLA) and the Absorb operation that maintain compressed KV caches while enabling fast training/inference.",
+      "relationship_sentence": "TransMLA directly targets the MLA/Absorb design from DeepSeek-V2, building a weight-conversion procedure that maps GQA weights into MLA\u2019s low-rank latent space while remaining operator-compatible with V2."
+    },
+    {
+      "title": "DeepSeek-V3 Technical Report",
+      "authors": "DeepSeek-AI Team",
+      "year": 2024,
+      "role": "Consolidates MLA as the production attention stack and defines practical runtime/ABI expectations for MLA-based inference at scale.",
+      "relationship_sentence": "TransMLA\u2019s \u2018full DeepSeek compatibility\u2019 objective is keyed to V3\u2019s MLA runtime conventions, ensuring converted models interoperate with V3 infrastructure without retraining."
+    },
+    {
+      "title": "DeepSeek-R1: Incentivizing Reasoning via Reinforcement Learning",
+      "authors": "DeepSeek-AI Team",
+      "year": 2025,
+      "role": "Demonstrates MLA-based stacks in advanced reasoning models, motivating the need for seamless migration paths from widely deployed GQA models to MLA.",
+      "relationship_sentence": "TransMLA aligns its conversion outputs with R1-compatible MLA semantics so GQA models can be ported to the latest MLA-based reasoning/inference pipelines."
+    },
+    {
+      "title": "GQA: Training Generalized Multi-Query Transformer Language Models",
+      "authors": "Joshua Ainslie, Zachary Burchfield, Adam Roberts, et al.",
+      "year": 2023,
+      "role": "Formalizes grouped-query attention (GQA) that shares K/V across head groups to reduce KV cache size, now standard in LLaMA/Qwen/Mistral.",
+      "relationship_sentence": "TransMLA begins from GQA parameterization and uses its grouped K/V sharing structure to derive principled initializations and mappings into MLA\u2019s low-rank latent factors."
+    },
+    {
+      "title": "Fast Transformer Decoding: One Write-Head is All You Need",
+      "authors": "Noam Shazeer",
+      "year": 2019,
+      "role": "Introduces multi-query attention (MQA), the precursor to GQA, establishing the efficiency\u2013expressivity trade-off via shared K/V for decoding and smaller KV caches.",
+      "relationship_sentence": "TransMLA\u2019s argument that MLA is more expressive under the same KV budget is positioned against the MQA/GQA lineage established by Shazeer, guiding baselines and conversion targets."
+    },
+    {
+      "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+      "authors": "Edward J. Hu, Yelong Shen, Phillip Wallis, et al.",
+      "year": 2021,
+      "role": "Shows how low-rank factorization can be inserted and later merged (absorbed) into linear layers without changing tensor shapes or runtime semantics.",
+      "relationship_sentence": "TransMLA\u2019s conversion and the MLA \u2018Absorb\u2019 step borrow the LoRA-style notion of low-rank parameterization and post-hoc weight merging to keep the KV footprint compact."
+    },
+    {
+      "title": "Linformer: Self-Attention with Linear Complexity",
+      "authors": "Sinong Wang, Belinda Z. Li, Madian Khabsa, Han Fang, Hao Ma",
+      "year": 2020,
+      "role": "Provides theoretical and empirical support for low-rank projections of attention keys/values while preserving model quality.",
+      "relationship_sentence": "TransMLA\u2019s expressivity claim for low-rank MLA at fixed KV budget builds on Linformer\u2019s evidence that attention admits effective low-rank K/V projections."
+    }
+  ],
+  "synthesis_narrative": "TransMLA\u2019s key contribution\u2014converting widely deployed GQA-based LLMs into MLA models with full DeepSeek compatibility and measurable speedups\u2014stands on two converging lines of prior work. First, the DeepSeek series (V2/V3/R1) specifies the MLA architecture and Absorb operation that compress the KV cache through low-rank latent factors while preventing cache bloat. These works define the target operator semantics and runtime ABI that TransMLA must match; the paper\u2019s promise of \u201cfull DeepSeek compatibility\u201d means converted weights must function identically under MLA kernels introduced and stabilized across V2/V3 and used in R1 reasoning models.\nSecond, TransMLA starts from the industry-standard efficiency lineage of MQA and GQA (Shazeer, Ainslie et al.), where K/V sharing across heads reduces KV memory but trades off expressivity. Their parameterizations and initialization tricks enable principled mappings from grouped K/V to MLA\u2019s latent space, providing a concrete conversion path rather than retraining from scratch. To justify that MLA can exceed GQA expressivity at the same KV budget, the paper leverages the broader low-rank attention literature\u2014especially Linformer\u2019s results that attention often admits low-rank K/V projections without sacrificing quality. Finally, the conversion\u2019s practical mechanics mirror LoRA-style low-rank factorization with a subsequent merge (absorb) step that preserves tensor shapes and runtime efficiency. Together, these works supply the architectural target (MLA/Absorb), the source parameterization (GQA/MQA), the theoretical rationale for low-rank K/V, and the algorithmic toolkit for stable low-rank merging\u2014directly enabling TransMLA\u2019s seamless migration framework.",
+  "analysis_timestamp": "2026-01-07T00:21:33.170286"
+}

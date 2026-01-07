@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Structure-from-Motion Revisited",
+      "authors": "Johannes L. Sch\u00f6nberger, Jan-Michael Frahm",
+      "year": 2016,
+      "role": "baseline SfM/BA system (COLMAP)",
+      "relationship_sentence": "ROS-Cam targets the same camera parameter optimization problem as COLMAP but extends it to dynamic scenes and RGB-only supervision, inheriting the SfM/BA pipeline structure while replacing COLMAP\u2019s static-scene assumptions and heavy correspondences with sparse, patch-wise constraints and robust weighting."
+    },
+    {
+      "title": "Bundle Adjustment \u2014 A Modern Synthesis",
+      "authors": "Bill Triggs, Philip F. McLauchlan, Richard I. Hartley, Andrew W. Fitzgibbon",
+      "year": 1999,
+      "role": "foundational bundle adjustment theory",
+      "relationship_sentence": "ROS-Cam\u2019s outlier-aware joint optimization directly builds on BA formulations and their use of robust cost functions and Schur-complement structure to optimize camera intrinsics/extrinsics efficiently from image-derived constraints."
+    },
+    {
+      "title": "Detection and Tracking of Point Features",
+      "authors": "Carlo Tomasi, Takeo Kanade",
+      "year": 1991,
+      "role": "sparse patch/feature tracking",
+      "relationship_sentence": "The paper\u2019s Patch-wise Tracking Filters are conceptually descended from KLT-style sparse, patch-based tracking, but tailored to yield maximally sparse, reliable long-range relations suitable for robust camera optimization in the presence of motion."
+    },
+    {
+      "title": "Random Sample Consensus: A Paradigm for Model Fitting with Applications to Image Analysis and Automated Cartography",
+      "authors": "Martin A. Fischler, Robert C. Bolles",
+      "year": 1981,
+      "role": "robust model fitting/outlier handling",
+      "relationship_sentence": "ROS-Cam shares the core idea of resisting dynamic-scene outliers but replaces hard inlier/outlier decisions of RANSAC with adaptive down-weighting within a joint optimization, enabling smoother integration of constraints across frames."
+    },
+    {
+      "title": "On the Unification of Line Processes, Outlier Rejection, and Robust Statistics",
+      "authors": "Michael J. Black, Anand Rangarajan",
+      "year": 1996,
+      "role": "robust M-estimators and soft outlier weighting",
+      "relationship_sentence": "The Outlier-aware Joint Optimization in ROS-Cam follows the robust estimation paradigm of M-estimators/IRLS to adaptively attenuate contributions from moving regions without explicit motion masks."
+    },
+    {
+      "title": "Self-Calibration and Metric Reconstruction from Image Sequences",
+      "authors": "Marc Pollefeys, Reinhard Koch, Luc Van Gool",
+      "year": 1999,
+      "role": "camera self-calibration from RGB-only sequences",
+      "relationship_sentence": "By optimizing camera parameters from a single RGB video without external priors, ROS-Cam leverages the tradition of self-calibration, substituting classical algebraic constraints with data-driven patch correspondences and robust costs."
+    },
+    {
+      "title": "Unsupervised Learning of Depth and Ego-Motion from Video",
+      "authors": "Tinghui Zhou, Matthew Brown, Noah Snavely, David G. Lowe",
+      "year": 2017,
+      "role": "RGB-only photometric supervision with outlier masking",
+      "relationship_sentence": "ROS-Cam echoes the idea of supervising geometry purely from RGB via photometric consistency and handling dynamics through learned or adaptive weighting; it operationalizes a non-learned, optimization-centric variant for camera parameter refinement."
+    }
+  ],
+  "synthesis_narrative": "ROS-Cam sits at the intersection of classical SfM/BA and RGB-only geometric supervision, rethinking camera parameter optimization for dynamic scenes. Its optimization backbone is rooted in bundle adjustment as formalized by Triggs et al., and operationally inspired by the COLMAP pipeline of Sch\u00f6nberger and Frahm. However, where COLMAP presumes static scenes and dense correspondences, ROS-Cam introduces patch-wise tracking filters to produce a maximally sparse yet reliable set of temporal constraints. This design descends from KLT-style sparse tracking (Tomasi\u2013Kanade), prioritizing patch-level stability over raw keypoint density to better survive occlusions and local motion.\n\nThe paper\u2019s central advance in dynamic scenes is its outlier-aware joint optimization that down-weights moving regions without motion masks. This draws directly from robust estimation theory\u2014M-estimators and IRLS as unified by Black and Rangarajan\u2014while conceptually generalizing the robust fitting spirit of RANSAC from hard inlier tests to soft, differentiable weighting inside BA. In parallel, its RGB-only supervision ethos is aligned with unsupervised depth/ego-motion learning (Zhou et al.), which demonstrated that photometric consistency and adaptive weighting can supervise geometry without external labels; ROS-Cam adapts this idea to classical optimization rather than learned models. Finally, optimizing intrinsics from video without GT priors ties back to self-calibration (Pollefeys et al.), replacing algebraic constraints with robust, patch-induced geometric relations. Together, these threads yield an efficient, mask-free, RGB-only camera optimization method for dynamic scenes.",
+  "analysis_timestamp": "2026-01-07T00:21:32.252454"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "The Curious Case of Neural Text Degeneration",
+      "authors": "Ari Holtzman, Jan Buys, Li Du, Maxwell Forbes, Yejin Choi",
+      "year": 2020,
+      "role": "Introduced nucleus (top-p) sampling as a probabilistic truncation rule that adapts the number of outcomes by covering a target cumulative probability mass.",
+      "relationship_sentence": "Twilight directly repurposes the top-p principle from sampling to attention, selecting the minimal set of keys whose attention weights cover a target probability mass to yield an adaptive token budget."
+    },
+    {
+      "title": "Adaptive Attention Span in Transformers",
+      "authors": "Sainbayar Sukhbaatar, Edouard Grave, Piotr Bojanowski, Armand Joulin",
+      "year": 2019,
+      "role": "Pioneered learnable, input-dependent context lengths per head, demonstrating that adaptive attention budgets can preserve accuracy while saving computation.",
+      "relationship_sentence": "Twilight extends the idea of adaptive budgeting from span-length learning to inference-time, per-query token selection via top-p coverage, enabling fine-grained, probabilistic budget control."
+    },
+    {
+      "title": "Generating Long Sequences with Sparse Transformers",
+      "authors": "Rewon Child, Scott Gray, Alec Radford, Ilya Sutskever",
+      "year": 2019,
+      "role": "Introduced fixed sparse attention patterns to reduce quadratic complexity while maintaining quality on long sequences.",
+      "relationship_sentence": "Twilight augments static sparse patterns like those in Sparse Transformers with a dynamic, nucleus-style pruning rule that adapts the kept-token count to the current attention distribution."
+    },
+    {
+      "title": "Longformer: The Long-Document Transformer",
+      "authors": "Iz Beltagy, Matthew E. Peters, Arman Cohan",
+      "year": 2020,
+      "role": "Proposed sliding-window and global-token sparse attention for efficient long-context processing with fixed compute budgets.",
+      "relationship_sentence": "Twilight generalizes over Longformer's fixed-budget sparsity by making the kept-token set and size adaptive via hierarchical top-p pruning without retraining."
+    },
+    {
+      "title": "Big Bird: Transformers for Longer Sequences",
+      "authors": "Manzil Zaheer, Guru Guruganesh, Avinava Dubey, Joshua Ainslie, Chris Alberti, Santiago Ontanon, Philip Pham, Anirudh Ravula, Qifan Wang, Li Yang, Amr Ahmed",
+      "year": 2020,
+      "role": "Established random + local + global sparse patterns with theoretical guarantees using a predetermined attention budget.",
+      "relationship_sentence": "Twilight can be layered on top of BigBird-style patterns to adapt the per-query token budget by retaining just enough keys to reach a target attention mass."
+    },
+    {
+      "title": "Reformer: The Efficient Transformer",
+      "authors": "Nikita Kitaev, \u0141ukasz Kaiser, Anselm Levskaya",
+      "year": 2020,
+      "role": "Used LSH-based attention to sparsify computation with content-based but still largely preset budgets.",
+      "relationship_sentence": "Twilight complements content-based sparse retrieval like Reformer by making the final keep/discard decision adaptive through a top-p mass threshold on attention scores."
+    },
+    {
+      "title": "Routing Transformer: Efficient Content-Based Sparse Attention",
+      "authors": "Aurko Roy, Mohammad Saffar, Ashish Vaswani, David Grangier",
+      "year": 2021,
+      "role": "Introduced content-based clustering to route attention into sparse neighborhoods, improving efficiency while relying on fixed capacity per route.",
+      "relationship_sentence": "Twilight takes the next step from content-based sparsity to probability-mass\u2013based adaptivity, adjusting the number of routed tokens per query via nucleus-style thresholds."
+    }
+  ],
+  "synthesis_narrative": "Twilight\u2019s core insight is to import the nucleus (top-p) truncation rule from decoding into attention, turning the softmax attention distribution into an adaptive compute budget: keep the smallest set of keys that covers a target cumulative probability mass. This directly builds on Holtzman et al.\u2019s top-p sampling, but applies it inside attention rather than output token sampling. The need for adaptivity is foreshadowed by Sukhbaatar et al.\u2019s Adaptive Attention Span, which showed that variable context per head can save compute without accuracy loss; Twilight operationalizes a similar principle at inference time by using attention probabilities themselves as a budget oracle.\nEarly efficient-transformer work (Sparse Transformer) and long-context architectures (Longformer, BigBird, Reformer) established that sparsity is essential but largely fixed-budget, leaving a gap when the optimal compute-accuracy tradeoff varies across queries, heads, layers, and inputs. Twilight addresses this by layering a hierarchical top-p pruning rule over such sparse patterns, converting static capacities into data-driven, per-query token counts. Content-based sparsity such as the Routing Transformer further motivated Twilight\u2019s design: while routing selects who can attend to whom, it typically enforces fixed capacities; Twilight adds a probabilistic, mass-preserving criterion that flexibly sets capacities on the fly. By unifying these lines\u2014static sparse patterns for scalability, adaptive span ideas for elasticity, and nucleus-style mass thresholds for principled truncation\u2014Twilight achieves aggressive, accuracy-preserving pruning with dynamic budgets that plug into existing sparse attention backbones without retraining.",
+  "analysis_timestamp": "2026-01-06T23:42:48.106123"
+}

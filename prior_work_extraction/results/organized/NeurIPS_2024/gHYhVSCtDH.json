@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "SST: Single-stride Sparse Transformer for 3D Object Detection",
+      "authors": "Lue Fan et al.",
+      "year": 2022,
+      "role": "Serialization-based 3D detection baseline using grouped Transformer sequences",
+      "relationship_sentence": "Voxel Mamba directly targets SST\u2019s core limitation\u2014the need to partition serialized voxels into multiple groups due to the quadratic cost of self-attention\u2014by replacing attention with a linear-complexity SSM to enable a single, group-free voxel sequence."
+    },
+    {
+      "title": "DSVT: Dynamic Sparse Voxel Transformer",
+      "authors": "Sun et al.",
+      "year": 2023,
+      "role": "Dynamic local-window/grouping strategy for sparse voxel Transformers",
+      "relationship_sentence": "DSVT\u2019s success with locality-preserving grouped windows underscores the trade-off between preserving spatial proximity and computational tractability that Voxel Mamba resolves via a global, group-free SSM over the entire serialized voxel space."
+    },
+    {
+      "title": "Mamba: Linear-Time Sequence Modeling with Selective State Spaces",
+      "authors": "Albert Gu, Tri Dao",
+      "year": 2023,
+      "role": "Core SSM architecture enabling linear-time long-range sequence modeling",
+      "relationship_sentence": "Voxel Mamba builds its group-free voxel serialization on Mamba\u2019s selective state space model to process very long voxel sequences with linear complexity while retaining long-range dependencies."
+    },
+    {
+      "title": "Efficiently Modeling Long Sequences with Structured State Spaces (S4)",
+      "authors": "Albert Gu, Karan Goel, Christopher R\u00e9",
+      "year": 2021,
+      "role": "Foundational structured SSM theory and kernels",
+      "relationship_sentence": "The theoretical underpinnings of S4 directly inform the state space formulation Voxel Mamba leverages to stably and efficiently model long serialized voxel sequences."
+    },
+    {
+      "title": "Swin Transformer: Hierarchical Vision Transformer using Shifted Windows",
+      "authors": "Ze Liu et al.",
+      "year": 2021,
+      "role": "Hierarchical, locality-preserving window design for scalable vision transformers",
+      "relationship_sentence": "Voxel Mamba\u2019s Dual-scale SSM Block echoes Swin\u2019s hierarchical receptive-field expansion while avoiding quadratic attention, offering a linear-complexity alternative to windowed Transformers."
+    },
+    {
+      "title": "VMamba: Visual State Space Model",
+      "authors": "Liu et al.",
+      "year": 2024,
+      "role": "Applying SSMs to visual domains with scanning and hierarchical designs",
+      "relationship_sentence": "VMamba demonstrates that SSMs can replace attention in vision backbones, motivating Voxel Mamba\u2019s adaptation of SSMs to 3D voxel serialization and its hierarchical dual-scale design."
+    }
+  ],
+  "synthesis_narrative": "Voxel Mamba\u2019s key contribution is to eliminate the grouping bottleneck of serialization-based 3D detectors by processing the entire set of serialized voxels as a single sequence with a state space model, and to recover spatial proximity via a Dual-scale SSM Block that hierarchically expands receptive fields along the 1D curve. This design is directly motivated by prior serialization-based voxel Transformers such as SST and DSVT, which showed that flattening sparse voxels into sequences enables strong detection, but required grouping or windowing to keep attention\u2019s quadratic complexity tractable\u2014inevitably harming global spatial continuity. The technical pivot that makes a group-free approach feasible comes from Mamba and its S4 foundations: selective state spaces offer linear-time sequence modeling with long-range capacity, allowing Voxel Mamba to serialize all voxels into one sequence without exploding compute. The Dual-scale SSM Block conceptually parallels Swin Transformer\u2019s hierarchical windowing\u2014expanding receptive fields to restore proximity\u2014yet maintains linear complexity by staying within the SSM framework rather than attention. Finally, recent evidence from VMamba that SSMs can serve as competitive visual backbones validates the architectural shift from attention to SSMs in high-dimensional perception. Together, these works lay the conceptual and algorithmic pathway for Voxel Mamba\u2019s group-free voxel serialization and dual-scale hierarchical SSM design for 3D object detection.",
+  "analysis_timestamp": "2026-01-07T00:02:04.768680"
+}

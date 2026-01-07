@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Practical Bayesian Optimization of Machine Learning Algorithms",
+      "authors": "Jasper Snoek et al.",
+      "year": 2012,
+      "arxiv_id": "1206.2944",
+      "role": "Foundation",
+      "relationship_sentence": "Established GP-based BO with exact conditioning and online updates\u2014the surrogate/baseline and update behavior that the proposed continual VBLL explicitly emulates."
+    },
+    {
+      "title": "Deep Kernel Learning",
+      "authors": "Andrew Gordon Wilson et al.",
+      "year": 2016,
+      "arxiv_id": "1511.02222",
+      "role": "Related Problem",
+      "relationship_sentence": "Showed that learning deep feature maps for GPs captures complex correlations; the proposed method adopts the same deep-feature surrogate idea but replaces GP inference with a variational Bayesian last layer trained via GP-like conditioning."
+    },
+    {
+      "title": "Bayesian Optimization with Robust Bayesian Neural Networks",
+      "authors": "Jost Tobias Springenberg et al.",
+      "year": 2016,
+      "arxiv_id": "unknown",
+      "role": "Gap Identification",
+      "relationship_sentence": "Demonstrated BO with BNN surrogates yet reported unreliable performance and calibration on some tasks, a limitation directly addressed by tying VBLL training to exact GP conditioning."
+    },
+    {
+      "title": "Deep Bayesian Bandits Showdown: An Empirical Comparison of Bayesian Deep Networks for Thompson Sampling",
+      "authors": "Carlos Riquelme et al.",
+      "year": 2018,
+      "arxiv_id": "1802.09127",
+      "role": "Inspiration",
+      "relationship_sentence": "Showed that a neural feature extractor with a Bayesian linear last layer (neural-linear) yields calibrated uncertainty and efficient sequential updates, the architectural template the proposed method adopts for BO."
+    },
+    {
+      "title": "Laplace Redux: Effortless Bayesian Deep Learning",
+      "authors": "Christoph Immer et al.",
+      "year": 2021,
+      "arxiv_id": "unknown",
+      "role": "Inspiration",
+      "relationship_sentence": "Established that Bayesianizing only the last layer (e.g., via Laplace) yields GP-like predictions over learned features; the proposed work generalizes this insight to a variational last layer and makes the GP-conditioning equivalence explicit for online training."
+    },
+    {
+      "title": "Variational Continual Learning",
+      "authors": "Cuong V. Nguyen et al.",
+      "year": 2018,
+      "arxiv_id": "1710.10628",
+      "role": "Extension",
+      "relationship_sentence": "Introduced an online variational update that projects prior posteriors as new data arrive; the proposed approach applies this continual VI recipe to the Bayesian last layer to enable fast per-iteration BO updates."
+    }
+  ],
+  "synthesis_narrative": "Gaussian process surrogates for Bayesian optimization were popularized with exact conditioning and efficient online updates, enabling principled acquisition-driven search over expensive black-box functions. Deep kernel learning subsequently showed that learning feature maps before a GP can model complex, non-Euclidean correlations by letting a neural network parameterize the kernel, retaining GP conditioning while gaining representational power. In parallel, robust Bayesian neural network surrogates were explored for BO, but empirical studies reported poor calibration and inconsistent performance on some tasks. A complementary insight emerged from neural-linear methods in sequential decision making: coupling a neural feature extractor with a Bayesian linear last layer yields calibrated uncertainty and cheap posterior updates, suggesting that only the final layer needs to be Bayesian for effective uncertainty. This was reinforced by last-layer Laplace approaches, which demonstrated that Bayesianizing just the final layer produces GP-like predictions over deep features, hinting at a tight equivalence between last-layer Bayesian inference and GP conditioning. Finally, variational continual learning introduced a practical recipe for streaming variational updates by projecting the previous posterior as new data arrive, providing a template for online Bayesian updates. Together, these works expose an opportunity: marry deep feature flexibility with GP-style exact conditioning and streaming updates by Bayesianizing only the last layer. The resulting step is to cast the last layer\u2019s variational training so it is algebraically equivalent to GP conditioning, and then leverage continual variational updates to deliver efficient online BO training while overcoming BNN calibration weaknesses and GP kernel-selection brittleness.",
+  "target_paper": {
+    "title": "Bayesian Optimization via Continual Variational Last Layer Training",
+    "authors": "Paul Brunzema, Mikkel Jordahn, John Willes, Sebastian Trimpe, Jasper Snoek, James Harrison",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "Bayesian deep learning, bayesian optimization, uncertainty",
+    "abstract": "Gaussian Processes (GPs) are widely seen as the state-of-the-art surrogate models for Bayesian optimization (BO) due to their ability to model uncertainty and their performance on tasks where correlations are easily captured (such as those defined by Euclidean metrics) and their ability to be efficiently updated online. However, the performance of GPs depends on the choice of kernel, and kernel selection for complex correlation structures is often difficult or must be made bespoke. While Bayesian neural networks (BNNs) are a promising direction for higher capacity surrogate models, they have so far seen limited use due to poor performance on some problem types. In this paper, we propose an approach which shows competitive performance on many problem types, including some that BNNs typically struggle with. We build on variational Bayesian last layers (VBLLs), and connect training of these models to exact conditioning in GPs. We exploit this connection to develop an efficient online trai",
+    "openreview_id": "1jcnvghayD",
+    "forum_id": "1jcnvghayD"
+  },
+  "analysis_timestamp": "2026-01-06T08:43:27.244890"
+}

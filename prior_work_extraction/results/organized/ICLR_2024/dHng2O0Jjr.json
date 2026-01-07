@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Toolformer: Language Models Can Teach Themselves to Use Tools",
+      "authors": "Timo Schick et al.",
+      "year": 2023,
+      "arxiv_id": "2302.04761",
+      "role": "Gap Identification",
+      "relationship_sentence": "Toolformer showed that LLMs can self-generate supervision for tool calls but was constrained to a small, curated set of tools, a scale and realism limitation ToolLLM explicitly addresses by building a massively larger, real-world API corpus and dataset."
+    },
+    {
+      "title": "ReAct: Synergizing Reasoning and Acting in Language Models",
+      "authors": "Shunyu Yao et al.",
+      "year": 2023,
+      "arxiv_id": "2210.03629",
+      "role": "Extension",
+      "relationship_sentence": "ToolLLM extends ReAct\u2019s thought\u2013action\u2013observation schema by using it to prompt ChatGPT to synthesize multi-step, multi-tool API trajectories and to supervise open-source models on real REST interactions."
+    },
+    {
+      "title": "Self-Instruct: Aligning Language Models with Self-Generated Instructions",
+      "authors": "Yizhong Wang et al.",
+      "year": 2023,
+      "arxiv_id": "2212.10560",
+      "role": "Inspiration",
+      "relationship_sentence": "ToolLLM adopts the Self-Instruct paradigm\u2014using a strong LLM to bootstrap diverse tasks\u2014to automatically generate instruction\u2013response data specifically centered on invoking and composing real-world APIs."
+    },
+    {
+      "title": "Gorilla: Large Language Model Connected with Massive APIs",
+      "authors": "Shishir G. Patil et al.",
+      "year": 2023,
+      "arxiv_id": "2305.15334",
+      "role": "Baseline",
+      "relationship_sentence": "Gorilla serves as a primary baseline for mapping natural language to API calls via retrieval-augmented finetuning, which ToolLLM directly compares against while scaling to orders-of-magnitude more real REST endpoints and interactive multi-tool use."
+    },
+    {
+      "title": "HuggingGPT: Solving AI Tasks with ChatGPT and its Friends in HuggingFace",
+      "authors": "Yongliang Shen et al.",
+      "year": 2023,
+      "arxiv_id": "2303.17580",
+      "role": "Related Problem",
+      "relationship_sentence": "HuggingGPT\u2019s LLM-as-controller pattern for tool selection and argument formatting from tool descriptions informs ToolLLM\u2019s design for matching instructions to appropriate APIs and composing tool calls."
+    },
+    {
+      "title": "WebGPT: Browser-assisted question-answering with human feedback",
+      "authors": "Reiichiro Nakano et al.",
+      "year": 2021,
+      "arxiv_id": "2112.09332",
+      "role": "Foundation",
+      "relationship_sentence": "WebGPT established the act\u2013observe loop and external-tool execution paradigm for LLMs, which ToolLLM adopts and adapts to the RESTful API setting with standardized function-call style interactions and evaluation."
+    }
+  ],
+  "synthesis_narrative": "Language models learning to use external tools gained a concrete shape with WebGPT, which operationalized an act\u2013observe loop and evaluated models that browse the web and integrate retrieved evidence. ReAct contributed a more general, reusable scaffold for tool use by interleaving explicit thoughts with tool Actions and Observations, enabling multi-step reasoning grounded by tool outputs. Toolformer showed that models can self-generate supervision for when and how to call tools using only API signatures and a few seed demonstrations, but it remained limited to a handful of simple tools and synthetic contexts. In parallel, Gorilla tackled the problem of grounding API calls at scale by combining retrieval over API docs with finetuning to reduce hallucinations, framing API selection and argument filling as a retrieval-augmented generation problem. HuggingGPT demonstrated an LLM-as-controller pipeline: planning, selecting tools from descriptions, formatting arguments, executing tools, and aggregating results, illustrating how tool registries can be leveraged via natural language interfaces. Self-Instruct provided a scalable recipe for bootstrapping diverse instruction-following data by prompting a stronger LLM to create tasks and solutions without heavy human labor. Together, these works indicated that (1) tool use benefits from explicit thought\u2013action scaffolds, (2) retrieval and tool descriptions can ground API selection, and (3) LLM-generated supervision can scale data creation\u2014yet the field lacked a large, real-world API corpus, multi-tool trajectories at scale, and systematic evaluation. Building on these insights, the current paper unifies self-instruct data generation with ReAct-style trajectories and retrieval-guided grounding, scaling to 16,000+ real REST APIs and establishing an end-to-end dataset, training recipe, and benchmark for open-source LLM tool use.",
+  "target_paper": {
+    "title": "ToolLLM: Facilitating Large Language Models to Master 16000+ Real-world APIs",
+    "authors": "Yujia Qin, Shihao Liang, Yining Ye, Kunlun Zhu, Lan Yan, Yaxi Lu, Yankai Lin, Xin Cong, Xiangru Tang, Bill Qian, Sihan Zhao, Lauren Hong, Runchu Tian, Ruobing Xie, Jie Zhou, Mark Gerstein, dahai li, Zhiyuan Liu, Maosong Sun",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Large Language Model, Tool Use, API Use",
+    "abstract": "Despite the advancements of open-source large language models (LLMs), e.g., LLaMA, they remain significantly limited in tool-use capabilities, i.e., using external tools (APIs) to fulfill human instructions. The reason is that current instruction tuning largely focuses on basic language tasks but ignores the tool-use domain. This is in contrast to the excellent tool-use capabilities of state-of-the-art (SOTA) closed-source LLMs, e.g., ChatGPT. To bridge this gap, we introduce ToolLLM, a general tool-use framework encompassing data construction, model training, and evaluation. We first present ToolBench, an instruction-tuning dataset for tool use, which is constructed automatically using ChatGPT. Specifically, the construction can be divided into three stages: (i) API collection: we collect 16,464 real-world RESTful APIs spanning 49 categories from RapidAPI Hub; (ii) instruction generation: we prompt ChatGPT to generate diverse instructions involving these APIs, covering both single-too",
+    "openreview_id": "dHng2O0Jjr",
+    "forum_id": "dHng2O0Jjr"
+  },
+  "analysis_timestamp": "2026-01-06T22:48:19.901008"
+}

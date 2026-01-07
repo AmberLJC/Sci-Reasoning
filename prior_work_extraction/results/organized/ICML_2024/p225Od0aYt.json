@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Between MDPs and Semi-MDPs: A Framework for Temporal Abstraction in Reinforcement Learning",
+      "authors": "Richard S. Sutton et al.",
+      "year": 1999,
+      "role": "Foundation",
+      "relationship_sentence": "This options framework formalized temporally extended actions and terminations, providing the theoretical basis that PRISE instantiates by learning data-driven, variable-duration macro-actions from demonstrations."
+    },
+    {
+      "title": "Neural Machine Translation of Rare Words with Subword Units",
+      "authors": "Rico Sennrich et al.",
+      "year": 2016,
+      "role": "Inspiration",
+      "relationship_sentence": "Introduced byte pair encoding (BPE) for subword tokenization; PRISE directly adapts BPE to compress action sequences into a variable-length action vocabulary, the paper\u2019s core innovation."
+    },
+    {
+      "title": "Neural Discrete Representation Learning (VQ-VAE)",
+      "authors": "Aaron van den Oord et al.",
+      "year": 2017,
+      "role": "Foundation",
+      "relationship_sentence": "Provided the vector quantization paradigm for mapping continuous signals to discrete codebooks; PRISE\u2019s first stage\u2014quantizing continuous actions into discrete primitives\u2014follows this idea before applying BPE."
+    },
+    {
+      "title": "Trajectory Transformer: Offline Reinforcement Learning as Sequence Modeling",
+      "authors": "Michael Janner et al.",
+      "year": 2021,
+      "role": "Gap Identification",
+      "relationship_sentence": "Showed that discretized trajectories can be modeled as token sequences, but tokens are fixed at step-level granularity; PRISE addresses this gap by using BPE to merge frequent action n-grams into variable-duration skills."
+    },
+    {
+      "title": "SPiRL: Learning Skill Priors for Reinforcement Learning",
+      "authors": "Karl Pertsch et al.",
+      "year": 2020,
+      "role": "Gap Identification",
+      "relationship_sentence": "Learns skill priors from offline demonstrations using fixed-length segments; PRISE explicitly overcomes this fixed-horizon limitation by discovering variable-span skills via BPE-style sequence compression."
+    },
+    {
+      "title": "CompILE: Compositional Imitation Learning and Execution",
+      "authors": "Tobias Kipf et al.",
+      "year": 2019,
+      "role": "Inspiration",
+      "relationship_sentence": "Demonstrated unsupervised, variable-length segmentation of demonstrations into reusable sub-tasks; PRISE pursues the same goal but replaces latent-variable segmentation with lightweight BPE-style compression of action sequences."
+    }
+  ],
+  "synthesis_narrative": "PRISE\u2019s core idea\u2014casting temporal action abstraction as sequence compression\u2014stands on two pillars: the options framework from reinforcement learning and subword tokenization from NLP. Sutton, Precup, and Singh\u2019s options formalized temporally extended actions and terminations, supplying the theoretical scaffold for learning skills of variable duration. From the language side, Sennrich et al.\u2019s introduction of BPE showed how data-driven merging of frequent symbol pairs yields compact, variable-length vocabularies; PRISE directly imports this mechanism to actions, defining skills as compressed action n-grams. To make action sequences tokenizable, PRISE first discretizes continuous actions, drawing on van den Oord et al.\u2019s VQ-VAE paradigm for converting continuous signals into discrete codebooks. The work also responds to concrete gaps in sequence-modeling for control and prior skill-learning. Trajectory Transformer established that discretized trajectories can be modeled as token sequences but retained fixed step-level granularity, offering no temporal abstraction; PRISE\u2019s BPE merges address this by inducing variable-span skills. In demonstration-driven hierarchical learning, SPiRL learns skill priors from fixed-length segments, a rigidity PRISE removes by discovering skills whose durations adapt to data statistics. Finally, CompILE\u2019s variable-length segmentation of demonstrations provided evidence that compositional, data-driven decomposition is useful, while PRISE achieves a similar end with a simpler, scalable compression algorithm. Together, these works directly shape PRISE\u2019s method: quantize actions, compress with BPE, and realize options as learned, variable-duration action tokens.",
+  "analysis_timestamp": "2026-01-06T23:09:26.437961"
+}

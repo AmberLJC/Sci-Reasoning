@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "3D Gaussian Splatting for Real-Time Radiance Field Rendering",
+      "authors": "Bernhard Kerbl, Georgios Kopanas, Thomas Leimk\u00fchler, George Drettakis",
+      "year": 2023,
+      "role": "Foundational method and representation",
+      "relationship_sentence": "EGGS builds directly on 3DGS\u2019s anisotropic 3D Gaussian primitives and GPU rasterization pipeline, addressing 3DGS\u2019s multi-view inconsistency by introducing a complementary 2D counterpart and mechanisms to switch between them."
+    },
+    {
+      "title": "Surface Splatting",
+      "authors": "Mario Zwicker, Hanspeter Pfister, Jeroen van Baar, Markus Gross",
+      "year": 2001,
+      "role": "Classical 2D Gaussian splatting in screen space",
+      "relationship_sentence": "EGGS\u2019s 2D Gaussian component inherits the idea of image-space elliptical (Gaussian) splats from Surface Splatting, leveraging their multi-view consistency and anti-aliasing properties within a modern, differentiable, unified rasterizer."
+    },
+    {
+      "title": "NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis",
+      "authors": "Ben Mildenhall, Pratul P. Srinivasan, Matthew Tancik, Jonathan T. Barron, Ravi Ramamoorthi, Ren Ng",
+      "year": 2020,
+      "role": "Volumetric rendering and multi-view supervision paradigm",
+      "relationship_sentence": "EGGS follows NeRF\u2019s multi-view photometric supervision framework and geometry\u2013appearance trade-off insights, but replaces implicit fields with explicit Gaussian primitives that can be 2D or 3D and are adaptively exchanged."
+    },
+    {
+      "title": "Mip-NeRF: A Multiscale Representation for Anti-Aliasing Neural Radiance Fields",
+      "authors": "Jonathan T. Barron, Ben Mildenhall, Matthew Tancik, Peter Hedman, Ricardo Martin-Brualla, Pratul P. Srinivasan",
+      "year": 2021,
+      "role": "Scale/frequency-aware rendering and training",
+      "relationship_sentence": "EGGS\u2019s Frequency-Decoupled Optimization echoes Mip-NeRF\u2019s anti-aliasing and frequency-aware training principles, using frequency separation to exploit the strengths of 2D vs. 3D Gaussians for geometry vs. appearance."
+    },
+    {
+      "title": "PlenOctrees for Real-time Rendering of Neural Radiance Fields",
+      "authors": "Alex Yu, Ruilong Li, Matthew Tancik, Hao Li, Ren Ng, Angjoo Kanazawa",
+      "year": 2021,
+      "role": "Explicit, GPU-efficient NVS with custom rendering",
+      "relationship_sentence": "EGGS adopts the philosophy of explicit, GPU-amenable scene representations and custom CUDA rendering from PlenOctrees, adapting these ideas to a unified hybrid Gaussian rasterizer for fast training/inference."
+    },
+    {
+      "title": "QSplat: A Multiresolution Point Rendering System for Large Meshes",
+      "authors": "Szymon Rusinkiewicz, Marc Levoy",
+      "year": 2000,
+      "role": "Point-based rendering and splat hierarchies",
+      "relationship_sentence": "EGGS\u2019s hybrid rasterization and adaptive type exchange are conceptually aligned with point-based rendering\u2019s use of splats and level-of-detail, extending these ideas to switchable 2D/3D Gaussian primitives optimized per-view and per-frequency."
+    }
+  ],
+  "synthesis_narrative": "EGGS sits at the intersection of explicit Gaussian primitives, point-based rendering, and frequency-aware neural view synthesis. Its 3D side squarely builds on 3D Gaussian Splatting (Kerbl et al.), inheriting anisotropic 3D Gaussians, alpha compositing, and a GPU-first rasterization pipeline that delivers real-time appearance fidelity. To counter 3DGS\u2019s multi-view inconsistencies, EGGS revives and modernizes the core idea of screen-space Gaussian splats from Surface Splatting, introducing a 2D Gaussian pathway that naturally enforces cross-view consistency and anti-aliased accumulation.\nNeRF provides the multi-view supervision paradigm and the lens through which geometry\u2013appearance trade-offs are framed, while Mip-NeRF\u2019s multiscale anti-aliasing informs EGGS\u2019s Frequency-Decoupled Optimization: separating low- vs. high-frequency signals so 2D Gaussians can stabilize geometry and 3D Gaussians can capture fine appearance. From PlenOctrees, EGGS takes the ethos of explicit, CUDA-optimized rendering for training and inference efficiency, but applies it to a unified rasterizer capable of handling both 2D and 3D splats. Finally, classic point-based systems like QSplat inform EGGS\u2019s adaptive mechanism\u2014analogous to LOD selection\u2014by enabling dynamic exchange between 2D and 3D Gaussian types based on scene content and optimization signals.\nTogether, these works directly shape EGGS\u2019s three core ingredients: a unified hybrid rasterizer, an adaptive type-exchange policy balancing geometry and appearance, and a frequency-decoupled training strategy that exploits the complementary strengths of 2D and 3D Gaussian representations.",
+  "analysis_timestamp": "2026-01-07T00:21:32.287583"
+}

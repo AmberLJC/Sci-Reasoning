@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP",
+      "authors": "Patrick Lewis, Ethan Perez, Aleksandra Piktus, Fabio Petroni, Vladimir Karpukhin, et al.",
+      "year": 2020,
+      "role": "Defined the modern RAG paradigm of combining a parametric LM with external retrieval for knowledge-intensive tasks.",
+      "relationship_sentence": "ALFAR is situated squarely within the RAG setup introduced by Lewis et al., addressing the persistent problem they expose\u2014how to make the generator actually use retrieved evidence rather than its outdated parametric memory."
+    },
+    {
+      "title": "Leveraging Passage Retrieval with Generative Models for Open-Domain Question Answering (FiD)",
+      "authors": "Gautier Izacard, Edouard Grave",
+      "year": 2021,
+      "role": "Showed that fusing information from multiple retrieved passages via decoder attention improves evidence utilization.",
+      "relationship_sentence": "By revealing how attention over many retrieved contexts can be uneven or suboptimal, FiD motivates ALFAR\u2019s attention reallocation component that explicitly shifts attention toward salient retrieved tokens without retraining."
+    },
+    {
+      "title": "Generalization through Memorization: Nearest Neighbor Language Models (kNN-LM)",
+      "authors": "Urvashi Khandelwal, Omer Levy, Luke Zettlemoyer",
+      "year": 2020,
+      "role": "Proposed interpolating the base LM distribution with a retrieval-based distribution at inference time.",
+      "relationship_sentence": "ALFAR\u2019s Adaptive Logits Fusion directly echoes kNN-LM\u2019s principle of mixing parametric and retrieval-driven signals at the probability/logit level, extending it to conflict-aware, context-adaptive fusion in multimodal RAG."
+    },
+    {
+      "title": "Pointer-Generator Networks",
+      "authors": "Abigail See, Peter J. Liu, Christopher D. Manning",
+      "year": 2017,
+      "role": "Introduced a gating mechanism that adaptively balances copying from context versus generating from the vocabulary.",
+      "relationship_sentence": "ALFAR\u2019s token-wise reconciliation between contextual and parametric knowledge mirrors pointer-generator gating, reinterpreted as adaptive fusion of logits from retrieved evidence versus the model\u2019s internal knowledge."
+    },
+    {
+      "title": "Plug and Play Language Models: A Simple Approach to Controlled Text Generation (PPLM)",
+      "authors": "S. Dathathri, Andrea Madotto, Janice Lan, Jane Hung, Eric Frank, Piero Molino, Jason Yosinski, Rosanne Liu",
+      "year": 2020,
+      "role": "Demonstrated training-free, plug-and-play manipulation of LM outputs via inference-time steering.",
+      "relationship_sentence": "ALFAR adopts the plug-and-play philosophy of PPLM, designing a training-free module that steers generation\u2014here by reallocating attention and fusing logits\u2014without altering MLLM parameters."
+    },
+    {
+      "title": "Self-RAG: Learning to Retrieve, Generate, and Critique for Language Models",
+      "authors": "Akari Asai, Jungo Kasai, Sewon Min, Hannaneh Hajishirzi, et al.",
+      "year": 2023,
+      "role": "Showed the importance of dynamically assessing and reconciling retrieved evidence with parametric knowledge.",
+      "relationship_sentence": "ALFAR\u2019s conflict-aware fusion is conceptually aligned with Self-RAG\u2019s idea of deciding when to trust retrieval versus the model, but operationalizes it through lightweight, inference-time logit fusion."
+    },
+    {
+      "title": "LLaVA: Large Language and Vision Assistant",
+      "authors": "Haotian Liu, Chunyuan Li, Qingyang Wu, Yong Jae Lee",
+      "year": 2023,
+      "role": "Provided a widely-used MLLM backbone and surfaced practical attention biases across multimodal tokens.",
+      "relationship_sentence": "Observed attention patterns in LLaVA-like MLLMs motivate ALFAR\u2019s attention reallocation, which explicitly counteracts biases toward certain tokens/modalities so retrieved knowledge is better utilized."
+    }
+  ],
+  "synthesis_narrative": "ALFAR targets a central challenge established by Retrieval-Augmented Generation: parametric knowledge in LMs is limited and outdated, yet na\u00efve concatenation of retrieved context seldom guarantees its effective use. FiD crystallized the role of decoder attention in integrating multiple passages, while also implicitly highlighting attention pathologies when evidence is lengthy or conflicting. In multimodal assistants like LLaVA, these issues are exacerbated by cross-modal token competition, yielding attention biases that suppress retrieved cues. ALFAR\u2019s attention reallocation directly addresses this bottleneck by redistributing focus toward salient, retrieved tokens during inference without retraining.\n\nOn the knowledge-conflict side, ALFAR\u2019s Adaptive Logits Fusion draws a clear lineage from techniques that mix or steer probability distributions at decoding time. kNN-LM pioneered combining a base LM distribution with a retrieval-driven distribution, and pointer-generator networks introduced token-wise gating between copying from context and generating from the model\u2019s vocabulary. PPLM broadened the toolkit for training-free, plug-and-play steering of generation. ALFAR synthesizes these strands into a conflict-aware, adaptive fusion of parametric and contextual logits tailored for MLLMs and multimodal RAG. Complementing this, Self-RAG\u2019s insight\u2014that models must decide when to trust retrieved evidence\u2014resonates with ALFAR\u2019s adaptive weighting, but ALFAR achieves it via lightweight inference-time mechanisms rather than additional training. Together, these prior ideas directly shape ALFAR\u2019s two-pronged, training-free design that improves knowledge utilization in multimodal settings.",
+  "analysis_timestamp": "2026-01-07T00:21:32.243246"
+}

@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Deep CORAL: Correlation Alignment for Deep Domain Adaptation",
+      "authors": "Baochen Sun et al.",
+      "year": 2016,
+      "arxiv_id": "1607.01719",
+      "role": "Extension",
+      "relationship_sentence": "NMTune adopts the same core idea of an affine feature-space transformation as Deep CORAL\u2019s linear alignment, extending it from matching domain statistics to explicitly correcting the feature distortions induced by noisy pre-training."
+    },
+    {
+      "title": "Tent: Fully Test-Time Adaptation by Entropy Minimization",
+      "authors": "Dequan Wang et al.",
+      "year": 2021,
+      "arxiv_id": "2006.10726",
+      "role": "Inspiration",
+      "relationship_sentence": "The lightweight, black-box adaptation principle of TENT\u2014updating only a small set of affine parameters without accessing source data\u2014directly inspired NMTune\u2019s design for post-hoc feature correction of noisy pre-trained models."
+    },
+    {
+      "title": "Co-teaching: Robust Training of Deep Neural Networks with Extremely Noisy Labels",
+      "authors": "Bo Han et al.",
+      "year": 2018,
+      "arxiv_id": "1804.06872",
+      "role": "Gap Identification",
+      "relationship_sentence": "Co-teaching exemplifies noise-robust training that requires intervention during training on noisy data, a limitation this work addresses by proposing a downstream, black-box mitigation method that operates after pre-training."
+    },
+    {
+      "title": "WebVision Database: Visual Learning and Understanding from Web Data",
+      "authors": "Wen Li et al.",
+      "year": 2017,
+      "arxiv_id": "1708.02862",
+      "role": "Foundation",
+      "relationship_sentence": "WebVision formalized supervised learning from large-scale web data with substantial label noise, providing the pre-training-with-noise setting and motivation that this work systematically studies for transfer."
+    },
+    {
+      "title": "WILDS: A Benchmark of in-the-Wild Distribution Shifts",
+      "authors": "Pang Wei Koh et al.",
+      "year": 2021,
+      "arxiv_id": "2012.07421",
+      "role": "Foundation",
+      "relationship_sentence": "WILDS crystallized the ID vs OOD generalization framework under distribution shift, which this work adopts to disentangle how pre-training noise differentially impacts in-domain versus out-of-domain transfer."
+    },
+    {
+      "title": "Do Better ImageNet Models Transfer Better?",
+      "authors": "Simon Kornblith et al.",
+      "year": 2019,
+      "arxiv_id": "1805.08974",
+      "role": "Foundation",
+      "relationship_sentence": "This paper established standardized transfer evaluation from ImageNet pre-training to diverse downstream tasks, providing the evaluation paradigm this work extends to analyze the effect of label noise in pre-training."
+    }
+  ],
+  "synthesis_narrative": "Learning from web-scale labeled data introduced the practical reality of noisy supervision, with WebVision defining a benchmark and setting in which large datasets contain pervasive label errors. Robust training under such noise, as typified by Co-teaching, showed that selectively trusting samples can stabilize learning\u2014yet these methods intervene during training and assume access to the noisy corpus. Separately, transfer evaluation was systematized by work demonstrating how pre-trained representations carry over to many tasks, and WILDS formalized in-domain versus out-of-domain performance under distribution shift, providing a lens to assess when transfer succeeds or fails. On the representation side, Deep CORAL revealed that simple affine transformations of features can effectively align distributions by matching second-order statistics, while TENT demonstrated that small, black-box updates to affine components can adapt models at test time without revisiting source data.\nTaken together, these threads expose an opportunity: leverage the power of affine feature-space adjustments and black-box adaptation to mitigate the specific distortions that noisy pre-training imprints on representations, and evaluate the outcome through the ID/OOD lens. Building on CORAL\u2019s linear alignment idea and TENT\u2019s lightweight adaptation mechanism\u2014while addressing the training-time dependency of traditional noisy-label methods\u2014the current work naturally emerges as a post-hoc, black-box approach that reshapes feature geometry to recover OOD transfer without re-training on the pre-training data.",
+  "target_paper": {
+    "title": "Understanding and Mitigating the Label Noise in Pre-training on Downstream Tasks",
+    "authors": "Hao Chen, Jindong Wang, Ankit Shah, Ran Tao, Hongxin Wei, Xing Xie, Masashi Sugiyama, Bhiksha Raj",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Pre training, Noisy model learning, Label noise, Noise mitigation",
+    "abstract": "Pre-training on large-scale datasets and then fine-tuning on downstream tasks have become a standard practice in deep learning. However, pre-training data often contain label noise that may adversely affect the generalization of the model. This paper aims to understand the nature of noise in pre-training datasets and to mitigate its impact on downstream tasks. More specifically, through extensive experiments of supervised pre-training models on synthetic noisy ImageNet-1K and YFCC15M datasets, we demonstrate that while slight noise in pre-training can benefit in-domain (ID) transfer performance, where the training and testing data share the same distribution, it always deteriorates out-of-domain (OOD) performance, where training and testing data distribution are different. We empirically verify that the reason behind is noise in pre-training shapes the feature space differently. We then propose a light-weight black-box tuning method (NMTune) to affine the feature space to mitigate the ",
+    "openreview_id": "TjhUtloBZU",
+    "forum_id": "TjhUtloBZU"
+  },
+  "analysis_timestamp": "2026-01-06T09:34:40.635337"
+}

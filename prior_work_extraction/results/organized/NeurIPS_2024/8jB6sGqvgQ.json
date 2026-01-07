@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Explaining and Harnessing Adversarial Examples",
+      "authors": "Ian J. Goodfellow, Jonathon Shlens, Christian Szegedy",
+      "year": 2015,
+      "role": "Foundational adversarial training theory",
+      "relationship_sentence": "Introduces gradient-based adversarial perturbations and the adversarial training paradigm that C-AdvUL instantiates for LLMs, but in the model\u2019s continuous embedding space rather than raw inputs."
+    },
+    {
+      "title": "Towards Deep Learning Models Resistant to Adversarial Attacks",
+      "authors": "Aleksander Madry, Aleksandar Makelov, Ludwig Schmidt, Dimitris Tsipras, Adrian Vladu",
+      "year": 2018,
+      "role": "Robust optimization framework (PGD min\u2013max)",
+      "relationship_sentence": "Provides the min\u2013max robust training objective (inner maximization over perturbations) that C-AdvUL makes tractable for LLMs by moving the attack to continuous token embeddings."
+    },
+    {
+      "title": "Adversarial Training Methods for Semi-Supervised Text Classification",
+      "authors": "Takeru Miyato, Andrew M. Dai, Ian Goodfellow",
+      "year": 2017,
+      "role": "Embedding-space adversarial perturbations for NLP (VAT)",
+      "relationship_sentence": "Demonstrates that adversarial perturbations in word embeddings are effective and efficient for text models, directly motivating the paper\u2019s choice to compute attacks in the LLM embedding space."
+    },
+    {
+      "title": "Theoretically Principled Trade-off between Robustness and Accuracy",
+      "authors": "Hongyang Zhang, Yaodong Yu, Jiantao Jiao, Eric P. Xing, Laurent El Ghaoui, Michael I. Jordan",
+      "year": 2019,
+      "role": "Robustness\u2013utility trade-off objective (TRADES)",
+      "relationship_sentence": "Inspires the two-loss design that explicitly balances robustness (on adversarial behaviors) with utility fine-tuning, mirroring TRADES\u2019 separation of robust and natural objectives."
+    },
+    {
+      "title": "Prefix-Tuning: Optimizing Continuous Prompts for Generation",
+      "authors": "Xiang Lisa Li, Percy Liang",
+      "year": 2021,
+      "role": "Continuous prompt/embedding control in LMs",
+      "relationship_sentence": "Shows that continuous prompt embeddings can steer generation, supporting the paper\u2019s core insight that operating in the continuous embedding space is a powerful and efficient surrogate for discrete prompt attacks."
+    },
+    {
+      "title": "Universal and Transferable Adversarial Attacks on Aligned Language Models (GCG)",
+      "authors": "Andy Zou et al.",
+      "year": 2023,
+      "role": "Baseline discrete jailbreak attack demonstrating computational burden",
+      "relationship_sentence": "Establishes strong discrete gradient-based jailbreaks whose high cost during training motivates the proposed continuous embedding-space attacks as a far more efficient alternative."
+    },
+    {
+      "title": "Direct Preference Optimization: Your Language Model is Secretly a Reward Model",
+      "authors": "Rafailov et al.",
+      "year": 2023,
+      "role": "Preference-based alignment without RL (basis for IPO-style training)",
+      "relationship_sentence": "Provides the preference-optimization framework that C-AdvIPO adapts adversarially, replacing explicit utility data with a preference-style objective under adversarial perturbations."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core contribution\u2014efficient adversarial training for LLMs via continuous embedding-space attacks and a two-part loss\u2014sits at the intersection of classical robust optimization, NLP-specific embedding perturbations, and modern preference-based alignment. Foundationally, Goodfellow et al. and Madry et al. supply the adversarial training and min\u2013max PGD frameworks that define robustness as inner maximization over input perturbations. Miyato et al. port this idea to NLP by perturbing word embeddings, demonstrating that continuous embedding-space attacks are both effective and computationally light\u2014directly enabling the paper\u2019s switch from expensive discrete token searches to fast continuous attacks in LLMs. Zhang et al. (TRADES) contributes the principled notion of decoupling robustness and utility through separate losses, echoed in the paper\u2019s design that trains on adversarial behaviors while preserving helpfulness via a utility objective. Li and Liang\u2019s prefix-tuning establishes that continuous prompt embeddings can reliably steer generation, validating embedding-space manipulations as a practical surrogate for discrete prompts that underlie many jailbreaks. Zou et al.\u2019s GCG highlights the strength\u2014but prohibitive training-time cost\u2014of discrete gradient-based jailbreaks, sharpening the motivation for a continuous alternative. Finally, preference-based alignment without RL (DPO and its variants, including IPO) informs the C-AdvIPO formulation, which integrates adversarial perturbations into a preference-optimization objective to obviate separate utility data, completing a coherent bridge from robust optimization to efficient, alignment-aware adversarial training for LLMs.",
+  "analysis_timestamp": "2026-01-06T23:33:35.545431"
+}

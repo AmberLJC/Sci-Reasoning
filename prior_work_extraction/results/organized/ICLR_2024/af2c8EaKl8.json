@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+      "authors": "Lili Chen et al.",
+      "year": 2021,
+      "arxiv_id": "2106.01345",
+      "role": "Baseline",
+      "relationship_sentence": "DC retains DT\u2019s return-conditioned sequence modeling formulation but directly replaces DT\u2019s global self-attention token mixer with a local convolutional mixer to better match the Markovian local dependencies in trajectories."
+    },
+    {
+      "title": "MetaFormer is Actually What You Need for Vision",
+      "authors": "Weihao Yu et al.",
+      "year": 2022,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "DC adopts the MetaFormer paradigm that the generic Transformer \u2018skeleton\u2019\u2014independent of attention\u2014is key, instantiating it with a local convolutional token mixer instead of attention exactly as MetaFormer advocates."
+    },
+    {
+      "title": "Patches Are All You Need?",
+      "authors": "Daniel Trockman et al.",
+      "year": 2022,
+      "arxiv_id": "",
+      "role": "Extension",
+      "relationship_sentence": "DC extends ConvMixer\u2019s idea of using depthwise convolution as the token mixer by adapting it from spatial image patches to causal temporal trajectory tokens for decision making."
+    },
+    {
+      "title": "An Empirical Evaluation of Generic Convolutional and Recurrent Networks for Sequence Modeling",
+      "authors": "Shaojie Bai et al.",
+      "year": 2018,
+      "arxiv_id": "1803.01271",
+      "role": "Inspiration",
+      "relationship_sentence": "DC is motivated by TCN\u2019s finding that causal/dilated temporal convolutions effectively capture sequence dependencies, guiding the choice of local convolutional mixing for RL trajectories."
+    },
+    {
+      "title": "Trajectory Transformer: Model-Based Offline Reinforcement Learning with Sequence Modeling",
+      "authors": "Michael Janner et al.",
+      "year": 2021,
+      "arxiv_id": "",
+      "role": "Related Problem",
+      "relationship_sentence": "DC targets the same offline RL trajectory modeling setup established by Trajectory Transformer but replaces attention-based token mixing with local convolution to address overreliance on global context."
+    },
+    {
+      "title": "Conformer: Convolution-augmented Transformer for Speech Recognition",
+      "authors": "Anmol Gulati et al.",
+      "year": 2020,
+      "arxiv_id": "2005.08100",
+      "role": "Related Problem",
+      "relationship_sentence": "DC draws on Conformer\u2019s insight that explicitly modeling local patterns with convolution benefits sequence tasks, but goes further by making convolution the sole token mixer for decision sequences."
+    }
+  ],
+  "synthesis_narrative": "Decision Transformer showed that offline reinforcement learning could be cast as conditional sequence modeling, conditioning on desired return and actions in an autoregressive manner with a Transformer backbone; its key mechanism is global self-attention to mix trajectory tokens. MetaFormer then demonstrated that the Transformer\u2019s success often stems from the overall architectural scaffold\u2014normalization, token mixer, and feedforward blocks\u2014rather than attention itself, and that the mixer can be swapped with simpler alternatives. ConvMixer provided a concrete recipe for replacing attention with depthwise convolution as the token mixer, highlighting that local filtering can be both expressive and efficient for token interactions. Temporal Convolutional Networks established that causal (and dilated) temporal convolutions excel at capturing dependencies in sequences, offering a strong local modeling prior. Trajectory Transformer reinforced the viability of sequence modeling for RL trajectories with attention, framing the same offline RL problem setup. Conformer, in a different sequence domain, showed that adding convolutions specifically to capture local patterns can improve modeling quality. Together these works revealed a tension: sequence models in RL used global attention despite RL\u2019s locally Markovian structure, while MetaFormer-style designs and temporal convolutions suggested local token mixing could suffice. The natural next step was to instantiate the MetaFormer skeleton for decision making with a causal, local convolutional token mixer\u2014preserving the DT-style return-conditioned sequence formulation while addressing attention\u2019s mismatch and improving efficiency.",
+  "target_paper": {
+    "title": "Decision ConvFormer: Local Filtering in MetaFormer is Sufficient for Decision Making",
+    "authors": "Jeonghye Kim, Suyoung Lee, Woojun Kim, Youngchul Sung",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "MetaFormer, Convolution, Reinforcement Learning, Representation Learning",
+    "abstract": "The recent success of Transformer in natural language processing has sparked its use in various domains. In offline reinforcement learning (RL), Decision Transformer (DT) is emerging as a promising model based on Transformer. However, we discovered that the attention module of DT is not appropriate to capture the inherent local dependence pattern in trajectories of RL modeled as a Markov decision process. To overcome the limitations of DT, we propose a novel action sequence predictor, named Decision ConvFormer (DC), based on the architecture of MetaFormer, which is a general structure to process multiple entities in parallel and understand the interrelationship among the multiple entities. DC employs local convolution filtering as the token mixer and can effectively capture the inherent local associations of the RL dataset. In extensive experiments, DC achieved state-of-the-art performance across various standard RL benchmarks while requiring fewer resources. Furthermore, we show that ",
+    "openreview_id": "af2c8EaKl8",
+    "forum_id": "af2c8EaKl8"
+  },
+  "analysis_timestamp": "2026-01-06T07:59:59.339304"
+}

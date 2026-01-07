@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Relative Entropy Policy Search",
+      "authors": "Jan Peters et al.",
+      "year": 2010,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "REPS is a canonical episodic policy-search method that optimizes trajectory generators on-policy, whose inability to reuse off-policy data is the core limitation overcome by TOP-ERL\u2019s segment-wise off-policy value estimation."
+    },
+    {
+      "title": "A Generalized Path Integral Control Approach to Reinforcement Learning (PI^2)",
+      "authors": "Evangelos A. Theodorou et al.",
+      "year": 2010,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "PI^2 established the ERL formulation of predicting full action trajectories with movement primitives and updating from episodic returns, which TOP-ERL retains while addressing PI^2\u2019s on-policy restriction via an off-policy critic."
+    },
+    {
+      "title": "Probabilistic Movement Primitives",
+      "authors": "Andreas Paraschos et al.",
+      "year": 2013,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "ProMPs provide the trajectory parameterization and distributional framework for generating smooth multi-step action sequences, which TOP-ERL uses as the action generator whose segments are evaluated by the critic."
+    },
+    {
+      "title": "Between MDPs and Semi-MDPs: A Framework for Temporal Abstraction in Reinforcement Learning",
+      "authors": "Richard S. Sutton et al.",
+      "year": 1999,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "The options/SMDP framework formalized value learning for temporally extended actions and n-step bootstrapping across option boundaries, directly motivating TOP-ERL\u2019s segment-wise Q-estimation and n-step return targets."
+    },
+    {
+      "title": "RUDDER: Return Decomposition for Delayed Rewards",
+      "authors": "J. A. Arjona-Medina et al.",
+      "year": 2019,
+      "arxiv_id": "1806.07857",
+      "role": "Inspiration",
+      "relationship_sentence": "RUDDER showed that decomposing trajectory returns to earlier sequence parts improves long-horizon credit assignment, inspiring TOP-ERL\u2019s idea to break long action sequences into learnable segments with local value targets."
+    },
+    {
+      "title": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+      "authors": "Lili Chen et al.",
+      "year": 2021,
+      "arxiv_id": "2106.01345",
+      "role": "Inspiration",
+      "relationship_sentence": "Decision Transformer demonstrated that transformers can map partial trajectories to returns, motivating TOP-ERL\u2019s transformer-based critic to predict segment state\u2013action values conditioned on sequence context."
+    },
+    {
+      "title": "Stabilizing Transformers for Reinforcement Learning",
+      "authors": "Emilio Parisotto et al.",
+      "year": 2020,
+      "arxiv_id": "1910.06764",
+      "role": "Related Problem",
+      "relationship_sentence": "GTrXL established transformer architectures as effective for capturing long-range temporal dependencies in value estimation, informing TOP-ERL\u2019s choice of a transformer critic for sequence-aware segment evaluation."
+    }
+  ],
+  "synthesis_narrative": "Episodic policy-search methods such as Relative Entropy Policy Search optimize trajectory generators using full-episode returns but inherently rely on on-policy sampling, foregoing the efficiency of replayed data. The PI^2 framework likewise casts control as episodic updates over movement primitives, shaping the ERL paradigm of predicting complete action sequences from which updates are derived. Probabilistic Movement Primitives contributed a concrete, distributional parameterization of smooth multi-step trajectories, widely used in robotics to encode high-level temporal structure. The options framework formalized temporally extended actions and the associated semi-MDP value backups, specifying how n-step return targets bootstrap across boundaries in long-duration actions. RUDDER introduced return decomposition across sequences to address delayed rewards, highlighting that splitting trajectories and assigning local learning targets can significantly improve credit assignment. In parallel, Decision Transformer showed transformers can predict returns from partial trajectories, and GTrXL established that transformer-based critics can stably capture long-range dependencies in RL value estimation.\nTogether, these works exposed a clear opportunity: ERL\u2019s trajectory-level policies enable coherent long-horizon exploration, but lack an off-policy mechanism to evaluate and update from replayed experience. The SMDP view and return decomposition suggest segmenting long action sequences and bootstrapping across segments, while transformer sequence models provide the capacity to condition value predictions on rich temporal context. Synthesizing these insights, the present work performs off-policy ERL by splitting predicted trajectories into segments and learning a transformer-based critic with n-step targets to estimate segment state\u2013action values, thereby preserving ERL\u2019s advantages while gaining off-policy sample efficiency.",
+  "target_paper": {
+    "title": "TOP-ERL: Transformer-based Off-Policy Episodic Reinforcement Learning",
+    "authors": "Ge Li, Dong Tian, Hongyi Zhou, Xinkai Jiang, Rudolf Lioutikov, Gerhard Neumann",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "Value of sequences of actions, Reinforcement Learning, Transformer, Robot Manipulation, Movement Primitives.",
+    "abstract": "This work introduces Transformer-based Off-Policy Episodic Reinforcement Learning (TOP-ERL), a novel algorithm that enables off-policy updates in the ERL framework. In ERL, policies predict entire action trajectories over multiple time steps instead of single actions at every time step. These trajectories are typically parameterized by trajectory generators such as  Movement Primitives (MP), allowing for smooth and efficient exploration over long horizons while capturing high-level temporal correlations. However, ERL methods are often constrained to on-policy frameworks due to the difficulty of evaluating state-action values for entire action sequences, limiting their sample efficiency and preventing the use of more efficient off-policy architectures. TOP-ERL addresses this shortcoming by segmenting long action sequences and estimating the state-action values for each segment using a transformer-based critic architecture alongside an n-step return estimation. These contributions result",
+    "openreview_id": "N4NhVN30ph",
+    "forum_id": "N4NhVN30ph"
+  },
+  "analysis_timestamp": "2026-01-06T10:30:15.641929"
+}

@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Spectral redemption in clustering sparse networks",
+      "authors": "Florent Krzakala et al.",
+      "year": 2013,
+      "arxiv_id": "1306.5550",
+      "role": "Foundation",
+      "relationship_sentence": "The detectability-threshold viewpoint and signal-to-noise framing for when community structure is statistically recoverable directly underpin NetInfoF_Probe\u2019s notion of \u201cusable information\u201d and its criterion for when topology alone can support prediction."
+    },
+    {
+      "title": "Spectral clustering of graphs with the Bethe Hessian",
+      "authors": "Alaa Saade et al.",
+      "year": 2014,
+      "arxiv_id": "1406.1880",
+      "role": "Inspiration",
+      "relationship_sentence": "The Bethe Hessian\u2019s closed-form, training-free spectral estimator of structural signal in sparse graphs motivated NetInfoF\u2019s theoretically justified probe that quantifies structural information without model training."
+    },
+    {
+      "title": "APPNP: Approximating Personalized Propagation of Neural Predictions",
+      "authors": "Johannes Klicpera et al.",
+      "year": 2019,
+      "arxiv_id": "1810.05997",
+      "role": "Foundation",
+      "relationship_sentence": "APPNP\u2019s decoupled PageRank-based propagation establishes the diffusion-style linear backbone that NetInfoF adopts and analytically calibrates using its information probe for both node classification and link prediction."
+    },
+    {
+      "title": "GPR-GNN: Graph Neural Networks with Learnable and Transferable Generalized PageRank",
+      "authors": "Eli Chien et al.",
+      "year": 2021,
+      "arxiv_id": "2006.07988",
+      "role": "Baseline",
+      "relationship_sentence": "NetInfoF directly builds on GPR-GNN\u2019s generalized polynomial PageRank filter but replaces learned coefficients with closed-form weights computed from measured usable information and extends the same backbone to link prediction."
+    },
+    {
+      "title": "MixHop: Higher-Order Graph Convolutional Architectures via Sparsified Neighborhood Mixing",
+      "authors": "Sami Abu-El-Haija et al.",
+      "year": 2019,
+      "arxiv_id": "1905.00067",
+      "role": "Related Problem",
+      "relationship_sentence": "MixHop\u2019s explicit multi-hop A^k mixing demonstrated the utility of combining different neighborhood orders, which NetInfoF uses as a shared linear backbone for both probing information and acting on it via closed-form weights."
+    },
+    {
+      "title": "Beyond Homophily in Graph Neural Networks: Current Limitations and Effective Designs (H2GCN)",
+      "authors": "Jiong Zhu et al.",
+      "year": 2020,
+      "arxiv_id": "2006.11468",
+      "role": "Gap Identification",
+      "relationship_sentence": "By showing that standard message passing fails under heterophily and advocating ego/neighbor separation and higher-order aggregation, H2GCN motivates NetInfoF\u2019s need to quantify when structure is actually useful and how to balance it with node features."
+    }
+  ],
+  "synthesis_narrative": "Detectability theory for sparse networks established that structural signals become usable only above a statistical threshold; Krzakala and colleagues formalized this through a signal-to-noise perspective and spectral operators that succeed exactly when information is present. Saade et al. operationalized this idea via the Bethe Hessian, a closed-form spectral method with guarantees in sparse regimes, showing that one can test and extract structural signal without learning. In parallel, APPNP introduced a decoupled, personalized PageRank diffusion that cleanly separates propagation from feature transformation, making linear diffusion a reusable backbone. Building on this, GPR-GNN generalized diffusion to learn polynomial filters with signed, multi-hop weights that flexibly capture both homophily and heterophily. MixHop corroborated the effectiveness of mixing multiple A^k neighborhoods, reinforcing the practicality of a multi-hop linear backbone. Meanwhile, H2GCN identified that conventional message passing degrades on heterophilous graphs and advocated designs that explicitly separate ego features from structural aggregation, highlighting the need to know when topology should be trusted.\nTaken together, these works reveal a natural opportunity: couple a training-free, theoretically grounded test of when and where graph structure (versus features) carries recoverable signal with a flexible multi-hop linear diffusion backbone. NetInfoF synthesizes detectability-style probing with APPNP/GPR-GNN/MixHop-style polynomial diffusion by deriving closed-form filter weights from the measured signal-to-noise, and it uses the same backbone to both assess and exploit information for node classification and link prediction, addressing the heterophily-driven failure modes documented by H2GCN.",
+  "target_paper": {
+    "title": "NetInfoF Framework: Measuring and Exploiting Network Usable Information",
+    "authors": "Meng-Chieh Lee, Haiyang Yu, Jian Zhang, Vassilis N. Ioannidis, Xiang song, Soji Adeshina, Da Zheng, Christos Faloutsos",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Graph Neural Networks, Information Theory, Heterophily Graphs",
+    "abstract": "Given a node-attributed graph, and a graph task (link prediction or node classification), can we tell if a graph neural network (GNN) will perform well? More specifically, do the graph structure and the node features carry enough usable information for the task? Our goals are\n(1) to develop a fast tool to measure how much information is in the graph structure and in the node features, and\n(2) to exploit the information to solve the task, if there is enough.\nWe propose NetInfoF, a framework including NetInfoF_Probe and NetInfoF_Act, for the measurement and the exploitation of network usable information (NUI), respectively. Given a graph data, NetInfoF_Probe measures NUI without any model training, and NetInfoF_Act solves link prediction and node classification, while two modules share the same backbone.\nIn summary, NetInfoF has following notable advantages:\n(a) General, handling both link prediction and node classification;\n(b) Principled, with theoretical guarantee and closed-form solu",
+    "openreview_id": "KY8ZNcljVU",
+    "forum_id": "KY8ZNcljVU"
+  },
+  "analysis_timestamp": "2026-01-06T23:24:01.810974"
+}

@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Set Transformer: A Framework for Attention-based Permutation-Invariant Neural Networks",
+      "authors": "Juho Lee et al.",
+      "year": 2019,
+      "arxiv_id": "1810.00825",
+      "role": "Extension",
+      "relationship_sentence": "NV-Embed\u2019s latent attention pooling head directly extends Set Transformer\u2019s PMA idea by using a learned query to attend over token representations for sequence-level embedding instead of mean/EOS pooling."
+    },
+    {
+      "title": "Perceiver: General Perception with Iterative Attention",
+      "authors": "Andrew Jaegle et al.",
+      "year": 2021,
+      "arxiv_id": "2103.03206",
+      "role": "Inspiration",
+      "relationship_sentence": "The use of a small learned latent to cross-attend and summarize inputs in Perceiver inspired NV-Embed\u2019s learned latent attention layer for pooling decoder-only token states into a single embedding."
+    },
+    {
+      "title": "Learning Transferable Visual Models From Natural Language Supervision (CLIP)",
+      "authors": "Alec Radford et al.",
+      "year": 2021,
+      "arxiv_id": "2103.00020",
+      "role": "Baseline",
+      "relationship_sentence": "CLIP established the decoder-style text transformer with EOS pooling under a contrastive objective, which NV-Embed explicitly replaces with latent attention pooling to overcome EOS/mean pooling limitations."
+    },
+    {
+      "title": "SimCSE: Simple Contrastive Learning of Sentence Embeddings",
+      "authors": "Tianyu Gao et al.",
+      "year": 2021,
+      "arxiv_id": "2104.08821",
+      "role": "Foundation",
+      "relationship_sentence": "NV-Embed\u2019s contrastive training with large in-batch negatives for sentence-level representations builds on the SimCSE framework, adapting it to decoder-only LLMs and instruction-formatted pairs."
+    },
+    {
+      "title": "UniLM: Unified Language Model Pre-training for Natural Language Understanding and Generation",
+      "authors": "Li Dong et al.",
+      "year": 2019,
+      "arxiv_id": "1905.03197",
+      "role": "Inspiration",
+      "relationship_sentence": "NV-Embed\u2019s removal of the causal mask during representation learning is motivated by UniLM\u2019s insight that adjusting attention masks enables bidirectional encoding behavior within a unified transformer architecture."
+    },
+    {
+      "title": "E5: Text Embeddings by Weakly-Supervised Contrastive Pre-training",
+      "authors": "Wang et al.",
+      "year": 2022,
+      "arxiv_id": null,
+      "role": "Extension",
+      "relationship_sentence": "NV-Embed\u2019s two-stage instruction-driven contrastive training and unified query/document prompting extend E5\u2019s instruction-based formulation to decoder-only LLMs with improved negatives and broader retrieval supervision."
+    }
+  ],
+  "synthesis_narrative": "Pooling by Multihead Attention (PMA) in the Set Transformer introduced a learned seed vector that attends to a set to produce a robust, permutation-invariant summary, offering a principled alternative to naive mean or special-token pooling. Perceiver further generalized the idea of using a compact latent array that cross-attends to inputs to form condensed representations, highlighting the effectiveness of learned latent queries for summarization. CLIP operationalized contrastive training at scale with a decoder-style text transformer that represents text via the final EOS token under a contrastive objective, establishing EOS/last-token pooling as the default for decoder-based encoders. SimCSE showed that contrastive learning with large in-batch negatives yields strong, general-purpose sentence embeddings, providing an effective recipe for representation learning. UniLM demonstrated that simply changing attention masks can toggle a transformer between uni- and bi-directional modes, revealing that bidirectional attention is beneficial for understanding-oriented representations. E5 unified retrieval tasks through instruction-formatted query/document prompts and weakly supervised contrastive pretraining, popularizing instruction-driven, multi-stage training for generalist embeddings. Together these works reveal that while contrastive objectives and instruction-driven formulations are powerful, EOS/mean pooling for decoder-only models remains suboptimal and causal masks constrain representation quality. The natural next step is to replace heuristic pooling with a learned latent attention head and to remove causal masking when learning embeddings, while adopting a two-stage, instruction-based contrastive regimen with strong in-batch negatives. NV-Embed synthesizes these insights to turn decoder-only LLMs into high-quality, generalist embedding models that outperform prior EOS/mean pooling baselines.",
+  "target_paper": {
+    "title": "NV-Embed: Improved Techniques for Training LLMs as Generalist Embedding Models",
+    "authors": "Chankyu Lee, Rajarshi Roy, Mengyao Xu, Jonathan Raiman, Mohammad Shoeybi, Bryan Catanzaro, Wei Ping",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "LLM, embedding model, retriever",
+    "abstract": "Decoder-only large language model (LLM)-based embedding models are beginning to outperform BERT or T5-based embedding models in general-purpose text embedding tasks, including dense vector-based retrieval. In this work, we introduce the NV-Embed model, incorporating architectural designs, training procedures, and curated datasets to significantly enhance the performance of LLM as a versatile embedding model, while maintaining its simplicity and reproducibility.For model architecture, we propose a latent attention layer to obtain pooled embeddings, which consistently improves retrieval and downstream task accuracy compared to mean pooling or using the last <EOS> token embedding from LLMs. To enhance representation learning, we remove the causal attention mask of LLMs during contrastive training. For training algorithm, we introduce a two-stage contrastive instruction-tuning method. It first applies contrastive training with instructions on retrieval datasets, utilizing in-batch negative",
+    "openreview_id": "lgsyLSsDRe",
+    "forum_id": "lgsyLSsDRe"
+  },
+  "analysis_timestamp": "2026-01-06T12:43:23.732353"
+}

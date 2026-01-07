@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Optimal Brain Damage",
+      "authors": "Yann LeCun, John S. Denker, Sara A. Solla",
+      "year": 1990,
+      "role": "Foundational pruning via local saliency",
+      "relationship_sentence": "Introduced parameter saliency using local Taylor approximations to predict performance change under component removal; ModHiFi generalizes this local-to-global idea to a loss/gradient-free setting using reconstruction-based subset fidelity under Lipschitz assumptions."
+    },
+    {
+      "title": "Channel Pruning for Accelerating Very Deep Neural Networks",
+      "authors": "Yihui He, Xiangyu Zhang, Jian Sun",
+      "year": 2017,
+      "role": "Local reconstruction for channel selection",
+      "relationship_sentence": "Showed that minimizing layer-wise feature-map reconstruction error is an effective criterion for selecting channels; ModHiFi formalizes and extends this intuition by proving that global reconstruction error is bounded by aggregated local reconstruction errors and by turning it into a general Subset Fidelity metric."
+    },
+    {
+      "title": "SNIP: Single-shot Network Pruning based on Connection Sensitivity",
+      "authors": "Namhoon Lee, Thalaiyasingam Ajanthan, Philip H. S. Torr",
+      "year": 2019,
+      "role": "One-shot importance estimation",
+      "relationship_sentence": "Demonstrated that a single pre-update, local sensitivity signal can predict global accuracy impact; ModHiFi similarly relies on a single-pass, local criterion (reconstruction fidelity) to score component subsets when explicit loss/gradients are unavailable."
+    },
+    {
+      "title": "Synaptic Flow: Pruning Neural Networks without Data",
+      "authors": "Hidenori Tanaka, Daniel Kunin, Matthew D. Baron, Jaehoon Lee, Samuel S. Schoenholz",
+      "year": 2020,
+      "role": "Data-free pruning signal",
+      "relationship_sentence": "Established that architecture- and data-agnostic signals can guide pruning; ModHiFi advances this line by proposing a theoretically grounded, data-free (synthetic/distributional) fidelity metric tied to Lipschitz continuity, avoiding gradients altogether."
+    },
+    {
+      "title": "Greedy Layer-Wise Training of Deep Networks",
+      "authors": "Yoshua Bengio, Pascal Lamblin, Dan Popovici, Hugo Larochelle",
+      "year": 2007,
+      "role": "Local reconstruction preserves global information",
+      "relationship_sentence": "Provided theoretical and empirical support that layer-wise reconstruction objectives preserve downstream performance; ModHiFi translates this principle into formal bounds linking local reconstruction errors of component subsets to global predictive fidelity."
+    },
+    {
+      "title": "Spectral Normalization for Generative Adversarial Networks",
+      "authors": "Takeru Miyato, Toshiki Kataoka, Masanori Koyama, Yuichi Yoshida",
+      "year": 2018,
+      "role": "Lipschitz control via spectral norms",
+      "relationship_sentence": "Popularized spectral norm control to bound network Lipschitz constants; ModHiFi\u2019s guarantees hinge on networks being (approximately) Lipschitz, enabling rigorous propagation of local reconstruction errors to global performance bounds, including for well-trained Transformers."
+    },
+    {
+      "title": "ROME: Locating and Editing Factual Associations in GPT",
+      "authors": "Kevin Meng, David Bau, Alex Andonian, Yonatan Belinkov",
+      "year": 2022,
+      "role": "Targeted model modification via component localization",
+      "relationship_sentence": "Showed that identifying and editing a small set of parameters can steer model behavior while preserving overall function; ModHiFi contributes a principled way to find such high-fidelity components without gradients or original data using Subset Fidelity."
+    }
+  ],
+  "synthesis_narrative": "ModHiFi\u2019s core idea\u2014ranking component subsets by their ability to locally reconstruct model behavior and using this as a proxy for global predictive fidelity\u2014draws from two converging lines of work. First, classical pruning methods like Optimal Brain Damage established that local measures of parameter importance can predict global performance impact. Later, channel-pruning approaches (e.g., He et al.) operationalized local feature reconstruction as an effective criterion for structural selection, foreshadowing ModHiFi\u2019s use of reconstruction as an importance signal. Complementing this, single-shot and data-free pruning methods (SNIP and SynFlow) demonstrated that lightweight, architecture-agnostic, and gradient/data-minimal signals can guide modification, motivating ModHiFi\u2019s constraint of operating without the original loss, gradients, or private data.\nSecond, theoretical perspectives on locality and stability underpin ModHiFi\u2019s guarantees. Greedy layer-wise training showed that preserving local reconstructions sustains global representational utility, while spectral normalization formalized Lipschitz control, enabling bounds that relate local perturbations to global behavior. ModHiFi synthesizes these by proving that, for Lipschitz-continuous networks (including well-trained Transformers), global reconstruction error is linearly bounded by aggregated local reconstruction errors, justifying Subset Fidelity as a global importance metric. Finally, practical needs from targeted model modification (e.g., ROME) highlight the value of identifying small, causally influential parameter subsets; ModHiFi provides a general, data-free mechanism to find such high-fidelity components, unifying pruning, unlearning, and editing under a common theoretical and algorithmic framework.",
+  "analysis_timestamp": "2026-01-06T23:42:48.103700"
+}

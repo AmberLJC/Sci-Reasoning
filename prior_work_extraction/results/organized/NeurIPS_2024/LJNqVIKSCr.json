@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Planning chemical syntheses with deep neural networks and symbolic AI",
+      "authors": "Marwin H. S. Segler, Mike Preuss, Mark P. Waller",
+      "year": 2018,
+      "role": "Neural-guided search baseline for CASP",
+      "relationship_sentence": "Established neurally guided tree search (MCTS) for retrosynthesis from target to stock materials, providing the core search-and-learn paradigm that DESP extends to handle explicit starting-material constraints and bidirectional expansion."
+    },
+    {
+      "title": "Computer-Assisted Retrosynthesis Based on Molecular Similarity",
+      "authors": "Connor W. Coley, Luke Rogers, William H. Green, Klavs F. Jensen",
+      "year": 2017,
+      "role": "Template-based expansion with learned prioritization",
+      "relationship_sentence": "Showed how learned scoring can guide reaction-template expansions in an AND/OR-style search, informing DESP\u2019s use of a learned cost network to prioritize expansions on a retrosynthetic hypergraph."
+    },
+    {
+      "title": "AiZynthFinder: a fast, robust and flexible open-source software for retrosynthetic planning",
+      "authors": "Markus Genheden, Amol Thakkar, Ola Engkvist, Esben Jannik Bjerrum",
+      "year": 2020,
+      "role": "Practical CASP system with stock constraints and MCTS",
+      "relationship_sentence": "Demonstrated large-scale, stock-constrained planning via MCTS, motivating DESP\u2019s stronger formulation that enforces user-specified starting materials and its efficiency gains via goal-aware guidance and bidirectional search."
+    },
+    {
+      "title": "Computer-Assisted Synthetic Planning: The End of the Beginning",
+      "authors": "Przemyslaw Szymku\u0107, Ewa P. Gajewska, Tomasz Klucznik, Krzysztof Molga, Piotr Dittwald, Micha\u0142 Startek, Micha\u0142 Bajczyk, Bartosz A. Grzybowski",
+      "year": 2016,
+      "role": "Foundational CASP formulation with availability constraints (Chematica/SYNTHIA)",
+      "relationship_sentence": "Framed synthesis planning as constrained search over reaction networks with explicit availability constraints, a conceptual basis that DESP refines by enforcing goal starting materials through a dedicated double-ended search scheme."
+    },
+    {
+      "title": "A Formal Basis for the Heuristic Determination of Minimum Cost Paths (A*)",
+      "authors": "Peter E. Hart, Nils J. Nilsson, Bertram Raphael",
+      "year": 1968,
+      "role": "Foundational heuristic search and cost-to-go guidance",
+      "relationship_sentence": "Provided the theoretical backbone for best-first expansions guided by learned costs; DESP\u2019s goal-conditioned cost network plays an A*-like role on a retrosynthetic hypergraph."
+    },
+    {
+      "title": "Bidirectional and Heuristic Search in Path Problems",
+      "authors": "Ira Pohl",
+      "year": 1971,
+      "role": "Principled bidirectional heuristic search",
+      "relationship_sentence": "Introduced bidirectional search strategies that directly inspire DESP\u2019s interleaved expansions from target and goal starting materials to ensure constraint satisfiability and reduce search effort."
+    },
+    {
+      "title": "Universal Value Function Approximators",
+      "authors": "Tom Schaul, Daniel Horgan, Karol Gregor, David Silver",
+      "year": 2015,
+      "role": "Goal-conditioned value estimation",
+      "relationship_sentence": "Established goal-conditioned value functions; DESP\u2019s goal-conditioned cost network adapts this idea to CASP, learning costs conditioned on specified starting-material goals from a partially observed reaction hypergraph."
+    }
+  ],
+  "synthesis_narrative": "DESP sits at the intersection of three lines of work: neural-guided CASP search, classical bidirectional/heuristic search, and goal-conditioned value estimation. Segler et al. (2018) demonstrated that learned policies and values can dramatically improve retrosynthetic tree search, while Coley et al. (2017) showed that template-based expansions prioritised by learned scoring can operationalize search on AND/OR-like structures. These CASP systems, and the practical MCTS implementation in AiZynthFinder (Genheden et al., 2020), typically assume success once any stock building blocks are reached; in contrast, real-world constraints often require specific starting materials. Chematica/SYNTHIA\u2019s formulation (Szymku\u0107 et al., 2016) emphasized availability constraints within reaction-network search, underscoring the need for constraint-aware planning that DESP explicitly addresses. \nAt the algorithmic core, DESP brings classical heuristic-search principles to retrosynthetic hypergraphs. A* (Hart et al., 1968) motivates the use of learned cost-to-go estimates for best-first expansion, but DESP\u2019s key advance is to instantiate a bidirectional scheme inspired by Pohl\u2019s (1971) bidirectional heuristic search\u2014interleaving expansions from the target and from the specified starting materials to ensure goal satisfaction and shrink search. Finally, DESP\u2019s goal-conditioned cost network is a direct application of Universal Value Function Approximators (Schaul et al., 2015), conditioning the learned cost on the desired starting-material set and training it offline from a partially observed reaction hypergraph. Together, these strands yield a principled, data-driven, double-ended search that improves solve rates and efficiency under explicit starting-material constraints.",
+  "analysis_timestamp": "2026-01-06T23:33:36.253020"
+}

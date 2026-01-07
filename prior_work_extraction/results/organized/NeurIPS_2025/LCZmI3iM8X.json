@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Direct Preference Optimization: Your Language Model Is Secretly a Reward Model",
+      "authors": "Rafailov et al.",
+      "year": 2023,
+      "role": "Baseline",
+      "relationship_sentence": "VPO directly modifies DPO\u2019s pairwise loss by constraining the negative gradient applied to rejected samples, addressing the confidence-squeezing pathology DPO induces under a softmax head."
+    },
+    {
+      "title": "Training language models to follow instructions with human feedback",
+      "authors": "Ouyang et al.",
+      "year": 2022,
+      "role": "Foundation",
+      "relationship_sentence": "This work established the modern RLHF alignment pipeline and pairwise-preference supervision regime that VPO adopts, while VPO replaces reward-model-based optimization with a DPO-style objective enhanced by V-usable information."
+    },
+    {
+      "title": "Deep reinforcement learning from human preferences",
+      "authors": "Christiano et al.",
+      "year": 2017,
+      "role": "Foundation",
+      "relationship_sentence": "Christiano et al. introduced the pairwise human-preference formulation for alignment that underlies both DPO and VPO; VPO preserves this formulation but changes how rejected samples are penalized."
+    },
+    {
+      "title": "Information-Theoretic Measures for Task-Oriented Learning",
+      "authors": "Xu and Raginsky",
+      "year": 2019,
+      "role": "Foundation",
+      "relationship_sentence": "This paper introduced the V-information/usable-information framework that VPO operationalizes to quantify task-relevant (V-usable) similarity between preference pairs and gate negative gradients."
+    },
+    {
+      "title": "Self-Consistency Improves Chain of Thought Reasoning in Language Models",
+      "authors": "Wang et al.",
+      "year": 2022,
+      "role": "Gap Identification",
+      "relationship_sentence": "By showing multiple diverse reasoning paths can yield correct answers, this work highlights that rejected chains may contain useful reasoning; VPO explicitly avoids over-penalizing such non-preference samples by measuring their V-usable similarity to preferred ones."
+    },
+    {
+      "title": "Let\u2019s Verify Step by Step",
+      "authors": "Lightman et al.",
+      "year": 2023,
+      "role": "Inspiration",
+      "relationship_sentence": "Verifier-based assessment of intermediate reasoning steps motivates VPO\u2019s use of a V-class to quantify what information in a rejected trace is still usable for reasoning, guiding selective constraint of negative gradients."
+    }
+  ],
+  "synthesis_narrative": "VPO sits squarely in the preference-optimization lineage inaugurated by RLHF. Christiano et al. (2017) introduced pairwise preference learning as the core alignment signal, and Ouyang et al. (2022) operationalized it at LLM scale. DPO (Rafailov et al., 2023) then removed the reward model by reparameterizing the objective into a pairwise logistic loss, establishing the direct baseline VPO targets. However, DPO\u2019s strong negative updates on rejected samples can collapse softmax confidence and inadvertently suppress task-relevant tokens\u2014an issue that becomes acute in reasoning where rejected chains may still carry valuable intermediate logic. Two reasoning-focused developments sharpened this gap: Self-Consistency (Wang et al., 2022) showed that multiple, diverse chains can be useful for correct reasoning, implying that wholesale penalization of non-preference samples discards useful signal; and verifier-based process supervision (Lightman et al., 2023) demonstrated that step-level, verifier-grounded judgments can isolate what parts of a chain are actually useful. VPO\u2019s core innovation is to fuse DPO-style pairwise optimization with the information-theoretic framework of V-information (Xu and Raginsky, 2019), using V-usable information to measure the task-relevant similarity between preference pairs. This lets VPO selectively constrain the negative gradient on rejected samples when they share usable reasoning content with preferred ones, preserving beneficial reasoning signal while still enforcing preferences\u2014directly remedying DPO\u2019s gradient pathology in reasoning tasks.",
+  "analysis_timestamp": "2026-01-06T23:08:23.955538"
+}

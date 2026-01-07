@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Learning Transferable Visual Models From Natural Language Supervision",
+      "authors": "Alec Radford et al.",
+      "year": 2021,
+      "arxiv_id": "2103.00020",
+      "role": "Foundation",
+      "relationship_sentence": "NegLabel relies on CLIP\u2019s zero-shot image\u2013text similarity formulation to compute confidence over textual labels, enabling its post hoc OOD scoring with large pools of negative labels."
+    },
+    {
+      "title": "CLIPN: Image-Driven Negative Prompt Learning for Zero-Shot Out-of-Distribution Detection",
+      "authors": "First author et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "NegLabel builds on the idea of negative textual guidance introduced by CLIPN, but replaces learned negative prompts with a large corpus-driven set of negative labels and a new OOD score designed to exploit them without training."
+    },
+    {
+      "title": "Zero-Shot Out-of-Distribution Detection via CLIP",
+      "authors": "First author et al.",
+      "year": 2022,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "NegLabel targets the same zero-shot VLM-based OOD setting as ZOC and addresses its sensitivity to limited auxiliary label sets by systematically leveraging vast negative label corpora with a tailored OOD score."
+    },
+    {
+      "title": "Deep Anomaly Detection with Outlier Exposure",
+      "authors": "Dan Hendrycks et al.",
+      "year": 2019,
+      "arxiv_id": "1812.04606",
+      "role": "Gap Identification",
+      "relationship_sentence": "NegLabel is motivated by OE\u2019s limitation of requiring auxiliary OOD images and retraining, achieving a similar \u2018exposure to negatives\u2019 effect purely through textual negative labels in a post hoc manner."
+    },
+    {
+      "title": "Energy-based Out-of-Distribution Detection",
+      "authors": "Weitang Liu et al.",
+      "year": 2020,
+      "arxiv_id": "2010.03759",
+      "role": "Related Problem",
+      "relationship_sentence": "NegLabel extends energy-style scoring by integrating contrast between positive in-distribution labels and a large set of negative labels, theoretically analyzing why this negative-label-informed score separates OOD data."
+    },
+    {
+      "title": "Learning from Complementary Labels",
+      "authors": "Takeshi Ishida et al.",
+      "year": 2017,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "NegLabel is inspired by the complementary-label paradigm\u2014using labels that indicate what a sample is not\u2014and transfers this idea to VLMs by operationalizing many complementary (negative) text labels to guide OOD scoring."
+    }
+  ],
+  "synthesis_narrative": "CLIP established a practical zero-shot classification mechanism by aligning images and textual labels in a shared embedding space, making confidence measurable via image\u2013text similarity. Complementary-label learning showed that supervision describing what an instance does not belong to can be made statistically useful, motivating the use of negative label information in decision-making. Energy-based OOD detection highlighted the power of scoring functions that reflect relative logit/energy structure rather than raw softmax, pointing to contrastive, theoretically grounded scores for separating in- and out-of-distribution inputs. Outlier Exposure demonstrated that auxiliary negatives substantially improve OOD detection but at the cost of collecting OOD images and retraining, surfacing the need for a post hoc pathway to \u201cexpose\u201d models to negatives. Within the VLM arena, ZOC operationalized zero-shot OOD detection directly on CLIP by leveraging auxiliary label sets, while CLIPN introduced negative textual guidance through learned negative prompts, concretely showing that negatives in the text space can enhance zero-shot OOD detection.\nTogether, these works suggested a clear opportunity: achieve OE-like benefits without images by using textual negatives; make the negative signal scalable and training-free; and design a score that leverages negative labels in a theoretically justified way. Negatives learned as prompts (CLIPN) and small auxiliary label pools (ZOC) hinted at the mechanism but were limited in scope or required learning. Building on CLIP\u2019s similarity framework, complementary-label insights, and energy-style scoring, the current paper aggregates a vast corpus of negative labels and crafts a new OOD score that contrasts positives against many negatives, delivering a simple post hoc method with strong empirical and theoretical support.",
+  "target_paper": {
+    "title": "Negative Label Guided OOD Detection with Pretrained Vision-Language Models",
+    "authors": "Xue Jiang, Feng Liu, Zhen Fang, Hong Chen, Tongliang Liu, Feng Zheng, Bo Han",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "OOD detection",
+    "abstract": "Out-of-distribution (OOD) detection aims at identifying samples from unknown classes, playing a crucial role in trustworthy models against errors on unexpected inputs.  \nExtensive research has been dedicated to exploring OOD detection in the vision modality. \n{Vision-language models (VLMs) can leverage both textual and visual information for various multi-modal applications, whereas few OOD detection methods take into account information from the text modality. \nIn this paper, we propose a novel post hoc OOD detection method, called NegLabel, which takes a vast number of negative labels from extensive corpus databases. We design a novel scheme for the OOD score collaborated with negative labels.\nTheoretical analysis helps to understand the mechanism of negative labels. Extensive experiments demonstrate that our method NegLabel achieves state-of-the-art performance on various OOD detection benchmarks and generalizes well on multiple VLM architectures. Furthermore, our method NegLabel ex",
+    "openreview_id": "xUO1HXz4an",
+    "forum_id": "xUO1HXz4an"
+  },
+  "analysis_timestamp": "2026-01-06T12:16:38.187632"
+}

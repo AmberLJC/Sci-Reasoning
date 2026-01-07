@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Model Soup: Averaging Weights of Multiple Fine-Tuned Models Improves Accuracy",
+      "authors": "Mitchell Wortsman et al.",
+      "year": 2022,
+      "arxiv_id": "2203.05482",
+      "role": "Baseline",
+      "relationship_sentence": "This work is the primary training-free merging baseline the paper improves upon, motivating a structure-aware alternative (layer swapping) to naive weight averaging for composing math and language experts."
+    },
+    {
+      "title": "Merging Models with Fisher-Weighted Averaging",
+      "authors": "Michael Matena et al.",
+      "year": 2021,
+      "arxiv_id": "2111.09832",
+      "role": "Baseline",
+      "relationship_sentence": "As a key merging baseline that uses parameter importance to guide averaging, it directly frames the comparison point that layer swapping surpasses by selectively replacing specific layers instead of globally averaging."
+    },
+    {
+      "title": "Git Re-Basin: Merging Models modulo Permutation Symmetries",
+      "authors": "Samuel Ainsworth et al.",
+      "year": 2022,
+      "arxiv_id": "2209.04836",
+      "role": "Gap Identification",
+      "relationship_sentence": "By showing that weight-space permutation misalignment undermines merging, this paper highlights a limitation the new method avoids by copying whole layers (bypassing neuron matching) to compose capabilities."
+    },
+    {
+      "title": "Task Arithmetic: Leveraging Task Vectors to Edit and Compose Models",
+      "authors": "Gabrielle Ilharco et al.",
+      "year": 2022,
+      "arxiv_id": "2212.04089",
+      "role": "Baseline",
+      "relationship_sentence": "This provides a task-vector baseline for composing skills without further training, which the new approach directly challenges by demonstrating more precise capability transfer via targeted layer replacement."
+    },
+    {
+      "title": "MAD-X: An Adapter-Based Framework for Multi-Task Cross-Lingual Transfer",
+      "authors": "Jonas Pfeiffer et al.",
+      "year": 2020,
+      "arxiv_id": null,
+      "role": "Extension",
+      "relationship_sentence": "MAD-X\u2019s core insight\u2014that language-specific and task-specific competencies can be modularized and recombined for zero-shot cross-lingual transfer\u2014is directly generalized here from adapters to full transformer layers via layer swapping."
+    },
+    {
+      "title": "BERT Rediscovers the NLP Pipeline",
+      "authors": "Ian Tenney et al.",
+      "year": 2019,
+      "arxiv_id": "1905.05950",
+      "role": "Inspiration",
+      "relationship_sentence": "Evidence that lower layers encode lexical/syntactic features while higher layers encode task semantics directly motivates the choice to swap only top and bottom layers to transfer language capacity without eroding math reasoning."
+    },
+    {
+      "title": "MGSM: Multilingual Grade School Math",
+      "authors": "J. Shi et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "This benchmark and problem setup define the evaluation target\u2014zero-shot cross-lingual math reasoning\u2014against which the layer-swapped models demonstrate gains without in-language math supervision."
+    }
+  ],
+  "synthesis_narrative": "Weight-space composition emerged as a practical way to combine capabilities without extra training: Model Soup showed that simple weight averaging can outperform individual fine-tunes, while Fisher-weighted averaging refined this by incorporating parameter importance. Yet, Git Re-Basin revealed a core fragility\u2014permutation misalignment across trained models\u2014that can foil naive merging, prompting methods that either align neurons or avoid destructive averaging. Task Arithmetic introduced task vectors, demonstrating that adding deltas between fine-tuned and base models can transplant skills across tasks without retraining. In parallel, MAD-X established that cross-lingual transfer improves when language-specific and task-specific knowledge are modularized as adapters and recombined, enabling zero-shot transfer to new languages; this was underpinned by layerwise evidence like Tenney et al., which found lower transformer layers capture lexical/syntactic processing while higher layers encode task semantics. MGSM then crystallized the multilingual math reasoning problem, providing a standard to assess transfer without target-language math data. Taken together, these works suggested both the promise and pitfalls of training-free composition: merging must respect model anatomy and the separation of language and task competencies. The natural next step was to replace indiscriminate averaging with structure-aware composition that mirrors adapter-style modularity at full-layer granularity. By swapping only the bottom and top layers from a language expert into a math expert, the approach sidesteps permutation issues, preserves math reasoning internals, and injects target-language processing where it matters, yielding zero-shot cross-lingual math gains on MGSM.",
+  "target_paper": {
+    "title": "Layer Swapping for Zero-Shot Cross-Lingual Transfer in Large Language Models",
+    "authors": "Lucas Bandarkar, Benjamin Muller, Pritish Yuvraj, Rui Hou, Nayan Singhal, Hongjiang Lv, Bing Liu",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "model souping, model merging, cross-lingual transfer, multilingual, math, mathematical reasoning, LLM, SFT",
+    "abstract": "Model merging, such as model souping, is the practice of combining different models with the same architecture together without further training. In this work, we present a model merging methodology that addresses the difficulty of fine-tuning Large Language Models (LLMs) for target tasks in non-English languages, where task-specific data is often unavailable. We focus on mathematical reasoning and without in-language math data, facilitate cross-lingual transfer by composing language and math capabilities. Starting from the same pretrained model, we fine-tune separate \"experts\" on math instruction data in English and on generic instruction data in the target language. We then replace the top and bottom transformer layers of the math expert directly with layers from the language expert, which consequently enhances math performance in the target language. The resulting merged models outperform the individual experts and other merging methods on the math benchmark, MGSM, by 10% across fou",
+    "openreview_id": "vQhn4wrQ6j",
+    "forum_id": "vQhn4wrQ6j"
+  },
+  "analysis_timestamp": "2026-01-06T08:38:28.042528"
+}

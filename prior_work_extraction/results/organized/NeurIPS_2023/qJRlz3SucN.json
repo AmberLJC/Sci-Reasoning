@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Classification and Regression Trees",
+      "authors": "Leo Breiman, Jerome Friedman, Richard Olshen, Charles Stone",
+      "year": 1984,
+      "role": "Foundational decision tree methodology",
+      "relationship_sentence": "VaRT builds on CART\u2019s recursive partitioning framework, replacing greedy point estimates with a Bayesian posterior over tree structures and leaf predictions."
+    },
+    {
+      "title": "Bayesian CART Model Search",
+      "authors": "Hugh A. Chipman, Edward I. George, Robert E. McCulloch",
+      "year": 1998,
+      "role": "Bayesian priors and posterior inference over tree structures",
+      "relationship_sentence": "This work introduced priors over tree topology/splits and MCMC for posterior inference; VaRT adopts the Bayesian view of trees but substitutes reversible-jump sampling with variational inference."
+    },
+    {
+      "title": "BART: Bayesian Additive Regression Trees",
+      "authors": "Hugh A. Chipman, Edward I. George, Robert E. McCulloch",
+      "year": 2010,
+      "role": "Bayesian tree-based regression and uncertainty quantification",
+      "relationship_sentence": "BART established effective Bayesian regularization and uncertainty in tree-based regression; VaRT leverages similar prior design principles while targeting a variational posterior over stochastic trees rather than MCMC over ensembles."
+    },
+    {
+      "title": "Mondrian Forests for Large-Scale Regression when Uncertainty Matters",
+      "authors": "Balaji Lakshminarayanan, Daniel M. Roy, Yee Whye Teh",
+      "year": 2016,
+      "role": "Nonparametric stochastic processes over recursive partitions",
+      "relationship_sentence": "Mondrian forests provide a principled stochastic prior over tree partitions and predictive uncertainty; VaRT similarly models stochastic decision trees and infers their posterior, but via variational inference."
+    },
+    {
+      "title": "Deep Neural Decision Forests",
+      "authors": "Peter Kontschieder, Madalina Fiterau, Antonio Criminisi, Samuel Rota Bul\u00f2",
+      "year": 2015,
+      "role": "Differentiable probabilistic routing in trees",
+      "relationship_sentence": "By introducing probabilistic routing and gradient-based training for trees, this work motivates the use of stochastic/soft decisions that VaRT exploits to enable vectorized, gradient-based variational inference over tree structure."
+    },
+    {
+      "title": "The Concrete Distribution: A Continuous Relaxation of Discrete Random Variables",
+      "authors": "Chris J. Maddison, Andriy Mnih, Yee Whye Teh",
+      "year": 2017,
+      "role": "Continuous relaxations and reparameterization for discrete choices",
+      "relationship_sentence": "Concrete relaxations enable low-variance gradient estimates for discrete decisions; VaRT leverages such relaxations (or related reparameterizations) to optimize over split choices and routing in variational inference."
+    },
+    {
+      "title": "Black Box Variational Inference",
+      "authors": "Rajesh Ranganath, Sean Gerrish, David M. Blei",
+      "year": 2014,
+      "role": "General-purpose stochastic gradient variational inference",
+      "relationship_sentence": "BBVI provides a framework for variational inference in nonconjugate models using Monte Carlo gradients, directly underpinning VaRT\u2019s approach to approximate the intractable posterior over stochastic decision trees."
+    }
+  ],
+  "synthesis_narrative": "VaRT\u2019s core innovation\u2014approximating a posterior over stochastic decision trees with variational inference\u2014sits at the intersection of Bayesian tree modeling and modern gradient-based VI. The classical CART framework supplies the fundamental recursive partitioning model that VaRT Bayesianizes, while Bayesian CART introduced priors on tree topology and split parameters along with MCMC-based posterior inference. BART further demonstrated how carefully designed priors and Bayesian uncertainty yield strong regression performance, informing VaRT\u2019s probabilistic treatment of trees even though VaRT targets a single stochastic tree rather than an ensemble.\n\nOn the stochastic-structure side, Mondrian forests contributed a nonparametric, probabilistic view of hierarchical partitions and uncertainty-aware predictions, aligning with VaRT\u2019s goal of modeling distributions over tree structures. To make inference scalable and differentiable, VaRT draws on ideas from differentiable decision trees and forests\u2014such as probabilistic routing\u2014popularized by Deep Neural Decision Forests, which make tree decisions amenable to gradient optimization and vectorized implementation.\n\nFinally, the variational machinery enabling VaRT\u2019s training pipeline traces to Black Box Variational Inference and continuous relaxations like the Concrete distribution. These techniques provide low-variance stochastic gradients and reparameterizations for discrete choices, allowing VaRT to optimize over split placements and routing probabilities without resorting to reversible-jump MCMC. Together, these strands yield a fully vectorized PyTorch implementation that delivers competitive regression performance and calibrated uncertainty, with natural extensions to causal inference tasks.",
+  "analysis_timestamp": "2026-01-06T23:42:49.132914"
+}

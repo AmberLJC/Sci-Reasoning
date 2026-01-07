@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Composing Text and Image for Image Retrieval",
+      "authors": "Nam Vo et al.",
+      "year": 2019,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "ISA adopts the CIR formulation introduced by TIRG\u2014modifying an image representation with a text modifier\u2014and directly addresses TIRG\u2019s reliance on labeled triplets by learning the composition in a zero-shot manner via an image-to-sentence mapping in a VL text space."
+    },
+    {
+      "title": "Learning Transferable Visual Models From Natural Language Supervision",
+      "authors": "Alec Radford et al.",
+      "year": 2021,
+      "arxiv_id": "2103.00020",
+      "role": "Foundation",
+      "relationship_sentence": "ISA explicitly leverages CLIP\u2019s text encoder and word embedding space, mapping images to sentence tokens within this space to perform composition and retrieval without labeled triplets."
+    },
+    {
+      "title": "Conditional Prompt Learning for Vision-Language Models",
+      "authors": "Kaiyang Zhou et al.",
+      "year": 2022,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "ISA generalizes CoCoOp\u2019s image-conditioned textual prompts by producing an image-derived sentence (a sequence of tokens) that is fused with the user\u2019s text modifier in the VL text space."
+    },
+    {
+      "title": "An Image Is Worth One Word: Textual Inversion for Personalization of Text-to-Image Models",
+      "authors": "Rinon Gal et al.",
+      "year": 2022,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "ISA borrows the core idea of representing visual concepts as learnable tokens in a text embedding space and extends it from single pseudo-words to adaptive multi-token sentences for retrieval composition."
+    },
+    {
+      "title": "TokenLearner: What Can 8 Learned Tokens Do for Images and Videos?",
+      "authors": "Sanghyun Woo et al.",
+      "year": 2021,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "ISA\u2019s adaptive token learner echoes TokenLearner\u2019s principle of selecting a compact, informative set of tokens from an image, but projects them into a VL text embedding space to act as a sentence."
+    },
+    {
+      "title": "CIRR: Composed Image Retrieval on Real-life Images",
+      "authors": "Xin Eric Wang et al.",
+      "year": 2021,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "CIRR formalizes real-world relative-caption CIR evaluation and highlights the scarcity of labeled triplets, a key limitation that ISA tackles through zero-shot composition learning from unlabeled images."
+    },
+    {
+      "title": "FashionIQ: A New Dataset Toward Retrieving Images by Natural Language Feedback",
+      "authors": "Yuming Gu et al.",
+      "year": 2021,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "FashionIQ\u2019s natural-language feedback setup defined practical CIR benchmarks and exposed annotation bottlenecks, motivating ISA\u2019s unlabeled, CLIP-text-space composition and asymmetric deployment design."
+    }
+  ],
+  "synthesis_narrative": "Composed image retrieval was crystallized by prior work that modified an image\u2019s representation using a text modifier to form a query, with TIRG establishing the now-standard composition mechanism. CLIP provided a powerful shared image\u2013text space and, crucially, a text encoder with a word embedding space that can be directly operated on without paired supervision. CoCoOp introduced image-conditioned prompt learning inside CLIP\u2019s text encoder, showing that image features can produce effective textual tokens for downstream transfer. Textual Inversion demonstrated that visual concepts can be represented as learnable tokens within a text embedding space, suggesting a path to encode visual content as text-like units. TokenLearner revealed that a small set of adaptively selected tokens can capture discriminative visual information, motivating compact tokenized representations. Datasets such as CIRR and FashionIQ framed CIR evaluation with relative captions and highlighted the scarcity and cost of labeled triplets, a practical limitation that persisted across methods.\nTogether, these works revealed an opportunity: use CLIP\u2019s text embedding space as the locus of composition, generate image-conditioned textual tokens to avoid dependency on labeled triplets, and keep gallery encoders lightweight via asymmetric design. The current paper synthesizes these insights by mapping an image into an adaptive, multi-token \u201csentence\u201d within CLIP\u2019s word embedding space and integrating it with the user\u2019s text modifier, achieving zero-shot composition while retaining an index-friendly, asymmetric retrieval pipeline.",
+  "target_paper": {
+    "title": "Image2Sentence based Asymmetrical Zero-shot Composed Image Retrieval",
+    "authors": "Yongchao Du, Min Wang, Wengang Zhou, Shuping Hui, Houqiang Li",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "zero-shot, composed image retrieval, asymmetrical",
+    "abstract": "The task of composed image retrieval (CIR) aims to retrieve images based on the query image and the text describing the users' intent. \nExisting methods have made great progress with the advanced large vision-language (VL) model in CIR task, however, they generally suffer from two main issues: lack of labeled triplets for model training and difficulty of deployment on resource-restricted environments when deploying the large vision-language model. To tackle the above problems, we propose Image2Sentence based Asymmetric zero-shot composed image retrieval (ISA), which takes advantage of the VL model and only relies on unlabeled images for composition learning. In the framework, we propose a new adaptive token learner that maps an image to a sentence in the word embedding space of VL model.  The sentence adaptively captures discriminative visual information and is further integrated with the text modifier. An asymmetric structure is devised for flexible deployment, in which the lightweigh",
+    "openreview_id": "5BXAXOpaWu",
+    "forum_id": "5BXAXOpaWu"
+  },
+  "analysis_timestamp": "2026-01-06T17:46:46.735273"
+}

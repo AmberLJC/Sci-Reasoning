@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Is Space-Time Attention All You Need for Video Understanding? (TimeSformer)",
+      "authors": "Gedas Bertasius, Heng Wang, Lorenzo Torresani",
+      "year": 2021,
+      "role": "Foundational video transformer establishing the token explosion problem in space-time attention.",
+      "relationship_sentence": "RLT targets the core inefficiency exposed by TimeSformer\u2014vast numbers of temporally redundant tokens\u2014by collapsing exact temporal repeats before inference."
+    },
+    {
+      "title": "VideoMAE: Masked Autoencoders are Data-Efficient Learners for Self-Supervised Video Pre-Training",
+      "authors": "Zhan Tong et al.",
+      "year": 2022,
+      "role": "Evidence of extreme temporal redundancy in videos via heavy random masking during training.",
+      "relationship_sentence": "VideoMAE\u2019s success with large temporal masking motivates RLT\u2019s premise that many video patches are redundant and can be safely removed, but RLT does this deterministically at inference with negligible overhead."
+    },
+    {
+      "title": "Token Merging: Your ViT But Faster (ToMe)",
+      "authors": "Bolya et al.",
+      "year": 2023,
+      "role": "Content-aware token reduction by merging similar tokens inside the network.",
+      "relationship_sentence": "RLT is conceptually akin to ToMe\u2019s redundancy reduction but specializes to exact temporal repeats and performs merging pre-inference, carrying run-length via position encoding to avoid per-layer compute and hyperparameter tuning."
+    },
+    {
+      "title": "Not All Tokens Are Equal: Efficient Vision Transformers by Token Pruning (EViT)",
+      "authors": "Liu et al.",
+      "year": 2022,
+      "role": "Token pruning using attention-based importance to accelerate ViTs.",
+      "relationship_sentence": "RLT addresses EViT\u2019s reliance on learned importance scores and thresholds by offering a parameter-free, content-aware rule (exact temporal repetition) with negligible overhead and no dataset-specific tuning."
+    },
+    {
+      "title": "DynamicViT: Efficient Vision Transformers by Dynamic Token Sparsification",
+      "authors": "Rao et al.",
+      "year": 2021,
+      "role": "Learned, example-dependent token sparsification for efficiency.",
+      "relationship_sentence": "RLT pursues the same goal as DynamicViT\u2014processing fewer tokens\u2014but replaces learned gating with deterministic run-length collapsing, improving robustness across datasets and reducing engineering/training complexity."
+    },
+    {
+      "title": "TokenLearner: Adaptive Space-Time Tokenization for Videos",
+      "authors": "Ryoo et al.",
+      "year": 2021,
+      "role": "Adaptive selection/aggregation of informative tokens in videos.",
+      "relationship_sentence": "Where TokenLearner learns to aggregate informative space-time tokens, RLT provides a lightweight, training-free mechanism that aggregates only exact temporal duplicates and encodes their duration explicitly."
+    },
+    {
+      "title": "Train Short, Test Long: Attention with Linear Biases (ALiBi)",
+      "authors": "Ofir Press, Noah A. Smith, Mike Lewis",
+      "year": 2021,
+      "role": "Positional-bias design enabling length-aware attention without expanding embeddings.",
+      "relationship_sentence": "RLT\u2019s scheme that augments tokens with run-length information connects to ALiBi-style positional biases, motivating how to inject length/distance signals into attention without increasing token count."
+    }
+  ],
+  "synthesis_narrative": "Run-Length Tokenization (RLT) directly addresses the token explosion in video transformers crystallized by TimeSformer, where exhaustive space-time attention turns many near-duplicate patches into wasted compute. Empirical evidence from VideoMAE shows that heavy temporal masking has surprisingly small impact on learning, reinforcing the premise that video inputs contain large stretches of redundant content. Prior efficiency methods, such as DynamicViT and EViT, prune tokens using learned importance modules or attention scores, but typically require extra training, thresholds, or dataset-specific tuning; they also impose nontrivial runtime overhead. ToMe takes a content-aware route by merging similar tokens during inference, but operates inside the network and adds per-layer merging steps and hyperparameters.\n\nRLT\u2019s core innovation is to exploit exact temporal repetition before the model ever runs: it finds runs of identical (or near-identical) patches and collapses them into a single token, then injects the collapsed duration via a positional/length encoding. This preserves semantic content while eliminating redundant compute and memory traffic with negligible preprocessing cost and no retraining. The design of length-aware encoding resonates with ideas from ALiBi, which shows that simple, efficient positional biases can make attention aware of distance/length without larger embeddings. Finally, adaptive tokenization ideas from TokenLearner inspired the notion that content, not just position, should determine token budgets; RLT instantiates this with a deterministic, parameter-free rule tailored to temporal redundancy. Together, these works shaped RLT\u2019s simple, robust, and fast path to accelerate video transformers without sacrificing accuracy.",
+  "analysis_timestamp": "2026-01-06T23:39:42.954841"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Bandit Based Monte-Carlo Planning (UCT)",
+      "authors": "Levente Kocsis, Csaba Szepesv\u00e1ri",
+      "year": 2006,
+      "role": "theoretical foundation",
+      "relationship_sentence": "Introduced UCT, the core MCTS principle that allocates a finite simulation budget at decision time to trade off exploration and exploitation\u2014establishing the idea of inference-time planning that this paper generalizes to break RL performance ceilings."
+    },
+    {
+      "title": "A general reinforcement learning algorithm that masters chess, shogi, and Go through self-play (AlphaZero)",
+      "authors": "David Silver et al.",
+      "year": 2018,
+      "role": "methodological precursor",
+      "relationship_sentence": "Showed that augmenting a trained policy/value network with MCTS at inference dramatically outperforms the network alone, directly evidencing that carefully chosen inference strategies can surpass the \u2018zero-shot\u2019 policy ceiling in complex multi-agent games."
+    },
+    {
+      "title": "Mastering Atari, Go, Chess and Shogi by Planning with a Learned Model (MuZero)",
+      "authors": "Julian Schrittwieser et al.",
+      "year": 2020,
+      "role": "methodological precursor",
+      "relationship_sentence": "Demonstrated that planning with a learned model at execution time yields large gains, reinforcing the central claim that test-time computation and the strategy that uses it are pivotal for breaking performance limits of trained policies."
+    },
+    {
+      "title": "Monte-Carlo Planning in Large POMDPs (POMCP)",
+      "authors": "David Silver, Joel Veness",
+      "year": 2010,
+      "role": "methodological precursor",
+      "relationship_sentence": "Provided scalable online (inference-time) planning under partial observability via UCT with particle filtering, exemplifying compute-bounded search at execution that the present work extends to complex multi-agent RL settings."
+    },
+    {
+      "title": "Deep Reinforcement Learning in a Handful of Trials using Probabilistic Dynamics Models (PETS)",
+      "authors": "Kurtland Chua, Roberto Calandra, Rowan McAllister, Sergey Levine",
+      "year": 2018,
+      "role": "methodological precursor",
+      "relationship_sentence": "Used CEM-based trajectory optimization over learned dynamics to select actions at inference, a canonical example of budgeted sampling-and-selection that mirrors the paper\u2019s emphasis on inference strategies to escape training-time ceilings."
+    },
+    {
+      "title": "Neural Combinatorial Optimization with Reinforcement Learning and Active Search",
+      "authors": "William Bello, Hieu Pham, Quoc V. Le, Mohammad Norouzi, Samy Bengio",
+      "year": 2017,
+      "role": "empirical inspiration",
+      "relationship_sentence": "Showed that dedicating compute at test time\u2014via instance-specific active search and multi-sample decoding\u2014improves solution quality on hard combinatorial tasks, directly motivating the paper\u2019s multi-try inference phase for RL policies."
+    },
+    {
+      "title": "Attention, Learn to Solve Routing Problems!",
+      "authors": "Wouter Kool, Herke van Hoof, Max Welling",
+      "year": 2019,
+      "role": "empirical inspiration",
+      "relationship_sentence": "Demonstrated that sampling many candidate solutions and selecting the best under a fixed budget at inference time yields large gains over greedy policies, a best-of-N strategy the paper generalizes to complex multi-agent RL."
+    }
+  ],
+  "synthesis_narrative": "The lineage of this paper\u2019s core idea\u2014breaking RL performance ceilings through an inference-phase strategy\u2014traces to online planning and budgeted search. UCT (Kocsis & Szepesv\u00e1ri, 2006) formalized Monte Carlo Tree Search as an inference-time allocation of limited simulations, seeding the notion that execution-time computation can materially improve decisions. AlphaZero (Silver et al., 2018) transformed this into practice: policies that plateau when used greedily were vaulted to superhuman performance by coupling them with MCTS at inference. MuZero (Schrittwieser et al., 2020) reinforced the principle by showing that even learned models, when used for planning at test time, systematically outperform pure feed-forward action selection.\nIn partially observable and large spaces, POMCP (Silver & Veness, 2010) established scalable online planning with particle filters, again hinging on how a finite inference budget is deployed. In continuous-control settings, PETS (Chua et al., 2018) exemplified compute-bounded inference via CEM planning over learned dynamics, using multiple sampled trajectories to choose high-return actions.\nA parallel thread in neural combinatorial optimization showed that test-time compute can be harnessed without new training: Active Search (Bello et al., 2017) and sampling-based decoding for routing (Kool et al., 2019) markedly improved solutions by generating multiple candidates and selecting the best under a budget. This paper synthesizes these strands, arguing that for complex, often multi-agent RL problems, the decisive lever is not further training of a single policy but the design of an inference strategy\u2014search, sampling, or selection\u2014operated within a time/compute budget. Their empirical gains validate this unifying perspective.",
+  "analysis_timestamp": "2026-01-07T00:02:04.953396"
+}

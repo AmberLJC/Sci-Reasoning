@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+      "authors": "Edward J. Hu et al.",
+      "year": 2021,
+      "arxiv_id": "2106.09685",
+      "role": "Foundation",
+      "relationship_sentence": "FLoRA retains LoRA\u2019s \u0394W = BA low-rank parameterization but reformulates the forward pass so each example in a batch can carry its own (Bi, Ai) and still execute as a single efficient batched GEMM."
+    },
+    {
+      "title": "Parameter-Efficient Transfer Learning for NLP",
+      "authors": "Neil Houlsby et al.",
+      "year": 2019,
+      "arxiv_id": "1902.00751",
+      "role": "Foundation",
+      "relationship_sentence": "By introducing modular, per-task adapters as pluggable components, this work established the multi-adapter serving paradigm that FLoRA specifically targets for heterogeneous, per-request customization."
+    },
+    {
+      "title": "Prefix-Tuning: Optimizing Continuous Prompts for Generation",
+      "authors": "Xiang Lisa Li et al.",
+      "year": 2021,
+      "arxiv_id": "2101.00190",
+      "role": "Related Problem",
+      "relationship_sentence": "Prefix-tuning showed a PEFT method that is inherently batch-friendly because adaptation resides in the input rather than weights, highlighting the batching weakness of LoRA that FLoRA resolves without sacrificing LoRA\u2019s quality."
+    },
+    {
+      "title": "LoRAX: Efficient Multi-Adapter Serving for Large Language Models",
+      "authors": "First author et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "LoRAX relies on request reordering and adapter hot-swapping to form homogeneous batches, exposing the inability to batch heterogeneous LoRA adapters\u2014a serving bottleneck that FLoRA removes by enabling per-example adapters within one batch."
+    },
+    {
+      "title": "PUNICA: Multi-LoRA Inference Acceleration via Segmented-Gather Matrix-Vector Multiplication",
+      "authors": "First author et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "PUNICA\u2019s SGMV kernel fuses many per-request low-rank LoRA updates into one operation for decoding, an insight FLoRA generalizes by formulating the full batched matmul so each sample\u2019s distinct LoRA can be executed together efficiently."
+    },
+    {
+      "title": "S-LoRA: Serving Thousands of Concurrent LoRA Adapters",
+      "authors": "Lianmin Zheng et al.",
+      "year": 2024,
+      "arxiv_id": null,
+      "role": "Related Problem",
+      "relationship_sentence": "S-LoRA demonstrates system-level techniques to serve many LoRA adapters (e.g., specialized kernels and memory/KV-cache management) and motivates FLoRA\u2019s complementary reformulation that achieves true heterogeneous batching with standard batched GEMMs."
+    }
+  ],
+  "synthesis_narrative": "Low-rank adaptation (LoRA) introduced a simple \u0394W = BA factorization that preserves a frozen base model while adapting with tiny matrices, defining the parameterization that later work would seek to serve efficiently at scale. Earlier adapter tuning established adapters as pluggable, task-specific modules, explicitly framing the multi-adapter, multi-tenant serving scenario that arises when different requests require different small add-ons. In contrast to weight-side methods, prefix-tuning showed that keeping adaptation on the input side yields natural batching, underscoring a key limitation of LoRA: per-example weight differences disrupt standard batched GEMMs. Practical multi-adapter serving solutions like LoRAX exposed this bottleneck by depending on reordering and hot-swapping to create homogeneous batches, which breaks down for heterogeneous traffic. PUNICA contributed a crucial systems insight by introducing a segmented-gather matrix-vector kernel to fuse many per-request low-rank updates for decoding, proving that heterogeneous LoRA execution can be collapsed into a single operator. S-LoRA scaled this idea to thousands of adapters with memory and KV-cache optimizations, further cementing the need for principled heterogeneous batching.\nThese strands together revealed an opportunity: keep LoRA\u2019s accuracy, avoid reordering constraints, and eliminate custom per-phase kernels by re-expressing the low-rank update so each sample carries its own adapter through a single batched operation. FLoRA synthesizes these insights into a generalized batched formulation that executes per-example LoRA adapters together, delivering heterogeneous batching while preserving LoRA\u2019s empirical strengths on code generation and multilingual ASR.",
+  "target_paper": {
+    "title": "Batched Low-Rank Adaptation of Foundation Models",
+    "authors": "Yeming Wen, Swarat Chaudhuri",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "oral",
+    "keywords": "LLM Adaptation, Low-rank, Code Generation",
+    "abstract": "Low-Rank Adaptation (LoRA) has recently gained attention for fine-tuning foundation models by incorporating trainable low-rank matrices, thereby reducing the number of trainable parameters. While \\lora/ offers numerous advantages, its applicability for real-time serving to a diverse and global user base \nis constrained by its incapability to handle multiple task-specific adapters efficiently. This imposes a performance bottleneck in scenarios requiring personalized, task-specific adaptations for each incoming request.\n\nTo address this, we introduce FLoRA (Fast LoRA), a framework in which each input example in a minibatch can be associated with its unique low-rank adaptation weights, allowing for efficient batching of heterogeneous requests. We empirically demonstrate that \\flora/ retains the performance merits of \\lora/, showcasing competitive results on the MultiPL-E code generation benchmark spanning over 8 languages and a multilingual speech recognition task across 6 languages.",
+    "openreview_id": "w4abltTZ2f",
+    "forum_id": "w4abltTZ2f"
+  },
+  "analysis_timestamp": "2026-01-06T09:48:38.036972"
+}

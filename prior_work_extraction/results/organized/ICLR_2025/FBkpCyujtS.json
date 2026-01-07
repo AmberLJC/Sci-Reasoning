@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "The Curious Case of Neural Text Degeneration",
+      "authors": "Ari Holtzman et al.",
+      "year": 2020,
+      "arxiv_id": "1904.09751",
+      "role": "Baseline",
+      "relationship_sentence": "Min-p modifies nucleus (top-p) sampling by making the truncation threshold a function of step-wise confidence (the top-token probability), directly addressing the high-temperature failure mode of nucleus sampling highlighted by Holtzman et al."
+    },
+    {
+      "title": "Hierarchical Neural Story Generation",
+      "authors": "Angela Fan et al.",
+      "year": 2018,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "Min-p departs from the fixed-size truncation introduced via top-k sampling by Fan et al., replacing a constant k with a confidence-scaled cutoff that adapts to the shape of the distribution at each step."
+    },
+    {
+      "title": "Typical Decoding for Natural Language Generation",
+      "authors": "Clara Meister et al.",
+      "year": 2022,
+      "arxiv_id": "2202.00666",
+      "role": "Related Problem",
+      "relationship_sentence": "Min-p adopts the same core idea of adaptive truncation as typical decoding, but substitutes entropy-based typicality with a simpler per-step signal (top-token probability) to better preserve coherence at high temperatures."
+    },
+    {
+      "title": "Mirostat: A Method for Controlling the Perplexity of Text Generation",
+      "authors": "Trieu H. Trinh et al.",
+      "year": 2021,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "Min-p builds on Mirostat\u2019s insight of dynamically modulating exploration using model uncertainty, but implements it as a one-shot truncation rule keyed to the top-token probability rather than iterative temperature control."
+    },
+    {
+      "title": "Language Models (Mostly) Know What They Know",
+      "authors": "Saurav Kadavath et al.",
+      "year": 2022,
+      "arxiv_id": "2207.05221",
+      "role": "Foundation",
+      "relationship_sentence": "Min-p leverages the finding that language models\u2019 token probabilities reflect their confidence by using the top-token probability as the scaling factor for truncation, enabling more exploration when uncertain and restraint when confident."
+    },
+    {
+      "title": "Comparison of Decoding Strategies for Open-Ended Language Generation",
+      "authors": "Violet Ippolito et al.",
+      "year": 2019,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "Min-p explicitly targets the quality\u2013diversity breakdown at higher temperatures documented by Ippolito et al., providing a drop-in sampler that maintains coherence while supporting creative outputs."
+    }
+  ],
+  "synthesis_narrative": "Holtzman et al. introduced nucleus (top-p) sampling and showed how fixed decoding strategies induce degeneration, with nucleus truncation mitigating some issues but still vulnerable when the probability mass flattens at higher temperatures. Fan et al. popularized top-k sampling for open-ended generation, establishing the fixed-size truncation paradigm and its sensitivity to the local shape of the predictive distribution. Meister et al. proposed typical decoding, using entropy-based typicality to adaptively select tokens whose information content matches the model\u2019s uncertainty, reducing off-manifold sampling while retaining diversity. Trinh et al. (Mirostat) demonstrated that actively controlling surprise (per-token perplexity) via dynamic temperature adjustment can stabilize quality by aligning generation to a target entropy. Kadavath et al. provided evidence that language models\u2019 probabilities, especially top-token probabilities, encode meaningful confidence about correctness, suggesting a simple, local signal for adaptive control. Ippolito et al. systematically documented how standard sampling degrades coherence and diversity as temperature rises, highlighting the need for robust, high-temperature decoding.\nTaken together, these works expose a central opportunity: combine the adaptability of dynamic methods with a minimal, local signal that reflects model confidence at each step. The insight that token probabilities convey confidence (Kadavath) and that adaptive truncation or entropy control improves generation (Meister; Mirostat) naturally leads to a rule that scales truncation by the top-token probability. By directly correcting the high-temperature brittleness of nucleus sampling (Holtzman) and avoiding the rigidity of fixed-k (Fan), the resulting approach enables exploration when the model is uncertain and restraint when it is confident\u2014delivering creative yet coherent outputs at elevated temperatures.",
+  "target_paper": {
+    "title": "Turning Up the Heat: Min-p Sampling for Creative and Coherent LLM Outputs",
+    "authors": "Nguyen Nhat Minh, Andrew Baker, Clement Neo, Allen G Roush, Andreas Kirsch, Ravid Shwartz-Ziv",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "oral",
+    "keywords": "Natural Language Processing, Large Language Models, Text Generation, Sampling Methods, Truncation Sampling, Stochastic Sampling, Min-p Sampling, Top-p Sampling, Nucleus Sampling, Temperature Sampling, Decoding Methods, Deep Learning, Artificial Intelligence",
+    "abstract": "Large Language Models (LLMs) generate text by sampling the next token from a probability distribution over the vocabulary at each decoding step. Popular sampling methods like top-p (nucleus sampling) often struggle to balance quality and diversity, especially at higher temperatures which lead to incoherent or repetitive outputs. We propose min-p sampling, a dynamic truncation method that adjusts the sampling threshold based on the model's confidence by using the top token's probability as a scaling factor. Our experiments on benchmarks including GPQA, GSM8K, and AlpacaEval Creative Writing show that min-p sampling improves both the quality and diversity of generated text across different model families (Mistral and Llama 3) and model sizes (1B to 123B parameters), especially at higher temperatures. Human evaluations further show a clear preference for min-p sampling, in both text quality and creativity. Min-p sampling has been adopted by popular open-source LLM frameworks, including Hu",
+    "openreview_id": "FBkpCyujtS",
+    "forum_id": "FBkpCyujtS"
+  },
+  "analysis_timestamp": "2026-01-06T08:25:32.491300"
+}

@@ -1,0 +1,85 @@
+{
+  "prior_works": [
+    {
+      "title": "TabPFN: A Transformer That Solves Small Tabular Classification Problems in a Second",
+      "authors": [
+        "Philipp Hollmann",
+        "Arik Reuter",
+        "Frank Hutter",
+        "Bernhard Sch\u00f6lkopf"
+      ],
+      "year": 2022,
+      "role": "Architectural and training recipe seed",
+      "relationship_sentence": "Do-PFN directly extends the PFN paradigm\u2014pretraining a transformer on synthetic tasks so it performs amortized Bayesian-style inference in-context\u2014by redefining the training tasks to be causal effect queries over SCMs with interventions."
+    },
+    {
+      "title": "Causality: Models, Reasoning, and Inference",
+      "authors": [
+        "Judea Pearl"
+      ],
+      "year": 2009,
+      "role": "Foundational theory (SCMs and do-operator)",
+      "relationship_sentence": "The paper\u2019s core objective\u2014predicting interventional outcomes from observational data\u2014rests on Pearl\u2019s SCM formalism and do-calculus, which guide the generation of synthetic interventional data and the definition of causal effect targets."
+    },
+    {
+      "title": "The frontier of simulation-based inference",
+      "authors": [
+        "Kyle Cranmer",
+        "Johann Brehmer",
+        "Gilles Louppe"
+      ],
+      "year": 2020,
+      "role": "Methodological precursor (amortized inference from simulations)",
+      "relationship_sentence": "Do-PFN adopts the SBI principle of learning amortized inference over a prior of generative models, instantiating it with a prior over causal structures and using synthetic simulations to train a universal in-context estimator of interventional effects."
+    },
+    {
+      "title": "Causal Effect Inference with Deep Latent-Variable Models (CEVAE)",
+      "authors": [
+        "Christos Louizos",
+        "Uri Shalit",
+        "Joris M. Mooij",
+        "David Sontag",
+        "Richard Zemel",
+        "Max Welling"
+      ],
+      "year": 2017,
+      "role": "Handling confounding via generative modeling",
+      "relationship_sentence": "By showing how deep generative models can infer treatment effects under latent confounding, CEVAE motivates Do-PFN\u2019s choice to model data-generating causal mechanisms (rather than only predictive representations) and to train on SCM-simulated worlds."
+    },
+    {
+      "title": "Estimating Individual Treatment Effect: Generalization Bounds and Algorithms (CFR)",
+      "authors": [
+        "Uri Shalit",
+        "Fredrik D. Johansson",
+        "David Sontag"
+      ],
+      "year": 2017,
+      "role": "Problem framing and limitations of unconfoundedness",
+      "relationship_sentence": "CFR crystallized representation learning for ITE under unconfoundedness; Do-PFN explicitly aims to go beyond this assumption by training across diverse SCMs (including confounding and interventions), addressing CFR\u2019s key limitation."
+    },
+    {
+      "title": "GANITE: Estimation of Individualized Treatment Effects using Generative Adversarial Nets",
+      "authors": [
+        "Jinsung Yoon",
+        "James Jordon",
+        "Mihaela van der Schaar"
+      ],
+      "year": 2018,
+      "role": "Generative approach to counterfactuals",
+      "relationship_sentence": "GANITE\u2019s use of generative models to impute counterfactuals informs Do-PFN\u2019s generative-training perspective; Do-PFN generalizes this by amortizing across many SCMs and learning to answer do-queries in context."
+    },
+    {
+      "title": "Causal Meta-Learning",
+      "authors": [
+        "Ioana Bica",
+        "Ahmed M. Alaa",
+        "Mihaela van der Schaar"
+      ],
+      "year": 2020,
+      "role": "Meta-learning across causal tasks",
+      "relationship_sentence": "This work meta-learns to estimate treatment effects across related tasks; Do-PFN operationalizes a similar cross-task generalization but with PFN-style in-context learning over a broad prior of SCMs, enabling zero-shot causal effect estimation without graph knowledge."
+    }
+  ],
+  "synthesis_narrative": "Do-PFN\u2019s core innovation\u2014pretraining a transformer on synthetic causal tasks so it can estimate interventional outcomes in context\u2014stands on three converging lines of prior work. First, the PFN/TabPFN line (Hollmann et al.) established that a transformer trained on a distribution of synthetic tabular tasks can amortize Bayesian-like inference and perform strong in-context learning without fine-tuning. Do-PFN directly repurposes this recipe, swapping standard predictive tasks for causal effect queries generated from structural causal models (SCMs) with interventions. Second, Pearl\u2019s SCM framework and do-calculus provide the algebra and semantics of interventions, which Do-PFN uses both to define targets (do-quantities) and to synthesize richly varied training data spanning confounding structures and interventional regimes. Third, the simulation-based inference literature (Cranmer et al.) shows how to learn amortized estimators from simulator outputs; Do-PFN instantiates SBI with a prior over SCMs, effectively learning a universal in-context estimator of causal effects.\nDeep causal estimation methods such as CEVAE and GANITE demonstrate the value of generative modeling for counterfactuals and handling confounding, while CFR clarifies the limitations of unconfoundedness-based representation learning\u2014limitations Do-PFN aims to transcend by training across diverse SCM families. Finally, causal meta-learning (Bica et al.) motivates learning to generalize across tasks; Do-PFN realizes this with PFN-style in-context learning, enabling accurate, zero-shot causal effect estimation without requiring the underlying causal graph.",
+  "analysis_timestamp": "2026-01-07T00:21:32.360846"
+}

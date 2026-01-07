@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "H2O: Heavy-Hitter Oracle for Efficient Generative Inference of Large Language Models",
+      "authors": "Suyu Ge et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Extension",
+      "relationship_sentence": "H2O introduced attention-driven offline profiling to identify and retain heavy-hitter tokens for KV cache eviction, which this paper directly generalizes into a head-aware oracle that chooses different eviction rules per attention head."
+    },
+    {
+      "title": "StreamingLLM: Efficient Streaming Language Modeling with Attention Sink",
+      "authors": "Xiao et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Inspiration",
+      "relationship_sentence": "StreamingLLM revealed the 'attention sink' phenomenon and preserved a small set of special tokens while using a sliding window for others, an insight this paper adopts at head granularity by discarding non\u2011special tokens on special\u2011token heads and sliding on local heads."
+    },
+    {
+      "title": "Scissorhands: Exploiting the Persistence of Importance Hypothesis for LLM KV Cache Compression",
+      "authors": "Sheng et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Baseline",
+      "relationship_sentence": "Scissorhands proposed importance\u2011based KV eviction without retraining but applied a uniform policy across heads, a limitation this work addresses via adaptive, head\u2011specific compression guided by lightweight profiling."
+    },
+    {
+      "title": "Analyzing Multi-Head Self-Attention: Specialized Heads Do the Heavy Lifting, the Rest Can Be Pruned",
+      "authors": "Anna Voita et al.",
+      "year": 2019,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "This study established that attention heads specialize (e.g., positional, delimiter-focused), directly motivating this paper\u2019s per\u2011head categorization (local, special\u2011token\u2011centric, global) that underpins adaptive KV caching."
+    },
+    {
+      "title": "What Does BERT Look At? An Analysis of Attention",
+      "authors": "Kevin Clark et al.",
+      "year": 2019,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "Clark et al. showed that certain heads consistently attend to special tokens like [CLS]/[SEP], supporting the paper\u2019s strategy to retain special tokens only on heads centered on such tokens while evicting others."
+    },
+    {
+      "title": "Longformer: The Long-Document Transformer",
+      "authors": "Iz Beltagy et al.",
+      "year": 2020,
+      "arxiv_id": "2004.05150",
+      "role": "Related Problem",
+      "relationship_sentence": "Longformer decomposed attention into local windows plus a few global tokens, an architectural pattern that directly informs this work\u2019s per\u2011head split between local-window caching and special\u2011token retention."
+    }
+  ],
+  "synthesis_narrative": "H2O introduced an attention-driven profiling oracle that, from a calibration set, identifies heavy-hitter tokens to keep in the KV cache during generation, demonstrating that static precomputed signals can guide token-level eviction without retraining. StreamingLLM exposed the attention-sink phenomenon\u2014LMs reliably attend to a tiny set of special tokens\u2014using this to retain those sinks while sliding a local window over ordinary tokens for streaming inputs. Scissorhands posited the persistence-of-importance hypothesis to evict KV entries based on estimated token importance, but used a uniform policy that does not account for head-specific behaviors. Earlier interpretability work showed that multi-head attention is functionally diverse: Voita et al. found specialized heads (e.g., positional or delimiter-focused) that carry most of the load, and Clark et al. documented heads that consistently attend to special tokens like [CLS]/[SEP]. Longformer canonized a local-plus-global decomposition by mixing sliding-window attention with a few global tokens that broadcast information. Together these works reveal that (i) attention importance can be profiled offline, (ii) special tokens warrant different treatment, and (iii) attention structure is heterogeneous across heads. The natural next step is to make eviction head-aware: use sliding windows only on local heads, retain special tokens only on special-token heads, and leave global heads uncompressed. By coupling lightweight per-head profiling with tailored cache policies, the paper synthesizes these insights into an adaptive KV compression scheme that reduces memory without fine-tuning.",
+  "target_paper": {
+    "title": "Model Tells You What to Discard: Adaptive KV Cache Compression for LLMs",
+    "authors": "Suyu Ge, Yunan Zhang, Liyuan Liu, Minjia Zhang, Jiawei Han, Jianfeng Gao",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "oral",
+    "keywords": "Large Language Model, Efficient Inference, Generative Inference, Key-Value Cache",
+    "abstract": "In this study, we introduce adaptive KV cache compression, a plug-and-play method that reduces the memory footprint of generative inference for Large Language Models (LLMs). Different from the conventional KV cache that retains key and value vectors for all context tokens, we conduct targeted profiling to discern the intrinsic structure of attention modules. Based on the recognized structure, we then construct the KV cache in an adaptive manner: evicting long-range contexts on attention heads emphasizing local contexts, discarding non-special tokens on attention heads centered on special tokens, and only employing the standard KV cache for attention heads that broadly attend to all tokens. Moreover, with the lightweight attention profiling used to guide the construction of the adaptive KV cache, FastGen can be deployed without resource-intensive fine-tuning or re-training. In our experiments across various asks, FastGen demonstrates substantial reduction on GPU memory consumption with ",
+    "openreview_id": "uNrFpDPMyo",
+    "forum_id": "uNrFpDPMyo"
+  },
+  "analysis_timestamp": "2026-01-06T09:56:24.476989"
+}

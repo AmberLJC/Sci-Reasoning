@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "GShard: Scaling Giant Models with Conditional Computation and Automatic Sharding",
+      "authors": "Mikhail Lepikhin et al.",
+      "year": 2020,
+      "role": "Early large-scale MoE architecture and systemization",
+      "relationship_sentence": "MoESD builds on GShard\u2019s expert routing and parallelism patterns, using their implications for token-to-expert workload variance to model how SD interacts with MoE computation and communication at inference time."
+    },
+    {
+      "title": "Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity",
+      "authors": "William Fedus, Barret Zoph, Noam Shazeer",
+      "year": 2021,
+      "role": "Foundational sparse MoE design (top-1 gating) and efficiency tradeoffs",
+      "relationship_sentence": "MoESD leverages Switch\u2019s insight that sparsity reduces per-token compute, then explains\u2014via theory and measurement\u2014why such sparsity can expand the batch-size regime where speculative decoding yields net speedups."
+    },
+    {
+      "title": "GLaM: Efficient Scaling of Language Models with Mixture-of-Experts",
+      "authors": "Nan Du et al.",
+      "year": 2022,
+      "role": "State-of-the-art sparse MoE for LLMs and analysis of compute/performance",
+      "relationship_sentence": "The paper\u2019s central claim that sparser MoEs benefit more from SD under realistic batching directly builds on GLaM-style MoE compute footprints, quantifying how expert sparsity shifts verification/drafting costs relative to dense baselines."
+    },
+    {
+      "title": "DeepSpeed-MoE: Advancing Mixture-of-Experts Training and Inference",
+      "authors": "Samyam Rajbhandari et al.",
+      "year": 2022,
+      "role": "Systems techniques for expert parallelism, routing, and throughput",
+      "relationship_sentence": "MoESD\u2019s batch-size and workload modeling incorporates DeepSpeed-MoE\u2019s practical insights on expert parallelism and communication hotspots, clarifying when SD\u2019s draft-verify pipeline overcomes MoE routing/communication overheads."
+    },
+    {
+      "title": "Fast Inference from Transformers via Speculative Decoding",
+      "authors": "Shauli Leviathan et al.",
+      "year": 2023,
+      "role": "Core speculative decoding algorithm (draft-and-verify) and acceptance-rate analysis",
+      "relationship_sentence": "MoESD generalizes the canonical SD framework to sparse MoEs, showing that acceptance rate alone is insufficient; it derives a more complete speedup model that accounts for MoE-specific compute/comm balance and batch effects."
+    },
+    {
+      "title": "Medusa: Simple Framework for Efficient LLM Inference with Multiple Draft Heads",
+      "authors": "Yifan Lai et al.",
+      "year": 2023,
+      "role": "SD variant emphasizing higher acceptance via multi-draft speculation within a single model",
+      "relationship_sentence": "Contrasting with Medusa\u2019s acceptance-centric goal, MoESD demonstrates that architectural sparsity and workload changes in MoE can dominate SD efficacy, motivating its theoretical model that predicts speedups beyond acceptance considerations."
+    }
+  ],
+  "synthesis_narrative": "MoESD\u2019s core contribution\u2014explaining and exploiting why sparse Mixture-of-Experts (MoE) models can benefit disproportionately from speculative decoding (SD) under realistic batch sizes\u2014sits at the intersection of two lines of work. On the MoE side, GShard established the modern expert-routing paradigm and its distributed systems footprint, while Switch Transformers simplified gating and highlighted how conditional sparsity changes per-token compute. GLaM then demonstrated that sparse MoE can achieve strong quality\u2013efficiency tradeoffs in large language models, clarifying the inference-time compute composition (expert MLPs, gating, and communication) that MoESD analyzes. DeepSpeed-MoE contributed practical insights into expert parallelism and communication overheads, which directly inform MoESD\u2019s batch-size\u2013aware modeling of end-to-end latency.\nOn the SD side, the foundational draft-and-verify method formalized by Leviathan et al. provides the acceptance-driven baseline that most subsequent work optimizes. Medusa extended this by raising acceptance rates via multiple draft heads within a single model. MoESD departs from the prevailing acceptance-only lens: by integrating MoE-specific sparsity, routing, and communication into a quantitative model, it predicts when SD\u2019s verification cost is amortized more effectively in MoE than in dense models and shows that increased sparsity widens the effective batch-size window. Together, these prior works supply the algorithmic primitives (SD), architectural foundations (sparse MoE), and systems realities (expert parallelism and communication) that MoESD unifies into a theory-backed explanation and demonstration of SD\u2019s unique acceleration potential for sparse MoEs.",
+  "analysis_timestamp": "2026-01-07T00:29:42.048192"
+}

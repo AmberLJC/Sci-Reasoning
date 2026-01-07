@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Scaling Laws for Neural Language Models",
+      "authors": "Jared Kaplan et al.",
+      "year": 2020,
+      "role": "Foundational scaling law for LMs and compute-optimal tradeoffs",
+      "relationship_sentence": "This work provides the baseline compute\u2013model\u2013data scaling law that the paper reproduces and then reconciles with Chinchilla by identifying confounding factors (last-layer compute, warmup, and scale-dependent optimizer tuning)."
+    },
+    {
+      "title": "Training Compute-Optimal Large Language Models (Chinchilla)",
+      "authors": "Jordan Hoffmann et al.",
+      "year": 2022,
+      "role": "Compute-optimal scaling law emphasizing more data for smaller models",
+      "relationship_sentence": "The paper aligns Kaplan\u2019s results with Chinchilla after correcting for key factors and tests Chinchilla\u2019s hypothesis about the necessity of careful learning-rate decay, finding it non-essential for the scaling law\u2019s validity."
+    },
+    {
+      "title": "Scaling Laws for Autoregressive Generative Modeling",
+      "authors": "Tom Henighan et al.",
+      "year": 2020,
+      "role": "General scaling-law methodology across modalities",
+      "relationship_sentence": "This work established the broader empirical framework for scaling-law measurement and analysis that underpins the paper\u2019s reproduction and diagnostic methodology."
+    },
+    {
+      "title": "An Empirical Model of Large-Batch Training",
+      "authors": "Sam McCandlish et al.",
+      "year": 2018,
+      "role": "Batch size and learning-rate scaling via gradient-noise-scale theory",
+      "relationship_sentence": "The paper\u2019s secondary contribution\u2014deriving scaling laws for optimal learning rate and batch size\u2014builds on the gradient-noise-scale perspective linking batch size, learning rate, and training efficiency."
+    },
+    {
+      "title": "Decoupled Weight Decay Regularization (AdamW)",
+      "authors": "Ilya Loshchilov and Frank Hutter",
+      "year": 2019,
+      "role": "Optimizer foundation used in modern LM training",
+      "relationship_sentence": "Because the paper finds that tuning the AdamW \u03b22 parameter is essential at smaller batch sizes, AdamW\u2019s formulation directly informs the optimizer-focused analysis and conclusions."
+    },
+    {
+      "title": "Accurate, Large Minibatch SGD: Training ImageNet in 1 Hour",
+      "authors": "Priya Goyal et al.",
+      "year": 2017,
+      "role": "Introduction and justification of learning-rate warmup",
+      "relationship_sentence": "The identification of warmup duration as a key driver of scaling-law discrepancies draws on the practice and rationale for warmup popularized by this work."
+    },
+    {
+      "title": "Tensor Programs V: Tuning Large Neural Networks via \u03bc-Parametrization",
+      "authors": "Greg Yang et al.",
+      "year": 2022,
+      "role": "Theory of scale-dependent hyperparameter transfer",
+      "relationship_sentence": "The paper\u2019s claim that optimizer hyperparameters require scale-dependent tuning\u2014and that this affects inferred scaling laws\u2014echoes \u03bcP\u2019s core insight that hyperparameters do not naively transfer across model scales."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core contribution\u2014resolving the apparent conflict between Kaplan-style and Chinchilla-style compute-optimal scaling\u2014sits squarely within the empirical scaling-law tradition inaugurated by Kaplan et al. and extended by Henighan et al. This tradition established how loss predictably varies with compute, model size, and data, providing both the methodology and baselines that the authors faithfully reproduce on modern corpora. Hoffmann et al. (Chinchilla) reframed compute-optimality toward training smaller models on more data and suggested careful learning-rate decay as a contributing factor, setting the target the present paper explains and ultimately matches after correcting for overlooked details.\n\nThe explanation the authors advance relies on three levers grounded in prior practice and theory. First, the role of warmup duration\u2014canonically motivated by Goyal et al.\u2014is shown to materially affect measured scaling, revealing how training protocol details can masquerade as fundamental laws. Second, scale-dependent optimizer tuning resonates with the \u03bc-Parametrization view (Yang et al.) that hyperparameters don\u2019t trivially transfer across scales, directly informing the paper\u2019s diagnostic of optimizer-induced shifts. Third, the secondary result on optimal learning rate and batch size draws on the gradient-noise-scale perspective of McCandlish et al., connecting compute efficiency to LR\u2013batch size scaling. Finally, because these dynamics are instantiated with AdamW, the finding that \u03b22 tuning is critical at smaller batch sizes traces directly to Loshchilov and Hutter\u2019s optimizer formulation. Together, these works form the conceptual and methodological backbone enabling the paper to reconcile scaling laws and refine practical prescriptions.",
+  "analysis_timestamp": "2026-01-06T23:33:35.563539"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Proximal Policy Optimization Algorithms",
+      "authors": "John Schulman et al.",
+      "year": 2017,
+      "role": "Extension",
+      "relationship_sentence": "The proposed Layer-Wise PPO (L-PPO) directly modifies the clipped PPO objective to assign and apply layer-conditioned updates to the image encoder during multimodal RLHF, making PPO the algorithmic backbone the paper extends."
+    },
+    {
+      "title": "Deep Reinforcement Learning from Human Preferences",
+      "authors": "Paul F. Christiano et al.",
+      "year": 2017,
+      "role": "Foundation",
+      "relationship_sentence": "This work establishes the RLHF paradigm (preference data, reward modeling, and policy optimization) that the paper adapts to the vision-language setting and retools for layer-wise alignment across an image encoder."
+    },
+    {
+      "title": "Visual Instruction Tuning",
+      "authors": "Haotian Liu et al.",
+      "year": 2023,
+      "role": "Baseline",
+      "relationship_sentence": "LLaVA\u2019s architecture and training practice (frozen CLIP encoder with instruction tuning) serve as a primary baseline whose limitations in encoder-side safety alignment are exposed by ICET and improved via the proposed L-PPO."
+    },
+    {
+      "title": "DeeBERT: Dynamic Early Exiting for Accelerating BERT Inference",
+      "authors": "Ji Xin et al.",
+      "year": 2020,
+      "role": "Inspiration",
+      "relationship_sentence": "By operationalizing early exits in Transformer stacks, DeeBERT provides the concrete mechanism the paper repurposes\u2014truncating the encoder at intermediate layers\u2014to reveal the ICET vulnerability in VLMs."
+    },
+    {
+      "title": "BranchyNet: Fast Inference via Early Exiting from Deep Networks",
+      "authors": "Akira Teerapittayanon et al.",
+      "year": 2016,
+      "role": "Foundation",
+      "relationship_sentence": "BranchyNet originated the early-exit paradigm in deep networks, directly enabling the paper\u2019s idea of exiting an image encoder early to probe how harmful information is distributed across layers."
+    },
+    {
+      "title": "Learning Transferable Visual Models From Natural Language Supervision (CLIP)",
+      "authors": "Alec Radford et al.",
+      "year": 2021,
+      "role": "Foundation",
+      "relationship_sentence": "CLIP supplies the layered image encoder (ViT/ResNet) embedded in LLaVA; the ICET analysis explicitly manipulates CLIP\u2019s intermediate layers to study and mitigate layer-wise safety misalignment."
+    },
+    {
+      "title": "Training language models to follow instructions with human feedback",
+      "authors": "Long Ouyang et al.",
+      "year": 2022,
+      "role": "Gap Identification",
+      "relationship_sentence": "While demonstrating the effectiveness of RLHF at the model output level, this work leaves open whether alignment permeates internal representations\u2014motivating the paper\u2019s layer-wise RLHF that targets image-encoder layers specifically."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core contributions\u2014exposing an early-exit vulnerability (ICET) in vision-language models and proposing Layer-Wise PPO (L-PPO) for multimodal, layer-targeted RLHF\u2014sit at the intersection of two lines of prior work. First, the early-exit literature (BranchyNet; DeeBERT) introduced and operationalized the idea of exiting deep networks and Transformer stacks at intermediate layers. This concept is repurposed here to truncate the image encoder and diagnose where harmful information persists across layers, revealing ICET. The architectural context enabling this analysis comes from CLIP\u2019s widely used layered image encoders and the LLaVA family, where image encoders are typically frozen during instruction tuning\u2014highlighting a practical misalignment gap on the visual side that the paper exploits and then addresses. Second, the alignment methodology builds squarely on RLHF (Christiano et al.), with PPO (Schulman et al.) providing the optimization backbone. The paper extends PPO into a layer-aware variant, L-PPO, to selectively adjust encoder layers based on multimodal preference signals. Finally, instruction-following alignment via human feedback (Ouyang et al.) underscored that RLHF is effective at shaping outputs but did not ensure alignment of internal representations; this shortcoming directly motivates the proposed layer-wise alignment regime. Together, these works provide the mechanisms (early exit), the platforms (CLIP/LLaVA), and the optimization framework (RLHF/PPO) that the paper fuses into its central innovation.",
+  "analysis_timestamp": "2026-01-06T23:07:19.627015"
+}

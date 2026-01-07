@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+      "authors": "Edward J. Hu et al.",
+      "year": 2022,
+      "role": "Foundational PEFT method using low-rank updates to frozen weights.",
+      "relationship_sentence": "GraLoRA directly builds on LoRA\u2019s low-rank reparameterization but targets LoRA\u2019s structural bottleneck\u2014entangled gradients across all input channels\u2014by introducing sub-blocked adapters to localize gradient flow and increase effective capacity."
+    },
+    {
+      "title": "AdaLoRA: Adaptive Budget Allocation for Parameter-Efficient Fine-Tuning",
+      "authors": "Zhang et al.",
+      "year": 2023,
+      "role": "Adaptive rank allocation across layers to improve LoRA under a fixed parameter budget.",
+      "relationship_sentence": "AdaLoRA exposed LoRA\u2019s sensitivity to rank and diminishing returns at high ranks; GraLoRA addresses this root cause not by redistributing rank, but by structurally partitioning weight matrices so added capacity does not induce cross-channel overfitting."
+    },
+    {
+      "title": "DoRA: Weight-Decomposed Low-Rank Adaptation",
+      "authors": "Liu et al.",
+      "year": 2024,
+      "role": "Reparameterizes LoRA via magnitude\u2013direction decomposition to mitigate entanglement and improve stability.",
+      "relationship_sentence": "DoRA\u2019s analysis of entanglement informed GraLoRA\u2019s diagnosis of LoRA\u2019s gradient interference; GraLoRA tackles a complementary axis by spatially disentangling channels with sub-block adapters rather than decomposing weights."
+    },
+    {
+      "title": "PiSSA: Principal Subspace Adaptation for Large Language Models",
+      "authors": "Chen et al.",
+      "year": 2024,
+      "role": "Spectral/principal-subspace\u2013aware LoRA initialization to better utilize higher ranks and approach FFT performance.",
+      "relationship_sentence": "PiSSA showed the importance of aligning low-rank updates with salient subspaces; GraLoRA extends this insight by structuring the update space itself\u2014partitioning matrices so each sub-block can target more relevant subspaces without interfering with unrelated channels."
+    },
+    {
+      "title": "IA3: Few-Shot Parameter-Efficient Fine-Tuning by Inserting Learned Scaling into Transformers",
+      "authors": "Liu et al.",
+      "year": 2022,
+      "role": "Channel-/feature-wise scaling (multiplicative adapters) to localize adaptation with minimal parameters.",
+      "relationship_sentence": "IA3 demonstrated the benefit of localized, channel-level adaptation; GraLoRA generalizes this locality principle to low-rank adapters by assigning independent adapters to sub-blocks, reducing cross-channel gradient coupling."
+    },
+    {
+      "title": "Compacter: Efficient Low-Rank Adapter Layers for Natural Language Processing",
+      "authors": "Mahabadi et al.",
+      "year": 2021,
+      "role": "Structured/parameter-shared adapters (e.g., Kronecker factorization) to increase expressivity at low cost.",
+      "relationship_sentence": "Compacter motivated that architectural structure within adapters can expand expressivity without large overhead; GraLoRA similarly leverages structural design\u2014matrix partitioning with per-block low-rank modules\u2014to boost capacity with negligible compute/storage cost."
+    }
+  ],
+  "synthesis_narrative": "GraLoRA\u2019s core contribution\u2014partitioning each weight matrix into sub-blocks with independent low-rank adapters\u2014emerges from a line of work grappling with LoRA\u2019s capacity\u2013stability trade-offs and gradient interference. LoRA introduced the central low-rank reparameterization that GraLoRA retains, but it also revealed a structural bottleneck: as rank grows, updates entangle gradients across unrelated input channels, often stalling or harming accuracy compared to full fine-tuning. Subsequent methods tried to unlock capacity without losing stability. AdaLoRA redistributed rank across layers, highlighting that na\u00efvely increasing rank is ineffective, while PiSSA aligned LoRA with principal subspaces to better utilize higher ranks and narrow the FFT gap. DoRA reframed the problem as weight entanglement, decomposing magnitude and direction to stabilize optimization.\n\nComplementary to these efforts, IA3 showed that localized, channel-wise modulation can reduce interference, and Compacter demonstrated that carefully structured adapters (e.g., via Kronecker designs and parameter sharing) can expand expressivity at negligible cost. GraLoRA synthesizes these insights: rather than only tuning where/what subspace to update, it restructures how updates propagate by spatially localizing adapters within sub-blocks of the weight matrix. This granular design decouples gradients across channels, scales capacity effectively with minimal overhead, and empirically recovers FFT-like behavior at higher ranks\u2014addressing the very failure mode that prior LoRA variants mitigated only partially through rank scheduling, decomposition, or initialization.",
+  "analysis_timestamp": "2026-01-07T00:05:12.532257"
+}

@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Dissecting Adam: The Sign, Magnitude and Variance of Gradients",
+      "authors": "Lukas Balles et al.",
+      "year": 2018,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "By isolating that Adam\u2019s update direction largely follows the coordinate-wise sign of the gradient, this work motivates modeling Adam with SignGD\u2014the key surrogate our analysis uses to study transformer training dynamics."
+    },
+    {
+      "title": "signSGD with Majority Vote",
+      "authors": "Jeremy Bernstein et al.",
+      "year": 2018,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "This paper formalized sign-based gradient updates and established their practical viability, providing the exact optimization rule our work analyzes on a two-layer transformer."
+    },
+    {
+      "title": "On the Convergence of Adam and Beyond",
+      "authors": "Sashank J. Reddi et al.",
+      "year": 2018,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "By showing Adam can behave pathologically and is challenging to analyze, this work motivates replacing Adam with the more tractable SignGD to obtain rigorous training-dynamics results for transformers."
+    },
+    {
+      "title": "The Marginal Value of Adaptive Gradient Methods in Deep Learning",
+      "authors": "Ashia C. Wilson et al.",
+      "year": 2017,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "This study documented that adaptive optimizers like Adam often generalize worse than SGD, directly motivating our theoretical result that SignGD/Adam achieve fast optimization yet poor generalization on noisy separable data."
+    },
+    {
+      "title": "What Learning Algorithm Is In-Context Learning? Investigations with Linear Models",
+      "authors": "Ekin Aky\u00fcrek et al.",
+      "year": 2022,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "It introduced a minimal two-layer attention-only transformer with trainable query\u2013key and a linear head as a tractable theoretical model, which is precisely the architecture we analyze under SignGD."
+    },
+    {
+      "title": "The Implicit Bias of Gradient Descent on Separable Data",
+      "authors": "Daniel Soudry et al.",
+      "year": 2018,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "By proving that gradient descent on separable data converges to max-margin solutions, this work provides the contrastive baseline against which we show SignGD/Adam can fit noise and generalize poorly."
+    }
+  ],
+  "synthesis_narrative": "Balles and Hennig demonstrated that Adam\u2019s effectiveness is largely driven by the directionality of its steps\u2014essentially the sign of the gradient\u2014highlighting that sign-based updates capture the optimizer\u2019s core behavior. Bernstein and colleagues then formalized signSGD as a sign-based optimization method with practical performance and theoretical framing, giving a clean, analyzable update rule. Reddi and co-authors showed that Adam can diverge and is theoretically difficult to handle, underscoring the need for a tractable surrogate when seeking rigorous analysis. Wilson et al. empirically established that adaptive methods often generalize worse than SGD, particularly by fitting noise more readily, sharpening the central generalization question around Adam-like updates. In parallel, Aky\u00fcrek and collaborators introduced a minimal two-layer attention-only transformer with trainable query\u2013key and a linear head as a standard model for theory, enabling precise study of attention learning dynamics. Soudry et al. showed that gradient descent on separable data converges to max-margin solutions, offering a canonical implicit-bias baseline in classification.\n\nTogether, these works suggested a natural path: analyze the minimal two-layer transformer under a sign-based surrogate that captures Adam\u2019s core behavior to understand its optimization and generalization. The convergence pathologies and analysis challenges of Adam, the sign-equivalence insight, and the documented generalization gap of adaptive methods jointly pointed to SignGD as the right lens. Within the attention-only transformer template, this synthesis enabled a stage-wise characterization of training dynamics and a proof that, while optimization proceeds quickly, the learned solution overfits noise and generalizes poorly\u2014mirroring the empirical behavior of Adam.",
+  "target_paper": {
+    "title": "On the Optimization and Generalization of Two-layer Transformers with Sign Gradient Descent",
+    "authors": "Bingrui Li, Wei Huang, Andi Han, Zhanpeng Zhou, Taiji Suzuki, Jun Zhu, Jianfei Chen",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "Sign Gradient Descent; Transformer; Training Dynamics; Theory",
+    "abstract": "The Adam optimizer is widely used for transformer optimization in practice, which makes understanding the underlying optimization mechanisms an important problem.\nHowever, due to the Adam's complexity, theoretical analysis of how it optimizes transformers remains a challenging task. \nFortunately, Sign Gradient Descent (SignGD) serves as an effective surrogate for Adam.\nDespite its simplicity, theoretical understanding of how SignGD optimizes transformers still lags behind.\nIn this work, we study how SignGD optimizes a two-layer transformer -- consisting of a softmax attention layer with trainable query-key parameterization followed by a linear layer -- on \na linearly separable noisy dataset.\nWe identify four stages in the training dynamics, each exhibiting intriguing behaviors.\nBased on the training dynamics, we prove the fast convergence but poor generalization of the learned transformer on the noisy dataset.\nWe also show that Adam behaves similarly to SignGD in terms of both optimiza",
+    "openreview_id": "97rOQDPmk2",
+    "forum_id": "97rOQDPmk2"
+  },
+  "analysis_timestamp": "2026-01-06T10:34:31.822644"
+}

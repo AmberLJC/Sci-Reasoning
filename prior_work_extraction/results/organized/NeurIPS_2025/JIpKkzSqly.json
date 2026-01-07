@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Safe Latent Diffusion: Mitigating Inappropriate Content Generation in Diffusion Models",
+      "authors": "Patrick Schramowski et al.",
+      "year": 2023,
+      "role": "Defense architecture/baseline (multi-layer safety, safety guidance + post hoc filters)",
+      "relationship_sentence": "This work crystallized the practical, multi-layer safety pipeline for T2I systems (safety-guided generation plus a CLIP-based image safety checker), defining the real-world target that TAA aims to defeat by coordinating an attack across sequential defenses rather than a single layer."
+    },
+    {
+      "title": "Ablating Concepts in Text-to-Image Diffusion Models",
+      "authors": "Nupur Kumari et al.",
+      "year": 2023,
+      "role": "Defense component (concept erasure/editing in diffusion models)",
+      "relationship_sentence": "By formalizing and implementing concept erasure in diffusion models, this paper established a prominent \u2018middle-layer\u2019 defense; TAA explicitly exploits the residual, entangled semantics left after such erasure to craft prompts that bypass this layer while remaining acceptable to upstream and downstream filters."
+    },
+    {
+      "title": "Erasing Concepts from Diffusion Models",
+      "authors": "Varun Gandikota et al.",
+      "year": 2023,
+      "role": "Defense component and vulnerability analysis (concept forgetting)",
+      "relationship_sentence": "Demonstrating both mechanisms and limits of concept erasure, this work informed TAA\u2019s transstratal strategy: it motivates searching for overlapping failure modes where erased concepts can be re-invoked indirectly through related attributes that also slip past prompt and image filters."
+    },
+    {
+      "title": "SneakyPrompt: Jailbreaking Text-to-Image Models via Evolutionary Prompt Optimization",
+      "authors": "Zhang et al.",
+      "year": 2024,
+      "role": "Attack on text safety filters (prompt obfuscation and genetic search)",
+      "relationship_sentence": "SneakyPrompt showed that black-box evolutionary search over tokenizations can consistently evade prompt filters; TAA generalizes this idea from single-layer evasion to a multi-objective search that simultaneously satisfies constraints imposed by prompt filters, concept erasers, and image safety filters."
+    },
+    {
+      "title": "Universal and Transferable Adversarial Attacks on Aligned Language Models (GCG)",
+      "authors": "Andy Zou et al.",
+      "year": 2023,
+      "role": "Adversarial prompt optimization on discrete tokens",
+      "relationship_sentence": "GCG\u2019s discrete, constraint-aware optimization of adversarial suffixes directly inspires TAA\u2019s LLM-guided candidate generation and refinement loop for crafting prompts that meet implicit, subjective constraints across several safety layers in a black-box regime."
+    },
+    {
+      "title": "Self-Play/Red-Teaming Language Models",
+      "authors": "Ethan Perez et al.",
+      "year": 2022,
+      "role": "LLM-as-red-teamer to iteratively propose adversarial prompts using feedback",
+      "relationship_sentence": "This line of work motivates using an LLM to propose and adapt adversarial candidates from sparse pass/fail feedback; TAA adopts a similar feedback-driven, black-box loop to evolve \u2018transstratal\u2019 prompts that pass every stage of a multi-layer pipeline."
+    },
+    {
+      "title": "Black-box Adversarial Attacks: Bandits and Query-Efficient Optimization",
+      "authors": "Andrew Ilyas et al.",
+      "year": 2018,
+      "role": "Query-efficient black-box optimization framework",
+      "relationship_sentence": "Principles from query-efficient black-box attacks guide TAA\u2019s search over prompt space under limited feedback, shaping its multi-objective, sample-efficient strategy to discover prompts that jointly evade prompt filters, concept erasers, and image safety checkers."
+    }
+  ],
+  "synthesis_narrative": "The core contribution of Transstratal Adversarial Attack (TAA) is to convert the real-world, sequential safety pipeline of modern text-to-image systems into a multi-objective black-box optimization problem over prompts, then solve it with an LLM-guided, feedback-driven search that exploits overlapping vulnerabilities across layers. Safe Latent Diffusion (Schramowski et al.) codified the practical multi-layer design\u2014safety-guided generation and a CLIP-based image safety checker\u2014setting the concrete target for TAA. The concept erasure literature (Kumari et al.; Gandikota et al.) supplied the critical middle-layer defense mechanism and exposed its limits: erased notions can resurface via entangled attributes and indirect semantics. TAA operationalizes this insight by explicitly searching for prompts that re-invoke forbidden content through related, unfiltered concepts while remaining benign to both upstream prompt filters and downstream image filters.\nSingle-layer jailbreak methods such as SneakyPrompt demonstrated that discrete black-box search can evade prompt filters, but they do not coordinate success across all layers. TAA extends this by adopting LLM-based red teaming (Perez et al.) to generate candidate prompts that satisfy implicit, subjective constraints, and by leveraging token-level adversarial optimization ideas from GCG (Zou et al.) to refine candidates under sparse pass/fail signals. Finally, the methodology is grounded in query-efficient black-box attack principles (Ilyas et al.), enabling scalable exploration under realistic API limits. Together, these strands yield a transstratal attack that systematically and simultaneously bypasses prompt filters, concept erasers, and image safety checkers.",
+  "analysis_timestamp": "2026-01-07T00:05:12.519081"
+}

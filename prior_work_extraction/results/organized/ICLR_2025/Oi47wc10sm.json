@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Plug and Play Language Models: A Simple Approach to Controlled Text Generation",
+      "authors": "Santosh Kumar Dathathri, Andrea Madotto, Janice Lan, Jane Hung, Eric Frank, Piero Molino, Jason Yosinski, Rosanne Liu",
+      "year": 2020,
+      "role": "Technique precursor for decoding-time intervention",
+      "relationship_sentence": "CAST builds on the idea from PPLM that one can steer a frozen LM at inference by manipulating hidden activations, but extends it by gating when to steer based on input-dependent activation patterns rather than steering indiscriminately at every step."
+    },
+    {
+      "title": "GeDi: Generative Discriminator Guided Sequence Generation",
+      "authors": "Ben Krause et al.",
+      "year": 2021,
+      "role": "Decoding-time controllability via external discriminators",
+      "relationship_sentence": "Like GeDi, CAST targets selective content control (e.g., toxicity/refusals) at generation time; however, CAST dispenses with a separate discriminator and instead uses category-sensitive hidden-state signatures to conditionally activate steering only for targeted inputs."
+    },
+    {
+      "title": "Locating and Editing Factual Associations in GPT (ROME)",
+      "authors": "Kevin Meng, David Bau, Alex Andonian, Yonatan Belinkov",
+      "year": 2022,
+      "role": "Internal intervention/knowledge editing foundation",
+      "relationship_sentence": "ROME established that precise, localized interventions inside transformer representations can reliably alter outputs while preserving other behavior; CAST adopts this interventionist paradigm but applies it transiently in activation space and triggers it conditionally by context."
+    },
+    {
+      "title": "Amnesic Probing: Behavioral Explanation by Information Removal",
+      "authors": "Yanai Elazar, Shauli Ravfogel, Hila Gonen, Michael Elhadad, Yoav Goldberg",
+      "year": 2021,
+      "role": "Evidence that attributes are encoded and editable in hidden states",
+      "relationship_sentence": "Amnesic probing shows that specific attributes can be identified and removed from hidden states, supporting CAST\u2019s core observation that prompt categories produce distinct activation patterns that can be detected and selectively acted upon."
+    },
+    {
+      "title": "Understanding intermediate layers using linear classifier probes",
+      "authors": "Guillaume Alain, Yoshua Bengio",
+      "year": 2016,
+      "role": "Methodological precedent: probing hidden activations",
+      "relationship_sentence": "CAST\u2019s conditional gate relies on reading out category information from intermediate representations; linear probes popularized by Alain & Bengio provide the conceptual and practical basis for such lightweight activation-based detectors."
+    },
+    {
+      "title": "Editing Models with Task Arithmetic",
+      "authors": "Gabriel Ilharco, Mitchell Wortsman, Samir Yitzhak Gadre, Nicholas Carlini, Ludwig Schmidt, Hannaneh Hajishirzi, Ali Farhadi",
+      "year": 2023,
+      "role": "Related concept: vector-based steering of capabilities",
+      "relationship_sentence": "Task arithmetic demonstrates controllable behavior shifts via adding weight-space task vectors; CAST is an activation-space analogue that applies steering vectors only when a category is detected, thereby preserving normal behavior elsewhere."
+    },
+    {
+      "title": "Constitutional AI: Harmlessness from AI Feedback",
+      "authors": "Yuntao Bai et al.",
+      "year": 2022,
+      "role": "Safety alignment motivation for programmable refusals",
+      "relationship_sentence": "Constitutional AI formalized rule-based refusal policies; CAST operationalizes such policies at inference by conditionally steering activations to refuse for specified content categories without additional training or RL."
+    }
+  ],
+  "synthesis_narrative": "Conditional Activation Steering (CAST) fuses two lines of work: decoding-time control and representation-level interventions. PPLM pioneered activation-level steering of frozen language models, proving that one can guide generation by adjusting hidden states at inference. GeDi extended decoding-time control to safety-relevant content using discriminators, but remained always-on and driven by an external model. CAST\u2019s core advance is to make steering selective by using the model\u2019s own internal activations as a detector: it analyzes hidden-state patterns to decide whether and where to apply steering, thus preserving normal behavior on benign inputs.\n\nThis conditional gating rests on the probing literature\u2014Alain & Bengio\u2019s linear probes and amnesic probing by Elazar et al.\u2014which show that semantic and attribute information is linearly recoverable and manipulable in intermediate layers. At the same time, representation and model editing works such as ROME demonstrate that localized, principled interventions can reliably alter specific behaviors while limiting collateral changes. CAST adopts this interventionist mindset but performs transient activation steering rather than persistent weight edits, and crucially triggers it only for targeted categories.\n\nFinally, task-vector arithmetic connects to CAST\u2019s use of directionality in representation space to add or suppress behaviors, while Constitutional AI frames the policy-level goal\u2014programmable refusals for defined categories\u2014that CAST achieves without further training. Together, these works directly inform CAST\u2019s design: detect category via activations, then conditionally apply an appropriate steering vector to realize selective, rule-based refusals.",
+  "analysis_timestamp": "2026-01-06T23:42:48.079241"
+}

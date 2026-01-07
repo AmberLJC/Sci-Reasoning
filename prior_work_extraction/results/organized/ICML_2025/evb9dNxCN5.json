@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Causal Inference using Invariant Prediction: Identification and Confidence Intervals",
+      "authors": "Jonas Peters, Peter B\u00fchlmann, Nicolai Meinshausen",
+      "year": 2016,
+      "role": "Theoretical foundation for invariance across environments and spurious correlation avoidance",
+      "relationship_sentence": "The paper\u2019s formalization of \u201ccontinual confounders\u201d extends the invariant prediction principle\u2014finding predictors stable across environments\u2014to the harder setting where environments arrive sequentially rather than jointly."
+    },
+    {
+      "title": "Invariant Risk Minimization",
+      "authors": "Martin Arjovsky, L\u00e9on Bottou, Ishaan Gulrajani, David Lopez-Paz",
+      "year": 2020,
+      "role": "Core methodology and problem framing for learning invariances to spurious correlations across environments",
+      "relationship_sentence": "IRM\u2019s environment-based view of spurious correlations (e.g., Colored MNIST) underpins the claim that joint multi-environment training can identify invariant predictors, which this work shows breaks down under sequential (continual) access."
+    },
+    {
+      "title": "Distributionally Robust Neural Networks for Group Shifts (Group DRO)",
+      "authors": "Shiori Sagawa, Pang Wei Koh, Tatsunori B. Hashimoto, Percy Liang",
+      "year": 2020,
+      "role": "Robust optimization framework and benchmarking for spurious correlations under group shifts",
+      "relationship_sentence": "Group DRO and its Waterbirds benchmark crystallize how ERM exploits spurious features; the present work leverages this insight to demonstrate that continual learners likewise fail to avoid spurious cues when groups/environments change over tasks."
+    },
+    {
+      "title": "CLEVR: A Diagnostic Dataset for Compositional Language and Elementary Visual Reasoning",
+      "authors": "Justin Johnson, Bharath Hariharan, Laurens van der Maaten, Li Fei-Fei, C. Lawrence Zitnick, Ross Girshick",
+      "year": 2017,
+      "role": "Dataset inspiration and substrate for controlled construction of confounded tasks",
+      "relationship_sentence": "ConCon is built on CLEVR\u2019s controllable generative setup (and its CoGenT-style factor manipulations), enabling the authors to vary confounders across tasks to isolate the continual-confounding phenomenon."
+    },
+    {
+      "title": "Overcoming Catastrophic Forgetting in Neural Networks",
+      "authors": "James Kirkpatrick et al.",
+      "year": 2017,
+      "role": "Seminal continual learning baseline (regularization against forgetting)",
+      "relationship_sentence": "As a canonical method addressing forgetting (EWC), it provides a key baseline that the paper shows is insufficient for resisting spurious correlations when tasks introduce shifting confounders."
+    },
+    {
+      "title": "Gradient Episodic Memory for Continual Learning",
+      "authors": "David Lopez-Paz, Marc'Aurelio Ranzato",
+      "year": 2017,
+      "role": "Core continual learning method (constraint-based replay) used as a baseline",
+      "relationship_sentence": "GEM represents replay/constrained optimization approaches the paper evaluates, showing that even with episodic memory, models still latch onto spurious features under continual confounding."
+    },
+    {
+      "title": "Efficient Lifelong Learning with A-GEM",
+      "authors": "Arslan Chaudhry, Marc'Aurelio Ranzato, Marcus Rohrbach, Mohamed Elhoseiny",
+      "year": 2019,
+      "role": "Scalable replay-based continual learning baseline",
+      "relationship_sentence": "A-GEM, a widely used CL benchmark method, is empirically tested and found unable to ignore time-varying confounders, reinforcing the paper\u2019s claim that confounding is a challenge beyond standard forgetting."
+    }
+  ],
+  "synthesis_narrative": "This paper bridges two previously distinct threads: invariance-based approaches for combating spurious correlations and the mechanics of continual learning. Invariance theory and methods\u2014Invariant Prediction (Peters et al., 2016) and Invariant Risk Minimization (Arjovsky et al., 2020)\u2014establish that when multiple environments are available jointly, invariant predictors can be identified that ignore spurious features. Group DRO (Sagawa et al., 2020) operationalizes this by optimizing worst-group risk, further demonstrating how ERM exploits spurious cues and how group structure enables robust learning. However, these works assume simultaneous access to diverse environments. The present paper\u2019s key insight is that in continual learning, environments (and their confounders) arrive sequentially, undermining the ability to learn invariances that require cross-environment comparison during training.\nTo expose and study this gap, the authors construct ConCon, a continually confounded dataset grounded in CLEVR (Johnson et al., 2017), whose controllable generative factors permit systematic variation of confounders across tasks, akin to CoGenT-style factor recombinations. They then evaluate representative continual learning methods\u2014including EWC (Kirkpatrick et al., 2017), GEM (Lopez-Paz & Ranzato, 2017), and A-GEM (Chaudhry et al., 2019)\u2014which primarily address catastrophic forgetting via regularization or replay constraints. The findings reveal that such methods, while mitigating forgetting, do not prevent reliance on spurious correlations when confounders shift over time. By formally defining continual confounders and empirically demonstrating failure modes of standard CL, the paper delineates a new problem setting at the intersection of robustness and lifelong learning, motivating algorithms that explicitly reason about invariance under sequential access.",
+  "analysis_timestamp": "2026-01-07T00:04:09.156381"
+}

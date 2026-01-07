@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Identity Mappings in Deep Residual Networks",
+      "authors": "Kaiming He et al.",
+      "year": 2016,
+      "role": "Extension",
+      "relationship_sentence": "SimBa\u2019s residual feedforward block is a direct adaptation of He et al.\u2019s identity-mapping residual design, providing a linear pathway that induces a simplicity bias and stabilizes optimization when scaling RL MLPs."
+    },
+    {
+      "title": "Layer Normalization",
+      "authors": "Jimmy Lei Ba et al.",
+      "year": 2016,
+      "role": "Extension",
+      "relationship_sentence": "SimBa directly incorporates LayerNorm to control activation magnitudes without batch statistics, a crucial normalization mechanism for non-iid RL data that enables safe parameter scaling."
+    },
+    {
+      "title": "PopArt: Preserving Outputs Precisely, while Adaptively Rescaling Targets",
+      "authors": "Hado van Hasselt et al.",
+      "year": 2016,
+      "role": "Inspiration",
+      "relationship_sentence": "PopArt showed that adaptive normalization combats scale sensitivity in RL value learning; SimBa generalizes this normalization principle to inputs via running-stat observation normalization to maintain stability as capacity grows."
+    },
+    {
+      "title": "On the Spectral Bias of Neural Networks",
+      "authors": "Nasim Rahaman et al.",
+      "year": 2019,
+      "role": "Foundation",
+      "relationship_sentence": "Rahaman et al. established that neural networks preferentially learn low-frequency (simple) functions, motivating SimBa\u2019s architectural choices (linear residual path + normalization) to accentuate this simplicity bias when scaling parameters."
+    },
+    {
+      "title": "Deep learning generalizes because the parameter-function map is biased towards simple functions",
+      "authors": "Andrey Mingard et al.",
+      "year": 2020,
+      "role": "Foundation",
+      "relationship_sentence": "This work formalized a global simplicity bias in the parameter-to-function map, providing the theoretical rationale that larger networks can generalize if guided by simplicity-inducing components\u2014precisely what SimBa operationalizes."
+    },
+    {
+      "title": "DrQ-v2: Improved Data-Efficiency for Vision-Based Reinforcement Learning",
+      "authors": "Denis Yarats et al.",
+      "year": 2021,
+      "role": "Baseline",
+      "relationship_sentence": "DrQ-v2 is a principal off-policy baseline; SimBa replaces its standard MLP with a residual+LayerNorm+obs-normalization block and shows consistent sample-efficiency gains when scaling model size."
+    },
+    {
+      "title": "Proximal Policy Optimization Algorithms",
+      "authors": "John Schulman et al.",
+      "year": 2017,
+      "role": "Baseline",
+      "relationship_sentence": "PPO serves as the on-policy baseline and popularized practical observation/advantage normalization in RL; SimBa elevates observation normalization to a first-class architectural component to enable safe parameter scaling."
+    }
+  ],
+  "synthesis_narrative": "SimBa\u2019s core idea\u2014scaling up RL models by explicitly injecting simplicity bias\u2014stands at the intersection of theory demonstrating an innate preference for simple solutions and architectural mechanisms that operationalize that preference. The theoretical backbone comes from spectral and global simplicity bias results (Rahaman et al., Mingard et al.), which explain how large networks can generalize when guided toward simpler functions. SimBa translates these insights into practice using two architectural tools that have proven to promote simple, stable representations at scale: residual identity mappings (He et al.) to create a linear pathway from inputs to outputs and LayerNorm (Ba et al.) to control activation magnitudes without relying on batch statistics that are problematic in RL. Complementing these, SimBa formalizes observation normalization\u2014long a pragmatic trick in strong baselines like PPO\u2014into a deliberate, running-stat input standardization module, and takes inspiration from PopArt\u2019s demonstration that adaptive normalization mitigates scale sensitivity in RL. Together, these components produce an architecture that preserves the benefits of simplicity bias while allowing parameter counts to grow. The result is a capacity-scalable backbone that consistently improves sample efficiency across diverse algorithms, as evidenced by gains over prominent baselines such as DrQ-v2 (off-policy) and PPO (on-policy). In short, SimBa fuses simplicity-bias theory with residual and normalization mechanisms to unlock reliable scaling in deep RL.",
+  "analysis_timestamp": "2026-01-06T23:09:26.618722"
+}

@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "CodeRL: Mastering Code Generation through Pretrained Language Models via Reinforcement Learning",
+      "authors": "Hung Le et al.",
+      "year": 2022,
+      "arxiv_id": "2207.01780",
+      "role": "Baseline",
+      "relationship_sentence": "This policy-based actor\u2013critic framework established the now-standard formulation of using unit-test pass/fail signals as rewards for code generation, which B-Coder directly keeps but replaces with a value-based, off-policy learner to address CodeRL\u2019s on-policy sample inefficiency."
+    },
+    {
+      "title": "Training language models to follow instructions with human feedback",
+      "authors": "Long Ouyang et al.",
+      "year": 2022,
+      "arxiv_id": "2203.02155",
+      "role": "Gap Identification",
+      "relationship_sentence": "As the canonical PPO-based RLHF approach, it exemplifies the dominance and limitations of on-policy policy-gradient methods (e.g., instability and poor reuse of off-policy data) that B-Coder explicitly seeks to overcome with a value-based, off-policy design."
+    },
+    {
+      "title": "Implicit Q-Learning (IQL): Off-Policy Reinforcement Learning by Implicit Value Regularization",
+      "authors": "Ilya Kostrikov et al.",
+      "year": 2022,
+      "arxiv_id": "2110.06169",
+      "role": "Extension",
+      "relationship_sentence": "B-Coder adapts IQL\u2019s core ideas\u2014expectile regression for value learning and advantage-weighted policy extraction\u2014to the token-level program synthesis setting, enabling stable value learning from large off-policy code corpora."
+    },
+    {
+      "title": "Conservative Q-Learning for Offline Reinforcement Learning",
+      "authors": "Aviral Kumar et al.",
+      "year": 2020,
+      "arxiv_id": "2006.04779",
+      "role": "Inspiration",
+      "relationship_sentence": "The conservative value estimation principle informs B-Coder\u2019s design to mitigate out-of-distribution action overestimation when learning Q-values from off-policy program data."
+    },
+    {
+      "title": "Evaluating Large Language Models Trained on Code",
+      "authors": "Mark Chen et al.",
+      "year": 2021,
+      "arxiv_id": "2107.03374",
+      "role": "Foundation",
+      "relationship_sentence": "HumanEval defined the execution-based evaluation (pass@k) and unit-test\u2013driven correctness signal that B-Coder leverages as a direct, verifiable reward for value learning."
+    },
+    {
+      "title": "Measuring Coding Challenge Problem Solving with APPS",
+      "authors": "Dan Hendrycks et al.",
+      "year": 2021,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "APPS introduced a large-scale, execution-based program synthesis benchmark with automated unit tests, providing the off-policy trajectories and verifiable rewards that make value-based off-policy learning feasible in B-Coder."
+    }
+  ],
+  "synthesis_narrative": "CodeRL showed that unit-test signals can be used as direct rewards to train code-generating language models with reinforcement learning, concretizing the execution-as-supervision paradigm for program synthesis. The RLHF literature, epitomized by instruction following with PPO, demonstrated that policy-gradient methods can align large language models but also underscored well-known drawbacks: on-policy sampling costs, instability, and limited reuse of historical data. Implicit Q-Learning introduced a stable, off-policy value-learning recipe\u2014expectile value regression paired with advantage-weighted behavior policy extraction\u2014that sidesteps the pitfalls of policy gradients when abundant logged data exist. Conservative Q-Learning contributed the key insight that pessimistic value estimation curbs overestimation on out-of-distribution actions, a recurring challenge in offline settings. HumanEval formalized execution-based correctness with pass@k and ensured program synthesis rewards are binary yet reliable via unit tests. APPS provided a large corpus of diverse programming trajectories and automated execution feedback, making off-policy and offline RL practically viable.\nTogether these works revealed a compelling opportunity: program synthesis uniquely offers plentiful off-policy code and cheap, verifiable rewards\u2014conditions under which value-based offline RL should excel. Brought together, unit-test rewards (CodeRL, HumanEval, APPS), the stability and data efficiency of IQL-style value learning, and conservative value estimation principles suggest replacing on-policy PPO with a value-based approach. B-Coder naturally emerges by adapting IQL to token-level code generation, leveraging APPS/HumanEval\u2019s execution feedback, and incorporating conservative value ideas to robustly learn from historical programs while guiding decoding toward functionally correct solutions.",
+  "target_paper": {
+    "title": "$\\mathcal{B}$-Coder: Value-Based Deep Reinforcement Learning for Program Synthesis",
+    "authors": "Zishun Yu, Yunzhe Tao, Liyu Chen, Tao Sun, Hongxia Yang",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Program Synthesis, Code Generation, Reinforcement Learning, Value-Based RL",
+    "abstract": "Program synthesis aims to create accurate, executable programs from problem specifications, specifically from natural language descriptions in our context. \nRecent studies have leveraged the power of reinforcement learning (RL) in conjunction with large language models (LLMs), significantly enhancing code generation capabilities. The application of RL focuses on directly optimizing for functional correctness, offering an advantage over conventional supervised methods. \nDespite policy-based RL methods dominating the literature on RL for program synthesis, the nature of program synthesis tasks hints at a natural alignment with value-based methods.\nThis stems from the rich collection of off-policy programs, including those developed by human programmers and also historical samples, coupled with the straightforward verification of generated programs through automated unit testing, meaning rewards are easy to obtain.\nDiverging from the dominant use of policy-based algorithms, our work explo",
+    "openreview_id": "fLf589bx1f",
+    "forum_id": "fLf589bx1f"
+  },
+  "analysis_timestamp": "2026-01-06T18:55:06.994965"
+}

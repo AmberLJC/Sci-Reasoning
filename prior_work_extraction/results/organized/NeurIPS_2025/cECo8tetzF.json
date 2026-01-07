@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+      "authors": "Edward J. Hu et al.",
+      "year": 2022,
+      "role": "PEFT baseline for post-pruning restoration",
+      "relationship_sentence": "LoRA established the dominant parameter-efficient strategy for recovering performance after compression; RestoreLCC departs from LoRA\u2019s dense-model-agnostic, layer-wide low-rank updates by targeting pruning-specific losses localized in attention activations and compensating only the lost components."
+    },
+    {
+      "title": "SparseGPT: Massive Language Models Can Be Accurately Pruned in One-Shot",
+      "authors": "Aleksandar Frantar, Dan Alistarh",
+      "year": 2023,
+      "role": "Foundational LLM pruning method and problem setup",
+      "relationship_sentence": "SparseGPT popularized practical post-hoc LLM pruning and characterized accuracy drops from one-shot sparsification; RestoreLCC is explicitly designed to restore such pruned models without undoing sparsity, focusing on the attention-activation information that SparseGPT-era methods discard."
+    },
+    {
+      "title": "Wanda: Pruning by Weights and Activation",
+      "authors": "Sun et al.",
+      "year": 2023,
+      "role": "Activation-aware importance for pruning",
+      "relationship_sentence": "Wanda showed that activations are informative for deciding what to prune; RestoreLCC extends this activation-centric view to restoration by contrastively probing attention activations to identify lost information components and selectively reintroducing them."
+    },
+    {
+      "title": "Movement Pruning: Adaptive Sparsity by Fine-Tuning",
+      "authors": "Victor Sanh et al.",
+      "year": 2020,
+      "role": "Sparsity with recovery via fine-tuning",
+      "relationship_sentence": "Movement Pruning demonstrated that targeted sparsification plus fine-tuning can recover accuracy; RestoreLCC pursues the same goal but replaces broad fine-tuning with a lightweight, plug-and-play compensation that preserves the pruned model\u2019s efficiency."
+    },
+    {
+      "title": "Are Sixteen Heads Really Better Than One?",
+      "authors": "Paul Michel, Omer Levy, Graham Neubig",
+      "year": 2019,
+      "role": "Attention head importance and pruning",
+      "relationship_sentence": "This work established that only a subset of attention heads are critical and can be ablated with limited loss; RestoreLCC builds on this by contrastively identifying which heads lose task-relevant activation components after pruning and compensating them specifically."
+    },
+    {
+      "title": "Analyzing Multi-Head Self-Attention: Specialized Heads Do the Heavy Lifting",
+      "authors": "Elena Voita et al.",
+      "year": 2019,
+      "role": "Head specialization and function analysis",
+      "relationship_sentence": "Evidence of specialized, task-critical heads motivates RestoreLCC\u2019s component-level compensation: it restores the specific information those specialized heads lose under pruning rather than applying uniform adaptation."
+    },
+    {
+      "title": "Parameter-Efficient Transfer Learning for NLP (Adapter Tuning)",
+      "authors": "Neil Houlsby et al.",
+      "year": 2019,
+      "role": "Plug-in adapters for efficient restoration",
+      "relationship_sentence": "Adapter tuning introduced modular, insertable blocks that minimally perturb the backbone; RestoreLCC adopts this plug-and-play philosophy, attaching small compensation modules on attention pathways to reintroduce lost activation components at low cost."
+    }
+  ],
+  "synthesis_narrative": "RestoreLCC sits at the intersection of pruning, parameter-efficient adaptation, and fine-grained analyses of attention heads. On the pruning side, SparseGPT crystallized a practical regime where large language models are pruned post hoc, exposing characteristic accuracy losses. Activation-aware pruning like Wanda further showed that activations carry crucial signals about what information is being preserved or discarded. These insights directly motivate RestoreLCC\u2019s central observation: pruning-induced information loss manifests in attention activations and can be detected and targeted.\n\nConcurrently, PEFT methods\u2014Adapter Tuning and especially LoRA\u2014became the default restoration tools, but they were designed for dense models and typically spread low-rank updates broadly. Movement Pruning demonstrated that targeted sparsification combined with fine-tuning can recover accuracy, yet it still retrains many parameters and may erode efficiency. RestoreLCC embraces the PEFT spirit but makes it pruning-aware: it uses contrastive probing on attention activations to identify exactly which heads and components lost task-relevant information, then installs lightweight, plug-and-play compensation to reintroduce only those components, preserving sparsity and inference cost.\n\nFinally, foundational analyses of attention heads by Michel et al. and Voita et al. established that a small set of specialized heads are disproportionately important. RestoreLCC leverages this head-level selectivity: rather than uniformly adapting the network, it pinpoints and compensates the specific, specialized heads whose activations were degraded by pruning. The result is a targeted, activation-driven restoration mechanism that recovers performance while maintaining the efficiency gains of pruning.",
+  "analysis_timestamp": "2026-01-07T00:21:32.305265"
+}

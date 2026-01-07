@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Data Shapley: Equitable Valuation of Data for Machine Learning",
+      "authors": "Amirata Ghorbani and James Zou",
+      "year": 2019,
+      "arxiv_id": "1904.02868",
+      "role": "Foundation",
+      "relationship_sentence": "This work formalized data valuation via the Shapley value and introduced retraining-based estimators (e.g., TMC/Aumann-Shapley), whose computational cost and lack of per-run specificity are the exact limitations In-Run Data Shapley replaces with gradient-trajectory credits in a single training run."
+    },
+    {
+      "title": "Towards Efficient Data Valuation Based on the Shapley Value",
+      "authors": "Ruoxi Jia et al.",
+      "year": 2019,
+      "arxiv_id": null,
+      "role": "Extension",
+      "relationship_sentence": "By showing that exploiting algorithmic structure (e.g., kNN-Shapley) can make Shapley tractable, this paper directly motivates our strategy of exploiting SGD\u2019s per-step gradient structure to compute Shapley-like credits without retraining."
+    },
+    {
+      "title": "Estimating Training Data Influence by Tracing Gradient Descent (TracIn)",
+      "authors": "Avijit Pruthi et al.",
+      "year": 2020,
+      "arxiv_id": "2002.08484",
+      "role": "Inspiration",
+      "relationship_sentence": "TracIn\u2019s insight that the sequence of SGD updates encodes data attribution informs our per-iteration accumulation, which we recast from an influence heuristic into principled Shapley contributions computed along the training trajectory."
+    },
+    {
+      "title": "Understanding Black-box Predictions via Influence Functions",
+      "authors": "Pang Wei Koh and Percy Liang",
+      "year": 2017,
+      "arxiv_id": "1703.04730",
+      "role": "Baseline",
+      "relationship_sentence": "As the standard non-retraining baseline for training-point contribution to a fixed model, influence functions\u2019 Hessian-based formulation is the approach our in-run Shapley replaces with a scalable, Hessian-free credit assignment during training."
+    },
+    {
+      "title": "Values of Non-Atomic Games",
+      "authors": "Robert J. Aumann and Lloyd S. Shapley",
+      "year": 1974,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "The Aumann\u2013Shapley path-integral notion of marginal contributions underlies our view of each SGD step as an infinitesimal game, enabling Shapley credits to be accumulated over the training path without subset retraining."
+    },
+    {
+      "title": "Representer Point Selection for Explaining Deep Neural Networks",
+      "authors": "Chih-Kuan Yeh et al.",
+      "year": 2018,
+      "arxiv_id": "1811.09720",
+      "role": "Related Problem",
+      "relationship_sentence": "This work demonstrated model-specific training-point attribution from a single trained model, foreshadowing our model/run-specific valuation while we supply an axiomatic Shapley grounding and compute credits online during training."
+    }
+  ],
+  "synthesis_narrative": "Data Shapley established the game-theoretic formulation of valuing training data via marginal contributions over subsets and proposed Monte Carlo and Aumann\u2013Shapley estimators, but these required repeated retraining and captured an average notion of value across training randomness. Building on this, work on efficient Shapley computation showed that leveraging model-specific structure\u2014such as closed-form behavior in kNN\u2014can make exact or approximate Shapley practical, highlighting the importance of algorithm-aware shortcuts rather than generic subset enumeration. Influence functions provided a non-retraining route to estimate the effect of upweighting or removing a point on a fixed model\u2019s loss via Hessian-inverse sensitivity, but their instability and cost in deep models limited scalability. TracIn revealed that the trajectory of SGD encodes attribution signal: summing gradient alignments across checkpoints yields a faithful, run-specific estimate of example influence without Hessians. The Aumann\u2013Shapley framework offered a principled path-integral view of marginal contributions for non-atomic participants, suggesting credit accumulation along a continuous process. Finally, representer-point methods showed that training-point attributions can be computed for a specific trained model in one run by exploiting structural decompositions. Together, these works expose a gap: Shapley-based valuations were principled but retraining-heavy, while trajectory-based or model-specific attributions were scalable but lacked Shapley guarantees. The natural synthesis is to treat SGD as the path over which infinitesimal data contributions accrue, using per-step gradients to compute and aggregate Shapley-like marginal credits, thereby yielding principled, run-specific data values with negligible overhead.",
+  "target_paper": {
+    "title": "Data Shapley in One Training Run",
+    "authors": "Jiachen T. Wang, Prateek Mittal, Dawn Song, Ruoxi Jia",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "oral",
+    "keywords": "Shapley value, data valuation.",
+    "abstract": "Data Shapley offers a principled framework for attributing the contribution of data within machine learning contexts. However, the traditional notion of Data Shapley requires re-training models on various data subsets, which becomes computationally infeasible for large-scale models. Additionally, this retraining-based definition cannot evaluate the contribution of data for a specific model training run, which may often be of interest in practice. This paper introduces a novel concept, In-Run Data Shapley, which eliminates the need for model retraining and is specifically designed for assessing data contribution for a particular model of interest. In-Run Data Shapley calculates the Shapley value for each gradient update iteration and accumulates these values throughout the training process. We present several techniques that allow the efficient scaling of In-Run Data Shapley to the size of foundation models. In its most optimized implementation, our method adds negligible runtime overhe",
+    "openreview_id": "HD6bWcj87Y",
+    "forum_id": "HD6bWcj87Y"
+  },
+  "analysis_timestamp": "2026-01-06T08:11:30.920099"
+}

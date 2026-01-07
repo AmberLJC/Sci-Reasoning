@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+      "authors": "Jason Wei et al.",
+      "year": 2022,
+      "role": "Foundation",
+      "relationship_sentence": "Introduced the CoT prompting paradigm that this paper formalizes as a training objective; the core result here explains mechanistically why CoT helps by showing it lets a transformer implement multi-step GD autoregressively."
+    },
+    {
+      "title": "Show Your Work: Scratchpads for Intermediate Computation",
+      "authors": "Maxwell I. Nye et al.",
+      "year": 2021,
+      "role": "Foundation",
+      "relationship_sentence": "Established supervising intermediate reasoning traces (scratchpads) as a way to enable multi-step computation, which this work instantiates in a linear-regression in-context setup and proves enables multi-step GD within a transformer."
+    },
+    {
+      "title": "What Learning Algorithm Is In-Context Learning? Investigations with Linear Models",
+      "authors": "Ekin Aky\u00fcrek et al.",
+      "year": 2022,
+      "role": "Baseline",
+      "relationship_sentence": "Showed that transformers trained on in-context linear regression implement gradient-descent-like updates; the present paper adopts this problem formulation and sharpens it by proving a one-layer linear transformer without CoT performs only a single GD step, while CoT enables multi-step GD."
+    },
+    {
+      "title": "Transformers Learn In-Context by Gradient Descent",
+      "authors": "Johannes von Oswald et al.",
+      "year": 2023,
+      "role": "Extension",
+      "relationship_sentence": "Demonstrated GD-like inner-loop learning emerges in transformers for linear tasks; this paper extends that line by proving and empirically verifying that adding CoT turns the emergent single-step behavior into multi-step GD realized autoregressively."
+    },
+    {
+      "title": "Learning to Learn by Gradient Descent by Gradient Descent",
+      "authors": "Marcin Andrychowicz et al.",
+      "year": 2016,
+      "role": "Inspiration",
+      "relationship_sentence": "Pioneered learned optimizers that carry out multi-step GD via a sequence model; the current work shows a transformer can internalize such an optimizer when guided by CoT, effectively executing iterative GD across tokens."
+    },
+    {
+      "title": "Self-Consistency Improves Chain of Thought Reasoning in Language Models",
+      "authors": "Xuezhi Wang et al.",
+      "year": 2023,
+      "role": "Gap Identification",
+      "relationship_sentence": "Documented strong empirical gains from CoT without explaining the training-time mechanism; this work addresses that gap by analyzing training dynamics and proving CoT induces multi-step GD in a controlled regression setting."
+    }
+  ],
+  "synthesis_narrative": "This paper\u2019s core insight\u2014that chain-of-thought (CoT) prompting enables transformers to implement multi-step gradient descent (GD) autoregressively\u2014stands at the intersection of two lines of work. First, CoT and its precursors established that supervising intermediate reasoning steps can unlock multi-step computation in language models. Scratchpads (Nye et al.) provided the template of emitting explicit intermediate traces, and Chain-of-Thought prompting (Wei et al.) popularized this idea at scale. Their strong empirical gains (further amplified by self-consistency; Wang et al.) created a clear mechanistic gap: why does emitting reasoning steps help? Second, theoretical analyses of in-context learning in linear regression revealed that transformers can behave like inner-loop learners. Aky\u00fcrek et al. and von Oswald et al. showed that, when trained on in-context linear regression, transformers implement GD-like updates, effectively performing a step (or few steps) of optimization on the fly. The present work fuses these threads and advances them: it adopts the in-context linear regression setting and proves a sharp limitation\u2014without CoT, a one-layer linear transformer can realize only a single GD step and cannot recover the true weights\u2014then shows that CoT overcomes this limitation by enabling multi-step GD via autoregressive rollouts. Conceptually, this mirrors learned-optimizer ideas (Andrychowicz et al.), but realized within a standard transformer trained with a CoT objective. The result is a mechanistic account linking CoT to iterative optimization and generalization.",
+  "analysis_timestamp": "2026-01-06T23:09:26.617827"
+}

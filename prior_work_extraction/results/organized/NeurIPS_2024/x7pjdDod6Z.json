@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Neural Sparse Voxel Fields",
+      "authors": "Lingjie Liu et al.",
+      "year": 2020,
+      "role": "Explicit sparse 3D voxel representation for neural scene modeling",
+      "relationship_sentence": "MeshFormer adopts sparse 3D voxel feature grids to encode scene geometry, extending NSVF\u2019s sparse-voxel idea from efficient radiance fields into a generalizable voxel backbone geared toward mesh-quality reconstruction."
+    },
+    {
+      "title": "MVSNeRF: Fast Generalizable Radiance Field Reconstruction from Multi-View Stereo",
+      "authors": "Anpei Chen et al.",
+      "year": 2021,
+      "role": "3D cost volumes and 3D CNNs that inject projective geometry bias for generalizable NeRF",
+      "relationship_sentence": "MeshFormer\u2019s design\u2014fusing transformers with 3D convolutions over voxelized features\u2014follows MVSNeRF\u2019s insight that explicit 3D volumes and projective aggregation significantly improve sparse-view generalization."
+    },
+    {
+      "title": "pixelNeRF: Neural Radiance Fields from One or Few Images",
+      "authors": "Alex Yu, Vickie Ye, Matthew Tancik, Angjoo Kanazawa",
+      "year": 2021,
+      "role": "Generalizable sparse-view neural rendering via image-conditioned radiance fields",
+      "relationship_sentence": "Targeting the same open-world, few-view regime as pixelNeRF, MeshFormer replaces per-ray conditioning with a 3D-structured voxel backbone to supply stronger 3D inductive bias and better mesh extraction."
+    },
+    {
+      "title": "EG3D: Efficient Geometry-aware 3D Generative Adversarial Networks",
+      "authors": "Eric R. Chan et al.",
+      "year": 2022,
+      "role": "Tri-plane feature representation widely adopted for fast 3D-aware generation",
+      "relationship_sentence": "MeshFormer explicitly moves away from triplanes popularized by EG3D, motivating its choice of sparse 3D voxels to encode native 3D structure and projective bias needed for high-quality meshes."
+    },
+    {
+      "title": "NeuS: Learning Neural Implicit Surfaces by Volume Rendering",
+      "authors": "Wang et al.",
+      "year": 2021,
+      "role": "SDF-based volume/surface rendering for accurate, watertight surface reconstruction",
+      "relationship_sentence": "MeshFormer\u2019s combination of SDF supervision with surface rendering directly builds on NeuS\u2019s formulation, enabling cleaner geometry and direct mesh extraction instead of purely volumetric radiance fields."
+    },
+    {
+      "title": "MonoSDF: Exploring Monocular Geometric Cues for Neural Implicit Surface Reconstruction",
+      "authors": "Yu et al.",
+      "year": 2023,
+      "role": "Integrating monocular depth/normal priors to stabilize SDF learning from sparse views",
+      "relationship_sentence": "MeshFormer extends MonoSDF\u2019s use of 2D geometric cues by explicitly ingesting normal maps as inputs and supervision, strengthening geometry learning under sparse-view conditions."
+    },
+    {
+      "title": "ControlNet: Adding Conditional Control to Text-to-Image Diffusion Models",
+      "authors": "Lvmin Zhang, Maneesh Agrawala",
+      "year": 2023,
+      "role": "2D diffusion framework demonstrating reliable conditioning and generation with normal maps",
+      "relationship_sentence": "MeshFormer\u2019s use of normal maps predicted by 2D diffusion models is enabled by ControlNet-like mechanisms showing normals as a robust conditioning signal that can guide downstream tasks."
+    }
+  ],
+  "synthesis_narrative": "MeshFormer\u2019s core innovation\u2014high-quality mesh reconstruction from sparse views via an explicitly 3D-guided model\u2014emerges by unifying advances across representation, supervision, and priors. Early generalizable reconstruction methods (pixelNeRF) established the sparse-view, open-world setting but suffered from weak 3D inductive bias. MVSNeRF demonstrated that building and processing 3D volumes with projective geometry cues yields stronger generalization, while NSVF showed that sparse voxel representations can efficiently capture 3D structure. MeshFormer synthesizes these ideas by storing learnable features in sparse 3D voxels and processing them with 3D convolutions augmented by transformers, explicitly injecting 3D and projective bias. In parallel, SDF-based surface rendering (NeuS) revealed that coupling SDF learning with differentiable surface rendering yields cleaner, watertight meshes\u2014guiding MeshFormer\u2019s choice to supervise SDFs while rendering surfaces directly. To overcome the ill-posedness of sparse-view geometry, MonoSDF showed that monocular depth/normal priors provide powerful constraints for SDF optimization; MeshFormer operationalizes this further by requiring normal maps as inputs and outputs. Finally, the practicality of obtaining high-quality normal maps from 2D diffusion models (as enabled by ControlNet-like conditioning) makes normal-guided reconstruction scalable and robust. The combination of an explicitly 3D voxel backbone, surface-oriented SDF rendering, and diffusion-predicted normal guidance thus directly addresses the training cost, generalization, and mesh quality limitations of triplane-based and purely volumetric predecessors (e.g., EG3D), culminating in MeshFormer.",
+  "analysis_timestamp": "2026-01-06T23:39:42.971362"
+}

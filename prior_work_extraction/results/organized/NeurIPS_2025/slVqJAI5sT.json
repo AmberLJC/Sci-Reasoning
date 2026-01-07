@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Score-Based Generative Modeling through Stochastic Differential Equations",
+      "authors": "Yang Song, Jascha Sohl-Dickstein, Diederik P. Kingma, Abhishek Kumar, Stefano Ermon, Ben Poole",
+      "year": 2021,
+      "role": "Foundational model class and sampling framework",
+      "relationship_sentence": "\u03a8-Sampler builds directly on score-based generative models and their SDE-based denoising trajectories, which define the state space and dynamics within which SMC-based inference-time alignment operates."
+    },
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Jonathan Ho, Ajay Jain, Pieter Abbeel",
+      "year": 2020,
+      "role": "Core diffusion prior and denoising process",
+      "relationship_sentence": "The work provides the diffusion prior and discretized denoising process that \u03a8-Sampler augments with SMC and improved initialization, anchoring the definition of the Gaussian prior from which most prior SMC-based methods initialized particles."
+    },
+    {
+      "title": "Diffusion Models Beat GANs on Image Synthesis",
+      "authors": "Prafulla Dhariwal, Alex Nichol",
+      "year": 2021,
+      "role": "Inference-time guidance via log-likelihood gradients",
+      "relationship_sentence": "Classifier guidance established that gradients of auxiliary objectives can steer diffusion sampling at inference time, conceptually motivating \u03a8-Sampler\u2019s use of a reward-informed posterior rather than unguided prior initialization."
+    },
+    {
+      "title": "Sequential Monte Carlo Samplers",
+      "authors": "Pierre Del Moral, Arnaud Doucet, Ajay Jasra",
+      "year": 2006,
+      "role": "SMC framework for sequences of target distributions",
+      "relationship_sentence": "This seminal SMC-samplers framework underpins \u03a8-Sampler\u2019s population-based inference over the denoising chain, including weighting, resampling, and MCMC rejuvenation steps whose efficiency critically depends on initial particle quality."
+    },
+    {
+      "title": "MCMC Methods for Functions: Modifying Metropolis\u2013Hastings to Analyze Bayesian Inverse Problems",
+      "authors": "Simon L. Cotter, Gareth O. Roberts, Andrew M. Stuart, David White",
+      "year": 2013,
+      "role": "Dimension-robust pCN/pCNL proposals",
+      "relationship_sentence": "\u03a8-Sampler\u2019s pCNL-based initializer directly leverages the function-space, dimension-robust design of pCN/pCNL proposals to sample high-dimensional posteriors with gradient information, enabling practical reward-aware initialization."
+    },
+    {
+      "title": "Sequential Monte Carlo Methods for Bayesian Inverse Problems",
+      "authors": "Alexandros Beskos, Ajay Jasra, Kody J. H. Law, Raul Tempone, Yan Zhou",
+      "year": 2015,
+      "role": "SMC with function-space MCMC moves for high-dimensional posteriors",
+      "relationship_sentence": "Demonstrates integrating pCN-like MCMC kernels within SMC to target complex, high-dimensional posteriors, a direct methodological antecedent to \u03a8-Sampler\u2019s use of pCNL to seed SMC with posterior-aware particles."
+    },
+    {
+      "title": "Diffusion Posterior Sampling for Inverse Problems",
+      "authors": "Hyungjin Chung, Jong Chul Ye",
+      "year": 2023,
+      "role": "Posterior-based guidance with diffusion priors",
+      "relationship_sentence": "Shows that conditioning diffusion sampling on a likelihood to form a posterior yields markedly better target-constrained samples, directly inspiring \u03a8-Sampler\u2019s shift from Gaussian-prior initialization to reward-aware posterior initialization."
+    }
+  ],
+  "synthesis_narrative": "\u03a8-Sampler\u2019s core innovation\u2014replacing Gaussian-prior initialization with reward-aware posterior initialization for SMC over score-model denoising\u2014emerges from three converging lines of work. First, diffusion/score-based generative modeling (Ho et al., Song et al.) provides the denoising trajectory and Gaussian prior from which most samplers start, and classifier guidance (Dhariwal & Nichol) demonstrates that inference-time gradients can steer generation without retraining. Second, the SMC-samplers literature (Del Moral, Doucet, Jasra) establishes population-based inference over sequences of targets with resampling and MCMC rejuvenation, making clear that particle quality at initialization strongly impacts efficiency and eventual alignment. Third, function-space MCMC advances (Cotter et al.) introduce pCN/pCNL proposals that remain stable in high dimensions and exploit gradients, and their integration into SMC for high-dimensional posteriors (Beskos et al.) shows how to practically combine population methods with dimension-robust MCMC moves.\nBuilding on these foundations, \u03a8-Sampler adopts the posterior-centric perspective popularized in diffusion posterior sampling (Chung & Ye), but replaces measurement likelihoods with reward models to define a reward-aware posterior. It then uses a pCNL initializer to sample this posterior efficiently in high-dimensional latent spaces before commencing SMC over the denoising sequence. This design directly addresses the mismatch between Gaussian-prior initial particles and reward-relevant regions, yielding higher effective sample sizes and better alignment without retraining\u2014an explicit synthesis of posterior-guided diffusion, SMC samplers, and function-space MCMC.",
+  "analysis_timestamp": "2026-01-07T00:21:33.177825"
+}

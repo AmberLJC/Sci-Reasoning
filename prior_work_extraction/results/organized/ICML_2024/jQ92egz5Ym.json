@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+      "authors": "Edward J. Hu et al.",
+      "year": 2022,
+      "role": "Foundation",
+      "relationship_sentence": "IR-QLoRA is built on the LoRA decomposition and explicitly modifies how the LoRA pathway interacts with quantized base weights via its Information Elastic Connection, which presupposes LoRA\u2019s low-rank finetuning formulation."
+    },
+    {
+      "title": "QLoRA: Efficient Finetuning of Quantized LLMs",
+      "authors": "Tim Dettmers et al.",
+      "year": 2023,
+      "role": "Baseline",
+      "relationship_sentence": "QLoRA established the recipe of 4-bit weight quantization (e.g., NF4) plus LoRA finetuning; IR-QLoRA directly targets QLoRA\u2019s degradation at 2\u20134 bits by replacing its quantizer with Information Calibration Quantization and augmenting the LoRA branch with an Information Elastic Connection."
+    },
+    {
+      "title": "LoftQ: LoRA-Fine-Tuning-aware Quantization for Large Language Models",
+      "authors": "Liu et al.",
+      "year": 2023,
+      "role": "Gap Identification",
+      "relationship_sentence": "LoftQ co-designs quantization with LoRA but still suffers accuracy loss at aggressive bit-widths; IR-QLoRA is motivated by this gap and proposes an information-retention-driven quantizer and an elastic LoRA connection to avoid LoRA benefits being drowned by quantization noise."
+    },
+    {
+      "title": "AWQ: Activation-aware Weight Quantization for LLMs",
+      "authors": "Ji Lin et al.",
+      "year": 2023,
+      "role": "Inspiration",
+      "relationship_sentence": "AWQ demonstrated that leveraging activation statistics to calibrate quantization preserves critical information; IR-QLoRA generalizes this idea into its statistics-based Information Calibration Quantization to retain the original information of weights under low-bit constraints."
+    },
+    {
+      "title": "GPTQ: Accurate Post-Training Quantization for Generative Pretrained Transformers",
+      "authors": "Ethan Frantar et al.",
+      "year": 2022,
+      "role": "Related Problem",
+      "relationship_sentence": "GPTQ\u2019s loss-aware, blockwise weight quantization is a strong PTQ baseline that IR-QLoRA contrasts with; IR-QLoRA tackles a related but distinct issue\u2014ensuring compatibility with LoRA finetuning\u2014by prioritizing information retention over pure reconstruction error minimization."
+    },
+    {
+      "title": "AdaLoRA: Adaptive Budget Allocation for Parameter-Efficient Fine-Tuning",
+      "authors": "Zhang et al.",
+      "year": 2023,
+      "role": "Inspiration",
+      "relationship_sentence": "AdaLoRA introduced the notion of elastic/importance-guided capacity in LoRA; IR-QLoRA\u2019s Information Elastic Connection adopts this spirit of elasticity to enable the LoRA branch to flexibly capture diverse information that quantization would otherwise suppress."
+    }
+  ],
+  "synthesis_narrative": "IR-QLoRA is situated at the intersection of low-bit quantization and parameter-efficient finetuning. Its foundation is LoRA, whose low-rank adaptation pathway IR-QLoRA explicitly restructures to remain effective when the backbone is quantized. QLoRA defined the practical recipe for finetuning quantized LLMs but exposed a critical failure mode at very low bit-widths: the LoRA signal can be overwhelmed by quantization noise, limiting accuracy gains. LoftQ advanced the co-design of quantization and LoRA, yet still exhibited degradation under aggressive bit settings, highlighting a gap that IR-QLoRA addresses by centering the design on information retention. On the quantization side, AWQ showed that carefully using activation statistics can preserve salient information during PTQ; IR-QLoRA draws direct inspiration here, proposing statistics-based Information Calibration Quantization to better retain the original information of model parameters. While GPTQ offers high-accuracy PTQ via loss-aware rounding, it does not directly resolve the compatibility issues with LoRA finetuning; IR-QLoRA\u2019s approach instead ensures the quantized base and the LoRA branch remain information-consistent. Finally, AdaLoRA\u2019s idea of elastic capacity allocation informs IR-QLoRA\u2019s Information Elastic Connection, enabling the LoRA pathway to adaptively capture diverse information that low-bit quantization tends to erase. Together, these works directly shape IR-QLoRA\u2019s dual contributions: information-calibrated quantization and an elastic LoRA connection that unlock reliable gains in the 2\u20134 bit regime.",
+  "analysis_timestamp": "2026-01-06T23:09:26.501932"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Communication-Efficient Learning of Deep Networks from Decentralized Data",
+      "authors": "H. Brendan McMahan, Eider Moore, Daniel Ramage, Seth Hampson, Blaise Aguera y Arcas",
+      "year": 2017,
+      "role": "Introduced the federated learning paradigm (FedAvg) with partial client participation, establishing the setting where client state staleness and drift arise.",
+      "relationship_sentence": "A-FedPD targets the partial-participation-induced staleness identified in FedAvg, but does so on the dual side by aligning inactive clients\u2019 dual variables."
+    },
+    {
+      "title": "FedProx: A Robust Federated Learning Framework with Heterogeneous Devices",
+      "authors": "Tian Li, Anit Kumar Sahu, Ameet Talwalkar, Virginia Smith",
+      "year": 2020,
+      "role": "Introduced proximal regularization to mitigate client drift under data/device heterogeneity and intermittent participation.",
+      "relationship_sentence": "While FedProx stabilizes primal updates via proximal terms, A-FedPD directly corrects the root cause in primal-dual FL by aligning stale dual variables through virtual updates."
+    },
+    {
+      "title": "SCAFFOLD: Stochastic Controlled Averaging for Federated Learning",
+      "authors": "Sai Praneeth Karimireddy et al.",
+      "year": 2020,
+      "role": "Proposed control variates to correct client drift, showing the efficacy of maintaining auxiliary correction states across rounds.",
+      "relationship_sentence": "A-FedPD extends the drift-correction idea to the dual space, maintaining and virtually updating dual states for inactive clients to prevent dual hysteresis."
+    },
+    {
+      "title": "Distributed Optimization and Statistical Learning via the Alternating Direction Method of Multipliers",
+      "authors": "Stephen Boyd, Neal Parikh, Eric Chu, Borja Peleato, Jonathan Eckstein",
+      "year": 2011,
+      "role": "Canonical primal-dual framework for consensus optimization with explicit dual variables enforcing agreement constraints.",
+      "relationship_sentence": "A-FedPD builds on the ADMM/Lagrangian consensus view, identifying how partial participation induces dual drift and proposing virtual dual updates to maintain consensus."
+    },
+    {
+      "title": "Communication-Efficient Distributed Dual Coordinate Ascent (CoCoA)",
+      "authors": "Virginia Smith et al.",
+      "year": 2015,
+      "role": "Established a primal-dual perspective for distributed learning with local dual updates and global primal aggregation to enforce consensus efficiently.",
+      "relationship_sentence": "A-FedPD inherits the principle of coordinating local duals with a global consensus and adapts it to FL by imputing dual updates for non-participating clients."
+    },
+    {
+      "title": "Local SGD Converges Fast and Communicates Little",
+      "authors": "Sebastian U. Stich",
+      "year": 2019,
+      "role": "Analyzed the effect of infrequent communication on drift and convergence in local-update methods.",
+      "relationship_sentence": "A-FedPD addresses an analogous phenomenon\u2014but in dual variables\u2014arising from sparse participation by virtually propagating dual updates between communication rounds."
+    },
+    {
+      "title": "Federated Learning Based on Dynamic Regularization (FedDyn)",
+      "authors": "Deniz Acar et al.",
+      "year": 2021,
+      "role": "Introduced dynamic regularization to counteract client drift without explicit control variates.",
+      "relationship_sentence": "A-FedPD is conceptually aligned with drift correction but uniquely operates in the dual domain, simulating dual updates for inactive clients to avoid dual drift."
+    }
+  ],
+  "synthesis_narrative": "A-FedPD\u2019s core contribution is to diagnose and fix a previously underexplored failure mode in federated primal-dual learning: dual drift caused by partial client participation. Foundationally, FedAvg established the partial participation setting and revealed how infrequent client engagement leads to stale states and drift. Follow-up stabilization methods such as FedProx and SCAFFOLD demonstrated that maintaining auxiliary correction mechanisms (proximal regularization and control variates) can effectively counter client drift, providing a template for how corrective state can be maintained across rounds. In parallel, primal-dual frameworks like ADMM and the CoCoA family grounded the consensus formulation of distributed learning in Lagrangian terms, with explicit dual variables coordinating local models to a shared global solution. These works clarify the central role of dual variables in enforcing consensus and the sensitivity of convergence to the currency of those dual updates. Analyses of local updates under sparse communication, such as Local SGD, sharpened the understanding of how staleness accumulates between synchronizations. Drift-correction techniques like FedDyn then reinforced that drift can be mitigated by algorithmically maintaining alignment even when participation is intermittent. A-FedPD synthesizes these strands by moving the correction mechanism to the dual layer: it constructs virtual dual updates that keep inactive clients\u2019 dual variables aligned with the global consensus, thereby eliminating dual hysteresis without requiring their participation. This principled dual-space alignment closes a key gap left by prior primal-only stabilization approaches.",
+  "analysis_timestamp": "2026-01-06T23:33:35.560708"
+}

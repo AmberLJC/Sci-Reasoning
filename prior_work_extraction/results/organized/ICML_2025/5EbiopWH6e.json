@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Deep Equilibrium Models",
+      "authors": "Shaojie Bai et al.",
+      "year": 2019,
+      "role": "Foundation",
+      "relationship_sentence": "Introduced fixed-point implicit layers and training via implicit differentiation, which the present paper adapts to sequence/state-space settings to realize RNN-like nonlinear recurrences while retaining parallelization."
+    },
+    {
+      "title": "HiPPO: Recurrent Memory with Optimal Polynomial Projection",
+      "authors": "Albert Gu et al.",
+      "year": 2020,
+      "role": "Foundation",
+      "relationship_sentence": "Established the state-space memory framework underlying modern SSMs, providing the formulation that implicit SSMs build upon before adding nonlinear fixed-point recurrences."
+    },
+    {
+      "title": "Efficiently Modeling Long Sequences with Structured State Spaces",
+      "authors": "Albert Gu et al.",
+      "year": 2022,
+      "role": "Baseline",
+      "relationship_sentence": "S4 is the core SSM baseline whose parallelizable linear-time state updates are preserved but whose limited nonlinear state-transition capacity the new implicit SSMs explicitly overcome."
+    },
+    {
+      "title": "Mamba: Linear-Time Sequence Modeling with Selective State Spaces",
+      "authors": "Albert Gu et al.",
+      "year": 2024,
+      "role": "Baseline",
+      "relationship_sentence": "Mamba\u2019s input-dependent (selective) SSM improves expressivity within linear-time SSMs, and serves as the primary strong baseline that the proposed implicit SSMs surpass in state-tracking by implementing truly nonlinear RNN-like transitions."
+    },
+    {
+      "title": "Theoretical Limitations of Self-Attention in Neural Sequence Models",
+      "authors": "Michael Hahn",
+      "year": 2020,
+      "role": "Gap Identification",
+      "relationship_sentence": "Demonstrated formal limits of self-attention on certain formal-language dependencies, motivating the paper\u2019s focus on models with stronger state-tracking and its evaluation on regular-language benchmarks."
+    },
+    {
+      "title": "On the Practical Computational Power of Finite Precision RNNs",
+      "authors": "Gail Weiss et al.",
+      "year": 2018,
+      "role": "Foundation",
+      "relationship_sentence": "Provided evidence that finite-precision RNNs implement powerful nonlinear state transitions (e.g., counters), grounding the claim that matching RNN expressivity is desirable and informing the paper\u2019s RNN-equivalence result."
+    },
+    {
+      "title": "RWKV: Reinventing RNNs for the Transformer Era",
+      "authors": "Bo Peng et al.",
+      "year": 2023,
+      "role": "Related Problem",
+      "relationship_sentence": "Pursues the same trade-off of RNN expressivity with parallelizable training via a reparameterized recurrence, informing the present work\u2019s alternative fixed-point route to parallelism with RNN-like dynamics."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core idea\u2014using an implicit fixed-point update to endow state-space models with the nonlinear transition power of RNNs while retaining parallel training\u2014stands directly on the shoulders of deep equilibrium models. DEQ provided the fixed-point formulation and implicit differentiation toolkit, as well as the empirical observation that approximate convergence can suffice, which this work adapts to temporal state updates. On the sequence-modeling side, HiPPO established the modern state-space memory view that S4 operationalized into a highly parallelizable, long-context baseline; these works define the state and convolutional parameterization that the new implicit layer augments with nonlinear equilibrium dynamics. Mamba further pushed SSM expressivity with input-dependent selection and is the natural strong baseline that still remains limited to single-step (effectively linear-in-state) updates\u2014precisely the gap the current paper closes by iterating to a fixed point that captures RNN-style nonlinear transitions. The motivation to recover RNN expressivity is grounded in theory: Weiss et al. showed finite-precision RNNs realize powerful counters and state-tracking beyond finite-state constraints, while Hahn formalized key limits of self-attention, motivating rigorous evaluation on regular languages. Finally, RWKV represents a contemporaneous attempt to reconcile RNN expressivity with parallelizable training; the present work offers a principled alternative via implicit equilibrium computation and a tokenwise convergence curriculum that preserves most parallelism.",
+  "analysis_timestamp": "2026-01-06T23:07:19.582938"
+}

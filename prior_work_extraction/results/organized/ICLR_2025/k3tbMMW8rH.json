@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Flow Matching for Generative Modeling",
+      "authors": "Yaron Lipman et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "Flow Matching introduced the modern matching paradigm for training transport maps via path interpolants using paired data, which FSBM directly generalizes by injecting a small set of pre-aligned pairs as feedback while keeping the overall bridge-based matching framework."
+    },
+    {
+      "title": "Conditional Flow Matching: Training Continuous Normalizing Flows without Score Estimation",
+      "authors": "Tongzhou Wang et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "Conditional Flow Matching showed how to remove pair supervision by matching conditional velocities but at a significant computational cost, and FSBM explicitly addresses this limitation by reintroducing minimal pair supervision as feedback to retain scalability."
+    },
+    {
+      "title": "Schr\u00f6dinger Bridge Sampling",
+      "authors": "Guillaume De Bortoli et al.",
+      "year": 2021,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "Schr\u00f6dinger Bridge Sampling established the practical SB/EOT route for bridging empirical marginals without pairings, providing the fully unsupervised baseline whose high cost motivates FSBM\u2019s semi-supervised, feedback-guided alternative."
+    },
+    {
+      "title": "Sinkhorn Distances: Lightspeed Computation of Optimal Transport",
+      "authors": "Marco Cuturi",
+      "year": 2013,
+      "arxiv_id": "1306.0895",
+      "role": "Foundation",
+      "relationship_sentence": "FSBM formulates a static entropic OT objective with an additional feedback term, directly relying on the Sinkhorn-regularized EOT framework introduced by Cuturi for tractable training."
+    },
+    {
+      "title": "On the relation between optimal transport and Schr\u00f6dinger bridges: a stochastic control viewpoint",
+      "authors": "Yongxin Chen, Tryphon T. Georgiou, Michele Pavon",
+      "year": 2016,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "By casting Schr\u00f6dinger bridges as stochastic optimal control with state-feedback drifts, this work supplies the control-theoretic foundation that FSBM leverages to interpret pre-aligned pairs as state feedback guiding the learned transport."
+    },
+    {
+      "title": "Optimal Transport for Domain Adaptation",
+      "authors": "Nicolas Courty et al.",
+      "year": 2014,
+      "arxiv_id": null,
+      "role": "Extension",
+      "relationship_sentence": "This paper demonstrated how side information (e.g., labels) can regularize the OT coupling, an idea FSBM extends by using a small set of known pairings to regularize the EOT objective and steer uncoupled samples during bridge matching."
+    }
+  ],
+  "synthesis_narrative": "Flow Matching introduced the idea of training transport maps by matching vector fields along chosen interpolants, showing that paired correspondences can yield scalable training for generative flows. Conditional Flow Matching removed the need for explicit pairings by matching conditional velocities, but the cost and complexity of sampling and estimating these conditionals made the approach computationally heavy in large-scale settings. Schr\u00f6dinger Bridge Sampling established a practical, fully unsupervised bridge-based route between distributions using the Schr\u00f6dinger problem and entropic OT, but it inherits high computational burden due to repeated coupling or score estimation without supervision. The Sinkhorn-regularized entropic OT framework made static optimal transport tractable and differentiable, enabling learnable couplings via efficient matrix scaling. From a control-theoretic lens, Schr\u00f6dinger bridges are stochastic optimal control problems with state-feedback drifts, suggesting that external information can be injected as feedback to steer transport. Finally, optimal transport for domain adaptation showed that side information (labels or partial correspondences) can be incorporated as regularization to bias couplings toward desired alignments.\nBringing these strands together created a natural opportunity: retain the scalability of paired matching while avoiding the impracticality of fully supervised pairings, and cut the cost of fully unsupervised SB. FSBM synthesizes this by casting bridge learning as a static EOT with a targeted feedback term derived from a small set of pre-aligned pairs and interpreting this as state feedback in the SB control view. This semi-supervised coupling guides non-coupled samples, preserving efficiency while requiring only minimal supervision.",
+  "target_paper": {
+    "title": "Feedback Schr\u00f6dinger Bridge Matching",
+    "authors": "Panagiotis Theodoropoulos, Nikolaos Komianos, Vincent Pacelli, Guan-Horng Liu, Evangelos Theodorou",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "oral",
+    "keywords": "Diffusion models, Schr\u00f6dinger bridge, Distribution matching, Semi-Supervised Learning",
+    "abstract": "Recent advancements in diffusion bridges for distribution transport problems have heavily relied on matching frameworks, yet existing methods often face a trade-off between scalability and access to optimal pairings during training. \nFully unsupervised methods make minimal assumptions but incur high computational costs, limiting their practicality. On the other hand, imposing full supervision of the matching process with optimal pairings improves scalability, however, it can be infeasible in most applications.\nTo strike a balance between scalability and minimal supervision, we introduce Feedback Schr\u00f6dinger Bridge Matching (FSBM), a novel semi-supervised matching framework that incorporates a small portion ($<8$% of the entire dataset) of pre-aligned pairs as state feedback to guide the transport map of non-coupled samples, thereby significantly improving efficiency. This is achieved by formulating a static Entropic Optimal Transport (EOT) problem with an additional term capturing the ",
+    "openreview_id": "k3tbMMW8rH",
+    "forum_id": "k3tbMMW8rH"
+  },
+  "analysis_timestamp": "2026-01-06T14:04:34.236147"
+}

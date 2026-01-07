@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+      "authors": "Alexey Dosovitskiy et al.",
+      "year": 2020,
+      "arxiv_id": "2010.11929",
+      "role": "Foundation",
+      "relationship_sentence": "The register tokens generalize ViT\u2019s architectural mechanism of appending a learned special token (CLS) to the patch sequence by introducing multiple learned global tokens that serve as a dedicated scratchpad for internal computations."
+    },
+    {
+      "title": "Emerging Properties in Self-Supervised Vision Transformers",
+      "authors": "Mathilde Caron et al.",
+      "year": 2021,
+      "arxiv_id": "2104.14294",
+      "role": "Gap Identification",
+      "relationship_sentence": "DINO revealed object-centric attention maps in self-supervised ViTs but also exhibits spurious, high-norm background tokens at inference, a limitation directly diagnosed and eliminated by introducing register tokens to absorb such internal computations."
+    },
+    {
+      "title": "DINOv2: Learning Robust Visual Features without Supervision",
+      "authors": "Maxime Oquab et al.",
+      "year": 2023,
+      "arxiv_id": "2304.07193",
+      "role": "Baseline",
+      "relationship_sentence": "DINOv2 provides the primary self-supervised ViT baseline and training recipe into which register tokens are inserted, yielding smoother features/attention and state-of-the-art dense prediction performance."
+    },
+    {
+      "title": "Visual Prompt Tuning",
+      "authors": "Menglin Jia et al.",
+      "year": 2022,
+      "arxiv_id": "2203.12119",
+      "role": "Inspiration",
+      "relationship_sentence": "VPT demonstrated that prepending learnable tokens to a ViT can steer internal computation, directly inspiring the mechanism of adding learned input tokens that registers repurpose as a computation workspace during end-to-end training."
+    },
+    {
+      "title": "Perceiver: General Perception with Iterative Attention",
+      "authors": "Andrew Jaegle et al.",
+      "year": 2021,
+      "arxiv_id": "2103.03206",
+      "role": "Inspiration",
+      "relationship_sentence": "Perceiver\u2019s use of a small learnable latent array that attends to inputs motivated the idea that a few global tokens can act as centralized computation hubs, which registers adopt inside standard ViT encoders to prevent background-token hijacking."
+    },
+    {
+      "title": "Going deeper with Image Transformers (CaiT)",
+      "authors": "Hugo Touvron et al.",
+      "year": 2021,
+      "arxiv_id": "2103.17239",
+      "role": "Related Problem",
+      "relationship_sentence": "CaiT\u2019s class-attention layers explicitly separate global aggregation via special tokens from patch\u2013patch interactions, informing the design intuition that isolating computation roles to dedicated tokens can stabilize and structure ViT representations, as registers do."
+    }
+  ],
+  "synthesis_narrative": "Transformers for vision were framed by ViT as sequences of patch tokens augmented with a learned CLS token, establishing that non-image tokens can be appended to the input to mediate global computation. DINO showed that self-supervised ViTs develop object-centric attention and salient-region features, popularizing the use of attention maps for downstream discovery, while revealing the presence of anomalously high-norm background tokens at inference. DINOv2 consolidated a robust training recipe that scales self-supervised ViTs and serves as a strong baseline for dense prediction, but inherits the same representational quirks visible in feature and attention maps. Visual Prompt Tuning demonstrated a simple, effective mechanism for steering transformer computation by prepending learned tokens, proving that extra inputs can act as context carriers without altering backbone structure. Perceiver advanced this idea by introducing a small latent array that attends to inputs, using learnable tokens as centralized computation hubs. CaiT further exemplified the benefits of decoupling roles by dedicating special tokens and attention patterns to global aggregation, separate from patch interaction.\nTogether, these works expose both the power and the brittleness of token-mediated computation in ViTs: emergent global behavior and object-centricity coexist with background-token hijacking. The natural next step is to provide explicit, learned global tokens whose role is solely computational rather than representational. Building on ViT\u2019s special-token interface, the prompting/latent-token mechanism from VPT and Perceiver, and the role-separation intuition of CaiT, the paper introduces register tokens that absorb internal computation. Plugged into the DINO/DINOv2 pipeline, registers eliminate background artifacts, smooth attention/feature maps, and unlock stronger dense predictions and object discovery at scale.",
+  "target_paper": {
+    "title": "Vision Transformers Need Registers",
+    "authors": "Timoth\u00e9e Darcet, Maxime Oquab, Julien Mairal, Piotr Bojanowski",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "oral",
+    "keywords": "representation, vision, transformer, register, SSL, CLIP, attention, attention map, interpretability, DINO, DINOv2",
+    "abstract": "Transformers have recently emerged as a powerful tool for learning visual representations. In this paper, we identify and characterize artifacts in feature maps of both supervised and self-supervised ViT networks. The artifacts correspond to high-norm tokens appearing during inference primarily in low-informative background areas of images, that are repurposed for internal computations. We propose a simple yet effective solution based on providing additional tokens to the input sequence of the Vision Transformer to fill that role. We show that this solution fixes that problem entirely for both supervised and self-supervised models, sets a new state of the art for self-supervised visual models on dense visual prediction tasks, enables object discovery methods with larger models, and most importantly leads to smoother feature maps and attention maps for downstream visual processing.",
+    "openreview_id": "2dnO3LLiJ1",
+    "forum_id": "2dnO3LLiJ1"
+  },
+  "analysis_timestamp": "2026-01-06T15:18:31.502911"
+}

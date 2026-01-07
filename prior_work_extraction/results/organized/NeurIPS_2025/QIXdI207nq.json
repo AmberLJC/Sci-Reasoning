@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Denoising Diffusion Implicit Models",
+      "authors": "Jiaming Song, Chenlin Meng, Stefano Ermon",
+      "year": 2020,
+      "role": "Training-free acceleration of diffusion sampling via non-Markovian (deterministic) samplers",
+      "relationship_sentence": "LeMiCa builds on the training-free acceleration paradigm inaugurated by DDIM, but shifts the focus from step-count reduction to feature/cache reuse across video frames, explicitly controlling accumulated error rather than only per-trajectory sampling error."
+    },
+    {
+      "title": "Elucidating the Design Space of Diffusion-Based Generative Models",
+      "authors": "Tero Karras, Miika Aittala, Samuli Laine, Erik H\u00e4rk\u00f6nen, Janne Hellsten, Jaakko Lehtinen, Timo Aila",
+      "year": 2022,
+      "role": "Robust ODE/SDE samplers and analysis of error\u2013speed tradeoffs for diffusion",
+      "relationship_sentence": "EDM\u2019s insights into sampler-induced errors motivate LeMiCa\u2019s complementary strategy: rather than only tuning samplers, it formulates cache scheduling to bound worst-case path error across frames, improving global consistency while still accelerating inference."
+    },
+    {
+      "title": "High-Resolution Image Synthesis with Latent Diffusion Models",
+      "authors": "Robin Rombach, Andreas Blattmann, Dominik Lorenz, Patrick Esser, Bj\u00f6rn Ommer",
+      "year": 2022,
+      "role": "Latent-space U-Net/attention backbone widely reused in text-to-image/video diffusion",
+      "relationship_sentence": "LeMiCa\u2019s caching operates on the latent diffusion backbone (e.g., attention and intermediate features) popularized by LDMs; the architectural regularities LDM introduced enable practical feature reuse and scheduling across frames."
+    },
+    {
+      "title": "Deep Feature Flow for Video Recognition",
+      "authors": "Xizhou Zhu, Yuwen Xiong, Jifeng Dai, Lu Yuan, Yichen Wei",
+      "year": 2017,
+      "role": "Feature caching on keyframes with propagation to save compute in video, exposing error accumulation issues",
+      "relationship_sentence": "LeMiCa generalizes the keyframe-and-propagation idea from DFF to diffusion-based video generation, but replaces heuristic local decisions with a global, graph-based cache scheduling that explicitly controls worst-case accumulated error."
+    },
+    {
+      "title": "Prompt-to-Prompt Image Editing with Cross Attention Control",
+      "authors": "Amir Hertz, Ron Mokady, Jay Alaluf, Yael Pritch, Daniel Cohen-Or, Tali Dekel",
+      "year": 2022,
+      "role": "Reusing and controlling cross-attention maps to preserve content/style while editing",
+      "relationship_sentence": "By showing that cross-attention features encode content/style faithfully, Prompt-to-Prompt underpins LeMiCa\u2019s choice to cache and schedule attention/feature reuse across video frames to maintain global content and style consistency."
+    },
+    {
+      "title": "TokenFlow: Repurposing Diffusion Features for Video Editing",
+      "authors": "Guy Gafni, Ameen Ali, Ariel Gordon, Michael Rubinstein (and collaborators)",
+      "year": 2023,
+      "role": "Temporal consistency via propagating/caching diffusion features across frames for video editing",
+      "relationship_sentence": "TokenFlow\u2019s success and limitations with locally propagating diffusion features motivate LeMiCa\u2019s core contribution: turning cache selection into a global path optimization with error-weighted edges to limit worst-case temporal drift."
+    },
+    {
+      "title": "On a Multicriteria Shortest Path Problem",
+      "authors": "E. Q. V. Martins",
+      "year": 1984,
+      "role": "Foundational algorithms for multiobjective shortest paths and lexicographic optimization",
+      "relationship_sentence": "LeMiCa\u2019s lexicographic minimax path formulation draws directly from multicriteria shortest-path theory, using lexicographic minimax objectives to bound the worst edge (error) along cache paths while improving secondary criteria."
+    }
+  ],
+  "synthesis_narrative": "LeMiCa\u2019s core idea\u2014formulating cache scheduling for diffusion-based video generation as a graph problem with error-weighted edges and solving it via a lexicographic minimax path objective\u2014sits at the intersection of three threads of prior work. First, training-free acceleration of diffusion models (DDIM; EDM) established that significant speedups are possible without retraining, but primarily targeted single-image/single-trajectory samplers. LeMiCa complements these by accelerating the per-frame forward pass through cache reuse, targeting temporal sequences where cumulative errors\u2014not just local sampling error\u2014dominate quality.\nSecond, the architectural substrate enabling reusable features comes from latent diffusion (LDM), which standardized attention- and U-Net-based backbones. Building on this, video-specific works showed the promise and pitfalls of reusing features over time: Deep Feature Flow introduced keyframe caching and highlighted error accumulation when propagating features to save compute; in diffusion, Prompt-to-Prompt and TokenFlow demonstrated that cross-attention and intermediate tokens encode content/style and can be propagated for temporal consistency, yet typically relied on local heuristics that left global drift unchecked.\nThird, LeMiCa\u2019s scheduling engine is grounded in multicriteria shortest path theory (Martins), adopting a lexicographic minimax objective to explicitly cap worst-case path error while optimizing secondary costs. This reframing converts heuristic cache decisions into a principled global optimization, delivering both speed and improved global consistency across frames\u2014precisely where earlier caching and propagation approaches struggled.",
+  "analysis_timestamp": "2026-01-07T00:21:32.337497"
+}

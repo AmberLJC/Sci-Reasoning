@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Neural Tangent Kernel: Convergence and Generalization in Neural Networks",
+      "authors": "Arthur Jacot, Franck Gabriel, Cl\u00e9ment Hongler",
+      "year": 2018,
+      "role": "Theoretical foundation linking training dynamics to spectrum of a Gram/kernel matrix",
+      "relationship_sentence": "MeCo\u2019s core insight\u2014that the minimum eigenvalue of a feature correlation/Gram matrix controls convergence\u2014directly mirrors NTK theory where the training rate is governed by the smallest eigenvalue of the NTK Gram matrix."
+    },
+    {
+      "title": "A Convergence Theory for Deep Learning via Over-Parameterization",
+      "authors": "Zeyuan Allen-Zhu, Yuanzhi Li, Yingyu Liang",
+      "year": 2019,
+      "role": "Over-parameterization convergence theory emphasizing spectral conditions",
+      "relationship_sentence": "This work formalizes how gradient descent convergence in over-parameterized nets depends on spectral properties (e.g., minimum eigenvalues) of data-induced matrices, underpinning MeCo\u2019s use of the minimum eigenvalue of a correlation matrix as a trainability proxy."
+    },
+    {
+      "title": "Deep Information Propagation",
+      "authors": "Samuel S. Schoenholz, Justin Gilmer, Surya Ganguli, Jascha Sohl-Dickstein",
+      "year": 2017,
+      "role": "Signal propagation analysis connecting layerwise activation correlations to trainability/generalization",
+      "relationship_sentence": "By showing how correlations of activations evolve and affect signal propagation, this paper motivates MeCo\u2019s focus on Pearson correlations of feature maps as a forward-pass indicator of convergence and capacity."
+    },
+    {
+      "title": "Neural Architecture Search Without Training (NASWOT)",
+      "authors": "Andrew Mellor, Jack Turner, Amos Storkey, Elliot J. Crowley",
+      "year": 2021,
+      "role": "Zero-shot NAS via forward-pass correlation-based statistics",
+      "relationship_sentence": "NASWOT demonstrated that forward-pass correlation structure of activations can rank architectures without training; MeCo refines this idea by using the minimum eigenvalue of the Pearson correlation matrix (and needing only a single input) to better capture collapse and trainability."
+    },
+    {
+      "title": "Zero-Cost Proxies for Lightweight NAS",
+      "authors": "Ahmed Abdelfattah, Ganesh Chennupati, Abhinav Mehrotra, Nicholas D. Lane, Hisham Cholakkal, Rao Muhammad Anwer",
+      "year": 2021,
+      "role": "Comprehensive study establishing and benchmarking zero-cost NAS proxies",
+      "relationship_sentence": "This benchmark crystallized the strengths/limitations of proxies (e.g., SNIP, GraSP, SynFlow, Jacobian-covariance), many requiring backprop or labels; MeCo is positioned as a forward-only, label- and data-light alternative that improves correlation with true performance."
+    },
+    {
+      "title": "Weight Agnostic Neural Networks",
+      "authors": "Adam Gaier, David Ha",
+      "year": 2019,
+      "role": "Evidence that architecture alone, with random weights, can predict performance characteristics",
+      "relationship_sentence": "WANN\u2019s central premise\u2014that untrained networks can be informative\u2014supports MeCo\u2019s zero-shot setting and justifies designing a purely forward-pass metric based on untrained feature statistics."
+    },
+    {
+      "title": "SNIP: Single-shot Network Pruning based on Connection Sensitivity",
+      "authors": "Namhoon Lee, Thalaiyasingam Ajanthan, Philip H. S. Torr",
+      "year": 2019,
+      "role": "Early \u201ctraining-free\u201d saliency proxy using one backward pass",
+      "relationship_sentence": "SNIP popularized evaluating networks at initialization via sensitivity, but needs backprop and labeled loss; MeCo directly responds by removing backprop and labels, replacing gradient saliency with a spectral correlation criterion computable in one forward pass."
+    }
+  ],
+  "synthesis_narrative": "MeCo emerges at the intersection of zero-shot NAS practice and spectral theory of over-parameterized training. On the theory side, NTK analysis (Jacot et al., 2018) and over-parameterization convergence results (Allen-Zhu et al., 2019) show that optimization speed and stability hinge on the spectrum\u2014especially the minimum eigenvalue\u2014of data- or feature-induced Gram matrices. Deep Information Propagation (Schoenholz et al., 2017) further links activation correlations to effective signal flow, suggesting that correlation structure is diagnostic of trainability and generalization.\n\nOn the NAS side, NASWOT (Mellor et al., 2021) proved that forward-pass activation correlations can reliably rank architectures without training, while the Zero-Cost Proxies benchmark (Abdelfattah et al., 2021) established the landscape of training-free metrics\u2014many relying on backprop, labels, or sizable data batches (e.g., SNIP). These works motivate MeCo\u2019s design goals: eliminate backprop and labels, minimize data needs, and retain high correlation with true performance.\n\nMeCo synthesizes these threads by operationalizing a theoretically grounded spectral statistic\u2014the minimum eigenvalue of the Pearson correlation matrix of feature maps\u2014as a one-sample, single-forward-pass proxy for both convergence rate and generalization capacity. It departs from prior forward-only methods by collapsing the requirement of a batch to just one input and by focusing on a sharper spectral indicator (minimum eigenvalue) rather than determinants or heuristic scores. In doing so, MeCo directly addresses the computational and data dependencies highlighted by earlier proxies, while aligning closely with spectral theory that predicts how and why architectures train effectively.",
+  "analysis_timestamp": "2026-01-06T23:42:49.097110"
+}

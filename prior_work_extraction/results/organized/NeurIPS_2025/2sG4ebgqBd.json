@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Fast Inference from Transformers via Speculative Decoding",
+      "authors": "Y. Leviathan et al.",
+      "year": 2023,
+      "role": "Foundational decoding acceleration",
+      "relationship_sentence": "Introduced the draft-and-verify paradigm that SpecMER builds upon, providing the core mechanism for accelerating autoregressive generation that SpecMER augments with biological guidance."
+    },
+    {
+      "title": "Large language models generate functional protein sequences (ProGen)",
+      "authors": "A. Madani et al.",
+      "year": 2023,
+      "role": "Protein autoregressive generation",
+      "relationship_sentence": "Established autoregressive transformers as viable generators of functional proteins, defining the application setting in which SpecMER targets latency reduction without sacrificing biological plausibility."
+    },
+    {
+      "title": "Biological structure and function emerge from scaling unsupervised learning to 250 million protein sequences",
+      "authors": "A. Rives et al.",
+      "year": 2021,
+      "role": "Protein language modeling at scale",
+      "relationship_sentence": "Showed that large protein LMs capture structural/functional signals, motivating SpecMER\u2019s need to preserve the target model\u2019s likelihood distribution when accelerating decoding."
+    },
+    {
+      "title": "MSA Transformer",
+      "authors": "R. Rao et al.",
+      "year": 2021,
+      "role": "Leveraging multiple sequence alignments",
+      "relationship_sentence": "Demonstrated how MSAs encode evolutionary constraints; SpecMER operationalizes this by extracting k-mer/motif signals from MSAs to guide candidate proposals and verification."
+    },
+    {
+      "title": "Gapped BLAST and PSI-BLAST: a new generation of protein database search programs",
+      "authors": "S. F. Altschul et al.",
+      "year": 1997,
+      "role": "MSA-derived position-specific priors (PSSMs)",
+      "relationship_sentence": "Popularized building PSSMs from iterative alignments to score sequence plausibility, directly inspiring SpecMER\u2019s use of MSA-derived motif/k-mer scores to prioritize biologically consistent drafts."
+    },
+    {
+      "title": "Accelerated Profile HMM Searches (HMMER3)",
+      "authors": "S. R. Eddy",
+      "year": 2011,
+      "role": "Profile-HMM scoring from MSAs",
+      "relationship_sentence": "Provided a rigorous, efficient framework for scoring sequences against MSA-derived models; SpecMER\u2019s k-mer guidance echoes this idea by injecting fast, evolution-informed scoring into decoding."
+    },
+    {
+      "title": "Lexically Constrained Decoding for Sequence Generation",
+      "authors": "C. Hokamp and Q. Liu",
+      "year": 2017,
+      "role": "Constrained/guided decoding",
+      "relationship_sentence": "Showed that adding constraints during decoding can steer generations; SpecMER adapts this principle to proteins by using motif/k-mer constraints to steer speculative proposals while maintaining target-model fidelity."
+    }
+  ],
+  "synthesis_narrative": "SpecMER\u2019s central idea\u2014accelerating protein autoregressive generation via speculative decoding while preserving biological plausibility\u2014sits at the intersection of fast decoding and evolution-informed scoring. The draft-and-verify engine is rooted in speculative decoding (Leviathan et al., 2023), which established how a lightweight proposer can be paired with a target model to achieve speedups without changing the target distribution. In protein design, autoregressive transformers like ProGen (Madani et al., 2023) and large-scale protein LMs (Rives et al., 2021) demonstrated that such models encode rich structural/functional priors, creating a premium on acceleration methods that do not distort their likelihoods.\n\nSpecMER\u2019s biological guidance traces directly to decades of alignment-derived priors. PSI-BLAST (Altschul et al., 1997) and HMMER3 (Eddy, 2011) formalized efficient scoring of sequences against MSA-derived position-specific models, operationalizing evolutionary constraints for fast plausibility assessment. MSA Transformer (Rao et al., 2021) further underscored that MSAs capture co-evolutionary structure pivotal for maintaining function. SpecMER internalizes these insights by extracting k-mer/motif signals from MSAs and using them to score speculative candidates in parallel, selecting drafts consistent with evolutionary patterns.\n\nFinally, the notion that decoding can be steered without retraining is grounded in constrained decoding work (Hokamp & Liu, 2017), which showed constraints can guide token selection. SpecMER adapts this to the protein domain: motif-informed k-mer constraints bias proposals toward biologically viable regions while the target LM verifies them, marrying speed with fidelity to the model\u2019s distribution and to evolutionary priors.",
+  "analysis_timestamp": "2026-01-07T00:21:32.259503"
+}

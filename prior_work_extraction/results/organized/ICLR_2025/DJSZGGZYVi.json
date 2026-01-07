@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "DiT: Scalable Diffusion Models with Transformers",
+      "authors": "William Peebles and Saining Xie",
+      "year": 2023,
+      "arxiv_id": "2212.09748",
+      "role": "Baseline",
+      "relationship_sentence": "REPA is applied to the DiT denoising network, improving training efficiency and image quality over the original DiT baseline by aligning intermediate hidden states to external visual features."
+    },
+    {
+      "title": "Learning Transferable Visual Models From Natural Language Supervision",
+      "authors": "Alec Radford et al.",
+      "year": 2021,
+      "arxiv_id": "2103.00020",
+      "role": "Foundation",
+      "relationship_sentence": "CLIP provides the high-level image embeddings that REPA treats as the clean target representations for aligning noisy denoiser features during training."
+    },
+    {
+      "title": "DINOv2: Learning Robust Visual Features without Supervision",
+      "authors": "Matthieu Oquab et al.",
+      "year": 2023,
+      "arxiv_id": "2304.07193",
+      "role": "Gap Identification",
+      "relationship_sentence": "DINOv2 set the bar for state-of-the-art visual representations that diffusion features fail to match, directly motivating REPA to inject DINOv2 embeddings as supervision for denoiser hidden states."
+    },
+    {
+      "title": "Hierarchical Text-Conditional Image Generation with CLIP Latents",
+      "authors": "Aditya Ramesh et al.",
+      "year": 2022,
+      "arxiv_id": "2204.06125",
+      "role": "Inspiration",
+      "relationship_sentence": "By demonstrating that operating diffusion in CLIP\u2019s latent space simplifies training and improves fidelity, this work inspires REPA\u2019s use of strong external representations to ease diffusion training via feature alignment rather than latent-space diffusion."
+    },
+    {
+      "title": "Perceptual Losses for Real-Time Style Transfer and Super-Resolution",
+      "authors": "Justin Johnson, Alexandre Alahi, Li Fei-Fei",
+      "year": 2016,
+      "arxiv_id": "1603.08155",
+      "role": "Extension",
+      "relationship_sentence": "REPA generalizes perceptual feature alignment\u2014originally matching generated images to VGG features\u2014by aligning the denoiser\u2019s noisy hidden projections to pretrained encoder representations across diffusion timesteps."
+    },
+    {
+      "title": "Diffusion Models Beat GANs on Image Synthesis",
+      "authors": "Prafulla Dhariwal and Alexander Nichol",
+      "year": 2021,
+      "arxiv_id": "2105.05233",
+      "role": "Related Problem",
+      "relationship_sentence": "The classifier-guidance mechanism shows how external discriminative models can steer diffusion, a principle REPA internalizes by using external encoders to supervise denoiser representations during training."
+    }
+  ],
+  "synthesis_narrative": "Transformer-based denoisers in diffusion models established a strong, scalable architecture for image generation, with DiT showing that replacing U-Nets with vision transformers yields powerful generative performance but without explicit mechanisms for high-level representation learning in the denoiser. CLIP introduced image embeddings with rich semantic alignment learned from language supervision and became a widely used source of robust visual features. DINOv2 advanced purely visual self-supervised learning, delivering representations that are notably stronger than those implicit in standard denoising networks. DALL\u00b7E 2\u2019s unCLIP demonstrated that moving generation into a pretrained representation space can simplify training and improve sample quality, highlighting the value of external, semantically organized feature spaces for generative modeling. Earlier, perceptual loss work showed that aligning to pretrained feature spaces (e.g., VGG) provides stable and semantically meaningful training signals beyond pixel losses. Finally, classifier guidance evidenced that external discriminative models can effectively steer diffusion behavior, albeit only at inference. Together these works reveal two converging insights: pretrained representations encode semantics that diffusion training struggles to learn from scratch, and external discriminative signals can meaningfully shape diffusion models. The natural next step is to bring strong external features directly into the training loop\u2014not by changing the generative target space or relying solely on inference-time guidance, but by aligning denoiser hidden states at noisy timesteps to clean embeddings from CLIP/DINOv2\u2014thereby improving representation learning, training efficiency, and downstream generation quality.",
+  "target_paper": {
+    "title": "Representation Alignment for Generation: Training Diffusion Transformers Is Easier Than You Think",
+    "authors": "Sihyun Yu, Sangkyung Kwak, Huiwon Jang, Jongheon Jeong, Jonathan Huang, Jinwoo Shin, Saining Xie",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "oral",
+    "keywords": "Diffusion models, Representation learning",
+    "abstract": "Recent studies have shown that the denoising process in (generative) diffusion models can induce meaningful (discriminative) representations inside the model, though the quality of these representations still lags behind those learned through recent self-supervised learning methods. We argue that one main bottleneck in training large-scale diffusion models for generation lies in effectively learning these representations. Moreover, training can be made easier by incorporating high-quality external visual representations, rather than relying solely on the diffusion models to learn them independently. We study this by introducing a straightforward regularization called REPresentation Alignment (REPA), which aligns the projections of noisy input hidden states in denoising networks with clean image representations obtained from external, pretrained visual encoders. The results are striking: our simple strategy yields significant improvements in both training efficiency and generation quali",
+    "openreview_id": "DJSZGGZYVi",
+    "forum_id": "DJSZGGZYVi"
+  },
+  "analysis_timestamp": "2026-01-06T15:10:14.050786"
+}

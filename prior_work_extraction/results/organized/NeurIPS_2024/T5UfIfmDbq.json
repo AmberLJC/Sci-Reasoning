@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Bandit Based Monte-Carlo Planning (UCT)",
+      "authors": "Levente Kocsis; Csaba Szepesv\u00e1ri",
+      "year": 2006,
+      "role": "MCTS backbone",
+      "relationship_sentence": "Provided the core UCT selection/backpropagation machinery that MCTS-transfer builds on to adaptively explore and refine a tree of candidate subspaces during optimization."
+    },
+    {
+      "title": "X-Armed Bandits (introducing HOO)",
+      "authors": "S\u00e9bastien Bubeck; R\u00e9mi Munos; Gilles Stoltz; Csaba Szepesv\u00e1ri",
+      "year": 2011,
+      "role": "Hierarchical partitioning/optimism",
+      "relationship_sentence": "Inspired the iterative divide-select strategy by showing how hierarchical optimistic partitioning (HOO) efficiently searches continuous spaces via trees, a principle mirrored in MCTS-transfer\u2019s subspace division and selection."
+    },
+    {
+      "title": "Multi-task Bayesian Optimization",
+      "authors": "Kevin Swersky; Jasper Snoek; Ryan P. Adams",
+      "year": 2013,
+      "role": "Transfer BO antecedent",
+      "relationship_sentence": "Established leveraging related source tasks within BO, motivating MCTS-transfer\u2019s use of similarity across tasks to guide which subspaces to prioritize and transfer."
+    },
+    {
+      "title": "Using Meta-Learning to Initialize Bayesian Optimization of Hyperparameters",
+      "authors": "Matthias Feurer; Jost Tobias Springenberg; Frank Hutter",
+      "year": 2015,
+      "role": "Warm-start via past tasks",
+      "relationship_sentence": "Showed that warm-starting BO with configurations from prior tasks accelerates convergence; MCTS-transfer generalizes this by learning and warm-starting with a transferable search subspace rather than only initial points."
+    },
+    {
+      "title": "Two-Stage Transfer Surrogate Model for Automatic Hyperparameter Optimization",
+      "authors": "Martin Wistuba; Nicolas Schilling; Lars Schmidt-Thieme",
+      "year": 2018,
+      "role": "Search space transfer baseline",
+      "relationship_sentence": "Proposed reusing source-task surrogates to bias/prune the target search region; MCTS-transfer directly extends this idea with an adaptive, online MCTS mechanism to iteratively refine the transferred subspace."
+    },
+    {
+      "title": "High-Dimensional Bayesian Optimization with Sparse Axis-Aligned Subspaces (SAASBO)",
+      "authors": "David Eriksson; Michael Pearce; Jacob R. Gardner; Ryan Turner; Matthias Poloczek",
+      "year": 2021,
+      "role": "Adaptive subspace focus",
+      "relationship_sentence": "Demonstrated the efficiency gains of concentrating BO on a learned low-dimensional subspace, informing MCTS-transfer\u2019s emphasis on identifying and optimizing within a compact, high-payoff subspace."
+    },
+    {
+      "title": "Bayesian Optimization in High Dimensions via Random Embeddings (REMBO)",
+      "authors": "Ziyu Wang; Frank Hutter; Masrour Zoghi; David Matheson; Nando de Freitas",
+      "year": 2013,
+      "role": "Subspace restriction for BO",
+      "relationship_sentence": "Showed that restricting BO to lower-dimensional embeddings can overcome high dimensionality; MCTS-transfer replaces random embeddings with task-informed, adaptively refined subspaces via MCTS."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core contribution\u2014adapting Monte Carlo Tree Search to transfer and refine a promising search subspace for black-box optimization\u2014sits at the intersection of MCTS-based hierarchical exploration and transfer/multi-task Bayesian optimization. On the exploration side, UCT (Kocsis & Szepesv\u00e1ri, 2006) provides the fundamental selection and backup rules enabling principled exploration\u2013exploitation in a tree, while HOO (Bubeck et al., 2011) shows how optimistic, hierarchical partitioning can efficiently navigate continuous domains. These ideas motivate MCTS-transfer\u2019s iterative divide\u2013select\u2013optimize cycle, where the tree encodes progressively finer subspaces and decisions are driven by optimistic estimates.\nOn the transfer side, multi-task BO (Swersky et al., 2013) established the value of leveraging related tasks within BO, and meta-learning for warm-start (Feurer et al., 2015) demonstrated practical acceleration by seeding with prior knowledge. The Two-Stage Transfer Surrogate (Wistuba et al., 2018) pushed further by transferring knowledge to bias or prune the target search region\u2014directly antecedent to MCTS-transfer\u2019s search space transfer, which adds an adaptive mechanism that refines the region online. Complementing this, SAASBO (Eriksson et al., 2021) and REMBO (Wang et al., 2013) highlight the power of concentrating search in lower-dimensional subspaces; MCTS-transfer operationalizes this principle by learning a task-informed subspace and adaptively partitioning it via MCTS. Together, these works supply the methodological backbone (MCTS/optimism), the transfer rationale (multi-task and warm-start BO), and the subspace-efficiency principle that MCTS-transfer integrates into a flexible, adaptive space-transfer framework.",
+  "analysis_timestamp": "2026-01-06T23:42:49.037192"
+}

@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "AutoMix: Automatic Mixed Sample Data Augmentation",
+      "authors": "Fang et al.",
+      "year": 2022,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "Adversarial AutoMixup directly builds on AutoMix\u2019s end-to-end framework of a mixed-sample generator and a classifier, but replaces AutoMix\u2019s shared minimization objective with an adversarial min\u2013max between generator and classifier to avoid producing overly consistent (low-diversity) mixtures."
+    },
+    {
+      "title": "mixup: Beyond Empirical Risk Minimization",
+      "authors": "Hongyi Zhang et al.",
+      "year": 2018,
+      "arxiv_id": "1710.09412",
+      "role": "Foundation",
+      "relationship_sentence": "The method inherits mixup\u2019s core formulation of linear sample and label interpolation, using it as the basic supervision constraint while learning how to generate the mixed samples adversarially."
+    },
+    {
+      "title": "CutMix: Regularization Strategy to Train Strong Classifiers with Localizable Features",
+      "authors": "Sangdoo Yun et al.",
+      "year": 2019,
+      "arxiv_id": "1905.04899",
+      "role": "Foundation",
+      "relationship_sentence": "CutMix introduced region-based compositional mixing and proportional label assignment, which Adversarial AutoMixup generalizes by learning where and how to compose regions via a trainable generator optimized against the classifier."
+    },
+    {
+      "title": "Puzzle Mix: Exploiting Saliency and Local Statistics for Optimal Mixup",
+      "authors": "Kim et al.",
+      "year": 2020,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "PuzzleMix showed that saliency-guided, hand-crafted mixing can improve performance yet remains offline and limited in diversity, a limitation the new method addresses by learning to generate diverse, challenging mixes through adversarial optimization."
+    },
+    {
+      "title": "Co-Mixup: Saliency Guided Joint Example Mixing for Robust Learning",
+      "authors": "Kim et al.",
+      "year": 2021,
+      "arxiv_id": null,
+      "role": "Related Problem",
+      "relationship_sentence": "Co-Mixup formulates mask-based joint example mixing with saliency/consistency constraints, informing the idea of learning pixel-level mixing policies that Adversarial AutoMixup re-casts as an adversarially optimized generator."
+    },
+    {
+      "title": "Adversarial AutoAugment",
+      "authors": "Zhang et al.",
+      "year": 2020,
+      "arxiv_id": "1912.11188",
+      "role": "Inspiration",
+      "relationship_sentence": "Adversarial AutoAugment\u2019s insight of searching augmentation policies that maximize a model\u2019s loss directly inspires the adversarial objective in which the mixup generator produces hard samples that challenge the classifier."
+    },
+    {
+      "title": "Towards Deep Learning Models Resistant to Adversarial Attacks",
+      "authors": "Aleksander Madry et al.",
+      "year": 2018,
+      "arxiv_id": "1706.06083",
+      "role": "Foundation",
+      "relationship_sentence": "The min\u2013max adversarial training framework underpins the alternating optimization in which the generator maximizes classification loss over mix parameters while the classifier minimizes it to gain robustness."
+    }
+  ],
+  "synthesis_narrative": "Mixup established the core principle of training on convex combinations of inputs and labels to regularize classifiers, while CutMix broadened this idea by composing image regions and assigning labels proportionally. PuzzleMix further refined mixing by using saliency and local statistics to place informative regions, and Co-Mixup formulated a mask-optimization view with saliency constraints to produce semantically plausible pixel-level mixes. In parallel, the adversarial training literature crystallized a min\u2013max view of robust learning: models should minimize loss against inputs that are chosen to maximize it, and Adversarial AutoAugment applied this notion to augmentation policy learning, showing that deliberately hard augmentations can yield stronger generalization. AutoMix then brought mix generation into an end-to-end framework with a learned generator and classifier optimized jointly, but its shared minimization objective tended to yield consistent, less diverse mixes. Together, these works revealed both how to compose samples and why maximizing difficulty during training strengthens robustness.\nRecognizing the opportunity to fuse end-to-end mix generation with adversarial difficulty, the new approach recasts AutoMix\u2019s generator-classifier pipeline as a min\u2013max game: the generator learns masks and mixing coefficients that maximize classification loss subject to mixup constraints, while the classifier minimizes it. This synthesis retains mixup\u2019s label interpolation and CutMix/PuzzleMix\u2019s spatial composition, adopts Co-Mixup\u2019s mask-based perspective, and injects Adversarial AutoAugment/Madry-style adversarial pressure to produce diverse, challenging mixes that counter the consistency bias in AutoMix.",
+  "target_paper": {
+    "title": "Adversarial AutoMixup",
+    "authors": "Huafeng Qin, Xin Jin, Yun Jiang, Moun\u00eem El-Yacoubi, Xinbo Gao",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Data Augmentation, Mixup, Image Classification",
+    "abstract": "Data mixing augmentation has been widely applied to improve the generalization ability of deep neural networks. Recently, offline data mixing augmentation, e.g. handcrafted and saliency information-based mixup, has been gradually replaced by automatic mixing approaches. Through minimizing two sub-tasks, namely, mixed sample generation and mixup classification in an end-to-end way, AutoMix significantly improves accuracy on image classification tasks. However, as the optimization objective is consistent for the two sub-tasks, this approach is prone to generating consistent instead of diverse mixed samples, which results in overfitting for target task training. In this paper, we propose AdAutomixup, an adversarial automatic mixup augmentation approach that generates challenging samples to train a robust classifier for image classification, by alternatively optimizing the classifier and the mixup sample generator. AdAutomixup comprises two modules, a mixed example generator, and a target ",
+    "openreview_id": "o8tjamaJ80",
+    "forum_id": "o8tjamaJ80"
+  },
+  "analysis_timestamp": "2026-01-06T09:10:57.185636"
+}

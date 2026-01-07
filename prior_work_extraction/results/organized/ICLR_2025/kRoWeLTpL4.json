@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Extracting Training Data from Large Language Models",
+      "authors": "Nicholas Carlini et al.",
+      "year": 2021,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "This work established concrete protocols and evidence for verbatim regurgitation from LMs, defining the copyright/memorization risk and evaluation targets that CP-Fuse directly aims to mitigate."
+    },
+    {
+      "title": "On Memorization in Language Models",
+      "authors": "Nikhil Kandpal et al.",
+      "year": 2022,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "By showing that scaling and data duplication drive memorization and that training-time fixes (e.g., deduplication) only partially reduce regurgitation, this paper motivates CP-Fuse\u2019s post-hoc, inference-time approach that does not require retraining or data changes."
+    },
+    {
+      "title": "Plug and Play Language Models: A Simple Approach to Controlled Text Generation",
+      "authors": "Siddharth Dathathri et al.",
+      "year": 2020,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "PPLM\u2019s gradient-based, attribute-guided decoding exemplifies effective but computationally expensive inference-time control, a cost/latency limitation that CP-Fuse explicitly addresses with lightweight probability fusion."
+    },
+    {
+      "title": "GeDi: Generative Discriminator Guided Sequence Generation",
+      "authors": "Ben Krause et al.",
+      "year": 2021,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "GeDi\u2019s idea of steering generation by combining model distributions via Bayes-guided signals informs CP-Fuse\u2019s principle of inference-time log-probability aggregation to enforce constraints without retraining."
+    },
+    {
+      "title": "DExperts: Decoding-Time Controlled Text Generation with Experts and Anti-Experts",
+      "authors": "Xiang Lisa Li et al.",
+      "year": 2021,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "CP-Fuse directly generalizes DExperts\u2019 logit-space combination of multiple LMs by adaptively fusing models trained on disjoint copyrighted subsets and adding a balancing property to prevent any single model\u2019s memorized content from dominating."
+    },
+    {
+      "title": "Model Soups: Averaging Weights of Multiple Fine-Tuned Models Improves Accuracy Without Training",
+      "authors": "Mitchell Wortsman et al.",
+      "year": 2022,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "Model Soups demonstrated that post-hoc fusion of models trained on different data can improve behavior without retraining, a compositional insight CP-Fuse adopts at the output-probability level for copyright-safe generation."
+    }
+  ],
+  "synthesis_narrative": "Evidence that large language models can reproduce training data verbatim crystallized with work showing concrete extraction attacks and benchmarks for regurgitation, framing the safety and copyright stakes of open-ended generation. Subsequent analysis connected memorization to scaling and data duplication, and documented that training-time mitigations like deduplication do not fully prevent reproduction, particularly under adversarial prompts, thereby motivating inference-time safeguards. Early decoding-time control methods such as Plug-and-Play Language Models effectively steered attributes by iteratively adjusting hidden states, but incurred significant compute and latency overhead. GeDi introduced a lighter-weight alternative by steering with Bayes-guided combination using a generative discriminator, illustrating that probability-level composition can enforce constraints without retraining. DExperts advanced this line by combining expert and anti-expert language models directly in logit space during decoding, showing that multi-LM fusion can suppress unwanted content distributions. In parallel, Model Soups showed that post-hoc composition of models trained on different data can improve behavior without additional training, underscoring the promise of model fusion as a general strategy. Together, these threads reveal a gap: the need for a fast, post-hoc, probability-level fusion that targets copyright regurgitation specifically. Building on the insight that combining model distributions can steer outputs, and on the feasibility of post-hoc composition across differently trained models, the current work fuses models trained on disjoint copyrighted subsets and introduces an adaptive balancing mechanism to minimize memorized reproduction while preserving generation quality and efficiency.",
+  "target_paper": {
+    "title": "Copyright-Protected Language Generation via Adaptive Model Fusion",
+    "authors": "Javier Abad, Konstantin Donhauser, Francesco Pinto, Fanny Yang",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "oral",
+    "keywords": "language models, copyright, model fusion, memorization, safety, privacy",
+    "abstract": "The risk of language models reproducing copyrighted material from their training data has led to the development of various protective measures. Among these, inference-time strategies that impose constraints via post-processing have shown promise in addressing the complexities of copyright regulation. However, they often incur prohibitive computational costs or suffer from performance trade-offs. To overcome these limitations, we introduce Copyright-Protecting Model Fusion (CP-Fuse), a novel approach that combines models trained on disjoint sets of copyrighted material during inference. In particular, CP-Fuse adaptively aggregates the model outputs to minimize the reproduction of copyrighted content, adhering to a crucial balancing property to prevent the regurgitation of memorized data. Through extensive experiments, we show that CP-Fuse significantly reduces the reproduction of protected material without compromising the quality of text and code generation. Moreover, its post-hoc nat",
+    "openreview_id": "kRoWeLTpL4",
+    "forum_id": "kRoWeLTpL4"
+  },
+  "analysis_timestamp": "2026-01-06T14:39:09.509495"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Soft Actor-Critic: Off-Policy Maximum Entropy Deep Reinforcement Learning with a Stochastic Actor",
+      "authors": "Tuomas Haarnoja, Aurick Zhou, Pieter Abbeel, Sergey Levine",
+      "year": 2018,
+      "role": "Off-policy actor-critic foundation and entropy-regularized objective",
+      "relationship_sentence": "ACE directly extends SAC\u2019s max-entropy objective by replacing a uniform entropy bonus with a causality-aware, dimension-weighted entropy term while retaining the off-policy actor-critic training paradigm."
+    },
+    {
+      "title": "Maximum Entropy Inverse Reinforcement Learning",
+      "authors": "Brian D. Ziebart, Andrew Maas, J. Andrew Bagnell, Anind K. Dey",
+      "year": 2008,
+      "role": "Theoretical basis for entropy-regularized decision making",
+      "relationship_sentence": "The principle that policies should be entropy-regularized to encourage broad exploration underpins ACE; ACE adapts this idea by weighting entropy in proportion to each action dimension\u2019s causal effect on reward."
+    },
+    {
+      "title": "Woulda, Coulda, Shoulda: Counterfactually-Guided Policy Search",
+      "authors": "Lars Buesing, Theophane Weber, Nicolas Heess, et al.",
+      "year": 2019,
+      "role": "Causal inference and counterfactual reasoning for RL",
+      "relationship_sentence": "ACE\u2019s core step\u2014evaluating the causal impact of individual action dimensions on returns\u2014draws on counterfactual/interventional reasoning popularized in this work to attribute outcome changes to specific action choices."
+    },
+    {
+      "title": "Counterfactual Multi-Agent Policy Gradients (COMA)",
+      "authors": "Jakob N. Foerster, Gregory Farquhar, Triantafyllos Afouras, Nantas Nardelli, Shimon Whiteson",
+      "year": 2018,
+      "role": "Counterfactual credit assignment mechanism",
+      "relationship_sentence": "ACE mirrors COMA\u2019s counterfactual credit assignment idea\u2014here applied within a single agent across action dimensions\u2014to assess each primitive behavior\u2019s marginal contribution and guide exploration pressure."
+    },
+    {
+      "title": "Action Branching Architectures for Deep Reinforcement Learning",
+      "authors": "Arash Tavakoli, Fabio Pardo, Petar Kormushev",
+      "year": 2018,
+      "role": "Factorized action spaces and dimension-wise treatment",
+      "relationship_sentence": "Evidence that action dimensions can and should be handled separately informs ACE\u2019s premise that different primitives have unequal impact, motivating dimension-wise entropy weighting."
+    },
+    {
+      "title": "Twin Delayed Deep Deterministic Policy Gradient",
+      "authors": "Scott Fujimoto, Herke van Hoof, David Meger",
+      "year": 2018,
+      "role": "Robust off-policy actor-critic training components",
+      "relationship_sentence": "ACE builds on stabilized off-policy actor-critic techniques (e.g., twin critics, target smoothing) introduced by TD3, integrating them with its causality-aware exploration mechanism."
+    },
+    {
+      "title": "The Lottery Ticket Hypothesis: Finding Sparse, Trainable Neural Networks",
+      "authors": "Jonathan Frankle, Michael Carbin",
+      "year": 2019,
+      "role": "Resetting/rewinding to recover trainability",
+      "relationship_sentence": "ACE\u2019s dormancy-guided reset echoes the insight that reinitializing dormant substructures can restore effective learning dynamics, using gradient dormancy as a principled trigger for resets."
+    }
+  ],
+  "synthesis_narrative": "ACE\u2019s key contribution\u2014causality-aware entropy regularization in an off-policy actor-critic\u2014sits at the intersection of maximum-entropy RL, causal credit assignment, and optimization heuristics for restoring stalled learning. SAC provides the immediate algorithmic scaffold: an off-policy actor-critic objective augmented with an entropy bonus, along with practical training stabilizers; ACE inherits this framework and replaces the uniform entropy incentive with dimension-specific entropy weights. The conceptual basis for using entropy as a principled exploration driver traces to maximum-entropy decision making, which SAC operationalizes; ACE refines that principle by tying the strength of the entropy term to each action dimension\u2019s causal contribution to returns.\nCounterfactual reasoning from causal RL directly shapes how ACE measures these contributions. Methods like counterfactually-guided policy search and COMA demonstrate how to attribute outcomes to interventions on components (agents or actions) via counterfactual baselines. ACE internalizes this idea within a single agent by treating action dimensions as primitive behaviors and computing their marginal effect on reward, then prioritizing exploration where causal influence is high. Evidence from action-branching architectures further supports the premise that action dimensions merit separate treatment, legitimizing ACE\u2019s dimension-wise entropy modulation.\nFinally, ACE addresses the gradient dormancy that arises when learning over-focuses on a subset of dimensions. Inspired by literature showing that strategic resets or weight rewinding can revive stalled subnetworks, ACE introduces a dormancy-guided reset mechanism to reanimate under-trained primitives. Together, these strands yield a targeted, causality-aware exploration scheme that improves data efficiency and performance across diverse continuous control tasks.",
+  "analysis_timestamp": "2026-01-07T00:02:04.891988"
+}

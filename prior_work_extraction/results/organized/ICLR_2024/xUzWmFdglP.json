@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "The Matrix Mechanism: Optimizing Linear Queries under Differential Privacy",
+      "authors": "Chao Li et al.",
+      "year": 2010,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "MMCC directly builds on the matrix mechanism\u2019s strategy-based correlated noise for linear queries, providing the first sampling-based privacy amplification analysis specifically for such correlated outputs."
+    },
+    {
+      "title": "Private and Continual Release of Statistics",
+      "authors": "T.-H. Hubert Chan et al.",
+      "year": 2011,
+      "arxiv_id": "",
+      "role": "Extension",
+      "relationship_sentence": "The binary-tree mechanism is a concrete matrix mechanism used in DP-FTRL, and MMCC\u2019s conditional composition is applied to this structure to show its noise can asymptotically match DP-SGD with amplification."
+    },
+    {
+      "title": "Deep Learning with Differential Privacy",
+      "authors": "Mart\u00edn Abadi et al.",
+      "year": 2016,
+      "arxiv_id": "1607.00133",
+      "role": "Baseline",
+      "relationship_sentence": "DP-SGD established the utility of privacy amplification by subsampling, and MMCC is designed to recover comparable amplification guarantees when noise is correlated via matrix mechanisms."
+    },
+    {
+      "title": "Subsampled R\u00e9nyi Differential Privacy and Analytical Moments Accountant",
+      "authors": "Yu-Xiang Wang et al.",
+      "year": 2019,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "MMCC leverages the tight subsampled-RDP amplification bounds by showing that, after conditioning on prior outputs, correlated matrix-mechanism releases can be analyzed as if independent."
+    },
+    {
+      "title": "The Composition Theorem for Differential Privacy",
+      "authors": "Peter Kairouz et al.",
+      "year": 2015,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "MMCC\u2019s conditional composition theorem extends adaptive composition ideas by enabling per-release accounting for correlated mechanisms through conditioning on earlier outputs."
+    },
+    {
+      "title": "Practical and Private (Deep) Learning without Sampling or Shuffling",
+      "authors": "Galen Andrew et al.",
+      "year": 2021,
+      "arxiv_id": "",
+      "role": "Baseline",
+      "relationship_sentence": "This DP-FTRL line demonstrated state-of-the-art training with matrix-mechanism noise but lacked sampling-based amplification analysis, a gap MMCC explicitly fills for DP-FTRL (including the binary-tree variant)."
+    },
+    {
+      "title": "Privacy Amplification by Iteration",
+      "authors": "Vitaly Feldman et al.",
+      "year": 2018,
+      "arxiv_id": "",
+      "role": "Related Problem",
+      "relationship_sentence": "By showing amplification can survive dependencies introduced by iterative algorithms, this work motivated MMCC\u2019s search for amplification tools that tolerate correlation, realized via conditioning for matrix mechanisms."
+    }
+  ],
+  "synthesis_narrative": "The matrix mechanism established how to answer linear workloads by injecting carefully correlated noise using a strategy matrix, calibrating multivariate Gaussian perturbations to meet differential privacy guarantees. The binary-tree mechanism exemplified this idea for cumulative sums, achieving low error via structured correlation across releases over time. Differentially private stochastic gradient descent showed that subsampling can greatly amplify privacy guarantees and, together with the moments accountant, made amplification central to practical private deep learning. Subsampled R\u00e9nyi DP then provided tight, analytic amplification formulas for the sampled Gaussian mechanism, enabling sharp accounting when per-step releases are independent. Optimal composition results formalized adaptive privacy accounting, laying the groundwork to reason about multi-step mechanisms based on the privacy loss distribution. More recently, DP-FTRL methods used matrix-mechanism-style, tree-aggregated noise to surpass DP-SGD utility, yet their correlated outputs prevented leveraging standard subsampling amplification analyses.\nBringing these threads together exposes a clear opportunity: marry the tight subsampling amplification calculus with the utility advantages of matrix mechanisms despite their correlations. MMCC realizes this by proving a conditional composition theorem that conditions on earlier outputs to render subsequent correlated releases analyzable as if independent, allowing subsampled-RDP-style amplification to transfer. Applying this to the binary-tree mechanism used in DP-FTRL, MMCC shows the added noise can asymptotically match DP-SGD with amplification, closing the accounting gap and unifying amplification with matrix-mechanism training.",
+  "target_paper": {
+    "title": "Privacy Amplification for Matrix Mechanisms",
+    "authors": "Christopher A. Choquette-Choo, Arun Ganesh, Thomas Steinke, Abhradeep Guha Thakurta",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "differential privacy, privacy amplification, matrix mechanism",
+    "abstract": "Privacy amplification exploits randomness in data selection to provide tighter differential privacy (DP) guarantees. This analysis is key to DP-SGD's success in machine learning (ML), but, is not readily applicable to the newer state-of-the-art (SOTA) algorithms. This is because these algorithms, known as DP-FTRL, use the matrix mechanism to add correlated noise instead of independent noise as in DP-SGD.\n\nIn this paper, we propose \"MMCC'' (matrix mechanism conditional composition), the first algorithm to analyze privacy amplification via sampling for any generic matrix mechanism. MMCC is nearly tight in that it approaches a lower bound as $\\epsilon\\to0$. \nTo analyze correlated outputs in MMCC, we prove that they can be analyzed as if they were independent, by conditioning them on prior outputs. Our \"conditional composition theorem'' has broad utility: we use it to show that the noise added to binary-tree-DP-FTRL can asymptotically match the noise added to DP-SGD with amplification. Our",
+    "openreview_id": "xUzWmFdglP",
+    "forum_id": "xUzWmFdglP"
+  },
+  "analysis_timestamp": "2026-01-06T10:35:17.294105"
+}

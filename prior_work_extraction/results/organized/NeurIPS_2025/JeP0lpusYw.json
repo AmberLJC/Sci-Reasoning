@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Merging Models with Fisher-Weighted Averaging",
+      "authors": "Matena, M.; Raffel, C.",
+      "year": 2022,
+      "role": "Conflict-aware parameter-space model merging baseline",
+      "relationship_sentence": "HM3\u2019s parameter-level inner loop integrates Fisher-weighted averaging to quickly obtain stable merged weights that respect task-specific sensitivities, providing reliable seeds for the subsequent architecture-level exploration."
+    },
+    {
+      "title": "Model Soup: Averaging weights of multiple fine-tuned models improves accuracy",
+      "authors": "Wortsman, M.; et al.",
+      "year": 2022,
+      "role": "Simple but strong parameter averaging for identical architectures",
+      "relationship_sentence": "HM3 extends the idea of model soups by using weight-averaging style merges as fast inner-level solvers, then elevates merging beyond identical architectures via a learned architecture-path search."
+    },
+    {
+      "title": "TIES-Merging: Resolving Interference when Merging Models",
+      "authors": "Yadav, S.; et al.",
+      "year": 2023,
+      "role": "Interference-aware parameter merging across tasks",
+      "relationship_sentence": "HM3 leverages interference-resolving merging (e.g., TIES) in its parameter-level component to mitigate conflicts before exploring cross-model layer paths, reducing error propagation into the architecture search."
+    },
+    {
+      "title": "PathNet: Evolution Channels Gradient Descent in Super Neural Networks",
+      "authors": "Fernando, C.; Banarse, D.; Blundell, C.; et al.",
+      "year": 2017,
+      "role": "Architecture-path composition across pretrained modules",
+      "relationship_sentence": "HM3 builds on PathNet\u2019s core insight of selecting layer-wise pathways through pretrained components, but formalizes it as a Markovian layer-granular search with RL and multi-objective criteria for reconstruction across heterogeneous models."
+    },
+    {
+      "title": "Neural Architecture Search with Reinforcement Learning",
+      "authors": "Zoph, B.; Le, Q. V.",
+      "year": 2017,
+      "role": "RL formulation for architecture search",
+      "relationship_sentence": "HM3 adopts an actor\u2013critic policy over discrete architectural decisions, echoing NAS\u2019s MDP formulation to sequentially generate architectures, adapted here to select inference paths across models with efficient policy discretization."
+    },
+    {
+      "title": "NSGA-II: A Fast and Elitist Multiobjective Genetic Algorithm",
+      "authors": "Deb, K.; Pratap, A.; Agarwal, S.; Meyarivan, T.",
+      "year": 2002,
+      "role": "Foundational multi-objective optimization and Pareto selection",
+      "relationship_sentence": "HM3\u2019s bilevel multi-objective framing (e.g., balancing accuracy, efficiency, and compatibility) follows NSGA-II\u2019s Pareto-optimal selection principles to guide trade-offs during both parameter and architecture decision-making."
+    },
+    {
+      "title": "Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity",
+      "authors": "Fedus, W.; Zoph, B.; Shazeer, N.",
+      "year": 2021,
+      "role": "Layer-wise discrete routing among experts",
+      "relationship_sentence": "HM3\u2019s architecture-level search over discrete layer choices is inspired by expert routing in Switch Transformers, motivating the Markovian, layer-local decisions and compatibility-aware selection when composing paths from multiple pretrained models."
+    }
+  ],
+  "synthesis_narrative": "HM3 bridges parameter-space and architecture-space model merging by stacking proven ideas into a coherent bilevel, multi-objective framework. At the inner (parameter) level, it builds directly on weight-averaging methods such as Model Soup and conflict-aware schemes like Fisher-weighted averaging and TIES-Merging, using them as fast solvers to produce robust merged checkpoints without data. These stabilized parameters become the substrate for HM3\u2019s outer (architecture) level, which takes inspiration from PathNet\u2019s concept of composing functional pathways from pretrained modules. Rather than evolutionary selection, HM3 formalizes path construction as a Markov decision process and employs an actor\u2013critic strategy akin to reinforcement-learning NAS, enabling sequential layer-granular decisions. The discrete, expert-style selection of layers echoes Switch Transformers\u2019 routing, underscoring the feasibility of sparse, compatibility-conscious choices at each depth. To steer the search toward practically valuable designs, HM3 frames objectives\u2014such as accuracy, compute, and layer compatibility\u2014within a multi-objective optimization paradigm inspired by NSGA-II, seeking Pareto-optimal trade-offs across both levels. Together, these strands yield a hierarchical merging methodology that first mitigates parameter interference and then discovers efficient inference paths across heterogeneous architectures, directly extending parameter-only merging into the architecture domain while preserving data-free practicality.",
+  "analysis_timestamp": "2026-01-06T23:42:48.104602"
+}

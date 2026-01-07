@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Planning with Diffusion for Flexible Behavior Synthesis",
+      "authors": "Michael Janner et al.",
+      "year": 2022,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "Introduced trajectory-level diffusion modeling for control and planning, which MMD adopts at the single-robot level before adding multi-robot collision handling via search."
+    },
+    {
+      "title": "Diffusion Policy: Visuomotor Policy Learning via Action Diffusion",
+      "authors": "Xiao Ma Chi et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Gap Identification",
+      "relationship_sentence": "Established the effectiveness of training diffusion policies from single-robot demonstrations while highlighting the practical limitation to single-robot settings that MMD explicitly overcomes by scaling to multi-robot via search."
+    },
+    {
+      "title": "Decision Diffuser: Offline Reinforcement Learning with Diffusion Models",
+      "authors": "Anurag Ajay et al.",
+      "year": 2022,
+      "arxiv_id": "",
+      "role": "Inspiration",
+      "relationship_sentence": "Provided conditioning and guidance mechanisms for steering diffusion samples toward goals/constraints, which MMD leverages to condition single-robot diffusions on start/goal while enforcing inter-robot collisions through search."
+    },
+    {
+      "title": "Subdimensional Expansion for Multi-Robot Path Planning (M*)",
+      "authors": "Glenn Wagner and Howie Choset",
+      "year": 2015,
+      "arxiv_id": "",
+      "role": "Extension",
+      "relationship_sentence": "Introduced the idea of planning independently per robot and coupling only in conflict regions, which MMD extends by replacing per-robot shortest-path planners with learned single-robot diffusion proposals."
+    },
+    {
+      "title": "Conflict-Based Search for Optimal Multi-Agent Pathfinding",
+      "authors": "Guni Sharon et al.",
+      "year": 2015,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "Established conflict-driven constraint search over individual paths, informing MMD\u2019s high-level strategy to resolve robot-robot collisions as constraints while keeping per-robot motions data-driven."
+    },
+    {
+      "title": "Learning Sampling Distributions for Robot Motion Planning",
+      "authors": "Brent Ichter et al.",
+      "year": 2018,
+      "arxiv_id": "",
+      "role": "Inspiration",
+      "relationship_sentence": "Showed how learned generative models can guide classical planners while search enforces feasibility, a template MMD follows using diffusion-generated motions under search-imposed collision constraints."
+    },
+    {
+      "title": "Compositional Visual Generation with Composable Diffusion Models",
+      "authors": "Mingyang Liu et al.",
+      "year": 2022,
+      "arxiv_id": "",
+      "role": "Extension",
+      "relationship_sentence": "Proposed product-of-experts score composition to combine multiple diffusion models, which MMD adapts to compose several environment-specific diffusion models for scalable planning in large spaces."
+    }
+  ],
+  "synthesis_narrative": "Trajectory diffusion for decision making established that generative models can synthesize feasible, multi-modal behaviors when trained on trajectory data, with Planning with Diffusion showing how to sample and refine trajectories for control. Decision Diffuser further demonstrated how conditioning and guidance could steer diffusion rollouts toward task objectives, and Diffusion Policy validated that single-robot action/trajectory diffusion learned from demonstrations can be robust and sample-efficient in robotics. In parallel, classical multi-robot planning developed principled ways to decouple and recouple agents: M* introduced subdimensional expansion that plans independently and only couples robots near conflicts, while Conflict-Based Search formalized resolving collisions as a high-level constraint search over individual plans. Bridging learning and search, Learning Sampling Distributions for Motion Planning showed learned generative priors can bias planners while search guarantees constraint satisfaction. Finally, Compositional Diffusion demonstrated that multiple diffusion models can be combined via score/product-of-experts composition to represent conjunctions of constraints or concepts.\nTaken together, these works revealed a path to scalable multi-robot planning: use single-robot diffusion as powerful data-driven priors, rely on search to enforce hard inter-robot collision constraints without training a joint model, and compose multiple specialized diffusions to cover large, heterogeneous environments. The current paper synthesizes these insights by coupling per-robot diffusion generation with conflict-driven search in the spirit of M* and CBS, and by leveraging composable diffusion to scale across environment partitions\u2014addressing the sample complexity and generalization limits that kept diffusion-based robotics largely confined to single-robot, small-scale settings.",
+  "target_paper": {
+    "title": "Multi-Robot Motion Planning with Diffusion Models",
+    "authors": "Yorai Shaoul, Itamar Mishani, Shivam Vats, Jiaoyang Li, Maxim Likhachev",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "Multi-Agent Planning, Robotics, Generative Models",
+    "abstract": "Diffusion models have recently been successfully applied to a wide range of robotics applications for learning complex multi-modal behaviors from data. However, prior works have mostly been confined to single-robot and small-scale environments due to the high sample complexity of learning multi-robot diffusion models. In this paper, we propose a method for generating collision-free multi-robot trajectories that conform to underlying data distributions while using only single-robot data. Our algorithm, Multi-robot Multi-model planning Diffusion (MMD), does so by combining learned diffusion models with classical search-based techniques---generating data-driven motions under collision constraints. Scaling further, we show how to compose multiple diffusion models to plan in large environments where a single diffusion model fails to generalize well. We demonstrate the effectiveness of our approach in planning for dozens of robots in a variety of simulated scenarios motivated by logistics en",
+    "openreview_id": "AUCYptvAf3",
+    "forum_id": "AUCYptvAf3"
+  },
+  "analysis_timestamp": "2026-01-06T14:06:17.071063"
+}

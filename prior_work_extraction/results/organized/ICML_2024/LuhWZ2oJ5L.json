@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Quantifying high-order interdependencies via the O-information",
+      "authors": "Fernando E. Rosas et al.",
+      "year": 2019,
+      "role": "Gap Identification",
+      "relationship_sentence": "This paper introduced O-information as TC\u2013DTC to assess synergy\u2013redundancy, but highlighted that practical computation was tractable mainly for simplified cases (e.g., Gaussian/discrete), a limitation S\u03a9I directly addresses by providing a general, model-based estimator."
+    },
+    {
+      "title": "Information Theoretical Analysis of Multivariate Correlation",
+      "authors": "S. Watanabe",
+      "year": 1960,
+      "role": "Foundation",
+      "relationship_sentence": "Watanabe defined Total Correlation (TC), one of the two multivariate information quantities whose difference constitutes O-information; S\u03a9I relies on this formulation to reconstruct O-information from entropies."
+    },
+    {
+      "title": "Nonnegative entropy measures of multivariate associations",
+      "authors": "Te Sun Han",
+      "year": 1978,
+      "role": "Foundation",
+      "relationship_sentence": "Han introduced Dual Total Correlation (a.k.a. binding information), the counterpart to TC; S\u03a9I\u2019s target quantity, O-information, is explicitly TC minus DTC, making Han\u2019s construct a core theoretical building block."
+    },
+    {
+      "title": "Entropy and the Central Limit Theorem",
+      "authors": "Andrew R. Barron",
+      "year": 1986,
+      "role": "Foundation",
+      "relationship_sentence": "Barron\u2019s development and use of de Bruijn\u2019s identity links differential entropy to Fisher information/score, providing the key theoretical bridge that S\u03a9I exploits to estimate the entropies needed for O-information from learned scores."
+    },
+    {
+      "title": "Estimation of Non-Normalized Statistical Models by Score Matching",
+      "authors": "Aapo Hyv\u00e4rinen",
+      "year": 2005,
+      "role": "Extension",
+      "relationship_sentence": "Score matching provides a principled way to learn the score \u2207 log p(x) without normalization constants; S\u03a9I extends this idea to estimate the scores needed to compute entropy terms that assemble O-information."
+    },
+    {
+      "title": "A Connection Between Score Matching and Denoising Autoencoders",
+      "authors": "Pascal Vincent",
+      "year": 2011,
+      "role": "Extension",
+      "relationship_sentence": "The denoising-score matching connection underpins practical training of neural score models across noise levels; S\u03a9I leverages such noise-conditional score estimation to robustly obtain the score fields used in its O-information estimator."
+    },
+    {
+      "title": "Generative Modeling by Estimating Gradients of the Data Distribution",
+      "authors": "Yang Song et al.",
+      "year": 2019,
+      "role": "Inspiration",
+      "relationship_sentence": "Noise-conditional score networks showed how a single learned model can capture scores for perturbed distributions; S\u03a9I adopts this paradigm to learn one model and reuse it to compute the multiple entropy terms required for O-information without restrictive assumptions."
+    }
+  ],
+  "synthesis_narrative": "S\u03a9I targets a central limitation in the original O-information program: while O-information (Rosas et al., 2019) elegantly captures synergy\u2013redundancy as the difference between Total Correlation and Dual Total Correlation, practical estimation was largely confined to simplified cases such as Gaussian or discrete models. S\u03a9I\u2019s key insight is to transform the problem of estimating many entropies into learning a single score field and using score-based identities to obtain the needed quantities. This rests on the foundational decomposition O = TC \u2212 DTC, with TC (Watanabe, 1960) and DTC (Han, 1978) defining the target via sums of (joint and marginal) entropies. Barron\u2019s formalization of de Bruijn\u2019s identity connects differential entropy to Fisher information and scores, enabling entropy estimation from score fields rather than normalized densities. To realize this in practice, S\u03a9I builds directly on score-matching methodology: Hyv\u00e4rinen (2005) provides a tractable way to learn scores for unnormalized models, while Vincent (2011) links score matching to denoising, motivating noise-conditional training. The practical blueprint comes from score-based generative modeling (Song & Ermon, 2019), demonstrating that one noise-conditional network can learn scores across perturbation levels. Synthesizing these threads, S\u03a9I learns a single score model and uses score/Fisher-information identities to compute the multiple entropy terms that assemble O-information, thus overcoming prior restrictions and enabling general, assumption-light O-information estimation.",
+  "analysis_timestamp": "2026-01-06T23:09:26.425479"
+}

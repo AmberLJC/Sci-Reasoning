@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Learning representations by back-propagating errors",
+      "authors": "David E. Rumelhart, Geoffrey E. Hinton, Ronald J. Williams",
+      "year": 1986,
+      "role": "Conceptual baseline for efficient gradient computation via information reuse",
+      "relationship_sentence": "Provides the classical backpropagation paradigm whose key property\u2014reusing intermediate activations to compute all parameter gradients at near-forward cost\u2014defines the efficiency benchmark the paper aims to match in the quantum setting."
+    },
+    {
+      "title": "A single quantum cannot be cloned",
+      "authors": "W. K. Wootters, Wojciech H. Zurek",
+      "year": 1982,
+      "role": "Foundational limitation motivating impossibility with single-copy access",
+      "relationship_sentence": "No-cloning formalizes why intermediate quantum information cannot be duplicated for reuse, underpinning the paper\u2019s claim that backprop-like scaling is impossible without multiple copies."
+    },
+    {
+      "title": "Some estimates of the information transmitted by quantum states (Holevo bound)",
+      "authors": "Alexander S. Holevo",
+      "year": 1973,
+      "role": "Information-theoretic limit used to argue single-copy constraints",
+      "relationship_sentence": "The Holevo bound limits extractable classical information per copy of a quantum state, supporting the paper\u2019s lower-bound intuition that single-copy measurement cannot amortize gradients across many parameters like classical backprop does."
+    },
+    {
+      "title": "Shadow tomography of quantum states",
+      "authors": "Scott Aaronson",
+      "year": 2018,
+      "role": "Technical foundation for multi-copy, multi-observable estimation",
+      "relationship_sentence": "Introduces shadow tomography, the core idea that many observables can be estimated from multiple copies, which the paper adapts to enable backprop-like gradient reuse when multi-copy access is allowed."
+    },
+    {
+      "title": "Predicting many properties of a quantum system from few measurements",
+      "authors": "Hsin-Yuan (Robert) Huang, Richard Kueng, John Preskill",
+      "year": 2020,
+      "role": "Operational tool (classical shadows) enabling efficient reuse of measurement data",
+      "relationship_sentence": "Classical shadows give a practical, sample-efficient scheme to reuse measurement outcomes to estimate numerous observables, directly inspiring the paper\u2019s gradient-estimation algorithm that matches backpropagation scaling with multiple copies."
+    },
+    {
+      "title": "Quantum Circuit Learning",
+      "authors": "Keisuke Mitarai, Masahiro Negoro, Masahiro Kitagawa, Keiji Fujii",
+      "year": 2018,
+      "role": "Baseline variational model and gradient-training framework",
+      "relationship_sentence": "Establishes parameterized quantum circuits and gradient-based training as the standard setting, providing the target model class whose naive gradient cost the paper seeks to improve via information reuse."
+    },
+    {
+      "title": "Evaluating analytic gradients on quantum hardware using the parameter-shift rule",
+      "authors": "Maria Schuld, Ville Bergholm, Christian Gogolin, Josh Izaac, Nathan Killoran",
+      "year": 2019,
+      "role": "Baseline gradient estimator whose scaling motivates improvement",
+      "relationship_sentence": "Parameter-shift gives the canonical per-parameter gradient cost (often linear in parameter count), which the paper shows cannot be reduced to backprop-like scaling without multi-copy access and then achieves using shadow-based methods."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s central question\u2014can quantum models train with the same asymptotic efficiency as classical backpropagation?\u2014is anchored by Rumelhart\u2013Hinton\u2013Williams, which established that caching and reusing intermediate activations yields all gradients at roughly a single forward-pass cost. Quantum mechanics appears to forbid this reuse due to measurement collapse and the impossibility of duplicating unknown states. The no-cloning theorem (Wootters\u2013Zurek) and the Holevo bound jointly articulate the core obstruction: with single-copy access, one cannot both preserve and repeatedly extract enough information from intermediate quantum states to amortize gradients across many parameters.\n\nThe breakthrough lever enabling a quantum analogue of backprop-like scaling is shadow tomography. Aaronson\u2019s shadow tomography introduced the idea that, given multiple fresh copies, one can compress measurement data into a representation that supports estimating many observables later. Huang\u2013Kueng\u2013Preskill\u2019s classical shadows operationalized this with near-optimal sample complexity, making multi-observable estimation practical and theoretically tight. Building on these foundations, the paper shows that if multiple copies of intermediate states are available, shadow-based techniques can \u201ccheat\u201d measurement collapse: reuse randomized measurement records to recover all needed gradients, matching backpropagation\u2019s scaling.\n\nThis result is cast against the prevailing variational quantum learning paradigm (Mitarai et al.) and its standard gradient estimator, the parameter-shift rule (Schuld et al.), whose cost scales with the number of parameters. The paper thus synthesizes classical backprop\u2019s information-reuse principle, quantum information limits (no-cloning/Holevo), and multi-copy shadow tomography to delineate a tight boundary: backprop-like efficiency is impossible with single-copy access, but achievable with multiple copies via shadow-based gradient estimation.",
+  "analysis_timestamp": "2026-01-06T23:42:49.099624"
+}

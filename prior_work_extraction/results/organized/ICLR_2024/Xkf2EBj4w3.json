@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "C-Learning: Learning to Achieve Goals via Contrastive Reinforcement Learning",
+      "authors": "Benjamin Eysenbach et al.",
+      "year": 2022,
+      "arxiv_id": null,
+      "role": "Extension",
+      "relationship_sentence": "This work adopts the C-Learning contrastive objective for estimating goal-conditioned Q-values and directly stabilizes it with architectural and hyperparameter choices to make it robust for offline robotic deployment."
+    },
+    {
+      "title": "Hindsight Experience Replay",
+      "authors": "Marcin Andrychowicz et al.",
+      "year": 2017,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "HER introduced self-supervised goal relabeling for goal-conditioned RL, providing the core data-generation and supervision paradigm that this paper leverages and adapts for offline contrastive value learning."
+    },
+    {
+      "title": "Unsupervised Control through Non-Parametric Discriminative Rewards (DISCERN)",
+      "authors": "David Warde-Farley et al.",
+      "year": 2018,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "DISCERN\u2019s discriminative, contrastive reward for goal reaching directly inspired using classifier-style objectives to drive goal-conditioned control, which this paper extends to multi-step value estimation and stabilizes."
+    },
+    {
+      "title": "Universal Value Function Approximators",
+      "authors": "Tom Schaul et al.",
+      "year": 2015,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "UVFA established the goal-conditioned value function formulation Q(s,a,g) that the contrastive objective estimates, providing the formal backbone for the method refined here."
+    },
+    {
+      "title": "Reinforcement Learning with Imagined Goals (RIG)",
+      "authors": "Ashvin Nair et al.",
+      "year": 2018,
+      "arxiv_id": null,
+      "role": "Related Problem",
+      "relationship_sentence": "RIG demonstrated unsupervised robotic goal-reaching via learned latent goals, highlighting representation and stability challenges that motivate a contrastive value-learning approach made robust in this paper."
+    },
+    {
+      "title": "Goal-Conditioned Supervised Learning (GCSL)",
+      "authors": "Dibya Ghosh et al.",
+      "year": 2019,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "GCSL provides the primary offline goal-reaching baseline\u2014supervised learning on relabeled future states\u2014whose limitations on long-horizon credit assignment this paper addresses with stabilized contrastive RL."
+    }
+  ],
+  "synthesis_narrative": "Universal Value Function Approximators formalized goal conditioning by parameterizing value functions with goals, enabling policies to generalize across targets. Hindsight Experience Replay introduced self-supervised relabeling of achieved states as goals, providing an effective supervision signal for goal-conditioned learning without manual rewards. DISCERN advanced this paradigm by using a discriminative, contrastive objective that trains a classifier to reward matching between observations and goals, demonstrating that contrastive signals can drive unsupervised goal attainment. Reinforcement Learning with Imagined Goals showed on robots that learning latent goal representations and rewards can enable self-supervised goal-reaching, but also exposed brittleness and representation-dependence when scaling to real systems. Goal-Conditioned Supervised Learning simplified training from offline play data via supervised learning on relabeled trajectories, performing well but struggling with long-horizon credit assignment and generalization beyond the behavior distribution. C-Learning unified these ideas by casting goal-reaching as contrastive estimation of a goal-conditioned Q-function, leveraging negatives to learn multi-step values but exhibiting sensitivity to architecture and hyperparameters that limited practical deployment.\n\nTaken together, these works suggested that contrastive supervision is powerful for goal-reaching, that goal-conditioned value functions are the right abstraction for long horizons, and that offline, self-supervised relabeling can supply abundant training data\u2014yet instability and design fragility hindered real-robot use. Building directly on C-Learning\u2019s contrastive Q formulation and the HER/UVFA problem setup, while addressing the representation and stability issues surfaced by DISCERN, RIG, and GCSL, the present paper systematically identifies architectural and hyperparameter choices that stabilize contrastive value learning, enabling practical offline, self-supervised robotic goal-reaching.",
+  "target_paper": {
+    "title": "Stabilizing Contrastive RL: Techniques for Robotic Goal Reaching from Offline Data",
+    "authors": "Chongyi Zheng, Benjamin Eysenbach, Homer Rich Walke, Patrick Yin, Kuan Fang, Ruslan Salakhutdinov, Sergey Levine",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "reinforcement learning, self-supervised learning, contrastive learning, goal-conditioned RL, offline RL, robotics",
+    "abstract": "Robotic systems that rely primarily on self-supervised learning have the potential to decrease the amount of human annotation and engineering effort required to learn control strategies. In the same way that prior robotic systems have leveraged self-supervised techniques from computer vision (CV) and natural language processing (NLP), our work builds on prior work showing that the reinforcement learning (RL) itself can be cast as a self-supervised problem: learning to reach any goal without human-specified rewards or labels. Despite the seeming appeal, little (if any) prior work has demonstrated how self-supervised RL methods can be practically deployed on robotic systems. By first studying a challenging simulated version of this task, we discover design decisions about architectures and hyperparameters that increase the success rate by $2 \\times$. These findings lay the groundwork for our main result: we demonstrate that a self-supervised RL algorithm based on contrastive learning can",
+    "openreview_id": "Xkf2EBj4w3",
+    "forum_id": "Xkf2EBj4w3"
+  },
+  "analysis_timestamp": "2026-01-06T08:28:57.151157"
+}

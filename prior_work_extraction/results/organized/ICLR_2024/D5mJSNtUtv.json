@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Joint Autoregressive and Hierarchical Priors for Learned Image Compression",
+      "authors": "David Minnen et al.",
+      "year": 2018,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "This work showed that autoregressive context models markedly boost compression but introduce costly serial decoding, directly motivating our finite-state, lookup-table autoregressive coder to retain dependencies without per-symbol neural inference."
+    },
+    {
+      "title": "Lossless Image Compression with Learned Probabilities (L3C)",
+      "authors": "Fabian Mentzer et al.",
+      "year": 2019,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "L3C provides the hierarchical learned lossless framework and practical baseline our system plugs into and surpasses, with our FSAR coder replacing its probability-estimation bottleneck while preserving speed."
+    },
+    {
+      "title": "Asymmetric Numeral Systems: entropy coding combining speed of Huffman coding with compression of arithmetic coding",
+      "authors": "Jarek Duda",
+      "year": 2013,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "We adopt ANS\u2019s table-driven finite-state formulation as the basis for our FSAR coder, extending the lookup-table transition mechanism to index distributions by Markov state for autoregressive coding."
+    },
+    {
+      "title": "Context-based adaptive binary arithmetic coding in the H.264/AVC video compression standard",
+      "authors": "Detlev Marpe et al.",
+      "year": 2003,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "CABAC\u2019s finite-state context adaptation for fast entropy coding inspired our design of a compact Markov state machine that captures local dependencies while keeping coding operations table-driven."
+    },
+    {
+      "title": "Estimating or Propagating Gradients Through Stochastic Neurons",
+      "authors": "Yoshua Bengio et al.",
+      "year": 2013,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "Our Straight-Through Hardmax Quantization directly relies on the straight-through estimator introduced here to backpropagate through discrete argmax decisions in the latent space."
+    },
+    {
+      "title": "Categorical Reparameterization with Gumbel-Softmax",
+      "authors": "Eric Jang et al.",
+      "year": 2017,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "The temperature-tuned soft relaxation for categorical variables in Gumbel-Softmax motivates our hardmax+STE alternative, explicitly avoiding its bias/temperature tradeoffs during discrete latent optimization."
+    },
+    {
+      "title": "Neural Discrete Representation Learning (VQ-VAE)",
+      "authors": "Aaron van den Oord et al.",
+      "year": 2017,
+      "arxiv_id": null,
+      "role": "Extension",
+      "relationship_sentence": "Building on VQ-VAE\u2019s straight-through updates for hard assignments, we modify the mechanism by discarding codebooks and applying a hardmax over categorical logits to realize STHQ for discrete latents."
+    }
+  ],
+  "synthesis_narrative": "Autoregressive context modeling was shown to significantly improve entropy models when combined with hierarchical priors, but the serial nature of masked-convolution context inference made decoding slow and computationally heavy, as highlighted by Minnen and colleagues. Practical learned lossless systems like L3C established a hierarchical framework and fast causal probability estimation as a strong baseline for real-world compressors. Independently, Asymmetric Numeral Systems introduced a table-driven finite-state entropy coder that achieves arithmetic-coding efficiency with near-Huffman speed by using lookup-table state transitions. In engineered codecs, CABAC demonstrated that finite-state context adaptation can capture local dependencies efficiently within an entropy-coding loop. For discrete optimization, Bengio\u2019s straight-through estimator provided a principled way to propagate gradients through non-differentiable decisions. The Gumbel-Softmax relaxation offered a differentiable proxy for categorical variables but introduced temperature tuning and mismatch between training and discrete inference. VQ-VAE showed that straight-through updates for hard assignments could stabilize training with discrete representations without relying on continuous relaxations. Together, these works revealed a path: replace expensive neural autoregressive context evaluation with a finite-state, table-driven mechanism that preserves dependency modeling, and train truly discrete latents using hard decisions with straight-through gradients. By fusing ANS-style lookup transitions with a compact Markov state to realize fast autoregressive entropy coding, and by adopting hardmax straight-through quantization instead of soft relaxations, the current work naturally extends this lineage to deliver higher compression ratios without sacrificing computational efficiency.",
+  "target_paper": {
+    "title": "Finite-State Autoregressive Entropy Coding for Efficient Learned Lossless Compression",
+    "authors": "Yufeng Zhang, Hang Yu, Jianguo Li, Weiyao Lin",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Lossless Compression, Autoregressive Model, Acceleration, Entropy Coding, Autoencoder",
+    "abstract": "Learned lossless data compression has garnered significant attention recently due to its superior compression ratios compared to traditional compressors. However, the computational efficiency of these models jeopardizes their practicality. This paper proposes a novel system for improving the compression ratio while maintaining computational efficiency for learned lossless data compression. Our approach incorporates two essential innovations. First, we propose the Finite-State AutoRegressive (FSAR) entropy coder, an efficient autoregressive Markov model based entropy coder that utilizes a lookup table to expedite autoregressive entropy coding. Next, we present a Straight-Through Hardmax Quantization (STHQ) scheme to enhance the optimization of discrete latent space. Our experiments show that the proposed lossless compression method could improve the compression ratio by up to 6\\% compared to the baseline, with negligible extra computational time. Our work provides valuable insights into",
+    "openreview_id": "D5mJSNtUtv",
+    "forum_id": "D5mJSNtUtv"
+  },
+  "analysis_timestamp": "2026-01-06T22:46:24.332671"
+}

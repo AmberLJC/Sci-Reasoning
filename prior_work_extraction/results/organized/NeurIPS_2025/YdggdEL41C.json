@@ -1,0 +1,86 @@
+{
+  "prior_works": [
+    {
+      "title": "SlowFast Networks for Video Recognition",
+      "authors": [
+        "Christoph Feichtenhofer",
+        "Haoqi Fan",
+        "Jitendra Malik",
+        "Kaiming He"
+      ],
+      "year": 2019,
+      "role": "Architectural inspiration",
+      "relationship_sentence": "Vist\u2019s dual slow\u2013fast routing mirrors SlowFast\u2019s two-pathway design, using a fast, low-cost stream to skim broad context and a slow, high-fidelity stream for fine-grained reasoning."
+    },
+    {
+      "title": "Flamingo: a Visual Language Model for Few-Shot Learning",
+      "authors": [
+        "Jean-Baptiste Alayrac",
+        "Antoine Miech",
+        "Vedant Misra"
+      ],
+      "year": 2022,
+      "role": "Cross-modal token resampling and frozen vision encoder",
+      "relationship_sentence": "Flamingo\u2019s Perceiver Resampler and frozen vision backbone directly inform Vist\u2019s use of a frozen lightweight vision encoder plus a learned resampler to compress many inputs into a small set of tokens consumable by an LLM."
+    },
+    {
+      "title": "BLIP-2: Bootstrapping Language-Image Pre-training for Unified Vision-Language Understanding and Generation",
+      "authors": [
+        "Junnan Li",
+        "Dongxu Li",
+        "Silvio Savarese",
+        "Steven C. H. Hoi"
+      ],
+      "year": 2023,
+      "role": "Efficient vision-to-LLM bridging via learnable queries",
+      "relationship_sentence": "BLIP-2\u2019s Q-Former shows how learnable queries can distill rich visual features into a compact set for an LLM, a mechanism analogous to Vist\u2019s resampler that summarizes rendered context images."
+    },
+    {
+      "title": "Donut: Document Understanding Transformer without OCR",
+      "authors": [
+        "Geewook Kim"
+      ],
+      "year": 2022,
+      "role": "OCR-free text understanding from images",
+      "relationship_sentence": "Donut validates that rendering text into images and processing them with vision encoders preserves semantics, underpinning Vist\u2019s idea to render distant text tokens into images for low-cost skimming."
+    },
+    {
+      "title": "Skim-RNN: Learning to Skim Text",
+      "authors": [
+        "Minjoon Seo",
+        "Sewon Min",
+        "Ali Farhadi",
+        "Hannaneh Hajishirzi"
+      ],
+      "year": 2017,
+      "role": "Selective reading for efficiency",
+      "relationship_sentence": "Skim-RNN\u2019s learned skimming vs detailed reading directly motivates Vist\u2019s selective allocation of compute\u2014skimming distant, low-salience context and deeply processing the proximal window."
+    },
+    {
+      "title": "TokenLearner: What Can 8 Learned Tokens Do for Images and Videos?",
+      "authors": [
+        "Sungyoon Ryoo",
+        "AJ Piergiovanni",
+        "Anurag Arnab",
+        "Michael Tschannen",
+        "Mostafa Dehghani",
+        "Cordelia Schmid",
+        "Matthias Minderer"
+      ],
+      "year": 2021,
+      "role": "Learned token selection/compression",
+      "relationship_sentence": "TokenLearner\u2019s paradigm of learning to select a small set of informative tokens inspires Vist\u2019s resampler to focus capacity on semantically salient regions of rendered context."
+    },
+    {
+      "title": "A statistical interpretation of term specificity and its application in retrieval (TF\u2013IDF)",
+      "authors": [
+        "Karen Sp\u00e4rck Jones"
+      ],
+      "year": 1972,
+      "role": "Frequency-informed salience modeling",
+      "relationship_sentence": "Vist\u2019s Probability-Informed Visual Enhancement objective that masks high-frequency terms echoes TF\u2013IDF\u2019s down-weighting of common words to emphasize semantically informative tokens."
+    }
+  ],
+  "synthesis_narrative": "Vist\u2019s core innovation\u2014rendering distant tokens into images for a vision-driven fast path while reserving an LLM slow path for proximal, high-precision reasoning\u2014emerges from converging lines of prior work. The slow\u2013fast decomposition is architecturally motivated by SlowFast, which demonstrated the efficiency and accuracy benefits of asymmetric dual-path processing. To make a vision-based fast path viable, Flamingo and BLIP-2 provide the critical blueprint: use a frozen, lightweight vision encoder and a small learned bottleneck (Perceiver Resampler or Q-Former) to distill high-dimensional visual inputs into compact tokens that an LLM can ingest. Donut further substantiates that semantics of text can be preserved when the text is rendered as images and processed by vision backbones, validating Vist\u2019s decision to visually encode distant context rather than keep it as raw tokens.\n\nOn the selection and compression side, TokenLearner shows that learnable token selection can concentrate representational capacity on informative regions\u2014an idea Vist adapts when training its resampler to focus on semantically rich parts of the rendered context. Skim-RNN contributes the selective reading principle: spend computation where it matters and skim the rest, directly reflected in Vist\u2019s slow\u2013fast routing policy. Finally, the PVE objective\u2019s masking of high-frequency terms is grounded in the TF\u2013IDF tradition of discounting common words to elevate informative content, giving Vist a principled, probability-informed signal to guide what the visual resampler should prioritize. Together, these works directly shape Vist\u2019s vision-centric token compression pipeline and training objective.",
+  "analysis_timestamp": "2026-01-07T00:29:42.064125"
+}

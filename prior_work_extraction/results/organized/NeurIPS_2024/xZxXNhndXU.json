@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "3D Gaussian Splatting for Real-Time Radiance Field Rendering",
+      "authors": "Kerbl, Kopanas, Leimk\u00fchler, Drettakis",
+      "year": 2023,
+      "role": "Foundational rasterization-based representation enabling fast, high-quality NVS via 3D Gaussians with SH colors",
+      "relationship_sentence": "4DGF adopts 3D Gaussians as the explicit geometry scaffold introduced by 3DGS, but replaces per-Gaussian color with a neural appearance field to scale to heterogeneous, urban-scale data while retaining real-time rasterization benefits."
+    },
+    {
+      "title": "4D Gaussian Splatting for Real-Time Dynamic Scene Rendering",
+      "authors": "Xu et al.",
+      "year": 2024,
+      "role": "Extends Gaussian splatting to dynamic scenes by introducing time-parameterized/deformable Gaussians",
+      "relationship_sentence": "4DGF builds on the notion of temporally varying Gaussians but departs from per-point deformations by integrating dynamics through a global scene graph, enabling scalability to large urban areas with many sequences."
+    },
+    {
+      "title": "Block-NeRF: Scalable Large Scene Neural View Synthesis",
+      "authors": "Tancik et al.",
+      "year": 2022,
+      "role": "Pioneered partitioning and composition strategies for city-scale NeRFs",
+      "relationship_sentence": "4DGF inherits the idea of decomposing large scenes and composing them at render time; it operationalizes this at scale via a scene-graph that organizes static and dynamic components across urban blocks."
+    },
+    {
+      "title": "Mega-NeRF: Scalable Construction of Large-Scale NeRFs for Street View Scenes",
+      "authors": "Turki et al.",
+      "year": 2022,
+      "role": "Demonstrated training and data-handling strategies for thousands of street-view images and unbounded scenes",
+      "relationship_sentence": "4DGF targets the same urban/street-view regime and leverages similar large-scale training and partitioning principles, but uses Gaussians for efficient geometry and a neural appearance field for robustness to heterogeneous captures."
+    },
+    {
+      "title": "NeRF in the Wild: Neural Radiance Fields for Unconstrained Photo Collections",
+      "authors": "Martin-Brualla et al.",
+      "year": 2021,
+      "role": "Introduced appearance embeddings and transient modeling to handle lighting, weather, and content variability",
+      "relationship_sentence": "4DGF\u2019s compact neural appearance model is conceptually aligned with NeRF-W\u2019s disentangling of appearance from geometry, enabling rendering under severe lighting/seasonal variations across urban data."
+    },
+    {
+      "title": "K-Planes: Explicit Radiance Fields in Space, Time, and Appearance",
+      "authors": "Fridovich-Keil et al.",
+      "year": 2023,
+      "role": "Provided a factorized, lightweight neural field for space\u2013time\u2013appearance that scales and trains efficiently",
+      "relationship_sentence": "4DGF draws on K-Planes\u2019 insight that compact factorized neural fields can model time/appearance efficiently, using a neural field head atop Gaussians to capture view- and condition-dependent appearance."
+    },
+    {
+      "title": "D-NeRF: Neural Radiance Fields for Dynamic Scenes",
+      "authors": "Pumarola et al.",
+      "year": 2021,
+      "role": "Introduced deformation-based dynamic NeRFs (4D modeling) with canonical space warping",
+      "relationship_sentence": "4DGF is informed by deformation-field approaches to dynamics but replaces continuous per-point warps with a scalable scene-graph abstraction, better suited for complex, city-scale motion and object-level changes."
+    }
+  ],
+  "synthesis_narrative": "4DGF sits at the confluence of high-speed explicit rasterization, dynamic 4D modeling, large-scale scene decomposition, and robust appearance handling. The shift from volumetric ray marching to rasterization with Gaussian primitives in 3D Gaussian Splatting established the core efficiency and quality envelope that 4DGF inherits for interactive rendering. Extending Gaussians into time, 4D Gaussian Splatting demonstrated that dynamic content can be captured by temporally varying or deformable primitives; 4DGF generalizes this to the urban regime by replacing per-primitive motion with a scene-graph that organizes static infrastructure and dynamic actors at global scale.\nWork on scaling NeRFs to cities\u2014Block-NeRF and Mega-NeRF\u2014showed that partitioning, composition, and large-batch training strategies are essential for thousands of frames and unbounded extents. 4DGF integrates these lessons operationally via a global scene graph and an efficient Gaussian scaffold that keeps memory and rendering costs tractable.\nHeterogeneous imagery across weather, season, and lighting is addressed by decoupling geometry from appearance. NeRF in the Wild introduced appearance embeddings and transient components to model such variability; K-Planes further showed that compact, factorized neural fields can represent space\u2013time\u2013appearance efficiently. 4DGF synthesizes these ideas by storing geometry in Gaussians while predicting appearance from a lightweight neural field conditioned on view and scene factors. Finally, deformation-based dynamic NeRFs (D-NeRF) motivate the general 4D formulation that 4DGF achieves more scalably with a scene-graph-driven dynamic integration suited to complex urban environments.",
+  "analysis_timestamp": "2026-01-06T23:33:35.581804"
+}

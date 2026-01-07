@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Unifying Count-Based Exploration and Intrinsic Motivation",
+      "authors": "Marc G. Bellemare et al.",
+      "year": 2016,
+      "role": "Gap Identification",
+      "relationship_sentence": "Introduced pseudocounts derived from density models to extend tabular counts to high-dimensional RL; this paper explicitly replaces that density-model dependency by showing counts can be recovered via Rademacher (coin-flip) averaging and a supervised objective."
+    },
+    {
+      "title": "Count-Based Exploration with Neural Density Models",
+      "authors": "Georg Ostrovski et al.",
+      "year": 2017,
+      "role": "Baseline",
+      "relationship_sentence": "Established PixelCNN-based neural pseudocounts as the practical state of the art for high-dimensional count-based exploration; the coin-flip method directly competes with and outperforms this approach while avoiding explicit density modeling."
+    },
+    {
+      "title": "Exploration: A Study of Count-Based Exploration in Deep Reinforcement Learning",
+      "authors": "Haoran Tang et al.",
+      "year": 2017,
+      "role": "Inspiration",
+      "relationship_sentence": "Showed that approximate counting in high-dimensional spaces can be achieved without full density models via hashing/random projections; the proposed coin-flip estimator builds on this insight by using Rademacher randomness to obtain learnable, unbiased count surrogates."
+    },
+    {
+      "title": "Model-Based Interval Estimation with Exploration Bonuses (MBIE-EB)",
+      "authors": "Alexander L. Strehl et al.",
+      "year": 2008,
+      "role": "Foundation",
+      "relationship_sentence": "Provided the theoretical foundation for count-based exploration bonuses that depend on visitation counts N(s,a); the new method\u2019s learned pseudocounts are used in exactly this bonus framework."
+    },
+    {
+      "title": "Finding frequent items in data streams",
+      "authors": "Moses Charikar et al.",
+      "year": 2002,
+      "role": "Inspiration",
+      "relationship_sentence": "Introduced CountSketch, showing that averaging Rademacher-signed updates yields unbiased estimates of item frequencies; the paper\u2019s core coin-flip identity for recovering counts is a learning-based adaptation of this principle."
+    },
+    {
+      "title": "Noise-Contrastive Estimation: A New Estimation Principle for Unnormalized Statistical Models",
+      "authors": "Michael U. Gutmann et al.",
+      "year": 2010,
+      "role": "Related Problem",
+      "relationship_sentence": "Demonstrated how density-related quantities can be estimated via simple supervised objectives; the coin-flip approach similarly reframes count estimation as a supervised learning problem with synthetic labels."
+    },
+    {
+      "title": "Exploration by Random Network Distillation",
+      "authors": "Yuri Burda et al.",
+      "year": 2019,
+      "role": "Related Problem",
+      "relationship_sentence": "Showed that supervised learning on random targets can drive exploration; the present work leverages a closely related supervised-learning setup but proves it recovers calibrated visitation counts rather than just novelty signals."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s main contribution\u2014estimating visitation pseudocounts in high-dimensional RL via coin flips and a supervised loss\u2014emerges from two converging lines of work. First, classical count-based exploration (MBIE-EB) established the value of bonuses that scale with visitation counts, creating a need to recover N(s,a) beyond tabular settings. Bellemare et al. then unified count-based exploration with intrinsic motivation through density-model pseudocounts, and Ostrovski et al. operationalized this with PixelCNN, but both inherit the difficulty and computational cost of accurate high-dimensional density modeling; these limitations are the explicit target of the present method. Second, Tang et al. demonstrated that approximate counting could bypass density estimation via random projections and hashing, pointing to randomization as a viable bridge from high-dimensional observations to count-like signals.\n\nThe new insight connects this RL context to data-stream algorithms: CountSketch shows that Rademacher-signed averaging gives unbiased frequency estimates. The authors recast that identity into a learnable form: a simple supervised objective on Rademacher (coin-flip) labels whose optimum recovers visitation counts, avoiding explicit density models while retaining count-based bonuses. This supervised reduction echoes the spirit of Noise-Contrastive Estimation\u2014turning unsupervised quantities into supervised learning targets\u2014while differing in its goal (counts, not densities). Finally, compared to exploration-by-prediction-error approaches like Random Network Distillation, the coin-flip method preserves the interpretability and calibration of count-based exploration, yielding a principled and empirically stronger intrinsic bonus.",
+  "analysis_timestamp": "2026-01-06T23:09:26.542766"
+}

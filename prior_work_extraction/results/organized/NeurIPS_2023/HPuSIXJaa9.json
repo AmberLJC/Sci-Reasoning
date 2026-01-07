@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Deep Reinforcement Learning from Human Preferences",
+      "authors": "Paul F. Christiano, Jan Leike, Tom B. Brown, Miljan Martic, Shane Legg, Dario Amodei",
+      "year": 2017,
+      "role": "Origin of preference-based RL/RLHF pipeline",
+      "relationship_sentence": "DPO targets the same pairwise human preference setting introduced here but removes the explicit reward model and RL optimization stages that this work established."
+    },
+    {
+      "title": "Fine-Tuning Language Models from Human Preferences",
+      "authors": "Daniel M. Ziegler, Nisan Stiennon, Jeffrey Wu, Tom B. Brown, Alec Radford, et al.",
+      "year": 2019,
+      "role": "KL-regularized RLHF objective for language models",
+      "relationship_sentence": "This paper formalized the KL-penalized policy objective relative to a reference LM and optimized it with PPO; DPO derives an equivalent fixed point and optimizes it directly without PPO by using the policy\u2013reward mapping."
+    },
+    {
+      "title": "Learning to Summarize from Human Feedback",
+      "authors": "Nisan Stiennon, Long Ouyang, Jeffrey Wu, Daniel M. Ziegler, Ryan Lowe, et al.",
+      "year": 2020,
+      "role": "Scalable RLHF instantiation with Bradley\u2013Terry preference modeling",
+      "relationship_sentence": "DPO builds on this RLHF setup\u2014pairwise preferences modeled with a Bradley\u2013Terry/logistic head and KL-regularized PPO\u2014by showing the same objective can be optimized via a direct preference-classification loss on the policy."
+    },
+    {
+      "title": "Reward Augmented Maximum Likelihood (RAML) for Neural Structured Prediction",
+      "authors": "Mohammad Norouzi, Samy Bengio, Zhifeng Chen, Navdeep Jaitly, Mike Schuster, et al.",
+      "year": 2016,
+      "role": "Supervised learning toward reward-exponentiated target distributions",
+      "relationship_sentence": "RAML\u2019s insight that an optimal policy can be trained by matching a reward-weighted (Boltzmann) distribution informs DPO\u2019s use of a closed-form reward\u2013policy relation to replace RL with supervised learning."
+    },
+    {
+      "title": "Relative Entropy Policy Search (REPS)",
+      "authors": "Jan Peters, Katharina M\u00fclling, Yasemin Altun",
+      "year": 2010,
+      "role": "Closed-form solution of reward maximization under a KL constraint",
+      "relationship_sentence": "REPS yields the Boltzmann-form policy update under a KL constraint; DPO leverages the same optimality condition (policy proportional to reference times exp of scaled reward) to express rewards via policy log-ratios."
+    },
+    {
+      "title": "Maximum Entropy Inverse Reinforcement Learning",
+      "authors": "Brian D. Ziebart, Andrew Maas, J. Andrew Bagnell, Anind K. Dey",
+      "year": 2008,
+      "role": "Boltzmann distributions over behaviors linking rewards to policies",
+      "relationship_sentence": "MaxEnt IRL provides the exp-reward policy form that underlies DPO\u2019s mapping r(x,y) \u221d log \u03c0(y|x) \u2212 log \u03c0_ref(y|x), enabling preference likelihoods to be optimized directly in policy space."
+    },
+    {
+      "title": "Rank Analysis of Incomplete Block Designs: I. The Method of Paired Comparisons",
+      "authors": "R. A. Bradley, M. E. Terry",
+      "year": 1952,
+      "role": "Foundational paired-comparison (Bradley\u2013Terry) preference model",
+      "relationship_sentence": "DPO\u2019s loss is a logistic/Bradley\u2013Terry likelihood on preference pairs, directly using this model to connect reward differences\u2014expressed via policy log-ratios\u2014to observed human choices."
+    }
+  ],
+  "synthesis_narrative": "DPO\u2019s core contribution is to eliminate reward modeling and reinforcement learning from the RLHF pipeline by exploiting a closed-form relationship between rewards and the optimal KL-regularized policy, turning preference learning into direct policy training. The starting point is preference-based RL (Christiano et al., 2017), which established collecting pairwise human comparisons, training a reward model with a Bradley\u2013Terry likelihood, and then optimizing a policy against that reward. For language models, Ziegler et al. (2019) and Stiennon et al. (2020) cast this as maximizing expected reward while penalizing KL divergence from a reference LM, typically optimized with PPO, and using the Bradley\u2013Terry/logistic preference model.\nThe theoretical lever enabling DPO comes from the Boltzmann-form optimality of KL/entropy-regularized control: REPS (Peters et al., 2010) and MaxEnt IRL (Ziebart et al., 2008) show that the optimal policy under a KL or entropy regularizer is proportional to the reference policy times the exponential of a scaled reward. This yields an invertible mapping between reward and policy log-ratios. RAML (Norouzi et al., 2016) further demonstrated that one can train models by supervised learning to match reward-exponentiated target distributions rather than performing RL.\nDPO synthesizes these strands by substituting the reward\u2013policy mapping into the Bradley\u2013Terry preference likelihood used in RLHF. This yields a simple logistic classification loss on policy log-likelihood ratios relative to a reference model, optimizing the same KL-regularized objective targeted by PPO-based RLHF but in a single-stage, stable, supervised procedure.",
+  "analysis_timestamp": "2026-01-06T23:33:35.588210"
+}

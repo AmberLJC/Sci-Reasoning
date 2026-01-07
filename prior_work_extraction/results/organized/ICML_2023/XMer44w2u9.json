@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Restormer: Efficient Transformer for High-Resolution Image Restoration",
+      "authors": "Syed Waqas Zamir et al.",
+      "year": 2022,
+      "role": "Baseline",
+      "relationship_sentence": "Fourmer retains Restormer\u2019s restoration-tailored \u201cspatial interaction + channel evolution\u201d block structure but replaces MDTA and GDFN with Fourier spatial interaction and Fourier channel evolution to cut memory while preserving global modeling."
+    },
+    {
+      "title": "SwinIR: Image Restoration Using Swin Transformer",
+      "authors": "Jingyun Liang et al.",
+      "year": 2021,
+      "role": "Gap Identification",
+      "relationship_sentence": "By relying on windowed (local) attention for efficiency, SwinIR sacrifices fully global context; Fourmer addresses this gap with FFT-based modules that provide innate global receptive fields at lower memory cost."
+    },
+    {
+      "title": "Pre-Trained Image Processing Transformer",
+      "authors": "Hanting Chen et al.",
+      "year": 2021,
+      "role": "Foundation",
+      "relationship_sentence": "IPT established a unified Transformer formulation for diverse image restoration tasks but is memory/latency heavy, directly motivating Fourmer\u2019s search for a more efficient global modeling mechanism."
+    },
+    {
+      "title": "FNet: Mixing Tokens with Fourier Transforms",
+      "authors": "James Lee-Thorp et al.",
+      "year": 2021,
+      "role": "Inspiration",
+      "relationship_sentence": "FNet showed that Fourier transforms can replace attention for global token mixing; Fourmer directly adopts this idea for its Fourier spatial interaction to achieve global communication with low memory."
+    },
+    {
+      "title": "Global Filter Networks for Image Classification",
+      "authors": "Guo et al.",
+      "year": 2021,
+      "role": "Inspiration",
+      "relationship_sentence": "GFNet demonstrated frequency-domain global filtering as an efficient alternative to attention; Fourmer extends this frequency-space global modeling to restoration and leverages it as a degradation-aware prior."
+    },
+    {
+      "title": "FcaNet: Frequency Channel Attention Networks",
+      "authors": "Qilong Wang et al.",
+      "year": 2021,
+      "role": "Extension",
+      "relationship_sentence": "Building on FcaNet\u2019s use of frequency cues to modulate channels, Fourmer\u2019s Fourier channel evolution explicitly evolves channel representations based on Fourier responses to encode degradation priors."
+    },
+    {
+      "title": "MAXIM: Multi-Axis MLP for Image Processing",
+      "authors": "Zhengzhong Tu et al.",
+      "year": 2022,
+      "role": "Foundation",
+      "relationship_sentence": "MAXIM popularized the image-processing block pattern of spatial mixing plus channel mixing; Fourmer follows this paradigm but replaces MLP mixers with Fourier operators to gain globality and efficiency."
+    }
+  ],
+  "synthesis_narrative": "Fourmer\u2019s core idea\u2014an efficient, globally aware restoration backbone that adheres to a spatial interaction plus channel evolution paradigm while operating in the Fourier domain\u2014emerges from two converging lines of work. On the restoration side, IPT introduced a unified Transformer formulation across tasks, but at substantial memory cost, while SwinIR and Restormer made global modeling practical for high-resolution restoration via windowed or tailored attention and specialized feed-forward designs. These systems crystallized the two-branch block design (spatial interaction + channel evolution) yet still faced either heavy memory or limited global context, exposing the need for a more efficient, fully global mechanism. Concurrently, frequency-domain architectures showed that Fourier transforms can provide inexpensive global mixing. FNet proved FFT-based token mixing can replace attention, and GFNet extended frequency-domain global filtering to vision with strong efficiency. Complementing these, FcaNet demonstrated that frequency statistics are powerful signals for channel weighting. Finally, MAXIM reinforced the generality of the spatial/channel separation for image processing. Fourmer synthesizes these precedents: it keeps the proven restoration block blueprint from Restormer/SwinIR/MAXIM, swaps attention/MLP token mixing for Fourier spatial interaction inspired by FNet/GFNet to achieve innate globality with low memory, and replaces conventional channel MLPs with Fourier-based channel evolution adapted from FcaNet to encode degradation priors. This direct lineage yields a frequency-driven, degradation-aware global modeling paradigm.",
+  "analysis_timestamp": "2026-01-06T23:09:26.565392"
+}

@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Dataset Distillation",
+      "authors": "Tongzhou Wang; Jun-Yan Zhu; Antonio Torralba; Alexei A. Efros",
+      "year": 2018,
+      "role": "Foundational bilevel formulation for learning synthetic datasets",
+      "relationship_sentence": "SRe^2L directly responds to the original bilevel coupling in Dataset Distillation by explicitly decoupling model optimization from synthetic data optimization, enabling stable training and scalability beyond the small-scale settings where the original method struggled."
+    },
+    {
+      "title": "Dataset Condensation with Gradient Matching",
+      "authors": "Bo Zhao; Konda Reddy Mopuri; Hakan Bilen",
+      "year": 2021,
+      "role": "Core optimization objective for synthesizing data via gradient matching",
+      "relationship_sentence": "SRe^2L\u2019s Squeeze stage builds on the gradient/distribution matching paradigm introduced here, while redesigning the training to reduce memory/compute and to avoid tight inner-loop coupling that hinders high-resolution and large-scale condensation."
+    },
+    {
+      "title": "Dataset Condensation with Differentiable Siamese Augmentation",
+      "authors": "Bo Zhao; Hakan Bilen",
+      "year": 2021,
+      "role": "Scalability and regularization via differentiable augmentations",
+      "relationship_sentence": "SRe^2L leverages the insight that strong, learnable augmentations stabilize condensation, but pushes further by separating optimization and later recovering arbitrary image resolutions, addressing DSA\u2019s limitations at high resolutions."
+    },
+    {
+      "title": "Dataset Distillation by Matching Training Trajectories (MTT)",
+      "authors": "Justin Cazenavette et al.",
+      "year": 2022,
+      "role": "High-fidelity trajectory-matching baseline highlighting efficiency bottlenecks",
+      "relationship_sentence": "SRe^2L targets MTT\u2019s quality while eliminating its heavy inner-loop compute, achieving comparable or better accuracy with ~52\u00d7 speedup through the decoupled Squeeze\u2013Recover\u2013Relabel pipeline."
+    },
+    {
+      "title": "Distribution Matching for Dataset Condensation",
+      "authors": "Bo Zhao; Hakan Bilen",
+      "year": 2023,
+      "role": "Architecture-agnostic condensation via feature/distribution alignment",
+      "relationship_sentence": "SRe^2L\u2019s Relabel stage is motivated by cross-architecture generalization in distribution-matching approaches, reassigning labels to synthetic images to adapt them to arbitrary evaluation networks."
+    },
+    {
+      "title": "Distilling the Knowledge in a Neural Network",
+      "authors": "Geoffrey Hinton; Oriol Vinyals; Jeff Dean",
+      "year": 2015,
+      "role": "Conceptual and practical basis for soft labels and teacher-guided relabeling",
+      "relationship_sentence": "SRe^2L\u2019s Relabel component directly draws on knowledge distillation principles, employing teacher-driven soft targets to make condensed data transferable across architectures."
+    }
+  ],
+  "synthesis_narrative": "SRe^2L\u2019s central advance\u2014decoupling model and synthetic-data optimization to scale dataset condensation to ImageNet-level resolution and architectures\u2014emerges from a sequence of insights in dataset distillation and model compression. The original Dataset Distillation work established bilevel optimization of synthetic images but exposed brittleness and limited scalability when the model and data are tightly coupled in the inner loop. Gradient Matching and its successor with Differentiable Siamese Augmentation demonstrated that matching training signals and using strong augmentations can produce effective coresets, yet both remained constrained by compute/memory and degraded performance at higher resolutions. Matching Training Trajectories further improved fidelity by aligning full optimization dynamics, but at prohibitive cost, underscoring the need for a more efficient formulation.\nBuilding on these lessons, SRe^2L\u2019s Squeeze stage retains the signal-matching spirit while removing the heavy bilevel dependency to cut cost. Its Recover stage explicitly decouples resolution, allowing arbitrary upscaling of synthesized images without re-solving the inner problem\u2014a point of failure for prior methods tied to fixed training resolutions. Finally, insights from distribution-matching approaches about cross-architecture generalization, combined with classic knowledge distillation, motivate SRe^2L\u2019s Relabel step: teacher-driven soft targets adapt the condensed set to any evaluation network. Together, these influences yield a flexible, efficient pipeline that attains state-of-the-art accuracy under tight IPC budgets while scaling to ImageNet and arbitrary architectures.",
+  "analysis_timestamp": "2026-01-06T23:42:48.035954"
+}

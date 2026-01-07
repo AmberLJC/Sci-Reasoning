@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "DiffPure: Purifying Adversarial Perturbations with Diffusion Models",
+      "authors": "Nie et al.",
+      "year": 2023,
+      "role": "Baseline",
+      "relationship_sentence": "Serves as the primary diffusion-based purification baseline that adds isotropic noise in pixel space and denoises; our method directly addresses its limitation of indiscriminately damaging all frequency components by designing frequency-aware purification."
+    },
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Ho et al.",
+      "year": 2020,
+      "role": "Foundation",
+      "relationship_sentence": "Provides the core forward (isotropic Gaussian) and reverse denoising framework whose isotropic corruption we reinterpret in the Fourier domain, motivating our modification to avoid uniform damage across frequencies."
+    },
+    {
+      "title": "Score-Based Generative Modeling through Stochastic Differential Equations",
+      "authors": "Song et al.",
+      "year": 2021,
+      "role": "Foundation",
+      "relationship_sentence": "Supplies the reverse-time score-based denoising machinery that our purification pipeline leverages; we adapt this framework to operate in a frequency-selective manner."
+    },
+    {
+      "title": "SDEdit: Guided Image Synthesis for Stochastic Image Editing with Score-Based Models",
+      "authors": "Meng et al.",
+      "year": 2022,
+      "role": "Inspiration",
+      "relationship_sentence": "Inspires the \u2018add noise then denoise\u2019 view as an editing/purification operation preserving structure; we extend this idea by preserving content/structure via selectively using less-damaged frequency bands."
+    },
+    {
+      "title": "A Fourier Perspective on Model Robustness in Computer Vision",
+      "authors": "Yin et al.",
+      "year": 2019,
+      "role": "Foundation",
+      "relationship_sentence": "Establishes that robustness is strongly tied to frequency, motivating our frequency-domain analysis and the key finding that adversarial damage increases monotonically with frequency."
+    },
+    {
+      "title": "FDA: Fourier Domain Adaptation for Semantic Segmentation",
+      "authors": "Yang and Soatto",
+      "year": 2020,
+      "role": "Related Problem",
+      "relationship_sentence": "Demonstrates amplitude\u2013phase decomposition and that low-frequency amplitude manipulations preserve structure, informing our use of amplitude/phase to recover clean content from less-damaged frequencies."
+    },
+    {
+      "title": "The Importance of Phase in Signals",
+      "authors": "Oppenheim and Lim",
+      "year": 1981,
+      "role": "Foundation",
+      "relationship_sentence": "Provides the classic result that phase encodes structural information, grounding our design that exploits low-frequency phase (and amplitude) components to retain image structure during purification."
+    }
+  ],
+  "synthesis_narrative": "This paper\u2019s core innovation\u2014frequency-aware diffusion-based adversarial purification\u2014emerges from two converging threads: diffusion purification and frequency-domain understanding of images and robustness. On the generative side, DDPM establishes a forward isotropic Gaussian noising and reverse denoising framework, while score-based SDEs generalize the reverse-time denoising machinery used in practice. SDEdit reframes noising\u2013denoising as structure-preserving editing, a perspective later adopted by diffusion-based defenses such as DiffPure, which \u201cdrown\u201d adversarial perturbations in noise and then denoise. However, DiffPure (and the DDPM forward process it inherits) treats all pixels\u2014and thus all frequencies\u2014equally, often eroding semantic content. On the frequency side, Yin et al. show that robustness is frequency dependent, motivating a defense that reasons explicitly in the Fourier domain. Classical signal processing (Oppenheim & Lim) and modern computer vision (FDA by Yang & Soatto) further decompose images into amplitude and phase, with phase carrying structure and low-frequency amplitude controlling global content/style. Building on these insights, the present work analyzes diffusion purification through the Fourier lens, finding adversarial damage rises monotonically with frequency for both amplitude and phase. It then redesigns purification to preferentially preserve low-damage frequency components, extracting content and structure while removing high-frequency adversarial artifacts\u2014directly remedying the indiscriminate damage inherent to prior diffusion-based purification.",
+  "analysis_timestamp": "2026-01-06T23:07:19.631285"
+}

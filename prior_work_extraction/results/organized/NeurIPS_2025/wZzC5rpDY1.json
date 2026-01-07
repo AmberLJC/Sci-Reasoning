@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Distilling the Knowledge in a Neural Network",
+      "authors": "Geoffrey Hinton, Oriol Vinyals, Jeff Dean",
+      "year": 2015,
+      "role": "Foundational knowledge distillation",
+      "relationship_sentence": "MonoLift\u2019s teacher\u2013student training and softened supervision build directly on the KD paradigm introduced by Hinton et al., extending it to multi-level (feature, temporal, and policy) constraints for robotics."
+    },
+    {
+      "title": "Policy Distillation",
+      "authors": "Andrei A. Rusu, Sergio Gomez Colmenarejo, Caglar Gulcehre, Guillaume Desjardins, James Kirkpatrick, Razvan Pascanu, Volodymyr Mnih, Koray Kavukcuoglu, Raia Hadsell",
+      "year": 2016,
+      "role": "Action-level policy transfer",
+      "relationship_sentence": "MonoLift\u2019s action-level supervision that transfers the teacher\u2019s control behavior to the RGB student directly follows the idea of distilling a teacher\u2019s policy into a student."
+    },
+    {
+      "title": "Cross Modal Distillation for Supervision Transfer",
+      "authors": "Saurabh Gupta, Judy Hoffman, Jitendra Malik",
+      "year": 2016,
+      "role": "Cross-modal (depth\u2192RGB) representation transfer",
+      "relationship_sentence": "MonoLift\u2019s spatial-level distillation of geometry-aware features from a depth-guided teacher to an RGB student is a direct application of cross-modal distillation principles introduced by Gupta et al."
+    },
+    {
+      "title": "Asymmetric Actor-Critic for Image-Based Robot Learning",
+      "authors": "Lerrel Pinto, Marcin Andrychowicz, others",
+      "year": 2017,
+      "role": "Privileged-information training in RL",
+      "relationship_sentence": "MonoLift adopts the privileged-information setup\u2014using additional modalities (depth) at training but not at test\u2014pioneered in asymmetric actor\u2013critic methods, formalizing it via a distillation framework."
+    },
+    {
+      "title": "Perceiver-Actor (PerAct): A Multi-Task Transformer for Robotic Manipulation",
+      "authors": "Mohit Shridhar, Lucas Manuelli, Dieter Fox",
+      "year": 2022,
+      "role": "Depth-guided 3D manipulation policy design",
+      "relationship_sentence": "By showing the advantages of RGB-D voxel-based 3D reasoning for precise manipulation, PerAct motivates MonoLift\u2019s choice of a depth-guided teacher to supply geometry-aware supervision to an RGB student."
+    },
+    {
+      "title": "3D Diffusion Policy for Visuomotor Control",
+      "authors": "Z. Chi, et al.",
+      "year": 2023,
+      "role": "Modern 3D (RGB-D) policy with strong spatial\u2013temporal structure",
+      "relationship_sentence": "MonoLift\u2019s temporal and spatial distillation is informed by recent 3D diffusion-based policies that leverage depth for structured spatiotemporal reasoning, serving as high-capacity teachers for RGB students."
+    }
+  ],
+  "synthesis_narrative": "MonoLift\u2019s core idea\u2014training a monocular RGB policy to perform 3D-aware manipulation by distilling knowledge from a depth-guided teacher\u2014sits at the intersection of distillation, privileged-information RL, and 3D manipulation. At the action level, MonoLift inherits the principle of transferring behavior from a competent teacher to a compact student from Policy Distillation, ensuring the RGB student replicates the teacher\u2019s control decisions. The general teacher\u2013student framework and the use of softened supervision are rooted in classic Knowledge Distillation, which MonoLift extends to robotics with additional spatial and temporal alignment. Critically, its spatial distillation directly follows Cross-Modal Distillation: depth encodes geometry that is difficult to infer from RGB, and transferring depth-informed features into RGB backbones provides 3D inductive bias without test-time depth. The training-time use of extra modalities echoes Asymmetric Actor\u2013Critic approaches to privileged information, but MonoLift operationalizes this via an explicit tri-level KD objective so the student needs only monocular input at deployment. Finally, advances in depth-guided 3D manipulation policies, such as PerAct\u2019s voxelized RGB-D perception and 3D Diffusion Policy\u2019s spatiotemporal structure, motivate MonoLift\u2019s choice of a depth-aware teacher: these works demonstrate the performance benefits of explicit 3D reasoning, which MonoLift captures through spatial, temporal, and policy distillation while avoiding the runtime cost of depth estimation or additional sensors.",
+  "analysis_timestamp": "2026-01-07T00:21:32.235596"
+}

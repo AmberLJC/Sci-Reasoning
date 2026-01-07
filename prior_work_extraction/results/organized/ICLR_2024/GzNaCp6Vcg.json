@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Physics-informed neural networks: A deep learning framework for solving forward and inverse problems involving nonlinear partial differential equations",
+      "authors": "M. Raissi et al.",
+      "year": 2019,
+      "arxiv_id": "1711.10561",
+      "role": "Foundation",
+      "relationship_sentence": "Established the composite PINN loss over PDE, initial/boundary, and data terms defined on distinct point sets\u2014precisely the multi\u2013point-type training formulation that PINNACLE optimizes over."
+    },
+    {
+      "title": "DeepXDE: A Deep Learning Library for Solving Differential Equations",
+      "authors": "L. Lu et al.",
+      "year": 2021,
+      "arxiv_id": "1907.04502",
+      "role": "Baseline",
+      "relationship_sentence": "Introduced residual-based adaptive refinement (RAR) for collocation point selection, providing the primary collocation-only adaptive sampling baseline that PINNACLE generalizes to jointly handle collocation and experimental points."
+    },
+    {
+      "title": "Self-Adaptive Physics-Informed Neural Networks",
+      "authors": "L. McClenny et al.",
+      "year": 2020,
+      "arxiv_id": "2009.04544",
+      "role": "Inspiration",
+      "relationship_sentence": "Proposed learning the relative weights of different PINN loss terms during training, directly inspiring PINNACLE\u2019s idea of dynamically adjusting the emphasis across different training point types (via selection/proportion) rather than static weighting."
+    },
+    {
+      "title": "When and why PINNs fail to train: A neural tangent kernel perspective",
+      "authors": "S. Wang et al.",
+      "year": 2022,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "Diagnosed gradient and loss-imbalance pathologies among PDE, boundary, and data terms, motivating PINNACLE\u2019s use of interactions among point types to rebalance training via adaptive point selection and type proportioning."
+    },
+    {
+      "title": "B-PINNs: Bayesian physics-informed neural networks for forward and inverse PDE problems",
+      "authors": "L. Yang et al.",
+      "year": 2021,
+      "arxiv_id": null,
+      "role": "Related Problem",
+      "relationship_sentence": "Enabled uncertainty-aware use of experimental/data points and suggested active acquisition strategies, informing PINNACLE\u2019s information-driven selection of costly experimental points alongside collocation points."
+    },
+    {
+      "title": "hp-VPINNs: Variational physics-informed neural networks with adaptivity",
+      "authors": "M. Kharazmi et al.",
+      "year": 2021,
+      "arxiv_id": null,
+      "role": "Related Problem",
+      "relationship_sentence": "Developed adaptive refinement guided by a-priori/a-posteriori indicators for PDE enforcement, highlighting the effectiveness of adaptive point placement for collocation-only settings that PINNACLE extends to all point types."
+    }
+  ],
+  "synthesis_narrative": "Physics-informed neural networks were formalized with a composite loss over PDE residuals, initial/boundary conditions, and data-driven terms defined on separate point sets, establishing the central training paradigm and point taxonomy for subsequent work (Raissi et al., 2019). Building on this, adaptive collocation strategies such as residual-based adaptive refinement (RAR) focused on reallocating interior points toward high-residual regions to accelerate convergence and improve accuracy, but operated solely on collocation points (Lu et al., 2021). Complementarily, self-adaptive PINNs learned loss weights among PDE, boundary, and data terms, demonstrating that rebalancing emphasis among training components can markedly improve optimization (McClenny et al., 2020). NTK-based analyses then exposed that competing gradients across these terms cause optimization pathologies and imbalance, underscoring the need to account for interactions among point types during training (Wang et al., 2022). In parallel, Bayesian PINNs introduced uncertainty-aware usage and active acquisition of scarce experimental points, showing that data placement can be principled but treating it separately from collocation mechanisms (Yang et al., 2021). Finally, hp-VPINNs demonstrated the power of adaptive refinement guided by error indicators in variational settings, again primarily for collocation/test points (Kharazmi et al., 2021).\nTaken together, these works revealed that (i) different point types drive distinct dynamics, (ii) adaptive refinement and uncertainty-aware acquisition are effective but siloed, and (iii) loss/gradient interactions across terms must be managed. The natural next step is to unify these insights by jointly selecting all training point types while adaptively rebalancing their proportions using interaction-aware signals\u2014precisely the gap PINNACLE addresses by integrating information-driven collocation and experimental point selection with automatic type proportion adjustment.",
+  "target_paper": {
+    "title": "PINNACLE: PINN Adaptive ColLocation and Experimental points selection",
+    "authors": "Gregory Kang Ruey Lau, Apivich Hemachandra, See-Kiong Ng, Bryan Kian Hsiang Low",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Physics-informed Neural Networks, PINNs, adaptive training points selection",
+    "abstract": "Physics-Informed Neural Networks (PINNs), which incorporate PDEs as soft constraints, train with a composite loss function that contains multiple training point types: different types of collocation points chosen during training to enforce each PDE and initial/boundary conditions, and experimental points which are usually costly to obtain via experiments or simulations. Training PINNs using this loss function is challenging as it typically requires selecting large numbers of points of different types, each with different training dynamics. Unlike past works that focused on the selection of either collocation or experimental points, this work introduces PINN Adaptive ColLocation and Experimental points selection (PINNACLE), the first algorithm that jointly optimizes the selection of all training point types, while automatically adjusting the proportion of collocation point types as training progresses. PINNACLE uses information on the interactions among training point types, which had n",
+    "openreview_id": "GzNaCp6Vcg",
+    "forum_id": "GzNaCp6Vcg"
+  },
+  "analysis_timestamp": "2026-01-06T06:20:18.301224"
+}

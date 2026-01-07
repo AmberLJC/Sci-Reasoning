@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Algorithmic Learning in a Random World",
+      "authors": "Vladimir Vovk et al.",
+      "year": 2005,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "This book introduced conformal prediction\u2019s nonconformity-score-and-calibration paradigm and exchangeability-based finite-sample guarantees, which the current work preserves while altering scoring and calibration aggregation to be reliable under poisoning."
+    },
+    {
+      "title": "Classification with Valid and Adaptive Coverage",
+      "authors": "Y. Romano et al.",
+      "year": 2020,
+      "arxiv_id": "2009.14193",
+      "role": "Baseline",
+      "relationship_sentence": "The APS/RAPS framework provides the standard score-based conformal prediction sets for classification that the current method directly modifies by replacing per-model scores with smoothed scores aggregated across partition-trained models to withstand training-set poisoning."
+    },
+    {
+      "title": "Cross-Conformal Predictors",
+      "authors": "Vladimir Vovk et al.",
+      "year": 2015,
+      "arxiv_id": "",
+      "role": "Inspiration",
+      "relationship_sentence": "Cross-conformal prediction\u2019s idea of constructing multiple conformal predictors on disjoint calibration folds and aggregating their evidence directly motivates building multiple calibration-based prediction sets and combining them, here via a majority rule to tolerate corrupted calibration subsets."
+    },
+    {
+      "title": "Predictive Inference with the Jackknife+",
+      "authors": "Rina Foygel Barber et al.",
+      "year": 2021,
+      "arxiv_id": "",
+      "role": "Related Problem",
+      "relationship_sentence": "Jackknife+ shows how multi-split conformalization aggregates fold-wise calibrations to retain finite-sample validity, informing the current paper\u2019s strategy of split-based construction and aggregation while adapting the aggregation rule to be robust to adversarially corrupted folds."
+    },
+    {
+      "title": "Certified Adversarial Robustness via Randomized Smoothing",
+      "authors": "Jeremy M. Cohen et al.",
+      "year": 2019,
+      "arxiv_id": "1902.02918",
+      "role": "Inspiration",
+      "relationship_sentence": "The smoothing-for-certification principle\u2014averaging predictions to obtain robustness certificates\u2014inspires the current work\u2019s smoothed score functions that aggregate predictions from models trained on distinct partitions to certify reliability under training-data poisoning."
+    },
+    {
+      "title": "Certified Defenses for Data Poisoning Attacks",
+      "authors": "Jacob Steinhardt et al.",
+      "year": 2017,
+      "arxiv_id": "1706.03691",
+      "role": "Gap Identification",
+      "relationship_sentence": "This paper formalized bounded-fraction poisoning threat models and certified guarantees for learning, highlighting the lack of analogous, efficient certificates for conformal prediction that the current work addresses for both training and calibration corruption."
+    }
+  ],
+  "synthesis_narrative": "Conformal prediction\u2019s modern form arises from the nonconformity-score and calibration blueprint of Vovk, Gammerman, and Shafer, which delivers finite-sample guarantees under exchangeability. Building on that foundation for classification, Romano, Sesia, and Cand\u00e8s proposed APS/RAPS, which turn softmax-derived scores into compact, valid prediction sets\u2014implicitly assuming uncorrupted training and calibration data. Cross-conformal prediction introduced the use of multiple, disjoint calibration folds and aggregation of their evidence, while Jackknife+ generalized multi-split conformalization to aggregate fold-wise calibrations and preserve validity. Separately, Cohen, Rosenfeld, and Kolter\u2019s randomized smoothing established that averaging predictions across randomized or structured variations can yield certifiable robustness guarantees. In robust learning under poisoning, Steinhardt, Koh, and Liang provided formal bounded-fraction threat models and certification techniques, crystallizing the need for defenses that reason about worst-case contamination rather than benign sampling fluctuations.\nTogether, these works reveal a path: conformal prediction offers distribution-free coverage but lacks guarantees under poisoning; multi-split aggregation suggests constructing multiple, independent calibration views; and smoothing provides a mechanism to certify robustness via aggregation. The present paper synthesizes these ideas by (i) smoothing score functions through ensembles of models trained on disjoint data partitions to neutralize training-set poison and (ii) constructing multiple calibration-based prediction sets and aggregating them via a majority rule to ensure reliability even when an adversary corrupts a bounded fraction of calibration data, yielding the first efficient conformal sets with provable reliability under poisoning.",
+  "target_paper": {
+    "title": "Provably Reliable Conformal Prediction Sets in the Presence of Data Poisoning",
+    "authors": "Yan Scholten, Stephan G\u00fcnnemann",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "Conformal prediction, Certifiable robustness, Adversarial robustness",
+    "abstract": "Conformal prediction provides model-agnostic and distribution-free uncertainty quantification through prediction sets that are guaranteed to include the ground truth with any user-specified probability. Yet, conformal prediction is not reliable under poisoning attacks where adversaries manipulate both training and calibration data, which can significantly alter prediction sets in practice. As a solution, we propose reliable prediction sets (RPS): the first efficient method for constructing conformal prediction sets with provable reliability guarantees under poisoning. To ensure reliability under training poisoning, we introduce smoothed score functions that reliably aggregate predictions of classifiers trained on distinct partitions of the training data. To ensure reliability under calibration poisoning, we construct multiple prediction sets, each calibrated on distinct subsets of the calibration data. We then aggregate them into a majority prediction set, which includes a class only i",
+    "openreview_id": "ofuLWn8DFZ",
+    "forum_id": "ofuLWn8DFZ"
+  },
+  "analysis_timestamp": "2026-01-06T11:08:36.211365"
+}

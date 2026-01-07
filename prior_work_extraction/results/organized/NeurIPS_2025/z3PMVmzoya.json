@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis",
+      "authors": "Ben Mildenhall, Pratul P. Srinivasan, Matthew Tancik, Jonathan T. Barron, Ravi Ramamoorthi, Ren Ng",
+      "year": 2020,
+      "role": "Established neural volumetric rendering with ray-based sampling and alpha compositing for implicit 3D scene modeling.",
+      "relationship_sentence": "GeRaF generalizes NeRF\u2019s volumetric rendering paradigm to RF by discarding the lens/ray constraint and introducing lens-less sampling and lens-less alpha blending to aggregate contributions from the full 3D space."
+    },
+    {
+      "title": "DeepSDF: Learning Continuous Signed Distance Functions for Shape Representation",
+      "authors": "Jeong Joon Park, Peter Florence, Julian Straub, Richard Newcombe, Steven Lovegrove",
+      "year": 2019,
+      "role": "Popularized learning signed distance functions with MLPs as a compact continuous geometry representation.",
+      "relationship_sentence": "GeRaF adopts an SDF parameterization to represent geometry and jointly learns reflectiveness and RF signal power fields, extending DeepSDF from geometry-only modeling to RF-aware inverse rendering."
+    },
+    {
+      "title": "VolSDF: Volume Rendering of Neural Implicit Surfaces",
+      "authors": "Lior Yariv, Yoni Kasten, Dror Moran, Meirav Galun, Ronen Basri, Yaron Lipman",
+      "year": 2021,
+      "role": "Bridged SDFs and volumetric rendering by deriving transmittance/opacity from SDFs for stable surface-based reconstruction.",
+      "relationship_sentence": "GeRaF\u2019s RF volumetric rendering leverages the SDF-to-opacity connection to integrate RF propagation and attenuation while learning an SDF, mirroring VolSDF\u2019s principled coupling of SDFs with volume rendering."
+    },
+    {
+      "title": "Ref-NeRF: Structured View-Dependent Appearance",
+      "authors": "Dor Verbin, Peter Hedman, Ben Mildenhall, Todd Zickler, Jonathan T. Barron, Pratul P. Srinivasan",
+      "year": 2022,
+      "role": "Modeled specular and view-dependent effects within neural fields for physically grounded appearance.",
+      "relationship_sentence": "GeRaF adapts the idea of explicitly modeling specular interactions to the RF domain, where specular reflections dominate, by learning a reflectiveness field consistent with RF physics."
+    },
+    {
+      "title": "Instant Neural Graphics Primitives with a Multiresolution Hash Encoding",
+      "authors": "Thomas M\u00fcller, Alex Evans, Christoph Schied, Alexander Keller",
+      "year": 2022,
+      "role": "Enabled fast neural field training and dense querying via efficient encodings, making large-scale sampling practical.",
+      "relationship_sentence": "GeRaF\u2019s full-space, lens-less sampling during training becomes computationally feasible by leveraging the efficiency principles popularized by Instant-NGP for dense neural field queries."
+    },
+    {
+      "title": "WiTrack: Motion Tracking via Body Radio Reflections",
+      "authors": "Fadel Adib, Zachary Kabelac, Dina Katabi, Robert C. Miller",
+      "year": 2014,
+      "role": "Introduced near-range RF sensing with FMCW signals and outlined signal models for propagation, multipath, and range/Doppler filtering.",
+      "relationship_sentence": "GeRaF\u2019s physics-based RF rendering and its filter-based suppression of irrelevant signals build on WiTrack\u2019s FMCW propagation and filtering principles to handle multipath and noise."
+    },
+    {
+      "title": "Wi-Vi: See Through Walls with Wi-Fi!",
+      "authors": "Fadel Adib, Dina Katabi",
+      "year": 2013,
+      "role": "Demonstrated occlusion-penetrating RF imaging and signal processing to isolate reflections of interest in cluttered multipath environments.",
+      "relationship_sentence": "GeRaF\u2019s motivation and its filtering strategy to reject irrelevant RF contributions are directly aligned with Wi-Vi\u2019s insight that targeted processing is essential for through-occlusion RF sensing."
+    }
+  ],
+  "synthesis_narrative": "GeRaF\u2019s core contribution\u2014neural implicit 3D geometry reconstruction from RF\u2014arises at the intersection of neural volumetric rendering and RF propagation/processing. NeRF established the differentiable volume rendering framework and alpha compositing under lens-constrained ray sampling, while VolSDF and DeepSDF advanced the use of signed distance functions as robust, learnable geometric priors tightly coupled to rendering. GeRaF inherits the SDF-based representation and the transmittance/opacity machinery but fundamentally departs from the lens/ray assumption by introducing lens-less sampling and lens-less alpha blending to aggregate contributions from the entire 3D volume, a necessity in RF where measurements are not confined to rays.\n\nOn the sensing side, WiTrack and Wi-Vi provided the RF physics and signal-processing underpinnings: FMCW-based range modeling, multipath structure, and filter designs to suppress clutter and isolate relevant reflections. GeRaF internalizes these ideas as a physics-based RF volumetric rendering pipeline and a filter-based renderer that attenuates irrelevant signal paths within learning. Handling specular reflections\u2014dominant in RF\u2014draws conceptual guidance from reflection-aware neural fields such as Ref-NeRF, which demonstrated how to factor view-dependent/specular behavior into learned fields; GeRaF adapts this notion to RF by learning reflectiveness and signal power consistent with electromagnetic interactions. Finally, practical full-space sampling during training is enabled by efficiency principles from Instant-NGP, whose fast encodings make dense neural field queries tractable. Together, these works directly scaffold GeRaF\u2019s design: an SDF-driven, RF-physics-aware neural renderer with lens-less sampling and built-in filtering for robust near-range 3D reconstruction from RF signals.",
+  "analysis_timestamp": "2026-01-07T00:05:12.553612"
+}

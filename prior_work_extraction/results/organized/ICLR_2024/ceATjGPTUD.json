@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "HyPoradise: Benchmarking Generative Error Correction for ASR with LLMs",
+      "authors": "Yuchen Hu et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "This work introduced the GER task and dataset that finetunes LLMs to map ASR N-best hypotheses to ground-truth transcripts, which the current paper directly extends to noisy conditions and uses as its primary methodological and data foundation."
+    },
+    {
+      "title": "An Investigation of Deep Neural Networks for Noise Robust Speech Recognition",
+      "authors": "Martin L. Seltzer et al.",
+      "year": 2013,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "This paper\u2019s noise-aware training concept\u2014conditioning recognition models on explicit noise representations\u2014directly inspires the current work\u2019s core idea of conditioning GER with a noise embedding, adapted here into language space to avoid cross-modality mismatch."
+    },
+    {
+      "title": "Recognizer Output Voting Error Reduction (ROVER)",
+      "authors": "Jonathan G. Fiscus",
+      "year": 1997,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "ROVER established that aggregating multiple hypotheses yields robust signals for error reduction, motivating the current paper\u2019s use of the N-best list itself as a source to derive a robust language-space noise embedding."
+    },
+    {
+      "title": "Finding consensus in speech recognition: Word error minimization and other applications of confusion networks",
+      "authors": "Lidia Mangu et al.",
+      "year": 2000,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "By converting N-best lists into posterior-bearing confusion networks, this work shows how hypothesis distributions encode uncertainty\u2014an insight the current paper leverages to extract noise-condition cues from N-best statistics in language space."
+    },
+    {
+      "title": "Deliberation Networks: Sequence to Sequence Learning by Learning to Deliberate",
+      "authors": "Yingce Xia et al.",
+      "year": 2017,
+      "arxiv_id": null,
+      "role": "Related Problem",
+      "relationship_sentence": "The deliberation paradigm\u2014feeding first-pass hypotheses into a second-pass generator to refine outputs\u2014directly informs the GER framing of consuming N-best hypotheses to produce corrected transcripts."
+    },
+    {
+      "title": "The 4th CHiME Speech Separation and Recognition Challenge",
+      "authors": "Emmanuel Vincent et al.",
+      "year": 2017,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "CHiME-4 codified evaluation under real and simulated noisy conditions, highlighting the specific robustness gap that the current paper addresses by bringing GER explicitly into the noise-robust ASR setting."
+    }
+  ],
+  "synthesis_narrative": "HyPoradise established the generative error correction (GER) formulation for ASR by finetuning large language models to transform an N-best list into the ground-truth transcript, concretely defining the N-best-to-reference mapping and providing a benchmark to study it. Noise-aware training showed that explicitly conditioning recognition models on noise representations can materially improve robustness, introducing the principle of noise conditioning that later methods could adapt. ROVER demonstrated that aggregating multiple hypotheses exposes complementary evidence useful for error reduction, while the confusion network framework made this concrete by turning N-best lists into posteriors whose dispersion encodes uncertainty\u2014signals often correlated with acoustic difficulty. Deliberation networks contributed the second-pass paradigm that consumes first-pass hypotheses to generate improved sequences, validating the general mechanism of hypothesis-informed generation. The CHiME-4 challenge crystallized the community\u2019s focus on realistic noisy environments, standardizing noise conditions and clarifying robustness targets.\nTogether, these works revealed a natural opportunity: combine GER\u2019s hypothesis-to-transcript mapping with noise-aware conditioning, but do so without injecting raw audio features that cause cross-modality mismatch for LLMs. The current paper synthesizes this by extracting a language-space noise embedding directly from N-best statistics\u2014akin to confusion-network uncertainty\u2014thereby preserving the textual modality while capturing noise conditions and extending HyPoradise to evaluate GER under explicit noisy scenarios.",
+  "target_paper": {
+    "title": "Large Language Models are Efficient Learners of Noise-Robust Speech Recognition",
+    "authors": "Yuchen Hu, CHEN CHEN, Chao-Han Huck Yang, Ruizhe Li, Chao Zhang, Pin-Yu Chen, EngSiong Chng",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Large language models, automatic speech recognition, generative error correction, noise-robustness",
+    "abstract": "Recent advances in large language models (LLMs) have promoted generative error correction (GER) for automatic speech recognition (ASR), which leverages the rich linguistic knowledge and powerful reasoning ability of LLMs to improve recognition results. The latest work proposes a GER benchmark with \"HyPoradise\" dataset to learn the mapping from ASR N-best hypotheses to ground-truth transcription by efficient LLM finetuning, which shows great effectiveness but lacks specificity on noise-robust ASR. In this work, we extend the benchmark to noisy conditions and investigate if we can teach LLMs to perform denoising for GER just like what robust ASR do, where one solution is introducing noise information as a conditioner into LLM. However, directly incorporating noise embeddings from audio encoder could harm the LLM tuning due to cross-modality gap. To this end, we propose to extract a language-space noise embedding from the N-best list to represent the noise conditions of source speech, whi",
+    "openreview_id": "ceATjGPTUD",
+    "forum_id": "ceATjGPTUD"
+  },
+  "analysis_timestamp": "2026-01-06T13:49:36.324318"
+}

@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "The Curse of Recursion: Training on Generated Data Makes Models Forget",
+      "authors": "Ilia Shumailov et al.",
+      "year": 2023,
+      "arxiv_id": "2305.17493",
+      "role": "Gap Identification",
+      "relationship_sentence": "This work documented collapse when models are iteratively retrained on their own samples, and the present paper directly targets this exact self-consuming retraining setting by proving conditions under which it is in fact stable."
+    },
+    {
+      "title": "Self-Consuming Generative Models Go MAD",
+      "authors": "Rima Somepalli et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "By introducing Model Autophagy Disorder and showing support shrinkage from training on synthetic data, this paper crystallized the failure mode that the current work explains and mitigates via a formal stability framework."
+    },
+    {
+      "title": "Estimation of Non-Normalized Statistical Models by Score Matching",
+      "authors": "Aapo Hyv\u00e4rinen",
+      "year": 2005,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "The stability analysis rests on Fisher divergence and the geometry of score matching introduced here, modeling iterative retraining as repeated projection of true scores onto a model class."
+    },
+    {
+      "title": "A Connection Between Score Matching and Denoising Autoencoders",
+      "authors": "Pascal Vincent",
+      "year": 2011,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "The equivalence between denoising and score matching for Gaussian corruption provides the exact training objective whose behavior under mixed real/synthetic data the paper studies."
+    },
+    {
+      "title": "What Regularized Auto-Encoders Learn from the Data-Generating Distribution",
+      "authors": "Guillaume Alain et al.",
+      "year": 2014,
+      "arxiv_id": "1211.4246",
+      "role": "Inspiration",
+      "relationship_sentence": "The result that denoising/regularized autoencoders estimate the data score underpins the paper\u2019s view of retraining as score projection, enabling a self-consistency argument across iterations."
+    },
+    {
+      "title": "Score-Based Generative Modeling through Stochastic Differential Equations",
+      "authors": "Yang Song et al.",
+      "year": 2021,
+      "arxiv_id": "2011.13456",
+      "role": "Foundation",
+      "relationship_sentence": "The noise-conditioned score learning and multi-sigma training formalized here define the diffusion/score-based objectives to which the paper\u2019s stability guarantees apply."
+    },
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Jonathan Ho et al.",
+      "year": 2020,
+      "arxiv_id": "2006.11239",
+      "role": "Foundation",
+      "relationship_sentence": "The denoising loss and noise schedule of DDPMs are the concrete objective the paper analyzes when retraining on mixtures of real and synthetic data."
+    }
+  ],
+  "synthesis_narrative": "Empirical work on feedback loops first showed concrete failure modes when generative models repeatedly train on their own outputs: one study demonstrated progressive forgetting and coverage loss under recursive retraining, while another introduced Model Autophagy Disorder to describe support shrinkage caused by self-consumption of synthetic data. Separately, the theory of score matching established Fisher divergence as a principled objective for learning unnormalized distributions by matching data scores, giving a geometric view of training as projection in score space. Its denoising variant rigorously connected Gaussian denoising to score estimation, and further results on regularized autoencoders proved that denoising objectives estimate the gradient of the log-density, suggesting a self-consistency structure for noisy data. Modern diffusion and score-based generative modeling then operationalized these insights: DDPMs defined a practical denoising loss under a noise schedule, and the SDE formulation generalized this to noise-conditioned score learning across multiple sigmas. Together, these lines defined both the practical training objective and the mathematical geometry of scores.\nBringing these threads together, the current work views iterative retraining on mixed real/synthetic datasets through the geometry of score projections induced by denoising/score-matching objectives. The empirical reports of collapse posed a clear gap\u2014no formal conditions explained when feedback loops should fail versus remain stable. By leveraging Fisher-divergence projection properties and the noise-conditioned training structure from diffusion/score-based models, the paper shows that with sufficiently accurate initialization and a nontrivial fraction of real data, retraining constitutes a contraction toward the true score, thereby establishing provable stability and precisely delineating regimes where the empirically observed collapse can or cannot arise.",
+  "target_paper": {
+    "title": "On the Stability of Iterative Retraining of Generative Models on their own Data",
+    "authors": "Quentin Bertrand, Joey Bose, Alexandre Duplessis, Marco Jiralerspong, Gauthier Gidel",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Generative Models, Iterative Training, Diffusion",
+    "abstract": "Deep generative models have made tremendous progress in modeling complex data, often exhibiting generation quality that surpasses a typical human's ability to discern the authenticity of samples. Undeniably, a key driver of this success is enabled by the massive amounts of web-scale data consumed by these models. Due to these models' striking performance and ease of availability, the web will inevitably be increasingly populated with synthetic content. Such a fact directly implies that future iterations of generative models will be trained on both clean and artificially generated data from past models. In this paper, we develop a framework to rigorously study the impact of training generative models on mixed datasets---from classical training on real data to self-consuming generative models trained on purely synthetic data. We first prove the stability of iterative training under the condition that the initial generative models approximate the data distribution well enough and the prop",
+    "openreview_id": "JORAfH2xFd",
+    "forum_id": "JORAfH2xFd"
+  },
+  "analysis_timestamp": "2026-01-06T17:13:42.503430"
+}

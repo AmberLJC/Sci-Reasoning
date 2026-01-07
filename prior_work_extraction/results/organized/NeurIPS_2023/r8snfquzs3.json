@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "OptNet: Differentiable Optimization as a Layer in Neural Networks",
+      "authors": "Brandon Amos, J. Zico Kolter",
+      "year": 2017,
+      "role": "Optimization-as-a-layer (implicit differentiation of convex programs)",
+      "relationship_sentence": "OptNet established the paradigm of embedding exact solvers inside neural networks and backpropagating through them, directly inspiring SMTLayer\u2019s solver-in-the-loop design while motivating how solver outputs can guide learning."
+    },
+    {
+      "title": "Decision-Focused Learning for Combinatorial Optimization",
+      "authors": "Brian Wilder, Bistra Dilkina, Milind Tambe",
+      "year": 2019,
+      "role": "Training with non-differentiable solvers by shaping objectives to downstream decisions",
+      "relationship_sentence": "This work showed how to train models around non-differentiable combinatorial solvers by aligning learning with solver outputs, a key precedent for SMTLayer\u2019s use of an (undifferentiable) SMT solver in both forward and backward passes."
+    },
+    {
+      "title": "Semantic Loss: A Method for Learning with Soft Logical Constraints",
+      "authors": "Huan Xu, Yuxiao Zhang, Stephen Friedman, Guy Van den Broeck",
+      "year": 2018,
+      "role": "Logic-as-loss to inject symbolic constraints into neural training",
+      "relationship_sentence": "Semantic Loss demonstrated the gains from encoding logical formulas as training signals; SMTLayer advances this by replacing relaxations with an actual SMT engine that enforces richer theories and provides solver-grounded feedback."
+    },
+    {
+      "title": "DL2: Training and Querying Neural Networks with Logic",
+      "authors": "Marc Fischer, Mislav Balunovi\u0107, Dana Drachsler-Cohen, Timon Gehr, Martin Vechev",
+      "year": 2019,
+      "role": "Differentiable penalties for first-order logic constraints",
+      "relationship_sentence": "DL2 translated logical constraints into differentiable objectives; SMTLayer generalizes this idea by integrating an SMT solver for forward inference and backward guidance without requiring differentiable relaxations."
+    },
+    {
+      "title": "DeepProbLog: Neural Probabilistic Logic Programming",
+      "authors": "Robin Manhaeve, Sebastijan Duman\u010di\u0107, Angelika Kimmig, Thomas Demeester, Luc De Raedt",
+      "year": 2018,
+      "role": "Neuro-symbolic integration via logic program inference supervising neural components",
+      "relationship_sentence": "DeepProbLog showed the benefits of coupling symbolic inference with neural perception; SMTLayer similarly composes neural predictions with symbolic reasoning, but targets SMT theories and uses solver calls directly in both passes."
+    },
+    {
+      "title": "Posterior Regularization for Structured Latent Variable Models",
+      "authors": "Kuzman Ganchev, Jo\u00e3o Gra\u00e7a, Jennifer Gillenwater, Ben Taskar",
+      "year": 2010,
+      "role": "Constraint-driven learning via regularization toward feasible posteriors",
+      "relationship_sentence": "Posterior Regularization pioneered training with declarative constraints; SMTLayer operationalizes this principle with an SMT oracle that enforces feasibility and supplies corrective signals to the network."
+    },
+    {
+      "title": "NeuroSAT: A Neural Satisfiability Solver",
+      "authors": "Daniel Selsam, Nikolaj Bj\u00f8rner",
+      "year": 2019,
+      "role": "Neural reasoning over SAT problems",
+      "relationship_sentence": "NeuroSAT connected deep networks with SAT reasoning, motivating tighter integration between neural representations and symbolic solvers that SMTLayer realizes for richer SMT theories and end-to-end training."
+    }
+  ],
+  "synthesis_narrative": "SMTLayer builds on two converging lines of work: optimization/decision layers inside networks and neuro-symbolic learning with logical constraints. OptNet pioneered embedding exact solvers into neural architectures via implicit differentiation, establishing that solver outputs can be used as intermediate computations and training signals. Decision-focused learning extended this concept to non-differentiable combinatorial solvers by aligning training with decision quality rather than requiring gradients through the solver, a key precedent for SMTLayer\u2019s claim that the SMT oracle itself need not be differentiable.\n\nIn parallel, logic-as-learning-signal approaches\u2014Semantic Loss and DL2\u2014demonstrated that domain knowledge expressed as formulas can regularize neural models. However, both rely on differentiable relaxations of logic. DeepProbLog showed a stronger coupling of symbolic inference with neural components by letting a reasoning engine supervise neural predicates, but in the realm of probabilistic logic programming. NeuroSAT connected deep learning to satisfiability reasoning, highlighting the utility of symbolic constraints and the feasibility of solver-guided neural computation, albeit without providing a general solver layer for end-to-end tasks.\n\nSMTLayer synthesizes these strands: like OptNet/decision-focused learning, it places a solver in the loop, but\u2014unlike logic relaxations\u2014it uses a full SMT engine to perform forward inference from formulas and network-produced symbols, and to return backward signals that steer representations toward theory compatibility. This yields a practical PyTorch layer that encodes rich domain knowledge, improves data efficiency, and enhances robustness without requiring differentiable surrogate logics.",
+  "analysis_timestamp": "2026-01-06T23:42:49.064352"
+}

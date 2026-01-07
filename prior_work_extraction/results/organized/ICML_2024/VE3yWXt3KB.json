@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Stealing Machine Learning Models via Prediction APIs",
+      "authors": "Florian Tram\u00e8r et al.",
+      "year": 2016,
+      "role": "Foundation",
+      "relationship_sentence": "This work formalized the API-based model extraction threat model that the present paper adopts and extends, moving from functional cloning to exact parameter recovery for production LMs."
+    },
+    {
+      "title": "Knockoff Nets: Stealing Functionality of Black-Box Models",
+      "authors": "Tribhuvanesh Orekondy et al.",
+      "year": 2019,
+      "role": "Gap Identification",
+      "relationship_sentence": "Knockoff Nets showed black-box stealing yields functional replicas but not internal parameters; the current paper targets this explicit gap by recovering the output projection matrix of proprietary LMs."
+    },
+    {
+      "title": "High Accuracy and High Fidelity Extraction of Neural Networks",
+      "authors": "Matthew Jagielski et al.",
+      "year": 2020,
+      "role": "Baseline",
+      "relationship_sentence": "This state-of-the-art extraction method for neural nets established how far query-based cloning can go; the present work advances beyond fidelity to identify and recover a specific parameter matrix in deployed language models."
+    },
+    {
+      "title": "Using the Output Embedding to Improve Language Models",
+      "authors": "Ofir Press et al.",
+      "year": 2017,
+      "role": "Foundation",
+      "relationship_sentence": "Press and Wolf introduced weight tying between the input embeddings and the output softmax classifier; the attack here leverages this tying to interpret the recovered unembedding/projection as the model\u2019s embedding matrix and to deduce hidden dimension."
+    },
+    {
+      "title": "Tying Word Vectors and Word Classifiers: A Loss Framework for Language Modeling",
+      "authors": "Hakan Inan et al.",
+      "year": 2017,
+      "role": "Extension",
+      "relationship_sentence": "By formalizing and motivating the tying of word vectors and classifiers, this work supplies the precise linkage the paper exploits when reconstructing the projection layer from black-box log-prob outputs."
+    },
+    {
+      "title": "Model Inversion Attacks that Exploit Confidence Information and Basic Countermeasures",
+      "authors": "Matt Fredrikson et al.",
+      "year": 2015,
+      "role": "Inspiration",
+      "relationship_sentence": "This paper showed that probability scores leak internal model information; the present attack directly builds on that insight by using log-prob outputs (and API logit manipulations) to set up linear constraints that solve for the projection matrix."
+    },
+    {
+      "title": "Extracting Training Data from Large Language Models",
+      "authors": "Nicholas Carlini et al.",
+      "year": 2021,
+      "role": "Related Problem",
+      "relationship_sentence": "This work demonstrated practical exfiltration from production LLM APIs under realistic query access; the current paper adopts the same black-box deployment setting and escalates from data leakage to parameter recovery."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core innovation\u2014recovering the output embedding/projection matrix of production language models via standard API access\u2014roots directly in the model extraction lineage inaugurated by Tram\u00e8r et al., who defined the prediction-API threat model for stealing machine learning models. Subsequent work like Knockoff Nets and Jagielski et al. established that black-box querying can yield high-fidelity functional clones, but left a critical gap: these methods do not recover internal parameters. The present paper explicitly addresses that gap by targeting an identifiable parameter block\u2014the projection layer\u2014rather than only functional mimicry. Two foundational advances in language modeling, Press & Wolf and Inan et al., introduced and formalized weight tying between input embeddings and the output classifier. This structural identity makes the projection matrix both meaningful and recoverable: reconstructing the unembedding immediately reveals the tied embeddings and hidden dimension. Fredrikson et al.\u2019s model inversion results provide the key leakage mechanism: probability outputs can expose internal model structure. Leveraging modern LLM APIs that expose log-probabilities and logit controls, the authors translate these confidences into linear constraints sufficient to solve for the projection weights. Finally, Carlini et al. demonstrated the practicality of sensitive information extraction from production LLM APIs, validating the deployment-grounded threat model that this work adopts. Together, these works directly enable and motivate a shift from approximate functional extraction to precise parameter recovery in deployed language models.",
+  "analysis_timestamp": "2026-01-06T23:09:26.468421"
+}

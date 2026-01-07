@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Distilling the Knowledge in a Neural Network",
+      "authors": "Geoffrey Hinton, Oriol Vinyals, Jeff Dean",
+      "year": 2015,
+      "role": "Technique foundation (teacher\u2013student distillation)",
+      "relationship_sentence": "Introduced the distillation paradigm that this paper scrutinizes; the attacks and analyses hinge on the fact that students inherit the teacher\u2019s decision boundaries and confidence patterns."
+    },
+    {
+      "title": "Semi-supervised Knowledge Transfer for Deep Learning from Private Training Data (PATE)",
+      "authors": "Nicolas Papernot, Mart\u00edn Abadi, \u00dalfar Erlingsson, Ian Goodfellow, Kunal Talwar",
+      "year": 2017,
+      "role": "Privacy-motivated teacher\u2013student framework",
+      "relationship_sentence": "Established teacher\u2013student knowledge transfer as a privacy mechanism; the present work directly tests this privacy intuition (sans strong aggregation/noise) and shows that distillation alone affords limited membership privacy."
+    },
+    {
+      "title": "Membership Inference Attacks Against Machine Learning Models",
+      "authors": "Reza Shokri, Marco Stronati, Congzheng Song, Vitaly Shmatikov",
+      "year": 2017,
+      "role": "Foundational membership inference (MIA) formulation",
+      "relationship_sentence": "Provides the core MIA threat model and attack motifs that this paper adapts and specializes to distillation, evaluating leakage for both teacher and student models."
+    },
+    {
+      "title": "Privacy Risk in Machine Learning: Analyzing the Connection to Overfitting",
+      "authors": "Samuel Yeom, Irene Giacomelli, Matt Fredrikson, Somesh Jha",
+      "year": 2018,
+      "role": "Loss-based optimality lens for MIAs",
+      "relationship_sentence": "Links membership inference to per-example loss/generalization; the paper leverages this lens to explain why MI can succeed on non-training queries that are strongly influenced by training points."
+    },
+    {
+      "title": "Label-Only Membership Inference Attacks",
+      "authors": "Katherine Lee, Milad Nasr, Nicolas Papernot, Xueqi Wang, Florian Tram\u00e8r",
+      "year": 2021,
+      "role": "MIAs under limited outputs",
+      "relationship_sentence": "Develops boundary/margin-based MIAs when only labels are available; informs this paper\u2019s attack design for distilled setups where access to logits may be constrained."
+    },
+    {
+      "title": "Understanding Black-box Predictions via Influence Functions",
+      "authors": "Pang Wei Koh, Percy Liang",
+      "year": 2017,
+      "role": "Training-point influence methodology",
+      "relationship_sentence": "Provides the conceptual tool that predictions on crafted inputs can be highly influenced by specific training examples; underpins the paper\u2019s insight that MI can succeed without querying exact training points."
+    },
+    {
+      "title": "Membership Privacy for Machine Learning Models Through Knowledge Transfer",
+      "authors": "Tanvi Shejwalkar, Amir Houmansadr",
+      "year": 2021,
+      "role": "Distillation-based defense claim",
+      "relationship_sentence": "Proposes knowledge transfer/distillation as a defense against MI; this paper directly re-evaluates and challenges that claim, demonstrating the limited privacy of plain distillation\u2014especially when teacher and student data overlap."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core contribution\u2014designing targeted membership inference attacks to probe privacy in knowledge distillation\u2014sits at the intersection of three lines of work. First, Hinton et al. introduced distillation as a teacher\u2013student training method, later adapted by PATE to argue that knowledge transfer can privatize learning through mediated access to private data. Shejwalkar and Houmansadr further advanced this narrative by positioning knowledge transfer/distillation as a practical defense against MIAs. These works collectively motivated the community\u2019s belief that students might shed the teacher\u2019s privacy risks.\nSecond, foundational MIA research by Shokri et al. and the loss-based perspective of Yeom et al. established threat models and principled criteria (e.g., per-example loss and generalization gaps) for detecting membership. Choquette-Choo et al. extended MIAs to label-only settings, relevant when distilled systems expose limited outputs. These attack paradigms directly inform this paper\u2019s methodology for auditing both teacher and student in realistic, restricted-query scenarios.\nThird, Koh and Liang\u2019s influence functions supplied the conceptual bridge exploited here: a model\u2019s predictions on carefully chosen non-training inputs can be highly governed by specific training examples. Building on this, the paper shows that MIAs need not query exact training points; it suffices to query inputs strongly influenced by them. By uniting influence-guided query selection with modern MIA tooling, the authors demonstrate that students \u201cparrot\u201d their teachers, so distillation alone yields only limited privacy\u2014especially when teacher and student data are similar or when adversaries can manipulate the teacher\u2019s query distribution.",
+  "analysis_timestamp": "2026-01-07T00:02:04.799955"
+}

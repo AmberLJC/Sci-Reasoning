@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "GLTR: Statistical Detection and Visualization of Generated Text",
+      "authors": "Sebastian Gehrmann et al.",
+      "year": 2019,
+      "role": "Baseline",
+      "relationship_sentence": "DetectGPT directly improves upon GLTR\u2019s zero-shot, likelihood/rank-based probing by replacing first-order token statistics with a second-order curvature probe of the generator\u2019s log-probability surface."
+    },
+    {
+      "title": "Defending Against Neural Fake News",
+      "authors": "Rowan Zellers et al.",
+      "year": 2019,
+      "role": "Foundation",
+      "relationship_sentence": "This work crystallized the modern formulation of machine-generated text detection and showed that matched generators can act as strong detectors, a problem framing DetectGPT adopts while removing the need for supervised training or labeled data."
+    },
+    {
+      "title": "On the Pitfalls of Likelihood-based OOD Detection in Deep Generative Models",
+      "authors": "Eric Nalisnick et al.",
+      "year": 2019,
+      "role": "Gap Identification",
+      "relationship_sentence": "By showing raw likelihood is a misleading signal for distributional membership, this paper motivates DetectGPT\u2019s shift away from mean log-probability toward curvature as a more discriminative statistic."
+    },
+    {
+      "title": "Likelihood Ratios for Out-of-Distribution Detection",
+      "authors": "Jie Ren et al.",
+      "year": 2019,
+      "role": "Inspiration",
+      "relationship_sentence": "Ren et al. introduce the idea of normalizing likelihoods with an auxiliary model; DetectGPT echoes this insight by using a second model to generate local perturbations, effectively controlling for surface-form effects while probing the target model\u2019s landscape."
+    },
+    {
+      "title": "Intelligent Selection of Language Model Training Data",
+      "authors": "Robert C. Moore et al.",
+      "year": 2010,
+      "role": "Foundation",
+      "relationship_sentence": "The cross-entropy difference (Moore\u2013Lewis) principle of comparing sentences across models underlies common detection baselines that DetectGPT supersedes with a curvature-based criterion rather than first-order score differences."
+    },
+    {
+      "title": "BERT-Attack: Adversarial Attack Against BERT Using BERT",
+      "authors": "Linyang Li et al.",
+      "year": 2020,
+      "role": "Extension",
+      "relationship_sentence": "DetectGPT repurposes masked-LM\u2013based fluent token substitutions\u2014pioneered for adversarial attacks\u2014to generate natural local perturbations that enable finite-difference estimation of curvature on the target model\u2019s log-probability."
+    }
+  ],
+  "synthesis_narrative": "DetectGPT sits at the intersection of text detection, OOD theory for generative models, and perturbation-based probing. Earlier zero-shot detectors such as GLTR established that token-level likelihood ranks from the generator reveal systematic artifacts in machine text; DetectGPT keeps the \"probe the generator with its own scores\" philosophy but replaces first-order statistics with a second-order curvature test. The problem framing\u2014use the generator itself to detect fakes\u2014was popularized by Grover, yet that line relied on supervised detectors and labeled data; DetectGPT addresses this limitation by providing a label-free criterion. The shift away from raw likelihood is directly motivated by findings in generative OOD detection: Nalisnick et al. demonstrated that high likelihood can be misleading, and Ren et al. introduced likelihood ratios with a background model to factor out input complexity. DetectGPT echoes this normalization idea by using an auxiliary language model only to create local, fluent perturbations, and then judging the target model through how its log-probability curves around the original text. This also advances beyond Moore\u2013Lewis cross-entropy difference baselines, exchanging first-order model comparisons for a curvature-based statistic that better separates real from machine text. Finally, the practical mechanism enabling DetectGPT\u2019s curvature estimate draws on masked-LM substitution methods from adversarial NLP (e.g., BERT-Attack), reinterpreting them not as attacks but as controlled local probes of the target model\u2019s probability landscape.",
+  "analysis_timestamp": "2026-01-06T23:09:26.559299"
+}

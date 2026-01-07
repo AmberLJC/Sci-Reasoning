@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Deep Recurrent Q-Learning for Partially Observable MDPs",
+      "authors": "Matthew Hausknecht et al.",
+      "year": 2015,
+      "arxiv_id": "1507.06527",
+      "role": "Gap Identification",
+      "relationship_sentence": "DRQN is used as the canonical recurrent baseline for partial observability, and its poor performance under fixed observation delays directly motivates the need for a delay-specific formulation and training strategy."
+    },
+    {
+      "title": "DreamerV2: Mastering Atari with Discrete World Models",
+      "authors": "Danijar Hafner et al.",
+      "year": 2020,
+      "arxiv_id": "2010.02193",
+      "role": "Gap Identification",
+      "relationship_sentence": "Dreamer-style latent world models provide a strong generic approach to POMDPs, but the paper shows that without delay-aware alignment these methods degrade under large, fixed observation delays, revealing a gap their method addresses."
+    },
+    {
+      "title": "Making Deep Q-learning Methods Robust to Time Discretization",
+      "authors": "C\u00e9dric Tallec et al.",
+      "year": 2018,
+      "arxiv_id": "1806.07366",
+      "role": "Inspiration",
+      "relationship_sentence": "This work\u2019s insight that reaction time and time discretization should be modeled explicitly informs the paper\u2019s decision to incorporate delay into the decision process (DOMDP) and to align learning targets across delay."
+    },
+    {
+      "title": "Closer control of loops with dead time (Smith Predictor)",
+      "authors": "O. J. M. Smith",
+      "year": 1957,
+      "arxiv_id": "",
+      "role": "Inspiration",
+      "relationship_sentence": "The classical idea of predicting the current plant state from delayed measurements via a forward model inspires the paper\u2019s strategy to reconstruct undelayed states for policy/critic updates in delayed-observation settings."
+    },
+    {
+      "title": "Soft Actor-Critic: Off-Policy Maximum Entropy Deep Reinforcement Learning with a Stochastic Actor",
+      "authors": "Tuomas Haarnoja et al.",
+      "year": 2018,
+      "arxiv_id": "1801.01290",
+      "role": "Extension",
+      "relationship_sentence": "The proposed delay-aware algorithms are implemented as modifications of SAC, re-indexing transitions and adjusting targets to align actions and values across the observation delay."
+    },
+    {
+      "title": "Addressing Function Approximation Error in Actor-Critic Methods (TD3)",
+      "authors": "Scott Fujimoto et al.",
+      "year": 2018,
+      "arxiv_id": "1802.09477",
+      "role": "Baseline",
+      "relationship_sentence": "TD3 serves as a primary continuous-control baseline that the paper evaluates and improves upon by introducing delay-aware alignment that TD3 lacks."
+    }
+  ],
+  "synthesis_narrative": "Recurrent value-based agents such as DRQN aggregate histories to cope with partial observability, but they do not explicitly account for fixed observation lags and thus struggle when the agent must act on stale sensory inputs. Dreamer-style latent world models learn predictive belief states and achieve strong results in generic POMDPs, yet their training targets and rollouts assume timely observations and are not aligned to fixed delays, leading to degraded control when the signal is systematically late. Complementing these, work on time discretization shows that reaction latency should be treated as part of the state, suggesting that temporal misalignment, rather than lack of memory, is the core issue. Classical control offers a direct remedy: the Smith predictor compensates for dead time by rolling a dynamics model forward to estimate the current state from delayed measurements. Meanwhile, SAC and TD3 provide robust off-policy actor-critic frameworks for continuous control onto which algorithmic modifications can be cleanly grafted.\nTaken together, these works expose a clear opportunity: generic POMDP solutions and strong actor-critics lack mechanisms to align learning signals and decisions with fixed observation delays, while control theory offers a principled compensation template. Building on this, the paper formalizes delayed-observation MDPs to pin down the misalignment, and then extends SAC-style training with delay-aware transition indexing and predictive state reconstruction, achieving non-delayed-level performance even under large lags.",
+  "target_paper": {
+    "title": "Addressing Signal Delay in Deep Reinforcement Learning",
+    "authors": "Wei Wang, Dongqi Han, Xufang Luo, Dongsheng Li",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Deep Reinforcement Learning, Signal Delay, Robotic Control, Continuous Control",
+    "abstract": "Despite the notable advancements in deep reinforcement learning (DRL) in recent years, a prevalent issue that is often overlooked is the impact of signal delay. Signal delay occurs when there is a lag between an agent's perception of the environment and its corresponding actions. In this paper, we first formalize delayed-observation Markov decision processes (DOMDP) by extending the standard MDP framework to incorporate signal delays. Next, we elucidate the challenges posed by the presence of signal delay in DRL, showing that trivial DRL algorithms and generic methods for partially observable tasks suffer greatly from delays. Lastly, we propose effective strategies to overcome these challenges. Our methods achieve remarkable performance in continuous robotic control tasks with large delays, yielding results comparable to those in non-delayed cases. Overall, our work contributes to a deeper understanding of DRL in the presence of signal delays and introduces novel approaches to address ",
+    "openreview_id": "Z8UfDs4J46",
+    "forum_id": "Z8UfDs4J46"
+  },
+  "analysis_timestamp": "2026-01-06T15:56:03.204396"
+}

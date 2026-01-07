@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "An Empirical Model of Large-Batch Training",
+      "authors": "Sam McCandlish, Jared Kaplan, Dario Amodei et al.",
+      "year": 2018,
+      "role": "Conceptual foundation: gradient noise scale (GNS) and critical batch size (CBS)",
+      "relationship_sentence": "This work introduced CBS and the GNS-based proxy that the present paper directly scrutinizes and replaces with a simple empirical measurement."
+    },
+    {
+      "title": "Measuring the Effects of Data Parallelism on Neural Network Training",
+      "authors": "Chris J. Shallue, Jaehoon Lee, Joseph Antognini, Jonathan Sohl-Dickstein, Roy Frostig, George E. Dahl",
+      "year": 2018,
+      "role": "Empirical methodology for batch-size scaling and diminishing returns",
+      "relationship_sentence": "Their empirical protocol for quantifying speedup and diminishing returns with increasing batch size informs the paper\u2019s direct, target-based measurement of CBS over training."
+    },
+    {
+      "title": "Don't Decay the Learning Rate, Increase the Batch Size",
+      "authors": "Samuel L. Smith, Pieter-Jan Kindermans, Quoc V. Le",
+      "year": 2018,
+      "role": "Noise-scale perspective linking batch size and learning rate",
+      "relationship_sentence": "By tying optimization noise to the batch-size/learning-rate tradeoff, this work motivates tracking CBS dynamically and challenges static, one-shot estimates."
+    },
+    {
+      "title": "Accurate, Large Minibatch SGD: Training ImageNet in 1 Hour",
+      "authors": "Priya Goyal, Piotr Doll\u00e1r, Ross Girshick, Pieter Noordhuis, Lukasz Wesolowski, Aapo Kyrola, Andrew Tulloch, Yangqing Jia, Kaiming He",
+      "year": 2017,
+      "role": "Large-batch training practice and scaling rules",
+      "relationship_sentence": "The linear-scaling rule and warmup practices here underpin the practical regime where CBS matters, framing the efficiency-speed tradeoff the paper measures directly."
+    },
+    {
+      "title": "On Large-Batch Training for Deep Learning: Generalization Gap and Sharp Minima",
+      "authors": "Nitish Shirish Keskar, Dheevatsa Mudigere, Jorge Nocedal, Mikhail Smelyanskiy, Ping Tak Peter Tang",
+      "year": 2017,
+      "role": "Evidence for harms of too-large batches",
+      "relationship_sentence": "Their identification of generalization and optimization issues at large batch sizes motivates defining and measuring a CBS threshold to avoid token-inefficient regimes."
+    },
+    {
+      "title": "Language Models are Few-Shot Learners (GPT-3)",
+      "authors": "Tom B. Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah, et al.",
+      "year": 2020,
+      "role": "High-scale adoption of GNS/CBS in practice",
+      "relationship_sentence": "This work operationalized the GNS-based CBS heuristic at scale, providing the real-world context that the present paper revisits with a more direct, assumption-light estimator."
+    }
+  ],
+  "synthesis_narrative": "The core contribution\u2014a simple, empirical procedure to directly measure critical batch size (CBS) and track its evolution during language model training\u2014emerges from a reassessment of the gradient-noise-scale (GNS) proxy and a synthesis of empirical scaling methodologies. McCandlish et al. (2018) established the CBS concept and proposed estimating it via GNS, an idea subsequently adopted in large-scale practice (e.g., GPT-3), but their proxy relies on strong assumptions about gradient statistics. This gap motivates a direct, assumption-light measurement. The empirical playbook for quantifying diminishing returns with larger batches comes from Shallue et al. (2018), who analyzed data parallelism by measuring time/steps to reach fixed targets as a function of batch size; the present work adapts this target-based methodology to token efficiency in LMs to obtain CBS curves over training. Smith, Kindermans, and Le (2018) connect batch size, learning rate, and optimization noise, underscoring that CBS can change over training dynamics\u2014reinforcing the need to measure CBS continuously rather than infer it once from a noisy proxy. Goyal et al. (2017) provided the practical large-batch regime (linear scaling, warmup) where CBS choices determine throughput versus efficiency trade-offs, while Keskar et al. (2017) documented harms of overly large batches, making a measurable CBS threshold operationally consequential. Finally, GPT-3\u2019s reliance on the GNS heuristic highlights the stakes of accurate CBS estimation at scale; this paper offers a simpler, direct alternative and reveals CBS\u2019s evolution over training in modern LMs.",
+  "analysis_timestamp": "2026-01-07T00:21:32.255755"
+}

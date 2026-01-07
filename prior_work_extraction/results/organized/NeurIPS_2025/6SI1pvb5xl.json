@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Set Transformer: A Framework for Attention-based Permutation-Invariant Neural Networks",
+      "authors": "Juho Lee et al.",
+      "year": 2019,
+      "role": "Foundation",
+      "relationship_sentence": "Introduced inducing-point attention (ISAB/PMA), which pools a set through a small number of learned representatives and then broadcasts back; CBSA directly generalizes this contract-and-broadcast pattern while deriving it as a gradient step of a unified optimization objective and allowing representatives to be chosen from data."
+    },
+    {
+      "title": "Perceiver IO: A General Architecture for Structured Inputs & Outputs",
+      "authors": "Andrew Jaegle et al.",
+      "year": 2021,
+      "role": "Extension",
+      "relationship_sentence": "Uses a fixed latent bottleneck that cross-attends to inputs (compression) and then broadcasts to outputs; CBSA subsumes this when the representative set is a fixed learnable latent array and adds a principled optimization-derived interpretation to the contract-and-broadcast mechanism."
+    },
+    {
+      "title": "Object-Centric Learning with Slot Attention",
+      "authors": "Francesco Locatello et al.",
+      "year": 2020,
+      "role": "Inspiration",
+      "relationship_sentence": "Demonstrated iterative attention that clusters inputs into a small number of slots (representatives) and then decodes from them; CBSA adopts the \u2018compress to a few, then broadcast\u2019 idea but grounds it in a single unrolled gradient step from a unified attention objective for general self-attention."
+    },
+    {
+      "title": "Nystr\u00f6mformer: A Nystr\u00f6m-based Algorithm for Approximating Self-Attention",
+      "authors": "Yunyang Xiong et al.",
+      "year": 2021,
+      "role": "Baseline",
+      "relationship_sentence": "Approximates self-attention with a small set of landmarks (representatives) to achieve linear complexity; CBSA recovers this behavior when representatives are chosen as Nystr\u00f6m landmarks, while providing an optimization-grounded mechanism and improved interpretability."
+    },
+    {
+      "title": "Learning Fast Approximations of Sparse Coding",
+      "authors": "Karol Gregor et al.",
+      "year": 2010,
+      "role": "Foundation",
+      "relationship_sentence": "Established algorithm unrolling (LISTA), mapping a gradient/ISTA step to a forward pass; CBSA is explicitly constructed by unrolling a gradient step of a tailored attention objective, following this paradigm to tie each forward operation to optimization semantics."
+    },
+    {
+      "title": "Sparse Sequence-to-Sequence Models (\u03b1-entmax)",
+      "authors": "Ben Peters et al.",
+      "year": 2019,
+      "role": "Gap Identification",
+      "relationship_sentence": "Advanced interpretability via sparse probability mappings for attention but retained quadratic self-attention cost; CBSA addresses this gap by coupling interpretability with linear scaling through representative-based contraction derived from a unifying objective."
+    },
+    {
+      "title": "Linformer: Self-Attention with Linear Complexity",
+      "authors": "Sinong Wang et al.",
+      "year": 2020,
+      "role": "Gap Identification",
+      "relationship_sentence": "Achieves linear-time attention via low-rank projections but lacks a unifying optimization view and inherent interpretability; CBSA fills this gap by deriving linear-time, representative-based attention from a principled optimization objective that yields interpretable structure."
+    }
+  ],
+  "synthesis_narrative": "CBSA\u2019s core idea\u2014compressing many tokens into a few representatives and broadcasting back\u2014stands on a clear lineage of representative-based attention and optimization-derived architectures. Set Transformer laid the foundation with inducing-point attention (ISAB/PMA), showing that sets can be efficiently summarized by a small learned representative set and then disseminated back, a blueprint CBSA generalizes and grounds in optimization. Perceiver IO extended this bottleneck paradigm to broad modalities through a learnable latent array and bidirectional cross-attention; CBSA subsumes this case when representatives are fixed latents, but crucially provides a principled objective whose gradient step instantiates the forward pass. Slot Attention supplied the inspirational motif of clustering inputs into a few slots and then decoding, highlighting the interpretability benefits of object-like representatives; CBSA adopts this contract-and-broadcast behavior but replaces heuristic updates with a single, unrolled gradient step.\nOn the efficiency side, Nystr\u00f6mformer is the most direct baseline: its landmarks are a concrete instantiation of CBSA\u2019s representatives, yet CBSA unifies such choices under one objective while improving interpretability. Linformer typifies linear attention via low-rank projections but lacks semantic grounding; CBSA provides that missing optimization lens. Finally, the algorithm-unrolling paradigm of LISTA enables CBSA\u2019s architecture-as-optimization design, while Entmax epitomizes prior interpretability-only advances that preserved quadratic costs\u2014precisely the split CBSA bridges by jointly achieving interpretability and linear scaling.",
+  "analysis_timestamp": "2026-01-06T23:08:23.951138"
+}

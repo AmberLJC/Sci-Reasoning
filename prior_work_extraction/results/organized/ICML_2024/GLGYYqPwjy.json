@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "CCNet: Extracting High-Quality Monolingual Datasets from Web Crawl Data",
+      "authors": "Guillaume Wenzek, Marie-Anne Lachaux, Alexis Conneau, et al.",
+      "year": 2020,
+      "role": "Heuristic web-data filtering baseline",
+      "relationship_sentence": "QuRating explicitly seeks to surpass CCNet-style perplexity and rule-based filtering by replacing such heuristics with learned, multidimensional quality ratings."
+    },
+    {
+      "title": "Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer (C4 Corpus)",
+      "authors": "Colin Raffel, Noam Shazeer, Adam Roberts, et al.",
+      "year": 2020,
+      "role": "Large-scale data curation via simple heuristics",
+      "relationship_sentence": "C4\u2019s widespread heuristic cleaning of Common Crawl set a template for pretraining data selection that QuRating critiques and improves upon with LLM-judged quality annotations."
+    },
+    {
+      "title": "OpenWebText Corpus",
+      "authors": "Jason Gokaslan, Vanya Cohen",
+      "year": 2019,
+      "role": "Quality-proxy data selection (upvote-based)",
+      "relationship_sentence": "OpenWebText demonstrated that proxy signals (e.g., Reddit upvotes) can improve pretraining data quality; QuRating generalizes this idea by learning richer quality signals directly from pairwise judgments."
+    },
+    {
+      "title": "Learning to Summarize with Human Feedback",
+      "authors": "Nisan Stiennon, Long Ouyang, Jeffrey Wu, Daniel M. Ziegler, et al.",
+      "year": 2020,
+      "role": "Pairwise preference modeling to learn scalar rewards",
+      "relationship_sentence": "QuRating\u2019s QuRater model mirrors RLHF reward modeling by training a scalar quality predictor from pairwise comparisons, a technique popularized by this work."
+    },
+    {
+      "title": "Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena",
+      "authors": "Lianmin Zheng, Wei-Lin Chiang, Ying Sheng, et al.",
+      "year": 2023,
+      "role": "LLM-as-a-judge reliability for pairwise judgments",
+      "relationship_sentence": "Evidence that LLMs can provide reliable pairwise evaluations underpins QuRating\u2019s decision to use LLMs to generate large-scale quality comparisons."
+    },
+    {
+      "title": "Intelligent Selection of Language Model Training Data",
+      "authors": "Robert C. Moore, William Lewis",
+      "year": 2010,
+      "role": "Foundational document scoring for data selection",
+      "relationship_sentence": "QuRating extends the classic idea of scoring documents for selection (e.g., cross-entropy difference) by learning multi-criteria quality scores rather than relying on domain-mismatch heuristics."
+    },
+    {
+      "title": "Dynamic Data Selection for Neural Machine Translation",
+      "authors": "Marlies van der Wees, Arianna Bisazza, Christof Monz",
+      "year": 2017,
+      "role": "Sampling via score-proportional distributions",
+      "relationship_sentence": "QuRating\u2019s practice of sampling with quality ratings as logits echoes dynamic/soft sampling strategies that weight examples by selection scores to balance quality and diversity."
+    }
+  ],
+  "synthesis_narrative": "QuRating sits at the intersection of three lines of work: heuristic web-scale data filtering, preference-based learning from pairwise comparisons, and score-weighted sampling for data curation. Early large-scale corpora such as C4 and OpenWebText, as well as the CCNet pipeline, established that filtering noisy web data with simple heuristics or proxy signals can materially improve language model pretraining. However, these approaches largely rely on static rules (e.g., language ID, perplexity thresholds, toxicity lists) or crude popularity signals, leaving richer human notions of quality\u2014style, expertise, factuality, educational value\u2014under-modeled.\n\nThe second thread, inaugurated in NLP by preference-based training such as Learning to Summarize with Human Feedback, showed how pairwise comparisons can train scalar reward models that capture nuanced human judgments. Subsequent evidence from MT-Bench and Chatbot Arena that LLMs can reliably act as judges enabled scaling such comparisons beyond costly human annotation. QuRating directly leverages this: LLM-generated pairwise judgments are converted into scalar ratings (QuRater), providing multi-criterion quality scores for massive corpora.\n\nFinally, classic data selection methods (Moore\u2013Lewis) and dynamic/soft sampling in NMT demonstrated that selecting or sampling examples proportional to relevance scores can improve generalization while preserving diversity. QuRating\u2019s sampling \u201cusing quality ratings as logits\u201d operationalizes this principle, balancing high-quality text with breadth. Together, these prior works shaped QuRating\u2019s core innovation: learning rich, LLM-judged quality scores from pairwise comparisons and using them to curate pretraining data in a way that outperforms heuristic filtering while maintaining diversity.",
+  "analysis_timestamp": "2026-01-07T00:02:04.879712"
+}

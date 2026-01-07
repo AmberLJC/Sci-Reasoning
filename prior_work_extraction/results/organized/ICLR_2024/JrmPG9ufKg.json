@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "A Simple Framework for Contrastive Learning of Visual Representations",
+      "authors": "Ting Chen et al.",
+      "year": 2020,
+      "arxiv_id": "2002.05709",
+      "role": "Baseline",
+      "relationship_sentence": "The paper adopts SimCLR\u2019s instance-discrimination contrastive loss as the local client objective and then augments it with a user-verification term, showing this combination yields a lower bound to a global multi-view mutual information."
+    },
+    {
+      "title": "Representation Learning with Contrastive Predictive Coding",
+      "authors": "Aaron van den Oord et al.",
+      "year": 2018,
+      "arxiv_id": "1807.03748",
+      "role": "Foundation",
+      "relationship_sentence": "CPC\u2019s InfoNCE objective provides the mutual-information lower bound framework that the paper leverages to formally connect the augmented SimCLR + user-verification loss to a bound on global multi-view mutual information."
+    },
+    {
+      "title": "On Variational Bounds of Mutual Information",
+      "authors": "Ben Poole et al.",
+      "year": 2019,
+      "arxiv_id": "1905.06922",
+      "role": "Foundation",
+      "relationship_sentence": "This work\u2019s unifying treatment of MI lower bounds (including InfoNCE) underpins the paper\u2019s derivation that combining local contrastive terms with user verification recovers a valid global multi-view MI bound."
+    },
+    {
+      "title": "Contrastive Multiview Coding",
+      "authors": "Yonglong Tian et al.",
+      "year": 2020,
+      "arxiv_id": "1906.05849",
+      "role": "Inspiration",
+      "relationship_sentence": "CMC\u2019s view that contrastive learning maximizes mutual information across multiple views directly motivates framing federated clients/views under a global multi-view MI objective."
+    },
+    {
+      "title": "Supervised Contrastive Learning",
+      "authors": "Prannay Khosla et al.",
+      "year": 2020,
+      "arxiv_id": "2004.11362",
+      "role": "Extension",
+      "relationship_sentence": "The paper extends SimCLR to the federated semi-supervised setting by adopting SupCon\u2019s key idea\u2014treat same-label samples as positives\u2014and by adding an auxiliary label-prediction head."
+    },
+    {
+      "title": "Model-Contrastive Federated Learning",
+      "authors": "Qinbin Li et al.",
+      "year": 2021,
+      "arxiv_id": "2103.16257",
+      "role": "Gap Identification",
+      "relationship_sentence": "MOON\u2019s observation that non-i.i.d. data degrades federated contrastive learning motivates the paper\u2019s MI-based objective and analysis, replacing heuristic model-level contrast with a principled global MI perspective."
+    },
+    {
+      "title": "Communication-Efficient Learning of Deep Networks from Decentralized Data",
+      "authors": "H. Brendan McMahan et al.",
+      "year": 2017,
+      "arxiv_id": "1602.05629",
+      "role": "Foundation",
+      "relationship_sentence": "This work defines the federated learning setup and aggregation protocol on which the paper\u2019s federated SimCLR and user-verification objectives are instantiated and evaluated."
+    }
+  ],
+  "synthesis_narrative": "SimCLR showed that instance-discrimination with augmentations and a temperature-scaled softmax contrastive loss can learn strong representations, establishing a practical contrastive objective widely adopted in vision. Contrastive Predictive Coding formalized the InfoNCE objective as a tractable lower bound on mutual information, casting contrastive learning as MI maximization via a noise-contrastive classification task. Poole et al. unified variational MI bounds, clarifying when InfoNCE-type objectives constitute valid MI lower bounds and how combining or reweighting terms affects bound properties. Contrastive Multiview Coding emphasized that maximizing mutual information across multiple views is key to representation quality, framing contrast as multiview MI maximization rather than mere instance pairing. Supervised Contrastive Learning demonstrated that using same-label examples as positives and coupling contrastive learning with a classification head yields stronger supervised/semi-supervised representations. Federated learning, formalized by FedAvg, enables decentralized training under client heterogeneity, while MOON highlighted that non-i.i.d. data induces representational drift and proposed a contrastive alignment between local and global models to mitigate it.\nBuilding on these insights, a clear gap emerged: federated contrastive methods lacked a principled connection between local objectives and a global representation criterion under client heterogeneity. By viewing clients as views and leveraging InfoNCE/variational MI theory, it becomes natural to add a user-verification objective that ties client identity to representations, thereby recovering a lower bound to global multiview mutual information. The supervised contrastive recipe provides a direct path to a federated semi-supervised variant via same-label positives and an auxiliary label head, while MOON\u2019s non-i.i.d. findings motivate analyzing how heterogeneity impacts global MI. Within the FedAvg framework, this synthesis yields a theoretically grounded, federated SimCLR extension.",
+  "target_paper": {
+    "title": "A Mutual Information Perspective on Federated Contrastive Learning",
+    "authors": "Christos Louizos, Matthias Reisser, Denis Korzhenkov",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "federated learning, contrastive learning, self-supervised, semi-supervised, mutual information",
+    "abstract": "We investigate contrastive learning in the federated setting through the lens of Sim- CLR and multi-view mutual information maximization. In doing so, we uncover a connection between contrastive representation learning and user verification; by adding a user verification loss to each client\u2019s local SimCLR loss we recover a lower bound to the global multi-view mutual information. To accommodate for the case of when some labelled data are available at the clients, we extend our SimCLR variant to the federated semi-supervised setting. We see that a supervised SimCLR objective can be obtained with two changes: a) the contrastive loss is computed between datapoints that share the same label and b) we require an additional auxiliary head that predicts the correct labels from either of the two views. Along with the proposed SimCLR extensions, we also study how different sources of non-i.i.d.-ness can impact the performance of federated unsupervised learning through global mutual information m",
+    "openreview_id": "JrmPG9ufKg",
+    "forum_id": "JrmPG9ufKg"
+  },
+  "analysis_timestamp": "2026-01-06T15:33:24.783612"
+}

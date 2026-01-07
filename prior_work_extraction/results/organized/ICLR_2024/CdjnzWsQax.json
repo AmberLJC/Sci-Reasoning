@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Time-series Generative Adversarial Networks",
+      "authors": "Jinsung Yoon et al.",
+      "year": 2019,
+      "arxiv_id": "1907.05321",
+      "role": "Baseline",
+      "relationship_sentence": "TimeGAN is the primary time-series synthesis baseline the paper seeks to surpass, and its limitation of assuming uniform temporal scales directly motivates modeling irregular, variable-duration financial patterns."
+    },
+    {
+      "title": "CSDI: Conditional Score-based Diffusion Models for Probabilistic Time Series Imputation",
+      "authors": "Yusuke Tashiro et al.",
+      "year": 2021,
+      "arxiv_id": "2107.03502",
+      "role": "Extension",
+      "relationship_sentence": "The paper extends the core idea of applying score-based diffusion to time series by adapting it from conditional imputation to unconditional generation of learned pattern segments."
+    },
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Jonathan Ho et al.",
+      "year": 2020,
+      "arxiv_id": "2006.11239",
+      "role": "Foundation",
+      "relationship_sentence": "The diffusion module in FTS-Diffusion inherits the DDPM forward\u2013reverse noising scheme and training objective to synthesize realistic segment-level time-series samples."
+    },
+    {
+      "title": "Matrix Profile I: All Pairs Similarity Joins for Time Series: A Unifying View that Includes Motifs, Discords and Shapelets",
+      "authors": "Chin-Chia M. Yeh et al.",
+      "year": 2016,
+      "arxiv_id": "1603.09113",
+      "role": "Inspiration",
+      "relationship_sentence": "The paper\u2019s scale-invariant pattern recognition module is inspired by matrix-profile-style motif discovery, leveraging z-normalized subsequence matching to extract recurring patterns independent of absolute magnitude."
+    },
+    {
+      "title": "k-Shape: Efficient and Accurate Clustering of Time Series",
+      "authors": "Nikos Paparrizos et al.",
+      "year": 2015,
+      "arxiv_id": "1503.01588",
+      "role": "Inspiration",
+      "relationship_sentence": "The scale-invariant representation of patterns builds on k-Shape\u2019s shape-based distance (SBD) and z-normalization to align and cluster subsequences by shape rather than scale or phase."
+    },
+    {
+      "title": "A New Approach to the Economic Analysis of Nonstationary Time Series and the Business Cycle",
+      "authors": "James D. Hamilton",
+      "year": 1989,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "Modeling the temporal transition of extracted patterns is grounded in Markov regime-switching ideas, informing the use of a transition mechanism over pattern states to aggregate generated segments."
+    }
+  ],
+  "synthesis_narrative": "Matrix-profile-based motif discovery established that recurring subsequences in time series can be surfaced robustly using z-normalized similarity, enabling identification of repeated patterns independent of absolute amplitude and tolerant to local misalignment. Complementing this, k-Shape introduced a shape-based distance with z-normalization that clusters subsequences by their underlying shape while being invariant to scale and phase, offering a practical way to represent motif classes without being tied to raw magnitudes. In generative modeling for time series, diffusion methods provided a powerful likelihood-based alternative: DDPM formalized a forward\u2013reverse noising process and objective for high-fidelity sample synthesis, while CSDI demonstrated that score-based diffusion can be adapted to time series specifically, conditioning on observed portions to model complex dynamics. In finance, Hamilton\u2019s regime-switching framework emphasized that temporal dynamics transition among latent states with distinct persistence, motivating explicit modeling of transitions and durations. Meanwhile, TimeGAN became the de facto baseline for synthetic time-series generation but typically assumes regular sampling and does not natively capture variable-duration, scale-invariant motifs.\nTogether, these works revealed both the ingredients and the gap: robust discovery of scale-invariant motifs (matrix profile, k-Shape), a generative mechanism capable of high-fidelity segment synthesis (DDPM/CSDI), and a principled view of state transitions over time (regime switching), while existing generators like TimeGAN underperformed on irregular, multiscale financial patterns. The paper synthesizes these strands by first extracting scale- and duration-agnostic motifs, then training a diffusion model to generate motif segments, and finally learning a transition mechanism over motif types to stitch segments into coherent financial series\u2014an evident next step given the limitations and insights of the prior literature.",
+  "target_paper": {
+    "title": "Generative Learning for Financial Time Series with Irregular and Scale-Invariant Patterns",
+    "authors": "Hongbin Huang, Minghua Chen, Xiao Qiao",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "generative model, time series pattern recognition, diffusion model, financial time series",
+    "abstract": "Limited data availability poses a major obstacle in training deep learning models for financial applications. Synthesizing financial time series to augment real-world data is challenging due to the irregular and scale-invariant patterns uniquely associated with financial time series - temporal dynamics that repeat with varying duration and magnitude. Such dynamics cannot be captured by existing approaches, which often assume regularity and uniformity in the underlying data. We develop a novel generative framework called FTS-Diffusion to model irregular and scale-invariant patterns that consists of three modules. First, we develop a scale-invariant pattern recognition algorithm to extract recurring patterns that vary in duration and magnitude. Second, we construct a diffusion-based generative network to synthesize segments of patterns. Third, we model the temporal transition of patterns in order to aggregate the generated segments. Extensive experiments show that FTS-Diffusion generates",
+    "openreview_id": "CdjnzWsQax",
+    "forum_id": "CdjnzWsQax"
+  },
+  "analysis_timestamp": "2026-01-06T13:14:06.868950"
+}

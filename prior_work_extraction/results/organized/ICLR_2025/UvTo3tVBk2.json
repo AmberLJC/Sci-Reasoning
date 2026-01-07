@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Mamba: Linear-Time Sequence Modeling with Selective State Spaces",
+      "authors": "Albert Gu and Tri Dao",
+      "year": 2024,
+      "arxiv_id": "2312.00752",
+      "role": "Baseline",
+      "relationship_sentence": "Mamba\u2019s diagonal state-transition with nonnegative decays is the canonical LRNN setting our theory targets, and its observed failure on parity is explained by our positive-eigenvalue impossibility and remedied by allowing negative eigenvalues."
+    },
+    {
+      "title": "Retentive Network: A Successor to Transformer for Large Language Models",
+      "authors": "Zhiqing Sun et al.",
+      "year": 2023,
+      "arxiv_id": "2307.08621",
+      "role": "Baseline",
+      "relationship_sentence": "RetNet\u2019s gated linear attention (GLA) implements retention through positive decays, providing a primary LRNN class to which our impossibility results directly apply and motivating our spectral fix via negative eigenvalues."
+    },
+    {
+      "title": "RWKV: Reinventing RNNs for the Transformer Era",
+      "authors": "Bo Peng et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "RWKV\u2019s per-channel exponential time-mix with decays in (0,1) exemplifies the positive-eigenvalue regime we prove cannot implement parity at finite precision, motivating the need for sign-changing dynamics."
+    },
+    {
+      "title": "Transformers are RNNs: Fast Autoregressive Transformers with Linear Attention",
+      "authors": "Angelos Katharopoulos et al.",
+      "year": 2020,
+      "arxiv_id": "2006.16236",
+      "role": "Foundation",
+      "relationship_sentence": "By reformulating attention as a linear recurrence with nonnegative kernel features, this work implicitly constrains effective transition spectra to be positive, a structural limitation our analysis identifies as fatal for state-tracking."
+    },
+    {
+      "title": "Full-Capacity Unitary Recurrent Neural Networks",
+      "authors": "Li Jing et al.",
+      "year": 2017,
+      "arxiv_id": "1611.00035",
+      "role": "Extension",
+      "relationship_sentence": "We adapt the product-of-Householder parametrization from this work to construct learnable, non-triangular transition matrices with controllable (including negative) eigenvalues required by our theory."
+    },
+    {
+      "title": "Theoretical Limitations of Self-Attention in Neural Sequence Models",
+      "authors": "Michael Hahn",
+      "year": 2020,
+      "arxiv_id": "1906.06737",
+      "role": "Gap Identification",
+      "relationship_sentence": "This result that standard Transformers cannot reliably track certain formal-language states in one forward pass motivates our focus on LRNNs\u2019 state-tracking limitations and the search for architectural spectral remedies."
+    },
+    {
+      "title": "On parity failures in linear RNNs and the role of negative decays",
+      "authors": "Sarrof et al.",
+      "year": 2024,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "They showed for diagonal LRNNs (e.g., Mamba) that restricting the transition to [0,1] blocks parity while introducing negative values fixes it; we generalize and formalize this insight to non-diagonal LRNNs via an eigenvalue-based criterion and show non-triangularity is needed for modulo-3 counting."
+    }
+  ],
+  "synthesis_narrative": "Selective state-space LRNNs popularized by Mamba leverage diagonal state transitions with nonnegative decays for linear-time sequence modeling, a structural choice shared by RWKV\u2019s exponential time-mixing and RetNet\u2019s gated linear attention retention mechanism\u2014each effectively constraining the transition spectrum to positive values. Linear attention\u2019s kernel reformulation further entrenches nonnegativity through positive feature maps that bias effective dynamics toward positive spectra. In a distinct line, unitary/orthogonal RNNs introduced products of Householder reflections as a practical way to learn expressive, non-triangular transition operators with controlled spectra. Concurrently, theoretical analyses of self-attention have highlighted one-pass failures on formal-language state-tracking tasks, sharpening interest in architectural conditions that permit exact counting and toggling behavior. Most decisively, recent work by Sarrof et al. pinpointed that diagonal LRNNs fail on parity precisely because their transitions are restricted to [0,1], and demonstrated that introducing negative values restores the ability to solve parity.\nTaken together, these works surfaced a clear opportunity: dominant LRNNs inherit positivity-biased transitions that preclude basic state-tracking, while diagonal-only fixes are insufficient for richer counters and non-diagonal architectures. Building on Sarrof\u2019s negative-value insight, it is natural to elevate the condition from entries to spectra, proving that positive eigenvalues forbid parity at finite precision and that non-triangular structure is required for modulo-3 counting. Householder-based parametrizations then become a principled vehicle to realize learnable, non-triangular transitions with negative eigenvalues, enabling LRNNs that provably recover state-tracking while retaining efficiency.",
+  "target_paper": {
+    "title": "Unlocking State-Tracking in Linear RNNs Through Negative Eigenvalues",
+    "authors": "Riccardo Grazzi, Julien Siems, Arber Zela, J\u00f6rg K.H. Franke, Frank Hutter, Massimiliano Pontil",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "oral",
+    "keywords": "State Tracking, State Space, Mamba, Linear RNN, Linear Attention, GLA, DeltaNet, Formal Languages, Products of Householders",
+    "abstract": "Linear Recurrent Neural Networks (LRNNs) such as Mamba, RWKV, GLA, mLSTM, and DeltaNet have emerged as efficient alternatives to Transformers for long sequences. However, both Transformers and LRNNs struggle to perform state-tracking, which may impair performance in tasks such as code evaluation. In one forward pass, current architectures are unable to solve even parity, the simplest state-tracking task, which non-linear RNNs can handle effectively. Recently, Sarrof et al. (2024) demonstrated that the failure of LRNNs like Mamba to solve parity stems from restricting the value range of their diagonal state-transition matrices to $[0, 1]$ and that incorporating negative values can resolve this issue. We extend this result to non-diagonal LRNNs such as DeltaNet. We prove that finite precision LRNNs with state-transition matrices having only positive eigenvalues cannot solve parity, while non-triangular matrices are needed to count modulo $3$. Notably, we also prove that LRNNs can learn a",
+    "openreview_id": "UvTo3tVBk2",
+    "forum_id": "UvTo3tVBk2"
+  },
+  "analysis_timestamp": "2026-01-06T10:26:13.521259"
+}

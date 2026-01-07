@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Attention Is All You Need",
+      "authors": "Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, Lukasz Kaiser, Illia Polosukhin",
+      "year": 2017,
+      "role": "Foundational architecture",
+      "relationship_sentence": "Provides the canonical self-attention transformer architecture whose layer-wise computation the paper formalizes and relates to constant-round MPC, enabling the bidirectional simulation results."
+    },
+    {
+      "title": "A Model of Computation for MapReduce",
+      "authors": "Howard Karloff, Siddharth Suri, Sergei Vassilvitskii",
+      "year": 2010,
+      "role": "Foundational theory (MPC model)",
+      "relationship_sentence": "Introduces the Massively Parallel Computation framework and round/communication constraints that the paper leverages to equate a constant number of attention layers with a constant number of MPC rounds."
+    },
+    {
+      "title": "Are Transformers Universal Approximators of Sequence-to-Sequence Functions?",
+      "authors": "Chulhee Yun, Srinadh Bhojanapalli, Ankit Singh Rawat, Sashank J. Reddi, Sanjiv Kumar",
+      "year": 2020,
+      "role": "Expressivity analysis of transformers",
+      "relationship_sentence": "Establishes transformer expressivity from a circuit-style perspective, which the paper sharpens by tying layer depth to MPC round complexity and showing logarithmic depth suffices for key algorithmic tasks."
+    },
+    {
+      "title": "Theoretical Limitations of Self-Attention",
+      "authors": "Michael Hahn",
+      "year": 2020,
+      "role": "Lower bounds/limitations",
+      "relationship_sentence": "Identifies depth-related limitations of self-attention, motivating the paper\u2019s precise characterization of depth as a parallel communication resource via MPC equivalence."
+    },
+    {
+      "title": "On the Practical Computational Power of Finite Precision RNNs",
+      "authors": "Gail Weiss, Yoav Goldberg, Eran Yahav",
+      "year": 2018,
+      "role": "Comparator model (sequential networks) theory",
+      "relationship_sentence": "Characterizes finite-precision recurrent models as essentially weighted automata, providing a contrasting baseline class that the paper separates from logarithmic-depth transformers using parallelism-based arguments."
+    },
+    {
+      "title": "Linformer: Self-Attention with Linear Complexity",
+      "authors": "Sinong Wang, Belinda Z. Li, Madian Khabsa, Han Fang, Hao Ma",
+      "year": 2020,
+      "role": "Sub-quadratic attention approximation",
+      "relationship_sentence": "Serves as a representative linearized attention model; the paper\u2019s MPC-based analysis yields tasks separating full transformers from Linformer-style sub-quadratic approximations due to restricted global communication."
+    },
+    {
+      "title": "Big Bird: Transformers for Longer Sequences",
+      "authors": "Manzil Zaheer, Guru Guruganesh, Avinava Dubey, Joshua Ainslie, Chris Alberti, Santiago Ontanon, Philip Pham, Anirudh Ravula, Qifan Wang, Li Yang, Amr Ahmed",
+      "year": 2020,
+      "role": "Sparse/sub-quadratic attention architecture",
+      "relationship_sentence": "Provides a widely used sparse-attention design; the paper contrasts such restricted connectivity with MPC-style all-to-all communication to exhibit tasks these approximations cannot efficiently solve at small depth."
+    }
+  ],
+  "synthesis_narrative": "This paper\u2019s core insight\u2014equating a constant number of transformer self-attention layers with a constant number of Massively Parallel Computation (MPC) rounds\u2014sits at the intersection of transformer expressivity and parallel algorithm theory. The architectural substrate comes from Vaswani et al. (2017), whose self-attention mechanism is the object of formal simulation. Karloff\u2013Suri\u2013Vassilvitskii (2010) provide the MPC abstraction and round/communication constraints, which the authors adopt to formalize attention\u2019s capability as a parallel communication primitive. Prior expressivity work such as Yun et al. (2020) framed transformers in circuit-theoretic terms; the present paper advances this by pinning layer depth to MPC round complexity, yielding the headline result that logarithmic depth suffices for basic algorithmic tasks classically solved via parallelism (e.g., via pointer-jumping and related primitives).\n\nOn the limitations side, Hahn (2020) highlighted depth as a critical bottleneck for self-attention, which this work contextualizes: depth is precisely parallel communication budget. Against other sequence models, results like Weiss\u2013Goldberg\u2013Yahav (2018) position finite-precision RNNs as essentially sequential/finite-state, explaining why they fail on tasks the log-depth transformer can solve. Finally, by analyzing sub-quadratic attention schemes (Linformer, BigBird), the paper isolates constrained global communication as the culprit: reduced connectivity undermines the constant-round MPC equivalence and yields separations on basic tasks. Collectively, these threads crystallize the paper\u2019s contribution: parallelism\u2014and the ability to perform global, round-efficient communication\u2014is the distinguishing computational resource of transformers.",
+  "analysis_timestamp": "2026-01-07T00:02:04.886466"
+}

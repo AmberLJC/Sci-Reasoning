@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "DUSt3R: (Pointmap-based pose-free 3D reconstruction from image pairs)",
+      "authors": "Original authors (various)",
+      "year": 2023,
+      "role": "Pointmap reconstruction backbone",
+      "relationship_sentence": "EAG3R inherits the pointmap prediction paradigm from DUSt3R, using dense pointmaps from image pairs as the core representation for pose-free geometry estimation, and extends this paradigm by augmenting it with events."
+    },
+    {
+      "title": "MonST3R",
+      "authors": "Original authors (various)",
+      "year": 2024,
+      "role": "Backbone for dynamic-scene pointmaps",
+      "relationship_sentence": "EAG3R is built upon the MonST3R backbone, leveraging its pointmap architecture and training pipeline for handling dynamics, then adding event streams, reliability-aware fusion, and novel losses on top."
+    },
+    {
+      "title": "A Unifying Contrast Maximization Framework for Event Cameras",
+      "authors": "Guillermo Gallego et al.",
+      "year": 2018,
+      "role": "Event-based photometric objective",
+      "relationship_sentence": "The event-based photometric consistency loss in EAG3R is conceptually grounded in contrast maximization/brightness-change principles introduced by Gallego et al., adapting them to supervise spatiotemporal coherence within pointmap-based global optimization."
+    },
+    {
+      "title": "E2VID: Learning to Reconstruct High Frame-Rate High Dynamic Range Videos from Event Cameras",
+      "authors": "Henri Rebecq et al.",
+      "year": 2019,
+      "role": "Event-to-intensity reconstruction and fusion prior",
+      "relationship_sentence": "E2VID demonstrates how events provide complementary, HDR, blur-robust cues to frames; EAG3R\u2019s event adapter and fusion design build on this intuition to inject event-derived structure and edge timing into the RGB pointmap pipeline."
+    },
+    {
+      "title": "EV-FlowNet: Self-Supervised Optical Flow Estimation for Event-based Cameras",
+      "authors": "Alex Zihao Zhu et al.",
+      "year": 2018,
+      "role": "Event representation and motion cues",
+      "relationship_sentence": "EAG3R\u2019s lightweight event encoder and SNR-aware fusion are informed by EV-FlowNet\u2019s use of event accumulations to extract reliable motion/edge features, guiding how to represent and weight event information during RGB-event feature fusion."
+    },
+    {
+      "title": "DROID-SLAM: Deep Visual SLAM for Monocular, Stereo, and RGB-D Cameras",
+      "authors": "Zachary Teed and Jia Deng",
+      "year": 2021,
+      "role": "Photometric bundle-adjustment paradigm",
+      "relationship_sentence": "EAG3R\u2019s global optimization stage inherits the idea of photometric-consistency-driven refinement from DROID-SLAM, adapting it by formulating an event-based photometric consistency term tailored to asynchronous event streams."
+    },
+    {
+      "title": "Deep Retinex-Net: Deep Retinex Decomposition for Low-Light Enhancement",
+      "authors": "Chen Wei et al.",
+      "year": 2018,
+      "role": "Retinex-inspired enhancement prior",
+      "relationship_sentence": "EAG3R\u2019s retinex-inspired image enhancement module is motivated by Retinex-based decomposition for low-light/uneven illumination, stabilizing RGB inputs so that event-RGB fusion can rely on more consistent reflectance features."
+    }
+  ],
+  "synthesis_narrative": "EAG3R fuses two influential lines of work: pointmap-based, pose-free 3D reconstruction and event-based perception under challenging imaging conditions. DUSt3R established dense pointmaps from image pairs as a powerful representation for fast, accurate geometry without explicit poses. MonST3R extended this family to better handle dynamics, providing the architectural foundation and training protocol that EAG3R adopts and augments. On the event side, E2VID showed that events complement frames with HDR, low-latency edge information, while EV-FlowNet encoded events into motion-aware features\u2014together motivating EAG3R\u2019s lightweight event encoder and its SNR-aware fusion that selectively trusts events or RGB depending on local reliability.\nCrucially, EAG3R introduces an event-based photometric consistency loss to enforce spatiotemporal coherence during global optimization. This objective is conceptually rooted in Gallego et al.\u2019s contrast maximization principles for event cameras, but is tailored to supervise pointmap predictions and cross-time consistency in a differentiable reconstruction pipeline. The overall optimization design echoes the photometric bundle-adjustment paradigm popularized by DROID-SLAM, now adapted to asynchronous event streams. Finally, EAG3R\u2019s retinex-inspired enhancement module draws from Deep Retinex-Net, stabilizing RGB appearance under extreme illumination so that fusion with events is more effective. Together, these works directly inform EAG3R\u2019s core innovations: an event-augmented pointmap framework, reliability-aware RGB-event fusion, and an event-based photometric loss for globally consistent geometry in dynamic, extreme-lighting scenes.",
+  "analysis_timestamp": "2026-01-07T00:21:32.319494"
+}

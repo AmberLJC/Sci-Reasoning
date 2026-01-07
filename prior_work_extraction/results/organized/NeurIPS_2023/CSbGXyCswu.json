@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Learning to Summarize with Human Feedback",
+      "authors": "Nisan Stiennon, Long Ouyang, Jeff Wu, Daniel M. Ziegler, Ryan Lowe, et al.",
+      "year": 2020,
+      "role": "Established the modern RLHF pipeline using pairwise human preferences to train a global reward model for sequence-level optimization.",
+      "relationship_sentence": "Wu et al. build directly on this RLHF paradigm but replace its holistic, sequence-level reward with dense, segment-level rewards that resolve the credit assignment issues highlighted by long-form outputs."
+    },
+    {
+      "title": "Training Language Models to Follow Instructions with Human Feedback",
+      "authors": "Long Ouyang, Jeff Wu, Xu Jiang, Diogo Almeida, Carroll L. Wainwright, et al.",
+      "year": 2022,
+      "role": "Generalized RLHF to instruction following with a single holistic reward model optimized via PPO.",
+      "relationship_sentence": "The fine-grained RLHF framework extends InstructGPT\u2019s preference-model-plus-RL recipe by modifying the reward modeling to operate at the sentence/sub-sentence level rather than over entire responses."
+    },
+    {
+      "title": "Training a Helpful and Harmless Assistant with Reinforcement Learning from Human Feedback",
+      "authors": "Yuntao Bai, Andy Jones, Kamal Ndousse, Amanda Askell, Anna Chen, et al.",
+      "year": 2022,
+      "role": "Demonstrated multi-objective alignment (helpfulness vs. harmlessness) via separate preference models and scalarization.",
+      "relationship_sentence": "Wu et al. adopt and generalize the multi-objective idea by learning multiple reward models tied to distinct error types (e.g., toxicity, factuality, relevance) and composing them during training."
+    },
+    {
+      "title": "Improving alignment of dialogue agents via targeted human judgements (Sparrow)",
+      "authors": "Anthony Glaese, Nat McAleese, Maja Trebacz, John Aslanides, et al.",
+      "year": 2022,
+      "role": "Used targeted, category-specific human feedback for safety and helpfulness to guide dialogue behavior.",
+      "relationship_sentence": "The paper\u2019s use of type-specific feedback signals echoes Sparrow\u2019s targeted judgments, but operationalizes them as explicit, modular reward models applied densely across generated segments."
+    },
+    {
+      "title": "Process supervision improves mathematical reasoning",
+      "authors": "William Saunders, Catherine Yeh, Jeff Wu, Steven Bills, Long Ouyang, et al.",
+      "year": 2022,
+      "role": "Showed that supervising intermediate reasoning steps (process supervision) can outperform outcome-only feedback by improving credit assignment.",
+      "relationship_sentence": "Wu et al. translate the core insight of process-level supervision into general text generation by delivering per-segment rewards that localize errors, improving credit assignment beyond outcome-only RLHF."
+    },
+    {
+      "title": "FRANK: A Benchmark for Factuality Evaluation in Abstractive Summarization",
+      "authors": "Artidoro Pagnoni, Vidhisha Balachandran, Yulia Tsvetkov",
+      "year": 2021,
+      "role": "Introduced span-level factuality annotations and a taxonomy of error types for long-form generation evaluation.",
+      "relationship_sentence": "The paper\u2019s fine-grained labels for error spans and categories inform Wu et al.\u2019s design of feedback schemas and multi-type reward models that pinpoint which parts of an output are incorrect and why."
+    }
+  ],
+  "synthesis_narrative": "Wu et al.\u2019s core contribution\u2014a fine-grained RLHF framework with dense, segment-level rewards and multiple attribute-specific reward models\u2014arises from combining lessons across RLHF, multi-objective alignment, and span-level evaluation. Sequence-level RLHF was established by Stiennon et al. and broadened by Ouyang et al. for instruction following, but both rely on holistic preferences, which obscure where and why long outputs fail. Bai et al. showed that separate reward models can express competing objectives (helpfulness vs. harmlessness), suggesting modular rewards as a practical mechanism to represent distinct desiderata. Glaese et al. further emphasized targeted, category-specific judgments for safety, motivating the move from undifferentiated preferences to attribute-aware feedback signals. In parallel, Saunders et al. demonstrated that process supervision\u2014rewarding intermediate steps\u2014improves credit assignment versus outcome-only feedback, a principle Wu et al. generalize to open-ended text by delivering per-segment rewards. Finally, FRANK\u2019s span-level error annotations and taxonomy provided a blueprint for operationalizing fine-grained labels that distinguish error types and their locations. Synthesizing these strands, Wu et al. depart from monolithic, end-to-end rewards by (1) densifying rewards at the sentence/sub-sentence level to localize credit and (2) learning multiple, type-specific reward models that can be composed during training, yielding more informative and controllable signals for aligning language model generation.",
+  "analysis_timestamp": "2026-01-07T00:02:04.773135"
+}

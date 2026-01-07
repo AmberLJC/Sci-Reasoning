@@ -1,0 +1,57 @@
+{
+  "prior_works": [
+    {
+      "title": "Mamba: Linear-Time Sequence Modeling with Selective State Spaces",
+      "authors": "Albert Gu et al.",
+      "year": 2024,
+      "arxiv_id": "2312.00752",
+      "role": "Foundation",
+      "relationship_sentence": "This paper introduces the selective state-space architecture and selective-scan recurrence that the current work explicitly takes to a continuous-time limit and analyzes for token-level asymptotic dynamics."
+    },
+    {
+      "title": "Efficiently Modeling Long Sequences with Structured State Spaces",
+      "authors": "Albert Gu et al.",
+      "year": 2021,
+      "arxiv_id": "2111.00396",
+      "role": "Foundation",
+      "relationship_sentence": "S4 formalizes continuous-time state-space dynamics and their discretizations for sequence modeling, providing the SSM mathematical framework and parameterization that the present analysis uses to derive Mamba\u2019s depth-wise continuous-time dynamical system."
+    },
+    {
+      "title": "HiPPO: Recurrent Memory with Optimal Polynomial Projections",
+      "authors": "Albert Gu et al.",
+      "year": 2020,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "HiPPO supplies the structured state matrices and memory formalism underlying modern SSM layers, whose spectral properties inform the parameter-based criteria this paper derives for token trajectories to converge or diverge."
+    },
+    {
+      "title": "Neural Ordinary Differential Equations",
+      "authors": "Ricky T. Q. Chen et al.",
+      "year": 2018,
+      "arxiv_id": "1806.07366",
+      "role": "Inspiration",
+      "relationship_sentence": "The neural-ODE viewpoint motivates taking the continuous-depth limit of layered sequence models, a methodological move this work applies to selective SSM stacks to obtain an ODE governing token dynamics."
+    },
+    {
+      "title": "Liquid Time-constant Networks",
+      "authors": "Ramin Hasani et al.",
+      "year": 2021,
+      "arxiv_id": "2006.04439",
+      "role": "Related Problem",
+      "relationship_sentence": "LTC establishes analysis tools for input-dependent (gated) continuous-time recurrent dynamics, which this paper extends to selective SSM gating to characterize stability and asymptotic behavior (vanishing vs. exploding tokens)."
+    }
+  ],
+  "synthesis_narrative": "Selective state space models emerged from state-space sequence modeling, where S4 cast sequence processing as a discretization of continuous-time linear dynamics with structured parameterizations that enable long-range memory. The HiPPO framework clarified how specific structured state matrices encode recent history, making spectral properties of the state operator central to memory behavior. Building on these ideas, Mamba introduced selective scan: an input-dependent gating mechanism that modulates SSM parameters on the fly, yielding linear-time recurrence while substantially changing the effective dynamics across tokens. In parallel, the neural-ODE perspective established that deep networks can be meaningfully analyzed via their continuous-depth limits, providing a principled route to derive governing ODEs for stacked layers. Liquid Time-constant Networks showed how input-dependent, gated continuous-time systems can be analyzed for stability and asymptotics, highlighting that gating turns the dynamics into a controlled system whose long-term behavior depends on parameterized modulations. Together, these works set the stage for a precise dynamical study of selective SSMs. The combination of SSM formalism (S4/HiPPO), selective gating (Mamba), and continuous-depth analysis (Neural ODEs/LTC) reveals a gap: despite strong empirical performance, there is no principled characterization of token trajectories in deep selective SSMs. The current paper fills this by deriving the continuous-time limit of Mamba\u2019s stacked selective SSM, then using spectral and gating-driven criteria to prove a sharp dichotomy in 1D\u2014tokens either vanish or blow up\u2014linking these regimes to performance and explaining observed token-mixing/reordering behavior.",
+  "target_paper": {
+    "title": "Demystifying the Token Dynamics of Deep Selective State Space Models",
+    "authors": "Thieu Vo, Duy-Tung Pham, Xin T. Tong, Tan Minh Nguyen",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "Selective state-space model, continuous-time limit, dynamical system, asymptotic behavior, token reordering",
+    "abstract": "Selective state space models (SSM), such as Mamba, have gained prominence for their effectiveness in modeling sequential data. Despite their outstanding empirical performance, a comprehensive theoretical understanding of deep selective SSM remains elusive, hindering their further development and adoption for applications that need high fidelity. In this paper, we investigate the dynamical properties of tokens in a pre-trained Mamba model. In particular, we derive the dynamical system governing the continuous-time limit of the Mamba model and characterize the asymptotic behavior of its solutions. In the one-dimensional case, we prove that only one of the following two scenarios happens: either all tokens converge to zero, or all tokens diverge to infinity.  We provide criteria based on model parameters to determine when each scenario occurs. For the convergent scenario, we empirically verify that this scenario negatively impacts the model's performance.  For the divergent scenario, we p",
+    "openreview_id": "qtTIP5Gjc5",
+    "forum_id": "qtTIP5Gjc5"
+  },
+  "analysis_timestamp": "2026-01-06T18:16:00.962651"
+}

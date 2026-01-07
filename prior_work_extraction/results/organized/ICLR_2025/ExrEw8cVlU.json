@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "3D Gaussian Splatting for Real-Time Radiance Field Rendering",
+      "authors": "Bernhard Kerbl, Georgios Kopanas, Thomas Leimk\u00fchler, George Drettakis",
+      "year": 2023,
+      "role": "Foundational representation and training pipeline",
+      "relationship_sentence": "Poison-splat targets the densification, splitting, and pruning mechanics and memory/runtime profile introduced by 3D Gaussian Splatting, exploiting its training-time heuristics to force worst-case complexity and OOM."
+    },
+    {
+      "title": "Poisoning Attacks against Support Vector Machines",
+      "authors": "Battista Biggio, Blaine Nelson, Pavel Laskov",
+      "year": 2012,
+      "role": "Bilevel optimization paradigm for data poisoning",
+      "relationship_sentence": "This seminal bilevel framework for crafting training-time poisons underpins Poison-splat\u2019s formulation of poisoning as an upper\u2013lower optimization problem tailored to maximize 3DGS compute cost rather than degrade accuracy."
+    },
+    {
+      "title": "Understanding Black-box Predictions via Influence Functions",
+      "authors": "Pang Wei Koh, Percy Liang",
+      "year": 2017,
+      "role": "Influence-based approximations of training effects",
+      "relationship_sentence": "Poison-splat leverages influence-style approximations to efficiently estimate how small input perturbations alter 3DGS training dynamics and resource usage, enabling tractable gradients for the bilevel attack objective."
+    },
+    {
+      "title": "Bilevel Programming for Hyperparameter Optimization and Meta-Learning",
+      "authors": "Luca Franceschi, Paolo Frasconi, Massimiliano Pontil, et al.",
+      "year": 2018,
+      "role": "Differentiation through optimization for bilevel problems",
+      "relationship_sentence": "Techniques for differentiating through inner-loop optimization inform Poison-splat\u2019s attack objective approximation and hypergradient computation over the 3DGS training loop."
+    },
+    {
+      "title": "Poison Frogs! Targeted Clean-Label Poisoning Attacks on Neural Networks",
+      "authors": "Ali Shafahi, W. Ronny Huang, Mahyar Najibi, et al.",
+      "year": 2018,
+      "role": "Clean-label poisoning strategy",
+      "relationship_sentence": "The clean-label poisoning paradigm inspires Poison-splat\u2019s design of visually plausible, input-space poisons that evade simple detection while inducing pathological densification and memory blow-up in 3DGS."
+    },
+    {
+      "title": "Witches\u2019 Brew: Industrial Scale Data Poisoning via Gradient Matching",
+      "authors": "Jonas Geiping, Liam Fowl, W. Ronny Huang, et al.",
+      "year": 2021,
+      "role": "Gradient-matching objective for scalable poisoning",
+      "relationship_sentence": "Gradient matching provides a practical surrogate to steer training dynamics, which Poison-splat adapts to align poisoned inputs with gradients that trigger excessive Gaussian creation and worst-case compute."
+    },
+    {
+      "title": "DeepSloth: Making DNNs Suffer from Slowness Attacks",
+      "authors": "Sokar et al.",
+      "year": 2021,
+      "role": "Compute-cost/DoS perspective in adversarial ML",
+      "relationship_sentence": "DeepSloth\u2019s insight that inputs can be crafted to inflate computation directly motivates Poison-splat\u2019s focus on a denial-of-service style objective\u2014maximizing training time and memory instead of accuracy error."
+    }
+  ],
+  "synthesis_narrative": "Poison-splat\u2019s key contribution\u2014turning 3D Gaussian Splatting\u2019s training loop into a computational liability via input poisoning\u2014rests on two intertwined lines of prior work. First, the representation and optimization mechanics of 3DGS define the attack surface: Kerbl et al. detail the gradient-driven densification, splitting, and pruning that determine the number of Gaussians and, consequently, the memory and time footprint. Poison-splat exploits these levers, crafting inputs that provoke pathological densification and push 3DGS toward its worst-case complexity and even OOM. Second, the paper\u2019s attack design and optimization toolkit draw from the data-poisoning literature. The bilevel formulation traces to Biggio et al.\u2019s poisoning framework, while influence functions (Koh and Liang) and bilevel differentiation methods (Franceschi et al.) provide scalable approximations for computing hypergradients through training. Practical poisoning objectives from clean-label attacks (Shafahi et al.) and gradient matching (Geiping et al.) shape Poison-splat\u2019s surrogate losses, enabling poisons that remain visually plausible yet manipulate training dynamics to maximize resource usage. Finally, the strategic focus on computation cost and denial-of-service echoes systems-oriented adversarial work like DeepSloth, reframing the attacker\u2019s goal from accuracy degradation to compute inflation. Together, these works directly inform Poison-splat\u2019s choice of target (3DGS), objective (compute/memory blow-up), and optimization machinery (bilevel/influence/gradient-matching), culminating in a practical, scalable compute-cost attack that exposes a new security vulnerability in modern 3D reconstruction pipelines.",
+  "analysis_timestamp": "2026-01-07T00:02:04.909689"
+}

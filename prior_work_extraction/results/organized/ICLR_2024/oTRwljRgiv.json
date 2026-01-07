@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "FlashMeta: A Framework for Inductive Program Synthesis",
+      "authors": "Oleksandr Polozov and Sumit Gulwani",
+      "year": 2015,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "ExeDec adopts the core FlashMeta/PROSE insight of propagating example constraints to sub-expressions\u2014here realized neurally as predicting execution subgoals that serve as learned \"witness states\" to decompose synthesis."
+    },
+    {
+      "title": "RobustFill: Neural Program Learning under Noisy I/O",
+      "authors": "Jacob Devlin et al.",
+      "year": 2017,
+      "arxiv_id": "1703.07469",
+      "role": "Foundation",
+      "relationship_sentence": "ExeDec builds directly on the RobustFill PBE formulation and DSL/dataset, and targets its inability to compositionally generalize by replacing one-shot decoding with stepwise execution-driven subgoal prediction."
+    },
+    {
+      "title": "DeepCoder: Learning to Write Programs",
+      "authors": "Matej Balog et al.",
+      "year": 2017,
+      "arxiv_id": "1611.01989",
+      "role": "Foundation",
+      "relationship_sentence": "ExeDec uses the DeepCoder DSL/benchmark and explicitly addresses the generalization limits of DeepCoder-style component prediction by introducing intermediate execution subgoals that guide multi-step synthesis."
+    },
+    {
+      "title": "Execution-Guided Decoding for Semantic Parsing",
+      "authors": "Chenglong Wang et al.",
+      "year": 2018,
+      "arxiv_id": "1807.03100",
+      "role": "Extension",
+      "relationship_sentence": "ExeDec extends execution-guided decoding from merely pruning by running partial programs to actively predicting execution subgoals that steer each decoding step based on execution feedback."
+    },
+    {
+      "title": "Generalization Without Systematicity: On the Compositional Skills of Sequence-to-Sequence Recurrent Networks (SCAN)",
+      "authors": "Brenden M. Lake and Marco Baroni",
+      "year": 2018,
+      "arxiv_id": "1711.00350",
+      "role": "Foundation",
+      "relationship_sentence": "ExeDec\u2019s meta-benchmark for compositional generalization in program synthesis adopts the SCAN-style idea of stress-testing systematic recomposition of known primitives via targeted train/test splits."
+    },
+    {
+      "title": "Learning to Infer Program Sketches",
+      "authors": "Maxwell I. Nye et al.",
+      "year": 2019,
+      "arxiv_id": "1902.10980",
+      "role": "Inspiration",
+      "relationship_sentence": "ExeDec draws on the decomposition principle from sketch-based synthesis\u2014separating high-level guidance from low-level search\u2014by instead decomposing along execution states through predicted subgoals."
+    }
+  ],
+  "synthesis_narrative": "FlashMeta (PROSE) established that inductive program synthesis can be made tractable by decomposing a program into sub-expressions and propagating example constraints to them via witness functions, providing a concrete mechanism for subgoal-driven search. RobustFill framed programming-by-example over a FlashFill-style DSL with neural sequence models checked by execution consistency, but it solved problems in one shot and struggled to recombine primitives beyond its training distribution. DeepCoder learned component likelihoods for a functional DSL to guide enumerative search, again operating without explicit intermediate execution targets and exhibiting limited compositional generalization. Execution-guided decoding showed that running partial programs during decoding can prune invalid continuations, introducing a tight feedback loop between execution and generation but still using execution passively rather than as a predicted target. SCAN demonstrated how to rigorously evaluate systematic compositionality through tailored train/test splits that stress novel recombinations of known primitives. Learning to Infer Program Sketches validated that explicit decomposition\u2014separating high-level structure from low-level completion\u2014can dramatically improve synthesis efficiency and generalization.\nTaken together, these works revealed both the power of decomposition and execution feedback and the gap: neural PBE systems lacked a learned mechanism to set and pursue intermediate execution targets that enable systematic recomposition. ExeDec naturally synthesizes these ideas by casting witness-style decomposition into a neural framework that predicts execution subgoals, uses execution to inform each step, and evaluates this on SCAN-inspired compositional splits of RobustFill and DeepCoder, yielding stronger synthesis and markedly improved compositional generalization.",
+  "target_paper": {
+    "title": "ExeDec: Execution Decomposition for Compositional Generalization in Neural Program Synthesis",
+    "authors": "Kensen Shi, Joey Hong, Yinlin Deng, Pengcheng Yin, Manzil Zaheer, Charles Sutton",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "oral",
+    "keywords": "Program Synthesis, Programming By Example, Generalization, Compositional Generalization",
+    "abstract": "When writing programs, people have the ability to tackle a new complex task by decomposing it into smaller and more familiar subtasks. While it is difficult to measure whether neural program synthesis methods have similar capabilities, we can measure whether they compositionally generalize, that is, whether a model that has been trained on the simpler subtasks is subsequently able to solve more complex tasks. In this paper, we characterize several different forms of compositional generalization that are desirable in program synthesis, forming a meta-benchmark which we use to create generalization tasks for two popular datasets, RobustFill and DeepCoder. We then propose ExeDec, a novel decomposition-based synthesis strategy that predicts execution subgoals to solve problems step-by-step informed by program execution at each step. When used with Transformer models trained from scratch, ExeDec has better synthesis performance and greatly improved compositional generalization ability compa",
+    "openreview_id": "oTRwljRgiv",
+    "forum_id": "oTRwljRgiv"
+  },
+  "analysis_timestamp": "2026-01-06T09:46:25.101088"
+}

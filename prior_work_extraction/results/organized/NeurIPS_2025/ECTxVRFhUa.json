@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Attention Is All You Need",
+      "authors": "Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, Lukasz Kaiser, Illia Polosukhin",
+      "year": 2017,
+      "role": "Foundational Transformer and multi-head attention baseline",
+      "relationship_sentence": "TPA is proposed as a drop-in replacement for standard multi-head attention and is evaluated against Transformer baselines defined by this work."
+    },
+    {
+      "title": "Fast Transformer Decoding: One Write-Head Is All You Need (Multi-Query Attention)",
+      "authors": "Noam Shazeer",
+      "year": 2019,
+      "role": "Direct prior on reducing KV-cache size at inference",
+      "relationship_sentence": "MQA\u2019s idea of sharing keys/values across heads to shrink the KV cache directly motivates TPA\u2019s more aggressive compression by factorizing Q/K/V with tensor decompositions."
+    },
+    {
+      "title": "GQA: Training Generalized Multi-Query Transformer Models",
+      "authors": "Joshua Ainslie et al.",
+      "year": 2023,
+      "role": "Scalable KV-cache sharing baseline (between MQA and MHA)",
+      "relationship_sentence": "GQA formalizes partial sharing of keys/values, providing a key baseline and conceptual stepping stone that TPA aims to surpass by compressing Q/K/V via low-rank tensor factors rather than sharing alone."
+    },
+    {
+      "title": "RoFormer: Enhanced Transformer with Rotary Position Embedding",
+      "authors": "Jianlin Su, Yu Lu, Shuailong Pan, Bo Wen",
+      "year": 2021,
+      "role": "Positional encoding mechanism integrated into TPA",
+      "relationship_sentence": "TPA\u2019s factorized representations are designed to be compatible with RoPE, leveraging RoFormer\u2019s rotary positional scheme to preserve relative position information under tensor factorization."
+    },
+    {
+      "title": "Transformer-XL: Attentive Language Models Beyond a Fixed-Length Context",
+      "authors": "Zihang Dai, Zhilin Yang, Yiming Yang, Jaime Carbonell, Quoc V. Le, Ruslan Salakhutdinov",
+      "year": 2019,
+      "role": "Motivation and mechanics for caching long-range context",
+      "relationship_sentence": "By introducing segment-level recurrence and cached memories, Transformer-XL highlights the importance and cost of KV caches that TPA targets for compression during long-context inference."
+    },
+    {
+      "title": "Linformer: Self-Attention with Linear Complexity",
+      "authors": "Sinong Wang, Belinda Li, Madian Khabsa, Han Fang, Hao Ma",
+      "year": 2020,
+      "role": "Low-rank perspective on attention",
+      "relationship_sentence": "Linformer\u2019s empirical low-rank property of attention motivates TPA\u2019s choice to impose low-rank structure\u2014here at the level of Q/K/V via tensor factorization\u2014to reduce memory while preserving quality."
+    },
+    {
+      "title": "Tensorizing Neural Networks",
+      "authors": "Alexander Novikov, Dmitrii Podoprikhin, Anton Osokin, Dmitry P. Vetrov",
+      "year": 2015,
+      "role": "Tensor decomposition methodology for compact neural representations",
+      "relationship_sentence": "TPA borrows the idea of tensor-train/CP-style decompositions from tensorized networks to compactly parameterize and store Q/K/Value representations, directly enabling KV-cache shrinkage."
+    }
+  ],
+  "synthesis_narrative": "The core contribution of Tensor Product Attention (TPA) is to compress the key\u2013value cache and associated attention representations via tensor decompositions while preserving model quality and compatibility with standard positional encodings. This builds squarely on three lines of prior work. First, the Transformer formulation of multi-head attention (Vaswani et al., 2017) and the practical need to cache keys and values for autoregressive inference (crystallized by Transformer-XL\u2019s recurrent caching) establish both the mechanism and the memory bottleneck that TPA targets. Second, MQA (Shazeer, 2019) and GQA (Ainslie et al., 2023) demonstrate that sharing K/V across heads is an effective way to shrink the KV cache; TPA proceeds further by introducing a low-rank, tensor-factorized parameterization of Q/K/V that reduces memory beyond head sharing while remaining a drop-in replacement. Third, the mathematical plausibility of compressing attention is supported by low-rank attention approximations (Linformer), while the concrete machinery for compact representations comes from tensorization methods (Novikov et al., 2015), which TPA adapts to the streaming, cache-sensitive setting of inference. Finally, by ensuring the factorized Q/K interact naturally with rotary position embeddings (RoFormer), TPA maintains strong relative positional inductive bias without inflating memory. Together, these works directly motivate TPA\u2019s design choices\u2014what to compress (KV caches), how to compress (tensor/low-rank factorization), and how to keep accuracy (RoPE-compatible structure)\u2014and provide the precise baselines (MHA, MQA, GQA) that TPA is shown to match or surpass.",
+  "analysis_timestamp": "2026-01-07T00:21:32.281381"
+}

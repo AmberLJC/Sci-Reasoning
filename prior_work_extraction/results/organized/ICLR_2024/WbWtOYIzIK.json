@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+      "authors": "Patrick Lewis et al.",
+      "year": 2020,
+      "arxiv_id": "2005.11401",
+      "role": "Baseline",
+      "relationship_sentence": "This work established the baseline paradigm of augmenting a base generator with retrieved external knowledge, which Knowledge Card directly replaces with plug-in domain-specialized LMs and is the primary system it seeks to outperform."
+    },
+    {
+      "title": "K-Adapter: Infusing Knowledge into Pre-Trained Models with Adapters",
+      "authors": "Wang et al.",
+      "year": 2021,
+      "arxiv_id": "",
+      "role": "Inspiration",
+      "relationship_sentence": "K-Adapter\u2019s idea of modular, domain-specific parametric components that inject factual knowledge into a general model directly inspired Knowledge Cards as separately trained, domain-focused parametric repositories."
+    },
+    {
+      "title": "AdapterFusion: Non-Destructive Task Composition for Transfer Learning",
+      "authors": "Jonas Pfeiffer et al.",
+      "year": 2021,
+      "arxiv_id": "",
+      "role": "Extension",
+      "relationship_sentence": "AdapterFusion\u2019s mechanism for composing multiple specialized adapters informs Knowledge Card\u2019s extension to select and integrate outputs from multiple domain-specialized models rather than fusing internal adapter parameters."
+    },
+    {
+      "title": "Toolformer: Language Models Can Teach Themselves to Use Tools",
+      "authors": "Timo Schick et al.",
+      "year": 2023,
+      "arxiv_id": "2302.04761",
+      "role": "Inspiration",
+      "relationship_sentence": "By showing that LMs can learn to call external tools via text, Toolformer directly motivates treating specialized LMs as callable plug-ins that a base LLM can invoke at inference time."
+    },
+    {
+      "title": "Self-RAG: Learning to Retrieve, Generate, and Critique for Language Modeling",
+      "authors": "Akari Asai et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Extension",
+      "relationship_sentence": "Self-RAG\u2019s retrieve\u2013generate\u2013critique loop directly informs Knowledge Card\u2019s content selectors that filter generated auxiliary content for relevance and factuality before integration."
+    },
+    {
+      "title": "MEMIT: Mass-Editing Memory in a Transformer",
+      "authors": "Keith Meng et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Gap Identification",
+      "relationship_sentence": "Limitations of mass model editing\u2014white-box access requirements and unintended side effects\u2014explicitly motivate Knowledge Card\u2019s modular alternative of updating knowledge by training separate domain-specific models."
+    },
+    {
+      "title": "HuggingGPT: Solving AI Tasks with ChatGPT and its Friends in HuggingFace",
+      "authors": "Yongliang Shen et al.",
+      "year": 2023,
+      "arxiv_id": "2303.17580",
+      "role": "Related Problem",
+      "relationship_sentence": "HuggingGPT\u2019s orchestration of specialized models as tools by an LLM directly supports the plug-in design where a general LLM delegates subproblems to specialized LMs."
+    }
+  ],
+  "synthesis_narrative": "Retrieval-augmented methods first showed that a general-purpose generator can be strengthened by injecting external knowledge at inference time, with RAG formalizing the retrieve-then-generate pipeline and establishing strong baselines for knowledge-intensive tasks. K-Adapter introduced modular, domain-specific parametric components that infuse factual knowledge into a frozen backbone, proving that knowledge can be packaged as detachable modules. AdapterFusion then demonstrated how multiple such specialized modules can be composed without destructive interference, highlighting the value of dynamic selection and integration over monolithic fine-tuning. Parallelly, Toolformer revealed that language models can be trained to call external tools via textual API-like invocations, suggesting a general interface for plugging capabilities into an LM. Self-RAG added a learned critique step that scores retrieved or generated context for relevance and factuality before integrating it, indicating that filtering auxiliary content can materially improve reliability. HuggingGPT showed that a general LLM can orchestrate specialized models as tools to solve complex tasks, reinforcing the feasibility of delegating to domain experts. Finally, MEMIT exposed the fragility and white-box requirements of mass knowledge editing inside large models, motivating alternatives to direct parameter surgery.\nBy combining these insights, a natural next step is to treat domain knowledge as modular, parametric experts that can be called like tools, selected dynamically, and filtered for quality before use\u2014sidestepping costly retraining and risky edits. Knowledge Card synthesizes the composition ideas of adapters, the orchestration/tool-calling interface, and critique-based filtering from Self-RAG to build a black-box, plug-in framework that supplies relevant, concise, and factual domain knowledge to a base LLM, directly addressing RAG\u2019s dependence on static corpora and model-editing\u2019s brittleness.",
+  "target_paper": {
+    "title": "Knowledge Card: Filling LLMs' Knowledge Gaps with Plug-in Specialized Language Models",
+    "authors": "Shangbin Feng, Weijia Shi, Yuyang Bai, Vidhisha Balachandran, Tianxing He, Yulia Tsvetkov",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "oral",
+    "keywords": "large language models, black-box language models, modular and collaborative knowledge",
+    "abstract": "By design, large language models (LLMs) are static general-purpose models, expensive to retrain or update frequently. As they are increasingly adopted for knowledge-intensive tasks, it becomes evident that these design choices lead to failures to generate factual, relevant, and up-to-date knowledge. To this end, we propose Knowledge Card, a modular framework to plug in new factual and relevant knowledge into general-purpose LLMs. We first introduce knowledge cards---specialized language models trained on corpora from specific domains and sources. Knowledge cards serve as parametric repositories that are selected at inference time to generate background knowledge for the base LLM. We then propose three content selectors to dynamically select and retain information in documents generated by knowledge cards, specifically controlling for relevance, brevity, and factuality of outputs. Finally, we propose two complementary integration approaches to augment the base LLM with the (relevant, fa",
+    "openreview_id": "WbWtOYIzIK",
+    "forum_id": "WbWtOYIzIK"
+  },
+  "analysis_timestamp": "2026-01-06T13:04:34.330406"
+}

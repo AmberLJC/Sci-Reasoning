@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Physics-Informed Neural Networks: A Deep Learning Framework for Solving Forward and Inverse Problems Involving Nonlinear Partial Differential Equations",
+      "authors": "Maziar Raissi et al.",
+      "year": 2019,
+      "role": "Foundation",
+      "relationship_sentence": "CoPINN retains the canonical PINN formulation introduced by Raissi et al.\u2014minimizing PDE and boundary residuals with automatic differentiation\u2014and builds its self-paced, separable training strategy directly on this framework."
+    },
+    {
+      "title": "Characterizing Possible Failure Modes in Physics-Informed Neural Networks",
+      "authors": "Vaibhav Krishnapriyan et al.",
+      "year": 2021,
+      "role": "Gap Identification",
+      "relationship_sentence": "This work documented that PINNs often get stuck in poor minima and exhibit imbalanced learning, especially near boundary layers; CoPINN directly targets this failure mode (UPP) with an easy-to-hard training schedule and boundary-aware treatment."
+    },
+    {
+      "title": "When and Why PINNs Fail to Train: A Neural Tangent Kernel Perspective",
+      "authors": "Sifan Wang et al.",
+      "year": 2022,
+      "role": "Gap Identification",
+      "relationship_sentence": "Wang et al. explained PINN training stiffness and imbalance through NTK/gradient-spectrum analyses, motivating CoPINN\u2019s self-paced weighting to counter early dominance of \u2018easy\u2019 signals and to equilibrate learning across samples and boundaries."
+    },
+    {
+      "title": "Self-Adaptive Physics-Informed Neural Networks",
+      "authors": "Luke McClenny et al.",
+      "year": 2020,
+      "role": "Baseline",
+      "relationship_sentence": "SA-PINN introduced learnable loss-term weights; CoPINN advances this idea from term-level balancing to sample-level self-paced weighting, explicitly prioritizing easier collocation/boundary points before harder ones."
+    },
+    {
+      "title": "Curriculum Learning",
+      "authors": "Yoshua Bengio et al.",
+      "year": 2009,
+      "role": "Inspiration",
+      "relationship_sentence": "CoPINN\u2019s \u2018cognitive\u2019 easy-to-hard training policy is a direct instantiation of curriculum learning principles, adapted to physics residuals and boundary conditions in PINNs."
+    },
+    {
+      "title": "Self-Paced Learning for Latent Variable Models",
+      "authors": "M. Pawan Kumar et al.",
+      "year": 2010,
+      "role": "Inspiration",
+      "relationship_sentence": "The SPL framework of latent sample weights and a pacing parameter informs CoPINN\u2019s optimization, where per-point weights reflect estimated difficulty and are increased over time to realize self-paced PINN training."
+    },
+    {
+      "title": "Learning Nonlinear Operators via DeepONet Based on the Universal Approximation Theorem of Operators",
+      "authors": "Lu Lu et al.",
+      "year": 2021,
+      "role": "Inspiration",
+      "relationship_sentence": "DeepONet\u2019s separation of inputs via distinct subnetworks and an aggregation (inner-product) mechanism inspires CoPINN\u2019s separable coordinate encoders and aggregation scheme to stabilize and structure learning across spatial dimensions."
+    }
+  ],
+  "synthesis_narrative": "CoPINN\u2019s core innovation fuses curriculum/self-paced training with a separable architectural bias to remedy the Unbalanced Prediction Problem in PINNs. The foundational formulation of PINNs by Raissi et al. establishes the learning objective\u2014enforcing PDE and boundary residuals\u2014that CoPINN preserves. However, subsequent analyses by Krishnapriyan et al. and Wang et al. revealed that standard PINNs often prioritize \u2018easy\u2019 regions and neglect hard boundary layers due to gradient spectrum imbalances and stiff loss landscapes, leading to local minima and unstable training. Prior remedies such as SA-PINN introduced learnable term-level weights, but they do not address point-wise difficulty and progression. CoPINN directly imports curriculum learning (Bengio et al.) and self-paced learning (Kumar et al.) into the PINN setting: it assigns and gradually lifts per-sample weights, so training proceeds from easy to hard collocation and boundary points, explicitly targeting the identified failure modes. Complementing this learning schedule, CoPINN introduces separable subnetworks that encode each spatial coordinate independently and aggregate them to form multi-dimensional predictions\u2014an idea inspired by DeepONet\u2019s separated trunk/branch design. This separability structures the hypothesis space and yields more stable early learning dynamics, making the self-paced curriculum effective at rebalancing signals across regions, especially near boundaries. Together, these strands form the direct intellectual lineage to CoPINN\u2019s cognitive, easy-to-hard and separable approach for robust PINN training.",
+  "analysis_timestamp": "2026-01-06T23:07:19.581932"
+}

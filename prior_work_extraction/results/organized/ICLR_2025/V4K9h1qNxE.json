@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "HyperNetworks",
+      "authors": "David Ha et al.",
+      "year": 2016,
+      "arxiv_id": "1609.09106",
+      "role": "Foundation",
+      "relationship_sentence": "This introduced the core idea of a conditioning signal generating the weights of another network, which we instantiate by viewing the key\u2013query interaction in multi-head attention as a hypernetwork that emits the value-path operator and then modify to test nonlinearity."
+    },
+    {
+      "title": "Transformers are RNNs: Fast Weight Programmers",
+      "authors": "Kazuki Irie et al.",
+      "year": 2020,
+      "arxiv_id": "2006.16236",
+      "role": "Extension",
+      "relationship_sentence": "By framing attention as fast weight programming, this work provided the blueprint we extend by identifying a low-dimensional key\u2013query latent that parameterizes the value transformation and analyzing its compositional reuse."
+    },
+    {
+      "title": "FiLM: Visual Reasoning with a General Conditioning Layer",
+      "authors": "Ethan Perez et al.",
+      "year": 2018,
+      "arxiv_id": "1709.07871",
+      "role": "Inspiration",
+      "relationship_sentence": "FiLM showed that a compact conditioning vector can modulate a downstream network to enable compositional reasoning, directly motivating our treatment of the attention-produced latent as a conditioning code and our test of stronger (nonlinear) conditioned value networks."
+    },
+    {
+      "title": "In-context Learning and Induction Heads",
+      "authors": "Catherine Olsson et al.",
+      "year": 2022,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "By revealing reusable attention circuits (induction heads) that implement algorithmic subtasks, this work inspired our hypothesis that a single key\u2013query\u2013dependent code specifies such subtasks and can be recombined compositionally."
+    },
+    {
+      "title": "What Learning Algorithm Is In-Context Learning? Investigations with Linear Models",
+      "authors": "Ekin Aky\u00fcrek et al.",
+      "year": 2023,
+      "arxiv_id": "2211.15661",
+      "role": "Related Problem",
+      "relationship_sentence": "This paper links in-context learning to inner-loop optimization encoded in hidden states, motivating our search for and measurement of an attention-level latent 'task code' that generalizes across unseen compositions."
+    },
+    {
+      "title": "Generalization without Systematicity: On the Compositional Skills of Neural Sequence Models (SCAN)",
+      "authors": "Brenden M. Lake et al.",
+      "year": 2018,
+      "arxiv_id": "1711.00350",
+      "role": "Foundation",
+      "relationship_sentence": "SCAN formalized compositional generalization as recombining familiar primitives in novel ways, providing the problem setting and evaluation lens our hypernetwork view of attention is designed to explain and improve."
+    }
+  ],
+  "synthesis_narrative": "HyperNetworks established that a compact conditioning signal can generate the parameters of a target network, crystallizing the notion of weight-as-a-function-of-context central to modular computation. Complementing this, work on fast weight programmers showed that attention can be interpreted as dynamically programmed weights, grounding the idea that context (key\u2013query) can set up transient operators applied to values. FiLM demonstrated in practice that a low-dimensional code can modulate downstream computation to enable visual reasoning, highlighting that such codes can be both compact and composable. Mechanistic studies of transformers uncovered induction heads\u2014reusable attention circuits that implement algorithmic subtasks\u2014suggesting that attention already contains modular building blocks that can be recombined. Analyses of in-context learning further argued that models encode task-specific inner-loop updates in their hidden states, implying an internal task code that steers computation without changing persistent weights. Finally, SCAN provided a concrete formulation and evaluation of compositional generalization as recombination of learned primitives.\nTaken together, these works reveal a consistent picture: contextual signals can generate or modulate operators (hypernetworks/fast weights), compact codes can control complex reasoning (FiLM), and transformers house reusable attention circuits and task codes (induction heads, ICL). The natural next step is to make this implicit mechanism explicit by treating multi-head attention itself as a hypernetwork that emits a key\u2013query\u2013specific operator on values, to extract the low-dimensional latent that specifies subtasks, and to test whether enriching the generated operator (e.g., making the value network nonlinear) strengthens the recomposition needed for systematic generalization.",
+  "target_paper": {
+    "title": "Attention as a Hypernetwork",
+    "authors": "Simon Schug, Seijin Kobayashi, Yassir Akram, Joao Sacramento, Razvan Pascanu",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "oral",
+    "keywords": "attention, compositional generalization, abstract reasoning, in-context learning, transformer, mechanistic interpretability",
+    "abstract": "Transformers can under some circumstances generalize to novel problem instances whose constituent parts might have been encountered during training, but whose compositions have not.\nWhat mechanisms underlie this ability for compositional generalization?\nBy reformulating multi-head attention as a hypernetwork, we reveal that a composable, low-dimensional latent code specifies key-query specific operations.\nWe find empirically that this latent code is predictive of the subtasks the network performs on unseen task compositions, revealing that latent codes acquired during training are reused to solve unseen problem instances.\nTo further examine the hypothesis that the intrinsic hypernetwork of multi-head attention supports compositional generalization, we ablate whether making the hypernetwork-generated linear value network nonlinear strengthens compositionality.\nWe find that this modification improves compositional generalization on abstract reasoning tasks.\nIn particular, we introduce a ",
+    "openreview_id": "V4K9h1qNxE",
+    "forum_id": "V4K9h1qNxE"
+  },
+  "analysis_timestamp": "2026-01-06T10:36:53.577250"
+}

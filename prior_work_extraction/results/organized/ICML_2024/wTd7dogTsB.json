@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Score-Based Generative Modeling through Stochastic Differential Equations",
+      "authors": "Yang Song et al.",
+      "year": 2021,
+      "role": "Foundation",
+      "relationship_sentence": "This paper formalized diffusion-model sampling as reverse-time SDEs driven by the score of Gaussian-smoothed data, which is exactly the generative framework whose distributional (TV) error the ICML 2024 paper analyzes and optimizes."
+    },
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Jonathan Ho et al.",
+      "year": 2020,
+      "role": "Baseline",
+      "relationship_sentence": "DDPM established the practical diffusion sampling baseline (discrete-time with denoising scores) that the new theory subsumes in the continuous-time view and motivates the early-stopping (finite-noise) bias\u2013variance trade-off analyzed for minimax optimality."
+    },
+    {
+      "title": "Estimation of Non-Normalized Statistical Models by Score Matching",
+      "authors": "Aapo Hyv\u00e4rinen",
+      "year": 2005,
+      "role": "Foundation",
+      "relationship_sentence": "Score matching introduced the core objective for learning \u2207 log p, and the new work\u2019s guarantees hinge on the statistical accuracy of score estimation for the Gaussian-smoothed densities p0 * N(0, tI) used in diffusion models."
+    },
+    {
+      "title": "A Connection Between Score Matching and Denoising Autoencoders: A New Perspective on Unsupervised Learning",
+      "authors": "Pascal Vincent",
+      "year": 2011,
+      "role": "Inspiration",
+      "relationship_sentence": "Vincent\u2019s denoising\u2013score identity under Gaussian corruption underpins the idea that estimating the score of p0 * N(0, tI) can be cast as denoising/regression, which the ICML 2024 paper leverages to design and analyze a kernel-based score estimator."
+    },
+    {
+      "title": "Tweedie\u2019s Formula and Selection Bias",
+      "authors": "Bradley Efron",
+      "year": 2011,
+      "role": "Foundation",
+      "relationship_sentence": "Through Tweedie\u2019s formula, \u2207 log(p0 * N(0, tI))(y) is linked to a conditional expectation (denoising) problem; the new paper directly exploits this identity to convert score estimation into nonparametric regression and derive its MSE rates."
+    },
+    {
+      "title": "On Estimating Regression",
+      "authors": "E. A. Nadaraya",
+      "year": 1964,
+      "role": "Extension",
+      "relationship_sentence": "The kernel regression (Nadaraya\u2013Watson) estimator provides the concrete nonparametric tool the paper adapts to estimate the Tweedie denoiser and thus the score, enabling the kernel-based score estimator whose optimal MSE is proved."
+    },
+    {
+      "title": "Introduction to Nonparametric Estimation",
+      "authors": "Alexandre B. Tsybakov",
+      "year": 2009,
+      "role": "Foundation",
+      "relationship_sentence": "Classical minimax theory for Sobolev smoothness and kernel methods supplies the benchmarks and techniques the paper uses to prove that, with an early-stopping (finite t) strategy, diffusion sampling attains near-minimax rates under \u03b2 \u2264 2."
+    }
+  ],
+  "synthesis_narrative": "The core contribution analyzes diffusion-model sampling from a nonparametric, large-sample perspective and proves near-minimax optimality without density lower bound assumptions. This rests on the score-based diffusion formulation of Song et al., which frames generation as reversing an SDE with drift equal to the score of Gaussian-smoothed data; DDPM provides the practical baseline instantiation. The statistical heart of the analysis is score estimation for p0 convolved with a Gaussian. Hyv\u00e4rinen\u2019s score matching and Vincent\u2019s denoising\u2013score connection establish that, under Gaussian corruption, score learning is equivalent to denoising/regression. Efron\u2019s Tweedie formula makes this explicit by expressing the smoothed-score \u2207 log(p0 * N(0, tI)) in terms of a conditional expectation, which the paper estimates using a kernel regression (Nadaraya\u2013Watson) estimator. This choice enables sharp, distribution-agnostic MSE bounds for the score under merely sub-Gaussian tails. Finally, Tsybakov\u2019s nonparametric minimax theory provides the rate benchmarks and the bias\u2013variance lens to interpret the diffusion time t as a smoothing/bandwidth parameter; choosing t via early stopping balances approximation (heat-flow bias) and estimation error to achieve near-minimax generation error (up to logs) for Sobolev smoothness \u03b2 \u2264 2. Together, these works directly shape the paper\u2019s kernel-based score estimator, the TV error propagation over the reverse SDE, and the early-stopping strategy that yields minimax-optimal sampling rates.",
+  "analysis_timestamp": "2026-01-06T23:09:26.447351"
+}

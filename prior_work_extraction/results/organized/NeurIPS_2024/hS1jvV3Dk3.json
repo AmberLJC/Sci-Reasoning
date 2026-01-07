@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "AutoPrompt: Eliciting Knowledge from Language Models with Automatically Generated Prompts",
+      "authors": "Taylor Shin, Yasaman Razeghi, Robert L. Logan IV, Eric Wallace, Sameer Singh",
+      "year": 2020,
+      "role": "Established discrete prompt optimization as a search problem and demonstrated that automatic edits to textual triggers can significantly change downstream performance.",
+      "relationship_sentence": "The paper builds on AutoPrompt\u2019s view of prompt optimization as discrete search but departs from its global/surrogate-gradient strategy by advocating localized, zeroth\u2011order search over carefully designed edit neighborhoods."
+    },
+    {
+      "title": "Making Pre-trained Language Models Better Few-shot Learners (LM-BFF)",
+      "authors": "Tianyu Gao, Adam Fisch, Danqi Chen",
+      "year": 2021,
+      "role": "Showed that prompt templates and verbalizers crucially affect few-shot performance and proposed automatic selection strategies.",
+      "relationship_sentence": "LM-BFF directly motivates Insight II by evidencing that both the generation and representation choices of prompts dramatically shape reachable optima, reinforcing the need to define the input domain for effective local search."
+    },
+    {
+      "title": "The Power of Scale for Parameter-Efficient Prompt Tuning",
+      "authors": "Brian Lester, Rami Al-Rfou, Noah Constant",
+      "year": 2021,
+      "role": "Introduced continuous (soft) prompt representations and showed representation matters for performance and optimization behavior.",
+      "relationship_sentence": "This work underpins Insight II: representation space design influences the landscape; the paper leverages this by selecting domains/encodings where localized zeroth-order steps can reliably find strong local optima."
+    },
+    {
+      "title": "Instruction Induction: From Few Examples to Natural Language Instructions",
+      "authors": "Or Honovich et al.",
+      "year": 2022,
+      "role": "Pioneered automatic instruction synthesis via LLMs and selection over many candidates, exemplifying global prompt search for black-box LMs.",
+      "relationship_sentence": "Serving as a canonical global-search baseline, it directly motivates the paper\u2019s pivot to localized optimization by highlighting the inefficiency and brittleness of broad candidate exploration."
+    },
+    {
+      "title": "Generating Natural Language Adversarial Examples",
+      "authors": "Moustafa Alzantot et al.",
+      "year": 2018,
+      "role": "Demonstrated effective gradient-free search over discrete text via genetic/local edits with only black-box feedback.",
+      "relationship_sentence": "The success of edit-based, locality-aware search in discrete text informs the paper\u2019s design of local neighborhoods and edit operators for efficient zeroth-order prompt optimization."
+    },
+    {
+      "title": "ZOO: Zeroth Order Optimization based Black-box Attacks to Deep Neural Networks without Training Substitute Models",
+      "authors": "Pin-Yu Chen et al.",
+      "year": 2017,
+      "role": "Established query-efficient zeroth-order (finite-difference) optimization for black-box models.",
+      "relationship_sentence": "ZOO provides the methodological foundation for estimating directional improvements from function evaluations, directly inspiring the paper\u2019s localized zeroth-order update scheme for prompts."
+    },
+    {
+      "title": "Black-box Adversarial Attacks with Limited Queries and Information",
+      "authors": "Andrew Ilyas et al.",
+      "year": 2018,
+      "role": "Advanced evolution-strategy/gradient-estimation techniques for black-box optimization with strong query efficiency.",
+      "relationship_sentence": "This work influences the paper\u2019s choice of stochastic gradient-free estimators and emphasizes locality and sampling strategies to navigate non-smooth, noisy objective landscapes typical in prompt optimization."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core contribution\u2014framing prompt optimization for black-box LLMs as localized zeroth-order search over carefully defined input domains\u2014emerges from two lines of prior work. First, prompt methods established that both search and representation crucially shape outcomes. AutoPrompt cast discrete prompt improvement as an optimization problem, while LM-BFF empirically showed that template and verbalizer choices drastically alter few-shot performance. Complementing these, Prompt Tuning introduced continuous prompt representations, reinforcing that the geometry of the search space matters. Collectively, these works motivate the paper\u2019s Insight II: the prompt generation and representation domains strongly affect discoverable optima.\nSecond, recent automatic prompt/instruction methods, such as Instruction Induction, popularized global search\u2014iteratively proposing and scoring many candidate prompts. While effective, these approaches can be query-inefficient and brittle. This sets up the paper\u2019s Insight I: high-quality local optima are abundant and practically advantageous when explored efficiently.\nTo operationalize these insights, the paper draws on zeroth-order optimization foundations from black-box attack literature. ZOO formalized finite-difference gradient estimation without access to model internals, and Ilyas et al. advanced query-efficient evolution strategies. In parallel, Alzantot et al. demonstrated the power of locality-aware edit operations in discrete text spaces. Integrating these ideas, the paper constrains search to well-designed local neighborhoods and applies zeroth-order estimators to reliably climb toward strong local optima, achieving efficient, robust prompt optimization without relying on global exhaustive exploration.",
+  "analysis_timestamp": "2026-01-06T23:39:42.951885"
+}

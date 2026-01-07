@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Intelligent Selection of Language Model Training Data",
+      "authors": "Robert C. Moore, William Lewis",
+      "year": 2010,
+      "role": "Methodological foundation for in-distribution data selection via LM cross-entropy/perplexity scoring",
+      "relationship_sentence": "GRAPE generalizes the Moore\u2013Lewis idea by using the target model\u2019s own normalized log-likelihood to select, per instruction, the response most in-distribution with the model\u2019s pretraining corpus."
+    },
+    {
+      "title": "Domain Adaptation via Pseudo In-Domain Data Selection",
+      "authors": "Amittai Axelrod, Xiaodong He, Jianfeng Gao",
+      "year": 2011,
+      "role": "Validation and extension of cross-entropy difference for domain adaptation and data selection",
+      "relationship_sentence": "Like Axelrod et al., which showed that choosing pseudo in-domain sentences improves downstream performance, GRAPE selects pseudo in-domain responses (conditioned on the instruction) to maximize SFT effectiveness."
+    },
+    {
+      "title": "Google\u2019s Neural Machine Translation System: Bridging the Gap between Human and Machine Translation",
+      "authors": "Yonghui Wu et al.",
+      "year": 2016,
+      "role": "Scoring mechanism\u2014length-normalized log probability for fair sequence comparison",
+      "relationship_sentence": "GRAPE\u2019s use of normalized probability to compare candidate responses echoes GNMT\u2019s length normalization to ensure comparable, bias-reduced sequence scoring across varying lengths."
+    },
+    {
+      "title": "Don\u2019t Stop Pretraining: Adapt Language Models to Domains and Tasks",
+      "authors": "Suchin Gururangan, Ana Marasovi\u0107, Swabha Swayamdipta, Kyle Lo, Iz Beltagy, Doug Downey, Noah A. Smith",
+      "year": 2020,
+      "role": "Empirical evidence on distribution mismatch and the value of in-domain adaptation",
+      "relationship_sentence": "The core GRAPE hypothesis\u2014that alignment with the pretrained distribution improves finetuning\u2014directly builds on Gururangan et al.\u2019s finding that in-domain data yields better transfer than mismatched data."
+    },
+    {
+      "title": "Training language models to follow instructions with human feedback",
+      "authors": "Long Ouyang et al.",
+      "year": 2022,
+      "role": "Alignment principle\u2014stay close to the base model distribution via KL-regularized RLHF",
+      "relationship_sentence": "GRAPE operationalizes the same intuition behind InstructGPT\u2019s KL penalty\u2014remaining near the pretrained distribution\u2014by enforcing it at the data selection stage using the base model\u2019s own likelihoods."
+    },
+    {
+      "title": "Direct Preference Optimization: Your Language Model is Secretly a Reward Model",
+      "authors": "Rafael Rafailov, Ke Alexander Wang, Sham Kakade, Tatsunori Hashimoto",
+      "year": 2023,
+      "role": "Model-likelihood as alignment signal with a reference model",
+      "relationship_sentence": "DPO\u2019s use of model log-likelihood ratios to align with preferences informs GRAPE\u2019s idea that the model\u2019s likelihood is a powerful alignment signal\u2014here repurposed to select supervision targets that fit the model\u2019s distribution."
+    },
+    {
+      "title": "Self-Instruct: Aligning Language Models with Self-Generated Instructions",
+      "authors": "Yizhong Wang, Yeganeh Kordi, Swaroop Mishra, Alisa Liu, et al.",
+      "year": 2023,
+      "role": "Data generation paradigm exposing teacher\u2013student distribution mismatch in SFT",
+      "relationship_sentence": "By showing that large-scale synthetic instruction data often come from different teacher models, Self-Instruct motivates GRAPE\u2019s response selection step to mitigate cross-model distribution mismatch during SFT."
+    }
+  ],
+  "synthesis_narrative": "GRAPE\u2019s core contribution\u2014selecting, for each instruction, the response that best matches the target model\u2019s pretrained distribution using normalized log-likelihood\u2014sits at the intersection of classic domain-adaptive data selection and modern alignment methods. The Moore\u2013Lewis method and Axelrod et al. established that selecting pseudo in-domain data via language-model cross-entropy differences substantially improves downstream performance; GRAPE internalizes this principle at the granularity of instruction\u2013response pairs, treating the target model\u2019s own likelihood as the in-domain proxy. GNMT\u2019s length normalization provides the practical scoring machinery to compare candidate sequences fairly, preventing length biases in selection. \n\nConcurrently, alignment work such as InstructGPT demonstrated the value of staying close to the pretrained distribution (via KL penalties) to preserve capabilities and robustness; DPO further showed that model log-likelihoods can serve as effective alignment signals without explicit reward models. GRAPE translates these alignment insights into a data-centric procedure: instead of constraining the optimization objective during training, it curates training targets that naturally adhere to the base model\u2019s distribution. \n\nFinally, Gururangan et al.\u2019s evidence that in-domain data boosts performance and Self-Instruct\u2019s practice of sourcing supervision from external teachers highlight the risks of distribution mismatch in SFT. GRAPE addresses this by gathering multi-source responses and using the target model\u2019s likelihood to pick the most in-distribution target, yielding higher-quality, better-matched supervision with standard SFT.",
+  "analysis_timestamp": "2026-01-07T00:02:04.936511"
+}

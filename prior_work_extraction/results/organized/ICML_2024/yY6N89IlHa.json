@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Spatio-Temporal Backpropagation for Training High-Performance Spiking Neural Networks",
+      "authors": "Yujie Wu et al.",
+      "year": 2018,
+      "role": "Foundation",
+      "relationship_sentence": "CLIF builds directly on the STBP formulation for training LIF-based SNNs, and its core analysis of vanishing temporal gradients is performed in precisely this BPTT-with-surrogate framework that STBP popularized."
+    },
+    {
+      "title": "SuperSpike: A Supervised Learning Algorithm for Spiking Neural Networks",
+      "authors": "Friedemann Zenke et al.",
+      "year": 2017,
+      "role": "Foundation",
+      "relationship_sentence": "CLIF adopts the surrogate-gradient training paradigm inaugurated by SuperSpike (approximating the spike\u2019s derivative), but addresses its key shortcoming\u2014temporal gradient attenuation\u2014via a neuron-level complementary path while preserving binary spikes."
+    },
+    {
+      "title": "SLAYER: Spike Layer Error Reassignment in Time",
+      "authors": "Sumit B. Shrestha et al.",
+      "year": 2018,
+      "role": "Foundation",
+      "relationship_sentence": "SLAYER established temporal error propagation for SNNs; CLIF operates within this same temporal credit-assignment regime and specifically modifies the LIF neuron to create extra backpropagation paths for temporal gradients."
+    },
+    {
+      "title": "Temporal Efficient Training of Spiking Neural Networks",
+      "authors": "Deng et al.",
+      "year": 2022,
+      "role": "Gap Identification",
+      "relationship_sentence": "TET explicitly highlights and tackles vanishing temporal gradients by reweighting multi-step losses; CLIF targets the same obstacle but resolves it neuron-centrically by adding a complementary pathway that enhances temporal gradient flow without auxiliary loss schedules."
+    },
+    {
+      "title": "Dspike: Discrete Spikes for Backpropagation Through Time",
+      "authors": "Liang et al.",
+      "year": 2023,
+      "role": "Gap Identification",
+      "relationship_sentence": "Dspike sharpens temporal gradients with a discontinuous surrogate; CLIF addresses the same gradient-weakening problem from a different angle by redesigning the LIF dynamics to intrinsically supply additional temporal gradient paths while keeping spikes binary."
+    },
+    {
+      "title": "Long short-term memory and learning-to-learn in networks of spiking neurons",
+      "authors": "Guillaume Bellec et al.",
+      "year": 2020,
+      "role": "Inspiration",
+      "relationship_sentence": "By introducing adaptive LIF (ALIF) with an auxiliary slow state (adaptive threshold) to aid temporal credit assignment, this work inspired CLIF\u2019s neuron-level strategy of adding a complementary state/pathway to improve long-range temporal gradients without sacrificing spiking discreteness."
+    },
+    {
+      "title": "Deep Residual Learning in Spiking Neural Networks",
+      "authors": "Fang et al.",
+      "year": 2021,
+      "role": "Extension",
+      "relationship_sentence": "This paper\u2019s Parametric LIF (learnable time constants) exemplifies neuron-level modifications to improve SNN trainability; CLIF extends this line by altering the LIF dynamics to create complementary gradient paths, providing a hyperparameter-free alternative focused on temporal gradient propagation."
+    }
+  ],
+  "synthesis_narrative": "CLIF\u2019s core contribution\u2014a LIF-variant that creates complementary backpropagation paths to strengthen temporal gradients while preserving binary spikes\u2014sits squarely in the lineage of direct SNN training with surrogate gradients. The foundational bedrock comes from SuperSpike, SLAYER, and STBP, which established how to apply BPTT to LIF neurons using surrogate spike derivatives and temporal error propagation. Within that paradigm, CLIF identifies a concrete failure mode: temporal gradients vanish across time steps in standard LIF-based training. Recent works such as TET and Dspike explicitly targeted this issue, respectively via temporal loss reweighting and sharper (discontinuous) surrogates. CLIF addresses the same gap, but at the neuron-design level\u2014altering dynamics to open extra temporal gradient pathways\u2014thereby improving credit assignment without changing the training objective or sacrificing discrete spiking. The inspiration to endow neurons with additional internal dynamics that aid temporal learning traces to ALIF, where an auxiliary adaptive threshold state extends memory. CLIF similarly augments LIF with a complementary pathway, but keeps the design simple, hyperparameter-free, and compatible with standard surrogate gradients. Finally, prior neuron-centric optimization like Parametric LIF demonstrated that modifying intrinsic dynamics can materially improve trainability; CLIF advances this trajectory by specifically engineering the neuron's dynamics to mitigate temporal gradient decay, yielding consistent accuracy gains across datasets while maintaining SNN efficiency.",
+  "analysis_timestamp": "2026-01-06T23:09:26.424919"
+}

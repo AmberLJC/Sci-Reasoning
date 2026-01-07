@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Exploiting Linear Structure Within Convolutional Networks for Efficient Evaluation",
+      "authors": "Emily L. Denton et al.",
+      "year": 2014,
+      "arxiv_id": "1404.0736",
+      "role": "Baseline",
+      "relationship_sentence": "This work established SVD-based low-rank factorization with output reconstruction for compressing linear layers, which MoDeGPT extends by jointly decomposing consecutive Transformer subcomponents and enforcing bounded reconstruction error."
+    },
+    {
+      "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+      "authors": "Edward J. Hu et al.",
+      "year": 2021,
+      "arxiv_id": "2106.09685",
+      "role": "Gap Identification",
+      "relationship_sentence": "LoRA popularized low-rank structure in Transformer matrices but adds adapter parameters and inference overhead, a limitation MoDeGPT addresses by compressing native weights via joint decomposition without extra modules."
+    },
+    {
+      "title": "Linformer: Self-Attention with Linear Complexity",
+      "authors": "Sinong Wang et al.",
+      "year": 2020,
+      "arxiv_id": "2006.04768",
+      "role": "Inspiration",
+      "relationship_sentence": "Linformer showed that Transformer attention exhibits low-rank structure that can be exploited via projection, motivating MoDeGPT\u2019s larger-scale structural decomposition and hidden-dimension reduction guided by output preservation."
+    },
+    {
+      "title": "Nystr\u00f6mformer: A Nystr\u00f6m-Based Algorithm for Approximating Self-Attention",
+      "authors": "Yunyang Xiong et al.",
+      "year": 2021,
+      "arxiv_id": "2102.03902",
+      "role": "Extension",
+      "relationship_sentence": "Nystr\u00f6mformer introduced Nystr\u00f6m approximation with accuracy guarantees for attention, which MoDeGPT repurposes as a building block to approximate paired subcomponents with bounded error in its modular decomposition."
+    },
+    {
+      "title": "CUR Matrix Decompositions for Improved Data Analysis",
+      "authors": "Petros Drineas et al.",
+      "year": 2008,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "This paper provides the CR/CUR decomposition framework and relative-error bounds that MoDeGPT leverages to construct compact factors from selected columns/rows when jointly decomposing module pairs."
+    },
+    {
+      "title": "SparseGPT: Massive Language Models Can Be Accurately Pruned in One-Shot",
+      "authors": "Aleksandar Frantar et al.",
+      "year": 2023,
+      "arxiv_id": "2301.00774",
+      "role": "Inspiration",
+      "relationship_sentence": "SparseGPT\u2019s layer-output reconstruction principle for one-shot LLM pruning directly informs MoDeGPT\u2019s use of output reconstruction to safely reduce hidden dimensions across larger module structures."
+    },
+    {
+      "title": "ALBERT: A Lite BERT for Self-supervised Learning of Language Representations",
+      "authors": "Zhenzhong Lan et al.",
+      "year": 2019,
+      "arxiv_id": "1909.11942",
+      "role": "Related Problem",
+      "relationship_sentence": "ALBERT\u2019s factorized parameterization and reduced hidden dimensions demonstrate that shrinking intermediate representations can preserve accuracy, an idea MoDeGPT generalizes via data-driven reconstruction across paired subcomponents."
+    }
+  ],
+  "synthesis_narrative": "Early neural network compression via low-rank SVD showed that linear layers can be factorized while preserving outputs by minimizing reconstruction error, concretely demonstrating a practical accuracy\u2013efficiency trade-off (Denton et al.). In Transformers, Linformer established that self-attention exhibits inherent low-rank structure and can be projected to lower dimensions with controlled degradation, while Nystr\u00f6mformer introduced a Nystr\u00f6m-based approximation of attention with empirical and theoretical fidelity guarantees. Beyond classical SVD, CR/CUR matrix decompositions provided a principled way to approximate matrices via selected columns/rows with relative-error bounds (Drineas et al.), enriching the toolkit for structured approximations. For LLMs, SparseGPT showed that matching layer outputs via a one-shot reconstruction objective is a powerful guiding signal for accuracy-preserving compression. Meanwhile, LoRA popularized leveraging low-rank structure in Transformer weights but introduced additional adapter parameters and runtime overhead, and ALBERT demonstrated that reducing hidden dimensions through factorization can maintain quality in Transformer-based models.\nTogether, these works reveal that (i) output reconstruction is a reliable objective for preserving behavior during compression, (ii) Transformer substructures possess exploitable low-rank structure, and (iii) decompositions like SVD, Nystr\u00f6m, and CR come with error control. The natural next step is to move beyond single-layer approximations and adapter add-ons toward a joint, structured factorization of consecutive Transformer subcomponents, using output reconstruction to safely reduce hidden dimensions while invoking decomposition schemes with provable error bounds\u2014precisely the synthesis that enables efficient, accurate LLM compression at larger structural granularity.",
+  "target_paper": {
+    "title": "MoDeGPT: Modular Decomposition for Large Language Model Compression",
+    "authors": "Chi-Heng Lin, Shangqian Gao, James Seale Smith, Abhishek Patel, Shikhar Tuli, Yilin Shen, Hongxia Jin, Yen-Chang Hsu",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "oral",
+    "keywords": "LLM, model compression, matrix decomposition",
+    "abstract": "Large Language Models (LLMs) have significantly advanced AI with their exceptional performance across a wide range of tasks. However, their extensive computational requirements restrict their use on devices with limited resources.\nWhile recent compression methods based on low-rank matrices show potential\nsolutions, they often suffer from significant loss of accuracy or introduce substantial\noverhead in parameters and inference time. In this paper, we introduce Modular De-\ncomposition (MoDeGPT), a new, efficient, and structured compression framework\nthat overcomes these limitations. MoDeGPT jointly decomposes pairs of consecu-\ntive subcomponents within Transformer blocks, reduces hidden dimensions through\noutput reconstruction on a larger structural scale than conventional low-rank meth-\nods, and repurposes three classical matrix decomposition algorithms\u2014Nystr\u00f6m\napproximation, CR decomposition, and SVD\u2014to ensure bounded errors in our\nnovel decomposition approach. Our experiments show th",
+    "openreview_id": "8EfxjTCg2k",
+    "forum_id": "8EfxjTCg2k"
+  },
+  "analysis_timestamp": "2026-01-06T12:30:20.812201"
+}

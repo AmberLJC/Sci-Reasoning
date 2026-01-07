@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Jonathan Ho; Ajay Jain; Pieter Abbeel",
+      "year": 2020,
+      "role": "Foundational diffusion prior",
+      "relationship_sentence": "Provides the denoising diffusion framework and learned score/denoiser that this paper uses as a powerful image prior during reverse-time inference."
+    },
+    {
+      "title": "Score-Based Generative Modeling through Stochastic Differential Equations",
+      "authors": "Yang Song; Jascha Sohl-Dickstein; Diederik P. Kingma; Abhishek Kumar; Stefano Ermon; Ben Poole",
+      "year": 2021,
+      "role": "Score-based theory and sampling",
+      "relationship_sentence": "Establishes the continuous-time score-based formulation and reverse-time updates that enable integrating log-likelihood gradients (for MAP/posterior guidance) into diffusion sampling."
+    },
+    {
+      "title": "Denoising Diffusion Restoration Models (DDRM)",
+      "authors": "Bahjat Kawar; Michael Elad; Stefano Ermon",
+      "year": 2022,
+      "role": "Diffusion prior for inverse problems",
+      "relationship_sentence": "Demonstrates how to inject measurement consistency/likelihood constraints into diffusion sampling for restoration, which this paper generalizes to adaptive, heteroscedastic likelihoods and MAP inference."
+    },
+    {
+      "title": "Diffusion Posterior Sampling for General Noisy Inverse Problems",
+      "authors": "Hyungjin Chung; Byeongsu Sim; Jong Chul Ye",
+      "year": 2022,
+      "role": "Bayesian diffusion guidance",
+      "relationship_sentence": "Introduces posterior-guided diffusion using known AWGN likelihoods; the present work extends this idea by inferring per-pixel noise precision via variational Bayes during the reverse process."
+    },
+    {
+      "title": "Practical Poissonian-Gaussian Noise Modeling and Fitting for Single-Image Raw-Data",
+      "authors": "Alessandro Foi; Mejdi Trimeche; Vladimir Katkovnik; Karen Egiazarian",
+      "year": 2008,
+      "role": "Heteroscedastic camera noise model",
+      "relationship_sentence": "Motivates an independent, non-identically distributed (signal-dependent) likelihood by formalizing real camera noise as Poisson-Gaussian, underpinning the paper\u2019s precision-weighted i.n.i.d. likelihood design."
+    },
+    {
+      "title": "CBDNet: A Convolutional Blind Denoising Network",
+      "authors": "Shi Guo; Zifei Yan; Kai Zhang; Wangmeng Zuo; Lei Zhang",
+      "year": 2019,
+      "role": "Blind real-noise modeling with spatially varying noise",
+      "relationship_sentence": "Shows the effectiveness of learning spatially varying noise level maps for real-world denoising, inspiring the paper\u2019s per-pixel precision inference and local smoothing (Gaussian convolution) of variance estimates."
+    },
+    {
+      "title": "From Learning Models of Natural Image Patches to Image Restoration (EPLL)",
+      "authors": "Daniel Zoran; Yair Weiss",
+      "year": 2011,
+      "role": "MAP with learned generative priors and noise parameter updates",
+      "relationship_sentence": "Pioneers MAP restoration with a learned prior and alternating estimation of noise parameters; this paper adopts the same MAP philosophy but replaces the patch GMM with a diffusion prior and uses variational Bayes for precision."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core contribution\u2014adaptive likelihood estimation and MAP inference with a diffusion prior for real-world, signal-dependent noise\u2014rests on three converging lines of work. First, diffusion generative modeling (Ho et al., 2020; Song et al., 2021) provides the learned score/denoiser and reverse-time dynamics that serve as a powerful image prior and a mechanism to inject log-likelihood guidance into sampling. Second, diffusion-for-inverse-problems frameworks (DDRM; Chung et al.\u2019s Diffusion Posterior Sampling) show how to incorporate measurement models and likelihood terms into diffusion trajectories. However, these typically assume simple, homoscedastic Gaussian noise and known noise levels. The present paper generalizes this by introducing an independent, non-identically distributed (heteroscedastic) likelihood and performing adaptive, per-pixel precision inference during the reverse process.\nA third strand comes from real-noise modeling and Bayesian restoration. Foi et al. (2008) established Poisson\u2013Gaussian camera noise as a practical, signal-dependent model, motivating the i.n.i.d. likelihood and the need to estimate local noise statistics. CBDNet (Guo et al., 2019) demonstrated the utility of spatially varying noise maps for blind denoising and the benefit of smoothing/regularizing such maps\u2014ideas echoed here via a precision prior and local Gaussian convolution to stabilize variance estimates. Finally, EPLL (Zoran & Weiss, 2011) provides the blueprint for MAP restoration with a learned generative prior and adaptive noise parameter updates; this work transposes that MAP-and-adaptation paradigm into the diffusion setting, replacing GMM patch priors with a diffusion prior and using variational Bayes to infer per-pixel noise precision on-the-fly.",
+  "analysis_timestamp": "2026-01-06T23:33:36.275044"
+}

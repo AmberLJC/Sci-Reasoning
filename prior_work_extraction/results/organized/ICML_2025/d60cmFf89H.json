@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "TabPFN: A Transformer that Solves Small Tabular Classification Problems in a Second",
+      "authors": "M. Hollmann et al.",
+      "year": 2023,
+      "role": "Baseline",
+      "relationship_sentence": "TabFlex directly builds on TabPFN\u2019s in-context learning formulation for tabular classification and replaces its quadratic self-attention with linear attention to eliminate the core scalability bottleneck."
+    },
+    {
+      "title": "Transformers are RNNs: Fast Autoregressive Transformers with Linear Attention",
+      "authors": "A. Katharopoulos et al.",
+      "year": 2020,
+      "role": "Inspiration",
+      "relationship_sentence": "The linear attention mechanism introduced here (kernelizing attention to achieve O(n) complexity) provides the key idea that TabFlex adopts to replace TabPFN\u2019s quadratic self-attention for million-sample scalability."
+    },
+    {
+      "title": "Rethinking Attention with Performers",
+      "authors": "K. Choromanski et al.",
+      "year": 2021,
+      "role": "Inspiration",
+      "relationship_sentence": "Performer\u2019s FAVOR+ random feature approximation of softmax attention is a concrete linear-attention instantiation that directly informs TabFlex\u2019s choice of scalable attention as a drop-in replacement for standard self-attention."
+    },
+    {
+      "title": "Efficiently Modeling Long Sequences with Structured State Spaces",
+      "authors": "A. Gu et al.",
+      "year": 2021,
+      "role": "Related Problem",
+      "relationship_sentence": "S4 demonstrates linear-time sequence modeling via state-space models, motivating TabFlex\u2019s exploration of linear-time sequence alternatives to attention for handling very long tabular in-context sequences."
+    },
+    {
+      "title": "Mamba: Linear-Time Sequence Modeling with Selective State Spaces",
+      "authors": "A. Gu and T. Dao",
+      "year": 2023,
+      "role": "Related Problem",
+      "relationship_sentence": "Mamba\u2019s selective SSM shows that modern linear-time sequence models can match transformer quality at scale, reinforcing TabFlex\u2019s design choice to favor linear-time mechanisms over quadratic attention for scalability."
+    },
+    {
+      "title": "XGBoost: A Scalable Tree Boosting System",
+      "authors": "T. Chen and C. Guestrin",
+      "year": 2016,
+      "role": "Baseline",
+      "relationship_sentence": "XGBoost serves as the primary production baseline for large tabular datasets, and TabFlex explicitly targets\u2014and demonstrates\u2014speed gains over it while maintaining competitive accuracy."
+    }
+  ],
+  "synthesis_narrative": "TabFlex\u2019s core innovation\u2014scaling in-context tabular learning to millions of samples\u2014rests squarely on two threads of prior work. First, TabPFN established the problem formulation and paradigm: training a transformer to perform amortized Bayesian-like inference for tabular classification in-context, delivering training-free adaptability. However, TabPFN\u2019s quadratic self-attention becomes the critical bottleneck as context length grows with more samples, features, and classes. Second, the linear-time sequence modeling literature provides the remedy. Linear attention methods, notably the kernel-based formulation of Katharopoulos et al. and the FAVOR+ approximation from Performer, show how to preserve the benefits of attention while reducing complexity to O(n). TabFlex directly leverages these linear-attention ideas as a drop-in replacement for TabPFN\u2019s self-attention, converting the dominant quadratic cost into linear scaling and thereby enabling million-sample contexts. Complementing this, state-space model advances (S4 and Mamba) independently validate that linear-time sequence architectures can rival transformers, informing TabFlex\u2019s design choices and comparisons for handling long tabular sequences. Finally, XGBoost represents the established large-scale tabular baseline that TabFlex aims to surpass on efficiency without sacrificing accuracy. Together, these works directly shape TabFlex: TabPFN provides the in-context tabular learning blueprint and limitation; linear attention provides the enabling technique; and modern linear-time sequence modeling and XGBoost frame the scalability targets and competitive landscape.",
+  "analysis_timestamp": "2026-01-06T23:07:19.584778"
+}

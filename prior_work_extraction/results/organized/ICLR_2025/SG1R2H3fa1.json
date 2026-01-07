@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "DeepWalk: Online Learning of Social Representations",
+      "authors": "Bryan Perozzi et al.",
+      "year": 2014,
+      "arxiv_id": "1403.6652",
+      "role": "Inspiration",
+      "relationship_sentence": "DeepWalk\u2019s core idea of turning graphs into sequences via random walks directly motivates RWNNs\u2019 use of walk-generated records that a neural reader consumes for downstream prediction, generalizing the Skip-gram objective to task-specific neural inference."
+    },
+    {
+      "title": "Anonymous Walk Embeddings",
+      "authors": "Sergey Ivanov et al.",
+      "year": 2018,
+      "arxiv_id": "1805.11921",
+      "role": "Foundation",
+      "relationship_sentence": "The anonymity mapping for random walks in AWE establishes that anonymized walk patterns are isomorphism-invariant, a specific device RWNNs adopt to guarantee probabilistic invariance irrespective of the chosen record format (e.g., text)."
+    },
+    {
+      "title": "Neural Message Passing for Quantum Chemistry",
+      "authors": "Justin Gilmer et al.",
+      "year": 2017,
+      "arxiv_id": "1704.01212",
+      "role": "Baseline",
+      "relationship_sentence": "The MPNN framework is the principal baseline whose iterative propagation RWNNs reinterpret through Markov-chain operators, enabling a direct comparison that highlights RWNNs\u2019 alleviation of over-smoothing by construction."
+    },
+    {
+      "title": "How Powerful are Graph Neural Networks?",
+      "authors": "Keyulu Xu et al.",
+      "year": 2019,
+      "arxiv_id": "1810.00826",
+      "role": "Foundation",
+      "relationship_sentence": "GIN\u2019s formalization of isomorphism-invariant expressivity and universal approximation provides the expressivity benchmark and proof template that RWNNs target and match\u2014in probability\u2014under anonymized walk records."
+    },
+    {
+      "title": "Predict then Propagate: Graph Neural Networks meet Personalized PageRank",
+      "authors": "Johannes Klicpera et al.",
+      "year": 2019,
+      "arxiv_id": "1810.05997",
+      "role": "Related Problem",
+      "relationship_sentence": "APPNP\u2019s use of a Personalized PageRank (random-walk-with-restart) operator to control diffusion motivates the paper\u2019s Markov-chain lens and supports the claim that finite-length/random-walk propagation mitigates over-smoothing."
+    },
+    {
+      "title": "Graph Neural Networks Exponentially Lose Expressive Power for Node Classification",
+      "authors": "Kenta Oono et al.",
+      "year": 2019,
+      "arxiv_id": "1905.10947",
+      "role": "Gap Identification",
+      "relationship_sentence": "This work\u2019s proof that deep message passing collapses to an over-smoothed limit is the explicit shortcoming RWNNs address by replacing deep iterative averaging with finite random-walk records read once by a neural model."
+    },
+    {
+      "title": "On the Bottleneck of Graph Neural Networks and its Practical Implications",
+      "authors": "Uri Alon et al.",
+      "year": 2021,
+      "arxiv_id": "2006.05205",
+      "role": "Gap Identification",
+      "relationship_sentence": "The identification of over-squashing as an information bottleneck frames RWNNs\u2019 analysis, where the paper shows oversquashing can still manifest (albeit differently) even as over-smoothing is alleviated."
+    }
+  ],
+  "synthesis_narrative": "DeepWalk introduced the concrete mechanism of representing a graph by sequences produced from random walks, then learning from these sequences with a language-modeling objective\u2014establishing that walk-generated records are a powerful, model-consumable interface to graph structure. Anonymous Walk Embeddings showed that mapping node identities to anonymous roles within walk patterns yields isomorphism-invariant statistics, isolating the precise anonymization trick that preserves invariance while still encoding structural signals. The MPNN framework formalized neural message passing as iterative neighborhood aggregation, providing the de facto baseline and a blueprint for relating graph learning dynamics to linear operators. GIN crystallized the connection between isomorphism testing and graph-network expressivity, proving universal approximation for invariant functions and setting the benchmark for theoretical power. APPNP demonstrated that a Personalized PageRank (random-walk-with-restart) propagator can control diffusion length, connecting propagation depth to random-walk processes. Oono and Suzuki proved that deep message passing inevitably over-smooths, while Alon and Yahav identified over-squashing as an information bottleneck in long-range dependency propagation. Together, these works revealed that random-walk records can be fed directly to neural readers, that anonymization is the key to invariance, and that diffusion depth is the root of smoothing and squashing pathologies. Building on this, the current paper defines random walk neural networks that consume anonymized walk records in flexible formats (even plain text), establishes isomorphism-invariant universal approximation in probability, and uses a Markov-chain perspective to show over-smoothing is alleviated by construction while clarifying how over-squashing remains and where it arises.",
+  "target_paper": {
+    "title": "Revisiting Random Walks for Learning on Graphs",
+    "authors": "Jinwoo Kim, Olga Zaghen, Ayhan Suleymanzade, Youngmin Ryou, Seunghoon Hong",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "Graph machine learning, random walk, invariance, universal approximation, markov chain",
+    "abstract": "We revisit a simple model class for machine learning on graphs, where a random walk on a graph produces a machine-readable record, and this record is processed by a deep neural network to directly make vertex-level or graph-level predictions. We call these stochastic machines random walk neural networks (RWNNs), and through principled analysis, show that we can design them to be isomorphism invariant while capable of universal approximation of graph functions in probability. A useful finding is that almost any kind of record of random walks guarantees probabilistic invariance as long as the vertices are anonymized. This enables us, for example, to record random walks in plain text and adopt a language model to read these text records to solve graph tasks. We further establish a parallelism to message passing neural networks using tools from Markov chain theory, and show that over-smoothing in message passing is alleviated by construction in RWNNs, while over-squashing manifests as prob",
+    "openreview_id": "SG1R2H3fa1",
+    "forum_id": "SG1R2H3fa1"
+  },
+  "analysis_timestamp": "2026-01-06T13:23:30.234093"
+}

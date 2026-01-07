@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Scalable Diffusion Models with Transformers (DiT)",
+      "authors": "William Peebles, Saining Xie",
+      "year": 2023,
+      "role": "Foundational architecture for transformer-based diffusion",
+      "relationship_sentence": "SVG2 targets the DiT-style transformer backbone for video generation, directly addressing its quadratic attention cost with a sparse, training-free scheme tailored to preserve DiT\u2019s generation quality."
+    },
+    {
+      "title": "Video Diffusion Models",
+      "authors": "Jonathan Ho, Tim Salimans, et al.",
+      "year": 2022,
+      "role": "Foundational work on diffusion for video generation",
+      "relationship_sentence": "By establishing diffusion as a viable framework for videos, this work motivates SVG2\u2019s focus on accelerating attention in spatiotemporal diffusion while maintaining fidelity."
+    },
+    {
+      "title": "Sparse Transformers",
+      "authors": "Rewon Child, Scott Gray, Alec Radford, Ilya Sutskever",
+      "year": 2019,
+      "role": "Fixed, position-based sparse attention patterns",
+      "relationship_sentence": "SVG2 is a response to positional/block sparse patterns (as in Sparse Transformers) that save compute but degrade accuracy; SVG2 replaces positional clustering with semantic-critical token selection."
+    },
+    {
+      "title": "Reformer: The Efficient Transformer",
+      "authors": "Nikita Kitaev, \u0141ukasz Kaiser, Anselm Levskaya",
+      "year": 2020,
+      "role": "Content-based token grouping via LSH and permutation",
+      "relationship_sentence": "Reformer\u2019s content-driven bucketing and permutation inspired SVG2\u2019s semantic-aware permutation to group similar (critical) tokens, enabling both accuracy retention and GPU-friendly locality."
+    },
+    {
+      "title": "Efficient Content-Based Sparse Attention with Routing Transformers",
+      "authors": "Aurko Roy, Mohammad Saffar, Ashish Vaswani, David Grangier",
+      "year": 2021,
+      "role": "Cluster-based, content-aware sparse attention with block structure",
+      "relationship_sentence": "Routing Transformers showed that clustering by content yields block-sparse attention; SVG2 adapts this insight to diffusion-time token selection and explicit permutation for contiguous GPU processing."
+    },
+    {
+      "title": "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness",
+      "authors": "Tri Dao, Daniel Y. Fu, Stefano Ermon, Atri Rudra, Christopher R\u00e9",
+      "year": 2022,
+      "role": "GPU-kernel and IO-aware optimization for attention",
+      "relationship_sentence": "FlashAttention highlighted the importance of contiguous memory access and blockwise computation; SVG2\u2019s permutation step ensures critical tokens are contiguous to minimize GPU compute waste."
+    },
+    {
+      "title": "ToMe: Token Merging for Vision Transformers",
+      "authors": "Daniel Bolya et al.",
+      "year": 2023,
+      "role": "Training-free, similarity-based token reduction",
+      "relationship_sentence": "ToMe demonstrated training-free, semantics-based token consolidation (also applied to diffusion); SVG2 builds on this spirit by scoring and grouping critical tokens without retraining, but avoids merging-induced artifacts in video generation."
+    }
+  ],
+  "synthesis_narrative": "SVG2 sits at the intersection of diffusion transformers and efficient attention. DiT established transformer-based diffusion as a strong generative backbone, while Video Diffusion Models cemented diffusion\u2019s applicability to the spatiotemporal domain\u2014together motivating acceleration specifically for video generation. Early sparse attention like Sparse Transformers reduced complexity via fixed, position-driven block patterns, but these mechanisms trade accuracy for efficiency because they ignore semantic relevance. Reformer and Routing Transformers shifted the paradigm to content-aware grouping: they permute or cluster tokens by similarity to create block-sparse structures that preserve modeling power. SVG2 adapts this content-based perspective to the diffusion setting with a training-free pipeline that identifies semantically critical tokens, tackling the core failure mode of position-based clustering.\nCrucially, SVG2 also addresses system-level efficiency. FlashAttention underscored that GPU throughput hinges on contiguous memory access and blockwise kernels. Existing sparse inference for diffusion often scatters important tokens, harming utilization. SVG2\u2019s semantic-aware permutation explicitly packs critical tokens contiguously, aligning the sparsity pattern with GPU-friendly computation to eliminate waste. Finally, training-free token reduction ideas like ToMe demonstrate that semantics-driven token operations can preserve quality without retraining; SVG2 extends this philosophy to video diffusion transformers, balancing fidelity and speed. By unifying content-aware token selection with GPU-aligned permutation, SVG2 achieves a Pareto frontier of quality versus latency for video generation.",
+  "analysis_timestamp": "2026-01-07T00:21:32.317963"
+}

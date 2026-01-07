@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "FiLM: Visual Reasoning with a General Conditioning Layer",
+      "authors": "Ethan Perez et al.",
+      "year": 2018,
+      "arxiv_id": "1709.07871",
+      "role": "Inspiration",
+      "relationship_sentence": "This work introduced task/instruction-conditioned feature modulation; the current paper borrows the conditioning principle but replaces dense FiLM-style modulation with a compact, task-conditioned selective bottleneck to filter visual features."
+    },
+    {
+      "title": "Neural Discrete Representation Learning (VQ-VAE)",
+      "authors": "Aaron van den Oord et al.",
+      "year": 2017,
+      "arxiv_id": "1711.00937",
+      "role": "Inspiration",
+      "relationship_sentence": "VQ-VAE showed how a learnable codebook can serve as a compact, trainable bottleneck; the current paper adapts this idea to build a small task-conditioned codebook that selectively routes visual information relevant to the embodied task."
+    },
+    {
+      "title": "CLIP-Adapter: Better Vision-Language Models with Feature Adapters",
+      "authors": "Peng Gao et al.",
+      "year": 2021,
+      "arxiv_id": "2110.04544",
+      "role": "Baseline",
+      "relationship_sentence": "CLIP-Adapter is a parameter-efficient way to adapt CLIP without full fine-tuning; the proposed method is positioned as a stronger parameter-efficient alternative that, unlike adapters, explicitly filters out task-irrelevant CLIP features."
+    },
+    {
+      "title": "Object Goal Navigation using Goal-Oriented Semantic Exploration",
+      "authors": "Devendra Singh Chaplot et al.",
+      "year": 2020,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "This paper formalized Object-Goal Navigation with semantic priors and established the task setup and metrics that the current work targets when evaluating task-conditioned selective visual representations."
+    },
+    {
+      "title": "Zero-Shot Object-Goal Navigation using Multimodal Foundation Models (ZSON)",
+      "authors": "Kushal K. Ramrakhya et al.",
+      "year": 2022,
+      "arxiv_id": "",
+      "role": "Gap Identification",
+      "relationship_sentence": "ZSON demonstrated that off-the-shelf CLIP features enable ObjectNav but also carry broad, task-irrelevant signals; the current paper directly addresses this limitation by learning a task-conditioned filter over such features."
+    },
+    {
+      "title": "ManipulaTHOR: A Framework for Visual Object Manipulation",
+      "authors": "Kuo-Hao Zeng et al.",
+      "year": 2021,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "ManipulaTHOR defined interactive object displacement/manipulation tasks and benchmarks used to assess whether selective, task-conditioned visual representations improve policy learning beyond navigation."
+    }
+  ],
+  "synthesis_narrative": "FiLM introduced a simple and effective mechanism to condition visual processing on a task or instruction by feature-wise modulation, establishing that task signals can guide what aspects of an image should be emphasized. VQ-VAE demonstrated that a learnable codebook can act as a compact, trainable bottleneck, discretizing features into a small set of prototypes that can encourage selective information flow. CLIP-Adapter showed that parameter-efficient modules attached to pre-trained vision-language models can adapt them to new tasks without full fine-tuning, but it preserves most upstream activations and does not explicitly suppress task-irrelevant content. In embodied navigation, Goal-Oriented Semantic Exploration specified the Object-Goal Navigation formulation and emphasized leveraging semantic cues to find target objects, providing the task structure and metrics. ZSON then applied multimodal foundation models like CLIP to ObjectNav, evidencing the potency of generic pre-trained features for zero-shot performance while implicitly exposing the problem that such broad representations include information irrelevant to the current goal. ManipulaTHOR extended embodied evaluation to object displacement/manipulation, offering a complementary testbed where perceptual selectivity is critical for control.\nTogether, these works suggest a natural opportunity: combine task conditioning (FiLM) with a compact bottleneck (VQ) to create a parameter-efficient adapter (\u00e0 la CLIP-Adapter) that explicitly filters representations for embodied tasks defined by ObjectNav and manipulation benchmarks. The synthesis is a task-conditioned codebook that selectively admits goal-relevant visual signals, thereby reducing learning noise, accelerating convergence, and improving generalization across navigation and manipulation settings.",
+  "target_paper": {
+    "title": "Selective Visual Representations Improve Convergence and Generalization for Embodied AI",
+    "authors": "Ainaz Eftekhar, Kuo-Hao Zeng, Jiafei Duan, Ali Farhadi, Aniruddha Kembhavi, Ranjay Krishna",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Embodied-AI, Task-conditioned Representations, Visual Navigation, Reinforcement Learning",
+    "abstract": "Embodied AI models often employ off the shelf vision backbones like CLIP to encode their visual observations. Although such general purpose representations encode rich syntactic and semantic information about the scene, much of this information is often irrelevant to the specific task at hand. This introduces noise within the learning process and distracts the agent's focus from task-relevant visual cues.\nInspired by selective attention in humans\u2014the process through which people filter their perception based on their experiences, knowledge, and the task at hand\u2014we introduce a parameter-efficient approach to filter visual stimuli for embodied AI.\nOur approach induces a task-conditioned bottleneck using a small learnable codebook module. This codebook is trained jointly to optimize task reward and acts as a task-conditioned selective filter over the visual observation.\nOur experiments showcase state-of-the-art performance for object goal navigation and object displacement across $5$ benc",
+    "openreview_id": "kC5nZDU5zf",
+    "forum_id": "kC5nZDU5zf"
+  },
+  "analysis_timestamp": "2026-01-06T06:13:47.282667"
+}

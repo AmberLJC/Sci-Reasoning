@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "From Softmax to Sparsemax: A Sparse Model of Attention and Multi-Label Classification",
+      "authors": "Andr\u00e9 F. T. Martins, Ram\u00f3n Astudillo",
+      "year": 2016,
+      "role": "Foundational sparse alternative to softmax",
+      "relationship_sentence": "AdaSplash builds on the sparse-probability perspective inaugurated by sparsemax, which \u03b1-entmax generalizes and which AdaSplash accelerates and exploits computationally."
+    },
+    {
+      "title": "Learning with Fenchel-Young Losses",
+      "authors": "Mathieu Blondel, Andr\u00e9 F. T. Martins, Vlad Niculae",
+      "year": 2019,
+      "role": "Theoretical and algorithmic foundation of \u03b1-entmax",
+      "relationship_sentence": "This work formalized \u03b1-entmax via Tsallis entropies and provided practical computation/training tools that AdaSplash directly improves upon with a faster hybrid Halley\u2013bisection solver and GPU-friendly implementation."
+    },
+    {
+      "title": "Sparse Sequence-to-Sequence Models with \u03b1-Entmax",
+      "authors": "Ben Peters, Vlad Niculae, Andr\u00e9 F. T. Martins, Mathieu Blondel",
+      "year": 2019,
+      "role": "Introduced and popularized \u03b1-entmax in attention and generation",
+      "relationship_sentence": "AdaSplash targets the exact \u03b1-entmax transformation introduced here, replacing the original bisection-based computation with a faster solver and, crucially, turning the induced sparsity into real runtime/memory savings."
+    },
+    {
+      "title": "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness",
+      "authors": "Tri Dao, Daniel Y. Fu, Stefano Ermon, Atri Rudra, Christopher R\u00e9",
+      "year": 2022,
+      "role": "GPU-optimized attention kernel inspiration",
+      "relationship_sentence": "AdaSplash adapts FlashAttention\u2019s IO-aware tiling and kernel design ideas to the adaptive sparse regime, enabling exact \u03b1-entmax attention to run efficiently on GPUs."
+    },
+    {
+      "title": "FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning",
+      "authors": "Tri Dao",
+      "year": 2023,
+      "role": "Advanced kernel and parallelization techniques for attention",
+      "relationship_sentence": "The improved scheduling and parallelism principles from FlashAttention-2 inform AdaSplash\u2019s Triton kernels to handle sparse gather/scatter and variable supports efficiently."
+    },
+    {
+      "title": "Triton: An Intermediate Language and Compiler for Tiled Neural Network Computations",
+      "authors": "Philippe Tillet, Hanjun Kim, Shubho Sengupta, Saehoon Yi, et al.",
+      "year": 2021,
+      "role": "Implementation substrate for custom GPU kernels",
+      "relationship_sentence": "AdaSplash\u2019s custom kernels are implemented in Triton, directly leveraging Triton\u2019s abstractions to express and optimize adaptive sparse attention on GPUs."
+    },
+    {
+      "title": "Routing Transformer: Efficient Content-Based Sparse Attention with Routing",
+      "authors": "Aurko Roy, Mohammad Saffar, Ashish Vaswani, David Grangier",
+      "year": 2021,
+      "role": "Precedent for data-dependent sparse attention",
+      "relationship_sentence": "AdaSplash shares the goal of exploiting content-driven sparsity for efficiency, but achieves it via exact \u03b1-entmax probabilities and dedicated kernels rather than approximate routing, extending the concept to adaptive softmax replacements."
+    }
+  ],
+  "synthesis_narrative": "AdaSplash sits at the intersection of sparse probabilistic transformations and GPU-aware attention kernels. Its core idea\u2014making \u03b1-entmax attention both fast and memory-efficient\u2014traces back to Martins and Astudillo\u2019s sparsemax, which first argued for sparse alternatives to softmax, and to Blondel, Martins, and Niculae\u2019s Fenchel\u2013Young framework, which formalized \u03b1-entmax as a Tsallis-entropy-regularized prediction function with practical training losses. The early deployment of \u03b1-entmax in attention and sequence generation demonstrated its modeling benefits but relied on iterative bisection and dense implementations that did not translate sparsity into real compute savings. AdaSplash directly targets this gap: it replaces prior solvers with a hybrid Halley\u2013bisection method that sharply reduces iterations, and it re-engineers the attention pipeline to capitalize on the induced sparsity.\n\nOn the systems side, FlashAttention and FlashAttention-2 provided the blueprint for IO-aware tiling, work partitioning, and memory scheduling that make attention kernels fast on GPUs. AdaSplash borrows these principles but adapts them to the more challenging adaptive-sparse setting, where the support varies per query-key interaction. Triton serves as the practical vehicle to express these custom sparse kernels efficiently. Finally, prior content-based sparse attention (e.g., Routing Transformer) validated that data-dependent sparsity can deliver substantive savings; AdaSplash advances this line by delivering exact, \u03b1-entmax-driven sparsity with GPU kernels designed to exploit it, unifying the statistical advantages of adaptive sparsity with the performance characteristics of state-of-the-art attention implementations.",
+  "analysis_timestamp": "2026-01-07T00:04:09.140243"
+}

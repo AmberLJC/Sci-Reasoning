@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "STL: A Seasonal-Trend Decomposition Procedure Based on Loess",
+      "authors": "Robert B. Cleveland et al.",
+      "year": 1990,
+      "role": "Foundation",
+      "relationship_sentence": "SparseTSF\u2019s core idea of explicitly decoupling periodicity (seasonality) from trend directly follows STL\u2019s additive decomposition principle, which it operationalizes via cross-period downsampling to isolate trend across periods."
+    },
+    {
+      "title": "Informer: Beyond Efficient Transformer for Long Sequence Time-Series Forecasting",
+      "authors": "Haoyi Zhou et al.",
+      "year": 2021,
+      "role": "Foundation",
+      "relationship_sentence": "Informer crystallized the modern LTSF problem setting and benchmarks that SparseTSF targets, framing the long-horizon forecasting challenge that SparseTSF seeks to solve with orders-of-magnitude fewer parameters."
+    },
+    {
+      "title": "Autoformer: Decomposition Transformers with Auto-Correlation for Long-Term Series Forecasting",
+      "authors": "Haixu Wu et al.",
+      "year": 2021,
+      "role": "Inspiration",
+      "relationship_sentence": "Autoformer showed that explicitly decomposing time series into trend and seasonal parts improves LTSF; SparseTSF inherits this decomposition rationale but replaces heavy auto-correlation machinery with cross-period downsampling that captures periodicity with ~1k parameters."
+    },
+    {
+      "title": "FEDformer: Frequency Enhanced Decomposed Transformer for Long-term Series Forecasting",
+      "authors": "Tian Zhou et al.",
+      "year": 2022,
+      "role": "Gap Identification",
+      "relationship_sentence": "FEDformer tackles periodicity via frequency-domain blocks within a decomposed framework but remains parameter-heavy; SparseTSF is motivated by this gap, proposing cross-period sparse forecasting to retain periodic cues while drastically reducing model size."
+    },
+    {
+      "title": "Are Transformers Effective for Time Series Forecasting?",
+      "authors": "Ailing Zeng et al.",
+      "year": 2023,
+      "role": "Extension",
+      "relationship_sentence": "Building on DLinear\u2019s decomposition-then-linear paradigm that challenged transformer dominance, SparseTSF extends this line by introducing cross-period downsampling to extract periodic features and forecast cross-period trends, achieving far lower parameter counts and better robustness."
+    },
+    {
+      "title": "TimesNet: Temporal 2D-Variation Modeling for General Time Series Analysis",
+      "authors": "Haixu Wu et al.",
+      "year": 2023,
+      "role": "Inspiration",
+      "relationship_sentence": "TimesNet\u2019s idea of reorganizing sequences along candidate periods to capture multi-periodic structure directly inspires SparseTSF\u2019s cross-period viewpoint, which simplifies this by period-aware downsampling to obtain periodic features with minimal computation."
+    },
+    {
+      "title": "N-BEATS: Neural basis expansion analysis for interpretable time series forecasting",
+      "authors": "Boris N. Oreshkin et al.",
+      "year": 2020,
+      "role": "Related Problem",
+      "relationship_sentence": "N-BEATS demonstrated strong forecasting via explicit trend/seasonality bases; SparseTSF aligns with this decomposition ethos while innovating a cross-period sampling mechanism that removes the need for large stacks or basis expansions."
+    }
+  ],
+  "synthesis_narrative": "SparseTSF\u2019s core innovation\u2014cross-period sparse forecasting\u2014emerges from two converging lines of work: decomposition-centric forecasting and period-aware representation. STL provides the foundational principle that seasonal (periodic) and trend components should be decoupled; Informer then establishes the long-horizon LTSF setting and benchmarks that catalyzed the recent wave of neural methods. Autoformer operationalizes decomposition within deep models and shows that modeling periodicity explicitly pays dividends, while FEDformer further emphasizes periodic structure in the frequency domain but remains computationally heavy. In parallel, Zeng et al. revealed that simple decomposition-plus-linear models (DLinear) can outperform complex transformers, suggesting that careful problem reformulation may matter more than model size. TimesNet offers a crucial insight: restructuring sequences along periods helps expose periodic patterns; however, it still relies on substantial backbones. SparseTSF synthesizes these insights by adopting decomposition while replacing heavy modules with a period-aware downsampling scheme that directly extracts periodic features and shifts the forecasting focus to cross-period trends. In doing so, it addresses the explicit gap left by FEDformer/Autoformer (high complexity) and extends DLinear\u2019s thesis (simplicity works) to the extreme: fewer than 1k parameters with robust long-horizon performance. N-BEATS\u2019 success with explicit trend/season modeling further validates this decomposition-first trajectory that SparseTSF refines with a cross-period lens.",
+  "analysis_timestamp": "2026-01-06T23:09:26.456810"
+}

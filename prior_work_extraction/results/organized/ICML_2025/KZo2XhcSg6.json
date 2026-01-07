@@ -1,0 +1,78 @@
+{
+  "prior_works": [
+    {
+      "title": "Contractive Auto-Encoders: Explicit Invariance During Feature Extraction",
+      "authors": [
+        "Salah Rifai",
+        "Pascal Vincent",
+        "Xavier Muller",
+        "Xavier Glorot",
+        "Yoshua Bengio"
+      ],
+      "year": 2011,
+      "role": "Jacobian penalty groundwork",
+      "relationship_sentence": "Introduced penalizing the Frobenius norm of the Jacobian to enforce local contractivity, directly inspiring LipsNet++\u2019s Jacobian-based regularization to bound the policy\u2019s Lipschitz constant for smooth action outputs."
+    },
+    {
+      "title": "Spectral Normalization for Generative Adversarial Networks",
+      "authors": [
+        "Takeru Miyato",
+        "Toshiki Kataoka",
+        "Masanori Koyama",
+        "Yuichi Yoshida"
+      ],
+      "year": 2018,
+      "role": "Lipschitz control via operator norms",
+      "relationship_sentence": "Established practical Lipschitz control by constraining spectral norms of layers, framing an alternative to which LipsNet++\u2019s Jacobian regularization is explicitly tailored for input\u2013action smoothness in policy networks."
+    },
+    {
+      "title": "Robust Large Margin Deep Neural Networks",
+      "authors": [
+        "Milan Sokoli\u0107",
+        "Raja Giryes",
+        "Guillermo Sapiro"
+      ],
+      "year": 2017,
+      "role": "Theory linking Jacobian norm and robustness/generalization",
+      "relationship_sentence": "Provided theoretical connections between Jacobian norms, robustness, and generalization, supporting LipsNet++\u2019s choice to regularize the policy Jacobian to mitigate non-smooth action fluctuations."
+    },
+    {
+      "title": "Deep Kalman Filters",
+      "authors": [
+        "Rahul G. Krishnan",
+        "Uri Shalit",
+        "David Sontag"
+      ],
+      "year": 2017,
+      "role": "Differentiable filtering for noisy sequential observations",
+      "relationship_sentence": "Demonstrated end-to-end trainable filtering within deep models, motivating LipsNet++\u2019s integration of a learnable filter layer to attenuate observation noise before control."
+    },
+    {
+      "title": "Fourier Neural Operator for Parametric Partial Differential Equations",
+      "authors": [
+        "Zongyi Li",
+        "Nikola Kovachki",
+        "Kamyar Azizzadenesheli",
+        "Burigede Liu",
+        "Kaushik Bhattacharya",
+        "Andrew Stuart",
+        "Anima Anandkumar"
+      ],
+      "year": 2020,
+      "role": "FFT-based learnable frequency-domain transformations",
+      "relationship_sentence": "Showed the effectiveness of learning multiplicative weights in the Fourier domain, directly informing LipsNet++\u2019s trainable Fourier filter matrix to select informative frequencies and suppress noise."
+    },
+    {
+      "title": "Speaker Recognition from Raw Waveform with SincNet",
+      "authors": [
+        "Mirco Ravanelli",
+        "Yoshua Bengio"
+      ],
+      "year": 2018,
+      "role": "Learnable band-pass filtering front-ends",
+      "relationship_sentence": "Introduced parameterized, learnable band-pass filters as the first layer to perform task-driven frequency selection, paralleling LipsNet++\u2019s frequency-selective filter layer for denoising observations."
+    }
+  ],
+  "synthesis_narrative": "LipsNet++ addresses action fluctuation in real-world reinforcement learning by unifying a learnable filter and a Lipschitz-controlled controller inside the policy network. Its controller layer is grounded in the notion that input\u2013output smoothness can be enforced by limiting the network\u2019s sensitivity to input perturbations. Contractive Auto-Encoders established the practical recipe of penalizing the Jacobian norm to induce local contractivity, while subsequent analyses\u2014such as Robust Large Margin Deep Neural Networks\u2014solidified the theoretical link between small Jacobian norms, robustness, and better generalization. Spectral Normalization provided a complementary, operator-norm\u2013based route to controlling Lipschitz constants. Together, these works directly motivate LipsNet++\u2019s Jacobian regularization to explicitly bound the policy\u2019s Lipschitz constant and suppress non-smooth action responses to noisy observations.\n\nOn the perception side, LipsNet++ incorporates a trainable frequency-domain filter that attenuates observation noise before the controller acts. The feasibility and effectiveness of end-to-end differentiable filtering in sequential decision systems is foreshadowed by Deep Kalman Filters, which embed trainable filtering within deep models for noisy time series. The specific choice of a Fourier-domain layer draws on recent advances showing that frequency-space parameterizations are powerful and trainable: Fourier Neural Operators learn multiplicative spectral weights via FFTs to capture pertinent structures, while SincNet demonstrates that learnable band-pass filters can act as task-adaptive, noise-suppressing front-ends. By combining these two lines\u2014differentiable filtering for noisy observations and principled Lipschitz control for smooth policies\u2014LipsNet++ operationalizes the classical filter\u2013controller decomposition within a single, trainable policy network tailored for robust, low-fluctuation control.",
+  "analysis_timestamp": "2026-01-07T00:21:32.393798"
+}

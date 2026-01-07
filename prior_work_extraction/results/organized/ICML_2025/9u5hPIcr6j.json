@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "The Lottery Ticket Hypothesis: Finding Sparse, Trainable Neural Networks",
+      "authors": "Jonathan Frankle, Michael Carbin",
+      "year": 2019,
+      "role": "Conceptual foundation",
+      "relationship_sentence": "Established that sparse subnetworks (\u201cwinning tickets\u201d) exist within dense networks; LotteryCodec extends this idea to compression by treating a discovered sparse subnetwork as the synthesis model whose structure encodes image statistics."
+    },
+    {
+      "title": "What\u2019s Hidden in a Randomly Weighted Neural Network?",
+      "authors": "Vivek Ramanujan et al.",
+      "year": 2020,
+      "role": "Methodological inspiration (mask-only training on random nets)",
+      "relationship_sentence": "Showed that high-performing subnetworks can be found in randomly initialized networks by optimizing masks alone; LotteryCodec directly leverages this by searching a binary mask over a shared random network to avoid weight training while achieving strong reconstruction."
+    },
+    {
+      "title": "Supermasks in Superposition",
+      "authors": "Mitchell Wortsman et al.",
+      "year": 2020,
+      "role": "Encoding via masks",
+      "relationship_sentence": "Demonstrated that binary masks can select different functional subnetworks within a single backbone; LotteryCodec repurposes this principle so the per-image mask becomes the bitstream that encodes image-specific structure in the shared random network."
+    },
+    {
+      "title": "Stabilizing the Lottery Ticket Hypothesis",
+      "authors": "Jonathan Frankle, Gintare Karolina Dziugaite, Daniel M. Roy, Michael Carbin",
+      "year": 2020,
+      "role": "Algorithmic mechanism (rewinding)",
+      "relationship_sentence": "Introduced weight rewinding to improve subnetwork discovery; LotteryCodec\u2019s rewind modulation mechanism is a codec-side analogue that guides subnetwork search to boost rate\u2013distortion performance."
+    },
+    {
+      "title": "Deep Image Prior",
+      "authors": "Dmitry Ulyanov, Andrea Vedaldi, Victor Lempitsky",
+      "year": 2018,
+      "role": "Untrained networks as image priors",
+      "relationship_sentence": "Revealed that untrained convolutional networks capture natural image statistics when optimized on a single image; LotteryCodec inherits this overfitting paradigm but replaces weight optimization with subnetwork selection in a fixed random network."
+    },
+    {
+      "title": "Deep Decoder: Concise Image Representations from Untrained Non-convolutional Networks",
+      "authors": "Philipp Heckel, Paul Hand",
+      "year": 2019,
+      "role": "Single-image compression via overfitted decoders",
+      "relationship_sentence": "Showed that compact, untrained decoders optimized per image can serve as image representations; LotteryCodec similarly aims at single-image compression but encodes the model structure (mask) rather than trained weights."
+    },
+    {
+      "title": "Implicit Neural Representations with Periodic Activation Functions (SIREN)",
+      "authors": "Vincent Sitzmann, Julien N. P. Martel, Alexander W. Bergman, David B. Lindell, Gordon Wetzstein",
+      "year": 2020,
+      "role": "Architectural underpinning for INRs",
+      "relationship_sentence": "Established expressive coordinate-based networks for signal reconstruction; LotteryCodec relies on the expressivity of over-parameterized random networks (akin to INRs) to ensure that a suitable subnetwork exists and can act as an effective synthesis network."
+    }
+  ],
+  "synthesis_narrative": "LotteryCodec reframes single-image compression as the problem of discovering an image-specific subnetwork within a shared, randomly initialized backbone and transmitting only the binary mask. This synthesis builds on two converging lines of work. From the sparsity-in-networks literature, the Lottery Ticket Hypothesis posited that performant sparse subnetworks exist within dense models, while follow-ups showed that such subnetworks can be identified even in randomly initialized networks by optimizing only masks. Supermasks further demonstrated that different masks can encode different functionalities within a single backbone, directly motivating the idea of using the mask itself as the compact code that carries image statistics. Stabilizing techniques such as weight rewinding informed LotteryCodec\u2019s rewind modulation, an analogue that regularizes subnetwork search to improve rate\u2013distortion trade-offs.\n\nConcurrently, untrained-network image modeling established that network structure alone provides a strong prior. Deep Image Prior and Deep Decoder showed that optimizing an untrained generator per image can yield high-quality reconstructions and compact representations\u2014core precedents for overfitted, single-image neural codecs. Implicit neural representation advances like SIREN validated the expressivity of over-parameterized coordinate networks, supporting the premise that a randomly initialized, shared backbone contains subnetworks capable of high-fidelity synthesis. By uniting these strands, LotteryCodec replaces weight optimization and transmission with mask discovery and coding, enabling competitive RD performance and adaptive decoding complexity via controllable mask ratios.",
+  "analysis_timestamp": "2026-01-07T00:21:32.379610"
+}

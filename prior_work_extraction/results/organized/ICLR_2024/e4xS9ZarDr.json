@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Lion: Evolved Sign Momentum",
+      "authors": "Chen et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Baseline",
+      "relationship_sentence": "This work defines the Lion update\u2014sign of an EMA momentum with decoupled weight decay\u2014which is the exact algorithm the present paper reinterprets as solving an L\u221e-constrained optimization via Lyapunov analysis."
+    },
+    {
+      "title": "Decoupled Weight Decay Regularization (AdamW)",
+      "authors": "Ilya Loshchilov et al.",
+      "year": 2019,
+      "arxiv_id": "1711.05101",
+      "role": "Extension",
+      "relationship_sentence": "Lion inherits the decoupled weight decay mechanism from AdamW, and the paper\u2019s theory leverages this decoupling to map the update to a constrained objective rather than implicit L2 regularization."
+    },
+    {
+      "title": "signSGD with Majority Vote is Communication Efficient and Fault Tolerant",
+      "authors": "Jeremy Bernstein et al.",
+      "year": 2018,
+      "arxiv_id": "1810.05291",
+      "role": "Inspiration",
+      "relationship_sentence": "The use of sign-based updates (and momentum variants) in signSGD directly motivates interpreting Lion\u2019s sign-of-momentum step as a steepest-descent direction under L\u221e geometry, which the paper formalizes."
+    },
+    {
+      "title": "Towards Deep Learning Models Resistant to Adversarial Attacks",
+      "authors": "Aleksander Madry et al.",
+      "year": 2018,
+      "arxiv_id": "1706.06083",
+      "role": "Foundation",
+      "relationship_sentence": "This work formalized projected gradient descent under an L\u221e constraint (with elementwise clipping), providing the precise constrained PGD template that the paper shows Lion implicitly realizes with momentum."
+    },
+    {
+      "title": "A Variational Perspective on Accelerated Methods",
+      "authors": "Wilson Wibisono et al.",
+      "year": 2016,
+      "arxiv_id": "1603.04245",
+      "role": "Foundation",
+      "relationship_sentence": "Its continuous-time Lyapunov/variational framework underpins the paper\u2019s construction of Lyapunov functions to interpret Lion\u2019s dynamics as solving a constrained optimization problem."
+    },
+    {
+      "title": "Analysis and Design of Optimization Algorithms via Integral Quadratic Constraints",
+      "authors": "Laurent Lessard et al.",
+      "year": 2016,
+      "arxiv_id": "1604.01044",
+      "role": "Extension",
+      "relationship_sentence": "This discrete-time Lyapunov/IQC methodology is adapted to analyze Lion\u2019s iterate-level stability and convergence, complementing the paper\u2019s continuous-time analysis."
+    }
+  ],
+  "synthesis_narrative": "Lion was introduced as an empirically strong optimizer discovered by program search, with an update that applies the sign of an exponential-moving-average momentum and a decoupled weight decay step. Decoupled weight decay, formalized by AdamW, separates shrinkage from the gradient step, changing the underlying optimization interpretation relative to classical L2-regularized methods. The signSGD literature established sign-based updates (with momentum variants) as effective and suggested a connection to L\u221e geometry, where the sign direction corresponds to a steepest-descent direction under the dual norm. Projected gradient descent under an L\u221e constraint, popularized in adversarial training, precisely specifies the projection as elementwise clipping, giving a concrete algorithmic template for constrained dynamics. On the theory side, continuous-time variational/Lyapunov frameworks showed how optimizer dynamics can be derived and certified via energy functions, while discrete-time Lyapunov/IQC analysis provided iterate-level stability tools for momentum-like schemes.\nTogether, these works expose a gap: Lion\u2019s sign-momentum plus decoupled shrinkage resembles L\u221e-constrained PGD with momentum, yet lacked a formal account. By marrying the L\u221e projection geometry (sign/clipping) with decoupled weight decay and adopting continuous- and discrete-time Lyapunov frameworks, the present work synthesizes a principled view that Lion implicitly minimizes a loss subject to an L\u221e bound, yielding theoretical guarantees and a clear problem formulation for the optimizer\u2019s behavior.",
+  "target_paper": {
+    "title": "Lion Secretly Solves a Constrained Optimization: As Lyapunov Predicts",
+    "authors": "Lizhang Chen, Bo Liu, Kaizhao Liang, qiang liu",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Lion, Optimization, Lyapunov Analysis",
+    "abstract": "Lion (Evolved Sign Momentum), a new optimizer discovered through program search, has shown promising results in training large AI models. It achieves results comparable to AdamW but with greater memory efficiency. As what we can expect from the result of the random search, Lion blends a number of elements from existing algorithms, including signed momentum, decoupled weight decay,  Polayk and Nesterov momentum, but doesn't fit into any existing category of theoretically grounded optimizers. Thus, even though Lion appears to perform well as a general-purpose optimizer for a wide range of tasks, its theoretical basis remains uncertain. This absence of theoretical clarity limits opportunities to further enhance and expand Lion's efficacy. This work aims to demystify Lion. Using both continuous-time and discrete-time analysis, we demonstrate that Lion is a novel and theoretically grounded approach for minimizing a general loss function $f(x)$ while enforcing a bound constraint $||x||_\\inft",
+    "openreview_id": "e4xS9ZarDr",
+    "forum_id": "e4xS9ZarDr"
+  },
+  "analysis_timestamp": "2026-01-06T07:49:50.203596"
+}

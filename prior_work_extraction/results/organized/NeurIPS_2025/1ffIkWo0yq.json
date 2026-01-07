@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Improving Generalization Performance using Double Backpropagation",
+      "authors": "Harris Drucker, Yann LeCun",
+      "year": 1992,
+      "role": "Gradient regularization",
+      "relationship_sentence": "ProGrad builds on the idea of directly constraining input gradients introduced by double backprop, but replaces soft penalties with provable satisfaction of linear gradient constraints while minimizing weight change."
+    },
+    {
+      "title": "Contractive Auto-Encoders: Explicit Invariance During Feature Extraction",
+      "authors": "Salah Rifai, Pascal Vincent, Xavier Muller, Xavier Glorot, Yoshua Bengio",
+      "year": 2011,
+      "role": "Jacobian control via contractive penalties",
+      "relationship_sentence": "By viewing the input\u2013Jacobian as an object to be shaped (as in CAEs), ProGrad advances from global Jacobian shrinkage to enforcing pointwise linear Jacobian constraints with guarantees through targeted parameter edits."
+    },
+    {
+      "title": "Right for the Right Reasons: Training Interpretable Models by Constraining their Explanations",
+      "authors": "Andrew Ross, Michael C. Hughes, Finale Doshi-Velez",
+      "year": 2017,
+      "role": "Gradient-based explanation constraints",
+      "relationship_sentence": "Where Ross et al. encourage gradients to align with human-provided masks via loss terms, ProGrad directly edits parameters to satisfy hard linear gradient constraints and certifies satisfaction at specified inputs."
+    },
+    {
+      "title": "Parseval Networks: Improving Robustness to Adversarial Examples",
+      "authors": "Mathieu Ciss\u00e9, Piotr Bojanowski, Edouard Grave, Yann Dauphin, Nicolas Usunier",
+      "year": 2017,
+      "role": "Lipschitz/gradient norm control by spectral constraints",
+      "relationship_sentence": "ProGrad generalizes the theme of controlling sensitivity (and thus gradients) by moving from global Lipschitz-oriented regularization to exact, local linear gradient constraints enforced via parameter editing."
+    },
+    {
+      "title": "Provable Defenses against Adversarial Examples via the Convex Outer Adversarial Polytope",
+      "authors": "Eric Wong, J. Zico Kolter",
+      "year": 2018,
+      "role": "Linear relaxation and dual networks for certification",
+      "relationship_sentence": "ProGrad leverages the linear-relaxation/dual-network paradigm pioneered here to reason about and certify linear properties, adapting it from output robustness to linear constraints on the input\u2013Jacobian."
+    },
+    {
+      "title": "Towards Fast Computation of Certified Robustness for ReLU Networks",
+      "authors": "Huan Zhang, Tsui-Wei Weng, Pin-Yu Chen, Cho-Jui Hsieh, Luca Daniel",
+      "year": 2018,
+      "role": "Tight linear bounds (CROWN) for certification",
+      "relationship_sentence": "ProGrad relies on CROWN-style linear bounding of network behavior to efficiently propagate and check linear constraints, extending these techniques to certify constraints on gradients rather than outputs."
+    },
+    {
+      "title": "Net-Trim: Convex Pruning of Deep Neural Networks with Performance Guarantee",
+      "authors": "Arash Aghasi, Nam Nguyen, Justin Romberg",
+      "year": 2017,
+      "role": "Minimal-change weight updates under convex constraints",
+      "relationship_sentence": "ProGrad mirrors Net-Trim\u2019s philosophy of minimally perturbing parameters to satisfy linear constraints, but applies it to Jacobian constraints (rather than activations/outputs) with provable satisfaction guarantees."
+    }
+  ],
+  "synthesis_narrative": "ProGrad sits at the intersection of three lines of work: shaping gradients, certifying neural properties with linear relaxations, and minimally invasive model repair. Early gradient-centric methods\u2014Double Backpropagation and Contractive Auto-Encoders\u2014established that controlling the input\u2013Jacobian can influence generalization and invariance, while \u201cRight for the Right Reasons\u201d showed gradients could be steered toward user-specified patterns. These approaches, however, enforced gradient behavior softly via regularization and provided no guarantees of exact compliance at specific inputs. In parallel, robustness certification methods such as the convex outer adversarial polytope and CROWN developed efficient linear-relaxation and dual-network machinery to bound neural network behavior with proofs of correctness. ProGrad repurposes this certification toolkit to reason not only about outputs but about the Jacobian, enabling efficient checking and propagation of linear constraints on gradients. Finally, Net-Trim introduced a paradigm of editing parameters to satisfy linear constraints while minimizing deviation from the original weights. ProGrad adopts this minimal-change editing principle but targets gradient constraints, yielding a procedure that provably satisfies linear Jacobian requirements at specified inputs while keeping weight perturbations small. The result is the first efficient, provable gradient editing framework: it combines gradient supervision\u2019s intent (what derivatives should be), certification\u2019s rigor (guarantees), and convex-editing\u2019s practicality (small parameter updates) to address safety, scientific, and interpretability constraints encoded in DNN gradients.",
+  "analysis_timestamp": "2026-01-07T00:21:32.251326"
+}

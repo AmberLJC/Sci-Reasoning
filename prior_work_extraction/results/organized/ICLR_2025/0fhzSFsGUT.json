@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "The Reversible Residual Network: Backpropagation Without Storing Activations",
+      "authors": "Aidan N. Gomez et al.",
+      "year": 2017,
+      "arxiv_id": "1707.04585",
+      "role": "Foundation",
+      "relationship_sentence": "PETRA directly relies on RevNet\u2019s invertible residual blocks to reconstruct activations during backward passes, enabling exact gradients while decoupling stage computations without storing activations."
+    },
+    {
+      "title": "i-RevNet: Deep Invertible Networks",
+      "authors": "Julius Jacobsen et al.",
+      "year": 2018,
+      "arxiv_id": "1802.07088",
+      "role": "Inspiration",
+      "relationship_sentence": "By showing that fully invertible architectures can match non-invertible CNNs on classification, i-RevNet provided the empirical justification that PETRA\u2019s reliance on reversible layers would not sacrifice accuracy."
+    },
+    {
+      "title": "GPipe: Efficient Training of Giant Neural Networks using Pipeline Parallelism",
+      "authors": "Yanping Huang et al.",
+      "year": 2019,
+      "arxiv_id": "1811.06965",
+      "role": "Foundation",
+      "relationship_sentence": "GPipe formalized stage-based pipeline parallelism with micro-batches, a setup PETRA adopts but re-engineers by using reversibility to allow independent stage execution and minimal activation/gradient communication."
+    },
+    {
+      "title": "PipeDream: Generalized Pipeline Parallelism for DNN Training",
+      "authors": "Deepak Narayanan et al.",
+      "year": 2019,
+      "arxiv_id": "1806.03377",
+      "role": "Baseline",
+      "relationship_sentence": "PipeDream\u2019s weight-stashing mechanism to handle inconsistent weights across pipeline stages serves as PETRA\u2019s principal baseline, which PETRA replaces by keeping a single weight version enabled by reversible reconstruction and delayed exact gradients."
+    },
+    {
+      "title": "PipeDream-2BW: Balancing Pipeline Parallelism for DNN Training",
+      "authors": "Deepak Narayanan et al.",
+      "year": 2021,
+      "arxiv_id": "",
+      "role": "Gap Identification",
+      "relationship_sentence": "The two-weight-version scheme in PipeDream-2BW reduces staleness at the cost of extra memory, a limitation PETRA addresses by eliminating weight stashing entirely while preserving correctness via reversibility-based gradient routing."
+    },
+    {
+      "title": "Decoupled Neural Interfaces using Synthetic Gradients",
+      "authors": "Max Jaderberg et al.",
+      "year": 2016,
+      "arxiv_id": "1608.05343",
+      "role": "Gap Identification",
+      "relationship_sentence": "DNI sought to decouple layers with synthetic (approximate) gradients but suffered stability/accuracy issues, motivating PETRA\u2019s use of reversibility to achieve similar decoupling with exact but delayed gradients."
+    }
+  ],
+  "synthesis_narrative": "Reversible residual networks established that invertible blocks can reconstruct activations exactly, enabling backpropagation without storing intermediate states; this property is crucial when gradients must be computed without retaining forward caches. Building on that, i-RevNet demonstrated that fully invertible CNNs can achieve competitive accuracy on standard vision tasks, alleviating concerns that reversibility undermines representational power. In parallel, GPipe formalized stage-based pipeline parallelism with micro-batching, clarifying how models can be partitioned across devices but still requiring stored activations and tightly coupled forward/backward scheduling. PipeDream pushed pipeline parallelism further with asynchronous execution, introducing weight stashing to maintain per-microbatch consistency under staleness, while PipeDream-2BW reduced staleness by keeping two weight versions\u2014both approaches trading memory for correctness. A different thread, Decoupled Neural Interfaces, attempted to break the forward-backward dependency with synthetic gradients, exposing the promise of stage independence but revealing instability from inexact gradient signals. Together, these works suggested that practical pipeline parallelism needed exact gradients, minimal activation storage, and no multi-version weights. PETRA synthesizes these insights by using reversibility to reconstruct activations at stage boundaries, enabling independent stage computations that exchange only activations and true (but delayed) gradients; this removes weight stashing entirely and preserves a single parameter version, delivering a parallel, autograd-like training procedure that retains accuracy while addressing the core memory and consistency limitations of prior pipeline methods.",
+  "target_paper": {
+    "title": "PETRA: Parallel End-to-end Training with Reversible Architectures",
+    "authors": "Stephane Rivaud, Louis Fournier, Thomas Pumir, Eugene Belilovsky, Michael Eickenberg, Edouard Oyallon",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "Model parallelism, Delayed gradient, Reversible architectures",
+    "abstract": "Reversible architectures have been shown to be capable of performing on par with their non-reversible architectures, being applied in deep learning for memory savings and generative modeling. In this work, we show how reversible architectures can solve challenges in parallelizing deep model training. We introduce PETRA, a novel alternative to backpropagation for parallelizing gradient computations. PETRA facilitates effective model parallelism by enabling stages (i.e., a set of layers) to compute independently on different devices, while only needing to communicate activations and gradients between each other. By decoupling the forward and backward passes and keeping a single updated version of the parameters, the need for weight stashing is also removed. We develop a custom autograd-like training framework for PETRA, and we demonstrate its effectiveness on standard computer vision benchmarks, achieving competitive accuracies comparable to backpropagation using ResNet-18, ResNet-34, an",
+    "openreview_id": "0fhzSFsGUT",
+    "forum_id": "0fhzSFsGUT"
+  },
+  "analysis_timestamp": "2026-01-06T16:31:38.563049"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Jonathan Ho et al.",
+      "year": 2020,
+      "role": "Foundation",
+      "relationship_sentence": "ANT is built on the DDPM denoising objective and timestep formulation, and its targeted (per-sample) noise selection is a direct modification of DDPM\u2019s standard practice of sampling untargeted Gaussian noise across timesteps."
+    },
+    {
+      "title": "Improved Denoising Diffusion Probabilistic Models",
+      "authors": "Alex Nichol et al.",
+      "year": 2021,
+      "role": "Gap Identification",
+      "relationship_sentence": "IDDPM formalized practical training choices (e.g., fixed timestep/noise sampling schedules) that remain non-targeted; ANT explicitly addresses this gap by adversarially selecting input-dependent, \u2018hard\u2019 noise/timesteps instead of using a fixed schedule."
+    },
+    {
+      "title": "Diffusion Models Beat GANs on Image Synthesis",
+      "authors": "Prafulla Dhariwal et al.",
+      "year": 2021,
+      "role": "Extension",
+      "relationship_sentence": "ANT\u2019s similarity\u2011guided training borrows the core idea of leveraging a classifier to steer diffusion behavior (as in classifier guidance) and adapts it from sampling-time guidance to training-time transfer to prioritize semantically aligned updates."
+    },
+    {
+      "title": "Towards Deep Learning Models Resistant to Adversarial Attacks",
+      "authors": "Aleksander Madry et al.",
+      "year": 2018,
+      "role": "Inspiration",
+      "relationship_sentence": "ANT\u2019s adversarial noise selection is directly inspired by adversarial training\u2019s max\u2011loss perturbation principle, recast to the diffusion setting by choosing, per input, the noise/timestep that maximizes training difficulty."
+    },
+    {
+      "title": "Few-shot Image Generation via Cross-Domain Correspondence",
+      "authors": "Shivam Ojha et al.",
+      "year": 2021,
+      "role": "Related Problem",
+      "relationship_sentence": "CDC demonstrated that transfer from a well\u2011trained source generator can solve few\u2011shot generation, motivating ANT to bring analogous transfer benefits to diffusion models where direct application of GAN adaptation is infeasible."
+    },
+    {
+      "title": "MineGAN: Effective Knowledge Transfer in Generative Adversarial Networks",
+      "authors": "Yaxing Wang et al.",
+      "year": 2020,
+      "role": "Related Problem",
+      "relationship_sentence": "MineGAN showed knowledge transfer from a source GAN to data\u2011scarce targets via selective adaptation, a paradigm ANT echoes in diffusion by selecting targeted noise/timesteps rather than mining latents."
+    },
+    {
+      "title": "DreamBooth: Fine Tuning Text-to-Image Diffusion Models for Subject-Driven Generation",
+      "authors": "Nataniel Ruiz et al.",
+      "year": 2023,
+      "role": "Gap Identification",
+      "relationship_sentence": "DreamBooth evidences that diffusion models can be adapted with very few images but largely in text\u2011conditioned, subject\u2011specific settings; ANT addresses the broader data\u2011scarcity transfer problem by classifier\u2011guided similarity and adversarial noise selection without relying on text conditioning."
+    }
+  ],
+  "synthesis_narrative": "ANT sits at the intersection of diffusion training mechanics and transfer learning under data scarcity. The denoising formulation and timestep\u2011conditioned objective from DDPM, refined in IDDPM, define the training substrate ANT works upon; these works also expose a core limitation\u2014noise and timestep choices are non\u2011targeted and fixed\u2014motivating ANT\u2019s per\u2011example, adversarial noise selection. Dhariwal and Nichol\u2019s classifier guidance demonstrated that an external classifier can steer diffusion behavior; ANT extends this idea from inference to training, using a classifier to focus transfer on semantically similar regions, thereby improving data\u2011efficient adaptation. The adversarial component of ANT directly inherits the max\u2011loss perturbation ethos of Madry et al., but reinterprets the adversary as the diffusion noise/timestep, choosing the hardest perturbations for each input to accelerate and stabilize few\u2011shot transfer. Finally, GAN transfer methods like CDC and MineGAN established that pretraining and selective adaptation can unlock few\u2011shot generation, but their mechanisms depend on GAN latents and architectures; ANT translates the transfer principle into the diffusion regime by replacing latent mining with similarity\u2011guided updates and adversarial noise targeting. Compared to text\u2011conditioned personalization such as DreamBooth, ANT aims at general data\u2011scarce transfer without relying on prompts, addressing a broader gap by directly modifying the diffusion training dynamics.",
+  "analysis_timestamp": "2026-01-06T23:09:26.437416"
+}

@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Regret Minimization in Games with Incomplete Information",
+      "authors": "Zinkevich et al.",
+      "year": 2007,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "The work provides the CFR framework\u2014its regret and average-strategy iteration process is exactly the mechanism DDCFR formalizes as an environment to which it attaches a learned discounting policy."
+    },
+    {
+      "title": "Solving Large Imperfect-Information Games Using CFR+",
+      "authors": "Tammelin",
+      "year": 2014,
+      "arxiv_id": "1407.5042",
+      "role": "Baseline",
+      "relationship_sentence": "CFR+ introduced the practical gains of non-uniform iteration weighting (via regret-matching+ and linear averaging), which DDCFR replaces with a learned, state-dependent discounting schedule."
+    },
+    {
+      "title": "Solving Imperfect-Information Games via Discounted CFR (DCFR)",
+      "authors": "Brown and Sandholm",
+      "year": 2019,
+      "arxiv_id": "",
+      "role": "Gap Identification",
+      "relationship_sentence": "DCFR\u2019s fixed, manually chosen discounting parameters are the explicit limitation DDCFR addresses by learning a dynamic discounting policy conditioned on runtime information."
+    },
+    {
+      "title": "AutoLoss: Learning Discrete Schedules for Alternate Optimization",
+      "authors": "Zheng et al.",
+      "year": 2018,
+      "arxiv_id": "",
+      "role": "Inspiration",
+      "relationship_sentence": "AutoLoss\u2019s idea of casting optimization scheduling as a reinforcement learning policy directly motivates DDCFR\u2019s treatment of per-iteration discount choices as actions in an MDP optimized for equilibrium quality."
+    },
+    {
+      "title": "Learning to learn by gradient descent by gradient descent",
+      "authors": "Andrychowicz et al.",
+      "year": 2016,
+      "arxiv_id": "1606.04474",
+      "role": "Inspiration",
+      "relationship_sentence": "The demonstration that optimizer behaviors can be learned from optimization state inspires DDCFR\u2019s learned, adaptive per-iteration discounting instead of hand-tuned schedules."
+    },
+    {
+      "title": "Learning to Reweight Examples for Robust Deep Learning",
+      "authors": "Ren et al.",
+      "year": 2018,
+      "arxiv_id": "1803.09050",
+      "role": "Related Problem",
+      "relationship_sentence": "This work shows that dynamically learned scalar weights based on training signals outperform fixed heuristics, an insight DDCFR translates from per-example reweighting to per-iteration discounting in CFR."
+    }
+  ],
+  "synthesis_narrative": "Counterfactual Regret Minimization (CFR) formalizes iterative regret updates that generate an average strategy converging toward a Nash equilibrium in imperfect-information games, establishing the iteration dynamics and regret structure subsequent methods build upon. CFR+ revealed that non-uniform iteration weighting\u2014specifically, regret-matching+ and linearly increasing emphasis on later iterations\u2014substantially accelerates convergence, pinpointing iteration weighting as a crucial lever. Discounted CFR (DCFR) generalized this idea by introducing explicit discount factors for both regrets and average policies, providing a principled yet manual way to downweight earlier iterations; it empirically improved convergence but left the schedule to hand-tuned hyperparameters. In parallel, meta-optimization research demonstrated that optimization procedures themselves can be learned: Andrychowicz et al. learned optimizers that map optimization state to adaptive update rules, while AutoLoss framed schedule selection as a reinforcement learning policy over discrete optimization decisions. Ren et al. further showed that learning scalar weights from runtime signals (e.g., loss statistics) can outperform fixed heuristics, underscoring the value of adaptive weighting.\n\nTogether these works expose a clear opportunity: CFR variants gain speed from non-uniform iteration weighting, yet rely on fixed, manually designed schedules, while meta-optimization shows schedules and weights can be learned from state to improve outcomes. The natural next step is to cast CFR\u2019s iteration process as a decision process and learn a policy that selects iteration discounts conditioned on runtime information, thereby generalizing DCFR/CFR+ from fixed schemes to dynamic, automatically learned discounting that optimizes equilibrium quality directly.",
+  "target_paper": {
+    "title": "Dynamic Discounted Counterfactual Regret Minimization",
+    "authors": "Hang Xu, Kai Li, Haobo Fu, QIANG FU, Junliang Xing, Jian Cheng",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "imperfect-information games, regret minimization, Nash equilibrium",
+    "abstract": "Counterfactual regret minimization (CFR) is a family of iterative algorithms showing promising results in solving imperfect-information games. Recent novel CFR variants (e.g., CFR+, DCFR) have significantly improved the convergence rate of the vanilla CFR. The key to these CFR variants\u2019 performance is weighting each iteration non-uniformly, i.e., discounting earlier iterations. However, these algorithms use a fixed, manually-specified scheme to weight each iteration, which enormously limits their potential. In this work, we propose Dynamic Discounted CFR (DDCFR), the first equilibrium-finding framework that discounts prior iterations using a dynamic, automatically-learned scheme. We formalize CFR\u2019s iteration process as a carefully designed Markov decision process and transform the discounting scheme learning problem into a policy optimization problem within it. The learned discounting scheme dynamically weights each iteration on the fly using information available at runtime. Experimen",
+    "openreview_id": "6PbvbLyqT6",
+    "forum_id": "6PbvbLyqT6"
+  },
+  "analysis_timestamp": "2026-01-06T14:03:08.418905"
+}

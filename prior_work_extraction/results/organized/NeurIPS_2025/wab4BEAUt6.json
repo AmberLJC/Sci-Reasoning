@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "A Unified Approach to Interpreting Model Predictions",
+      "authors": "Scott M. Lundberg et al.",
+      "year": 2017,
+      "role": "Foundation",
+      "relationship_sentence": "Introduced SHAP as the game-theoretic framework and KernelSHAP for black-box models, defining the problem formulation that this paper solves more efficiently via a Fourier-domain closed form."
+    },
+    {
+      "title": "From Local Explanations to Global Understanding with Explainable AI for Trees",
+      "authors": "Scott M. Lundberg et al.",
+      "year": 2020,
+      "role": "Baseline",
+      "relationship_sentence": "TreeSHAP provides exact polynomial-time SHAP for tree ensembles; the present paper offers an alternative exact path via a compact Fourier representation of trees and extends the approach to black-box models."
+    },
+    {
+      "title": "GPUTreeShap: Fast Parallel Tree Shapley Explanations",
+      "authors": "Rory Mitchell et al.",
+      "year": 2022,
+      "role": "Gap Identification",
+      "relationship_sentence": "While GPUTreeShap accelerates TreeSHAP via parallelism, it still incurs per-instance costs; this work addresses that gap by deriving a Fourier-domain closed form enabling simple summations and amortized computation."
+    },
+    {
+      "title": "Sobol\u2019 Indices and Shapley Value",
+      "authors": "Art B. Owen",
+      "year": 2014,
+      "role": "Extension",
+      "relationship_sentence": "Established a precise link between Shapley values and orthogonal ANOVA decompositions, which this paper extends by giving an explicit closed-form formula that computes SHAP directly from Fourier coefficients."
+    },
+    {
+      "title": "Learning Decision Trees Using the Fourier Spectrum",
+      "authors": "Eyal Kushilevitz et al.",
+      "year": 1993,
+      "role": "Foundation",
+      "relationship_sentence": "Showed that decision trees admit sparse Fourier/Walsh spectra and provided algorithms to recover them, directly enabling this paper\u2019s exact SHAP computation for trees via compact Fourier representations."
+    },
+    {
+      "title": "On the Spectral Bias of Neural Networks and its Implications for Function Approximation",
+      "authors": "Nasim Rahaman et al.",
+      "year": 2019,
+      "role": "Inspiration",
+      "relationship_sentence": "Demonstrated that learned predictors emphasize low-frequency components, motivating the paper\u2019s first-stage approximation of black-box models by compact Fourier representations."
+    },
+    {
+      "title": "Explaining Prediction Models and Individual Predictions with Feature Contributions",
+      "authors": "Erik \u0160trumbelj et al.",
+      "year": 2014,
+      "role": "Foundation",
+      "relationship_sentence": "Provided Monte Carlo Shapley estimation for general ML models, whose high computational cost the present work overcomes by replacing coalition sampling with a Fourier-based closed-form summation."
+    }
+  ],
+  "synthesis_narrative": "The paper builds squarely on the SHAP framework introduced by Lundberg and Lee (2017), adopting its game-theoretic definition as the target attribution and its black-box setting as the problem scope. For tree models, TreeSHAP (Lundberg et al., 2020) is the exact baseline: it supplies a specialized dynamic program to compute SHAP, but it is model-class specific. Recent engineering advances like GPUTreeShap (Mitchell et al., 2022) parallelize TreeSHAP, yet they preserve per-instance runtime proportional to tree complexity, highlighting a gap in amortized, structure-exploiting computation that this work addresses.\nA key theoretical lever comes from Owen (2014), who established a tight connection between Shapley values and orthogonal decompositions (ANOVA/Sobol). The present paper operationalizes and extends this idea to the Fourier domain, deriving a closed-form that \u201clinearizes\u201d SHAP into a simple sum over Fourier coefficients. This becomes especially powerful for models with compact spectra. The feasibility of such spectra is grounded in two strands: classic results showing decision trees have sparse Walsh/Fourier expansions and can be recovered efficiently (Kushilevitz & Mansour, 1993), and modern observations of spectral bias in learned predictors (Rahaman et al., 2019) indicating low-frequency dominance. Leveraging these, the authors propose a two-stage pipeline: compute a compact Fourier representation (exact for trees, approximate for black boxes), then obtain SHAP exactly from those coefficients via the new closed form. Compared to sampling-based SHAP estimators (e.g., Strumbelj & Kononenko, 2014), this eliminates Monte Carlo variance and enables amortized, parallel computation with a tunable accuracy\u2013efficiency trade-off.",
+  "analysis_timestamp": "2026-01-06T23:08:23.945482"
+}

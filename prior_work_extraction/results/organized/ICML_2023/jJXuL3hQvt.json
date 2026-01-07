@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Homomorphic Encryption for Arithmetic of Approximate Numbers",
+      "authors": "Cheon et al.",
+      "year": 2017,
+      "role": "Foundation",
+      "relationship_sentence": "HETAL\u2019s encrypted training, gradient updates, and high-precision softmax rely on CKKS\u2019s approximate real-number arithmetic and SIMD packing; without CKKS the paper\u2019s practical encrypted transfer learning would not be feasible."
+    },
+    {
+      "title": "Faster Homomorphic Linear Transformations in HElib",
+      "authors": "Halevi et al.",
+      "year": 2014,
+      "role": "Extension",
+      "relationship_sentence": "HETAL\u2019s fast encrypted matrix multiplication builds directly on the diagonal/rotation-based homomorphic linear transform paradigm introduced here, which it reorganizes and optimizes for TL workloads to achieve large speedups."
+    },
+    {
+      "title": "Low Latency Privacy Preserving Inference (LoLa)",
+      "authors": "Brutzkus et al.",
+      "year": 2019,
+      "role": "Baseline",
+      "relationship_sentence": "LoLa\u2019s packing layouts and diagonal/hybrid matmul procedures are a primary baseline that HETAL outperforms (1.8\u00d7\u2013323\u00d7), demonstrating direct improvement over prior encrypted matrix-multiplication methods used for NN layers."
+    },
+    {
+      "title": "CHET: An Optimizing Compiler for Fully Homomorphic Encryption Programs",
+      "authors": "Dathathri et al.",
+      "year": 2019,
+      "role": "Extension",
+      "relationship_sentence": "CHET systematized BSGS-style linear transforms and hoisted rotations for HE DNNs; HETAL extends this line by tailoring and refining the transform pipeline specifically for efficient encrypted training in transfer learning."
+    },
+    {
+      "title": "CryptoNets: Applying Neural Networks to Encrypted Data with High Throughput and Accuracy",
+      "authors": "Gilad-Bachrach et al.",
+      "year": 2016,
+      "role": "Inspiration",
+      "relationship_sentence": "CryptoNets established the HE-friendly NN design and polynomial approximation approach that HETAL adopts and advances to training, culminating in HETAL\u2019s highly precise softmax approximation under CKKS."
+    },
+    {
+      "title": "Secure Logistic Regression Based on Homomorphic Encryption",
+      "authors": "Kim et al.",
+      "year": 2018,
+      "role": "Foundation",
+      "relationship_sentence": "Prior work on HE-based model training and sigmoid/gradient computations directly informs HETAL\u2019s encrypted optimization loop, which generalizes these ideas to multiclass softmax and TL heads with early stopping."
+    },
+    {
+      "title": "Gazelle: A Low Latency Framework for Secure Neural Network Inference",
+      "authors": "Juvekar et al.",
+      "year": 2018,
+      "role": "Gap Identification",
+      "relationship_sentence": "Gazelle exemplifies the dominant focus on private inference (not training); HETAL explicitly targets this gap by enabling practical encrypted training in a transfer-learning MLaaS setting."
+    }
+  ],
+  "synthesis_narrative": "HETAL\u2019s core innovation\u2014practical encrypted transfer-learning training with accuracy matching plaintext\u2014rests on the approximate homomorphic arithmetic of CKKS, which enables efficient SIMD-packed real-number computation for gradient steps and softmax. Its main performance leap comes from rethinking homomorphic matrix multiplication, directly extending the diagonal/rotation-based linear transforms pioneered by Halevi and Shoup and subsequently engineered in systems like LoLa and CHET. These earlier systems crystallized the algorithmic toolkit\u2014diagonal encodings, hoisted rotations, and BSGS-structured transforms\u2014that HETAL refines and reorganizes specifically for transfer-learning workloads, yielding the reported 1.8\u00d7\u2013323\u00d7 speedups over those methods.\n\nOn the learning side, CryptoNets introduced the HE-friendly neural network blueprint and polynomial approximations of nonlinearities, a lineage HETAL advances with a highly precise softmax approximation that preserves nonencrypted accuracy. Earlier demonstrations of training under HE for logistic regression established that encrypted optimization loops are feasible and clarified practical choices for activation approximations and step updates; HETAL generalizes these ideas to multiclass softmax heads and integrates validation-based early stopping while keeping all client data encrypted. Finally, the broader private ML literature typified by Gazelle concentrated on inference-only protocols, leaving a clear gap for private training in MLaaS. HETAL explicitly addresses this gap, leveraging CKKS and optimized homomorphic linear transforms to make encrypted transfer-learning training practical for the first time.",
+  "analysis_timestamp": "2026-01-06T23:09:26.544720"
+}

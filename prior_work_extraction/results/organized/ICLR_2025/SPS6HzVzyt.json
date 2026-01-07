@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Finetuned Language Models Are Zero-Shot Learners",
+      "authors": "Jason Wei et al.",
+      "year": 2021,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "This work established instruction finetuning as the core paradigm for improving instruction-following, providing the problem formulation whose effect on context usage the current paper systematically interrogates across training."
+    },
+    {
+      "title": "Self-Instruct: Aligning Language Models with Self-Generated Instructions",
+      "authors": "Yizhong Wang et al.",
+      "year": 2022,
+      "arxiv_id": "2212.10560",
+      "role": "Extension",
+      "relationship_sentence": "Self-Instruct\u2019s concrete data-generation recipe underlies modern instruction-tuning pipelines, and the present paper directly extends this setting by tracking how reliance on provided context evolves as more Self-Instruct\u2013style data is used."
+    },
+    {
+      "title": "Stanford Alpaca: An Instruction-Following LLaMA Model",
+      "authors": "Rohan Taori et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "Alpaca provides a canonical general-purpose instruction-tuning dataset and setup that the paper uses as a primary baseline to reveal the context\u2013parametric inversion during finetuning."
+    },
+    {
+      "title": "UltraChat: A Large-scale Automatic Multi-turn Chat Dataset for Instruction Tuning",
+      "authors": "Shuyue Stella Ding et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "UltraChat supplies multi-turn conversational instruction data, enabling the paper\u2019s cross-dataset tests that show the inversion phenomenon persists beyond single-turn instruction formats."
+    },
+    {
+      "title": "Lost in the Middle: How Language Models Use Long Context",
+      "authors": "Nelson F. Liu et al.",
+      "year": 2023,
+      "arxiv_id": "2307.03172",
+      "role": "Inspiration",
+      "relationship_sentence": "By isolating and measuring systematic underuse of long-context information, this work informs the paper\u2019s measurement lens for quantifying context reliance as finetuning progresses."
+    },
+    {
+      "title": "Improving language models by retrieving from trillions of tokens (RETRO)",
+      "authors": "Sebastian Borgeaud et al.",
+      "year": 2022,
+      "arxiv_id": "2112.04426",
+      "role": "Related Problem",
+      "relationship_sentence": "RETRO shows that explicitly training models to use retrieved evidence can shift reliance toward context, motivating the paper\u2019s contrast that generic instruction finetuning alone can instead drift toward parametric knowledge."
+    },
+    {
+      "title": "Discovering Language Model Behaviors with Model-Written Evaluations",
+      "authors": "Ethan Perez et al.",
+      "year": 2022,
+      "arxiv_id": "2212.09251",
+      "role": "Gap Identification",
+      "relationship_sentence": "This work documents undesirable alignment side effects like sycophancy, directly motivating the paper\u2019s investigation into another alignment-tuning failure mode: reduced grounding in provided context over finetuning."
+    }
+  ],
+  "synthesis_narrative": "Instruction tuning was crystallized by Finetuned Language Models Are Zero-Shot Learners, which showed that supervised finetuning on diverse instructions reliably improves instruction following and generalization. Self-Instruct operationalized a scalable data-creation recipe\u2014models generating and filtering their own instructions and responses\u2014setting the template for most modern general-purpose tuning corpora. Stanford Alpaca demonstrated that modest, general-purpose instruction datasets can yield strong instruction-following behavior with lightweight finetuning, establishing a widely adopted baseline recipe. UltraChat extended this paradigm to large, multi-turn conversational traces, reflecting real dialog structure while retaining the instruction-following objective. In parallel, Lost in the Middle revealed that language models systematically underutilize provided evidence, especially in long contexts, and offered concrete evaluation setups for measuring context reliance. On the other hand, RETRO showed that when training explicitly rewards use of retrieved evidence, models shift reliance toward context over parametric memory. Complementing these perspectives, Discovering Language Model Behaviors with Model-Written Evaluations documented alignment-tuning side effects such as sycophancy, suggesting that naively optimizing for instruction adherence can induce unintended behaviors. Together, these works highlight a tension: instruction tuning promises better instruction adherence, yet models often underuse provided context unless training explicitly incentivizes evidence use, and alignment-style finetuning can introduce new failure modes. Building on the standard Alpaca- and UltraChat-style finetuning setups derived from Self-Instruct and FLAN, and using Lost in the Middle\u2019s lens to quantify context use, the paper synthesizes these insights to probe the dynamics of context reliance during instruction finetuning\u2014showing a counterintuitive inversion where reliance initially improves but then degrades\u2014thereby explaining why generic instruction finetuning can drift toward parametric knowledge unless evidence use is explicitly trained, as in retrieval-augmented approaches.",
+  "target_paper": {
+    "title": "Context-Parametric Inversion: Why Instruction Finetuning May Not Actually Improve Context Reliance",
+    "authors": "Sachin Goyal, Christina Baek, J Zico Kolter, Aditi Raghunathan",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "oral",
+    "keywords": "Instruction finetuning, context-vs-parametric reliance",
+    "abstract": "Large Language Model's are instruction-finetuned to enhance their ability to follow user instructions and better comprehend input context. Still, they often struggle to follow the input context, especially when it contradicts model's parametric knowledge. This manifests as various failures, such as hallucinations where a model inserts outdated or unwarranted facts into its response. In this work, we observe an intriguing phenomenon: the context reliance of the model decreases as instruction finetuning progresses, $\\textit{despite an initial expected increase}$. We call this phenomenon as the $\\textbf{context-parametric inversion}$. This is surprising, as one would expect instruction tuning to improve the model's ability to follow input instructions.  We observe this behavior on multiple general purpose instruction tuning datasets such as TULU, Alpaca and Ultrachat, across multiple model families like Llama, Mistral and Pythia.  We perform various controlled studies to eliminate some si",
+    "openreview_id": "SPS6HzVzyt",
+    "forum_id": "SPS6HzVzyt"
+  },
+  "analysis_timestamp": "2026-01-06T07:33:27.423152"
+}

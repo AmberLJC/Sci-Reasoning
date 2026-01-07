@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Prochlo: Strong Privacy for Analytics in the Crowd",
+      "authors": "Bittau et al.",
+      "year": 2017,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "This work introduced the encode\u2013shuffle\u2013analyze (ESA) architecture that operationalizes the shuffled model, providing the system-level foundation the paper leverages to collect anonymized, locally randomized end-user reports."
+    },
+    {
+      "title": "Amplification by Shuffling: From Local to Central Differential Privacy via Anonymity",
+      "authors": "Balle et al.",
+      "year": 2019,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "Its privacy amplification theorem under shuffling underpins the paper\u2019s guarantees by converting lightly locally perturbed user messages into (near) central-DP-level privacy once anonymized."
+    },
+    {
+      "title": "The Privacy Blanket of the Shuffle Model",
+      "authors": "Cheu et al.",
+      "year": 2019,
+      "arxiv_id": "arXiv:1903.02846",
+      "role": "Extension",
+      "relationship_sentence": "This paper provides concrete single-message shuffle protocols and analyses for summation/histograms that the paper directly generalizes from simple linear aggregates to kernel-density aggregates."
+    },
+    {
+      "title": "Random Features for Large-Scale Kernel Machines",
+      "authors": "Rahimi and Recht",
+      "year": 2007,
+      "arxiv_id": "arXiv:0709.4485",
+      "role": "Inspiration",
+      "relationship_sentence": "The random Fourier features idea to linearize kernel evaluations directly motivates representing the kernel density as a sum of bounded random features that can be privately aggregated via a shuffle protocol."
+    },
+    {
+      "title": "The Bernstein Mechanism: Function Release under Differential Privacy",
+      "authors": "Ald\u00e0 and Rubinstein",
+      "year": 2017,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "As a central-DP baseline for privately releasing smooth functions (including density functions) with explicit accuracy guarantees, it is the standard the paper aims to match in the shuffled model."
+    },
+    {
+      "title": "Differential Privacy for Functions and Functional Data",
+      "authors": "Hall, Rinaldo, and Wasserman",
+      "year": 2013,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "This work formalized private release of functions and established accuracy\u2013privacy tradeoffs for density estimation under central DP that the paper targets as its accuracy benchmark."
+    }
+  ],
+  "synthesis_narrative": "Prochlo established the encode\u2013shuffle\u2013analyze pipeline that allows end-user data to be lightly randomized locally and then anonymized in transit, making it possible to compute accurate aggregates without a fully trusted curator. Building on this system model, amplification-by-shuffling results showed that anonymity dramatically strengthens privacy guarantees of locally perturbed messages, effectively bringing their protection close to central differential privacy. The privacy blanket framework then provided concrete single-message shuffle protocols and analyses for summation and histogram queries, giving algorithmic templates and error bounds for privately aggregating bounded user contributions. Separately, random Fourier features demonstrated that kernel methods can be linearized by mapping inputs to low-dimensional random feature spaces where kernel evaluations reduce to averages of bounded features. In central DP, the Bernstein mechanism offered a principled way to release smooth functions\u2014such as densities\u2014with tractable privacy accounting and error, and foundational work on DP for functions clarified minimax tradeoffs for private density estimation.\nTaken together, these works suggested a path: represent kernel density estimation as a small collection of bounded, linear aggregates (e.g., via random features), have each user emit a lightly noised sketch under ESA, and rely on shuffle amplification and single-message analyses to ensure privacy while retaining near-central accuracy. The gap\u2014shuffle-model methods largely limited to simple sums versus central-DP function release methods requiring curator trust\u2014motivated a synthesis that extends shuffle summation machinery to nonparametric kernel densities and, by learning per-class densities, enables private classification with accuracy competitive with central DP.",
+  "target_paper": {
+    "title": "Learning from End User Data with Shuffled Differential Privacy over Kernel Densities",
+    "authors": "Tal Wagner",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "differential privacy, shuffled differential privacy, kernel density estimation, kde",
+    "abstract": "We study a setting of collecting and learning from private data distributed across end users.\nIn the shuffled model of differential privacy, the end users partially protect their data locally before sharing it, and their data is also anonymized during its collection to enhance privacy. \nThis model has recently become a prominent alternative to central DP, which requires full trust in a central data curator, and local DP, where fully local data protection takes a steep toll on downstream accuracy. \n\nOur main technical result is a shuffled DP protocol for privately estimating the kernel density function of a distributed dataset, with accuracy essentially matching central DP. \nWe use it to privately learn a classifier from the end user data, by learning a private density function per class. \nMoreover, we show that the density function itself can recover the semantic content of its class, despite having been learned in the absence of any unprotected data. \nOur experiments show the favorabl",
+    "openreview_id": "QjSOgxJ0hp",
+    "forum_id": "QjSOgxJ0hp"
+  },
+  "analysis_timestamp": "2026-01-06T15:37:43.806759"
+}

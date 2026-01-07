@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Policy Invariance under Reward Transformations: Theory and Application to Reward Shaping",
+      "authors": "Andrew Y. Ng, Daishi Harada, Stuart J. Russell",
+      "year": 1999,
+      "role": "Foundational theory of reward shaping",
+      "relationship_sentence": "Provides the core PBRS invariance result that this paper scrutinizes in practice, motivating a learned alternative when PBRS degrades performance."
+    },
+    {
+      "title": "Potential-based Shaping and Q-Value Initialization are Equivalent",
+      "authors": "Eric Wiewiora",
+      "year": 2003,
+      "role": "Clarifies mechanics and limitations of PBRS",
+      "relationship_sentence": "Establishes practical implications of PBRS that serve as a baseline the authors evaluate and show can underperform, motivating automatic shaping design."
+    },
+    {
+      "title": "Apprenticeship Learning via Inverse Reinforcement Learning",
+      "authors": "Pieter Abbeel, Andrew Y. Ng",
+      "year": 2004,
+      "role": "Conceptual precedent for learning reward weights over features",
+      "relationship_sentence": "Introduces learning linear reward weights from features, a template the paper adapts by learning how to blend auxiliary (feature-like) rewards to optimize true task return."
+    },
+    {
+      "title": "Maximum Entropy Inverse Reinforcement Learning",
+      "authors": "Brian D. Ziebart, Andrew Maas, J. Andrew Bagnell, Anind K. Dey",
+      "year": 2008,
+      "role": "Methodological foundation for reward parameterization and learning",
+      "relationship_sentence": "Strengthens the IRL paradigm of parameterized rewards; the new work similarly optimizes reward parameters but via a bi-level objective tied to environment returns rather than demonstrations."
+    },
+    {
+      "title": "Deep Reinforcement Learning from Human Preferences",
+      "authors": "Paul F. Christiano et al.",
+      "year": 2017,
+      "role": "Alignment via learned reward models",
+      "relationship_sentence": "Demonstrates that aligning behavior often requires learning a reward function; this paper pursues alignment by learning how to combine auxiliary rewards with the task reward to avoid misaligned behaviors."
+    },
+    {
+      "title": "UNREAL: Reinforcement Learning with Unsupervised Auxiliary Tasks",
+      "authors": "Max Jaderberg et al.",
+      "year": 2016,
+      "role": "Use of auxiliary signals to accelerate RL",
+      "relationship_sentence": "Shows auxiliary rewards can speed learning but typically need hand-tuned mixing; the present work directly learns the optimal blending of auxiliary and primary rewards."
+    },
+    {
+      "title": "Meta-Gradient Reinforcement Learning",
+      "authors": "Xu et al.",
+      "year": 2018,
+      "role": "Bilevel/meta-gradient machinery for learning meta-parameters",
+      "relationship_sentence": "Provides the core bilevel optimization approach\u2014differentiating through learning\u2014to tune parameters (here, reward-blend coefficients) so that inner-loop training improves outer-loop true returns."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core contribution\u2014a bi-level framework that learns behavior-alignment reward functions by optimally blending auxiliary rewards with the environment\u2019s primary reward\u2014sits at the intersection of reward shaping, reward learning, and meta-optimization. Classical potential-based reward shaping (Ng, Harada, Russell, 1999) and its practical elaborations (Wiewiora, 2003) supply the canonical approach for densifying feedback while preserving optimal policies in idealized settings. The authors\u2019 systematic evidence that PBRS can nonetheless hinder performance in realistic regimes motivates moving beyond fixed shaping. In parallel, the inverse reinforcement learning lineage (Abbeel & Ng, 2004; Ziebart et al., 2008) established reward functions as parameterized combinations of features and demonstrated that learning their weights can better reflect intended objectives; this paper inherits that parameterization idea but replaces imitation-driven objectives with an outer objective that maximizes true task return. Preference-based reward modeling (Christiano et al., 2017) further reinforces the alignment perspective: to elicit desired behavior, one often must learn the reward rather than handcraft it. Complementing these, auxiliary-task methods (UNREAL; Jaderberg et al., 2016) showed that extra signals can accelerate learning, but typically rely on manually tuned mixtures\u2014precisely the knob this work automates. Finally, meta-gradient reinforcement learning (Xu et al., 2018) provides the bilevel optimization toolkit to differentiate through the inner RL update, enabling principled end-to-end tuning of reward-blend parameters so that training under the shaped signal yields the highest true return. Together, these strands directly inform the paper\u2019s central design: learnable, aligned reward composition optimized via bilevel objectives.",
+  "analysis_timestamp": "2026-01-07T00:02:04.796241"
+}

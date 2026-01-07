@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Cascaded Diffusion Models for High Fidelity Image Generation",
+      "authors": "Jonathan Ho et al.",
+      "year": 2021,
+      "arxiv_id": "2106.15282",
+      "role": "Baseline",
+      "relationship_sentence": "This work established the cascaded multi-scale diffusion pipeline whose intermediate variables make likelihood intractable, and the present paper directly resolves this by reparameterizing each scale with hierarchical volume-preserving maps to enable exact likelihood."
+    },
+    {
+      "title": "Image Super-Resolution via Iterative Refinement",
+      "authors": "Chitwan Saharia et al.",
+      "year": 2021,
+      "arxiv_id": "2104.07636",
+      "role": "Related Problem",
+      "relationship_sentence": "SR3 formalized diffusion-based super-resolution modules used as stages in cascades, and the current paper makes these super-resolution stages likelihood-trainable by operating in a volume-preserving hierarchical latent space."
+    },
+    {
+      "title": "Deep Generative Image Models using a Laplacian Pyramid of Adversarial Networks",
+      "authors": "Emily Denton et al.",
+      "year": 2015,
+      "arxiv_id": "1506.05751",
+      "role": "Inspiration",
+      "relationship_sentence": "By showing that Laplacian pyramid decompositions enable effective multi-scale generative cascades, this work directly inspired using the Laplacian pyramid as a hierarchical volume-preserving map for tractable likelihood in cascaded diffusion."
+    },
+    {
+      "title": "The Laplacian Pyramid as a Compact Image Code",
+      "authors": "Peter J. Burt et al.",
+      "year": 1983,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "This classic paper introduced the Laplacian pyramid transform that the present work adopts as a concrete hierarchical volume-preserving map to decompose images into multi-scale bands without local distortion."
+    },
+    {
+      "title": "NICE: Non-linear Independent Components Estimation",
+      "authors": "Laurent Dinh et al.",
+      "year": 2014,
+      "arxiv_id": "1410.8516",
+      "role": "Inspiration",
+      "relationship_sentence": "NICE introduced the key idea of volume-preserving invertible transformations yielding zero log-determinant in change-of-variables, which this paper extends to hierarchical, spatially-structured maps across scales."
+    },
+    {
+      "title": "Integer Discrete Flows and Lossless Compression",
+      "authors": "Emiel Hoogeboom et al.",
+      "year": 2019,
+      "arxiv_id": "",
+      "role": "Extension",
+      "relationship_sentence": "This work demonstrated using invertible wavelet/Haar transforms as volume-preserving steps in likelihood-based models, and the present paper leverages the same class of wavelet transforms as hierarchical volume-preserving maps for diffusion cascades."
+    },
+    {
+      "title": "High-Resolution Image Synthesis with Latent Diffusion Models",
+      "authors": "Robin Rombach et al.",
+      "year": 2022,
+      "arxiv_id": "2112.10752",
+      "role": "Gap Identification",
+      "relationship_sentence": "Latent diffusion relies on autoencoder latents that are not volume-preserving (and thus not directly likelihood-traceable), motivating the present work\u2019s replacement with hierarchical volume-preserving maps to obtain exact likelihood in multi-scale settings."
+    }
+  ],
+  "synthesis_narrative": "Cascaded Diffusion Models showed that chaining diffusion models across resolutions yields high-fidelity images, but their construction introduces intermediate variables that make marginal likelihood of the final image intractable. SR3 clarified the mechanics of diffusion-based super-resolution modules used within such cascades, cementing the conditional multi-scale formulation but leaving likelihood evaluation unaddressed. Earlier, Laplacian Pyramid GANs demonstrated that decomposing images into multi-scale residual bands via a Laplacian pyramid yields effective generative cascades, pointing to pyramid decompositions as a powerful scaffold for hierarchical generation. The Laplacian pyramid itself, originating from Burt and Adelson, provides an invertible multi-scale transform that cleanly separates frequency bands without local distortions\u2014precisely the structure needed to decouple scales. In parallel, NICE introduced volume-preserving invertible transformations whose unit Jacobian simplifies change-of-variables, highlighting that volume preservation can make likelihood computations especially tractable. Integer Discrete Flows operationalized this idea with Haar/wavelet transforms, showing that orthonormal, invertible filter banks can serve as volume-preserving steps within exact-likelihood models. Conversely, Latent Diffusion Models achieved efficiency by learning compressive autoencoder latents that are not volume-preserving, thereby sacrificing direct likelihood access. Together, these works suggest a natural path: keep the multi-scale generative benefits of cascades and pyramids, but choose hierarchical transforms that are invertible and volume-preserving so that diffusion can be performed in a latent space where the likelihood is directly computable. The present paper synthesizes these insights by training cascaded diffusion models on hierarchical volume-preserving maps (e.g., Laplacian pyramids and wavelets), removing extraneous variables and enabling exact likelihood while retaining multi-scale generative advantages.",
+  "target_paper": {
+    "title": "Likelihood Training of Cascaded Diffusion Models via Hierarchical Volume-preserving Maps",
+    "authors": "Henry Li, Ronen Basri, Yuval Kluger",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "likelihood-based modeling, diffusion modeling, density estimation",
+    "abstract": "Cascaded models are multi-scale generative models with a marked capacity for producing perceptually impressive samples at high resolutions. In this work, we show that they can also be excellent likelihood models, so long as we overcome a fundamental difficulty with probabilistic multi-scale models: the intractability of the likelihood function. Chiefly, in cascaded models each intermediary scale introduces extraneous variables that cannot be tractably marginalized out for likelihood evaluation. This issue vanishes by modeling the diffusion process on latent spaces induced by a class of transformations we call hierarchical volume-preserving maps, which decompose spatially structured data in a hierarchical fashion without introducing local distortions in the latent space. We demonstrate that two such maps are well-known in the literature for multiscale modeling: Laplacian pyramids and wavelet transforms. Not only do such reparameterizations allow the likelihood function to be directly ex",
+    "openreview_id": "sojpn00o8z",
+    "forum_id": "sojpn00o8z"
+  },
+  "analysis_timestamp": "2026-01-06T07:29:40.836201"
+}

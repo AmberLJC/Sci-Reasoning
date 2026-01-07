@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Scalable Diffusion Models with Transformers",
+      "authors": "William Peebles et al.",
+      "year": 2023,
+      "arxiv_id": "2212.09748",
+      "role": "Extension",
+      "relationship_sentence": "PixArt-\u03b1 directly extends DiT by inserting cross-attention into the DiT backbone and pretraining it to learn image priors before adding text conditioning, following DiT\u2019s efficient latent-space Transformer design and ImageNet-style pretraining recipe."
+    },
+    {
+      "title": "High-Resolution Image Synthesis with Latent Diffusion Models",
+      "authors": "Robin Rombach et al.",
+      "year": 2022,
+      "arxiv_id": "2112.10752",
+      "role": "Foundation",
+      "relationship_sentence": "PixArt-\u03b1 adopts LDM\u2019s latent-space diffusion and the cross-attention conditioning mechanism, which are the backbone choices that make its 1024px generation feasible at low training cost."
+    },
+    {
+      "title": "GLIDE: Towards Photorealistic Image Generation and Editing with Text-Guided Diffusion Models",
+      "authors": "Alex Nichol et al.",
+      "year": 2021,
+      "arxiv_id": "2112.10741",
+      "role": "Inspiration",
+      "relationship_sentence": "GLIDE\u2019s text-guided diffusion with cross-attention and classifier-free guidance provides the conditioning and sampling paradigm that PixArt-\u03b1 streamlines within a Transformer-based denoiser."
+    },
+    {
+      "title": "Imagen: Photorealistic Text-to-Image Diffusion Models with Deep Language Understanding",
+      "authors": "Chitwan Saharia et al.",
+      "year": 2022,
+      "arxiv_id": "2205.11487",
+      "role": "Gap Identification",
+      "relationship_sentence": "Imagen demonstrated that strong frozen language encoders yield superior text-image alignment but at massive compute cost, a limitation PixArt-\u03b1 explicitly targets while retaining the strong-text-encoder conditioning insight."
+    },
+    {
+      "title": "SDXL: Improving Latent Diffusion Models for High-Resolution Image Synthesis",
+      "authors": "Timothy Podell et al.",
+      "year": 2023,
+      "arxiv_id": "2307.01952",
+      "role": "Baseline",
+      "relationship_sentence": "SDXL is the primary high-resolution LDM baseline whose image quality PixArt-\u03b1 aims to match while substantially reducing training compute via a DiT-based design and staged training."
+    },
+    {
+      "title": "Adding Conditional Control to Text-to-Image Diffusion Models",
+      "authors": "Lvmin Zhang et al.",
+      "year": 2023,
+      "arxiv_id": "2302.05543",
+      "role": "Inspiration",
+      "relationship_sentence": "ControlNet\u2019s principle of preserving a pretrained image prior while attaching new, zero-initialized conditioning pathways motivates PixArt-\u03b1\u2019s decomposed training that first learns pixel dependence and then introduces text-alignment modules without destabilizing the base model."
+    }
+  ],
+  "synthesis_narrative": "Transformers as diffusion denoisers were shown to scale and train efficiently in latent space by DiT, which established a ViT-style backbone and an ImageNet-centric pretraining recipe for learning strong image priors with patch tokens. Latent Diffusion introduced operating in a VAE latent space and injected conditioning via cross-attention, a combination that drastically cut training cost while enabling high-resolution synthesis. GLIDE provided the concrete text-conditioning and sampling paradigm\u2014cross-attention with classifier-free guidance\u2014in a diffusion setting, demonstrating how captions can steer denoising effectively. Imagen revealed that pairing diffusion with a strong frozen language model yields markedly better text-image alignment and photorealism, albeit with prohibitive compute through large cascades. SDXL refined latent diffusion at scale for 1024px images, setting the open benchmark for realism and alignment but reinforcing the heavy compute footprint needed for near-commercial quality. ControlNet showed that one can preserve a pretrained image prior and later attach condition-specific modules initialized to minimally perturb the base, enabling decoupled optimization of content versus controls. Taken together, these works suggest a path: use a DiT backbone in latent space for efficiency, employ cross-attention for text conditioning, and decouple objectives. Building on this, the new model first learns pixel dependencies as a strong prior, then adds text-alignment modules inspired by minimally invasive conditioning, and finally fine-tunes for aesthetic quality\u2014synthesizing SDXL/Imagen-level realism while substantially reducing training cost.",
+  "target_paper": {
+    "title": "PixArt-$\\alpha$: Fast Training of Diffusion Transformer for Photorealistic Text-to-Image Synthesis",
+    "authors": "Junsong Chen, Jincheng YU, Chongjian GE, Lewei Yao, Enze Xie, Zhongdao Wang, James Kwok, Ping Luo, Huchuan Lu, Zhenguo Li",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Text-to-Image Diffusion, Transformer",
+    "abstract": "The most advanced text-to-image (T2I) models require significant training costs (e.g., millions of GPU hours), seriously hindering the fundamental innovation for the AIGC community while increasing CO2 emissions. This paper introduces PixArt-$\\alpha$, a Transformer-based T2I diffusion model whose image generation quality is competitive with state-of-the-art image generators (e.g., Imagen, SDXL, and even Midjourney), reaching near-commercial application standards. Additionally, it supports high-resolution image synthesis up to 1024px resolution with low training cost, as shown in Figure 1 and 2. To achieve this goal, three core designs are proposed: (1) Training strategy decomposition: We devise three distinct training steps that separately optimize pixel dependency, text-image alignment, and image aesthetic quality; (2) Efficient T2I Transformer: We incorporate cross-attention modules into Diffusion Transformer (DiT) to inject text conditions and streamline the computation-intensive cl",
+    "openreview_id": "eAKmQPe3m1",
+    "forum_id": "eAKmQPe3m1"
+  },
+  "analysis_timestamp": "2026-01-06T19:25:18.518839"
+}

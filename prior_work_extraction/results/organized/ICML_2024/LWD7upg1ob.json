@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Differentially Private Synthetic Data via Foundation Model APIs",
+      "authors": "Zinan Lin, Chulin Xie, Arturs Backurs, Sivakanth Gopi, Da Yu, Huseyin A. Inan, Harsha Nori, Haotian Jiang, Huishuai Zhang, Yin Tat Lee, Bo Li, Sergey Yekhanin",
+      "year": 2024,
+      "role": "Algorithmic precursor introducing Private Evolution (PE) for images with only black-box API access",
+      "relationship_sentence": "Aug-PE is a direct extension of PE, adapting its DP propose\u2013score\u2013select evolutionary loop from diffusion models for images to LLM-based text generation with text-specific utilities and augmentations."
+    },
+    {
+      "title": "Mechanism Design via Differential Privacy (Exponential Mechanism)",
+      "authors": "Frank McSherry, Kunal Talwar",
+      "year": 2007,
+      "role": "Foundational DP selection mechanism for choosing high-utility items under privacy",
+      "relationship_sentence": "Aug-PE\u2019s private best-of-N selection among LLM-generated candidates relies on exponential-mechanism-style/noisy-argmax selection to pick high-utility texts while preserving DP."
+    },
+    {
+      "title": "Deep Learning with Differential Privacy",
+      "authors": "Mart\u00edn Abadi, Andy Chu, Ian Goodfellow, H. Brendan McMahan, Ilya Mironov, Kunal Talwar, Li Zhang",
+      "year": 2016,
+      "role": "Baseline DP-SGD approach and accounting principles that Aug-PE aims to avoid for proprietary LLMs",
+      "relationship_sentence": "The paper\u2019s motivation and comparisons build on DP-SGD, highlighting Aug-PE\u2019s advantage of avoiding costly DP fine-tuning while still providing formal DP guarantees."
+    },
+    {
+      "title": "R\u00e9nyi Differential Privacy",
+      "authors": "Ilya Mironov",
+      "year": 2017,
+      "role": "Tight privacy accounting/composition for iterative DP mechanisms",
+      "relationship_sentence": "Aug-PE composes many private selection and scoring steps, for which RDP-style accounting provides tighter cumulative privacy bounds."
+    },
+    {
+      "title": "Evolution Strategies as a Scalable Alternative to Reinforcement Learning",
+      "authors": "Tim Salimans, Jonathan Ho, Xi Chen, Szymon Sidor, Ilya Sutskever",
+      "year": 2017,
+      "role": "Black-box optimization via sample\u2013mutate\u2013select that underpins PE\u2019s evolutionary search",
+      "relationship_sentence": "The generate\u2013perturb\u2013select paradigm from evolution strategies informs Aug-PE\u2019s black-box search over LLM outputs without accessing or training model parameters."
+    },
+    {
+      "title": "Semi-supervised Knowledge Transfer for Deep Learning from Private Training Data (PATE)",
+      "authors": "Nicolas Papernot, Mart\u00edn Abadi, \u00dalfar Erlingsson, Ian Goodfellow, Kunal Talwar",
+      "year": 2017,
+      "role": "Private noisy aggregation/selection framework",
+      "relationship_sentence": "Aug-PE\u2019s use of noisy selection/aggregation over multiple candidates echoes PATE\u2019s DP noisy-argmax principle for privatizing decisions based on sensitive data."
+    },
+    {
+      "title": "PATE-GAN: Generating Synthetic Data with Differential Privacy",
+      "authors": "James Jordon, Jinsung Yoon, Mihaela van der Schaar",
+      "year": 2019,
+      "role": "DP-guided generative data synthesis via private selection/aggregation",
+      "relationship_sentence": "PATE-GAN demonstrates how DP selection can steer generative models, a strategy Aug-PE adopts in a black-box LLM setting by privately selecting among sampled texts."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core contribution\u2014Aug-PE for differentially private synthetic text via LLM APIs\u2014sits at the intersection of black-box evolutionary generation and rigorous DP selection/accounting. It builds directly on Private Evolution (Lin et al., 2024), which introduced a DP propose\u2013score\u2013select loop using only API access to foundation models; Aug-PE adapts this template from images to the harder text domain by defining text-specific utilities, augmentations, and iteration schemes. The selection step is grounded in the exponential mechanism (McSherry & Talwar, 2007), enabling private best-of-N choice among LLM samples based on utilities computed against sensitive corpora. Because Aug-PE repeats private scoring/selection many times, it relies on tight composition\u2014conveniently handled by R\u00e9nyi Differential Privacy (Mironov, 2017)\u2014to maintain end-to-end guarantees. The black-box optimization flavor of Aug-PE echoes evolution strategies (Salimans et al., 2017), which inspire the generate\u2013mutate\u2013select procedure without accessing model internals. On the generative privacy side, PATE (Papernot et al., 2017) and PATE-GAN (Jordon et al., 2019) established that noisy aggregation/selection can safely guide model outputs, a principle Aug-PE applies to rerank LLM candidates using DP noise. Finally, Abadi et al. (2016) provide the canonical DP-SGD baseline and conceptual backdrop\u2014highlighting the cost and impracticality of DP fine-tuning proprietary LLMs that Aug-PE circumvents while still delivering formal DP guarantees for synthetic text.",
+  "analysis_timestamp": "2026-01-07T00:02:04.883487"
+}

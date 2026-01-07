@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Axiomatic Attribution for Deep Networks (Integrated Gradients)",
+      "authors": "Mukund Sundararajan, Ankur Taly, Qiqi Yan",
+      "year": 2017,
+      "role": "Foundational gradient-based saliency baseline",
+      "relationship_sentence": "The paper evaluates and surpasses IG; ABO is motivated by IG\u2019s sensitivity and saturation issues, replacing pure gradient signals with a causal, intervention-based attribution via optimized attention biases."
+    },
+    {
+      "title": "Quantifying Attention Flow in Transformers",
+      "authors": "Samira Abnar, Willem Zuidema",
+      "year": 2020,
+      "role": "Attention-based attribution method (rollout/flow)",
+      "relationship_sentence": "ABO targets the same mechanism\u2014attention\u2014but instead of passively aggregating attention, it actively optimizes additive attention biases per token to causally test how changing attention affects generation."
+    },
+    {
+      "title": "Transformer Interpretability Beyond Attention: Exploring and Improving Attribution",
+      "authors": "Hila Chefer, Shir Gur, Lior Wolf",
+      "year": 2021,
+      "role": "Transformer-specific relevance propagation (gradient-based) attribution",
+      "relationship_sentence": "As a strong Transformer attribution baseline, this work highlights limitations of raw attention; ABO advances beyond gradient-relevance propagation by directly intervening in attention logits to obtain causal token importance."
+    },
+    {
+      "title": "Understanding Neural Networks through Representation Erasure",
+      "authors": "Jiwei Li, Will Monroe, Dan Jurafsky",
+      "year": 2016,
+      "role": "Perturbation/erasure-based causal attribution",
+      "relationship_sentence": "ABO is conceptually aligned with causal perturbation but avoids confounds of deletion (distribution shift, grammar breaks) by intervening through attention bias optimization to estimate each token\u2019s effect without altering surface form."
+    },
+    {
+      "title": "Train Short, Test Long: Attention with Linear Biases (ALiBi)",
+      "authors": "Ofir Press, Noah A. Smith, Mike Lewis",
+      "year": 2021,
+      "role": "Design of additive attention bias in transformers",
+      "relationship_sentence": "ALiBi formalized attention bias as an additive term to attention logits; ABO leverages this knob directly, optimizing per-token bias parameters to probe causal influence, grounding its method in established attention-bias mechanics."
+    },
+    {
+      "title": "Prefix-Tuning: Optimizing Continuous Prompts for Generation",
+      "authors": "Xiang Lisa Li, Percy Liang",
+      "year": 2021,
+      "role": "Parameter-efficient steering of generation via small optimizable controls",
+      "relationship_sentence": "ABO adopts the prefix/prompt-tuning philosophy\u2014optimize a small set of auxiliary parameters while keeping model weights frozen\u2014here instantiated as per-token attention biases optimized to measure causal impact."
+    },
+    {
+      "title": "Lost in the Middle: How Language Models Use Long Context",
+      "authors": "Nelson F. Liu, Kevin Lin, John Hewitt, Ashwin Paranjape, Michele Catasta, Christopher D. Manning, Percy Liang",
+      "year": 2023,
+      "role": "Long-context behavior analysis and stress-testing inspiration",
+      "relationship_sentence": "Findings on positional and length-related failures informed the paper\u2019s NIAH-style stress tests; ABO is designed to remain reliable under long contexts where standard saliency methods spuriously credit irrelevant tokens."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core contribution\u2014Attention Bias Optimization (ABO) for causal input attribution\u2014emerges from three converging threads. First, foundational attribution tools such as Integrated Gradients and Transformer-tailored relevance propagation (Chefer et al.) provided widely used but imperfect baselines, revealing gradient saturation, context leakage, and tenuous links between attention and explanation. Second, attention-focused attribution (Abnar & Zuidema) highlighted that attention structure is informative yet non-causal when merely observed. ABO turns this observation into intervention by directly manipulating the attention mechanism. The feasibility of such targeted control stems from architectural advances that expose an explicit attention bias term: ALiBi established additive attention biases as a principled lever on attention logits. ABO exploits this lever, optimizing per-token biases to measure how steering attention changes generation, thereby quantifying causal influence without altering model weights. Third, causal perturbation ideas (representation erasure) demonstrated the value of interventions but suffered from distribution shift when tokens are removed. ABO preserves input integrity while still performing causal tests. Finally, insights from long-context studies like Lost in the Middle motivated a rigorous needle-in-a-haystack stress test, revealing that standard attributions over-credit irrelevant context as inputs grow. ABO is built to remain robust in this regime, combining parameter-efficient steering (inspired by prefix/prompt tuning) with attention-bias interventions to deliver stable, causal attributions that better reflect which tokens truly drive an LLM\u2019s output.",
+  "analysis_timestamp": "2026-01-06T23:42:48.167421"
+}

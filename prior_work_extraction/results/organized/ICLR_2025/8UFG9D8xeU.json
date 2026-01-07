@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Direct Preference Optimization: Your Language Model is Secretly a Reward Model",
+      "authors": "Rafailov et al.",
+      "year": 2023,
+      "arxiv_id": "2305.18290",
+      "role": "Extension",
+      "relationship_sentence": "This work adopts DPO\u2019s RL-free, closed-form preference objective and extends it to multi-agent motion generation by optimizing directly on preference pairs that are implicitly mined from pre-training demonstrations instead of human-labeled comparisons."
+    },
+    {
+      "title": "Training language models to follow instructions with human feedback",
+      "authors": "Ouyang et al.",
+      "year": 2022,
+      "arxiv_id": "2203.02155",
+      "role": "Gap Identification",
+      "relationship_sentence": "RLHF established the standard post-training pipeline with preference data but its dependence on large-scale, costly human comparisons motivates replacing explicit annotations with implicit preferences extracted from existing demonstrations."
+    },
+    {
+      "title": "Deep reinforcement learning from human preferences",
+      "authors": "Christiano et al.",
+      "year": 2017,
+      "arxiv_id": "1706.03741",
+      "role": "Foundation",
+      "relationship_sentence": "Introduced the pairwise preference modeling (e.g., Bradley\u2013Terry) that underpins the paper\u2019s formulation of alignment as optimizing a policy to satisfy trajectory-level preferences."
+    },
+    {
+      "title": "Extrapolating Beyond Suboptimal Demonstrations via Inverse Reinforcement Learning from Human Preferences (T-REX)",
+      "authors": "Brown et al.",
+      "year": 2019,
+      "arxiv_id": "",
+      "role": "Inspiration",
+      "relationship_sentence": "Showed that ranked demonstrations can supervise behavior without online querying by deriving preferences from trajectories, directly inspiring the use of pre-training expert demos to synthesize preference data for alignment."
+    },
+    {
+      "title": "Constitutional AI: Harmlessness from AI Feedback",
+      "authors": "Bai et al.",
+      "year": 2022,
+      "arxiv_id": "2212.08073",
+      "role": "Inspiration",
+      "relationship_sentence": "Demonstrated scalable preference supervision without human raters by deriving preferences from existing sources, motivating the substitution of expensive human labels with implicit feedback extracted from pre-training data."
+    },
+    {
+      "title": "RRHF: Rank Responses to Align Language Models with Human Feedback",
+      "authors": "Yuan et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Related Problem",
+      "relationship_sentence": "Provided an RL-free ranking-loss formulation for direct model optimization from pairwise preferences, informing the paper\u2019s direct post-training loss design without training an explicit reward model."
+    }
+  ],
+  "synthesis_narrative": "Pairwise preference learning for sequential decision making was crystallized by Christiano et al., who modeled human comparisons over trajectory segments via a Bradley\u2013Terry formulation, turning alignment into optimizing a policy to satisfy measured preferences. Ouyang et al. scaled this idea to large language models through RLHF, operationalizing post-training with a reward model and reinforcement learning but incurring high costs for collecting human preference labels at scale. To sidestep RL, Rafailov et al. introduced Direct Preference Optimization, deriving a closed-form objective that directly maximizes the likelihood of preferred responses under a Bradley\u2013Terry model using only preference pairs. In parallel, RRHF showed that ranking-based, RL-free objectives can effectively align generative models without training a reward model. From the demonstrations side, Brown et al. (T-REX) established that ranked demonstrations provide sufficient signal to supervise behavior without online queries, extracting preferences from existing trajectories. Bai et al. (Constitutional AI) further showed that scalable alignment can be achieved by replacing costly human ratings with derived feedback, validating the premise of non-human, non-interactive preference generation.\nTaken together, these works expose a gap: preference alignment is powerful but bottlenecked by human comparisons, while demonstrations are abundant yet underutilized for post-training alignment. The current paper synthesizes DPO-style direct optimization with T-REX\u2019s insight of ranking demonstrations, operationalizing an RL-free objective over preference pairs implicitly mined from pre-training expert demos, thereby achieving scalable, post-training preference alignment tailored to multi-agent motion generation without additional human annotation.",
+  "target_paper": {
+    "title": "Direct Post-Training Preference Alignment for Multi-Agent Motion Generation Model Using Implicit Feedback from Pre-training Demonstrations",
+    "authors": "Thomas Tian, Kratarth Goel",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "Efficient Post-training Preference Alignment, Alignment from demonstrations, Multi-agent Motion Generation",
+    "abstract": "Recent advancements in Large Language Models (LLMs) have revolutionized motion generation models in embodied applications such as autonomous driving and robotic manipulation. While LLM-type auto-regressive motion generation models benefit from training scalability, there remains a discrepancy between their token prediction objectives and human preferences. As a result, models pre-trained solely with token-prediction objectives often generate behaviors that deviate from what humans would prefer, making post-training preference alignment crucial for producing human-preferred motions. Unfortunately, post-training alignment requires extensive preference rankings of motions generated by the pre-trained model, which are costly and time-consuming to annotate, especially in multi-agent motion generation settings. Recently, there has been growing interest in leveraging expert demonstrations previously used during pre-training to scalably generate preference data for post-training alignment. How",
+    "openreview_id": "8UFG9D8xeU",
+    "forum_id": "8UFG9D8xeU"
+  },
+  "analysis_timestamp": "2026-01-06T06:14:54.640993"
+}

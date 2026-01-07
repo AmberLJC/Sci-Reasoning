@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Learning to Prompt for Continual Learning (L2P)",
+      "authors": "Wang et al.",
+      "year": 2022,
+      "role": "baseline and design template for prompt-based CL",
+      "relationship_sentence": "Introduced a prompt pool with key-guided retrieval over a frozen ViT, establishing the core pipeline (prompt selection + prediction) that this paper decomposes into task-identity inference and within-task prediction, and whose weaknesses under self-supervised pretraining the authors diagnose."
+    },
+    {
+      "title": "DualPrompt: Complementary Prompting for Rehearsal-Free Continual Learning",
+      "authors": "Wang et al.",
+      "year": 2022,
+      "role": "architectural precursor suggesting separation of knowledge",
+      "relationship_sentence": "Split prompts into general and expert components, foreshadowing the need to disentangle different roles of prompts; the new work formalizes this idea as a hierarchical decomposition (task-identity inference vs task-adaptive prediction) and explains why such separation is crucial under self-supervised features."
+    },
+    {
+      "title": "CODA-Prompt: Compositional Decomposed Prompting for Continual Learning",
+      "authors": "Yang et al.",
+      "year": 2023,
+      "role": "methodological precursor on decoupling and composing prompts",
+      "relationship_sentence": "Proposed decomposing and composing prompts to isolate knowledge components; the present paper generalizes this into a principled three-part objective (within-task prediction, task-ID inference, task-adaptive prediction) and provides theory explaining when and why such decoupling matters."
+    },
+    {
+      "title": "Visual Prompt Tuning",
+      "authors": "Jia et al.",
+      "year": 2022,
+      "role": "mechanistic building block for vision prompts with frozen backbones",
+      "relationship_sentence": "Established that learnable visual prompts can steer frozen ViT representations; the current work builds on this mechanism and shows that, with self-supervised pretraining, prompt-induced instruction and test-time uninstructed features can mismatch\u2014motivating the hierarchical treatment."
+    },
+    {
+      "title": "Prefix-Tuning: Optimizing Continuous Prompts for Generation",
+      "authors": "Li and Liang",
+      "year": 2021,
+      "role": "theoretical and conceptual underpinning of soft prompting",
+      "relationship_sentence": "Provided the general principle that small learned prefixes/prompts can condition large pretrained models; this paper leverages that lens to analyze how prompts instruct representations and why explicit task-identity inference must be modeled separately in continual settings."
+    },
+    {
+      "title": "Masked Autoencoders Are Scalable Vision Learners (MAE)",
+      "authors": "He, Chen, Xie, Li, Doll\u00e1r, Girshick",
+      "year": 2022,
+      "role": "empirical motivation via self-supervised pretraining regime",
+      "relationship_sentence": "Supplied the self-supervised pretraining setting in which prior prompt-based CL methods underperform; the revealed gap drives the paper\u2019s theoretical decomposition and the proposed method targeted at SSL-pretrained encoders."
+    }
+  ],
+  "synthesis_narrative": "Prompt-based continual learning (CL) emerged with L2P, which established a now-standard recipe: learn a pool of prompts, retrieve them per input via keys derived from frozen features, and make predictions with minimal backbone updates. DualPrompt refined this by splitting knowledge into general and expert prompts, implicitly hinting that different functional roles coexist in prompt-based CL. CODA-Prompt took this further by decomposing and composing prompts to isolate knowledge components across tasks. In parallel, Visual Prompt Tuning and Prefix-Tuning provided the core mechanism and conceptual framing: small learned prompts can steer large pretrained models without altering backbone weights.\n\nThis paper identifies a critical failure mode of those designs when the backbone is self-supervised (e.g., MAE-pretrained): task-specific knowledge must be injected via prompts (instruction), yet prompt retrieval at test time relies on uninstructed representations. This mismatch obscures sub-optimality. Building on the above lineage, the authors formalize a hierarchical decomposition of the CL objective into within-task prediction, task-identity inference, and task-adaptive prediction, clarifying which components current methods entangle and why that hurts under self-supervised pretraining. Their method operationalizes this separation, improving retrieval (task-ID inference) and adaptation without conflating them with within-task predictors. Thus, the contribution synthesizes prompt-tuning mechanisms (Prefix/VPT), prompt-based CL architectures (L2P, DualPrompt, CODA-Prompt), and the SSL pretraining regime (MAE) into a principled framework that resolves the instructed\u2013uninstructed representation gap.",
+  "analysis_timestamp": "2026-01-07T00:02:04.849415"
+}

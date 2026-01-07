@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Noise2Noise: Learning Image Restoration without Clean Data",
+      "authors": "Jaakko Lehtinen et al.",
+      "year": 2018,
+      "role": "Inspiration",
+      "relationship_sentence": "The paper\u2019s core idea\u2014training from multiple independent noisy observations without clean supervision\u2014directly adopts the Noise2Noise principle and repurposes it to learn SDFs from repeated noisy point clouds."
+    },
+    {
+      "title": "Noise2Self: Blind Denoising by Self-Supervision",
+      "authors": "Joshua Batson et al.",
+      "year": 2019,
+      "role": "Inspiration",
+      "relationship_sentence": "Their extension to recover signals from a single noisy observation inspires the paper\u2019s claim that even a single noisy point cloud can supervise SDF learning via self-supervised statistical losses that avoid trivial identity mappings."
+    },
+    {
+      "title": "DeepSDF: Learning Continuous Signed Distance Functions for Shape Representation",
+      "authors": "Jeong Joon Park et al.",
+      "year": 2019,
+      "role": "Foundation",
+      "relationship_sentence": "DeepSDF established neural SDFs as a powerful continuous surface representation; the present work builds on this formulation while replacing clean SDF supervision with a noise-to-noise learning objective."
+    },
+    {
+      "title": "SAL: Sign Agnostic Learning of Shapes From Raw Data",
+      "authors": "Matan Atzmon et al.",
+      "year": 2019,
+      "role": "Gap Identification",
+      "relationship_sentence": "SAL showed how to learn SDFs without known inside/outside signs but typically assumes clean/on-surface constraints and normals; the new method explicitly addresses SAL\u2019s sensitivity to noise and reliance on clean geometric cues."
+    },
+    {
+      "title": "Implicit Geometric Regularization for Learning Shapes",
+      "authors": "Amos Gropp et al.",
+      "year": 2020,
+      "role": "Foundation",
+      "relationship_sentence": "IGR introduced the Eikonal regularization and on-surface constraints that enforce SDF geometry from point samples; this work leverages such SDF regularization while introducing a novel noise-to-noise loss over unordered, correspondence-free scans."
+    },
+    {
+      "title": "Points2Surf: Learning Implicit Surfaces from Point Clouds",
+      "authors": "Philipp Erler et al.",
+      "year": 2020,
+      "role": "Baseline",
+      "relationship_sentence": "Points2Surf is a primary reconstruction baseline that learns implicit surfaces from point clouds but relies on supervised training with relatively clean data; the proposed approach improves robustness by learning directly from noisy observations without clean targets."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core innovation\u2014learning SDFs directly from noisy point clouds via a noise-to-noise mapping\u2014stands on two intertwined intellectual threads: self-supervised denoising and neural implicit surface learning. Noise2Noise established that pairs of independent noisy measurements suffice to learn a denoiser without clean targets, a principle this work transfers to 3D geometry by treating multiple LiDAR scans as independent noisy observations of the same underlying SDF. Noise2Self further motivates the feasibility of self-supervision from a single noisy observation, informing the paper\u2019s single-scan regime by emphasizing statistical independence structures that prevent identity solutions.\n\nOn the representation side, DeepSDF introduced neural SDFs as a continuous implicit surface model, which this paper retains while discarding its reliance on clean signed distance supervision. SAL and IGR advanced training SDFs from raw point samples through sign-agnostic constraints and Eikonal regularization; however, SAL\u2019s dependence on clean on-surface constraints and normals, and the general sensitivity of these pipelines to noise, expose the precise gap this paper targets. The proposed loss statistically aggregates over unordered, correspondence-free scans to maintain geometric consistency\u2014complementing IGR-style SDF regularization\u2014thus enabling learning without clean SDFs, normals, or denoised inputs. Relative to Points2Surf, a strong implicit-surface baseline trained on cleaner supervision, the new method reframes supervision entirely around noisy observations, achieving robustness aligned with realistic LiDAR data acquisition.",
+  "analysis_timestamp": "2026-01-06T23:09:26.567259"
+}

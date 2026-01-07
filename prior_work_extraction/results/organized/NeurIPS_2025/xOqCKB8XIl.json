@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Jonathan Ho, Ajay Jain, Pieter Abbeel",
+      "year": 2020,
+      "role": "foundational technique",
+      "relationship_sentence": "HopaDIFF casts action segmentation as a conditional denoising process over label sequences, directly building on the DDPM paradigm to realize iterative refinement via diffusion steps conditioned on video and text."
+    },
+    {
+      "title": "Fourier Features Let Networks Learn High Frequency Functions in Low Dimensional Domains",
+      "authors": "Matthew Tancik, Pratul Srinivasan, Ben Mildenhall, Sara Fridovich-Keil, Nithin Raghavan, Utkarsh Singhal, Ravi Ramamoorthi, Jonathan T. Barron, Ren Ng",
+      "year": 2020,
+      "role": "key conditioning mechanism",
+      "relationship_sentence": "The paper motivates Fourier feature mappings for representing high-frequency signals, which HopaDIFF leverages as Fourier-conditioned inputs to encode temporal positions and boundaries crucial for fine-grained action segmentation."
+    },
+    {
+      "title": "Learning Transferable Visual Models From Natural Language Supervision (CLIP)",
+      "authors": "Alec Radford, Jong Wook Kim, Chris Hallacy, Aditya Ramesh, Gabriel Goh, Sandhini Agarwal, Girish Sastry, Amanda Askell, Pamela Mishkin, Jack Clark, Gretchen Krueger, Ilya Sutskever",
+      "year": 2021,
+      "role": "multimodal alignment backbone",
+      "relationship_sentence": "HopaDIFF relies on VLM-based visual\u2013text features to identify and condition on the referred person; CLIP provides the core alignment principle enabling robust textual reference guidance in multi-person scenes."
+    },
+    {
+      "title": "Temporal Convolutional Networks for Action Segmentation and Detection",
+      "authors": "Colin Lea, Michael D. Flynn, Ren\u00e9 Vidal, Austin Reiter, Gregory D. Hager",
+      "year": 2017,
+      "role": "foundational action segmentation formulation",
+      "relationship_sentence": "This work established framewise action segmentation with temporal convolutions, a formulation HopaDIFF adopts but replaces the deterministic decoding with diffusion-based inference and language conditioning."
+    },
+    {
+      "title": "MS-TCN: Multi-Stage Temporal Convolutional Network for Action Segmentation",
+      "authors": "Yazan Abu Farha, J\u00fcrgen Gall",
+      "year": 2019,
+      "role": "iterative refinement baseline",
+      "relationship_sentence": "MS-TCN\u2019s multi-stage refinement inspired HopaDIFF\u2019s iterative improvement of label sequences; HopaDIFF generalizes this idea via denoising diffusion steps that better handle boundaries and multi-person ambiguity."
+    },
+    {
+      "title": "Video Action Transformer Network",
+      "authors": "Rohit Girdhar, Jo\u00e3o Carreira, Carl Doersch, Andrew Zisserman",
+      "year": 2019,
+      "role": "actor-conditioned context modeling",
+      "relationship_sentence": "Actor-conditioned attention for per-person action recognition in multi-person scenes informs HopaDIFF\u2019s holistic\u2013partial design, combining target person features with global context to resolve referring ambiguities."
+    },
+    {
+      "title": "Localizing Moments in Video with Natural Language",
+      "authors": "Lisa Anne Hendricks, Oliver Wang, Eli Shechtman, Josef Sivic, Trevor Darrell, Bryan Russell",
+      "year": 2017,
+      "role": "text-guided temporal grounding",
+      "relationship_sentence": "This work introduced aligning free-form text with temporal segments; HopaDIFF extends the concept from coarse moment retrieval to dense, per-frame action labeling conditioned on textual references to a specific person."
+    }
+  ],
+  "synthesis_narrative": "HopaDIFF\u2019s core innovation\u2014holistic\u2013partial aware, Fourier-conditioned diffusion for referring human action segmentation\u2014emerges from the confluence of advances in diffusion-based structured prediction, temporal modeling for segmentation, and multimodal grounding. At its heart, the model reinterprets action segmentation as conditional denoising over label sequences, directly inheriting the iterative refinement mechanics of Denoising Diffusion Probabilistic Models. To precisely encode temporal positions and sharpen boundaries in long, untrimmed videos, it conditions the diffusion process on Fourier feature mappings, following the insight that Fourier encodings capture high-frequency signal components crucial for change points.\n\nOn the segmentation side, the formulation and training recipes of framewise action parsing are rooted in Temporal Convolutional Networks and the multi-stage refinement of MS-TCN; HopaDIFF generalizes these iterative refinements through probabilistic denoising steps that better handle over-segmentation and boundary jitter. Because the task is multi-person and text-referred, the model must isolate the target individual while leveraging scene context. Actor-conditioned context modeling from the Video Action Transformer informs HopaDIFF\u2019s holistic\u2013partial design, fusing target-centric tracks with global cues to disambiguate interactions and occlusions. Finally, robust text-video alignment is essential: CLIP\u2019s language\u2013vision pretraining provides the semantic bridge enabling the textual description to guide per-person segmentation. The broader paradigm of text-guided temporal grounding, pioneered by moment retrieval, underpins HopaDIFF\u2019s extension from coarse segment retrieval to dense, per-frame labeling under natural language references.",
+  "analysis_timestamp": "2026-01-07T00:05:12.552638"
+}

@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Language Modeling with Gated Convolutional Networks",
+      "authors": "Y. N. Dauphin et al.",
+      "year": 2017,
+      "arxiv_id": "1612.08083",
+      "role": "Foundation",
+      "relationship_sentence": "This paper introduced the GLU gating formulation that the current work directly modifies by removing the element-wise nonlinearity to obtain a purely bilinear MLP expressible as a third-order weight tensor."
+    },
+    {
+      "title": "GLU Variants Improve Transformer",
+      "authors": "Noam Shazeer",
+      "year": 2020,
+      "arxiv_id": "2002.05202",
+      "role": "Inspiration",
+      "relationship_sentence": "By showing that gated two-branch MLPs (e.g., SwiGLU) outperform standard MLPs in Transformers, this work motivated retaining the GLU-style factorized structure while dropping nonlinearities to enable a bilinear, analytically tractable weight form."
+    },
+    {
+      "title": "Transformer Feed-Forward Layers Are Key-Value Memories",
+      "authors": "Jacob Geva et al.",
+      "year": 2021,
+      "arxiv_id": "2102.01178",
+      "role": "Inspiration",
+      "relationship_sentence": "Framing FFNs as weight-encoded key\u2013value memories directly motivated analyzing MLP weights themselves; the present work operationalizes this by eigendecomposing the bilinear MLP weight tensor to read out weight-encoded features."
+    },
+    {
+      "title": "Toy Models of Superposition in Neural Networks",
+      "authors": "Nelson Elhage et al.",
+      "year": 2022,
+      "arxiv_id": "2209.10652",
+      "role": "Gap Identification",
+      "relationship_sentence": "By revealing entangled (superposed) features in activations, this work highlighted that activation-only methods miss how weights implement features\u2014precisely the gap addressed here via weight-spectrum analysis of bilinear MLPs."
+    },
+    {
+      "title": "Scaling Monosemanticity: Extracting Interpretable Features from Claude 3 with Sparse Autoencoders",
+      "authors": "Templeton et al.",
+      "year": 2024,
+      "arxiv_id": "",
+      "role": "Baseline",
+      "relationship_sentence": "Large-scale SAEs are the primary activation-based feature-extraction baseline that this paper contrasts with, replacing dataset-driven activation probes by eigendecomposing the bilinear MLP weight tensor to attribute features directly to weights."
+    },
+    {
+      "title": "Bilinear CNN Models for Fine-Grained Visual Recognition",
+      "authors": "Tsung-Yu Lin et al.",
+      "year": 2015,
+      "arxiv_id": "1504.07889",
+      "role": "Related Problem",
+      "relationship_sentence": "This work established that multiplicative interactions can be expressed as bilinear forms amenable to matrix/tensor decompositions, a formalism the present paper adopts to cast MLP computation as a bilinear weight tensor."
+    },
+    {
+      "title": "Speeding-up Convolutional Neural Networks using CP-Decomposition",
+      "authors": "Vadim Lebedev et al.",
+      "year": 2015,
+      "arxiv_id": "1412.6553",
+      "role": "Related Problem",
+      "relationship_sentence": "By treating layer parameters as higher-order tensors and factorizing them to expose low-rank structure, this paper provided the methodological precedent for analyzing low-rank spectra of a third-order weight tensor for interpretability rather than compression."
+    }
+  ],
+  "synthesis_narrative": "Gated nonlinearities were crystallized by the GLU formulation, which decomposes a layer into two branches whose outputs interact multiplicatively, providing a simple structure for feature construction. Subsequent work showed that such gated two-branch MLPs (e.g., SwiGLU) improve Transformer performance, underscoring that gating\u2014not the specific nonlinearity\u2014drives effectiveness. In parallel, the feed-forward block was reinterpreted as a key\u2013value memory whose weights explicitly encode feature write/read operations, suggesting that decoding features directly from weights could be viable. Separately, bilinear models in vision demonstrated that multiplicative interactions can be represented as bilinear forms and analyzed using matrix/tensor decompositions, while tensor factorization methods showed that treating network parameters as higher-order tensors exposes meaningful low-rank structure. Meanwhile, mechanistic interpretability identified superposition in activations and scaled sparse autoencoders extracted large numbers of activation features, but these activation-centric methods left open how MLP weights construct those features. Together these strands point to a natural opportunity: adopt the gated factorization, drop element-wise nonlinearities to keep a purely multiplicative (bilinear) interaction, and then analyze the resulting weight tensor spectrally. By expressing the MLP as a third-order tensor, eigendecomposition can reveal low-rank, interpretable modes that align with features, directly linking weight structure to computation. This synthesis bridges the gap left by activation-based methods, enabling weight-based mechanistic interpretability while retaining strong empirical performance.",
+  "target_paper": {
+    "title": "Bilinear MLPs enable weight-based mechanistic interpretability",
+    "authors": "Michael T Pearce, Thomas Dooms, Alice Rigg, Jose Oramas, Lee Sharkey",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "interpretability, mechanistic interpretability, bilinear, feature extraction, weight-based, eigenvector, eigendecomposition, tensor network",
+    "abstract": "A mechanistic understanding of how MLPs do computation in deep neural net-\nworks remains elusive. Current interpretability work can extract features from\nhidden activations over an input dataset but generally cannot explain how MLP\nweights construct features. One challenge is that element-wise nonlinearities\nintroduce higher-order interactions and make it difficult to trace computations\nthrough the MLP layer. In this paper, we analyze bilinear MLPs, a type of\nGated Linear Unit (GLU) without any element-wise nonlinearity that neverthe-\nless achieves competitive performance. Bilinear MLPs can be fully expressed in\nterms of linear operations using a third-order tensor, allowing flexible analysis of\nthe weights. Analyzing the spectra of bilinear MLP weights using eigendecom-\nposition reveals interpretable low-rank structure across toy tasks, image classifi-\ncation, and language modeling. We use this understanding to craft adversarial\nexamples, uncover overfitting, and identify small langua",
+    "openreview_id": "gI0kPklUKS",
+    "forum_id": "gI0kPklUKS"
+  },
+  "analysis_timestamp": "2026-01-06T14:22:01.658786"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Analyzing Multi-Head Self-Attention: Specialized Heads in the Transformer",
+      "authors": "Elena Voita, David Talbot, Fedor Moiseev, Rico Sennrich, Ivan Titov",
+      "year": 2019,
+      "role": "Empirical evidence of head-level specialization and head pruning in Transformers",
+      "relationship_sentence": "Head Pursuit builds directly on Voita et al.\u2019s finding that individual heads specialize (e.g., positional, syntactic), extending this idea to generative and multimodal settings and operationalizing specialization with a principled ranking via decoding-layer probing."
+    },
+    {
+      "title": "Are Sixteen Heads Really Better than One?",
+      "authors": "Paul Michel, Omer Levy, Graham Neubig",
+      "year": 2019,
+      "role": "Head importance estimation and pruning methodology",
+      "relationship_sentence": "The paper\u2019s result that editing as few as ~1% of heads can steer concepts echoes Michel et al.\u2019s head-importance paradigm, replacing pruning heuristics with a decoding-probe\u2013based ranking to target the most causally relevant heads."
+    },
+    {
+      "title": "Transformer Feed-Forward Layers Are Key-Value Memories",
+      "authors": "Mor Geva, Roei Schuster, Jonathan Berant, Omer Levy",
+      "year": 2020,
+      "role": "Probing intermediate activations using the unembedding/decoding matrix (logit-lens style) to interpret internal computations",
+      "relationship_sentence": "Head Pursuit explicitly builds on the established practice from Geva et al. of projecting intermediate representations through the final decoding layer, generalizing it to a signal-processing view that aggregates evidence across samples and isolates head contributions."
+    },
+    {
+      "title": "A Mathematical Framework for Transformer Circuits",
+      "authors": "Nelson Elhage, Neel Nanda, Catherine Olsson, Tom Henighan, Chris Olah",
+      "year": 2021,
+      "role": "Linear decomposition of transformer computations enabling component-wise attribution",
+      "relationship_sentence": "The paper\u2019s signal-processing reinterpretation and decomposition of head effects rely on the linear-residual-stream and unembedding framework articulated by Elhage et al., legitimizing per-head attribution of output logits."
+    },
+    {
+      "title": "In-Context Learning and Induction Heads",
+      "authors": "Catherine Olsson, Nelson Elhage, Neel Nanda, et al.",
+      "year": 2022,
+      "role": "Per-head circuit discovery demonstrating distinct functional roles (e.g., induction heads)",
+      "relationship_sentence": "Head Pursuit extends the per-head functional analysis exemplified by induction heads to a broader set of semantic and visual attributes, using decoding-layer probes to systematically rank and edit those heads."
+    },
+    {
+      "title": "Locating and Editing Factual Associations in GPT (ROME)",
+      "authors": "Kevin Meng, David Bau, Alex Andonian, Yonatan Belinkov",
+      "year": 2022,
+      "role": "Targeted model editing to alter specific knowledge with minimal parameter changes",
+      "relationship_sentence": "The demonstration that localized edits can control specific behaviors motivates Head Pursuit\u2019s head-level editing to suppress or enhance targeted concepts, shifting the edit granularity from MLP memories to attention heads selected by their probe score."
+    },
+    {
+      "title": "Transformer Interpretability Beyond Attention: Attribution with Gradient and Attention Rollout",
+      "authors": "Hila Chefer, Shir Gur, Lior Wolf",
+      "year": 2021,
+      "role": "Attribution methods for vision and vision-language transformers",
+      "relationship_sentence": "For multimodal analysis, Head Pursuit aligns with Chefer et al.\u2019s goal of attributing outputs to specific transformer components, but contributes a decoding-probe\u2013based metric that ranks cross-/self-attention heads tied to visual or semantic attributes."
+    }
+  ],
+  "synthesis_narrative": "Head Pursuit stands at the intersection of three interpretability threads: head specialization, linear decoding-based probing, and targeted editing. Foundational work by Voita et al. and Michel et al. established that attention heads often carry distinct functions and that many heads can be pruned with minimal loss, motivating head-level importance measures. Building on this, Geva et al. popularized projecting intermediate activations through the unembedding (decoding) matrix to read out semantic content, a practice that Head Pursuit reinterprets through a signal-processing lens to aggregate evidence across samples and to score heads by their relevance to target concepts.\n\nThe theoretical backbone comes from the transformer-circuits framework of Elhage et al., which treats the residual stream and unembedding as linear operators, legitimizing decomposition of output logits into component-wise (including per-head) contributions. Olsson et al.\u2019s discovery of induction heads further demonstrated that individual heads implement identifiable functional circuits, bolstering the premise that editing a small subset of heads can reliably alter behavior. Complementing this, ROME showed that localized parameter edits can precisely change specific knowledge; Head Pursuit extends the idea to head-level interventions selected by a principled probe-based ranking rather than heuristic localization. Finally, Chefer et al. contributed attribution techniques for vision and vision-language transformers; Head Pursuit adapts the per-component interpretability objective to a decoding-probe\u2013driven head ranking that transfers to multimodal settings, enabling consistent identification and manipulation of heads specialized for semantic or visual attributes.",
+  "analysis_timestamp": "2026-01-07T00:02:04.939555"
+}

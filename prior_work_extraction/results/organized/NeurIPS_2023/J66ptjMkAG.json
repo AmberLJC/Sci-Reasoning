@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Bayes\u2013Hermite quadrature",
+      "authors": "Anthony O\u2019Hagan",
+      "year": 1991,
+      "role": "Foundational formulation of Bayesian/quadrature in RKHS",
+      "relationship_sentence": "Established the probabilistic (Bayesian) view of numerical integration that underpins kernel-based quadrature; the NeurIPS 2023 paper builds on this RKHS worst-case error/Bayesian quadrature lens while proposing a new node selection mechanism."
+    },
+    {
+      "title": "A Kernel Two-Sample Test",
+      "authors": "Arthur Gretton, Karsten M. Borgwardt, Malte J. Rasch, Bernhard Sch\u00f6lkopf, Alexander J. Smola",
+      "year": 2012,
+      "role": "Core theory of kernel mean embeddings and MMD",
+      "relationship_sentence": "Provides the MMD/worst-case error framework used to analyze kernel quadrature error; the paper\u2019s guarantees for RPC-selected nodes are stated in this RKHS discrepancy language."
+    },
+    {
+      "title": "On the Equivalence Between Herding and Conditional Gradient Algorithms",
+      "authors": "Francis R. Bach, Simon Lacoste-Julien, Martin Jaggi",
+      "year": 2012,
+      "role": "Greedy/recombination perspective for kernel quadrature node design",
+      "relationship_sentence": "Showed that kernel herding/Frank\u2013Wolfe greedily minimizes RKHS discrepancy; the new work contrasts with these (often costlier) greedy schemes by using randomized pivoted Cholesky to get comparable errors at lower cost."
+    },
+    {
+      "title": "Kernel Quadrature with Continuous Volume Sampling",
+      "authors": "Micha\u0142 Derezi\u0144ski, Feynman Liang, Michael W. Mahoney",
+      "year": 2020,
+      "role": "State-of-the-art sampling design via continuous volume sampling/DPPs",
+      "relationship_sentence": "Established strong quadrature error rates using CVS/DPP-based node sets but at significant computational cost; the RPC method directly targets matching these rates while avoiding the expensive CVS sampling."
+    },
+    {
+      "title": "Monte Carlo with Determinantal Point Processes",
+      "authors": "R\u00e9mi Bardenet, Adrien Hardy",
+      "year": 2020,
+      "role": "Repulsive (DPP) sampling for low-variance integration",
+      "relationship_sentence": "Demonstrated the integration benefits of DPP-style repulsion; the paper positions RPC as a practical surrogate that mimics repulsive/volume effects without explicit DPP sampling."
+    },
+    {
+      "title": "Optimal Thinning of MCMC Output in Reproducing Kernel Hilbert Spaces",
+      "authors": "Riabiz, Oates, et al.",
+      "year": 2022,
+      "role": "Thinning/recombination approaches for kernel quadrature",
+      "relationship_sentence": "Provided near-optimal error via kernel thinning but with nontrivial computational overhead; the new paper shows RPC achieves comparable rates to thinning/recombination at much lower runtime."
+    },
+    {
+      "title": "The Pivoted Cholesky Decomposition of Positive Semidefinite Matrices",
+      "authors": "Helmut Harbrecht, Marc Peters, Reinhold Schneider",
+      "year": 2012,
+      "role": "Algorithmic precursor: pivoted Cholesky for kernel matrices",
+      "relationship_sentence": "Introduced the pivot selection via Schur-complement diagonals for low-rank kernel approximation; the NeurIPS 2023 work randomizes this pivot rule to sample quadrature nodes efficiently (RPC) and analyzes the resulting integration error."
+    }
+  ],
+  "synthesis_narrative": "Kernel quadrature traces back to the Bayesian Monte Carlo framework of O\u2019Hagan, which formalized integration in an RKHS and linked error to posterior uncertainty. Subsequent advances in kernel mean embeddings and maximum mean discrepancy (Gretton et al.) provided the dominant discrepancy measure and analysis toolkit for worst-case quadrature error. On the algorithmic side, greedy recombination strategies such as kernel herding (and its Frank\u2013Wolfe interpretation by Bach, Lacoste-Julien, and Jaggi) offered deterministic node selection via iterative minimization of RKHS discrepancy, but at a computational cost that can be limiting in large-scale or complex-geometry settings.\n\nA parallel line exploited repulsive designs: determinantal point processes and continuous volume sampling (Bardenet & Hardy; Derezi\u0144ski, Liang & Mahoney) delivered near-optimal node sets with strong error guarantees, yet required solving challenging sampling problems in continuous spaces. Another influential strand\u2014kernel thinning and recombination (Riabiz et al.)\u2014compressed large candidate sets to high-quality quadrature rules but again incurred significant overhead.\n\nThe NeurIPS 2023 paper synthesizes these threads by importing pivoted Cholesky\u2014classically used for fast low-rank kernel approximations (Harbrecht, Peters & Schneider)\u2014into quadrature via a randomized pivoting rule (RPC). This sampling implicitly tracks leverage/Schur-complement mass, capturing the diversity and repulsion that make CVS/DPPs effective, while retaining the simplicity and speed of Cholesky-type updates. The result is a practical method that matches the error rates of CVS-, thinning-, and recombination-based quadrature, yet scales easily to arbitrary kernels and geometries, thereby closing the gap between theory-optimal node design and computational tractability.",
+  "analysis_timestamp": "2026-01-06T23:42:49.075351"
+}

@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Soft Actor-Critic: Off-Policy Maximum Entropy Deep Reinforcement Learning with a Stochastic Actor",
+      "authors": "Tuomas Haarnoja et al.",
+      "year": 2018,
+      "arxiv_id": "1801.01290",
+      "role": "Foundation",
+      "relationship_sentence": "SAPO adopts SAC\u2019s maximum-entropy objective and stochastic actor-critic formulation, replacing SAC\u2019s sample-based gradients with analytic first-order gradients from a differentiable simulator to update the policy."
+    },
+    {
+      "title": "Learning Continuous Control Policies by Stochastic Value Gradients",
+      "authors": "Nicolas Heess et al.",
+      "year": 2015,
+      "arxiv_id": "1510.09142",
+      "role": "Extension",
+      "relationship_sentence": "SAPO extends SVG\u2019s core idea of reparameterizing action noise and backpropagating through known dynamics by applying exact simulator gradients in a multiphysics setting and integrating the soft-entropy objective for stability."
+    },
+    {
+      "title": "End-to-End Differentiable Physics for Learning and Control",
+      "authors": "Filipe de Avila Belbute-Peres et al.",
+      "year": 2018,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "This work showed that backpropagating through contact-regularized physics can train controllers but struggled with stability and scalability, gaps SAPO explicitly addresses via a stabilized actor-critic update using analytic gradients."
+    },
+    {
+      "title": "ChainQueen: A Real-Time Differentiable Physical Simulator for Soft Robotics",
+      "authors": "Yunzhu Hu et al.",
+      "year": 2019,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "ChainQueen established analytic first-order gradients for deformable materials via MPM; Rewarped generalizes this differentiable soft-body capability into a parallel multiphysics stack suitable for RL data collection."
+    },
+    {
+      "title": "DiffTaichi: Differentiable Programming for Physical Simulation",
+      "authors": "Yuanming Hu et al.",
+      "year": 2020,
+      "arxiv_id": "1910.00935",
+      "role": "Inspiration",
+      "relationship_sentence": "DiffTaichi demonstrated compiling differentiable simulation kernels to GPUs for efficient gradient computation, inspiring Rewarped\u2019s design of a GPU-parallel differentiable multiphysics platform that feeds SAPO with analytic gradients."
+    },
+    {
+      "title": "Brax: A Differentiable Physics Engine for Large Scale Rigid Body Simulation",
+      "authors": "Daniel P. Freeman et al.",
+      "year": 2021,
+      "arxiv_id": "2106.13281",
+      "role": "Gap Identification",
+      "relationship_sentence": "Brax showed large-scale GPU-parallel differentiable RL for rigid bodies but lacks deformable multiphysics, a limitation directly motivating Rewarped\u2019s multiphysics scope and SAPO\u2019s application to soft-body tasks."
+    }
+  ],
+  "synthesis_narrative": "Maximum-entropy actor-critic methods established how entropy-regularized objectives stabilize learning with stochastic policies, with Soft Actor-Critic formalizing a practical stochastic actor update under the soft Bellman framework. Stochastic Value Gradients introduced backpropagation through known dynamics via reparameterized action noise, enabling analytic policy gradients when model derivatives are available. End-to-end differentiable physics for learning and control demonstrated that differentiable contact-regularized simulators can train controllers by gradient descent, while highlighting fragility and limited scalability when pushing gradients through stiff contacts and longer horizons. ChainQueen provided analytic gradients for deformable materials via MPM, showing that first-order methods can effectively steer soft-body dynamics when simulator derivatives are accurate. DiffTaichi proved that differentiable simulation kernels can be compiled for high-throughput GPU execution, making gradient-based control more tractable computationally. In parallel, Brax delivered scalable GPU-parallel differentiable rigid-body simulation for RL at scale, but without deformable multiphysics support. Together, these works reveal both the promise and the missing pieces: soft-entropy actor-critic updates benefit from exact gradients, differentiable multiphysics enables those gradients for deformables, and GPU parallelism is essential for RL-scale data. The natural next step is to marry SAC\u2019s stabilized objective with SVG-style analytic gradients sourced from a fast, GPU-parallel differentiable multiphysics engine, explicitly addressing the instability and coverage gaps observed in earlier differentiable-physics control and rigid-only large-scale systems.",
+  "target_paper": {
+    "title": "Stabilizing Reinforcement Learning in Differentiable Multiphysics Simulation",
+    "authors": "Eliot Xing, Vernon Luk, Jean Oh",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "reinforcement learning, differentiable simulation",
+    "abstract": "Recent advances in GPU-based parallel simulation have enabled practitioners to collect large amounts of data and train complex control policies using deep reinforcement learning (RL), on commodity GPUs. However, such successes for RL in robotics have been limited to tasks sufficiently simulated by fast rigid-body dynamics. Simulation techniques for soft bodies are comparatively several orders of magnitude slower, thereby limiting the use of RL due to sample complexity requirements. To address this challenge, this paper presents both a novel RL algorithm and a simulation platform to enable scaling RL on tasks involving rigid bodies and deformables. We introduce Soft Analytic Policy Optimization (SAPO), a maximum entropy first-order model-based actor-critic RL algorithm, which uses first-order analytic gradients from differentiable simulation to train a stochastic actor to maximize expected return and entropy. Alongside our approach, we develop Rewarped, a parallel differentiable multiph",
+    "openreview_id": "DRiLWb8bJg",
+    "forum_id": "DRiLWb8bJg"
+  },
+  "analysis_timestamp": "2026-01-06T19:19:01.289425"
+}

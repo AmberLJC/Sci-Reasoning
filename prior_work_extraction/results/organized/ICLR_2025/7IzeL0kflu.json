@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Human-level control through deep reinforcement learning",
+      "authors": "Volodymyr Mnih et al.",
+      "year": 2015,
+      "arxiv_id": "1312.5602",
+      "role": "Baseline",
+      "relationship_sentence": "This work established target networks and experience replay as the default stabilizers for off-policy deep Q-learning, which the current paper explicitly removes by proving that normalization alone can ensure stable TD updates."
+    },
+    {
+      "title": "An analysis of temporal-difference learning with function approximation",
+      "authors": "John N. Tsitsiklis and Benjamin Van Roy",
+      "year": 1997,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "It formalized TD learning as a projected fixed-point problem and characterized when contraction and convergence hold, providing the theoretical framework that this paper leverages to show normalization can restore convergence off-policy."
+    },
+    {
+      "title": "Residual algorithms: Reinforcement learning with function approximation",
+      "authors": "Leemon C. Baird",
+      "year": 1995,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "Baird\u2019s counterexample demonstrated divergence of off-policy TD with function approximation, the precise instability this paper addresses via network normalization in place of target networks or replay."
+    },
+    {
+      "title": "Fast Gradient-Descent Methods for Temporal-Difference Learning with Linear Function Approximation",
+      "authors": "Richard S. Sutton et al.",
+      "year": 2009,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "GTD/TDC provided provably convergent off-policy TD for linear function approximation using two-timescale updates, whose complexity and restriction this paper overcomes by achieving convergence in deep networks through simple normalization."
+    },
+    {
+      "title": "An emphatic approach to off-policy temporal-difference learning",
+      "authors": "Richard S. Sutton et al.",
+      "year": 2016,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "Emphatic TD restored stability off-policy via importance-weighted state emphases, motivating this paper\u2019s alternative route that attains stability by architectural normalization rather than specialized weighting."
+    },
+    {
+      "title": "Layer Normalization",
+      "authors": "Jimmy Lei Ba et al.",
+      "year": 2016,
+      "arxiv_id": "1607.06450",
+      "role": "Extension",
+      "relationship_sentence": "This paper introduces layer-wise feature normalization, which the current work embeds in Q-networks and theoretically analyzes to prove TD convergence without target networks or replay."
+    },
+    {
+      "title": "Learning values across many orders of magnitude (PopArt)",
+      "authors": "Hado van Hasselt et al.",
+      "year": 2016,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "PopArt showed that adaptive normalization of value targets stabilizes value learning, inspiring the present work\u2019s use of normalization\u2014shifted from targets to features\u2014to achieve provable TD stability."
+    }
+  ],
+  "synthesis_narrative": "Deep Q-learning demonstrated that large replay buffers and slowly updated target networks can stabilize off-policy bootstrapping with nonlinear function approximators, establishing these mechanisms as de facto requirements for practical TD learning. Earlier theoretical work had already cast TD as a projected fixed-point iteration and characterized when contraction holds, laying the groundwork to reason about stability with function approximation. Baird\u2019s counterexample pinpointed the core pathology\u2014off-policy bootstrapping with function approximation can diverge\u2014thereby crystallizing the deadly triad as a central obstacle. In response, gradient TD methods achieved provable off-policy convergence in the linear setting via two-timescale stochastic approximation, while emphatic TD restored stability through emphasis weighting; both validated that modifying the update dynamics can fix divergence but at the cost of algorithmic complexity or strong assumptions. In parallel, normalization emerged as a stabilizing ingredient in deep learning: layer normalization provided feature-wise, input-independent normalization within networks, and PopArt showed that adaptive normalization of value targets can regularize learning across scales in RL.\nTogether these works suggested an opening: if normalization can regularize representations or targets and fixed-point theory prescribes contraction for stability, then the right normalization might restore contraction for off-policy TD with deep networks. The present paper synthesizes these insights by placing normalization inside the Q-network and proving that such regularization alone can ensure convergent off-policy TD updates, removing the need for target networks and replay, while retaining the empirical robustness previously attributed to those mechanisms.",
+  "target_paper": {
+    "title": "Simplifying Deep Temporal Difference Learning",
+    "authors": "Matteo Gallici, Mattie Fellows, Benjamin Ellis, Bartomeu Pou, Ivan Masmitja, Jakob Nicolaus Foerster, Mario Martin",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "Reinforcement Learning, TD, Theory, Q-learning, Parallelisation, Network Normalisation",
+    "abstract": "$Q$-learning played a foundational role in the field reinforcement learning (RL).\nHowever, TD algorithms with off-policy data, such as $Q$-learning, or nonlinear function approximation like deep neural networks require several additional tricks to stabilise training, primarily a large replay buffer and target networks. Unfortunately, the delayed updating of frozen network parameters in the target network harms the sample efficiency and, similarly, the large replay buffer introduces memory and implementation overheads. In this paper, we investigate whether it is possible to accelerate and simplify off-policy TD training while maintaining its stability. Our key theoretical result demonstrates for the first time that regularisation techniques such as LayerNorm can yield provably convergent TD algorithms without the need for a target network or replay buffer, even with off-policy data. Empirically, we find that online, parallelised sampling enabled by vectorised environments stabilises tra",
+    "openreview_id": "7IzeL0kflu",
+    "forum_id": "7IzeL0kflu"
+  },
+  "analysis_timestamp": "2026-01-06T14:36:32.205798"
+}

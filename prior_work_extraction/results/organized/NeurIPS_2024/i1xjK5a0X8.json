@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Masked Autoencoders Are Scalable Vision Learners",
+      "authors": "Kaiming He et al.",
+      "year": 2022,
+      "role": "Foundational MIM template",
+      "relationship_sentence": "PCP-MAE follows MAE\u2019s visible-encoder/decoder-with-masked-positions paradigm and specifically interrogates the MAE-style reliance on positional information during reconstruction."
+    },
+    {
+      "title": "Point-BERT: Pre-Training 3D Point Cloud Transformers with Masked Point Modeling",
+      "authors": "Yu et al.",
+      "year": 2022,
+      "role": "Early masked modeling for point clouds",
+      "relationship_sentence": "Point-BERT established patch tokenization and masked point modeling on 3D point clouds with center-based normalization, a design choice PCP-MAE scrutinizes for enabling positional shortcuts."
+    },
+    {
+      "title": "Point-MAE: Masked Autoencoders for Point Cloud Self-Supervised Learning",
+      "authors": "Pang et al.",
+      "year": 2022,
+      "role": "Direct baseline and pipeline",
+      "relationship_sentence": "Point-MAE\u2019s decoder consumes masked patch centers to reconstruct points; PCP-MAE\u2019s key empirical finding\u2014that centers alone nearly suffice\u2014directly critiques this design and motivates predicting (rather than feeding) centers."
+    },
+    {
+      "title": "Point-M2AE: Multi-Scale Masked Autoencoders for 3D Point Cloud Representation",
+      "authors": "Zhang et al.",
+      "year": 2023,
+      "role": "Multi-scale extension of point MAE",
+      "relationship_sentence": "By extending MAE to multi-scale patches while still leveraging patch centers, Point-M2AE exemplifies the broader pattern of positional leakage that PCP-MAE aims to remove."
+    },
+    {
+      "title": "MaskFeat: Masked Visual Pre-training with Simple Features",
+      "authors": "Wei et al.",
+      "year": 2022,
+      "role": "Alternative targets to avoid low-level shortcuts",
+      "relationship_sentence": "MaskFeat showed that choosing targets that reduce pixel-level shortcutting improves representation learning; PCP-MAE analogously changes the target/path by predicting centers to prevent trivial reconstruction from positional cues."
+    },
+    {
+      "title": "I-JEPA: Self-Supervised Learning from Images with a Joint-Embedding Predictive Architecture",
+      "authors": "Assran et al.",
+      "year": 2023,
+      "role": "Principle of avoiding information leakage and low-level reconstruction",
+      "relationship_sentence": "I-JEPA advocates prediction of high-level representations without direct access to target content; PCP-MAE echoes this principle by withholding masked patch centers from the decoder and forcing their prediction."
+    }
+  ],
+  "synthesis_narrative": "PCP-MAE builds squarely on the masked autoencoding paradigm inaugurated by MAE, which splits visible encoding from masked-region reconstruction using positional information. When this template migrated to point clouds, Point-BERT introduced masked point modeling with patch tokenization and center-based normalization, and Point-MAE operationalized a direct MAE-style pipeline where the decoder receives masked patch centers to reconstruct local geometry. Multi-scale variants such as Point-M2AE preserved this reliance on centers across patch scales. The authors\u2019 central observation\u2014that a decoder can reconstruct masked patches surprisingly well from centers alone, even without encoder features\u2014exposes a positional shortcut embedded in these pipelines, explaining weak semantic pressure on the encoder.\nIn parallel, the 2D MIM literature proposed remedies against low-level shortcuts. MaskFeat demonstrated that altering targets (e.g., feature regression) can improve representation quality by making reconstruction less trivial, while I-JEPA formalized the idea of predictive learning without direct access to target content, thereby curbing information leakage. PCP-MAE synthesizes these lines: it removes the decoder\u2019s access to masked patch centers and instead makes center prediction the task, eliminating the shortcut pathway and compelling the encoder to encode semantics. Thus, PCP-MAE is a principled re-specification of point-cloud MAE objectives and data flow, directly addressing the positional leakage inherited from Point-MAE/M2AE while aligning with broader JEPA/MIM insights on target design and information control.",
+  "analysis_timestamp": "2026-01-07T00:02:04.769191"
+}

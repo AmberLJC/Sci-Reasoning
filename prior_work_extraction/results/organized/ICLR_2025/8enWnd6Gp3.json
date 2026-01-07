@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "3D Gaussian Splatting for Real-Time Radiance Field Rendering",
+      "authors": "Kerbl et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Inspiration",
+      "relationship_sentence": "The paper\u2019s core idea of optimizing a set of deformable, local primitives via differentiable splatting is directly inspired by 3D Gaussian Splatting, which established the efficiency and stability of Lagrangian primitive-based optimization and rendering."
+    },
+    {
+      "title": "DMTet: Deformable Meshes using Tetrahedral Grids",
+      "authors": "Shen et al.",
+      "year": 2021,
+      "arxiv_id": "",
+      "role": "Extension",
+      "relationship_sentence": "TetSphere extends the DMTet insight that volumetric tetrahedral parameterizations yield high-quality meshes by replacing fixed grids with deformable tetrahedral \u2018spheres\u2019 and adding geometric constraints to overcome grid bias, irregular triangles, and non-manifold artifacts."
+    },
+    {
+      "title": "nvdiffrec: Neural 3D Reconstruction with Differentiable Rendering",
+      "authors": "Munkberg et al.",
+      "year": 2022,
+      "arxiv_id": "",
+      "role": "Baseline",
+      "relationship_sentence": "As a leading mesh-based inverse rendering baseline, nvdiffrec\u2019s use of mesh regularizers and photometric objectives frames the reconstruction setting that TetSphere targets while improving mesh manifoldness and eliminating floaters through a volumetric Lagrangian parameterization."
+    },
+    {
+      "title": "NeuS: Learning Neural Implicit Surfaces by Volume Rendering for Multi-view Reconstruction",
+      "authors": "Wang et al.",
+      "year": 2021,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "NeuS formalized surface-consistent volume rendering for multi-view reconstruction, providing the reconstruction objective that TetSphere adopts while addressing NeuS\u2019s common mesh extraction issues (floaters, non-manifoldness) via explicit tetrahedral volumetric meshes."
+    },
+    {
+      "title": "DreamGaussian: Generative 3D Using Gaussian Splatting",
+      "authors": "Tang et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Baseline",
+      "relationship_sentence": "DreamGaussian showed how splatting primitives can drive text/image-to-3D generation but produces weak or post-hoc meshing, which TetSphere directly improves by using tetrahedral volumetric primitives that enforce high-quality, watertight meshes in generative settings."
+    },
+    {
+      "title": "SDF-GS: 3D Gaussian Splatting for High-Quality Surface Reconstruction via Signed Distance Fields",
+      "authors": "Zhang et al.",
+      "year": 2024,
+      "arxiv_id": "",
+      "role": "Gap Identification",
+      "relationship_sentence": "By attaching SDFs to Gaussian primitives, SDF-GS explicitly sought better surfaces but still struggled with manifoldness and floating artifacts, motivating TetSphere\u2019s move to tetrahedral volumetric primitives with built-in geometric constraints."
+    }
+  ],
+  "synthesis_narrative": "3D Gaussian Splatting demonstrated that optimizing a set of localized primitives with differentiable splatting yields fast, stable inverse rendering and opened a path to primitive-centric scene representations. DMTet showed that parameterizing geometry volumetrically with tetrahedral elements enables robust, high-quality mesh extraction and differentiable optimization, but its fixed grid introduces bias and occasional irregular or non-manifold output. nvdiffrec established mesh-based inverse rendering as a practical baseline, coupling photometric objectives with mesh regularizers, yet relied on triangle parameterizations that can tangle or spawn floaters. NeuS introduced a surface-consistent volume rendering formulation for multi-view reconstruction, producing accurate surfaces but still suffering from floaters and non-manifold artifacts at extraction time. DreamGaussian transferred splatting primitives into text/image-to-3D pipelines, proving scalability for generative modeling but relying on post-hoc meshing or producing weak geometry. SDF-GS fused SDF estimation with Gaussian primitives to improve surface fidelity, yet its surfel-like primitives made manifoldness and floating artifacts difficult to control. Together, these works suggested that splatting-based Lagrangian optimization is powerful, volumetric tetrahedra produce cleaner meshes, and current primitive choices or implicit-to-mesh conversions limit manifoldness and regularity. The natural next step is to combine splatting\u2019s optimization and rendering pipeline with an explicitly volumetric, deformable primitive: tetrahedralized spheres. By adopting Lagrangian volumetric meshes and adding geometric regularizations and constraints, the current work integrates the strengths of splatting and tetrahedra while directly addressing grid bias, irregular triangles, non-manifoldness, and floaters, and it slots cleanly into both reconstruction and generative modeling pipelines.",
+  "target_paper": {
+    "title": "TetSphere Splatting: Representing High-Quality Geometry with Lagrangian Volumetric Meshes",
+    "authors": "Minghao Guo, Bohan Wang, Kaiming He, Wojciech Matusik",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "oral",
+    "keywords": "geometry representation, 3D modeling",
+    "abstract": "We introduce TetSphere Splatting, a Lagrangian geometry representation designed for high-quality 3D shape modeling. TetSphere splatting leverages an underused yet powerful geometric primitive -- volumetric tetrahedral meshes. It represents 3D shapes by deforming a collection of tetrahedral spheres, with geometric regularizations and constraints that effectively resolve common mesh issues such as irregular triangles, non-manifoldness, and floating artifacts. Experimental results on multi-view and single-view reconstruction highlight TetSphere splatting's superior mesh quality while maintaining competitive reconstruction accuracy compared to state-of-the-art methods. Additionally, TetSphere splatting demonstrates versatility by seamlessly integrating into generative modeling tasks, such as image-to-3D and text-to-3D generation.",
+    "openreview_id": "8enWnd6Gp3",
+    "forum_id": "8enWnd6Gp3"
+  },
+  "analysis_timestamp": "2026-01-06T14:08:01.379982"
+}

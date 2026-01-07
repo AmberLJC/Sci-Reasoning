@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Minimum Bayes-Risk Decoding for Statistical Machine Translation",
+      "authors": "Shankar Kumar and William Byrne",
+      "year": 2004,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "This work establishes the MBR decoding objective that the current paper directly instantiates for instruction-following by swapping in an LLM judge as the utility function."
+    },
+    {
+      "title": "Sampling-Based Minimum Bayes Risk Decoding for Neural Machine Translation",
+      "authors": "Thijs Eikema and Wilker Aziz",
+      "year": 2020,
+      "arxiv_id": null,
+      "role": "Extension",
+      "relationship_sentence": "The paper\u2019s candidate/reference sampling scheme for approximating MBR risk is adopted here, but with the risk computed by an LLM judge rather than lexical or embedding metrics."
+    },
+    {
+      "title": "Minimum Bayes Risk Decoding with Neural Reference Metrics Improves Neural Machine Translation",
+      "authors": "Markus Freitag et al.",
+      "year": 2022,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "By showing that MBR with learned neural metrics (e.g., COMET/BLEURT) beats lexical metrics, this work motivates replacing those metrics with a stronger LLM judge within the same MBR framework."
+    },
+    {
+      "title": "MT-Bench: Evaluating Large Language Models with Multi-Turn Questions and LLM-as-a-Judge",
+      "authors": "Lianmin Zheng et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "This paper operationalizes LLM-as-a-judge and provides the MT-Bench setting that the current work both evaluates on and leverages conceptually to use an LLM judge as the MBR utility."
+    },
+    {
+      "title": "AlpacaEval 2.0: An Automatic Evaluation for Instruction Following Models",
+      "authors": "Yizhong Wang et al. (AlpacaEval team)",
+      "year": 2024,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "It supplies the LLM-as-a-judge evaluation protocol and benchmark on which the paper demonstrates that MBR with LLM judges outperforms greedy and best-of-N decoding."
+    },
+    {
+      "title": "Training Language Models to Follow Instructions with Human Feedback",
+      "authors": "Long Ouyang et al.",
+      "year": 2022,
+      "arxiv_id": "2203.02155",
+      "role": "Baseline",
+      "relationship_sentence": "This work popularized best-of-N selection using a reference-free reward model at inference, which serves as a primary baseline that the paper improves upon with reference-based MBR selection."
+    },
+    {
+      "title": "Direct Preference Optimization: Your Language Model Is Secretly a Reward Model",
+      "authors": "Alexander Rafailov et al.",
+      "year": 2023,
+      "arxiv_id": "2305.18290",
+      "role": "Extension",
+      "relationship_sentence": "DPO provides the preference-learning mechanism the paper uses to retain test-time gains by distilling MBR-selected winners into the model."
+    }
+  ],
+  "synthesis_narrative": "Minimum Bayes Risk (MBR) decoding was originally formulated for machine translation to select outputs that minimize expected loss under a task-specific utility (Kumar and Byrne), and later adapted to neural generation with a practical sampling-based approximation that uses model-generated candidates and references (Eikema and Aziz). Subsequent work demonstrated that the choice of utility is pivotal: replacing lexical metrics with learned neural reference metrics like COMET/BLEURT markedly improves MBR effectiveness (Freitag et al.), highlighting that stronger evaluators yield stronger MBR selection. In parallel, evaluation research established that large language models can reliably act as judges to score conversational quality; MT-Bench operationalized GPT-4-as-a-judge for multi-turn instruction following (Zheng et al.), and AlpacaEval 2.0 standardized automatic, judge-based comparisons for instruction-following models with attention to known biases. Separately, instruction tuning with human feedback popularized best-of-N selection using a reference-free reward model at inference (Ouyang et al.), while preference-learning methods such as Direct Preference Optimization (Rafailov et al.) showed how to turn pairwise choices into trainable supervision.\nBringing these strands together, the current work replaces brittle lexical/embedding utilities in sampling-based MBR with an LLM judge, leveraging established judge reliability from MT-Bench/AlpacaEval to score candidates and select responses that better follow instructions than best-of-N reward-model selection. Recognizing that MBR\u2019s gains are test-time only, it then applies DPO to distill the MBR winners into the model, retaining improvements without extra decoding cost. This synthesis is a natural progression: mature MBR machinery, evidence that stronger evaluators boost MBR, the emergence of LLM-as-judge as a high-fidelity utility, and practical preference optimization collectively point to judge-driven MBR for inference and DPO-based consolidation for training.",
+  "target_paper": {
+    "title": "Better Instruction-Following Through Minimum Bayes Risk",
+    "authors": "Ian Wu, Patrick Fernandes, Amanda Bertsch, Seungone Kim, Sina Khoshfetrat Pakazad, Graham Neubig",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "LLM, instruction-following, test time compute, decoding, MBR, minimal bayes risk, LLM judges, self-improvement",
+    "abstract": "General-purpose LLM judges capable of human-level evaluation provide not only a scalable and accurate way of evaluating instruction-following LLMs but also new avenues for supervising and improving their performance. One promising way of leveraging LLM judges for supervision is through Minimum Bayes Risk (MBR) decoding, which uses a reference-based evaluator to select a high-quality output from amongst a set of candidate outputs. In the first part of this work, we explore using MBR decoding as a method for improving the test-time performance of instruction-following LLMs. We find that MBR decoding with reference-based LLM judges substantially improves over greedy decoding, best-of-N decoding with reference-free judges and MBR decoding with lexical and embedding-based metrics on AlpacaEval and MT-Bench. These gains are consistent across LLMs with up to 70B parameters, demonstrating that smaller LLM judges can be used to supervise much larger LLMs. Then, seeking to retain the improvement",
+    "openreview_id": "7xCSK9BLPy",
+    "forum_id": "7xCSK9BLPy"
+  },
+  "analysis_timestamp": "2026-01-06T09:53:16.919052"
+}

@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Mastering Atari, Go, Chess and Shogi by Planning with a Learned Model",
+      "authors": "Julian Schrittwieser et al.",
+      "year": 2020,
+      "arxiv_id": "1911.08265",
+      "role": "Baseline",
+      "relationship_sentence": "OptionZero directly builds on MuZero\u2019s self-play training loop and learned policy\u2013value\u2013dynamics architecture, extending it by inserting an option network and modifying the dynamics to model option-conditioned (multi-step) transitions for MCTS."
+    },
+    {
+      "title": "Between MDPs and semi-MDPs: A framework for temporal abstraction in reinforcement learning",
+      "authors": "Richard S. Sutton et al.",
+      "year": 1999,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "OptionZero\u2019s treatment of options and its dynamics modification follow the SMDP option model (initiation, intra-option policy, termination), enabling planning over temporally extended actions as single transitions in search."
+    },
+    {
+      "title": "The Option-Critic Architecture",
+      "authors": "Pierre-Luc Bacon et al.",
+      "year": 2017,
+      "arxiv_id": "1609.05140",
+      "role": "Inspiration",
+      "relationship_sentence": "OptionZero adopts the idea of learning option policies and termination functions end-to-end, but repurposes them for use inside MCTS and learns them via self-play signals rather than purely flat control."
+    },
+    {
+      "title": "Value Prediction Network",
+      "authors": "Junhyuk Oh et al.",
+      "year": 2017,
+      "arxiv_id": "1707.03497",
+      "role": "Inspiration",
+      "relationship_sentence": "OptionZero generalizes VPN\u2019s insight of learning abstract, option-like transition models for planning by embedding option-conditioned transitions into MuZero\u2019s latent dynamics to look ahead farther under fixed simulation budgets."
+    },
+    {
+      "title": "Mastering Chess and Shogi by Self-Play with a General Reinforcement Learning Algorithm",
+      "authors": "David Silver et al.",
+      "year": 2017,
+      "arxiv_id": "1712.01815",
+      "role": "Foundation",
+      "relationship_sentence": "OptionZero inherits the AlphaZero-style self-play plus MCTS training paradigm and reinterprets actions in the search as learned options instead of only primitive moves."
+    },
+    {
+      "title": "Hierarchical Deep Reinforcement Learning: Integrating Temporal Abstraction and Intrinsic Motivation",
+      "authors": "Tejas D. Kulkarni et al.",
+      "year": 2016,
+      "arxiv_id": "1604.06057",
+      "role": "Related Problem",
+      "relationship_sentence": "This work demonstrated that temporal abstraction improves long-horizon control (e.g., Atari), motivating OptionZero\u2019s use of learned options to reduce branching and extend effective planning depth."
+    }
+  ],
+  "synthesis_narrative": "MuZero established a powerful template that couples self-play with a learned policy\u2013value\u2013dynamics model, using MCTS to plan without human priors; however, its search operates over primitive actions and is constrained by simulation budgets. The options framework of Sutton, Precup, and Singh introduced semi-MDPs and formal option models\u2014initiation sets, intra-option policies, and terminations\u2014showing that temporally extended actions can be modeled as single transitions for planning. Option-Critic demonstrated that option policies and termination can be learned end-to-end from reward, removing the need for hand-engineered options and suggesting parameterizations suitable for neural learning. Value Prediction Network showed that learning abstract, option-like transition models enables multi-step lookahead in latent space, indicating a route to deeper planning through learned temporally extended dynamics. AlphaZero proved the effectiveness of self-play plus MCTS as a scalable training paradigm for decision-making systems. Hierarchical Deep RL (H-DQN) further evidenced that temporal abstraction can dramatically aid long-horizon tasks like Atari.\nTogether these works highlight a gap: self-play planning systems lacked temporal abstraction, while hierarchical methods with options rarely integrated with powerful model-based search or required handcrafting/demonstrations. OptionZero synthesizes MuZero\u2019s self-play and MCTS with the SMDP option formalism and Option-Critic style learnable option parameterizations, and brings VPN\u2019s idea of option-conditioned transitions into MuZero\u2019s dynamics. This combination allows search over learned options to go deeper under the same simulation budget, naturally advancing the prior landscape.",
+  "target_paper": {
+    "title": "OptionZero: Planning with Learned Options",
+    "authors": "Po-Wei Huang, Pei-Chiun Peng, Hung Guei, Ti-Rong Wu",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "oral",
+    "keywords": "Option, Semi-MDP, MuZero, MCTS, Planning, Reinforcement Learning",
+    "abstract": "Planning with options -- a sequence of primitive actions -- has been shown effective in reinforcement learning within complex environments. Previous studies have focused on planning with predefined options or learned options through expert demonstration data.\nInspired by MuZero, which learns superhuman heuristics without any human knowledge, we propose a novel approach, named *OptionZero*. OptionZero incorporates an *option network* into MuZero, providing autonomous discovery of options through self-play games. Furthermore, we modify the dynamics network to provide environment transitions when using options, allowing searching deeper under the same simulation constraints. Empirical experiments conducted in 26 Atari games demonstrate that OptionZero outperforms MuZero, achieving a 131.58% improvement in mean human-normalized score. Our behavior analysis shows that OptionZero not only learns options but also acquires strategic skills tailored to different game characteristics. Our findin",
+    "openreview_id": "3IFRygQKGL",
+    "forum_id": "3IFRygQKGL"
+  },
+  "analysis_timestamp": "2026-01-06T10:08:43.209224"
+}

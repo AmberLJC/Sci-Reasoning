@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Dynamic Correlation Clustering with Database Queries",
+      "authors": "Vincent Cohen-Addad et al.",
+      "year": 2024,
+      "role": "Baseline",
+      "relationship_sentence": "This ICML 2024 work introduced the database-query dynamic model with node insertions and provided the first algorithm in this setting; Sparse-pivot operates in the same model and directly improves its approximation factor while achieving polylogarithmic amortized update time."
+    },
+    {
+      "title": "Correlation Clustering",
+      "authors": "Nikhil Bansal et al.",
+      "year": 2004,
+      "role": "Foundation",
+      "relationship_sentence": "This paper formalized the correlation clustering (min-disagreements) objective and problem setting that Sparse-pivot explicitly targets and analyzes in the dynamic model."
+    },
+    {
+      "title": "Aggregating Inconsistent Information: Ranking and Clustering",
+      "authors": "Nir Ailon et al.",
+      "year": 2008,
+      "role": "Extension",
+      "relationship_sentence": "The classic randomized pivot (KwikCluster) paradigm from this paper is the algorithmic template that Sparse-pivot adapts\u2014making pivoting query-sparse and dynamically maintainable under node insertions."
+    },
+    {
+      "title": "Deterministic Pivoting Algorithms for Clustering Problems",
+      "authors": "Arjan van Zuylen et al.",
+      "year": 2009,
+      "role": "Inspiration",
+      "relationship_sentence": "Their analysis framework for pivoting algorithms (via local charge/triangle-based arguments) directly informs Sparse-pivot\u2019s constant-factor analysis when only a sparsely queried subset of edges is used."
+    },
+    {
+      "title": "Clustering with Qualitative Information",
+      "authors": "Moses Charikar et al.",
+      "year": 2003,
+      "role": "Foundation",
+      "relationship_sentence": "This work developed approximation frameworks and LP viewpoints for correlation clustering on general graphs, providing structural lemmas and baselines that Sparse-pivot leverages in its approximation analysis."
+    },
+    {
+      "title": "Better and Simpler Online Algorithms for Correlation Clustering",
+      "authors": "Nir Ailon et al.",
+      "year": 2014,
+      "role": "Related Problem",
+      "relationship_sentence": "By exposing the limitations of irrevocable online clustering under node arrivals, this paper motivated the shift to dynamic models (such as Cohen-Addad et al.\u2019s) that allow reclustering\u2014the setting in which Sparse-pivot is designed."
+    }
+  ],
+  "synthesis_narrative": "Sparse-pivot\u2019s core innovation\u2014bringing a constant-factor, polylog-update correlation clustering algorithm to the database-query dynamic insertion model\u2014rests on two pillars: the dynamic model itself and pivot-based correlation clustering. The model and baseline were set by Cohen-Addad et al. (ICML 2024), who defined how an algorithm can access the evolving signed graph via database queries and update the clustering as nodes arrive; Sparse-pivot is expressly built to operate in this model and to remedy its main shortcoming: a large approximation factor. On the algorithmic side, Sparse-pivot decisively inherits and retools the pivoting paradigm from Ailon\u2013Charikar\u2013Newman, turning KwikCluster into a query-sparse, dynamically maintainable procedure. Its analysis borrows the local charging/triangle-inequality style of van Zuylen\u2013Williamson\u2019s deterministic pivoting framework to show that one can preserve constant-factor guarantees even when only a sparse subset of edges is queried per insertion. Foundationally, the work of Bansal\u2013Blum\u2013Chawla and Charikar\u2013Guruswami\u2013Wirth defined the min-disagreement objective and provided approximation and LP perspectives that anchor the target guarantee and guide the decomposition of disagreement costs in analysis. Finally, the online-correlation-clustering line (e.g., Ailon et al. 2014) underscored the limitations of irrevocable, arrival-based decisions, motivating dynamic models with reclustering; Sparse-pivot advances this direction by showing that a carefully designed sparse-pivot mechanism yields both strong theory (20+\u03b5) and practical improvements within the dynamic database-access setting.",
+  "analysis_timestamp": "2026-01-06T23:07:19.564356"
+}

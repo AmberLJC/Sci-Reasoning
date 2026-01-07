@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "3D Gaussian Splatting for Real-Time Radiance Field Rendering",
+      "authors": "Bernhard Kerbl et al.",
+      "year": 2023,
+      "arxiv_id": "2308.04079",
+      "role": "Baseline",
+      "relationship_sentence": "The method directly takes the 3DGS representation and renderer as its starting point\u2014consuming an initial set of Gaussians optimized from limited views\u2014and targets 3DGS\u2019s well-known failure to extrapolate to unseen viewpoints."
+    },
+    {
+      "title": "Point Transformer",
+      "authors": "Hengshuang Zhao et al.",
+      "year": 2021,
+      "arxiv_id": null,
+      "role": "Extension",
+      "relationship_sentence": "The core network adapts Point Transformer\u2019s vector attention and relative positional encoding to operate over Gaussian splat parameters (means, anisotropic covariances, opacities/SH), defining Gaussian-aware neighborhoods for learned aggregation."
+    },
+    {
+      "title": "IBRNet: Learning Multi-View Image-Based Rendering",
+      "authors": "Qianqian Wang et al.",
+      "year": 2021,
+      "arxiv_id": "2102.13090",
+      "role": "Foundation",
+      "relationship_sentence": "It established the generalizable NVS formulation of learning view synthesis by aggregating multi-view 3D neighborhoods, a setup the new approach recasts over explicit Gaussian primitives rather than per-ray samples."
+    },
+    {
+      "title": "Point-NeRF: Point-based Neural Radiance Fields",
+      "authors": "Qiangeng Xu et al.",
+      "year": 2022,
+      "arxiv_id": null,
+      "role": "Related Problem",
+      "relationship_sentence": "Demonstrated that point-anchored features with learned local aggregation improve view generalization, directly informing the choice to reason over explicit 3D point primitives\u2014here specialized to Gaussian splats."
+    },
+    {
+      "title": "RegNeRF: Regularizing Neural Radiance Fields for View Synthesis from Sparse Inputs",
+      "authors": "Michael Niemeyer et al.",
+      "year": 2022,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "By relying on handcrafted regularizers to cope with sparse views yet still struggling beyond the training camera distribution, it crystallized the need for a learned prior that can infer occluded content for OOD viewpoints."
+    },
+    {
+      "title": "Neural Point-Based Graphics",
+      "authors": "K. Aliev et al.",
+      "year": 2020,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "Showed that explicit point primitives with learned features can drive high-quality novel view synthesis, motivating an explicit, point-like representation\u2014here Gaussians\u2014paired with learned neighborhood reasoning."
+    }
+  ],
+  "synthesis_narrative": "Real-time novel view synthesis with explicit primitives surged with the introduction of 3D Gaussian Splatting, which optimizes anisotropic Gaussian splats and spherical harmonics and renders via differentiable splatting; yet it often leaves holes and view-dependent artifacts when extrapolating beyond the training camera manifold. IBRNet formalized generalizable view synthesis by learning to aggregate multi-view evidence in 3D, showing that learned local context can support view generalization across scenes. Point-NeRF extended this principle to explicit point anchors, where per-point features and localized aggregation improved robustness and efficiency relative to per-ray volumetric sampling. In parallel, Point Transformer introduced vector attention with relative positional encodings tailored to irregular 3D point sets, enabling powerful local-to-global reasoning over point neighborhoods. Earlier, Neural Point-Based Graphics established that explicit point primitives with learned features could achieve photorealistic rendering by conditioning on local neighborhoods, paving the way for point-centric learned renderers. Despite these advances, regularization-centric methods like RegNeRF demonstrated that hand-crafted priors for sparse inputs still falter when test views deviate substantially from training poses, underscoring the need for a stronger learned prior. Bringing these threads together, the new approach starts from a 3DGS initialization but replaces fixed regularization with a transformer that reasons directly over Gaussian splats. By adapting point-transformer attention to Gaussian-specific attributes (positions, anisotropic covariances, and appearance parameters), it learns to aggregate neighborhood evidence to refine or augment splats, filling unseen regions and stabilizing view extrapolation\u2014an expected next step given prior successes of learned neighborhood aggregation and explicit point representations.",
+  "target_paper": {
+    "title": "SplatFormer: Point Transformer for Robust 3D Gaussian Splatting",
+    "authors": "Yutong Chen, Marko Mihajlovic, Xiyi Chen, Yiming Wang, Sergey Prokudin, Siyu Tang",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "Novel View Synthesis, Gaussian Splatting, Point cloud modeling",
+    "abstract": "3D Gaussian Splatting (3DGS) has recently transformed photorealistic reconstruction, achieving high visual fidelity and real-time performance. However, rendering quality significantly deteriorates when test views deviate from the camera angles used during training, posing a major challenge for applications in immersive free-viewpoint rendering and navigation. In this work, we conduct a comprehensive evaluation of 3DGS and related novel view synthesis methods under out-of-distribution (OOD) test camera scenarios. By creating diverse test cases with synthetic and real-world datasets, we demonstrate that most existing methods, including those incorporating various regularization techniques and data-driven priors, struggle to generalize effectively to OOD views. To address this limitation, we introduce SplatFormer, the first point transformer model specifically designed to operate on Gaussian splats. SplatFormer takes as input an initial 3DGS set optimized under limited training views and ",
+    "openreview_id": "9NfHbWKqMF",
+    "forum_id": "9NfHbWKqMF"
+  },
+  "analysis_timestamp": "2026-01-06T19:58:49.598661"
+}

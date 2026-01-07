@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Deep Learning with Differential Privacy",
+      "authors": "Martin Abadi, Andy Chu, Ian Goodfellow, H. Brendan McMahan, Ilya Mironov, Kunal Talwar, Li Zhang",
+      "year": 2016,
+      "role": "Introduced DP-SGD and moments accountant",
+      "relationship_sentence": "This paper established DP-SGD\u2014the mechanism whose implementations the ICML 2024 work scrutinizes\u2014and popularized Poisson subsampling-based privacy accounting that the new paper shows can diverge from shuffling-based practice."
+    },
+    {
+      "title": "R\u00e9nyi Differential Privacy",
+      "authors": "Ilya Mironov",
+      "year": 2017,
+      "role": "Framework for tight composition/accounting",
+      "relationship_sentence": "RDP underpins modern, numerically tight privacy accountants used to analyze Poisson-subsampled DP-SGD, providing the baseline the ICML 2024 paper contrasts against shuffling-based implementations."
+    },
+    {
+      "title": "Subsampled R\u00e9nyi Differential Privacy and Analytical Moments Accountant",
+      "authors": "Yu-Xiang Wang, Borja Balle, Shiva Prasad Kasiviswanathan",
+      "year": 2019,
+      "role": "Tight analysis of Poisson subsampling and practical accountant",
+      "relationship_sentence": "This work gives tight RDP bounds and the analytical moments accountant for the subsampled Gaussian mechanism, directly enabling the common (Poisson-based) practice whose mismatch with shuffling-based DP-SGD the new paper quantifies."
+    },
+    {
+      "title": "Privacy Amplification by Subsampling: Tight Analyses via Couplings",
+      "authors": "Borja Balle, Yu-Xiang Wang",
+      "year": 2018,
+      "role": "Amplification results for different subsampling schemes",
+      "relationship_sentence": "By distinguishing privacy amplification under Poisson vs. sampling-without-replacement, this paper provides the theoretical lens the ICML 2024 work leverages to argue that the sampling rule materially affects DP-SGD\u2019s guarantees."
+    },
+    {
+      "title": "Privacy Amplification by Iteration",
+      "authors": "Vitaly Feldman, Ilya Mironov, Kunal Talwar, Abhradeep Guha Thakurta",
+      "year": 2018,
+      "role": "Iterative analysis relevant to without-replacement DP-SGD",
+      "relationship_sentence": "This work offers tools to analyze iterative noisy updates (as in DP-SGD with shuffled minibatches), informing the ICML 2024 paper\u2019s focus on how shuffling-based training departs from Poisson-subsampled analyses."
+    },
+    {
+      "title": "Gaussian Differential Privacy",
+      "authors": "Jinshuo Dong, Aaron Roth, Weijie J. Su",
+      "year": 2019,
+      "role": "Unified metric and conversions used in accountants",
+      "relationship_sentence": "GDP provides a unifying lens and accurate conversions between privacy notions that many accountants use; the ICML 2024 work\u2019s comparison of guarantees implicitly relies on these standardized accounting foundations."
+    }
+  ],
+  "synthesis_narrative": "The ICML 2024 paper targets a widely overlooked mismatch: practitioners typically implement DP-SGD with shuffled, fixed-size minibatches (sampling without replacement) yet analyze privacy using Poisson-subsampled accountants. The intellectual pathway to this finding begins with Abadi et al. (2016), which introduced DP-SGD and the moments accountant, setting the canonical mechanism and practice of subsampling-based analysis. Mironov\u2019s R\u00e9nyi Differential Privacy (2017) then provided a powerful composition framework that enabled tight, scalable accounting. Building on RDP, Wang, Balle, and Kasiviswanathan (2019) delivered tight bounds for the subsampled Gaussian mechanism and the analytical moments accountant, cementing Poisson subsampling as the default analysis path and powering modern open-source accountants.\n\nHowever, the training-time reality often uses shuffled, without-replacement minibatching. Balle and Wang (2018) gave tight amplification results that separate Poisson and without-replacement sampling, highlighting that the sampling rule fundamentally changes privacy. Feldman et al. (2018) further developed privacy amplification by iteration, offering tools to reason about iterative procedures like DP-SGD under shuffling. Finally, Dong, Roth, and Su (2019) introduced Gaussian Differential Privacy, a unifying metric that normalizes comparisons across analyses.\n\nTogether, these works enabled precise Poisson-based accounting while revealing conceptual gaps for shuffling-based implementations. The ICML 2024 paper leverages this foundation to formalize DP-SGD as post-processing of adaptive batch linear queries and to demonstrate that shuffling and Poisson subsampling can yield substantially different privacy guarantees\u2014showing that prevalent practice can materially misestimate privacy.",
+  "analysis_timestamp": "2026-01-06T23:42:48.071565"
+}

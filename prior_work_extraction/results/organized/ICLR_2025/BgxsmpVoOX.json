@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Classifier-Free Diffusion Guidance",
+      "authors": "Jonathan Ho; Tim Salimans",
+      "year": 2022,
+      "role": "Foundational guidance mechanism for training-free control at inference by mixing conditional and unconditional scores.",
+      "relationship_sentence": "R2F operationalizes a training-free, inference-time guidance scheme that injects additional conditioning (frequent, related concepts) across timesteps in a way conceptually akin to classifier-free guidance."
+    },
+    {
+      "title": "Diffusion Models Beat GANs on Image Synthesis (Guided Diffusion)",
+      "authors": "Prafulla Dhariwal; Alex Nichol",
+      "year": 2021,
+      "role": "Introduced classifier-based guidance to steer diffusion sampling with external signals.",
+      "relationship_sentence": "R2F\u2019s LLM-derived signals are an external guidance source that steers the sampling trajectory toward better concept composition, directly building on the idea that diffusion sampling can be guided by auxiliary information."
+    },
+    {
+      "title": "High-Resolution Image Synthesis with Latent Diffusion Models",
+      "authors": "Robin Rombach; Andreas Blattmann; Dominik Lorenz; Patrick Esser; Bj\u00f6rn Ommer",
+      "year": 2022,
+      "role": "Established the latent diffusion framework (e.g., Stable Diffusion) that R2F targets as a plug-and-play, model-agnostic inference method.",
+      "relationship_sentence": "R2F is designed to sit atop pre-trained latent diffusion models, leveraging their text conditioning interfaces to inject rare-to-frequent guidance without additional training."
+    },
+    {
+      "title": "Compositional Visual Generation with Composable Diffusion Models",
+      "authors": "Liu et al.",
+      "year": 2022,
+      "role": "Showed that composing multiple conditional scores (product-of-experts) enables novel attribute\u2013object compositions.",
+      "relationship_sentence": "R2F extends the compositional conditioning idea by using an LLM to automatically select frequent, semantically related helper concepts and schedule their composition across timesteps to stabilize rare concept generation."
+    },
+    {
+      "title": "Attend-and-Excite: Enforcing Object-Text Alignment in Text-to-Image Generation",
+      "authors": "Chefer et al.",
+      "year": 2023,
+      "role": "Identified and mitigated compositional failures (e.g., missing/underbound objects) via attention manipulation at inference.",
+      "relationship_sentence": "R2F addresses the same rare-composition failure mode but replaces attention regularization with LLM-informed semantic guidance, and can complement such attention-based methods."
+    },
+    {
+      "title": "ControlNet: Adding Conditional Control to Text-to-Image Diffusion Models",
+      "authors": "Lvmin Zhang; Maneesh Agrawala",
+      "year": 2023,
+      "role": "Provided a widely adopted framework for region/condition-guided diffusion generation.",
+      "relationship_sentence": "R2F\u2019s rare-to-frequent concept planning is designed to integrate with region-guided pipelines like ControlNet, using spatial controls while LLM guidance resolves rare concept composition."
+    },
+    {
+      "title": "LayoutGPT: Compositional Visual Planning with Large Language Models",
+      "authors": "Jiang et al.",
+      "year": 2024,
+      "role": "Demonstrated using LLMs as planners that decompose prompts into structured, generative-friendly plans (e.g., layouts) for T2I.",
+      "relationship_sentence": "R2F similarly leverages LLMs as semantic planners, but specifically to surface frequent, related concepts and schedule their exposure during diffusion to boost rare composition fidelity."
+    }
+  ],
+  "synthesis_narrative": "R2F sits at the intersection of diffusion guidance, compositional conditioning, and LLM planning. Guided Diffusion and Classifier-Free Guidance established that diffusion sampling can be steered at inference by auxiliary signals\u2014either external classifiers or unconditional predictors\u2014laying the foundation for R2F\u2019s training-free intervention during sampling. Latent Diffusion Models (e.g., Stable Diffusion) provided the practical, widely used text-conditioning interface R2F exploits to plug in guidance without retraining base models. On the compositional front, Composable Diffusion showed that combining multiple conditional scores can realize attribute\u2013object conjunctions, a principle R2F adopts and extends by automatically selecting frequent, semantically related helper concepts via an LLM and scheduling their contribution across timesteps to stabilize rare compositions. Attend-and-Excite exposed systematic failures in binding and coverage for multi-concept prompts and offered attention-centric fixes; R2F targets the same failure mode but uses LLM-derived semantic priors rather than attention manipulation, making it complementary. Finally, region/condition-guided frameworks like ControlNet and LLM-based planners like LayoutGPT demonstrate how structural or linguistic plans can improve controllability. R2F builds on these by using the LLM as a semantic planner to surface frequent proxies for rare concepts and orchestrate their temporal exposure during diffusion, yielding a flexible, training-free method that integrates smoothly with regional control while directly boosting rare compositional fidelity.",
+  "analysis_timestamp": "2026-01-07T00:02:04.906182"
+}

@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Flamingo: a Visual Language Model for Few-Shot Learning",
+      "authors": "Jean-Baptiste Alayrac et al.",
+      "year": 2022,
+      "arxiv_id": "2204.14198",
+      "role": "Foundation",
+      "relationship_sentence": "RoboFlamingo directly leverages Flamingo\u2019s interleaved cross-attention architecture for single-step vision\u2013language grounding, using it as the pre-trained comprehension module onto which the action policy is attached."
+    },
+    {
+      "title": "OpenFlamingo: An Open-Source Framework for Training Large Multimodal Models",
+      "authors": "Mohamed Awadalla et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Extension",
+      "relationship_sentence": "RoboFlamingo is explicitly built on OpenFlamingo checkpoints and training recipes, extending the open-source VLM with an explicit policy head and fine-tuning on robot imitation data."
+    },
+    {
+      "title": "RT-2: Vision-Language-Action Models Transfer Web Knowledge to Robotic Control",
+      "authors": "Anthony Brohan et al.",
+      "year": 2023,
+      "arxiv_id": "2307.15818",
+      "role": "Baseline",
+      "relationship_sentence": "RT-2 demonstrated that VLM pretraining can transfer to robot actions, serving as the main baseline that RoboFlamingo challenges by decoupling perception (VLM) from a lightweight policy head for imitation learning."
+    },
+    {
+      "title": "RT-1: Robotics Transformer for Real-World Control at Scale",
+      "authors": "Anthony Brohan et al.",
+      "year": 2022,
+      "arxiv_id": "2212.06817",
+      "role": "Gap Identification",
+      "relationship_sentence": "RT-1 framed language-conditioned manipulation via behavior cloning over temporal sequences but required massive robot-only data, a limitation RoboFlamingo addresses by reusing a pre-trained VLM and minimal fine-tuning."
+    },
+    {
+      "title": "CLIPort: What and Where Pathways for Robotic Manipulation",
+      "authors": "Mohit Shridhar et al.",
+      "year": 2021,
+      "arxiv_id": "2109.12098",
+      "role": "Inspiration",
+      "relationship_sentence": "CLIPort showed that frozen/pre-trained vision\u2013language representations can ground instructions for manipulation, inspiring RoboFlamingo\u2019s strategy of repurposing a stronger VLM (Flamingo) as the perception-language module."
+    },
+    {
+      "title": "Perceiver-Actor: A Multi-Task Transformer for Robotic Manipulation",
+      "authors": "F. Shafiullah et al.",
+      "year": 2022,
+      "arxiv_id": null,
+      "role": "Related Problem",
+      "relationship_sentence": "PerAct fused temporal history and language with a transformer for action prediction, informing RoboFlamingo\u2019s choice to keep explicit sequential modeling while outsourcing perception-language fusion to a pre-trained VLM."
+    }
+  ],
+  "synthesis_narrative": "Flamingo introduced an interleaved cross-attention design that fuses images and text for single-step multimodal comprehension, enabling strong few-shot alignment without task-specific training. OpenFlamingo made this capability accessible by releasing open-source checkpoints and recipes, allowing researchers to adapt Flamingo\u2019s cross-modal encoder to new domains. RT-2 showed that web-scale vision\u2013language pretraining can transfer to robot actions by aligning VLM embeddings with action tokens, validating the broader premise that foundation-model knowledge can power manipulation. In parallel, RT-1 formulated language-conditioned manipulation as behavior cloning over temporal sequences with a transformer policy, but it relied on massive robot-only datasets and heavy compute. CLIPort demonstrated the practical benefit of reusing frozen or pre-trained vision\u2013language features (CLIP) to ground instructions for manipulation, effectively decoupling perception-language grounding from low-level action prediction. Perceiver-Actor (PerAct) established that transformer-based fusion of history and language is effective for multi-step manipulation, emphasizing explicit temporal modeling for policy learning. Together, these works highlighted a gap: strong policies either require huge robot datasets (RT-1) or entwine action tokenization with perception (RT-2), while earlier decoupled approaches (CLIPort) lacked powerful temporal modeling. The natural next step is to repurpose a state-of-the-art VLM for single-step grounding and append a compact, explicit policy head that models history, training only via imitation on language-conditioned data. This synthesis preserves powerful multimodal understanding, avoids massive data/compute, and yields a flexible, open-loop controller deployable on modest hardware.",
+  "target_paper": {
+    "title": "Vision-Language Foundation Models as Effective Robot Imitators",
+    "authors": "Xinghang Li, Minghuan Liu, Hanbo Zhang, Cunjun Yu, Jie Xu, Hongtao Wu, Chilam Cheang, Ya Jing, Weinan Zhang, Huaping Liu, Hang Li, Tao Kong",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Large Visual Language Model, Robotics, Imitation Learning",
+    "abstract": "Recent progress in vision language foundation models has shown their ability to understand multimodal data and resolve complicated vision language tasks, including robotics manipulation. We seek a straightforward way of making use of existing vision-language models (VLMs) with simple fine-tuning on robotics data.\nTo this end, we derive a simple and novel vision-language manipulation framework, dubbed RoboFlamingo, built upon the open-source VLMs, OpenFlamingo. Unlike prior works, RoboFlamingo utilizes pre-trained VLMs for single-step vision-language comprehension, models sequential history information with an explicit policy head, and is slightly fine-tuned by imitation learning only on language-conditioned manipulation datasets. Such a decomposition provides RoboFlamingo the flexibility for open-loop control and deployment on low-performance platforms. By exceeding the state-of-the-art performance with a large margin on the tested benchmark, we show RoboFlamingo can be an effective an",
+    "openreview_id": "lFYj0oibGR",
+    "forum_id": "lFYj0oibGR"
+  },
+  "analysis_timestamp": "2026-01-07T00:13:46.615247"
+}

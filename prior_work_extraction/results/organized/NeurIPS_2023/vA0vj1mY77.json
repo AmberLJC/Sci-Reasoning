@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "High-Resolution Image Synthesis with Latent Diffusion Models",
+      "authors": "Robin Rombach, Andreas Blattmann, Dominik Lorenz, Patrick Esser, Bj\u00f6rn Ommer",
+      "year": 2022,
+      "role": "Backbone text-to-image diffusion architecture",
+      "relationship_sentence": "MVDiffusion builds directly on a pretrained latent diffusion backbone and its cross-attention conditioning, enabling scalable text-guided generation while inserting new correspondence-aware attention layers without retraining from scratch."
+    },
+    {
+      "title": "Video Diffusion Models",
+      "authors": "Jonathan Ho et al.",
+      "year": 2022,
+      "role": "Architectural inspiration for multi-frame consistency via inter-frame attention",
+      "relationship_sentence": "The idea of augmenting an image diffusion UNet with attention across multiple frames to ensure temporal coherence motivates MVDiffusion\u2019s cross-view attention that couples parallel views for global consistency."
+    },
+    {
+      "title": "ControlNet: Adding Conditional Control to Text-to-Image Diffusion Models",
+      "authors": "Lvmin Zhang, Maneesh Agrawala",
+      "year": 2023,
+      "role": "Conditioning mechanism for structure-guided diffusion",
+      "relationship_sentence": "ControlNet\u2019s strategy of adding side networks to inject structural signals (e.g., depth) while preserving base diffusion weights informs MVDiffusion\u2019s design to incorporate pixel-level correspondences and geometry without disrupting the pretrained model."
+    },
+    {
+      "title": "MultiDiffusion: Fusing Diffusion Paths for Controlled Image Generation",
+      "authors": "Omer Bar-Tal et al.",
+      "year": 2023,
+      "role": "Panorama generation baseline via tiled fusion",
+      "relationship_sentence": "By showing how overlapping-window diffusion can stitch panoramas yet suffer from local inconsistencies, MultiDiffusion provides a direct point of comparison that MVDiffusion improves upon via simultaneous, globally aware multi-view generation."
+    },
+    {
+      "title": "RePaint: Inpainting using Denoising Diffusion Probabilistic Models",
+      "authors": "Andreas Lugmayr et al.",
+      "year": 2022,
+      "role": "Diffusion-based inpainting used in sequential warp\u2013inpaint pipelines",
+      "relationship_sentence": "MVDiffusion was designed to avoid the error accumulation seen when prior multi-view methods iteratively warp and inpaint regions with diffusion, as exemplified by RePaint-style inpainting steps."
+    },
+    {
+      "title": "SynSin: End-to-End View Synthesis from a Single Image",
+      "authors": "Olivia Wiles et al.",
+      "year": 2020,
+      "role": "Warp-and-inpaint multi-view/view-synthesis paradigm",
+      "relationship_sentence": "SynSin typifies sequential warping plus inpainting approaches for novel views that accumulate artifacts across views, motivating MVDiffusion\u2019s simultaneous generation with explicit cross-view interactions."
+    },
+    {
+      "title": "DreamFusion: Text-to-3D using 2D Diffusion",
+      "authors": "Ben Poole, Ajay Jain, Jonathan T. Barron, Ben Mildenhall",
+      "year": 2022,
+      "role": "Multi-view consistency enforced via a 2D diffusion prior",
+      "relationship_sentence": "DreamFusion\u2019s demonstration that a 2D diffusion prior can enforce multi-view coherence inspires MVDiffusion\u2019s goal of achieving consistent multi-view images directly in 2D by coupling views through correspondence-aware attention rather than optimizing a 3D representation."
+    }
+  ],
+  "synthesis_narrative": "MVDiffusion\u2019s core contribution\u2014jointly generating multiple, geometrically consistent views with correspondence-aware attention\u2014emerges from converging lines of work in diffusion modeling, conditioning, and multi-view synthesis. Latent Diffusion Models provided the practical, high-resolution text-to-image backbone and cross-attention interface that MVDiffusion reuses, enabling insertion of new modules without sacrificing image quality. In parallel, video diffusion research (e.g., Video Diffusion Models) established that augmenting 2D UNets with inter-frame attention promotes consistency across frames; MVDiffusion adapts this idea from time to viewpoint, replacing generic temporal coupling with correspondence-aware cross-view attention driven by known pixel mappings. ControlNet showed how to inject structural signals like depth while freezing the base generator, a principle mirrored in MVDiffusion\u2019s integration of geometry and correspondences as auxiliary pathways rather than retraining the core model. On the application side, MultiDiffusion demonstrated panorama generation by fusing overlapping tiles, highlighting local inconsistency and stitching artifacts that MVDiffusion overcomes by globally co-sampling all views. The limitations of sequential warp-and-inpaint pipelines\u2014represented by SynSin and diffusion inpainting methods like RePaint\u2014underscore the error accumulation MVDiffusion explicitly avoids by abandoning iterative refinement for simultaneous generation. Finally, DreamFusion revealed that a 2D diffusion prior can enforce multi-view coherence for 3D, conceptually motivating MVDiffusion\u2019s 2D-only but correspondence-guided route to multi-view consistency without expensive 3D optimization.",
+  "analysis_timestamp": "2026-01-07T00:02:04.858365"
+}

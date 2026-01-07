@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "3D Gaussian Splatting for Real-Time Radiance Field Rendering",
+      "authors": "Bernhard Kerbl, Georgios Kopanas, Thomas Leimk\u00fchler, George Drettakis",
+      "year": 2023,
+      "role": "Introduced the 3D Gaussian scene representation and differentiable splatting/rendering that enable efficient, stable optimization from posed multi-view images.",
+      "relationship_sentence": "SQS directly builds on 3DGS by predicting 3D Gaussian parameters from sparse queries and using self-supervised splatting of images/depth as the core pretraining signal."
+    },
+    {
+      "title": "NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis",
+      "authors": "Ben Mildenhall, Pratul P. Srinivasan, Matthew Tancik, Jonathan T. Barron, Ravi Ramamoorthi, Ren Ng",
+      "year": 2020,
+      "role": "Established view-synthesis-driven self-supervision from multi-view images with known poses, linking geometry and appearance through differentiable rendering.",
+      "relationship_sentence": "SQS adopts the NeRF-style multi-view reconstruction principle but replaces volumetric fields with 3D Gaussian splatting, yielding a practical self-supervised objective for sparse queries."
+    },
+    {
+      "title": "DETR: End-to-End Object Detection with Transformers",
+      "authors": "Nicolas Carion, Francisco Massa, Gabriel Synnaeve, Nicolas Usunier, Alexandre Kirillov, Sergey Zagoruyko",
+      "year": 2020,
+      "role": "Pioneered the query-based detection paradigm and query interaction mechanisms in transformers.",
+      "relationship_sentence": "SQS\u2019s pre-trained Gaussian queries are integrated into downstream SPMs via query interaction in the DETR tradition, enabling seamless coupling with task-specific queries."
+    },
+    {
+      "title": "Deformable DETR: Deformable Transformers for End-to-End Object Detection",
+      "authors": "Xizhou Zhu, Weijie Su, Lewei Lu, Bin Li, Xiaogang Wang, Jifeng Dai",
+      "year": 2021,
+      "role": "Introduced sparse, reference-point-based deformable attention for efficient multi-scale feature sampling.",
+      "relationship_sentence": "SQS leverages the deformable-attention notion of sampling around reference points by extending them to learned 3D Gaussian primitives that query multi-view features and supervise reconstruction."
+    },
+    {
+      "title": "DETR3D: 3D Object Detection from Multi-View Images via 3D-to-2D Queries",
+      "authors": "Yue Wang et al.",
+      "year": 2022,
+      "role": "Proposed 3D reference points as queries that project to multi-view images for cross-view feature aggregation without constructing dense BEV.",
+      "relationship_sentence": "SQS generalizes DETR3D\u2019s 3D query concept from points to Gaussians, using the richer 3D primitive during pretraining and then aligning with task queries at fine-tuning."
+    },
+    {
+      "title": "BEVFormer: Learning Bird\u2019s-Eye-View Representation from Multi-Camera Images via Transformers",
+      "authors": "Zhiqi Li et al.",
+      "year": 2022,
+      "role": "Popularized BEV/query transformers with cross-view deformable attention in autonomous driving.",
+      "relationship_sentence": "Although SQS targets sparse perception without dense BEV, it inherits BEVFormer\u2019s cross-view attention mechanics to connect query-centric 3D priors with multi-camera features during pretraining."
+    },
+    {
+      "title": "Sparse4D: Multi-View 3D Object Detection with Sparse Spatial-Temporal Queries",
+      "authors": "Chen et al.",
+      "year": 2023,
+      "role": "Established an SPM that eschews dense BEV/volumes in favor of sparse spatio-temporal queries for efficient multi-camera 3D detection.",
+      "relationship_sentence": "SQS is expressly designed to pretrain such SPMs; it supplies them with Gaussian-initialized queries that encode fine-grained geometry/appearance learned via splatting, boosting detection and occupancy tasks."
+    }
+  ],
+  "synthesis_narrative": "SQS fuses two lines of progress: query-centric transformers for autonomous driving and differentiable multi-view rendering. On the rendering side, NeRF inaugurated view-synthesis as a powerful self-supervised signal, while 3D Gaussian Splatting replaced volumetric fields with efficient, stable, and differentiable 3D Gaussians. SQS adopts this representation not as an end in itself, but as a pretraining target: it asks sparse queries to predict Gaussian parameters and uses splatting-based reconstruction of multi-view images and depth to inject fine-grained geometric and photometric priors into the queries. On the transformer side, DETR introduced the notion of learnable queries and interaction mechanisms, refined by Deformable DETR\u2019s reference-point sampling. In multi-camera 3D perception, DETR3D\u2019s 3D-to-2D querying and BEVFormer\u2019s cross-view deformable attention provided the mechanics to connect 3D queries to multi-view features, while Sparse4D demonstrated that efficient sparse perception models can eschew dense BEV/volumetric construction entirely. SQS synthesizes these ideas: it replaces point-like references with richer Gaussian primitives during pretraining, leverages cross-view deformable sampling to couple queries with images, and then uses DETR-style query interaction to bridge pre-trained Gaussian queries with task-specific queries for occupancy and detection. This pretraining-to-finetuning pathway directly targets SPMs, yielding stronger context encoding without sacrificing their hallmark efficiency.",
+  "analysis_timestamp": "2026-01-07T00:21:32.359297"
+}

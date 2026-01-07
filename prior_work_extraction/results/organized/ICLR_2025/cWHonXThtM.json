@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "FitNets: Hints for Thin Deep Nets",
+      "authors": "Adriana Romero et al.",
+      "year": 2015,
+      "arxiv_id": "1412.6550",
+      "role": "Foundation",
+      "relationship_sentence": "MiPKD builds on the FitNets idea of intermediate feature supervision, but replaces direct feature regression with a learned Feature Prior Mixer that injects teacher features as priors into student features to enable cross-architecture applicability."
+    },
+    {
+      "title": "Paying More Attention to Attention: Improving the Performance of Convolutional Neural Networks via Attention Transfer",
+      "authors": "Sergey Zagoruyko and Nikos Komodakis",
+      "year": 2017,
+      "arxiv_id": "1612.03928",
+      "role": "Gap Identification",
+      "relationship_sentence": "Attention Transfer exemplifies feature-level KD that requires tight spatial/channel alignment; MiPKD explicitly addresses this limitation by mixing teacher priors with student representations rather than matching attention maps directly."
+    },
+    {
+      "title": "A Gift from Knowledge Distillation: Fast Optimization, Network Minimization and Transfer Learning",
+      "authors": "Junho Yim et al.",
+      "year": 2017,
+      "arxiv_id": "1707.01219",
+      "role": "Related Problem",
+      "relationship_sentence": "FSP distills inter-layer relationships via FSP matrices; MiPKD\u2019s Block Prior Mixer advances this line by dynamically propagating reconstructed features across blocks instead of supervising with static inter-layer relations."
+    },
+    {
+      "title": "Knowledge Review: A General and Explicit Knowledge Distillation Framework",
+      "authors": "Pengguang Chen et al.",
+      "year": 2021,
+      "arxiv_id": "",
+      "role": "Baseline",
+      "relationship_sentence": "Knowledge Review aggregates multi-level teacher features through review modules; MiPKD serves as a lighter, architecture-agnostic alternative by integrating teacher priors at feature and block levels without bespoke review layers."
+    },
+    {
+      "title": "Relational Knowledge Distillation",
+      "authors": "Wonpyo Park et al.",
+      "year": 2019,
+      "arxiv_id": "1904.05068",
+      "role": "Inspiration",
+      "relationship_sentence": "RKD\u2019s shift from element-wise feature matching to structure-aware transfer motivates MiPKD\u2019s strategy of integrating teacher information as priors, reducing dependence on exact feature alignment between teacher and student."
+    },
+    {
+      "title": "Training data-efficient image transformers & distillation through attention",
+      "authors": "Hugo Touvron et al.",
+      "year": 2021,
+      "arxiv_id": "2012.12877",
+      "role": "Related Problem",
+      "relationship_sentence": "DeiT\u2019s distillation token demonstrates architecture-agnostic knowledge transfer (CNN\u2194ViT), which MiPKD echoes by designing prior mixers that work universally across SR architectures at feature and block granularities."
+    }
+  ],
+  "synthesis_narrative": "Hint-based distillation first showed that supervising intermediate student features with teacher \u2018hints\u2019 can transfer rich representations, establishing feature-level KD as a practical route to compact yet capable models. Attention Transfer refined this idea by matching teacher\u2013student attention maps to emphasize spatial saliency, but in doing so exposed a recurring challenge: the need for tightly aligned feature shapes and semantics across architectures. The FSP approach further highlighted inter-layer relationships as transferable knowledge, modeling how features transform across blocks through FSP matrices, while still relying on static objectives defined on paired layers. Knowledge Review pushed multi-granularity transfer by aggregating teacher information from several stages via review modules, providing stronger signals across depth but introducing task- and architecture-specific engineering. Relational Knowledge Distillation reframed transfer as preserving structural relations among samples to mitigate brittle, element-wise matches, pointing toward alignment-agnostic supervision. Finally, DeiT demonstrated that distillation mechanisms can be made architecture-agnostic (e.g., CNN-to-Transformer) by introducing a mediating interface\u2014the distillation token\u2014that decouples knowledge delivery from strict feature congruence. Taken together, these works created both an opportunity and a constraint: multi-level teacher signals are valuable, but most techniques remain limited by architectural coupling or handcrafted alignment. The current paper synthesizes these insights by mixing teacher information as priors directly into student representations via a Feature Prior Mixer and propagating reconstructed priors dynamically across blocks with a Block Prior Mixer, yielding a universal, multi-granularity distillation mechanism tailored to super-resolution yet decoupled from specific teacher\u2013student architectures.",
+  "target_paper": {
+    "title": "Knowledge Distillation with Multi-granularity Mixture of Priors for Image Super-Resolution",
+    "authors": "Simiao Li, Yun Zhang, Wei Li, Hanting Chen, Wenjia Wang, Bingyi Jing, Shaohui Lin, Jie Hu",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "Image Super-Resolution, Knowledge Distillation, Model Compression",
+    "abstract": "Knowledge distillation (KD) is a promising yet challenging model compression approach that transmits rich learning representations from robust but resource-demanding teacher models to efficient student models. Previous methods for image super-resolution (SR) are often tailored to specific teacher-student architectures, limiting their potential for improvement and hindering broader applications. This work presents a novel KD framework for SR models, the multi-granularity Mixture of Priors Knowledge Distillation (MiPKD), which can be universally applied to a wide range of architectures at both feature and block levels. The teacher\u2019s knowledge is effectively integrated with the student's feature via the Feature Prior Mixer, and the reconstructed feature propagates dynamically in the training phase with the Block Prior Mixer. Extensive experiments illustrate the significance of the proposed MiPKD technique.",
+    "openreview_id": "cWHonXThtM",
+    "forum_id": "cWHonXThtM"
+  },
+  "analysis_timestamp": "2026-01-06T15:22:41.702998"
+}

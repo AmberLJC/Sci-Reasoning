@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Jonathan Ho, Ajay Jain, Pieter Abbeel",
+      "year": 2020,
+      "role": "Established the modern diffusion modeling framework and the denoising objective used to train noise predictors, providing the mathematical basis for guided sampling via score modification.",
+      "relationship_sentence": "The paper\u2019s idea of steering sampling by mixing predictions from two models operates directly within the DDPM score-based denoising framework introduced here."
+    },
+    {
+      "title": "Improved Denoising Diffusion Probabilistic Models",
+      "authors": "Alexander Quinn Nichol, Prafulla Dhariwal",
+      "year": 2021,
+      "role": "Introduced training and architectural improvements (e.g., learned variance, better schedules) that became standard for high-fidelity ImageNet diffusion models.",
+      "relationship_sentence": "The proposed \u2018bad-version\u2019 guidance builds on these improved conditional diffusion baselines, using their trained predictors as both the strong and weaker guides."
+    },
+    {
+      "title": "Diffusion Models Beat GANs on Image Synthesis",
+      "authors": "Prafulla Dhariwal, Alex Nichol",
+      "year": 2021,
+      "role": "Introduced classifier guidance and high-quality class-conditional diffusion models, revealing that guidance improves fidelity/alignment but at the cost of diversity.",
+      "relationship_sentence": "This work\u2019s fidelity\u2013diversity trade-off motivates the new method, which seeks guidance that improves quality without collapsing variation."
+    },
+    {
+      "title": "Classifier-Free Diffusion Guidance",
+      "authors": "Jonathan Ho, Tim Salimans",
+      "year": 2022,
+      "role": "Showed that subtracting an unconditional predictor from a conditional one yields effective guidance without an external classifier, popularizing a tunable guidance scale.",
+      "relationship_sentence": "The new paper generalizes this idea by replacing the unconditional branch with a smaller/less-trained conditional model to decouple quality from diversity."
+    },
+    {
+      "title": "GLIDE: Towards Photorealistic Image Generation and Editing with Text-Guided Diffusion Models",
+      "authors": "Alex Nichol, Prafulla Dhariwal, Aditya Ramesh, Pranav Shyam, et al.",
+      "year": 2022,
+      "role": "Demonstrated classifier-free guidance at scale for text-to-image, clearly exhibiting the alignment\u2013quality gains and diversity losses associated with increasing guidance.",
+      "relationship_sentence": "The observed entanglement of alignment/quality and variation in GLIDE underscores the need for guidance alternatives like the proposed weaker-model steering."
+    },
+    {
+      "title": "Elucidating the Design Space of Diffusion-Based Generative Models",
+      "authors": "Tero Karras, Miika Aittala, Janne Hellsten, Samuli Laine, Timo Aila",
+      "year": 2022,
+      "role": "Analyzed preconditioning, loss weighting, and sampling to improve diffusion model quality and stability, providing a robust recipe widely adopted for ImageNet generation.",
+      "relationship_sentence": "The proposed guidance is implemented atop these EDM design choices, leveraging their stable training/sampling to isolate the effect of the \u2018bad-version\u2019 guide on quality vs. diversity."
+    }
+  ],
+  "synthesis_narrative": "The core insight\u2014steering a strong diffusion model with a smaller or less-trained version of itself to raise perceptual quality without sacrificing sample diversity\u2014emerges directly from the evolution of guidance in diffusion models. DDPM provided the foundational denoising framework where sample trajectories can be altered by modifying the score estimate. Building on this, Improved DDPM and subsequent high-quality ImageNet models supplied strong conditional predictors and training practices that make guidance effective and measurable at scale. Dhariwal and Nichol\u2019s classifier guidance first exposed a practical fidelity\u2013diversity trade-off via external gradients, while Ho and Salimans\u2019 classifier-free guidance replaced the classifier with an unconditional branch, making the trade-off accessible but still entangled: stronger guidance improved alignment/quality yet reduced variation. Large-scale text-to-image systems like GLIDE amplified this observation, showing that tuning CFG scales predictably sacrifices diversity for fidelity. Karras et al.\u2019s EDM then clarified how architectural, loss, and sampling choices influence perceptual quality, providing a stable platform to test new guidance mechanisms.\nWithin this trajectory, the present work\u2019s leap is to reinterpret the auxiliary model in CFG: rather than using an unconditional predictor, use a deliberately weaker conditional model as the auxiliary. Because the weaker model underfits visual detail while preserving the conditioning signal, its difference from the strong model provides a direction that selectively boosts image quality without collapsing modes. This reframing preserves variation yet improves fidelity, resolving the long-standing entanglement exposed by prior guidance methods.",
+  "analysis_timestamp": "2026-01-06T23:33:35.553608"
+}

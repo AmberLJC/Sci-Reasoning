@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "FrugalGPT: How to Use Large Language Models While Reducing Cost and Improving Performance",
+      "authors": "Unknown et al.",
+      "year": 2023,
+      "arxiv_id": "2305.10843",
+      "role": "Foundation",
+      "relationship_sentence": "This work formalized the practical model-routing problem across multiple LLMs and established cost\u2013quality tradeoffs, which EmbedLLM targets by supplying reusable model-centric embeddings that drive routing decisions."
+    },
+    {
+      "title": "RouteLLM: Learning to Route LLMs with Preference Feedback",
+      "authors": "Unknown et al.",
+      "year": 2024,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "As a primary routing baseline that trains policies to select among LLMs, RouteLLM motivates EmbedLLM\u2019s learning of general-purpose model embeddings that improve routing without retraining task-specific routers."
+    },
+    {
+      "title": "Task2Vec: Task Embedding for Meta-Learning",
+      "authors": "Alessandro Achille et al.",
+      "year": 2019,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "Task2Vec\u2019s insight that tasks can be embedded via Fisher features directly inspired EmbedLLM\u2019s shift to embedding models themselves to capture capability structure across tasks."
+    },
+    {
+      "title": "LogME: Practical Assessment of Pre-trained Models for Transfer Learning",
+      "authors": "Lei You et al.",
+      "year": 2021,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "LogME predicts model transferability but requires per-task data and inference; EmbedLLM addresses this limitation by learning model embeddings that forecast performance across benchmarks without additional inference cost."
+    },
+    {
+      "title": "Neural Architecture Optimization",
+      "authors": "Renqian Luo et al.",
+      "year": 2018,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "NAO\u2019s encoder\u2013decoder that maps architectures into a continuous space predictive of accuracy directly motivates EmbedLLM\u2019s encoder\u2013decoder for learning model embeddings predictive of capability profiles."
+    },
+    {
+      "title": "Model soups: averaging weights of multiple fine-tuned models improves accuracy without increasing inference time",
+      "authors": "Ilya Wortsman et al.",
+      "year": 2022,
+      "arxiv_id": null,
+      "role": "Related Problem",
+      "relationship_sentence": "By revealing linear structure in weight space that captures model capabilities, Model Soups supports the premise that a compact vector can summarize an LLM\u2019s skills, which EmbedLLM operationalizes as an embedding."
+    },
+    {
+      "title": "Editing Models with Task Arithmetic",
+      "authors": "Gabriel Ilharco et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "Task arithmetic shows that task-specific changes correspond to approximately linear directions, informing EmbedLLM\u2019s design to encode a model\u2019s capability profile in a low-dimensional vector space."
+    }
+  ],
+  "synthesis_narrative": "Frugal routing methods established the practical need to choose among multiple LLMs to balance quality and cost, with FrugalGPT defining the decision problem and empirical tradeoffs, while RouteLLM learned policies that map inputs to model choices using feedback signals. In parallel, representation learning works suggested how to capture functional properties in low-dimensional vectors: Task2Vec embedded tasks via Fisher features to summarize behavior, LogME predicted transferability of pretrained models to new tasks using a closed-form evidence score, and Neural Architecture Optimization introduced an encoder\u2013decoder that places architectures in a continuous space predictive of accuracy. Complementary findings on weight-space structure\u2014Model Soups\u2019 linear averaging and Task Arithmetic\u2019s capability vectors\u2014demonstrated that model skills admit compact, approximately linear representations.\nTogether these threads expose a gap: routing frameworks retrain task-specific routers and transferability metrics require per-task inference, yet evidence suggests model capabilities can be summarized once in a vector space predictive of performance. EmbedLLM synthesizes these ideas by learning an encoder\u2013decoder that maps entire LLMs to compact embeddings whose geometry forecasts benchmark performance and drives routing across many models without retraining per task. This is a natural next step: it replaces per-task routing and per-task transferability estimation with a reusable, model-centric representation that encodes capability profiles directly.",
+  "target_paper": {
+    "title": "EmbedLLM: Learning Compact Representations of Large Language Models",
+    "authors": "Richard Zhuang, Tianhao Wu, Zhaojin Wen, Andrew Li, Jiantao Jiao, Kannan Ramchandran",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "Large Language Models, Representation Learning, Model Routing",
+    "abstract": "With hundreds of thousands of language models available on Huggingface today, efficiently evaluating and utilizing these models across various downstream tasks has become increasingly critical. Many existing methods repeatedly learn task-specific representations of Large Language Models (LLMs), which leads to inefficiencies in both time and computational resources. To address this, we propose EmbedLLM, a framework designed to learn compact vector representations of LLMs that facilitate downstream applications involving many models, such as model routing. We introduce an encoder-decoder approach for learning such embedding, along with a systematic framework to evaluate their effectiveness. Empirical results show that EmbedLLM outperforms prior methods in model routing. Additionally, we demonstrate that our method can forecast a model's performance on multiple benchmarks, without incurring additional inference cost. Extensive probing experiments validate that the learned embeddings captu",
+    "openreview_id": "Fs9EabmQrJ",
+    "forum_id": "Fs9EabmQrJ"
+  },
+  "analysis_timestamp": "2026-01-06T12:23:07.616053"
+}

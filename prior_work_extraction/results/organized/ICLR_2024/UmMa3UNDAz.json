@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "High-Resolution Image Synthesis with Latent Diffusion Models",
+      "authors": "Robin Rombach et al.",
+      "year": 2022,
+      "arxiv_id": "2112.10752",
+      "role": "Foundation",
+      "relationship_sentence": "EfficientDM targets the latent-space U-Net and epsilon-prediction objective introduced by Latent Diffusion, which defines the exact modules and loss it quantizes and distills during fine-tuning."
+    },
+    {
+      "title": "PTQ4DM: Post-Training Quantization for Diffusion Models",
+      "authors": "Li et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Baseline",
+      "relationship_sentence": "EfficientDM directly addresses PTQ4DM\u2019s observed accuracy collapse at low bit-widths by replacing pure PTQ with a lightweight, data-free quantization-aware fine-tuning stage that preserves PTQ-like efficiency."
+    },
+    {
+      "title": "QLoRA: Efficient Finetuning of Quantized Large Language Models",
+      "authors": "Tim Dettmers et al.",
+      "year": 2023,
+      "arxiv_id": "2305.14314",
+      "role": "Inspiration",
+      "relationship_sentence": "EfficientDM borrows QLoRA\u2019s core idea of freezing a low-bit base and training small low-rank adapters, adapting it from LLMs to diffusion U-Nets to make QAT memory- and parameter-efficient."
+    },
+    {
+      "title": "ZeroQ: A Novel Zero-Shot Quantization Framework",
+      "authors": "Yaohui Cai et al.",
+      "year": 2020,
+      "arxiv_id": "",
+      "role": "Inspiration",
+      "relationship_sentence": "EfficientDM adopts ZeroQ\u2019s data-free paradigm by driving quantization updates with synthetic inputs instead of real data, enabling PTQ-like practicality without access to training datasets."
+    },
+    {
+      "title": "Dreaming to Distill: Data-Free Knowledge Transfer via DeepInversion",
+      "authors": "Hongxu Yin et al.",
+      "year": 2020,
+      "arxiv_id": "2006.05525",
+      "role": "Related Problem",
+      "relationship_sentence": "EfficientDM leverages the DeepInversion principle of synthesizing pseudo inputs guided by a teacher model to enable supervision for data-free quantization-aware fine-tuning of diffusion backbones."
+    },
+    {
+      "title": "Progressive Distillation for Fast Sampling of Diffusion Models",
+      "authors": "Tim Salimans and Jonathan Ho",
+      "year": 2022,
+      "arxiv_id": "2202.00512",
+      "role": "Related Problem",
+      "relationship_sentence": "EfficientDM uses the teacher\u2013student noise-prediction matching loss popularized here to supervise a quantized student with an FP teacher across timesteps under a data-free setting."
+    }
+  ],
+  "synthesis_narrative": "Latent Diffusion introduced a latent-space U-Net architecture and epsilon-prediction training objective that most modern text-to-image pipelines use, fixing the modules (cross-attention, residual/conv blocks) and loss structure that quantization must preserve. PTQ4DM showed that post-training quantization can compress diffusion models efficiently but also revealed pronounced degradation at 4\u20136 bits due to timestep-dependent activation distributions and calibration fragility, establishing both a strong baseline and a clear failure mode. QLoRA then demonstrated that freezing a low-bit backbone while training lightweight low-rank adapters can recover accuracy with minimal memory and compute, providing a template for parameter-efficient adaptation on quantized models. In parallel, ZeroQ established that synthetic inputs can drive effective, data-free calibration/training, and DeepInversion showed how a teacher\u2019s signals can guide pseudo-input synthesis for supervision when real data are unavailable. Progressive Distillation in diffusion further validated a robust teacher\u2013student objective: matching the teacher\u2019s noise-prediction across timesteps as a stable supervision signal.\nTogether these works exposed a gap: PTQ is efficient but brittle at low bits, while full QAT is accurate but data- and compute-heavy. By uniting QLoRA-style parameter-efficient adaptation with ZeroQ/DeepInversion\u2019s data-free supervision and using the teacher\u2013student noise-matching loss common in diffusion distillation, the current paper naturally emerges\u2014performing quantization-aware, data-free fine-tuning on latent diffusion backbones to reach QAT-level quality with PTQ-like efficiency.",
+  "target_paper": {
+    "title": "EfficientDM: Efficient Quantization-Aware Fine-Tuning of Low-Bit Diffusion Models",
+    "authors": "Yefei He, Jing Liu, Weijia Wu, Hong Zhou, Bohan Zhuang",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Diffusion Models, Model Quantization, Model Compression, Efficient Models",
+    "abstract": "Diffusion models have demonstrated remarkable capabilities in image synthesis and related generative tasks. Nevertheless, their practicality for low-latency real-world applications is constrained by substantial computational costs and latency issues. Quantization is a dominant way to compress and accelerate diffusion models, where post-training quantization (PTQ) and quantization-aware training (QAT) are two main approaches, each bearing its own properties. While PTQ exhibits efficiency in terms of both time and data usage, it may lead to diminished performance in low bit-width settings. On the other hand, QAT can help alleviate performance degradation but comes with substantial demands on computational and data resources. To capitalize on the advantages while avoiding their respective drawbacks, we introduce a data-free, quantization-aware and parameter-efficient fine-tuning framework for low-bit diffusion models, dubbed EfficientDM, to achieve QAT-level performance with PTQ-like effi",
+    "openreview_id": "UmMa3UNDAz",
+    "forum_id": "UmMa3UNDAz"
+  },
+  "analysis_timestamp": "2026-01-06T16:34:12.633816"
+}

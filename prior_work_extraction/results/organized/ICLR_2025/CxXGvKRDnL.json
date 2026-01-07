@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Variational Diffusion Models",
+      "authors": "Jonathan Ho et al.",
+      "year": 2021,
+      "arxiv_id": "2107.00630",
+      "role": "Foundation",
+      "relationship_sentence": "This work formalized diffusion models as deep hierarchical VAEs optimizing an ELBO, which the current paper modifies by replacing the Gaussian forward process with uniform noise so the ELBO matches a universal-quantization compression cost."
+    },
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Jonathan Ho et al.",
+      "year": 2020,
+      "arxiv_id": "2006.11239",
+      "role": "Baseline",
+      "relationship_sentence": "The standard Gaussian-noise diffusion formulation serves as the baseline paradigm that this paper departs from by adopting a uniform-noise forward process to align likelihood training with end-to-end compression."
+    },
+    {
+      "title": "Lossy Image Compression with Compressive Autoencoders",
+      "authors": "Lucas Theis et al.",
+      "year": 2017,
+      "arxiv_id": "1703.00395",
+      "role": "Inspiration",
+      "relationship_sentence": "Introduced the additive uniform-noise (universal quantization) relaxation of quantization that enables differentiable rate estimation, an idea the present work embeds directly into each diffusion step of the forward process."
+    },
+    {
+      "title": "Variational Image Compression with a Scale Hyperprior",
+      "authors": "Johannes Ball\u00e9 et al.",
+      "year": 2018,
+      "arxiv_id": "1802.01436",
+      "role": "Foundation",
+      "relationship_sentence": "Established the VAE-based learned compression view where the negative ELBO corresponds to actual bit cost under uniform-noise quantization, which this paper extends to the multi-step latent hierarchy of diffusion."
+    },
+    {
+      "title": "Multi-Realism Image Compression with a Conditional Diffusion Model",
+      "authors": "Eirikur Agustsson et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Baseline",
+      "relationship_sentence": "Uses a conditional diffusion decoder for generative image compression but lacks an ELBO-to-bits equivalence and inherent progressive coding, gaps this paper addresses via a universally quantized diffusion ELBO and stepwise decodability."
+    },
+    {
+      "title": "Full Resolution Image Compression with Recurrent Neural Networks",
+      "authors": "George Toderici et al.",
+      "year": 2017,
+      "arxiv_id": "1608.05148",
+      "role": "Foundation",
+      "relationship_sentence": "Formulated progressive neural image compression by sending incremental bits that improve reconstructions, a quality-scalable coding objective that the present work achieves through diffusion timesteps."
+    },
+    {
+      "title": "Denoising Diffusion Probabilistic Models for Discrete Data",
+      "authors": "Jacob Austin et al.",
+      "year": 2021,
+      "arxiv_id": "2107.03006",
+      "role": "Inspiration",
+      "relationship_sentence": "Demonstrated that diffusion forward processes need not be Gaussian by adopting alternative transition kernels, motivating the design of a uniform-noise forward process tailored to universal quantization."
+    }
+  ],
+  "synthesis_narrative": "Diffusion models were recast as hierarchical latent variable models optimizing an ELBO, clarifying their likelihood-training objective and multi-step latent structure. The standard denoising diffusion framework uses Gaussian corruption schedules, defining the prevailing baseline for forward\u2013reverse stochastic processes in generative modeling. In learned lossy compression, a key practical and theoretical insight is that quantization can be relaxed using additive uniform noise, enabling differentiable rate estimation and directly connecting training objectives to bit costs. This connection was formalized in variational compression with hyperpriors, where the negative ELBO aligns with end-to-end codelength under the uniform-noise relaxation. Concurrently, conditional diffusion decoders were introduced for generative compression, achieving strong rate\u2013distortion\u2013perception trade-offs but lacking a principled ELBO-to-bit accounting and inherent progressive decoding. Independent of these, progressive neural codecs established the goal of transmitting a bitstream that yields successively better reconstructions. Finally, discrete diffusion showed that forward processes need not be Gaussian, opening the door to tailoring the corruption distribution to downstream objectives.\nBringing these strands together naturally suggests replacing Gaussian noise with uniform noise in the diffusion forward process to integrate the universal-quantization relaxation into the ELBO itself. With the ELBO now equal to compression cost, the multi-step hierarchy of diffusion provides a built-in progressive code: each denoising step corresponds to an additional, decodable refinement layer. This synthesis addresses the limitations of Gaussian and conditional diffusion compression by unifying likelihood training and bit accounting while delivering quality-scalable decoding.",
+  "target_paper": {
+    "title": "Progressive Compression with Universally Quantized Diffusion Models",
+    "authors": "Yibo Yang, Justus Will, Stephan Mandt",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "oral",
+    "keywords": "diffusion, generative modeling, compression, universal quantization",
+    "abstract": "Diffusion probabilistic models have achieved mainstream success in many generative modeling tasks, from image generation to inverse problem solving. A distinct feature of these models is that they correspond to deep hierarchical latent variable models optimizing a variational evidence lower bound (ELBO) on the data likelihood. Drawing on a basic connection between likelihood modeling and compression, we explore the potential of diffusion models for progressive coding, resulting in a sequence of bits that can be incrementally transmitted and decoded with progressively improving reconstruction quality. Unlike prior work based on Gaussian diffusion or conditional diffusion models, we propose a new form of diffusion model with uniform noise in the forward process, whose negative ELBO corresponds to the end-to-end compression cost using universal quantization. We obtain promising first results on image compression, achieving competitive rate-distortion-realism results on a wide range of bit",
+    "openreview_id": "CxXGvKRDnL",
+    "forum_id": "CxXGvKRDnL"
+  },
+  "analysis_timestamp": "2026-01-06T08:49:25.169607"
+}

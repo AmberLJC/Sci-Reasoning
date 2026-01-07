@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+      "authors": "Edward J. Hu et al.",
+      "year": 2022,
+      "role": "Baseline",
+      "relationship_sentence": "LoRA-One directly analyzes LoRA\u2019s optimization dynamics and replaces LoRA\u2019s heuristic initialization with a provably optimal one-step\u2013full-gradient, singular-subspace\u2013aligned initialization, yielding linear convergence and better generalization."
+    },
+    {
+      "title": "Parameter-Efficient Transfer Learning for NLP",
+      "authors": "Neil Houlsby et al.",
+      "year": 2019,
+      "role": "Foundation",
+      "relationship_sentence": "By introducing adapter modules as the core PEFT formulation, this work established the architectural paradigm that LoRA (and thus LoRA-One) concretely instantiates and theoretically refines."
+    },
+    {
+      "title": "Intrinsic Dimensionality Explains the Effectiveness of Language Model Fine-Tuning",
+      "authors": "Armen Aghajanyan et al.",
+      "year": 2021,
+      "role": "Foundation",
+      "relationship_sentence": "Its empirical finding that fine-tuning resides in a low-dimensional subspace motivates LoRA-style low-rank updates, and LoRA-One formalizes this by aligning adapters with the top singular subspace of the one-step full gradient."
+    },
+    {
+      "title": "Low-Rank Solutions of Semidefinite Programs via Procrustes Flow",
+      "authors": "Stephen Tu et al.",
+      "year": 2016,
+      "role": "Inspiration",
+      "relationship_sentence": "This work\u2019s principle\u2014spectral (one-shot) initialization followed by gradient descent yields subspace alignment and linear convergence in low-rank factorizations\u2014inspires LoRA-One\u2019s one-step full-gradient SVD initialization for low-rank adapters."
+    },
+    {
+      "title": "QLoRA: Efficient Finetuning of Quantized LLMs",
+      "authors": "Tim Dettmers et al.",
+      "year": 2023,
+      "role": "Baseline",
+      "relationship_sentence": "As a dominant LoRA variant baseline, QLoRA is directly improved by LoRA-One\u2019s gradient-aligned initialization and preconditioning, which address conditioning and convergence issues orthogonal to quantization."
+    },
+    {
+      "title": "Linear Convergence of Gradient and Proximal-Gradient Methods Under the Polyak\u2013\u0141ojasiewicz Condition",
+      "authors": "Hamed Karimi et al.",
+      "year": 2016,
+      "role": "Foundation",
+      "relationship_sentence": "LoRA-One\u2019s proof of linear convergence leverages PL-style conditions; this paper provides the theoretical framework that underpins the claimed linear rates and the role of preconditioning in ill-conditioned regimes."
+    },
+    {
+      "title": "BitFit: Simple Parameter-Efficient Fine-Tuning for Transformers",
+      "authors": "Elad Ben-Zaken et al.",
+      "year": 2022,
+      "role": "Baseline",
+      "relationship_sentence": "As a key PEFT baseline, BitFit highlights the feasibility of sparse/low-parameter adaptation; LoRA-One surpasses it by selecting a principled low-rank, gradient-aligned subspace with provable properties."
+    }
+  ],
+  "synthesis_narrative": "LoRA-One\u2019s core insight\u2014initializing low-rank adapters to align with the singular subspaces of the one-step full fine-tuning gradient and then proving linear convergence\u2014sits squarely at the intersection of PEFT design and classical low-rank optimization theory. The architectural lineage begins with adapter modules (Houlsby et al., 2019), which introduced the PEFT paradigm later instantiated in LoRA (Hu et al., 2022). Aghajanyan et al. (2021) provided a crucial empirical foundation by showing that fine-tuning trajectories lie in a low-dimensional subspace, motivating low-rank updates. LoRA crystallized this into a practical mechanism but left open questions about how to pick the \u2018right\u2019 low-rank subspace and why certain inits work. LoRA-One answers this by importing the spectral-initialization playbook from nonconvex low-rank optimization (Tu et al., 2016), showing that a one-shot SVD of the full-model gradient yields immediate subspace alignment and unlocks linear convergence. The convergence analysis is formalized under PL-style conditions (Karimi et al., 2016), and extended to show how preconditioning mitigates ill-conditioning\u2014thereby clarifying when and why gradient-alignment\u2013based PEFT should work. Empirically, LoRA-One improves upon central baselines like LoRA and QLoRA (Dettmers et al., 2023), and surpasses simple alternatives like BitFit (Ben-Zaken et al., 2022). Altogether, these works directly shaped LoRA-One\u2019s problem formulation, its one-step spectral-gradient initialization, and its provable convergence guarantees.",
+  "analysis_timestamp": "2026-01-06T23:07:19.613817"
+}

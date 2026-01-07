@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "CodeRL: Mastering Code Generation through Deep Reinforcement Learning",
+      "authors": "Shuai Lu, Daya Guo, Shuo Ren, Junjie Huang, Lei Zhang, Nan Duan",
+      "year": 2022,
+      "role": "method",
+      "relationship_sentence": "CodeRL established that unit-test execution can serve as a verifiable reward to fine-tune code LMs via RL; RLEF builds on this idea but trains models to condition on multi-step execution feedback and improve iteratively rather than optimizing single-shot pass/fail rewards."
+    },
+    {
+      "title": "Competitive programming with AlphaCode",
+      "authors": "Yujia Li, David Choi, Junyoung Chung, Nate Kushman, et al.",
+      "year": 2022,
+      "role": "baseline/setting",
+      "relationship_sentence": "AlphaCode showcased strong competitive-programming performance via massive independent sampling and selection; RLEF directly targets this regime by replacing sample-heavy search with learned multi-step refinement grounded in execution feedback, achieving similar or better accuracy with an order of magnitude fewer samples."
+    },
+    {
+      "title": "APPS: Benchmarking Python Code Generation with Execution-Based Evaluation",
+      "authors": "Dan Hendrycks, Collin Burns, Steven Basart, Andy Zou, Mantas Mazeika, Dawn Song",
+      "year": 2021,
+      "role": "benchmark/dataset",
+      "relationship_sentence": "APPS introduced competitive-programming tasks with executable unit tests, providing the verifiable environment and reward signal that RLEF leverages for end-to-end RL training and evaluation."
+    },
+    {
+      "title": "Evaluating Large Language Models Trained on Code (HumanEval)",
+      "authors": "Mark Chen, Jerry Tworek, Heewoo Jun, Qiming Yuan, Henrique Ponde de Oliveira Pinto, et al.",
+      "year": 2021,
+      "role": "benchmark/protocol",
+      "relationship_sentence": "HumanEval popularized execution-based pass@k evaluation for code LMs; RLEF exploits the same automatic execution signals during training to teach models to use feedback over multiple steps."
+    },
+    {
+      "title": "Reflexion: Language Agents with Verbal Reinforcement Learning",
+      "authors": "Noah Shinn, Joseph D. Labash, Alessandro C. Cassano",
+      "year": 2023,
+      "role": "agent/feedback framework",
+      "relationship_sentence": "Reflexion demonstrated that agents can leverage iterative feedback and self-evaluation to improve task performance; RLEF operationalizes this principle for code by training the policy end-to-end to interpret and act on execution feedback across steps."
+    },
+    {
+      "title": "Self-Refine: Iterative Refinement with Self-Feedback",
+      "authors": "Akshita Madaan, Shrimai Prabhumoye, Yiming Yang, Graham Neubig",
+      "year": 2023,
+      "role": "iterative refinement paradigm",
+      "relationship_sentence": "Self-Refine showed that LMs can self-generate and use feedback to iteratively improve outputs; RLEF goes beyond prompting by using reinforcement learning so the model internalizes how to turn execution feedback into targeted code edits."
+    },
+    {
+      "title": "Execution-Guided Decoding for Neural Program Synthesis/Semantic Parsing",
+      "authors": "Xinyun Chen, Chen Liang, Kelvin Guu, Dawn Song",
+      "year": 2018,
+      "role": "execution-grounded generation",
+      "relationship_sentence": "Execution-guided decoding established the value of using partial program execution to guide generation; RLEF extends the execution-grounding concept from decoding-time heuristics to training-time policy learning over multi-step feedback."
+    }
+  ],
+  "synthesis_narrative": "RLEF sits at the intersection of execution-grounded program synthesis and reinforcement learning for code. CodeRL first showed that verifiable signals from unit tests can serve as rewards for RL fine-tuning, but it optimizes single-shot correctness; RLEF advances this by explicitly training models to interpret and act on intermediate execution feedback over multiple steps, yielding learned repair behaviors instead of relying on large pass@k sampling. AlphaCode epitomized the independent sampling and selection paradigm for competitive programming; RLEF directly challenges that design by replacing breadth of samples with depth of iterative improvement, achieving comparable or superior accuracy with dramatically fewer generations.\n\nThe execution-based evaluation ecosystems created by HumanEval and APPS provide the scaffolding RLEF uses for training and benchmarking: automatic test suites translate into reliable rewards and rich feedback (errors, traces, failing cases) that RLEF learns to exploit. From the agent literature, Reflexion and Self-Refine established that LMs can benefit from iterative feedback and self-evaluation; RLEF operationalizes these ideas for code by moving from prompt-level heuristics to end-to-end RL, so the policy internalizes how to parse compiler/runtime signals and propose targeted fixes. Finally, the lineage of execution-guided decoding demonstrated the effectiveness of grounding generation in partial execution; RLEF generalizes this principle to policy learning, enabling robust multi-step correction and substantial sample-efficiency gains on competitive programming tasks across both 8B and 70B models.",
+  "analysis_timestamp": "2026-01-07T00:21:32.371511"
+}

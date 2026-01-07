@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Segmentation from Natural Language Expressions",
+      "authors": "Ronghang Hu et al.",
+      "year": 2016,
+      "arxiv_id": "1603.04337",
+      "role": "Foundation",
+      "relationship_sentence": "This work formalized referring image segmentation and introduced the standard RefCOCO/RefCOCO+/RefCOCOg benchmarks that BarLeRIa targets, defining the problem setting and evaluation protocol the new PET framework is built for."
+    },
+    {
+      "title": "LAVT: Language-Aware Vision Transformer for Referring Image Segmentation",
+      "authors": "Y. Li et al.",
+      "year": 2022,
+      "arxiv_id": "2208.01843",
+      "role": "Baseline",
+      "relationship_sentence": "LAVT\u2019s core idea of injecting language into all layers of a vision transformer via bi-directional cross-modal interactions is the architectural template BarLeRIa makes parameter-efficient by replacing heavy cross-attention with intertwined vision\u2013language adapters."
+    },
+    {
+      "title": "CRIS: CLIP-Driven Referring Image Segmentation",
+      "authors": "X. Wang et al.",
+      "year": 2022,
+      "arxiv_id": "2111.15174",
+      "role": "Inspiration",
+      "relationship_sentence": "CRIS showed that leveraging frozen CLIP features can strongly guide RIS, directly motivating BarLeRIa\u2019s strategy to keep powerful pre-trained backbones frozen while adding lightweight trainable modules for cross-modal dense prediction."
+    },
+    {
+      "title": "BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models",
+      "authors": "Junnan Li et al.",
+      "year": 2023,
+      "arxiv_id": "2301.12597",
+      "role": "Inspiration",
+      "relationship_sentence": "BLIP-2 demonstrated that training a small bridging module (Q-Former) between frozen vision and language encoders is highly effective, a principle BarLeRIa adapts to dense segmentation via bi-directional intertwined adapters rather than a single bridge."
+    },
+    {
+      "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+      "authors": "Edward J. Hu et al.",
+      "year": 2022,
+      "arxiv_id": "2106.09685",
+      "role": "Extension",
+      "relationship_sentence": "BarLeRIa\u2019s efficient attention tuning modules adopt the LoRA principle of low-rank updates to attention projections, enabling substantial parameter reduction while maintaining cross-modal expressiveness."
+    },
+    {
+      "title": "Visual Prompt Tuning",
+      "authors": "Menglin Jia et al.",
+      "year": 2022,
+      "arxiv_id": "2203.12119",
+      "role": "Gap Identification",
+      "relationship_sentence": "VPT exemplifies PET methods that succeed for unimodal recognition with frozen ViTs but do not handle cross-modal dense prediction, a limitation BarLeRIa explicitly addresses with intertwined vision\u2013language adapters and global/local efficient attention."
+    },
+    {
+      "title": "CLIP-Adapter: Better Vision-Language Models with Feature Adapters",
+      "authors": "Feng Gao et al.",
+      "year": 2023,
+      "arxiv_id": "2110.04544",
+      "role": "Extension",
+      "relationship_sentence": "CLIP-Adapter\u2019s idea of inserting lightweight adapters into frozen vision\u2013language encoders is generalized in BarLeRIa to a bi-directional, layer-wise intertwined adapter design tailored for dense segmentation."
+    }
+  ],
+  "synthesis_narrative": "Referring image segmentation was crystallized by early work that framed segmentation as grounded by natural language expressions and established the RefCOCO family of benchmarks, fixing both the task protocol and evaluation setting. Subsequent architectures like LAVT injected linguistic signals across all vision-transformer stages via bi-directional cross-modal interactions, showing that layer-wise intertwining markedly improves mask quality but at the cost of full, heavy fine-tuning. In parallel, CLIP-driven RIS demonstrated that frozen vision\u2013language features can strongly guide segmentation, revealing that large pre-training can be exploited without retraining the full stack. Parameter-efficient transfer advances then supplied mechanisms for doing so: LoRA introduced low-rank updates to attention projections to preserve capacity with few trainable parameters; visual prompt tuning showed that small learnable additions can steer frozen ViTs, albeit only in unimodal recognition; and CLIP-Adapter verified that lightweight adapters on frozen CLIP can effectively adapt vision\u2013language representations. BLIP-2 further proved that a compact, trainable bridge between frozen vision and language encoders suffices for strong cross-modal grounding.\nTogether, these works expose a gap: strong RIS benefits from deep, layer-wise vision\u2013language intertwining (\u00e0 la LAVT), but prevailing PET methods are either unimodal or not tuned for dense prediction. BarLeRIa emerges as the natural synthesis\u2014keeping powerful backbones frozen, while replacing heavy cross-attention with bi-directional, intertwined adapters and employing LoRA-style efficient attention in global and local forms\u2014bringing the adapter/prompt efficiency of CLIP-Adapter/LoRA/BLIP-2 into the cross-modal, dense segmentation setting that LAVT and CLIP-driven RIS established.",
+  "target_paper": {
+    "title": "BarLeRIa: An Efficient Tuning Framework for Referring Image Segmentation",
+    "authors": "Yaoming Wang, Jin Li, XIAOPENG ZHANG, Bowen Shi, Chenglin Li, Wenrui Dai, Hongkai Xiong, Qi Tian",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "referring image segmentation; parameter efficient tuning",
+    "abstract": "Pre-training followed by full fine-tuning has gradually been substituted by Parameter-Efficient Tuning (PET) in the field of computer vision. PET has gained popularity, especially in the context of large-scale models, due to its ability to reduce transfer learning costs and conserve hardware resources. However, existing PET approaches primarily focus on recognition tasks and typically support uni-modal optimization, while neglecting dense prediction tasks and vision language interactions. To address this limitation, we propose a novel PET framework called **B**i-direction**a**l Inte**r**twined Vision **L**anguage Effici**e**nt Tuning for **R**eferring **I**mage Segment**a**tion (**BarLeRIa**), which leverages bi-directional intertwined vision language adapters to fully exploit the frozen pre-trained models' potential in cross-modal dense prediction tasks. In BarLeRIa, two different tuning modules are employed for efficient attention, one for global, and the other for local, along with ",
+    "openreview_id": "wHLDHRkmEu",
+    "forum_id": "wHLDHRkmEu"
+  },
+  "analysis_timestamp": "2026-01-06T23:26:10.935358"
+}

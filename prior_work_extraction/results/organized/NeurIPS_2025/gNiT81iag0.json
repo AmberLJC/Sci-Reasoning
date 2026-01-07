@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Extracting Training Data from Large Language Models",
+      "authors": "Nicholas Carlini, Florian Tram\u00e8r, et al.",
+      "year": 2021,
+      "role": "Problem demonstration and threat model",
+      "relationship_sentence": "Established that LLMs verbatimly regurgitate memorized training sequences and provided concrete extraction protocols that TokenSwap explicitly aims to disrupt without model retraining."
+    },
+    {
+      "title": "Quantifying Memorization Across Neural Language Models",
+      "authors": "Nicholas Carlini, Eric Wallace, et al.",
+      "year": 2023,
+      "role": "Measurement methodology and scaling insight",
+      "relationship_sentence": "Introduced exposure-based metrics and showed memorization grows with model scale, directly motivating TokenSwap\u2019s large\u2013small model pairing and its evaluation criteria."
+    },
+    {
+      "title": "Deep Learning with Differential Privacy",
+      "authors": "Mart\u00edn Abadi, Andy Chu, et al.",
+      "year": 2016,
+      "role": "Baseline mitigation highlighting limitations",
+      "relationship_sentence": "Provided the canonical DP-SGD mitigation that reduces memorization but requires training-time access and degrades utility\u2014constraints TokenSwap was designed to avoid via a post-hoc, output-only approach."
+    },
+    {
+      "title": "Machine Unlearning",
+      "authors": "Ugo Bourtoule, Varun Chandrasekaran, et al. (SISA)",
+      "year": 2021,
+      "role": "Alternative mitigation requiring weight access",
+      "relationship_sentence": "Proposed SISA training for unlearning, exemplifying methods that necessitate internal model/weight access and retraining, which TokenSwap circumvents by operating purely at the token-probability level."
+    },
+    {
+      "title": "GeDi: Generative Discriminator Guided Sequence Generation",
+      "authors": "Sheng Shen, Alexei Baevski, Ari Holtzman, et al. (Krause et al.)",
+      "year": 2020,
+      "role": "Post-hoc decoding control via probability reweighting",
+      "relationship_sentence": "Demonstrated that combining signals from separate models to reweight token probabilities can steer generation post-hoc, a core tactical precedent for TokenSwap\u2019s probability substitution between LMs."
+    },
+    {
+      "title": "Contrastive Decoding: Open-ended Text Generation as Optimization",
+      "authors": "Xiang Lisa Li, Tianyi Zhang, et al.",
+      "year": 2022,
+      "role": "Leveraging a weaker reference model to guide decoding",
+      "relationship_sentence": "Showed that comparing a strong LM against a weaker reference model can improve generation quality; TokenSwap adapts this two-model principle to target memorization by letting a smaller, less-memorizing LM govern specific token subsets."
+    },
+    {
+      "title": "DistilBERT, a distilled version of BERT: smaller, faster, cheaper and lighter (and DistilGPT-2 model line)",
+      "authors": "Victor Sanh, Lysandre Debut, Julien Chaumond, Thomas Wolf",
+      "year": 2019,
+      "role": "Evidence that small distilled LMs retain fluency",
+      "relationship_sentence": "Established that distilled, smaller LMs preserve fluent token distributions for common/function words, supporting TokenSwap\u2019s premise that a compact model can reliably supply low-memorization probabilities for those tokens."
+    }
+  ],
+  "synthesis_narrative": "TokenSwap\u2019s core contribution\u2014a post-hoc defense that mixes token probabilities from a large, capable but memorization-prone LM with those from a smaller, less-memorizing LM\u2014emerges at the intersection of three lines of prior work. First, memorization risk was concretely characterized by Carlini et al. (2021) and later quantified across scales (Carlini et al., 2023), establishing that larger models regurgitate more and providing the exposure-style metrics used to assess defenses. Second, common mitigation baselines such as DP-SGD (Abadi et al., 2016) and unlearning frameworks like SISA (Bourtoule et al., 2021) require retraining and access to internal weights, making them impractical for typical model consumers\u2014thus motivating a purely output-level, post-hoc intervention. Third, a stream of decoding-control methods demonstrated that multiple models\u2019 probability signals can be combined at inference to steer generation without retraining: GeDi reweights logits using an auxiliary discriminator/LM, while Contrastive Decoding leverages a weaker reference model to shape token choices. TokenSwap repurposes this two-model decoding paradigm specifically for privacy/memorization: it selectively delegates function-word (and similarly common) token probabilities to a compact model that is fluent yet less prone to memorization. Distillation results (Sanh et al., 2019) underpin the feasibility of using small LMs to provide high-quality probabilities on such tokens, preserving grammaticality while disrupting memorized rare sequences. Together, these works directly inform TokenSwap\u2019s design constraints, mechanism (probability-level composition), and evaluation against regurgitation.",
+  "analysis_timestamp": "2026-01-06T23:42:48.142582"
+}

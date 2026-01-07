@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Nightshade: Prompt-Specific Poisoning of Text-to-Image Models",
+      "authors": "Shawn Shan et al.",
+      "year": 2024,
+      "role": "Baseline",
+      "relationship_sentence": "SilentBadDiffusion adopts Nightshade\u2019s core idea of prompt-linked data poisoning for text-to-image diffusion models but repurposes it to stealthily bind a specific text reference to copyrighted content and to operate without any pipeline changes, serving as the primary poisoning baseline it surpasses on stealth and objective."
+    },
+    {
+      "title": "BadNets: Identifying Vulnerabilities in the Machine Learning Model Supply Chain",
+      "authors": "Tianyu Gu et al.",
+      "year": 2017,
+      "role": "Foundation",
+      "relationship_sentence": "The work provides the foundational backdoor threat model\u2014implanting a trigger during training to elicit targeted behavior at inference\u2014which SilentBadDiffusion instantiates for diffusion models by tying a benign text prompt to copyrighted outputs via training-data poisoning."
+    },
+    {
+      "title": "Clean-Label Backdoor Attacks",
+      "authors": "Turner et al.",
+      "year": 2019,
+      "role": "Inspiration",
+      "relationship_sentence": "SilentBadDiffusion borrows the clean-label principle\u2014poisons that look consistent and inconspicuous\u2014by dispersing copyrighted signal across innocuous-looking samples so that each poisoned item blends into the clean corpus while collectively encoding the backdoor."
+    },
+    {
+      "title": "Hidden Trigger Backdoor Attacks",
+      "authors": "Saha et al.",
+      "year": 2020,
+      "role": "Extension",
+      "relationship_sentence": "The paper\u2019s notion of subtle, hard-to-detect triggers directly informs SilentBadDiffusion\u2019s design of spreading trigger information across multiple images, enabling an imperceptible backdoor that activates only for specific text prompts."
+    },
+    {
+      "title": "Glaze: Protecting Artists from Style Mimicry by Text-to-Image Models",
+      "authors": "Shawn Shan et al.",
+      "year": 2023,
+      "role": "Gap Identification",
+      "relationship_sentence": "As a leading protection method against style mimicry, Glaze highlights the copyright-protection goal whose vulnerabilities this paper explicitly probes by formalizing a Copyright Infringement Attack and showing that subtle poisoning can still induce infringing generations."
+    },
+    {
+      "title": "DreamBooth: Fine Tuning Text-to-Image Diffusion Models for Subject-Driven Generation",
+      "authors": "Nataniel Ruiz et al.",
+      "year": 2023,
+      "role": "Related Problem",
+      "relationship_sentence": "DreamBooth demonstrates that a textual token can be bound to a specific visual subject; SilentBadDiffusion achieves a similar binding covertly via poisoning, without controlling fine-tuning or introducing a special token."
+    },
+    {
+      "title": "TrojDiffusion: Trojan Attacks on Diffusion Models",
+      "authors": "Zhang et al.",
+      "year": 2023,
+      "role": "Related Problem",
+      "relationship_sentence": "Prior trojaning of diffusion models requires training control or explicit trigger patterns, whereas SilentBadDiffusion directly extends the idea to a data-only poisoning setting that implants a text-activated copyright backdoor with a tiny poison ratio."
+    }
+  ],
+  "synthesis_narrative": "SilentBadDiffusion sits at the intersection of backdoor learning and text-to-image poisoning. At its root is the BadNets formulation: plant a trigger during training so a benign input elicits a targeted output at test time. The authors adapt this to diffusion models using clean-label backdoor principles from Turner et al., crafting poisons that look consistent and thus evade manual or automated filtering. Saha et al.\u2019s hidden trigger concept further guides the design toward imperceptibility by distributing the trigger signal across many samples rather than relying on a conspicuous patch.\nNightshade provides the most direct methodological baseline in the diffusion domain\u2014prompt-specific poisoning for text-to-image models\u2014demonstrating that tiny amounts of tailored data can steer prompt behavior. SilentBadDiffusion extends this blueprint from concept corruption to copyright binding: it stealthily associates a specific text reference with dispersed copyrighted content and does so without any adjustment to the fine-tuning pipeline. In contrast to trojaning works like TrojDiffusion that typically assume training control or explicit triggers, this method operates purely through data contribution at very low poisoning ratios.\nFinally, the work is motivated by recent protection efforts such as Glaze, which aim to thwart style mimicry. By formalizing a Copyright Infringement Attack and showing that stronger diffusion models are paradoxically easier to backdoor, SilentBadDiffusion exposes a critical vulnerability: even with protections and standard training pipelines, inconspicuous poisoning can induce targeted copyright breaches.",
+  "analysis_timestamp": "2026-01-06T23:09:26.464364"
+}

@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Rethinking the Inception Architecture for Computer Vision",
+      "authors": "Christian Szegedy, Vincent Vanhoucke, Sergey Ioffe, Jon Shlens, Zbigniew Wojna",
+      "year": 2016,
+      "role": "Introduced label smoothing (LS) as a simple regularizer for classification networks.",
+      "relationship_sentence": "This paper provides the canonical LS objective that MaxSup analytically decomposes and ultimately replaces with a targeted top-1 logit penalty."
+    },
+    {
+      "title": "Regularizing Neural Networks by Penalizing Confident Output Distributions",
+      "authors": "Gabriel Pereyra, George Tucker, Jan Chorowski, \u0141ukasz Kaiser, Geoffrey Hinton",
+      "year": 2017,
+      "role": "Proposed the confidence penalty (negative entropy) to discourage overly peaked predictions, closely related to LS\u2019s entropy-based view.",
+      "relationship_sentence": "MaxSup inherits the principle of discouraging overconfident predictions from confidence penalty but sharpens it by explicitly suppressing only the maximum logit to avoid LS\u2019s error amplification on misclassifications."
+    },
+    {
+      "title": "On Calibration of Modern Neural Networks",
+      "authors": "Chuan Guo, Geoff Pleiss, Yu Sun, Kilian Q. Weinberger",
+      "year": 2017,
+      "role": "Diagnosed overconfidence and popularized simple post-hoc and training-time calibration techniques including label smoothing.",
+      "relationship_sentence": "MaxSup is motivated by the calibration failures highlighted here, aiming to reduce overconfidence while not reinforcing incorrect predictions as LS can."
+    },
+    {
+      "title": "When Does Label Smoothing Help?",
+      "authors": "Rafael M\u00fcller, Simon Kornblith, Geoffrey Hinton",
+      "year": 2019,
+      "role": "Analyzed mechanisms and side effects of LS on optimization, calibration, and representations.",
+      "relationship_sentence": "This analysis informs MaxSup\u2019s theoretical decomposition of LS and motivates designing a regularizer that preserves LS\u2019s benefits without its adverse representational side effects."
+    },
+    {
+      "title": "Prevalence of Neural Collapse during the terminal phase of deep learning training",
+      "authors": "Vardan Papyan, X.Y. Han, David L. Donoho",
+      "year": 2020,
+      "role": "Characterized representation collapse (neural collapse) under standard cross-entropy training.",
+      "relationship_sentence": "The neural collapse framework provides the representational lens through which MaxSup interprets and mitigates LS-induced feature compactification."
+    },
+    {
+      "title": "Supervised Contrastive Learning",
+      "authors": "Prannay Khosla, Piotr Teterwak, Chen Wang, Aaron Sarna, Yonglong Tian, Phillip Isola, Aaron Maschinot, Ce Liu, Dilip Krishnan",
+      "year": 2020,
+      "role": "Encouraged objectives that preserve intra-class diversity and improve class separability.",
+      "relationship_sentence": "As a contrasting remedy to feature collapse, this work motivates MaxSup\u2019s pursuit of diversity-preserving representations via a simpler cross-entropy\u2013compatible logit suppression."
+    }
+  ],
+  "synthesis_narrative": "MaxSup\u2019s core contribution\u2014analytically decomposing label smoothing (LS) to reveal a misclassification-driven error-amplification term and proposing a targeted top-1 logit penalty\u2014builds on a lineage of work that established, scrutinized, and sought to fix overconfidence and representation collapse. Szegedy et al. introduced LS as a practical regularizer, implicitly blending cross-entropy with a uniform target; MaxSup formalizes this blend and exposes its asymmetric behavior: it regularizes only when predictions are correct but can amplify errors when predictions are wrong. Pereyra et al.\u2019s confidence penalty framed regularization as discouraging excessively peaked posteriors, a conceptual foundation that MaxSup sharpens by suppressing only the maximum logit, thereby applying uniform pressure regardless of correctness and avoiding LS\u2019s error amplification. The calibration perspective of Guo et al. underscores the centrality of overconfidence; MaxSup aims to retain calibration gains without entrenching incorrect beliefs. M\u00fcller et al. analyzed when and how LS helps, noting shifts in representation and optimization behavior; their insights motivate MaxSup\u2019s analytical decomposition and redesign of the regularizer. Papyan et al.\u2019s neural collapse theory provides a principled lens on representation compactification; MaxSup explicitly targets LS-induced collapse by preventing excessive dominance of a single logit. Finally, supervised contrastive learning demonstrates that preserving intra-class diversity can enhance generalization; MaxSup positions itself as a lightweight, CE-compatible alternative that preserves diversity by constraining the top-1 logit rather than flattening the entire distribution.",
+  "analysis_timestamp": "2026-01-06T23:42:48.146503"
+}

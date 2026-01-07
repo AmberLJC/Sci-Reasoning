@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "3D Gaussian Splatting for Real-Time Radiance Field Rendering",
+      "authors": "Bernhard Kerbl, Georgios Kopanas, Thomas Leimk\u00fchler, George Drettakis",
+      "year": 2023,
+      "role": "Representation backbone",
+      "relationship_sentence": "Provides the core 3D Gaussian scene representation and differentiable splatting machinery that 3DGM builds upon to construct a Gaussian-based environmental map from images."
+    },
+    {
+      "title": "NeRF in the Wild: Neural Radiance Fields for Unconstrained Photo Collections",
+      "authors": "Ricardo Martin-Brualla, Noha Radwan, Mehdi S. M. Sajjadi, Jonathan T. Barron, Alexey Dosovitskiy, Daniel Duckworth",
+      "year": 2021,
+      "role": "Transient/separable content modeling",
+      "relationship_sentence": "Introduces a latent 'transient' component and appearance embeddings to separate static environment from changing content across images, directly inspiring 3DGM\u2019s multitraverse-driven environment\u2013object decomposition."
+    },
+    {
+      "title": "NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis",
+      "authors": "Ben Mildenhall, Pratul P. Srinivasan, Matthew Tancik, Jonathan T. Barron, Ravi Ramamoorthi, Ren Ng",
+      "year": 2020,
+      "role": "Foundational neural scene representation",
+      "relationship_sentence": "Establishes the photometric, multi-view consistency training paradigm for inverse rendering from images that 3DGM inherits conceptually while replacing MLP radiance fields with 3D Gaussians."
+    },
+    {
+      "title": "DynaSLAM: Tracking, Mapping, and Inpainting in Dynamic Scenes",
+      "authors": "Berta Bescos, Jos\u00e9 M. F\u00e1cil, Javier Civera, Jos\u00e9 Neira",
+      "year": 2018,
+      "role": "Dynamic-object suppression for mapping",
+      "relationship_sentence": "Demonstrates that removing dynamic/ephemeral objects enables robust mapping; 3DGM generalizes this idea by learning to segment ephemera via multitraverse self-supervision rather than relying on external semantics/inpainting."
+    },
+    {
+      "title": "Long-Term Visual Localization Using Semantically Segmented Images",
+      "authors": "Erik Stenborg, Carl Toft, Lars Hammarstrand",
+      "year": 2018,
+      "role": "Multi-session persistence cues",
+      "relationship_sentence": "Shows that suppressing transient classes across revisits improves localization, motivating 3DGM\u2019s use of repeated traversals to identify persistent (environment) versus ephemeral (object) pixels."
+    },
+    {
+      "title": "Dynamic Maps for Long-Term Operation of Mobile Service Robots",
+      "authors": "Peter Biber, Tom Duckett",
+      "year": 2005,
+      "role": "Long-term mapping principle",
+      "relationship_sentence": "Introduces experience-based/dynamic maps that separate persistent structure from time-varying elements, a conceptual precursor to 3DGM\u2019s \u2018memorize what matters\u2019 philosophy in a modern 3DGS framework."
+    },
+    {
+      "title": "On the Unification of Line Processes, Outlier Rejection, and Robust Statistics",
+      "authors": "Michael J. Black, Anand Rangarajan",
+      "year": 1998,
+      "role": "Robust estimation/outlier modeling",
+      "relationship_sentence": "Provides the robust M-estimation viewpoint for treating outliers with redescending penalties, directly aligning with 3DGM\u2019s formulation of environment pixels as inliers and ephemeral objects as outliers during training."
+    }
+  ],
+  "synthesis_narrative": "3DGM\u2019s key contribution\u2014emergent environment\u2013object decomposition from multitraverse RGB videos within a Gaussian-based mapper\u2014rests on three intertwined lines of prior work. First, its representation and optimization scaffold is 3D Gaussian Splatting (Kerbl et al.), which replaces MLP radiance fields with optimized 3D Gaussians for efficient, differentiable rendering and mapping, itself conceptually rooted in NeRF\u2019s multi-view photometric training (Mildenhall et al.). Second, the paper\u2019s central idea of separating persistent environment from transient/ephemeral content directly echoes NeRF in the Wild (Martin-Brualla et al.), which modeled per-image transients to robustly explain changing content; 3DGM operationalizes a similar separation but uses cross-traverse consistency as self-supervision and yields 2D ephemeral segmentation alongside a 3D map. Third, robotics and long-term SLAM works establish why and how to prefer persistent structure: DynaSLAM demonstrated that filtering dynamic objects stabilizes reconstruction, while Stenborg et al. leveraged semantics across revisits to improve localization by downweighting transients. Biber and Duckett provided the earlier long-term mapping principle of maintaining persistent maps amid environmental variation, which 3DGM modernizes with Gaussian rendering and data-driven learning. Finally, the paper\u2019s formulation\u2014environment pixels as inliers and ephemeral ones as outliers\u2014draws on robust estimation theory (Black & Rangarajan), motivating robust losses that naturally reject ephemeral inconsistencies across traversals. Together, these works directly shaped 3DGM\u2019s self-supervised, multitraverse-driven decomposition and its efficient 3DGS-based mapping pipeline.",
+  "analysis_timestamp": "2026-01-06T23:39:42.969877"
+}

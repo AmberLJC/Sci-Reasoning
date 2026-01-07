@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "A Data\u2013Driven Approximation of the Koopman Operator: Extended Dynamic Mode Decomposition",
+      "authors": "Matthew O. Williams et al.",
+      "year": 2015,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "MamKO builds on EDMD\u2019s core idea of learning a finite-dimensional linear predictor in a lifted space, but replaces the fixed Koopman matrix with a data-conditioned, time-varying operator generated online."
+    },
+    {
+      "title": "Dynamic Mode Decomposition with Control",
+      "authors": "Joshua L. Proctor et al.",
+      "year": 2016,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "MamKO inherits the formalism of incorporating control inputs into Koopman/linear predictors from DMDc, while advancing it by letting the Koopman operator adapt to online data rather than remain constant."
+    },
+    {
+      "title": "Linear predictors for nonlinear dynamical systems: Koopman meets model predictive control",
+      "authors": "Milan Korda et al.",
+      "year": 2018,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "MamKO directly extends the Koopman-MPC pipeline introduced by Korda and Mezi\u0107 by substituting their constant Koopman operator with a Mamba-generated, time-varying operator to improve prediction and control on time-varying systems."
+    },
+    {
+      "title": "Deep learning for universal linear embeddings of nonlinear dynamics",
+      "authors": "Brandon J. Lusch et al.",
+      "year": 2018,
+      "arxiv_id": "1712.09707",
+      "role": "Gap Identification",
+      "relationship_sentence": "MamKO addresses the key limitation in deep Koopman autoencoders\u2014using a fixed latent linear operator\u2014by generating Koopman operators online to handle evolving dynamics."
+    },
+    {
+      "title": "Learning Koopman Invariant Subspaces for Dynamic Mode Decomposition",
+      "authors": "Kenji Takeishi et al.",
+      "year": 2017,
+      "arxiv_id": "1702.05459",
+      "role": "Gap Identification",
+      "relationship_sentence": "MamKO responds to the constraint in learning Koopman-invariant subspaces with a static linear evolution by enabling a data-driven, time-varying operator that preserves the linear structure while adapting over time."
+    },
+    {
+      "title": "Mamba: Linear-Time Sequence Modeling with Selective State Spaces",
+      "authors": "Albert Gu et al.",
+      "year": 2023,
+      "arxiv_id": "2312.00752",
+      "role": "Inspiration",
+      "relationship_sentence": "MamKO borrows Mamba\u2019s selective state-space mechanism to condition the linear dynamics on the current input/context, using it to generate Koopman operators online without abandoning the linear state-space form."
+    }
+  ],
+  "synthesis_narrative": "Extended Dynamic Mode Decomposition (EDMD) established that nonlinear dynamics can be forecast via a learned linear operator acting on lifted observables, but this operator is fixed once trained. Dynamic Mode Decomposition with Control (DMDc) incorporated exogenous inputs into that linear predictor, preserving tractable linear structure for control. Deep Koopman models\u2014via autoencoders\u2014demonstrated that the lifting can itself be learned, again enforcing linear evolution in the latent space but still relying on a constant operator. Learning Koopman-invariant subspaces further codified the invariant linear-latent formulation, exhibiting strong modeling power yet sharing the same stationarity assumption on the linear operator. Meanwhile, the Koopman-MPC framework showed how these linear predictors could be embedded into model predictive control to regulate nonlinear systems efficiently, but real-world performance often degraded on time-varying dynamics due to the frozen operator. In parallel, Mamba introduced selective state space models that adapt their linear state-space evolution to the stream of inputs, providing a principled, efficient pathway to data-conditioned linear dynamics.\nTaken together, these works illuminated both the power and the brittleness of Koopman methods with constant operators: linear structure enables MPC and efficient prediction, yet fixed operators struggle on time-varying systems. The selective SSM idea from Mamba offered exactly the missing mechanism to make the linear operator adaptive without discarding the linear state-space form. MamKO naturally synthesizes these threads by generating Koopman operators online via a Mamba-style selective state space, preserving Koopman-MPC tractability while improving modeling and control of evolving nonlinear dynamics.",
+  "target_paper": {
+    "title": "MamKO: Mamba-based Koopman operator for modeling and predictive control",
+    "authors": "ZHAOYANG LI, Minghao Han, Xunyuan Yin",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "Mamba; Koopman operator; model predictive control; nonlinear systems",
+    "abstract": "The Koopman theory, which enables the transformation of nonlinear systems into linear representations, is a powerful and efficient tool to model and control nonlinear systems. However, the ability of the Koopman operator to model complex systems, particularly time-varying systems, is limited by the fixed linear state-space representation. To address the limitation, the large language model, Mamba, is considered a promising strategy for enhancing modeling capabilities while preserving the linear state-space structure.\nIn this paper, we propose a new framework, the Mamba-based Koopman operator (MamKO), which provides enhanced model prediction capability and adaptability, as compared to Koopman models with constant Koopman operators. Inspired by the Mamba structure, MamKO generates Koopman operators from online data; this enables the model to effectively capture the dynamic behaviors of the nonlinear system over time. A model predictive control system is then developed based on the propos",
+    "openreview_id": "hNjCVVm0EQ",
+    "forum_id": "hNjCVVm0EQ"
+  },
+  "analysis_timestamp": "2026-01-06T09:57:54.500559"
+}

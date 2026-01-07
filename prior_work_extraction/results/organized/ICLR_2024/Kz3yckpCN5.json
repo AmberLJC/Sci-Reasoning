@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Self-Instruct: Aligning Language Models with Self-Generated Instructions",
+      "authors": "Yizhong Wang et al.",
+      "year": 2023,
+      "arxiv_id": "2212.10560",
+      "role": "Foundation",
+      "relationship_sentence": "This work introduced the paradigm of using a stronger LLM to synthesize instruction\u2013response pairs for supervised fine-tuning, which the paper adopts and stress-tests when the teacher is proprietary (e.g., ChatGPT)."
+    },
+    {
+      "title": "Alpaca: A Strong, Replicable Instruction-Following Model",
+      "authors": "Rohan Taori et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "Alpaca\u2019s recipe of distilling text-davinci-003 into LLaMA with ~52K synthetic pairs is the canonical imitation pipeline the paper replicates and scales (model sizes and data amounts) to examine whether imitation actually closes capability gaps."
+    },
+    {
+      "title": "Vicuna: An Open-Source Chatbot Impressing GPT-4 with 90% ChatGPT Quality",
+      "authors": "Chiang et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "Vicuna trained on ShareGPT conversations and reported near-ChatGPT quality via pairwise judgments, a claim the paper directly revisits by showing such human-preference ratings can mask persistent deficits on tasks absent from the imitation data."
+    },
+    {
+      "title": "Koala: A Dialogue Model for Academic Research",
+      "authors": "Xinyang Geng et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "Koala fine-tuned LLaMA on ChatGPT-derived conversations and reported strong user preferences, providing a prominent imitation baseline that motivates the paper\u2019s deeper automatic evaluations revealing limited transfer of underlying capabilities."
+    },
+    {
+      "title": "Training language models to follow instructions with human feedback",
+      "authors": "Long Ouyang et al.",
+      "year": 2022,
+      "arxiv_id": "2203.02155",
+      "role": "Foundation",
+      "relationship_sentence": "InstructGPT established instruction following with human preference optimization and human ratings, framing the evaluation paradigm that the paper scrutinizes by demonstrating how surface-level helpfulness can mislead crowd raters about true competence."
+    },
+    {
+      "title": "Finetuned Language Models Are Zero-Shot Learners",
+      "authors": "Jason Wei et al.",
+      "year": 2022,
+      "arxiv_id": "2109.01652",
+      "role": "Foundation",
+      "relationship_sentence": "FLAN showed that diverse, broad instruction tuning primarily helps via task coverage, an insight the paper leverages by designing targeted tests that reveal imitation data lacking coverage yields little to no capability transfer."
+    }
+  ],
+  "synthesis_narrative": "Self-Instruct introduced the practical blueprint for bootstrapping supervised instruction-tuning data by prompting a stronger model to generate instruction\u2013response pairs, seeding a wave of low-cost alignment via synthetic supervision. Alpaca operationalized this idea by distilling text-davinci-003 into LLaMA using ~52K synthetic pairs, demonstrating that small open models could appear highly compliant with instructions after imitation. Vicuna extended the imitation story by training on real user\u2013ChatGPT conversations from ShareGPT and reporting near-ChatGPT quality using pairwise judgments, while Koala similarly fine-tuned LLaMA on ChatGPT-derived dialogues and found strong user preferences\u2014both reinforcing the perception that cheap imitation yields ChatGPT-like chat quality. InstructGPT had earlier defined instruction following through supervised fine-tuning and preference-based evaluation, making human ratings a central yardstick for helpfulness and safety. FLAN, in parallel, established that instruction tuning improves zero-shot performance largely through broad task coverage, implying that what\u2019s in the instruction data critically governs generalization.\nTogether, these works created a compelling but untested belief that imitating proprietary models via synthetic or conversational data could efficiently transfer underlying capabilities, as validated by human preferences. The paper synthesizes and extends these ideas by reproducing and scaling Alpaca/Self-Instruct-style pipelines across model sizes and data volumes, and by contrasting crowd ratings with targeted automatic evaluations. Anchored by FLAN\u2019s coverage insight and Vicuna/Koala\u2019s preference-based claims, it reveals that imitation primarily transfers style and instruction compliance, not deeper skills on tasks absent from the imitation data\u2014clarifying the limits of \u201ccheap imitation\u201d and motivating more coverage-aware training and evaluation.",
+  "target_paper": {
+    "title": "The False Promise of Imitating Proprietary Language Models",
+    "authors": "Arnav Gudibande, Eric Wallace, Charlie Victor Snell, Xinyang Geng, Hao Liu, Pieter Abbeel, Sergey Levine, Dawn Song",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Language Models, Model Imitation, Distillation, Instruction-Tuning",
+    "abstract": "An emerging method to cheaply improve a weaker language model is to finetune it on outputs from a stronger model, such as a proprietary system like ChatGPT (e.g., Alpaca, Self-Instruct, and others). In this work, we critically analyze this approach of imitating language models. We first finetune a series of LMs that imitate ChatGPT using varying base model sizes (1.5B--13B), data sources, and imitation data amounts (0.3M--150M tokens). We then evaluate the models using crowd raters and canonical NLP benchmarks. Initially, we were surprised by the output quality of our imitation models---they appear far better at following instructions, and crowd workers rate their outputs as competitive with ChatGPT. However, when conducting more targeted automatic evaluations, we find that imitation models close little to none of the gap from the base LM to ChatGPT on tasks that are not heavily supported in the imitation data. We show that these performance discrepancies may slip past human raters bec",
+    "openreview_id": "Kz3yckpCN5",
+    "forum_id": "Kz3yckpCN5"
+  },
+  "analysis_timestamp": "2026-01-06T12:55:25.968545"
+}

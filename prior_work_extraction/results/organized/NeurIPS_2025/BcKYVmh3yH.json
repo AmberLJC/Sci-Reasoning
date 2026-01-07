@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Learning to Summarize with Human Feedback",
+      "authors": "Nisan Stiennon, Long Ouyang, Jeffrey Wu, Daniel M. Ziegler, Ryan Lowe, Chelsea Voss, Alec Radford, Dario Amodei, Paul Christiano",
+      "year": 2020,
+      "role": "Established best-of-N sampling with a learned reward model as a practical test-time selection mechanism.",
+      "relationship_sentence": "ST-BoN targets the core limitations surfaced by this work\u2014needing a separate reward model and generating full N samples\u2014by replacing reward-model selection with self-estimated signals and truncating losing samples early."
+    },
+    {
+      "title": "Training language models to follow instructions with human feedback",
+      "authors": "Long Ouyang, Jeffrey Wu, Xu Jiang, Diogo Almeida, Carroll L. Wainwright, Pamela Mishkin, et al.",
+      "year": 2022,
+      "role": "Popularized RLHF pipelines in which reward models rerank best-of-N samples at inference, highlighting quality gains but added latency/memory.",
+      "relationship_sentence": "ST-BoN directly addresses the inference overhead of RM-based BoN popularized here by dispensing with reward models and using the base model\u2019s own early-generation signals for selection."
+    },
+    {
+      "title": "Self-Consistency Improves Chain of Thought Reasoning in Language Models",
+      "authors": "Xuezhi Wang, Jason Wei, Dale Schuurmans, Quoc V. Le, Ed H. Chi, et al.",
+      "year": 2023,
+      "role": "Demonstrated test-time scaling via multi-sample reasoning and agreement-based selection without a trained reward model.",
+      "relationship_sentence": "ST-BoN builds on the insight that agreement/consistency among samples is predictive of solution quality, but makes it sampling-efficient by estimating winners early and truncating the rest."
+    },
+    {
+      "title": "Tree of Thoughts: Deliberate Problem Solving with Large Language Models",
+      "authors": "Shunyu Yao, Dian Yu, Jeffrey Zhao, Izhak Shafran, Karthik Narasimhan, et al.",
+      "year": 2023,
+      "role": "Introduced structured test-time search with model-internal evaluations of partial thoughts and pruning.",
+      "relationship_sentence": "ST-BoN adopts a related principle\u2014evaluating partial generations\u2014to prune candidates, but tailors it to the BoN setting with lightweight, self-estimated early signals instead of external verifiers."
+    },
+    {
+      "title": "Diverse Beam Search: Decoding Diverse Solutions from Neural Sequence Models",
+      "authors": "Ashwin K. Vijayakumar, Michael Cogswell, Ramprasaath R. Selvaraju, Qixing Huang, Devi Parikh, Dhruv Batra",
+      "year": 2016,
+      "role": "Showed the value of maintaining multiple diverse candidates during decoding and later selection.",
+      "relationship_sentence": "ST-BoN retains the multi-candidate spirit of DBS/BoN but improves efficiency by stopping clearly suboptimal candidates early rather than fully decoding all sequences."
+    },
+    {
+      "title": "Noisy Parallel Approximate Decoding",
+      "authors": "Kyunghyun Cho",
+      "year": 2016,
+      "role": "Proposed generating multiple perturbed candidates in parallel and selecting by model score, an early form of BoN for sequence generation.",
+      "relationship_sentence": "ST-BoN addresses NPAD/BoN\u2019s compute burden by introducing a principled early-selection mechanism that avoids finishing all candidates before reranking."
+    },
+    {
+      "title": "Confident Adaptive Language Modeling",
+      "authors": "Tal Schuster, et al.",
+      "year": 2022,
+      "role": "Pioneered confidence-driven adaptive compute for generation, making early decisions based on model uncertainty.",
+      "relationship_sentence": "ST-BoN echoes CALM\u2019s adaptive-compute ethos by using early, model-internal signals (consistency/likelihood cues) to adaptively truncate sampling and save memory/latency."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s key contribution\u2014sampling-efficient Best-of-N via self-estimated, early-decoding selection (ST-BoN)\u2014sits at the intersection of test-time scaling, multi-candidate decoding, and adaptive compute. Prior RLHF work established BoN as a powerful inference-time tool: Stiennon et al. (2020) and Ouyang et al. (2022) showed that generating multiple candidates and choosing with a reward model improves quality, but at the cost of extra memory, latency, and the need to train and deploy a separate scorer. In parallel, self-consistency (Wang et al., 2023) and Tree-of-Thoughts (Yao et al., 2023) demonstrated that one can exploit model-internal signals\u2014agreement among samples or evaluations of partial thoughts\u2014without reward models, suggesting a path to eliminating the RM overhead.\nClassical decoding advances like Diverse Beam Search (Vijayakumar et al., 2016) and Noisy Parallel Approximate Decoding (Cho, 2016) established the effectiveness of exploring multiple candidates, but typically required fully generating and then rescoring, exacerbating compute and memory use. Finally, Confident Adaptive Language Modeling (Schuster et al., 2022) introduced the broader idea of adapting computation based on early uncertainty signals.\nST-BoN synthesizes these threads: it preserves BoN\u2019s quality gains while borrowing the self-evaluation ethos of self-consistency/ToT and the adaptive-compute principle of CALM. Concretely, it leverages early sampling consistency and likelihood cues on partial prefixes to predict which candidate will ultimately win, truncating the rest to save GPU memory and latency\u2014thereby jointly addressing BoN\u2019s two main bottlenecks (fully decoding N samples and relying on reward models).",
+  "analysis_timestamp": "2026-01-07T00:29:42.060114"
+}

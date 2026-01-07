@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Structured Denoising Diffusion Models in Discrete State Spaces (D3PM)",
+      "authors": "Jacob Austin et al.",
+      "year": 2021,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "D3PM highlights the core limitation of discrete diffusion\u2014needing a hand\u2011designed, tractable corruption/noise process\u2014which RetroBridge explicitly avoids by learning a Markov bridge pinned at data endpoints instead of relying on a simple noise prior."
+    },
+    {
+      "title": "Diffusion Schr\u00f6dinger Bridge",
+      "authors": "Louis De Bortoli et al.",
+      "year": 2021,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "This work establishes generative modeling via bridges conditioned on endpoints, providing the theoretical template of connecting two intractable distributions that RetroBridge adapts to discrete Markov chains for retrosynthesis."
+    },
+    {
+      "title": "Denoising Diffusion Bridges",
+      "authors": "Michael S. Albergo et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "By introducing learning objectives along diffusion bridges to transport between endpoint distributions, this paper directly inspires RetroBridge\u2019s endpoint\u2011conditioned denoising objective while motivating a bridge\u2011based alternative to standard diffusion."
+    },
+    {
+      "title": "Stochastic Interpolants: A Unifying Framework for Flows and Diffusions",
+      "authors": "Michael S. Albergo et al.",
+      "year": 2022,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "Stochastic interpolants formalize paths pinned at endpoints, a key insight RetroBridge adopts by parameterizing discrete Markov bridges that interpolate between product and precursor molecules."
+    },
+    {
+      "title": "Generative Flow Networks",
+      "authors": "Yoshua Bengio et al.",
+      "year": 2021,
+      "arxiv_id": null,
+      "role": "Related Problem",
+      "relationship_sentence": "GFlowNets show how to learn stochastic policies over discrete trajectories to match target terminal distributions, informing RetroBridge\u2019s use of a learned multi\u2011step Markov process in discrete chemical state spaces."
+    },
+    {
+      "title": "Retro*: Learning Retrosynthetic Planning with Neural Guided A*",
+      "authors": "Xianggen Liu et al. (often cited as Chen et al.)",
+      "year": 2020,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "Retro* frames multi\u2011step retrosynthesis as heuristic search driven by calibrated single\u2011step likelihoods, directly motivating RetroBridge\u2019s focus on probabilistic single\u2011step modeling with confidence estimates."
+    },
+    {
+      "title": "RetroXpert: Decompose Retrosynthesis Prediction via Reaction Center Identification and Synthon-Based Editing",
+      "authors": "Chao Yan et al.",
+      "year": 2020,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "As a leading template\u2011free single\u2011step method, RetroXpert serves as a primary competitor that RetroBridge targets, contrasting a deterministic edit pipeline with a learned Markov bridge over discrete molecular states."
+    }
+  ],
+  "synthesis_narrative": "Work on discrete diffusion models such as D3PM established that denoising in token spaces hinges on a prescribed, tractable corruption process, an assumption that can distort discrete structures like molecular graphs. Schr\u00f6dinger-bridge formulations subsequently introduced generative modeling as learning a process that connects two endpoint distributions; the Diffusion Schr\u00f6dinger Bridge made this concrete by conditioning dynamics on both endpoints to transport mass between complex marginals. Denoising Diffusion Bridges refined this perspective with training objectives defined along the bridge path, demonstrating that endpoint-conditioned denoising can replace reliance on simple priors. Stochastic Interpolants unified flows and diffusions through endpoint-pinned paths, clarifying how to construct learnable interpolations between paired samples. In discrete domains, Generative Flow Networks showed that one can learn stochastic multi-step policies to realize target terminal distributions via Markovian trajectories, highlighting the practicality of trajectory-based generative modeling in combinatorial state spaces. In retrosynthesis, Retro* formulated multi-step planning as heuristic search that depends critically on calibrated single-step probabilities, and RetroXpert provided a strong template-free baseline for single-step reactant prediction via synthon edits. Together, these works revealed a gap: while bridges enable endpoint-conditioned transport, existing methods largely target continuous spaces or require simple priors, and discrete diffusion imposes unnatural noise. The natural next step is a discrete, endpoint-conditioned Markov process that learns directly from paired (product, precursor) data, yielding calibrated conditional likelihoods for search. RetroBridge synthesizes bridge-based generative transport with discrete, trajectory-based modeling to connect product molecules to plausible precursors without a tractable noise distribution.",
+  "target_paper": {
+    "title": "RetroBridge: Modeling Retrosynthesis with Markov Bridges",
+    "authors": "Ilia Igashov, Arne Schneuing, Marwin Segler, Michael M. Bronstein, Bruno Correia",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Retrosynthesis, Reactions, Chemistry, Drug Discovery, Markov Bridge",
+    "abstract": "Retrosynthesis planning is a fundamental challenge in chemistry which aims at designing multi-step reaction pathways from commercially available starting materials to a target molecule. Each step in multi-step retrosynthesis planning requires accurate prediction of possible precursor molecules given the target molecule and confidence estimates to guide heuristic search algorithms. We model single-step retrosynthesis as a distribution learning problem in a discrete state space. First, we introduce the Markov Bridge Model, a generative framework aimed to approximate the dependency between two intractable discrete distributions accessible via a finite sample of coupled data points. Our framework is based on the concept of a Markov bridge, a Markov process pinned at its endpoints. Unlike diffusion-based methods, our Markov Bridge Model does not need a tractable noise distribution as a sampling proxy and directly operates on the input product molecules as samples from the intractable prior ",
+    "openreview_id": "770DetV8He",
+    "forum_id": "770DetV8He"
+  },
+  "analysis_timestamp": "2026-01-06T19:09:18.025720"
+}

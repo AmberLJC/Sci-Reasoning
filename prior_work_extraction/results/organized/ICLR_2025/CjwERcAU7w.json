@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Deep Reinforcement Learning from Human Preferences",
+      "authors": "Paul F. Christiano et al.",
+      "year": 2017,
+      "role": "Foundation",
+      "relationship_sentence": "SCoRe adopts the core RL-from-feedback formulation introduced here\u2014optimizing a language policy with scalar feedback\u2014while replacing external human labels with self-generated multi-turn feedback to specifically train self-correction."
+    },
+    {
+      "title": "Training language models to follow instructions with human feedback",
+      "authors": "Long Ouyang et al.",
+      "year": 2022,
+      "role": "Foundation",
+      "relationship_sentence": "SCoRe directly builds on the online RL paradigm (policy optimization on-model rollouts) established for LLMs by InstructGPT, but substitutes human preference signals with self-produced correction feedback to target multi-turn self-correction."
+    },
+    {
+      "title": "Constitutional AI: Harmlessness from AI Feedback",
+      "authors": "Yuntao Bai et al.",
+      "year": 2022,
+      "role": "Inspiration",
+      "relationship_sentence": "Constitutional AI\u2019s critique-and-revise loop and AI-generated feedback demonstrate that models can supervise themselves; SCoRe generalizes this idea by training an LLM to generate, evaluate, and update its own multi-turn corrections via online RL without a stronger teacher."
+    },
+    {
+      "title": "STaR: Bootstrapping Reasoning With Reasoning",
+      "authors": "Eric Zelikman et al.",
+      "year": 2022,
+      "role": "Gap Identification",
+      "relationship_sentence": "STaR\u2019s offline SFT on self-generated traces motivates SCoRe\u2019s claim that offline SFT suffers distribution mismatch; SCoRe addresses this by training online on the model\u2019s own multi-turn correction rollouts."
+    },
+    {
+      "title": "Self-Refine: Iterative Refinement with Self-Feedback",
+      "authors": "Shivanshu Madaan et al.",
+      "year": 2023,
+      "role": "Baseline",
+      "relationship_sentence": "Self-Refine establishes the inference-time iterative self-correction protocol that SCoRe turns into a training objective; SCoRe\u2019s online RL learns to produce and act on effective self-feedback rather than relying on untrained iteration."
+    },
+    {
+      "title": "Reflexion: Language Agents with Verbal Reinforcement Learning",
+      "authors": "Noah Shinn et al.",
+      "year": 2023,
+      "role": "Related Problem",
+      "relationship_sentence": "Reflexion shows multi-turn reflection can improve agents but lacks a principled training scheme; SCoRe formalizes multi-turn self-correction as an online RL problem and trains the base LLM to internalize effective correction strategies."
+    },
+    {
+      "title": "Self-Instruct: Aligning Language Models with Self-Generated Instructions",
+      "authors": "Yizhong Wang et al.",
+      "year": 2022,
+      "role": "Gap Identification",
+      "relationship_sentence": "Self-Instruct popularized offline SFT on self-generated data; SCoRe explicitly targets the resulting limitations (mode collapse and training\u2013inference mismatch) by moving from offline SFT to online RL on self-generated correction trajectories."
+    }
+  ],
+  "synthesis_narrative": "SCoRe\u2019s key contribution\u2014teaching an LLM to self-correct through multi-turn online reinforcement learning with entirely self-generated data\u2014sits at the intersection of RL-from-feedback and self-critique/refinement lines of work. The RL foundation comes from Christiano et al. and InstructGPT, which established optimizing language policies from scalar feedback via online rollouts. Constitutional AI then demonstrated that models can supervise themselves through AI-generated critiques and revisions, motivating SCoRe\u2019s decision to remove reliance on stronger teachers or humans and to let the policy generate and act on its own feedback. On the other side, STaR and Self-Instruct showed that offline SFT on model-generated traces can bootstrap capabilities, but they also revealed critical shortcomings\u2014distribution mismatch and mode preference\u2014that SCoRe directly addresses by training on-policy and online over the model\u2019s own correction trajectories. Self-Refine codified iterative, inference-time self-correction without training; SCoRe turns that protocol into a learning problem, explicitly optimizing the policy to produce effective critiques and revisions. Finally, Reflexion highlighted the promise of multi-turn reflection for agents but lacked a principled training mechanism; SCoRe supplies that mechanism via online RL. Together, these works directly shaped SCoRe\u2019s formulation: multi-turn, on-policy RL that uses self-generated feedback to reliably instill self-correction behavior where offline SFT and untrained iteration fall short.",
+  "analysis_timestamp": "2026-01-06T23:09:26.616701"
+}

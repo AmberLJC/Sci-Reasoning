@@ -1,0 +1,83 @@
+{
+  "prior_works": [
+    {
+      "title": "iCaRL: Incremental Classifier and Representation Learning",
+      "authors": [
+        "Sylvestre-Alvise Rebuffi",
+        "Alexander Kolesnikov",
+        "Georg Sperl",
+        "Christoph H. Lampert"
+      ],
+      "year": 2017,
+      "role": "Introduced exemplar-based replay with class-wise memory and herding selection, a backbone paradigm for class-incremental learning.",
+      "relationship_sentence": "FedCBDR generalizes iCaRL\u2019s class-wise exemplar idea to the federated setting with a globally coordinated, importance-sensitive sampler that maintains balanced class memories across clients."
+    },
+    {
+      "title": "Learning a Unified Classifier Incrementally via Rebalancing (LUCIR)",
+      "authors": [
+        "Saihui Hou",
+        "Xinyu Pan",
+        "Chen Change Loy",
+        "Zilei Wang",
+        "Dahua Lin"
+      ],
+      "year": 2019,
+      "role": "Proposed rebalancing mechanisms (cosine classifier and margin-based constraints) to mitigate bias toward newly added classes in class-incremental learning.",
+      "relationship_sentence": "FedCBDR\u2019s reweighting of the learning objective to counteract bias between replayed (old) and new classes is conceptually aligned with LUCIR\u2019s rebalancing principles."
+    },
+    {
+      "title": "Large Scale Incremental Learning (BiC)",
+      "authors": [
+        "Yue Wu",
+        "Yinpeng Chen",
+        "Lijuan Wang",
+        "Yuancheng Ye",
+        "Zicheng Liu",
+        "Yandong Guo"
+      ],
+      "year": 2019,
+      "role": "Introduced a bias-correction module to explicitly rectify prediction bias caused by the imbalance between old and new classes.",
+      "relationship_sentence": "FedCBDR\u2019s class-aware loss reweighting plays a role analogous to BiC\u2019s bias correction, addressing systematic skew between newly arrived and replayed classes under incremental updates."
+    },
+    {
+      "title": "Class-Balanced Loss Based on Effective Number of Samples",
+      "authors": [
+        "Yin Cui",
+        "Menglin Jia",
+        "Tsung-Yi Lin",
+        "Yang Song",
+        "Serge Belongie"
+      ],
+      "year": 2019,
+      "role": "Provided a principled per-class reweighting scheme to handle long-tailed and class-imbalanced distributions.",
+      "relationship_sentence": "FedCBDR\u2019s objective reweighting for class imbalance is grounded in class-balanced loss ideas that weight classes by their effective sample counts."
+    },
+    {
+      "title": "Dark Experience for General Continual Learning (DER/DER++)",
+      "authors": [
+        "Pietro Buzzega",
+        "Matteo Boschini",
+        "Angelo Porrello",
+        "Davide Abati",
+        "Simone Calderara"
+      ],
+      "year": 2020,
+      "role": "Showed that rehearsal with stored samples and logit-level distillation effectively preserves prior knowledge in continual learning.",
+      "relationship_sentence": "FedCBDR\u2019s replay mechanism that leverages representation/logit information from prior tasks builds on DER\u2019s insight that soft targets and stored exemplars strengthen rehearsal."
+    },
+    {
+      "title": "FedDF: Data-Free Knowledge Distillation for Heterogeneous Federated Learning",
+      "authors": [
+        "Tao Lin",
+        "Lingjing Kong",
+        "Sebastian U. Stich",
+        "Martin Jaggi"
+      ],
+      "year": 2020,
+      "role": "Demonstrated privacy-preserving aggregation of client knowledge on the server via data-free (or unlabeled-data) distillation.",
+      "relationship_sentence": "FedCBDR\u2019s global-perspective reconstruction of prior task knowledge in a privacy-preserving manner is informed by FedDF\u2019s paradigm of aggregating client knowledge without sharing raw data."
+    }
+  ],
+  "synthesis_narrative": "FedCBDR\u2019s core innovation is to make replay-based federated class-incremental learning explicitly class-balanced by coordinating memory construction from a global perspective and reweighting the objective to correct bias between replayed and new classes. The replay foundation is inherited from iCaRL, which introduced class-wise exemplar management and herding to preserve old knowledge, and from DER, which established that augmenting rehearsal with logit/representation matching strengthens retention. Building on these rehearsal paradigms, FedCBDR introduces a class-aware, importance-sensitive sampler that is globally coordinated across clients\u2014a natural federated generalization of iCaRL\u2019s per-class exemplar logic, now informed by global statistics.\nAt the objective level, LUCIR and BiC directly address the characteristic bias toward newly introduced classes in class-incremental settings. Their rebalancing and bias-correction mechanisms motivate FedCBDR\u2019s reweighted training objective to mitigate the skew between abundant new samples and scarce replayed ones. Complementing this, Class-Balanced Loss provides a principled recipe for per-class weighting based on effective sample counts, which underlies FedCBDR\u2019s class-wise reweighting to tackle both within-buffer and across-task imbalances.\nFinally, the federated constraint\u2014preserving privacy while forming a global view\u2014draws on data-free distillation ideas typified by FedDF, which aggregates client knowledge without sharing raw data. FedCBDR adapts this to reconstruct global representations of prior tasks that guide class-aware sampling, achieving privacy-preserving, globally balanced replay across heterogeneous clients.",
+  "analysis_timestamp": "2026-01-07T00:21:32.267934"
+}

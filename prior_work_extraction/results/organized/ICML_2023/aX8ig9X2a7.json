@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "AI Text Watermarking",
+      "authors": "Scott Aaronson",
+      "year": 2022,
+      "role": "Inspiration",
+      "relationship_sentence": "Aaronson\u2019s blog post proposed the keyed, context-dependent greenlist idea\u2014hashing the prefix to select a favored subset of tokens and then biasing sampling\u2014directly inspiring the paper\u2019s core watermarking mechanism and detection philosophy."
+    },
+    {
+      "title": "GLTR: Statistical Detection and Visualization of Generated Text",
+      "authors": "Sebastian Gehrmann et al.",
+      "year": 2019,
+      "role": "Baseline",
+      "relationship_sentence": "GLTR established probability-based detection of LM outputs using access to model likelihoods, serving as the primary baseline whose practical limitations (model access, brittleness) this paper aims to surpass with a watermark that enables public detection without API access."
+    },
+    {
+      "title": "DetectGPT: Zero-Shot Machine-Generated Text Detection using Probability Curvature",
+      "authors": "Eric Mitchell et al.",
+      "year": 2023,
+      "role": "Gap Identification",
+      "relationship_sentence": "DetectGPT\u2019s model-scoring-based detector illustrates the fragility and access-dependence of post-hoc detectors, motivating the paper\u2019s key contribution of a built-in watermark with calibrated hypothesis testing that avoids model/API dependence."
+    },
+    {
+      "title": "Automatic Detection of Generated Text is Easiest When Humans Are Fooled",
+      "authors": "Daphne Ippolito et al.",
+      "year": 2020,
+      "role": "Gap Identification",
+      "relationship_sentence": "Ippolito et al. showed that both human and automated detection of generated text are unreliable, directly motivating the paper\u2019s shift from after-the-fact detectors to proactive watermarking with statistical guarantees."
+    },
+    {
+      "title": "Natural Language Watermarking: Challenges and Approaches",
+      "authors": "Ulas Topkara et al.",
+      "year": 2006,
+      "role": "Foundation",
+      "relationship_sentence": "This work framed natural-language watermarking as an information-hiding problem and documented robustness challenges (e.g., edits/paraphrases), a foundational perspective the paper adopts while proposing token-level, statistical watermarks suited to neural LMs."
+    },
+    {
+      "title": "Provably Secure Steganography",
+      "authors": "Nicholas J. Hopper et al.",
+      "year": 2002,
+      "role": "Foundation",
+      "relationship_sentence": "Hopper\u2013Langford\u2013von Ahn introduced PRF/keyed steganographic formalisms and security notions that underpin the paper\u2019s keyed, context-dependent token subset selection and its information-theoretic sensitivity analysis."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core innovation\u2014a keyed, context-dependent watermark that softly biases sampling toward a pseudorandom \u201cgreenlist\u201d and is verifiable via a simple hypothesis test\u2014emerges at the intersection of cryptographic steganography, classic NLP watermarking, and the limitations of post-hoc text detectors. Foundationally, Topkara et al. established natural language watermarking as an information-hiding problem with practical robustness concerns, while Hopper\u2013Langford\u2013von Ahn provided the cryptographic underpinnings for keyed, PRF-based embedding and the corresponding detection/security lens. These ideas directly inform the paper\u2019s choice to deterministically derive greenlists from a secret key and the preceding context and to analyze detectability using information-theoretic tools.\n\nConcurrently, the field\u2019s reliance on post-hoc detectors\u2014typified by GLTR\u2019s likelihood-based signals and DetectGPT\u2019s curvature-based scores\u2014highlighted structural weaknesses: dependence on model access, sensitivity to domain shift, and limited calibration. Ippolito et al. further demonstrated that both human and automated detection are brittle, crystallizing the need for proactive provenance signals. Against this backdrop, Aaronson\u2019s 2022 proposal to hash the context to select a favored token subset and bias generation provided the immediate spark. The present paper operationalizes that idea at scale for LLMs, formalizes a simple z-test with interpretable p-values for public verification without API access, and supplies an information-theoretic sensitivity analysis. Together, these threads yield a practically deployable, statistically grounded watermark that directly addresses the gaps of prior detection paradigms while building on the cryptographic and NLP watermarking foundations.",
+  "analysis_timestamp": "2026-01-06T23:09:26.558832"
+}

@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Overcoming catastrophic forgetting in neural networks",
+      "authors": "Kirkpatrick et al.",
+      "year": 2017,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "EWC\u2019s fixed, diagonal Fisher/Hessian-based importance weights exemplify the static Hessian approximation that this paper critiques and seeks to replace with an adaptive, online counterpart via meta-gradient alignment."
+    },
+    {
+      "title": "Online Structured Laplace Approximations for Overcoming Catastrophic Forgetting",
+      "authors": "Ritter et al.",
+      "year": 2018,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "By framing continual learning as an online Laplace approximation that relies on Hessian information, this work formalizes the Hessian-centric view that the paper leverages to connect meta-CL updates to implicit online Hessian estimation."
+    },
+    {
+      "title": "Memory Aware Synapses: Learning what (not) to forget",
+      "authors": "Aljundi et al.",
+      "year": 2018,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "MAS exemplifies regularization approaches that compute and then freeze parameter importance (a proxy for Hessian curvature), directly motivating the need for an adaptive, continually updated curvature estimate."
+    },
+    {
+      "title": "Gradient Episodic Memory for Continual Learning",
+      "authors": "Lopez-Paz and Ranzato",
+      "year": 2017,
+      "arxiv_id": null,
+      "role": "Related Problem",
+      "relationship_sentence": "GEM\u2019s constraint enforcing non-negative dot products between current and past-task gradients established gradient alignment as a mechanism to reduce interference, which underpins interpreting meta-CL updates as curvature-aware and sensitive to replay sampling variance."
+    },
+    {
+      "title": "Learning to Learn without Forgetting by Maximizing Transfer and Minimizing Interference",
+      "authors": "Riemer et al.",
+      "year": 2019,
+      "arxiv_id": null,
+      "role": "Extension",
+      "relationship_sentence": "MER\u2019s Reptile-style meta-objective operationalizes gradient alignment via replay, which this paper extends by viewing it as an implicit online Hessian estimator and stabilizing it with a variance-reduced replay gradient estimator."
+    },
+    {
+      "title": "Accelerating Stochastic Gradient Descent using Predictive Variance Reduction",
+      "authors": "Johnson and Zhang",
+      "year": 2013,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "SVRG\u2019s control-variate principle directly inspires the paper\u2019s variance-reduced replay gradient construction that lowers the stochastic noise in the meta-alignment update, thereby sharpening the implicit Hessian approximation."
+    }
+  ],
+  "synthesis_narrative": "Regularization-based continual learning began by penalizing deviations from previous parameters using curvature surrogates: Elastic Weight Consolidation anchored updates with a fixed diagonal Fisher/Hessian, while Memory Aware Synapses computed frozen importance via sensitivity of outputs to parameters. These methods crystallized a Hessian-centric view of stability, but their static estimates constrained transfer\u2013forgetting trade-offs. Online Structured Laplace Approximations further formalized continual learning as maintaining a posterior via online Hessian updates, clarifying how curvature governs forgetting and transfer, yet still updated curvature coarsely and not at the granularity of stepwise learning. In parallel, gradient-based replay methods reframed stability as gradient compatibility: Gradient Episodic Memory enforced non-negative dot products between current and past-task gradients to prevent interference, and Meta-Experience Replay introduced a Reptile-style meta-objective to directly maximize transfer and minimize interference through replay-driven meta-updates.\nThese strands revealed a gap: gradient-alignment meta-updates can be interpreted as implicitly encoding curvature online, but their reliance on randomly sampled memory induces high-variance estimates that blunt curvature fidelity. Given SVRG\u2019s control-variate insight for variance reduction in stochastic optimization, a natural next step was to reinterpret meta-CL\u2019s alignment as an online Hessian estimator and endow it with a variance-reduced replay gradient. This synthesis keeps the adaptability of meta-CL while addressing the static-curvature weakness of classic regularization, yielding a stabilized, timely curvature signal that more effectively balances transfer and forgetting.",
+  "target_paper": {
+    "title": "Meta Continual Learning Revisited: Implicitly Enhancing Online Hessian Approximation via Variance Reduction",
+    "authors": "Yichen Wu, Long-Kai Huang, Renzhen Wang, Deyu Meng, Ying Wei",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "oral",
+    "keywords": "Continual Learning",
+    "abstract": "Regularization-based methods have so far been among the *de facto* choices for continual learning. Recent theoretical studies have revealed that these methods all boil down to relying on the Hessian matrix approximation of model weights. \nHowever, these methods suffer from suboptimal trade-offs between knowledge transfer and forgetting due to fixed and unchanging Hessian estimations during training.\nAnother seemingly parallel strand of Meta-Continual Learning (Meta-CL) algorithms enforces alignment between gradients of previous tasks and that of the current task. \nIn this work we revisit Meta-CL and for the first time bridge it with regularization-based methods. Concretely, Meta-CL implicitly approximates Hessian in an online manner, which enjoys the benefits of timely adaptation but meantime suffers from high variance induced by random memory buffer sampling. \nWe are thus highly motivated to combine the best of both worlds, through the proposal of Variance Reduced Meta-CL (VR-MCL) to ",
+    "openreview_id": "TpD2aG1h0D",
+    "forum_id": "TpD2aG1h0D"
+  },
+  "analysis_timestamp": "2026-01-06T13:40:42.594059"
+}

@@ -1,0 +1,78 @@
+{
+  "prior_works": [
+    {
+      "title": "Score-Based Generative Modeling through Stochastic Differential Equations",
+      "authors": [
+        "Yang Song",
+        "Jascha Sohl-Dickstein",
+        "Diederik P. Kingma",
+        "Abhishek Kumar",
+        "Stefano Ermon",
+        "Ben Poole"
+      ],
+      "year": 2021,
+      "role": "Foundational diffusion framework",
+      "relationship_sentence": "Established the SDE/PDE view and predictor\u2013corrector samplers for score-based models; FKC builds on this by deriving principled Feynman\u2013Kac weights to simulate modified PDEs corresponding to composed/annealed target distributions."
+    },
+    {
+      "title": "Diffusion Models Beat GANs on Image Synthesis",
+      "authors": [
+        "Prafulla Dhariwal",
+        "Alexander Nichol"
+      ],
+      "year": 2021,
+      "role": "Guidance heuristic baseline",
+      "relationship_sentence": "Introduced classifier guidance via classifier gradients; FKC generalizes the idea of guided sampling by replacing heuristic guidance with PDE-consistent Feynman\u2013Kac correctors along target paths."
+    },
+    {
+      "title": "Classifier-Free Diffusion Guidance",
+      "authors": [
+        "Jonathan Ho",
+        "Tim Salimans"
+      ],
+      "year": 2022,
+      "role": "Guidance without auxiliary classifier",
+      "relationship_sentence": "Proposed mixing conditional and unconditional scores as a heuristic; FKC provides a principled alternative that accounts for intermediate distributions via Feynman\u2013Kac weighting and SMC, addressing CFG\u2019s mismatch at intermediate times."
+    },
+    {
+      "title": "Products of Experts",
+      "authors": [
+        "Geoffrey E. Hinton"
+      ],
+      "year": 2002,
+      "role": "PoE composition principle",
+      "relationship_sentence": "Formalized geometric/product compositions of distributions; FKC offers an explicit simulation scheme to sample from PoE targets formed by multiple pretrained score models."
+    },
+    {
+      "title": "Annealed Importance Sampling",
+      "authors": [
+        "Radford M. Neal"
+      ],
+      "year": 2001,
+      "role": "Annealing and geometric path weighting",
+      "relationship_sentence": "Introduced annealed/geometric bridges with importance weights; FKC extends this idea to continuous-time diffusion paths, deriving continuous Feynman\u2013Kac weights for annealed and geometric-averaged targets."
+    },
+    {
+      "title": "Feynman\u2013Kac Formulae: Genealogical and Interacting Particle Systems with Applications",
+      "authors": [
+        "Pierre Del Moral"
+      ],
+      "year": 2004,
+      "role": "Feynman\u2013Kac theoretical foundation",
+      "relationship_sentence": "Provides the path-measure and weighting theory underlying Feynman\u2013Kac models; FKC directly instantiates these weights to correct diffusion trajectories toward desired composite targets."
+    },
+    {
+      "title": "Sequential Monte Carlo Samplers",
+      "authors": [
+        "Pierre Del Moral",
+        "Arnaud Doucet",
+        "Ajay Jasra"
+      ],
+      "year": 2006,
+      "role": "SMC algorithmic template",
+      "relationship_sentence": "Developed SMC with tempering/resampling for static targets; FKC adapts these ideas to simulate FK-weighted diffusion dynamics, using resampling to control weight degeneracy along the target path."
+    }
+  ],
+  "synthesis_narrative": "The core contribution of Feynman-Kac Correctors (FKC) is a principled, efficient way to sample from annealed, geometric-averaged, and product-of-experts targets derived from pretrained score-based models by correctly simulating the associated PDEs. This builds directly on the SDE/PDE formulation and predictor\u2013corrector sampling of score-based generative modeling (Song et al., 2021), but replaces heuristic guidance with corrections derived from the Feynman\u2013Kac (FK) formula. The need for principled guidance stems from the success and limitations of classifier and classifier-free guidance (Dhariwal & Nichol, 2021; Ho & Salimans, 2022), which mix scores but do not preserve the correct intermediate distributions, necessitating ad hoc correctors. FKC instead leverages the FK path-measure theory (Del Moral, 2004) to derive continuous-time weights that exactly account for potential terms induced by annealing, geometric averaging, or PoE compositions. The notion of geometric bridges and annealed paths is inherited from Annealed Importance Sampling (Neal, 2001), which FKC generalizes to diffusion trajectories via FK weights. Product-of-experts composition (Hinton, 2002) provides the statistical semantics for combining multiple pretrained models; FKC supplies the missing sampling mechanism that targets the resulting product distribution faithfully over time. Finally, to make these FK-weighted simulations practical, FKC employs Sequential Monte Carlo resampling (Del Moral, Doucet & Jasra, 2006) to control weight degeneracy, yielding a scalable algorithm that unifies guidance, annealing, and composition under a single PDE-consistent framework.",
+  "analysis_timestamp": "2026-01-07T00:21:32.386318"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "OptNet: Differentiable Optimization as a Layer in Neural Networks",
+      "authors": "Brandon Amos, J. Zico Kolter",
+      "year": 2017,
+      "role": "Foundational differentiable optimization layer",
+      "relationship_sentence": "Established the core technique of implicit differentiation through optimization problems, enabling DiffTORI to treat trajectory optimization itself as a differentiable policy module."
+    },
+    {
+      "title": "Differentiable Convex Optimization Layers",
+      "authors": "Akshay Agrawal, Brandon Amos, Shane Barratt, Stephen Boyd, Stephen Diamond, J. Zico Kolter",
+      "year": 2019,
+      "role": "General framework for differentiating through convex programs",
+      "relationship_sentence": "Provided scalable, numerically stable tools to differentiate through structured optimizers, directly informing DiffTORI\u2019s ability to backpropagate gradients through trajectory optimization procedures."
+    },
+    {
+      "title": "Differentiable MPC for End-to-end Planning and Control",
+      "authors": "Brandon Amos, J. Zico Kolter",
+      "year": 2018,
+      "role": "Differentiable trajectory optimization for control",
+      "relationship_sentence": "Demonstrated that MPC/iLQR-style planners can be embedded and trained end-to-end, a core design principle that DiffTORI extends to learn both dynamics and cost for RL and imitation objectives."
+    },
+    {
+      "title": "Iterative Linear Quadratic Regulator Design for Nonlinear Biological Movement Systems",
+      "authors": "Weiwei Li, Emanuel Todorov",
+      "year": 2004,
+      "role": "Classical trajectory optimization (iLQR/DDP)",
+      "relationship_sentence": "Provides the trajectory optimization backbone (iLQR/DDP) that DiffTORI differentiates through, supplying the structure for generating action sequences from cost and dynamics models."
+    },
+    {
+      "title": "Learning Continuous Control Policies by Stochastic Value Gradients",
+      "authors": "Nicolas Heess, Greg Wayne, David Silver, Timothy Lillicrap, Tom Erez, Yuval Tassa",
+      "year": 2015,
+      "role": "End-to-end model-based RL via value gradients",
+      "relationship_sentence": "Introduced backpropagating policy gradients through learned dynamics to directly optimize task return, a key idea DiffTORI adopts but routes through a trajectory optimizer rather than raw rollouts."
+    },
+    {
+      "title": "PILCO: A Model-Based and Data-Efficient Approach to Policy Search",
+      "authors": "Marc Peter Deisenroth, Carl E. Rasmussen",
+      "year": 2011,
+      "role": "Analytic policy gradients through probabilistic dynamics",
+      "relationship_sentence": "Showed that learning dynamics to maximize task performance via analytic gradients can be highly data-efficient, motivating DiffTORI\u2019s objective-aligned learning of dynamics through the optimizer."
+    },
+    {
+      "title": "Guided Policy Search",
+      "authors": "Sergey Levine, Vladlen Koltun",
+      "year": 2013,
+      "role": "Bridging trajectory optimization and policy learning",
+      "relationship_sentence": "Used trajectory optimization to supervise policy learning, highlighting the synergy between TO and policies that DiffTORI internalizes by making the TO process itself differentiable and policy-like."
+    }
+  ],
+  "synthesis_narrative": "DiffTORI\u2019s core contribution\u2014using a differentiable trajectory optimizer as the policy representation and learning both dynamics and cost end-to-end\u2014rests on two converging threads: differentiable optimization and objective-aligned model-based reinforcement learning. On the optimization side, OptNet and subsequent work on differentiable convex optimization layers established implicit differentiation through optimizers as a stable, general-purpose mechanism for embedding optimization inside neural architectures. Differentiable MPC then specialized this idea to control, showing that iLQR/MPC-style trajectory optimizers can be unrolled or implicitly differentiated to train parameters of costs and dynamics from task signals. These advances rely fundamentally on iLQR/DDP, which provides the structured trajectory optimization backbone (linearization/quadratization, backward pass) that makes efficient differentiation feasible.\n\nOn the RL side, PILCO and Stochastic Value Gradients demonstrated that learning and exploiting differentiable dynamics to directly optimize expected return addresses the objective mismatch inherent in purely predictive model learning. DiffTORI inherits this principle but channels gradients through the trajectory optimization process itself, aligning learned dynamics and costs with downstream task performance. Finally, Guided Policy Search highlighted the practical synergy between trajectory optimization and policy learning; DiffTORI internalizes this synergy by treating the optimizer as the policy, enabling end-to-end training for both reinforcement and imitation learning while preserving the structure and strong priors of trajectory optimization.",
+  "analysis_timestamp": "2026-01-07T00:02:04.759311"
+}

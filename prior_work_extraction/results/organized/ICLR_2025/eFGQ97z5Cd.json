@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Outrageously Large Neural Networks: The Sparsely-Gated Mixture-of-Experts Layer",
+      "authors": "Noam Shazeer et al.",
+      "year": 2017,
+      "role": "Foundation",
+      "relationship_sentence": "Introduced MoE layers and the learned router with softmax gating probabilities\u2014the exact routing weights (RWs) this paper repurposes as semantic embeddings."
+    },
+    {
+      "title": "GShard: Scaling Giant Neural Networks with Conditional Computation and Automatic Sharding",
+      "authors": "Dmitry Lepikhin et al.",
+      "year": 2020,
+      "role": "Extension",
+      "relationship_sentence": "Extended MoE to Transformer LMs with top-2 gating and load-balancing losses, defining the practical RW signals (pre-top-k soft routing) that the current work extracts and analyzes."
+    },
+    {
+      "title": "Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity",
+      "authors": "William Fedus et al.",
+      "year": 2021,
+      "role": "Gap Identification",
+      "relationship_sentence": "Standardized simple top-1 routing where gating scores are used solely for dispatch and balancing; this paper explicitly addresses that overlooked gap by using those router scores as off-the-shelf embeddings."
+    },
+    {
+      "title": "GLaM: Efficient Scaling of Language Models with Mixture-of-Experts",
+      "authors": "Nan Du et al.",
+      "year": 2022,
+      "role": "Extension",
+      "relationship_sentence": "Demonstrated large-scale MoE LLMs and router behavior across layers; the proposed method directly leverages these GLaM-style router distributions as representation vectors."
+    },
+    {
+      "title": "Sentence-BERT: Sentence Embeddings using Siamese BERT-Networks",
+      "authors": "Nils Reimers et al.",
+      "year": 2019,
+      "role": "Foundation",
+      "relationship_sentence": "Established the sentence-embedding problem formulation and evaluation protocols that this work targets, providing the benchmark setting where RW-based embeddings are assessed."
+    },
+    {
+      "title": "SimCSE: Simple Contrastive Learning of Sentence Embeddings",
+      "authors": "Tianyu Gao et al.",
+      "year": 2021,
+      "role": "Gap Identification",
+      "relationship_sentence": "Showed that strong embeddings typically require (contrastive) finetuning; the present work addresses this limitation by achieving competitive performance without finetuning via MoE routing weights and their combination with hidden states."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core insight\u2014that the router in sparse Mixture-of-Experts LLMs already computes a rich, task-agnostic representation\u2014traces directly to the invention and scaling of MoE routing. Shazeer et al. (2017) introduced sparsely-gated MoE layers and the learned router whose softmax gating probabilities define the routing weights; these are precisely the signals the present work repurposes as embeddings. GShard (Lepikhin et al., 2020) adapted MoE to Transformers with top-k gating and balancing losses, making router scores a stable, ubiquitous byproduct across layers that can be extracted without modifying training. Switch Transformers (Fedus et al., 2021) popularized simple top-1 routing for trillion-parameter models, but treated router outputs purely as a dispatch mechanism\u2014an implicit gap this paper exploits by reframing those scores as robust semantic embeddings. GLaM (Du et al., 2022) further validated the scalability and behavior of MoE routers in large LLMs, providing the exact architectural context whose routing distributions the authors analyze.\nIn parallel, the sentence-embedding literature defined both the problem and its prevailing assumption that finetuning is necessary. Sentence-BERT (Reimers & Gurevych, 2019) established standard evaluation, while SimCSE (Gao et al., 2021) demonstrated that contrastive finetuning is key for strong performance. The current work challenges this premise by showing MoE routing weights\u2014complementary to hidden states\u2014yield strong, prompt-robust embeddings without any finetuning, and by combining RW and HS (MoEE) to surpass either alone.",
+  "analysis_timestamp": "2026-01-06T23:09:26.636343"
+}

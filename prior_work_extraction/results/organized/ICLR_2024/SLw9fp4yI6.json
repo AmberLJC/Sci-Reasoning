@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "DExperts: Decoding-Time Controlled Text Generation with Experts and Anti-Experts",
+      "authors": "Liu et al.",
+      "year": 2021,
+      "arxiv_id": "",
+      "role": "Extension",
+      "relationship_sentence": "The paper recasts DExperts\u2019 expert/anti-expert ratio as linear logit-space arithmetic and generalizes it to compose multiple controllers with tunable strengths without additional finetuning."
+    },
+    {
+      "title": "GeDi: Generative Discriminator Guided Sequence Generation",
+      "authors": "Krause et al.",
+      "year": 2021,
+      "arxiv_id": "",
+      "role": "Extension",
+      "relationship_sentence": "GeDi\u2019s Bayes-guided class-conditional steering is expressed as adding discriminator LM log-likelihoods to the base model\u2019s logits, which the paper unifies and extends within a single arithmetic framework."
+    },
+    {
+      "title": "FUDGE: Controlled Text Generation with Future Discriminators",
+      "authors": "Yang and Klein",
+      "year": 2021,
+      "arxiv_id": "",
+      "role": "Extension",
+      "relationship_sentence": "FUDGE\u2019s future-conditioned discriminator update corresponds to additive log-probability adjustments that the paper incorporates as a special case of its model arithmetic for attribute composition."
+    },
+    {
+      "title": "Plug and Play Language Models: A Simple Approach to Controlled Text Generation",
+      "authors": "Dathathri et al.",
+      "year": 2020,
+      "arxiv_id": "1912.02164",
+      "role": "Gap Identification",
+      "relationship_sentence": "The work targets PPLM\u2019s gradient-in-the-loop inefficiency and instability by replacing per-step hidden-state optimization with closed-form logit arithmetic that yields cheaper, more precise control at inference."
+    },
+    {
+      "title": "Self-Debiasing for Generative Language Models",
+      "authors": "Schick et al.",
+      "year": 2021,
+      "arxiv_id": "",
+      "role": "Extension",
+      "relationship_sentence": "Self-Debiasing\u2019s subtractive logit adjustment using a bias-only prompt is captured as anti-expert subtraction in the model arithmetic, which the paper extends to multi-attribute, multi-model compositions."
+    },
+    {
+      "title": "Contrastive Decoding for Open-Ended Text Generation",
+      "authors": "Li et al.",
+      "year": 2022,
+      "arxiv_id": "",
+      "role": "Related Problem",
+      "relationship_sentence": "The paper generalizes contrastive decoding\u2019s difference-of-models guidance (strong vs. weak LM) as a ratio in logit space, enabling broader, attribute-driven composition beyond quality control."
+    },
+    {
+      "title": "Fast Inference from Transformers via Speculative Decoding",
+      "authors": "Leviathan et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Extension",
+      "relationship_sentence": "The paper extends speculative decoding to verify and accelerate sequences generated under composed-model logits, showing compatibility that preserves near single-model runtime."
+    }
+  ],
+  "synthesis_narrative": "A line of controlled generation methods established that decoding-time probability shaping can steer language models without retraining. DExperts introduced a ratio between an expert and anti-expert LM to bias outputs toward or away from attributes, operationalized as logit additions that realize a product-of-experts view. GeDi framed control as Bayes-guided class-conditional steering with a generative discriminator, effectively adding the discriminator\u2019s class likelihoods to the base model\u2019s token logits. FUDGE showed that a future-conditioned discriminator can adjust next-token probabilities via additive log-prob updates computed from partial continuations. PPLM demonstrated strong attribute control by iteratively perturbing hidden states using gradient signals but suffered from instability and substantial decoding overhead. Self-Debiasing revealed a simple subtractive logit trick by contrasting biased versus neutral prompts to reduce unwanted attributes. In parallel, contrastive decoding reduced degeneration by penalizing continuations favored by a weaker LM, operationally a difference-of-models ratio in logit space. Finally, speculative decoding provided a general mechanism to accelerate sampling by drafting tokens and verifying them with a target distribution.\nThese ingredients collectively suggested a unifying perspective: many CTG techniques are instances of simple arithmetic on model logits or log-likelihoods. By making that arithmetic explicit, one can compose multiple controllers, tune strengths continuously, and subsume prior methods as special cases while avoiding PPLM\u2019s gradient costs. Extending speculative decoding to these composed distributions yields practical, efficient sampling, enabling scalable, fine-grained control at near single-model latency.",
+  "target_paper": {
+    "title": "Controlled Text Generation via Language Model Arithmetic",
+    "authors": "Jasper Dekoninck, Marc Fischer, Luca Beurer-Kellner, Martin Vechev",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Controlled text generation, LLM, Natural Language Processing",
+    "abstract": "As Large Language Models (LLMs) are deployed more widely, customization with respect to vocabulary, style, and character becomes more important. In this work, we introduce model arithmetic, a novel inference framework for composing and biasing LLMs without the need for model (re)training or highly specific datasets. In addition, the framework allows for more precise control of generated text than direct prompting and prior controlled text generation (CTG) techniques. Using model arithmetic, we can express prior CTG techniques as simple formulas and naturally extend them to new and more effective formulations. Further, we show that speculative sampling, a technique for efficient LLM sampling, extends to our setting. This enables highly efficient text generation with multiple composed models with only marginal overhead over a single model. Our empirical evaluation demonstrates that model arithmetic allows fine-grained control of generated text while outperforming state-of-the-art on the ",
+    "openreview_id": "SLw9fp4yI6",
+    "forum_id": "SLw9fp4yI6"
+  },
+  "analysis_timestamp": "2026-01-06T05:52:52.022602"
+}

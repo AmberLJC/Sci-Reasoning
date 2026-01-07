@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Reluplex: An Efficient SMT Solver for Verifying Deep Neural Networks",
+      "authors": "Guy Katz et al.",
+      "year": 2017,
+      "role": "Foundation",
+      "relationship_sentence": "Reluplex formalized DNN verification as checking local robustness properties over an \u03b5-ball around a reference input; our work retains this verification template but replaces the input-centered ball with polyhedral regions induced by fixed neural activation patterns (NAPs)."
+    },
+    {
+      "title": "AI2: Safety and Robustness Certification of Neural Networks with Abstract Interpretation",
+      "authors": "Timothy Gehr et al.",
+      "year": 2018,
+      "role": "Gap Identification",
+      "relationship_sentence": "AI2 exemplifies the prevailing 'data-as-specification' paradigm and shows scalable but conservative certification around individual inputs; our paper explicitly addresses the resulting tight, point-specific regions by proposing NAP-based specifications that decouple correctness from a single input neighborhood."
+    },
+    {
+      "title": "Provable Defenses via the Convex Outer Adversarial Polytope",
+      "authors": "Eric Wong et al.",
+      "year": 2018,
+      "role": "Baseline",
+      "relationship_sentence": "The convex adversarial polytope method is a canonical baseline for certifying local robustness around inputs; we benchmark against it and show its certified regions rarely cover other test inputs, directly motivating our shift to neural-representation (NAP) specifications."
+    },
+    {
+      "title": "Certified Adversarial Robustness via Randomized Smoothing",
+      "authors": "Jeremy M. Cohen et al.",
+      "year": 2019,
+      "role": "Baseline",
+      "relationship_sentence": "Randomized smoothing provides state-of-the-art input-centric certifications under Gaussian perturbations; our work highlights that these certificates remain input-specific and tight, prompting our representation-as-specification approach that can certify entire NAP regions shared across inputs."
+    },
+    {
+      "title": "On the Number of Linear Regions of Deep Neural Networks",
+      "authors": "Guido F. Mont\u00fafar et al.",
+      "year": 2014,
+      "role": "Foundation",
+      "relationship_sentence": "This work established that ReLU networks partition input space into convex linear regions indexed by activation patterns; our core idea directly uses these activation-pattern regions as the units of specification to be verified."
+    },
+    {
+      "title": "Evaluating Robustness of Neural Networks with Mixed Integer Programming",
+      "authors": "Vincent Tjeng et al.",
+      "year": 2019,
+      "role": "Extension",
+      "relationship_sentence": "Tjeng et al. showed how to encode fixed ReLU activation patterns and verify linear properties over the induced polytope via MILP; we adopt this formulation to check label invariance over NAP cells, operationalizing neural-representation-as-specification."
+    },
+    {
+      "title": "Deep k-Nearest Neighbors: Towards Confident, Interpretable and Robust Deep Learning",
+      "authors": "Nicholas Papernot et al.",
+      "year": 2018,
+      "role": "Inspiration",
+      "relationship_sentence": "DkNN demonstrated that internal representations can signal correctness by relating a test point\u2019s hidden activations to training examples; this directly inspired our move from data-centered neighborhoods to specifications grounded in neural activation patterns."
+    }
+  ],
+  "synthesis_narrative": "The central shift in \u201cTowards Reliable Neural Specifications\u201d is from data-centric local neighborhoods to specifications grounded in neural activation patterns (NAPs). This leap rests on two pillars: the established local-robustness verification paradigm and the structural understanding of ReLU networks. Reluplex crystallized DNN verification as proving properties over \u03b5-balls around a reference input, while AI2 and the convex outer adversarial polytope refined this approach into scalable, widely used baselines. Yet these methods certify tight, input-specific regions that rarely extend to other test points. Randomized smoothing broadened the toolkit but remained fundamentally tied to a single input\u2019s neighborhood, perpetuating the transferability limitation that this paper explicitly measures and seeks to overcome.\n\nThe representational lens comes from foundational work showing that ReLU networks partition input space into convex linear regions indexed by activation patterns. This structure makes it natural to define specifications over whole activation-pattern regions rather than around individual inputs. Practically, the paper leverages MILP formulations for fixed activation patterns to verify label invariance across an entire NAP cell, directly extending Tjeng et al.\u2019s encoding. Complementing this, DkNN\u2019s demonstration that hidden representations can diagnose reliability provided a clear motivational bridge: if representations carry semantic reliability signals, they can serve as specifications. Combining these threads, the paper operationalizes neural-representation-as-specification\u2014using NAPs as certifiable, reusable units\u2014thereby addressing the tightness and non-transferability inherent in data-as-specification baselines.",
+  "analysis_timestamp": "2026-01-06T23:09:26.530694"
+}

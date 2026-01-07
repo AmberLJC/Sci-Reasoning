@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "3D Gaussian Splatting for Real-Time Radiance Field Rendering",
+      "authors": "Kerbl, Kopanas, Leimk\u00fchler, Drettakis",
+      "year": 2023,
+      "role": "Foundational 3D representation and renderer",
+      "relationship_sentence": "MetaGS builds directly on 3D Gaussian Splatting, replacing its SH-based appearance with a physics-guided Blinn\u2013Phong decomposition and introducing a meta-training scheme over Gaussians to generalize under lighting shifts."
+    },
+    {
+      "title": "Models of Light Reflection for Computer Synthesized Pictures (Blinn\u2013Phong)",
+      "authors": "James F. Blinn",
+      "year": 1977,
+      "role": "Physical prior for shading and specular reflection",
+      "relationship_sentence": "MetaGS embeds the Blinn\u2013Phong reflectance formulation into the Gaussian pipeline to explicitly decouple diffuse and specular components, enabling accurate relighting from point-light sources and improved OOD robustness."
+    },
+    {
+      "title": "NeRV: Neural Reflectance and Visibility Fields for Relighting and View Synthesis",
+      "authors": "Srinivasan, Mildenhall, Tancik, Barron, Ng",
+      "year": 2021,
+      "role": "Inverse rendering with reflectance/visibility decomposition for relighting",
+      "relationship_sentence": "NeRV demonstrated that disentangling reflectance, lighting, and visibility enables relighting; MetaGS adopts this principle within Gaussians by factorizing shading via Blinn\u2013Phong to achieve controllable relighting."
+    },
+    {
+      "title": "NeRF in the Wild: Neural Radiance Fields for Unconstrained Photo Collections",
+      "authors": "Martin-Brualla, Radwan, Sajjadi, Barron, Dosovitskiy, Duckworth",
+      "year": 2021,
+      "role": "Modeling appearance/illumination variability across captures",
+      "relationship_sentence": "NeRF-W motivated handling illumination variability; MetaGS goes further by meta-learning Gaussian parameters across diverse lighting to maintain geometry/appearance fidelity under OOD illumination."
+    },
+    {
+      "title": "pixelNeRF: Neural Radiance Fields from One or Few Images",
+      "authors": "Yu, Ye, Tancik, Kanazawa",
+      "year": 2021,
+      "role": "Generalizable neural rendering across scenes via learned priors",
+      "relationship_sentence": "pixelNeRF showed that learned priors can generalize across scenes; MetaGS analogously learns a cross-illumination prior over Gaussians so that minimal adaptation suffices under unseen lighting."
+    },
+    {
+      "title": "Model-Agnostic Meta-Learning for Fast Adaptation of Deep Networks (MAML)",
+      "authors": "Finn, Abbeel, Levine",
+      "year": 2017,
+      "role": "Core meta-learning algorithmic template",
+      "relationship_sentence": "MetaGS adopts a MAML-style training objective to optimize Gaussian geometry/appearance parameters for rapid and stable adaptation to new lighting conditions from biased training distributions."
+    }
+  ],
+  "synthesis_narrative": "MetaGS\u2019s key contribution\u2014robust out-of-distribution 3D relighting by meta-learning a physics-guided Gaussian representation\u2014rests on two converging lines of prior work. First, the representation and rendering backbone derives from 3D Gaussian Splatting, which established a fast, differentiable point-based alternative to NeRFs. MetaGS retools this backbone by replacing per-Gaussian appearance (e.g., SH colors) with a physically motivated Blinn\u2013Phong decomposition, directly inspired by classic illumination models that cleanly separate diffuse and specular shading. The decision to embed physical priors is reinforced by inverse-rendering advances like NeRV, which showed that disentangling reflectance, lighting, and visibility is essential for controllable relighting.\nSecond, MetaGS targets generalization under lighting shifts. NeRF-W highlighted the importance of modeling appearance/illumination variability, while pixelNeRF demonstrated that learned priors can generalize across scenes from limited inputs. MetaGS synthesizes these insights with meta-learning: leveraging a MAML-style objective to train Gaussian geometry and appearance so they are explicitly optimized to adapt quickly and reliably to unseen lighting. This unifies generalizable priors with fast adaptation, but at the level of a real-time Gaussian renderer and under a physics-based shading parameterization. Together, these works directly inform MetaGS\u2019s design: a Gaussian representation capable of efficient relighting, stabilized by physical shading structure, and trained with meta-learning to maintain reconstruction fidelity and view synthesis quality under severe OOD illumination.",
+  "analysis_timestamp": "2026-01-07T00:05:12.520409"
+}

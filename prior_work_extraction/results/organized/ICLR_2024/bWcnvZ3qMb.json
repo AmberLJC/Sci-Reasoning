@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Are Transformers Effective for Time Series Forecasting?",
+      "authors": "Ailing Zeng et al.",
+      "year": 2023,
+      "arxiv_id": "2205.13504",
+      "role": "Baseline",
+      "relationship_sentence": "This work established strong lightweight linear baselines (LTSF-Linear/DLinear) and highlighted that heavy attention is unnecessary, which FITS directly targets and surpasses while addressing DLinear\u2019s inability to exploit frequency-domain structure."
+    },
+    {
+      "title": "FEDformer: Frequency Enhanced Decomposed Transformer for Long-Term Series Forecasting",
+      "authors": "Haixu Zhou et al.",
+      "year": 2022,
+      "arxiv_id": "2201.12740",
+      "role": "Inspiration",
+      "relationship_sentence": "FEDformer showed that modeling and filtering in Fourier space improves long-horizon forecasting, directly motivating FITS to abandon attention and operate purely via complex frequency-domain manipulation."
+    },
+    {
+      "title": "Fourier Neural Operator for Parametric Partial Differential Equations",
+      "authors": "Zongyi Li et al.",
+      "year": 2021,
+      "arxiv_id": "2010.08895",
+      "role": "Inspiration",
+      "relationship_sentence": "The idea of learning global mappings with a tiny set of complex spectral weights in FNO inspired FITS\u2019s design of compact, learnable operations in the Fourier domain for time-series modeling."
+    },
+    {
+      "title": "NHITS: Neural Hierarchical Interpolation for Time Series Forecasting",
+      "authors": "Cristian Challu et al.",
+      "year": 2023,
+      "arxiv_id": "2201.12886",
+      "role": "Extension",
+      "relationship_sentence": "Building on NHITS\u2019s success with interpolation-based reconstruction, FITS generalizes the interpolation idea by performing it directly in the complex frequency domain for greater compactness and fidelity."
+    },
+    {
+      "title": "N-BEATS: Neural basis expansion analysis for interpretable time series forecasting",
+      "authors": "Boris Oreshkin et al.",
+      "year": 2020,
+      "arxiv_id": "1905.10437",
+      "role": "Foundation",
+      "relationship_sentence": "N-BEATS framed forecasting as reconstruction from learned bases (trend/seasonality), a perspective FITS concretizes with an explicit Fourier (complex) basis and spectral reconstruction to minimize parameters."
+    },
+    {
+      "title": "Deep Complex Networks",
+      "authors": "Chiheb Trabelsi et al.",
+      "year": 2018,
+      "arxiv_id": "1705.09792",
+      "role": "Foundation",
+      "relationship_sentence": "This paper provided the core complex-valued operations and normalization needed for stable learning in the complex domain, which FITS leverages to manipulate spectra directly."
+    }
+  ],
+  "synthesis_narrative": "Recent studies revealed that effective time-series forecasting does not require heavy attention mechanisms. DLinear (Are Transformers Effective for Time Series Forecasting?) demonstrated that simple linear models with seasonal\u2013trend decomposition can rival or beat complex transformers on long-horizon benchmarks, establishing a minimalist baseline and exposing the limits of purely time-domain linearity. FEDformer showed that selecting and operating on dominant Fourier modes substantially improves long-range modeling, grounding the value of frequency-domain processing. The Fourier Neural Operator introduced learning with complex spectral multipliers to capture global structure using very few parameters, highlighting a path to high capacity per parameter. NHITS proved that interpolation-based reconstruction, especially across multiple resolutions, is a powerful forecasting principle. N-BEATS framed forecasting as reconstructing signals from learned bases (trend/seasonality), suggesting that explicit basis choices can yield interpretable and strong models. Deep Complex Networks supplied the practical machinery for stable learning with complex-valued parameters and activations, essential when operating directly on spectra.\nTogether, these works pointed to an opportunity: combine interpolation-based reconstruction with explicit Fourier-domain modeling and complex-valued learning to achieve global receptive fields and strong long-horizon performance using a tiny parameter budget. The current paper synthesizes these insights by eschewing attention and time-domain convolutions, reconstructing sequences through complex frequency-domain interpolation with learned spectral parameters, thereby unifying the efficiency of DLinear, the spectral advantages of FEDformer/FNO, and the reconstruction philosophy of NHITS/N-BEATS into a compact, edge-friendly model.",
+  "target_paper": {
+    "title": "FITS: Modeling Time Series with $10k$ Parameters",
+    "authors": "Zhijian Xu, Ailing Zeng, Qiang Xu",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Time series analysis, Time series forecasting, Complex-valued neural network",
+    "abstract": "In this paper, we introduce FITS, a lightweight yet powerful model for time series analysis. Unlike existing models that directly process raw time-domain data, FITS operates on the principle that time series can be manipulated through interpolation in the complex frequency domain, achieving performance comparable to state-of-the-art models for time series forecasting and anomaly detection tasks. Notably, FITS accomplishes this with a svelte profile of just about $10k$ parameters, making it ideally suited for edge devices and paving the way for a wide range of applications. The code is available for review at: \\url{https://anonymous.4open.science/r/FITS}.",
+    "openreview_id": "bWcnvZ3qMb",
+    "forum_id": "bWcnvZ3qMb"
+  },
+  "analysis_timestamp": "2026-01-06T13:26:26.693689"
+}

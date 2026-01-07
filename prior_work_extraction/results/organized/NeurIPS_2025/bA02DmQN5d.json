@@ -1,0 +1,76 @@
+{
+  "prior_works": [
+    {
+      "title": "Vision Transformers Need Registers",
+      "authors": [
+        "Romain Darcet",
+        "et al."
+      ],
+      "year": 2024,
+      "role": "Problem discovery and baseline solution",
+      "relationship_sentence": "This work identified high-norm outlier tokens that cause noisy attention in ViTs and proposed training learned register tokens as a fix, directly motivating the present paper\u2019s training-free register alternative."
+    },
+    {
+      "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+      "authors": [
+        "Alexey Dosovitskiy",
+        "et al."
+      ],
+      "year": 2020,
+      "role": "Architectural foundation",
+      "relationship_sentence": "The ViT architecture and tokenization scheme (including special tokens like [CLS]) define the token-level machinery where outlier tokens emerge and where the proposed untrained register token can be inserted."
+    },
+    {
+      "title": "Training data-efficient image transformers & distillation through attention (DeiT)",
+      "authors": [
+        "Hugo Touvron",
+        "et al."
+      ],
+      "year": 2021,
+      "role": "Precedent for adding special tokens",
+      "relationship_sentence": "DeiT\u2019s use of an extra distillation token shows that introducing learned, non-patch tokens can steer attention and improve behavior, a conceptual precursor to mimicking register tokens with an added token."
+    },
+    {
+      "title": "Perceiver IO: A General Architecture for Structured Inputs & Outputs",
+      "authors": [
+        "Andrew Jaegle",
+        "et al."
+      ],
+      "year": 2021,
+      "role": "Conceptual precedent for latent/register-like tokens",
+      "relationship_sentence": "Perceiver-style latent arrays demonstrate the utility of content-agnostic latent tokens for aggregating and routing information, an idea closely related to the \u2018register token\u2019 concept the paper emulates without training."
+    },
+    {
+      "title": "Token Merging: Your ViT But Faster",
+      "authors": [
+        "Daniel Bolya",
+        "et al."
+      ],
+      "year": 2023,
+      "role": "Inference-time token surgery precedent",
+      "relationship_sentence": "ToMe established that training-free, inference-time manipulation of tokens in ViTs is feasible and effective, informing the practicality of adding and routing activations to an untrained token post hoc."
+    },
+    {
+      "title": "Learning Transferable Visual Models From Natural Language Supervision (CLIP)",
+      "authors": [
+        "Alec Radford",
+        "et al."
+      ],
+      "year": 2021,
+      "role": "Pretrained testbed exhibiting the phenomenon",
+      "relationship_sentence": "CLIP\u2019s ViT backbones manifest the high-norm token issue studied here, shaping the paper\u2019s goal of a training-free mitigation that works on already-trained CLIP models."
+    },
+    {
+      "title": "DINOv2: Learning Robust Visual Features without Supervision",
+      "authors": [
+        "M. Oquab",
+        "et al."
+      ],
+      "year": 2023,
+      "role": "Pretrained testbed and evidence of generality",
+      "relationship_sentence": "DINOv2 ViTs also exhibit high-norm outliers, and the need to fix them without retraining guided the design of a register-like, training-free intervention applicable to self-supervised backbones."
+    }
+  ],
+  "synthesis_narrative": "The core contribution\u2014adding an untrained register-like token and routing high-norm activations from a sparse set of \u201cregister neurons\u201d into it at inference time\u2014emerges by synthesizing insights across token-centric transformer design, special-token precedents, and recent analyses of outlier tokens. Darcet et al. (2024) provided the pivotal observation that ViTs develop high-norm outlier tokens that corrupt attention, and showed that learned register tokens mitigate the issue\u2014establishing both the problem and a retraining-heavy remedy. Building on the ViT tokenization paradigm of Dosovitskiy et al. (2020), and precedents like DeiT\u2019s distillation token (Touvron et al., 2021), the paper leverages the idea that introducing non-patch tokens can steer attention. Perceiver IO (Jaegle et al., 2021) further reinforced the value of content-agnostic latent tokens for information aggregation\u2014conceptually akin to \u201cregisters.\u201d Crucially, the practicality of intervening post hoc is supported by token-surgery methods like Token Merging (Bolya et al., 2023), which demonstrate that training-free token manipulation can improve behavior without retraining. Finally, widespread, pretrained ViT ecosystems such as CLIP (Radford et al., 2021) and DINOv2 (Oquab et al., 2023) exhibit the high-norm phenomenon and make retraining costly, directly motivating a training-free solution. The new method reframes Darcet et al.\u2019s trained-register idea as a mechanistic redirection of sparse neuron activations into an added, untrained token\u2014preserving the benefits of registers while avoiding retraining, and yielding cleaner attention and improved downstream features across existing models.",
+  "analysis_timestamp": "2026-01-07T00:21:32.316692"
+}

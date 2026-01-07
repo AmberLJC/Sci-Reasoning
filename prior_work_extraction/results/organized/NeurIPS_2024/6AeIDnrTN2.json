@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "3D Gaussian Splatting for Real-Time Radiance Field Rendering",
+      "authors": "Bernhard Kerbl, Georgios Kopanas, Thomas Leimk\u00fchler, George Drettakis",
+      "year": 2023,
+      "role": "Foundational representation and target for compression",
+      "relationship_sentence": "LightGaussian directly compresses the 3DGS representation\u2014pruning Gaussians, lowering SH degree, and quantizing attributes\u2014specifically to mitigate 3DGS\u2019s large storage and splatting overheads while preserving real-time rendering."
+    },
+    {
+      "title": "Structure-from-Motion Revisited",
+      "authors": "Johannes L. Sch\u00f6nberger, Jan-Michael Frahm",
+      "year": 2016,
+      "role": "Upstream data generation informing the problem setting",
+      "relationship_sentence": "The heavy SfM point clouds (e.g., via COLMAP) that seed 3DGS are a primary source of the million-level Gaussians LightGaussian must compress, motivating its global-significance pruning for unbounded scenes."
+    },
+    {
+      "title": "Learning both Weights and Connections for Efficient Neural Networks",
+      "authors": "Song Han, Jeff Pool, John Tran, William J. Dally",
+      "year": 2015,
+      "role": "Pruning paradigm (prune\u2013retrain loop)",
+      "relationship_sentence": "LightGaussian\u2019s prune-and-recover procedure is inspired by network pruning\u2019s iterative prune\u2013retrain strategy, repurposed to remove low-importance Gaussians while recovering fidelity through optimization."
+    },
+    {
+      "title": "Pruning Convolutional Neural Networks for Resource Efficient Inference",
+      "authors": "Pavlo Molchanov, Stephen Tyree, Tero Karras, Timo Aila, Jan Kautz",
+      "year": 2017,
+      "role": "Importance-based global saliency for pruning",
+      "relationship_sentence": "The method\u2019s use of a global significance score to rank Gaussians echoes Taylor/saliency-based criteria for structured pruning, guiding which primitives can be safely removed with minimal impact on reconstruction."
+    },
+    {
+      "title": "Distilling the Knowledge in a Neural Network",
+      "authors": "Geoffrey Hinton, Oriol Vinyals, Jeff Dean",
+      "year": 2015,
+      "role": "Knowledge distillation framework",
+      "relationship_sentence": "LightGaussian distills high-degree spherical harmonics into lower-degree coefficients, using teacher\u2013student supervision (with pseudo-view augmentation) to transfer view-dependent appearance while reducing parameters."
+    },
+    {
+      "title": "Neural Discrete Representation Learning (VQ-VAE)",
+      "authors": "Aaron van den Oord, Oriol Vinyals, Koray Kavukcuoglu",
+      "year": 2017,
+      "role": "Vector quantization with codebooks",
+      "relationship_sentence": "Its Gaussian Vector Quantization leverages codebook-based discretization principles, adapting quantization strength to each Gaussian\u2019s significance to shrink storage with limited quality loss."
+    },
+    {
+      "title": "PlenOctrees for Real-Time Rendering of Neural Radiance Fields",
+      "authors": "Alex Yu, Ruilong Li, Matthew Tancik, Hao Li, Ren Ng, Angjoo Kanazawa",
+      "year": 2021,
+      "role": "SH-based view-dependent appearance and distillation practice",
+      "relationship_sentence": "The use of spherical harmonics for compact view-dependent color and distilling dense supervision from many rendered rays informs LightGaussian\u2019s SH-degree reduction via distillation and pseudo-view sampling."
+    }
+  ],
+  "synthesis_narrative": "LightGaussian targets the practical bottleneck of 3D Gaussian Splatting: millions of SfM-seeded Gaussians and high-order SH appearance that impose gigabyte-level storage and hamper splatting efficiency, especially in unbounded scenes. The core idea is to import mature compression principles from deep model optimization into the 3DGS primitive space. From Han et al., LightGaussian borrows an iterative prune\u2013recover paradigm, but applies it to scene primitives: Gaussians with minimal global significance to reconstruction are pruned and the scene is re-optimized to recover fidelity. Molchanov et al.\u2019s saliency-driven pruning motivates a global importance metric to rank primitives, ensuring removals minimally affect photometric error. To reduce appearance parameters, LightGaussian turns to Hinton et al.\u2019s knowledge distillation, transferring a teacher\u2019s high-degree spherical harmonics to a student with a lower SH degree; pseudo-view augmentation supplies dense, view-diverse supervision, akin to distillation practices in PlenOctrees\u2019 SH-based radiance representation. Finally, codebook-based vector quantization (VQ-VAE) inspires LightGaussian\u2019s Gaussian Vector Quantization, discretizing attributes with significance-aware strength to compress further without uniform quality degradation. Together with the foundational 3DGS target and the practical scale introduced by COLMAP SfM pipelines, these strands converge into a unified compress\u2013recover\u2013distill\u2013quantize pipeline. The result is a compact, fast 3DGS representation that maintains visual fidelity while achieving the reported 15\u00d7 size reduction and 200+ FPS rendering.",
+  "analysis_timestamp": "2026-01-06T23:33:36.287527"
+}

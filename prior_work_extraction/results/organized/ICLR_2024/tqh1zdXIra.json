@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Auto-WEKA: Combined Selection and Hyperparameter Optimization of Machine Learning Algorithms",
+      "authors": "Chris Thornton et al.",
+      "year": 2013,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "Quick-Tune adopts the CASH formulation introduced by Auto-WEKA\u2014jointly selecting an algorithm/model and its hyperparameters\u2014and instantiates it for choosing among pretrained models while tuning their finetuning hyperparameters."
+    },
+    {
+      "title": "Efficient and Robust Automated Machine Learning",
+      "authors": "Matthias Feurer et al.",
+      "year": 2015,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "Quick-Tune borrows Auto-sklearn\u2019s idea of transferring meta-knowledge across datasets to warm-start search, extending it from classical ML pipelines to deep finetuning over a hub of pretrained models."
+    },
+    {
+      "title": "Speeding up Automatic Hyperparameter Optimization of Deep Neural Networks by Extrapolation of Learning Curves",
+      "authors": "Dominik Domhan et al.",
+      "year": 2015,
+      "arxiv_id": null,
+      "role": "Extension",
+      "relationship_sentence": "Quick-Tune extends learning-curve extrapolation by training a meta-learned gray-box predictor on finetuning curves across many models and datasets to forecast final accuracy from early epochs."
+    },
+    {
+      "title": "Freeze-Thaw Bayesian Optimization",
+      "authors": "Kevin Swersky et al.",
+      "year": 2014,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "Quick-Tune leverages the core insight of using partially observed learning curves to guide resource allocation, replacing Freeze-Thaw\u2019s BO with a meta-learned predictor specialized to finetuning."
+    },
+    {
+      "title": "BOHB: Robust and Efficient Hyperparameter Optimization at Scale",
+      "authors": "Stefan Falkner et al.",
+      "year": 2018,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "BOHB serves as the multi-fidelity HPO baseline that Quick-Tune surpasses by augmenting early-stopping resource allocation with a meta-learned performance model and the additional model-selection dimension."
+    },
+    {
+      "title": "LogME: Practical Assessment of Pre-trained Models for Transfer Learning",
+      "authors": "Kaichao You et al.",
+      "year": 2021,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "Quick-Tune addresses LogME\u2019s limitation of zero-shot model scoring by exploiting short finetuning learning curves and jointly optimizing hyperparameters to select both the model and its finetuning regime."
+    }
+  ],
+  "synthesis_narrative": "The CASH paradigm established by Auto-WEKA defined the joint problem of selecting an algorithm while optimizing its hyperparameters, showing that treating model choice and hyperparameter tuning as one search yields superior solutions. Auto-sklearn added a crucial ingredient: transferring meta-knowledge across datasets to warm-start search, using prior runs to inform new tasks. In parallel, learning-curve\u2013based gray-box methods demonstrated that partial training trajectories are predictive of final performance: Domhan et al. modeled deep nets\u2019 curves to extrapolate outcomes, while Freeze-Thaw Bayesian optimization operationalized the same idea by pausing and resuming runs based on early progress. BOHB unified Bayesian optimization with Hyperband-style early stopping to allocate resources efficiently using early performance signals, establishing a strong multi-fidelity HPO baseline. In transfer learning, LogME provided a practical zero-shot score to rank pretrained models for a target dataset without training, but by design ignored the impact of finetuning hyperparameters and training dynamics. Together, these works indicated that (i) joint model selection and HPO is the right formulation, (ii) meta-knowledge across datasets can accelerate search, and (iii) early learning curves carry powerful predictive signals, yet transferability metrics failed to incorporate finetuning and HPO methods ignored the choice among pretrained models. Quick-Tune naturally synthesizes these strands by meta-learning a gray-box performance predictor from large-scale finetuning learning curves to rapidly co-decide which pretrained model to use and how to tune it on a new dataset.",
+  "target_paper": {
+    "title": "Quick-Tune: Quickly Learning Which Pretrained Model to Finetune and How",
+    "authors": "Sebastian Pineda Arango, Fabio Ferreira, Arlind Kadra, Frank Hutter, Josif Grabocka",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "oral",
+    "keywords": "Finetuning, pretrained model hubs, transfer learning, hyperparameter optimization, meta-learning",
+    "abstract": "With the ever-increasing number of pretrained models, machine learning practitioners are continuously faced with which pretrained model to use, and how to finetune it for a new dataset. In this paper, we propose a methodology that jointly searches for the optimal pretrained model and the hyperparameters for finetuning it. Our method transfers knowledge about the performance of many pretrained models with multiple hyperparameter configurations on a series of datasets. To this aim, we evaluated over 20k hyperparameter configurations for finetuning 24 pretrained image classification models on 87 datasets to generate a large-scale meta-dataset. We meta-learn a gray-box performance predictor on the learning curves of this meta-dataset and use it for fast hyperparameter optimization on new datasets. We empirically demonstrate that our resulting approach can quickly select an accurate pretrained model for a new dataset together with its optimal hyperparameters.",
+    "openreview_id": "tqh1zdXIra",
+    "forum_id": "tqh1zdXIra"
+  },
+  "analysis_timestamp": "2026-01-06T19:21:11.999646"
+}

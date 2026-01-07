@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "H2O: Heavy-Hitter Oracle for Efficient Generative Inference of Large Language Models",
+      "authors": "Zhang et al.",
+      "year": 2023,
+      "role": "KV cache eviction baseline",
+      "relationship_sentence": "SmallKV builds on H2O\u2019s idea of token-level importance for KV retention but replaces its irreversible eviction with a compensated, attention-guided scheme using a small model to mitigate saliency shift and marginal-information loss."
+    },
+    {
+      "title": "Scissorhands: Efficient Inference for Long-Context LLMs via Dynamic KV Cache Management",
+      "authors": "Ma et al.",
+      "year": 2024,
+      "role": "Dynamic eviction policy",
+      "relationship_sentence": "Scissorhands highlights the practical gains and pitfalls of dynamic KV eviction; SmallKV directly addresses its irreversibility by reintroducing guidance from a small model\u2019s attention to adapt when attention saliency shifts."
+    },
+    {
+      "title": "SnapKV: Simple and Effective KV Cache Compression for LLMs",
+      "authors": "Liu et al.",
+      "year": 2024,
+      "role": "Importance-based KV compression",
+      "relationship_sentence": "SnapKV\u2019s average-attention-based selection exposes the marginal-information over-compression problem that SmallKV counters by leveraging a small model\u2019s attention to preserve collectively important but individually marginal tokens."
+    },
+    {
+      "title": "StreamingLLM: Efficient Streaming Language Models with Attention Sinks",
+      "authors": "Xiao et al.",
+      "year": 2024,
+      "role": "Fixed-size KV and eviction for streaming",
+      "relationship_sentence": "StreamingLLM popularized irreversible eviction in long-context streaming; SmallKV departs from this by compensating evictions using cross-scale attention matching so the large model can still perceive globally important context."
+    },
+    {
+      "title": "ShadowKV: KV Cache Offloading and On-Demand Recall for LLM Inference",
+      "authors": "Zhang et al.",
+      "year": 2024,
+      "role": "Compensation via offloading/recall",
+      "relationship_sentence": "ShadowKV shows the value of compensating evicted information by recalling it later; SmallKV achieves a lighter-weight compensation by using a small model\u2019s attention predictions instead of costly I/O offloading."
+    },
+    {
+      "title": "TinyBERT: Distilling BERT for Natural Language Understanding",
+      "authors": "Jiao et al.",
+      "year": 2020,
+      "role": "Attention-map distillation across scales",
+      "relationship_sentence": "TinyBERT\u2019s attention distillation evidences that attention patterns are transferable across model sizes, directly motivating SmallKV\u2019s use of a small model\u2019s attention to guide and compensate the large model\u2019s KV compression."
+    },
+    {
+      "title": "MiniLM: Deep Self-Attention Distillation for Task-Agnostic Compression of Pre-Trained Transformers",
+      "authors": "Wang et al.",
+      "year": 2020,
+      "role": "Self-attention relation matching",
+      "relationship_sentence": "MiniLM demonstrates that matching self-attention relations preserves behavior across scales, underpinning SmallKV\u2019s assumption of high cross-scale attention similarity for effective compensation."
+    }
+  ],
+  "synthesis_narrative": "SmallKV\u2019s core insight is to compensate KV cache compression using a small model whose attention closely matches that of a larger LLM, thereby fixing two chronic issues in token-level eviction: saliency shift and marginal-information over-compression. Earlier eviction/compression methods such as H2O, SnapKV, and Scissorhands established the feasibility of importance-aware KV reduction but typically operated with irreversible decisions and per-token criteria that overlooked the collective utility of many marginal tokens. StreamingLLM further cemented fixed-size, irreversible eviction in streaming settings, reinforcing the need for mechanisms that can adapt when attention patterns change during decoding. ShadowKV illustrated one route to compensation\u2014offloading and recalling evicted KV\u2014but at the expense of I/O and system complexity. Parallel lines of research in knowledge distillation (TinyBERT, MiniLM) showed that attention maps and self-attention relations are highly transferable across model sizes, implying that a small model can reliably approximate a large model\u2019s attention signals. SmallKV synthesizes these strands by replacing hard, permanent eviction with small-model-assisted attention matching: the small model provides global attention cues to preserve collectively important context and offers a lightweight compensatory signal when saliency shifts. This yields an adaptive, reversible flavor of KV compression that maintains the large model\u2019s attention fidelity without the overheads of external offloading.",
+  "analysis_timestamp": "2026-01-07T00:21:32.275797"
+}

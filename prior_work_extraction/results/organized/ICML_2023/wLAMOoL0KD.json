@@ -1,0 +1,41 @@
+{
+  "prior_works": [
+    {
+      "title": "Checkmate: Breaking the Memory Wall with Optimal Tensor Rematerialization",
+      "authors": "Paras Jain et al.",
+      "year": 2020,
+      "role": "Gap Identification",
+      "relationship_sentence": "Rockmate explicitly targets Checkmate\u2019s limitation\u2014its ILP-based optimizer is too slow on full model DAGs\u2014by applying a Checkmate-style solver only within detected complex blocks to retain optimality without whole-graph overhead."
+    },
+    {
+      "title": "ROTOR: Efficient Rematerialization for Sequential Neural Networks",
+      "authors": "Lionel Eyraud-Dubois et al.",
+      "year": 2022,
+      "role": "Extension",
+      "relationship_sentence": "Rockmate extends Rotor\u2019s fast scheduling for purely sequential graphs by lifting it to the inter-block level of a block-structured model, overcoming Rotor\u2019s restriction to strictly sequential networks."
+    },
+    {
+      "title": "Training Deep Nets with Sublinear Memory Cost",
+      "authors": "Tianqi Chen et al.",
+      "year": 2016,
+      "role": "Foundation",
+      "relationship_sentence": "Rockmate builds on the core idea of gradient checkpointing introduced here\u2014trading recomputation for activation memory\u2014to enforce a user-specified activation budget automatically."
+    },
+    {
+      "title": "Algorithm 799: Revolve: An Implementation of Checkpointing for the Reverse or Adjoint Mode of Computational Differentiation",
+      "authors": "Andreas Griewank et al.",
+      "year": 2000,
+      "role": "Foundation",
+      "relationship_sentence": "Revolve provides the foundational optimal checkpointing framework in reverse-mode AD that underpins the theoretical basis of rematerialization strategies used and adapted by Rockmate."
+    },
+    {
+      "title": "Memory-Efficient Backpropagation Through Time",
+      "authors": "Andrei Gruslys et al.",
+      "year": 2016,
+      "role": "Related Problem",
+      "relationship_sentence": "This work applies revolve-style checkpointing to sequential computation (BPTT), directly informing Rockmate\u2019s use of sequential scheduling (via Rotor) across a sequence of detected blocks."
+    }
+  ],
+  "synthesis_narrative": "Rockmate\u2019s core contribution\u2014automatic, budgeted activation rematerialization that is both fast and near-optimal\u2014stands on a direct lineage of checkpointing and rematerialization research. The conceptual foundation is the trade-off between memory and recomputation introduced by gradient checkpointing (Chen et al., 2016) and the optimal checkpointing principles from reverse-mode automatic differentiation (Griewank & Walther, Revolve). These works establish the problem\u2019s essence: reduce peak activation memory by strategically discarding and recomputing intermediates. Checkmate (Jain et al., 2020) brought these ideas to general DNN computation graphs via ILP optimization, defining the modern problem formulation of optimal rematerialization on arbitrary DAGs but at a prohibitive whole-graph cost. Rotor (Eyraud-Dubois et al., 2022) then delivered a very fast scheduler for strictly sequential models, revealing that near-optimal schedules can be computed quickly when structure is exploitable. Rockmate unifies these strands by automatically detecting a widespread block structure in PyTorch models, then applying a Checkmate-style optimizer within each complex block (addressing Checkmate\u2019s scalability gap) and a Rotor-style sequential scheduler across the block sequence (overcoming Rotor\u2019s generality limitation). Insights from Gruslys et al. (2016) on sequential checkpointing further inform the use of sequential scheduling at the inter-block level. Together, these prior works directly motivate Rockmate\u2019s blockwise\u2013sequential hybrid that achieves Checkmate-like efficiency with Rotor-like speed.",
+  "analysis_timestamp": "2026-01-06T23:09:26.523315"
+}

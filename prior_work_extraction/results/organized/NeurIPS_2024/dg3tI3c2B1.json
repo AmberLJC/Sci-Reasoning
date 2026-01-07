@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Automatic Chemical Design Using a Data-Driven Continuous Representation of Molecules",
+      "authors": "Rafael G\u00f3mez-Bombarelli, Jennifer N. Wei, David Duvenaud, Jos\u00e9 Miguel Hern\u00e1ndez-Lobato, Benjam\u00edn S\u00e1nchez-Lengeling, Dennis Sheberla, Jorge Aguilera-Iparraguirre, Timothy D. Hirzel, Ryan P. Adams, Al\u00e1n Aspuru-Guzik",
+      "year": 2018,
+      "role": "Introduced molecular design via a latent continuous space with a property predictor and latent-space optimization for target properties.",
+      "relationship_sentence": "LPT inherits the core idea of steering generation through a learned latent space tied to molecular properties, replacing latent optimization with posterior sampling of a latent prompt to satisfy target properties."
+    },
+    {
+      "title": "Junction Tree Variational Autoencoder for Molecular Graph Generation",
+      "authors": "Wengong Jin, Regina Barzilay, Tommi Jaakkola",
+      "year": 2018,
+      "role": "Established latent-variable generative modeling for molecules with effective property optimization in latent space.",
+      "relationship_sentence": "LPT builds on the principle of property-driven latent control demonstrated by JTVAE, but couples it to an autoregressive Transformer via a latent prompt and a Bayesian posterior over the prompt given desired properties."
+    },
+    {
+      "title": "Prefix-Tuning: Optimizing Continuous Prompts for Generation",
+      "authors": "Xiang Lisa Li, Percy Liang",
+      "year": 2021,
+      "role": "Proposed continuous prefix vectors to condition causal Transformers without modifying core parameters.",
+      "relationship_sentence": "LPT generalizes continuous prompting to molecular generation by using a learnable latent prompt as the conditioning signal for a causal Transformer decoder to control molecule synthesis."
+    },
+    {
+      "title": "Plug and Play Language Models: A Simple Approach to Controlled Text Generation",
+      "authors": "Sumanth Dathathri, Andrea Madotto, Janice Lan, Jane Hung, Eric Frank, Piero Molino, Jason Yosinski, Rosanne Liu, Thomas K. Le Paine, Mohammad Shoeybi, Bryan Catanzaro, Jiantao Jiao, Pascale Fung",
+      "year": 2020,
+      "role": "Demonstrated guiding autoregressive generation using an external attribute model without retraining the generator.",
+      "relationship_sentence": "LPT\u2019s posterior-guided inference of the latent prompt using a property predictor mirrors PPLM\u2019s attribute-model guidance, but performs guidance in the latent prompt space to condition the Transformer generator."
+    },
+    {
+      "title": "Semi-supervised Learning with Deep Generative Models",
+      "authors": "Diederik P. Kingma, Danilo J. Rezende, Shakir Mohamed, Max Welling",
+      "year": 2014,
+      "role": "Formulated joint generative modeling of data and labels with p(y|z) and Bayesian inference p(z|y).",
+      "relationship_sentence": "LPT adopts an MLE-trained generative structure where a property predictor p(y|z) enables posterior sampling p(z|y) to obtain a latent prompt consistent with target properties."
+    },
+    {
+      "title": "VAE with a VampPrior",
+      "authors": "Jakub M. Tomczak, Max Welling",
+      "year": 2018,
+      "role": "Introduced learnable priors for latent-variable models to improve generative fit.",
+      "relationship_sentence": "LPT\u2019s learnable prior over the latent prompt via a neural transformation of Gaussian noise is a direct descendant of learnable-prior ideas exemplified by VampPrior."
+    },
+    {
+      "title": "MolGPT: Molecular Generation using a Transformer Decoder Model",
+      "authors": "Vaibhav Bagal, Rahul Aggarwal, Rajdeep Chowdhury, U. Deva Priyakumar",
+      "year": 2022,
+      "role": "Showcased causal Transformer decoders for SMILES-based molecular generation.",
+      "relationship_sentence": "LPT leverages the MolGPT-style autoregressive Transformer as the molecular decoder, but augments it with a latent prompt to enable property-conditional generation."
+    }
+  ],
+  "synthesis_narrative": "The Latent Prompt Transformer (LPT) fuses three influential lines of work into a unified framework for property-conditional molecular generation. First, latent-space molecular design from G\u00f3mez-Bombarelli et al. and JTVAE established that molecules can be generated and optimized by manipulating a learned latent representation tied to properties. LPT retains this latent-control paradigm but replaces downstream optimization with a principled Bayesian mechanism: a property predictor p(y|z) defines a posterior p(z|y) from which latent prompts are sampled to meet target properties. This Bayesian factorization directly echoes the semi-supervised VAE formulation (p(x|z), p(y|z), p(z)), providing a likelihood-based training objective on molecule\u2013property pairs and a clear inference route for conditional design.\nSecond, LPT\u2019s use of a continuous prompt to condition a causal Transformer draws on Prefix-Tuning, extending continuous prompting beyond NLP to molecular generation. Rather than tuning prompt vectors per-task, LPT learns a generative prior over prompts and uses posterior-inferred prompts to guide the decoder at sample time. This prompts-as-latents view is further connected to controllable generation methods like PPLM: LPT\u2019s property predictor plays the role of an attribute model, but guidance occurs in the latent prompt space, yielding more stable and scalable control.\nFinally, the learnable prior over latent prompts follows the VAE literature on flexible priors (e.g., VampPrior), improving expressivity over fixed Gaussians. Coupled with an autoregressive SMILES Transformer as popularized by MolGPT, these components collectively enable LPT\u2019s key contribution: likelihood-trained, posterior-guided, prompt-conditioned molecule generation with explicit property control.",
+  "analysis_timestamp": "2026-01-06T23:33:35.535253"
+}

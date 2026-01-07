@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Fast \u03b5-free inference of simulator models with Bayesian conditional density estimation",
+      "authors": "George Papamakarios, Iain Murray",
+      "year": 2016,
+      "role": "Foundational method for neural posterior estimation (NPE) in simulation-based inference",
+      "relationship_sentence": "CoLT is designed to validate the accuracy of neural posterior estimates produced by methods like SNPE, directly addressing the need for principled post-hoc assessment of q(\u03b8|x) introduced by Papamakarios and Murray."
+    },
+    {
+      "title": "Benchmarking Simulation-Based Inference",
+      "authors": "Jan-Matthis Lueckmann, Pedro J. Gon\u00e7alves, Giovanni Bassetto, Michael\u00a0Deistler, Jakob\u00a0H. Macke",
+      "year": 2021,
+      "role": "Empirical study of SBI methods and diagnostics (including C2ST/coverage)",
+      "relationship_sentence": "This benchmark highlighted practical drawbacks of existing classifier-based and coverage diagnostics for NPE, motivating CoLT\u2019s need for a more targeted, data-efficient, and condition-aware validation procedure."
+    },
+    {
+      "title": "Validating Bayesian Inference Algorithms with Simulation-Based Calibration",
+      "authors": "Sean Talts, Michael Betancourt, Daniel Simpson, Aki Vehtari, Andrew Gelman",
+      "year": 2018,
+      "role": "Foundational posterior calibration diagnostic for Bayesian/SBI workflows",
+      "relationship_sentence": "SBC established a gold-standard validation via rank statistics but aggregates over x and can miss localized conditional misfit; CoLT builds on this idea to provide x-conditional, localized discrepancy detection with only one \u03b8 per x."
+    },
+    {
+      "title": "Revisiting Classifier Two-Sample Tests",
+      "authors": "David Lopez-Paz, Maxime Oquab",
+      "year": 2017,
+      "role": "Classifier-based two-sample testing framework widely used in NPE validation",
+      "relationship_sentence": "CoLT responds to limitations of global classifier two-sample tests (e.g., sensitivity to density estimation and lack of conditional localization) by learning a localization function that targets worst-case \u03b8 for each x."
+    },
+    {
+      "title": "Approximating Likelihood Ratios with Calibrated Discriminative Classifiers",
+      "authors": "Kyle Cranmer, Juan Pavez, Gilles Louppe",
+      "year": 2015,
+      "role": "Classifier-based ratio estimation underpinning many SBI/NPE and diagnostic methods",
+      "relationship_sentence": "CoLT leverages the insight that discriminative objectives can expose discrepancies between models, but departs from pure ratio estimation by adaptively localizing \u03b8|x where q diverges most from p without requiring dense sampling per x."
+    },
+    {
+      "title": "Interpretable Distribution Features with Maximum Testing Power",
+      "authors": "Wittawat Jitkrittum, Zolt\u00e1n Szab\u00f3, Kacper P. Chwialkowski, Arthur Gretton",
+      "year": 2016,
+      "role": "Learned test locations/witness features to localize distributional differences",
+      "relationship_sentence": "CoLT\u2019s learned localization function \u03b8\u2113(x) echoes Jitkrittum et al.\u2019s idea of optimizing test locations to maximize power, but extends it to the conditional setting to pinpoint \u03b8 where q(\u03b8|x) vs p(\u03b8|x) diverge for each x."
+    },
+    {
+      "title": "Kernelized Stein Discrepancy",
+      "authors": "Qiang Liu, Jason D. Lee, Michael I. Jordan",
+      "year": 2016,
+      "role": "Goodness-of-fit testing via Stein witness functions that localize model misspecification",
+      "relationship_sentence": "CoLT is conceptually aligned with Stein witness-based localization of model misfit, but operationalizes localization in the conditional posterior setting with only a single \u03b8\u223c p(\u03b8|x) per x typical of SBI."
+    }
+  ],
+  "synthesis_narrative": "CoLT sits at the intersection of simulation-based inference and modern goodness-of-fit testing. Neural posterior estimation methods such as SNPE (Papamakarios & Murray) made amortized posteriors q(\u03b8|x) practical, but also raised the need for robust validation. The SBI community subsequently embraced diagnostics like simulation-based calibration (Talts et al.) and classifier-based metrics surveyed in Benchmarking SBI (Lueckmann et al.), revealing key shortcomings: many tests aggregate across x, struggle to identify where errors occur, or require many samples per x that are unavailable in typical simulator workflows.\n\nClassifier two-sample tests (Lopez-Paz & Oquab) and classifier-based ratio estimation (Cranmer et al.) demonstrated the power of discriminative objectives to expose distributional discrepancies, influencing many NPE diagnostics. However, these approaches are largely global and not explicitly conditional, limiting their ability to detect localized deviations in q(\u03b8|x). CoLT\u2019s core innovation\u2014learning a localization function \u03b8\u2113(x) that targets worst-case discrepancies for each x\u2014draws methodological inspiration from kernel testing with learned test locations and witness functions. In particular, Jitkrittum et al. showed that optimizing test locations can dramatically improve power and provide interpretability, while kernelized Stein discrepancy (Liu et al.) introduced witness functions that highlight where a model fails.\n\nBy adapting these localization principles to the conditional posterior setting and designing the procedure to work with only a single \u03b8 \u223c p(\u03b8|x) per x, CoLT overcomes the data-efficiency and conditional-specificity gaps in prior diagnostics, providing a principled, high-power test tailored to NPE validation.",
+  "analysis_timestamp": "2026-01-07T00:21:32.273104"
+}

@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis",
+      "authors": "Ben Mildenhall et al.",
+      "year": 2020,
+      "arxiv_id": "2003.08934",
+      "role": "Foundation",
+      "relationship_sentence": "Retri3D targets retrieval of neural field scenes and its Neural Field Artifact Analysis explicitly addresses NeRF-specific artifacts (e.g., floaters, multi-view inconsistency) that degrade language\u2013image matching from rendered views."
+    },
+    {
+      "title": "3D Gaussian Splatting for Real-Time Radiance Field Rendering",
+      "authors": "Bernhard Kerbl et al.",
+      "year": 2023,
+      "arxiv_id": "2308.04079",
+      "role": "Foundation",
+      "relationship_sentence": "The retrieval pipeline depends on rapidly rendering many viewpoints of 3DGS scenes, and the artifact analysis module is designed to handle splat-specific issues (holes/flicker) while the smart camera policy exploits 3DGS\u2019s real-time rendering to select informative views."
+    },
+    {
+      "title": "Learning Transferable Visual Models From Natural Language Supervision",
+      "authors": "Alec Radford et al.",
+      "year": 2021,
+      "arxiv_id": "2103.00020",
+      "role": "Foundation",
+      "relationship_sentence": "Retri3D relies on CLIP\u2019s image\u2013text embedding space by rendering NGR views and indexing their CLIP features to enable text-to-3D scene retrieval without additional cross-modal training."
+    },
+    {
+      "title": "Multi-view Convolutional Neural Networks for 3D Shape Recognition",
+      "authors": "Hang Su et al.",
+      "year": 2015,
+      "arxiv_id": "1505.00880",
+      "role": "Inspiration",
+      "relationship_sentence": "Retri3D generalizes the MVCNN idea of aggregating features from multiple rendered views, but adapts it to neural fields with a learned camera policy and artifact-aware filtering for language-driven retrieval."
+    },
+    {
+      "title": "GVCNN: Group-View Convolutional Neural Networks for 3D Shape Recognition",
+      "authors": "Yifan Feng et al.",
+      "year": 2018,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "The smart camera movement in Retri3D echoes GVCNN\u2019s insight that not all views are equally informative, extending it by actively selecting and weighting artifact-free, semantically rich NGR views for CLIP matching."
+    },
+    {
+      "title": "OpenShape: Scaling Up 3D Shape Representation Towards Open-World Understanding",
+      "authors": "Zhizhong Liu et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "Retri3D adopts OpenShape\u2019s open-vocabulary retrieval formulation but replaces training a 3D encoder with rendering-based CLIP indexing and artifact-aware view selection tailored to neural fields."
+    },
+    {
+      "title": "ULIP: Learning a Unified Representation of Language, Images, and Point Clouds for 3D Understanding",
+      "authors": "Yuqian Xue et al.",
+      "year": 2022,
+      "arxiv_id": "2212.05171",
+      "role": "Related Problem",
+      "relationship_sentence": "ULIP\u2019s language-aligned 3D retrieval on point clouds highlights the gap for neural field scenes; Retri3D addresses this by aligning NGRs to text via rendered CLIP views and mitigating neural-field artifacts rather than training a new 3D encoder."
+    }
+  ],
+  "synthesis_narrative": "Neural radiance fields demonstrated that scenes can be encoded as continuous neural fields, but their view-dependent artifacts and multi-view inconsistencies are well known to contaminate downstream perceptual judgments from renderings. 3D Gaussian Splatting further enabled real-time, high-fidelity rendering of large scenes as sets of anisotropic Gaussians, while introducing splat-specific failure modes such as holes and flicker that affect visual descriptors across viewpoints. CLIP established a robust joint image\u2013text embedding space, making it practical to query visual content with natural language by embedding rendered images and comparing them to text. MVCNN showed that 3D recognition and retrieval can be driven by aggregating features from multiple rendered views, and GVCNN refined this by learning that only a subset of views carry the most discriminative information, suggesting the value of selective view weighting or selection. OpenShape scaled open-vocabulary 3D retrieval by distilling CLIP into 3D encoders via multi-view supervision, while ULIP aligned point cloud encoders to CLIP using language\u2013image supervision, both framing zero-shot text-to-3D retrieval but operating on meshes/point clouds rather than neural fields. Together, these works revealed that multi-view, language-aligned retrieval is powerful, yet NGRs lack a retrieval framework and suffer artifacts that undermine naive CLIP-on-renders. The natural next step is to keep CLIP-based text retrieval but tailor it to NGRs by (i) actively choosing informative camera views and (ii) filtering neural-field-specific artifacts before feature extraction, leveraging 3DGS speed for efficient multi-view rendering and extending multi-view aggregation with learned, artifact-aware selection.",
+  "target_paper": {
+    "title": "Retri3D: 3D Neural Graphics Representation Retrieval",
+    "authors": "Yushi Guan, Daniel Kwan, Jean Sebastien Dandurand, Xi Yan, Ruofan Liang, Yuxuan Zhang, Nilesh Jain, Nilesh Ahuja, Selvakumar Panneer, Nandita Vijaykumar",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "Neural Graphics Representation; 3D Retrieval; Database",
+    "abstract": "Learnable 3D Neural Graphics Representations (3DNGR) have emerged as promising 3D representations for reconstructing 3D scenes from 2D images. Numerous works, including Neural Radiance Fields (NeRF), 3D Gaussian Splatting (3DGS), and their variants, have significantly enhanced the quality of these representations. The ease of construction from 2D images, suitability for online viewing/sharing, and applications in game/art design downstream tasks make it a vital 3D representation, with potential creation of large numbers of such 3D models. This necessitates large data stores, local or online, to save 3D visual data in these formats. However, no existing framework enables accurate retrieval of stored 3DNGRs. In this work, we propose, Retri3D, a framework that enables accurate and efficient retrieval of 3D scenes represented as NGRs from large data stores using text queries. We introduce a novel Neural Field Artifact Analysis technique, combined with a Smart Camera Movement Module, to sel",
+    "openreview_id": "q3EbOXb4y1",
+    "forum_id": "q3EbOXb4y1"
+  },
+  "analysis_timestamp": "2026-01-06T10:06:16.108369"
+}

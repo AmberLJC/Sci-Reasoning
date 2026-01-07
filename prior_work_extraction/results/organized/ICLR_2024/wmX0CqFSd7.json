@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Score-Based Generative Modeling through Stochastic Differential Equations",
+      "authors": "Yang Song et al.",
+      "year": 2021,
+      "arxiv_id": "2011.13456",
+      "role": "Foundation",
+      "relationship_sentence": "Treating the diffusion score as the gradient of a learned energy (log-density) underpins the paper\u2019s core move to optimize over diffusion-model energies rather than over learned dynamics."
+    },
+    {
+      "title": "Compositional Visual Generation with Composable Diffusion Models",
+      "authors": "Yilun Du et al.",
+      "year": 2022,
+      "arxiv_id": "",
+      "role": "Extension",
+      "relationship_sentence": "The paper directly extends the product-of-experts/sum-of-scores idea from composable diffusion to combine multiple diffusion models for different subcomponents into a single compositional inverse-design objective."
+    },
+    {
+      "title": "Classifier-Free Diffusion Guidance",
+      "authors": "Jonathan Ho et al.",
+      "year": 2022,
+      "arxiv_id": "2207.12598",
+      "role": "Inspiration",
+      "relationship_sentence": "The guidance mechanism that combines conditional and unconditional scores\u2014and scales them to trade off constraints\u2014inspires the paper\u2019s weighted combination of component energies during compositional design."
+    },
+    {
+      "title": "Diffuser: Diffusion Models for Sequential Decision Making",
+      "authors": "Michael Janner et al.",
+      "year": 2022,
+      "arxiv_id": "2208.04202",
+      "role": "Related Problem",
+      "relationship_sentence": "Using diffusion models as energy-shaped priors for planning informs the paper\u2019s insight that optimizing over diffusion energies can avoid adversarial exploitation seen when directly optimizing learned dynamics."
+    },
+    {
+      "title": "Diffusion Posterior Sampling for General Noisy Inverse Problems",
+      "authors": "Hyungjin Chung et al.",
+      "year": 2023,
+      "arxiv_id": "2209.14687",
+      "role": "Extension",
+      "relationship_sentence": "This work\u2019s sum-of-scores formulation that combines a diffusion prior with constraint/likelihood gradients is generalized here to compose multiple learned diffusion priors for multi-component inverse design."
+    },
+    {
+      "title": "Fourier Neural Operator for Parametric Partial Differential Equations",
+      "authors": "Zongyi Li et al.",
+      "year": 2021,
+      "arxiv_id": "2010.08895",
+      "role": "Baseline",
+      "relationship_sentence": "FNO-based surrogates are a primary baseline for PDE-governed inverse design whose direct optimization is shown to induce adversarial designs, motivating the shift to diffusion energy optimization."
+    },
+    {
+      "title": "Learning to Simulate Complex Physics with Graph Networks",
+      "authors": "Alvaro Sanchez-Gonzalez et al.",
+      "year": 2020,
+      "arxiv_id": "2002.09405",
+      "role": "Gap Identification",
+      "relationship_sentence": "Graph-network physics simulators exemplify learned dynamics models that, when optimized over for design (e.g., N-body), can be adversarially exploited\u2014precisely the failure mode this paper seeks to avoid."
+    }
+  ],
+  "synthesis_narrative": "Score-based diffusion establishes that the score function is the gradient of a learned log-density, giving a principled energy interpretation and enabling gradient-based shaping of sampling trajectories. Building on this, composable diffusion demonstrates that multiple conditional generative factors can be composed by summing their scores (a product-of-experts view), yielding images that simultaneously satisfy several constraints. Classifier-free guidance refines this by showing how unconditional and conditional scores can be combined and scaled to trade off fidelity versus constraint satisfaction. In sequential decision-making, Diffuser leverages diffusion as an energy-shaped trajectory prior, guiding sampling with reward signals rather than directly optimizing a brittle learned dynamics model. For inverse problems, Diffusion Posterior Sampling formalizes combining a learned diffusion prior with measurement-consistency terms via score addition, unifying priors and constraints within one sampling procedure. In parallel, Fourier Neural Operators and graph-network simulators provide fast learned surrogates for PDEs and physical dynamics but exhibit vulnerability when used as optimization objectives, where gradient-based search often exploits model imperfections to produce adversarial designs. Together, these works suggest replacing direct optimization over learned forward models with optimization in the space of diffusion energies, and composing multiple design requirements by summing scores. The present paper synthesizes these insights by training diffusion models for design subcomponents and optimizing their combined energy landscape, achieving compositional inverse design that resists adversarial failure modes typical of surrogate-based optimization while naturally accommodating multi-constraint PDE-governed systems.",
+  "target_paper": {
+    "title": "Compositional Generative Inverse Design",
+    "authors": "Tailin Wu, Takashi Maruyama, Long Wei, Tao Zhang, Yilun Du, Gianluca Iaccarino, Jure Leskovec",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "inverse design, generative design, PDE, physical simulation, compositional",
+    "abstract": "Inverse design, where we seek to design input variables in order to optimize an underlying objective function, is an important problem that arises across fields such as mechanical engineering to aerospace engineering. Inverse design is typically formulated as an optimization problem, with recent works leveraging optimization across learned dynamics models. However, as models are optimized they tend to fall into adversarial modes, preventing effective sampling. We illustrate that by instead optimizing over the learned energy function captured by the diffusion model, we can avoid such adversarial examples and significantly improve design performance. We further illustrate how such a design system is compositional, enabling us to combine multiple different diffusion models representing subcomponents of our desired system to design systems with every specified component. In an N-body interaction task and a challenging 2D multi-airfoil design task, we demonstrate that by composing the learn",
+    "openreview_id": "wmX0CqFSd7",
+    "forum_id": "wmX0CqFSd7"
+  },
+  "analysis_timestamp": "2026-01-06T19:29:12.460303"
+}

@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Efficient and Accurate Estimation of Lipschitz Constants for Deep Neural Networks",
+      "authors": "Amirhossein Fazlyab, Alexander Robey, Hamed Hassani, Manfred Morari, George J. Pappas",
+      "year": 2019,
+      "role": "Foundational SDP-based formulation for tight global Lipschitz upper bounds using quadratic constraints on activations.",
+      "relationship_sentence": "ECLipsE starts from this global LMI/SDP view of Lipschitz estimation and contributes an exact decomposition that breaks the large verification SDP into per-layer subproblems, preserving tightness while dramatically improving scalability."
+    },
+    {
+      "title": "Semidefinite Relaxations for Certifying Robustness of Neural Networks",
+      "authors": "Aditi Raghunathan, Jacob Steinhardt, Percy Liang",
+      "year": 2018,
+      "role": "Pioneered SDP relaxations for ReLU network verification, framing robustness certification as a large matrix inequality.",
+      "relationship_sentence": "ECLipsE leverages the same SDP verification paradigm but shows how the resulting large matrix verification problem can be decomposed along the network\u2019s cascade structure to yield small SDPs."
+    },
+    {
+      "title": "Semidefinite Relaxations for Certifying Robustness to Adversarial Examples",
+      "authors": "Alhussein Fawzi, Hamza Fawzi, Omar Fawzi",
+      "year": 2018,
+      "role": "Introduced tight SDP-based certificates for neural networks, highlighting the power and computational burden of global semidefinite verifiers.",
+      "relationship_sentence": "ECLipsE draws on this SDP-based certification lineage and addresses the key bottleneck by replacing a single global SDP with compositionally coupled, layer-sized SDPs."
+    },
+    {
+      "title": "Lipschitz Regularity of Deep Neural Networks: Analysis and Efficient Estimation",
+      "authors": "S\u00e9bastien Virmaux, Pierre Scaman",
+      "year": 2018,
+      "role": "Provided efficient, compositional layer-wise Lipschitz analyses and practical estimation algorithms (e.g., AutoLip/SeqLip).",
+      "relationship_sentence": "ECLipsE adopts a compositional mindset akin to this work but upgrades the per-layer reasoning from norm products to principled small SDPs that retain much of the tightness of global relaxations."
+    },
+    {
+      "title": "The Singular Values of Convolutional Layers",
+      "authors": "Vardan Papyan (Sedghi), Vineet Gupta, Philip M. Long",
+      "year": 2019,
+      "role": "Characterized exact spectral norms of convolutional layers, a key building block for layer-wise Lipschitz bounds.",
+      "relationship_sentence": "ECLipsE\u2019s per-layer subproblems can exploit accurate operator norms for linear layers (including convolutions), integrating these spectral results to strengthen the compositional bounds."
+    },
+    {
+      "title": "System Analysis via Integral Quadratic Constraints",
+      "authors": "Alexander Megretski, Anders Rantzer",
+      "year": 1997,
+      "role": "Classical IQC framework enabling quadratic constraints and compositional analysis of interconnected nonlinear systems.",
+      "relationship_sentence": "ECLipsE relies on the IQC/Quadratic-Constraint viewpoint (used in modern neural verification) and applies its compositionality to cascade neural networks, enabling exact decomposition of the global LMI into layer-level certificates."
+    }
+  ],
+  "synthesis_narrative": "ECLipsE\u2019s core contribution\u2014transforming a single, large SDP for global Lipschitz estimation into a set of small, layer-sized SDPs that compose along the network cascade\u2014sits squarely at the intersection of two lines of prior work: SDP-based verification and compositional Lipschitz analysis. The SDP foundation was laid by robustness certification methods that encode ReLU (or slope-restricted) nonlinearities with quadratic constraints, culminating in large matrix verification problems (Raghunathan et al.; Fawzi et al.). Fazlyab et al. then specialized this paradigm to bounding global Lipschitz constants via an SDP that is tight but increasingly expensive for deep or wide networks. In parallel, Virmaux and Scaman popularized efficient, compositional layer-wise bounds, trading tightness for scalability by relying on operator norms and activation gating heuristics. ECLipsE merges these threads: it retains the principled quadratic-constraint geometry of SDP approaches, but introduces an exact decomposition aligned with the network\u2019s cascade structure, yielding small SDPs\u2014each sized by a single layer\u2014whose solutions compose to a global certificate. Classical IQC theory (Megretski & Rantzer) underpins this move, providing the formal mechanism to distribute certificates across interconnected subsystems. Finally, accurate operator-norm analyses for linear layers (e.g., convolutional spectral norms from Sedghi et al.) can be seamlessly incorporated into the per-layer subproblems, helping ECLipsE match the tightness of global SDPs with the efficiency of compositional methods.",
+  "analysis_timestamp": "2026-01-06T23:39:42.958707"
+}

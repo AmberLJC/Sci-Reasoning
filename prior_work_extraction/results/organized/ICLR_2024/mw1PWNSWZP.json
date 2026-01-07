@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "StarCoder: may the source be with you!",
+      "authors": "Raymond Li et al.",
+      "year": 2023,
+      "arxiv_id": "2305.06161",
+      "role": "Baseline",
+      "relationship_sentence": "Provides the pretrained 15.5B code LLM that is instruction-tuned in this work and serves as the primary baseline for assessing gains from commit-based instruction tuning."
+    },
+    {
+      "title": "Self-Instruct: Aligning Language Models with Self-Generated Instructions",
+      "authors": "Yizhong Wang et al.",
+      "year": 2023,
+      "arxiv_id": "2212.10560",
+      "role": "Gap Identification",
+      "relationship_sentence": "Its synthetic instruction generation pipeline is used as a comparison point, and its dependence on model-written instructions is the specific limitation this work replaces with naturally occurring commit-derived instructions."
+    },
+    {
+      "title": "Crosslingual Generalization through Multitask Finetuning (xP3)",
+      "authors": "Niklas Muennighoff et al.",
+      "year": 2022,
+      "arxiv_id": "2211.01786",
+      "role": "Extension",
+      "relationship_sentence": "Demonstrates that large mixtures of human-written instructions across tasks and languages improve generalization, a recipe this work adapts to code by constructing a code-specific instruction mixture from Git commits (with xP3x serving as a direct baseline)."
+    },
+    {
+      "title": "OpenAssistant Conversations \u2013 Democratizing Large Language Model Alignment",
+      "authors": "Andreas K\u00f6pf et al.",
+      "year": 2023,
+      "arxiv_id": "2304.07327",
+      "role": "Baseline",
+      "relationship_sentence": "Supplies crowd-sourced human-written conversational instructions used as a baseline dataset, highlighting the contrast with the code-specific, naturally paired commit instructions introduced here."
+    },
+    {
+      "title": "WizardCoder: Empowering Code Large Language Models with Evol-Instruct",
+      "authors": "Qinkai Zheng et al.",
+      "year": 2023,
+      "arxiv_id": "2306.08568",
+      "role": "Gap Identification",
+      "relationship_sentence": "Shows that evolving synthetic code instructions can substantially boost code LLMs but relies on proprietary LMs for data, a gap this work addresses with a permissively licensed, human-authored commit corpus."
+    },
+    {
+      "title": "Training language models to follow instructions with human feedback (InstructGPT)",
+      "authors": "Long Ouyang et al.",
+      "year": 2022,
+      "arxiv_id": "2203.02155",
+      "role": "Inspiration",
+      "relationship_sentence": "Established the instruction-following fine-tuning paradigm that underpins the method here\u2014fine-tuning a pretrained LLM to follow instructions to markedly improve downstream performance."
+    },
+    {
+      "title": "Evaluating Large Language Models Trained on Code (HumanEval)",
+      "authors": "Mark Chen et al.",
+      "year": 2021,
+      "arxiv_id": "2107.03374",
+      "role": "Foundation",
+      "relationship_sentence": "Defines the standard code generation benchmark whose formulation is adopted and then expanded upon to evaluate synthesis, explanation, and repair across multiple languages."
+    }
+  ],
+  "synthesis_narrative": "Instruction-following fine-tuning was crystallized by InstructGPT, which showed that adapting pretrained models to follow natural-language instructions yields large downstream gains. Building on this, xP3 demonstrated that assembling large mixtures of human-written instructions across many tasks and languages further improves generalization, establishing a data-centric recipe for instruction tuning. In the code domain, WizardCoder applied an Evol\u2011Instruct pipeline to generate synthetic programming instructions, revealing that targeted instruction data can substantially boost code LLMs, albeit with reliance on proprietary model outputs. OpenAssistant Conversations offered an alternative source of community-sourced, human-written instruction data, but it is predominantly general-purpose dialogue rather than code-specific supervision. StarCoder provided a strong open, permissively trained base code model on which instruction tuning can be directly assessed. Finally, HumanEval supplied a canonical formulation for evaluating code synthesis, anchoring comparative measurement and inspiring extensions to broaden what \u201cinstruction following\u201d means for coding tasks.\n\nTogether, these works expose a clear opportunity: instruction tuning is powerful, mixtures matter, and code LLMs benefit from targeted supervision, but existing pipelines often depend on synthetic or proprietary outputs and lack large-scale, naturally occurring code-specific instructions. The present work synthesizes these insights by mining Git commits\u2014natural pairings of human-written intent (commit messages) with code changes\u2014to create a massive, permissively licensed instruction corpus for code, instruction-tuning StarCoder on it, and extending HumanEval to a broader, multilingual suite covering synthesis, explanation, and repair, thereby delivering the next logical step in open, instruction-tuned code LLMs.",
+  "target_paper": {
+    "title": "OctoPack: Instruction Tuning Code Large Language Models",
+    "authors": "Niklas Muennighoff, Qian Liu, Armel Randy Zebaze, Qinkai Zheng, Binyuan Hui, Terry Yue Zhuo, Swayam Singh, Xiangru Tang, Leandro Von Werra, Shayne Longpre",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "large language models, large code models, instruction tuning",
+    "abstract": "Finetuning large language models (LLMs) on instructions leads to vast performance improvements on natural language tasks. We apply instruction tuning using code, leveraging the natural structure of Git commits, which pair code changes with human instructions. We compile CommitPack: 4 terabytes of Git commits across 350 programming languages. We benchmark CommitPack against other natural and synthetic code instructions (xP3x, Self-Instruct, OASST) on the 16B parameter StarCoder model, and achieve state-of-the-art performance among models not trained on OpenAI outputs, on the HumanEval Python benchmark (46.2% pass@1). We further introduce HumanEvalPack, expanding the HumanEval benchmark to a total of 3 coding tasks (Code Repair, Code Explanation, Code Synthesis) across 6 languages (Python, JavaScript, Java, Go, C++, Rust). Our models, OctoCoder and OctoGeeX, achieve the best performance across HumanEvalPack among all permissive models, demonstrating CommitPack's benefits in generalizing ",
+    "openreview_id": "mw1PWNSWZP",
+    "forum_id": "mw1PWNSWZP"
+  },
+  "analysis_timestamp": "2026-01-07T00:15:29.580237"
+}

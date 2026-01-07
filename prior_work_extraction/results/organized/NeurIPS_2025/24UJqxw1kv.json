@@ -1,0 +1,83 @@
+{
+  "prior_works": [
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": [
+        "Jonathan Ho",
+        "Ajay Jain",
+        "Pieter Abbeel"
+      ],
+      "year": 2020,
+      "role": "methodological foundation",
+      "relationship_sentence": "Provides the core diffusion modeling machinery that FORL leverages to conditionally generate multi-modal candidate future states without assuming a specific pattern of non-stationarity."
+    },
+    {
+      "title": "Autoregressive Denoising Diffusion Models for Multivariate Probabilistic Time Series Forecasting (TimeGrad)",
+      "authors": [
+        "Ali R. Rasul et al."
+      ],
+      "year": 2021,
+      "role": "methodological foundation",
+      "relationship_sentence": "Demonstrates that diffusion/score-based models can perform calibrated probabilistic time-series forecasting, directly inspiring FORL\u2019s conditional diffusion module for forecasting non-stationary offsets."
+    },
+    {
+      "title": "Diffuser: Planning with Diffusion for Flexible Behavior Synthesis",
+      "authors": [
+        "Michael Janner",
+        "Yilun Du",
+        "Joshua B. Tenenbaum",
+        "Sergey Levine"
+      ],
+      "year": 2022,
+      "role": "conceptual precedent in RL + diffusion",
+      "relationship_sentence": "Shows how diffusion models can be integrated into decision-making; FORL repurposes this idea from action/trajectory generation to candidate state generation to robustify offline RL under shifts."
+    },
+    {
+      "title": "Implicit Q-Learning (IQL): Offline RL with Implicit Value Regularization",
+      "authors": [
+        "Ilya Kostrikov",
+        "Ashvin Nair",
+        "Sergey Levine"
+      ],
+      "year": 2021,
+      "role": "offline RL backbone/baseline",
+      "relationship_sentence": "A practical, widely adopted offline RL algorithm that FORL can augment; FORL\u2019s forecasting module plugs into such conservative, data-driven value/policy learning without extra interaction."
+    },
+    {
+      "title": "Conservative Q-Learning for Offline Reinforcement Learning",
+      "authors": [
+        "Aviral Kumar",
+        "Aurick Zhou",
+        "George Tucker",
+        "Sergey Levine"
+      ],
+      "year": 2020,
+      "role": "offline RL backbone/baseline",
+      "relationship_sentence": "Introduces conservatism to mitigate extrapolation in offline RL; FORL complements this by forecasting latent shifts, improving robustness when stationarity assumptions fail."
+    },
+    {
+      "title": "PEARL: Probabilistic Embeddings for Actor-Critic RL",
+      "authors": [
+        "Kate Rakelly",
+        "Aurick Zhou",
+        "Deirdre Quillen",
+        "Chelsea Finn",
+        "Sergey Levine"
+      ],
+      "year": 2019,
+      "role": "handling hidden context/non-stationarity",
+      "relationship_sentence": "Shows that inferring latent context enables fast adaptation to task variation; FORL similarly targets hidden offsets but achieves zero-shot robustness via forecasted candidate states."
+    },
+    {
+      "title": "Chronos: Pretrained Transformers for Time Series Forecasting",
+      "authors": [
+        "Yuyang Wang et al."
+      ],
+      "year": 2024,
+      "role": "zero-shot time-series foundation model",
+      "relationship_sentence": "Establishes that large pretrained time-series models can provide strong zero-shot forecasts; FORL leverages such models to supply immediate offset forecasts at test time without further training."
+    }
+  ],
+  "synthesis_narrative": "FORL\u2019s core contribution\u2014robust offline RL under abrupt, time-varying, potentially non-Markovian offsets\u2014emerges from unifying advances in diffusion generative modeling, offline RL, and foundation models for time series. At the modeling level, DDPM provides the fundamental denoising diffusion framework, while TimeGrad demonstrates that diffusion/score-based approaches can yield calibrated probabilistic forecasts for time series, directly informing FORL\u2019s conditional diffusion module for candidate state generation. Diffuser further establishes that diffusion models can be embedded into decision-making pipelines; FORL adapts this idea from trajectory/action synthesis to state forecasting, proposing futures that account for latent, time-varying offsets.\n\nOn the RL side, IQL and CQL supply practical, conservative offline RL backbones that operate purely on static datasets, ensuring stability and safety against distributional extrapolation. FORL complements these by supplying forecasted, offset-adjusted candidate states to mitigate partial observability induced by non-stationarity, thereby improving decision quality without any additional environment interaction. Conceptually, PEARL motivates modeling hidden context to cope with task variation and partial observability; FORL achieves a zero-shot analogue by forecasting and integrating plausible future contexts/offsets at episode onset.\n\nFinally, the rise of time-series foundation models such as Chronos shows that large, pretrained forecasters can generalize zero-shot across domains. FORL leverages these models to obtain immediate offset forecasts, which, combined with diffusion-based candidate state generation, yields a unified, plug-and-play framework tailored to non-stationary offline settings.",
+  "analysis_timestamp": "2026-01-07T00:02:04.936995"
+}

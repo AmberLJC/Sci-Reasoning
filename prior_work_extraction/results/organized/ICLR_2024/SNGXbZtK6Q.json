@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "DeepXplore: Automated Whitebox Testing of Deep Learning Systems",
+      "authors": "Kexin Pei et al.",
+      "year": 2017,
+      "arxiv_id": "1705.06640",
+      "role": "Foundation",
+      "relationship_sentence": "DeepXplore introduced neuron coverage as a thresholded activation-based test adequacy metric, which NAC directly rethinks by redefining a neuron\u2019s activation state to also include its influence on the model decision."
+    },
+    {
+      "title": "DeepGauge: Multi-Granularity Testing Criteria for Deep Learning Systems",
+      "authors": "Lei Ma et al.",
+      "year": 2018,
+      "arxiv_id": "1803.07519",
+      "role": "Extension",
+      "relationship_sentence": "DeepGauge broadened coverage concepts to multi-granularity neuron behaviors, and NAC extends this lineage by proposing a more semantically grounded coverage that couples activation magnitude with decision influence for OOD and generalization assessment."
+    },
+    {
+      "title": "Surprise Adequacy: A Measure of Testing Adequacy for Deep Learning Systems",
+      "authors": "Kim et al.",
+      "year": 2019,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "Surprise Adequacy showed activation-trace\u2013based adequacy can flag unusual inputs but relies on distance measures with sensitivity and scalability issues, motivating NAC\u2019s simpler InD-only coverage of influential neurons as a robust alternative."
+    },
+    {
+      "title": "Grad-CAM: Visual Explanations from Deep Networks via Gradient-based Localization",
+      "authors": "Ramprasaath R. Selvaraju et al.",
+      "year": 2017,
+      "arxiv_id": "1610.02391",
+      "role": "Inspiration",
+      "relationship_sentence": "Grad-CAM formalized using gradients to quantify a neuron/channel\u2019s contribution to a target prediction, which NAC borrows to define the \u2018influence on model decisions\u2019 component of its activation state."
+    },
+    {
+      "title": "A Baseline for Detecting Misclassified and Out-of-Distribution Examples in Neural Networks",
+      "authors": "Dan Hendrycks et al.",
+      "year": 2017,
+      "arxiv_id": "1610.02136",
+      "role": "Foundation",
+      "relationship_sentence": "This work established the post-hoc OOD detection setting and the MSP baseline that NAC directly targets by replacing output confidence with neuron activation coverage derived from InD behavior."
+    },
+    {
+      "title": "A Simple Unified Framework for Detecting Out-of-Distribution Samples and Adversarial Attacks",
+      "authors": "Kimin Lee et al.",
+      "year": 2018,
+      "arxiv_id": "1807.03888",
+      "role": "Related Problem",
+      "relationship_sentence": "The Mahalanobis detector showed OOD can be detected using in-distribution feature statistics across layers, informing NAC\u2019s choice to leverage internal neuron behavior from InD data rather than relying solely on output scores."
+    },
+    {
+      "title": "Energy-based Out-of-Distribution Detection",
+      "authors": "Weitang Liu et al.",
+      "year": 2020,
+      "arxiv_id": "2010.03759",
+      "role": "Baseline",
+      "relationship_sentence": "Energy-based scoring is a strong post-hoc OOD baseline that NAC explicitly competes with by demonstrating that coverage of influential neuron activations separates InD/OOD more effectively."
+    }
+  ],
+  "synthesis_narrative": "Neuron-centric testing lines began with DeepXplore\u2019s neuron coverage, which counted a neuron as covered when its activation surpassed a threshold, introducing the idea that adequacy can be assessed via internal activations. DeepGauge refined this notion with multi-granularity criteria (e.g., k-multisection, top-k) to capture richer neuron behavior, yet still treated activation magnitude as the sole proxy for behavioral relevance. Surprise Adequacy reframed test adequacy as activation-trace novelty relative to training traces, demonstrating that activation-space statistics can flag unusual inputs but incurring complexity and sensitivity in distance estimation. In parallel, Grad-CAM established a principled, gradient-based way to quantify a neuron or channel\u2019s contribution to a target decision, offering a practical handle on neuron influence rather than raw activity alone. For OOD detection, MSP codified the post-hoc setting with softmax confidence, while the Mahalanobis approach showed that in-distribution feature statistics across layers can detect OOD without extra training, and energy-based scoring further improved output-level post-hoc detection. Together these works suggested a gap: coverage metrics ignored decision influence, while attribution and output-score methods lacked a coverage principle grounded in in-distribution behavior. A natural synthesis is to define a neuron activation state that couples activation magnitude with gradient-based decision influence, compute its in-distribution coverage, and use this simple internal-behavior statistic to both separate OOD from InD and gauge generalization robustness across architectures and datasets.",
+  "target_paper": {
+    "title": "Neuron Activation Coverage: Rethinking Out-of-distribution Detection and Generalization",
+    "authors": "Yibing Liu, Chris XING TIAN, Haoliang Li, Lei Ma, Shiqi Wang",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Out-of-distribution, Generalization, Neuron Activation",
+    "abstract": "The out-of-distribution (OOD) problem generally arises when neural networks encounter data that significantly deviates from the training data distribution, i.e., in-distribution (InD). In this paper, we study the OOD problem from a neuron activation view. We first formulate neuron activation states by considering both the neuron output and its influence on model decisions. Then, to characterize the relationship between neurons and OOD issues, we introduce the *neuron activation coverage* (NAC) -- a simple measure for neuron behaviors under InD data. Leveraging our NAC, we show that 1) InD and OOD inputs can be largely separated based on the neuron behavior, which significantly eases the OOD detection problem and beats the 21 previous methods over three benchmarks (CIFAR-10, CIFAR-100, and ImageNet-1K). 2) a positive correlation between NAC and model generalization ability consistently holds across architectures and datasets, which enables a NAC-based criterion for evaluating model robu",
+    "openreview_id": "SNGXbZtK6Q",
+    "forum_id": "SNGXbZtK6Q"
+  },
+  "analysis_timestamp": "2026-01-06T23:42:53.498920"
+}

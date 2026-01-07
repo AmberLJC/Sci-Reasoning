@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "DARE: Drop-and-Rescale for Delta-Parameter Pruning",
+      "authors": "Yu et al.",
+      "year": 2024,
+      "arxiv_id": null,
+      "role": "Extension",
+      "relationship_sentence": "DAREx directly modifies DARE\u2019s core random drop-and-rescale scheme by replacing its expectation-preserving scaling (which explodes at high pruning rates) and correcting for biased, high-variance delta distributions that DARE assumes away."
+    },
+    {
+      "title": "Dropout: A Simple Way to Prevent Neural Networks from Overfitting",
+      "authors": "Nitish Srivastava et al.",
+      "year": 2014,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "DARE\u2019s use of 1/(1-p) rescaling after random dropping is inherited from dropout\u2019s expectation-preserving principle, which DAREx rethinks to avoid variance blow-up at extreme pruning."
+    },
+    {
+      "title": "Regularization of Neural Networks using DropConnect",
+      "authors": "Li Wan et al.",
+      "year": 2013,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "DARE\u2019s mechanism of randomly zeroing weights (here, delta-weights) with rescaling is a direct analogue of DropConnect\u2019s weight-level stochastic masking that DAREx retains but rescales more robustly."
+    },
+    {
+      "title": "BitFit: Simple Parameter-Efficient Fine-Tuning for Transformer-based Masked Language Models",
+      "authors": "Ben Zaken et al.",
+      "year": 2021,
+      "arxiv_id": "2106.10199",
+      "role": "Foundation",
+      "relationship_sentence": "By showing that only a small subset of parameters (biases) need to change during fine-tuning, BitFit provides empirical grounding that many delta parameters are dispensable, motivating aggressive delta pruning refined by DAREx."
+    },
+    {
+      "title": "Movement Pruning: Adaptive Sparsity by Fine-Tuning",
+      "authors": "Victor Sanh et al.",
+      "year": 2020,
+      "arxiv_id": null,
+      "role": "Related Problem",
+      "relationship_sentence": "Movement pruning demonstrates that sparsity can be introduced during fine-tuning with minimal loss, informing DAREx\u2019s premise that large fractions of fine-tuning deltas can be removed if scaling/statistics are handled correctly."
+    },
+    {
+      "title": "Editing Models with Task Arithmetic",
+      "authors": "Gabrielle Ilharco et al.",
+      "year": 2022,
+      "arxiv_id": null,
+      "role": "Related Problem",
+      "relationship_sentence": "Task arithmetic shows that scaling and combining weight deltas (task vectors) critically affects behavior, directly motivating DAREx\u2019s attention to delta mean/variance and principled rescaling for stable performance."
+    }
+  ],
+  "synthesis_narrative": "Randomized drop-and-rescale has a long lineage: dropout established the expectation-preserving 1/(1\u2212p) rule for activation masking, and DropConnect ported the idea to weight-level stochastic masking. DARE applies this exact principle to delta-weights\u2014the differences between fine-tuned and base parameters\u2014pruning a random subset of deltas and rescaling the survivors to keep the expected update unchanged. Independent evidence from parameter-efficient fine-tuning reinforced the feasibility of removing many updates: BitFit showed that modifying only biases can often suffice, and movement pruning demonstrated that sparsity introduced during fine-tuning preserves accuracy if chosen carefully. Complementary work on task vectors revealed that the magnitude and statistics of weight deltas strongly influence model behavior; scaling those deltas changes downstream performance in predictable ways, implying that both the rescaling rule and the distributional properties (mean and variance) of deltas matter.\nCollectively, these works exposed an opportunity: while random delta pruning can work surprisingly well, the dropout-style rescaling inherited by DARE becomes unstable under extreme pruning, and real-world delta distributions are not zero-mean with benign variance. The natural next step was to keep the simplicity and speed of random delta masking but replace brittle expectation-only scaling with a robust scheme and to actively correct delta statistics. DAREx operationalizes this by introducing a modified rescaling (DAREx-q) that avoids large-factor blowups and by normalizing/centering high-mean, high-variance deltas to push pruning into the extreme regime with minimal loss.",
+  "target_paper": {
+    "title": "DARE the Extreme: Revisiting Delta-Parameter Pruning For Fine-Tuned Models",
+    "authors": "Wenlong Deng, Yize Zhao, Vala Vakilian, Minghui Chen, Xiaoxiao Li, Christos Thrampoulidis",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "Delta parameter pruning, Efficiency, Large Language Models",
+    "abstract": "Storing open-source fine-tuned models separately introduces redundancy and increases response times in applications utilizing multiple models. Delta-parameter pruning (DPP), particularly the random drop and rescale (DARE) method proposed by Yu et al., addresses this by pruning the majority of delta parameters\u2014the differences between fine-tuned and pre-trained model weights\u2014while typically maintaining minimal performance loss. However, DARE fails when either the pruning rate or the magnitude of the delta parameters is large. We highlight two key reasons for this failure: (1) an excessively large rescaling factor as pruning rates increase, and (2) high mean and variance in the delta parameters. To push DARE\u2019s limits, we introduce DAREx (DARE the eXtreme), which features two algorithmic improvements: (1) DAREx-q, a rescaling factor modification that significantly boosts performance at high pruning rates (e.g., > 30% on COLA and SST2 for encoder models, with even greater gains in decoder m",
+    "openreview_id": "avSocG0oFA",
+    "forum_id": "avSocG0oFA"
+  },
+  "analysis_timestamp": "2026-01-06T13:03:33.883890"
+}

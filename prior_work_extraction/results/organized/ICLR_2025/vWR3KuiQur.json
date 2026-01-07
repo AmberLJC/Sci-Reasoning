@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "SmoothQuant: Accurate and Efficient Post-Training Quantization for Large Language Models",
+      "authors": "Xiao et al.",
+      "year": 2023,
+      "role": "Outlier-redistribution baseline",
+      "relationship_sentence": "SVDQuant\u2019s first step\u2014shifting activation outliers into the weights\u2014directly builds on SmoothQuant\u2019s idea of rebalancing activation/weight scales before quantization, but then goes beyond smoothing by absorbing the concentrated outliers via a separate low-rank branch."
+    },
+    {
+      "title": "LLM.int8(): 8-bit Matrix Multiplication for Transformers at Scale",
+      "authors": "Dettmers, Lewis, Belkada, Zettlemoyer",
+      "year": 2022,
+      "role": "High-precision pathway for outliers",
+      "relationship_sentence": "The notion of handling outlier channels in a higher-precision path inspired SVDQuant\u2019s design of a dedicated high-precision branch to capture outlier components while quantizing the bulk computation aggressively."
+    },
+    {
+      "title": "AWQ: Activation-aware Weight Quantization for LLM Compression and Acceleration",
+      "authors": "Lin et al.",
+      "year": 2023,
+      "role": "Saliency-aware selective precision",
+      "relationship_sentence": "AWQ\u2019s principle of preserving a small set of salient weights informed SVDQuant\u2019s choice to isolate and retain outlier-heavy structure in a compact, high-precision component rather than uniformly quantizing everything."
+    },
+    {
+      "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+      "authors": "Hu et al.",
+      "year": 2022,
+      "role": "Low-rank decomposition paradigm",
+      "relationship_sentence": "SVDQuant leverages the LoRA-style insight that impactful model changes live in low-rank subspaces, using an SVD-derived low-rank branch to represent outlier structure while leaving the residual to low-bit quantization."
+    },
+    {
+      "title": "QLoRA: Efficient Finetuning of Quantized Large Language Models",
+      "authors": "Dettmers, Pagnoni, Holtzman, Zettlemoyer",
+      "year": 2023,
+      "role": "Low-bit base + high-precision low-rank correction",
+      "relationship_sentence": "QLoRA\u2019s success with a 4-bit base model plus high-precision low-rank adapters parallels SVDQuant\u2019s architecture of a low-bit main path complemented by a high-precision low-rank branch to recover accuracy lost to quantization."
+    },
+    {
+      "title": "PTQ4DM: Post-Training Quantization for Diffusion Models",
+      "authors": "Zhang et al.",
+      "year": 2023,
+      "role": "Diffusion-specific PTQ baseline",
+      "relationship_sentence": "By documenting diffusion models\u2019 sensitivity\u2014especially activation outliers across timesteps\u2014PTQ4DM motivates SVDQuant\u2019s need to go beyond smoothing and introduce a structured branch to absorb outliers for stable 4-bit W/A quantization."
+    },
+    {
+      "title": "GPTQ: Accurate Post-Training Quantization for Generative Pre-trained Transformers",
+      "authors": "Frantar, Ashkboos, Alistarh, Hoefler",
+      "year": 2022,
+      "role": "Strong weight-only PTQ baseline",
+      "relationship_sentence": "GPTQ\u2019s accurate 4-bit weight quantization highlights the remaining activation and outlier challenges, which SVDQuant addresses by splitting weights into a high-precision low-rank outlier component and a quantized residual."
+    }
+  ],
+  "synthesis_narrative": "SVDQuant sits at the intersection of three converging lines of work: outlier handling, low-rank modeling, and diffusion-specific quantization. From the outlier side, SmoothQuant introduced the key idea of shifting activation outliers into weights to make activations easier to quantize, while LLM.int8 and AWQ showed that selectively allocating higher precision to outlier or salient channels can stabilize aggressive quantization. SVDQuant adopts and unifies these insights by first consolidating activation outliers into the weights and then purposefully separating the outlier-heavy component from the bulk.\nLow-rank techniques provided the structural vehicle for this separation. LoRA demonstrated that impactful parameter changes often lie in low-rank subspaces, and QLoRA operationalized a practical recipe: keep the main pathway at 4 bits while adding a small, high-precision low-rank branch to recover accuracy. SVDQuant translates this into a post-training setting using SVD on the weight matrices to extract a compact high-precision low-rank branch that \"absorbs\" outliers, leaving a residual that is much friendlier to 4-bit quantization.\nFinally, diffusion-focused PTQ research such as PTQ4DM established both the feasibility and the unique challenges of quantizing diffusion models across timesteps, and weight-only methods like GPTQ highlighted that activation/outlier issues remain the primary bottleneck at 4 bits. SVDQuant\u2019s low-rank absorption mechanism synthesizes these strands, enabling stable 4-bit weight-and-activation quantization for diffusion models.",
+  "analysis_timestamp": "2026-01-06T23:42:48.097496"
+}

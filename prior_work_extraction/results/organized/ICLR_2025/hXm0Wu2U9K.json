@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Training language models to follow instructions with human feedback",
+      "authors": "Long Ouyang et al.",
+      "year": 2022,
+      "arxiv_id": "2203.02155",
+      "role": "Foundation",
+      "relationship_sentence": "Established RLHF as KL-regularized PPO fine-tuning against a learned reward model, defining the prevailing alignment setup and KL control that this paper proves theoretically too weak and replaces with chi-squared\u2013based pessimism."
+    },
+    {
+      "title": "Fine-Tuning Language Models from Human Preferences",
+      "authors": "Daniel M. Ziegler et al.",
+      "year": 2019,
+      "arxiv_id": "1909.08593",
+      "role": "Foundation",
+      "relationship_sentence": "Introduced the LM alignment pipeline via learned reward models and KL-regularized RL, providing the core problem formulation and regularization paradigm whose limitations this work targets."
+    },
+    {
+      "title": "Direct Preference Optimization: Your Language Model is Secretly a Reward Model",
+      "authors": "Alexander M. Rafailov et al.",
+      "year": 2023,
+      "arxiv_id": "2305.18290",
+      "role": "Extension",
+      "relationship_sentence": "Supplied the preference-optimization formulation (avoiding explicit RL) that this paper generalizes by replacing DPO\u2019s KL/BTL-driven objective with a chi-squared preference objective that is provably robust to overoptimization."
+    },
+    {
+      "title": "Conservative Q-Learning for Offline Reinforcement Learning",
+      "authors": "Aviral Kumar et al.",
+      "year": 2020,
+      "arxiv_id": "2006.04779",
+      "role": "Inspiration",
+      "relationship_sentence": "Demonstrated pessimism/conservatism as a principled fix for distribution shift in offline RL, directly motivating the paper\u2019s pessimistic preference optimization to prevent overoptimization in offline alignment."
+    },
+    {
+      "title": "Stochastic Gradient Methods for Distributionally Robust Optimization with f-divergences",
+      "authors": "Hamed Namkoong and John C. Duchi",
+      "year": 2016,
+      "arxiv_id": "1610.05602",
+      "role": "Inspiration",
+      "relationship_sentence": "Showed that chi-squared f-divergence DRO yields tractable mean\u2013variance style penalties for robust risk, a technical insight this paper adapts to derive a chi-squared preference objective with tight, computable pessimistic guarantees."
+    },
+    {
+      "title": "Training a Helpful and Harmless Assistant with Reinforcement Learning from Human Feedback",
+      "authors": "Yuntao Bai et al.",
+      "year": 2022,
+      "arxiv_id": "2204.05862",
+      "role": "Gap Identification",
+      "relationship_sentence": "Documented reward overoptimization and proxy gaming under KL-regularized RLHF at scale, providing the empirical gap this paper addresses with provable protection against overoptimization."
+    }
+  ],
+  "synthesis_narrative": "Instruction-following RLHF was operationalized by Ziegler et al. with a learned reward model and KL-regularized policy optimization, and scaled by Ouyang et al. into the now-standard KL-penalized PPO alignment protocol. Bai et al. then highlighted that, despite KL control to a reference model, optimizing against imperfect reward models induces reward hacking and quality regression\u2014overoptimization during offline fine-tuning. In parallel, offline RL developed conservative methods; Kumar et al. showed that pessimistic penalties curb distribution shift by downweighting unsupported actions, pointing to conservatism as the right structural remedy. From a robustness viewpoint, Namkoong and Duchi established that chi-squared f-divergence\u2013based distributional robustness yields practical mean\u2013variance penalties that tightly control worst-case risk under sampling noise. Meanwhile, Rafailov et al. reframed alignment as direct preference optimization, replacing explicit RL with a supervised objective derived from Bradley\u2013Terry pairwise preferences, but still effectively tethered by KL-style regularization or reference policies.\nThese threads expose a coherent opportunity: KL proximity to a reference is not the right quantity to control overoptimization; one needs pessimism calibrated to the statistical uncertainty of the offline preference data. By marrying the DRO insight that chi-squared divergence induces tight variance-based robustness with the DPO preference-based formulation, and by adopting the conservative ethos from offline RL, the present work replaces KL regularization with chi-squared preference optimization. This synthesis yields a direct-alignment objective that is sample-efficient under realistic coverage assumptions and provably resists overoptimization, addressing the documented failures of KL-regularized RLHF at scale.",
+  "target_paper": {
+    "title": "Correcting the Mythos of KL-Regularization: Direct Alignment without Overoptimization via Chi-Squared Preference Optimization",
+    "authors": "Audrey Huang, Wenhao Zhan, Tengyang Xie, Jason D. Lee, Wen Sun, Akshay Krishnamurthy, Dylan J Foster",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "Reinforcement Learning Theory, Offline Reinforcement Learning, single-policy concentrability, pessimism, RLHF",
+    "abstract": "Language model alignment methods such as reinforcement learning from human feedback (RLHF) have led to impressive advances in language model capabilities, but are limited by a widely observed phenomenon known as *overoptimization*, where the quality of the language model degrades over the course of the alignment process. As the model optimizes performance on an offline reward model, it overfits to inaccuracies and drifts away from preferred responses covered by the data. To discourage such distribution shift, KL-regularization is widely employed in existing offline alignment methods, but overoptimization continues to harm performance. Lending theoretical insight into the source of these empirical observations, we first show that the KL-regularization is too weak to prevent overfitting, then ask: is it possible to design an efficient algorithm that is provably robust to overoptimization?\n\nIn this paper, we advance theoretical understanding of sample-efficient offline alignment and intro",
+    "openreview_id": "hXm0Wu2U9K",
+    "forum_id": "hXm0Wu2U9K"
+  },
+  "analysis_timestamp": "2026-01-06T09:48:27.108763"
+}

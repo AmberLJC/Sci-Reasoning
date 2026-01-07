@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Machine Learning with Adversaries: Byzantine Tolerant Gradient Descent",
+      "authors": "Blanchard et al.",
+      "year": 2017,
+      "arxiv_id": "1703.02757",
+      "role": "Foundation",
+      "relationship_sentence": "This paper introduced Krum and formalized Byzantine-robust distributed gradient descent under bounded-update assumptions, establishing the pre-aggregation control (often enforced via clipping) that ARC preserves while replacing static bounds with adaptive ones."
+    },
+    {
+      "title": "Byzantine-Robust Distributed Learning: Towards Optimal Statistical Rates",
+      "authors": "Yin et al.",
+      "year": 2018,
+      "arxiv_id": "1803.01498",
+      "role": "Baseline",
+      "relationship_sentence": "Yin et al. proved optimal statistical rates for coordinate-wise median/trimmed-mean aggregators under bounded gradients, a condition typically met via fixed clipping, and ARC directly augments these SOTA Robust-DGD methods by adaptively choosing the clipping threshold while retaining their guarantees."
+    },
+    {
+      "title": "Robust Aggregation for Federated Learning",
+      "authors": "Pillutla et al.",
+      "year": 2019,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "This work\u2019s geometric-median based RFA is a principal robust aggregator in federated learning that relies in practice on pre-aggregation norm control; ARC is designed to be plug-and-play with RFA by replacing static clipping with an input-adaptive rule that maintains robustness while improving convergence when well-initialized."
+    },
+    {
+      "title": "A Little Is Enough: Circumventing Defenses for Distributed Learning",
+      "authors": "Baruch et al.",
+      "year": 2019,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "By showing that small, carefully biased updates can defeat popular robust aggregators and that naive fixed clipping can be either ineffective or harmful, this paper exposed the brittleness of static clipping that ARC explicitly remedies with data-driven thresholds."
+    },
+    {
+      "title": "Local Model Poisoning Attacks to Byzantine-Robust Federated Learning",
+      "authors": "Fang et al.",
+      "year": 2020,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "This attack paper demonstrated that strong Byzantine-resilient aggregators can still fail under adaptive client attacks and heterogeneous data, motivating the need for principled, context-aware clipping like ARC rather than one-size-fits-all static norms."
+    },
+    {
+      "title": "Differentially Private Learning with Adaptive Clipping",
+      "authors": "Andrew et al.",
+      "year": 2021,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "This work introduced the idea of estimating clipping thresholds from observed gradient statistics (e.g., quantile-based adaptation), which ARC repurposes\u2014without privacy noise\u2014to set input-dependent clipping that preserves Byzantine-robust aggregation guarantees."
+    }
+  ],
+  "synthesis_narrative": "Byzantine-robust distributed optimization was grounded by the introduction of Krum, which formalized robustness under bounded client updates and spurred the practice of pre-aggregation control to meet its assumptions. Subsequent theory showed that coordinate-wise median and trimmed-mean aggregators could achieve optimal statistical rates when gradients are suitably bounded, reinforcing the centrality of pre-aggregation clipping to guarantee robustness. Robust Federated Aggregation (RFA) advanced this line with geometric-median aggregation, again relying in practice on limiting update magnitudes to contain adversarial influence. However, attack studies revealed the fragility of these defenses: small, targeted biases could circumvent robust aggregators, and local model poisoning remained effective under realistic heterogeneity, highlighting that fixed clipping can under- or over-suppress signal depending on the attack and data regime. In parallel, work on differentially private learning introduced adaptive clipping, showing that dynamically estimating clipping thresholds from gradient statistics can better track training dynamics than static norms.\n\nTogether, these works surfaced a clear opportunity: robust aggregators need bounded updates to retain guarantees, yet fixed clipping is inconsistent across attacks and data conditions, while adaptive thresholding can track the true scale of benign gradients. Building on the theoretical frameworks of Krum, coordinate-wise robust aggregates, and RFA, and informed by the demonstrated failures of static defenses, the current work synthesizes adaptive clipping\u2014\u00e0 la quantile-based estimation\u2014from privacy research into a principled, aggregator-agnostic mechanism that preserves Byzantine robustness and improves asymptotic convergence when models are well-initialized.",
+  "target_paper": {
+    "title": "Adaptive Gradient Clipping for Robust Federated Learning",
+    "authors": "Youssef Allouah, Rachid Guerraoui, Nirupam Gupta, Ahmed Jellouli, Geovani Rizk, John Stephan",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "Federated learning, robustness, Byzantine resilience",
+    "abstract": "Robust federated learning aims to maintain reliable performance despite the presence of adversarial or misbehaving workers. While state-of-the-art (SOTA) robust distributed gradient descent (Robust-DGD) methods were proven theoretically optimal, their empirical success has often relied on pre-aggregation gradient clipping.\nHowever, existing static clipping strategies yield inconsistent results: enhancing robustness against some attacks while being ineffective or even detrimental against others.\nTo address this limitation, we propose a principled adaptive clipping strategy, Adaptive Robust Clipping (ARC), which dynamically adjusts clipping thresholds based on the input gradients. We prove that ARC not only preserves the theoretical robustness guarantees of SOTA Robust-DGD methods but also provably improves asymptotic convergence when the model is well-initialized. Extensive experiments on benchmark image classification tasks confirm these theoretical insights, demonstrating that ARC sig",
+    "openreview_id": "03OkC0LKDD",
+    "forum_id": "03OkC0LKDD"
+  },
+  "analysis_timestamp": "2026-01-06T10:47:18.183191"
+}

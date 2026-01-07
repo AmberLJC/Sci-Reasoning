@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Lexically Constrained Decoding for Sequence Generation Using Grid Beam Search",
+      "authors": "Chris Hokamp et al.",
+      "year": 2017,
+      "role": "Foundation",
+      "relationship_sentence": "This paper formalized the problem of enforcing lexical constraints during decoding, directly defining the control objective that GeLaTo seeks to satisfy but without offering a tractable probabilistic mechanism."
+    },
+    {
+      "title": "Fast Lexically Constrained Decoding for Sequence Generation",
+      "authors": "Matt Post et al.",
+      "year": 2018,
+      "role": "Gap Identification",
+      "relationship_sentence": "By improving the efficiency of lexically constrained beam search yet still facing combinatorial complexity and limited expressivity, this work highlights the need for a principled, tractable approach that GeLaTo provides via TPM-based conditioning."
+    },
+    {
+      "title": "Plug and Play Language Models: A Simple Approach to Controlled Text Generation",
+      "authors": "Archit Dathathri et al.",
+      "year": 2020,
+      "role": "Gap Identification",
+      "relationship_sentence": "PPLM demonstrated steering LMs with auxiliary signals but relied on heuristic gradient-based updates without exact constraint satisfaction; GeLaTo addresses this gap by computing p(text | constraints) with a tractable model."
+    },
+    {
+      "title": "FUDGE: Controlled Text Generation With Future Discriminators",
+      "authors": "Kevin Yang et al.",
+      "year": 2021,
+      "role": "Gap Identification",
+      "relationship_sentence": "FUDGE conditions decoding on a learned discriminator estimating future constraint satisfaction, motivating GeLaTo\u2019s shift to a generative, tractable controller that yields exact probabilistic guidance instead of learned proxies."
+    },
+    {
+      "title": "GeDi: Generative Discriminator Guided Sequence Generation",
+      "authors": "Ben Krause et al.",
+      "year": 2021,
+      "role": "Inspiration",
+      "relationship_sentence": "GeDi\u2019s Bayes-inspired reweighting with a generative controller directly inspired GeLaTo\u2019s key idea, which replaces GeDi\u2019s neural controller with a tractable probabilistic model (distilled HMM) to make conditioning efficient and principled."
+    },
+    {
+      "title": "A Tutorial on Hidden Markov Models and Selected Applications in Speech Recognition",
+      "authors": "Lawrence R. Rabiner",
+      "year": 1989,
+      "role": "Foundation",
+      "relationship_sentence": "Rabiner established HMMs and their exact forward\u2013backward inference, the tractable machinery GeLaTo exploits to compute and sample from p(text | lexical constraints) once the HMM is aligned with the LM."
+    },
+    {
+      "title": "Distilling the Knowledge in a Neural Network",
+      "authors": "Geoffrey Hinton et al.",
+      "year": 2015,
+      "role": "Extension",
+      "relationship_sentence": "GeLaTo directly applies the knowledge-distillation paradigm to transfer GPT-2\u2019s distribution into a compact HMM, enabling a tractable controller that faithfully guides the base LM under constraints."
+    }
+  ],
+  "synthesis_narrative": "GeLaTo\u2019s core contribution\u2014using a tractable probabilistic model to compute p(text | constraints) and guide an autoregressive LM\u2014sits at the intersection of constrained decoding and controllable generation, while crucially introducing tractability via a distilled HMM. The constrained decoding lineage begins with Hokamp and Liu\u2019s grid beam search, which formulated lexical constraints during decoding, and Post and Vilar\u2019s faster variant. These works defined the problem but remained combinatorial and limited in expressivity, motivating a probabilistic alternative. Controllable generation methods like PPLM and FUDGE showed how auxiliary models can steer generation, but they relied on approximate gradients or learned future discriminators that do not provide exact conditioning or guarantees. GeDi took a decisive step by reframing control through Bayes with a generative controller, directly inspiring GeLaTo\u2019s approach of pairing the base LM with an auxiliary generative model. GeLaTo advances this idea by selecting a tractable probabilistic model\u2014an HMM\u2014for which exact conditional inference is possible, grounded in Rabiner\u2019s forward\u2013backward algorithms. To align this tractable controller with a powerful LM, GeLaTo leverages knowledge distillation (Hinton et al.), transferring GPT\u20112\u2019s behavior into the HMM so that the controller\u2019s probabilities faithfully reflect the LM\u2019s distribution. Together, these works shaped GeLaTo\u2019s insight: make constraint satisfaction tractable by distilling a strong LM into a TPM and using its exact conditional computations to guide autoregressive decoding.",
+  "analysis_timestamp": "2026-01-06T23:09:26.515038"
+}

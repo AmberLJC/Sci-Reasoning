@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Communication-Efficient Learning of Deep Networks from Decentralized Data",
+      "authors": "H. Brendan McMahan et al.",
+      "year": 2017,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "The proposed method directly modifies FedAvg\u2019s aggregation step by replacing its fixed data-size weights with participation-history\u2013adapted weights to prevent objective drift under heterogeneous client availability."
+    },
+    {
+      "title": "SCAFFOLD: Stochastic Controlled Averaging for On-Device Federated Learning",
+      "authors": "Sai Praneeth Karimireddy et al.",
+      "year": 2020,
+      "arxiv_id": "1910.06378",
+      "role": "Gap Identification",
+      "relationship_sentence": "SCAFFOLD addresses client-drift via global variance reduction using per-client control variates that require O(N) client-state memory at the server, a heavy footprint this paper explicitly avoids while targeting the same participation-induced bias."
+    },
+    {
+      "title": "Federated Learning Based on Dynamic Regularization (FedDyn)",
+      "authors": "Dimitris A. Acar et al.",
+      "year": 2021,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "FedDyn mitigates drift by maintaining per-client dynamic regularizers stored at the server, and its O(N) auxiliary state motivates the paper\u2019s lightweight alternative based on adaptive aggregation weights instead of global variance-reduction memory."
+    },
+    {
+      "title": "Agnostic Federated Learning",
+      "authors": "Mehryar Mohri et al.",
+      "year": 2019,
+      "arxiv_id": "1902.00146",
+      "role": "Foundation",
+      "relationship_sentence": "By formalizing client-weighted federated objectives and treating aggregation weights as optimization variables, AFL provides the conceptual foundation that aggregation weights determine the target objective\u2014an insight this paper uses to seek \u2018optimal\u2019 weights under non-uniform participation."
+    },
+    {
+      "title": "Fair Resource Allocation in Federated Learning (q-FFL)",
+      "authors": "Tian Li et al.",
+      "year": 2020,
+      "arxiv_id": "1905.10497",
+      "role": "Related Problem",
+      "relationship_sentence": "q-FFL operationalizes client reweighting in aggregation to achieve a desired objective (fairness), demonstrating that principled, goal-driven aggregation weights can be designed\u2014an idea paralleled here for correcting participation-induced bias."
+    },
+    {
+      "title": "Asynchronous Federated Optimization",
+      "authors": "Chenliang Xie et al.",
+      "year": 2019,
+      "arxiv_id": "1903.03934",
+      "role": "Related Problem",
+      "relationship_sentence": "Asynchronous FL weights client updates by staleness using simple history-based rules to counter sampling/recency bias, directly informing the paper\u2019s use of participation history to compute debiasing aggregation weights."
+    }
+  ],
+  "synthesis_narrative": "FedAvg introduced the canonical partial-participation training loop with data-size\u2013proportional aggregation, implicitly defining how client sampling and aggregation interact in practice. SCAFFOLD later showed that client-drift from intermittent participation and non-IID data can be countered by global variance reduction using client-specific control variates, but at the cost of maintaining an O(N) set of client states. FedDyn pursued the same drift-mitigation goal by storing per-client dynamic regularizers on the server, again incurring O(N) memory. Agnostic Federated Learning established that the choice of aggregation weights defines the effective optimization objective and can be treated as an explicit decision variable. q-FFL further demonstrated that reweighting clients in the aggregation step can deliberately bias optimization toward a target (fairness), providing a concrete recipe for designing weights to achieve a specified objective. In parallel, asynchronous FL showed that simple history-based server weights (e.g., staleness-aware) can effectively correct sampling-induced biases without heavy auxiliary state.\nTogether, these works reveal a gap: strong drift-correction via global variance reduction exists but is memory-heavy, while weight-design frameworks and history-based debiasing show that aggregation weights can realign training objectives at low cost. The present paper synthesizes these insights by proving that heterogeneous participation skews FedAvg away from the original objective and then using participation history to estimate sampling probabilities and adapt aggregation weights accordingly. This yields a lightweight, memory-efficient alternative that preserves the intended federated objective under unknown, non-uniform client availability.",
+  "target_paper": {
+    "title": "A Lightweight Method for Tackling Unknown Participation Statistics in Federated Averaging",
+    "authors": "Shiqiang Wang, Mingyue Ji",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "federated learning, partial client participation, adaptation, aggregation weights",
+    "abstract": "In federated learning (FL), clients usually have diverse participation statistics that are unknown a priori, which can significantly harm the performance of FL if not handled properly. Existing works aiming at addressing this problem are usually based on global variance reduction, which requires a substantial amount of additional memory in a multiplicative factor equal to the total number of clients. An important open problem is to find a lightweight method for FL in the presence of clients with unknown participation rates. In this paper, we address this problem by adapting the aggregation weights in federated averaging (FedAvg) based on the participation history of each client. We first show that, with heterogeneous participation statistics, FedAvg with non-optimal aggregation weights can diverge from the optimal solution of the original FL objective, indicating the need of finding optimal aggregation weights. However, it is difficult to compute the optimal weights when the participat",
+    "openreview_id": "ZKEuFKfCKA",
+    "forum_id": "ZKEuFKfCKA"
+  },
+  "analysis_timestamp": "2026-01-06T13:20:11.071655"
+}

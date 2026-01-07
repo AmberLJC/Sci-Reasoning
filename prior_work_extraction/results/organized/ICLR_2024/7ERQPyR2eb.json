@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "EG3D: Efficient Geometry-aware 3D Generative Adversarial Networks",
+      "authors": "Eric R. Chan et al.",
+      "year": 2022,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "Real3D-Portrait\u2019s large image-to-plane module directly regresses tri-plane features by distilling geometry and appearance priors from a pretrained EG3D-like 3D face generator, making one-shot 3D avatar reconstruction feasible."
+    },
+    {
+      "title": "GeneFace: Generalizable and Efficient NeRF-based Audio-Driven Talking Head Synthesis",
+      "authors": "Yi Ren et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "GeneFace is the primary baseline for one-shot, generalizable NeRF-based talking heads that Real3D-Portrait improves upon by addressing GeneFace\u2019s weaker single-image 3D reconstruction and animation stability."
+    },
+    {
+      "title": "GeneFace++: Improving Audio-Driven 3D Talking Head Synthesis",
+      "authors": "Yi Ren et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "Although enhancing lip articulation and quality, GeneFace++ remains head-focused and exhibits residual jitter, gaps that Real3D-Portrait targets with motion-adapter stabilization and explicit torso/background synthesis."
+    },
+    {
+      "title": "AD-NeRF: Audio Driven Neural Radiance Fields for Talking Head Synthesis",
+      "authors": "Yudong Chen et al.",
+      "year": 2021,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "AD-NeRF established the audio-to-expression conditioning of a radiance field that Real3D-Portrait generalizes via an efficient motion adapter to support robust, one-shot audio-driven animation."
+    },
+    {
+      "title": "NeRFace: Dynamic Neural Radiance Fields for Modeling Face Expressions",
+      "authors": "Guy Gafni et al.",
+      "year": 2021,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "NeRFace\u2019s pose- and expression-conditioned NeRF provides the motion-control formulation that Real3D-Portrait adapts, using an explicit adapter to fuse video-/audio-derived motion signals for stable driving."
+    },
+    {
+      "title": "DECA: Detailed Expression Capture and Animation",
+      "authors": "Yao Feng et al.",
+      "year": 2021,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "Real3D-Portrait relies on DECA-style 3DMM codes for estimating and representing facial pose/expression, which the motion adapter consumes to produce accurate motion-conditioned animation from one shot."
+    }
+  ],
+  "synthesis_narrative": "EG3D introduced a 3D-aware GAN with a tri-plane scene representation, enabling high-fidelity, 3D-consistent faces and making it practical to regress 3D features from a single image by leveraging strong generative priors. AD-NeRF demonstrated that audio features can drive a radiance field to synthesize talking heads, establishing the core audio-to-expression conditioning pathway for 3D neural rendering. NeRFace formalized conditioning a dynamic NeRF on pose and expression codes, providing a clear motion-control interface that separates identity from driving signals. DECA provided a robust route to recover 3DMM-based pose and expression parameters from images or video, yielding reliable motion representations widely used to drive 3D face models. Building on these, GeneFace showed that a generalizable NeRF conditioned on identity and motion could achieve one-shot audio-driven talking head synthesis, while GeneFace++ further improved lip articulation and quality but remained primarily head-focused and prone to residual jitter in challenging scenarios.\nTaken together, these works exposed a gap: generalizable talking heads lacked accurate one-shot 3D reconstruction and stable long-horizon animation, and most pipelines ignored realistic torso dynamics and background control. Real3D-Portrait naturally synthesizes these threads by distilling EG3D-style 3D face priors into a large image-to-plane encoder for precise single-image 3D reconstruction; adopting a motion-control interface inspired by NeRFace/AD-NeRF but inserting an efficient adapter that robustly maps audio/video-derived 3DMM motion into stable NeRF dynamics; and extending beyond the head with a head\u2013torso\u2013background super-resolution module to deliver coherent upper-body motion and switchable backgrounds, directly addressing the limitations revealed by GeneFace/GeneFace++.",
+  "target_paper": {
+    "title": "Real3D-Portrait: One-shot Realistic 3D Talking Portrait Synthesis",
+    "authors": "Zhenhui Ye, Tianyun Zhong, Yi Ren, Jiaqi Yang, Weichuang Li, Jiawei Huang, Ziyue Jiang, Jinzheng He, Rongjie Huang, Jinglin Liu, Chen Zhang, Xiang Yin, Zejun MA, Zhou Zhao",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "One-shot Talking Face Generation, Neural Radiance Field",
+    "abstract": "One-shot 3D talking portrait generation aims to reconstruct a 3D avatar from an unseen image, and then animate it with a reference video or audio to generate a talking portrait video. The existing methods fail to simultaneously achieve the goals of accurate 3D avatar reconstruction and stable talking face animation. Besides, while the existing works mainly focus on synthesizing the head part, it is also vital to generate natural torso and background segments to obtain a realistic talking portrait video. To address these limitations, we present Real3D-Potrait, a framework that (1) improves the one-shot 3D reconstruction power with a large image-to-plane model that distills 3D prior knowledge from a 3D face generative model; (2) facilitates accurate motion-conditioned animation with an efficient motion adapter; (3) synthesizes realistic video with natural torso movement and switchable background using a head-torso-background super-resolution model; and (4) supports one-shot audio-driven ",
+    "openreview_id": "7ERQPyR2eb",
+    "forum_id": "7ERQPyR2eb"
+  },
+  "analysis_timestamp": "2026-01-07T00:30:28.713842"
+}

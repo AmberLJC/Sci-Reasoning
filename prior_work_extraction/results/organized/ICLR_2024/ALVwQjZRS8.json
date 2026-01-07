@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "InCoder: A Generative Model for Code Infilling",
+      "authors": "Daniel Fried et al.",
+      "year": 2022,
+      "arxiv_id": "2204.05999",
+      "role": "Baseline",
+      "relationship_sentence": "InCoder established infilling/FIM as the dominant code-editing baseline but operates with local, file-level context, whose limitations in leveraging repository-wide recent changes Coeditor explicitly overcomes by conditioning on repo-level diffs and static-analysis-built contexts."
+    },
+    {
+      "title": "CodeXGLUE: A Machine Learning Benchmark Dataset for Code Understanding and Generation",
+      "authors": "Shuai Lu et al.",
+      "year": 2021,
+      "arxiv_id": "2102.04664",
+      "role": "Foundation",
+      "relationship_sentence": "CodeXGLUE\u2019s code refinement formulation (buggy-to-fixed translation) crystallized the edit-as-generation task that Coeditor adopts but extends to real commit-derived edits and multi-round settings with repository-level information."
+    },
+    {
+      "title": "Learning to Represent Edits",
+      "authors": "Pengcheng Yin et al.",
+      "year": 2019,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "This work introduced modeling edits as first-class objects rather than regenerating code from scratch, a key insight Coeditor leverages by representing recent code changes explicitly via line diffs to guide subsequent edits."
+    },
+    {
+      "title": "CODIT: Code Editing with Tree-based Neural Networks",
+      "authors": "Matei Tufano et al.",
+      "year": 2019,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "CODIT framed learning code edits from historical commits, directly informing Coeditor\u2019s commit-history-derived training data and focus on learning to apply edits rather than synthesize entire files."
+    },
+    {
+      "title": "RepoCoder: Repository-Level Code Generation with Retrieval-Augmented LLMs",
+      "authors": "Zhu et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Related Problem",
+      "relationship_sentence": "RepoCoder demonstrated the necessity of repository-level context and retrieval/static-analysis signals for code generation, which Coeditor adapts to the editing setting by constructing large, customized contexts for predicting localized edits."
+    },
+    {
+      "title": "Self-Refine: Iterative Refinement with Self-Feedback",
+      "authors": "Aman Madaan et al.",
+      "year": 2023,
+      "arxiv_id": "2303.17651",
+      "role": "Inspiration",
+      "relationship_sentence": "Self-Refine showed that multi-round iterative improvement markedly boosts LLM performance, motivating Coeditor\u2019s multi-round auto-editing formulation where each round conditions on prior diffs within the same repository."
+    }
+  ],
+  "synthesis_narrative": "InCoder introduced code infilling as an effective editing primitive but largely limited context to a single file, making it difficult to exploit cross-file changes in large repositories. CodeXGLUE standardized code refinement as translating buggy code to fixed code, sharpening the notion of code editing as a prediction problem, though typically scoped to local contexts and curated benchmarks rather than real-world commit streams. Learning to Represent Edits provided the crucial insight that edits themselves can be modeled explicitly, enabling systems to leverage edit signals rather than regenerate entire artifacts. CODIT operationalized this idea in software engineering by learning code edits from commit histories, showing that past changes contain rich supervision for applying multi-line, structured edits. RepoCoder established that repository-level tasks benefit from retrieval and static analysis to assemble the right cross-file context, suggesting that code generation\u2014and by extension code editing\u2014should be conditioned on project-wide information. Finally, Self-Refine demonstrated that iterative, multi-round refinement can systematically improve model outputs when each round conditions on prior outcomes.\nTogether, these works reveal a gap: dominant code-editing methods either ignore repository-wide recent changes or do not iterate with explicit edit history. Coeditor naturally synthesizes these insights by training on real commits, representing recent changes as line diffs, and using static analysis to build repo-level contexts, then iterating edits round-by-round while conditioning on prior diffs\u2014thereby addressing both context and iteration shortcomings of prior approaches.",
+  "target_paper": {
+    "title": "Coeditor: Leveraging Repo-level Diffs for Code Auto-editing",
+    "authors": "Jiayi Wei, Greg Durrett, Isil Dillig",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "language model for code, editing, refactoring",
+    "abstract": "Developers often dedicate significant time to maintaining and refactoring existing code. However, most prior work on generative models for code focuses solely on creating new code, overlooking the distinctive needs of editing existing code. In this work, we explore a multi-round code auto-editing setting, aiming to predict edits to a code region based on recent changes within the same codebase. Our model, Coeditor, is a fine-tuned language model specifically designed for code editing tasks. We represent code changes using a line diff format and employ static analysis to form large customized model contexts, ensuring the availability of appropriate information for prediction. We collect a code editing dataset from the commit histories of 1650 open-source Python projects for training and evaluation. In a simplified single-round, single-edit task, Coeditor significantly outperforms GPT-3.5 and SOTA open-source code completion models (bringing exact-match accuracy from 34.7 up to 60.4), de",
+    "openreview_id": "ALVwQjZRS8",
+    "forum_id": "ALVwQjZRS8"
+  },
+  "analysis_timestamp": "2026-01-06T13:25:11.529602"
+}

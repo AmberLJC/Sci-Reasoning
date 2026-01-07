@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Hindsight Experience Replay",
+      "authors": "Marcin Andrychowicz et al.",
+      "year": 2017,
+      "arxiv_id": "1707.01495",
+      "role": "Foundation",
+      "relationship_sentence": "RT-Trajectory directly adapts HER\u2019s core idea of hindsight relabeling\u2014relabeling each rollout with what was actually achieved\u2014by generating \u201chindsight trajectory sketches\u201d from executed end-effector paths and using them as conditioning goals."
+    },
+    {
+      "title": "Learning from Play: Unsupervised Learning to Imitate",
+      "authors": "Corey Lynch et al.",
+      "year": 2019,
+      "arxiv_id": "",
+      "role": "Inspiration",
+      "relationship_sentence": "Building on the play-data paradigm that relabels unlabeled trajectories into useful supervision, RT-Trajectory leverages the same hindsight principle but replaces outcome- or language labels with automatically derived 2D trajectory sketches to supervise multi-task policies."
+    },
+    {
+      "title": "RT-1: Robotics Transformer for Real-World Control at Scale",
+      "authors": "Anthony Brohan et al.",
+      "year": 2022,
+      "arxiv_id": "2212.06817",
+      "role": "Extension",
+      "relationship_sentence": "RT-Trajectory extends the RT-1 transformer policy framework by adding a trajectory-sketch conditioning channel and training procedure, effectively turning RT-1 into a sketch-conditioned multi-task policy."
+    },
+    {
+      "title": "Do As I Can, Not As I Say: Grounding Language in Robotic Affordances (SayCan)",
+      "authors": "Michael Ahn et al.",
+      "year": 2022,
+      "arxiv_id": "",
+      "role": "Gap Identification",
+      "relationship_sentence": "SayCan highlighted that language alone often lacks the low-level geometric specificity needed for precise manipulation, a limitation RT-Trajectory addresses via motion-centric sketch prompts."
+    },
+    {
+      "title": "RT-2: Vision-Language-Action Models Transfer Web Knowledge to Robotic Control",
+      "authors": "Anthony Brohan et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Gap Identification",
+      "relationship_sentence": "RT-2 showed strong semantic and object generalization but struggled to extrapolate to novel motor programs, motivating RT-Trajectory\u2019s trajectory-sketch prompt that encodes new action geometry directly."
+    },
+    {
+      "title": "CLIPort: What and Where Pathways for Robotic Manipulation",
+      "authors": "Mohit Shridhar et al.",
+      "year": 2021,
+      "arxiv_id": "",
+      "role": "Related Problem",
+      "relationship_sentence": "CLIPort demonstrated the power of spatial goal representations (per-pixel affordance maps) for language-conditioned manipulation, a spatial-conditioning insight RT-Trajectory generalizes using user-provided trajectory overlays."
+    }
+  ],
+  "synthesis_narrative": "Hindsight Experience Replay established that trajectories can be retroactively relabeled with achieved goals to unlock learning signals from otherwise sparse feedback, introducing a powerful paradigm of hindsight conditioning. Learning from Play pushed this further for robot manipulation by transforming unstructured play into supervision via hindsight relabeling, showing that rich multi-task behaviors can emerge from relabeled trajectories. RT-1 showed that a transformer-based policy trained at scale on diverse, language-labeled demonstrations can perform many real-world tasks from raw pixels, cementing a practical architecture and data recipe for multi-task imitation learning. SayCan revealed that while language is a flexible interface, it often fails to convey the precise low-level geometry needed for manipulation, especially when tasks require new motion patterns. RT-2 scaled vision-language-action models and improved semantic transfer but still struggled with novel motor programs that language alone does not specify. CLIPort highlighted the benefits of spatially grounded conditioning through per-pixel affordances, underscoring that spatial structure in the input can simplify manipulation learning.\nTaken together, these works suggested an opportunity: combine hindsight relabeling with an explicitly spatial, motion-centric prompt to provide the missing geometric specificity that language lacks, while retaining the practicality of large-scale multi-task training. RT-Trajectory synthesizes these ingredients by auto-generating \u201chindsight trajectory sketches\u201d from executed rollouts and integrating them into an RT-1-style policy, enabling users to specify new tasks via rough sketches and allowing the policy to generalize to novel motor programs that prior language-only systems could not execute.",
+  "target_paper": {
+    "title": "RT-Trajectory: Robotic Task Generalization via Hindsight Trajectory Sketches",
+    "authors": "Jiayuan Gu, Sean Kirmani, Paul Wohlhart, Yao Lu, Montserrat Gonzalez Arenas, Kanishka Rao, Wenhao Yu, Chuyuan Fu, Keerthana Gopalakrishnan, Zhuo Xu, Priya Sundaresan, Peng Xu, Hao Su, Karol Hausman, Chelsea Finn, Quan Vuong, Ted Xiao",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "robotics, robot learning, robot manipulation, task representation, behavior cloning, multitask imitation learning, goal conditioning",
+    "abstract": "Generalization remains one of the most important desiderata for robust robot learning systems. While recently proposed approaches show promise in generalization to novel objects, semantic concepts, or visual distribution shifts, generalization to new tasks remains challenging. For example, a language-conditioned policy trained on pick-and-place tasks will not be able to generalize to a folding task, even if the arm trajectory of folding is similar to pick-and-place. Our key insight is that this kind of generalization becomes feasible if we represent the task through rough trajectory sketches. We propose a policy conditioning method using such rough trajectory sketches, which we call RT-Trajectory, that is practical, easy to specify, and allows the policy to effectively perform new tasks that would otherwise be challenging to perform. We find that trajectory sketches strike a balance between being detailed enough to express low-level motion-centric guidance while being coarse enough to ",
+    "openreview_id": "F1TKzG8LJO",
+    "forum_id": "F1TKzG8LJO"
+  },
+  "analysis_timestamp": "2026-01-06T12:45:43.824954"
+}

@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "AppAgent: Multimodal Agents for Mobile App Control",
+      "authors": "Mao et al.",
+      "year": 2024,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "LiMAC explicitly targets AppAgent\u2019s heavy reliance on large cloud LLM/VLM prompting by replacing it with a fine-tuned VLM plus a compact Action Transformer that runs in real time on-device."
+    },
+    {
+      "title": "OSWorld: Benchmarking Generalist Computer Agents with Accessibility Trees",
+      "authors": "Wang et al.",
+      "year": 2024,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "LiMAC adopts OSWorld\u2019s core insight that coupling screenshots with the UI/accessibility tree markedly improves grounding and precise action selection, and thus conditions decisions on both modalities."
+    },
+    {
+      "title": "Mind2Web: Towards a Generalist Agent for the Web",
+      "authors": "Deng et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "LiMAC follows Mind2Web\u2019s DOM/tree-grounded action formulation\u2014predicting operations over UI nodes from language\u2014by adapting the same principle to Android view hierarchies for mobile control."
+    },
+    {
+      "title": "RT-2: Vision-Language-Action Models Transfer Web Knowledge to Robotic Control",
+      "authors": "Brohan et al.",
+      "year": 2023,
+      "arxiv_id": "2307.15818",
+      "role": "Inspiration",
+      "relationship_sentence": "LiMAC borrows RT-2\u2019s decoupled VLA design where a vision-language backbone provides semantic grounding and a lightweight action head outputs low-level actions under tight compute constraints."
+    },
+    {
+      "title": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+      "authors": "Chen et al.",
+      "year": 2021,
+      "arxiv_id": "2106.01345",
+      "role": "Foundation",
+      "relationship_sentence": "LiMAC\u2019s Action Transformer models control as causal sequence modeling over a history of observations and actions, directly echoing the Decision Transformer\u2019s sequential view of decision making."
+    },
+    {
+      "title": "RICO: A Mobile App Dataset for Building Data-Driven Design Applications",
+      "authors": "Deka et al.",
+      "year": 2017,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "LiMAC\u2019s use of Android view hierarchies alongside screenshots builds on RICO\u2019s demonstration that UI trees provide structure critical for cross-app semantics and action grounding."
+    }
+  ],
+  "synthesis_narrative": "AppAgent demonstrated that large multimodal LLM pipelines can interpret smartphone screens and execute tasks across apps, but its reliance on heavyweight prompting and cloud-scale models led to latency and cost that impede real-time, on-device use. OSWorld established that pairing raw pixels with the accessibility/UI tree sharply improves grounding and reduces hallucinations in GUI control, motivating architectures that explicitly consume both modalities. Mind2Web further formalized a tree-grounded action space on the web\u2014mapping language goals to operations over DOM nodes\u2014which clarified how to cast GUI interaction as structured action prediction anchored in a UI hierarchy. In robotics, RT-2 showed the effectiveness of decoupling perception and control with a VLA design: a vision-language backbone handles semantic grounding while a lightweight action head produces low-level actions. Decision Transformer reframed control as causal sequence modeling over past observations and actions, validating compact transformer policies for sequential decision-making. RICO highlighted the value of Android view hierarchies for cross-app generalization and semantic alignment between screens and actions.\n\nTogether, these works revealed a clear opportunity: combine the strong grounding of screenshot-plus-UI-tree inputs with a structured, tree-anchored action space, and drive decisions using a compact transformer policy decoupled from a multimodal backbone. LiMAC synthesizes this by feeding sequences of screenshots and view hierarchies into a fine-tuned VLM for perception and a small Action Transformer for real-time action prediction, directly addressing AppAgent\u2019s compute and latency limitations while preserving precise, hierarchy-grounded control.",
+  "target_paper": {
+    "title": "Lightweight Neural App Control",
+    "authors": "Filippos Christianos, Georgios Papoudakis, Thomas Coste, Jianye HAO, Jun Wang, Kun Shao",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "vision-language model, multi-modal, android control, app agent",
+    "abstract": "This paper introduces a novel mobile phone control architecture, Lightweight Multi-modal App Control (LiMAC), for efficient interactions and control across various Android apps. LiMAC  takes as input a textual goal and a sequence of past mobile observations, such as screenshots and corresponding UI trees, to generate precise actions. To address the computational constraints inherent to smartphones, we introduce a small Action Transformer (AcT) integrated with a fine-tuned vision-language model (VLM) for real-time decision-making and task execution.  We evaluate LiMAC on two open-source mobile control datasets, demonstrating the superior performance of our small-form-factor approach against fine-tuned versions of open-source VLMs, such as Florence2 and Qwen2-VL. It also significantly outperforms prompt engineering baselines utilising closed-source foundation models like GPT-4o. More specifically, LiMAC increases the overall action accuracy by up to 19% compared to fine-tuned VLMs, and u",
+    "openreview_id": "BL4WBIfyrz",
+    "forum_id": "BL4WBIfyrz"
+  },
+  "analysis_timestamp": "2026-01-06T11:22:26.723893"
+}

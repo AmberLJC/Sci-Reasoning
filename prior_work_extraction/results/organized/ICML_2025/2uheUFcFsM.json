@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Masked Autoregressive Flow for Density Estimation",
+      "authors": "George Papamakarios et al.",
+      "year": 2017,
+      "role": "Extension",
+      "relationship_sentence": "TarFlow is explicitly a Transformer-based variant of MAF, replacing MAF\u2019s masked MLP conditioners with autoregressive Transformer blocks and adopting layer-wise ordering changes to realize expressive autoregressive normalizing flows."
+    },
+    {
+      "title": "MADE: Masked Autoencoder for Distribution Estimation",
+      "authors": "Mathieu Germain et al.",
+      "year": 2015,
+      "role": "Foundation",
+      "relationship_sentence": "TarFlow\u2019s core mechanism\u2014strict autoregressive parameterization via masking\u2014directly inherits from MADE, with the mask structure enforced inside self-attention rather than masked MLPs."
+    },
+    {
+      "title": "Neural Autoregressive Flows",
+      "authors": "Chin-Wei Huang et al.",
+      "year": 2018,
+      "role": "Extension",
+      "relationship_sentence": "TarFlow follows NAF\u2019s strategy of stacking deep autoregressive transforms with alternating variable orderings, but swaps NADE/MADE-style conditioners for autoregressive Transformer blocks over image tokens."
+    },
+    {
+      "title": "Image Transformer",
+      "authors": "Niki Parmar et al.",
+      "year": 2018,
+      "role": "Inspiration",
+      "relationship_sentence": "TarFlow\u2019s use of autoregressive self-attention over image patches is directly inspired by Image Transformer\u2019s demonstration that Transformer-based autoregression over images scales and models long-range pixel dependencies."
+    },
+    {
+      "title": "Glow: Generative Flow with Invertible 1x1 Convolutions",
+      "authors": "Diederik P. Kingma et al.",
+      "year": 2018,
+      "role": "Baseline",
+      "relationship_sentence": "Glow is the canonical image flow baseline whose coupling-layer design TarFlow aims to surpass in sample quality and scalability while retaining exact likelihoods."
+    },
+    {
+      "title": "Flow++: Improving Flow-Based Generative Models with Variational Dequantization and Architecture Design",
+      "authors": "Jonathan Ho et al.",
+      "year": 2019,
+      "role": "Gap Identification",
+      "relationship_sentence": "Flow++ addressed dequantization and architecture gaps yet still lagged in perceptual quality; TarFlow tackles this shortfall by moving to autoregressive Transformer-based flows and introducing noise-augmentation with post-training denoising."
+    },
+    {
+      "title": "Classifier-Free Diffusion Guidance",
+      "authors": "Jonathan Ho et al.",
+      "year": 2021,
+      "role": "Inspiration",
+      "relationship_sentence": "TarFlow adapts the classifier-free guidance idea\u2014interpolating conditional and unconditional predictions\u2014into the flow setting to steer both class-conditional and unconditional sampling."
+    }
+  ],
+  "synthesis_narrative": "TarFlow\u2019s core innovation sits at the intersection of autoregressive flows and Transformer-based sequence modeling for images. The architectural backbone directly extends Masked Autoregressive Flow (Papamakarios et al., 2017), but replaces MAF\u2019s masked MLP conditioners with autoregressive Transformer blocks. This swap crucially preserves MADE\u2019s (Germain et al., 2015) masked autoregressive factorization while leveraging self-attention to capture long-range dependencies. In line with Neural Autoregressive Flows (Huang et al., 2018), TarFlow stacks multiple autoregressive transforms and alternates the ordering/direction across layers to boost expressivity\u2014now executed over image patches with attention rather than NADE/MADE networks. The decision to use self-attention over images is motivated by the Image Transformer (Parmar et al., 2018), which established that autoregressive Transformers scale effectively for image generation; TarFlow internalizes this within an invertible, likelihood-based model. Methodologically, the work targets shortcomings of prior image flows such as Glow (Kingma & Dhariwal, 2018) and Flow++ (Ho et al., 2019): despite exact likelihoods, their coupling-based designs and dequantization strategies left a persistent gap in perceptual quality. TarFlow addresses this with a more expressive autoregressive flow plus training-and-sampling refinements\u2014Gaussian noise augmentation and a post-training denoising step that substitutes for heavier dequantization machinery. Finally, its sampling guidance mechanism is inspired by classifier-free diffusion guidance (Ho & Salimans, 2021), extending the conditional\u2013unconditional interpolation idea to flows to reliably steer both class-conditional and unconditional generation.",
+  "analysis_timestamp": "2026-01-06T23:07:19.633124"
+}

@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Invariant Causal Prediction: Identification and Confidence Intervals",
+      "authors": "Jonas Peters et al.",
+      "year": 2016,
+      "arxiv_id": "1501.01332",
+      "role": "Foundation",
+      "relationship_sentence": "It formalizes the invariance principle across interventions/environments, which is instantiated here by treating truly causal spatio-temporal regions as predictors that remain stable under patch-level interventions."
+    },
+    {
+      "title": "Invariant Risk Minimization",
+      "authors": "Martin Arjovsky et al.",
+      "year": 2019,
+      "arxiv_id": "1907.02893",
+      "role": "Gap Identification",
+      "relationship_sentence": "IRM motivates learning predictors invariant across environments but requires environment labels and is hard to optimize on complex ST data; this work addresses that gap by creating pseudo-environments via targeted patch interventions guided by discovered causal regions."
+    },
+    {
+      "title": "Environment Inference for Invariant Learning",
+      "authors": "Trevor Creager et al.",
+      "year": 2021,
+      "arxiv_id": "",
+      "role": "Inspiration",
+      "relationship_sentence": "By inferring environments directly from data to apply invariance principles without annotations, it inspires the upstream stage here that discovers causal-important patches and uses them to construct interventional environments in ST settings."
+    },
+    {
+      "title": "VideoMAE: Masked Autoencoders are Data-Efficient Learners for Video",
+      "authors": "Zhan Tong et al.",
+      "year": 2022,
+      "arxiv_id": "2203.12602",
+      "role": "Inspiration",
+      "relationship_sentence": "Its masked spatio-temporal reconstruction pretraining reveals token/patch saliency, a self-supervised mechanism that is adapted here to score ST patches and identify causally important regions before intervention."
+    },
+    {
+      "title": "CutMix: Regularization Strategy to Train Strong Classifiers with Localizable Features",
+      "authors": "Sangdoo Yun et al.",
+      "year": 2019,
+      "arxiv_id": "1905.04899",
+      "role": "Related Problem",
+      "relationship_sentence": "CutMix\u2019s patch-level replacement provides the concrete mechanism of localized interventions that is turned from random mixing into informed, causally guided interventions on trivial patches to extrapolate test distributions."
+    },
+    {
+      "title": "Detecting causal associations in large nonlinear time series datasets",
+      "authors": "Jakob Runge et al.",
+      "year": 2019,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "This work shows that causal dependencies in climate/time-series data are sparse and lagged, directly motivating the focus on discovering causal regions and their temporal context rather than relying on global correlations."
+    },
+    {
+      "title": "Graph WaveNet for Deep Spatial-Temporal Graph Modeling",
+      "authors": "Zonghan Wu et al.",
+      "year": 2019,
+      "arxiv_id": "1906.00121",
+      "role": "Baseline",
+      "relationship_sentence": "As a primary ST forecasting backbone whose performance degrades under distribution shifts and sensor sparsity, it serves as the main baseline augmented by causal-region discovery and interventional updating."
+    }
+  ],
+  "synthesis_narrative": "Invariant Causal Prediction established that the true causal predictors are those whose conditional relationship to outcomes remains stable across interventions and environments, laying a formal basis for targeting invariances in prediction. Invariant Risk Minimization operationalized this idea as an objective but depended on known environments and proved brittle on complex data. Environment Inference for Invariant Learning relaxed this dependency by learning pseudo-environments from data so invariance could be imposed without annotations. Concurrently, VideoMAE demonstrated that masked spatio-temporal reconstruction can be a powerful self-supervised signal that highlights which patches carry most of the information for downstream tasks. CutMix showed that patch-level, localized modifications act like interventions that can regularize models by decoupling objects from context, though it does so randomly and without causal guidance. In climate and other real-world temporal systems, PCMCI revealed that causal dependencies are sparse, structured, and lagged, implying one should localize causal sources in space-time rather than rely on holistic correlational patterns. Graph WaveNet exemplified strong spatio-temporal forecasting architectures that nonetheless are vulnerable to distribution shifts and data sparsity. Together these works point to a path: use masked self-supervision to expose which spatio-temporal regions are truly informative (and likely causal), then create pseudo-environments via localized interventions that specifically perturb non-causal context, and finally train forecasting backbones under these interventions to enforce invariance. This synthesis naturally yields a two-stage framework that first discovers causal regions and then updates models with interventional samples, improving generalization under sensor sparsity and shifting spatio-temporal conditions.",
+  "target_paper": {
+    "title": "NuwaDynamics: Discovering and Updating in Causal Spatio-Temporal Modeling",
+    "authors": "Kun Wang, Hao Wu, Yifan Duan, Guibin Zhang, Kai Wang, Xiaojiang Peng, Yu Zheng, Yuxuan Liang, Yang Wang",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Spatio-temporal data mining, Causal inference, Two-stage framework",
+    "abstract": "Spatio-temporal (ST) prediction plays a pivotal role in earth sciences, such as meteorological prediction, urban computing. Adequate high-quality data, coupled with deep models capable of inference, are both indispensable and prerequisite for achieving meaningful results. However, the sparsity of data and the high costs associated with deploying sensors lead to significant data imbalances. Models that are overly tailored and lack causal relationships further compromise the generalizabilities of inference methods. Towards this end, we first establish a causal concept for ST predictions, named  NuwaDynamics, which targets to identify causal regions in data and endow model with causal reasoning ability in a two-stage process. Concretely, we initially leverage upstream self-supervision to discern causal important patches, imbuing the model with generalized information and conducting informed interventions on complementary trivial patches to extrapolate potential test distributions. This ph",
+    "openreview_id": "sLdVl0q68X",
+    "forum_id": "sLdVl0q68X"
+  },
+  "analysis_timestamp": "2026-01-06T17:32:39.892458"
+}

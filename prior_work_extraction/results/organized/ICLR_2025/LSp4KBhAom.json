@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "DUSt3R",
+      "authors": "First author et al.",
+      "year": 2024,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "LoRA3D starts from DUSt3R\u2019s pairwise 3D pointmaps and per-point confidences as its multi-view inputs, then globally aligns and calibrates them to overcome DUSt3R\u2019s generalization failures in challenging scenes."
+    },
+    {
+      "title": "MASt3R",
+      "authors": "First author et al.",
+      "year": 2024,
+      "arxiv_id": "",
+      "role": "Baseline",
+      "relationship_sentence": "LoRA3D builds on MASt3R\u2019s multi-view reconstruction setting and directly improves it by adding confidence-calibrated robust alignment and per-scene specialization via low-rank fine-tuning."
+    },
+    {
+      "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+      "authors": "Edward J. Hu et al.",
+      "year": 2021,
+      "arxiv_id": "2106.09685",
+      "role": "Foundation",
+      "relationship_sentence": "LoRA3D adopts LoRA\u2019s low-rank adapters to efficiently fine-tune large 3D geometric backbones during self-calibration without overfitting or heavy compute."
+    },
+    {
+      "title": "A General and Adaptive Robust Loss Function",
+      "authors": "Jonathan T. Barron",
+      "year": 2019,
+      "arxiv_id": "1701.03077",
+      "role": "Extension",
+      "relationship_sentence": "LoRA3D\u2019s robust geometric optimization directly applies Barron\u2019s adaptive robust loss to reweight residuals, enabling automatic downweighting of outliers and confidence calibration."
+    },
+    {
+      "title": "MAGSAC++: A Fast, Reliable and Accurate Robust Estimator",
+      "authors": "Daniel Barath et al.",
+      "year": 2020,
+      "arxiv_id": "1912.05909",
+      "role": "Inspiration",
+      "relationship_sentence": "LoRA3D\u2019s automatic re-weighting of per-point confidences is inspired by MAGSAC++\u2019s noise-scale marginalization to obtain data-driven inlier weights for geometric estimation."
+    },
+    {
+      "title": "On Calibration of Modern Neural Networks",
+      "authors": "Chuan Guo et al.",
+      "year": 2017,
+      "arxiv_id": "1706.04599",
+      "role": "Gap Identification",
+      "relationship_sentence": "LoRA3D addresses the miscalibration of confidence\u2014diagnosed by Guo et al.\u2014by explicitly calibrating 3D prediction confidences through geometry-consistency\u2013driven reweighting."
+    }
+  ],
+  "synthesis_narrative": "DUSt3R introduced a dense geometric foundation model that predicts pairwise 3D pointmaps together with per-point confidences, offering a strong prior for in-the-wild reconstruction but exhibiting failure modes in low-overlap or low-light conditions. MASt3R extended this paradigm to multi-view settings, showing that aggregating such pairwise geometric predictions can yield broader scene reconstructions, yet still relies on heuristic weighting and struggles to generalize in challenging scenarios. Barron\u2019s general and adaptive robust loss demonstrated how to automatically adjust residual weighting to suppress outliers without hand-tuned thresholds, a principle directly applicable to noisy multi-view geometric alignment. MAGSAC++ further showed that marginalizing over noise scales yields principled, data-driven inlier weights, underscoring the value of uncertainty-aware reweighting in geometric estimation. Guo et al. established that neural network confidences are often miscalibrated, motivating explicit calibration before using confidence as a weighting signal. Finally, Hu et al.\u2019s LoRA provided an efficient mechanism to specialize large pre-trained models via low-rank weight updates, enabling rapid adaptation with limited data.\nBringing these insights together naturally suggests a pipeline that: uses DUSt3R/MASt3R predictions as geometric priors; performs robust, uncertainty-aware global alignment that calibrates confidence via adaptive reweighting; and then specializes the backbone efficiently with low-rank adapters using pseudo labels derived from the calibrated geometry. This synthesis addresses the core gap\u2014miscalibrated confidence and limited generalization of 3D geometric foundation models\u2014while keeping adaptation efficient and data-light.",
+  "target_paper": {
+    "title": "LoRA3D: Low-Rank Self-Calibration of 3D Geometric Foundation models",
+    "authors": "Ziqi Lu, Heng Yang, Danfei Xu, Boyi Li, Boris Ivanovic, Marco Pavone, Yue Wang",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "3D foundation model, model specialization, robust optimization, low rank adaptation, self-supervised learning",
+    "abstract": "Emerging 3D geometric foundation models, such as DUSt3R, offer a promising approach for in-the-wild 3D vision tasks.\nHowever, due to the high-dimensional nature of the problem space and scarcity of high-quality 3D data,\nthese pre-trained models still struggle to generalize to many challenging circumstances,\nsuch as limited view overlap or low lighting.\nTo address this, we propose LoRA3D, an efficient self-calibration pipeline to *specialize* the pre-trained models to target scenes using their own multi-view predictions.\nTaking sparse RGB images as input, we leverage robust optimization techniques to refine multi-view predictions and align them into a global coordinate frame.\nIn particular, we incorporate prediction confidence into the geometric optimization process, \nautomatically re-weighting the confidence to better reflect point estimation accuracy. \nWe use the calibrated confidence to generate high-quality pseudo labels for the calibrating views and fine-tune the models using low-r",
+    "openreview_id": "LSp4KBhAom",
+    "forum_id": "LSp4KBhAom"
+  },
+  "analysis_timestamp": "2026-01-06T10:00:04.771983"
+}

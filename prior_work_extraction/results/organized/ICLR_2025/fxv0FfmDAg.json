@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Beyond neural scaling laws: Beating power law scaling via data pruning",
+      "authors": "Eric Sorscher et al.",
+      "year": 2022,
+      "role": "Gap Identification",
+      "relationship_sentence": "This paper popularized modern, score-based data pruning (e.g., EL2N/GraNd) to improve efficiency and scaling, and DRoP directly targets its unaddressed limitation\u2014large average gains but potentially skewed, biased class performance\u2014by designing class-aware, distributionally robust pruning."
+    },
+    {
+      "title": "An Empirical Study of Example Forgetting during Deep Neural Network Learning",
+      "authors": "Mariya Toneva et al.",
+      "year": 2019,
+      "role": "Baseline",
+      "relationship_sentence": "Forgetting-event\u2013based pruning is a core baseline DRoP evaluates and critiques; DRoP shows such difficulty-driven removal can amplify class bias and replaces it with class-wise quotas and within-class random pruning guided by a worst-class objective."
+    },
+    {
+      "title": "Coresets for Data-efficient Training of Neural Networks",
+      "authors": "Baharan Mirzasoleiman et al.",
+      "year": 2020,
+      "role": "Baseline",
+      "relationship_sentence": "CRAIG\u2019s gradient-matching coreset selection is a primary pruning baseline; DRoP directly addresses its tendency to under-cover rare classes by optimizing class-level pruning ratios for worst-class performance."
+    },
+    {
+      "title": "GLISTER: Generalization based Data Subset Selection for Efficient and Robust Learning",
+      "authors": "Kaleel Killamsetty et al.",
+      "year": 2021,
+      "role": "Baseline",
+      "relationship_sentence": "GLISTER\u2019s bilevel, validation-driven subset selection is a key comparator; DRoP departs by explicitly optimizing a distributionally robust (worst-class) criterion and enforcing random pruning within classes."
+    },
+    {
+      "title": "Distributionally Robust Neural Networks for Group Shifts",
+      "authors": "Shiori Sagawa et al.",
+      "year": 2020,
+      "role": "Foundation",
+      "relationship_sentence": "Group DRO formalizes minimizing worst-group risk; DRoP adapts this principle to the data selection stage, choosing per-class pruning ratios to optimize worst-class performance rather than average accuracy."
+    },
+    {
+      "title": "Variance-Based Regularization with Convex Objectives",
+      "authors": "Hongseok Namkoong et al.",
+      "year": 2017,
+      "role": "Foundation",
+      "relationship_sentence": "This foundational DRO framework (via f-divergence uncertainty sets) underpins DRoP\u2019s distributionally robust formulation for selecting class pruning ratios that protect worst-class risk."
+    },
+    {
+      "title": "Class-Balanced Loss Based on Effective Number of Samples",
+      "authors": "Yin Cui et al.",
+      "year": 2019,
+      "role": "Related Problem",
+      "relationship_sentence": "Class-balanced reweighting shows that per-class adjustments can mitigate imbalance; DRoP mirrors this insight by optimizing per-class pruning quotas (rather than loss weights) to improve worst-class accuracy."
+    }
+  ],
+  "synthesis_narrative": "DRoP emerges at the intersection of data pruning and distributional robustness. Modern pruning methods, crystallized by Sorscher et al., demonstrated that removing \u2018uninformative\u2019 samples (often via early-training dynamics scores like EL2N/GraNd) accelerates training and even beats neural scaling laws. Earlier signals such as Toneva et al.\u2019s forgetting events similarly fueled difficulty-based pruning, while coreset-style selection (Mirzasoleiman et al.\u2019s CRAIG) and bilevel validation-driven methods (Killamsetty et al.\u2019s GLISTER) offered strong, widely used baselines. Yet these approaches largely optimize average performance and can inadvertently skew class coverage, creating biased classifiers\u2014precisely the gap DRoP highlights empirically and theoretically.\n\nDRoP\u2019s core innovation reframes pruning through the lens of distributionally robust optimization: rather than maximizing average accuracy, it selects per-class pruning ratios to safeguard worst-class performance, then prunes randomly within each class. This principle is grounded in the DRO literature\u2014formally, in Namkoong and Duchi\u2019s f-divergence based framework\u2014and operationalized in the spirit of Group DRO by Sagawa et al., which prioritizes worst-group risk. Conceptually akin to the intent behind class-balanced loss by Cui et al., DRoP applies the adjustment not as loss weights but as class-specific pruning quotas derived from a robustness objective. The result is a pruning procedure that retains the efficiency gains of prior methods while directly addressing their core shortcoming: sensitivity to class imbalance and poor worst-class accuracy.",
+  "analysis_timestamp": "2026-01-06T23:09:26.596341"
+}

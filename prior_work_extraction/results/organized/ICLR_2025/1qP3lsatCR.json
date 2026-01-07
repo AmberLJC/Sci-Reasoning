@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Outrageously Large Neural Networks: The Sparsely-Gated Mixture-of-Experts Layer",
+      "authors": "Noam Shazeer et al.",
+      "year": 2017,
+      "arxiv_id": "1701.06538",
+      "role": "Foundation",
+      "relationship_sentence": "This work established the MoE formulation with token-to-expert routing and load-balancing losses, creating the routing behavior whose token\u2013expert patterns NetMoE leverages for sample-aware placement."
+    },
+    {
+      "title": "GShard: Scaling Giant Models with Conditional Computation and Automatic Sharding",
+      "authors": "Dmitry Lepikhin et al.",
+      "year": 2020,
+      "arxiv_id": "2006.16668",
+      "role": "Foundation",
+      "relationship_sentence": "GShard introduced expert-parallel sharding and the All-to-All token exchange across devices that defines the communication pattern NetMoE targets by reducing traffic via dynamic sample placement."
+    },
+    {
+      "title": "Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity",
+      "authors": "William Fedus et al.",
+      "year": 2021,
+      "arxiv_id": "2101.03961",
+      "role": "Gap Identification",
+      "relationship_sentence": "By adopting top-1 routing that intensifies frequent All-to-All exchanges, this paper exposes persistent communication bottlenecks that NetMoE addresses by exploiting per-sample expert locality to shrink exchanges."
+    },
+    {
+      "title": "DeepSpeed-MoE: Advancing Mixture-of-Experts Inference and Training",
+      "authors": "Samyam Rajbhandari et al.",
+      "year": 2022,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "As a state-of-the-art MoE runtime featuring dropless routing and optimized All-to-All collectives, it serves as a primary system baseline that NetMoE directly improves by reducing the bytes communicated via sample-aware placement."
+    },
+    {
+      "title": "Tutel: Efficient Mixture-of-Experts at Scale",
+      "authors": "Xia et al.",
+      "year": 2022,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "Tutel\u2019s hierarchical All-to-All and communication-kernel optimizations define a high-performance execution path that NetMoE complements by lowering All-to-All volume through organizing and placing samples that share expert affinity."
+    },
+    {
+      "title": "FasterMoE: A System for Efficient Training of Large Mixture-of-Experts Models",
+      "authors": "He et al.",
+      "year": 2022,
+      "arxiv_id": null,
+      "role": "Related Problem",
+      "relationship_sentence": "FasterMoE reduces communication by topology-aware expert placement; NetMoE extends this line by addressing the orthogonal dimension of dynamic sample placement based on observed token\u2013expert locality within samples."
+    }
+  ],
+  "synthesis_narrative": "Sparsely-gated Mixture-of-Experts introduced the core mechanism of routing tokens to a small subset of experts with load-balancing regularization, creating structured token\u2013expert assignment patterns. GShard operationalized expert-parallel MoE at scale, showing that sharding experts across devices induces an All-to-All exchange of routed tokens each layer, firmly establishing the communication pattern in distributed MoE. Switch Transformers simplified gating to top-1 selection, increasing the frequency and sensitivity of All-to-All while retaining the same fundamental pattern of tokens concentrating on a few experts. DeepSpeed-MoE delivered a production-grade MoE runtime with dropless routing and optimized collectives, making the All-to-All path the dominant system bottleneck in practice. Tutel further optimized this path with hierarchical All-to-All and high-performance kernels, but still assumed token movement after routing as a given. FasterMoE targeted the network itself, placing experts topologically to reduce cross-node traffic, highlighting that communication can be mitigated by aligning computation with network structure.\nTogether these works established that expert-parallel MoE hinges on recurring All-to-All token exchanges and that system-level gains have focused on better collectives or expert placement while leaving token movement patterns largely intact. Observing that tokens within the same training sample often route to a small, consistent set of experts reveals an unexploited lever: sample placement. Building on the standard routing formulations and existing runtimes, NetMoE synthesizes these insights by dynamically placing and batching samples according to their expert affinity, thereby reducing All-to-All volume and contention without altering routing or expert layout\u2014an immediate next step given the prior landscape.",
+  "target_paper": {
+    "title": "NetMoE: Accelerating MoE Training through Dynamic Sample Placement",
+    "authors": "Xinyi Liu, Yujie Wang, Fangcheng Fu, Xupeng Miao, Shenhan Zhu, Xiaonan Nie, Bin CUI",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "Mixture of Experts, All-to-All communication, Distributed training",
+    "abstract": "Mixture of Experts (MoE) is a widely used technique to expand model sizes for better model quality while maintaining the computation cost constant. In a nutshell, an MoE model consists of multiple experts in each model layer and routes the training tokens to only a fixed number of experts rather than all. In distributed training, as experts are distributed among different GPUs, All-to-All communication is necessary to exchange the training tokens among the GPUs after each time of expert routing. Due to the frequent and voluminous data exchanges, All-to-All communication has become a notable challenge to training efficiency.\n\nIn this paper, we manage to accelerate All-to-All communication in MoE models from the training sample perspective, which is unexplored so far. In particular, we put forward the observation that tokens in the same training sample have certain levels of locality in expert routing. Motivated by this, we develop NetMoE, which takes such locality into account and dynam",
+    "openreview_id": "1qP3lsatCR",
+    "forum_id": "1qP3lsatCR"
+  },
+  "analysis_timestamp": "2026-01-06T05:57:33.646351"
+}

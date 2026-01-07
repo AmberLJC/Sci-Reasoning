@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "The Lottery Ticket Hypothesis: Finding Sparse, Trainable Neural Networks",
+      "authors": "Jonathan Frankle and Michael Carbin",
+      "year": 2019,
+      "role": "Foundation",
+      "relationship_sentence": "ISP explicitly seeks 'lottery ticket\u2013quality' subnetworks and adopts the LTH problem formulation\u2014finding sparse subnetworks that can match dense performance\u2014while aiming to obtain them far more cheaply than the original IMP routine."
+    },
+    {
+      "title": "Stabilizing the Lottery Ticket Hypothesis",
+      "authors": "Jonathan Frankle et al.",
+      "year": 2019,
+      "role": "Gap Identification",
+      "relationship_sentence": "This work showed that making LTH work at scale requires early weight rewinding and repeated prune\u2013retrain cycles, highlighting the heavy computational burden that ISP directly targets by replacing iterative cycles with a single-pass approach."
+    },
+    {
+      "title": "Comparing Rewinding and Fine-Tuning in Neural Network Pruning",
+      "authors": "Alex Renda et al.",
+      "year": 2020,
+      "role": "Baseline",
+      "relationship_sentence": "Renda et al. established the state-of-practice IMP+rewinding procedure that ISP aims to match in subnetwork quality while drastically reducing the repeated training cost."
+    },
+    {
+      "title": "Model soups: averaging weights of multiple fine-tuned models improves accuracy without increasing inference-time cost",
+      "authors": "Mitchell Wortsman et al.",
+      "year": 2022,
+      "role": "Inspiration",
+      "relationship_sentence": "ISP is directly motivated by model soups\u2019 finding that averaging weights from separately fine-tuned models lands in better minima, adapting that idea to pruning by 'souping' cheap, single-pass pruning runs to obtain a superior winning ticket."
+    },
+    {
+      "title": "Averaging Weights Leads to Wider Optima in Deep Learning (Stochastic Weight Averaging)",
+      "authors": "Pavel Izmailov et al.",
+      "year": 2018,
+      "role": "Related Problem",
+      "relationship_sentence": "SWA underpins the rationale that weight averaging yields flatter, better generalizing minima; ISP leverages the same averaging intuition when merging multiple pruned candidates into an instantly stronger subnetwork."
+    },
+    {
+      "title": "SNIP: Single-Shot Network Pruning Based on Connection Sensitivity",
+      "authors": "Namhoon Lee et al.",
+      "year": 2019,
+      "role": "Gap Identification",
+      "relationship_sentence": "SNIP introduced efficient one-shot pruning but typically falls short of IMP-level tickets; ISP addresses this gap by showing that a single pass can still yield IMP-quality subnetworks when multiple cheap pruned candidates are 'souped' together."
+    },
+    {
+      "title": "Movement Pruning: Adaptive Sparsity by Fine-Tuning",
+      "authors": "Victor Sanh et al.",
+      "year": 2020,
+      "role": "Related Problem",
+      "relationship_sentence": "As a strong sparse fine-tuning method for large pretrained transformers, Movement Pruning provides a key baseline and contextualizes ISP\u2019s goal of matching strong sparse performance while cutting the iterative cost characteristic of IMP-style pipelines."
+    }
+  ],
+  "synthesis_narrative": "Instant Soup Pruning (ISP) targets the core challenge posed by the Lottery Ticket Hypothesis (LTH): locating sparse subnetworks that retain the accuracy of their dense counterparts. While LTH (Frankle & Carbin) established the formulation and iterative magnitude pruning (IMP) as the mechanism to \u2018draw\u2019 winning tickets, subsequent work demonstrated that making LTH practical at scale required early weight rewinding and multiple prune\u2013retrain cycles (Frankle et al., Stabilizing LTH; Renda et al.), cementing a powerful\u2014but computationally prohibitive\u2014baseline. In parallel, the model soups line (Wortsman et al.) revealed that averaging weights from independently fine-tuned models consistently lands in better minima without extra inference cost, itself grounded in the averaging-for-flatter-minima insight from SWA (Izmailov et al.). ISP fuses these trajectories: it replaces IMP\u2019s repeated cycles with a single-pass procedure that generates multiple cheap pruning candidates and \u2018soups\u2019 them, leveraging weight averaging to consolidate complementary signals into a higher-quality mask/initialization\u2014thereby producing lottery-ticket\u2013quality subnetworks at a fraction of IMP\u2019s cost. Compared to one-shot pruning such as SNIP, which is efficient but often inferior to IMP, ISP shows that ensembling via weight averaging closes the gap to IMP-quality tickets without iterative retraining. Within the sparse fine-tuning ecosystem for large pretrained transformers (e.g., Movement Pruning), ISP thus stands as a computationally economical route to high-quality tickets, directly inspired by soups while addressing the well-documented cost bottlenecks of LTH/IMP.",
+  "analysis_timestamp": "2026-01-06T23:09:26.568324"
+}

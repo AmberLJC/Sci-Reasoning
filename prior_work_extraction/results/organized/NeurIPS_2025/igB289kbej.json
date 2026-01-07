@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Jonathan Ho, Ajay Jain, Pieter Abbeel",
+      "year": 2020,
+      "role": "Foundational method",
+      "relationship_sentence": "Provides the denoising trajectory formulation of diffusion models that EraseFlow explicitly operates over, enabling policy learning on entire sampling paths rather than just final samples."
+    },
+    {
+      "title": "Classifier-Free Diffusion Guidance",
+      "authors": "Jonathan Ho, Tim Salimans",
+      "year": 2022,
+      "role": "Steering mechanism inspiration",
+      "relationship_sentence": "Demonstrates how guidance can steer diffusion sampling while preserving model priors, informing EraseFlow\u2019s goal of steering away from target concepts without degrading overall generative quality."
+    },
+    {
+      "title": "Erasing Concepts from Diffusion Models (ESD)",
+      "authors": "Gandikota et al.",
+      "year": 2023,
+      "role": "Direct baseline/contrast",
+      "relationship_sentence": "A leading concept-erasure approach whose reliance on adversarial objectives and fine-tuning motivates EraseFlow\u2019s trajectory-level, policy-based alternative that avoids quality collapse and brittle objectives."
+    },
+    {
+      "title": "ImageReward: Learning a Reward Model for Text-to-Image Generation",
+      "authors": "Xu et al.",
+      "year": 2023,
+      "role": "Reward-model alignment baseline",
+      "relationship_sentence": "Represents reward-model-driven alignment of text-to-image models, which EraseFlow explicitly avoids by learning a stochastic policy via GFlowNets that reduces dependence on hackable, hand-crafted rewards."
+    },
+    {
+      "title": "Generative Flow Networks",
+      "authors": "Bengio et al.",
+      "year": 2021,
+      "role": "Core methodological foundation",
+      "relationship_sentence": "Introduces GFlowNets as a framework for learning stochastic policies that sample high-reward objects through trajectories, directly enabling EraseFlow\u2019s exploration over denoising paths."
+    },
+    {
+      "title": "Trajectory Balance: Improved Credit Assignment in GFlowNets",
+      "authors": "Nikolay Malkin, Moksh Jain, Emmanuel Bengio, Doina Precup, Yoshua Bengio",
+      "year": 2022,
+      "role": "Training objective",
+      "relationship_sentence": "Provides the trajectory-balance objective that EraseFlow employs to stably learn trajectory-level policies for concept avoidance while maintaining distributional coverage."
+    },
+    {
+      "title": "Prompt-to-Prompt Image Editing with Cross-Attention Control",
+      "authors": "Nupur Kumari (Hertz) et al.",
+      "year": 2022,
+      "role": "Trajectory-level control motivation",
+      "relationship_sentence": "Shows that manipulating signals across denoising steps shapes semantics, motivating EraseFlow\u2019s decision to model and optimize full denoising trajectories rather than only endpoints."
+    }
+  ],
+  "synthesis_narrative": "EraseFlow\u2019s core insight\u2014casting concept erasure as exploration over denoising trajectories and optimizing the process with GFlowNets\u2014stands on two pillars: the trajectory-centric view of diffusion sampling and the trajectory-sampling capabilities of GFlowNets. The diffusion backbone from DDPM formalized the generative process as sequential denoising, while classifier-free guidance demonstrated how policies applied along this path can steer outputs without corrupting the model prior. Prompt-to-Prompt further revealed that interventions across denoising steps, not just final images, crucially determine semantic content, underscoring the value of trajectory-level control.\nOn the safety side, ESD established a concrete paradigm for erasing concepts via adversarial fine-tuning, but also exposed quality degradation and brittleness. In parallel, ImageReward exemplified alignment via learned reward models, highlighting the susceptibility of such rewards to hacking and limited generalization. EraseFlow directly responds to these limitations by replacing handcrafted or adversarial objectives with a learned stochastic policy over trajectories.\nMethodologically, Generative Flow Networks provide the mechanism to sample diverse, high-reward objects by learning flow-consistent policies; Trajectory Balance supplies a stable, end-to-end training objective with good credit assignment across paths. By mapping denoising sequences to GFlowNet trajectories and optimizing with trajectory balance, EraseFlow learns to divert sampling away from unwanted concepts while preserving the prior, achieving robust, generalizable erasure without retraining cycles or fragile reward models.",
+  "analysis_timestamp": "2026-01-07T00:21:32.286050"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Neural Machine Translation of Rare Words with Subword Units",
+      "authors": "Rico Sennrich; Barry Haddow; Alexandra Birch",
+      "year": 2016,
+      "role": "Introduced BPE subword tokenization, establishing the core practice of composing higher-order character dependencies into learned tokens.",
+      "relationship_sentence": "This paper\u2019s central claim\u2014that appropriate tokenization enables transformers to capture higher-order Markov dependencies\u2014directly builds on BPE\u2019s principle of bundling frequent character n-grams into tokens, which the authors leverage as the mechanism that breaks the unigram-collapse barrier."
+    },
+    {
+      "title": "Subword Regularization: Improving Neural Network Translation Models with Multiple Subword Candidates",
+      "authors": "Taku Kudo",
+      "year": 2018,
+      "role": "Proposed the Unigram LM tokenizer and stochastic subwording, shaping the modern theoretical and practical view of tokenization as probabilistic segmentation.",
+      "relationship_sentence": "The authors\u2019 analysis of how tokenization structure aligns with source statistics connects to Kudo\u2019s Unigram LM view, explaining why segmentations approximating source-level motifs (e.g., k-grams) help transformers learn k-th order Markov structure."
+    },
+    {
+      "title": "Language Models are Unsupervised Multitask Learners",
+      "authors": "Alec Radford; Jeffrey Wu; Rewon Child; David Luan; Dario Amodei; Ilya Sutskever",
+      "year": 2019,
+      "role": "Established byte-level BPE as a robust, general-purpose tokenizer for large LMs, highlighting tokenization\u2019s centrality to scaling.",
+      "relationship_sentence": "By codifying byte-level BPE as the de facto practice, this work motivates the present paper\u2019s theoretical examination of why subword tokenization is not merely convenient but functionally necessary for modeling higher-order dependencies."
+    },
+    {
+      "title": "Byte Pair Encoding is Suboptimal for Language Model Pretraining",
+      "authors": "K. Bostrom; Greg Durrett",
+      "year": 2020,
+      "role": "Empirically dissected how tokenizer choice affects LM quality, showing Unigram LM often outperforms BPE and that segmentation choices directly impact cross-entropy.",
+      "relationship_sentence": "Their findings that tokenizer design materially changes LM perplexity underpin this paper\u2019s thesis and experiments, motivating a principled account (via Markov sources) of when and why certain tokenizations aid learning."
+    },
+    {
+      "title": "CANINE: Pre-training an Efficient Tokenization-Free Encoder for Language with Characters",
+      "authors": "Jonathan H. Clark; Dan Garrette; Iulia Turc; John Wieting",
+      "year": 2022,
+      "role": "Demonstrated competitive character-level, tokenization-free modeling, challenging the necessity of subwords.",
+      "relationship_sentence": "CANINE\u2019s tokenization-free successes set up the precise tension addressed here; the present work delineates regimes (higher-order Markov sources) where tokenization-free transformers fail or learn slowly, clarifying when tokenization is essential."
+    },
+    {
+      "title": "ByT5: Towards a Token-Free Future with Pretrained Byte-to-Byte Models",
+      "authors": "Linting Xue; Noah Constant; Adam Roberts; et al.",
+      "year": 2022,
+      "role": "Advanced byte-level, token-free pretraining at scale, providing strong empirical baselines without subword segmentation.",
+      "relationship_sentence": "ByT5\u2019s results motivate a theoretical reconciliation: the current paper explains why, despite successes, token-free models can collapse to unigram behavior on higher-order Markov data, and how tokenization overcomes this."
+    },
+    {
+      "title": "Transformers Predict Unigrams on Higher-Order Markov Data (empirical observation cited as Makkuva et al., 2024)",
+      "authors": "Makkuva et al.",
+      "year": 2024,
+      "role": "Identified the unigram-prediction failure mode of transformers trained on simple higher-order Markov sources without tokenization.",
+      "relationship_sentence": "The present paper directly builds on this observed phenomenon, providing a systematic analysis and showing that appropriate tokenization enables near-optimal modeling of the underlying Markov distribution."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s key contribution\u2014explaining when and why tokenization enables transformers to learn higher-order dependencies in k-th order Markov sources\u2014rests on two converging lines of prior work. First, foundational tokenization research (Sennrich et al., 2016; Kudo, 2018; Radford et al., 2019; Bostrom & Durrett, 2020) established that segmenting text into subwords is not merely an engineering detail but a statistical tool: subword schemes like BPE and Unigram LM compress frequent n-grams into single tokens, reducing sequence length and aligning model inputs with recurring motifs. Empirical evidence that tokenizer choice affects cross-entropy (Bostrom & Durrett) and the widespread adoption of byte-level BPE (Radford et al.) underscore tokenization\u2019s impact on learnability.\nSecond, tokenization-free modeling efforts (Clark et al., 2022; Xue et al., 2022) challenged the necessity of subwords by demonstrating byte- and character-level LMs that can work at scale. However, Makkuva et al. (2024) documented a crucial failure mode: without tokenization, transformers trained on higher-order Markov data can default to unigram predictions, learning extremely slowly or not at all. The present paper synthesizes these threads by showing that appropriate tokenization breaks this barrier, enabling near-optimal modeling of Markov sources. It thereby provides a principled explanation for when tokenization is indispensable: when the data-generating process relies on higher-order local dependencies that subword segmentation can expose as atomic units for efficient transformer learning.",
+  "analysis_timestamp": "2026-01-06T23:33:35.523282"
+}

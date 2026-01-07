@@ -1,0 +1,248 @@
+#!/usr/bin/env python3
+"""
+Gemini 3 Pro Preview - Resume from paper 30
+With much longer delays to avoid rate limits
+"""
+
+import os
+import sys
+import json
+import time
+import re
+import requests
+from datetime import datetime
+from pathlib import Path
+
+sys.path.insert(0, '/tmp/exa_lib')
+from exa_py import Exa
+
+EXA_API_KEY = "3cf16e91-4d99-46fe-b0cd-7db130faf61f"
+GEMINI_API_KEY = "AIzaSyCYhkghQSuTq-AsWQhAdZf4bHQoMFV3DhM"
+
+INPUT_COST_PER_1M = 1.25
+OUTPUT_COST_PER_1M = 5.0
+RESUME_FROM = 30
+
+exa = Exa(api_key=EXA_API_KEY)
+
+
+def clean_title_for_search(title):
+    title = re.sub(r'\s*\([^)]*et al[^)]*\)', '', title)
+    title = re.sub(r'\s*\([^)]*\d{4}[^)]*\)', '', title)
+    title = re.sub(r'\s*\[\d+\]', '', title)
+    title = re.split(r'\s*/\s*|—', title)[0]
+    return re.sub(r'\s+', ' ', title).strip()
+
+
+def is_quality_content(content):
+    if not content or len(content) < 200:
+        return False
+    boilerplate = ["Skip to main content", "Cornell University", "We gratefully acknowledge"]
+    return sum(1 for b in boilerplate if b.lower() in content[:500].lower()) <= 1
+
+
+def search_paper_with_exa(title, max_chars=10000):
+    cleaned_title = clean_title_for_search(title)
+    try:
+        result = exa.search_and_contents(cleaned_title, type="auto", num_results=3,
+                                         text={"max_characters": max_chars}, category="research paper")
+        if result.results:
+            for paper in result.results:
+                if is_quality_content(paper.text or ""):
+                    return {"success": True, "title": paper.title, "url": paper.url, 
+                            "content": paper.text or "", "content_quality": "good"}
+            return {"success": True, "title": result.results[0].title, "url": result.results[0].url,
+                    "content": result.results[0].text or "", "content_quality": "fallback"}
+        return {"success": False, "content": "", "error": "No results"}
+    except Exception as e:
+        return {"success": False, "content": "", "error": str(e)}
+
+
+def call_gemini_api(prompt, max_retries=8):
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3-pro-preview:generateContent?key={GEMINI_API_KEY}"
+    data = {"contents": [{"parts": [{"text": prompt}]}], "generationConfig": {"maxOutputTokens": 16000}}
+    
+    for attempt in range(max_retries):
+        try:
+            response = requests.post(url, headers={"Content-Type": "application/json"}, json=data, timeout=180)
+            if response.status_code == 200:
+                result = response.json()
+                content = ""
+                if result.get("candidates") and result["candidates"][0].get("content", {}).get("parts"):
+                    content = result["candidates"][0]["content"]["parts"][0].get("text", "")
+                usage = result.get("usageMetadata", {})
+                return {"content": content, "input_tokens": usage.get("promptTokenCount", 0),
+                        "output_tokens": usage.get("candidatesTokenCount", 0) + usage.get("thoughtsTokenCount", 0)}
+            elif response.status_code == 429:
+                wait = 60 * (attempt + 1)  # 60, 120, 180, 240... seconds
+                print(f"        Rate limit, waiting {wait}s ({attempt+1}/{max_retries})...")
+                time.sleep(wait)
+            else:
+                raise Exception(f"API error: {response.status_code}")
+        except requests.exceptions.Timeout:
+            print(f"        Timeout, retrying ({attempt+1}/{max_retries})...")
+            time.sleep(30)
+    raise Exception(f"Failed after {max_retries} retries")
+
+
+def generate_research_ideas(predecessor_contents, k=10):
+    context_parts = [f"=== Paper {i+1}: {p.get('title', 'Unknown')} ===\n{p['content'][:6000]}\n"
+                     for i, p in enumerate(predecessor_contents) if p.get("success") and len(p.get("content", "")) >= 300]
+    if not context_parts:
+        return None, 0, 0
+    prompt = f"""Generate exactly {k} novel research ideas based on these papers:
+
+{chr(10).join(context_parts)}
+
+For each idea: title (1 line) + description (2-3 sentences). Format as numbered list 1-{k}."""
+    result = call_gemini_api(prompt)
+    return result["content"], result["input_tokens"], result["output_tokens"]
+
+
+def judge_similarity(idea, title, contribution):
+    prompt = f"""Does this idea match the paper?
+
+Idea: {idea}
+
+Paper Title: {title}
+Contribution: {contribution}
+
+Respond ONLY with "MATCH" or "NO_MATCH"."""
+    result = call_gemini_api(prompt)
+    response = result["content"].strip().upper()
+    return "MATCH" in response and "NO_MATCH" not in response, result["input_tokens"], result["output_tokens"]
+
+
+def parse_ideas(text):
+    pattern = r'\d+\.\s*\*?\*?([^*\n]+)\*?\*?\s*\n([^0-9]+?)(?=\d+\.|$)'
+    matches = re.findall(pattern, text, re.DOTALL)
+    if matches:
+        return [f"{t.strip()}\n{d.strip()}" for t, d in matches][:10]
+    parts = re.split(r'\n\s*\d+[\.\)]\s*', text)
+    return [p.strip() for p in parts if p.strip() and len(p.strip()) > 20][:10]
+
+
+def load_synthesis_data(data_dir):
+    papers = []
+    for fp in sorted(Path(data_dir).glob("synthesis_*.json")):
+        try:
+            with open(fp) as f:
+                data = json.load(f)
+            sg = data.get("synthesis_graph", {})
+            preds = [p.get("paper_title", "") if isinstance(p, dict) else p for p in sg.get("intellectual_predecessors", [])]
+            preds = [p for p in preds if p]
+            if data.get("title") and preds:
+                papers.append({"paper_title": data["title"], "contribution": sg.get("target_paper_contribution", ""),
+                              "predecessors": preds})
+        except:
+            pass
+    return papers
+
+
+def evaluate_paper(paper, idx, k=10):
+    print(f"\n[{idx}] {paper['paper_title'][:60]}...")
+    
+    preds = []
+    for i, t in enumerate(paper['predecessors']):
+        r = search_paper_with_exa(t)
+        preds.append(r)
+        print(f"    [{i+1}/{len(paper['predecessors'])}] {'✓' if r['success'] else '✗'}")
+        time.sleep(0.5)
+    
+    crawl_rate = sum(1 for p in preds if p['success']) / len(paper['predecessors'])
+    print(f"    Crawl: {crawl_rate*100:.0f}%")
+    
+    # Add delay before API call
+    print(f"    Waiting 5s before API call...")
+    time.sleep(5)
+    
+    total_in, total_out = 0, 0
+    ideas_text, in_t, out_t = generate_research_ideas(preds, k)
+    total_in += in_t
+    total_out += out_t
+    
+    if not ideas_text:
+        return {"paper_idx": idx, "paper_title": paper["paper_title"], "hit_at_k": False,
+                "crawl_rate": crawl_rate, "input_tokens": total_in, "output_tokens": total_out}
+    
+    ideas = parse_ideas(ideas_text)
+    print(f"    {len(ideas)} ideas, judging...")
+    
+    hit, match_idx = False, None
+    for i, idea in enumerate(ideas):
+        time.sleep(2)  # Delay between judge calls
+        is_match, in_t, out_t = judge_similarity(idea, paper["paper_title"], paper["contribution"])
+        total_in += in_t
+        total_out += out_t
+        if is_match and not hit:
+            hit, match_idx = True, i
+            print(f"        ✓ HIT at {i+1}!")
+    
+    if not hit:
+        print(f"        ✗ No match")
+    
+    return {"paper_idx": idx, "paper_title": paper["paper_title"], "hit_at_k": hit,
+            "matching_idea_idx": match_idx, "crawl_rate": crawl_rate,
+            "input_tokens": total_in, "output_tokens": total_out}
+
+
+def save_results(results, total_in, total_out, start_time, interim=False):
+    hits = sum(1 for r in results if r["hit_at_k"])
+    input_cost = (total_in / 1_000_000) * INPUT_COST_PER_1M
+    output_cost = (total_out / 1_000_000) * OUTPUT_COST_PER_1M
+    
+    data = {
+        "summary": {"model": "gemini-3-pro-preview", "k": 10, "total_papers": len(results),
+                   "hits": hits, "hit_rate_percent": round(hits / len(results) * 100, 2) if results else 0,
+                   "runtime_minutes": round((time.time() - start_time) / 60, 2),
+                   "cost": {"input_tokens": total_in, "output_tokens": total_out,
+                           "total_cost_usd": round(input_cost + output_cost, 2)}},
+        "results": results
+    }
+    
+    path = f"projects/research_idea_evaluation/results/evaluation_results_gemini_pro{'_interim' if interim else '_final'}.json"
+    with open(path, 'w') as f:
+        json.dump(data, f, indent=2)
+    print(f"\n    Saved: {path}")
+
+
+def main():
+    print(f"Gemini 3 Pro - Resume from {RESUME_FROM} (with longer delays)")
+    
+    with open('projects/research_idea_evaluation/results/evaluation_results_gemini_pro_interim.json') as f:
+        prev = json.load(f)
+    
+    results = prev['results']
+    total_in = prev['summary']['cost']['input_tokens']
+    total_out = prev['summary']['cost']['output_tokens']
+    print(f"Loaded {len(results)} results, {total_in:,} in / {total_out:,} out")
+    
+    papers = load_synthesis_data("projects/synthesis_graph_pipeline/results/conferences/NeurIPS-2025-oral")
+    start_time = time.time()
+    
+    for idx in range(RESUME_FROM, len(papers)):
+        result = evaluate_paper(papers[idx], idx, k=10)
+        results.append(result)
+        total_in += result["input_tokens"]
+        total_out += result["output_tokens"]
+        
+        hits = sum(1 for r in results if r["hit_at_k"])
+        cost = (total_in / 1_000_000) * INPUT_COST_PER_1M + (total_out / 1_000_000) * OUTPUT_COST_PER_1M
+        print(f"    Progress: {idx+1}/77 | Hits: {hits}/{len(results)} ({hits/len(results)*100:.1f}%) | ${cost:.2f}")
+        
+        if (idx + 1) % 10 == 0:
+            save_results(results, total_in, total_out, start_time, interim=True)
+        
+        # Add delay between papers
+        print(f"    Waiting 10s before next paper...")
+        time.sleep(10)
+    
+    save_results(results, total_in, total_out, start_time, interim=False)
+    
+    hits = sum(1 for r in results if r["hit_at_k"])
+    cost = (total_in / 1_000_000) * INPUT_COST_PER_1M + (total_out / 1_000_000) * OUTPUT_COST_PER_1M
+    print(f"\nFINAL: {hits}/{len(results)} = {hits/len(results)*100:.2f}% | ${cost:.2f}")
+
+
+if __name__ == "__main__":
+    main()

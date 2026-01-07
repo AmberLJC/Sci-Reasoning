@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Estimation of Non-Normalized Statistical Models by Score Matching",
+      "authors": "Aapo Hyv\u00e4rinen",
+      "year": 2005,
+      "role": "Foundational technique for estimating score functions from samples",
+      "relationship_sentence": "The paper\u2019s \u2018local score matching\u2019 to learn the Fisher score from simulator draws adapts Hyv\u00e4rinen\u2019s score-matching objective\u2014circumventing intractable normalizing constants\u2014to estimate \u2207\u03b8 log p(xobs|\u03b8) directly from simulations."
+    },
+    {
+      "title": "A Connection Between Score Matching and Denoising Autoencoders",
+      "authors": "Pascal Vincent",
+      "year": 2011,
+      "role": "Justifies score estimation of smoothed targets via local noise",
+      "relationship_sentence": "By showing that denoising with small noise learns the score of a locally smoothed density, this work underpins the authors\u2019 strategy of simulating in a neighborhood of each iterate and their analysis of the smoothing-induced bias in the Fisher score estimator."
+    },
+    {
+      "title": "Sliced Score Matching: A Scalable Approach to Density and Score Estimation",
+      "authors": "Yang Song, Stefano Ermon",
+      "year": 2019,
+      "role": "Scalable score estimation objectives compatible with simple regressors",
+      "relationship_sentence": "Sliced score matching demonstrates practical, sample-based score learning objectives that reduce to quadratic forms, motivating the paper\u2019s linear surrogate and closed-form least-squares fit for the Fisher score."
+    },
+    {
+      "title": "Statistical inference for noisy nonlinear ecological dynamical systems",
+      "authors": "Simon N. Wood",
+      "year": 2010,
+      "role": "Introduces synthetic likelihood to smooth intractable likelihoods via simulations",
+      "relationship_sentence": "Synthetic likelihood\u2019s idea of smoothing the likelihood surface with simulation-based approximations directly informs the paper\u2019s smoothing of the objective through local simulation and its use for robust, gradient-based MLE."
+    },
+    {
+      "title": "Indirect Inference",
+      "authors": "Christian Gourieroux, Alain Monfort, Eric Renault",
+      "year": 1993,
+      "role": "Auxiliary-model fitting on simulations to target parameters",
+      "relationship_sentence": "The proposed linear surrogate for the Fisher score is an auxiliary model fit on simulated data in the spirit of indirect inference, but targeted at the gradient rather than the likelihood level, enabling closed-form least-squares updates."
+    },
+    {
+      "title": "Bayesian Optimization for Likelihood-Free Inference of Simulator-Based Statistical Models",
+      "authors": "Michael U. Gutmann, Jukka Corander",
+      "year": 2016,
+      "role": "Sequential, simulation-efficient optimization for likelihood-free objectives",
+      "relationship_sentence": "BOLFI\u2019s concentration of simulations in regions that matter for inference inspires the paper\u2019s sequential design that draws simulations in localized neighborhoods around current parameters to learn informative Fisher score estimates efficiently."
+    },
+    {
+      "title": "A Stochastic Approximation Method",
+      "authors": "Herbert Robbins, Sutton Monro",
+      "year": 1951,
+      "role": "Foundation for iterative optimization with noisy gradient information",
+      "relationship_sentence": "The method\u2019s convergence framework for noisy gradient updates supports the paper\u2019s sequential likelihood maximization using estimated (and slightly biased) Fisher scores and informs step-size and stability considerations."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core contribution\u2014directly estimating the Fisher score for likelihood maximization in simulator-based models\u2014stands at the intersection of score estimation and likelihood-free optimization. Hyv\u00e4rinen\u2019s score matching provides the fundamental principle: learn gradients of log densities from samples without needing normalization, which the authors transpose from data space to parameter space to target \u2207\u03b8 log p(xobs|\u03b8). Vincent\u2019s denoising perspective justifies injecting local noise: simulating in a neighborhood around the current iterate effectively learns the score of a smoothed likelihood, explaining both the improved optimization landscape and the need to quantify smoothing bias.\n\nTo make this practical and fast, the work draws on scalable score estimation formulations such as sliced score matching, which yield quadratic objectives amenable to closed-form solutions under linear parameterizations\u2014directly enabling the paper\u2019s least-squares Fisher score surrogate. From the likelihood-free inference side, Wood\u2019s synthetic likelihood motivates smoothing the objective via simulations for robust MLE, while indirect inference contributes the idea of fitting an auxiliary (here, gradient) model to simulation output, naturally aligning with a linear, closed-form estimator. The sequential, localized simulation strategy echoes BOLFI\u2019s efficient allocation of simulator calls to informative regions. Finally, Robbins\u2013Monro provides the theoretical backbone for stable stochastic approximation with noisy gradient estimates, connecting the paper\u2019s bias\u2013variance analysis and convergence behavior. Together, these threads produce a principled, efficient pipeline for gradient-based maximization of intractable likelihoods via direct Fisher score estimation.",
+  "analysis_timestamp": "2026-01-06T23:42:48.107482"
+}

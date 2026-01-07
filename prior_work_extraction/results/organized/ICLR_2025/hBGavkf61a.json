@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Diffusion Autoencoders: Toward a Meaningful and Decodable Representation",
+      "authors": "Nantapong Preechakul et al.",
+      "year": 2022,
+      "arxiv_id": "2209.  (exact id not confirmed)",
+      "role": "Baseline",
+      "relationship_sentence": "This work establishes the auxiliary-encoder + diffusion-decoder paradigm and encodes data into a latent while still relying on a stochastic diffusion endpoint, creating the dual-path information split that DBAE collapses by making the endpoint x_T a z-dependent feed-forward inference."
+    },
+    {
+      "title": "High-Resolution Image Synthesis with Latent Diffusion Models",
+      "authors": "Robin Rombach et al.",
+      "year": 2022,
+      "arxiv_id": "2112.10752",
+      "role": "Foundation",
+      "relationship_sentence": "LDM introduced using an auxiliary autoencoder to control latent dimensionality while decoding with a diffusion model, a structural choice DBAE adopts but modifies by replacing the fixed, sampled endpoint with a z-conditioned endpoint to avoid information split and dimensional inflexibility."
+    },
+    {
+      "title": "Denoising Diffusion Implicit Models",
+      "authors": "Jiaming Song et al.",
+      "year": 2021,
+      "arxiv_id": "2010.02502",
+      "role": "Gap Identification",
+      "relationship_sentence": "DDIM highlights the deterministic forward/inverse mapping but still requires multi-step procedures to obtain x_T from data, a computational burden and rigidity that DBAE sidesteps via a single feed-forward predictor of a z-dependent endpoint."
+    },
+    {
+      "title": "Diffusion Schr\u00f6dinger Bridge",
+      "authors": "Mathieu De Bortoli et al.",
+      "year": 2021,
+      "arxiv_id": "2106. (exact id not confirmed)",
+      "role": "Inspiration",
+      "relationship_sentence": "By formulating generative modeling as constructing stochastic bridges between endpoints, this work motivates DBAE\u2019s core idea of enforcing a z-conditioned endpoint bridge that ties the data start and diffusion end into a single consistent pathway."
+    },
+    {
+      "title": "Conditional Flow Matching: Simulation-Free Training of Score-Based Diffusion Models",
+      "authors": "Yaron Lipman (Tong) et al.",
+      "year": 2023,
+      "arxiv_id": "2306. (exact id not confirmed)",
+      "role": "Inspiration",
+      "relationship_sentence": "Conditional flow matching demonstrates learning feed-forward mappings conditioned on endpoints, directly inspiring DBAE\u2019s feed-forward z-conditioned inference of x_T as a one-shot bridge rather than iterative diffusion."
+    },
+    {
+      "title": "Wasserstein Auto-Encoders",
+      "authors": "Ilya Tolstikhin et al.",
+      "year": 2018,
+      "arxiv_id": "1711.01558",
+      "role": "Foundation",
+      "relationship_sentence": "WAE\u2019s principle of matching the aggregated posterior to a chosen prior underpins DBAE\u2019s need to align the learned z distribution with the diffusion endpoint prior so that a z-dependent endpoint can validly substitute for sampled x_T."
+    }
+  ],
+  "synthesis_narrative": "Diffusion Autoencoders established a concrete recipe for diffusion-based representation learning: an auxiliary encoder maps data to a latent and a diffusion decoder reconstructs or generates, but the decoder still consumes a stochastic endpoint, leaving two inference paths that divide information between the encoded latent and the diffusion seed. Latent Diffusion Models cemented the role of an auxiliary autoencoder to control latent dimensionality while relying on a diffusion decoder, clarifying how representation compactness and diffusion generation can be combined. Denoising Diffusion Implicit Models showed that diffusion dynamics admit deterministic forward and inverse mappings, yet obtaining an endpoint tied to a specific data instance requires costly multi-step inference, exposing computational and dimensional rigidity in endpoint handling. Diffusion Schr\u00f6dinger Bridge framed generative modeling as constructing bridges constrained by endpoint distributions, emphasizing endpoint-consistent paths. Conditional Flow Matching demonstrated that such bridges can be learned as feed-forward, conditioning-driven mappings without iterative simulation. Wasserstein Auto-Encoders provided the aggregated-posterior matching principle to align an encoder\u2019s outputs with a target prior, ensuring compatibility between a learned latent and a generative pathway.\nTaken together, these works expose a gap: auxiliary-encoder diffusion systems split information across an encoded latent and an independently sampled endpoint, and iterative endpoint inference is inefficient and dimension-bound. The natural next step is to fuse the two paths by learning a feed-forward, latent-conditioned endpoint that creates a coherent bridge from data to diffusion termination while aligning the latent distribution with the endpoint prior, thereby eliminating information split and enabling flexible, efficient unsupervised representations.",
+  "target_paper": {
+    "title": "Diffusion Bridge AutoEncoders for Unsupervised Representation Learning",
+    "authors": "Yeongmin Kim, Kwanghyeon Lee, Minsang Park, Byeonghu Na, Il-chul Moon",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "Diffusion Model, Represenation Learning, Autoencoders",
+    "abstract": "Diffusion-based representation learning has achieved substantial attention due to its promising capabilities in latent representation and sample generation. Recent studies have employed an auxiliary encoder to identify a corresponding representation from data and to adjust the dimensionality of a latent variable $\\mathbf{z}$. Meanwhile, this auxiliary structure invokes an *information split problem*; the information of each data instance $\\mathbf{x}_0$ is divided into diffusion endpoint $\\mathbf{x}_T$ and encoded $\\mathbf{z}$ because there exist two inference paths starting from the data. The latent variable modeled by diffusion endpoint $\\mathbf{x}_T$ has some disadvantages. The diffusion endpoint $\\mathbf{x}_T$ is computationally expensive to obtain and inflexible in dimensionality. To address this problem, we introduce Diffusion Bridge AuteEncoders (DBAE), which enables $\\mathbf{z}$-dependent endpoint $\\mathbf{x}_T$ inference through a feed-forward architecture. This structure creat",
+    "openreview_id": "hBGavkf61a",
+    "forum_id": "hBGavkf61a"
+  },
+  "analysis_timestamp": "2026-01-06T17:16:52.766029"
+}

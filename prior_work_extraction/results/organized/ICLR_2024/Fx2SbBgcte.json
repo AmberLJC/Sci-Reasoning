@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "High-Resolution Image Synthesis with Latent Diffusion Models",
+      "authors": "Robin Rombach et al.",
+      "year": 2022,
+      "arxiv_id": "2112.10752",
+      "role": "Foundation",
+      "relationship_sentence": "AnimateDiff\u2019s plug-in motion module is designed around the Stable Diffusion/LDM U-Net in latent space, ensuring architectural compatibility across all personalized models derived from the same base."
+    },
+    {
+      "title": "DreamBooth: Fine Tuning Text-to-Image Diffusion Models for Subject-Driven Generation",
+      "authors": "Nataniel Ruiz et al.",
+      "year": 2022,
+      "arxiv_id": "2208.12242",
+      "role": "Foundation",
+      "relationship_sentence": "The problem setting explicitly assumes DreamBooth-style subject personalization as the appearance backbone, which AnimateDiff seeks to animate without further model-specific tuning."
+    },
+    {
+      "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+      "authors": "Edward J. Hu et al.",
+      "year": 2021,
+      "arxiv_id": "2106.09685",
+      "role": "Extension",
+      "relationship_sentence": "AnimateDiff\u2019s MotionLoRA directly applies LoRA\u2019s low-rank adapters to the temporal (motion) layers, enabling lightweight, style-specific motion adaptation on top of the reusable motion module."
+    },
+    {
+      "title": "Adding Conditional Control to Text-to-Image Diffusion Models (ControlNet)",
+      "authors": "Lvmin Zhang et al.",
+      "year": 2023,
+      "arxiv_id": "2302.05543",
+      "role": "Extension",
+      "relationship_sentence": "The motion branch adopts ControlNet\u2019s zero-initialized residual injection strategy to preserve the original T2I behavior while learning motion priors, making the module safely plug-and-play."
+    },
+    {
+      "title": "Latent Video Diffusion Models",
+      "authors": "Andreas Blattmann et al.",
+      "year": 2023,
+      "arxiv_id": "2304.08818",
+      "role": "Inspiration",
+      "relationship_sentence": "The core idea of adding temporal layers (e.g., temporal attention/conv) on top of an SD U-Net to model motion directly informs AnimateDiff\u2019s design of a learnable motion module."
+    },
+    {
+      "title": "Tune-A-Video: One-Shot Tuning of Image Diffusion Models for Text-to-Video Generation",
+      "authors": "Jay Zhangjie Wu et al.",
+      "year": 2023,
+      "arxiv_id": "2302.03011",
+      "role": "Baseline",
+      "relationship_sentence": "AnimateDiff targets the same T2I-to-video transfer but replaces Tune-A-Video\u2019s per-video/prompt fine-tuning with a reusable motion prior trained once and then plugged into any SD-based personalized model."
+    },
+    {
+      "title": "Text-to-Video Zero: Text-to-Image Diffusion Models are Zero-Shot Video Generators",
+      "authors": "Khachatryan et al.",
+      "year": 2023,
+      "arxiv_id": "2303.13439",
+      "role": "Gap Identification",
+      "relationship_sentence": "By showing zero-shot transfer suffers from weak motion priors and temporal artifacts, this work motivates AnimateDiff\u2019s strategy to explicitly learn a video-trained motion module while preserving base appearance."
+    }
+  ],
+  "synthesis_narrative": "Latent Diffusion Models established the Stable Diffusion U-Net operating in latent space, providing a modular backbone whose blocks and interfaces are consistent across derivatives. DreamBooth introduced subject-driven personalization by fine-tuning that backbone to encode specific identities or styles, making personalized T2I a common endpoint to preserve. LoRA contributed low-rank adapters as a lightweight mechanism to specialize subsets of weights, which can be targeted to specific layers while keeping base parameters mostly intact. ControlNet demonstrated a plug-and-play conditional branch with zero-initialized residual injection that augments Stable Diffusion without destroying its original capability, a key recipe for safe attachment of auxiliary modules. Latent Video Diffusion Models showed that injecting temporal layers (e.g., temporal attention/convs) into an SD-style U-Net yields coherent motion modeling, indicating that motion can be factored as temporal operators atop appearance features. Tune-A-Video adapted T2I models to video via per-instance fine-tuning, achieving coherence but at the cost of model-specific updates. Text-to-Video Zero explored zero-shot transfer from T2I to video, revealing limited motion priors and temporal artifacts without video-trained temporal modules. Together these works implied a gap: motion should be learned as a reusable temporal prior that can be safely attached to any SD-derived personalized model, and adapted efficiently when needed. AnimateDiff synthesizes ControlNet-style safe residual integration, LVMD-inspired temporal layers, and LoRA\u2019s low-rank updates to build a once-trained, plug-and-play motion module plus MotionLoRA for lightweight specialization, thereby animating DreamBooth/LoRA T2I models without model-specific tuning.",
+  "target_paper": {
+    "title": "AnimateDiff: Animate Your Personalized Text-to-Image Diffusion Models without Specific Tuning",
+    "authors": "Yuwei Guo, Ceyuan Yang, Anyi Rao, Zhengyang Liang, Yaohui Wang, Yu Qiao, Maneesh Agrawala, Dahua Lin, Bo Dai",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Deep Learning, Diffusion Model, Video Generation",
+    "abstract": "With the advance of text-to-image (T2I) diffusion models (e.g., Stable Diffusion) and corresponding personalization techniques such as DreamBooth and LoRA, everyone can manifest their imagination into high-quality images at an affordable cost. However, adding motion dynamics to existing high-quality personalized T2Is and enabling them to generate animations remains an open challenge. In this paper, we present AnimateDiff, a practical framework for animating personalized T2I models without requiring model-specific tuning. At the core of our framework is a plug-and-play motion module that can be trained once and seamlessly integrated into any personalized T2Is originating from the same base T2I. Through our proposed training strategy, the motion module effectively learns transferable motion priors from real-world videos. Once trained, the motion module can be inserted into a personalized T2I model to form a personalized animation generator. We further propose MotionLoRA, a lightweight fi",
+    "openreview_id": "Fx2SbBgcte",
+    "forum_id": "Fx2SbBgcte"
+  },
+  "analysis_timestamp": "2026-01-06T23:49:40.610741"
+}

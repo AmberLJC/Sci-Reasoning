@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Cooperative Training of Descriptor and Generator Networks",
+      "authors": "Jianwen Xie et al.",
+      "year": 2016,
+      "arxiv_id": "1609.09408",
+      "role": "Extension",
+      "relationship_sentence": "The paper directly extends CoopNets\u2019 MCMC-teaching idea by pairing each noise-level EBM with an initializer model that learns from the difference between EBM-refined samples and its own outputs."
+    },
+    {
+      "title": "Generative Modeling by Estimating Gradients of the Data Distribution",
+      "authors": "Yang Song et al.",
+      "year": 2019,
+      "arxiv_id": "1907.05600",
+      "role": "Foundation",
+      "relationship_sentence": "CDRL adopts the noise-conditional, multi-level formulation and few-step Langevin refinement strategy introduced for score-based models to define and sample a family of EBMs across increasing noise levels."
+    },
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Jonathan Ho et al.",
+      "year": 2020,
+      "arxiv_id": "2006.11239",
+      "role": "Foundation",
+      "relationship_sentence": "The diffusion forward-noising schedule and per-step denoising (recovery) perspective from DDPM provide the corruption ladder and recovery interpretation that CDRL uses to define EBMs at each noise level."
+    },
+    {
+      "title": "Variational Diffusion Models",
+      "authors": "Diederik P. Kingma et al.",
+      "year": 2021,
+      "arxiv_id": "2107.00630",
+      "role": "Inspiration",
+      "relationship_sentence": "VDM\u2019s likelihood-based view of diffusion training motivates CDRL\u2019s use of diffusion recovery likelihood as a tractable objective for fitting EBMs on noisy data states."
+    },
+    {
+      "title": "A Connection Between Score Matching and Denoising Autoencoders",
+      "authors": "Pascal Vincent",
+      "year": 2011,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "The denoising-as-likelihood insight underpins CDRL\u2019s recovery-likelihood objective by linking learning from corrupted data to estimating clean data statistics."
+    },
+    {
+      "title": "Learning Energy-Based Models by Short-Run MCMC Sampling",
+      "authors": "Erik Nijkamp et al.",
+      "year": 2019,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "Short-run MCMC exposed the difficulty and bias of few-step EBM learning in high dimensions, a limitation CDRL addresses by grounding refinement in diffusion recovery likelihood and amortizing initialization."
+    }
+  ],
+  "synthesis_narrative": "CoopNets established a cooperative learning paradigm where a generator initializes samples that a descriptor (EBM) refines via short MCMC steps, and the generator learns from the refinement\u2014an MCMC teaching mechanism that amortizes sampling. Score-based generative modeling introduced a noise-conditional formulation: learn a family of objectives tied to increasing corruption levels and use few-step Langevin refinement, operationalizing multi-level modeling and annealed sampling. DDPM formalized a forward noising process and reverse denoising view, providing the corruption ladder and per-step recovery interpretation that align naturally with defining models over noisy states. Variational Diffusion Models reframed diffusion training as likelihood maximization, clarifying how per-step denoising terms constitute a tractable likelihood surrogate. Vincent\u2019s denoising\u2013score matching connection grounded learning from corrupted observations as estimating clean data structure through recovery. Meanwhile, short-run MCMC highlighted the instability and bias of few-step refinement when used to train EBMs directly in high dimensions, revealing a gap between practicality and fidelity. Together, these works suggested that EBMs could be trained more stably on noise-conditional targets defined by diffusion corruption while retaining fast refinement through amortized initialization. The current approach synthesizes this by defining EBMs at each diffusion noise level and optimizing them via diffusion recovery likelihood, while jointly training an initializer at every level through cooperative learning so that a few MCMC steps suffice for high-quality refinement and efficient sampling.",
+  "target_paper": {
+    "title": "Learning Energy-Based Models by Cooperative Diffusion Recovery Likelihood",
+    "authors": "Yaxuan Zhu, Jianwen Xie, Ying Nian Wu, Ruiqi Gao",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Energy-based model, recovery-likelihood, cooperative learning",
+    "abstract": "Training energy-based models (EBMs) on high-dimensional data can be both challenging and time-consuming, and there exists a noticeable gap in sample quality between EBMs and other generative frameworks like GANs and diffusion models. To close this gap, inspired by the recent efforts of learning EBMs by maximimizing diffusion recovery likelihood (DRL), we propose cooperative diffusion recovery likelihood (CDRL), an effective approach to tractably learn and sample from a series of EBMs defined on increasingly noisy versons of a dataset, paired with an initializer model for each EBM. At each noise level, the two models are jointly estimated within a cooperative training framework: Samples from the initializer serve as starting points that are refined by a few MCMC sampling steps from the EBM. The EBM is then optimized by maximizing recovery likelihood, while the initializer model is optimized by learning from the difference between the refined samples and the initial samples. In addition,",
+    "openreview_id": "AyzkDpuqcl",
+    "forum_id": "AyzkDpuqcl"
+  },
+  "analysis_timestamp": "2026-01-06T23:03:52.259488"
+}

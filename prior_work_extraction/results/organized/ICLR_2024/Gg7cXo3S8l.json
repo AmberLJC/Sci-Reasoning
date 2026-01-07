@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Deeply-Supervised Nets",
+      "authors": "Chen-Yu Lee et al.",
+      "year": 2015,
+      "arxiv_id": "1409.5185",
+      "role": "Foundation",
+      "relationship_sentence": "Introduced the core local supervision formulation via auxiliary classifiers attached to intermediate layers, establishing the module-wise supervised training setup that this work seeks to retain without auxiliary networks."
+    },
+    {
+      "title": "Greedy Layerwise Learning Can Scale to Many Layers",
+      "authors": "Eugene Belilovsky et al.",
+      "year": 2019,
+      "arxiv_id": "1901.08164",
+      "role": "Baseline",
+      "relationship_sentence": "Demonstrated competitive module-wise backpropagation using local losses and per-layer auxiliary heads, serving as the primary local-learning baseline whose memory/parameter overhead this work aims to remove."
+    },
+    {
+      "title": "Training Neural Networks with Local Errors",
+      "authors": "Arild N\u00f8kland et al.",
+      "year": 2019,
+      "arxiv_id": "1901.00949",
+      "role": "Gap Identification",
+      "relationship_sentence": "Showed that local classifiers (even random ones) can drive layer-wise learning but still require auxiliary networks, motivating a local objective that eliminates such heads while preserving performance."
+    },
+    {
+      "title": "The Forward-Forward Algorithm: Some Preliminary Investigations",
+      "authors": "Geoffrey Hinton",
+      "year": 2022,
+      "arxiv_id": "2212.13345",
+      "role": "Gap Identification",
+      "relationship_sentence": "Proposed forward-only local learning without backprop or auxiliary heads but with a notable accuracy gap, highlighting the need for a more discriminative local objective to close performance to BP."
+    },
+    {
+      "title": "Supervised Contrastive Learning",
+      "authors": "Prannay Khosla et al.",
+      "year": 2020,
+      "arxiv_id": "2004.11362",
+      "role": "Inspiration",
+      "relationship_sentence": "Provided the label-aware contrastive objective of pulling same-class representations together and pushing others apart, which this work adapts to layer-local features as the core supervision signal."
+    },
+    {
+      "title": "Momentum Contrast for Unsupervised Visual Representation Learning",
+      "authors": "Kaiming He et al.",
+      "year": 2020,
+      "arxiv_id": "1911.05722",
+      "role": "Extension",
+      "relationship_sentence": "Introduced the dictionary/queue mechanism that supplies large, consistent sets of keys for contrastive learning, which this work repurposes into label-structured dictionaries to stabilize local supervision without auxiliary networks."
+    }
+  ],
+  "synthesis_narrative": "Deeply-Supervised Nets established that attaching auxiliary classifiers to intermediate layers can provide effective local supervision, formalizing a module-wise training setup that decouples layers via explicit heads. Building on that premise, greedy layerwise methods showed that module-wise backpropagation with local losses and auxiliary heads can scale and achieve strong accuracy, confirming the practical viability of local learning while inheriting the memory and parameter overhead of per-layer heads. Complementing this, local error approaches trained layers using local classifiers\u2014including fixed random ones\u2014proving local signals suffice but still depending on auxiliary mappings to labels. A forward-only alternative removed both backprop and auxiliary heads by leveraging local goodness objectives, but the resulting representations typically lagged in discriminativeness versus BP-trained models. In parallel, supervised contrastive learning demonstrated that label-aware contrastive objectives are especially effective at class-separating representations, and momentum contrast introduced dictionary/queue mechanisms that provide large, stable key sets crucial for robust contrastive optimization.\nTogether, these works revealed a clear opportunity: retain the efficiency and decoupling of local supervision while eliminating auxiliary heads, and replace weak local objectives with label-aware contrastive signals supported by stable dictionaries. By marrying the local-training formulation with supervised contrastive objectives and a dictionary mechanism adapted to labels at each layer, the current work naturally synthesizes these insights into a head-free, contrastive local supervision scheme that is both efficient and competitive.",
+  "target_paper": {
+    "title": "Dictionary Contrastive Learning for Efficient Local Supervision without Auxiliary Networks",
+    "authors": "Suhwan Choi, Myeongho Jeon, Yeonjung Hwang, Jeonglyul Oh, Sungjun Lim, Joonseok Lee, Myungjoo Kang",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Contrastive learning, Forward learning, Local learning, Image classification, Efficient learning",
+    "abstract": "While backpropagation (BP) has achieved widespread success in deep learning, it\nfaces two prominent challenges: computational inefficiency and biological implausibility.\nIn response to these challenges, local supervision, encompassing Local\nLearning (LL) and Forward Learning (FL), has emerged as a promising research\ndirection. LL employs module-wise BP to achieve competitive results yet relies on\nmodule-wise auxiliary networks, which increase memory and parameter demands.\nConversely, FL updates layer weights without BP and auxiliary networks but falls\nshort of BP\u2019s performance. This paper proposes a simple yet effective objective\nwithin a contrastive learning framework for local supervision without auxiliary\nnetworks. Given the insight that the existing contrastive learning framework for\nlocal supervision is susceptible to task-irrelevant information without auxiliary\nnetworks, we present DICTIONARY CONTRASTIVE LEARNING (DCL) that optimizes\nthe similarity between local features and lab",
+    "openreview_id": "Gg7cXo3S8l",
+    "forum_id": "Gg7cXo3S8l"
+  },
+  "analysis_timestamp": "2026-01-06T12:33:49.130045"
+}

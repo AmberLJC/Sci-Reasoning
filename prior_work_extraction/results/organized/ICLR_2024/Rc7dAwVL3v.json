@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Neural Codec Language Models are Zero-Shot Text to Speech Synthesizers",
+      "authors": "Chengyi Wang et al.",
+      "year": 2023,
+      "arxiv_id": "2301.02111",
+      "role": "Baseline",
+      "relationship_sentence": "NaturalSpeech 2 directly targets the instability and prosody/word-skipping issues of VALL-E\u2019s autoregressive neural codec LM by replacing token-by-token generation with latent diffusion over codec representations while retaining the zero-shot speech prompting setup."
+    },
+    {
+      "title": "SoundStream: An End-to-End Neural Audio Codec",
+      "authors": "Neil Zeghidour et al.",
+      "year": 2021,
+      "arxiv_id": "2107.03312",
+      "role": "Foundation",
+      "relationship_sentence": "NaturalSpeech 2 builds on SoundStream\u2019s residual vector quantization audio codec formulation by using RVQ-quantized latent codes as the target space for its diffusion generator."
+    },
+    {
+      "title": "High-Resolution Image Synthesis with Latent Diffusion Models",
+      "authors": "Robin Rombach et al.",
+      "year": 2022,
+      "arxiv_id": "2112.10752",
+      "role": "Inspiration",
+      "relationship_sentence": "NaturalSpeech 2 adopts the key insight of performing diffusion in a learned latent space (rather than raw signals) to enable efficient, high-quality generation\u2014here applied to neural audio codec latents for TTS."
+    },
+    {
+      "title": "Grad-TTS: A Diffusion Probabilistic Model for Text-to-Speech",
+      "authors": "Vladislav Popov et al.",
+      "year": 2021,
+      "arxiv_id": "2105.06337",
+      "role": "Extension",
+      "relationship_sentence": "NaturalSpeech 2 extends diffusion-based TTS from mel-spectrogram domains in Grad-TTS to neural codec latent space and augments conditioning with speech prompts for zero-shot style transfer."
+    },
+    {
+      "title": "FastSpeech 2: Fast and High-Quality End-to-End Text to Speech",
+      "authors": "Yi Ren et al.",
+      "year": 2021,
+      "arxiv_id": "2006.04558",
+      "role": "Extension",
+      "relationship_sentence": "NaturalSpeech 2 modifies FastSpeech 2\u2019s duration and pitch predictors by conditioning them on speech prompts to enable in-context learning of speaking rate and F0 patterns for zero-shot synthesis."
+    },
+    {
+      "title": "Voicebox: Text-Guided Multilingual Universal Speech Generation at Scale",
+      "authors": "Louis Martin (Le) et al.",
+      "year": 2023,
+      "arxiv_id": "2306.07875",
+      "role": "Inspiration",
+      "relationship_sentence": "NaturalSpeech 2 draws from Voicebox\u2019s non-autoregressive generation of neural codec latents and speech-prompt conditioning, but uses diffusion (rather than flow matching) and explicit prompt-aware predictors to stabilize content and prosody."
+    },
+    {
+      "title": "AudioLM: a Language Modeling Approach to Audio Generation",
+      "authors": "Tomasz Borsos et al.",
+      "year": 2022,
+      "arxiv_id": "2209.03143",
+      "role": "Related Problem",
+      "relationship_sentence": "NaturalSpeech 2 leverages AudioLM\u2019s insight that a short acoustic prompt can capture speaker identity and style for in-context continuation, adapting this idea to conditioned TTS via codec-latent diffusion."
+    }
+  ],
+  "synthesis_narrative": "Neural codec work established that high-quality speech could be compressed into residual vector-quantized latents suitable for generative modeling; SoundStream in particular introduced RVQ audio codes that preserve speaker identity and prosody at low bitrates. Latent diffusion further showed that running diffusion in a learned latent space drastically improves efficiency and fidelity compared with operating in raw signal domains, while Grad-TTS demonstrated the viability of diffusion-based text-conditioned speech generation, albeit over mel-spectrograms. Language-modeling approaches to audio revealed the power of in-context acoustic prompting: AudioLM used a short reference segment to preserve voice and style during continuation, and VALL-E brought this prompting paradigm to TTS by autoregressively generating codec tokens, exposing practical issues such as instability, word skipping, and prosody drift. Voicebox advanced non-autoregressive generation over codec latents with speech prompts, indicating that continuous-time generative training can improve robustness at scale. FastSpeech 2 contributed the practical framework of explicit duration and pitch predictors, enabling controllable, non-autoregressive alignment and F0 modeling. Together, these works suggested a path: use RVQ codec latents as a compact target, preserve zero-shot style via speech prompts, replace unstable autoregression with latent diffusion, and marry this with explicit duration/pitch control. NaturalSpeech 2 synthesizes these insights by performing diffusion in codec latent space with prompt-aware conditioning and prompt-conditioned duration/F0 predictors, achieving stable, high-quality zero-shot speech and singing at scale.",
+  "target_paper": {
+    "title": "NaturalSpeech 2: Latent Diffusion Models are Natural and Zero-Shot Speech and Singing Synthesizers",
+    "authors": "Kai Shen, Zeqian Ju, Xu Tan, Eric Liu, Yichong Leng, Lei He, Tao Qin, sheng zhao, Jiang Bian",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "text-to-speech, large-scale corpus, non-autoregressive, diffusion",
+    "abstract": "Scaling text-to-speech (TTS) to large-scale, multi-speaker, and in-the-wild datasets is important to capture the diversity in human speech such as speaker identities, prosodies, and styles (e.g., singing). Current large TTS systems usually quantize speech into discrete tokens and use language models to generate these tokens one by one, which suffer from unstable prosody, word skipping/repeating issue, and poor voice quality. In this paper, we develop NaturalSpeech 2, a TTS system that leverages a neural audio codec with residual vector quantizers to get the quantized latent vectors and uses a diffusion model to generate these latent vectors conditioned on text input. To enhance the zero-shot capability that is important to achieve diverse speech synthesis, we design a speech prompting mechanism to facilitate in-context learning in the diffusion model and the duration/pitch predictor. We scale NaturalSpeech 2 to large-scale datasets with 44K hours of speech and singing data and evaluate",
+    "openreview_id": "Rc7dAwVL3v",
+    "forum_id": "Rc7dAwVL3v"
+  },
+  "analysis_timestamp": "2026-01-06T12:47:11.536052"
+}

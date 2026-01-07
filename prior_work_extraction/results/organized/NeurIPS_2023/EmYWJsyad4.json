@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "beta-VAE: Learning Basic Visual Concepts with a Constrained Variational Framework",
+      "authors": "Irina Higgins, Lo\u00efc Matthey, Arka Pal, Christopher P. Burgess, Xavier Glorot, Matthew Botvinick, Shakir Mohamed, Alexander Lerchner",
+      "year": 2017,
+      "role": "Foundational disentanglement method",
+      "relationship_sentence": "Established MI/capacity-based disentanglement under an independence assumption; the NeurIPS paper relaxes this by using conditional mutual information (CMI) to disentangle even when factors are correlated."
+    },
+    {
+      "title": "Disentangling by Factorising (FactorVAE)",
+      "authors": "Hyunjik Kim, Andriy Mnih",
+      "year": 2018,
+      "role": "Methodological precursor (TC penalty)",
+      "relationship_sentence": "Introduced penalizing total correlation (an MI-based dependence measure) among latent dimensions; the new work generalizes this idea by penalizing conditional dependence (CMI) to address correlations induced by shared causes."
+    },
+    {
+      "title": "Isolating Sources of Disentanglement in Variational Autoencoders (\u03b2-TCVAE)",
+      "authors": "Ricky T. Q. Chen, Xuechen Li, Roger B. Grosse, David Duvenaud",
+      "year": 2018,
+      "role": "Methodological refinement of MI decomposition",
+      "relationship_sentence": "Showed how isolating and directly penalizing the total correlation term yields better disentanglement; the NeurIPS paper adopts this decomposition mindset and replaces TC with a conditional analogue to remain effective under correlated factors."
+    },
+    {
+      "title": "DARLA: Improving Zero-Shot Transfer in Reinforcement Learning",
+      "authors": "Irina Higgins et al.",
+      "year": 2017,
+      "role": "Motivation and RL integration of disentanglement",
+      "relationship_sentence": "Demonstrated that disentangled representations can boost RL generalization; the new paper advances this by proposing a CMI-based auxiliary loss tailored to RL to improve robustness under correlation shifts."
+    },
+    {
+      "title": "Deep Variational Information Bottleneck",
+      "authors": "Alexander A. Alemi, Ian Fischer, Joshua V. Dillon, Kevin Murphy",
+      "year": 2017,
+      "role": "MI optimization machinery",
+      "relationship_sentence": "Provided variational bounds to control and optimize MI in deep models; the NeurIPS paper leverages this variational MI framework conceptually to define and train a tractable CMI-minimization objective."
+    },
+    {
+      "title": "Mutual Information Neural Estimation (MINE)",
+      "authors": "Mohamed Ishmael Belghazi, Aristide Baratin, Sai Rajeswar, Sherjil Ozair, Yoshua Bengio, Aaron Courville, R. Devon Hjelm",
+      "year": 2018,
+      "role": "Estimation tool for information-theoretic losses",
+      "relationship_sentence": "Pioneered neural MI estimation enabling end-to-end optimization; the present work builds on this line by estimating and minimizing conditional dependencies between learned features."
+    },
+    {
+      "title": "Invariant Risk Minimization",
+      "authors": "Martin Arjovsky, L\u00e9on Bottou, Ishaan Gulrajani, David Lopez-Paz",
+      "year": 2019,
+      "role": "Problem motivation (spurious correlations and generalization)",
+      "relationship_sentence": "Framed learning robust predictors across environments by avoiding spurious correlations; the NeurIPS paper operationalizes a related goal in RL via CMI-based disentanglement that removes spurious feature dependencies."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core contribution\u2014using conditional mutual information (CMI) as an auxiliary objective to learn disentangled representations that remain robust under correlation shifts\u2014emerges from two converging threads: disentanglement via information-theoretic penalties and generalization under spurious correlations in RL. Beta-VAE established that constraining mutual information between latents and data can induce disentanglement, while FactorVAE and \u03b2-TCVAE sharpened this by directly penalizing total correlation among latents. However, these methods implicitly assume independent generative factors and tend to collapse when factors are correlated, a failure mode central to the motivation of the present work. In RL, DARLA showed the practical value of disentangled representations for transfer and robustness, motivating an RL-specific auxiliary loss that targets the causes of generalization failure.\n\nMethodologically, the feasibility of optimizing information-theoretic objectives in deep models is grounded in variational machinery from the Deep Variational Information Bottleneck and neural MI estimation (MINE), which provide tractable bounds and estimators for MI-based losses. The NeurIPS paper adapts this toolbox to conditional dependencies, replacing unconditional MI/TC penalties with CMI so that latent features become conditionally independent given others\u2014precisely the criterion needed when observed correlations arise from shared confounders or limited coverage. Finally, the broader objective aligns with Invariant Risk Minimization\u2019s aim to avoid spurious correlations across environments; here, invariance is achieved not by reweighting environments but by shaping the representation itself via CMI minimization. Together, these prior works directly inform the paper\u2019s insight and its practical CMI-based auxiliary task for RL.",
+  "analysis_timestamp": "2026-01-06T23:42:49.124200"
+}

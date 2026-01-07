@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+      "authors": "Jason Wei et al.",
+      "year": 2022,
+      "arxiv_id": "2201.11903",
+      "role": "Foundation",
+      "relationship_sentence": "DSPy\u2019s teleprompters explicitly generate and leverage intermediate rationales as learnable module parameters, directly building on the CoT insight that exposing step-by-step reasoning improves multi-step tasks."
+    },
+    {
+      "title": "Automatic Chain of Thought Prompting in Large Language Models",
+      "authors": "Zhang et al.",
+      "year": 2022,
+      "arxiv_id": "2210.03493",
+      "role": "Extension",
+      "relationship_sentence": "DSPy generalizes Auto-CoT\u2019s automatic construction and selection of rationale-augmented demonstrations from single prompts to entire pipelines by compiling and optimizing example sets across modules using task metrics."
+    },
+    {
+      "title": "Large Language Models are Human-Level Prompt Engineers",
+      "authors": "Zhou et al.",
+      "year": 2022,
+      "arxiv_id": "2211.01910",
+      "role": "Inspiration",
+      "relationship_sentence": "DSPy adopts APE\u2019s core idea of treating prompts as objects to be optimized via sampling and evaluation, elevating it into a compiler that searches module parameters to maximize an external metric over a pipeline."
+    },
+    {
+      "title": "ReAct: Synergizing Reasoning and Acting in Language Models",
+      "authors": "Yao et al.",
+      "year": 2022,
+      "arxiv_id": "2210.03629",
+      "role": "Baseline",
+      "relationship_sentence": "DSPy re-implements the ReAct reasoning-and-acting pattern as a composable pipeline and shows that compiling and optimizing its modules yields stronger performance, effectively subsuming ReAct as the primary baseline."
+    },
+    {
+      "title": "Self-Ask: A Simple Approach to Multi-Hop Reasoning",
+      "authors": "Press et al.",
+      "year": 2022,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "DSPy uses Self-Ask\u2019s question-decomposition with search as a pipeline template and compiles it by learning prompts, selectors, and demonstrations that are tuned jointly to a task metric."
+    },
+    {
+      "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP",
+      "authors": "Patrick Lewis et al.",
+      "year": 2020,
+      "arxiv_id": "2005.11401",
+      "role": "Foundation",
+      "relationship_sentence": "DSPy formalizes RAG\u2019s retriever\u2013generator pattern as declarative modules whose prompts and retrieval selectors become learnable parameters optimized by the compiler."
+    },
+    {
+      "title": "Decomposed Prompting: A Modular Approach for Solving Complex Tasks",
+      "authors": "Tushar Khot et al.",
+      "year": 2022,
+      "arxiv_id": "2210.02406",
+      "role": "Inspiration",
+      "relationship_sentence": "DSPy systematizes decomposed prompting by representing each subtask as a declarative LM module with learnable prompting parameters and compiling the whole graph jointly rather than hand-crafting prompts."
+    }
+  ],
+  "synthesis_narrative": "Chain-of-thought prompting revealed that explicitly eliciting intermediate rationales can unlock stronger multi-step reasoning in large language models, providing a concrete handle\u2014the rationale\u2014to optimize. Auto-CoT showed that these rationales and demonstrations need not be hand-written: they can be automatically generated and selected to improve performance. In parallel, APE framed prompting itself as an optimization problem, iteratively proposing and scoring candidate prompts against an objective. For complex tasks requiring tools or multiple steps, ReAct established a reasoning-and-acting template, while Self-Ask demonstrated that decomposing a question into sub-questions with retrieval markedly improves multi-hop QA. RAG formalized the retriever\u2013generator interface, making retrieval a first-class, composable component. Decomposed Prompting generalized the notion of breaking problems into modular subtasks, each guided by targeted prompts rather than a single monolithic instruction.\nTaken together, these works suggested that (1) prompts, demonstrations, and rationales are trainable objects, (2) multi-step pipelines with retrieval and decomposition are powerful but brittle when hand-crafted, and (3) automatic construction and selection of demonstrations can outperform manual prompt engineering. The natural next step was to unify these insights into a programming model where each pipeline component exposes learnable prompt parameters and a compiler optimizes them end-to-end against a metric\u2014automating demonstration creation, rationale generation, and example selection across modules to transform brittle prompt templates into state-of-the-art, trainable pipelines.",
+  "target_paper": {
+    "title": "DSPy: Compiling Declarative Language Model Calls into State-of-the-Art Pipelines",
+    "authors": "Omar Khattab, Arnav Singhvi, Paridhi Maheshwari, Zhiyuan Zhang, Keshav Santhanam, Sri Vardhamanan A, Saiful Haq, Ashutosh Sharma, Thomas T. Joshi, Hanna Moazam, Heather Miller, Matei Zaharia, Christopher Potts",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "programming models, prompting techniques, in-context learning, few-shot learning, chain of thought, multi-hop reasoning, language agents",
+    "abstract": "The ML community is rapidly exploring techniques for prompting language models (LMs) and for stacking them into pipelines that solve complex tasks. Unfortunately, existing LM pipelines are typically implemented using hard-coded \u201cprompt templates\u201d, i.e. lengthy strings discovered via trial and error. Toward a more systematic approach for developing and optimizing LM pipelines, we introduce DSPy, a programming model that abstracts LM pipelines as text transformation graphs, or imperative computational graphs where LMs are invoked through declarative modules. DSPy modules are parameterized, meaning they can learn how to apply compositions of prompting, finetuning, augmentation, and reasoning techniques. We design a compiler that will optimize any DSPy pipeline to maximize a given metric, by creating and collecting demonstrations. We conduct two case studies, showing that succinct DSPy programs can express and optimize pipelines that reason about math word problems, tackle multi-hop retrie",
+    "openreview_id": "sY5N0zY5Od",
+    "forum_id": "sY5N0zY5Od"
+  },
+  "analysis_timestamp": "2026-01-06T11:29:38.083460"
+}

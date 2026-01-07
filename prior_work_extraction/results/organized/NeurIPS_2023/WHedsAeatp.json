@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Representation Learning with Contrastive Predictive Coding",
+      "authors": "Aaron van den Oord, Yazhe Li, Oriol Vinyals",
+      "year": 2018,
+      "role": "Foundational contrastive learning objective (InfoNCE) for learning representations by pulling positives together and pushing negatives apart.",
+      "relationship_sentence": "RNC builds directly on the InfoNCE-style contrastive principle, but replaces binary positive/negative treatment with rank-aware comparisons to handle continuous regression targets."
+    },
+    {
+      "title": "Supervised Contrastive Learning",
+      "authors": "Prannay Khosla, Piotr Teterwak, et al.",
+      "year": 2020,
+      "role": "Introduced label-aware contrastive learning for classification, showing supervised structure can guide better representations than instance discrimination.",
+      "relationship_sentence": "RNC generalizes supervised contrastive learning from discrete class labels to continuous labels by constructing rank-based neighborhoods, enforcing representation order consistent with target order."
+    },
+    {
+      "title": "FaceNet: A Unified Embedding for Face Recognition and Clustering",
+      "authors": "Florian Schroff, Dmitry Kalenichenko, James Philbin",
+      "year": 2015,
+      "role": "Popularized triplet loss to enforce relative distance constraints in embedding space.",
+      "relationship_sentence": "RNC extends the idea of relative comparisons beyond local triplets to globally ordered, multi-sample (N-wise) constraints that align embeddings with continuous target rankings."
+    },
+    {
+      "title": "Improved Deep Metric Learning with Multi-class N-pair Loss Objective",
+      "authors": "Kihyuk Sohn",
+      "year": 2016,
+      "role": "Generalized triplet-based metric learning to N-pair comparisons, improving efficiency and stability.",
+      "relationship_sentence": "RNC\u2019s \u2018Rank-N\u2019 formulation echoes N-wise metric learning by leveraging many ranked comparisons simultaneously, but uses target-induced ranks rather than class prototypes to shape a continuous embedding."
+    },
+    {
+      "title": "Learning to Rank using Gradient Descent (RankNet)",
+      "authors": "Chris Burges, Tal Shaked, Erin Renshaw, Ari Lazier, Matt Deeds, Nicole Hamilton, Greg Hullender",
+      "year": 2005,
+      "role": "Seminal pairwise learning-to-rank loss that enforces correct orderings between item pairs.",
+      "relationship_sentence": "RNC imports the core ranking objective\u2014preserving pairwise order\u2014into representation learning, turning pairwise/listwise ranking signals into contrastive, order-consistent embedding constraints for regression."
+    },
+    {
+      "title": "Ordinal Regression with Multiple Output CNN",
+      "authors": "Zhenqiang Niu, Mo Zhou, Le Wang, Xinbo Gao, Gang Hua",
+      "year": 2016,
+      "role": "Early deep approach that exploits ordinal structure by decomposing regression into ordered classification subtasks.",
+      "relationship_sentence": "RNC addresses the same need to respect label order but, instead of discretizing into ordinal bins, learns a continuous representation whose geometry reflects the underlying target ordering."
+    },
+    {
+      "title": "Relative Attributes",
+      "authors": "Devi Parikh, Kristen Grauman",
+      "year": 2011,
+      "role": "Introduced learning from relative (ranked) comparisons to capture graded attribute strength.",
+      "relationship_sentence": "RNC similarly leverages relative judgments\u2014here induced by numeric targets\u2014to position samples along a continuum, embedding rank information directly via contrastive training."
+    }
+  ],
+  "synthesis_narrative": "Rank-N-Contrast sits at the intersection of contrastive representation learning and learning-to-rank/ordinal methods. From the contrastive side, CPC\u2019s InfoNCE established that representations can be shaped by attraction-repulsion dynamics, while Supervised Contrastive Learning showed that label structure guides embeddings more effectively than instance discrimination. Metric learning advances like triplet loss (FaceNet) and the N-pair objective demonstrated the power and efficiency of relative, multi-sample constraints for organizing embedding spaces.\nOn the ranking/ordinal side, RankNet formalized pairwise order-preserving objectives, and deep ordinal regression (e.g., OR-CNN) highlighted the importance of respecting label order for continuous targets, albeit typically via discretization to ordered classes. Relative Attributes broadened this perspective by learning from comparative statements to place samples along graded continua.\nRNC fuses these streams: it replaces categorical similarity in contrastive learning with rank-aware, N-wise comparisons derived from continuous targets, thus enforcing global order consistency in the embedding space. This resolves the fragmentation that arises when regression is trained end-to-end without representation-level ordering. By grounding its objective in ranking principles while retaining the scalability and stability of modern contrastive/N-pair training, RNC delivers representations that are provably and empirically aligned with target order\u2014yielding better performance, robustness, and generalization across diverse regression tasks.",
+  "analysis_timestamp": "2026-01-06T23:42:49.105641"
+}

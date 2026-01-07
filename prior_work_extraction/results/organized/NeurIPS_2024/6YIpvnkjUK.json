@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Communication-Efficient Learning of Deep Networks from Decentralized Data (FedAvg)",
+      "authors": "H. Brendan McMahan, Eider Moore, Daniel Ramage, Seth Hampson, Blaise Aguera y Arcas",
+      "year": 2017,
+      "role": "Foundational federated learning with intermittent communication (periodic model averaging).",
+      "relationship_sentence": "The paper adopts and analyzes the intermittent communication paradigm popularized by FedAvg, and characterizes precisely how infrequent averaging impacts the sample\u2013communication trade-off for Q-learning."
+    },
+    {
+      "title": "Local SGD Converges Fast and Communicates Little",
+      "authors": "Sebastian U. Stich",
+      "year": 2019,
+      "role": "Theory of local updates between synchronizations; quantifies linear speedup vs. communication frequency.",
+      "relationship_sentence": "Techniques and insights from Local SGD on client drift and conditions for linear speedup inform the converse bound and design of Fed-DVR-Q under periodic communication in the RL setting."
+    },
+    {
+      "title": "SCAFFOLD: Stochastic Controlled Averaging for Federated Learning",
+      "authors": "Sai Praneeth Karimireddy, Satyen Kale, Mehryar Mohri, Sashank Reddi, Sebastian Stich, Ananda Theertha Suresh",
+      "year": 2020,
+      "role": "Control variates/variance-reduction to mitigate client drift in federated optimization.",
+      "relationship_sentence": "Fed-DVR-Q leverages a control-variate style variance-reduction mechanism tailored to Q-learning to curb drift from local updates, mirroring SCAFFOLD\u2019s key idea to attain optimal communication while preserving sample efficiency."
+    },
+    {
+      "title": "Communication Complexity of Distributed Convex Learning and Optimization",
+      "authors": "Yossi Arjevani, Ohad Shamir",
+      "year": 2015,
+      "role": "Lower-bound methodology for communication complexity in distributed learning.",
+      "relationship_sentence": "The paper\u2019s \u03a9(1/(1\u2212\u03b3)) communication lower bound adapts distributed optimization lower-bound techniques typified by Arjevani\u2013Shamir to the federated Q-learning context and RL-specific conditioning via the discount factor."
+    },
+    {
+      "title": "Near-Optimal Time and Sample Complexities for Solving Markov Decision Processes with a Generative Model",
+      "authors": "Aaron Sidford, Mengdi Wang, Xian Wu, Yinyu Ye, Lin F. Yang (variations across versions)",
+      "year": 2018,
+      "role": "Variance-reduction and optimal (1\u2212\u03b3)-dependences for planning/learning in tabular MDPs.",
+      "relationship_sentence": "The variance-reduction toolbox and sharp (1\u2212\u03b3) dependencies from this line of work guide Fed-DVR-Q\u2019s design to achieve order-optimal sample complexity while controlling communication."
+    },
+    {
+      "title": "Speedy Q-learning",
+      "authors": "Mohammad Gheshlaghi Azar, R\u00e9mi Munos, Hilbert J. Kappen",
+      "year": 2013,
+      "role": "Finite-time analysis and accelerated variants of tabular Q-learning.",
+      "relationship_sentence": "Provides baseline contraction-based analyses for discounted Q-learning that underpin the sample-complexity targets Fed-DVR-Q matches in the federated setting."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core contribution\u2014tight characterization of the sample\u2013communication trade-off for federated Q-learning and the Fed-DVR-Q algorithm that attains it\u2014rests on two intertwined lines of prior work. From federated optimization, FedAvg established the intermittent communication template (periodic local updates with global averaging), while Local SGD theory quantified when such local progress can yield linear speedup and how infrequent synchronization induces client drift. Building on these, SCAFFOLD introduced control variates to actively correct drift, demonstrating that variance reduction is central to reconciling few communications with fast convergence. These ideas directly inform Fed-DVR-Q\u2019s distributed variance-reduction mechanism tailored to Q-updates.\nOn the reinforcement learning side, classical finite-time analyses of tabular Q-learning (e.g., Speedy Q-learning) provide the contraction-based backbone and benchmark dependencies on the discount factor for achieving near-optimal sample complexity. The modern variance-reduction program for MDPs with generative models sharpened these dependencies and furnished tools to reduce stochastic noise in Bellman updates, which Fed-DVR-Q adapts in a federated, sample-sharing context. Finally, the paper\u2019s converse bound adapts communication lower-bound methodologies from distributed optimization (\u00e0 la Arjevani\u2013Shamir) to the RL setting, revealing an intrinsic \u03a9(1/(1\u2212\u03b3)) communication cost for any algorithm that seeks linear sample-speedup across M agents. Together, these works converge to enable a federated Q-learning algorithm that is simultaneously sample-optimal and communication-efficient, while explaining why this joint optimality necessarily incurs the stated communication cost.",
+  "analysis_timestamp": "2026-01-06T23:42:49.033721"
+}

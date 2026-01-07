@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Learning Transferable Visual Models From Natural Language Supervision (CLIP)",
+      "authors": "Alec Radford et al.",
+      "year": 2021,
+      "role": "Foundational vision-language pretraining and zero-shot prompting",
+      "relationship_sentence": "Frolic builds directly on CLIP\u2019s zero-shot recognition via prompt templates and prompt ensembling, but replaces fixed templates with a learned distribution over prompt prototypes to better capture diverse visual-text alignments."
+    },
+    {
+      "title": "Learning to Prompt for Vision-Language Models (CoOp)",
+      "authors": "Kaiyang Zhou, Jingkang Yang, Chen Change Loy, Ziwei Liu",
+      "year": 2022,
+      "role": "Supervised prompt learning baseline",
+      "relationship_sentence": "CoOp showed that learnable continuous prompts can substantially improve CLIP with labeled data; Frolic generalizes this idea to a label-free setting by learning prompt distributions from unlabeled data."
+    },
+    {
+      "title": "Conditional Prompt Learning for Vision-Language Models (CoCoOp)",
+      "authors": "Kaiyang Zhou, Jingkang Yang, Chen Change Loy, Ziwei Liu",
+      "year": 2022,
+      "role": "Image-conditional prompt adaptation",
+      "relationship_sentence": "CoCoOp conditions prompts on image features to improve generalization; Frolic similarly seeks adaptability but does so without labels by learning a distribution over prompt prototypes and fusing it with base CLIP via confidence matching."
+    },
+    {
+      "title": "Tip-Adapter: Training-free CLIP-Adapter",
+      "authors": "Zhang et al.",
+      "year": 2022,
+      "role": "Prediction fusion with CLIP for improved zero/few-shot performance",
+      "relationship_sentence": "Tip-Adapter combines zero-shot CLIP with an auxiliary adapter\u2019s scores; Frolic adopts the spirit of combining adapted and base CLIP predictions, but drives the fusion adaptively through confidence matching in a fully label-free regime."
+    },
+    {
+      "title": "Robust fine-tuning of zero-shot models (WiSE-FT)",
+      "authors": "Mitchell Wortsman et al.",
+      "year": 2022,
+      "role": "Ensembling adapted and base models for robustness",
+      "relationship_sentence": "WiSE-FT ensembles a fine-tuned model with the original zero-shot CLIP to gain robustness; Frolic echoes this by fusing its learned prompt-distribution model with base CLIP, choosing the mixture via confidence alignment."
+    },
+    {
+      "title": "Long-tail learning via logit adjustment",
+      "authors": "Aditya Krishna Menon et al.",
+      "year": 2020,
+      "role": "Principled bias correction through logit priors",
+      "relationship_sentence": "Frolic\u2019s label-free logit adjustment to correct CLIP\u2019s inherent label-frequency bias is conceptually grounded in Menon et al.\u2019s logit adjustment framework, adapting it without labeled targets."
+    },
+    {
+      "title": "Adjusting the Outputs of a Classifier to New a Priori Probabilities: A Simple Procedure",
+      "authors": "M. Saerens, P. Latinne, C. Decaestecker",
+      "year": 2002,
+      "role": "Prior-shift estimation and bias recalibration with unlabeled data",
+      "relationship_sentence": "Frolic\u2019s label-free bias correction echoes classical prior-shift recalibration that estimates class priors from unlabeled data, aligning CLIP logits with estimated target priors without annotations."
+    }
+  ],
+  "synthesis_narrative": "Frolic advances zero-shot vision-language recognition by unifying three influential lines of work: prompt learning for CLIP, fusion of adapted and base models, and principled bias correction. CLIP demonstrated that carefully crafted textual templates and prompt ensembling can unlock strong zero-shot generalization, while CoOp and CoCoOp established that continuous and image-conditional prompts, learned with labels, yield sizable gains. Frolic internalizes these insights but removes the reliance on labeled data by learning a distribution over prompt prototypes from unlabeled samples, capturing diverse visual-text correspondences beyond fixed templates or a single learned prompt.\nTo translate distributional prompt gains into robust predictions, Frolic adaptively fuses its learned prompt-distribution model with the original CLIP, guided by confidence matching. This draws on ideas from Tip-Adapter and WiSE-FT, which show that combining adapted and base CLIP predictions or weights improves robustness; Frolic operationalizes a label-free, confidence-driven fusion tailored to zero-shot use.\nFinally, Frolic addresses a key failure mode\u2014label-frequency bias inherited from web-scale pretraining\u2014by performing label-free logit adjustment. This component is theoretically anchored in long-tail logit adjustment and classical prior-shift recalibration that estimate target class priors without labels. Together, these priors directly shape Frolic\u2019s core contribution: a label-free framework that learns and fuses prompt distributions while correcting label bias, thereby boosting zero-shot performance without annotations.",
+  "analysis_timestamp": "2026-01-06T23:33:36.292779"
+}

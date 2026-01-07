@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Model soups: Averaging weights of multiple fine-tuned models improves accuracy without increasing inference time",
+      "authors": "Mitchell Wortsman et al.",
+      "year": 2022,
+      "role": "direct inspiration",
+      "relationship_sentence": "This work established parameter-space fusion (averaging weights of multiple fine-tuned checkpoints) as a practical alternative to ensembling, directly motivating the paper\u2019s core idea of optimizing fusion in weight space rather than only selecting a single checkpoint."
+    },
+    {
+      "title": "Averaging Weights Leads to Wider Optima in Deep Learning (Stochastic Weight Averaging)",
+      "authors": "Pavel Izmailov, Dmitrii Podoprikhin, Timur Garipov, Dmitry Vetrov, Andrew Gordon Wilson",
+      "year": 2018,
+      "role": "foundational method",
+      "relationship_sentence": "SWA demonstrated that averaging checkpoints along an optimization trajectory yields flatter, better-generalizing solutions, underpinning this paper\u2019s use of checkpoint fusion as a robust alternative to single-model selection."
+    },
+    {
+      "title": "Loss Surfaces, Mode Connectivity, and Fast Ensembling of Deep Neural Networks",
+      "authors": "Timur Garipov, Pavel Izmailov, Dmitrii Podoprikhin, Dmitry Vetrov, Andrew Gordon Wilson",
+      "year": 2018,
+      "role": "empirical foundation",
+      "relationship_sentence": "By showing low-loss connectors between solutions and the viability of weight-space interpolation, this work provides empirical grounding that makes the proposed fine-tuning checkpoint/model fusion strategy plausible."
+    },
+    {
+      "title": "Merging Models with Fisher-Weighted Averaging",
+      "authors": "Michael Matena, Colin Raffel",
+      "year": 2022,
+      "role": "methodological precedent",
+      "relationship_sentence": "This paper introduced non-uniform, curvature-aware weight-space merging, directly informing the notion that fusion coefficients should be optimized rather than fixed\u2014precisely what the new method achieves via Bayesian optimization."
+    },
+    {
+      "title": "Editing Models with Task Arithmetic",
+      "authors": "Gabriel Ilharco, Mitchell Wortsman, Hannaneh Hajishirzi, Ali Farhadi, Ludwig Schmidt",
+      "year": 2023,
+      "role": "conceptual precedent",
+      "relationship_sentence": "Task-vector arithmetic showed that linear combinations of fine-tuning deltas can target desired behaviors, reinforcing the idea that controlled parameter-space combinations (here, BO-optimized fusions) can directly optimize downstream metrics."
+    },
+    {
+      "title": "Differentiable Expected Hypervolume Improvement for Parallel Multi-Objective Bayesian Optimization (qEHVI)",
+      "authors": "Samuel Daulton, Maximilian Balandat, Eytan Bakshy",
+      "year": 2020,
+      "role": "algorithmic backbone",
+      "relationship_sentence": "qEHVI provides the core multi-objective BO machinery to trade off competing objectives, enabling the paper\u2019s key contribution of jointly optimizing loss and task metric during model fusion."
+    },
+    {
+      "title": "Practical Bayesian Optimization of Machine Learning Algorithms",
+      "authors": "Jasper Snoek, Hugo Larochelle, Ryan P. Adams",
+      "year": 2012,
+      "role": "foundational method",
+      "relationship_sentence": "This seminal work on Bayesian optimization for hyperparameter tuning underlies the paper\u2019s two-stage procedure, where BO is used to efficiently explore fine-tuning hyperparameters before fusion."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core contribution\u2014optimizing model fusion in parameter space via multi-objective Bayesian optimization\u2014sits at the intersection of two lines of work: weight-space merging of fine-tuned models and Bayesian optimization for principled search. Model Soups established that simple weight averaging across fine-tuned checkpoints can beat any single model without inference overhead, while SWA and mode connectivity showed that averaging along training trajectories is both stable and often beneficial, providing strong justification for viewing checkpoint selection as a fusion problem rather than a winner-take-all choice. Beyond uniform averaging, Fisher-weighted averaging and task-vector arithmetic demonstrated that informed, non-uniform combinations in parameter space can better target desired behaviors, implying that the optimal fusion coefficients are task- and objective-dependent.\n\nThe second pillar is Bayesian optimization. Snoek et al. provided the foundation for BO-driven hyperparameter search, which the paper leverages in its first stage to produce a diverse, high-quality set of fine-tuning checkpoints. Crucially, to address the observed mismatch between training loss and evaluation metrics, the paper adopts multi-objective BO; qEHVI supplies the algorithmic backbone to jointly optimize loss and task metrics and navigate Pareto trade-offs when choosing fusion weights and checkpoints. By integrating these strands, the method transforms checkpoint selection into a multi-objective fusion optimization problem, delivering a principled, automated, two-stage pipeline that unifies fine-tuning HPO and parameter-space model fusion to improve downstream performance.",
+  "analysis_timestamp": "2026-01-06T23:33:36.263007"
+}

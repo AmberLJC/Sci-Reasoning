@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Distilling the Knowledge in a Neural Network",
+      "authors": "Geoffrey Hinton et al.",
+      "year": 2015,
+      "role": "Foundation",
+      "relationship_sentence": "TAID directly generalizes classic KD\u2019s token-level KL from student to teacher by replacing the fixed teacher target with an adaptive convex combination of teacher and student distributions, addressing instability observed with a static teacher."
+    },
+    {
+      "title": "Model Compression",
+      "authors": "Cristian Bucila et al.",
+      "year": 2006,
+      "role": "Foundation",
+      "relationship_sentence": "TAID operates squarely in the model-compression paradigm inaugurated by model compression with soft targets, preserving the core formulation of transferring distributional knowledge while altering the target distribution to be temporally adaptive."
+    },
+    {
+      "title": "Sequence-Level Knowledge Distillation",
+      "authors": "Yoon Kim et al.",
+      "year": 2016,
+      "role": "Gap Identification",
+      "relationship_sentence": "Kim & Rush showed that hard sequence-level KD reduces multimodality (mode averaging) but can induce mode collapse; TAID is explicitly designed to prevent such collapse by gradually shifting an interpolated target from student to teacher rather than committing early to hard teacher modes."
+    },
+    {
+      "title": "Improved Knowledge Distillation via Teacher Assistant: Bridging the Gap Between Student and Teacher",
+      "authors": "Seyed-Iman Mirzadeh et al.",
+      "year": 2020,
+      "role": "Gap Identification",
+      "relationship_sentence": "TAKD diagnosed capacity-gap optimization issues and proposed extra assistant models; TAID targets the same capacity-gap barrier but replaces additional models with an adaptive intermediate distribution that smoothly bridges student and teacher."
+    },
+    {
+      "title": "Training Deep Neural Networks on Noisy Labels with Bootstrapping",
+      "authors": "Scott Reed et al.",
+      "year": 2015,
+      "role": "Inspiration",
+      "relationship_sentence": "Bootstrapping\u2019s idea of mixing model predictions with targets to stabilize learning directly inspires TAID\u2019s core mechanism of interpolating teacher and student distributions to mitigate overconfident or misaligned targets."
+    },
+    {
+      "title": "Mean teachers are better role models: Weight-averaged consistency targets improve semi-supervised learning",
+      "authors": "Antti Tarvainen et al.",
+      "year": 2017,
+      "role": "Inspiration",
+      "relationship_sentence": "Mean Teacher demonstrates that temporally evolving targets stabilize training; TAID adopts a temporal perspective by adapting the interpolation coefficient over training, progressively shifting trust from the student to the teacher."
+    },
+    {
+      "title": "R\u00e9nyi Divergence Variational Inference",
+      "authors": "Yingzhen Li et al.",
+      "year": 2016,
+      "role": "Foundation",
+      "relationship_sentence": "The analysis of mode-seeking versus mass-covering behavior across divergence families informs TAID\u2019s theory: by controlling the mixture between student and teacher distributions over time, TAID navigates the mode averaging vs. mode collapse trade-off characterized by divergence direction."
+    }
+  ],
+  "synthesis_narrative": "TAID\u2019s lineage begins with the core notion of transferring distributional knowledge from a larger model to a smaller one, as established by Model Compression and formalized by Hinton\u2019s knowledge distillation. However, standard token-level KD with a fixed teacher target often struggles under large capacity gaps and the multimodality inherent in language modeling, yielding either mode averaging or mode collapse. Kim and Rush\u2019s sequence-level KD highlighted that committing to teacher-decoded outputs reduces multimodality but risks collapsing to a single mode, crystallizing the trade-off TAID seeks to resolve. Mirzadeh\u2019s Teacher Assistant KD diagnosed optimization failures under large capacity gaps and proposed extra intermediate teachers; TAID addresses the same failure mode without auxiliary models by introducing an adaptive intermediate distribution. The mechanism behind TAID\u2014interpolating targets between student and teacher\u2014draws directly from bootstrapping on noisy labels, where mixing model predictions with targets stabilizes learning. Complementarily, Mean Teacher\u2019s temporally evolving targets motivate TAID\u2019s temporal adaptivity: the interpolation coefficient shifts over training, initially relying more on the student (stability) and gradually trusting the teacher (fidelity). Theoretical grounding comes from divergence-based views (e.g., R\u00e9nyi/\u03b1-divergence), which explain how different target constructions induce mode-covering versus mode-seeking behavior. TAID operationalizes this insight by dynamically controlling where the mixture sits on that spectrum, thereby preventing mode collapse while overcoming the capacity gap during KD for causal LMs.",
+  "analysis_timestamp": "2026-01-06T23:09:26.603766"
+}

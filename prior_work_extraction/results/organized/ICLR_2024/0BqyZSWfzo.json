@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Evaluating Differentially Private Machine Learning in Practice",
+      "authors": "Bargav Jayaraman et al.",
+      "year": 2019,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "Their membership-inference-based auditing requires many retrainings and task-specific calibration, a bottleneck this work removes by estimating privacy loss during a single training run without auxiliary retraining."
+    },
+    {
+      "title": "Auditing Differentially Private Machine Learning: How Private is Private SGD?",
+      "authors": "Nicholas Carlini et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "This state-of-the-art audit framework provides empirical lower bounds for DP-SGD via thousands of retrainings and access to training internals; the present method targets comparable empirical tightness but in a one-shot, single-run setting without such assumptions."
+    },
+    {
+      "title": "Subsampled R\u00e9nyi Differential Privacy and Analytical Moments Accountant",
+      "authors": "Yu-Xiang Wang et al.",
+      "year": 2019,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "Their accountant is the standard analytical upper bound for (sampled) Gaussian mechanisms used in DP-SGD/FL, serving both as the formal composition framework and the primary analytic bound this work benchmarks and complements with empirical estimates."
+    },
+    {
+      "title": "Gaussian Differential Privacy",
+      "authors": "Jinshuo Dong et al.",
+      "year": 2019,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "The hypothesis-testing view and Gaussian likelihood-ratio characterization from GDP directly enable computing run-specific privacy loss contributions from the actual Gaussian noise realizations observed during training."
+    },
+    {
+      "title": "Learning Differentially Private Recurrent Language Models",
+      "authors": "H. Brendan McMahan et al.",
+      "year": 2018,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "This work instantiated user-level DP in cross-device federated learning via client subsampling, per-client clipping, and Gaussian noising, precisely the mechanism structure the one-shot estimator targets and exploits."
+    },
+    {
+      "title": "Privacy Odometers and Filters: Pay-as-you-go Composition for Differential Privacy",
+      "authors": "Ryan Rogers et al.",
+      "year": 2016,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "The idea of tracking realized privacy consumption over a specific execution inspired the single-run, online estimation paradigm extended here to empirical (data- and randomness-dependent) privacy loss in federated training."
+    }
+  ],
+  "synthesis_narrative": "Early empirical audits of differentially private learning showed how to turn membership inference into privacy lower bounds, but did so by calibrating attacks through many shadow trainings and task-specific tuning (Jayaraman et al.). More recent audits achieved stronger lower bounds for DP-SGD by running thousands of retrainings and sometimes leveraging training internals, further underscoring the cost and fragility of multi-run procedures (Carlini et al.). In parallel, analytical accounting matured: subsampled R\u00e9nyi DP and the analytical moments accountant formalized tight composition for the sampled Gaussian mechanism that underlies DP-SGD and DP-FL, yielding standard upper bounds used in practice (Wang, Balle, Kasiviswanathan). The hypothesis-testing formulation of privacy and the Gaussian likelihood-ratio view clarified how Gaussian mechanisms induce additive privacy loss random variables amenable to composition (Dong, Roth, Su). On the systems side, user-level DP in federated learning was instantiated with client subsampling, per-client clipping, and Gaussian noising of aggregated updates, precisely defining the randomized steps and observables in cross-device training (McMahan et al.). Finally, privacy odometers and filters proposed tracking realized privacy consumption over the actual sequence of mechanisms rather than worst-case schedules (Rogers et al.). Taken together, these strands revealed a gap: analytical bounds can be loose for real runs, while empirical audits are impractically multi-run. By marrying GDP\u2019s likelihood-ratio decomposition with the DP-FL mechanism structure and the odometer perspective, the current work naturally advances to a one-shot estimator that computes empirical privacy directly from a single federated training execution.",
+  "target_paper": {
+    "title": "One-shot Empirical Privacy Estimation for Federated Learning",
+    "authors": "Galen Andrew, Peter Kairouz, Sewoong Oh, Alina Oprea, Hugh Brendan McMahan, Vinith Menon Suriyakumar",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "oral",
+    "keywords": "differential privacy, federated learning, empirical privacy",
+    "abstract": "Privacy estimation techniques for differentially private (DP) algorithms are useful for comparing against analytical bounds, or to empirically measure privacy loss in settings where known analytical bounds are not tight. However, existing privacy auditing techniques usually make strong assumptions on the adversary (e.g., knowledge of intermediate model iterates or the training data distribution), are tailored to specific tasks, model architectures, or DP algorithm, and/or require retraining the model many times (typically on the order of thousands). These shortcomings make deploying such techniques at scale difficult in practice, especially in federated settings where model training can take days or weeks. In this work, we present a novel \u201cone-shot\u201d approach that can systematically address these challenges, allowing efficient auditing or estimation of the privacy loss of a model during the same, single training run used to fit model parameters, and without requiring any a priori knowle",
+    "openreview_id": "0BqyZSWfzo",
+    "forum_id": "0BqyZSWfzo"
+  },
+  "analysis_timestamp": "2026-01-06T10:01:39.207560"
+}

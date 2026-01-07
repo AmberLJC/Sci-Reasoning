@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Unsupervised Scalable Representation Learning for Multivariate Time Series",
+      "authors": "Jean-Yves Franceschi et al.",
+      "year": 2019,
+      "arxiv_id": null,
+      "role": "Extension",
+      "relationship_sentence": "SoftCLT generalizes Franceschi et al.\u2019s use of DTW-based instance similarity\u2014originally used to select hard triplet positives/negatives\u2014into continuous, DTW-driven soft weights applied across all instance pairs in the contrastive loss."
+    },
+    {
+      "title": "Unsupervised Representation Learning for Time Series with Temporal Neighborhood Coding",
+      "authors": "Nima Tonekaboni et al.",
+      "year": 2021,
+      "arxiv_id": null,
+      "role": "Extension",
+      "relationship_sentence": "SoftCLT extends TNC\u2019s hard temporal-neighborhood notion (local positives vs distant negatives) by introducing a soft temporal contrast where pair contributions decay smoothly with timestamp separation."
+    },
+    {
+      "title": "TS2Vec: Towards Universal Representation of Time Series",
+      "authors": "Zhenda Yue et al.",
+      "year": 2022,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "SoftCLT plugs into the TS2Vec-style instance-wise and temporal contrastive framework and replaces its hard positive/negative assignments with similarity-based soft weights to avoid penalizing correlated series or adjacent timestamps."
+    },
+    {
+      "title": "Time Series Representation Learning via Temporal and Contextual Contrasting",
+      "authors": "Mahmoud Eldele et al.",
+      "year": 2021,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "By relying on binary positives/negatives for temporal and contextual contrasting, TS-TCC exposes the limitation that SoftCLT addresses via soft assignments that respect inter-series similarity and temporal proximity."
+    },
+    {
+      "title": "Debiased Contrastive Learning",
+      "authors": "Ching-Yao Chuang et al.",
+      "year": 2020,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "SoftCLT is motivated by the false-negative issue highlighted in Debiased CL and mitigates it by down-weighting likely-colliding pairs using input-space similarity (DTW) and timestamp distance."
+    },
+    {
+      "title": "Dynamic programming algorithm optimization for spoken word recognition",
+      "authors": "Hiroaki Sakoe et al.",
+      "year": 1978,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "SoftCLT uses the DTW distance from Sakoe\u2013Chiba to quantify inter-series similarity under temporal misalignment, which directly defines the instance-wise soft assignment weights."
+    },
+    {
+      "title": "Supervised Contrastive Learning",
+      "authors": "Prannay Khosla et al.",
+      "year": 2020,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "SoftCLT adapts the multi-positive weighting idea of supervised contrastive learning to the unsupervised time-series setting by replacing label-based positives with similarity-driven soft assignments."
+    }
+  ],
+  "synthesis_narrative": "Franceschi et al. established that dynamic time warping (DTW) is a principled way to measure similarity between time series and used it to choose hard positives and negatives in a triplet loss, demonstrating the value of warping-aware instance relationships. Temporal Neighborhood Coding (TNC) codified temporal locality by treating segments within a temporal window as positives and those far away as negatives, operationalizing a hard neighborhood around timestamps. TS2Vec unified instance-wise and temporal contrastive learning in a simple, strong framework, but still relied on binary assignments that ignored graded similarities across series and time. TS-TCC further emphasized temporal and contextual contrasting for time series, yet its binary positive/negative design left correlated instances and adjacent timestamps vulnerable to being treated as hard negatives. Debiased Contrastive Learning identified the false-negative phenomenon in contrastive learning and proposed adjusting losses to reduce penalties on semantically similar negatives. The classic Sakoe\u2013Chiba DTW made it possible to compute alignment-robust distances between sequences, while Supervised Contrastive Learning showed that weighting multiple positives within a contrastive loss can improve representations by reflecting graded similarity.\nTogether, these works revealed a gap: time-series contrastive objectives capture temporal structure and inter-series similarity but with hard pair labels that cause false negatives, especially under misalignment and temporal proximity. SoftCLT naturally synthesizes these insights by injecting DTW-based instance similarity and timestamp-difference-based temporal proximity as soft weights into TS2Vec/TS-TCC-style objectives, thereby reducing false negatives and better respecting inherent correlations without changing the overall contrastive framework.",
+  "target_paper": {
+    "title": "Soft Contrastive Learning for Time Series",
+    "authors": "Seunghan Lee, Taeyoung Park, Kibok Lee",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Soft Contrastive Learning, Time Series Analysis, Self-supervised Learning",
+    "abstract": "Contrastive learning has shown to be effective to learn representations from time series in a self-supervised way.\nHowever, contrasting similar time series instances or values from adjacent timestamps within a time series leads to ignore their inherent correlations, which results in deteriorating the quality of learned representations.\nTo address this issue, we propose \\textit{SoftCLT}, a simple yet effective soft contrastive learning strategy for time series.\nThis is achieved by introducing instance-wise and temporal contrastive loss with soft assignments ranging from zero to one.\nSpecifically, we define soft assignments for 1) instance-wise contrastive loss by distance between time series on the data space, warping and 2) temporal contrastive loss by the difference of timestamps.\nSoftCLT is a plug-and-play method for time series contrastive learning that improves the quality of learned representations without bells and whistles.\nIn experiments, we demonstrate that SoftCLT consistentl",
+    "openreview_id": "pAsQSWlDUf",
+    "forum_id": "pAsQSWlDUf"
+  },
+  "analysis_timestamp": "2026-01-06T13:10:25.792055"
+}

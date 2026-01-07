@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "High-Resolution Image Synthesis with Latent Diffusion Models",
+      "authors": "Robin Rombach et al.",
+      "year": 2022,
+      "arxiv_id": "2112.10752",
+      "role": "Baseline",
+      "relationship_sentence": "SDXL directly scales and augments the latent-space U-Net with text cross-attention introduced by LDM\u2014its core architecture and training setup are the primary baseline SDXL seeks to surpass in fidelity and resolution."
+    },
+    {
+      "title": "Imagen: Photorealistic Text-to-Image Diffusion Models with Deep Language Understanding",
+      "authors": "Chitwan Saharia et al.",
+      "year": 2022,
+      "arxiv_id": "2205.11487",
+      "role": "Inspiration",
+      "relationship_sentence": "Imagen\u2019s finding that stronger language encoders and a multi-stage pipeline dramatically improve text alignment and photorealism directly motivated SDXL\u2019s addition of a second text encoder and a two-stage generation process."
+    },
+    {
+      "title": "Cascaded Diffusion Models for High Fidelity Image Generation",
+      "authors": "Jonathan Ho et al.",
+      "year": 2021,
+      "arxiv_id": "2106.15282",
+      "role": "Extension",
+      "relationship_sentence": "SDXL generalizes the cascaded diffusion paradigm by replacing pixel-space super-resolution stages with a latent-space refiner specialized for late denoising, preserving composition while boosting high-frequency detail."
+    },
+    {
+      "title": "SDEdit: Image Synthesis and Editing with Stochastic Differential Equations",
+      "authors": "Chenlin Meng et al.",
+      "year": 2021,
+      "arxiv_id": "2108.01073",
+      "role": "Foundation",
+      "relationship_sentence": "SDXL\u2019s post-hoc refinement step is instantiated as an image-to-image denoising procedure exactly in the SDEdit style\u2014starting from a noised base sample to add detail without altering global structure."
+    },
+    {
+      "title": "GLIDE: Towards Photorealistic Image Generation and Editing with Text-Guided Diffusion Models",
+      "authors": "Alex Nichol et al.",
+      "year": 2021,
+      "arxiv_id": "2112.10741",
+      "role": "Related Problem",
+      "relationship_sentence": "GLIDE\u2019s text-conditional diffusion with upsampler stages and practical noising\u2013denoising edits informed SDXL\u2019s use of a refinement denoising pass to improve sample fidelity after base generation."
+    },
+    {
+      "title": "SR3: Image Super-Resolution via Iterative Refinement",
+      "authors": "Chitwan Saharia et al.",
+      "year": 2021,
+      "arxiv_id": "2104.07636",
+      "role": "Related Problem",
+      "relationship_sentence": "SR3\u2019s demonstration that a dedicated diffusion stage can restore high-frequency details underpins SDXL\u2019s decision to train a separate refiner focused on visual fidelity rather than altering composition."
+    }
+  ],
+  "synthesis_narrative": "Latent Diffusion Models showed that shifting diffusion to a compressed latent space with cross-attention enables high-resolution image synthesis under practical compute, but their 512-oriented setup left room for richer detail and text alignment at larger scales. Cascaded Diffusion Models established that decomposing generation into stages, with later modules specialized for high-frequency detail, can yield strong fidelity, while SR3 made this concrete for super\u2011resolution with diffusion-based refiners. GLIDE demonstrated effective text-conditional diffusion with upsampler cascades and practical image editing via noising\u2013denoising, providing an operational recipe for post-hoc improvements. SDEdit formalized image-to-image diffusion by adding noise to an existing image and denoising it to refine content without changing structure. Imagen advanced the field by coupling a much stronger language encoder with a cascaded pipeline to reach 1024\u00d71024 photorealism, highlighting that capacity in the text encoder is pivotal for prompt faithfulness.\n\nTogether, these works revealed a path: keep the efficiency of latent diffusion, but borrow the multi-stage refinement strategy and image-to-image denoising recipe to boost detail, and increase language capacity to improve text grounding. SDXL synthesizes these insights by scaling the latent U\u2011Net (more attention), introducing a second text encoder to strengthen language conditioning, training across multiple aspect ratios to broaden coverage, and adding a latent-space refiner applied as an SDEdit-style post-hoc denoising pass. This combination closes the fidelity gap at high resolutions without resorting to heavy pixel-space super\u2011resolution chains, making high-quality 1024\u00d7 images feasible within the latent diffusion framework.",
+  "target_paper": {
+    "title": "SDXL: Improving Latent Diffusion Models for High-Resolution Image Synthesis",
+    "authors": "Dustin Podell, Zion English, Kyle Lacey, Andreas Blattmann, Tim Dockhorn, Jonas M\u00fcller, Joe Penna, Robin Rombach",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Image Synthesis, Diffusion, Generative AI",
+    "abstract": "We present Stable Diffusion XL (SDXL), a latent diffusion model for text-to-image synthesis. Compared to previous versions of Stable Diffusion, SDXL leverages a three times larger UNet backbone, achieved by significantly increasing the number of attention blocks and including a second text encoder. Further, we design multiple novel conditioning schemes and train SDXL on multiple aspect ratios. To ensure highest quality results, we also introduce a refinement model which is used to improve the visual fidelity of samples generated by SDXL using a post-hoc image-to-image technique. We demonstrate that SDXL improves dramatically over previous versions of Stable Diffusion and achieves results competitive with those of black-box state-of-the-art image generators such as Midjourney.",
+    "openreview_id": "di52zR8xgf",
+    "forum_id": "di52zR8xgf"
+  },
+  "analysis_timestamp": "2026-01-06T15:24:38.851715"
+}

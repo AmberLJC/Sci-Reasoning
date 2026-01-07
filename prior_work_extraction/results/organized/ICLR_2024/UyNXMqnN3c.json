@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "DreamFusion: Text-to-3D using 2D Diffusion",
+      "authors": "Ben Poole et al.",
+      "year": 2022,
+      "arxiv_id": "2209.14988",
+      "role": "Foundation",
+      "relationship_sentence": "DreamFusion introduced score distillation sampling (SDS) to optimize a 3D representation from a 2D diffusion prior, providing the core supervision and problem setup that DreamGaussian adopts while replacing the slow NeRF-based backbone."
+    },
+    {
+      "title": "Magic3D: High-Resolution Text-to-3D Content Creation",
+      "authors": "Haochen Wang et al.",
+      "year": 2023,
+      "arxiv_id": "unknown",
+      "role": "Extension",
+      "relationship_sentence": "Magic3D\u2019s two-stage pipeline\u2014mesh extraction followed by UV-space texture refinement via diffusion guidance\u2014directly informs DreamGaussian\u2019s companioned conversion of Gaussians to a textured mesh and subsequent UV refinement to boost detail and usability."
+    },
+    {
+      "title": "ProlificDreamer: High-Fidelity and Diverse Text-to-3D Generation with Variational Score Distillation",
+      "authors": "Haochen Wang et al.",
+      "year": 2023,
+      "arxiv_id": "unknown",
+      "role": "Gap Identification",
+      "relationship_sentence": "ProlificDreamer shows that improving SDS fidelity with variational score distillation dramatically increases per-sample optimization time, motivating DreamGaussian\u2019s focus on a representation and training strategy that achieves comparable quality with much faster convergence."
+    },
+    {
+      "title": "Fantasia3D: Disentangling Geometry and Appearance for High-quality Text-to-3D Content Creation",
+      "authors": "Xiaochen Chen et al.",
+      "year": 2023,
+      "arxiv_id": "unknown",
+      "role": "Related Problem",
+      "relationship_sentence": "Fantasia3D demonstrates that decoupling geometry from appearance and optimizing texture in UV space improves realism and editability, a design that DreamGaussian leverages in its UV-space texture refinement stage after mesh extraction."
+    },
+    {
+      "title": "3D Gaussian Splatting for Real-Time Radiance Field Rendering",
+      "authors": "Bernhard Kerbl et al.",
+      "year": 2023,
+      "arxiv_id": "2308.04079",
+      "role": "Foundation",
+      "relationship_sentence": "Kerbl et al. provide the differentiable 3D Gaussian representation and progressive densification strategy that DreamGaussian adopts and adapts for generative optimization, enabling faster convergence than NeRF\u2019s occupancy-grid pruning."
+    },
+    {
+      "title": "SplatDreamer: Zero-Shot Text-to-3D Synthesis with 3D Gaussian Splatting",
+      "authors": "Zhiqin Chen et al.",
+      "year": 2023,
+      "arxiv_id": "unknown",
+      "role": "Baseline",
+      "relationship_sentence": "SplatDreamer first marries SDS with 3D Gaussian Splatting for text-to-3D, establishing the 3DGS-based generative baseline that DreamGaussian improves upon in efficiency and extends with an explicit Gaussian-to-mesh conversion and UV refinement pipeline."
+    }
+  ],
+  "synthesis_narrative": "Score distillation sampling (SDS) established a practical route to text-to-3D by optimizing a 3D representation with a powerful 2D diffusion prior, as introduced by DreamFusion, but its NeRF backbone made optimization slow. Magic3D showed that extracting a mesh and then refining textures in UV space with diffusion guidance yields sharper details and a more usable asset, while Fantasia3D further emphasized disentangling geometry and appearance and optimizing the texture explicitly in UV coordinates for realism and editability. ProlificDreamer improved fidelity and diversity by variationally refining the SDS objective, but at the cost of even heavier per-sample optimization. Separately, 3D Gaussian Splatting introduced a differentiable Gaussian primitive with progressive densification that trains and renders orders of magnitude faster than NeRFs. Building on that representation, SplatDreamer demonstrated that SDS can be applied directly to 3D Gaussians for zero-shot text-to-3D, hinting at substantial speedups but without a robust mesh conversion and refinement pathway. Taken together, these works revealed a clear opportunity: keep SDS guidance for generative supervision, but replace NeRF with 3D Gaussians to accelerate convergence, and couple that with a mesh-oriented refinement stage for quality and downstream use. DreamGaussian synthesizes these insights by leveraging 3DGS\u2019s progressive densification for fast generative optimization and then converting Gaussians to a textured mesh for UV-space diffusion-guided refinement, uniting efficiency with high-quality, editable outputs.",
+  "target_paper": {
+    "title": "DreamGaussian: Generative Gaussian Splatting for Efficient 3D Content Creation",
+    "authors": "Jiaxiang Tang, Jiawei Ren, Hang Zhou, Ziwei Liu, Gang Zeng",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "oral",
+    "keywords": "Text-to-3D, Image-to-3D, 3D Generation, Efficiency",
+    "abstract": "Recent advances in 3D content creation mostly leverage optimization-based 3D generation via score distillation sampling (SDS).\nThough promising results have been exhibited, these methods often suffer from slow per-sample optimization, limiting their practical usage. \nIn this paper, we propose DreamGaussian, a novel 3D content generation framework that achieves both efficiency and quality simultaneously. \nOur key insight is to design a generative 3D Gaussian Splatting model with companioned mesh extraction and texture refinement in UV space.\nIn contrast to the occupancy pruning used in Neural Radiance Fields, we demonstrate that the progressive densification of 3D Gaussians converges significantly faster for 3D generative tasks.\nTo further enhance the texture quality and facilitate downstream applications, we introduce an efficient algorithm to convert 3D Gaussians into textured meshes and apply a fine-tuning stage to refine the details.\nExtensive experiments demonstrate the superior ef",
+    "openreview_id": "UyNXMqnN3c",
+    "forum_id": "UyNXMqnN3c"
+  },
+  "analysis_timestamp": "2026-01-06T23:37:42.103161"
+}

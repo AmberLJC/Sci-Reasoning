@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Outrageously Large Neural Networks: The Sparsely-Gated Mixture-of-Experts Layer",
+      "authors": "Noam Shazeer et al.",
+      "year": 2017,
+      "arxiv_id": "1701.06538",
+      "role": "Foundation",
+      "relationship_sentence": "MoE++ directly extends the sparsely-gated MoE formulation by augmenting the expert set with zero-computation options and permitting tokens to effectively choose k=0 (skip) under the same routing framework."
+    },
+    {
+      "title": "GShard: Scaling Giant Models with Conditional Computation and Automatic Sharding",
+      "authors": "Igor Lepikhin et al.",
+      "year": 2020,
+      "arxiv_id": "2006.16668",
+      "role": "Extension",
+      "relationship_sentence": "MoE++ builds on the GShard integration of MoE into Transformer FFN sublayers by generalizing the expert space from pure FFNs to heterogeneous experts (zero, copy, constant) within the same routed sublayer."
+    },
+    {
+      "title": "Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity",
+      "authors": "William Fedus et al.",
+      "year": 2021,
+      "arxiv_id": "2101.03961",
+      "role": "Baseline",
+      "relationship_sentence": "MoE++ addresses Switch\u2019s limitation of uniform per-token FFN usage and capacity-induced token dropping by letting routers assign easy tokens to zero/copy/constant experts so FFN capacity is concentrated on hard tokens."
+    },
+    {
+      "title": "GLaM: Efficient Scaling of Language Models with Mixture-of-Experts",
+      "authors": "Nan Du et al.",
+      "year": 2022,
+      "arxiv_id": "2112.06905",
+      "role": "Baseline",
+      "relationship_sentence": "While GLaM improves quality with top-2 routing, it still enforces fixed FFN compute per token; MoE++ directly relaxes this by learning a variable number of FFN calls\u2014including zero\u2014to allocate computation adaptively."
+    },
+    {
+      "title": "BASE Layers: Simplifying Training of Large, Sparse Models",
+      "authors": "Mike Lewis et al.",
+      "year": 2021,
+      "arxiv_id": "2106.04047",
+      "role": "Gap Identification",
+      "relationship_sentence": "By highlighting routing imbalance and capacity contention in MoE, BASE motivates MoE++\u2019s approach of expanding the routing action space with zero-compute experts to reduce contention rather than only rebalance assignments."
+    },
+    {
+      "title": "ST-MoE: Designing Stable and Transferable Mixture-of-Experts",
+      "authors": "Barret Zoph et al.",
+      "year": 2022,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "ST-MoE\u2019s exploration of routing design to better allocate expert capacity inspires MoE++ to go further by allowing routers to choose non-FFN actions (skip/replace) so true FFN experts focus on challenging tokens."
+    },
+    {
+      "title": "Universal Transformers",
+      "authors": "Mostafa Dehghani et al.",
+      "year": 2019,
+      "arxiv_id": "1807.03819",
+      "role": "Inspiration",
+      "relationship_sentence": "The ACT-style per-token halting in Universal Transformers motivates MoE++\u2019s zero expert and cheap paths (copy/constant), bringing adaptive, token-wise computation to the MoE layer."
+    }
+  ],
+  "synthesis_narrative": "Sparsely-gated mixtures of experts established token-wise conditional computation through a router that selects a small set of experts, grounding the idea that not all tokens need the same processing depth. GShard embedded this mechanism concretely into Transformer FFN sublayers, operationalizing routed FFN computation at scale. Switch Transformers demonstrated that top-1 routing yields large efficiency gains but revealed practical issues\u2014uniform per-token FFN compute and token drops under capacity pressure. GLaM showed that using more than one expert per token improves quality-per-compute, yet still adheres to a fixed number of FFN evaluations per token. BASE Layers exposed how routing imbalance and capacity contention degrade utilization, proposing reassignment strategies to mitigate these effects. ST-MoE further refined routing choices to improve stability and capacity allocation across experts. In parallel, Universal Transformers introduced per-token halting via adaptive computation time, establishing that learned skip/early-exit decisions can judiciously reduce compute for easy inputs.\nTogether, these works suggested a clear opportunity: marry MoE routing with learned, token-level decisions about whether to compute at all. The natural synthesis is to expand the expert set beyond FFNs to include zero-computation actions\u2014explicit skip (copy), discard (zero), or cheap replace (constant)\u2014so routers can steer easy tokens away from scarce FFN capacity. This creates truly heterogeneous, input-adaptive compute within the MoE layer, concentrating expensive expert computation on hard tokens while preserving or improving overall performance and deployment efficiency.",
+  "target_paper": {
+    "title": "MoE++: Accelerating Mixture-of-Experts Methods with Zero-Computation Experts",
+    "authors": "Peng Jin, Bo Zhu, Li Yuan, Shuicheng YAN",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "oral",
+    "keywords": "Mixture of Experts, Large Language Models, Efficient Foundation Models",
+    "abstract": "In this work, we aim to simultaneously enhance the effectiveness and efficiency of Mixture-of-Experts (MoE) methods. To achieve this, we propose MoE++, a general and heterogeneous MoE framework that integrates both Feed-Forward Network (FFN) and zero-computation experts. Specifically, we introduce three types of zero-computation experts: the zero expert, copy expert, and constant expert, which correspond to discard, skip, and replace operations, respectively. This design offers three key advantages: (i) **Low Computing Overhead**: Unlike the uniform mixing mechanism for all tokens within vanilla MoE, MoE++ allows each token to engage with a dynamic number of FFNs, be adjusted by constant vectors, or even skip the MoE layer entirely. (ii) **High Performance**: By enabling simple tokens to utilize fewer FFN experts, MoE++ allows more experts to focus on challenging tokens, thereby unlocking greater performance potential than vanilla MoE. (iii) **Deployment Friendly**: Given that zero-com",
+    "openreview_id": "t7P5BUKcYv",
+    "forum_id": "t7P5BUKcYv"
+  },
+  "analysis_timestamp": "2026-01-06T20:12:51.675472"
+}

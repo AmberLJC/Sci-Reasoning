@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Invariant Risk Minimization",
+      "authors": "Arjovsky et al.",
+      "year": 2019,
+      "arxiv_id": "1907.02893",
+      "role": "Gap Identification",
+      "relationship_sentence": "IRM\u2019s pursuit of a single domain-invariant predictor highlighted the limitation that one model cannot exploit meaningful variation across domains, motivating this paper\u2019s shift to domain-specific functions reweighted by domain relations."
+    },
+    {
+      "title": "Distributionally Robust Neural Networks for Group Shifts",
+      "authors": "Sagawa et al.",
+      "year": 2020,
+      "arxiv_id": "1911.08731",
+      "role": "Baseline",
+      "relationship_sentence": "GroupDRO reweights domains during training but still learns a single hypothesis, providing the primary baseline that this work advances by instead reweighting domain-specific predictors at test time using metadata-derived domain relations."
+    },
+    {
+      "title": "In Search of Lost Domain Generalization",
+      "authors": "Gulrajani et al.",
+      "year": 2021,
+      "arxiv_id": "2007.01434",
+      "role": "Foundation",
+      "relationship_sentence": "DomainBed formalized the DG setup with multiple labeled source domains and standardized evaluations, establishing the problem setting in which domain relations between sources and a target domain can be exploited."
+    },
+    {
+      "title": "WILDS: A Benchmark of in-the-Wild Distribution Shifts",
+      "authors": "Koh et al.",
+      "year": 2021,
+      "arxiv_id": "2012.07421",
+      "role": "Foundation",
+      "relationship_sentence": "WILDS introduced real-world datasets with explicit domain metadata (e.g., hospital IDs, time), providing the kind of side information this paper uses to learn and apply domain relations for reweighting experts."
+    },
+    {
+      "title": "Domain Adaptation with Multiple Sources",
+      "authors": "Mansour et al.",
+      "year": 2009,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "The theory that a target predictor can be expressed as a weighted mixture of source hypotheses underlies this work\u2019s strategy of learning per-domain functions and reweighting them via domain similarity for out-of-domain generalization."
+    },
+    {
+      "title": "Task2Vec: Task Embedding for Meta-Learning",
+      "authors": "Achille et al.",
+      "year": 2019,
+      "arxiv_id": "1907.05019",
+      "role": "Inspiration",
+      "relationship_sentence": "Task2Vec showed that quantifying task/domain similarity enables selecting or weighting specialized experts, inspiring the use of metadata-derived domain relations to gate combinations of domain-specific functions."
+    },
+    {
+      "title": "Model Soups: Averaging Weights of Multiple Fine-Tuned Models Improves Accuracy without Increasing Inference Time",
+      "authors": "Wortsman et al.",
+      "year": 2022,
+      "arxiv_id": "2203.05482",
+      "role": "Inspiration",
+      "relationship_sentence": "Model Soups demonstrated that aggregating specialized models yields better generalization, motivating this paper\u2019s principled, metadata-informed reweighting of domain-specific models at test time rather than uniform averaging."
+    }
+  ],
+  "synthesis_narrative": "Invariant Risk Minimization proposed learning a single predictor whose features are invariant across domains, a powerful but restrictive stance when domain-specific variation carries predictive signal. GroupDRO similarly optimized for worst-case domain performance yet maintained one shared hypothesis, relying on training-time reweighting to handle group shift. DomainBed established the modern domain generalization protocol with multiple labeled source domains and rigorous evaluation, revealing that many invariant methods underperform strong baselines and encouraging alternative formulations. WILDS introduced real-world distribution shifts accompanied by rich domain metadata (such as site, region, or time), making explicit the side information that can encode relationships among domains. Classic multi-source adaptation theory by Mansour, Mohri, and Rostamizadeh showed that a target predictor can be well-approximated by a weighted mixture of source hypotheses when weights reflect source\u2013target relatedness. Task2Vec provided a practical route to compute task/domain similarity and leverage it for expert selection or weighting. Model Soups further showed that combining specialized models improves generalization, suggesting that ensembles of domain-specialized functions can outperform a single shared model.\n\nTogether, these works point to a gap: single-model invariance leaves performance on the table when domains are related but not identical, and ensembles should be guided by how the target relates to sources. The current paper synthesizes these insights by training source-domain-specific functions and, at test time, reweighting them using domain relations learned from metadata, aligning practice with multi-source theory and exploiting real-world metadata to compute principled mixture weights with provable generalization benefits.",
+  "target_paper": {
+    "title": "Improving Domain Generalization with Domain Relations",
+    "authors": "Huaxiu Yao, Xinyu Yang, Xinyi Pan, Shengchao Liu, Pang Wei Koh, Chelsea Finn",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Domain Generalization; Domain Relations; Distribution Shift",
+    "abstract": "Distribution shift presents a significant challenge in machine learning, where models often underperform during the test stage when faced with a different distribution than the one they were trained on. In this paper, we focus on domain shifts, which occur when the model is applied to new domains that are different from the ones it was trained on, and propose a new approach called DG. Unlike previous approaches that aim to learn a single model that is domain invariant, DG leverages domain similarities based on domain metadata to learn domain-specific models. Concretely, DG learns a set of training-domain-specific functions during the training stage and reweights them based on domain relations during the test stage. These domain relations can be directly obtained and learned from domain metadata. Under mild assumptions, we theoretically prove that using domain relations to reweight training-domain-specific functions achieves stronger out-of-domain generalization compared to the conventi",
+    "openreview_id": "Dc4rXq3HIA",
+    "forum_id": "Dc4rXq3HIA"
+  },
+  "analysis_timestamp": "2026-01-06T18:44:34.191484"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Language Models are Few-Shot Learners",
+      "authors": "Tom B. Brown et al.",
+      "year": 2020,
+      "role": "Foundational concept: in-context learning in transformers",
+      "relationship_sentence": "DPT directly leverages the GPT-3 insight that transformers can learn to perform new tasks from in-context examples, extending this phenomenon from language tasks to decision-making problems."
+    },
+    {
+      "title": "RL^2: Fast Reinforcement Learning via Slow Reinforcement Learning",
+      "authors": "Yan Duan et al.",
+      "year": 2016,
+      "role": "Methodological precedent: meta-RL via sequence models",
+      "relationship_sentence": "RL^2 showed that recurrent networks can learn an RL algorithm in-context (including exploration) from recent trajectories, a capability DPT reproduces with transformers trained via supervised pretraining rather than RL."
+    },
+    {
+      "title": "PEARL: Efficient Off-policy Meta-Reinforcement Learning",
+      "authors": "Kate Rakelly et al.",
+      "year": 2019,
+      "role": "Conceptual antecedent: context-based task inference for fast adaptation",
+      "relationship_sentence": "PEARL established that a learned encoder can infer task identity from a small context dataset and guide action selection, which DPT realizes using attention over in-context trajectories within a transformer."
+    },
+    {
+      "title": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+      "authors": "Lili Chen et al.",
+      "year": 2021,
+      "role": "Direct methodological precursor: supervised sequence modeling for control",
+      "relationship_sentence": "Decision Transformer demonstrated that transformers trained with a supervised objective on trajectories can perform RL, and DPT builds on this framing by conditioning on an in-context dataset to predict optimal actions without return-to-go prompts."
+    },
+    {
+      "title": "Trajectory Transformer: Offline Reinforcement Learning as Sequence Modeling",
+      "authors": "Michael Janner et al.",
+      "year": 2021,
+      "role": "Methodological precursor: transformers for trajectory modeling and control",
+      "relationship_sentence": "Trajectory Transformer validated that transformer-based sequence models can learn dynamics and policies from offline data, a foundation DPT adapts from modeling trajectories to using them as in-context evidence for action prediction."
+    },
+    {
+      "title": "In-context Reinforcement Learning with Algorithm Distillation",
+      "authors": "Michael Laskin et al.",
+      "year": 2022,
+      "role": "Closest prior on in-context RL with transformers",
+      "relationship_sentence": "Algorithm Distillation showed that transformers trained to imitate an RL algorithm\u2019s behavior can perform in-context RL, and DPT advances this idea by showing that simple supervised pretraining to predict optimal actions from context suffices to induce exploration and offline conservatism."
+    },
+    {
+      "title": "Upside-Down Reinforcement Learning",
+      "authors": "J\u00fcrgen Schmidhuber",
+      "year": 2019,
+      "role": "Conceptual precursor: casting RL as supervised sequence prediction",
+      "relationship_sentence": "Upside-Down RL proposed reframing RL as supervised mapping from goals/returns to actions, a perspective DPT operationalizes by learning a supervised mapping from in-context interaction datasets and states to optimal actions."
+    }
+  ],
+  "synthesis_narrative": "The Decision-Pretrained Transformer (DPT) emerges at the intersection of in-context learning and sequence-modeling approaches to control. GPT-3\u2019s discovery that transformers can learn from examples within their context window suggested a general mechanism for rapid adaptation without parameter updates, motivating DPT to bring this paradigm to decision-making. Earlier meta-RL work, particularly RL^2 and PEARL, demonstrated that agents can infer task identity and learn to explore by processing recent experience; DPT adopts this context-as-task signal but replaces recurrent/latent encoders with attention over trajectories. The modern sequence-modeling view of RL, crystallized by Decision Transformer and Trajectory Transformer, established that supervised training on trajectories can yield strong control policies from offline data. Building on this, DPT modifies the conditioning structure: rather than return prompts or purely generative modeling, it uses an in-context dataset plus a query state to directly predict optimal actions, enabling both online adaptation and offline conservatism to arise from a single supervised objective. Finally, Algorithm Distillation provided the closest demonstration that transformers can implement in-context RL by imitating a learning algorithm; DPT shows such behavior can be induced even more simply, via supervised pretraining on diverse tasks\u2019 optimal actions, without distilling an explicit algorithm. Together, these works directly informed DPT\u2019s core insight: transformers can be pretrained with a supervised, context-conditioned objective to perform RL in-context, exhibiting exploration and generalization beyond the training distribution.",
+  "analysis_timestamp": "2026-01-07T00:02:04.793588"
+}

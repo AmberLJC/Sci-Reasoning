@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Sampling Generative Networks",
+      "authors": "Tom White et al.",
+      "year": 2016,
+      "arxiv_id": "1609.04468",
+      "role": "Baseline",
+      "relationship_sentence": "This work popularized spherical linear interpolation (SLERP) in latent spaces, the default interpolation strategy that current diffusion pipelines adopt and that NoiseDiffusion explicitly aims to go beyond by first correcting inverted noise before interpolating."
+    },
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Jonathan Ho et al.",
+      "year": 2020,
+      "arxiv_id": "2006.11239",
+      "role": "Foundation",
+      "relationship_sentence": "DDPM defines the forward Gaussian corruption process and the assumed standard normal noise prior, the exact distributional assumption that NoiseDiffusion enforces when correcting invalid inverted noise from real images."
+    },
+    {
+      "title": "Denoising Diffusion Implicit Models",
+      "authors": "Jiaming Song et al.",
+      "year": 2020,
+      "arxiv_id": "2010.02502",
+      "role": "Extension",
+      "relationship_sentence": "DDIM provides the deterministic sampling/inversion used to encode images into noise space, and NoiseDiffusion operates directly on these DDIM-inverted noises to adjust them toward the expected Gaussian prior before interpolation."
+    },
+    {
+      "title": "SDEdit: Image Synthesis and Editing with Stochastic Differential Equations",
+      "authors": "Chenlin Meng et al.",
+      "year": 2021,
+      "arxiv_id": "2108.01073",
+      "role": "Inspiration",
+      "relationship_sentence": "SDEdit showed that injecting controlled Gaussian noise can regularize real-image edits back onto the model manifold, inspiring NoiseDiffusion\u2019s key step of adding subtle Gaussian noise to re-regularize inverted noises toward the correct distribution."
+    },
+    {
+      "title": "Null-Text Inversion for Editing Real Images using Guided Diffusion Models",
+      "authors": "Mokady et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "This work exposed that faithfully reconstructing real images via diffusion requires specialized inversion and often suffers from drift, highlighting the practical mismatch of inverted latents that NoiseDiffusion addresses by correcting the noise distribution itself."
+    },
+    {
+      "title": "EDICT: Exact Diffusion Inversion via Coupled Transformations",
+      "authors": "Kawar et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "By targeting exact diffusion inversion and discussing fidelity/distributional consistency of inverted latents, EDICT underscored the challenges of obtaining valid (Gaussian) inversion noise, directly motivating NoiseDiffusion\u2019s correction and extreme-noise suppression."
+    }
+  ],
+  "synthesis_narrative": "Spherical linear interpolation (SLERP) became the default way to traverse semantic paths in generative latent spaces after Sampling Generative Networks showed it yields smooth morphs between codes. Denoising Diffusion Probabilistic Models formalized the forward Gaussian corruption and the assumption that the latent noise follows a standard normal distribution, making this distributional prior central to diffusion-based synthesis. Denoising Diffusion Implicit Models introduced a deterministic sampler with a practical inversion procedure, enabling images to be encoded into noise space so that interpolation (often via SLERP) can be performed directly on inverted noises. SDEdit demonstrated that carefully adding Gaussian noise to real inputs can regularize them back onto the score-model manifold, suggesting noise injection as a principled way to improve alignment with the generative process. Meanwhile, Null-Text Inversion revealed the fragility of diffusion inversion for real images\u2014reconstructions drift without tailored procedures\u2014while EDICT pursued exact inversion and highlighted the difficulty of obtaining distribution-consistent inverted latents.\nCollectively, these works laid out a pipeline\u2014encode real images into noise, interpolate in noise, decode\u2014while surfacing a core weakness: inverted noises of natural images often deviate from the assumed Gaussian prior, degrading interpolation. The natural next step is to intervene at the source by repairing the inverted noise itself. Building on DDIM inversion and SLERP\u2019s role, and inspired by SDEdit\u2019s noise-regularization insight, the current work corrects the inverted noise by injecting subtle Gaussian perturbations and suppressing extreme components, restoring validity with respect to the DDPM prior and enabling reliable, high-quality interpolation of real images.",
+  "target_paper": {
+    "title": "NoiseDiffusion: Correcting Noise for Image  Interpolation  with Diffusion Models beyond Spherical Linear Interpolation",
+    "authors": "PengFei Zheng, Yonggang Zhang, Zhen Fang, Tongliang Liu, Defu Lian, Bo Han",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Image Interpolation; Diffusion Models",
+    "abstract": "Image interpolation based on diffusion models is promising in creating fresh and interesting images. \nAdvanced interpolation methods mainly focus on spherical linear interpolation, where images are encoded into the noise space and then interpolated for denoising to images. \nHowever, existing methods face challenges in effectively interpolating natural images (not generated by diffusion models), thereby restricting their practical applicability. \nOur experimental investigations reveal that these challenges stem from the invalidity of the encoding noise, which may no longer obey the expected noise distribution, e.g., a normal distribution. \nTo address these challenges, we propose a novel approach to correct noise for image interpolation, NoiseDiffusion. Specifically, NoiseDiffusion approaches the invalid noise to the expected distribution by introducing subtle Gaussian noise and introduces a constraint to suppress noise with extreme values. In this context, promoting noise validity contr",
+    "openreview_id": "6O3Q6AFUTu",
+    "forum_id": "6O3Q6AFUTu"
+  },
+  "analysis_timestamp": "2026-01-06T15:21:28.755597"
+}

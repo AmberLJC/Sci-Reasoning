@@ -1,0 +1,80 @@
+{
+  "prior_works": [
+    {
+      "title": "CroCo: Self-Supervised Pre-Training for 3D Vision Tasks by Cross-View Completion",
+      "authors": [
+        "Caron et al."
+      ],
+      "year": 2023,
+      "role": "Baseline pretext task and primary point of departure",
+      "relationship_sentence": "Alligat0R directly replaces CroCo\u2019s cross-view completion pretext with covisibility segmentation, explicitly addressing CroCo\u2019s ill-posed supervision in non-covisible regions."
+    },
+    {
+      "title": "SuperGlue: Learning Feature Matching with Graph Neural Networks",
+      "authors": [
+        "Paul-Edouard Sarlin",
+        "Daniel DeTone",
+        "Tomasz Malisiewicz",
+        "Andrew Rabinovich"
+      ],
+      "year": 2020,
+      "role": "Inspiration for matchability/overlap reasoning",
+      "relationship_sentence": "SuperGlue\u2019s matchability predictions for non-matchable/occluded regions motivate Alligat0R\u2019s explicit per-pixel covisibility labeling as a dense, interpretable training signal."
+    },
+    {
+      "title": "LoFTR: Detector-Free Local Feature Matching with Transformers",
+      "authors": [
+        "Jiaming Sun",
+        "Zehao Shen",
+        "Yuang Liu"
+      ],
+      "year": 2021,
+      "role": "Dense cross-view supervision and overlap handling",
+      "relationship_sentence": "LoFTR demonstrates the value of dense, detector-free cross-view reasoning and confidence over non-overlapping areas, informing Alligat0R\u2019s dense covisibility segmentation pretext."
+    },
+    {
+      "title": "ORB-SLAM2: An Open-Source SLAM System for Monocular, Stereo and RGB-D Cameras",
+      "authors": [
+        "Ra\u00fal Mur-Artal",
+        "Juan D. Tard\u00f3s"
+      ],
+      "year": 2017,
+      "role": "Foundational concept of covisibility in multi-view geometry",
+      "relationship_sentence": "ORB-SLAM2\u2019s covisibility graph formalizes the notion of viewpoint overlap that Alligat0R operationalizes at the pixel level through covisibility segmentation."
+    },
+    {
+      "title": "Geometric Loss Functions for Camera Pose Regression with Deep Learning",
+      "authors": [
+        "Alex Kendall",
+        "Roberto Cipolla"
+      ],
+      "year": 2017,
+      "role": "Downstream objective foundation for pose regression",
+      "relationship_sentence": "This work grounds the training and evaluation of pose regression models, the downstream task Alligat0R targets by supplying geometry-aware pretraining."
+    },
+    {
+      "title": "ScanNet: Richly-Annotated 3D Reconstructions of Indoor Scenes",
+      "authors": [
+        "Angela Dai",
+        "Angel X. Chang",
+        "Manolis Savva"
+      ],
+      "year": 2017,
+      "role": "Dataset used to derive dense covisibility annotations",
+      "relationship_sentence": "Alligat0R\u2019s Cub3 dataset leverages ScanNet\u2019s RGB-D reconstructions and camera poses to compute accurate, large-scale covisibility masks."
+    },
+    {
+      "title": "nuScenes: A Multimodal Dataset for Autonomous Driving",
+      "authors": [
+        "Holger Caesar",
+        "Varun Bankiti",
+        "Alex H. Lang"
+      ],
+      "year": 2020,
+      "role": "Dataset used to derive diverse outdoor covisibility annotations",
+      "relationship_sentence": "Cub3 draws from nuScenes\u2019 calibrated multi-camera sequences and 3D geometry to generate covisibility labels across varied overlap conditions."
+    }
+  ],
+  "synthesis_narrative": "Alligat0R\u2019s core idea\u2014pre-training via covisibility segmentation\u2014emerges directly from limitations in cross-view completion and advances in multi-view geometry and matching. CroCo established cross-view completion as a powerful pretext for 3D vision, but its supervision becomes ill-posed where views do not overlap. Alligat0R explicitly targets this failure mode by predicting, per pixel, whether content is covisible, occluded, or out-of-FOV, thus providing a valid, interpretable signal everywhere. This choice is informed by progress in dense matching: SuperGlue introduced matchability to downweight non-matchable regions, and LoFTR showed the benefits of dense, detector-free cross-view reasoning with confidence on overlap\u2014both pointing to the need for explicit overlap-awareness that Alligat0R elevates to a pretext objective. The notion of covisibility itself traces to SLAM, where ORB-SLAM2\u2019s covisibility graph formalizes view overlap across keyframes; Alligat0R adapts this concept to the pixel level for supervision. For downstream utility, geometric loss formulations for camera pose regression provide the evaluation and training context that benefit from geometry-aware pretraining. Finally, realizing covisibility segmentation at scale requires accurate geometry and poses: ScanNet (indoor RGB-D) and nuScenes (outdoor multi-sensor driving) supply the 3D reconstructions and calibrated trajectories that underpin Cub3\u2019s dense covisibility labels across diverse overlap regimes. Together, these works directly shape Alligat0R\u2019s pretext design, dataset construction, and its improvements in relative pose regression.",
+  "analysis_timestamp": "2026-01-07T00:21:32.352080"
+}

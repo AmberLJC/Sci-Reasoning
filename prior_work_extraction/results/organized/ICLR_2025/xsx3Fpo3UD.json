@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Training language models to follow instructions with human feedback",
+      "authors": "Ouyang et al.",
+      "year": 2022,
+      "arxiv_id": "2203.02155",
+      "role": "Foundation",
+      "relationship_sentence": "Introduced RLHF with a KL-regularized PPO update and an advantage estimator, providing the advantage-based signal and KL-control paradigm that ADPA repurposes by deriving an advantage from a well-aligned teacher and constraining student updates with KL terms."
+    },
+    {
+      "title": "Direct Preference Optimization: Your Language Model is Secretly a Reward Model",
+      "authors": "Rafailov et al.",
+      "year": 2023,
+      "arxiv_id": "2305.18290",
+      "role": "Baseline",
+      "relationship_sentence": "Established a strong RL-free preference alignment objective from pairwise comparisons that serves as a primary baseline and whose instability on small models motivates replacing direct optimization with teacher-guided distillation and advantage-weighted signals."
+    },
+    {
+      "title": "Odds Ratio Preference Optimization: Stable RL-Free Preference Alignment",
+      "authors": "Hong et al.",
+      "year": 2024,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "Proposed a stable, reference-free preference loss (odds-ratio) widely used for SLM alignment, which ADPA improves upon by injecting teacher-derived pairwise information and weighting via advantage rather than relying solely on logits from the student."
+    },
+    {
+      "title": "Kahneman\u2013Tversky Optimization: A Framework for Post-hoc Preference Alignment",
+      "authors": "Ethayarajh et al.",
+      "year": 2024,
+      "arxiv_id": null,
+      "role": "Related Problem",
+      "relationship_sentence": "Showed that asymmetric weighting of positive vs. negative preferences can enhance RL-free alignment, inspiring ADPA\u2019s use of asymmetric, advantage-based weights derived from a teacher instead of hand-designed utilities."
+    },
+    {
+      "title": "Policy Distillation",
+      "authors": "Rusu et al.",
+      "year": 2015,
+      "arxiv_id": "1511.06295",
+      "role": "Foundation",
+      "relationship_sentence": "Demonstrated KL-based distillation from a teacher to a student policy, which ADPA/DCKD extend to preference alignment by introducing dual KL constraints and preference-aware weighting using the teacher\u2019s signals."
+    },
+    {
+      "title": "Accelerating Online Reinforcement Learning with Offline Datasets (AWAC)",
+      "authors": "Nair et al.",
+      "year": 2020,
+      "arxiv_id": "2006.09359",
+      "role": "Inspiration",
+      "relationship_sentence": "Introduced advantage-weighted behavior cloning, directly inspiring ADPA\u2019s core idea of weighting supervised distillation toward preferred responses using an advantage estimated from the teacher."
+    }
+  ],
+  "synthesis_narrative": "Instruction-following with human feedback established a KL-regularized reinforcement learning framework in which an advantage estimator modulates policy updates, grounding the idea that relative preference can guide learning intensity. Direct Preference Optimization reframed pairwise preference learning as an RL-free objective that operates on chosen\u2013rejected pairs via a calibrated logit-difference, creating a strong baseline for alignment without a reward model. Odds-Ratio Preference Optimization stabilized RL-free alignment by optimizing an odds-ratio loss, highlighting that reference-free formulations can be robust yet still hinge on the student\u2019s capacity to separate preferred from dispreferred responses. Kahneman\u2013Tversky Optimization showed that asymmetric weighting of positive and negative signals can improve preference alignment, suggesting that not all examples should influence training equally. Policy Distillation demonstrated that KL-based teacher\u2013student training can transfer behavior reliably, providing the mechanism to import a teacher\u2019s distributional guidance. AWAC advanced advantage-weighted imitation, showing that weighting supervised updates by advantage can prioritize higher-quality behaviors while remaining stable and off-policy.\n\nTogether, these works suggest a synthesis: use a strong teacher to stabilize preference learning via KL-based distillation, while amplifying separation between preferred and dispreferred outputs through advantage-weighted updates. The RLHF paradigm provides the advantage/KL control signals; DPO/ORPO/KTO expose the strengths and limits of RL-free objectives, especially on small models; policy distillation supplies the vehicle for transfer; and AWAC contributes the key weighting principle. The natural next step is to distill a well-aligned teacher into a small student using dual KL constraints for stability and a teacher-derived advantage to focus learning on truly preferred responses, overcoming capacity bottlenecks that hamper direct preference optimization on small models.",
+  "target_paper": {
+    "title": "Advantage-Guided Distillation for Preference Alignment in Small Language Models",
+    "authors": "Shiping Gao, Fanqi Wan, Jiajian Guo, Xiaojun Quan, Qifan Wang",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "Preference Alignment; Large language model; Knowledge Distillation; Advantage Function",
+    "abstract": "Alignment techniques enable Large Language Models (LLMs) to generate outputs that align with human preferences and play a crucial role in their effectiveness. However, their impact often diminishes when applied to Small Language Models (SLMs), likely due to the limited capacity of these models. Instead of directly applying existing alignment techniques to SLMs, we propose to utilize a well-aligned teacher LLM to guide the alignment process for these models, thereby facilitating the transfer of the teacher's knowledge of human preferences to the student model. To achieve this, we first explore a straightforward approach, Dual-Constrained Knowledge Distillation (DCKD), that employs knowledge distillation with two KL-divergence constraints from the aligned teacher to the unaligned student. To further enhance the student's ability to distinguish between preferred and dispreferred responses, we then propose Advantage-Guided Distillation for Preference Alignment (ADPA), which leverages an ad",
+    "openreview_id": "xsx3Fpo3UD",
+    "forum_id": "xsx3Fpo3UD"
+  },
+  "analysis_timestamp": "2026-01-06T15:14:45.666593"
+}

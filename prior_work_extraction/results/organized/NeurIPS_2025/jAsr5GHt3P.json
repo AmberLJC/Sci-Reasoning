@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Self-Consistency Improves Chain of Thought Reasoning in Language Models",
+      "authors": "Xuezhi Wang, Jason Wei, Dale Schuurmans, Quoc V. Le, Ed H. Chi, Denny Zhou",
+      "year": 2023,
+      "role": "Baseline for inference-time compute via repeated sampling",
+      "relationship_sentence": "AB-MCTS explicitly generalizes self-consistency\u2019s repeated sampling by replacing independent best-of-N generations with a principled search process that can revisit and refine candidates rather than only voting among one-shot samples."
+    },
+    {
+      "title": "Tree of Thoughts: Deliberate Problem Solving with Large Language Models",
+      "authors": "Shunyu Yao, Dian Yu, Jeffrey Zhao, Izhak Shafran, Thomas L. Griffiths, Yuan Cao, Karthik Narasimhan",
+      "year": 2023,
+      "role": "LLM tree-search formulation",
+      "relationship_sentence": "AB-MCTS builds on the idea of structuring reasoning as a search over thoughts but replaces heuristic BFS/DFS with Monte Carlo Tree Search and adaptive branching to allocate compute more effectively."
+    },
+    {
+      "title": "ReAct: Synergizing Reasoning and Acting in Language Models",
+      "authors": "Shunyu Yao, Jeffrey Zhao, Dian Yu, Izhak Shafran, Karthik Narasimhan, Yuan Cao",
+      "year": 2023,
+      "role": "Use of external environment feedback during reasoning",
+      "relationship_sentence": "AB-MCTS leverages external feedback signals (e.g., code execution/tests) to guide exploration and refinement, operationalizing ReAct\u2019s insight that interaction and feedback can steer multi-step reasoning."
+    },
+    {
+      "title": "Bandit Based Monte-Carlo Planning (UCT)",
+      "authors": "Levente Kocsis, Csaba Szepesv\u00e1ri",
+      "year": 2006,
+      "role": "Algorithmic foundation for exploration\u2013exploitation in MCTS",
+      "relationship_sentence": "AB-MCTS\u2019s decision to expand new branches (go wider) versus revisit existing ones (go deeper) is grounded in UCT-style upper-confidence selection that balances exploration and exploitation at each node."
+    },
+    {
+      "title": "Progressive Strategies for Monte-Carlo Tree Search (Progressive Widening)",
+      "authors": "Guillaume M. J.-B. Chaslot, Sander Bakkes, Istv\u00e1n Szita, Pieter Spronck",
+      "year": 2008,
+      "role": "Adaptive control of branching factor in MCTS",
+      "relationship_sentence": "AB-MCTS\u2019s adaptive branching echoes progressive widening by modulating when to add new children versus deepen existing ones, crucial for large, open-ended action spaces like program edits or solution steps."
+    },
+    {
+      "title": "Competition-Level Code Generation with AlphaCode",
+      "authors": "Yujia Li, David Choi, Junyoung Chung, et al.",
+      "year": 2022,
+      "role": "Execution-based feedback and massive sampling for coding",
+      "relationship_sentence": "AB-MCTS advances beyond AlphaCode\u2019s sample-and-filter paradigm by integrating execution/test feedback into a multi-turn search that can refine partial candidates rather than relying solely on large-N sampling."
+    },
+    {
+      "title": "Reflexion: Language Agents with Verbal Reinforcement Learning",
+      "authors": "Noah Shinn, Federico Cassano, Kazuma Hashimoto, Dan Klein",
+      "year": 2023,
+      "role": "Iterative self-improvement from feedback",
+      "relationship_sentence": "AB-MCTS formalizes iterative refinement with a tree search that uses feedback-driven value signals to revisit and improve prior attempts, generalizing Reflexion\u2019s feedback-guided revision to a principled MCTS framework."
+    }
+  ],
+  "synthesis_narrative": "The core contribution of AB-MCTS is a principled inference-time framework that unifies repeated sampling, multi-turn refinement, and exploration\u2013exploitation under Monte Carlo Tree Search with adaptive branching. Self-Consistency established that simply increasing test-time sampling and aggregating diverse reasoning paths can markedly improve accuracy; AB-MCTS generalizes this by moving from independent best-of-N generations to coordinated search that can revisit promising candidates. Tree of Thoughts framed LLM reasoning as a tree, but relied on heuristic BFS/DFS; AB-MCTS replaces this with UCT-based selection to systematically allocate compute where expected gains are highest. The UCT work provides the theoretical backbone for choosing between going deeper on an existing path versus exploring new ones, while Progressive Widening motivates adaptively controlling branching in vast action spaces\u2014key for complex coding and engineering tasks.\nReAct demonstrated the power of external environment feedback for steering reasoning. AB-MCTS operationalizes this by incorporating execution and other feedback signals into node evaluations and selection, turning passive sampling into active, feedback-informed search. Finally, AlphaCode showed the efficacy of large-scale sampling and unit-test filtering in code generation, and Reflexion showed iterative feedback-driven refinement; AB-MCTS synthesizes these into a unified algorithm that both explores broadly and iteratively improves candidates, yielding superior performance over repeated sampling and standard, feedback-agnostic MCTS.",
+  "analysis_timestamp": "2026-01-07T00:21:32.294961"
+}

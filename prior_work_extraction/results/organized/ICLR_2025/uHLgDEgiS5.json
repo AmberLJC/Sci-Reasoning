@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Understanding Black-box Predictions via Influence Functions",
+      "authors": "Pang Wei Koh et al.",
+      "year": 2017,
+      "arxiv_id": "1703.04730",
+      "role": "Baseline",
+      "relationship_sentence": "This classic influence-function framework defines leave-one-out influence at a converged ERM solution under a permutation-invariant data assumption, whose breakdown under stochastic, order-sensitive training directly motivates replacing it with a trajectory-specific LOO definition conditioned on iteration and data order."
+    },
+    {
+      "title": "Estimating Training Data Influence by Tracing Gradient Descent",
+      "authors": "Garima Pruthi et al.",
+      "year": 2020,
+      "arxiv_id": "2002.08484",
+      "role": "Inspiration",
+      "relationship_sentence": "By summing gradient inner-products across checkpoints, TracIn connected data influence to the optimization path, inspiring the formalization here of a principled, leave-one-out influence that is explicitly tied to a specific training iteration along the actual trajectory."
+    },
+    {
+      "title": "Data Shapley: Equitable Valuation of Data for Machine Learning",
+      "authors": "Amirata Ghorbani et al.",
+      "year": 2019,
+      "arxiv_id": "1904.02868",
+      "role": "Gap Identification",
+      "relationship_sentence": "Data Shapley formulates data valuation as marginal contributions over permutations of a set, implicitly ignoring the temporal order in which data are encountered, a limitation the trajectory-specific LOO influence addresses by conditioning value on when a point appears during training."
+    },
+    {
+      "title": "Representer Point Selection for Explaining Deep Neural Networks",
+      "authors": "Chih-Kuan Yeh et al.",
+      "year": 2018,
+      "arxiv_id": "1811.09720",
+      "role": "Gap Identification",
+      "relationship_sentence": "Representer methods attribute predictions using a kernel at the final model snapshot, which fails to capture non-convergent, multi-stage dynamics, prompting a shift to an influence notion that accounts for the full training trajectory and specific iteration removal."
+    },
+    {
+      "title": "An Empirical Study of Example Forgetting During Deep Neural Network Learning",
+      "authors": "Mariya Toneva et al.",
+      "year": 2019,
+      "arxiv_id": "1812.05159",
+      "role": "Inspiration",
+      "relationship_sentence": "The discovery of per-example forgetting events across epochs evidences that an example\u2019s effect is time-dependent, motivating an influence measure that records when during training a point exerts its impact via trajectory-specific LOO."
+    },
+    {
+      "title": "Curriculum Learning",
+      "authors": "Yoshua Bengio et al.",
+      "year": 2009,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "By showing that ordering and staging of training data materially affect learned models, curriculum learning provides the foundational rationale for defining influence that is conditional on the precise data sequence and training stage."
+    },
+    {
+      "title": "Influence Functions in Deep Learning Are Fragile",
+      "authors": "Shubham Basu et al.",
+      "year": 2021,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "This work demonstrates that classical influence-function estimates are unstable for deep networks and SGD, underscoring the need for a trajectory- and order-aware leave-one-out influence that remains meaningful under modern training regimes."
+    }
+  ],
+  "synthesis_narrative": "Influence functions introduced a principled leave-one-out sensitivity for individual training points by differentiating the ERM optimum, but they presuppose a permutation-invariant dataset and a stable converged solution. TracIn reframed attribution through the optimization path, estimating influence by accumulating gradient inner-products across checkpoints, implicitly linking data effects to where the trajectory passes. Data Shapley cast data valuation as marginal contributions over permutations, a set-function view that treats order as irrelevant. Representer point selection attributed predictions via a final-layer kernel at a single trained snapshot, sidestepping the dynamics of how parameters evolved. Empirical studies of forgetting events showed examples can flip between learned and unlearned across epochs, indicating that the contribution of a point depends on when it is seen. Curriculum learning further established that staging and order systematically shape training outcomes. Finally, evidence that influence functions are fragile for deep nets trained with SGD highlighted the brittleness of static, end-of-training approximations.\nTogether, these works reveal a gap: existing attribution either ignores order, collapses dynamics to a final snapshot, or heuristically traces gradients without a leave-one-out semantics. The natural next step is to endow influence with an explicit dependence on the actual optimization path and the specific iteration at which a point appears. By formalizing trajectory-specific leave-one-out influence, the current work synthesizes path-aware tracing with principled LOO semantics, addressing the instability of classical IF and the order-insensitivity of Shapley/representer approaches while capturing time-resolved effects that forgetting and curricula make salient.",
+  "target_paper": {
+    "title": "Capturing the Temporal Dependence of Training Data Influence",
+    "authors": "Jiachen T. Wang, Dawn Song, James Zou, Prateek Mittal, Ruoxi Jia",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "oral",
+    "keywords": "data attribution",
+    "abstract": "Traditional data influence estimation methods, like influence function, assume that learning algorithms are permutation-invariant with respect to training data. However, modern training paradigms\u2014especially for foundation models using stochastic algorithms and non-convergent, multi-stage curricula\u2014are sensitive to data ordering, thus violating this assumption. This mismatch renders influence functions inadequate for answering some critical questions in current machine learning: How can we differentiate the influence of the same data contributing at different stages of training? More generally, how can we capture the dependence of data influence on the optimization trajectory during training? To address this gap, we formalize the concept of \\emph{trajectory-specific leave-one-out (LOO) influence}, which quantifies the impact of removing a data point from a specific iteration during training, accounting for the exact sequence of data encountered and the model's optimization trajectory. H",
+    "openreview_id": "uHLgDEgiS5",
+    "forum_id": "uHLgDEgiS5"
+  },
+  "analysis_timestamp": "2026-01-06T07:57:57.831924"
+}

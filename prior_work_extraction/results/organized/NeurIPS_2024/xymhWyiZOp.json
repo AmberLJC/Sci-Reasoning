@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Bayesian Inference with Anchored Ensembles of Neural Networks",
+      "authors": "Tim Pearce, Mohamed Zaki, Ali Brintrup, Andy Neely",
+      "year": 2018,
+      "role": "Conceptual progenitor of anchoring",
+      "relationship_sentence": "Introduced the idea of anchoring weights to sampled priors via a quadratic pull, providing the core mechanism the NeurIPS 2024 paper generalizes and systematizes for vision models while diagnosing anchoring\u2019s shortcut failure modes."
+    },
+    {
+      "title": "Simple and Scalable Predictive Uncertainty Estimation using Deep Ensembles",
+      "authors": "Balaji Lakshminarayanan, Alexander Pritzel, Charles Blundell",
+      "year": 2017,
+      "role": "Baseline for uncertainty and calibration",
+      "relationship_sentence": "Established deep ensembles as a strong, architecture-agnostic baseline for uncertainty, calibration, and OOD behavior that the new anchored training protocol seeks to match or surpass while being more principled about the anchoring mechanism."
+    },
+    {
+      "title": "On Calibration of Modern Neural Networks",
+      "authors": "Chuan Guo, Geoff Pleiss, Yu Sun, Kilian Q. Weinberger",
+      "year": 2017,
+      "role": "Calibration metrics and evaluation",
+      "relationship_sentence": "Provided the canonical calibration framework (e.g., ECE, temperature scaling) that the paper uses to quantify the claimed gains in calibration and safety under the revised anchoring protocol."
+    },
+    {
+      "title": "Shortcut learning in deep neural networks",
+      "authors": "Robert Geirhos, J\u00f6rn-Henrik Jacobsen, Claudio Michaelis, Richard Zemel, et al.",
+      "year": 2020,
+      "role": "Problem framing: spurious correlations/shortcuts",
+      "relationship_sentence": "Diagnosed how models exploit spurious cues; this directly informs the paper\u2019s identification of anchored training\u2019s tendency to amplify shortcuts and motivates the proposed regularizer to counteract them."
+    },
+    {
+      "title": "Invariant Risk Minimization",
+      "authors": "Martin Arjovsky, L\u00e9on Bottou, Ishaan Gulrajani, David Lopez-Paz",
+      "year": 2019,
+      "role": "Objective for spurious-robust generalization",
+      "relationship_sentence": "Offers a principled route to discourage spurious features by enforcing invariance across environments, shaping the new paper\u2019s goal of modifying anchored training to prefer invariant, non-shortcut predictors."
+    },
+    {
+      "title": "Distributionally Robust Neural Networks for Group Shifts: On the Importance of Regularization for Worst-Group Performance",
+      "authors": "Shiori Sagawa, Pang Wei Koh, Tatsunori B. Hashimoto, Percy Liang",
+      "year": 2020,
+      "role": "Robust optimization against group shifts",
+      "relationship_sentence": "Provides a practical robustness criterion (GroupDRO) and evaluation lens for worst-group performance that the anchored protocol\u2019s regularizer is positioned to improve under spurious correlations."
+    },
+    {
+      "title": "Sharpness-Aware Minimization for Efficiently Improving Generalization",
+      "authors": "Pierre Foret, Ariel Kleiner, Hossein Mobahi, Behnam Neyshabur",
+      "year": 2021,
+      "role": "Training-time regularization for generalization",
+      "relationship_sentence": "Demonstrates how a simple, architecture-agnostic training perturbation/regularization can systematically improve generalization, paralleling the paper\u2019s design of a simple regularizer to fix anchoring\u2019s shortcut bias."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core contribution\u2014systematizing anchoring as a training protocol for vision models while revealing and mitigating its shortcut-learning pathology\u2014builds on two strands of prior work. First, Pearce et al.\u2019s anchored ensembles established the central mechanism: anchoring parameters to sampled priors with a quadratic penalty to approximate Bayesian inference. This idea, alongside deep ensembles, shaped the target outcomes (strong uncertainty, calibration, and extrapolation) and provided baseline practices. Guo et al.\u2019s calibration framework supplied the metrics to rigorously assess whether anchored training indeed improves safety-relevant reliability.\nSecond, the paper draws on the shortcut/spurious correlation literature to diagnose why naive anchoring can fail. Geirhos et al. articulated how networks exploit shortcuts, a failure mode that the authors observe is exacerbated by anchored training\u2019s bias toward easily learned signals. Methods for spurious-robust learning\u2014IRM and GroupDRO\u2014inform the objective-level perspective: altering the training signal to prefer invariant, worst-group-robust predictors. While not adopting those objectives wholesale, the paper introduces a simple regularizer within the anchoring paradigm to redirect learning away from spurious cues. Finally, inspiration from training-time regularizers like SAM underscores that small, architecture-agnostic modifications to the optimization landscape can lead to consistent generalization gains. Together, these works directly shape the paper\u2019s diagnosis of anchoring\u2019s limitations, the design of its corrective regularizer, and the evaluation of improvements in generalization and safety.",
+  "analysis_timestamp": "2026-01-06T23:39:42.962105"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Test-time data augmentation for estimation of heteroscedastic aleatoric uncertainty in deep neural networks",
+      "authors": "S. Ayhan et al.",
+      "year": 2018,
+      "role": "Baseline",
+      "relationship_sentence": "MAgg directly generalizes the standard TTA practice formalized by Ayhan & Berens\u2014averaging predictions over label-preserving augmentations\u2014by replacing naive averaging with relation-aware aggregation and allowing non\u2013label-preserving transformations via metamorphic relations."
+    },
+    {
+      "title": "A Survey on Metamorphic Testing",
+      "authors": "Sergio Segura et al.",
+      "year": 2016,
+      "role": "Foundation",
+      "relationship_sentence": "Segura et al. formalized metamorphic testing and metamorphic relations as a principled way to encode expected relations between inputs and outputs without requiring exact labels; MAgg adopts this framework to define and utilize metamorphic relations among transformed combinatorial instances at inference time."
+    },
+    {
+      "title": "DeepTest: Automated testing of deep-neural-network-driven autonomous cars",
+      "authors": "Yuchi Tian et al.",
+      "year": 2018,
+      "role": "Inspiration",
+      "relationship_sentence": "DeepTest demonstrated how domain-specific metamorphic relations can relate outputs across transformed inputs for DNNs; MAgg is inspired by this idea but repurposes it from testing to inference by exploiting such relations to aggregate predictions across metamorphically related instances."
+    },
+    {
+      "title": "Deep Sets",
+      "authors": "Manzil Zaheer et al.",
+      "year": 2017,
+      "role": "Gap Identification",
+      "relationship_sentence": "Deep Sets established permutation-invariant set aggregation (e.g., mean/sum) that underlies common TTA ensembling; MAgg addresses the limitation that such set pooling ignores known relational constraints between augmented instances by introducing a relation-graph and GNN-based aggregation."
+    },
+    {
+      "title": "Neural Message Passing for Quantum Chemistry",
+      "authors": "Justin Gilmer et al.",
+      "year": 2017,
+      "role": "Extension",
+      "relationship_sentence": "MAgg extends the message-passing paradigm to a new setting where nodes are transformed problem instances and directed edges encode metamorphic label mappings, using a GNN over this relation graph to aggregate predictions."
+    },
+    {
+      "title": "Learning a SAT Solver from Single-Bit Supervision",
+      "authors": "Daniel Selsam et al.",
+      "year": 2019,
+      "role": "Baseline",
+      "relationship_sentence": "NeuroSAT introduced GNN-based SAT satisfiability prediction, a primary task setting evaluated by MAgg; MAgg builds on this formulation and improves inference by aggregating predictions over metamorphically related SAT instances rather than relying on a single prediction or naive TTA."
+    },
+    {
+      "title": "Learning to Solve NP-Complete Problems: A Graph Neural Network for Decision TSP",
+      "authors": "Marcelo O. R. Prates et al.",
+      "year": 2019,
+      "role": "Foundation",
+      "relationship_sentence": "Prates et al. established the decision-TSP satisfiability prediction task with GNNs, which MAgg targets; MAgg leverages natural metamorphic relations in this setting (e.g., cost scaling with threshold adjustment) to construct relation graphs for improved test-time aggregation."
+    }
+  ],
+  "synthesis_narrative": "MAgg\u2019s core idea arises from unifying two lines of thought: test-time augmentation (TTA) and metamorphic testing (MT). TTA methods, typified by Ayhan & Berens, improve robustness by averaging predictions over label\u2011preserving transforms, but their permutation\u2011invariant set aggregation (as formalized by Deep Sets) ignores known dependencies between augmented views and cannot exploit non\u2013label\u2011preserving transformations. Metamorphic testing, synthesized in Segura et al.\u2019s survey and operationalized for DNNs in DeepTest, provides exactly such dependencies: metamorphic relations that specify how outputs should change under structured input transformations even when exact labels are unavailable. MAgg leverages this insight at inference time, modeling metamorphic relations among transformed instances as a directed relation graph and aggregating predictions with message passing, extending Gilmer et al.\u2019s MPNN framework to propagate information according to MR\u2011induced label mappings. This design directly addresses the central gap in standard TTA\u2014its reliance on label preservation and naive averaging\u2014by learning relation\u2011aware aggregation over richer, MR\u2011defined transformation families. The approach is instantiated on canonical ML-for-combinatorial tasks that provided the problem formulations and baselines: SAT satisfiability prediction via NeuroSAT and decision\u2011TSP via Prates et al. MAgg improves inference on these tasks by constructing MR graphs (e.g., literal/constraint transformations for SAT; cost scaling with threshold adjustment for decision\u2011TSP) and learning to aggregate across them, yielding an inference\u2011time augmentation mechanism grounded in metamorphic relations rather than constrained to invariances alone.",
+  "analysis_timestamp": "2026-01-06T23:09:26.436421"
+}

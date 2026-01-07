@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Structured Denoising Diffusion Models in Discrete State-Spaces (D3PM)",
+      "authors": "Jacob Austin et al.",
+      "year": 2021,
+      "role": "Foundational discrete diffusion framework",
+      "relationship_sentence": "Established discrete-state diffusion with tractable token marginals, which APD directly leverages to parallel-sample tokens from a dLLM\u2019s marginal distributions."
+    },
+    {
+      "title": "Diffusion-LM Improves Controllable Text Generation",
+      "authors": "Xiang Lisa Li et al.",
+      "year": 2022,
+      "role": "Practical diffusion language modeling",
+      "relationship_sentence": "Demonstrated diffusion LMs for text generation and highlighted speed\u2013quality tradeoffs in iterative refinement, motivating APD\u2019s quest for faster parallel decoding without quality collapse."
+    },
+    {
+      "title": "Blockwise Parallel Decoding for Neural Sequence Models",
+      "authors": "Mitchell Stern et al.",
+      "year": 2018,
+      "role": "Closest antecedent for multi-token parallel decoding with verification",
+      "relationship_sentence": "Introduced drafting multiple tokens per step and verifying blocks, directly informing APD\u2019s idea of adaptively choosing the number of tokens to decode in parallel."
+    },
+    {
+      "title": "Mask-Predict: Parallel Decoding of Conditional Masked Language Models",
+      "authors": "Marjan Ghazvininejad et al.",
+      "year": 2019,
+      "role": "Non-autoregressive iterative refinement and adaptive reveal",
+      "relationship_sentence": "Pioneered confidence-based progressive unmasking schedules; APD\u2019s dynamic adjustment of parallel token count follows the same principle of adapting the reveal rate to maintain quality."
+    },
+    {
+      "title": "Fast Inference from Transformers via Speculative Decoding",
+      "authors": "Yair Leviathan et al.",
+      "year": 2023,
+      "role": "Speculative decoding framework",
+      "relationship_sentence": "Provided the draft\u2013verify paradigm that APD explicitly inverts, replacing a large AR verifier with a small AR joint model while letting the dLLM supply parallel marginals."
+    },
+    {
+      "title": "Training Products of Experts by Minimizing Contrastive Divergence",
+      "authors": "Geoffrey E. Hinton",
+      "year": 2002,
+      "role": "Product-of-experts principle",
+      "relationship_sentence": "APD\u2019s multiplicative mixture of dLLM marginals with an auxiliary AR joint is a product-of-experts/log-linear combination that tightens the distribution while preserving parallelism."
+    },
+    {
+      "title": "On Using Monolingual Corpora in Neural Machine Translation (Shallow/Deep Fusion)",
+      "authors": "Caglar Gulcehre et al.",
+      "year": 2015,
+      "role": "Log-linear probability fusion during decoding",
+      "relationship_sentence": "Established combining model probabilities during decoding; APD analogously fuses (multiplicatively) diffusion marginals with a small AR model\u2019s joint to trade off speed and accuracy."
+    }
+  ],
+  "synthesis_narrative": "Adaptive Parallel Decoding (APD) sits at the intersection of discrete diffusion modeling and fast decoding techniques. Discrete diffusion foundations from D3PM (Austin et al., 2021) make it possible to compute token-level marginals for sequences, and Diffusion-LM (Li et al., 2022) shows these models can generate high-quality text but face speed\u2013quality tradeoffs from iterative refinement. To overcome the serial bottleneck of autoregression while retaining quality, APD borrows from two lines of work on accelerating decoding. First, blockwise parallel decoding (Stern et al., 2018) and Mask-Predict/CMLM (Ghazvininejad et al., 2019) demonstrate that decoding multiple tokens in parallel with adaptive reveal or verification can maintain quality; APD generalizes this insight to diffusion LLMs by dynamically adjusting how many tokens are sampled per iteration. Second, speculative decoding (Leviathan et al., 2023) popularized a draft\u2013verify pipeline using a small drafter and large verifier; APD inverts this configuration by letting the dLLM provide fast parallel marginals and a small autoregressive model supply a joint-sequence signal. The fusion mechanism itself is grounded in product-of-experts and shallow-fusion traditions (Hinton, 2002; Gulcehre et al., 2015), using a multiplicative (log-linear) combination to balance speed and consistency. Engineering choices such as enabling KV caching and masking-limits extend standard transformer inference practices to diffusion\u2019s iterative regime, yielding a tunable throughput\u2013quality tradeoff that unifies these prior ideas into a practical acceleration method for dLLMs.",
+  "analysis_timestamp": "2026-01-06T23:42:48.115265"
+}

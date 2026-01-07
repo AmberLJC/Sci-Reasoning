@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Learning Sparse Neural Networks through L0 Regularization",
+      "authors": "Christos Louizos et al.",
+      "year": 2018,
+      "arxiv_id": "1712.01312",
+      "role": "Extension",
+      "relationship_sentence": "This work formulates pruning as optimizing the expected loss under stochastic binary gates with an explicit sparsity control, which the current paper directly extends by deriving an FPK-guided infinitesimal update rule for the gate (mask) distribution as sparsity increases."
+    },
+    {
+      "title": "Variational Dropout Sparsifies Deep Neural Networks",
+      "authors": "Dmitry Molchanov et al.",
+      "year": 2017,
+      "arxiv_id": "1701.05369",
+      "role": "Inspiration",
+      "relationship_sentence": "By treating sparsification as learning parameters of a probabilistic distribution over weights and minimizing expected loss with a sparsity-inducing prior, this paper inspired the probabilistic, distribution-over-masks view that underpins the SFPK formulation."
+    },
+    {
+      "title": "To prune, or not to prune: exploring the efficacy of pruning for model compression",
+      "authors": "Zhu and Gupta",
+      "year": 2017,
+      "arxiv_id": "1710.01878",
+      "role": "Baseline",
+      "relationship_sentence": "Their gradual magnitude pruning schedule established the de facto baseline of incrementally increasing sparsity to mitigate accuracy drop, which the present work replaces with a mathematically derived FPK evolution to guide each infinitesimal sparsity increment."
+    },
+    {
+      "title": "The Lottery Ticket Hypothesis: Finding Sparse, Trainable Neural Networks",
+      "authors": "Jonathan Frankle et al.",
+      "year": 2019,
+      "arxiv_id": "1803.03635",
+      "role": "Foundation",
+      "relationship_sentence": "By framing pruning as the search for an optimal subnetwork at a given sparsity and popularizing iterative sparsification, this work establishes the problem setting that motivates modeling the evolution of the population of optimal subnetworks."
+    },
+    {
+      "title": "Stochastic Gradient Descent as Approximate Bayesian Inference",
+      "authors": "Stephan Mandt et al.",
+      "year": 2017,
+      "arxiv_id": "1704.04289",
+      "role": "Inspiration",
+      "relationship_sentence": "This paper\u2019s diffusion view of SGD and its associated Fokker\u2013Planck description of parameter-distribution dynamics directly motivate the thermodynamic/FPK machinery adapted here to derive an evolution equation for mask distributions under sparsity constraints."
+    },
+    {
+      "title": "SNIP: Single-Shot Network Pruning based on Connection Sensitivity",
+      "authors": "Namhoon Lee et al.",
+      "year": 2019,
+      "arxiv_id": "1810.02340",
+      "role": "Gap Identification",
+      "relationship_sentence": "SNIP\u2019s first-order, infinitesimal-loss-change criterion for one-shot pruning highlights the limitation of local, static saliency measures, which this paper addresses by prescribing a continuous-time, distributional evolution that minimizes expected loss under tiny sparsity increments."
+    },
+    {
+      "title": "Movement Pruning: Adaptive Sparsity by Fine-Tuning",
+      "authors": "Victor Sanh et al.",
+      "year": 2020,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "By learning mask scores during gradual sparsification to reduce accuracy loss, this method serves as a primary baseline that the proposed FPK-guided probabilistic pruning aims to improve upon with a principled evolution of mask distributions."
+    }
+  ],
+  "synthesis_narrative": "L0 regularization introduced stochastic binary gates and optimized the expected loss with an explicit sparsity control, establishing a principled way to view pruning through distributions over masks rather than fixed, deterministic selections. Variational Dropout further cemented the probabilistic perspective by learning distributions over weights that induce sparsity via variational objectives, demonstrating that compression can be cast as distributional optimization. SNIP provided a sensitivity-based, first-order approximation to the expected loss change under infinitesimal parameter removal, formalizing the notion of infinitesimal pruning decisions but in a one-shot, static setting. Gradual magnitude pruning showed that increasing sparsity smoothly during training substantially reduces accuracy degradation compared to abrupt pruning, though it relies on heuristic schedules. The Lottery Ticket Hypothesis sharpened the goal to locating optimal subnetworks at prescribed sparsity and popularized iterative sparsification as a path to such subnetworks. Finally, the diffusion view of optimization from Mandt et al. connected learning dynamics to Fokker\u2013Planck equations, offering thermodynamic tools to reason about probability flows in parameter space, while movement pruning demonstrated practical, score-based gradual sparsification as a strong baseline.\nTogether, these works exposed a gap: heuristics and local saliency guide either static or schedule-based pruning, but none specify how the optimal mask distribution should evolve under an infinitesimal increase in sparsity to minimize expected loss. By uniting the probabilistic gating formulations with the Fokker\u2013Planck thermodynamic lens, the current paper naturally proposes an evolution equation for the mask distribution and realizes it via particle simulation, yielding principled, closed-form guidance for each sparsity increment.",
+  "target_paper": {
+    "title": "Probabilistic Neural Pruning via Sparsity Evolutionary Fokker-Planck-Kolmogorov Equation",
+    "authors": "Zhanfeng Mo, Haosen Shi, Sinno Jialin Pan",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "Optimization for Deep Network, Probabilistic Method, Machine learning, Model compression",
+    "abstract": "Neural pruning aims to compress and accelerate deep neural networks by identifying the optimal subnetwork within a specified sparsity budget. In this work, we study how to gradually sparsify the unpruned dense model to the target sparsity level with minimal performance drop. Specifically, we analyze the evolution of the population of optimal subnetworks under continuous sparsity increments from a thermodynamic perspective. We first reformulate neural pruning as an expected loss minimization problem over the mask distributions. Then, we establish an effective approximation for the sparsity evolution of the optimal mask distribution, termed the **S**parsity Evolutionary **F**okker-**P**lanck-**K**olmogorov Equation (**SFPK**), which provides closed-form, mathematically tractable guidance on distributional transitions for minimizing the expected loss under an infinitesimal sparsity increment. On top of that, we propose SFPK-pruner, a particle simulation-based probabilistic pruning method,",
+    "openreview_id": "hJ1BaJ5ELp",
+    "forum_id": "hJ1BaJ5ELp"
+  },
+  "analysis_timestamp": "2026-01-06T17:58:27.159874"
+}

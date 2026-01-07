@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Deep Contextualized Word Representations (ELMo)",
+      "authors": "Matthew E. Peters; Mark Neumann; Mohit Iyyer; Matt Gardner; Christopher Clark; Kenton Lee; Luke Zettlemoyer",
+      "year": 2018,
+      "role": "Methodological precedent establishing backward language models",
+      "relationship_sentence": "TRLM builds on the idea from ELMo that training a backward LM (right-to-left) yields complementary information to a forward LM, but extends it from representation learning to generative scoring and reverse-direction inference for reranking."
+    },
+    {
+      "title": "A Diversity-Promoting Objective Function for Neural Conversation Models (MMI)",
+      "authors": "Jiwei Li; Michel Galley; Chris Brockett; Jianfeng Gao; Bill Dolan",
+      "year": 2016,
+      "role": "Conceptual foundation for using P(x|y) to rerank candidates",
+      "relationship_sentence": "Li et al. introduced reranking with reverse-direction probabilities (P(context|response)) via MMI, directly anticipating TRLM\u2019s core use of a reverse model to score queries given responses for selecting among forward generations."
+    },
+    {
+      "title": "Dual Learning for Machine Translation",
+      "authors": "Di He; Yingce Xia; Tao Qin; Liwei Wang; Tie-Yan Liu",
+      "year": 2016,
+      "role": "Framework coupling forward and backward models for mutual/unsupervised feedback",
+      "relationship_sentence": "TRLM adopts the dual-learning insight that reverse-direction modeling provides useful feedback to the forward model, but generalizes it beyond translation by training a time-reversed LM to supply unsupervised signals for broad LLM tasks."
+    },
+    {
+      "title": "Improving Neural Machine Translation Models with Monolingual Data via Back-Translation",
+      "authors": "Rico Sennrich; Barry Haddow; Alexandra Birch",
+      "year": 2016,
+      "role": "Evidence that reverse-generation improves forward performance",
+      "relationship_sentence": "Back-translation uses a reverse model to generate sources from targets, paralleling TRLM\u2019s idea of generating/scoring queries from responses to enrich or filter forward generations without supervised labels."
+    },
+    {
+      "title": "Self-Consistency Improves Chain of Thought Reasoning in Language Models",
+      "authors": "Xuezhi Wang; Jason Wei; Dale Schuurmans; Quoc V. Le; Ed H. Chi",
+      "year": 2022,
+      "role": "Decoding strategy that selects among multiple samples",
+      "relationship_sentence": "TRLM complements self-consistency: instead of majority voting over multiple chains, it introduces an orthogonal selection signal via P(query|response) from a time-reversed model to rerank forward candidates."
+    },
+    {
+      "title": "Reflexion: Language Agents with Verbal Reinforcement Learning",
+      "authors": "Noah Shinn; Arnav L. L. Labash; Ashwin Gopinath",
+      "year": 2023,
+      "role": "Motivation for self-critique/feedback without supervision",
+      "relationship_sentence": "Reflexion showed that LMs can improve by critiquing past outputs; TRLM provides a principled mechanism for such unsupervised feedback by learning a reverse-time model that quantitatively scores outputs rather than relying on heuristic critiques."
+    },
+    {
+      "title": "XLNet: Generalized Autoregressive Pretraining for Language Understanding",
+      "authors": "Zhilin Yang; Zihang Dai; Yiming Yang; Jaime Carbonell; Ruslan Salakhutdinov; Quoc V. Le",
+      "year": 2019,
+      "role": "Demonstrated benefits of alternative factorization orders",
+      "relationship_sentence": "XLNet\u2019s insight that different autoregressive factorizations capture complementary dependencies underpins TRLM\u2019s choice to explicitly train and use the reverse token order as a complementary model for scoring and generation."
+    }
+  ],
+  "synthesis_narrative": "The core contribution of Time-Reversed Language Models (TRLMs) is to operationalize reverse-direction modeling\u2014scoring queries given responses and generating in reverse token order\u2014as a principled, unsupervised feedback signal that complements forward LLMs. This builds directly on three strands of prior work. First, ELMo provided a concrete demonstration that backward language models learn information complementary to forward models; TRLM extends this from representation learning to generation and scoring for inverse inference. Second, a line of noisy-channel ideas in seq2seq\u2014MMI reranking in dialogue and dual learning/back-translation in machine translation\u2014established that reverse models P(x|y) can correct biases of forward models and enable learning or selection without parallel supervision. TRLM generalizes this insight to general-purpose LLMs: it trains a dedicated time-reversed LM from scratch and uses its likelihoods to rerank forward generations across tasks. Third, recent LLM prompting work (self-consistency, Reflexion) showed that unsupervised, model-internal feedback and selection among diverse samples substantially improve quality. TRLM complements these by replacing heuristic critiques or majority voting with a probabilistic reverse-model score that is theoretically analyzable and empirically complementary. Finally, XLNet\u2019s emphasis on alternative factorization orders motivates TRLM\u2019s explicit reverse-order pretraining and fine-tuning as capturing dependencies forward models miss. Together, these works converge on the insight that reverse-direction modeling provides a robust, general, and label-free signal for improving LLM generation\u2014precisely what TRLM formalizes and scales.",
+  "analysis_timestamp": "2026-01-06T23:33:36.253471"
+}

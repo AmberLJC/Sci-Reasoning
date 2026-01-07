@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Training language models to follow instructions with human feedback",
+      "authors": "Long Ouyang et al.",
+      "year": 2022,
+      "arxiv_id": "2203.02155",
+      "role": "Baseline",
+      "relationship_sentence": "Safe RLHF keeps the InstructGPT RLHF pipeline (preference model + KL-regularized PPO) as its primary baseline but replaces the single scalar reward with a constrained reward\u2013cost formulation."
+    },
+    {
+      "title": "Learning to summarize with human feedback",
+      "authors": "Nisan Stiennon et al.",
+      "year": 2020,
+      "arxiv_id": "2009.01325",
+      "role": "Foundation",
+      "relationship_sentence": "Safe RLHF directly builds on this paper\u2019s pairwise preference modeling and RL fine-tuning template for language generation, using learned preference models to drive policy optimization."
+    },
+    {
+      "title": "Training a Helpful and Harmless Assistant with Reinforcement Learning from Human Feedback",
+      "authors": "Yuntao Bai et al.",
+      "year": 2022,
+      "arxiv_id": "2204.05862",
+      "role": "Gap Identification",
+      "relationship_sentence": "By documenting the tension between helpfulness and harmlessness under a single reward model, this work exposed the core limitation that Safe RLHF addresses by decoupling preferences into separate reward (helpfulness) and cost (harmlessness) models."
+    },
+    {
+      "title": "Constitutional AI: Harmlessness from AI Feedback",
+      "authors": "Yuntao Bai et al.",
+      "year": 2022,
+      "arxiv_id": "2212.08073",
+      "role": "Inspiration",
+      "relationship_sentence": "This work\u2019s explicit separation of harmlessness supervision from helpfulness via constitutional feedback inspired Safe RLHF\u2019s idea to train distinct signals for safety and utility rather than collapsing them into one reward."
+    },
+    {
+      "title": "Constrained Markov Decision Processes",
+      "authors": "Eitan Altman",
+      "year": 1999,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "Safe RLHF formulates alignment as a CMDP\u2014maximizing expected reward subject to expected safety-cost constraints\u2014directly adopting the CMDP framework established in this monograph."
+    },
+    {
+      "title": "Reward Constrained Policy Optimization",
+      "authors": "Guy Tessler et al.",
+      "year": 2018,
+      "arxiv_id": "1805.11074",
+      "role": "Extension",
+      "relationship_sentence": "Safe RLHF adapts RCPO\u2019s Lagrangian primal\u2013dual approach by learning a safety cost model from preferences and updating the Lagrange multiplier during PPO fine-tuning to enforce cost constraints."
+    },
+    {
+      "title": "Benchmarking Safe Exploration in Deep Reinforcement Learning",
+      "authors": "Alex Ray et al.",
+      "year": 2019,
+      "arxiv_id": "1905.04819",
+      "role": "Extension",
+      "relationship_sentence": "Safe RLHF operationalizes PPO-Lagrangian style updates from this work to dynamically balance reward and learned safety cost when optimizing language model policies."
+    }
+  ],
+  "synthesis_narrative": "Pairwise preference modeling for text generation established that a learned reward model could guide policy optimization, with KL-regularized updates ensuring distributional faithfulness to a reference model. This template was crystallized for large language models by a widely used instruction-following pipeline that combined preference learning and PPO, but it treated disparate alignment goals as a single scalar reward. Concurrently, helpfulness\u2013harmlessness studies surfaced that optimizing for helpfulness can increase unsafe behaviors, and their training often collapsed safety and utility into one objective, leaving labelers to implicitly trade them off. A complementary line showed that harmlessness could be supervised separately, using principled rules to train a dedicated safety signal, indicating benefits of disentangling safety from utility. In parallel, constrained Markov decision processes formalized maximizing return under expected cost limits, and practical algorithms like RCPO and PPO-Lagrangian introduced primal\u2013dual updates to enforce constraints during policy optimization.\nTogether, these strands revealed a concrete opportunity: keep the successful RLHF machinery but separate the signals that drive it, casting safety as an explicit cost rather than a component of a single reward. The synthesis is to train distinct helpfulness and harmlessness models and optimize the policy in a CMDP using Lagrangian updates, letting the multiplier adaptively tune the trade-off. This reframing resolves annotator confusion, enforces quantifiable safety constraints, and preserves the benefits of RLHF while directly addressing the core tension between helpfulness and harmlessness.",
+  "target_paper": {
+    "title": "Safe RLHF: Safe Reinforcement Learning from Human Feedback",
+    "authors": "Josef Dai, Xuehai Pan, Ruiyang Sun, Jiaming Ji, Xinbo Xu, Mickel Liu, Yizhou Wang, Yaodong Yang",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Safe Reinforcement Learning, Reinforcement Learning from Human Feedback, Large Language Model, AI Safety",
+    "abstract": "With the development of large language models (LLMs), striking a balance between the performance and safety of AI systems has never been more critical. However, the inherent tension between the objectives of helpfulness and harmlessness presents a significant challenge during LLM training. To address this issue, we propose Safe Reinforcement Learning from Human Feedback (Safe RLHF), a novel algorithm for human value alignment. Safe RLHF explicitly decouples human preferences regarding helpfulness and harmlessness, effectively avoiding the crowd workers' confusion about the tension and allowing us to train separate reward and cost models. We formalize the safety concern of LLMs as an optimization task of maximizing the reward function while satisfying specified cost constraints. Leveraging the Lagrangian method to solve this constrained problem, Safe RLHF dynamically adjusts the balance between the two objectives during fine-tuning. Through a three-round fine-tuning using Safe RLHF, we ",
+    "openreview_id": "TyFrPOKYXw",
+    "forum_id": "TyFrPOKYXw"
+  },
+  "analysis_timestamp": "2026-01-06T08:35:53.678568"
+}

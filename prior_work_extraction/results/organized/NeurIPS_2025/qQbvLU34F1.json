@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "iCaRL: Incremental Classifier and Representation Learning",
+      "authors": "Sylvestre-Alvise Rebuffi, Alexander Kolesnikov, Georg Sperl, Christoph H. Lampert",
+      "year": 2017,
+      "role": "seminal_baseline_for_CIL_and_prototype_classifier",
+      "relationship_sentence": "Established the modern class-incremental learning setting and popularized prototype-based (NCM) prediction, framing the problem AnaCP targets and motivating our pursuit of near\u2013upper-bound performance without catastrophic forgetting."
+    },
+    {
+      "title": "Metric Learning for Large Scale Image Classification: Generalizing to New Classes at Near-Zero Cost",
+      "authors": "Thomas Mensink, Jakob Verbeek, Florent Perronnin, Gabriela Csurka",
+      "year": 2012,
+      "role": "analytic_classifier_foundation_(nearest_class_mean)",
+      "relationship_sentence": "Introduced the nearest class mean classifier with efficient updates, providing the analytic, prototype-based decision rule that AnaCP retains while adding analytic feature adaptation."
+    },
+    {
+      "title": "ScaIL: Classifier Weight Scaling for Class Incremental Learning",
+      "authors": "Hichem Belouadah, Adrian Popescu",
+      "year": 2020,
+      "role": "frozen_backbone_with_analytic_classifier_in_CIL",
+      "relationship_sentence": "Demonstrated that freezing features and analytically correcting classifier weights yields strong CIL performance, highlighting the efficiency\u2013adaptability trade-off that AnaCP resolves by enabling analytic feature updates."
+    },
+    {
+      "title": "CWR*: A Baseline for Class-Incremental Learning",
+      "authors": "Lorenzo Pellegrini, Gianluca Graffieti, Vincenzo Lomonaco, Davide Maltoni",
+      "year": 2019,
+      "role": "analytic_classifier_update_with_frozen_features",
+      "relationship_sentence": "Showed simple, rehearsal-friendly analytic updates to classifier layers over fixed representations are competitive, directly motivating AnaCP\u2019s retention of analytic classifiers while extending adaptability to the feature space."
+    },
+    {
+      "title": "Revisiting Nearest-Neighbor Baselines for Few-Shot Learning (SimpleShot)",
+      "authors": "Yan Wang, Wei-Lun Chao, Kilian Q. Weinberger, Laurens van der Maaten",
+      "year": 2020,
+      "role": "prototype_norm_and_metric_choice_in_fixed_embeddings",
+      "relationship_sentence": "Established that normalized prototypes in a frozen embedding with simple nearest-neighbor rules can be very strong, informing AnaCP\u2019s design choices around prototype computation and metric use with analytic machinery."
+    },
+    {
+      "title": "Supervised Contrastive Learning",
+      "authors": "Prannay Khosla, Piotr Teterwak, Chen Wang, Aaron Sarna, Yonglong Tian, Phillip Isola, Aaron Maschinot, Ce Liu, Dilip Krishnan",
+      "year": 2020,
+      "role": "contrastive_objective_inspiration_for_class_separation",
+      "relationship_sentence": "Provided the supervised contrastive objective that improves inter-class separation and intra-class compactness; AnaCP mirrors these benefits via an analytic contrastive projection rather than gradient-based optimization."
+    },
+    {
+      "title": "Incremental Linear Discriminant Analysis for Classification of Data Streams",
+      "authors": "Shan He Pang, Seiichi Ozawa, Nikola Kasabov",
+      "year": 2005,
+      "role": "analytic_projection_with_incremental_updates",
+      "relationship_sentence": "Presented closed-form, incrementally updatable discriminant projections, inspiring AnaCP\u2019s gradient-free, analytic feature adaptation mechanism compatible with class-incremental streams."
+    }
+  ],
+  "synthesis_narrative": "AnaCP sits at the intersection of two influential lines in class-incremental learning: analytic, prototype-based classification over frozen features, and contrastive representation learning for class separation. The CIL foundations laid by iCaRL defined the evaluation protocol and popularized prototype-based prediction, while Mensink et al. provided the nearest-class-mean formulation that underpins efficient analytic classifiers. Methods like CWR* and ScaIL showed that freezing a pre-trained encoder and updating only the classifier with simple, closed-form or calibration steps can be highly competitive\u2014yet they also exposed a key limitation: without adapting representations to the evolving set of classes, performance saturates below the joint-training upper bound. SimpleShot further reinforced that, with the right normalization and metric, analytic prototype classifiers over fixed embeddings are remarkably strong, sharpening the question of how to add feature plasticity without costly gradient-based training. Supervised Contrastive Learning introduced a powerful separation objective that, if harnessed without backpropagation, could endow CIL with adaptable yet stable features. AnaCP leverages this idea by recasting contrastive separation into an analytic projection update, drawing on the spirit of incremental LDA to achieve closed-form, streaming-compatible adaptation of the feature space. By marrying analytic prototype classification with an incrementally computable, contrastive-inspired projection, AnaCP preserves efficiency and stability while recovering much of the performance gap to the upper bound.",
+  "analysis_timestamp": "2026-01-06T23:42:48.130358"
+}

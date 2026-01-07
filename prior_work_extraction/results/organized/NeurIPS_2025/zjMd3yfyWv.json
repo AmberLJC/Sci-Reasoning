@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Ex-Post Differential Privacy",
+      "authors": "X. Wu et al.",
+      "year": 2019,
+      "role": "Foundational formulation of ex-post DP and correlated-noise schedule",
+      "relationship_sentence": "The paper\u2019s core utility-first guarantee directly builds on Wu et al.\u2019s ex-post DP idea of progressively reducing correlated noise and charging privacy only to the final, least-noisy release, which we adapt to validation metrics for hyperparameter tuning."
+    },
+    {
+      "title": "Private Selection from Private Candidates",
+      "authors": "J. Liu, K. Talwar",
+      "year": 2019,
+      "role": "Model/hyperparameter selection primitive under DP",
+      "relationship_sentence": "Our method leverages the PSPC paradigm for choosing among privately trained candidates, but replaces worst-case composition with an ex-post analysis that can substantially reduce the privacy cost when tuning halts early upon meeting a target utility."
+    },
+    {
+      "title": "Mechanism Design via Differential Privacy",
+      "authors": "F. McSherry, K. Talwar",
+      "year": 2007,
+      "role": "Exponential Mechanism for utility-driven DP selection",
+      "relationship_sentence": "We reinterpret the Exponential Mechanism through an ex-post lens to obtain a utility-first selection rule for hyperparameters, aligning the release decision to a target utility while certifying an ex-post epsilon\u2013delta."
+    },
+    {
+      "title": "Privacy Odometers and Filters: Pay-as-you-Go Composition",
+      "authors": "R. Rogers, A. Roth, J. Ullman, S. Vadhan",
+      "year": 2016,
+      "role": "Adaptive, realized privacy accounting",
+      "relationship_sentence": "The pay-as-you-go accounting viewpoint underpins our ex-post certification across adaptively chosen tuning rounds, enabling us to track and bound the realized privacy loss incurred by progressive denoising and early stopping."
+    },
+    {
+      "title": "Differential Privacy and Robust Statistics (Propose-Test-Release)",
+      "authors": "C. Dwork, J. Lei",
+      "year": 2009,
+      "role": "Release-when-stable principle",
+      "relationship_sentence": "PTR\u2019s stability-triggered release concept informs our halting rule: we release a near-final validation score (and hence a hyperparameter choice) only when noisy evidence exceeds a utility threshold, aligning with utility-first ex-post guarantees."
+    },
+    {
+      "title": "The Reusable Holdout: Preserving Validity in Adaptive Data Analysis",
+      "authors": "C. Dwork, V. Feldman, M. Hardt, T. Pitassi, O. Reingold, A. Roth",
+      "year": 2015,
+      "role": "Adaptive validation under privacy",
+      "relationship_sentence": "The reusable holdout motivates our separation of a private validation channel for repeated, adaptive probing during tuning, which we combine with ex-post accounting to keep the realized privacy loss minimal while preventing overfitting."
+    }
+  ],
+  "synthesis_narrative": "The key contribution\u2014private hyperparameter tuning with an ex-post (utility-first) guarantee\u2014stands on two pillars: ex-post privacy and private selection. Wu et al. (2019) provide the central blueprint by introducing ex-post DP and a progressive, correlated-noise schedule wherein only the least noisy reveal determines the privacy charge; our method adapts this schedule to validation metrics across candidate hyperparameters, enabling early stopping once a target utility is met. To effectuate the final selection among candidates, we draw on selection primitives: McSherry\u2013Talwar\u2019s Exponential Mechanism offers a utility-aware baseline selector, while Liu\u2013Talwar\u2019s Private Selection from Private Candidates formalizes choosing the best among privately computed models. We integrate these with ex-post accounting to avoid worst-case composition, achieving lower realized privacy when tuning halts early.\n\nAdaptive privacy accounting is critical: Rogers et al.\u2019s privacy odometers/filters supply the pay-as-you-go view we use to certify realized epsilon\u2013delta under adaptive tuning rounds. For the stopping rule, Dwork\u2013Lei\u2019s Propose-Test-Release inspires our release-when-stable criterion, mirroring a utility threshold crossed with correlated noise while preserving privacy. Finally, the reusable holdout framework guides our private validation protocol, supporting many adaptive probes without compromising generalization. Together, these works enable a tuning pipeline that targets a desired utility first, revealing just enough noisy information to certify success and pay only the privacy cost that actually materializes.",
+  "analysis_timestamp": "2026-01-07T00:21:32.230663"
+}

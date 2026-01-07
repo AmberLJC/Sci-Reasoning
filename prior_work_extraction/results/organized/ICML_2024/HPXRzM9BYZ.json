@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Measuring Robustness to Natural Distribution Shifts in Image Classification",
+      "authors": "Rohan Taori et al.",
+      "year": 2020,
+      "role": "Baseline",
+      "relationship_sentence": "Introduced the accuracy-on-the-line/effective-robustness paradigm that predicts OOD accuracy from ID accuracy; LCA-on-the-Line directly generalizes this baseline by replacing flat accuracy with WordNet-based LCA distances to fix its failure across heterogeneous training regimes (VMs vs VLMs)."
+    },
+    {
+      "title": "ImageNet Large Scale Visual Recognition Challenge",
+      "authors": "Olga Russakovsky et al.",
+      "year": 2015,
+      "role": "Foundation",
+      "relationship_sentence": "Established WordNet-based hierarchical evaluation for ImageNet, including measuring semantic distance between predicted and true labels; LCA-on-the-Line builds on this hierarchical evaluation by operationalizing the Lowest Common Ancestor (LCA) distance as the core metric."
+    },
+    {
+      "title": "WordNet: A Lexical Database for English",
+      "authors": "George A. Miller et al.",
+      "year": 1995,
+      "role": "Foundation",
+      "relationship_sentence": "Provides the taxonomy underlying ImageNet\u2019s class hierarchy; the paper\u2019s key idea\u2014measuring prediction\u2013label distance via the Lowest Common Ancestor\u2014depends directly on WordNet\u2019s tree structure."
+    },
+    {
+      "title": "Learning Transferable Visual Models From Natural Language Supervision",
+      "authors": "Alec Radford et al.",
+      "year": 2021,
+      "role": "Gap Identification",
+      "relationship_sentence": "Showed that CLIP-style VLMs often have lower ID accuracy yet superior OOD performance, exposing a core limitation of accuracy-on-the-line/effective-robustness; LCA-on-the-Line is designed precisely to reconcile such cross-supervision discrepancies."
+    },
+    {
+      "title": "Do Better ImageNet Models Transfer Better?",
+      "authors": "Simon Kornblith et al.",
+      "year": 2019,
+      "role": "Foundation",
+      "relationship_sentence": "Documented strong correlations between ImageNet accuracy and transfer performance, laying conceptual groundwork for predicting OOD behavior from ID metrics that LCA-on-the-Line extends with hierarchical semantics."
+    },
+    {
+      "title": "Do ImageNet Classifiers Generalize to ImageNet?",
+      "authors": "Benjamin Recht et al.",
+      "year": 2019,
+      "role": "Related Problem",
+      "relationship_sentence": "Introduced ImageNet-V2 as a natural distribution shift test, a canonical OOD target used to assess accuracy-on-the-line; LCA-on-the-Line evaluates and validates its predictions on such ImageNet variants."
+    },
+    {
+      "title": "ObjectNet: A Large-Scale Bias-Controlled Dataset for Pushing the Limits of Object Recognition",
+      "authors": "Andrei Barbu et al.",
+      "year": 2019,
+      "role": "Related Problem",
+      "relationship_sentence": "Provided a controlled OOD benchmark emphasizing viewpoint/background shifts; LCA-on-the-Line leverages such benchmarks to demonstrate improved ID-to-OOD performance prediction using LCA distances."
+    }
+  ],
+  "synthesis_narrative": "LCA-on-the-Line emerges by fusing two lines of prior work: (1) predicting out-of-distribution performance from in-distribution signals, and (2) hierarchical, taxonomy-aware evaluation of recognition. Taori et al. (2020) crystallized the accuracy-on-the-line/effective-robustness framework, showing a near-linear relationship between ID and OOD accuracy within comparable training regimes; this became the dominant baseline for assessing OOD generalization. However, Radford et al. (2021) revealed that vision\u2013language models trained with natural language supervision can exhibit superior OOD performance despite similar or lower ID accuracy, breaking the core premise of accuracy-on-the-line when model families differ. To address this, the present work returns to the semantics of labels: ImageNet\u2019s WordNet-based hierarchy from Russakovsky et al. (2015), rooted in Miller\u2019s WordNet (1995), provides a principled way to measure how \"wrong\" a prediction is via Lowest Common Ancestor distance. Building on the broader insight from Kornblith et al. (2019) that ID performance can predict transfer, LCA-on-the-Line replaces flat accuracy with hierarchical LCA distance, restoring a meaningful ID\u2192OOD predictor across heterogeneous supervision. The framework is validated on established natural shift benchmarks\u2014such as ImageNet-V2 (Recht et al., 2019) and ObjectNet (Barbu et al., 2019)\u2014demonstrating that taxonomy-aware metrics resolve the effective-robustness shortcomings that arise when comparing vision-only models and vision\u2013language models.",
+  "analysis_timestamp": "2026-01-06T23:09:26.438487"
+}

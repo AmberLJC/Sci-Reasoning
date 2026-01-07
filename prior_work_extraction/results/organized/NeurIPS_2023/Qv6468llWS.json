@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Jonathan Ho, Ajay Jain, Pieter Abbeel",
+      "year": 2020,
+      "role": "Diffusion models foundation",
+      "relationship_sentence": "PDE-Refiner adapts DDPM\u2019s iterative denoising paradigm and noise-level conditioning to design a multistep refinement schedule that progressively restores neglected high-frequency components in PDE rollouts."
+    },
+    {
+      "title": "Score-Based Generative Modeling through Stochastic Differential Equations",
+      "authors": "Yang Song, Jascha Sohl-Dickstein, Diederik P. Kingma, Abhishek Kumar, Stefano Ermon, Ben Poole",
+      "year": 2021,
+      "role": "Score-based SDE framework",
+      "relationship_sentence": "The predictor\u2013corrector view and continuous noise schedules from score-based models inform PDE-Refiner\u2019s refinement dynamics and stepwise correction mechanism across scales."
+    },
+    {
+      "title": "Fourier Neural Operator for Parametric Partial Differential Equations",
+      "authors": "Zongyi Li, Nikola Kovachki, Kamyar Azizzadenesheli, Burigede Liu, Kaushik Bhattacharya, Andrew M. Stuart, Anima Anandkumar",
+      "year": 2021,
+      "role": "Operator-learning baseline and spectral representation",
+      "relationship_sentence": "FNO provides the core neural PDE surrogate and spectral viewpoint that PDE-Refiner augments, demonstrating that iterative refinement can recover frequency content FNO under-represents in long rollouts."
+    },
+    {
+      "title": "Learning Mesh-Based Simulation with Graph Networks",
+      "authors": "Tobias Pfaff, Meire Fortunato, Alvaro Sanchez-Gonzalez, Peter Battaglia",
+      "year": 2021,
+      "role": "Learned physics simulators and rollout stability",
+      "relationship_sentence": "This work crystallized neural simulators\u2019 exposure-bias and error accumulation over long horizons, directly motivating PDE-Refiner\u2019s corrective refinement during rollout."
+    },
+    {
+      "title": "On the Spectral Bias of Neural Networks",
+      "authors": "Nasim Rahaman, Aristide Baratin, Devansh Arpit, Felix Draxler, Min Lin, et al.",
+      "year": 2019,
+      "role": "Frequency bias theory",
+      "relationship_sentence": "The finding that neural nets learn low frequencies first underpins PDE-Refiner\u2019s diagnosis that high-frequency (non-dominant) modes are neglected and thus must be explicitly recovered."
+    },
+    {
+      "title": "When and Why PINNs Fail to Train: A Frequency Perspective and Remedy",
+      "authors": "Sifan Wang, Hanwen Wang, Paris Perdikaris",
+      "year": 2021,
+      "role": "Frequency remedies in physics ML",
+      "relationship_sentence": "By linking physics-informed learning failures to frequency coverage and proposing frequency-aware remedies, this work motivates PDE-Refiner\u2019s emphasis on balanced frequency modeling during rollout."
+    },
+    {
+      "title": "Image Super-Resolution via Iterative Refinement (SR3)",
+      "authors": "Chitwan Saharia, Jonathan Ho, William Chan, Tim Salimans, David J. Fleet, Mohammad Norouzi",
+      "year": 2021,
+      "role": "Diffusion for high-frequency detail restoration",
+      "relationship_sentence": "SR3 demonstrates that diffusion-style repeated refinement excels at reconstructing high-frequency details, a principle PDE-Refiner transfers to spatiotemporal PDE fields."
+    }
+  ],
+  "synthesis_narrative": "PDE-Refiner\u2019s core insight is that neural PDE solvers lose non-dominant, often high-frequency, spatial information during long rollouts, driving instability and drift. This diagnosis is grounded in spectral-bias theory from Rahaman et al., which established that standard neural networks preferentially fit low frequencies, and reinforced by physics-specific analyses such as Wang et al.\u2019s frequency perspective on PINNs. Concurrently, the neural simulator literature, exemplified by mesh-based graph networks from Pfaff et al., highlighted exposure bias and compounding rollout errors in learned dynamics, framing the stability problem PDE-Refiner targets.\n\nOn the solution side, operator-learning methods like the Fourier Neural Operator (Li et al.) provided strong neural surrogates and a spectral lens but still underrepresented high-frequency modes over time. PDE-Refiner\u2019s architectural leap\u2014multistep refinement\u2014draws directly from diffusion and score-based generative modeling. DDPM (Ho et al.) supplies the iterative denoising template and noise-level conditioning, while score-based SDE modeling (Song et al.) contributes the notion of continuous schedules and predictor\u2013corrector stepping to traverse scales. SR3\u2019s success in reconstructing high-frequency image details via repeated refinement offers a concrete precedent for using diffusion-inspired procedures to recover lost fine-scale structure.\n\nBy uniting these strands\u2014spectral diagnostics from theory and physics ML, operator-learning foundations, and diffusion-driven iterative refinement\u2014PDE-Refiner formulates a conditional, multistep corrector that restores high-frequency content during rollout, yielding stable, accurate long-horizon PDE predictions.",
+  "analysis_timestamp": "2026-01-06T23:42:49.091784"
+}

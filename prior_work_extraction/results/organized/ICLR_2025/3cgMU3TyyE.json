@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "POMDP-based statistical spoken dialog systems: A review",
+      "authors": "Steve J. Young et al.",
+      "year": 2013,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "This survey formalized dialog management as an MDP/POMDP with delayed, end-of-conversation rewards, the exact problem setup SCOPE adopts to plan multi-turn conversational decisions."
+    },
+    {
+      "title": "Tree of Thoughts: Deliberate Problem Solving with Large Language Models",
+      "authors": "Shunyu Yao et al.",
+      "year": 2024,
+      "arxiv_id": "2305.10601",
+      "role": "Baseline",
+      "relationship_sentence": "SCOPE directly targets ToT\u2019s inference-time tree search that relies on expensive LLM rollouts at each node by replacing those rollouts with MCTS over a learned semantic transition model."
+    },
+    {
+      "title": "Graph of Thoughts: Solving Elaborate Problems with Large Language Models",
+      "authors": "Przemyslaw Besta et al.",
+      "year": 2023,
+      "arxiv_id": "2308.09687",
+      "role": "Related Problem",
+      "relationship_sentence": "SCOPE generalizes GoT\u2019s structured exploration idea by operating in a continuous semantic state space rather than enumerating discrete thought graphs, thereby reducing the number of LLM queries required."
+    },
+    {
+      "title": "Self-Consistency Improves Chain of Thought Reasoning in Language Models",
+      "authors": "Xuezhi Wang et al.",
+      "year": 2023,
+      "arxiv_id": "2203.11171",
+      "role": "Gap Identification",
+      "relationship_sentence": "SCOPE explicitly addresses the computational burden highlighted by self-consistency\u2019s need for many sampled rollouts by learning value estimates in semantic space to avoid majority-vote sampling at every turn."
+    },
+    {
+      "title": "Mastering Atari, Go, Chess and Shogi by Planning with a Learned Model (MuZero)",
+      "authors": "Julian Schrittwieser et al.",
+      "year": 2020,
+      "arxiv_id": "1911.08265",
+      "role": "Extension",
+      "relationship_sentence": "SCOPE adapts MuZero\u2019s core recipe\u2014MCTS over a learned latent dynamics and value model\u2014to conversations by modeling stochastic conversational transitions in a dense semantic space."
+    },
+    {
+      "title": "Dream to Control: Learning Behaviors by Latent Imagination (Dreamer)",
+      "authors": "Danijar Hafner et al.",
+      "year": 2019,
+      "arxiv_id": "1912.01603",
+      "role": "Inspiration",
+      "relationship_sentence": "SCOPE borrows Dreamer\u2019s key insight of simulating future trajectories in a compact latent space to dramatically cut environment interactions, here replacing environment calls with imagined conversational rollouts in embedding space."
+    }
+  ],
+  "synthesis_narrative": "Dialog management has long been cast as sequential decision making with delayed rewards, as established by the POMDP formulation for spoken dialog systems, which emphasizes planning under uncertainty and reward arriving only at conversation end. Tree of Thoughts introduced deliberate search over intermediate reasoning steps, expanding a decision tree with LLM-simulated rollouts to select better next actions, while Graph of Thoughts broadened this into graph-structured exploration; both achieved stronger solutions but at the cost of many expensive LLM calls. Self-consistency similarly improved reasoning by sampling multiple complete trajectories and aggregating via majority vote, reinforcing the empirical link between better outcomes and extensive rollouts. In contrast, model-based RL paved an efficient alternative: MuZero learned latent dynamics and value to plan with MCTS without querying the true environment, and Dreamer showed that \u201cimagination\u201d in a compact latent space can substitute for real interactions while preserving planning quality. Together these works revealed that discrete, rollout-heavy search improves decisions but is computationally prohibitive, whereas latent-space world models can enable efficient planning by simulating futures cheaply. Building on this, the present work models conversational transitions directly in a dense semantic space and runs MCTS atop learned dynamics and value, effectively translating ToT-style lookahead into MuZero/Dreamer-style latent planning for multi-turn conversations, thus maintaining decision quality while minimizing LLM queries.",
+  "target_paper": {
+    "title": "Broaden your SCOPE! Efficient Multi-turn Conversation Planning for LLMs with Semantic Space",
+    "authors": "Zhiliang Chen, Xinyuan Niu, Chuan-Sheng Foo, Bryan Kian Hsiang Low",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "Multi-turn Conversation Planning, Multi-turn LLM Optimization, MCTS, Semantic Space",
+    "abstract": "Large language models (LLMs) are used in chatbots or AI assistants to hold conversations with a human user. In such applications, the quality (e.g., user engagement, safety) of a conversation is important and can only be exactly known at the end of the conversation. To maximize its expected quality, conversation planning reasons about the stochastic transitions within a conversation to select the optimal LLM response at each turn. Existing simulation-based conversation planning algorithms typically select the optimal response by simulating future conversations with a large number of LLM queries at every turn. However, this process is extremely time-consuming and hence impractical for real-time conversations. This paper presents a novel approach called Semantic space COnversation Planning with improved Efficiency (SCOPE) that exploits the dense semantic representation of conversations to perform conversation planning efficiently. In particular, SCOPE models the stochastic transitions in",
+    "openreview_id": "3cgMU3TyyE",
+    "forum_id": "3cgMU3TyyE"
+  },
+  "analysis_timestamp": "2026-01-06T16:06:18.344479"
+}

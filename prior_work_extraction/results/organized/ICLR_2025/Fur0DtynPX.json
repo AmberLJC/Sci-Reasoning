@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Learning nonlinear operators via DeepONet based on the universal approximation theorem of operators",
+      "authors": "Lu et al.",
+      "year": 2021,
+      "role": "Foundation",
+      "relationship_sentence": "GridMix targets the core limitation of DeepONet\u2019s branch\u2013trunk (global) modulation\u2014strong global modeling but weak spatially varying detail\u2014by replacing purely global conditioning with a spatial mixture of grid modulations."
+    },
+    {
+      "title": "Fourier Neural Operator for Parametric Partial Differential Equations",
+      "authors": "Li et al.",
+      "year": 2021,
+      "role": "Baseline",
+      "relationship_sentence": "FNO is a principal baseline representing global operator learning; GridMix is explicitly designed to retain FNO-like global structure while overcoming its difficulty in reconstructing fine local details via spatially mixed grid modulation."
+    },
+    {
+      "title": "Feature-wise Linear Modulation for Visual Reasoning (FiLM)",
+      "authors": "Perez et al.",
+      "year": 2018,
+      "role": "Foundation",
+      "relationship_sentence": "FiLM established feature-wise modulation as a conditioning mechanism; GridMix extends this paradigm from global, sample-level conditioning to explicitly spatial modulation by mixing multiple grid-based representations in neural fields for PDEs."
+    },
+    {
+      "title": "Semantic Image Synthesis with Spatially-Adaptive Normalization (SPADE)",
+      "authors": "Park et al.",
+      "year": 2019,
+      "role": "Inspiration",
+      "relationship_sentence": "SPADE demonstrated that per-location (spatial) modulation yields sharper, locally accurate generations; GridMix adapts this spatially adaptive modulation idea to neural fields for PDEs, but crucially replaces a single spatial modulator with a learnable mixture of grid-based modulators to balance locality and global coherence."
+    },
+    {
+      "title": "Instant Neural Graphics Primitives with a Multiresolution Hash Encoding",
+      "authors": "M\u00fcller et al.",
+      "year": 2022,
+      "role": "Gap Identification",
+      "relationship_sentence": "Multiresolution hash grids are a canonical \u2018vanilla\u2019 grid-based spatial representation that offers strong locality yet can overfit a fixed spatial domain and lack global context; GridMix directly addresses these shortcomings by learning mixtures of grids that encode global structure while preserving local fidelity."
+    },
+    {
+      "title": "KiloNeRF: Speeding up Neural Radiance Fields with Thousands of Tiny MLPs",
+      "authors": "Reiser et al.",
+      "year": 2021,
+      "role": "Related Problem",
+      "relationship_sentence": "KiloNeRF\u2019s spatial mixture-of-experts shows how decomposing space into local components and blending them improves detail and scalability; GridMix adopts the same spatial mixture principle but applies it to grid-based modulators for PDE neural fields rather than to multiple radiance-field MLP experts."
+    }
+  ],
+  "synthesis_narrative": "GridMix is positioned against the global-conditioning paradigm that dominates neural-field operator learning for PDEs. DeepONet formalized the branch\u2013trunk factorization and became the archetype of global modulation\u2014strong at capturing global structures but comparatively weak in reconstructing spatially varying details. Similarly, the Fourier Neural Operator offers a powerful global inductive bias via spectral convolutions, yet often struggles with fine-grained locality. These global methods supplied both the problem formulation and the baseline GridMix seeks to improve.\nOn the other side of the spectrum, spatial modulation techniques\u2014exemplified in vision by SPADE\u2014show that per-location modulation is a direct route to sharper local fidelity. FiLM provided the broader conditioning framework that connects global and spatial modulation conceptually. However, when na\u00efvely importing grid-based spatial encodings from neural graphics (e.g., Instant-NGP\u2019s multiresolution hash grids), locality is achieved at the expense of robust global modeling and generalization across spatial domains, leading to overfitting to the training domain.\nThe key insight behind GridMix is to combine these worlds by mixing multiple grid-based modulators so that global structure can be explored while preserving locality. This mixture idea is reinforced by spatial mixture-of-experts in neural fields such as KiloNeRF, which shows how blending local components can yield both detail and scalability. GridMix operationalizes this as a mixture of grid representations for modulation and complements it with spatial domain augmentation to strengthen robustness to domain shifts, thereby directly addressing the explicit gaps in both global and vanilla grid-based approaches.",
+  "analysis_timestamp": "2026-01-06T23:09:26.643387"
+}

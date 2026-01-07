@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Deep Learning with Differential Privacy",
+      "authors": "Martin Abadi et al.",
+      "year": 2016,
+      "arxiv_id": "1607.00133",
+      "role": "Foundation",
+      "relationship_sentence": "The certificate proves that each DP-SGD step\u2014per-example gradient clipping and addition of Gaussian noise\u2014was performed as in Abadi et al.\u2019s DP-SGD, and the claimed (\u03b5, \u03b4) guarantee refers to this training procedure."
+    },
+    {
+      "title": "R\u00e9nyi Differential Privacy",
+      "authors": "Ilya Mironov",
+      "year": 2017,
+      "arxiv_id": "1702.07476",
+      "role": "Foundation",
+      "relationship_sentence": "The privacy accounting in the certificate composes per-iteration losses using R\u00e9nyi Differential Privacy, directly adopting Mironov\u2019s framework to compute an overall (\u03b5, \u03b4)."
+    },
+    {
+      "title": "Subsampled R\u00e9nyi Differential Privacy",
+      "authors": "Yu-Xiang Wang et al.",
+      "year": 2019,
+      "arxiv_id": "1908.10530",
+      "role": "Extension",
+      "relationship_sentence": "The epsilon reported by the certificate is computed under the subsampled Gaussian mechanism used by DP-SGD, following the RDP analysis for subsampling introduced by Wang, Balle, and Kasiviswanathan."
+    },
+    {
+      "title": "Improving the Gaussian Mechanism for Differential Privacy: Analytical Calibration",
+      "authors": "Borja Balle et al.",
+      "year": 2018,
+      "arxiv_id": "1805.06530",
+      "role": "Foundation",
+      "relationship_sentence": "Noise calibration in the certified training (i.e., the \u03c3 required for a target (\u03b5, \u03b4)) relies on the analytic characterization of the Gaussian mechanism from this work, which the proof system references when attesting correct noise addition."
+    },
+    {
+      "title": "Proof of Learning: Definitions and Practice",
+      "authors": "Fangzhou Jia et al.",
+      "year": 2021,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "The idea of producing a cryptographic proof tied to the training process is adapted here to certify DP-specific predicates, extending PoL\u2019s training-time attestations to a zero-knowledge setting that proves privacy rather than data provenance."
+    },
+    {
+      "title": "Membership Inference Attacks From First Principles",
+      "authors": "Nicholas Carlini et al.",
+      "year": 2022,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "This work formalizes the optimal likelihood-ratio membership audit that underpins post hoc DP auditing, whose intrinsic lower-bound nature and high computational cost are the explicit limitations replaced by proactive zero-knowledge certification."
+    },
+    {
+      "title": "Bulletproofs: Short Proofs for Confidential Transactions and More",
+      "authors": "Benedikt B\u00fcnz et al.",
+      "year": 2018,
+      "arxiv_id": "1707.01499",
+      "role": "Extension",
+      "relationship_sentence": "The customized zero-knowledge protocol builds on Bulletproof-style inner-product and range arguments to efficiently prove linear relations and norm/clipping constraints on gradients without revealing the underlying values."
+    }
+  ],
+  "synthesis_narrative": "Differentially private training as practiced in modern deep learning follows DP-SGD, where each step clips per-example gradients and injects Gaussian noise; the method and its moments accountant originate in Abadi et al. R\u00e9nyi Differential Privacy, introduced by Mironov, provides a tight and composable accounting framework, while the subsampled RDP analysis of Wang, Balle, and Kasiviswanathan specifies how privacy accumulates under mini-batch sampling, the regime DP-SGD operates in. The analytic calibration of the Gaussian mechanism by Balle and Wang precisely links target (\u03b5, \u03b4) to the noise scale \u03c3, giving a principled basis for certifying that the injected noise suffices for the claimed guarantee. In parallel, Proof of Learning (Jia et al.) showed how to bind a training run to cryptographic evidence by producing proofs tied to training steps, but without confidentiality or privacy semantics. Membership inference work from first principles (Carlini et al.) established optimal auditing tests widely used to post hoc estimate privacy loss, highlighting that such audits only yield lower bounds and can be computationally intensive. Finally, Bulletproofs furnished efficient zero-knowledge inner-product and range arguments, enabling succinct proofs of linear relations and norm bounds over hidden values. Together, these works exposed a gap: auditing-based checks are weak and costly, while training-time attestations lacked privacy objectives. The natural synthesis is a confidential proof system that, during DP-SGD, proves per-step clipping and correctly sampled Gaussian noise, composes privacy via (subsampled) RDP, and outputs a verifiable (\u03b5, \u03b4) certificate\u2014leveraging Bulletproof-style arguments for efficiency and adopting DP accounting results for correctness.",
+  "target_paper": {
+    "title": "Confidential-DPproof: Confidential Proof of Differentially Private Training",
+    "authors": "Ali Shahin Shamsabadi, Gefei Tan, Tudor Ioan Cebere, Aur\u00e9lien Bellet, Hamed Haddadi, Nicolas Papernot, Xiao Wang, Adrian Weller",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "privacy auditing, zero knowledge proof, differentially private training",
+    "abstract": "Post hoc privacy auditing techniques can be used to test the privacy guarantees of a model, but come with several limitations: (i) they can only establish lower bounds on the privacy loss, (ii) the intermediate model updates and some data must be shared with the auditor to get a better approximation of the privacy loss, and (iii) the auditor typically faces a steep computational cost to run a large number of attacks. In this paper, we propose to proactively generate a cryptographic certificate of privacy during training to forego such auditing limitations. We introduce Confidential-DPproof , a framework for Confidential Proof of Differentially Private Training, which enhances training with a certificate of the $(\\varepsilon,\\delta)$-DP guarantee achieved. To obtain this certificate without revealing information about the training data or model, we design a customized zero-knowledge proof protocol tailored to the requirements introduced by differentially private training, including rand",
+    "openreview_id": "PQY2v6VtGe",
+    "forum_id": "PQY2v6VtGe"
+  },
+  "analysis_timestamp": "2026-01-06T07:33:48.627995"
+}

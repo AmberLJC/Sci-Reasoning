@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "LightGCN: Simplifying and Powering Graph Convolution Network for Recommendation",
+      "authors": "Xiangnan He et al.",
+      "year": 2020,
+      "role": "Backbone CF graph encoder",
+      "relationship_sentence": "The proposed method builds on the LightGCN paradigm of learning user\u2013item representations over the interaction graph, and its path-based contrastive signals are designed to enhance these CF embeddings under sparsity."
+    },
+    {
+      "title": "Self-supervised Graph Learning for Recommendation (SGL)",
+      "authors": "Xia et al.",
+      "year": 2021,
+      "role": "Pioneered graph contrastive learning for recommendation",
+      "relationship_sentence": "SGL introduced view augmentation and InfoNCE-style alignment on user\u2013item graphs, and the new paper explicitly addresses SGL\u2019s limitation that augmentations can push apart semantically related nodes along interaction paths by replacing node-level views with path-level positives."
+    },
+    {
+      "title": "Neighborhood-enriched Contrastive Learning for Recommendation (NCL)",
+      "authors": "Lin et al.",
+      "year": 2022,
+      "role": "Mitigating false negatives via neighbor-based positives",
+      "relationship_sentence": "NCL\u2019s idea of using structural neighbors as positive signals directly motivates the intra-path contrast in the new work, which generalizes neighbors to entire interaction paths to better preserve multi-hop semantics."
+    },
+    {
+      "title": "HeCo: Heterogeneous Graph Contrastive Learning",
+      "authors": "Wang et al.",
+      "year": 2021,
+      "role": "Path/meta-path semantic views for contrastive learning",
+      "relationship_sentence": "HeCo\u2019s meta-path semantic views inspire treating paths as semantic units and motivate the inter-path contrast in the proposed method to align path-level semantics rather than only node-level views."
+    },
+    {
+      "title": "GCC: Graph Contrastive Coding for Graph Neural Network Pre-Training",
+      "authors": "Jiezhong Qiu et al.",
+      "year": 2020,
+      "role": "Subgraph/random-walk based contrastive pretraining",
+      "relationship_sentence": "GCC\u2019s use of random-walk substructures as contrastive anchors informs the paper\u2019s design of using sampled paths as the basic contrastive samples and contrasting at a subgraph/path granularity."
+    },
+    {
+      "title": "node2vec: Scalable Feature Learning for Networks",
+      "authors": "Aditya Grover and Jure Leskovec",
+      "year": 2016,
+      "role": "Biased random-walk path sampling",
+      "relationship_sentence": "The proposed path sampling procedure is conceptually grounded in node2vec\u2019s biased random walks, leveraging controllable walks to capture both homophily and structural roles along interaction paths."
+    },
+    {
+      "title": "PinSage: Graph Convolutional Neural Networks for Web-Scale Recommender Systems",
+      "authors": "Rex Ying et al.",
+      "year": 2018,
+      "role": "Random-walk based neighbor/path sampling in large-scale recommendation",
+      "relationship_sentence": "PinSage demonstrates how random-walk-based sampling captures informative paths in recommender graphs, a practical insight the new work extends by turning sampled paths into explicit contrastive units."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core idea\u2014using interaction paths as the primary unit for contrastive learning and designing both intra-path and inter-path objectives\u2014emerges from two converging threads. First, LightGCN established an effective CF backbone over user\u2013item bipartite graphs, while SGL adapted graph contrastive learning to recommendation via stochastic graph augmentations and node-level alignment. However, these augmentations can inadvertently separate semantically related nodes that lie along meaningful interaction paths, exposing a false-negative problem. NCL took a step toward fixing this by treating structural neighbors as positives, suggesting that positives should reflect local graph semantics rather than arbitrary augmented views.\nSecond, advances in graph/self-supervised learning highlighted the utility of path- or subgraph-level semantics. HeCo formalized meta-path semantic views in heterogeneous graphs and contrasted across such views, motivating the leap from node-level to path-level signals and the introduction of inter-path contrast. GCC showed that random-walk substructures can serve as anchor units for contrast, while node2vec and PinSage provided scalable, biased random-walk sampling mechanisms to extract informative paths in large recommender graphs.\nSynthesizing these insights, the paper reframes positives from individual nodes under random augmentations to sampled interaction paths, and it decouples supervision into intra-path alignment (target-to-path nodes) and inter-path alignment (path-to-path semantics). This directly addresses sparsity and false negatives by leveraging multi-hop relational signals that augment LightGCN-style CF embeddings with path-aware self-supervision.",
+  "analysis_timestamp": "2026-01-07T00:02:04.916108"
+}

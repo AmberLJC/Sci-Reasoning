@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Outrageously Large Neural Networks: The Sparsely-Gated Mixture-of-Experts Layer",
+      "authors": "Noam Shazeer et al.",
+      "year": 2017,
+      "role": "Foundation",
+      "relationship_sentence": "Introduced the MoE layer with top-k routing and the auxiliary importance/load-balancing losses that our paper keeps but explicitly augments with orthogonality and variance objectives to counter their tendency toward uniform, overlapping expert usage."
+    },
+    {
+      "title": "GShard: Scaling Giant Models with Conditional Computation and Automatic Sharding",
+      "authors": "Dmitry Lepikhin et al.",
+      "year": 2020,
+      "role": "Extension",
+      "relationship_sentence": "Popularized top-2 gating with the same family of balancing losses in large Transformer MoEs; our objectives are designed as drop-in additions to this routing regime to reduce expert overlap while preserving load balance."
+    },
+    {
+      "title": "Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity",
+      "authors": "William Fedus et al.",
+      "year": 2021,
+      "role": "Baseline",
+      "relationship_sentence": "Uses top-1 routing plus an auxiliary balancing loss that we identify as inducing overly uniform routing; these Switch-style models are core baselines where our orthogonality and variance losses yield better specialization and post-training performance."
+    },
+    {
+      "title": "GLaM: Efficient Scaling of Language Models with Mixture-of-Experts",
+      "authors": "Nan Du et al.",
+      "year": 2022,
+      "role": "Baseline",
+      "relationship_sentence": "Demonstrated large-scale MoE LMs with auxiliary load-balancing (and router regularization) as standard practice; our method targets the same training recipe, improving specialization by complementing\u2014rather than replacing\u2014the balancing objective."
+    },
+    {
+      "title": "V-MoE: Learning Visual Mixtures of Experts",
+      "authors": "Carlos Riquelme et al.",
+      "year": 2021,
+      "role": "Gap Identification",
+      "relationship_sentence": "Analyzed routing behavior under load-balancing and reported expert co-activation and uniformity issues; our orthogonality and variance losses directly address these specialization gaps while remaining compatible with their balancing approach."
+    },
+    {
+      "title": "BASE Layers: Simplifying Training of Large, Sparse Models",
+      "authors": "Mike Lewis et al.",
+      "year": 2021,
+      "role": "Related Problem",
+      "relationship_sentence": "Proposed an alternative sparse conditional-computation framework with balancing across experts; our objectives can be integrated into BASE-style routing to explicitly promote expert diversity and more discriminative token-to-expert assignments."
+    }
+  ],
+  "synthesis_narrative": "The core innovation\u2014encouraging real expert specialization in MoE LLMs by coupling an orthogonality loss with a variance-inducing routing loss\u2014arises directly from the modern MoE lineage that standardized auxiliary load balancing. Shazeer et al. (2017) established the MoE framework and the auxiliary importance/load terms that prevent collapse but also implicitly push toward uniformity. This practice was scaled and entrenched by GShard (Lepikhin et al., 2020) and Switch Transformers (Fedus et al., 2021), which rely on the same balancing family for top-2 and top-1 routing, respectively; these models are the immediate baselines where uniform routing and expert overlap degrade specialization, especially during post-training. GLaM (Du et al., 2022) further cemented this recipe at LLM scale, adding router regularization for stability but still depending on balancing that can blunt discriminative routing. Concurrently, V-MoE (Riquelme et al., 2021) documented specialization patterns and highlighted co-activation/uniformity behaviors under balancing, sharpening the precise gap our work targets. Our solution directly complements this established auxiliary loss: the orthogonality term reduces expert overlap by encouraging distinct token assignments, while the variance term makes routing more discriminative, countering uniform gates without sacrificing utilization. Finally, the ideas extend naturally to other sparse frameworks such as BASE Layers (Lewis et al., 2021), reinforcing that the contribution is a principled, general-purpose refinement to MoE routing objectives rather than an architecture-specific tweak.",
+  "analysis_timestamp": "2026-01-06T23:08:23.965429"
+}

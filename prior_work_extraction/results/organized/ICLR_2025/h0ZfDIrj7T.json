@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Self-Consistency Improves Chain of Thought Reasoning in Language Models",
+      "authors": "Xuezhi Wang et al.",
+      "year": 2023,
+      "arxiv_id": "2203.11171",
+      "role": "Baseline",
+      "relationship_sentence": "MoA directly generalizes self-consistency by replacing majority voting over i.i.d. samples from one model with cross-model, layer-wise conditioning where heterogeneous agents read and build on each other\u2019s intermediate outputs."
+    },
+    {
+      "title": "Tree of Thoughts: Deliberate Problem Solving with Large Language Models",
+      "authors": "Shunyu Yao et al.",
+      "year": 2023,
+      "arxiv_id": "2305.10601",
+      "role": "Inspiration",
+      "relationship_sentence": "MoA borrows ToT\u2019s core idea of maintaining multiple concurrent solution paths and iteratively improving them, but implements this via cooperative agents that consume prior agents\u2019 responses rather than explicit search over a thought tree."
+    },
+    {
+      "title": "Self-Refine: Iterative Refinement with Self-Feedback",
+      "authors": "Aman Madaan et al.",
+      "year": 2023,
+      "arxiv_id": "2303.17651",
+      "role": "Extension",
+      "relationship_sentence": "MoA extends Self-Refine\u2019s critique-and-revise loop from a single model self-editing its own draft to a multi-agent setting where each layer\u2019s agents use peers\u2019 outputs as feedback to produce improved responses."
+    },
+    {
+      "title": "Reflexion: Language Agents with Verbal Reinforcement Learning",
+      "authors": "Noah Shinn et al.",
+      "year": 2023,
+      "arxiv_id": "2303.11366",
+      "role": "Gap Identification",
+      "relationship_sentence": "MoA addresses Reflexion\u2019s limitation of single-agent self-reflection myopia by enabling diverse agents to externalize and cross-consume reflections across layers, mitigating failure modes of a lone reflective model."
+    },
+    {
+      "title": "AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation",
+      "authors": "Tianqi Wu et al.",
+      "year": 2023,
+      "arxiv_id": "2308.08155",
+      "role": "Foundation",
+      "relationship_sentence": "MoA formalizes the group-chat multi-agent interaction pattern popularized by AutoGen into a layered architecture where every agent explicitly conditions on all previous agents\u2019 messages as auxiliary context."
+    },
+    {
+      "title": "AI Safety via Debate",
+      "authors": "Geoffrey Irving et al.",
+      "year": 2018,
+      "arxiv_id": "1805.00899",
+      "role": "Inspiration",
+      "relationship_sentence": "MoA adapts debate\u2019s central mechanism\u2014agents sequentially responding to peers\u2019 arguments\u2014but repurposes it from adversarial persuasion to cooperative synthesis across layers to boost task performance."
+    }
+  ],
+  "synthesis_narrative": "Self-consistency established that sampling multiple chain-of-thought solutions from a single model and aggregating via majority vote can boost accuracy, highlighting the value of multiplicity but without interaction between samples or heterogeneous expertise. Tree of Thoughts carried this further by keeping multiple partial solutions and revisiting them through guided search, demonstrating that iterative, multi-path deliberation pays off when states are revisitable and comparable. Self-Refine showed that explicit critique-and-revise cycles improve outputs when a model conditions on its own prior drafts and feedback, while Reflexion added memory and self-reflective feedback loops to reduce repeated failures\u2014both underscoring the power of iterative conditioning on previous attempts but remaining confined to single-agent perspectives. AutoGen introduced practical patterns for multi-agent LLM conversations, where agents read one another\u2019s messages in group chats to accomplish tasks, proving the feasibility of structured agent coordination. Finally, AI Safety via Debate crystallized the principle that agents can sequentially respond to peers\u2019 arguments, making reasoning more explicit and inspectable, albeit in an adversarial framing.\nTogether, these works suggested a clear opportunity: combine the diversity benefits of ensembling and multi-path exploration with the iterative gains of critique, but do so across heterogeneous agents that explicitly read and build on each other\u2019s outputs in a structured way. The layered mixture-of-agents architecture naturally synthesizes these insights\u2014generalizing self-consistency beyond voting, replacing ToT\u2019s search with cooperative cross-conditioning, and scaling self-reflective loops into peer-reflective layers\u2014yielding a principled, inference-time method to aggregate the strengths of multiple LLMs.",
+  "target_paper": {
+    "title": "Mixture-of-Agents Enhances Large Language Model Capabilities",
+    "authors": "Junlin Wang, Jue WANG, Ben Athiwaratkun, Ce Zhang, James Zou",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "Multi-Agent Inference, Large Language Model",
+    "abstract": "Recent advances in large language models (LLMs) demonstrate substantial capabilities in natural language understanding and generation tasks. With the growing number of LLMs, how to harness the collective expertise of multiple LLMs is an exciting open direction. Toward this goal, we propose a new approach that leverages the collective strengths of multiple LLMs through a Mixture-of-Agents (MoA) methodology. In our approach, we construct a layered MoA architecture wherein each layer comprises multiple LLM agents. Each agent takes all the outputs from agents in the previous layer as auxiliary information in generating its response. MoA models achieves state-of-art performance on AlpacaEval 2.0, Arena-Hard, MT-Bench, and FLASK, surpassing GPT-4 Omni. For example, our MoA using only open-source LLMs achieves a score of 65.1% on AlpacaEval 2.0 compared to 57.5% by GPT-4 Omni.",
+    "openreview_id": "h0ZfDIrj7T",
+    "forum_id": "h0ZfDIrj7T"
+  },
+  "analysis_timestamp": "2026-01-06T07:22:49.395531"
+}

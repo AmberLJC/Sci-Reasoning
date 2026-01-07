@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Bringing the Web up to Speed with WebAssembly",
+      "authors": "Andreas Haas, Andreas Rossberg, Derek L. Schuff, Ben L. Titzer, et al.",
+      "year": 2017,
+      "role": "Foundational specification",
+      "relationship_sentence": "Defines WebAssembly\u2019s typed, structured control flow and implicit operand stack semantics that StackSight\u2019s static stack-tracking and correctness constraints directly rely on."
+    },
+    {
+      "title": "wasm-decompile (Binaryen): Decompiling WebAssembly to a readable C-like form",
+      "authors": "Alon Zakai and the Binaryen contributors",
+      "year": 2019,
+      "role": "Practical baseline/tool",
+      "relationship_sentence": "Establishes the feasibility of translating Wasm\u2019s stack-based IR into readable C-like code via structural reconstruction, which StackSight advances by integrating neurosymbolic reasoning and chain-of-thought guided lifting to idiomatic C++."
+    },
+    {
+      "title": "Soot: A Java Optimization Framework",
+      "authors": "Raja Vall\u00e9e-Rai, Etienne Gagnon, Laurie Hendren, et al.",
+      "year": 1999,
+      "role": "Methodological foundation (stack-to-IR lifting)",
+      "relationship_sentence": "Soot\u2019s elimination of the JVM operand stack to produce a 3-address IR (Jimple) informs StackSight\u2019s static analysis that tracks and materializes Wasm stack effects into explicit values for subsequent decompilation."
+    },
+    {
+      "title": "No More Gotos: Decompilation Using Structured Control Flow",
+      "authors": "Mohammed E. Yakdan, Saeed Eschweiler, Elmar Gerhards-Padilla, Matthew Smith",
+      "year": 2015,
+      "role": "Decompilation methodology",
+      "relationship_sentence": "Provides control-structure recovery techniques that underpin StackSight\u2019s translation of Wasm\u2019s block/loop/if constructs into structured C++ without resorting to unstructured jumps."
+    },
+    {
+      "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+      "authors": "Jason Wei, Xuezhi Wang, Dale Schuurmans, et al.",
+      "year": 2022,
+      "role": "Prompting methodology",
+      "relationship_sentence": "Directly motivates StackSight\u2019s use of chain-of-thought prompting to guide LLMs through stepwise reasoning about stack states and control flow during decompilation."
+    },
+    {
+      "title": "DreamCoder: Growing Libraries of Programs with Wake\u2013Sleep Program Synthesis",
+      "authors": "Kevin Ellis, Maxwell Nye, Armando Solar-Lezama, Joshua B. Tenenbaum, et al.",
+      "year": 2020,
+      "role": "Neurosymbolic paradigm",
+      "relationship_sentence": "Demonstrates the power of combining symbolic program reasoning with neural guidance, a paradigm StackSight adopts by coupling static analysis constraints with LLM-guided code synthesis."
+    },
+    {
+      "title": "Evaluating Large Language Models Trained on Code (Codex)",
+      "authors": "Mark Chen, Jerry Tworek, Heewoo Jun, Qiming Yuan, et al.",
+      "year": 2021,
+      "role": "Enabling LLM capability",
+      "relationship_sentence": "Shows that LLMs can generate and translate code with high fidelity, enabling StackSight to leverage LLMs as a decompiler back-end that maps Wasm semantics to readable C++."
+    }
+  ],
+  "synthesis_narrative": "StackSight\u2019s core innovation\u2014neurosymbolic chain-of-thought decompilation of WebAssembly\u2014stands on three pillars synthesized from prior work. First, the formalization of WebAssembly by Haas et al. precisely defines a typed, structured, stack-based execution model; this makes it possible to design a static analysis that soundly visualizes and tracks implicit stack effects. Classical decompilation and compiler frameworks then inform how to make that stack explicit: Soot\u2019s stack-to-3-address lifting for JVM bytecode provides the methodological template for materializing stack values, while Yakdan et al.\u2019s structured control-flow recovery guides the translation of Wasm\u2019s block/loop/if constructs into idiomatic high-level code. Practical Wasm tooling, notably Binaryen\u2019s wasm-decompile, establishes a concrete baseline for turning Wasm into readable C-like snippets, highlighting both the feasibility and limitations of purely symbolic approaches.\nSecond, recent advances in code-oriented LLMs (Codex) demonstrate that neural models can synthesize and translate code, making them plausible decompiler back-ends once provided with precise semantic cues. Chain-of-thought prompting operationalizes this capability, eliciting stepwise reasoning that aligns naturally with StackSight\u2019s stack-delta traces and control annotations.\nFinally, the neurosymbolic synthesis paradigm exemplified by DreamCoder motivates the coupling: symbolic program analysis constrains and scaffolds the search space, while neural reasoning proposes high-level reconstructions. StackSight integrates these threads by feeding analysis-derived stack effects and structural invariants into CoT-guided LLM prompts, yielding readable, structurally faithful C++ that outperforms prior Wasm decompilation tools.",
+  "analysis_timestamp": "2026-01-06T23:42:48.069225"
+}

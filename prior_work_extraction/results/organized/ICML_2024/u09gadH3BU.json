@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "APQ-ViT: Any-Precision Quantization for Vision Transformers",
+      "authors": "Liu et al.",
+      "year": 2022,
+      "role": "Inspiration",
+      "relationship_sentence": "Introduced the any-precision quantization formulation\u2014training one model to support multiple bit-widths via shared quantization parameters\u2014which Any-Precision LLM adapts to the LLM setting and retools for PTQ and inference-time serving."
+    },
+    {
+      "title": "GPTQ: Accurate Post-Training Quantization for Generative Pretrained Transformers",
+      "authors": "Frantar et al.",
+      "year": 2022,
+      "role": "Extension",
+      "relationship_sentence": "Provides the PTQ machinery (blockwise calibration and error-compensated quantization) that Any-Precision LLM modifies so quantizers across 3\u2013n bits are nested and storage-compatible, enabling a single overlaid representation to realize multiple precisions."
+    },
+    {
+      "title": "AWQ: Activation-aware Weight Quantization for LLM Compression and Acceleration",
+      "authors": "Lin et al.",
+      "year": 2023,
+      "role": "Baseline",
+      "relationship_sentence": "Serves as a strong 4-bit weight-only PTQ baseline whose activation-aware channel weighting is incorporated to stabilize lower-bit regimes within the proposed any-precision quantization pipeline."
+    },
+    {
+      "title": "SmoothQuant: Accurate and Efficient Post-Training Quantization for Large Language Models",
+      "authors": "Xiao et al.",
+      "year": 2023,
+      "role": "Foundation",
+      "relationship_sentence": "Identifies and resolves activation outliers that hinder low-bit LLM quantization; Any-Precision LLM leverages this insight to maintain accuracy across multiple supported precisions under a unified PTQ scheme."
+    },
+    {
+      "title": "LLM.int8(): 8-bit Matrix Multiplication for Transformers at Scale",
+      "authors": "Dettmers et al.",
+      "year": 2022,
+      "role": "Gap Identification",
+      "relationship_sentence": "Demonstrates practical mixed-precision inference but at a fixed precision and with special outlier handling; its limitation to a single precision motivates Any-Precision LLM\u2019s goal of serving many precisions from one stored model."
+    },
+    {
+      "title": "ZeroQuant: Efficient and Affordable Post-Training Quantization for Large-Scale Transformers",
+      "authors": "Yao et al.",
+      "year": 2022,
+      "role": "Foundation",
+      "relationship_sentence": "Establishes scalable PTQ for transformers; Any-Precision LLM builds on these PTQ calibration ideas while enforcing cross-bit consistency so multiple bit-widths can share a single overlaid weight representation."
+    },
+    {
+      "title": "QLoRA: Efficient Finetuning of Quantized LLMs",
+      "authors": "Dettmers et al.",
+      "year": 2023,
+      "role": "Related Problem",
+      "relationship_sentence": "Popularizes accurate 4-bit quantization (NF4) and shows strong quality at low precision; Any-Precision LLM generalizes beyond a single fixed bit-width to support a continuum of precisions within one memory footprint and an accompanying serving engine."
+    }
+  ],
+  "synthesis_narrative": "Any-Precision LLM marries two threads: the any-precision quantization idea and practical PTQ for LLMs. APQ-ViT first articulated the core concept of a single model supporting multiple bit-widths through shared quantization parameters; this is the conceptual spark the authors transfer to language models. To make that idea viable without expensive re-training, the work stands on the PTQ foundation laid by GPTQ and ZeroQuant, which show how to calibrate and compensate errors for transformer weights efficiently. The authors then extend these PTQ techniques so that quantizers at different bit-widths are nested and storage-compatible, enabling an overlaid representation that realizes 3\u2013n-bit models from one memory image.\nAWQ and SmoothQuant pinpoint and mitigate the outlier phenomena that make low-bit LLM quantization brittle. Their techniques and insights are directly used to stabilize the lower-precision endpoints within the proposed any-precision scheme, and AWQ serves as a primary empirical baseline. Earlier mixed-precision work such as LLM.int8() proved practical low-precision inference but at a fixed precision; this limitation motivates supporting many precisions concurrently. Finally, QLoRA cemented the community\u2019s confidence in 4-bit quality, but remained single-precision. Any-Precision LLM synthesizes these strands: it adapts PTQ methods to produce a cross-bit consistent, overlaid weight format and pairs it with a specialized serving engine, thereby enabling low-cost deployment of multiple effective \u201csizes\u201d (precisions) of one LLM from a single memory footprint.",
+  "analysis_timestamp": "2026-01-06T23:09:26.492599"
+}

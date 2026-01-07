@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Jonathan Ho et al.",
+      "year": 2020,
+      "arxiv_id": "2006.11239",
+      "role": "Baseline",
+      "relationship_sentence": "This work establishes the standard position-space forward/noise and reverse-time denoising formulation that the new method deliberately departs from by augmenting state with velocity and constructing a bridge in phase space to alleviate slow, long-step sampling."
+    },
+    {
+      "title": "Score-Based Generative Modeling through Stochastic Differential Equations",
+      "authors": "Yang Song et al.",
+      "year": 2021,
+      "arxiv_id": "2011.13456",
+      "role": "Foundation",
+      "relationship_sentence": "By casting generative modeling as reversing an SDE, this paper provides the mathematical framework the new approach generalizes to a second-order (phase-space) SDE whose drift/control is designed via stochastic optimal control."
+    },
+    {
+      "title": "Diffusion Schr\u00f6dinger Bridge",
+      "authors": "Guillaume De Bortoli et al.",
+      "year": 2021,
+      "arxiv_id": null,
+      "role": "Extension",
+      "relationship_sentence": "It introduces constructing probability path measures between noise and data via Schr\u00f6dinger bridges/SOC, which the new work extends by formulating and learning a controlled bridge in phase space rather than position space."
+    },
+    {
+      "title": "Flow Matching for Generative Modeling",
+      "authors": "Yaron Lipman et al.",
+      "year": 2022,
+      "arxiv_id": "2210.02747",
+      "role": "Inspiration",
+      "relationship_sentence": "This work shows that prescribing an interpolating path and directly regressing its velocity/drift yields efficient training, a principle the new method adopts by prescribing an SOC-derived interpolant in phase space and matching its controlled dynamics."
+    },
+    {
+      "title": "Stochastic Interpolants: A Unifying Framework for Flows and Diffusions",
+      "authors": "Michael S. Albergo et al.",
+      "year": 2022,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "It formalizes how choosing a stochastic path measure between source and target distributions determines the training objective, which directly motivates designing a phase-space interpolant to leverage velocity for earlier accurate predictions."
+    },
+    {
+      "title": "Hypoelliptic Diffusion Models",
+      "authors": "Michael S. Albergo et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "By introducing velocity-augmented (kinetic/hypoelliptic) dynamics for generative modeling, this paper provides the key insight that phase-space noise and momentum can accelerate sampling, which the new method operationalizes via a stochastic bridge in phase space."
+    }
+  ],
+  "synthesis_narrative": "Denoising Diffusion Probabilistic Models framed generation as reversing a noisy forward process in input space, establishing the canonical position-space SDE and long denoising trajectory. Score-Based Generative Modeling through SDEs generalized this to continuous-time SDEs with reverse-time dynamics, cementing the mathematical toolkit for designing drifts and sampling procedures. Diffusion Schr\u00f6dinger Bridge then connected generative modeling to stochastic optimal control by constructing path measures that bridge noise and data via entropy-regularized control, demonstrating that choosing the right bridge can improve sampling efficiency. In parallel, Flow Matching for Generative Modeling showed that prescribing an interpolating path and matching its velocity field provides a direct, simulation-free way to learn continuous-time generators. Stochastic Interpolants unified these ideas by making explicit that the choice of path measure determines both the loss and the learned dynamics, suggesting freedom to craft better paths. Finally, Hypoelliptic Diffusion Models introduced kinetic, velocity-augmented dynamics where noise acts in velocity, revealing that phase-space structure and momentum can enable faster mixing and early formation of meaningful samples.\nBringing these threads together naturally suggests designing a controlled path in phase space: use SOC/Schr\u00f6dinger-bridge principles to prescribe an optimal interpolant, train it via velocity/flow matching, and leverage kinetic structure to obtain informative velocities that produce realistic states early in time. The resulting phase-space stochastic bridge directly addresses the long-trajectory inefficiency of position-space diffusion by exploiting momentum to guide trajectories and by learning the bridge dynamics most conducive to efficient sampling.",
+  "target_paper": {
+    "title": "Generative Modeling with Phase Stochastic Bridge",
+    "authors": "Tianrong Chen, Jiatao Gu, Laurent Dinh, Evangelos Theodorou, Joshua M. Susskind, Shuangfei Zhai",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "oral",
+    "keywords": "Generative Modeling, Stochastic Optimal Control, Diffusion Model",
+    "abstract": "Diffusion models (DMs) represent state-of-the-art generative models for continuous inputs. DMs work by constructing a Stochastic Differential Equation (SDE) in the input space (ie, position space), and using a neural network to reverse it. In this work, we introduce a novel generative modeling framework grounded in \\textbf{phase space dynamics}, where a phase space is defined as {an augmented space encompassing both position and velocity.} Leveraging insights from Stochastic Optimal Control, we construct a path measure in the phase space that enables efficient sampling. {In contrast to DMs, our framework demonstrates the capability to generate realistic data points at an early stage of dynamics propagation.} This early prediction sets the stage for efficient data generation by leveraging additional velocity information along the trajectory. On standard image generation benchmarks, our model yields favorable performance over baselines in the regime of small Number of Function Evaluation",
+    "openreview_id": "tUtGjQEDd4",
+    "forum_id": "tUtGjQEDd4"
+  },
+  "analysis_timestamp": "2026-01-06T10:56:52.233177"
+}

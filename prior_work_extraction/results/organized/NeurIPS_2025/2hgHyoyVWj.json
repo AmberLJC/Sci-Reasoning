@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+      "authors": "Edward J. Hu, Yelong Shen, Phillip Wallis, Zeyuan Allen-Zhu, Yuanzhi Li, Lu Wang, Weizhu Chen",
+      "year": 2022,
+      "role": "Foundational method",
+      "relationship_sentence": "AuroRA directly builds on LoRA\u2019s low-rank weight-delta parameterization and targets its core limitation\u2014the linear low-rank bottleneck\u2014by inserting a nonlinear mapping between the two projections."
+    },
+    {
+      "title": "Parameter-Efficient Transfer Learning for NLP (Adapter layers)",
+      "authors": "Neil Houlsby et al.",
+      "year": 2019,
+      "role": "Conceptual precursor (nonlinear bottleneck adapters)",
+      "relationship_sentence": "The classic down-project/activation/up-project adapter block demonstrated that adding a nonlinearity inside a narrow bottleneck can increase expressivity, inspiring AuroRA\u2019s MLP-like nonlinear module within a LoRA-style path."
+    },
+    {
+      "title": "Compacter: Efficient Low-Rank Hypercomplex Adapter Layers for Transformer Models",
+      "authors": "Rabeeh Karimi Mahabadi, James Henderson, Sebastian Ruder",
+      "year": 2021,
+      "role": "Enhanced adapter expressivity with parameter sharing",
+      "relationship_sentence": "Compacter showed that carefully designed, nonlinear adapter blocks can substantially boost expressiveness at low parameter cost, motivating AuroRA\u2019s search for a more expressive yet compact mapping than purely linear LoRA."
+    },
+    {
+      "title": "Intrinsic Dimensionality Explains the Effectiveness of Language Model Fine-Tuning",
+      "authors": "Armen Aghajanyan, Sonal Gupta, Luke Zettlemoyer",
+      "year": 2021,
+      "role": "Theoretical underpinning for low-dimensional adaptation",
+      "relationship_sentence": "This work formalized why low-dimensional subspaces often suffice for adaptation, framing the trade-off that AuroRA addresses by adding nonlinearity to preserve efficiency while reducing approximation error."
+    },
+    {
+      "title": "Eckart\u2013Young Theorem (Best Low-Rank Approximation)",
+      "authors": "Carl Eckart, Gale Young",
+      "year": 1936,
+      "role": "Classical theory on limits of linear low-rank approximation",
+      "relationship_sentence": "The theorem underscores that purely linear low-rank mappings have strict approximation limits, providing theoretical motivation for AuroRA\u2019s nonlinear layer to surpass the linear low-rank bottleneck."
+    },
+    {
+      "title": "AdaLoRA: Adaptive Budget Allocation for Parameter-Efficient Fine-Tuning",
+      "authors": "Zhang et al.",
+      "year": 2023,
+      "role": "LoRA variant mitigating rank bottleneck via adaptive ranks",
+      "relationship_sentence": "AdaLoRA highlights that improving LoRA often means raising or reallocating rank, which increases parameters; AuroRA instead boosts expressivity via nonlinearity without needing higher linear rank."
+    },
+    {
+      "title": "DoRA: Weight-Decomposed Low-Rank Adaptation",
+      "authors": "Liu et al.",
+      "year": 2024,
+      "role": "LoRA reparameterization to alleviate linear expressivity issues",
+      "relationship_sentence": "DoRA improves LoRA within a linear framework by decomposing weights, setting up AuroRA\u2019s contrast that truly breaking the bottleneck requires inserting a nonlinear mapping rather than more linear transforms."
+    }
+  ],
+  "synthesis_narrative": "AuroRA\u2019s core idea\u2014placing an adaptive nonlinear layer between two low-rank projections to form an MLP-like block\u2014emerges at the intersection of LoRA\u2019s linear parameterization and adapter-style nonlinear bottlenecks. LoRA (Hu et al., 2022) established the dominant PEFT paradigm via linear low-rank deltas, but its performance often scales only by raising rank, increasing parameters. Classical adapter work (Houlsby et al., 2019) demonstrated that a down\u2013activation\u2013up bottleneck can be highly expressive with few parameters, a theme reinforced by Compacter (Karimi Mahabadi et al., 2021), which further improved adapter efficiency while retaining nonlinearity. These insights suggested that the path to breaking LoRA\u2019s bottleneck is not more linear maps but a strategically placed nonlinearity.\nAt the same time, theory on intrinsic dimensionality (Aghajanyan et al., 2021) explained why small subspaces can suffice, but also hinted at limits when the target function deviates from what a fixed linear low-rank map can capture. The Eckart\u2013Young theorem formalizes those limits for linear low-rank approximation, motivating a nonlinear augmentation that can reduce approximation error without inflating linear rank. Recent LoRA variants such as AdaLoRA (adaptive rank) and DoRA (weight reparameterization) sought to mitigate the bottleneck while staying linear, underscoring the need for a fundamentally different approach. Integrating these lines, AuroRA introduces an adaptive nonlinear layer\u2014mixing fixed and learnable nonlinearities\u2014between low-rank projectors, achieving higher expressivity under tight parameter budgets and theoretically lowering approximation error compared with purely linear low-rank updates.",
+  "analysis_timestamp": "2026-01-07T00:21:32.349775"
+}

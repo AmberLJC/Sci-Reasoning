@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Approximate Nearest Neighbors: Towards Removing the Curse of Dimensionality",
+      "authors": "Piotr Indyk; Rajeev Motwani",
+      "year": 1998,
+      "role": "Theoretical foundation of LSH and its AND/OR amplification constructions",
+      "relationship_sentence": "HEPT explicitly leverages the LSH framework and AND/OR collision-probability amplification from Indyk\u2013Motwani to tune the error\u2013complexity tradeoff and achieve near-linear neighbor discovery."
+    },
+    {
+      "title": "Locality-Sensitive Hashing Scheme Based on p-Stable Distributions",
+      "authors": "Mayur Datar; Nicole Immorlica; Piotr Indyk; Vahab S. Mirrokni",
+      "year": 2004,
+      "role": "Practical L2 (E2LSH) hash family",
+      "relationship_sentence": "HEPT adopts E2LSH to hash points under Euclidean geometry so that spatially local neighbors collide in buckets, enabling efficient, geometry-aware sparse attention."
+    },
+    {
+      "title": "Reformer: The Efficient Transformer",
+      "authors": "Nikita Kitaev; \u0141ukasz Kaiser; Anselm Levskaya",
+      "year": 2020,
+      "role": "First application of LSH to approximate self-attention",
+      "relationship_sentence": "Reformer\u2019s LSH attention showed that bucketed attention can be sub-quadratic; HEPT extends this idea to point clouds with explicit local inductive bias and AND/OR-constructed LSH to control accuracy."
+    },
+    {
+      "title": "Dynamic Graph CNN for Learning on Point Clouds",
+      "authors": "Yue Wang; Yongbin Sun; Ziwei Liu; Sanjay E. Sarma; Michael M. Bronstein; Justin M. Solomon",
+      "year": 2019,
+      "role": "Local-neighborhood inductive bias and the cost of dynamic kNN graph building",
+      "relationship_sentence": "HEPT replaces the expensive dynamic kNN used in DGCNN with LSH-based neighborhood construction that preserves local bias while reducing complexity."
+    },
+    {
+      "title": "Point Transformer",
+      "authors": "Hengshuang Zhao; Li Jiang; Jiaya Jia; Philip H. S. Torr",
+      "year": 2021,
+      "role": "Transformer architecture tailored to point clouds with relative positional encoding and local attention",
+      "relationship_sentence": "HEPT retains Point Transformer\u2019s geometric locality principles but achieves efficiency by forming neighborhoods via LSH rather than exact kNN."
+    },
+    {
+      "title": "Rethinking Attention with Performers",
+      "authors": "Krzysztof Choromanski; Valerii Likhosherstov; David Dohan; et al.",
+      "year": 2021,
+      "role": "Kernel-based (random features) approximation of softmax attention",
+      "relationship_sentence": "HEPT\u2019s error\u2013complexity study benchmarks against kernel approximations like Performer, motivating its choice of LSH sparsification as superior for large point clouds with local bias."
+    },
+    {
+      "title": "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness",
+      "authors": "Tri Dao; Daniel Y. Fu; Stefano Ermon; Atri Rudra; Christopher R\u00e9",
+      "year": 2022,
+      "role": "Hardware-friendly, regular attention primitives",
+      "relationship_sentence": "HEPT\u2019s design emphasizes regular, batched operations over irregular graph kernels, echoing FlashAttention\u2019s focus on GPU-efficient building blocks while pursuing sparsity via LSH."
+    }
+  ],
+  "synthesis_narrative": "HEPT\u2019s core innovation\u2014an LSH-driven, near-linear, hardware-friendly point transformer\u2014sits at the intersection of classic LSH theory, efficient attention, and point-cloud locality. The foundational works of Indyk\u2013Motwani established locality-sensitive hashing and its AND/OR amplification to precisely trade collision probability for efficiency, while Datar et al. provided the Euclidean (E2LSH) hash family HEPT directly instantiates to respect geometric proximity. Reformer demonstrated that LSH bucketing can restructure self-attention into sub-quadratic computation with regular batched matmuls; HEPT generalizes this idea to spatial point clouds and, crucially, exploits OR- and AND-constructions to tune recall and sparsity for locality-preserving neighborhoods.\n\nOn the modeling side, DGCNN and Point Transformer established that local inductive bias\u2014via dynamic kNN graphs and relative positional encoding\u2014is essential for point-cloud tasks, but also highlighted the computational burden of repeatedly constructing exact neighborhoods. By replacing dynamic kNN with E2LSH-based hashing, HEPT preserves this locality while cutting complexity and enabling regular, cache-friendly operations. Complementing sparsification, kernel-based efficient attention like Performer offered an alternative route; HEPT\u2019s quantitative error\u2013complexity analysis positions LSH sparsification as better aligned with point-cloud geometry than random-feature kernel approximations. Finally, the emphasis on regular, fused GPU primitives echoes the systems perspective of FlashAttention, guiding HEPT\u2019s use of sorting, bucketing, and batched matmuls instead of irregular graph kernels. Together, these strands converge into HEPT\u2019s LSH-based efficient point transformer with principled control over accuracy, scalability, and hardware efficiency for large scientific point clouds.",
+  "analysis_timestamp": "2026-01-06T23:42:48.062660"
+}

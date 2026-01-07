@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Fully-Convolutional Siamese Networks for Object Tracking (SiamFC)",
+      "authors": "Luca Bertinetto, Jack Valmadre, Jo\u00e3o F. Henriques, Andrea Vedaldi, Philip H. S. Torr",
+      "year": 2016,
+      "role": "Foundational crop-based tracking pipeline",
+      "relationship_sentence": "ZoomTrack directly modifies the classic SiamFC-style crop-and-resize pipeline by replacing uniform resizing of the search region with target-aware non-uniform resizing, keeping the local-tracking formulation intact."
+    },
+    {
+      "title": "SiamRPN++: Evolution of Siamese Visual Tracking with Very Deep Networks",
+      "authors": "Bo Li, Wei Wu, Qiang Wang, Fangyi Zhang, Junjie Yan",
+      "year": 2019,
+      "role": "Stronger Siamese baseline highlighting input-size/backbone trade-offs",
+      "relationship_sentence": "SiamRPN++ cemented the speed\u2013accuracy trade-off tied to search-region size and backbone depth; ZoomTrack tackles this exact bottleneck by reallocating resolution within a fixed smaller input to preserve target detail while keeping a broader field of view."
+    },
+    {
+      "title": "Learning Discriminative Model Prediction for Tracking (DiMP)",
+      "authors": "Goutam Bhat, Martin Danelljan, Luc Van Gool, Radu Timofte",
+      "year": 2019,
+      "role": "Performance-oriented local tracker baseline",
+      "relationship_sentence": "DiMP exemplifies high-accuracy, heavier local trackers; ZoomTrack aims to close the gap between fast/light and performance-oriented trackers by improving input resizing rather than altering the modeling head."
+    },
+    {
+      "title": "Learning Spatio-Temporal Transformer for Visual Tracking (STARK)",
+      "authors": "Bin Yan, Houwen Peng, Jianlong Fu, Dong Wang, Huchuan Lu",
+      "year": 2021,
+      "role": "Transformer-based tracker enabling strong performance with template\u2013search attention",
+      "relationship_sentence": "STARK showed Transformers\u2019 potential in local tracking but still adheres to uniformly resized inputs; ZoomTrack complements such Transformer trackers by feeding a resolution-redistributed input to boost accuracy without increasing nominal input size."
+    },
+    {
+      "title": "OSTrack: One-Stream Tracker with Template Features",
+      "authors": "Botao Ye, Hong Chang, Shiguang Shan, Xilin Chen",
+      "year": 2022,
+      "role": "High-speed ViT-based local tracker relying on compact inputs",
+      "relationship_sentence": "OSTrack demonstrates competitive accuracy at smaller input resolutions; ZoomTrack targets this regime directly by making the compact input target-aware via non-uniform resizing to recover detail where it matters."
+    },
+    {
+      "title": "Seam Carving for Content-Aware Image Resizing",
+      "authors": "Shai Avidan, Ariel Shamir",
+      "year": 2007,
+      "role": "Content-aware retargeting precursor",
+      "relationship_sentence": "Seam Carving established the principle of allocating pixels to salient regions during resizing; ZoomTrack adopts this content-aware spirit for tracking by explicitly optimizing a target-likelihood\u2013aware non-uniform resampling (solved via QP)."
+    },
+    {
+      "title": "Deformable Convolutional Networks",
+      "authors": "Jifeng Dai, Haozhi Qi, Yuwen Xiong, Yi Li, Guodong Zhang, Han Hu, Yichen Wei",
+      "year": 2017,
+      "role": "Adaptive sampling concept at feature level",
+      "relationship_sentence": "DCN introduced learnable, spatially adaptive sampling to focus computation on informative regions; ZoomTrack mirrors this idea at the pixel-input stage by allocating higher sampling density around the likely target area before feature extraction."
+    }
+  ],
+  "synthesis_narrative": "ZoomTrack\u2019s central contribution is a target-aware, non-uniform resizing strategy that preserves high resolution where the target is likely to appear while keeping the overall input compact for efficiency. This builds squarely on the crop-based local tracking paradigm inaugurated by SiamFC, which uniformly resizes a fixed search region and thus inevitably trades off field-of-view against target detail. Subsequent high-performance Siamese trackers like SiamRPN++ clarified how accuracy hinges on input size and backbone depth, motivating methods that can retain detail without inflating computation. In parallel, performance-oriented local trackers such as DiMP demonstrated what accuracy is possible with heavier models, delineating a gap that speed-focused trackers strive to close.\nTransformer-based trackers (e.g., STARK and OSTrack) further pushed speed\u2013accuracy efficiency by leveraging attention over compact inputs, yet they still inherit uniform resizing of the search region. ZoomTrack complements these models by restructuring the input itself: it redistributes pixels toward likely target zones so the network receives richer raw information without increasing nominal resolution. Conceptually, this echoes content-aware retargeting from Seam Carving, which preserves important regions during resizing, and aligns with the adaptive sampling philosophy of Deformable Convolutional Networks, which focus resources where evidence is strongest. ZoomTrack operationalizes these ideas for tracking via a quadratic-programming formulation that efficiently allocates row/column budgets, making the approach plug-and-play for most local, crop-based trackers while narrowing the speed\u2013accuracy gap.",
+  "analysis_timestamp": "2026-01-06T23:42:48.027648"
+}

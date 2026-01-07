@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Language Models as Knowledge Bases?",
+      "authors": "Fabio Petroni, Tim Rockt\u00e4schel, Patrick Lewis, Sebastian Riedel, et al.",
+      "year": 2019,
+      "role": "Established that pretrained LMs store factual associations and that elicitation is highly sensitive to prompt phrasing.",
+      "relationship_sentence": "This paper\u2019s central claim\u2014that reliable knowledge extraction depends on diversity\u2014builds directly on LAMA\u2019s finding that extraction is fragile to prompt variation, reframing it as a property learned during pretraining rather than solely a prompting issue."
+    },
+    {
+      "title": "How Can We Know What Language Models Know? (LPAQA)",
+      "authors": "Zhengbao Jiang, Frank F. Xu, Jun Araki, Graham Neubig",
+      "year": 2020,
+      "role": "Showed that paraphrasing relation prompts dramatically changes factual recall, and curated paraphrase sets improve extraction.",
+      "relationship_sentence": "The new work extends LPAQA\u2019s prompt-paraphrase insight upstream, demonstrating that paraphrase augmentation during pretraining\u2014not just at inference\u2014governs whether facts become extractable."
+    },
+    {
+      "title": "AutoPrompt: Eliciting Knowledge from Language Models with Automatically Generated Prompts",
+      "authors": "Taylor Shin, Yasaman Razeghi, Robert L. Logan IV, Eric Wallace, Sameer Singh",
+      "year": 2020,
+      "role": "Demonstrated that discrete prompt tokens can unlock latent factual knowledge without further training.",
+      "relationship_sentence": "By contrasting post-hoc elicitation (AutoPrompt) with pretraining-time augmentation, the paper argues that extractability hinges on learned invariances induced by diverse exposures rather than clever prompting alone."
+    },
+    {
+      "title": "Extracting Training Data from Large Language Models",
+      "authors": "Nicholas Carlini, Florian Tram\u00e8r, Eric Wallace, Matthew Jagielski, Ariel Herbert-Voss, et al.",
+      "year": 2021,
+      "role": "Provided clear evidence that LMs memorize specific training examples and that verbatim content can be extracted.",
+      "relationship_sentence": "This work supplies the memorization vs. generalizable-knowledge dichotomy that the paper probes, showing that memorization can persist even when extraction (answering) fails without augmentation."
+    },
+    {
+      "title": "Deduplicating Training Data Makes Language Models Better",
+      "authors": "Katherine Lee, Daphne Ippolito, Andrew Nystrom, et al.",
+      "year": 2021,
+      "role": "Showed repeated/near-duplicate data drives memorization and that deduplication improves generalization and reduces overfitting.",
+      "relationship_sentence": "The paper\u2019s diversity-augmentation thesis complements this result, arguing that not just less duplication but richer, varied views (e.g., paraphrases, shuffles) make stored facts linearly extractable."
+    },
+    {
+      "title": "Transformer Feed-Forward Layers Are Key-Value Memories",
+      "authors": "Mor Geva, Roee Schuster, Jonathan Berant, Omer Levy",
+      "year": 2020,
+      "role": "Proposed that MLP layers implement a key-value memory that stores token- and fact-level associations.",
+      "relationship_sentence": "The near-linear probing evidence in the paper aligns with the key-value memory view, suggesting that diversity helps align keys/values so a simple (linear) readout can retrieve facts."
+    },
+    {
+      "title": "ROME: Locating and Editing Factual Associations in GPT",
+      "authors": "Kevin Meng, David Bau, Alex Andonian, Yonatan Belinkov",
+      "year": 2022,
+      "role": "Showed that specific factual associations are localized and editable via rank-one updates in mid-layer MLPs.",
+      "relationship_sentence": "ROME\u2019s linear editability supports the paper\u2019s claim that extractability relates to linear structure; augmentation appears to organize facts into linearly accessible subspaces detectable by probes."
+    }
+  ],
+  "synthesis_narrative": "This paper\u2019s key contribution is to distinguish memorization from reliable extraction and to causally tie extractability of factual knowledge to diversity learned during pretraining. Foundational evidence that LMs contain factual associations but are brittle to prompt variation comes from LAMA and LPAQA, which showed that phrasing and paraphrase strongly affect recall. AutoPrompt further demonstrated that clever elicitation can unlock knowledge without additional training, framing extraction as an interface problem. The present work shifts this view upstream: it shows that unless pretraining presents facts with diverse surface forms (paraphrasing, shuffling), models memorize but fail to render those facts linearly extractable, and instruction tuning cannot fix that deficit.\nConcurrently, security and data-quality studies clarified the memorization landscape. Carlini et al. proved that LMs memorize verbatim training data, while Lee et al. showed that deduplication improves generalization, implying that repeated exposures drive rote storage rather than robust features. Mechanistic insights connect these phenomena to representation geometry: Geva et al.\u2019s key-value memory view and ROME\u2019s linear editability of facts indicate that factual associations live in linearly addressable subspaces. The paper leverages nearly linear probes to empirically link pretraining diversity to the linear accessibility of knowledge, closing the loop between data diversity, representational structure, and downstream QA. Together, these threads suggest that making facts extractable requires training-time augmentation that shapes linearly recoverable representations.",
+  "analysis_timestamp": "2026-01-06T23:42:48.070170"
+}

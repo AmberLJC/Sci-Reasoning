@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Outrageously Large Neural Networks: The Sparsely-Gated Mixture-of-Experts Layer",
+      "authors": "Noam Shazeer et al.",
+      "year": 2017,
+      "role": "Foundation",
+      "relationship_sentence": "MoLE preserves the sparse FFN-expert MoE formulation introduced here and builds its core idea\u2014replacing expert computation at inference with a table lookup\u2014on top of this canonical token-wise expert routing framework."
+    },
+    {
+      "title": "GShard: Scaling Giant Models with Conditional Computation and Automatic Sharding",
+      "authors": "Dmitry Lepikhin et al.",
+      "year": 2020,
+      "role": "Extension",
+      "relationship_sentence": "GShard operationalized MoE within Transformers with FFN experts and routing at scale; MoLE directly modifies this setup by keeping the FFN experts for training but re-parameterizing them into per-token lookup tables to avoid loading all experts in VRAM at inference."
+    },
+    {
+      "title": "Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity",
+      "authors": "William Fedus et al.",
+      "year": 2021,
+      "role": "Baseline",
+      "relationship_sentence": "Switch\u2019s top-1 routed FFN experts are the primary MoE baseline; MoLE targets the same architecture but replaces expert compute with lookups and offloads expert parameters to storage, directly improving inference memory and latency."
+    },
+    {
+      "title": "BASE Layers: Simplifying Training of Large, Sparse Models",
+      "authors": "Mike Lewis et al.",
+      "year": 2021,
+      "role": "Inspiration",
+      "relationship_sentence": "BASE showed content-agnostic/token-hash routing for MoE, motivating MoLE\u2019s design choice to feed experts with embedding outputs so that expert behavior becomes token-identity dependent and can be materialized as lookup tables pre-inference."
+    },
+    {
+      "title": "Generalization through Memorization: Nearest Neighbor Language Models",
+      "authors": "Urvashi Khandelwal et al.",
+      "year": 2020,
+      "role": "Inspiration",
+      "relationship_sentence": "kNN-LM demonstrated replacing neural computation with external retrieval at inference; MoLE internalizes this retrieval paradigm by querying offloaded key\u2013value stores of expert outputs keyed by input token ids instead of executing FFN compute."
+    },
+    {
+      "title": "DeepSpeed-MoE: Advancing Mixture-of-Experts to Trillion-Parameter Models",
+      "authors": "Samyam Rajbhandari et al.",
+      "year": 2022,
+      "role": "Gap Identification",
+      "relationship_sentence": "DeepSpeed-MoE highlighted MoE\u2019s communication and GPU memory bottlenecks and the practical need to keep all experts resident for dynamic routing; MoLE directly addresses this by enabling expert offloading via lookup without runtime expert computation."
+    },
+    {
+      "title": "FlexGen: High-Throughput Generative Inference of Large Language Models with Limited GPU Memory",
+      "authors": "Sheng Shen et al.",
+      "year": 2023,
+      "role": "Gap Identification",
+      "relationship_sentence": "FlexGen shows that CPU/NVMe offloading significantly increases inference latency; MoLE\u2019s lookup re-parameterization is designed precisely to make offloaded execution viable by trading expert compute for indexed I/O of precomputed expert outputs."
+    }
+  ],
+  "synthesis_narrative": "MoLE\u2019s lineage starts with the original sparse Mixture-of-Experts formulation, where token-wise routing activates a small subset of FFN experts (Shazeer et al.). GShard then established this paradigm within large Transformers, clarifying where experts sit (FFN blocks) and how conditional computation and sharding work at scale\u2014exactly the setting MoLE retains for training. Switch Transformers distilled the approach further with top-1 routing that today serves as the principal baseline MoLE targets to surpass in memory and latency. A key conceptual pivot comes from BASE Layers, which showed that expert routing need not be context-dependent: token-hash routing can be effective. This insight enables MoLE\u2019s decisive move to feed experts with embedding outputs, making expert behavior token-identity dependent so it can be tabulated. Complementing this, kNN-LM demonstrated that learned neural computation can be substituted with external retrieval at inference; MoLE adopts an analogous retrieval lens internally by converting expert FFNs into key\u2013value lookup tables keyed by token ids and storing them off-device. Finally, systems work on MoE and out-of-core LLM serving (DeepSpeed-MoE, FlexGen) crystallized the core bottlenecks\u2014VRAM residency of experts, all-to-all communication, and high-latency offloading. MoLE directly targets these gaps by eliminating expert compute at inference and enabling efficient offloaded lookups, yielding a communication- and VRAM-efficient MoE.",
+  "analysis_timestamp": "2026-01-06T23:07:19.637904"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Deep Learning with Differential Privacy",
+      "authors": "Mart\u00edn Abadi et al.",
+      "year": 2016,
+      "role": "Foundation",
+      "relationship_sentence": "ViP\u2019s training recipe and formal guarantees are built directly on DP\u2011SGD (per\u2011example gradient clipping plus Gaussian noise) introduced by Abadi et al., without which the core \u2018private pretraining\u2019 contribution would not be possible."
+    },
+    {
+      "title": "R\u00e9nyi Differential Privacy",
+      "authors": "Ilya Mironov",
+      "year": 2017,
+      "role": "Foundation",
+      "relationship_sentence": "ViP relies on RDP-based privacy accounting to tightly track the cumulative privacy loss over many training steps and report \u03b5\u22488, enabling the paper\u2019s large\u2011scale private pretraining claims."
+    },
+    {
+      "title": "Masked Autoencoders Are Scalable Vision Learners",
+      "authors": "Kaiming He et al.",
+      "year": 2022,
+      "role": "Inspiration",
+      "relationship_sentence": "ViP directly adopts and adapts the MAE masked reconstruction objective, arguing that its dense, non-contrastive pretext task aligns with DP\u2011SGD\u2019s clipping and noise, which is the paper\u2019s key algorithmic insight."
+    },
+    {
+      "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+      "authors": "Alexey Dosovitskiy et al.",
+      "year": 2021,
+      "role": "Foundation",
+      "relationship_sentence": "ViP privatizes a Vision Transformer backbone; ViT\u2019s patch tokenization and architecture are the structural basis for MAE-style masked image modeling under DP."
+    },
+    {
+      "title": "A Simple Framework for Contrastive Learning of Visual Representations",
+      "authors": "Ting Chen et al.",
+      "year": 2020,
+      "role": "Gap Identification",
+      "relationship_sentence": "SimCLR exemplifies contrastive SSL that depends on large batches and pairwise objectives; ViP explicitly moves away from such contrastive losses because clipping and DP noise degrade them, motivating the switch to MAE."
+    },
+    {
+      "title": "Emerging Properties in Self-Supervised Vision Transformers",
+      "authors": "Mathilde Caron et al.",
+      "year": 2021,
+      "role": "Related Problem",
+      "relationship_sentence": "DINO is a strong non-contrastive SSL method for ViTs, but its teacher\u2013student dynamics are sensitive to noise; this informed ViP\u2019s choice of a reconstruction objective (MAE) as more DP\u2011compatible."
+    },
+    {
+      "title": "Extracting Training Data from Large Language Models",
+      "authors": "Nicholas Carlini et al.",
+      "year": 2021,
+      "role": "Gap Identification",
+      "relationship_sentence": "Demonstrations of data extraction from foundation models provided the concrete privacy risk that ViP addresses by enforcing end\u2011to\u2011end DP during web\u2011scale vision pretraining."
+    }
+  ],
+  "synthesis_narrative": "ViP\u2019s central innovation\u2014scalable self\u2011supervised pretraining of a vision foundation model with rigorous differential privacy\u2014rests on two pillars: the DP mechanism and a DP\u2011compatible SSL objective. The privacy mechanism comes directly from DP\u2011SGD (Abadi et al.), with R\u00e9nyi DP accounting (Mironov) enabling tight composition over long training schedules to credibly report \u03b5\u22488. Architecturally, ViP builds on Vision Transformers (Dosovitskiy et al.), whose patch tokenization and transformer backbone are the default substrate for modern self\u2011supervised vision methods.\nThe key algorithmic choice is to adopt masked autoencoding (He et al., MAE). ViP argues and demonstrates that MAE\u2019s dense reconstruction loss aligns with per\u2011example clipping and injected noise, preserving learning signals under DP\u2011SGD. This selection is a direct response to the limitations of contrastive SSL such as SimCLR (Chen et al.), where large-batch, pairwise objectives suffer disproportionately under clipping and noise, and to fragilities observed in teacher\u2013student self-distillation like DINO (Caron et al.) when gradients are perturbed. Finally, the motivation for imposing formal privacy at internet scale is grounded in concrete leakage evidence from foundation models (Carlini et al.), which ViP addresses by making the entire pretraining private rather than relying solely on private fine\u2011tuning. Together, these works provided the privacy machinery, the architectural substrate, the motivating risks, and the specific self\u2011supervised strategy that ViP extends to the private foundation\u2011model regime.",
+  "analysis_timestamp": "2026-01-06T23:09:26.493562"
+}

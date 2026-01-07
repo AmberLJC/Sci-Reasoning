@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Deep Generative Image Models using a Laplacian Pyramid of Adversarial Networks (LAPGAN)",
+      "authors": "Emily L. Denton; Soumith Chintala; Arthur Szlam; Rob Fergus",
+      "year": 2015,
+      "role": "Pioneered coarse-to-fine, scale-wise autoregressive generation by factorizing image synthesis across a Laplacian pyramid.",
+      "relationship_sentence": "CoZ\u2019s factorization of extreme SISR into an autoregressive chain of intermediate scales directly echoes LAPGAN\u2019s multiscale decomposition, but reuses a fixed SR backbone instead of separate generators per level."
+    },
+    {
+      "title": "Deep Laplacian Pyramid Networks for Fast and Accurate Super-Resolution (LapSRN)",
+      "authors": "Wei-Sheng Lai; Jia-Bin Huang; Narendra Ahuja; Ming-Hsuan Yang",
+      "year": 2017,
+      "role": "Established progressive, pyramid-based upscaling for SISR with shared computation across scales.",
+      "relationship_sentence": "CoZ generalizes LapSRN\u2019s progressive upsampling idea into a model-agnostic, inference-time chain that repeatedly applies a pretrained SR model to traverse scale states without retraining."
+    },
+    {
+      "title": "Zero-Shot Super-Resolution (ZSSR): From Learning to Learn From a Single Image",
+      "authors": "Assaf Shocher; Nadav Cohen; Michal Irani",
+      "year": 2018,
+      "role": "Showed training-free/test-time adaptation for SR by exploiting internal image statistics rather than external retraining.",
+      "relationship_sentence": "CoZ\u2019s ability to reach extreme scales without additional training aligns with ZSSR\u2019s training-free philosophy, but achieves it via scale autoregression and external language guidance rather than internal patch learning."
+    },
+    {
+      "title": "Image Super-Resolution via Iterative Refinement (SR3)",
+      "authors": "Chitwan Saharia; Jonathan Ho; William Chan; Tim Salimans; David J. Fleet; Mohammad Norouzi",
+      "year": 2021,
+      "role": "Introduced diffusion-based SISR that serves as a strong, general-purpose 4\u00d7 SR backbone.",
+      "relationship_sentence": "CoZ explicitly wraps a standard 4\u00d7 diffusion SR model like SR3 as the reusable backbone, leveraging its fidelity at each step while extending it to extreme scales through chaining."
+    },
+    {
+      "title": "BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models",
+      "authors": "Junnan Li; Dongxu Li; Silvio Savarese; Steven C.H. Hoi",
+      "year": 2023,
+      "role": "Provided a practical VLM for high-quality, open-vocabulary captioning and visual-language grounding with minimal task-specific training.",
+      "relationship_sentence": "CoZ\u2019s multi-scale-aware prompt extraction relies on a VLM to produce descriptive text per zoom step, a role that BLIP-2-style architectures enable with strong image-to-text capabilities."
+    },
+    {
+      "title": "Deep Reinforcement Learning from Human Preferences",
+      "authors": "Paul F. Christiano; Jan Leike; Tom B. Brown; Miljan Martic; Shane Legg; Dario Amodei",
+      "year": 2017,
+      "role": "Founded preference-based RL (RLHF), learning policies from pairwise human feedback via a learned reward model.",
+      "relationship_sentence": "CoZ\u2019s GRPO fine-tuning of the prompt extractor with a critic VLM follows the RLHF paradigm of optimizing behavior against a learned preference signal rather than pure likelihood."
+    },
+    {
+      "title": "Constitutional AI: Harmlessness from AI Feedback",
+      "authors": "Yuntao Bai; Andy Jones; Kamal Ndousse; Amanda Askell; et al.",
+      "year": 2022,
+      "role": "Demonstrated reinforcement learning from AI feedback (RLAIF) using a capable model as the judge to reduce reliance on direct human labeling.",
+      "relationship_sentence": "CoZ\u2019s use of a critic VLM to shape prompts toward human-preferred guidance operationalizes the RLAIF idea\u2014using an AI evaluator as the reward signal during GRPO."
+    }
+  ],
+  "synthesis_narrative": "Chain-of-Zoom (CoZ) fuses three lines of prior work into a single framework: multiscale autoregression, diffusion SR backbones, and preference-aligned language guidance. From LAPGAN and LapSRN, CoZ inherits the core insight that high-resolution synthesis is easier when decomposed across scales; it recasts that principle as a model-agnostic, inference-time chain that repeatedly reuses a single pretrained SR module to traverse intermediate scale states. ZSSR contributes the training-free ethos: instead of retraining for larger magnifications, CoZ attains extreme upscaling by procedural factorization and reuse\u2014trading new parameters for a smarter inference schedule.\nDiffusion-based SR, exemplified by SR3, supplies the robust 4\u00d7 building block. Rather than redesigning architecture, CoZ wraps such a backbone and composes it autoregressively, preserving SR3\u2019s fidelity while pushing far beyond its native scale.\nFinally, CoZ addresses the diminishing visual evidence at large magnifications with multi-scale-aware textual prompts. BLIP-2\u2013style VLMs make per-step, fine-grained descriptions feasible, and the alignment of these prompts with human preference draws directly from RLHF. By training the prompt extractor with GRPO against a critic VLM\u2014an application of RLAIF\u2014CoZ ensures textual guidance is not merely descriptive but preference-aligned. Together, these influences yield a practical recipe: decompose scaling into tractable steps, reuse a strong SR backbone, and inject preference-aligned language cues at each hop, enabling stable super-resolution to extreme factors without additional SR model training.",
+  "analysis_timestamp": "2026-01-07T00:27:38.140735"
+}

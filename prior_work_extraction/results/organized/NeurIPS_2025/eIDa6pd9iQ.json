@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Deep Residual Learning for Image Recognition",
+      "authors": "Kaiming He et al.",
+      "year": 2016,
+      "role": "Baseline",
+      "relationship_sentence": "ACNs replace the short, local residual connections introduced in ResNets with additive long feedforward connections from every layer to the final output, and their analysis directly contrasts the differing training dynamics and depth redundancy observed in ResNets."
+    },
+    {
+      "title": "Densely Connected Convolutional Networks",
+      "authors": "Gao Huang et al.",
+      "year": 2017,
+      "role": "Inspiration",
+      "relationship_sentence": "DenseNet\u2019s principle of extensive inter-layer connectivity and feature reuse inspired ACN\u2019s use of long-range links, which ACN redirects as additive connections from each layer directly to the classifier instead of concatenative propagation to later blocks."
+    },
+    {
+      "title": "Deeply-Supervised Nets",
+      "authors": "Chen-Yu Lee et al.",
+      "year": 2015,
+      "role": "Inspiration",
+      "relationship_sentence": "DSN showed that providing a direct loss signal to intermediate layers yields stronger early representations; ACNs achieve this \u2018deep supervision\u2019 architecturally by giving each layer its own direct additive path to the output, ensuring unhindered gradient flow from the loss to every layer."
+    },
+    {
+      "title": "Residual Networks Behave Like Ensembles of Relatively Shallow Networks",
+      "authors": "Andreas Veit et al.",
+      "year": 2016,
+      "role": "Gap Identification",
+      "relationship_sentence": "By revealing that ResNets function as ensembles of shallow paths and that many deep paths are underutilized, this work motivated ACN\u2019s explicit aggregation of all layers at the output and its study of training dynamics that \u2018push\u2019 information into earlier layers."
+    },
+    {
+      "title": "Deep Networks with Stochastic Depth",
+      "authors": "Gao Huang et al.",
+      "year": 2016,
+      "role": "Gap Identification",
+      "relationship_sentence": "Stochastic Depth demonstrated that many residual layers can be skipped with little loss, highlighting depth redundancy; ACNs are designed so that such redundancy emerges deterministically through gradient descent due to additive connections to the output."
+    },
+    {
+      "title": "Deep Layer Aggregation",
+      "authors": "Fisher Yu et al.",
+      "year": 2018,
+      "role": "Extension",
+      "relationship_sentence": "DLA systematically aggregates features from multiple depths into predictions; ACNs extend this idea by enforcing uniform, direct additive connections from every layer to the final head and analyzing the unique layer-wise optimization patterns this induces."
+    },
+    {
+      "title": "BranchyNet: Fast Inference via Early Exiting from Deep Neural Networks",
+      "authors": "Surat Teerapittayanon et al.",
+      "year": 2016,
+      "role": "Related Problem",
+      "relationship_sentence": "BranchyNet\u2019s early-exit branches showed that intermediate layers can support strong predictions when directly connected to a classifier; ACNs integrate this insight by always routing each layer to the final output, replacing multiple exits with a single additive head that strengthens early layers during training."
+    }
+  ],
+  "synthesis_narrative": "Auto-Compressing Networks (ACNs) are best understood as a principled rethinking of residual connectivity grounded in three converging strands of prior work. First, ResNets established short skip connections as the dominant deep architecture but also exposed practical depth redundancy. This limitation was sharpened by Veit et al., who argued ResNets behave like ensembles of shallow paths, and by Stochastic Depth, which showed many layers can be dropped with minimal harm\u2014together motivating an architecture that purposefully leverages shallow, early representations rather than relying on ever-deeper stacks. Second, DenseNet and Deep Layer Aggregation demonstrated that extensive inter-layer connectivity and explicit aggregation across depths improves feature reuse and prediction, suggesting that connecting many layers to the output is beneficial if done systematically. Third, Deeply-Supervised Nets and BranchyNet revealed that direct loss signals to intermediate layers strengthen early representations and can support confident predictions, indicating that architectural routes from the classifier to all layers reshape learning dynamics.\nACNs fuse these insights into a simple modification: replace local residual links with direct, additive connections from every layer to the final output. This yields deep supervision by construction, structured aggregation at the head, and training dynamics that concentrate task-relevant information into earlier layers. The resulting \u201cauto-compression\u201d effect\u2014where deeper layers become increasingly redundant during gradient descent\u2014directly addresses the observed shortcomings of very deep residual stacks while retaining the benefits of broad connectivity and strong early-layer representations.",
+  "analysis_timestamp": "2026-01-06T23:08:23.962986"
+}

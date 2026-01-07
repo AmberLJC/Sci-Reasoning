@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Multi-stage stochastic optimization applied to energy planning",
+      "authors": "Pereira and Pinto",
+      "year": 1991,
+      "role": "Baseline",
+      "relationship_sentence": "Introduced stochastic dual dynamic programming (SDDP) and the core stagewise piecewise-linear value function approximation via subgradient cuts that TranSDDP directly replaces with a learned (Transformer-based) integration of cuts."
+    },
+    {
+      "title": "Analysis of stochastic dual dynamic programming method",
+      "authors": "Shapiro",
+      "year": 2011,
+      "role": "Foundation",
+      "relationship_sentence": "Formalized the SDDP framework and the use of cutting-plane approximations, clarifying the mathematical structure TranSDDP preserves while altering how cuts are aggregated to control complexity."
+    },
+    {
+      "title": "On the Convergence of Stochastic Dual Dynamic Programming",
+      "authors": "Girardeau et al.",
+      "year": 2015,
+      "role": "Gap Identification",
+      "relationship_sentence": "Established convergence under ever-growing banks of cuts, highlighting the practical burden of cut proliferation that TranSDDP addresses by learning to integrate (and implicitly prioritize) subgradient cuts efficiently."
+    },
+    {
+      "title": "The Cutting-Plane Method for Convex Programs",
+      "authors": "Kelley",
+      "year": 1960,
+      "role": "Foundation",
+      "relationship_sentence": "Provided the primal-dual cutting-plane principle SDDP relies on; TranSDDP\u2019s key innovation is to learn the sequential integration of these subgradient planes into a piecewise-linear value function."
+    },
+    {
+      "title": "Attention Is All You Need",
+      "authors": "Vaswani et al.",
+      "year": 2017,
+      "role": "Inspiration",
+      "relationship_sentence": "Supplied the Transformer architecture whose attention mechanism TranSDDP leverages to encode and aggregate variable-length sequences of cutting planes when constructing value-function approximations."
+    },
+    {
+      "title": "Deep Sets",
+      "authors": "Zaheer et al.",
+      "year": 2017,
+      "role": "Inspiration",
+      "relationship_sentence": "Motivated permutation-invariant neural aggregation of unordered inputs, directly informing TranSDDP\u2019s design for integrating a variable set of subgradient cuts irrespective of ordering."
+    },
+    {
+      "title": "Set Transformer: A Framework for Attention-based Permutation-Invariant Neural Networks",
+      "authors": "Lee et al.",
+      "year": 2019,
+      "role": "Extension",
+      "relationship_sentence": "Provided attention-based set processing modules that TranSDDP extends to the optimization setting to aggregate many cuts into a compact value-function representation at each stage."
+    }
+  ],
+  "synthesis_narrative": "TranSDDP\u2019s intellectual lineage begins with SDDP, introduced by Pereira and Pinto, which framed multistage stochastic programs as a sequence of stagewise problems whose value functions are approximated by piecewise-linear convex envelopes built from subgradient cuts. Shapiro\u2019s analysis further cemented the theoretical underpinnings of this cutting-plane approximation within SDDP, delineating the structure TranSDDP preserves. However, classical convergence results such as those by Girardeau, Lecl\u00e8re, and Philpott underscore a practical shortcoming: convergence proofs assume continually expanding banks of cuts, which in practice leads to ballooning time and memory costs as subproblem size and scenario count grow\u2014precisely the gap TranSDDP targets.\n\nThe paper\u2019s core innovation is to replace hand-crafted cut accumulation and heuristics with a learned integration mechanism that composes many subgradient planes into an effective piecewise-linear value approximation. This leap is enabled by the Transformer architecture of Vaswani et al., whose attention mechanism naturally handles variable-length inputs and focuses computation on the most informative signals. Ideas from Deep Sets and the Set Transformer directly inform how to aggregate an unordered (or order-agnostic) collection of cutting planes in a permutation-invariant, attention-based manner, aligning with the need to process a changing pool of cuts at each stage. Rooted in Kelley\u2019s cutting-plane principle yet modernized by attention-based set processing, TranSDDP retains SDDP\u2019s decomposition benefits while directly addressing the cut-proliferation bottleneck through learned, sequential integration of subgradient planes.",
+  "analysis_timestamp": "2026-01-06T23:09:26.547694"
+}

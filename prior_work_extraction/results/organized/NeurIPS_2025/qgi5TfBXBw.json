@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Off-Policy Deep Reinforcement Learning without Exploration (BCQ)",
+      "authors": "Scott Fujimoto, David Meger, Doina Precup",
+      "year": 2019,
+      "role": "Introduced the support-constraint paradigm by restricting policy actions to a small perturbation around actions generated from a learned behavior model, directly targeting extrapolation error in offline RL.",
+      "relationship_sentence": "The proposed neighborhood constraint builds on BCQ\u2019s core idea of staying near dataset actions but moves the constraint into the Bellman target and avoids explicit behavior modeling by using adaptive, data-driven neighborhoods."
+    },
+    {
+      "title": "Stabilizing Off-Policy Q-Learning via Bootstrapping Error Accumulation Reduction (BEAR)",
+      "authors": "Aviral Kumar, Justin Fu, Matthew Soh, Sergey Levine",
+      "year": 2019,
+      "role": "Pioneered divergence-based constraints (MMD) to ensure the learned policy stays within the support of the dataset, providing theoretical intuition about distributional shift and extrapolation.",
+      "relationship_sentence": "Adaptive neighborhood-constrained targets pursue the same goal as BEAR\u2014limiting distribution shift\u2014but replace global divergence control with local, pointwise neighborhoods that do not require tuning or estimating divergences."
+    },
+    {
+      "title": "Behavior Regularized Actor-Critic (BRAC)",
+      "authors": "Yifan Wu, George Tucker, Ofir Nachum",
+      "year": 2019,
+      "role": "Established density-constraint methods via KL regularization to a behavior policy, highlighting the trade-off between conservatism and performance in offline RL.",
+      "relationship_sentence": "The new method addresses BRAC\u2019s over-conservatism by constraining only the backup action set through neighborhoods, preserving flexibility while still bounding OOD error."
+    },
+    {
+      "title": "Conservative Q-Learning for Offline Reinforcement Learning (CQL)",
+      "authors": "Aviral Kumar, Aurick Zhou, George Tucker, Sergey Levine",
+      "year": 2020,
+      "role": "Introduced pessimistic Q-regularization that discourages high values on OOD actions without explicit support modeling.",
+      "relationship_sentence": "Neighborhood-constrained targets offer a complementary mechanism to CQL\u2019s pessimism by explicitly restricting backup actions to near-data regions, approximating a support constraint without learning a behavior model."
+    },
+    {
+      "title": "A Minimalist Approach to Offline Reinforcement Learning (TD3+BC)",
+      "authors": "Scott Fujimoto, David Meger, Doina Precup",
+      "year": 2021,
+      "role": "Showed that simple behavior cloning regularization can stabilize offline actor-critic but can be overly conservative when data are suboptimal.",
+      "relationship_sentence": "The proposed neighborhood constraint seeks a less conservative alternative to TD3+BC by allowing improvement beyond dataset actions while still controlling extrapolation through localized action neighborhoods."
+    },
+    {
+      "title": "Implicit Q-Learning (IQL)",
+      "authors": "Ilya Kostrikov, Ashvin Nair, Sergey Levine",
+      "year": 2022,
+      "role": "Demonstrated strong performance from in-sample (sample-constrained) learning via expectile value regression and advantage-weighted policy updates, avoiding explicit behavior models.",
+      "relationship_sentence": "By extending beyond pure in-sample backups, the neighborhood-constrained target generalizes IQL\u2019s sample constraint to a controlled local action set, reducing conservatism while retaining stability."
+    },
+    {
+      "title": "Safe Policy Improvement with Baseline Bootstrapping (SPIBB)",
+      "authors": "Hugo Laroche, Paul Trichelair, Thibault Tachet des Combes",
+      "year": 2019,
+      "role": "Provided a principled safe policy improvement framework that restricts policy changes based on data support (counts), exemplifying sample-constraint safety.",
+      "relationship_sentence": "The adaptive neighborhood constraint is a continuous-action analogue of SPIBB\u2019s data-dependent trust regions, replacing count-based sets with geometry-based local neighborhoods in the backup."
+    }
+  ],
+  "synthesis_narrative": "Offline RL\u2019s central challenge\u2014extrapolation error from out-of-distribution actions\u2014has been addressed along three main lines: density constraints, support constraints, and sample constraints. BRAC (density/KL regularization) and TD3+BC (BC regularization) exemplify density-control approaches that keep the learned policy close to the behavior policy but can be overly conservative when the dataset is suboptimal. BEAR advanced support-aware learning by constraining divergence to the dataset\u2019s support, while BCQ operationalized a concrete support constraint via a generative model and small perturbations around dataset actions; both, however, rely on accurate behavior or generative modeling. Sample-constrained methods like IQL and safety-oriented SPIBB restrict learning to in-dataset actions (or well-supported state-action pairs), improving stability yet often limiting improvement due to their conservatism.\n\nThe proposed adaptive neighborhood-constrained Q-learning synthesizes these insights by relocating the constraint to the Bellman target and defining the admissible action set as the union of local neighborhoods around dataset actions. This design directly inherits BCQ\u2019s intuition of staying near data but removes the need for behavior policy or generative modeling, addressing BEAR/BRAC\u2019s dependence on divergence estimation. By expanding beyond pure in-sample backups (IQL/SPIBB) to small, adaptive neighborhoods, it mitigates conservatism while still bounding extrapolation and distribution shift. Relative to pessimistic value regularization (CQL), it provides an explicit geometric control of OOD exposure rather than uniform underestimation. Collectively, these prior works motivate a constraint that is local, data-driven, and placed in the target backup, yielding a flexible yet theoretically grounded approximation to the ideal support constraint.",
+  "analysis_timestamp": "2026-01-07T00:21:32.334829"
+}

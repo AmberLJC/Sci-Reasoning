@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Understanding Black-box Predictions via Influence Functions",
+      "authors": "Pang Wei Koh, Percy Liang",
+      "year": 2017,
+      "role": "Foundational adaptation of influence functions to modern ML",
+      "relationship_sentence": "This work formalized influence functions for deep models and popularized using H^{-1}v approximations to estimate leave-one-out effects, whose core assumptions (invertible/positive-definite Hessian, local convexity, estimation via HVPs) are precisely the assumptions scrutinized and stress-tested by the NeurIPS 2023 paper."
+    },
+    {
+      "title": "The Influence Curve and Its Role in Robust Estimation",
+      "authors": "Frank R. Hampel",
+      "year": 1974,
+      "role": "Foundational statistical theory of influence functions",
+      "relationship_sentence": "Hampel\u2019s classical notion of an estimator\u2019s infinitesimal influence underpins the theoretical lens that the paper revisits, clarifying when the statistical IF intuition can or cannot carry over to highly non-convex, large-scale deep networks."
+    },
+    {
+      "title": "Estimating Training Data Influence by Tracing Gradient Descent (TracIn)",
+      "authors": "Garima Pruthi, Frederick Liu, Satyen Kale, Mukund Sundararajan",
+      "year": 2020,
+      "role": "Empirical critique and trajectory-based alternative",
+      "relationship_sentence": "By showing that trajectory-aware attributions can outperform classical IF in deep nets, TracIn directly motivates the paper\u2019s examination of the \u2018training trajectory\u2019 assumption and the limits of single-point (final-iterate) local linearization."
+    },
+    {
+      "title": "Representer Point Selection for Explaining Deep Neural Networks",
+      "authors": "Chih-Kuan Yeh, Joon Kim, Ian En-Hsu Yen, Pradeep K. Ravikumar",
+      "year": 2018,
+      "role": "Alternative data attribution under convexity/L2 assumptions",
+      "relationship_sentence": "This method\u2019s reliance on convex losses and L2 regularization provides a contrasting attribution framework that highlights the convexity assumptions the paper dissects and partially rehabilitates in its theoretical discussion."
+    },
+    {
+      "title": "Second-Order Stochastic Optimization in Linear Time (LiSSA)",
+      "authors": "Alekh Agarwal, Brian Bullins, Elad Hazan",
+      "year": 2016,
+      "role": "Practical inverse-Hessian estimation used in IF computations",
+      "relationship_sentence": "LiSSA-style stochastic approximations are the computational backbone of scalable IF, and the paper\u2019s analysis of numerical stability and damping directly interrogates the reliability of such H^{-1}v estimators in deep networks."
+    },
+    {
+      "title": "Fast Exact Multiplication by the Hessian",
+      "authors": "Barak A. Pearlmutter",
+      "year": 1994,
+      "role": "Core technique for Hessian\u2013vector products (HVP)",
+      "relationship_sentence": "Efficient HVPs make IF feasible in large models; the paper leverages and critiques this computational route when assessing stability and conditioning issues that undermine accurate leave-one-out prediction."
+    },
+    {
+      "title": "Deep Learning via Hessian-free Optimization",
+      "authors": "James Martens",
+      "year": 2010,
+      "role": "Characterization of curvature, non-convexity, and ill-conditioning in deep nets",
+      "relationship_sentence": "Martens\u2019 insights into non-convex, ill-conditioned curvature landscapes inform the paper\u2019s analysis of convexity violations and parameter divergence, clarifying why local second-order approximations can fail in practice."
+    }
+  ],
+  "synthesis_narrative": "The NeurIPS 2023 paper re-evaluates influence functions (IF) in the context of modern deep networks by interrogating the precise assumptions needed for IF to predict leave-one-out effects. Its starting point is the classical statistical notion of influence (Hampel), and its most direct antecedent is Koh and Liang\u2019s adaptation of IF to deep learning, which operationalized IF via H^{-1}v computations to attribute predictions to training points. This operationalization depends on efficient curvature primitives\u2014Pearlmutter\u2019s Hessian\u2013vector products and stochastic inverse-Hessian estimators like LiSSA\u2014that made IF scalable but also introduced numerical stability and damping choices that the paper shows can critically affect accuracy.\nAt the modeling level, the paper contrasts IF\u2019s local, single-iterate linearization with trajectory-aware perspectives such as TracIn, which empirically demonstrated that SGD path information can dominate attribution quality in non-convex regimes. Complementarily, Representer Point Selection crystallized how strong convexity and L2 regularization enable clean data-to-prediction decompositions, highlighting assumptions that often fail in contemporary deep models.\nSynthesizing these strands, the paper systematically identifies five problematic assumptions\u2014centered on convexity, numerical conditioning, training trajectory, and especially parameter divergence\u2014and delineates which can be mitigated and which constitute fundamental roadblocks. Insights from curvature-rich optimization (e.g., Martens) help explain why local second-order approximations can be unstable or misleading when retraining moves parameters across different basins. The result is a clarified theoretical and practical scope for IF: some limitations are addressable, but parameter divergence poses a principled barrier to reliably predicting retraining effects in modern deep networks.",
+  "analysis_timestamp": "2026-01-07T00:02:04.783373"
+}

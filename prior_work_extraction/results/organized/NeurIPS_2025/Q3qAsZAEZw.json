@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "What Every Computer Scientist Should Know About Floating-Point Arithmetic",
+      "authors": "David Goldberg",
+      "year": 1991,
+      "role": "Foundational theory of floating\u2011point non-associativity and rounding error",
+      "relationship_sentence": "The paper\u2019s root-cause analysis\u2014that parallel reductions and kernel choices change accumulation order and thus alter logits\u2014directly builds on Goldberg\u2019s exposition of non-associativity and rounding behavior in finite-precision arithmetic."
+    },
+    {
+      "title": "Numerical Reproducibility for the Parallel Reduction on Multi- and Many-Core Architectures",
+      "authors": "Sylvain Collange, David Defour, Stef Graillat, Romaric Iakymchuk",
+      "year": 2015,
+      "role": "GPU parallel reductions and reproducible algorithms",
+      "relationship_sentence": "By showing how thread scheduling and reduction trees make GPU sums non-reproducible and proposing order-invariant strategies, this work informs the paper\u2019s identification of batch size/GPU-count as sources of logit drift and motivates deterministic reduction patterns as a mitigation."
+    },
+    {
+      "title": "Fast Reproducible Floating-Point Summation",
+      "authors": "James Demmel, Huan Nguyen",
+      "year": 2013,
+      "role": "Algorithmic tools for reproducible summation (pairwise/binned accumulators)",
+      "relationship_sentence": "The proposed mitigations\u2014stabilizing and determinizing key reductions in softmax, attention, and layer norm\u2014draw on Demmel and Nguyen\u2019s techniques for reproducible accumulation that reduce order sensitivity without prohibitive overhead."
+    },
+    {
+      "title": "Mixed Precision Training",
+      "authors": "Paulius Micikevicius, Sharan Narang, Jonah Alben, Gregory Diamos, Erich Elsen, David Garcia, Boris Ginsburg, Michael Houston, Oleksii Kuchaiev, Ganesh Venkatesh, Hao Wu",
+      "year": 2018,
+      "role": "Precision policy: low-precision compute with higher-precision accumulators",
+      "relationship_sentence": "The paper\u2019s mitigation to upcast critical reductions (e.g., logits/softmax normalization) and accumulate in higher precision directly follows mixed-precision best practices that curb rounding amplification in deep networks."
+    },
+    {
+      "title": "BFloat16: The Secret of Deep Learning Training at Scale",
+      "authors": "Shibo Wang, Andrew Kanwar",
+      "year": 2019,
+      "role": "Characterization of bfloat16 format and its numerical trade-offs",
+      "relationship_sentence": "The observed brittleness under bfloat16\u2014and the recommendation to selectively use FP32 for sensitive operations\u2014are grounded in this work\u2019s analysis of bfloat16\u2019s exponent/mantissa trade-offs and rounding characteristics."
+    },
+    {
+      "title": "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness",
+      "authors": "Tri Dao, Daniel Y. Fu, Stefano Ermon, Atri Rudra, Christopher R\u00e9",
+      "year": 2022,
+      "role": "Numerically stable online softmax/attention computation",
+      "relationship_sentence": "By reformulating attention with online max-trick normalization and chunked reductions, FlashAttention provides algorithmic templates the paper leverages to reduce reduction-order sensitivity and improve determinism in attention kernels."
+    },
+    {
+      "title": "Scheduled Sampling for Sequence Prediction with Recurrent Neural Networks",
+      "authors": "Samy Bengio, Oriol Vinyals, Navdeep Jaitly, Noam Shazeer",
+      "year": 2015,
+      "role": "Exposure bias and error compounding in autoregressive decoding",
+      "relationship_sentence": "The paper\u2019s finding that tiny early-token rounding differences cascade into divergent chains of thought is theoretically contextualized by exposure bias, as formalized by scheduled sampling."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core contribution\u2014diagnosing and mitigating numerically induced nondeterminism in LLM inference\u2014rests on unifying classic floating\u2011point analysis with GPU-level reproducibility research and transformer-specific numerical design. Goldberg\u2019s account of non\u2011associativity and rounding provides the fundamental lens through which changes in GPU count, kernel choice, and batch size are shown to reorder reductions and thus perturb logits. Collange et al. and Demmel & Nguyen translate this theory into the GPU setting, demonstrating how parallel reductions become non\u2011reproducible and offering deterministic or order\u2011robust summation schemes; these directly inspire the paper\u2019s deterministic reduction strategies for softmax, attention, and layer normalization.\nComplementing reduction order, precision policy is central: Micikevicius et al. establish that higher\u2011precision accumulators temper rounding amplification, and Wang & Kanwar\u2019s characterization of bfloat16 explains why reasoning\u2011oriented LLMs are especially sensitive under BF16. Building on these, the paper prescribes selective upcasting and accumulation in FP32 at numerically sensitive points of the inference pipeline.\nAt the algorithmic level, FlashAttention\u2019s online, numerically stable softmax/attention shows how restructured normalization reduces susceptibility to chunking and parallelization artifacts; the paper adapts such patterns to enhance determinism across hardware and batching. Finally, the observed cascading divergence in generated reasoning traces to exposure bias as articulated by scheduled sampling: small early perturbations compound across decoding steps. Together, these works shape a principled toolbox\u2014deterministic reductions, stable normalizers, and precision-aware accumulators\u2014for reproducible LLM inference across heterogeneous systems.",
+  "analysis_timestamp": "2026-01-06T23:42:48.159875"
+}

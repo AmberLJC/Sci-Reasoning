@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Crafter: Open-World Survival Game for Reinforcement Learning",
+      "authors": "Danijar Hafner",
+      "year": 2021,
+      "role": "Direct predecessor benchmark and task design",
+      "relationship_sentence": "Craftax-Classic is a ground-up JAX rewrite of Crafter, and the main Craftax benchmark extends Crafter\u2019s mechanics, making Crafter the immediate progenitor of Craftax\u2019s environment structure and objectives."
+    },
+    {
+      "title": "The NetHack Learning Environment",
+      "authors": "K\u00fcttler et al.",
+      "year": 2020,
+      "role": "Mechanics and challenge inspiration for open-ended RL",
+      "relationship_sentence": "Craftax borrows NetHack-inspired elements (inventory, survival depth, long-horizon dependencies) to increase exploration and planning difficulty while remaining computationally efficient."
+    },
+    {
+      "title": "Procgen Benchmark: Procedurally-Generated Game Environments for Generalization in Reinforcement Learning",
+      "authors": "Ian Cobbe, Chris Hesse, Shane Hilton, John Schulman",
+      "year": 2020,
+      "role": "Contrastive benchmark emphasizing speed and diversity",
+      "relationship_sentence": "Procgen exemplifies fast, diverse procedurally generated tasks but limited complexity; Craftax explicitly targets similar throughput while substantially increasing long-horizon complexity and memory demands."
+    },
+    {
+      "title": "Minigrid: A Minimalist Gridworld Environment for Reinforcement Learning",
+      "authors": "Maxime Chevalier-Boisvert, Lucas Willems, Suman Pal",
+      "year": 2018,
+      "role": "Contrastive simple/fast baseline shaping design goals",
+      "relationship_sentence": "Minigrid represents the fast-but-too-simple end of the spectrum that Craftax aims to surpass in complexity and planning requirements without sacrificing simulation speed."
+    },
+    {
+      "title": "Brax: A Differentiable Physics Engine for Large Scale Rigid Body Simulation",
+      "authors": "Freeman et al.",
+      "year": 2021,
+      "role": "Technical inspiration for accelerator-native, vectorized environments",
+      "relationship_sentence": "Brax demonstrated that JAX+XLA, massive parallelism, and accelerator execution can deliver orders-of-magnitude throughput, a principle Craftax-Classic applies to a discrete open-ended domain."
+    },
+    {
+      "title": "JAX: Autograd and XLA",
+      "authors": "James Bradbury, Roy Frostig, Peter Hawkins, Matthew James Johnson, Chris Leary, Dougal Maclaurin, Skye Wanderman-Milne",
+      "year": 2018,
+      "role": "Enabling systems technology for speed (JIT, vmap, pmap)",
+      "relationship_sentence": "Craftax\u2019s 100x\u2013250x speedups stem from JAX primitives\u2014JIT compilation, vectorization, and GPU execution\u2014enabling end-to-end batched environment stepping and learning on a single accelerator."
+    },
+    {
+      "title": "The MineRL Competition on Sample Efficient Reinforcement Learning using Human Priors",
+      "authors": "William H. Guss et al.",
+      "year": 2019,
+      "role": "Open-ended Minecraft benchmark motivation",
+      "relationship_sentence": "Minecraft/MineRL established crafting/survival as compelling open-ended RL targets but is slow; Craftax seeks similar richness with dramatically lower computational cost."
+    }
+  ],
+  "synthesis_narrative": "Craftax\u2019s core contribution\u2014combining open-ended task complexity with lightning-fast simulation\u2014emerges by reconciling two lines of prior work. On the task-design side, Crafter defines a compact, survival-and-crafting open world that directly seeds Craftax: the authors rewrite Crafter in JAX (Craftax-Classic) and then extend its mechanics. To push difficulty toward deeper exploration, inventory use, and long-horizon dependencies, the design borrows from the NetHack Learning Environment, which has proven the value of roguelike mechanics for probing planning and memory.\n\nOn the performance side, Craftax adopts the accelerator-native philosophy popularized by JAX and exemplified by Brax: express the simulator as pure, vectorizable functions, then leverage JIT compilation and batched execution on GPUs/TPUs. This systems approach enables 100x\u2013250x speedups over Python-native simulators and allows billion-step runs on a single GPU. The benchmark\u2019s positioning is sharpened by contrasts with Procgen and Minigrid\u2014fast and diverse but comparatively shallow\u2014versus Minecraft/MineRL\u2014rich and open-ended but slow. Craftax explicitly targets the \u201cfast yet rich\u201d quadrant these benchmarks leave open.\n\nIn synthesis, Craftax fuses Crafter\u2019s open-world structure with NetHack-inspired depth, implemented using JAX\u2019s compilation and vectorization paradigm (as in Brax) to deliver unprecedented throughput. The result is a benchmark that preserves the exploration, planning, and memory challenges emblematic of open-ended RL while making large-scale experimentation accessible on modest hardware.",
+  "analysis_timestamp": "2026-01-07T00:02:04.897181"
+}

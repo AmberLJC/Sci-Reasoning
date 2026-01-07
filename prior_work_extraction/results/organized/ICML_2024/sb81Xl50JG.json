@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+      "authors": "Hu et al.",
+      "year": 2022,
+      "role": "Baseline",
+      "relationship_sentence": "APT adopts LoRA-style low-rank tunable parameters for PEFT but explicitly tackles LoRA\u2019s core limitation\u2014no inference speedup\u2014by jointly performing structured pruning of the base model during fine-tuning."
+    },
+    {
+      "title": "Prefix-Tuning: Optimizing Continuous Prompts for Generation",
+      "authors": "Li et al.",
+      "year": 2021,
+      "role": "Gap Identification",
+      "relationship_sentence": "As a representative PEFT method that reduces training memory without improving inference efficiency, Prefix-Tuning exemplifies the gap APT targets by combining tuning with concurrent structured pruning."
+    },
+    {
+      "title": "Movement Pruning: Adaptive Sparsity by Fine-Tuning",
+      "authors": "Sanh et al.",
+      "year": 2020,
+      "role": "Inspiration",
+      "relationship_sentence": "APT borrows the core idea of using training-time importance/movement signals to prune unimportant weights, but converts it into structured block pruning and couples it with adapter growth for joint training-and-inference efficiency."
+    },
+    {
+      "title": "Rigging the Lottery: Making All Tickets Winners",
+      "authors": "Evci et al.",
+      "year": 2020,
+      "role": "Inspiration",
+      "relationship_sentence": "APT\u2019s prune-and-grow dynamic\u2014discarding low-importance parameters while adding salient ones early in training\u2014directly follows the dynamic sparse training paradigm introduced by RigL\u2019s gradient-based pruning-and-growth."
+    },
+    {
+      "title": "Are Sixteen Heads Really Better Than One?",
+      "authors": "Michel et al.",
+      "year": 2019,
+      "role": "Foundation",
+      "relationship_sentence": "APT\u2019s structured pruning leverages the foundational insight that entire attention heads (and other transformer blocks) can be pruned with minimal quality loss when guided by saliency, enabling real speedups."
+    },
+    {
+      "title": "Block Pruning for Faster Transformers",
+      "authors": "Lagunas et al.",
+      "year": 2021,
+      "role": "Foundation",
+      "relationship_sentence": "APT builds on block-structured pruning to yield actual wall-clock speedups, while addressing its training-time overhead by interleaving pruning with adaptive PEFT growth in early fine-tuning."
+    },
+    {
+      "title": "Diff Pruning: Fine-Tuning with Sparse Updates",
+      "authors": "Guo et al.",
+      "year": 2021,
+      "role": "Gap Identification",
+      "relationship_sentence": "Diff Pruning shows that sparse parameter updates can reduce storage/training costs but still leave inference latency unchanged; APT directly addresses this by coupling sparse/low-rank tuning with structured base-model pruning."
+    }
+  ],
+  "synthesis_narrative": "APT\u2019s core innovation is to jointly prune and tune during early fine-tuning so that models gain both training-time efficiency (via parameter-efficient updates) and inference-time speedups (via structured pruning). The direct lineage starts from PEFT methods such as LoRA and Prefix-Tuning, which popularized updating a small set of parameters but left a critical gap: they do not accelerate inference. Diff Pruning further highlighted that sparsifying updates alone does not change runtime unless the base model itself is reduced. APT tackles this gap by drawing on two complementary threads in pruning. First, Movement Pruning established that pruning guided by training-time movement/gradient signals preserves accuracy; APT adopts this principle but converts it to structured pruning that yields real speedups. Second, RigL introduced a prune-and-grow dynamic sparse training mechanism using gradient-based growth; APT transposes this idea to the PEFT setting, dynamically adding salient tuning parameters while pruning unimportant base parameters early for rapid convergence. Foundational structured-transformer pruning works, from head-level pruning (Michel et al.) to block pruning for hardware-friendly acceleration (Lagunas et al.), provide the concrete pruning units and efficiency rationale that APT operationalizes within fine-tuning. Together, these works directly shape APT\u2019s unified schedule that adaptively grows low-rank tuning capacity where it matters while structurally shrinking the backbone to deliver both fast training and faster inference.",
+  "analysis_timestamp": "2026-01-06T23:09:26.451588"
+}

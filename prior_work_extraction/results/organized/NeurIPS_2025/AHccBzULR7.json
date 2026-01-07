@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis",
+      "authors": "Ben Mildenhall, Pratul P. Srinivasan, Matthew Tancik, Jonathan T. Barron, Ravi Ramamoorthi, Ren Ng",
+      "year": 2020,
+      "role": "Foundational neural field and differentiable rendering framework",
+      "relationship_sentence": "TREND builds on NeRF\u2019s idea of representing 3D scenes as neural fields and supervising learning via differentiable rendering, adapting this paradigm to the LiDAR modality to compute forecast losses from rendered future sweeps."
+    },
+    {
+      "title": "D-NeRF: Neural Radiance Fields for Dynamic Scenes",
+      "authors": "Albert Pumarola, Enric Corona, Gerard Pons-Moll, Francesc Moreno-Noguer",
+      "year": 2021,
+      "role": "Dynamic neural fields (time-varying scene representation)",
+      "relationship_sentence": "By modeling time as part of the implicit field, D-NeRF directly inspires TREND\u2019s Temporal LiDAR Neural Field and its recurrent embedding to capture evolving 3D structure and motion across LiDAR sequences."
+    },
+    {
+      "title": "Multi-View Supervision for Single-View Reconstruction via Differentiable Ray Consistency",
+      "authors": "Shubham Tulsiani, Tinghui Zhou, Alexei A. Efros, Jitendra Malik",
+      "year": 2017,
+      "role": "Ray-based differentiable consistency objective",
+      "relationship_sentence": "TREND\u2019s loss computed by differentiable rendering of LiDAR rays follows the principle of ray consistency, aligning predicted neural field responses with measured ranges along rays to provide an unsupervised signal."
+    },
+    {
+      "title": "Representation Learning with Contrastive Predictive Coding",
+      "authors": "Aaron van den Oord, Yazhe Li, Oriol Vinyals",
+      "year": 2018,
+      "role": "Forecasting-driven self-supervised learning",
+      "relationship_sentence": "CPC introduced forecasting future representations as a self-supervised objective; TREND operationalizes this in 3D by predicting future LiDAR observations through a recurrent encoder and a neural field."
+    },
+    {
+      "title": "Masked Autoencoders Are Scalable Vision Learners",
+      "authors": "Kaiming He, Xinlei Chen, Saining Xie, Yanghao Li, Piotr Doll\u00e1r, Ross Girshick",
+      "year": 2021,
+      "role": "Baseline masked reconstruction paradigm",
+      "relationship_sentence": "MAE defines the masked reconstruction family that dominates unsupervised pretraining; TREND departs from this static reconstruction by leveraging temporal forecasting and rendering to capture motion-informed semantics."
+    },
+    {
+      "title": "A Simple Framework for Contrastive Learning of Visual Representations (SimCLR)",
+      "authors": "Ting Chen, Simon Kornblith, Mohammad Norouzi, Geoffrey Hinton",
+      "year": 2020,
+      "role": "Foundational contrastive learning framework",
+      "relationship_sentence": "Contrastive instance discrimination like SimCLR underpins many 3D contrastive pretraining methods; TREND avoids reliance on augmentation pairs by using future LiDAR forecasts as the supervisory signal."
+    },
+    {
+      "title": "FlowNet3D: Learning Scene Flow in 3D Point Clouds",
+      "authors": "Xingyi Liu, Charles R. Qi, Hao Su, Leonidas J. Guibas",
+      "year": 2019,
+      "role": "Learning 3D motion dynamics from point clouds",
+      "relationship_sentence": "FlowNet3D\u2019s focus on estimating motion in point clouds motivates TREND\u2019s use of temporal cues; TREND leverages motion via a recurrent embedding and forecasts the future sweep rather than estimating scene flow explicitly."
+    }
+  ],
+  "synthesis_narrative": "TREND\u2019s core idea\u2014unsupervised pretraining by forecasting future LiDAR observations via a temporal neural field and differentiable rendering\u2014emerges from three converging lines of work. First, neural fields and rendering: NeRF established that a scene can be learned as a neural field supervised by differentiable rendering. D-NeRF extended this to dynamic settings by conditioning the field on time, while differentiable ray consistency formalized ray-based supervisory signals that are especially pertinent to range sensors. TREND fuses these insights into a LiDAR-specific neural field whose outputs are compared to measured future sweeps using a ray-based rendering loss.\nSecond, forecasting as a representation-learning signal: CPC showed that predicting the future in latent space can drive strong self-supervised features. TREND adopts this forecasting principle but grounds it in 3D by introducing a recurrent embedding over LiDAR sequences and predicting actual future observations through a neural field, thereby tying representation learning to physically observable dynamics.\nThird, a response to prevailing 3D pretraining paradigms: masked autoencoding (exemplified by MAE) and contrastive learning (e.g., SimCLR) have dominated but largely ignore temporal structure intrinsic to LiDAR sequences. TREND explicitly leverages motion and temporal coherence, akin to how FlowNet3D capitalized on 3D motion, but reframes the task as future sweep rendering rather than flow estimation. The result is a pretraining objective that encodes both geometry and dynamics, aligning the learned representation with downstream LiDAR perception tasks.",
+  "analysis_timestamp": "2026-01-07T00:05:12.541828"
+}

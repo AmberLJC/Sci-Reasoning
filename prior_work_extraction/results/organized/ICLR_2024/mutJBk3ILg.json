@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "A Simple Framework for Contrastive Learning of Visual Representations",
+      "authors": "Ting Chen et al.",
+      "year": 2020,
+      "arxiv_id": "2002.05709",
+      "role": "Baseline",
+      "relationship_sentence": "LateTVG is designed to plug into contrastive SSL pipelines like SimCLR, using the same InfoNCE objective and standard view-augmentation setup while regularizing the learned representations via feature-space view generation to counteract augmentation-induced spurious invariances."
+    },
+    {
+      "title": "What makes for good views for contrastive learning?",
+      "authors": "Yonglong Tian et al.",
+      "year": 2020,
+      "arxiv_id": "2005.10243",
+      "role": "Gap Identification",
+      "relationship_sentence": "This paper formalized how augmentations define the invariances learned by contrastive SSL, motivating the current work\u2019s focus on identifying and correcting undesired invariances by generating targeted feature-space views."
+    },
+    {
+      "title": "Manifold Mixup: Better Representations by Interpolating Hidden States",
+      "authors": "Vikas Verma et al.",
+      "year": 2019,
+      "arxiv_id": "1806.05236",
+      "role": "Inspiration",
+      "relationship_sentence": "By showing that augmentations performed in hidden feature space can improve generalization, Manifold Mixup directly inspires LateTVG\u2019s strategy of augmenting late-layer embeddings rather than relying solely on pixel-space transformations."
+    },
+    {
+      "title": "Robust Pre-Training by Adversarial Contrastive Learning",
+      "authors": "Jiang et al.",
+      "year": 2020,
+      "arxiv_id": null,
+      "role": "Related Problem",
+      "relationship_sentence": "Adversarial contrastive learning demonstrated that learned (hard) views can harden SSL, and the present work adapts this idea by generating feature-space perturbations targeted to remove spurious attributes rather than indiscriminately perturbing images."
+    },
+    {
+      "title": "Domain-Adversarial Training of Neural Networks",
+      "authors": "Yaroslav Ganin et al.",
+      "year": 2016,
+      "arxiv_id": "1505.07818",
+      "role": "Foundation",
+      "relationship_sentence": "DANN established the adversarial principle for removing specific nuisance/domain information from representations, a principle LateTVG leverages to regularize late-layer features so that spurious attributes become uninformative during SSL pretraining."
+    },
+    {
+      "title": "Distributionally Robust Neural Networks for Group Shifts: On the Importance of Regularization for Worst-Group Generalization",
+      "authors": "Shiori Sagawa et al.",
+      "year": 2020,
+      "arxiv_id": "1911.08731",
+      "role": "Gap Identification",
+      "relationship_sentence": "GroupDRO popularized group-aware reweighting/resampling to mitigate spurious correlations, and the current work explicitly shows that analogous resampling during SSL fails to induce true invariance, motivating its feature-space regularization approach."
+    }
+  ],
+  "synthesis_narrative": "Contrastive self-supervised learning frameworks showed that representation quality hinges on the definition of positive/negative pairs and the augmentations that produce them; SimCLR in particular crystallized the InfoNCE pipeline where view augmentations dictate what invariances are learned. Subsequent analysis clarified that these views effectively specify the invariance class, with theory and experiments demonstrating that mismatched or overly aggressive augmentations can encode undesirable invariances that harm transfer. Independently, feature-space augmentation work established that manipulating hidden states\u2014rather than images\u2014can yield stronger inductive biases and better generalization, suggesting a lever to target specific information in learned representations. Adversarial contrastive pretraining further revealed that learned or adversarially generated views can harden SSL, albeit with largely indiscriminate perturbations in pixel space. In supervised settings, domain-adversarial training provided a mechanism to explicitly remove domain or attribute information from features, offering a blueprint for targeted invariance. Finally, group-robust optimization highlighted practical mitigation via reweighting/resampling, but with limitations that can fail to enforce the desired invariances.\nTaken together, these works identify a gap: while augmentations control invariance in SSL, existing image-space or adversarial approaches are not targeted to spurious attributes, and group-based resampling does not reliably yield invariant representations. The natural next step is to generate views in feature space\u2014where specific nuisance factors can be suppressed\u2014and to regularize late-layer embeddings so spurious information is actively removed during pretraining, yielding SSL representations that retain task-relevant content without encoding shortcut cues.",
+  "target_paper": {
+    "title": "Views Can Be Deceiving: Improved SSL Through Feature Space Augmentation",
+    "authors": "Kimia Hamidieh, Haoran Zhang, Swami Sankaranarayanan, Marzyeh Ghassemi",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Representation Learning, Spurious Correlations, Self-supervised Learning",
+    "abstract": "Supervised learning methods have been found to exhibit inductive biases favoring simpler features. When such features are spuriously correlated with the label, this can result in suboptimal performance on minority subgroups. Despite the growing popularity of methods which learn from unlabeled data, the extent to which these representations rely on spurious features for prediction is unclear. In this work, we explore the impact of spurious features on Self-Supervised Learning (SSL) for visual representation learning. We first empirically show that commonly used augmentations in SSL can cause undesired invariances in the image space, and illustrate this with a simple example. We further show that classical approaches in combating spurious correlations, such as dataset re-sampling during SSL, do not consistently lead to invariant representations. Motivated by these findings, we propose LateTVG to remove spurious information from these representations during pre-training, by regularizing l",
+    "openreview_id": "mutJBk3ILg",
+    "forum_id": "mutJBk3ILg"
+  },
+  "analysis_timestamp": "2026-01-06T14:28:08.891578"
+}

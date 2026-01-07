@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Score-Based Generative Modeling through Stochastic Differential Equations",
+      "authors": "Yang Song et al.",
+      "year": 2021,
+      "arxiv_id": "2011.13456",
+      "role": "Foundation",
+      "relationship_sentence": "This work\u2019s SDE/continuity-equation formulation and divergence-based log-likelihood estimation are the exact mathematical apparatus SuperDiff generalizes to derive superposition and to motivate replacing the divergence integral with an It\u00f4-based density estimator."
+    },
+    {
+      "title": "FFJORD: Free-Form Continuous Dynamics for Scalable Reversible Generative Models",
+      "authors": "Will Grathwohl et al.",
+      "year": 2019,
+      "arxiv_id": "1810.01367",
+      "role": "Foundation",
+      "relationship_sentence": "FFJORD introduced the Hutchinson trace estimator for scalable divergence computation in continuous flows\u2014the computational baseline whose cost SuperDiff matches while substituting an It\u00f4 density estimator for tracking diffusion SDE log-likelihoods."
+    },
+    {
+      "title": "Compositional Visual Generation with Composable Diffusion Models",
+      "authors": "Nan Liu et al.",
+      "year": 2022,
+      "arxiv_id": "2206.01747",
+      "role": "Baseline",
+      "relationship_sentence": "This training-free product-of-experts score composition (summing scores and subtracting unconditional) is the primary baseline that SuperDiff systematizes and extends, replacing heuristic score addition with a superposition rule derived from the continuity equation."
+    },
+    {
+      "title": "Classifier-Free Diffusion Guidance",
+      "authors": "Jonathan Ho et al.",
+      "year": 2022,
+      "arxiv_id": "2207.12598",
+      "role": "Inspiration",
+      "relationship_sentence": "The linear combination of unconditional and conditional scores in classifier-free guidance directly inspired SuperDiff\u2019s view that pretrained score fields can be additively superposed during sampling."
+    },
+    {
+      "title": "Stochastic Interpolants: A Unifying Framework for Flows and Diffusions",
+      "authors": "Michael S. Albergo et al.",
+      "year": 2023,
+      "arxiv_id": "2303.08797",
+      "role": "Inspiration",
+      "relationship_sentence": "Its continuity-equation\u2013centric derivation of density evolution via stochastic interpolants provides the theoretical bridge SuperDiff uses to derive superposition from first principles rather than heuristics."
+    },
+    {
+      "title": "Flow Matching for Generative Modeling",
+      "authors": "Yaron Lipman et al.",
+      "year": 2023,
+      "arxiv_id": "2210.02747",
+      "role": "Related Problem",
+      "relationship_sentence": "By casting generation as transporting densities with a vector field under the continuity equation, this work informed SuperDiff\u2019s design intuition that drift fields can be composed at sampling time without retraining."
+    }
+  ],
+  "synthesis_narrative": "Score-based generative modeling through SDEs established the modern formulation of diffusion sampling via a stochastic process and its probability flow ODE, linking density evolution to the continuity equation and enabling log-likelihood computation as an integral of drift-field divergence. FFJORD provided the scalable mechanism to evaluate those divergence terms in continuous-time models using Hutchinson\u2019s trace estimator, making density tracking practical. Classifier-free guidance showed that linear combinations of unconditional and conditional score fields can be applied at generation time to steer samples, validating that additive manipulations of score fields can control the target density. Composable diffusion extended this idea to training-free composition by summing multiple conditional scores (a product-of-experts view), demonstrating practical model combination but relying on heuristic score additivity and independence assumptions. Stochastic Interpolants unified flows and diffusions under the continuity equation, clarifying how vector fields determine density dynamics and how It\u00f4 calculus governs their evolution. Flow Matching further emphasized that generation is mass transport under a continuity equation, highlighting that vector fields are the primary objects to design and potentially compose.\nTogether, these works revealed both the feasibility and limitations of training-free composition: additive score manipulation is powerful, yet lacked a first-principles foundation for combining distinct pretrained models, and divergence-based likelihood tracking is costly. The present work naturalizes the next step by deriving a superposition rule from the continuity equation and introducing an It\u00f4 density estimator that tracks log-likelihood with the same computational budget as Hutchinson, enabling principled, scalable composition-only generation with multiple pretrained diffusion models.",
+  "target_paper": {
+    "title": "The Superposition of Diffusion Models Using the It\u00f4 Density Estimator",
+    "authors": "Marta Skreta, Lazar Atanackovic, Joey Bose, Alexander Tong, Kirill Neklyudov",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "generative modelling, protein generation, image generation, diffusion models",
+    "abstract": "The Cambrian explosion of easily accessible pre-trained diffusion models suggests a demand for methods that combine multiple different pre-trained diffusion models without incurring the significant computational burden of re-training a larger combined model. In this paper, we cast the problem of combining multiple pre-trained diffusion models at the generation stage under a novel proposed framework termed superposition. Theoretically, we derive superposition from rigorous first principles stemming from the celebrated continuity equation and design two novel algorithms tailor-made for combining diffusion models in SuperDiff. SuperDiff leverages a new scalable It\u00f4 density estimator for the log likelihood of the diffusion SDE which incurs *no additional overhead* compared to the well-known Hutchinson's estimator needed for divergence calculations. We demonstrate that SuperDiff is scalable to large pre-trained diffusion models as superposition is performed *solely through composition durin",
+    "openreview_id": "2o58Mbqkd2",
+    "forum_id": "2o58Mbqkd2"
+  },
+  "analysis_timestamp": "2026-01-06T14:41:34.667958"
+}

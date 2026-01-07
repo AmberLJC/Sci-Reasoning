@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "SPIDER: Near-Optimal Nonconvex Optimization via Stochastic Path-Integrated Differential Estimator",
+      "authors": "Cong Fang et al.",
+      "year": 2018,
+      "arxiv_id": "1807.01695",
+      "role": "Inspiration",
+      "relationship_sentence": "PILOT borrows the SPIDER path-integrated gradient estimator idea to control stochastic gradient variance, which is key to attaining O(1/K) convergence with constant step sizes in a nonconvex setting."
+    },
+    {
+      "title": "SARAH: A Novel Method for Machine Learning Problems Using Stochastic Recursive Gradient",
+      "authors": "Lam M. Nguyen et al.",
+      "year": 2017,
+      "arxiv_id": "1703.00102",
+      "role": "Foundation",
+      "relationship_sentence": "The recursive gradient tracking mechanism underlying PILOT\u2019s estimator is directly grounded in SARAH\u2019s stochastic recursive gradient framework that SPIDER builds upon."
+    },
+    {
+      "title": "PAGE: A Simple and Optimal Probabilistic Gradient Estimator for Nonconvex Optimization",
+      "authors": "Zhize Li et al.",
+      "year": 2021,
+      "arxiv_id": "",
+      "role": "Inspiration",
+      "relationship_sentence": "PILOT+ adopts PAGE\u2019s core idea of replacing periodic full-gradient refreshes with probabilistic/adaptive batch updates to maintain low-variance gradients without full passes."
+    },
+    {
+      "title": "SBEED: Smoothed Bellman Error Embedding for Stochastic Control",
+      "authors": "Bo Dai et al.",
+      "year": 2018,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "PILOT\u2019s primal-dual min-max policy-evaluation formulation follows SBEED\u2019s convex-conjugate-based saddle-point embedding of Bellman error with function approximation."
+    },
+    {
+      "title": "Gradient Temporal-Difference Learning Algorithms",
+      "authors": "Richard S. Sutton et al.",
+      "year": 2009,
+      "arxiv_id": "",
+      "role": "Baseline",
+      "relationship_sentence": "PILOT builds on the primal-dual gradient-TD lineage (e.g., GTD2/TDC) and explicitly overcomes their two-timescale/diminishing-stepsize limitations by providing single-timescale constant-stepsize convergence guarantees."
+    },
+    {
+      "title": "Near-Optimal Algorithms for Minimax Optimization",
+      "authors": "Tianyi Lin et al.",
+      "year": 2020,
+      "arxiv_id": "",
+      "role": "Related Problem",
+      "relationship_sentence": "PILOT adapts variance-reduced single-loop techniques and O(1/K) stationarity guarantees for nonconvex\u2013(strongly) concave minimax problems to the RL policy-evaluation saddle-point setting."
+    }
+  ],
+  "synthesis_narrative": "Path-integrated and recursive gradient estimators emerged as powerful tools for fast nonconvex optimization. SPIDER introduced a path-integrated differential estimator that tightly controls variance, enabling constant stepsizes and near-optimal convergence in nonconvex regimes. Its roots lie in SARAH\u2019s stochastic recursive gradient framework, which showed how incremental gradient differences along an iterate path can track true gradients accurately at low cost. PAGE refined this direction by eliminating the need for periodic full-gradient computations, using probabilistic/adaptive refreshes to retain low variance without expensive passes. In reinforcement learning, SBEED established a saddle-point embedding of Bellman error via convex conjugacy, providing a primal-dual min-max template compatible with nonlinear function approximation. Earlier, Gradient Temporal-Difference (GTD) methods pioneered a primal-dual gradient approach to policy evaluation, but typically required two-timescale updates or diminishing stepsizes for convergence. In parallel, minimax optimization advances demonstrated that single-loop, variance-reduced schemes can achieve O(1/K) stationarity in nonconvex\u2013concave settings.\nBringing these strands together suggested a path: cast policy evaluation with nonlinear function approximation as a saddle-point problem, and endow its primal-dual updates with path-integrated variance-reduced gradients to unlock constant-stepsize O(1/K) convergence in a single timescale. The remaining bottleneck\u2014periodic full-gradient refresh\u2014could be removed by PAGE-style adaptive batching, preserving guarantees while reducing cost. This synthesis naturally led to PILOT\u2019s path-integrated primal-dual design and the adaptive-batch enhancement PILOT+, directly addressing the speed, stability, and sample-efficiency gaps identified in prior GTD-style and primal-dual RL approaches.",
+  "target_paper": {
+    "title": "PILOT: An $\\mathcal{O}(1/K)$-Convergent Approach for Policy Evaluation with Nonlinear Function Approximation",
+    "authors": "Zhuqing Liu, Xin Zhang, Jia Liu, Zhengyuan Zhu, Songtao Lu",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "min-max optimization, adaptive batch size, policy evaluation.",
+    "abstract": "Learning an accurate value function for a given policy is a critical step in solving reinforcement learning (RL) problems. So far, however, the convergence speed and sample complexity performances of most existing policy evaluation algorithms remain unsatisfactory, particularly with non-linear function approximation. This challenge motivates us to develop a new path-integrated primal-dual stochastic gradient (PILOT) method, that is able to achieve a fast convergence speed for RL policy evaluation with nonlinear function approximation. To further alleviate the periodic full gradient evaluation requirement, we further propose an enhanced method with an adaptive-batch adjustment called PILOT$^+$. The main advantages of our methods include: i) PILOT allows the use of {\\em{constant}} step sizes and achieves the $\\mathcal{O}(1/K)$ convergence rate to first-order stationary points of non-convex policy evaluation problems; ii) PILOT is a generic {\\em{single}}-timescale algorithm that is also a",
+    "openreview_id": "OkHHJcMroY",
+    "forum_id": "OkHHJcMroY"
+  },
+  "analysis_timestamp": "2026-01-06T06:49:32.933841"
+}

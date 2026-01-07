@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Neural Discrete Representation Learning (VQ-VAE)",
+      "authors": "Aaron van den Oord, Oriol Vinyals, Koray Kavukcuoglu",
+      "year": 2017,
+      "role": "Introduced vector-quantized latent codes enabling transformer-style autoregressive decoders to model images via categorical tokens.",
+      "relationship_sentence": "The new paper explicitly removes the VQ bottleneck that VQ-VAE established as standard for AR image models, replacing categorical per-token modeling with a diffusion-based continuous alternative."
+    },
+    {
+      "title": "Generating Diverse High-Fidelity Images with VQ-VAE-2",
+      "authors": "Ali Razavi, Aaron van den Oord, Oriol Vinyals",
+      "year": 2019,
+      "role": "Scaled discrete latent tokenization with hierarchical codebooks, cementing the effectiveness of AR modeling over discrete image tokens.",
+      "relationship_sentence": "By showing that high-fidelity AR generation hinges on discrete codebooks, VQ-VAE-2 set the baseline that this work challenges by demonstrating competitive AR generation without any vector quantization."
+    },
+    {
+      "title": "Taming Transformers for High-Resolution Image Synthesis (VQGAN)",
+      "authors": "Patrick Esser, Robin Rombach, Bj\u00f6rn Ommer",
+      "year": 2021,
+      "role": "Coupled strong discrete tokenizers with transformers to achieve high-quality image synthesis, widely adopted in AR and masked-AR pipelines.",
+      "relationship_sentence": "The proposed continuous-token AR approach aims to match the quality and scalability of VQGAN-based systems while eliminating the discrete tokenizer, highlighting a different route to efficient sequence modeling."
+    },
+    {
+      "title": "MaskGIT: Masked Generative Image Transformer",
+      "authors": "Huiwen Chang, Han Zhang, Lu Jiang, Ce Liu, William T. Freeman",
+      "year": 2022,
+      "role": "Pioneered masked autoregressive (MAR) generation over discrete visual tokens with parallel iterative refinement.",
+      "relationship_sentence": "This paper generalizes MAR ideas like MaskGIT to a continuous-valued token space by defining each token\u2019s conditional distribution via a diffusion procedure instead of categorical logits."
+    },
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Jonathan Ho, Ajay Jain, Pieter Abbeel",
+      "year": 2020,
+      "role": "Established the denoising diffusion framework and its training objective based on a noise-perturbation and denoising process.",
+      "relationship_sentence": "The core \u2018Diffusion Loss\u2019 used to model each token\u2019s conditional probability directly draws on the DDPM denoising objective, repurposed here as the per-token likelihood model within an AR factorization."
+    },
+    {
+      "title": "Variational Diffusion Models",
+      "authors": "Diederik P. Kingma, Tim Salimans, Ben Poole, Jonathan Ho",
+      "year": 2021,
+      "role": "Provided a likelihood/ELBO view and parameterization choices for diffusion models, clarifying probabilistic training of diffusion procedures.",
+      "relationship_sentence": "The paper\u2019s claim to model per-token probabilities via diffusion leverages the VDM perspective, grounding the diffusion-based per-token objective as a principled probabilistic component inside an autoregressive model."
+    },
+    {
+      "title": "PixelCNN++: Improving the PixelCNN with Discretized Logistic Mixture Likelihood and Other Modifications",
+      "authors": "Tim Salimans, Andrej Karpathy, Xi Chen, Diederik P. Kingma",
+      "year": 2017,
+      "role": "Advanced continuous-valued autoregressive image modeling by designing tractable per-pixel likelihoods (mixtures of logistics).",
+      "relationship_sentence": "The new work can be viewed as a modern replacement for explicit per-token continuous likelihoods (e.g., logistic mixtures) by using a diffusion-based conditional distribution, avoiding vector quantization altogether."
+    }
+  ],
+  "synthesis_narrative": "The dominant recipe for autoregressive image generation has relied on vector quantization: VQ-VAE and its hierarchical variant VQ-VAE-2 introduced discrete codebooks that transformers could model efficiently, and VQGAN further elevated fidelity, enabling strong AR and masked-AR systems. MaskGIT exemplified this paradigm by operating over discrete visual tokens with masked prediction and iterative refinement. The present work directly challenges this dependency on discrete tokenizers by shifting the per-token conditional distribution from a categorical over codebook indices to a diffusion-defined conditional in a continuous space. This shift is grounded in the denoising diffusion literature: DDPM supplies the fundamental training objective as a denoising loss over noise-perturbed variables, while Variational Diffusion Models formalize the probabilistic underpinnings, justifying the claim that a diffusion procedure can model per-token probabilities. Conceptually, the contribution also resonates with earlier continuous autoregressive modeling such as PixelCNN++, which carefully designed tractable per-pixel likelihoods; here, diffusion serves as a flexible, learned conditional distribution for each token, obviating the need for hand-crafted likelihoods and codebooks. By marrying AR factorization (and its masked-AR variants) with diffusion-based per-token modeling, the paper preserves the sampling speed advantages of sequence modeling while removing vector quantization. Together, these prior works directly enabled the insight and the technical machinery to operationalize autoregressive image generation in a fully continuous token space.",
+  "analysis_timestamp": "2026-01-06T23:42:49.046777"
+}

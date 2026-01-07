@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "H2O: Heavy-Hitter Oracle for Efficient KV-Cache Eviction in LLM Inference",
+      "authors": "Zhang et al.",
+      "year": 2023,
+      "role": "Query-aware KV-cache eviction baseline using attention statistics",
+      "relationship_sentence": "KVzip contrasts with H2O\u2019s query-aware, attention-statistic\u2013driven retention by proposing a query-agnostic, model-driven importance score based on context reconstruction, enabling reuse of the same compressed cache across diverse queries."
+    },
+    {
+      "title": "StreamingLLM: Efficient Streaming Language Models with Attention Sinks",
+      "authors": "Xiao et al.",
+      "year": 2024,
+      "role": "Query-agnostic eviction via position/window heuristics to stabilize long-context decoding",
+      "relationship_sentence": "KVzip builds on the idea that eviction can be query-agnostic but replaces positional/window heuristics with a principled, LLM-based reconstruction criterion to decide which KV pairs are globally reusable."
+    },
+    {
+      "title": "Scissorhands: Efficient Inference via Token-level KV Cache Compression",
+      "authors": "Li et al.",
+      "year": 2024,
+      "role": "Token-importance\u2013based KV compression/eviction during inference",
+      "relationship_sentence": "Similar in spirit to selectively dropping KV entries, Scissorhands motivates importance-driven pruning, while KVzip\u2019s novelty is to score importance by how well the LLM can reconstruct the original context, enabling robust, query-agnostic reuse."
+    },
+    {
+      "title": "SnapKV: Accelerating LLM Inference via KV-Cache Compression",
+      "authors": "Liu et al.",
+      "year": 2024,
+      "role": "KV-cache compression via representation approximation",
+      "relationship_sentence": "SnapKV shows KV compression can reduce memory and latency; KVzip advances this by defining a reconstruction-based importance objective that guides which KV pairs to evict, improving compression while preserving downstream accuracy."
+    },
+    {
+      "title": "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness",
+      "authors": "Dao et al.",
+      "year": 2022,
+      "role": "Attention kernel optimizing IO to reduce latency/memory",
+      "relationship_sentence": "KVzip\u2019s measured 2\u00d7 decoding speedups are demonstrated on top of FlashAttention, leveraging its IO-aware kernels while further shrinking the effective KV footprint via reconstruction-guided eviction."
+    },
+    {
+      "title": "vLLM: PagedAttention and Efficient LLM Serving",
+      "authors": "Zhao et al.",
+      "year": 2023,
+      "role": "Paged KV-cache management enabling sharing and eviction in serving systems",
+      "relationship_sentence": "KVzip complements PagedAttention\u2019s system-level KV management by supplying a query-agnostic content selection policy, allowing compressed caches to be reused across heterogeneous queries and sessions."
+    },
+    {
+      "title": "KVQuant: Accurate Quantization for LLM KV Caches",
+      "authors": "Liu et al.",
+      "year": 2024,
+      "role": "Quantization-based KV-cache size reduction",
+      "relationship_sentence": "KVzip is orthogonal to quantization methods like KVQuant; the reconstruction-based eviction criterion can be combined with quantization for compounded KV size reduction at minimal quality loss."
+    }
+  ],
+  "synthesis_narrative": "KVzip sits at the intersection of KV-cache eviction, compression, and practical serving. Early system work such as FlashAttention established IO-aware kernels that make attention efficient but still scale linearly with cache size, while vLLM\u2019s PagedAttention showed that careful KV memory management and sharing are crucial for high-throughput serving. On the algorithmic side, StreamingLLM demonstrated that query-agnostic eviction is feasible by relying on positional/windowing and attention-sink heuristics to sustain long-context decoding, revealing the promise of policies that do not depend on the current query. In parallel, methods like H2O and Scissorhands advanced token-importance\u2013driven KV pruning, typically guided by attention statistics or heuristic saliency, but remained largely query-aware or tightly coupled to per-query signals, limiting cross-query reuse. KV compression efforts such as SnapKV and KVQuant further underscored that shrinking KV memory is possible without prohibitive accuracy loss, yet primarily targeted representation-level approximations or quantization rather than principled content selection. KVzip synthesizes these lines by introducing a model-driven, query-agnostic criterion: measuring each KV pair\u2019s contribution to reconstructing the original context with the underlying LLM. This reconstruction-based importance allows a single compressed KV cache to be reused across diverse queries, delivering 3\u20134\u00d7 cache reduction and about 2\u00d7 lower FlashAttention decoding latency with negligible task degradation, and providing a complementary lever to quantization and system-level paging.",
+  "analysis_timestamp": "2026-01-07T00:21:32.322611"
+}

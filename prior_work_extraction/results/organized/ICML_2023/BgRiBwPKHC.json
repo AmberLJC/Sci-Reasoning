@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "HyperNetworks",
+      "authors": "David Ha et al.",
+      "year": 2016,
+      "role": "Foundation",
+      "relationship_sentence": "OCD adopts the core idea of generating a target network\u2019s weights from a separate conditioning network, but replaces deterministic hypernetworks with a diffusion model that learns to sample the per-example weights that SGD fine-tuning would produce."
+    },
+    {
+      "title": "Dynamic Filter Networks",
+      "authors": "Bert De Brabandere et al.",
+      "year": 2016,
+      "role": "Foundation",
+      "relationship_sentence": "By focusing on modifying a single layer conditioned on its activations and outputs, OCD directly generalizes DFN\u2019s per-input, dynamically generated layer weights to a stochastic, diffusion-based generator trained to mimic fine-tuned weights."
+    },
+    {
+      "title": "Model-Agnostic Meta-Learning for Fast Adaptation of Deep Networks",
+      "authors": "Chelsea Finn et al.",
+      "year": 2017,
+      "role": "Gap Identification",
+      "relationship_sentence": "MAML highlights the need for fast per-task/per-example adaptation but requires test-time optimization; OCD explicitly amortizes this adaptation by learning a direct conditional mapping (via diffusion) to the fine-tuned weights, removing the optimization loop."
+    },
+    {
+      "title": "Meta Networks",
+      "authors": "Tsendsuren Munkhdalai et al.",
+      "year": 2017,
+      "role": "Inspiration",
+      "relationship_sentence": "OCD is inspired by the fast-weights paradigm of Meta Networks\u2014producing per-example parameter changes\u2014but advances it by modeling a full stochastic distribution over adapted weights that replicates single-sample overfitting."
+    },
+    {
+      "title": "Meta-Learning with Latent Embedding Optimization",
+      "authors": "Andrei A. Rusu et al.",
+      "year": 2019,
+      "role": "Extension",
+      "relationship_sentence": "Like LEO, OCD directly predicts adapted parameters from data instead of running explicit test-time optimization, but extends this paradigm with conditional diffusion to capture multi-modal weight solutions and to target whole-layer adaptation across modalities."
+    },
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Jonathan Ho et al.",
+      "year": 2020,
+      "role": "Foundation",
+      "relationship_sentence": "OCD\u2019s core mechanism is a DDPM trained in weight space, enabling the stochastic sampling of layer weights conditioned on inputs/activations that match the distribution of SGD-fine-tuned solutions."
+    },
+    {
+      "title": "Simple and Scalable Predictive Uncertainty Estimation using Deep Ensembles",
+      "authors": "Balaji Lakshminarayanan et al.",
+      "year": 2017,
+      "role": "Related Problem",
+      "relationship_sentence": "OCD leverages the deep-ensemble insight\u2014performance gains from diverse models\u2014by producing diverse adapted networks via multiple diffusion samples without retraining each model."
+    }
+  ],
+  "synthesis_narrative": "OCD\u2019s key contribution\u2014amortizing per-example fine-tuning by sampling adapted weights with a conditional diffusion model\u2014stands at the intersection of dynamic parameterization, meta-learning, and modern generative modeling. HyperNetworks and Dynamic Filter Networks established the foundational notion that a conditioning signal can generate a target network\u2019s weights (or a single layer\u2019s filters) on the fly. OCD directly builds on this paradigm but replaces deterministic generation with a stochastic generator trained to imitate the specific fine-tuned weights that would result from overfitting to a single (x, y), and it targets a single layer conditioned on its activations and outputs, mirroring DFN\u2019s layer-local conditioning. Meta-learning works such as MAML and Meta Networks motivated the need for rapid adaptation; OCD explicitly addresses MAML\u2019s limitation of requiring test-time optimization by learning a one-shot mapping to the adapted weights, and it extends the fast-weights idea of Meta Networks to model full distributions over adapted solutions. LEO further demonstrated that directly predicting adapted parameters from data is viable; OCD generalizes this idea across modalities and uses diffusion to capture multi-modality in weight space. Technically, DDPM provides the generative backbone that enables sampling diverse, high-fidelity weight solutions conditioned on the current input and layer state. Finally, inspired by deep ensembles, OCD naturally yields ensemble benefits by drawing multiple diffusion samples, achieving diversity without multiple training runs.",
+  "analysis_timestamp": "2026-01-06T23:09:26.562070"
+}

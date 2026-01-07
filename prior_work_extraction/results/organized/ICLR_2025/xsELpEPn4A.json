@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "MT-Bench and Chatbot Arena: Evaluating Large Language Models with Pairwise Judgments",
+      "authors": "Zheng et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "Established the LLM-as-a-judge paradigm with GPT-4-based pairwise judgments on open-ended tasks and highlighted order/position confounds, which JudgeLM adopts as the evaluation setting and explicitly targets with debiasing."
+    },
+    {
+      "title": "Prometheus: Inducing Fine-Grained Evaluation Capability in Language Models",
+      "authors": "Kim et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Baseline",
+      "relationship_sentence": "Demonstrated that supervised fine-tuning on GPT-4\u2013generated judgments can turn open LLMs into general-purpose judges, providing the primary system design and training pipeline that JudgeLM scales up and aims to surpass."
+    },
+    {
+      "title": "Prometheus 2: An Open Language Model Judge Trained with Synthetic Feedback",
+      "authors": "Kim et al.",
+      "year": 2024,
+      "arxiv_id": null,
+      "role": "Extension",
+      "relationship_sentence": "Refined judgment data and protocols for training LLM judges and offered stronger baselines, which JudgeLM directly extends by training larger judges and introducing bias-mitigation techniques absent in Prometheus 2."
+    },
+    {
+      "title": "Shepherd: A Critic for Language Model Generation",
+      "authors": "Liu et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "Showed that a separately fine-tuned critic model trained on AI-generated critiques can reliably score and explain LLM outputs, inspiring JudgeLM\u2019s approach of training dedicated judge models rather than relying solely on prompted evaluators."
+    },
+    {
+      "title": "Constitutional AI: Harmlessness from AI Feedback",
+      "authors": "Bai et al.",
+      "year": 2022,
+      "arxiv_id": "2212.08073",
+      "role": "Foundation",
+      "relationship_sentence": "Established the viability of scaling supervision via AI-generated feedback instead of human labels, directly enabling JudgeLM\u2019s use of GPT-4\u2013produced judgments to supervise judge models."
+    },
+    {
+      "title": "UltraFeedback: Boosting Language Models with High-quality Feedback",
+      "authors": "Cui et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "Provided a large-scale, multi-dimensional GPT-4 feedback dataset with symmetric pairwise annotations and position randomization that informs JudgeLM\u2019s data construction and swap augmentation to mitigate position bias."
+    },
+    {
+      "title": "Is ChatGPT a Good MT Evaluator? A Preliminary Study",
+      "authors": "Kocmi et al.",
+      "year": 2023,
+      "arxiv_id": null,
+      "role": "Gap Identification",
+      "relationship_sentence": "Revealed strong format and reference sensitivities when using LLMs as evaluators, motivating JudgeLM\u2019s analysis of format/knowledge bias and its reference-support and reference-drop strategies."
+    }
+  ],
+  "synthesis_narrative": "MT-Bench and Chatbot Arena crystallized the LLM-as-a-judge paradigm by using GPT-4 to render pairwise judgments on open-ended tasks and noting the importance of order randomization to reduce position confounds. Prometheus showed that supervised fine-tuning on GPT-4 judgments can endow open LLMs with strong general-purpose evaluation capabilities, and Prometheus 2 refined this idea with better judgment data and protocols, creating widely adopted judge-model baselines. Shepherd demonstrated that training a separate critic on AI feedback can reliably score and analyze model outputs, validating the notion of a dedicated evaluator model. Constitutional AI established the practicality of AI-generated supervision at scale, showing that high-quality AI feedback can substitute for human labels. UltraFeedback scaled multi-dimensional GPT-4 feedback with symmetric pairwise annotations and side randomization, surfacing concrete data practices for more reliable preference/judgment learning. Meanwhile, work on MT evaluation found that LLM evaluators are highly sensitive to prompt format and the availability of references, underscoring vulnerabilities in reference-free judging. Together, these works reveal both the promise and pitfalls of LLM-based evaluation: fine-tuned judges can be strong and scalable, but they inherit position, knowledge, and format biases from their data and prompts. Building on the synthetic-feedback SFT pipeline and pairwise judging setup, the natural next step is to scale judge models while explicitly addressing these biases. JudgeLM synthesizes these ideas by constructing a large GPT-4\u2013labeled judgment dataset, training judges from 7B to 33B parameters, and introducing swap augmentation for position bias and reference-support/drop to disentangle knowledge and format effects, yielding more reliable, scalable judges.",
+  "target_paper": {
+    "title": "JudgeLM: Fine-tuned Large Language Models are Scalable Judges",
+    "authors": "Lianghui Zhu, Xinggang Wang, Xinlong Wang",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "LLM Judging",
+    "abstract": "Evaluating Large Language Models (LLMs) in open-ended scenarios is challenging because existing benchmarks and metrics can not measure them comprehensively. To address this problem, we propose to fine-tune LLMs as scalable judges (JudgeLM) to evaluate LLMs efficiently and effectively in open-ended benchmarks. We first propose a comprehensive, large-scale, high-quality dataset containing task seeds, LLMs-generated answers, and GPT-4-generated judgments for fine-tuning high-performance judges, as well as a new benchmark for evaluating the judges. We train JudgeLM at different scales from 7B, 13B, to 33B parameters, and conduct a systematic analysis of its capabilities and behaviors. We then analyze the key biases in fine-tuning LLM as a judge and consider them as position bias, knowledge bias, and format bias. To address these issues, JudgeLM introduces a bag of techniques including swap augmentation, reference support, and reference drop, which clearly enhance the judge's performance. J",
+    "openreview_id": "xsELpEPn4A",
+    "forum_id": "xsELpEPn4A"
+  },
+  "analysis_timestamp": "2026-01-06T06:07:58.399181"
+}

@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+      "authors": "Edward J. Hu et al.",
+      "year": 2022,
+      "role": "Foundational PEFT method and the direct baseline whose parameterization HydraLoRA rethinks.",
+      "relationship_sentence": "HydraLoRA is built explicitly to fix the training and parameter inefficiencies observed in standard LoRA\u2019s symmetric A/B factorization while retaining its low-rank adaptation paradigm."
+    },
+    {
+      "title": "AdaLoRA: Adaptive Budget Allocation for Parameter-Efficient Fine-Tuning",
+      "authors": "Zhang et al.",
+      "year": 2023,
+      "role": "Introduced data-/layer-sensitive rank allocation under a fixed parameter budget.",
+      "relationship_sentence": "The idea that different layers/modules warrant unequal capacity directly motivates HydraLoRA\u2019s asymmetric design, which allocates adaptation capacity non-uniformly without relying on manual, domain-specific choices."
+    },
+    {
+      "title": "ReLoRA: Merging LoRA Weights During Training to Mitigate Rank Collapse",
+      "authors": "Chen et al.",
+      "year": 2023,
+      "role": "Diagnosed training inefficiencies (e.g., rank collapse) in conventional LoRA and proposed a schedule that periodically merges adapters.",
+      "relationship_sentence": "By highlighting LoRA\u2019s training pathologies, ReLoRA motivates HydraLoRA\u2019s architectural change as a structural remedy rather than a training schedule workaround."
+    },
+    {
+      "title": "DoRA: Weight-Decomposed Low-Rank Adaptation",
+      "authors": "Liu et al.",
+      "year": 2024,
+      "role": "Re-parameterized LoRA by decoupling magnitude and direction to better use parameters.",
+      "relationship_sentence": "DoRA\u2019s evidence that LoRA\u2019s default symmetric parameterization is suboptimal informs HydraLoRA\u2019s asymmetric factorization aimed at improving expressivity per parameter."
+    },
+    {
+      "title": "PiSSA: Principal Subspace Alignment for LoRA Initialization",
+      "authors": "Sun et al.",
+      "year": 2024,
+      "role": "Used SVD-based alignment to place LoRA updates in high-utility subspaces.",
+      "relationship_sentence": "PiSSA\u2019s demonstration that important directions are anisotropically distributed supports HydraLoRA\u2019s asymmetric capacity placement across projections to better capture task-relevant subspaces."
+    },
+    {
+      "title": "DyLoRA: Dynamic Low-Rank Adaptation for Efficient Fine-Tuning",
+      "authors": "Yu et al.",
+      "year": 2023,
+      "role": "Varied LoRA rank during training to improve efficiency\u2013performance trade-offs.",
+      "relationship_sentence": "The benefit of non-uniform, context-dependent capacity in DyLoRA underpins HydraLoRA\u2019s static but architecturally asymmetric allocation that avoids manual, domain-informed tuning."
+    }
+  ],
+  "synthesis_narrative": "HydraLoRA\u2019s core innovation\u2014an asymmetric LoRA architecture that improves parameter usage and training efficiency without domain-specific heuristics\u2014evolves directly from a sequence of insights about where and how LoRA wastes capacity. LoRA (Hu et al., 2022) established low-rank adapters as the de facto PEFT baseline, but its symmetric A/B factorization and uniformity across modules often underperform full fine-tuning on complex tasks. Subsequent analyses and variants pinpointed why. AdaLoRA (2023) showed that adaptation capacity should be distributed unevenly across layers, implying the gains available from breaking uniformity. ReLoRA (2023) exposed training instabilities such as rank collapse in standard LoRA and used periodic merging to alleviate them\u2014highlighting that structural limitations, not just optimization hyperparameters, constrain LoRA\u2019s effectiveness. DoRA (2024) went further by reparameterizing weights to decouple magnitude and direction, empirically demonstrating that LoRA\u2019s vanilla symmetric parameterization leaves performance on the table. In parallel, PiSSA (2024) exploited principal subspace alignment to place updates where they matter most, underscoring the anisotropy of useful directions. DyLoRA (2023) reinforced the value of non-uniform capacity through dynamic rank scheduling. Synthesizing these threads, HydraLoRA adopts an asymmetric architecture to allocate and orient adaptation capacity where it is most impactful, achieving higher expressivity per parameter and better training dynamics\u2014without relying on manual, domain-informed module or layer selection.",
+  "analysis_timestamp": "2026-01-06T23:33:35.580443"
+}

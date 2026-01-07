@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Jonathan Ho, Ajay Jain, Pieter Abbeel",
+      "year": 2020,
+      "role": "Generative prior backbone",
+      "relationship_sentence": "This paper provides the diffusion-model foundation enabling a powerful, degradation-agnostic clean-image prior that the proposed framework leverages at test time."
+    },
+    {
+      "title": "Denoising Diffusion Restoration Models",
+      "authors": "Bahjat Kawar, Jiaming Song, Stefano Ermon, Michael Elad",
+      "year": 2022,
+      "role": "Diffusion for inverse problems",
+      "relationship_sentence": "DDRM demonstrated how pretrained diffusion models can solve image restoration tasks by decoupling the forward degradation from the learned clean-image prior, directly informing the paper\u2019s use of a diffusion prior for restoration under unknown degradations."
+    },
+    {
+      "title": "Diffusion Posterior Sampling for Image Restoration",
+      "authors": "Hyungjin Chung, Jong Chul Ye",
+      "year": 2022,
+      "role": "Guidance of diffusion with degradation models",
+      "relationship_sentence": "DPS shows how to guide diffusion sampling with a (possibly mismatched) degradation model, motivating the proposed adapter-guided mechanism that learns a test-time degradation proxy to steer diffusion toward clean reconstructions."
+    },
+    {
+      "title": "Deep Image Prior",
+      "authors": "Dmitry Ulyanov, Andrea Vedaldi, Victor Lempitsky",
+      "year": 2018,
+      "role": "Test-time single-image optimization precedent",
+      "relationship_sentence": "DIP established that image-specific optimization at test time can recover clean images without external training data, inspiring the paper\u2019s test-time adaptation paradigm for unknown degradations."
+    },
+    {
+      "title": "Zero-Shot Super-Resolution",
+      "authors": "Assaf Shocher, Nadav Cohen, Michal Irani",
+      "year": 2018,
+      "role": "Zero-shot, per-image adaptation",
+      "relationship_sentence": "ZSSR\u2019s strategy of training on the test image itself to handle unknown, image-specific degradations directly influenced the paper\u2019s open-set, on-the-fly degradation adaptation idea."
+    },
+    {
+      "title": "KernelGAN: Blind Super-Resolution Kernel Estimation using an Internal-GAN",
+      "authors": "Sefi Bell-Kligler, Assaf Shocher, Michal Irani",
+      "year": 2019,
+      "role": "Blind degradation estimation at test time",
+      "relationship_sentence": "KernelGAN\u2019s per-image estimation of unknown blur kernels provided a concrete blueprint for learning a degradation model at test time, analogous to the paper\u2019s degradation adapter."
+    },
+    {
+      "title": "Test-Time Training with Self-Supervision for Generalization",
+      "authors": "Yu Sun, Xiaolong Wang, Zhuang Liu, John Miller, Alexei A. Efros, Moritz Hardt",
+      "year": 2020,
+      "role": "Conceptual foundation for test-time adaptation",
+      "relationship_sentence": "TTT formalized adapting models during inference using self-supervised objectives under distribution shift, underpinning the paper\u2019s framing of open-set restoration as test-time adaptation."
+    }
+  ],
+  "synthesis_narrative": "The core contribution\u2014test-time degradation adaptation for open-set image restoration\u2014unifies two lines of prior art: powerful generative priors and on-the-fly adaptation under distribution shift. Diffusion models (Ho et al., 2020) supply a degradation-agnostic clean-image prior, which DDRM (Kawar et al., 2022) and DPS (Chung & Ye, 2022) showed can be harnessed for restoration by decoupling the forward degradation from the prior and guiding sampling with a degradation operator. However, these methods typically assume a known or parameterized forward model; the present paper addresses the harder open-set setting by learning that operator at test time. This idea is rooted in single-image, zero-shot optimization paradigms from Deep Image Prior (Ulyanov et al., 2018) and ZSSR (Shocher et al., 2018), which demonstrated that image-specific adaptation can recover structure without external supervision. KernelGAN (Bell-Kligler et al., 2019) further operationalized blind test-time degradation estimation by fitting a per-image blur kernel, directly inspiring the proposed degradation adapter that is optimized from the input alone. Finally, the framework\u2019s adapt-at-inference philosophy is grounded in Test-Time Training (Sun et al., 2020), which formalized self-supervised objectives to mitigate distribution shift during deployment. Synthesizing these strands, the paper couples a pretrained diffusion prior with a lightweight, self-supervised degradation adapter learned per test instance, enabling robust restoration under previously unseen degradations.",
+  "analysis_timestamp": "2026-01-07T00:02:04.874334"
+}

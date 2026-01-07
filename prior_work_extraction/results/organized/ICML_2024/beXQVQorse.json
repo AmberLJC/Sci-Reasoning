@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Practical Bayesian Optimization of Machine Learning Algorithms",
+      "authors": "Jasper Snoek, Hugo Larochelle, Ryan P. Adams",
+      "year": 2012,
+      "role": "Foundational GP-based Bayesian optimization framework and acquisition-driven sampling",
+      "relationship_sentence": "TSBO builds directly on the GP surrogate + acquisition framework established here, injecting pseudo-labeled unlabeled locations into the surrogate training loop to cut expensive queries while preserving BO\u2019s principled search."
+    },
+    {
+      "title": "Scalable Global Optimization via Local Bayesian Optimization (TuRBO)",
+      "authors": "David Eriksson, Michael Pearce, Jacob R. Gardner, Ryan Turner, Matthias Poloczek",
+      "year": 2019,
+      "role": "High-dimensional BO via trust-region local modeling",
+      "relationship_sentence": "TSBO targets the same high-dimensional regime as TuRBO, aiming to improve surrogate generalization in local regions by using student feedback from pseudo-labeled unlabeled points, and can be integrated with or compared against trust-region BO."
+    },
+    {
+      "title": "Max-value Entropy Search for Efficient Bayesian Optimization",
+      "authors": "Zi Wang, Stefanie Jegelka",
+      "year": 2017,
+      "role": "Objective-aligned, information-theoretic acquisition design",
+      "relationship_sentence": "TSBO\u2019s optimized unlabeled samplers are motivated by the idea of aligning sampling with the BO objective; akin to MES, the samplers are designed to target information that most benefits finding the maximum."
+    },
+    {
+      "title": "A Multi-points Criterion for Deterministic Parallel Global Optimization (Constant Liar/Kriging Believer)",
+      "authors": "David Ginsbourger, Rodolphe Le Riche, Laurent Carraro",
+      "year": 2010,
+      "role": "Use of surrogate \u2018fantasies\u2019 (predicted labels) to guide BO",
+      "relationship_sentence": "TSBO generalizes the notion of fantasized/predicted labels by establishing a teacher\u2013student loop where the teacher GP produces pseudo labels for unlabeled locations and the student\u2019s feedback selectively regularizes the teacher."
+    },
+    {
+      "title": "Pseudo-Label: The Simple and Efficient Semi-Supervised Learning Method for Deep Neural Networks",
+      "authors": "Dong-Hyun Lee",
+      "year": 2013,
+      "role": "Foundational pseudo-labeling for semi-supervised learning",
+      "relationship_sentence": "TSBO adopts pseudo-labeling as its core mechanism: the teacher GP generates labels for unlabeled locations to train a student, enabling learning from cheap unlabeled queries in a BO context."
+    },
+    {
+      "title": "Mean Teachers are Better Role Models: Weight-averaged Consistency Targets Improve Semi-supervised Deep Learning",
+      "authors": "Antti Tarvainen, Harri Valpola",
+      "year": 2017,
+      "role": "Teacher\u2013student consistency regularization paradigm",
+      "relationship_sentence": "TSBO adapts the teacher\u2013student consistency idea to BO, where student-driven feedback acts as a selective regularizer on the teacher GP to improve pseudo-label quality and generalization across the search space."
+    },
+    {
+      "title": "FixMatch: Simplifying Semi-Supervised Learning with Consistency and Confidence Thresholding",
+      "authors": "Kihyuk Sohn, David Berthelot, Nicholas Carlini, et al.",
+      "year": 2020,
+      "role": "Confidence-aware pseudo-label utilization",
+      "relationship_sentence": "TSBO\u2019s quantification and use of teacher\u2013student uncertainty to govern unlabeled sampling and pseudo-label trust mirror FixMatch\u2019s confidence-thresholding principle to ensure high-quality pseudo labels drive learning."
+    }
+  ],
+  "synthesis_narrative": "TSBO fuses two mature lines of work: Gaussian process Bayesian optimization and modern semi-supervised learning. The GP-based BO framework of Snoek et al. supplies the surrogate-plus-acquisition machinery that TSBO augments by training on pseudo-labeled, unlabeled locations, thereby reducing expensive evaluations. High-dimensional performance motivations and integration points come from TuRBO, whose trust-region strategy highlights the need for better surrogate generalization in local regions\u2014precisely what TSBO\u2019s student feedback aims to deliver. The design of TSBO\u2019s optimized unlabeled samplers is guided by information-theoretic, objective-aligned acquisition ideas exemplified by Max-value Entropy Search, steering sampling toward information that expedites locating the maximum.\nEqually central are teacher\u2013student semi-supervised principles. Pseudo-Label provides the basic self-training mechanism that TSBO repurposes with a GP teacher to create labels for unlabeled inputs. Mean Teacher contributes the notion of consistency-based regularization, inspiring TSBO\u2019s selective regularization loop wherein student feedback constrains and improves the teacher. FixMatch further motivates uncertainty- or confidence-aware filtering of pseudo labels, echoed in TSBO\u2019s explicit uncertainty quantification when leveraging teacher\u2013student predictions. Finally, the constant liar/kriging believer family shows that using surrogate-predicted labels (fantasies) within BO can be effective; TSBO generalizes this idea into a systematic semi-supervised pipeline, coupling fantasy labels with optimized unlabeled sampling tailored to the BO objective. Together, these works directly shape TSBO\u2019s core innovation: a teacher\u2013student, uncertainty-aware, objective-aligned use of unlabeled data to enhance high-dimensional BO.",
+  "analysis_timestamp": "2026-01-07T00:02:04.874800"
+}

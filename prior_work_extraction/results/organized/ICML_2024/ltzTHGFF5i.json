@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "I-BERT: Integer-only BERT Quantization",
+      "authors": "Sehoon Kim et al.",
+      "year": 2021,
+      "role": "Integer-only transformer inference",
+      "relationship_sentence": "Jetfire generalizes I-BERT\u2019s integer-only computation path from inference to pretraining, adopting an INT8 data flow across transformer components to avoid repeated dequantization and reduce memory traffic."
+    },
+    {
+      "title": "LLM.int8(): 8-bit Matrix Multiplication for Transformers at Scale",
+      "authors": "Tim Dettmers et al.",
+      "year": 2022,
+      "role": "Blockwise 8-bit quantization for transformers",
+      "relationship_sentence": "Jetfire\u2019s per-block quantization strategy builds on the blockwise/outlier-aware quantization ideas in LLM.int8(), adapting them from inference matmuls to a training setting to preserve accuracy under INT8 arithmetic."
+    },
+    {
+      "title": "SmoothQuant: Accurate and Efficient Post-Training Quantization for Large Language Models",
+      "authors": "Jiawei Xiao et al.",
+      "year": 2023,
+      "role": "Activation outlier mitigation for LLM quantization",
+      "relationship_sentence": "Jetfire targets the same activation outlier challenge addressed by SmoothQuant, but integrates the mitigation within a per-block training-time quantization scheme to maintain accuracy end-to-end in INT8."
+    },
+    {
+      "title": "Learned Step Size Quantization",
+      "authors": "Steven K. Esser et al.",
+      "year": 2019,
+      "role": "Foundational QAT with learned scales",
+      "relationship_sentence": "Jetfire\u2019s accurate INT8 training leverages the principle of learning/optimizing quantization scales (as in LSQ), applying it at per-block granularity to keep transformer pretraining close to FP16 accuracy."
+    },
+    {
+      "title": "DoReFa-Net: Training Low Bitwidth Convolutional Neural Networks with Low Bitwidth Gradients",
+      "authors": "Shuchang Zhou et al.",
+      "year": 2016,
+      "role": "Early fully quantized training (QAT) with STE",
+      "relationship_sentence": "Jetfire departs from the classic quantize\u2013compute\u2013dequantize pattern popularized by DoReFa-Net by maintaining an INT8 data flow throughout transformer blocks to improve speed and reduce memory access overhead."
+    },
+    {
+      "title": "Quantization and Training of Neural Networks for Efficient Integer-Arithmetic-Only Inference",
+      "authors": "Benoit Jacob et al.",
+      "year": 2018,
+      "role": "Integer-only quantization dataflow and scaling",
+      "relationship_sentence": "Jetfire extends the integer-arithmetic-only dataflow and per-channel scaling concepts to transformer pretraining, using int8/int32 accumulations and rescaling to keep computations in integer domains."
+    },
+    {
+      "title": "FP8 Formats for Deep Learning",
+      "authors": "Paulius Micikevicius et al.",
+      "year": 2022,
+      "role": "Low-precision (8-bit) training recipe for transformers",
+      "relationship_sentence": "Jetfire is motivated by the demonstrated viability of 8-bit training from FP8 work, but opts for INT8 with a tailored dataflow and per-block quantization to achieve better memory-access efficiency in transformers."
+    }
+  ],
+  "synthesis_narrative": "Jetfire\u2019s key contribution\u2014an end-to-end INT8 data flow for transformer pretraining coupled with per-block quantization\u2014emerges from two converging lines of prior work: integer-only computation paths for transformers and accuracy-preserving quantization schemes. I-BERT established that transformers can be executed with integer-only arithmetic by carefully redesigning operations, while Jacob et al. formalized integer quantization dataflows with int8/int32 accumulations and rescaling. Jetfire extends these ideas beyond inference to pretraining, emphasizing that staying in INT8 throughout the block avoids the frequent dequantization that inflates memory traffic in standard QAT pipelines.\n\nOn the accuracy side, LSQ demonstrated that learning quantization scales is crucial, and DoReFa-Net popularized fully quantized training with STE\u2014yet both typically rely on layer-wise quantize\u2013compute\u2013dequantize patterns that are suboptimal for transformers. For transformers specifically, LLM.int8() introduced blockwise/outlier-aware quantization for efficient 8-bit matmuls, and SmoothQuant tackled activation outliers via weight\u2013activation smoothing to stabilize 8-bit inference. Jetfire draws on these insights to adopt per-block quantization that directly addresses transformer outliers during training, stabilizing INT8 forward and backward passes.\n\nFinally, FP8 training results validated that 8-bit precision can maintain accuracy in large-scale transformer training with proper scaling and recipes. Jetfire leverages similar scaling discipline but in the INT8 integer domain, achieving superior memory-access efficiency and practical speedups by fusing an INT8-first dataflow with per-block quantization tailored to transformer pretraining.",
+  "analysis_timestamp": "2026-01-07T00:02:04.878615"
+}

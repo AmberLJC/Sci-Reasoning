@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "SimCLR: A Simple Framework for Contrastive Learning of Visual Representations",
+      "authors": "Ting Chen, Simon Kornblith, Mohammad Norouzi, Geoffrey Hinton",
+      "year": 2020,
+      "role": "Foundational instance-level contrastive learning",
+      "relationship_sentence": "The paper\u2019s instance-level contrastive objective follows the SimCLR InfoNCE formulation, encouraging invariance across different augmentations/partial views of the same object to learn robust completion priors from incomplete point clouds."
+    },
+    {
+      "title": "SwAV: Unsupervised Learning of Visual Features by Contrasting Cluster Assignments",
+      "authors": "Mathilde Caron, Ishan Misra, Julien Mairal, Priya Goyal, Piotr Bojanowski, Armand Joulin",
+      "year": 2020,
+      "role": "Prototype/cluster-level contrastive learning",
+      "relationship_sentence": "The proposed cluster-level contrast leverages the SwAV-style idea of contrasting assignments to prototypes, adapting clustering of local geometric parts to stabilize representation learning from incomplete point sets."
+    },
+    {
+      "title": "PointContrast: Unsupervised Pre-training for 3D Point Cloud Understanding",
+      "authors": "Xie et al.",
+      "year": 2020,
+      "role": "3D contrastive pretraining on point clouds",
+      "relationship_sentence": "PointContrast demonstrates how to build positive/negative pairs from partial 3D observations, directly informing the paper\u2019s design of instance-level contrasts across different incompletenesses and augmentations."
+    },
+    {
+      "title": "OcCo: Unsupervised Pre-Training for 3D Point Clouds by Occlusion Completion",
+      "authors": "Wang et al.",
+      "year": 2021,
+      "role": "Self-supervised completion as a pretext task",
+      "relationship_sentence": "OcCo shows that reconstructing occluded geometry can learn strong 3D priors without ground-truth completions; this directly motivates the paper\u2019s self-supervised complete-structure reconstruction module trained only on incomplete inputs."
+    },
+    {
+      "title": "Point-MAE: Masked Autoencoders for Point Cloud Self-Supervised Learning",
+      "authors": "Pang et al.",
+      "year": 2022,
+      "role": "Masked reconstruction of point tokens/patches",
+      "relationship_sentence": "Point-MAE\u2019s masked reconstruction validates that global shape structure can be recovered from partial tokens; the paper extends this idea to explicitly reconstruct a guidance \u2018complete structure\u2019 for downstream completion."
+    },
+    {
+      "title": "PoinTr: Diverse Point Cloud Completion with Geometry-Aware Transformers",
+      "authors": "Yu et al.",
+      "year": 2021,
+      "role": "Transformer-based supervised point cloud completion",
+      "relationship_sentence": "PoinTr established a strong supervised completion pipeline and transformer decoder design; the paper builds on this paradigm while removing the dependence on complete ground-truth via self-supervised structure guidance and contrastive learning."
+    },
+    {
+      "title": "PCN: Point Completion Network",
+      "authors": "Wentao Yuan et al.",
+      "year": 2018,
+      "role": "Early supervised point cloud completion baseline",
+      "relationship_sentence": "PCN crystallized the supervised completion setting and evaluation, highlighting the reliance on complete targets that the paper explicitly avoids by learning complete structure directly from incomplete observations."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core idea\u2014learning a self-supervised complete structure from only incomplete point clouds and using it to guide completion\u2014is enabled by converging advances in self-supervised reconstruction and contrastive representation learning. On the reconstruction side, OcCo introduced occlusion completion as a pretext task, proving that recovering missing geometry from partial scans yields transferable 3D priors without ground-truth completions. Point-MAE further showed that masked token reconstruction can capture holistic 3D structure from partial inputs. These works directly motivate the paper\u2019s explicit complete-structure reconstruction module, which turns incomplete inputs into a learned structural guidance signal, eliminating reliance on complete supervision.\nComplementing reconstruction with discriminative learning, SimCLR provides the canonical instance-level InfoNCE objective the authors adapt to enforce invariance across different partial views/augmentations of the same object, stabilizing learning from incomplete data. SwAV\u2019s prototypical/cluster contrast inspires the paper\u2019s cluster-level objective: by contrasting cluster assignments of local geometric parts, the method injects semantic consistency at a coarser granularity and mitigates ambiguities caused by missing regions. PointContrast bridges these ideas in 3D, demonstrating how to form positive/negative pairs from partial scans, which the paper leverages for both instance- and cluster-level pair construction in point cloud space.\nFinally, supervised completion methods like PoinTr and PCN define architectures and benchmarks for point cloud completion but depend on complete ground-truth. The proposed framework inherits effective architectural practices while replacing supervision with self-learned complete structure plus multi-level contrast, achieving completion without complete training targets.",
+  "analysis_timestamp": "2026-01-06T23:42:48.118696"
+}

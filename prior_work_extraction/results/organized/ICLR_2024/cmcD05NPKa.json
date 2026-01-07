@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Deep Learning for Symbolic Mathematics",
+      "authors": "Guillaume Lample and Fran\u00e7ois Charton",
+      "year": 2019,
+      "arxiv_id": "1912.01412",
+      "role": "Foundation",
+      "relationship_sentence": "This work established the transformer-as-seq2seq formulation for mathematical tasks with digit/character tokenization and curriculum-like sampling, directly framing the setup and sampling choices later used to study GCD behavior."
+    },
+    {
+      "title": "Evaluating Mathematical Reasoning in Neural Networks",
+      "authors": "David Saxton et al.",
+      "year": 2019,
+      "arxiv_id": "1904.01557",
+      "role": "Foundation",
+      "relationship_sentence": "By showing that arithmetic/number-theory tasks are highly sensitive to data distributions and generalization splits, this paper set the precedent to scrutinize operand/outcome sampling when training models on integer operations."
+    },
+    {
+      "title": "Grokking: Generalization Beyond Overfitting on Small Algorithmic Datasets",
+      "authors": "Alethea Power et al.",
+      "year": 2022,
+      "arxiv_id": "2201.02177",
+      "role": "Gap Identification",
+      "relationship_sentence": "It revealed that training dynamics and data distribution can flip models from memorization to rule learning on algorithmic tasks, motivating a targeted investigation of how operand vs GCD-balanced sampling steers the learned GCD rule."
+    },
+    {
+      "title": "Progress Measures for Grokking via Mechanistic Interpretability",
+      "authors": "Neel Nanda et al.",
+      "year": 2023,
+      "arxiv_id": "2301.05217",
+      "role": "Inspiration",
+      "relationship_sentence": "Their reverse-engineering of small transformers on modular arithmetic provided a blueprint for explaining an algorithmic task by identifying the learned features/circuits, inspiring the IO-level characterization of a divisibility-feature list for GCD."
+    },
+    {
+      "title": "Thinking Like Transformers",
+      "authors": "Gail Weiss, Yoav Goldberg, and Eran Yahav",
+      "year": 2021,
+      "arxiv_id": "2106.06981",
+      "role": "Foundation",
+      "relationship_sentence": "By connecting transformers to finite-automata style computations over token sequences, this work supports the feasibility of learning base-dependent regular properties like divisibility tests that underlie the GCD explanation."
+    },
+    {
+      "title": "Neural GPUs Learn Algorithms",
+      "authors": "\u0141ukasz Kaiser and Ilya Sutskever",
+      "year": 2016,
+      "arxiv_id": "1511.08228",
+      "role": "Related Problem",
+      "relationship_sentence": "Demonstrating that neural networks can learn digit-level algorithms such as addition/multiplication from sequences, it directly motivated using integer-string inputs to probe what algorithmic structure a model acquires for GCD."
+    },
+    {
+      "title": "Neural Arithmetic Logic Units",
+      "authors": "Andrew Trask et al.",
+      "year": 2018,
+      "arxiv_id": "1808.00508",
+      "role": "Related Problem",
+      "relationship_sentence": "By proposing specialized modules to achieve arithmetic extrapolation and highlighting standard models\u2019 tendency toward shortcut heuristics, it set up a contrast the present work addresses by showing plain transformers learn divisibility-based features and how data shifts change them."
+    }
+  ],
+  "synthesis_narrative": "Work on neural models for mathematics first showed that sequence-to-sequence transformers with digit or character tokenization can learn nontrivial symbolic and numeric tasks, and that sampling over difficulty scales matters for success (Lample and Charton). The DeepMind Mathematics Dataset established that arithmetic and number-theory tasks are especially sensitive to train-test splits and data distributions, foregrounding the role of operand ranges and target balancing (Saxton et al.). Grokking then revealed that, on small algorithmic datasets, training dynamics and data distribution can determine whether models memorize or eventually implement the underlying rule (Power et al.). Mechanistic studies of modular arithmetic reverse-engineered small transformers to concrete feature circuits, showing that interpretable arithmetic structure can be read out and tracked through training (Nanda et al.). Theoretical analyses connected transformer computation to finite-automata-like processing of token sequences, consistent with recognizing base-dependent regular properties such as divisibility (Weiss et al.). Earlier algorithm-learning systems using digit streams (Kaiser and Sutskever) and arithmetic-inductive-bias modules (Trask et al.) framed expectations about how neural models might internalize integer operations. Taken together, these works exposed a gap: despite progress on modular arithmetic circuits and sensitivity to data distributions, there was no IO-complete, mechanistic explanation of a learned number-theoretic operation. Building on seq2seq arithmetic framing, automata-style divisibility tests, and grokking\u2019s emphasis on data distribution, the present study shows that small transformers learn GCD by selecting the largest divisor from a learned feature list, and that modifying operand and outcome sampling predictably reshapes this list\u2014thus delivering a clean, data-dependent explanation of the learned algorithm.",
+  "target_paper": {
+    "title": "Learning the greatest common divisor: explaining transformer predictions",
+    "authors": "Francois Charton",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "mathematics, arithmetic, transformers, explainability",
+    "abstract": "The predictions of small transformers, trained to calculate the greatest common divisor (GCD) of two positive integers, can be fully characterized by looking at model inputs and outputs.\nAs training proceeds, the model learns a list $\\mathcal D$ of integers, products of divisors of the base used to represent integers and small primes, and predicts the largest element of $\\mathcal D$ that divides both inputs. \nTraining distributions impact performance. Models trained from uniform operands only learn a handful of GCD (up to $38$ GCD $\\leq100$). Log-uniform operands boost performance to $73$ GCD $\\leq 100$, and a log-uniform distribution of outcomes (i.e. GCD) to $91$. However, training from uniform (balanced) GCD breaks explainability.",
+    "openreview_id": "cmcD05NPKa",
+    "forum_id": "cmcD05NPKa"
+  },
+  "analysis_timestamp": "2026-01-07T00:08:31.819276"
+}

@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Generative Spoken Language Modeling from Raw Audio",
+      "authors": "Mayank Lakhotia et al.",
+      "year": 2021,
+      "role": "Foundation",
+      "relationship_sentence": "This work introduced the textless spoken language modeling problem formulation\u2014learning and generating speech directly from audio units\u2014which SpeechSSM explicitly adopts and scales to multi\u2011minute generations."
+    },
+    {
+      "title": "AudioLM: a Language Modeling Approach to Audio Generation",
+      "authors": "J\u00e1nos Borsos et al.",
+      "year": 2022,
+      "role": "Baseline",
+      "relationship_sentence": "AudioLM established hierarchical language modeling over semantic and acoustic tokens for textless speech generation using Transformers; SpeechSSM directly replaces this Transformer backbone with a state\u2011space model to overcome coherence and efficiency breakdowns beyond tens of seconds."
+    },
+    {
+      "title": "SoundStorm: Efficient Parallel Audio Generation",
+      "authors": "J\u00e1nos Borsos et al.",
+      "year": 2023,
+      "role": "Gap Identification",
+      "relationship_sentence": "SoundStorm improved long\u2011form audio generation efficiency with a staged, parallel Transformer decoder, but still relied on hierarchical conditioning and pipelines; SpeechSSM targets the identified limitation by enabling single\u2011session, textless multi\u2011minute sampling with a unified linear\u2011time model."
+    },
+    {
+      "title": "AudioGen: Textually Guided Audio Generation",
+      "authors": "Felix Kreuk et al.",
+      "year": 2022,
+      "role": "Related Problem",
+      "relationship_sentence": "AudioGen demonstrated autoregressive Transformer language models over discrete audio tokens but suffered quadratic complexity and length limitations; SpeechSSM draws from this token\u2011LM paradigm while addressing its long\u2011sequence inefficiency via state\u2011space modeling."
+    },
+    {
+      "title": "Efficiently Modeling Long Sequences with Structured State Spaces",
+      "authors": "Albert Gu et al.",
+      "year": 2021,
+      "role": "Foundation",
+      "relationship_sentence": "S4 introduced state\u2011space sequence models with provably efficient long\u2011range modeling, providing the theoretical and algorithmic foundation that enables SpeechSSM\u2019s linear\u2011time training and inference on multi\u2011minute speech."
+    },
+    {
+      "title": "Mamba: Linear-Time Sequence Modeling with Selective State Spaces",
+      "authors": "Albert Gu and Tri Dao",
+      "year": 2023,
+      "role": "Extension",
+      "relationship_sentence": "Mamba\u2019s selective SSM architecture showed practical, scalable long\u2011context generation; SpeechSSM extends this SSM family to spoken language modeling, adapting it to speech token streams and tailoring it for stable multi\u2011minute generation."
+    }
+  ],
+  "synthesis_narrative": "SpeechSSM sits at the intersection of textless spoken language modeling and linear-time sequence modeling. The problem formulation and core pipeline of learning to generate speech directly from audio-derived units trace back to Generative Spoken Language Modeling, which established spoken LMs without text supervision. AudioLM then operationalized this idea with hierarchical token stacks and autoregressive Transformer LMs, becoming the de facto baseline for textless speech generation. However, both AudioLM and contemporaneous discrete-token audio LMs such as AudioGen encountered coherence degradation and prohibitive compute as sequences extended to tens of seconds, revealing the architectural fragility and quadratic cost of Transformers in this regime. SoundStorm partially addressed efficiency with a staged, parallel Transformer decoder but retained multi-component pipelines and conditioning that complicate single-pass, textless long-form sampling.\n\nThe decisive enabling step comes from the state-space modeling line: S4 provided the principled framework for modeling long-range dependencies with linear time and memory, while Mamba demonstrated a selective SSM architecture capable of practical long-context generation. SpeechSSM directly extends this SSM family to the spoken LM setting, swapping out Transformer decoders for an SSM backbone tailored to speech token streams. This shift preserves utterance-level quality while delivering stable, coherent multi-minute generations in a single decoding session, thereby resolving the core scalability and coherence gaps left by Transformer-based spoken LMs and their hierarchical, staged variants.",
+  "analysis_timestamp": "2026-01-06T23:07:19.604734"
+}

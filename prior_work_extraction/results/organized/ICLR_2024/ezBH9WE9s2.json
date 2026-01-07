@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Adding Conditional Control to Text-to-Image Diffusion Models",
+      "authors": "Lvmin Zhang et al.",
+      "year": 2023,
+      "arxiv_id": "2302.05543",
+      "role": "Extension",
+      "relationship_sentence": "AnyText\u2019s auxiliary latent module follows ControlNet\u2019s principle of injecting structured conditions into a frozen diffusion backbone, extending it to fuse glyph rasters, text positions, and masks for precise text rendering/editing."
+    },
+    {
+      "title": "T2I-Adapter: Learning Adapters to Inject New Conditions into Stable Diffusion",
+      "authors": "Mingjie Sun et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Extension",
+      "relationship_sentence": "AnyText adopts the adapter-style conditioning idea to align additional inputs with a pretrained text-to-image model, directly generalizing T2I-Adapter from edges/poses to glyph and layout signals specific to scene text."
+    },
+    {
+      "title": "TextDiffuser: Diffusion Models as Text Renderers",
+      "authors": "Chen et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Baseline",
+      "relationship_sentence": "AnyText builds on TextDiffuser\u2019s rendered-glyph plus layout control for legible text, and explicitly addresses its limitations by adding OCR-derived embeddings and multilingual capability while supporting both generation and editing."
+    },
+    {
+      "title": "GlyphControl: Controllable Chinese Character Rendering in Text-to-Image Generation",
+      "authors": "Zhang et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Gap Identification",
+      "relationship_sentence": "AnyText is motivated by GlyphControl\u2019s insight that glyph conditioning improves character fidelity but remains language-specific, extending the idea to a unified multilingual setting and to masked text editing."
+    },
+    {
+      "title": "GLIGEN: Open-Set Grounded Text-to-Image Generation",
+      "authors": "Xingchao Liu et al.",
+      "year": 2023,
+      "arxiv_id": "2301.07093",
+      "role": "Foundation",
+      "relationship_sentence": "AnyText uses GLIGEN\u2019s box-level grounding concept to specify text regions, adopting positional maps to guide where the diffusion model should place text in complex scenes."
+    },
+    {
+      "title": "STEFANN: Scene Text Editor Using Font Adaptive Neural Network",
+      "authors": "Prasun Roy et al.",
+      "year": 2020,
+      "arxiv_id": "1903.06320",
+      "role": "Foundation",
+      "relationship_sentence": "AnyText inherits the problem formulation of scene text editing from STEFANN\u2014replacing/adding readable text within images\u2014while shifting from GAN-based localized edits to diffusion-based masked synthesis."
+    },
+    {
+      "title": "ABINet: Read Like Humans \u2014 Autonomous, Bidirectional and Iterative Language Modeling for Scene Text Recognition",
+      "authors": "Fangneng Zhan et al.",
+      "year": 2021,
+      "arxiv_id": "",
+      "role": "Inspiration",
+      "relationship_sentence": "AnyText\u2019s text embedding module leverages the idea of using an OCR recognizer to produce rich character-level representations, injecting recognition-aware (stroke/sequence) embeddings to guide diffusion toward correct text content."
+    }
+  ],
+  "synthesis_narrative": "ControlNet established a practical route to inject structured conditions into a frozen diffusion backbone via a dedicated control branch, enabling faithful adherence to external maps. T2I-Adapter further showed that lightweight adapters can align diverse conditional inputs to a pretrained text-to-image model without full retraining. GLIGEN introduced region-level grounding with bounding boxes, demonstrating that spatial control can reliably direct where content should appear. TextDiffuser revealed that rendering glyphs and layouts as explicit controls markedly improves legibility in text-in-image synthesis, while GlyphControl found that conditioning on glyphs benefits complex scripts like Chinese, though both approaches were limited in language breadth and lacked recognition-aware semantics. STEFANN earlier crystallized the scene text editing problem\u2014precisely replacing text within existing images\u2014though relying on GANs. In parallel, OCR advances such as ABINet highlighted that recognizers produce rich character-sequence representations that encode semantics beyond visual appearance.\nTogether, these works suggested a path: combine strong structural control (ControlNet/T2I-Adapter), spatial grounding (GLIGEN), and glyph priors (TextDiffuser/GlyphControl) with recognition-aware embeddings (OCR) to both place and spell text correctly. AnyText synthesizes these insights via an auxiliary latent module that fuses glyph, position, and masked image for controllable generation/editing, and a text embedding module that injects OCR-derived stroke/sequence cues for multilingual accuracy\u2014addressing the legibility and language limitations of prior text-rendering diffusion systems.",
+  "target_paper": {
+    "title": "AnyText: Multilingual Visual Text Generation and Editing",
+    "authors": "Yuxiang Tuo, Wangmeng Xiang, Jun-Yan He, Yifeng Geng, Xuansong Xie",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "diffusion model, text-to-image, text generation",
+    "abstract": "Diffusion model based Text-to-Image has achieved impressive achievements recently. Although current technology for synthesizing images is highly advanced and capable of generating images with high fidelity, it is still possible to give the show away when focusing on the text area in the generated image, as synthesized text often contains blurred, unreadable, or incorrect characters, making visual text generation one of the most challenging issues in this field. To address this issue, we introduce AnyText, a diffusion-based multilingual visual text generation and editing model, that focuses on rendering accurate and coherent text in the image. AnyText comprises a diffusion pipeline with two primary elements: an auxiliary latent module and a text embedding module. The former uses inputs like text glyph, position, and masked image to generate latent features for text generation or editing. The latter employs an OCR model for encoding stroke data as embeddings, which blend with image capti",
+    "openreview_id": "ezBH9WE9s2",
+    "forum_id": "ezBH9WE9s2"
+  },
+  "analysis_timestamp": "2026-01-06T16:12:13.864244"
+}

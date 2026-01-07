@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Score-Based Generative Modeling through Stochastic Differential Equations",
+      "authors": "Yang Song, Jascha Sohl-Dickstein, Diederik P. Kingma, Abhishek Kumar, Stefano Ermon, Ben Poole",
+      "year": 2021,
+      "role": "Foundational framework for forward noising processes and reverse-time sampling via denoisers/scores",
+      "relationship_sentence": "SLIPS builds on the SDE view that a forward observation/noising process paired with an associated denoiser can drive sampling; it generalizes this idea to stochastic localization processes and replaces learned scores with MCMC-estimated denoisers for an unnormalized target."
+    },
+    {
+      "title": "Generative Modeling by Estimating Gradients of the Data Distribution",
+      "authors": "Yang Song, Stefano Ermon",
+      "year": 2019,
+      "role": "Algorithmic template introducing annealed/heteroscedastic noise schedules and iterative denoising",
+      "relationship_sentence": "The annealed schedule concept directly informs SLIPS\u2019s flexible denoising schedules along a localization trajectory, while SLIPS swaps neural score learning for posterior-mean denoising estimated by MCMC at each noise level."
+    },
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Jonathan Ho, Ajay Jain, Pieter Abbeel",
+      "year": 2020,
+      "role": "Canonical discrete-time diffusion/denoising framework with explicit forward observation processes",
+      "relationship_sentence": "SLIPS mirrors the DDPM paradigm of specifying an explicit observation (noising) process and a matching denoiser, but instantiates it for stochastic localization and unnormalized targets with denoisers computed via iterative posterior sampling."
+    },
+    {
+      "title": "A Connection Between Score Matching and Denoising Autoencoders: A Bayesian Interpretation of Denoising and Neighborhood Estimation",
+      "authors": "Pascal Vincent",
+      "year": 2011,
+      "role": "Theoretical link between optimal denoisers and score estimation under corruption models",
+      "relationship_sentence": "This result justifies SLIPS\u2019s core step of using the posterior mean E[X|Y_t] as the denoiser associated to the observation process, underpinning the replacement of explicit score functions by MCMC-estimated denoisers."
+    },
+    {
+      "title": "Thin Shell Implies Spectral Gap up to Polylogarithmic Factors via a Stochastic Localization Scheme",
+      "authors": "Ronen Eldan",
+      "year": 2013,
+      "role": "Foundational stochastic localization process",
+      "relationship_sentence": "SLIPS adopts the stochastic localization viewpoint\u2014progressively localizing a distribution via a stochastic process\u2014and operationalizes it for practical sampling by coupling localization steps with posterior denoising."
+    },
+    {
+      "title": "Diffusion Schr\u00f6dinger Bridge with Applications to Score-Based Generative Modeling",
+      "authors": "Valentin De Bortoli, James Thornton, Alexandros Deligiannidis, Arnaud Doucet",
+      "year": 2021,
+      "role": "Bridges forward stochastic processes, denoising/score estimation, and target sampling via stochastic control",
+      "relationship_sentence": "This work motivates designing forward processes and associated denoisers to reach a target distribution; SLIPS follows this principle but uses MCMC-based posterior denoising within a stochastic localization framework for unnormalized targets."
+    },
+    {
+      "title": "Tweedie\u2019s Formula and Selection Bias",
+      "authors": "Bradley Efron",
+      "year": 2011,
+      "role": "Bayesian identity linking posterior mean denoising and score under Gaussian observation",
+      "relationship_sentence": "Tweedie\u2019s formula provides the prototypical identity connecting denoising and gradients of log-marginals; SLIPS leverages the posterior-mean-as-denoiser idea (generalized beyond Gaussian) and estimates it by MCMC at each localization step."
+    }
+  ],
+  "synthesis_narrative": "SLIPS sits at the intersection of score-based diffusion, stochastic localization, and Bayesian denoising. From score-based generative modeling and DDPM, it inherits the central design: specify a forward observation/noising process and apply an associated denoiser along a scheduled trajectory to reach a target distribution. The SDE formulation of score-based models further clarifies that such dynamics can be viewed as continuous-time processes with reverse-time sampling, guiding SLIPS\u2019s construction of flexible observation processes and denoising schedules. The theoretical backbone for using a denoiser is the denoiser\u2013score link: Vincent\u2019s denoising score matching and Tweedie\u2019s formula establish that the optimal denoiser equals a posterior mean and encodes the score of the corrupted marginal. SLIPS makes this link operational for unnormalized targets by estimating the posterior mean E[X|Y_t] with an inner MCMC, sidestepping the need to pretrain a neural score. On the localization side, Eldan\u2019s stochastic localization provides the core idea of progressively concentrating a distribution through a stochastic process. Diffusion Schr\u00f6dinger Bridge work strengthens the bridge between forward processes, denoisers, and sampling toward a desired target, inspiring SLIPS to design observation processes tailored to unnormalized densities. Together, these strands yield SLIPS\u2019s key contribution: a practical, training-free methodology that uses iterative posterior sampling to approximate the denoiser along a stochastic localization path, producing samples from complex unnormalized targets.",
+  "analysis_timestamp": "2026-01-07T00:02:04.901656"
+}

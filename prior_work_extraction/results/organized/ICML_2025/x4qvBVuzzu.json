@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+      "authors": "Edward J. Hu et al.",
+      "year": 2022,
+      "role": "Baseline",
+      "relationship_sentence": "The proposed state-based fine-tuning explicitly treats LoRA as a special case, and the paper\u2019s central goal\u2014achieving further memory reduction while improving performance\u2014directly builds on LoRA\u2019s low-rank adaptation paradigm and its limitations as a weight-centric method."
+    },
+    {
+      "title": "Parameter-Efficient Transfer Learning for NLP",
+      "authors": "Neil Houlsby et al.",
+      "year": 2019,
+      "role": "Foundation",
+      "relationship_sentence": "Adapter tuning introduced the core PEFT formulation of inserting small trainable modules into transformer residual blocks, which this work generalizes by shifting the locus of adaptation from weights to forward states and controlling entire residual blocks."
+    },
+    {
+      "title": "Prefix-Tuning: Optimizing Continuous Prompts for Generation",
+      "authors": "Xiang Lisa Li et al.",
+      "year": 2021,
+      "role": "Inspiration",
+      "relationship_sentence": "Prefix-Tuning demonstrated that modifying intermediate transformer states (via learned prefixes to K/V) can steer model behavior without updating base weights, directly inspiring the paper\u2019s state-centric perspective on optimization."
+    },
+    {
+      "title": "P-Tuning v2: Prompt Tuning Can Be Comparable to Fine-tuning Universally Across Scales and Tasks",
+      "authors": "Xiao Liu et al.",
+      "year": 2022,
+      "role": "Inspiration",
+      "relationship_sentence": "By extending prompts across layers to control hidden states throughout the network, P-Tuning v2 concretely motivated the idea of layerwise or blockwise state control that the paper formalizes as \u2018state-based fine-tuning\u2019 with parallel control."
+    },
+    {
+      "title": "Learning Multiple Visual Domains with Residual Adapters",
+      "authors": "Sylvestre-Alvise Rebuffi et al.",
+      "year": 2017,
+      "role": "Inspiration",
+      "relationship_sentence": "Residual adapters pioneered adding small parallel/serial branches that perturb activations within residual blocks, informing this paper\u2019s \u2018parallel control\u2019 design that perturbs and governs states across an entire block while keeping the backbone frozen."
+    },
+    {
+      "title": "QLoRA: Efficient Finetuning of Quantized LLMs",
+      "authors": "Tim Dettmers et al.",
+      "year": 2023,
+      "role": "Gap Identification",
+      "relationship_sentence": "QLoRA identified and alleviated weight-memory bottlenecks via quantization but still incurs activation memory costs; this paper explicitly targets that remaining gap by reframing fine-tuning around forward-state perturbations to avoid storing large intermediate states."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core innovation\u2014recasting parameter-efficient fine-tuning (PEFT) from weight updates to forward state perturbations with a parallel-control pathway\u2014emerges directly from two converging lines of work. First, LoRA established that small low-rank adapters can achieve strong adaptation while freezing base weights, but its weight-centric design still imposes activation memory and compute overheads at modified projections. Second, adapter and prompt-based methods shifted attention toward manipulating intermediate states: Houlsby-style adapters defined the general practice of inserting compact modules within residual blocks; Prefix-Tuning and P-Tuning v2 showed that controlling hidden states (e.g., via K/V prefixes or layerwise prompts) can substitute for weight updates and scale competitively.\n\nThis paper synthesizes these insights by formalizing a state-based tuning framework that treats LoRA as a special case while generalizing the intervention locus from specific weights to entire forward states. The \u2018parallel control\u2019 concept draws inspiration from residual adapters\u2019 parallel branches, enabling an additive pathway that perturbs the residual stream across the whole block. Conceptually, this achieves two aims absent in prior work: (1) unified, block-level control of activations that subsumes weight-local updates, and (2) concrete memory benefits by avoiding storage of large intermediate states during backpropagation through the frozen backbone. QLoRA contextualizes the practical gap\u2014quantization reduces weight memory yet leaves activation memory largely intact\u2014which the proposed state-based approach directly addresses. Together, these works form the immediate intellectual lineage for the paper\u2019s shift from weight-based to state-based PEFT with parallel control.",
+  "analysis_timestamp": "2026-01-06T23:07:19.637412"
+}

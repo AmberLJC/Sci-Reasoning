@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "DreamFusion: Text-to-3D using 2D Diffusion",
+      "authors": "Ben Poole et al.",
+      "year": 2022,
+      "arxiv_id": "2209.14988",
+      "role": "Extension",
+      "relationship_sentence": "DEEM extends DreamFusion\u2019s score distillation idea by using gradients from a frozen text-to-image diffusion model as generative feedback to directly align an image encoder\u2019s semantic distribution, rather than optimizing a 3D scene or latent."
+    },
+    {
+      "title": "High-Resolution Image Synthesis with Latent Diffusion Models",
+      "authors": "Robin Rombach et al.",
+      "year": 2022,
+      "arxiv_id": "2112.10752",
+      "role": "Foundation",
+      "relationship_sentence": "DEEM relies on the semantic cross-attention and denoising score properties of latent diffusion (e.g., Stable Diffusion) to extract token-level generative signals that supervise the vision encoder."
+    },
+    {
+      "title": "LLaVA: Visual Instruction Tuning",
+      "authors": "Haotian Liu et al.",
+      "year": 2023,
+      "arxiv_id": "2304.08485",
+      "role": "Baseline",
+      "relationship_sentence": "As a representative LMM built on a frozen image encoder plus instruction-tuned adaptor, LLaVA serves as a main baseline that DEEM augments by adding diffusion-driven perceptual alignment to remedy failures in color, counting, and spatial orientation."
+    },
+    {
+      "title": "BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models",
+      "authors": "Junnan Li et al.",
+      "year": 2023,
+      "arxiv_id": "2301.12597",
+      "role": "Foundation",
+      "relationship_sentence": "BLIP-2 established the frozen-encoder + lightweight bridge paradigm that DEEM targets, replacing purely discriminative alignment of the encoder with generative feedback-based semantic distribution alignment."
+    },
+    {
+      "title": "InstructBLIP: Towards General-purpose Vision-Language Models with Instruction Tuning",
+      "authors": "Wenliang Dai et al.",
+      "year": 2023,
+      "arxiv_id": "2305.06500",
+      "role": "Baseline",
+      "relationship_sentence": "InstructBLIP demonstrates instruction-tuned improvements while inheriting the same vision-encoder bottleneck, making it a key baseline that DEEM improves by injecting diffusion-based perceptual supervision rather than relying solely on text-instruction data."
+    },
+    {
+      "title": "Prompt-to-Prompt Image Editing with Cross-Attention Control",
+      "authors": "Amir Hertz et al.",
+      "year": 2022,
+      "arxiv_id": "2208.01626",
+      "role": "Inspiration",
+      "relationship_sentence": "By showing that diffusion cross-attention maps are token-aligned and controllable, Prompt-to-Prompt provides the concrete mechanism that DEEM leverages to harvest semantically grounded generative signals for supervising the image encoder."
+    },
+    {
+      "title": "MME: A Comprehensive Evaluation Benchmark for Multimodal Large Language Models",
+      "authors": "Yiyang Fu et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Gap Identification",
+      "relationship_sentence": "MME documents systematic deficiencies of LMMs in fine-grained perception (e.g., color, quantity, orientation), directly motivating DEEM\u2019s use of diffusion-based feedback to fix these OOD perception failures."
+    }
+  ],
+  "synthesis_narrative": "Frozen-encoder multimodal pipelines established by BLIP-2 showed that lightweight bridges can connect powerful vision encoders to LLMs, but their discriminative training favors task-targeted features and often overlooks fine-grained attributes. LLaVA scaled this recipe with visual instruction tuning, demonstrating strong conversational abilities but continuing to inherit perceptual brittleness from the underlying encoder. InstructBLIP reinforced that instruction data alone cannot fully correct misperceptions such as incorrect counting, color, or orientation. In parallel, latent diffusion models revealed rich token-level semantics via cross-attention and denoising scores, providing a generative prior that is both expressive and broadly trained. Prompt-to-Prompt exposed that these cross-attention maps are controllable and aligned to textual tokens, giving a practical handle to extract and manipulate semantic signals. DreamFusion then crystallized a general recipe\u2014score distillation\u2014for using a frozen text-to-image diffusion model to supervise an external representation by backpropagating generative signals. Benchmarks like MME documented where LMMs actually fail: detailed perception of color, quantity, orientation, and structure under distribution shifts. Taken together, these works reveal both the limitation of discriminative-only encoder alignment and the availability of a strong, token-aligned generative teacher. The natural next step is to treat diffusion models as perceptual oracles and distill their semantic distributions into the image encoder of an LMM. By importing score/cross-attention feedback from latent diffusion into the encoder\u2019s training objective, one can directly correct the precise perceptual errors flagged by benchmarks while remaining compatible with standard LMM architectures and instruction tuning.",
+  "target_paper": {
+    "title": "DEEM: Diffusion models serve as the eyes of large language models for image perception",
+    "authors": "Run Luo, Yunshui Li, Longze Chen, Wanwei He, Ting-En Lin, Ziqiang Liu, Lei Zhang, Zikai Song, Hamid Alinejad-Rokny, Xiaobo Xia, Tongliang Liu, Binyuan Hui, Min Yang",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "MLLM; Diffusion Model;",
+    "abstract": "The development of large language models (LLMs) has significantly advanced the emergence of large multimodal models (LMMs). While LMMs have achieved tremendous success by promoting the synergy between multimodal comprehension and creation, they often face challenges when confronted with out-of-distribution data, such as which can hardly distinguish orientation, quantity, color, structure, etc. This is primarily due to their reliance on image encoders trained to encode images into task-relevant features, which may lead them to disregard irrelevant details. Delving into the modeling capabilities of diffusion models for images naturally prompts the question: Can diffusion models serve as the eyes of large language models for image perception? In this paper, we propose DEEM, a simple but effective approach that utilizes the generative feedback of diffusion models to align the semantic distributions of the image encoder. This addresses the drawbacks of previous methods that solely relied on",
+    "openreview_id": "qtWjSboqfe",
+    "forum_id": "qtWjSboqfe"
+  },
+  "analysis_timestamp": "2026-01-06T19:00:07.664737"
+}

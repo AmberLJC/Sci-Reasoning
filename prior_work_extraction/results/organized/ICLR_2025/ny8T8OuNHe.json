@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Adding Conditional Control to Text-to-Image Diffusion Models (ControlNet)",
+      "authors": "Lvmin Zhang et al.",
+      "year": 2023,
+      "arxiv_id": "2302.05543",
+      "role": "Foundation",
+      "relationship_sentence": "Ctrl-Adapter directly reuses the ControlNet paradigm of an auxiliary condition branch attached to UNet blocks and explicitly addresses ControlNet\u2019s core limitation that each backbone requires retraining by learning a feature-space bridge instead."
+    },
+    {
+      "title": "T2I-Adapter: Learning Adapters to Dig out More Controllable Ability for Text-to-Image Diffusion Models",
+      "authors": "Chong Mou et al.",
+      "year": 2023,
+      "arxiv_id": "2302.08453",
+      "role": "Inspiration",
+      "relationship_sentence": "The idea of lightweight adapter modules for plugging control signals into a frozen diffusion backbone and supporting multi-condition, region-wise control inspires Ctrl-Adapter\u2019s adapter-style design and its fine-grained, patch-level multi-condition capability."
+    },
+    {
+      "title": "AnimateDiff: Animate Your Personalized Text-to-Image Diffusion Models without Specific Tuning",
+      "authors": "Guo et al.",
+      "year": 2023,
+      "arxiv_id": "2307.04725",
+      "role": "Related Problem",
+      "relationship_sentence": "AnimateDiff establishes motion-module video backbones derived from image diffusion models, and Ctrl-Adapter targets these backbones by aligning pretrained ControlNet features to such video architectures without retraining a video-specific ControlNet."
+    },
+    {
+      "title": "Control-A-Video: Controllable Text-to-Video Generation with Diffusion Models",
+      "authors": "Zhang et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Baseline",
+      "relationship_sentence": "As a primary controllable video baseline that trains video-specific control branches tied to a backbone, Control-A-Video motivates Ctrl-Adapter\u2019s core contribution of adapting existing pretrained ControlNets to new video backbones for control without expensive retraining."
+    },
+    {
+      "title": "Text2Video-Zero: Text-to-Image Diffusion Models are Zero-Shot Video Generators",
+      "authors": "Khachatryan et al.",
+      "year": 2023,
+      "arxiv_id": "2303.13439",
+      "role": "Gap Identification",
+      "relationship_sentence": "Text2Video-Zero revealed that applying image controls independently per frame induces temporal inconsistency, a limitation Ctrl-Adapter tackles via sparse-frame control and temporally coherent adaptation mechanisms across frames."
+    },
+    {
+      "title": "VideoComposer: Compositional Video Synthesis with Motion Controllability",
+      "authors": "Wang et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Related Problem",
+      "relationship_sentence": "VideoComposer\u2019s demonstration of multi-source and spatially localized conditions for video informs Ctrl-Adapter\u2019s patch-level multi-condition control, while Ctrl-Adapter generalizes this idea across arbitrary image/video diffusion backbones via feature-space adaptation."
+    }
+  ],
+  "synthesis_narrative": "ControlNet introduced the now-standard mechanism of injecting structural conditions through an auxiliary network attached to UNet blocks, but its training is tightly coupled to a specific backbone, forcing a full retrain when switching models and offering no temporal modeling. T2I-Adapter showed that lightweight adapters can plug control signals into a frozen text-to-image diffusion model and be composed across multiple conditions and regions, demonstrating efficient, fine-grained control without retraining the entire backbone. AnimateDiff established motion modules that convert image diffusion backbones into video generators, highlighting new feature spaces and temporal layers that complicate directly porting image-trained control branches. Control-A-Video extended structural control to videos by training video-specific control networks, but at the cost of backbone-specific retraining and limited portability. Text2Video-Zero found that naively applying image controls per frame leads to flicker and temporal drift, underscoring the need for temporal coherence and more efficient control integration. VideoComposer further revealed the benefits of compositional, multi-source, and spatially localized control for videos, but within fixed backbones.\nTogether these works expose a clear opportunity: reuse powerful, pretrained ControlNets across diverse image and video backbones while preserving temporal coherence and enabling fine-grained, multi-condition control\u2014without retraining per backbone. Ctrl-Adapter takes the natural next step by learning an adapter that aligns feature spaces between pretrained ControlNets and arbitrary diffusion backbones (including motion-module video models), supports sparse keyframe conditioning with temporal propagation, and retains patch-level, multi-condition flexibility inherited from adapter-style control designs.",
+  "target_paper": {
+    "title": "Ctrl-Adapter: An Efficient and Versatile Framework for Adapting Diverse Controls to Any Diffusion Model",
+    "authors": "Han Lin, Jaemin Cho, Abhay Zala, Mohit Bansal",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "oral",
+    "keywords": "Adapter, Diffusion, ControlNet, Text-to-video Generation, Image-to-video Generation, Text-to-image Generation",
+    "abstract": "ControlNets are widely used for adding spatial control to text-to-image diffusion models. However, when it comes to controllable video generation, ControlNets cannot be directly integrated into new backbones due to feature space mismatches, and training ControlNets for new backbones can be a significant burden for many users. Furthermore, applying ControlNets independently to different frames can not effectively maintain object temporal consistency. To address these challenges, we introduce Ctrl-Adapter, an efficient and versatile framework that adds diverse controls to any image/video diffusion models through the adaptation of pretrained ControlNets. Ctrl-Adapter offers strong and diverse capabilities, including image and video control, sparse-frame video control, fine-grained patch-level multi-condition control, zero-shot adaptation to unseen conditions, and supports a variety of downstream tasks beyond spatial control, including video editing, video style transfer, and text-guided m",
+    "openreview_id": "ny8T8OuNHe",
+    "forum_id": "ny8T8OuNHe"
+  },
+  "analysis_timestamp": "2026-01-06T14:43:59.143805"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "AI2: Safety and Robustness Certification of Neural Networks with Abstract Interpretation",
+      "authors": "R. Gehr, M. Mirman, D. Drachsler-Cohen, P. Tsankov, S. Chaudhuri, M. Vechev",
+      "year": 2018,
+      "role": "Foundational framework introducing abstract interpretation for neural network certification",
+      "relationship_sentence": "The paper\u2019s notion of an abstract image and provable, sound over-approximations directly builds on AI2\u2019s idea of propagating abstract domains through computation graphs to certify downstream behavior."
+    },
+    {
+      "title": "An Abstract Domain for Certifying Neural Networks (DeepPoly)",
+      "authors": "G. Singh, T. Gehr, M. P\u00fcschel, M. Vechev",
+      "year": 2019,
+      "role": "Abstract-domain design for tight piecewise-linear bounds",
+      "relationship_sentence": "DeepPoly\u2019s tight linear relaxations of nonlinear operations informed the design of efficient piecewise-linear abstractions that the authors extend to rendering-specific operators not covered by standard tools."
+    },
+    {
+      "title": "Efficient Neural Network Robustness Certification with General Activation Functions (CROWN)",
+      "authors": "H. Zhang, T.-W. Weng, P.-Y. Chen, C.-J. Hsieh",
+      "year": 2018,
+      "role": "Linear relaxation\u2013based perturbation analysis (LiRPA) for end-to-end bound propagation",
+      "relationship_sentence": "CROWN\u2019s LiRPA principles underpin the paper\u2019s end-to-end propagation of bounds from 3D pose/scene uncertainties through rendering into neural networks, motivating the extension with custom bounds for nonstandard operators."
+    },
+    {
+      "title": "NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis",
+      "authors": "B. Mildenhall, P. P. Srinivasan, M. Tancik, J. T. Barron, R. Ramamoorthi, R. Ng",
+      "year": 2020,
+      "role": "Rendering model with cumulative transmittance products along rays",
+      "relationship_sentence": "NeRF\u2019s volume rendering equation, which accumulates colors via cumulative products and sums, directly motivates the paper\u2019s custom abstraction for cumulative product summations to certify images under 3D semantic perturbations."
+    },
+    {
+      "title": "Neural 3D Mesh Renderer",
+      "authors": "H. Kato, Y. Ushiku, T. Harada",
+      "year": 2018,
+      "role": "Differentiable rasterization pipeline with depth-based aggregation",
+      "relationship_sentence": "The z-buffer\u2013style, sorting-based aggregation and per-pixel barycentric interpolation in differentiable rasterization informed the need for and design of sound, piecewise-linear bounds for sorting/aggregation within the rendering pipeline."
+    },
+    {
+      "title": "Computability of global solutions to factorable nonconvex programs via convex underestimating problems (McCormick relaxations)",
+      "authors": "G. P. McCormick",
+      "year": 1976,
+      "role": "Convex/concave envelopes for bilinear and product terms",
+      "relationship_sentence": "McCormick\u2019s bilinear envelopes provide the mathematical basis for bounding multiplicative interactions, which the paper leverages to construct linear bounds for cumulative product operations in volume rendering."
+    },
+    {
+      "title": "Matrix Perturbation Theory",
+      "authors": "G. W. Stewart, J.-G. Sun",
+      "year": 1990,
+      "role": "Perturbation bounds for inverses and stability of linear algebra operations",
+      "relationship_sentence": "Classical perturbation results for matrix inversion guide the paper\u2019s abstraction of camera pose inversion under uncertainty, ensuring sound bounds that reflect conditioning of the projection/extrinsics."
+    }
+  ],
+  "synthesis_narrative": "Abstract Rendering unifies certified perception with physically grounded 3D-to-2D image formation by propagating uncertainty through the rendering pipeline into neural networks. This synthesis rests on abstract interpretation and linear-relaxation bound propagation pioneered by AI2 and CROWN/DeepPoly: these works establish how to represent sets of inputs with tractable abstract domains and push tight, piecewise-linear bounds through complex computation graphs for certification. The paper extends this paradigm beyond pixel-level perturbations to 3D semantic uncertainty by introducing abstractions for rendering-specific operators that standard LiRPA tools do not support.\n\nTwo strands from computer graphics and vision shape the operator choices. NeRF\u2019s volume rendering formalism introduces cumulative transmittance products along rays; bounding these motivates tailored linear envelopes for cumulative product summations, mathematically grounded in McCormick\u2019s convex\u2013concave relaxations for products. Differentiable rasterization, exemplified by the Neural 3D Mesh Renderer, highlights depth-based, sorting-driven aggregation and barycentric interpolation; this spurs the development of sound bounds for sorting/select-and-aggregate behavior within rendering. Finally, camera pose uncertainty requires inverting perturbed transforms; Matrix Perturbation Theory provides the stability analysis and inverse sensitivity needed to design safe abstractions for matrix inversion.\n\nBy marrying abstract-interpretation-style certification with the core primitives of modern rendering, the paper constructs an abstract image\u2014constraints that provably overapproximate all images generated by continuous pose/scene variations\u2014and then composes this with downstream networks. The result is a principled, certifiable pipeline for semantic (3D) perturbations, concretely enabled by the prior foundations in neural verification, differentiable rendering, and convex relaxations.",
+  "analysis_timestamp": "2026-01-07T00:02:04.921748"
+}

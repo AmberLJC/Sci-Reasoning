@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Categorical Reparameterization with Gumbel-Softmax",
+      "authors": "Eric Jang, Shixiang (Shane) Gu, Ben Poole",
+      "year": 2017,
+      "role": "Differentiable sampling foundation",
+      "relationship_sentence": "MaskLLM\u2019s core idea\u2014learning discrete pruning masks via end-to-end optimization\u2014builds directly on the Gumbel-Softmax trick to make categorical (discrete) selections differentiable and trainable with SGD."
+    },
+    {
+      "title": "The Concrete Distribution: A Continuous Relaxation of Discrete Random Variables",
+      "authors": "Chris J. Maddison, Andriy Mnih, Yee Whye Teh",
+      "year": 2017,
+      "role": "Differentiable sampling foundation",
+      "relationship_sentence": "The Concrete/relaxed categorical distribution provides the theoretical underpinning for MaskLLM\u2019s probabilistic mask parameterization, enabling gradient-based learning over discrete N:M choices."
+    },
+    {
+      "title": "Learning Sparse Neural Networks through L0 Regularization",
+      "authors": "Christos Louizos, Max Welling, Diederik P. Kingma",
+      "year": 2018,
+      "role": "Probabilistic mask learning",
+      "relationship_sentence": "MaskLLM extends the idea of learning stochastic binary gates (masks) via reparameterizable distributions from L0 regularization to the combinatorial N:M setting, turning sparsity into a learnable distribution rather than a fixed criterion."
+    },
+    {
+      "title": "Rigging the Lottery: Making All Tickets Winners",
+      "authors": "Utku Evci, Trevor Gale, Jacob Menick, Pablo Samuel Castro, Erich Elsen",
+      "year": 2020,
+      "role": "Dynamic sparse training precedent",
+      "relationship_sentence": "RigL demonstrated that masks can be learned during training rather than imposed post hoc; MaskLLM adopts this philosophy for LLMs and specializes it to semi-structured N:M masks learned end-to-end."
+    },
+    {
+      "title": "NVIDIA Ampere Architecture: Structured Sparsity (2:4) and Sparse Tensor Cores",
+      "authors": "NVIDIA Corporation",
+      "year": 2020,
+      "role": "Hardware/algorithm target and motivation",
+      "relationship_sentence": "The Ampere 2:4 structured sparsity support establishes the practical N:M pattern that MaskLLM learns, ensuring the learned masks translate to real inference speedups on modern GPUs."
+    },
+    {
+      "title": "SparseGPT: Massive Language Models Can Be Accurately Pruned in One-Shot",
+      "authors": "Alexandar (Sasha) Frantar, Dan Alistarh",
+      "year": 2023,
+      "role": "LLM pruning baseline/contrast",
+      "relationship_sentence": "SparseGPT showed strong post-training unstructured pruning for LLMs; MaskLLM tackles a complementary regime by learning semi-structured N:M masks during training for hardware-accelerated inference and better transfer."
+    },
+    {
+      "title": "The Lottery Ticket Hypothesis: Finding Sparse, Trainable Neural Networks",
+      "authors": "Jonathan Frankle, Michael Carbin",
+      "year": 2019,
+      "role": "Mask transferability inspiration",
+      "relationship_sentence": "LTH established that sparse subnetworks can retain performance and sometimes transfer; MaskLLM\u2019s probabilistic mask modeling operationalizes transferability by learning and reusing mask distributions across tasks/domains."
+    }
+  ],
+  "synthesis_narrative": "MaskLLM\u2019s key contribution\u2014learning semi-structured N:M sparsity masks for LLMs via a probabilistic, end-to-end approach\u2014sits at the intersection of differentiable discrete selection and hardware-aligned sparsity. The methodological core is enabled by the Gumbel-Softmax and Concrete distribution relaxations (Jang et al.; Maddison et al.), which make categorical decisions differentiable. Louizos et al.\u2019s L0 regularization further demonstrates how reparameterizable stochastic gates can learn sparse structures directly from data, a paradigm MaskLLM adapts to the combinatorial N:M constraint by sampling mask patterns rather than individual weights. In spirit, MaskLLM follows dynamic sparse training (RigL) in learning masks during training, but targets semi-structured patterns that map to real speedups.\n\nOn the systems side, NVIDIA\u2019s Ampere 2:4 structured sparsity establishes both the constraint and the incentive: N:M masks deliver predictable acceleration on deployed hardware. Within the LLM context, post-training methods like SparseGPT underscore both the feasibility and the limits of unstructured pruning at scale; MaskLLM addresses the hardware-efficiency gap by learning N:M masks end-to-end on large corpora, yielding high-quality, accelerator-friendly sparsity. Finally, the transferability of sparsity\u2014hinted by the Lottery Ticket Hypothesis\u2014motivates MaskLLM\u2019s distributional view of masks, enabling adaptation and reuse of learned sparsity across domains and tasks. Together, these works directly shape MaskLLM\u2019s probabilistic N:M masking, its training-time learning strategy, and its focus on deployable, hardware-aligned sparsity for LLMs.",
+  "analysis_timestamp": "2026-01-06T23:33:35.580002"
+}

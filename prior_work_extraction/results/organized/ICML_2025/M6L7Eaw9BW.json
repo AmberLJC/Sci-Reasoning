@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "iCaRL: Incremental Classifier and Representation Learning",
+      "authors": "Sylvestre-Alvise Rebuffi et al.",
+      "year": 2017,
+      "role": "Baseline",
+      "relationship_sentence": "This work adopts iCaRL\u2019s exemplar-based CIL with nearest-mean classification as the primary baseline and extends it by explicitly compensating class-mean drift and calibrating covariances across tasks, which iCaRL does not model."
+    },
+    {
+      "title": "Distance-Based Image Classification: Generalizing to New Classes at Near-Zero Cost",
+      "authors": "Tomas Mensink et al.",
+      "year": 2013,
+      "role": "Foundation",
+      "relationship_sentence": "The paper\u2019s use of per-class mean embeddings as sufficient statistics directly builds on the nearest class mean formulation introduced by Mensink et al., around which the proposed mean-shift compensation is constructed."
+    },
+    {
+      "title": "Deep CORAL: Correlation Alignment for Deep Domain Adaptation",
+      "authors": "Baochen Sun et al.",
+      "year": 2016,
+      "role": "Inspiration",
+      "relationship_sentence": "The idea that aligning second-order feature statistics reduces distribution shift inspires the paper\u2019s covariance calibration; here, CORAL\u2019s covariance alignment is repurposed at class level between old and current networks to mitigate semantic drift in continual learning."
+    },
+    {
+      "title": "A Simple Unified Approach to Detecting Out-of-Distribution Samples and Adversarial Attacks",
+      "authors": "Kimin Lee et al.",
+      "year": 2018,
+      "role": "Extension",
+      "relationship_sentence": "Building on Lee et al.\u2019s class-conditional Gaussian view and Mahalanobis metric, the paper enforces a Mahalanobis distance\u2013based constraint to align class-specific embedding covariances across time, extending the idea from detection to drift calibration."
+    },
+    {
+      "title": "PODNet: Pooled Outputs Distillation for Small-Tasks Incremental Learning",
+      "authors": "Arthur Douillard et al.",
+      "year": 2020,
+      "role": "Gap Identification",
+      "relationship_sentence": "PODNet highlighted representation drift and used feature-level distillation; the current work addresses this gap more directly by modeling drift via its first two moments (mean and covariance) rather than generic pooled feature matching."
+    },
+    {
+      "title": "Task-Free Continual Learning",
+      "authors": "Rahaf Aljundi et al.",
+      "year": 2019,
+      "role": "Foundation",
+      "relationship_sentence": "This paper formalized learning without task boundaries/IDs, providing the task-agnostic setting that the current work explicitly targets with moment-based drift calibration that does not rely on task identity."
+    }
+  ],
+  "synthesis_narrative": "The core idea behind \u201cNavigating Semantic Drift in Task-Agnostic Class-Incremental Learning\u201d is to view forgetting through the lens of moment shifts in the feature space and then explicitly calibrate those shifts. This begins with the nearest class mean lineage: Mensink et al. established class means as compact, incrementally updatable statistics, and iCaRL embedded that principle into exemplar-based CIL with nearest-mean classification. However, these methods do not model how class means move and covariances deform as new tasks arrive, especially when task IDs are unknown. Prior attempts to curb representation drift, such as PODNet\u2019s pooled feature distillation, revealed the problem but treated it indirectly. The authors instead borrow from domain adaptation\u2019s moment alignment: Deep CORAL showed that covariance alignment can effectively reduce distribution shift, suggesting second-order statistics as a control knob. Complementing this, Lee et al.\u2019s Mahalanobis framework grounded the use of class-conditional Gaussian assumptions and distances that are sensitive to both mean and covariance, which the present work extends into a temporal consistency constraint between old and current networks. Finally, Aljundi et al.\u2019s task-free continual learning established the practical regime where task boundaries are unavailable; this setting underscores the need for label- and boundary-agnostic statistics like class means and covariances. By unifying these strands, the paper introduces mean-shift compensation and class-specific covariance calibration as principled, task-agnostic mechanisms to counter semantic drift in CIL.",
+  "analysis_timestamp": "2026-01-06T23:07:19.623122"
+}

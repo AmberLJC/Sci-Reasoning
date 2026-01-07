@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Estimation of Non-Normalized Statistical Models by Score Matching",
+      "authors": "Aapo Hyv\u00e4rinen",
+      "year": 2005,
+      "role": "Foundational score-matching objective",
+      "relationship_sentence": "SNPSE\u2019s core idea\u2014learning the gradient of the log-posterior without normalizing constants\u2014directly builds on Hyv\u00e4rinen\u2019s score matching, adapted to the conditional posterior p(\u03b8|x)."
+    },
+    {
+      "title": "A Connection Between Score Matching and Denoising Autoencoders",
+      "authors": "Pascal Vincent",
+      "year": 2011,
+      "role": "Denoising score matching formulation",
+      "relationship_sentence": "SNPSE trains a conditional score network with noise perturbations across a diffusion schedule, leveraging Vincent\u2019s denoising score matching to obtain stable gradients of the posterior."
+    },
+    {
+      "title": "Generative Modeling by Estimating Gradients of the Data Distribution",
+      "authors": "Yang Song, Stefano Ermon",
+      "year": 2019,
+      "role": "Score-based generative modeling (NCSN)",
+      "relationship_sentence": "SNPSE borrows the practical recipe of multi-noise level score learning and annealed Langevin sampling, but conditions the score on observations to target the posterior rather than the data marginal."
+    },
+    {
+      "title": "Score-Based Generative Modeling through Stochastic Differential Equations",
+      "authors": "Yang Song, Jascha Sohl-Dickstein, Diederik P. Kingma, Abhishek Kumar, Stefano Ermon, Ben Poole",
+      "year": 2021,
+      "role": "SDE framework and predictor\u2013corrector samplers",
+      "relationship_sentence": "The diffusion/SDE view and sampling algorithms from this work underpin SNPSE\u2019s conditional score-based diffusion sampler for drawing from p(\u03b8|x0)."
+    },
+    {
+      "title": "Fast \u03b5-free Inference of Simulation Models with Bayesian Conditional Density Estimation",
+      "authors": "George Papamakarios, Iain Murray",
+      "year": 2016,
+      "role": "Foundational sequential neural posterior estimation (SNPE-A)",
+      "relationship_sentence": "SNPSE inherits the SBI paradigm of learning the posterior from simulations and the sequential design principle introduced by early SNPE, replacing density estimation with posterior score estimation."
+    },
+    {
+      "title": "Automatic Posterior Transformation for Likelihood-Free Inference",
+      "authors": "David Greenberg, Marcel Nonnenmacher, Jakob H. Macke",
+      "year": 2019,
+      "role": "State-of-the-art SNPE variant (APT/SNPE-C)",
+      "relationship_sentence": "This modern SNPE formulation provides the immediate baseline and sequential amortization template that SNPSE parallels, guiding how simulations are targeted near the observation of interest."
+    },
+    {
+      "title": "Sequential Neural Likelihood: Fast Likelihood-Free Inference with Autoregressive Flows",
+      "authors": "George Papamakarios, David C. Sterratt, Iain Murray",
+      "year": 2019,
+      "role": "Sequential proposal design for SBI",
+      "relationship_sentence": "SNL demonstrated that adapting simulation proposals toward current posterior approximations greatly improves efficiency; SNPSE adopts this sequential guidance while swapping likelihood/posterior density models for a learned posterior score."
+    }
+  ],
+  "synthesis_narrative": "SNPSE fuses two lines of work: score-based diffusion modeling and sequential neural simulation-based inference. On the generative modeling side, Hyv\u00e4rinen\u2019s score matching established how to learn gradients of log densities without access to normalizing constants, while Vincent\u2019s denoising perspective made this practical by perturbing data with noise. Building on these, Song and Ermon introduced score-based generative models with multi-noise training and annealed Langevin dynamics, later unified by the SDE framework that supplies robust predictor\u2013corrector sampling. SNPSE directly ports these ideas to posterior inference by training a conditional score network s\u03b8(\u00b7|x) to approximate \u2207\u03b8 log p(\u03b8|x), and then sampling \u03b8 via diffusion/SDE methods conditioned on the observation.\n\nFrom the SBI side, Papamakarios and Murray\u2019s BCDE/SNPE-A pioneered learning amortized posteriors from simulations with a sequential scheme that concentrates simulations where the posterior has mass. Greenberg et al. (APT/SNPE-C) refined this into a strong, practical baseline using expressive flows and robust training, defining today\u2019s standard for sequential amortized SBI. Papamakarios et al.\u2019s SNL further crystallized the benefit of adapting proposals to the evolving posterior approximation to reduce simulation cost. SNPSE adopts this sequential scaffolding\u2014guiding simulations with the current posterior approximation\u2014but replaces density/ration-based targets with a learned posterior score, enabling diffusion-based posterior sampling. The result is a method that retains the simulation efficiency and amortization of SNPE/SNL while exploiting the robustness and sample quality of score-based diffusion models.",
+  "analysis_timestamp": "2026-01-06T23:42:48.060156"
+}

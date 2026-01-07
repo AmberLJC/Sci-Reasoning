@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Ricci curvature of Markov chains on metric spaces",
+      "authors": "Yann Ollivier",
+      "year": 2009,
+      "role": "Foundation",
+      "relationship_sentence": "ORC-ManL\u2019s pruning score is the Ollivier\u2013Ricci curvature computed between local neighbor measures on a kNN graph, using exactly the coarse Ricci curvature definition introduced by Ollivier (2009)."
+    },
+    {
+      "title": "Ollivier-Ricci curvature, local clustering and community structure on graphs",
+      "authors": "J\u00fcrgen Jost et al.",
+      "year": 2014,
+      "role": "Inspiration",
+      "relationship_sentence": "This work showed that edges embedded in triangle-rich, locally coherent regions have higher Ollivier\u2013Ricci curvature while inter-community \u2018bridges\u2019 exhibit strongly negative curvature, directly inspiring ORC-ManL\u2019s use of negative curvature to flag shortcut edges off the manifold."
+    },
+    {
+      "title": "A Global Geometric Framework for Nonlinear Dimensionality Reduction",
+      "authors": "Joshua B. Tenenbaum et al.",
+      "year": 2000,
+      "role": "Gap Identification",
+      "relationship_sentence": "Isomap formalized manifold learning via geodesic distances on kNN graphs and highlighted the failure mode caused by short-circuit edges; ORC-ManL is designed specifically to detect and prune those spurious shortcuts before downstream geodesic-based analysis."
+    },
+    {
+      "title": "Finding the Homology of Submanifolds with High Confidence from Random Samples",
+      "authors": "Partha Niyogi et al.",
+      "year": 2008,
+      "role": "Foundation",
+      "relationship_sentence": "This paper established the probabilistic framework for recovering manifold topology from noisy point samples via proximity graphs, providing the theoretical context that ORC-ManL leverages to argue that pruning shortcut edges improves topological and geometric inference."
+    },
+    {
+      "title": "The Relative Neighborhood Graph of a Finite Planar Set",
+      "authors": "Godfried T. Toussaint",
+      "year": 1980,
+      "role": "Baseline",
+      "relationship_sentence": "RNG-based pruning is a canonical edge-removal strategy to eliminate long-range shortcuts in proximity graphs; ORC-ManL directly compares against and improves upon RNG by using curvature to distinguish manifold-consistent edges from ambient-space shortcuts under noise."
+    },
+    {
+      "title": "Clustering Using a Similarity Measure Based on Shared Near Neighbors",
+      "authors": "Raymond A. Jarvis et al.",
+      "year": 1973,
+      "role": "Baseline",
+      "relationship_sentence": "Shared-nearest-neighbor/mutual-kNN graph construction is a standard pruning/symmetrization baseline for denoising kNN graphs; ORC-ManL addresses its limitation of not detecting ambient-space shortcuts that still share neighbors, yielding cleaner manifold graphs."
+    },
+    {
+      "title": "UMAP: Uniform Manifold Approximation and Projection for Dimension Reduction",
+      "authors": "Leland McInnes et al.",
+      "year": 2018,
+      "role": "Related Problem",
+      "relationship_sentence": "UMAP popularized kNN-graph-based manifold learning in practice; ORC-ManL directly targets the quality of the input neighbor graph and demonstrates that curvature-guided pruning measurably improves UMAP and related downstream analyses (e.g., scRNA-seq embeddings)."
+    }
+  ],
+  "synthesis_narrative": "ORC-ManL\u2019s core idea\u2014using Ollivier\u2013Ricci curvature to prune shortcut edges from kNN graphs\u2014rests squarely on Ollivier\u2019s (2009) definition of coarse Ricci curvature on metric measure spaces, which provides a principled, transport-based notion of edge curvature applicable to graphs. Empirical and theoretical insights from Jost and Liu (2014) directly motivate the pruning rule: they demonstrated that edges embedded within triangle-rich local neighborhoods tend to have higher (less negative) Ollivier curvature, whereas inter-community bridges are markedly negative\u2014exactly the signature of ambient-space shortcuts that derail manifold methods. The need to excise such shortcuts is the central gap identified since Isomap (Tenenbaum et al., 2000), which relies on geodesic distances over a kNN graph and is notoriously sensitive to short-circuit edges. Within the established framework for inferring manifold topology from noisy samples (Niyogi, Smale, and Weinberger, 2008), improving the fidelity of the underlying proximity graph is crucial; ORC-ManL\u2019s curvature-guided pruning directly targets this bottleneck and supports better homology, dimension, and geometry recovery. The method is evaluated against classical graph-pruning baselines\u2014Relative Neighborhood Graph (Toussaint, 1980) and shared/mutual-nearest-neighbor constructions (Jarvis and Patrick, 1973)\u2014whose angle- or neighbor-overlap criteria struggle under heterogeneous sampling and high-dimensional noise. Finally, because modern workflows like UMAP (McInnes et al., 2018) depend critically on the quality of the kNN graph, ORC-ManL\u2019s edge-level curvature criterion provides a drop-in improvement that translates into stronger manifold learning and single-cell analyses.",
+  "analysis_timestamp": "2026-01-06T23:09:26.621226"
+}

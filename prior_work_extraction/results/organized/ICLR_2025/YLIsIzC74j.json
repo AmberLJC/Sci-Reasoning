@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Chip Placement with Deep Reinforcement Learning",
+      "authors": "Azalia Mirhoseini et al.",
+      "year": 2021,
+      "arxiv_id": "2004.10746",
+      "role": "Gap Identification",
+      "relationship_sentence": "This seminal RL macro placement system optimizes surrogate objectives (e.g., wirelength/congestion) rather than signoff metrics like timing, and its well-noted misalignment with final QoR directly motivates LaMPlace\u2019s shift to optimizing cross-stage metrics."
+    },
+    {
+      "title": "Circuit Training: An Open-Source Framework for ML-Driven Chip Placement",
+      "authors": "A. Shah et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Baseline",
+      "relationship_sentence": "As the primary open-source baseline implementing the Mirhoseini-style RL formulation with proxy costs, Circuit Training is the system LaMPlace improves upon by replacing online proxy optimization with a predictor-driven cross-stage objective."
+    },
+    {
+      "title": "MaskPlace: Fast Chip Placement via Reinforcement Learning with Dynamic Action Masking",
+      "authors": "J. Lu et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Extension",
+      "relationship_sentence": "MaskPlace introduced learning a spatial action mask to prune the macro placement search space; LaMPlace directly extends this masking idea by learning masks guided by predicted cross-stage metrics rather than proxy objectives."
+    },
+    {
+      "title": "AutoDMP: Automated DREAMPlace-based Macro Placement",
+      "authors": "Y. Chen et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Related Problem",
+      "relationship_sentence": "AutoDMP exemplifies strong proxy-driven (HPWL/density) macro placement built on DREAMPlace, highlighting the field\u2019s dependence on intermediate surrogates that LaMPlace replaces with a learned predictor of final-stage metrics."
+    },
+    {
+      "title": "RouteNet: A Graph Neural Network for Routability and Congestion Prediction in VLSI Physical Design",
+      "authors": "H. Chen et al.",
+      "year": 2018,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "RouteNet established that downstream routing outcomes can be accurately predicted from early placement using a learned model, directly enabling LaMPlace\u2019s strategy of training an offline predictor for cross-stage metrics and using it in-loop."
+    },
+    {
+      "title": "DRC Hotspot Prediction Using Deep Learning",
+      "authors": "W. Liu et al.",
+      "year": 2018,
+      "arxiv_id": "",
+      "role": "Related Problem",
+      "relationship_sentence": "This line of work showed that signoff-quality metrics (e.g., DRC violations) can be predicted from pre-routing layouts, providing the key insight that costly post-placement metrics can be approximated to guide earlier-stage decisions as LaMPlace does for timing."
+    }
+  ],
+  "synthesis_narrative": "Reinforcement-learning-based macro placement demonstrated by Mirhoseini et al. formulated sequential macro placement and trained policies against proxy costs such as wirelength and congestion, establishing a powerful paradigm but one whose rewards were decoupled from final signoff quality. Circuit Training operationalized this approach as an open-source baseline with the same proxy-driven objective and costly, infrequent feedback from downstream tools. In parallel, MaskPlace introduced dynamic action masking to prune spatial choices during macro placement, proving that a learned mask can dramatically stabilize learning and speed the search without sacrificing quality. Outside direct optimization, RouteNet showed that routing congestion\u2014a downstream, cross-stage outcome\u2014can be predicted accurately from early placement features using learned models, providing rapid, differentiable feedback in lieu of full routing. Similarly, deep-learning-based DRC hotspot prediction demonstrated that high-cost signoff metrics can be approximated from early-stage layouts to inform design decisions. AutoDMP further underscored the community\u2019s reliance on differentiable or heuristic proxies (HPWL/density) for efficiency, while still lacking direct optimization of final timing or manufacturability.\nTogether, these works revealed a gap: strong search procedures and masking exist, but they are guided by proxy objectives that can misalign with timing and other cross-stage metrics; meanwhile, learned surrogates can accurately approximate expensive downstream outcomes. LaMPlace synthesizes these insights by training an offline predictor for cross-stage metrics and using it online to drive a learned spatial mask, thus constraining macro placement toward regions that improve predicted timing and signoff quality while retaining the efficiency benefits of masked search.",
+  "target_paper": {
+    "title": "LaMPlace: Learning to Optimize Cross-Stage Metrics in Macro Placement",
+    "authors": "Zijie Geng, Jie Wang, Ziyan Liu, Siyuan Xu, Zhentao Tang, Shixiong Kai, Mingxuan Yuan, Jianye HAO, Feng Wu",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "oral",
+    "keywords": "Macro placement, Chip design, EDA",
+    "abstract": "Machine learning techniques have shown great potential in enhancing macro placement, a critical stage in modern chip design.\nHowever, existing methods primarily focus on *online* optimization of *intermediate surrogate metrics* that are available at the current placement stage, rather than directly targeting the *cross-stage metrics*---such as the timing performance---that measure the final chip quality.\nThis is mainly because of the high computational costs associated with performing post-placement stages for evaluating such metrics, making the *online* optimization impractical.\nConsequently, these optimizations struggle to align with actual performance improvements and can even lead to severe manufacturing issues.\nTo bridge this gap, we propose **LaMPlace**, which **L**earns **a** **M**ask for optimizing cross-stage metrics in macro placement.\nSpecifically, LaMPlace trains a predictor on *offline* data to estimate these *cross-stage metrics* and then leverages the predictor to quickl",
+    "openreview_id": "YLIsIzC74j",
+    "forum_id": "YLIsIzC74j"
+  },
+  "analysis_timestamp": "2026-01-06T14:50:14.265346"
+}

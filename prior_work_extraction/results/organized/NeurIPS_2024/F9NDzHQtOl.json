@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Parallel Sampling of Diffusion Models",
+      "authors": "Shih et al.",
+      "year": 2024,
+      "role": "Empirical precursor for parallelizing diffusion sampling",
+      "relationship_sentence": "This work demonstrated that multiple diffusion steps can be computed concurrently in practice; the NeurIPS 2024 paper formalizes this idea with blockwise, parallelizable Picard iterations and provides the first provable sub-linear-in-d complexity, turning Shih et al.\u2019s empirical technique into an algorithm with theory."
+    },
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Jonathan Ho, Ajay Jain, Pieter Abbeel",
+      "year": 2020,
+      "role": "Foundational diffusion modeling and iterative sampling framework",
+      "relationship_sentence": "The proposed method accelerates the canonical iterative sampling process introduced by DDPM, making the baseline Markovian sampler effectively parallelizable within blocks while controlling error."
+    },
+    {
+      "title": "Denoising Diffusion Implicit Models (DDIM)",
+      "authors": "Jiaming Song, Chenlin Meng, Stefano Ermon",
+      "year": 2020,
+      "role": "Deterministic non-Markovian sampling enabling larger steps",
+      "relationship_sentence": "DDIM\u2019s deterministic trajectory and integral-form perspective inform the paper\u2019s use of Picard-style fixed-point iterations over time blocks, aligning with non-Markovian, probability-flow-style updates amenable to parallel evaluation."
+    },
+    {
+      "title": "Score-Based Generative Modeling through Stochastic Differential Equations",
+      "authors": "Yang Song, Jascha Sohl-Dickstein, Diederik P. Kingma, Abhishek Kumar, Stefano Ermon, Ben Poole",
+      "year": 2021,
+      "role": "SDE/ODE unification and Girsanov-based connections",
+      "relationship_sentence": "The NeurIPS 2024 analysis builds on the SDE and probability flow ODE formulations and uses change-of-measure (Girsanov) reasoning in this line of work to prove correctness and complexity guarantees for both SDE and ODE implementations."
+    },
+    {
+      "title": "Elucidating the Design Space of Diffusion-Based Generative Models",
+      "authors": "Tero Karras, Miika Aittala, Timo Aila, Samuli Laine",
+      "year": 2022,
+      "role": "Practical accelerations and solver/schedule design for diffusion sampling",
+      "relationship_sentence": "EDM established strong numerical practices and step-size schedules for fast sampling; the new method is compatible with such ODE-based accelerations and leverages them within its parallelizable block-Picard framework."
+    },
+    {
+      "title": "A \u201cParareal\u201d in Time Discretization Method",
+      "authors": "Jacques-Louis Lions, Yvon Maday, Gabriel Turinici",
+      "year": 2001,
+      "role": "Parallel-in-time blueprint via block decomposition and iterative correction",
+      "relationship_sentence": "The algorithm\u2019s division of the sampling horizon into O(1) time blocks with iterative, parallel refinements echoes the parareal paradigm, providing a conceptual foundation for achieving parallelism across temporal segments."
+    },
+    {
+      "title": "The Waveform Relaxation Method for Time-Domain Analysis of Large-Scale Integrated Circuits",
+      "authors": "Apichat Lelarasmee, Albert E. Ruehli, Alberto Sangiovanni-Vincentelli",
+      "year": 1982,
+      "role": "Picard-type integral fixed-point iterations amenable to parallelization",
+      "relationship_sentence": "Waveform relaxation\u2019s Picard iterations on integral forms directly motivate the paper\u2019s within-block Picard scheme, enabling simultaneous evaluation of multiple time points with convergence guarantees."
+    }
+  ],
+  "synthesis_narrative": "The core innovation\u2014splitting diffusion sampling into O(1) temporal blocks and executing parallelizable Picard iterations within each block\u2014sits at the intersection of three lines of prior work. First, diffusion modeling foundations (DDPM) and deterministic non-Markovian sampling (DDIM) established iterative and probability-flow-style trajectories that can be expressed in integral form, a prerequisite for fixed-point (Picard) schemes. Second, the SDE/ODE unification in score-based generative modeling provided by Song et al. furnished a rigorous stochastic calculus toolkit (notably change-of-measure/Girsanov arguments) and the probability flow ODE, which the new paper leverages to prove correctness and to ensure its analysis covers both SDE and ODE implementations. Third, numerical parallel-in-time methods\u2014parareal and waveform relaxation\u2014offered the architectural blueprint: divide the horizon into blocks and apply Picard-type fixed-point iterations that can be evaluated across many time points concurrently.\n\nOn the empirical/algorithmic side, Shih et al.\u2019s parallel sampling showed that concurrency across timesteps can accelerate diffusion inference in practice; the NeurIPS 2024 paper transforms that idea into a principled algorithm with theoretical guarantees, showing sub-linear time complexity in the data dimension. Practical fast-sampling insights from EDM (e.g., step-size schedules and ODE-based solvers) complement the method, which can integrate such numerical designs within its block-Picard framework. Together, these works directly informed both the algorithmic design (parallel-in-time Picard over diffusion trajectories) and the analysis (Girsanov-based guarantees), enabling the first provable sub-linear-in-d diffusion sampler.",
+  "analysis_timestamp": "2026-01-06T23:33:36.274388"
+}

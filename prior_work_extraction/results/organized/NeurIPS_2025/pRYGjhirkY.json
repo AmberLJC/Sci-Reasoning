@@ -1,0 +1,80 @@
+{
+  "prior_works": [
+    {
+      "title": "Mamba: Linear-Time Sequence Modeling with Selective State Spaces",
+      "authors": [
+        "Albert Gu",
+        "Tri Dao"
+      ],
+      "year": 2024,
+      "role": "Architecture foundation for efficient long-sequence modeling",
+      "relationship_sentence": "TrajMamba\u2019s core encoder adopts Mamba\u2019s selective state-space scanning to model very long trajectory sequences in linear time, directly enabling its efficiency claim over Transformer-style encoders."
+    },
+    {
+      "title": "Efficiently Modeling Long Sequences with Structured State Spaces (S4)",
+      "authors": [
+        "Albert Gu",
+        "Karan Goel",
+        "Christopher R\u00e9"
+      ],
+      "year": 2021,
+      "role": "Theoretical and architectural precursor to Mamba/SSM-based sequence encoders",
+      "relationship_sentence": "The S4 line established the practicality of structured state space models for long-range dependencies, providing the theoretical and empirical basis for the Traj-Mamba encoder\u2019s SSM design choices."
+    },
+    {
+      "title": "Hidden Markov Map Matching Through Noise and Sparseness",
+      "authors": [
+        "Paul Newson",
+        "John Krumm"
+      ],
+      "year": 2009,
+      "role": "GPS-to-road sequence conversion for road-perspective modeling",
+      "relationship_sentence": "By formalizing robust HMM-based map matching, this work enables transforming noisy GPS points into road segment sequences, a prerequisite for TrajMamba\u2019s joint GPS\u2013road perspective representation."
+    },
+    {
+      "title": "Algorithms for the reduction of the number of points required to represent a digitized line",
+      "authors": [
+        "David H. Douglas",
+        "Thomas K. Peucker"
+      ],
+      "year": 1973,
+      "role": "Classical trajectory simplification to remove redundant points",
+      "relationship_sentence": "Douglas\u2013Peucker motivates TrajMamba\u2019s redundancy-handling by demonstrating that principled geometric simplification improves efficiency without materially sacrificing path fidelity."
+    },
+    {
+      "title": "node2vec: Scalable Feature Learning for Networks",
+      "authors": [
+        "Aditya Grover",
+        "Jure Leskovec"
+      ],
+      "year": 2016,
+      "role": "Road network/segment embedding via biased random-walk objectives",
+      "relationship_sentence": "TrajMamba\u2019s road-perspective semantics can leverage node/edge embeddings learned from network structure in the spirit of node2vec to encode functional similarities among road segments efficiently."
+    },
+    {
+      "title": "Inductive Representation Learning on Large Graphs (GraphSAGE)",
+      "authors": [
+        "William L. Hamilton",
+        "Zhitao Ying",
+        "Jure Leskovec"
+      ],
+      "year": 2017,
+      "role": "Inductive graph embedding to fuse road/POI attributes",
+      "relationship_sentence": "GraphSAGE\u2019s neighborhood aggregation informs TrajMamba\u2019s strategy of enriching road-level representations with local structural and attribute signals without expensive full-graph retraining."
+    },
+    {
+      "title": "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding",
+      "authors": [
+        "Jacob Devlin",
+        "Ming-Wei Chang",
+        "Kenton Lee",
+        "Kristina Toutanova"
+      ],
+      "year": 2018,
+      "role": "Text encoder for addresses/POI descriptions and masked pre-training paradigm",
+      "relationship_sentence": "BERT provides the de facto mechanism for encoding textual addresses/POI descriptions; TrajMamba\u2019s contribution tackles the computational burden of such text semantics, e.g., via lightweight integration/distillation."
+    }
+  ],
+  "synthesis_narrative": "TrajMamba\u2019s key contribution\u2014an efficient, semantic-rich pre-training framework that jointly models GPS and road perspectives\u2014stands on two converging lines of prior work. First, on sequence modeling efficiency, SSMs (S4) and their linear-time evolution (Mamba) directly enable TrajMamba\u2019s Traj-Mamba Encoder to capture long-range movement patterns without quadratic cost, making pre-training over lengthy trajectories tractable. Second, on trajectory semantics, classical map matching (Newson & Krumm) provides the operational bridge from noisy GPS points to road-segment sequences, allowing TrajMamba to learn in both raw and road-network spaces. To encode functional semantics of roads and surrounding POIs efficiently, graph-embedding methods such as node2vec and GraphSAGE supply scalable mechanisms to represent road segments and their neighborhoods, complementing or distilling richer textual signals. Meanwhile, BERT anchors the handling of textual addresses/POI descriptions; TrajMamba\u2019s efficiency-oriented design responds to BERT\u2019s computational footprint by integrating textual semantics in a lightweight manner. Finally, the problem of redundant GPS points reflects decades of trajectory simplification research epitomized by Douglas\u2013Peucker, which motivates TrajMamba\u2019s principled reduction of redundancy to improve both computational efficiency and embedding quality. Together, these works directly shape TrajMamba\u2019s core innovation: a linear-time SSM encoder operating over dual GPS\u2013road views, enriched with efficiently integrated road/POI semantics and guarded by redundancy-aware preprocessing.",
+  "analysis_timestamp": "2026-01-07T00:21:32.280815"
+}

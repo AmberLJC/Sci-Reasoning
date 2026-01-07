@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Diffusion Posterior Sampling for General Noisy Inverse Problems",
+      "authors": "Hyungjin Chung et al.",
+      "year": 2023,
+      "arxiv_id": "2209.14687",
+      "role": "Baseline",
+      "relationship_sentence": "TReg builds directly on DPS\u2019s measurement-consistency posterior sampling framework and augments it with text-conditioned guidance to disambiguate multi-modal inverse solutions."
+    },
+    {
+      "title": "Denoising Diffusion Restoration Models",
+      "authors": "Omri Kawar et al.",
+      "year": 2022,
+      "arxiv_id": "2201.11793",
+      "role": "Baseline",
+      "relationship_sentence": "DDRM serves as a primary diffusion-based inverse solver baseline whose ambiguity under symmetric measurements TReg explicitly addresses by adding prompt-driven regularization."
+    },
+    {
+      "title": "High-Resolution Image Synthesis with Latent Diffusion Models",
+      "authors": "Robin Rombach et al.",
+      "year": 2022,
+      "arxiv_id": "2112.10752",
+      "role": "Foundation",
+      "relationship_sentence": "TReg operates in the LDM latent space and leverages its text encoder and unconditional (\u2018null\u2019) token, enabling text-regularized reverse diffusion without retraining."
+    },
+    {
+      "title": "Classifier-Free Diffusion Guidance",
+      "authors": "Jonathan Ho and Tim Salimans",
+      "year": 2021,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "TReg relies on classifier-free guidance\u2019s conditional\u2013unconditional mixing and repurposes the unconditional (null) embedding as an optimizable handle for adaptive negation."
+    },
+    {
+      "title": "Null-Text Inversion for Editing Real Images using Guided Diffusion Models",
+      "authors": "Daniel Mokady et al.",
+      "year": 2023,
+      "arxiv_id": "2211.09794",
+      "role": "Extension",
+      "relationship_sentence": "TReg extends null-text optimization from per-image editing to inverse-problem sampling by dynamically optimizing the null text to reinforce the desired prompt during reconstruction (adaptive negation)."
+    },
+    {
+      "title": "RePaint: Inpainting using Denoising Diffusion Probabilistic Models",
+      "authors": "Andreas Lugmayr et al.",
+      "year": 2022,
+      "arxiv_id": "2201.09865",
+      "role": "Related Problem",
+      "relationship_sentence": "RePaint\u2019s strategy of interleaving data-consistency operations with diffusion steps informs TReg\u2019s integration of measurement consistency alongside text-based regularization."
+    }
+  ],
+  "synthesis_narrative": "Latent Diffusion Models introduced text-conditioned generation in a compact latent space and an explicit unconditional token, making it practical to inject semantic information during sampling via the text encoder and classifier-free guidance. Classifier-free guidance formalized mixing conditional and unconditional predictions, providing a principled knob\u2014the null (unconditional) embedding\u2014that can be tuned to modulate how strongly text biases shape samples. Null-Text Inversion showed that this null embedding can itself be optimized at inference to precisely reconstruct a target, revealing that per-instance null-text optimization is a powerful mechanism for aligning the diffusion trajectory with desired semantics. In parallel, diffusion priors emerged as strong inverse problem solvers: Diffusion Posterior Sampling provided a general posterior-sampling update that enforces measurement consistency using a pre-trained diffusion prior, while Denoising Diffusion Restoration Models offered an analytic restoration pathway for linear degradations; both, however, can yield ambiguous reconstructions when measurements admit multiple plausible solutions. RePaint demonstrated how to interleave hard data constraints with diffusion sampling, but without explicit semantic disambiguation.\nCollectively, these works reveal a gap: diffusion-based inverse solvers enforce measurements yet lack a controllable semantic bias to choose among plausible modes, whereas text-conditioned diffusion\u2014and especially null-text optimization\u2014offers precisely such control. TReg naturally synthesizes these threads by running inverse sampling in the LDM latent space, injecting text prompts as regularizers through classifier-free guidance, and dynamically optimizing the null text (adaptive negation) to amplify the intended semantic bias, thereby resolving ambiguity while maintaining data consistency.",
+  "target_paper": {
+    "title": "Regularization by Texts for Latent Diffusion Inverse Solvers",
+    "authors": "Jeongsol Kim, Geon Yeong Park, Hyungjin Chung, Jong Chul Ye",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "Inverse problem, Text regularization, Diffusion model",
+    "abstract": "The recent development of diffusion models has led to significant progress in solving inverse problems by leveraging these models as powerful generative priors. However, challenges persist due to the ill-posed nature of such problems, often arising from ambiguities in measurements or intrinsic system symmetries. To address this, we introduce a novel latent diffusion inverse solver, regularization by text (TReg), inspired by the human ability to resolve visual ambiguities through perceptual biases. TReg integrates textual descriptions of preconceptions about the solution during reverse diffusion sampling, dynamically reinforcing these descriptions through null-text optimization, which we refer to as adaptive negation. Our comprehensive experimental results demonstrate that TReg effectively mitigates ambiguity in inverse problems, improving both accuracy and efficiency.",
+    "openreview_id": "TtUh0TOlGX",
+    "forum_id": "TtUh0TOlGX"
+  },
+  "analysis_timestamp": "2026-01-06T20:10:15.154580"
+}

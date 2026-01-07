@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Deep Reinforcement Learning from Human Preferences",
+      "authors": "Paul F. Christiano, Jan Leike, Tom B. Brown, Miljan Martic, Shane Legg, Dario Amodei",
+      "year": 2017,
+      "role": "RLHF foundation",
+      "relationship_sentence": "Establishes the core paradigm of optimizing language model policies with scalar rewards from feedback, underpinning DRG-Sapphire\u2019s use of reinforcement learning to align an LM to a specialized objective."
+    },
+    {
+      "title": "Learning to Summarize with Human Feedback",
+      "authors": "Nisan Stiennon, Long Ouyang, Jeffrey Wu, Daniel M. Ziegler, Ryan Lowe, et al.",
+      "year": 2020,
+      "role": "Practical RL recipe for LMs",
+      "relationship_sentence": "Demonstrates PPO-based RLHF at scale for text generation, informing DRG-Sapphire\u2019s end-to-end pipeline of supervised warm-start plus policy optimization with a task-specific reward."
+    },
+    {
+      "title": "Training language models to follow instructions with human feedback",
+      "authors": "Long Ouyang, Jeffrey Wu, Xu Jiang, Diogo Almeida, Carroll L. Wainwright, et al.",
+      "year": 2022,
+      "role": "Instruction tuning + PPO blueprint",
+      "relationship_sentence": "Provides the modern blueprint for aligning base LLMs via SFT followed by PPO-style optimization, a recipe DRG-Sapphire adapts to clinical DRG assignment."
+    },
+    {
+      "title": "Constitutional AI: Harmlessness from AI Feedback",
+      "authors": "Yuntao Bai, Andy Jones, Kamal Ndousse, Amanda Askell, Zeerak Talat, et al.",
+      "year": 2022,
+      "role": "Rule/AI-critique based supervision",
+      "relationship_sentence": "Introduces rule- or principle-driven automated feedback, directly motivating DRG-Sapphire\u2019s use of programmatic, rule-based rewards derived from DRG grouping logic instead of costly human labels."
+    },
+    {
+      "title": "DeepSeekMath: Pushing the Limits of Open-Source Language Models on Mathematical Reasoning",
+      "authors": "DeepSeek-AI Team",
+      "year": 2024,
+      "role": "GRPO algorithm and verifiable-reward RL for reasoning",
+      "relationship_sentence": "Proposes Group Relative Policy Optimization (GRPO) and shows its efficacy on tasks with verifiable signals; DRG-Sapphire adopts GRPO and adapts it from math to knowledge-intensive DRG coding with rule-based rewards."
+    },
+    {
+      "title": "Direct Preference Optimization: Your Language Model is Secretly a Reward Model",
+      "authors": "Alexander M. Rafailov, Jeff Z. HaoChen, Tatsu Hashimoto, Colin Raffel",
+      "year": 2023,
+      "role": "Preference optimization alternative to PPO",
+      "relationship_sentence": "Provides a strong non-RL baseline for preference optimization; contrasts inform DRG-Sapphire\u2019s choice of on-policy RL (GRPO/PPO-style) to better exploit programmatic rewards and exploration in an OOD domain."
+    },
+    {
+      "title": "MIMIC-IV, a freely accessible electronic health record dataset",
+      "authors": "Alistair E. W. Johnson, Lucas Bulgarelli, Tom J. Pollard, Leo A. Celi, Roger G. Mark, et al.",
+      "year": 2023,
+      "role": "Benchmark dataset enabling DRG evaluation",
+      "relationship_sentence": "Supplies the large-scale clinical notes and billing codes used to construct the DRG coding benchmark on which DRG-Sapphire is trained and evaluated, anchoring the study\u2019s OOD setting."
+    }
+  ],
+  "synthesis_narrative": "DRG-Sapphire\u2019s core innovation\u2014aligning an open-source LLM to perform out-of-distribution, knowledge-intensive DRG coding via reinforcement learning with rule-based rewards\u2014builds on three converging lines of work. First, the RLHF foundation from Christiano et al. and subsequent large-scale implementations in summarization and instruction-following (Stiennon et al.; Ouyang et al.) established the practical recipe of supervised warm-start followed by on-policy policy optimization against scalar rewards. Second, Anthropic\u2019s Constitutional AI showed that programmatic, principle-driven feedback can replace expensive human annotations, directly motivating DRG-Sapphire\u2019s choice to compute rewards via DRG grouper rules and coding constraints rather than rely on clinician preferences.\nThird, recent advances in RL for reasoning, particularly DeepSeekMath\u2019s Group Relative Policy Optimization (GRPO), demonstrated that structured, verifiable signals paired with group-normalized policy updates can substantially improve reasoning models. DRG-Sapphire adopts GRPO and adapts it beyond mathematical tasks to the clinical billing domain, where correctness is verifiable through deterministic DRG assignment logic yet knowledge demands are high and pretraining coverage is sparse. DPO provides a contrasting preference-optimization alternative that clarifies why on-policy RL with exploration is advantageous when rewards are computable and domain shift is severe. Finally, MIMIC-IV anchors the work in a realistic OOD benchmark, enabling rigorous measurement of accuracy and explainability in clinical settings. Together, these works supply the alignment mechanism (RLHF/PPO), the rule-based reward paradigm, the GRPO update strategy for reasoning, and the clinical dataset that make DRG-Sapphire feasible and effective.",
+  "analysis_timestamp": "2026-01-07T00:05:12.546040"
+}

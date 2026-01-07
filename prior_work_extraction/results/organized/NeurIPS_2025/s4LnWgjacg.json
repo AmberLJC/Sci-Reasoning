@@ -1,0 +1,77 @@
+{
+  "prior_works": [
+    {
+      "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+      "authors": [
+        "Edward J. Hu",
+        "Yelong Shen",
+        "Phillip Wallis",
+        "Zeyuan Allen-Zhu",
+        "Yuanzhi Li",
+        "Shean Wang",
+        "Lu Wang",
+        "Weizhu Chen"
+      ],
+      "year": 2022,
+      "role": "Foundational method",
+      "relationship_sentence": "Introduced the low-rank reparameterization W + BA with scaling \u03b1/r and the standard \u201czeros & Gaussian noise\u201d initialization, establishing the hyperparameters (rank, \u03b1, learning rate, init) whose effects the present paper unifies under update-magnitude control."
+    },
+    {
+      "title": "QLoRA: Efficient Finetuning of Quantized LLMs",
+      "authors": [
+        "Tim Dettmers",
+        "Artidoro Pagnoni",
+        "Ari Holtzman",
+        "Luke Zettlemoyer"
+      ],
+      "year": 2023,
+      "role": "Scalable PEFT baseline and hyperparameter evidence",
+      "relationship_sentence": "Demonstrated strong sensitivity of LoRA performance to scaling \u03b1, rank, and learning rate under quantization, empirically foreshadowing the paper\u2019s claim that these knobs primarily act by regulating update magnitude."
+    },
+    {
+      "title": "DoRA: Weight-Decomposed Low-Rank Adaptation",
+      "authors": [
+        "Qingyang Liu et al."
+      ],
+      "year": 2024,
+      "role": "Direction\u2013magnitude decomposition evidence",
+      "relationship_sentence": "Separated weight direction from magnitude and showed gains by explicitly modeling norms, directly supporting the paper\u2019s central thesis that magnitude plays a primary role in LoRA effectiveness."
+    },
+    {
+      "title": "PiSSA: Principal Singular Subspace Alignment for Parameter-Efficient Fine-Tuning",
+      "authors": [
+        "Zhang et al."
+      ],
+      "year": 2024,
+      "role": "Spectral initialization target",
+      "relationship_sentence": "Proposed SVD-based (spectral) initialization that substantially improves convergence over random init; the current paper reinterprets these gains as arising from magnitude amplification rather than spectral \u2018knowledge,\u2019 and designs a magnitude-matched alternative without SVD overhead."
+    },
+    {
+      "title": "AdaLoRA: Adaptive Budget Allocation for Parameter-Efficient Fine-Tuning",
+      "authors": [
+        "Yaqing Wang et al."
+      ],
+      "year": 2023,
+      "role": "Adaptive rank/norm budgeting",
+      "relationship_sentence": "Optimizes where and how much low-rank capacity to allocate during training, implicitly constraining update norms layer-wise; this connects to the new paper\u2019s view of low-rank structure as bounding update magnitude."
+    },
+    {
+      "title": "Parameter-Efficient Transfer Learning for NLP",
+      "authors": [
+        "Neil Houlsby",
+        "Andrei Giurgiu",
+        "Stanislaw Jastrzebski",
+        "Bruna Morrone",
+        "Quentin de Laroussilhe",
+        "Andrea Gesmundo",
+        "Mona Attariyan",
+        "Sylvain Gelly"
+      ],
+      "year": 2019,
+      "role": "PEFT precursor",
+      "relationship_sentence": "Established the adapter paradigm with careful initialization and scaling, a precursor to LoRA\u2019s design; the present paper extends this line by theoretically tying such choices to update-magnitude control."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core innovation\u2014framing LoRA performance as primarily governed by the magnitude of weight updates and unifying learning rate, scaling (\u03b1), and initialization as mechanisms for regulating this magnitude\u2014builds directly on several strands of prior work. LoRA (Hu et al., 2022) created the low-rank update pathway and introduced the \u03b1/r scaling and standard initialization practices that define the knobs whose effects this paper seeks to demystify. QLoRA (Dettmers et al., 2023) provided large-scale empirical evidence that LoRA\u2019s outcomes are highly sensitive to \u03b1, rank, and learning rate, hinting that a single underlying quantity\u2014update magnitude\u2014might be the common currency.\nA complementary line showed that shaping either the spectrum or the norm of updates improves LoRA. Spectral-initialization methods such as PiSSA align LoRA with principal singular subspaces of pretrained weights and consistently boost convergence; the present work argues these benefits are largely magnitude amplification rather than privileged spectral knowledge. DoRA\u2019s weight-decomposed formulation isolates magnitude from direction and reports gains by explicitly learning norms, directly reinforcing the idea that magnitudes are primary drivers. AdaLoRA\u2019s adaptive budget allocation further supports the view that low-rank structure constrains and redistributes update norms across layers.\nSituated against this backdrop, the paper formalizes how low-rank parameterization intrinsically bounds update magnitudes and shows that hyperparameters chiefly modulate these bounds. This leads to LoRAM, a magnitude-driven \u201cBasis & Basis\u201d initialization that matches spectral methods\u2019 benefits without their SVD cost\u2014operationalizing the magnitude primacy hypothesis into a practical, efficient initializer.",
+  "analysis_timestamp": "2026-01-07T00:21:32.332593"
+}

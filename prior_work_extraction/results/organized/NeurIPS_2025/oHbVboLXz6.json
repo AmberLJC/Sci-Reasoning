@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Visual Instruction Tuning",
+      "authors": "Haotian Liu et al.",
+      "year": 2023,
+      "role": "Baseline",
+      "relationship_sentence": "Uni-MuMER directly builds on an instruction-tuned VLM (in the spirit of LLaVA) as its backbone and fully fine-tunes it without architectural changes, leveraging the demonstrated cross-task generalization that Visual Instruction Tuning introduced."
+    },
+    {
+      "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+      "authors": "Jason Wei et al.",
+      "year": 2022,
+      "role": "Inspiration",
+      "relationship_sentence": "The Tree-Aware Chain-of-Thought (Tree-CoT) in Uni-MuMER generalizes CoT from linear verbal steps to supervised, structure-aligned reasoning traces over symbol layouts, directly inspired by CoT\u2019s explicit intermediate reasoning."
+    },
+    {
+      "title": "Tree of Thoughts: Deliberate Problem Solving with Large Language Models",
+      "authors": "Shunyu Yao et al.",
+      "year": 2023,
+      "role": "Extension",
+      "relationship_sentence": "Uni-MuMER adapts the ToT idea of branching intermediate states by supervising tree-structured reasoning over spatial sub-expressions, effectively turning ToT\u2019s search-time tree explorations into a train-time, task-specific Tree-CoT signal."
+    },
+    {
+      "title": "Image-to-Markup Generation with Coarse-to-Fine Attention",
+      "authors": "Yuntian Deng et al.",
+      "year": 2017,
+      "role": "Foundation",
+      "relationship_sentence": "Uni-MuMER inherits the image-to-markup formulation for producing LaTeX from images introduced by this work, but realizes it within a generalist VLM and augments it with structured reasoning and auxiliary tasks."
+    },
+    {
+      "title": "ICFHR2016 CROHME: Competition on Recognition of Online Handwritten Mathematical Expressions",
+      "authors": "Harold Mouch\u00e8re et al.",
+      "year": 2016,
+      "role": "Foundation",
+      "relationship_sentence": "CROHME established the HMER task, symbol layout tree representation, and evaluation protocols that Uni-MuMER targets, and its tree representation directly motivates Uni-MuMER\u2019s Tree-CoT supervision."
+    },
+    {
+      "title": "Training Region-based Object Detectors with Online Hard Example Mining",
+      "authors": "Abhinav Shrivastava et al.",
+      "year": 2016,
+      "role": "Inspiration",
+      "relationship_sentence": "Uni-MuMER\u2019s Error-Driven Learning operationalizes the OHEM principle\u2014prioritizing model-identified hard errors\u2014by mining confusion pairs of visually similar symbols and emphasizing them during fine-tuning."
+    },
+    {
+      "title": "TallyQA: Answering Complex Counting Questions",
+      "authors": "Manoj Acharya et al.",
+      "year": 2019,
+      "role": "Related Problem",
+      "relationship_sentence": "The Symbol Counting task in Uni-MuMER is motivated by VQA counting findings (e.g., TallyQA) showing that explicit counting supervision mitigates over/under-counting; Uni-MuMER adapts this idea to count math symbols to reduce omission/duplication errors."
+    }
+  ],
+  "synthesis_narrative": "Uni-MuMER\u2019s core insight\u2014fully fine-tuning a generalist VLM for handwritten mathematical expression recognition and guiding it with structure-aware reasoning and auxiliary signals\u2014rests on three strands of prior work. First, the HMER problem formulation and its tree-structured targets come from CROHME, while the image-to-markup paradigm popularized by Image-to-Markup Generation (Deng et al.) established the sequence-generation view that Uni-MuMER preserves within a modern VLM. Second, Visual Instruction Tuning (LLaVA) demonstrated that a single VLM can be instruction-tuned to generalize across diverse tasks without architectural changes; Uni-MuMER adopts this as its baseline and shows that full fine-tuning can inject domain knowledge for HMER. Third, recent advances in eliciting and organizing intermediate reasoning\u2014Chain-of-Thought (Wei et al.) and Tree-of-Thought (Yao et al.)\u2014directly inspire Uni-MuMER\u2019s Tree-CoT: supervised, tree-aligned reasoning traces that mirror symbol layout structures, moving from generic linear or search-time trees to domain-grounded, train-time structured rationales. To reduce common HMER failure modes, Uni-MuMER borrows the error-focused training principle from Online Hard Example Mining, turning model mistakes into prioritized confusion pairs in its Error-Driven Learning. Finally, insights from counting in VQA (TallyQA) motivate Symbol Counting as an auxiliary task to combat omissions and duplications, a key source of structural errors in HMER. Together, these works directly shape Uni-MuMER\u2019s unified, multi-task fine-tuning recipe and its structure-aware supervision.",
+  "analysis_timestamp": "2026-01-06T23:08:23.948607"
+}

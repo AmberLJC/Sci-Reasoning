@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Invariant Risk Minimization",
+      "authors": "Martin Arjovsky, Leon Bottou, Ishaan Gulrajani, David Lopez-Paz",
+      "year": 2019,
+      "role": "Conceptual foundation for learning invariant, causally-relevant predictors across environments",
+      "relationship_sentence": "SGFD\u2019s aim to disentangle true decision-relevant features from spurious correlations directly follows IRM\u2019s principle of enforcing invariance across changing environments to achieve out-of-distribution generalization."
+    },
+    {
+      "title": "Invariant Causal Prediction for Sequential Data",
+      "authors": "Jonas Peters, Peter B\u00fchlmann, Nicolai Meinshausen",
+      "year": 2016,
+      "role": "Causal framing for using environment shifts to identify stable predictors",
+      "relationship_sentence": "SGFD leverages the ICP idea that stable relationships across interventions help identify causally-relevant features, guiding its decorrelation of features that spuriously co-vary with decisions."
+    },
+    {
+      "title": "Measuring Statistical Dependence with Hilbert-Schmidt Norms (HSIC)",
+      "authors": "Arthur Gretton, Olivier Bousquet, Alex Smola, Bernhard Sch\u00f6lkopf",
+      "year": 2005,
+      "role": "Methodological building block for measuring and reducing statistical dependence",
+      "relationship_sentence": "SGFD\u2019s core step of decorrelating features via sample reweighting is grounded in kernel-based dependence measures such as HSIC to quantify and minimize associations between feature groups and decisions."
+    },
+    {
+      "title": "Random Features for Large-Scale Kernel Machines",
+      "authors": "Ali Rahimi, Benjamin Recht",
+      "year": 2007,
+      "role": "Algorithmic tool enabling scalable kernel dependence estimation via random Fourier features",
+      "relationship_sentence": "SGFD employs random Fourier feature projections to efficiently approximate kernel statistics, making saliency-guided dependence estimation and reweighting computationally tractable in high-dimensional visual RL."
+    },
+    {
+      "title": "Correcting Sample Selection Bias by Unlabeled Data (Kernel Mean Matching)",
+      "authors": "Jiayuan Huang, Arthur Gretton, Karsten M. Borgwardt, Bernhard Sch\u00f6lkopf, Alex J. Smola",
+      "year": 2006,
+      "role": "Foundational sample reweighting framework for distribution correction",
+      "relationship_sentence": "SGFD\u2019s sample reweighting mechanism is inspired by KMM-style importance weighting, repurposed here to balance feature\u2013decision associations and remove spurious correlations rather than only match input marginals."
+    },
+    {
+      "title": "Grad-CAM: Visual Explanations from Deep Networks via Gradient-based Localization",
+      "authors": "Ramprasaath R. Selvaraju, Michael Cogswell, Abhishek Das, Ramakrishna Vedantam, Devi Parikh, Dhruv Batra",
+      "year": 2017,
+      "role": "Explanation mechanism to derive saliency maps guiding training",
+      "relationship_sentence": "SGFD\u2019s saliency-guided component relies on gradient-based attribution to identify decision-relevant regions, using these maps to steer which correlations should be decorrelated."
+    },
+    {
+      "title": "Right for the Right Reasons: Training Differentiable Models by Constraining Their Explanations",
+      "authors": "Andrew Ross, Michael C. Hughes, Finale Doshi-Velez",
+      "year": 2017,
+      "role": "Precedent for using explanations to regularize models away from spurious cues",
+      "relationship_sentence": "SGFD extends the idea of explanation-guided learning by using saliency not just to penalize undesirable attributions but to drive sample reweighting that actively breaks spurious feature\u2013decision ties in RL."
+    }
+  ],
+  "synthesis_narrative": "Saliency-Guided Features Decorrelation (SGFD) targets the core challenge of generalization in visual RL: policies latch onto spurious correlations among state features and decisions that fail under environment changes. The method\u2019s causal framing is grounded in Invariant Risk Minimization and Invariant Causal Prediction, which argue that predictors stable across environments capture true causal relationships. To operationalize this in high-dimensional visual inputs, SGFD must quantify and then reduce dependence between feature groups and decisions. Kernel-based dependence measures like HSIC provide a principled objective for decorrelation, while Random Fourier Features make such kernel statistics scalable, enabling efficient dependence estimation within RL training. Crucially, SGFD uses saliency to decide which correlations matter: gradient-based attribution (e.g., Grad-CAM) identifies decision-relevant regions so that reweighting focuses on disentangling associations that confound action selection rather than indiscriminately regularizing all features. The use of sample reweighting is inspired by distribution correction techniques such as Kernel Mean Matching, adapted here from covariate shift to targeted deconfounding of feature\u2013decision ties. Finally, the broader paradigm of explanation-guided learning, as in Right for the Right Reasons, informs SGFD\u2019s strategy to use interpretability signals during training to avoid spurious reliance. Together, these strands\u2014causal invariance, kernel dependence with scalable approximations, importance reweighting, and saliency-guided supervision\u2014directly synthesize into SGFD\u2019s core contribution: decorrelating task-relevant and irrelevant factors to produce generalizable visual RL policies.",
+  "analysis_timestamp": "2026-01-07T00:02:04.852733"
+}

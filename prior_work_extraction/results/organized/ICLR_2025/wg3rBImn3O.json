@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "A Value for n-Person Games",
+      "authors": "Lloyd S. Shapley",
+      "year": 1953,
+      "role": "Foundation",
+      "relationship_sentence": "Defines the Shapley value\u2014the target quantity that Leverage SHAP provably estimates\u2014establishing the core cooperative game-theoretic attribution objective used throughout."
+    },
+    {
+      "title": "Explaining prediction models and individual predictions with feature contributions",
+      "authors": "Erik Strumbelj et al.",
+      "year": 2014,
+      "role": "Foundation",
+      "relationship_sentence": "Introduces model-agnostic Shapley-value-based explanations via sampling over coalitions, establishing the coalition-evaluation framework that Kernel SHAP and the proposed leverage-based estimator operate within."
+    },
+    {
+      "title": "A Unified Approach to Interpreting Model Predictions",
+      "authors": "Scott M. Lundberg et al.",
+      "year": 2017,
+      "role": "Extension",
+      "relationship_sentence": "Kernel SHAP casts Shapley estimation as a weighted least squares problem with the Shapley kernel, and Leverage SHAP is a light-weight modification that changes the sampling strategy to leverage-score sampling to obtain non-asymptotic O(n log n) guarantees."
+    },
+    {
+      "title": "Fast least squares regression via randomized sampling",
+      "authors": "Petros Drineas et al.",
+      "year": 2011,
+      "role": "Foundation",
+      "relationship_sentence": "Provides the core guarantee that sampling rows proportional to (approximate) leverage scores yields an \u03b5-accurate least-squares solution with O(d log d/\u03b5^2) samples\u2014instantiated here with the Kernel SHAP design matrix (d \u2248 n) to derive O(n log n) model evaluations."
+    },
+    {
+      "title": "Fast Approximation of Matrix Coherence and Statistical Leverage Scores",
+      "authors": "Petros Drineas et al.",
+      "year": 2012,
+      "role": "Inspiration",
+      "relationship_sentence": "Develops the concept and efficient approximation of statistical leverage scores, directly enabling the sampling distribution over coalitions used by Leverage SHAP."
+    },
+    {
+      "title": "Leveraged volume sampling for linear regression",
+      "authors": "Micha\u0142 Derezi\u0144ski et al.",
+      "year": 2018,
+      "role": "Related Problem",
+      "relationship_sentence": "Shows that actively selecting regression rows via leverage/volume sampling yields unbiased, high-accuracy estimators with near-minimal sample budgets, motivating the paper\u2019s agnostic active regression lens for Shapley estimation."
+    },
+    {
+      "title": "Low-rank approximation and regression in input sparsity time",
+      "authors": "Kenneth L. Clarkson et al.",
+      "year": 2013,
+      "role": "Related Problem",
+      "relationship_sentence": "Establishes non-asymptotic guarantees for approximate least-squares via randomized sketching, reinforcing the principle that O(d log d)-scale samples suffice to recover regression solutions\u2014an idea transferred to the Kernel SHAP design to yield provable sample complexity."
+    }
+  ],
+  "synthesis_narrative": "Leverage SHAP\u2019s core innovation\u2014provable O(n log n) sample complexity for estimating Shapley values\u2014arises by recasting Kernel SHAP\u2019s weighted least squares formulation through the lens of agnostic active regression and then importing leverage-score sampling guarantees from randomized linear algebra. The target of estimation is the Shapley value, defined by Shapley (1953), and the coalition-based, model-agnostic evaluation framework stems from Strumbelj and Kononenko (2014). Lundberg and Lee (2017) then made the decisive step of formulating Shapley estimation as a weighted linear regression (Kernel SHAP), which works well empirically but lacks non-asymptotic accuracy/sample-complexity guarantees. The present work directly modifies that method by changing only the sampling strategy: instead of Kernel SHAP\u2019s heuristic kernel-weighted sampling, it uses leverage-score sampling. This modification is theoretically powered by results from Drineas et al. (2011), who showed that sampling rows proportional to leverage scores yields \u03b5-accurate least-squares solutions with O(d log d/\u03b5^2) samples, and by Drineas et al. (2012), who developed practical methods to approximate leverage scores. Complementary lines on randomized regression (Clarkson & Woodruff, 2013) bolster the principle that near-linear-in-d sample sizes suffice for accurate regression recovery. Finally, leveraged volume sampling for linear regression (Derezi\u0144ski & Warmuth, 2018) provides a closely related active regression perspective, reinforcing the idea that judicious, leverage-informed query selection can deliver unbiased, high-accuracy estimators with minimal budgets\u2014precisely the paradigm Leverage SHAP instantiates for Shapley value estimation.",
+  "analysis_timestamp": "2026-01-06T23:09:26.611974"
+}

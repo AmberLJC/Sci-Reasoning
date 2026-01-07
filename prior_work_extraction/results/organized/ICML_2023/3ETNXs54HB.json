@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Diffuser: Diffusion Policies for Offline Reinforcement Learning",
+      "authors": "Michael Janner et al.",
+      "year": 2022,
+      "role": "Baseline",
+      "relationship_sentence": "AdaptDiffuser directly builds on Diffuser\u2019s trajectory-level diffusion and guided sampling for planning, extending it with a self-evolution loop that synthesizes and filters high-reward trajectories to continually finetune the planner and improve generalization."
+    },
+    {
+      "title": "Diffusion Models Beat GANs on Image Synthesis",
+      "authors": "Prafulla Dhariwal et al.",
+      "year": 2021,
+      "role": "Inspiration",
+      "relationship_sentence": "The classifier-guidance mechanism introduced here (using gradients of a target signal during denoising) directly inspires AdaptDiffuser\u2019s use of reward gradients to guide diffusion sampling toward high-return trajectories."
+    },
+    {
+      "title": "Generative Adversarial Imitation Learning",
+      "authors": "Jonathan Ho et al.",
+      "year": 2016,
+      "role": "Inspiration",
+      "relationship_sentence": "GAIL\u2019s use of a discriminator to assess expert-likeness of trajectories motivates AdaptDiffuser\u2019s discriminator that scores synthetic rollouts and filters them for finetuning the diffusion model."
+    },
+    {
+      "title": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+      "authors": "Lili Chen et al.",
+      "year": 2021,
+      "role": "Foundation",
+      "relationship_sentence": "By casting offline RL as conditional sequence modeling on returns/goals, Decision Transformer established the problem formulation that AdaptDiffuser adopts while replacing autoregressive modeling with a diffusion-based planner."
+    },
+    {
+      "title": "Conservative Q-Learning for Offline Reinforcement Learning",
+      "authors": "Aviral Kumar et al.",
+      "year": 2020,
+      "role": "Gap Identification",
+      "relationship_sentence": "CQL highlights the core limitation of offline RL\u2014distribution shift and insufficient coverage\u2014motivating AdaptDiffuser\u2019s strategy to synthesize and select high-quality trajectories to expand effective support."
+    },
+    {
+      "title": "Off-Policy Deep Reinforcement Learning without Exploration",
+      "authors": "Scott Fujimoto et al.",
+      "year": 2019,
+      "role": "Gap Identification",
+      "relationship_sentence": "BCQ\u2019s constraint to stay within the dataset\u2019s support underscores the coverage problem in offline RL, which AdaptDiffuser tackles by generating reward-guided synthetic data and using a discriminator to ensure quality."
+    }
+  ],
+  "synthesis_narrative": "AdaptDiffuser emerges at the intersection of trajectory-level generative planning and offline RL\u2019s data coverage challenge. Diffuser established diffusion models as planners by denoising entire trajectories and guiding sampling with task signals, providing the immediate methodological scaffold that AdaptDiffuser extends. The mechanism for steering generation\u2014classifier guidance from diffusion models\u2014supplies the key technical inspiration: AdaptDiffuser replaces class gradients with reward gradients to bias samples toward higher return, enabling targeted synthesis for goal-conditioned tasks. However, offline RL\u2019s central bottleneck is not merely planning quality but data support. Landmark works like BCQ and CQL crystallized how distribution shift and limited coverage degrade performance, motivating AdaptDiffuser\u2019s core innovation: a self-evolving loop that augments the dataset with guided synthetic trajectories while using a discriminator\u2014an idea rooted in GAIL\u2019s expert-likeness scoring\u2014to select only high-quality rollouts for finetuning. This closes the loop between planning and data: the planner generates better data, and better data sharpens the planner, promoting generalization to unseen tasks. Decision Transformer\u2019s framing of offline RL as conditional sequence modeling underpins the problem setup AdaptDiffuser embraces, while diffusion replaces autoregression to unlock gradient-guided sampling and iterative self-improvement. Together, these works directly enable AdaptDiffuser\u2019s design: diffusion-based trajectory generation steered by rewards, adversarial-style quality selection, and a continual adaptation cycle that overcomes offline coverage limitations.",
+  "analysis_timestamp": "2026-01-06T23:09:26.583290"
+}

@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Improved Precision and Recall Metric for Assessing Generative Models",
+      "authors": "Tero Kynk\u00e4\u00e4nniemi et al.",
+      "year": 2019,
+      "role": "Baseline",
+      "relationship_sentence": "eP&R is designed as a computationally efficient surrogate for this k-NN\u2013manifold P&R metric, removing its two main redundancies (ratio computation and manifold inside/outside checks) via hubness-aware sampling while preserving the original outputs."
+    },
+    {
+      "title": "Assessing Generative Models via Precision and Recall",
+      "authors": "Mehdi S. M. Sajjadi et al.",
+      "year": 2018,
+      "role": "Foundation",
+      "relationship_sentence": "This paper established the precision/recall decomposition for generative model evaluation that eP&R explicitly retains, targeting scalability without changing the underlying problem formulation."
+    },
+    {
+      "title": "Reliable Fidelity and Diversity Metrics for Generative Models",
+      "authors": "Muhammad Ferjad Naeem et al.",
+      "year": 2020,
+      "role": "Gap Identification",
+      "relationship_sentence": "By building k-NN\u2013based density and coverage metrics, this work highlighted the heavy computational burden of manifold/neighbor computations at scale\u2014an efficiency gap eP&R directly addresses with hubness-based representative sampling."
+    },
+    {
+      "title": "Hubs in Space: Popular Nearest Neighbors in High-Dimensional Data",
+      "authors": "Milos Radovanovic et al.",
+      "year": 2010,
+      "role": "Foundation",
+      "relationship_sentence": "This seminal work defined hubness as reverse k-NN occurrence and analyzed its emergence in high dimensions; eP&R\u2019s core mechanism\u2014sampling representatives by k-occurrence (hubness)\u2014directly instantiates this concept."
+    },
+    {
+      "title": "Hubness-aware k-nearest neighbor classification in high-dimensional data",
+      "authors": "Nenad Toma\u0161ev et al.",
+      "year": 2014,
+      "role": "Inspiration",
+      "relationship_sentence": "Demonstrating that weighting/selection by hubness yields robust k-NN decisions, this paper inspired eP&R\u2019s use of hubness to select representative samples that preserve P&R decisions while reducing neighbor computations."
+    },
+    {
+      "title": "Local and Global Scaling Reduce Hubness in k-NN Classification",
+      "authors": "Markus Schnitzer et al.",
+      "year": 2012,
+      "role": "Related Problem",
+      "relationship_sentence": "By analyzing how hubs persist and can be modulated by scaling, this work elucidates the stability of hubness with respect to neighbor perturbations, supporting eP&R\u2019s claim that hubness-based sampling is insensitive to exact k-NN results and thus compatible with approximate search."
+    }
+  ],
+  "synthesis_narrative": "The core of eP&R is to make precision-and-recall evaluation of generative models scalable without altering its semantics. That lineage begins with Sajjadi et al., who formalized precision and recall for distributions, and with Kynk\u00e4\u00e4nniemi et al., whose k-NN manifold construction became the practical, widely adopted P&R baseline. However, both require dense neighbor computations, which become prohibitive at modern dataset scales. Naeem et al. reinforced this limitation by extending k-NN\u2013based evaluation to density and coverage, underscoring the general scalability bottleneck of manifold/neighbor-heavy metrics. The key conceptual pivot of eP&R comes from high-dimensional nearest-neighbor theory: Radovanovic et al. introduced hubness as reverse k-NN occurrence, showing that some points repeatedly appear in neighbors\u2019 lists and thus summarize local neighborhoods. Building on this, Toma\u0161ev et al. demonstrated that hubness-aware selection/weighting can preserve k-NN decision quality while reducing computation. eP&R directly operationalizes these insights: it replaces exhaustive ratio computations and manifold inside/outside tests in P&R with hubness-aware sampling of representative elements, yielding near-identical scores at far lower cost. Finally, stability analyses from Schnitzer et al. explain why hubness-driven representatives are robust to small neighbor-order changes, justifying eP&R\u2019s further speedups with approximate k-NN. Together, these works provide the formal P&R objective, reveal the computational gap, and supply the hubness-based mechanism that makes eP&R\u2019s efficient surrogate feasible.",
+  "analysis_timestamp": "2026-01-06T23:09:26.476421"
+}

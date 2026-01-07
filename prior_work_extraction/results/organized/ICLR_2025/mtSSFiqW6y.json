@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Speculative Decoding",
+      "authors": "Chen et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "Introduced the draft-and-verify paradigm where a fast draft model proposes multiple future tokens that are verified by the target model\u2019s likelihood to preserve exact sampling, whose verification step Judge Decoding explicitly replaces with a learned judge to increase acceptance."
+    },
+    {
+      "title": "Blockwise Parallel Decoding for Autoregressive Models",
+      "authors": "Stern et al.",
+      "year": 2018,
+      "arxiv_id": "1811.02860",
+      "role": "Foundation",
+      "relationship_sentence": "Established the general propose-then-verify template for accepting multiple tokens per target-model evaluation, which Judge Decoding keeps structurally while altering the verification criterion away from strict log-probability agreement."
+    },
+    {
+      "title": "Medusa: Simple Framework for High-Throughput LLM Inference",
+      "authors": "Cai et al.",
+      "year": 2024,
+      "arxiv_id": "",
+      "role": "Baseline",
+      "relationship_sentence": "Uses multi-head drafts with standard alignment-based verification, whose early-rejection bottleneck Judge Decoding directly addresses by swapping in a utility-aware judge that accepts semantically valid continuations even when target probabilities disagree."
+    },
+    {
+      "title": "EAGLE: Efficient Autoregressive Generation via Lookahead",
+      "authors": "Li et al.",
+      "year": 2024,
+      "arxiv_id": "",
+      "role": "Baseline",
+      "relationship_sentence": "Implements self-speculative decoding that still verifies tokens by target-model likelihood, providing a primary competitor whose alignment-limited acceptance Judge Decoding overcomes with a judge-driven verifier."
+    },
+    {
+      "title": "LLM-as-a-Judge: Assessing Generation Quality with LLM Feedback",
+      "authors": "Zheng et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Inspiration",
+      "relationship_sentence": "Demonstrated that LLMs can reliably evaluate textual quality and preference beyond likelihood, directly inspiring Judge Decoding\u2019s use of a learned judge model to verify proposed tokens based on utility rather than exact alignment."
+    },
+    {
+      "title": "Constitutional AI: Harmlessness from AI Feedback",
+      "authors": "Bai et al.",
+      "year": 2022,
+      "arxiv_id": "2212.08073",
+      "role": "Inspiration",
+      "relationship_sentence": "Showed that AI feedback (a rules- or preference-based judge) can steer generation quality, which Judge Decoding adapts by learning a verifier to certify acceptable continuations and thus raise acceptance rates."
+    }
+  ],
+  "synthesis_narrative": "Speculative Decoding established the modern draft-and-verify recipe: a small model proposes several tokens that are accepted only if the target model\u2019s likelihood validates every step, ensuring exactness but tightly coupling acceptance to probability alignment. Earlier, Blockwise Parallel Decoding introduced the same structural idea\u2014multi-step proposals followed by verification with the base model\u2014demonstrating how parallelization hinges on the verifier\u2019s acceptance behavior. Medusa advanced throughput by attaching multi-token prediction heads yet retained the same alignment-based acceptance rule, revealing that early rejections dominate when proposals diverge from the target\u2019s local likelihood. EAGLE pursued self-speculation using internal lookahead to reduce target calls, but verification still depended on the target\u2019s next-token probabilities, leaving acceptance constrained by cross-entropy gaps. In parallel, LLM-as-a-Judge showed that models can reliably grade or prefer responses without relying on token likelihoods, pointing to a utility-oriented criterion for evaluating text. Constitutional AI further demonstrated that AI feedback, instantiated as a rule- or preference-based judge, can steer and certify outputs effectively.\nTaken together, these works exposed a bottleneck: acceptance in speculative methods is limited by strict probability alignment, even when proposed tokens are high quality. The natural next step is to decouple verification from target likelihood while retaining the efficient draft-and-verify structure. Judge Decoding synthesizes this by replacing alignment-based checks with a learned judge that certifies utility-acceptable continuations, thereby unlocking substantially higher acceptance rates\u2014and speedups\u2014without relying on fragile local probability agreement.",
+  "target_paper": {
+    "title": "Judge Decoding: Faster Speculative Sampling Requires Going Beyond Model Alignment",
+    "authors": "Gregor Bachmann, Sotiris Anagnostidis, Albert Pumarola, Markos Georgopoulos, Artsiom Sanakoyeu, Yuming Du, Edgar Sch\u00f6nfeld, Ali Thabet, Jonas K Kohler",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "oral",
+    "keywords": "LLM inference, speculative decoding",
+    "abstract": "The performance of large language models (LLMs) is closely linked to their underlying size, leading to ever-growing networks and hence slower inference. Speculative decoding has been proposed as a technique to accelerate autoregressive generation, leveraging a fast draft model to propose candidate tokens, which are then verified in parallel based on their likelihood under the target model. While this approach guarantees to reproduce the target output, it incurs a substantial penalty: many high-quality draft tokens are rejected, even when they represent objectively valid continuations. Indeed, we show that even powerful draft models such as GPT-4o, as well as human text cannot achieve high acceptance rates under the standard verification scheme. This severely limits the speedup potential of current speculative decoding methods, as an early rejection becomes overwhelmingly likely when solely relying on alignment of draft and target.\nWe thus ask the following question: Can we adapt verifi",
+    "openreview_id": "mtSSFiqW6y",
+    "forum_id": "mtSSFiqW6y"
+  },
+  "analysis_timestamp": "2026-01-06T19:14:18.100600"
+}

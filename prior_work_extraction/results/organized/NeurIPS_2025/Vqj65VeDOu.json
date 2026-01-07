@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Human-level control through deep reinforcement learning",
+      "authors": "Volodymyr Mnih et al.",
+      "year": 2015,
+      "role": "Foundational stabilization mechanisms in deep RL (experience replay, target networks) to mitigate non-stationarity and unstable updates.",
+      "relationship_sentence": "Introduced target networks and experience replay, mitigating non-stationarity and curbing unstable gradients in value-based RL\u2014the stability problem this paper revisits when scaling depth and width."
+    },
+    {
+      "title": "Reinforcement Learning: An Introduction (2nd ed.) \u2014 the deadly triad",
+      "authors": "Richard S. Sutton; Andrew G. Barto",
+      "year": 2018,
+      "role": "Conceptual framework explaining instability with function approximation, bootstrapping, and off-policy learning.",
+      "relationship_sentence": "Provides the theoretical lens connecting non-stationarity and instability under function approximation, which this work empirically sharpens and addresses via gradient-stability interventions."
+    },
+    {
+      "title": "On the difficulty of training recurrent neural networks",
+      "authors": "Razvan Pascanu; Tomas Mikolov; Yoshua Bengio",
+      "year": 2013,
+      "role": "Core analysis of exploding/vanishing gradients and practical remedy via gradient clipping.",
+      "relationship_sentence": "Characterized exploding/vanishing gradients and popularized gradient clipping\u2014principles the paper leverages and generalizes to stabilize gradient flow in deep RL architectures."
+    },
+    {
+      "title": "Deep Residual Learning for Image Recognition",
+      "authors": "Kaiming He; Xiangyu Zhang; Shaoqing Ren; Jian Sun",
+      "year": 2016,
+      "role": "Architectural principle (residual/skip connections) to preserve signal and gradient propagation in deep networks.",
+      "relationship_sentence": "Demonstrated that residual connections preserve gradient flow at scale, directly motivating the paper\u2019s architecture-centric fixes that maintain stable gradients in deeper/wider RL agents."
+    },
+    {
+      "title": "Fixup Initialization: Residual Learning Without Normalization",
+      "authors": "Hongyi Zhang; Yann N. Dauphin; Tengyu Ma",
+      "year": 2019,
+      "role": "Initialization and minor architectural tweaks enabling very deep training without normalization by controlling gradient scales.",
+      "relationship_sentence": "Shows that carefully designed initialization and small structural adjustments can stabilize deep nets without normalization, inspiring the paper\u2019s simple, implementation-friendly gradient-stability interventions for RL."
+    },
+    {
+      "title": "Stabilizing Transformers for Reinforcement Learning (GTrXL)",
+      "authors": "Emilio Parisotto; H. Francis Song; Jack W. Rae; Razvan Pascanu; Caglar Gulcehre; Siddhant M. Jayakumar; Max Jaderberg; Koray Kavukcuoglu",
+      "year": 2020,
+      "role": "RL-specific architectural and normalization choices (gating, Pre-LN) to improve gradient flow under non-stationary training signals.",
+      "relationship_sentence": "Provided RL evidence that architectural/normalization design governs gradient stability under non-stationary targets, a direct precursor to this paper\u2019s gradient-flow\u2013focused architectural interventions."
+    },
+    {
+      "title": "Learning values across many orders of magnitude (PopArt)",
+      "authors": "Hado van Hasselt; Matteo Hessel; Joseph Modayil",
+      "year": 2016,
+      "role": "Online output/target normalization to stabilize value learning when reward scales shift.",
+      "relationship_sentence": "Introduced PopArt to keep value-target scales well-conditioned as distributions shift, which this paper extends in spirit by systematizing gradient-scale control across deeper/wider networks."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core claim\u2014that scale in deep RL fails primarily due to the interaction of non-stationarity with gradient pathologies rooted in architectural choices\u2014sits at the confluence of stabilization mechanisms in RL and gradient-flow theory in deep networks. DQN established that non-stationarity is a first-order concern in deep RL and offered replay and target networks as practical stabilizers, while Sutton and Barto\u2019s deadly triad framed why off-policy bootstrapping with function approximation can diverge. Pascanu et al. grounded the gradient side of the story, diagnosing exploding/vanishing gradients and advocating clipping\u2014techniques that RL widely adopted but that alone don\u2019t ensure stable scaling.\n\nOn the architectural front, ResNets and Fixup demonstrated that gradient preservation at depth hinges on skip connections and principled initialization, even without normalization\u2014ideas that directly inform the paper\u2019s simple, RL-compatible interventions for deep and wide agents. GTrXL brought these lessons into RL, showing that normalization placement, gating, and initialization materially affect stability under non-stationary targets and long horizons. Complementing these, PopArt addressed shifting target scales via online normalization, exemplifying how keeping gradient magnitudes well-conditioned counteracts non-stationarity.\n\nTogether, these works crystallize a blueprint: diagnose instability as gradient-flow failure under moving targets, then fix it with architecture-aware initialization, residual pathways, selective normalization, and scale controls. The paper operationalizes this blueprint into minimal, drop-in interventions that robustly preserve gradient statistics, enabling consistent performance as network depth and width grow across standard RL algorithms.",
+  "analysis_timestamp": "2026-01-07T00:05:12.531763"
+}

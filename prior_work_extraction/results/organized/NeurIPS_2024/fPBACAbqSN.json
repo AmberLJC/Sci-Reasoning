@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Generating Long Sequences with Sparse Transformers",
+      "authors": "Rewon Child, Scott Gray, Alec Radford, Ilya Sutskever",
+      "year": 2019,
+      "role": "Algorithmic precursor: structured sparse attention and GPU-friendly block sparsity",
+      "relationship_sentence": "Introduced block- and strided-sparse attention plus blocksparse GPU kernels, directly informing MInference\u2019s block-sparse pattern choice and its emphasis on GPU-efficient sparse layouts."
+    },
+    {
+      "title": "Longformer: The Long-Document Transformer",
+      "authors": "Iz Beltagy, Matthew E. Peters, Arman Cohan",
+      "year": 2020,
+      "role": "Algorithmic precursor: local window + global tokens (vertical-slice) sparse pattern",
+      "relationship_sentence": "Established that sliding-window attention augmented with a few global tokens preserves quality on long inputs, mirroring MInference\u2019s Vertical-Slash pattern and motivating per-head global-token style sparsity."
+    },
+    {
+      "title": "Big Bird: Transformers for Longer Sequences",
+      "authors": "Manzil Zaheer, Guru Guruganesh, Avinava Dubey, Joshua Ainslie, Chris Alberti, et al.",
+      "year": 2020,
+      "role": "Algorithmic precursor: hybrid sparse patterns with theoretical guarantees",
+      "relationship_sentence": "Showed that combining local, random, and global attention yields subquadratic compute with strong accuracy, supporting MInference\u2019s head-wise assignment of different sparse patterns with minimal quality loss."
+    },
+    {
+      "title": "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness",
+      "authors": "Tri Dao, Daniel Y. Fu, Stefano Ermon, Atri Rudra, Christopher R\u00e9",
+      "year": 2022,
+      "role": "Systems/kernel foundation: IO-aware tiling for high-throughput attention",
+      "relationship_sentence": "Provided the kernel design principles (fused, IO-aware tiling) that MInference extends to sparse settings by dynamically building per-head sparse indices to accelerate the prefill phase."
+    },
+    {
+      "title": "vLLM: Fast LLM Inference via PagedAttention",
+      "authors": "Lianmin Zheng, Kexin Rong, Qifan Xu, Zhihao Jia, Joseph E. Gonzalez, Ion Stoica",
+      "year": 2023,
+      "role": "Serving/memory substrate: paged KV management for long contexts",
+      "relationship_sentence": "Introduced PagedAttention to scale KV memory for long prompts; MInference complements this by reducing prefill compute via dynamic sparsity and integrates naturally with paged KV layouts."
+    },
+    {
+      "title": "What Does BERT Look at? An Analysis of Attention",
+      "authors": "Kevin Clark, Urvashi Khandelwal, Omer Levy, Christopher D. Manning",
+      "year": 2019,
+      "role": "Empirical analysis: characteristic attention motifs",
+      "relationship_sentence": "Documented ubiquitous attention patterns (diagonal/local, vertical stripes to special tokens) that anticipate MInference\u2019s A-shape and Vertical-Slash motifs and justify head-specific sparse patterns without retraining."
+    }
+  ],
+  "synthesis_narrative": "MInference\u2019s core idea\u2014accelerating prefill for long-context LLMs by exploiting emergent, head-specific sparsity patterns and executing them efficiently on GPUs\u2014grew from two converging lines of work: (1) algorithmic sparsity patterns that preserve model quality at long lengths, and (2) systems kernels that make attention IO- and GPU-efficient. Early structured sparsity in Sparse Transformer introduced block/strided sparsity and blocksparse kernels, demonstrating both feasibility and the importance of GPU-friendly layouts. Longformer and BigBird then crystallized practical sparse attention recipes\u2014local windows augmented with a few global tokens and hybrid patterns with theoretical guarantees\u2014showing that well-chosen patterns can retain accuracy on long sequences and can vary across heads. In parallel, analysis from \u201cWhat Does BERT Look at?\u201d cataloged attention motifs like diagonal bands and vertical stripes to special tokens, directly echoing the A-shape and Vertical-Slash structures MInference leverages without retraining. On the systems side, FlashAttention established IO-aware, fused kernels that maximize on-chip reuse, a foundation MInference adapts to dynamic sparse index construction and execution. Finally, vLLM\u2019s PagedAttention addressed the memory side of long-context serving, making million-token contexts operationally feasible; MInference complements this by tackling the compute bottleneck in prefill, assigning per-head sparse patterns offline and generating indices on the fly to deliver large speedups while preserving accuracy.",
+  "analysis_timestamp": "2026-01-06T23:33:35.537531"
+}

@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Training language models to follow instructions with human feedback",
+      "authors": "Long Ouyang et al.",
+      "year": 2022,
+      "role": "Foundational preference learning (RLHF) for alignment",
+      "relationship_sentence": "Established the pipeline of collecting human preference comparisons and using them to align generative models, which ABC ports to text-to-image diffusion while rethinking the objective used for learning from preferences."
+    },
+    {
+      "title": "Direct Preference Optimization: Your Language Model Is Secretly a Reward Model",
+      "authors": "Alexander M. Rafailov et al.",
+      "year": 2023,
+      "role": "Methodological inspiration and key contrast baseline",
+      "relationship_sentence": "DPO reframed preference learning as a log-likelihood ratio against a reference policy, avoiding RL; ABC builds on this insight but eliminates reliance on a suboptimal SFT reference by recasting alignment as a pure classification problem over preference pairs."
+    },
+    {
+      "title": "Diffusion Models Beat GANs",
+      "authors": "Prafulla Dhariwal, Alex Nichol",
+      "year": 2021,
+      "role": "Methodological precedent (classifier guidance for diffusion)",
+      "relationship_sentence": "Introduced classifier guidance, showing discriminative classifiers can steer diffusion generation; ABC extends this classifier-driven paradigm to the training objective by learning from preference-derived class labels."
+    },
+    {
+      "title": "ImageReward: Learning and Evaluating Human Preferences for Text-to-Image Generation",
+      "authors": "Jiayi Xu et al.",
+      "year": 2023,
+      "role": "Reward-model approach for T2I alignment and evaluation",
+      "relationship_sentence": "Demonstrated that human comparison data can train a reward model to align and assess T2I outputs; ABC instead converts the same comparisons into supervised classification signals, avoiding explicit reward modeling."
+    },
+    {
+      "title": "PickScore: A Large-Scale Human Preference Dataset for Text-to-Image Generation",
+      "authors": "Yuval Kirstain et al.",
+      "year": 2023,
+      "role": "Data/resource and preference scoring for T2I",
+      "relationship_sentence": "Provided large-scale human preference data and a robust scorer for T2I; ABC leverages the pairwise-comparison setup and proposes augmentation to transform such pairs into fully supervised training instances."
+    },
+    {
+      "title": "Rank Analysis of Incomplete Block Designs: I. The Method of Paired Comparisons (Bradley\u2013Terry model)",
+      "authors": "R. A. Bradley, M. E. Terry",
+      "year": 1952,
+      "role": "Theoretical foundation for pairwise preference likelihoods",
+      "relationship_sentence": "The Bradley\u2013Terry logistic model underpins modern preference-learning objectives (including DPO); ABC\u2019s classification loss can be viewed as specializing this pairwise modeling into a direct binary classification signal over preferred vs. dispreferred samples."
+    }
+  ],
+  "synthesis_narrative": "ABC (Alignment by Classification) draws a direct lineage from preference learning in LLMs to diffusion models, while rethinking the objective used to exploit human comparisons. InstructGPT established that human pairwise preferences can reliably steer generative models, laying the problem framing ABC targets. DPO subsequently showed that preferences can be optimized without reinforcement learning by comparing a policy to a reference model through a Bradley\u2013Terry\u2013style likelihood; this is the key conceptual step ABC builds upon. However, DPO\u2019s dependence on a suboptimal SFT reference can bias learning, motivating ABC\u2019s core innovation: recasting alignment as a classification problem that learns directly from preference-labeled data and an idealized reference, avoiding explicit reward models or fragile reference policies.\n\nWithin the diffusion domain, classifier guidance demonstrated that discriminative signals can steer sampling, providing precedent for classifier-driven control of diffusion systems. ABC generalizes this idea from sampling-time guidance to a training objective, using preference-derived class labels to shape the generator. Contemporary T2I alignment via reward models\u2014ImageReward and PickScore\u2014validated that large-scale human comparisons are effective supervision, but they require training and maintaining separate reward predictors. ABC sidesteps this by transforming comparisons into fully supervised training signals and optimizing a classification-based loss, effectively turning preference alignment into a simpler, stable supervised learning problem rooted in the Bradley\u2013Terry formulation. Together, these works directly inform ABC\u2019s classification-centric, reference-light approach to aligning diffusion models with human preferences.",
+  "analysis_timestamp": "2026-01-06T23:42:48.125599"
+}

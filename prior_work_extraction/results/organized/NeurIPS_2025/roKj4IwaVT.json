@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Hogwild!: A Lock-Free Approach to Parallelizing Stochastic Gradient Descent",
+      "authors": "Feng Niu, Benjamin Recht, Christopher R\u00e9, Stephen J. Wright",
+      "year": 2011,
+      "role": "Asynchronous parallelism blueprint",
+      "relationship_sentence": "The paper\u2019s core idea of running multiple generators that concurrently update a shared state borrows directly from Hogwild!\u2019s lock-free, asynchronous update paradigm, adapting it from parameter updates to shared attention-cache writes during inference."
+    },
+    {
+      "title": "Transformer-XL: Attentive Language Models Beyond a Fixed-Length Context",
+      "authors": "Zihang Dai, Zhilin Yang, Yiming Yang, Jaime Carbonell, Quoc V. Le, Ruslan Salakhutdinov",
+      "year": 2019,
+      "role": "Attention memory/caching foundation",
+      "relationship_sentence": "Transformer-XL\u2019s segment-level recurrence and cacheable key\u2013value states provide the conceptual and practical basis for maintaining and reusing an attention cache, which Hogwild! Inference extends to a multi-writer, concurrent setting."
+    },
+    {
+      "title": "Self-Consistency Improves Chain of Thought Reasoning in Language Models",
+      "authors": "Xuezhi Wang, Jason Wei, Dale Schuurmans, Quoc V. Le, Ed H. Chi, Denny Zhou",
+      "year": 2022,
+      "role": "Parallel reasoning via voting",
+      "relationship_sentence": "Self-Consistency motivates running multiple reasoning trajectories in parallel and aggregating them, which directly informs Hogwild! Inference\u2019s goal of enabling concurrent exploration\u2014now implemented efficiently via a shared attention cache rather than post-hoc voting alone."
+    },
+    {
+      "title": "Tree of Thoughts: Deliberate Problem Solving with Large Language Models",
+      "authors": "Shunyu Yao et al.",
+      "year": 2023,
+      "role": "Structured multi-trajectory exploration",
+      "relationship_sentence": "Tree of Thoughts demonstrates that decomposing problems and exploring alternative paths improves performance; Hogwild! Inference provides a systems mechanism for such concurrent exploration by letting workers coordinate through a shared context/state."
+    },
+    {
+      "title": "ReAct: Synergizing Reasoning and Acting in Language Models",
+      "authors": "Shunyu Yao et al.",
+      "year": 2022,
+      "role": "Agentic coordination and tool-use prompting",
+      "relationship_sentence": "ReAct\u2019s prompting strategy for deciding what to do next inspires Hogwild! Inference\u2019s use of prompts to let parallel workers choose how to collaborate while reading/writing from a common memory."
+    },
+    {
+      "title": "Fast Inference from Transformers via Speculative Decoding",
+      "authors": "Yonatan Leviathan et al.",
+      "year": 2023,
+      "role": "Parallel token drafting/verification for acceleration",
+      "relationship_sentence": "Speculative decoding shows that extra parallel work can be amortized to accelerate autoregressive generation, and Hogwild! Inference generalizes this spirit by enabling unconstrained concurrent generation streams synchronized through a shared attention cache."
+    },
+    {
+      "title": "Megatron-LM: Training Multi-Billion Parameter Language Models Using Model Parallelism",
+      "authors": "Mohammad Shoeybi, Mostofa Patwary, Raul Puri, Patrick LeGresley, Jared Casper, Bryan Catanzaro",
+      "year": 2019,
+      "role": "Systems parallelism and scheduling foundation",
+      "relationship_sentence": "Megatron-LM\u2019s principles for splitting transformer computation and managing parallelism inform the low-level systems choices (e.g., partitioning, scheduling) needed to make concurrent attention updates performant and scalable."
+    }
+  ],
+  "synthesis_narrative": "Hogwild! Inference fuses ideas from asynchronous optimization, attention-memory reuse, and parallel test-time exploration into a single mechanism: multiple LLM workers run concurrently while synchronizing through a shared key\u2013value attention cache. The lock-free, multi-writer spirit comes directly from Hogwild!, translating its asynchronous updates from training to inference-time state mutation. Transformer-XL provides the key abstraction of reusable attention memory; Hogwild! Inference extends this from single-writer incremental decoding to a concurrent, multi-writer cache that multiple generators can read and update. On the algorithmic side, Self-Consistency and Tree of Thoughts established that exploring multiple reasoning paths and aggregating or pruning them improves outcomes; Hogwild! Inference supplies the systems substrate to enact such exploration natively within the model\u2019s context rather than via external orchestration. ReAct informs the prompting layer by encouraging worker agents to decide how to coordinate (e.g., divide subproblems, verify each other), now backed by a shared memory that makes coordination lightweight. Finally, speculative decoding demonstrates that extra parallel work can accelerate autoregressive generation; Hogwild! Inference generalizes this acceleration by allowing unconstrained concurrent streams while using the shared cache to synchronize and reduce duplication. Under the hood, systems lessons from Megatron-LM guide practical scheduling and parallelism choices to make concurrent attention updates efficient at scale.",
+  "analysis_timestamp": "2026-01-07T00:27:38.137483"
+}

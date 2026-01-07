@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Flow Matching for Generative Modeling",
+      "authors": "Lipman et al.",
+      "year": 2022,
+      "role": "Methodological foundation for training continuous-time generative flows without score estimation",
+      "relationship_sentence": "STFlow builds directly on flow matching to learn a probability flow over whole-slide gene-expression vectors, enabling joint (slide-level) generation rather than independent spot-wise predictions."
+    },
+    {
+      "title": "Conditional Flow Matching",
+      "authors": "Liu et al.",
+      "year": 2023,
+      "role": "Conditional generative modeling with flow matching",
+      "relationship_sentence": "STFlow uses the conditional variant of flow matching to model p(genes | histology), conditioning the learned flow on slide/image features to generate spatially coherent transcriptomes."
+    },
+    {
+      "title": "HE2RNA: A deep learning model to predict RNA-Seq expression of tumors from whole-slide images",
+      "authors": "Schmauch et al.",
+      "year": 2020,
+      "role": "Early histology-to-gene expression prediction from WSIs (MIL paradigm)",
+      "relationship_sentence": "HE2RNA established the feasibility of predicting gene expression from WSIs, which STFlow extends to the spatial transcriptomics setting while moving from weakly supervised per-sample prediction to joint slide-level generative modeling."
+    },
+    {
+      "title": "HisToGene: Predicting spatially resolved gene expression from histology images",
+      "authors": "Chen et al.",
+      "year": 2023,
+      "role": "Task-specific baseline for histology-to-ST prediction (spot-wise)",
+      "relationship_sentence": "HisToGene predicts each spot\u2019s expression independently from local image patches; STFlow addresses this factorization by modeling the joint distribution across all spots to capture cell\u2013cell interactions."
+    },
+    {
+      "title": "Hist2ST: From histology to spatial transcriptomics by deep learning",
+      "authors": "Li et al.",
+      "year": 2023,
+      "role": "Spot-level ST prediction leveraging neighborhood cues",
+      "relationship_sentence": "While Hist2ST incorporates local spatial context for spot-wise regression, STFlow replaces independent regression with a flow-based generative model over the entire slide, explicitly capturing inter-spot dependencies."
+    },
+    {
+      "title": "SpaGCN: Integrating gene expression, spatial location and histology to identify spatial domains",
+      "authors": "Hu et al.",
+      "year": 2021,
+      "role": "Demonstrated importance of spatial neighborhoods/cell\u2013cell interactions in ST",
+      "relationship_sentence": "SpaGCN\u2019s graph-based integration of spatial adjacency motivated STFlow\u2019s explicit modeling of cell\u2013cell interactions, realized here via a joint slide-level generative objective and local spatial attention."
+    },
+    {
+      "title": "HIPT: Hierarchical Image Pyramid Transformer for Whole Slide Image Analysis",
+      "authors": "Chen et al.",
+      "year": 2022,
+      "role": "Scalable WSI encoding with local/hierarchical attention",
+      "relationship_sentence": "HIPT\u2019s locally constrained attention for WSIs informed STFlow\u2019s efficient slide-level encoder with local spatial attention, enabling processing of slides with >10k spots under realistic memory budgets."
+    }
+  ],
+  "synthesis_narrative": "STFlow\u2019s core contribution\u2014joint, whole-slide generation of spatial transcriptomes conditioned on histology with scalable slide-level encoding\u2014emerges from three converging lines of prior work. First, the histology-to-transcriptomics literature (HE2RNA) demonstrated that gene expression can be inferred from WSIs, later adapted to the spatial setting by HisToGene and Hist2ST. However, these works typically predict each spot independently, only weakly incorporating neighborhood context and leaving slide-level dependencies under-modeled. Second, spatial transcriptomics methods like SpaGCN established that spatial adjacency and cell\u2013cell interactions are crucial signals, motivating models that capture correlations across spots rather than factorizing the task. Third, recent advances in generative modeling\u2014Flow Matching and its conditional variant\u2014provide a practical, scalable way to train continuous-time flows for conditional generation, offering a principled path to model the joint distribution of gene expression across an entire slide given histology. Finally, scalable WSI representation learning, exemplified by HIPT\u2019s local/hierarchical attention, provides architectural guidance for handling the extreme token counts of whole slides. STFlow synthesizes these threads: it conditions a flow-matched generative model on slide-level features, uses local spatial attention to remain memory-efficient, and models the joint distribution over all spots to explicitly encode cell\u2013cell interactions, overcoming the independence and scalability limitations of prior spot-wise predictors.",
+  "analysis_timestamp": "2026-01-07T00:21:32.400562"
+}

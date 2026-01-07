@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Segment Anything 2: Segment Anything in Images and Videos",
+      "authors": "Kirillov et al.",
+      "year": 2024,
+      "role": "Baseline",
+      "relationship_sentence": "SANSA directly repurposes SAM2\u2019s prompt-and-propagate pipeline and memory-based feature matching, modifying it to surface and align the model\u2019s latent semantic structure while mitigating the tracking-specific entanglement that SAM2 was optimized for."
+    },
+    {
+      "title": "Segment Anything",
+      "authors": "Kirillov et al.",
+      "year": 2023,
+      "role": "Inspiration",
+      "relationship_sentence": "SAM introduced large-scale class-agnostic, promptable segmentation and revealed that such models encode rich, transferable semantics\u2014an observation SANSA leverages in hypothesizing and then making explicit the latent semantics within SAM2."
+    },
+    {
+      "title": "Video Object Segmentation using Space-Time Memory Networks",
+      "authors": "Oh et al.",
+      "year": 2019,
+      "role": "Foundation",
+      "relationship_sentence": "STM established the key-value memory matching paradigm that underlies SAM2\u2019s propagate mechanism; SANSA capitalizes on this built-in correspondence engine to transfer support-to-query information for few-shot segmentation."
+    },
+    {
+      "title": "One-Shot Learning for Semantic Segmentation",
+      "authors": "Shaban et al.",
+      "year": 2017,
+      "role": "Foundation",
+      "relationship_sentence": "This work formalized the few-shot segmentation setting (support\u2013query episodic evaluation with pixel-level supervision), which SANSA adopts to reframe SAM2 as a few-shot learner."
+    },
+    {
+      "title": "PANet: Few-Shot Image Semantic Segmentation with Prototype Alignment",
+      "authors": "Wang et al.",
+      "year": 2019,
+      "role": "Related Problem",
+      "relationship_sentence": "PANet showed that cross-image prototype alignment is central to FSS, a function SANSA replaces by exploiting SAM2\u2019s built-in feature matching while aligning its features to be explicitly semantic rather than instance- or tracking-driven."
+    },
+    {
+      "title": "HSNet: Hypercorrelation Squeeze for Few-Shot Segmentation",
+      "authors": "Min et al.",
+      "year": 2021,
+      "role": "Gap Identification",
+      "relationship_sentence": "HSNet demonstrated that dense cross-image correlations drive FSS performance but rely on learned matchers and task-specific training; SANSA instead exposes and aligns SAM2\u2019s pre-existing matching and semantics to achieve stronger generalization with minimal modifications."
+    },
+    {
+      "title": "Emerging Properties in Self-Supervised Vision Transformers",
+      "authors": "Caron et al.",
+      "year": 2021,
+      "role": "Inspiration",
+      "relationship_sentence": "DINO revealed that ViT features trained without labels contain emergent semantic segmentation cues, directly motivating SANSA\u2019s core insight that SAM2\u2019s representations already encode semantics that can be made explicit for FSS."
+    }
+  ],
+  "synthesis_narrative": "SANSA\u2019s core idea\u2014exposing and aligning the latent semantic structure inside SAM2 to solve few-shot segmentation with minimal task-specific changes\u2014sits at the intersection of three lines of work. First, the problem setting and evaluation protocol derive from the few-shot segmentation literature inaugurated by One-Shot Learning for Semantic Segmentation, and later refined by prototype- and correlation-based approaches such as PANet and HSNet. These works established that cross-image correspondence is essential, but typically required purpose-built matchers and heavy episodic training. Second, advances in memory-based correspondence for video object segmentation, epitomized by the Space-Time Memory network, informed the propagate-and-match paradigm that SAM2 operationalizes at scale. SAM2 thus offers a high-quality, promptable, and streaming correspondence engine\u2014but one optimized for tracking, leading to entangled representations that under-serve semantic generalization. Third, large-scale promptable models like Segment Anything, together with self-supervised ViT findings from DINO, suggested that rich semantics can emerge implicitly in powerful encoders. SANSA brings these threads together: it takes SAM2 as the baseline mechanism for mask generation and propagation, diagnoses the tracking-driven entanglement as the key gap, and introduces lightweight alignment to make SAM2\u2019s hidden semantics explicit. This replaces task-specific matchers with SAM2\u2019s own correspondence while unlocking class-level generalization, yielding state-of-the-art few-shot segmentation performance.",
+  "analysis_timestamp": "2026-01-06T23:08:23.961922"
+}

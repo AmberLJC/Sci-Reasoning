@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Maximum Entropy Inverse Reinforcement Learning",
+      "authors": "Andrew Y. Ng and Pieter Abbeel and Andrew B. Ziebart",
+      "year": 2008,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "The MaxEnt IRL formulation that learns rewards by inducing a soft-optimal stochastic policy is the algorithmic template RHIP generalizes via a finite planning horizon to trade robustness for computational efficiency on massive graphs."
+    },
+    {
+      "title": "Modeling Purposeful Behavior with the Principle of Maximum Causal Entropy",
+      "authors": "Andrew B. Ziebart",
+      "year": 2010,
+      "arxiv_id": "",
+      "role": "Extension",
+      "relationship_sentence": "The maximum causal entropy inverse optimal control recursion provides the stochastic Bellman backups that RHIP truncates into a receding-horizon operator, with the infinite-horizon limit recovering the standard MCE-IOC solution."
+    },
+    {
+      "title": "Maximum Margin Planning",
+      "authors": "Nathan D. Ratliff et al.",
+      "year": 2006,
+      "arxiv_id": "",
+      "role": "Baseline",
+      "relationship_sentence": "MMP exemplifies the cheap deterministic shortest-path learner that forms the opposite endpoint of RHIP\u2019s trade-off, which RHIP approaches as the planning horizon shrinks toward purely deterministic planning."
+    },
+    {
+      "title": "Linearly-Solvable Markov Decision Processes",
+      "authors": "Emanuel Todorov",
+      "year": 2007,
+      "arxiv_id": "",
+      "role": "Inspiration",
+      "relationship_sentence": "The exponential transformation that linearizes control and yields principal-eigenvector solutions motivates the paper\u2019s eigenvector/power-iteration view and eigenvector-based initialization for scalable IRL updates."
+    },
+    {
+      "title": "Maximum Entropy Deep Inverse Reinforcement Learning",
+      "authors": "Markus Wulfmeier et al.",
+      "year": 2016,
+      "arxiv_id": "1507.04888",
+      "role": "Gap Identification",
+      "relationship_sentence": "Deep MaxEnt IRL demonstrated effective reward learning for navigation but exposed the prohibitive cost of full soft planning at scale, a limitation addressed here via graph compression, spatial parallelization, and RHIP\u2019s controllable horizon."
+    },
+    {
+      "title": "Contraction Hierarchies: Faster and Simpler Hierarchical Routing in Road Networks",
+      "authors": "Robert Geisberger et al.",
+      "year": 2008,
+      "arxiv_id": "",
+      "role": "Related Problem",
+      "relationship_sentence": "Contraction Hierarchies\u2019 graph compression and fast shortest-path queries directly underpin the scalable deterministic planning primitives that RHIP repeatedly invokes across a planetary-scale road graph."
+    }
+  ],
+  "synthesis_narrative": "Maximum entropy inverse reinforcement learning introduced a probabilistic formulation that fits rewards by inducing a soft-optimal policy, realized via entropy-regularized Bellman backups that are robust to suboptimal demonstrations. The maximum causal entropy refinement cast this as a causal, dynamic-programming-friendly recursion over MDPs, clarifying the stochastic policy structure and the temperature/horizon effects that govern robustness versus determinism. In contrast, maximum margin planning framed reward learning as structured prediction over deterministic shortest paths, enabling fast learning with Dijkstra-like planners but at the cost of brittleness to demonstration noise. Linearly-solvable MDPs showed that an exponential transform linearizes control, reducing planning to principal-eigenvector computation and suggesting power-iteration-style algorithms and eigenfunction initializations that can dramatically affect convergence. Deep maximum entropy IRL established that expressive neural features can learn navigation rewards, while simultaneously revealing the heavy computational burden of full soft planning on large graphs. Finally, contraction hierarchies demonstrated that hierarchical graph compression yields planet-scale shortest-path queries and naturally supports spatial partitioning and parallelization. Together, these works expose a gap between cheap deterministic planning and robust but expensive stochastic IRL, suggest that horizon/temperature mediates this gap, and hint that eigenvector perspectives and graph compression can stabilize and scale learning. The present work synthesizes these insights by introducing a receding-horizon generalization of classic entropy-based IRL that interpolates between deterministic and stochastic regimes, while leveraging hierarchical graph compression and eigenvector-inspired initialization to make reward inference tractable at global scale.",
+  "target_paper": {
+    "title": "Massively Scalable Inverse Reinforcement Learning in Google Maps",
+    "authors": "Matt Barnes, Matthew Abueg, Oliver F. Lange, Matt Deeds, Jason Trader, Denali Molitor, Markus Wulfmeier, Shawn O'Banion",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Inverse reinforcement learning, route optimization",
+    "abstract": "Inverse reinforcement learning (IRL) offers a powerful and general framework for learning humans' latent preferences in route recommendation, yet no approach has successfully addressed planetary-scale problems with hundreds of millions of states and demonstration trajectories. In this paper, we introduce scaling techniques based on graph compression, spatial parallelization, and improved initialization conditions inspired by a connection to eigenvector algorithms. We revisit classic IRL methods in the routing context, and make the key observation that there exists a trade-off between the use of cheap, deterministic planners and expensive yet robust stochastic policies. This insight is leveraged in Receding Horizon Inverse Planning (RHIP), a new generalization of classic IRL algorithms that provides fine-grained control over performance trade-offs via its planning horizon. Our contributions culminate in a policy that achieves a 16-24% improvement in route quality at a global scale, and ",
+    "openreview_id": "z3L59iGALM",
+    "forum_id": "z3L59iGALM"
+  },
+  "analysis_timestamp": "2026-01-06T10:09:55.780931"
+}

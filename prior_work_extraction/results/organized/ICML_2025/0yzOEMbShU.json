@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Self-Repellent Random Walk (SRRW) for MCMC on Graphs",
+      "authors": "Yi-Ting Ma et al.",
+      "year": 2024,
+      "role": "Baseline",
+      "relationship_sentence": "SRRW pioneered the history-driven, self-repellent kernel that achieves near-zero variance on graphs; HDT preserves SRRW\u2019s variance benefits while replacing kernel modification with a history-driven target to remove per-step neighbor-probability computation and the reversibility requirement."
+    },
+    {
+      "title": "Efficient, Multiple-Range Random Walk Algorithm to Calculate the Density of States",
+      "authors": "F. Wang et al.",
+      "year": 2001,
+      "role": "Inspiration",
+      "relationship_sentence": "Wang\u2013Landau introduced history-dependent biasing that flattens visitation histograms by adaptively adjusting target weights, directly inspiring HDT\u2019s shift from kernel edits to a history-driven target distribution that prioritizes under-sampled states."
+    },
+    {
+      "title": "Stochastic Approximation in Monte Carlo Computation (SAMC)",
+      "authors": "Faming Liang et al.",
+      "year": 2007,
+      "role": "Extension",
+      "relationship_sentence": "SAMC provides a stochastic-approximation mechanism to update bias weights toward prescribed sampling frequencies; HDT leverages this machinery to update its history-driven target online with low overhead and convergence guarantees."
+    },
+    {
+      "title": "The Wang\u2013Landau Algorithm for Monte Carlo Computation in General State Spaces",
+      "authors": "Y. F. Atchad\u00e9 et al.",
+      "year": 2010,
+      "role": "Foundation",
+      "relationship_sentence": "This work formalized WL as SA-MCMC on general state spaces and analyzed ergodicity, providing the theoretical framework HDT relies on to ensure validity when the target distribution evolves with the chain\u2019s history."
+    },
+    {
+      "title": "Lifting Markov Chains to Speed Mixing",
+      "authors": "Fan R. K. Chung (Chen) et al.",
+      "year": 1999,
+      "role": "Related Problem",
+      "relationship_sentence": "Lifting shows how nonreversible dynamics can accelerate mixing on graphs; by moving adaptation to the target rather than the kernel, HDT becomes compatible with lifted/nonreversible chains that SRRW\u2019s reversible-kernel design could not exploit."
+    },
+    {
+      "title": "Non-Backtracking Random Walks Mix Faster",
+      "authors": "Noga Alon et al.",
+      "year": 2007,
+      "role": "Gap Identification",
+      "relationship_sentence": "This result highlights concrete advantages of nonreversible graph walks, underscoring the key limitation of SRRW\u2019s reversibility constraint that HDT directly removes by making the history dependence reside in the target."
+    },
+    {
+      "title": "Markov Chain Monte Carlo Without Detailed Balance",
+      "authors": "H. Suwa et al.",
+      "year": 2010,
+      "role": "Related Problem",
+      "relationship_sentence": "Suwa\u2013Todo demonstrates practical nonreversible MCMC with improved mixing; HDT\u2019s history-driven target is explicitly designed to accommodate such nonreversible kernels, overcoming SRRW\u2019s incompatibility."
+    }
+  ],
+  "synthesis_narrative": "The core innovation of HDT is to relocate history dependence from the transition kernel to the target distribution, thereby retaining the variance-flattening benefits of self-repulsion while eliminating SRRW\u2019s computational and reversibility constraints. SRRW is the immediate baseline: it demonstrated that prioritizing under-sampled states via history-dependent kernels can achieve near-zero variance on graphs, but at the cost of expensive neighbor-wise probability updates and a reliance on reversible dynamics. HDT\u2019s design is directly inspired by the flat-histogram lineage beginning with Wang\u2013Landau, which adaptively biases the target to equalize visitation frequencies, and is operationalized using stochastic-approximation updates as in SAMC. The formal SA-MCMC perspective of Atchad\u00e9\u2013Liu extends these ideas to general state spaces with convergence analysis, providing the theoretical footing for an evolving, history-driven target within a valid MCMC framework. Crucially, by decoupling adaptation from the kernel, HDT resolves SRRW\u2019s key gap: incompatibility with nonreversible accelerations. Foundational results on lifting and non-backtracking random walks show that nonreversible dynamics can markedly speed mixing on graphs, and practical samplers like Suwa\u2013Todo exploit this in MCMC. HDT\u2019s target-centric adaptation makes these nonreversible kernels immediately usable, yielding near-zero variance sampling with substantially lower per-step overhead across general undirected graphs.",
+  "analysis_timestamp": "2026-01-06T23:07:19.602322"
+}

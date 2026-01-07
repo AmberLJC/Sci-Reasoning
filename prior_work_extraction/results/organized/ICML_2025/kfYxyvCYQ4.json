@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Soft Actor-Critic: Off-Policy Maximum Entropy Deep Reinforcement Learning with a Stochastic Actor",
+      "authors": "Tuomas Haarnoja; Aurick Zhou; Pieter Abbeel; Sergey Levine",
+      "year": 2018,
+      "role": "Foundational base algorithm for SimbaV2",
+      "relationship_sentence": "SimbaV2 is implemented atop SAC, augmenting its off-policy maximum-entropy actor\u2013critic with hyperspherical normalization and a distributional critic plus reward scaling to enable stable large-scale training."
+    },
+    {
+      "title": "A Distributional Perspective on Reinforcement Learning",
+      "authors": "Marc G. Bellemare; Will Dabney; R\u00e9mi Munos",
+      "year": 2017,
+      "role": "Theoretical foundation for distributional value learning",
+      "relationship_sentence": "This work introduced modeling the full return distribution rather than only its expectation, a principle SimbaV2 adopts to obtain more stable and informative gradients via distributional value estimation."
+    },
+    {
+      "title": "Implicit Quantile Networks for Distributional Reinforcement Learning",
+      "authors": "Will Dabney; Mark Rowland; Marc G. Bellemare; R\u00e9mi Munos",
+      "year": 2018,
+      "role": "Practical, differentiable quantile-based distributional estimator",
+      "relationship_sentence": "SimbaV2\u2019s distributional value estimation aligns with quantile-based approaches like IQN, enabling flexible, low-variance distributional critics that integrate naturally with actor\u2013critic updates."
+    },
+    {
+      "title": "Distributed Distributional Deterministic Policy Gradients (D4PG)",
+      "authors": "Gabriel Barth-Maron; Matthew W. Hoffman; David Budden; Will Dabney; Dan Horgan; Dhruva Tirumala; Alistair Muldal; Nicolas Heess; Timothy P. Lillicrap",
+      "year": 2018,
+      "role": "Demonstrated distributional critics\u2019 benefits in continuous control",
+      "relationship_sentence": "D4PG showed that combining actor\u2013critic with distributional value functions improves stability and performance in continuous control, motivating SimbaV2\u2019s use of a distributional critic with SAC."
+    },
+    {
+      "title": "Learning values across many orders of magnitude",
+      "authors": "Hado van Hasselt; Matteo Hessel; Joseph Modayil",
+      "year": 2016,
+      "role": "Reward/value normalization (PopArt) for scale robustness",
+      "relationship_sentence": "SimbaV2\u2019s reward scaling addresses the same challenge PopArt targets\u2014stable learning under widely varying reward magnitudes\u2014while using a simple scaling mechanism compatible with off-policy actor\u2013critic."
+    },
+    {
+      "title": "ArcFace: Additive Angular Margin Loss for Deep Face Recognition",
+      "authors": "Jiankang Deng; Jia Guo; Niannan Xue; Stefanos Zafeiriou",
+      "year": 2019,
+      "role": "Hyperspherical normalization of features and weights",
+      "relationship_sentence": "ArcFace\u2019s normalization of both features and classifier weights onto a hypersphere with a controlled scale inspires SimbaV2\u2019s hyperspherical normalization to bound feature/weight norms and stabilize optimization."
+    },
+    {
+      "title": "Weight Normalization: A Simple Reparameterization to Accelerate Training of Deep Neural Networks",
+      "authors": "Tim Salimans; Diederik P. Kingma",
+      "year": 2016,
+      "role": "Parameter reparameterization to decouple magnitude and direction",
+      "relationship_sentence": "By decoupling weight magnitude from direction, Weight Normalization informs SimbaV2\u2019s design choice to explicitly constrain weight norms, preventing uncontrolled norm growth during off-policy RL."
+    }
+  ],
+  "synthesis_narrative": "SimbaV2 targets a central obstacle to scaling deep reinforcement learning: unstable optimization under non-stationary data and varying reward magnitudes. Its architecture fuses two strands of prior work. First, distributional reinforcement learning (Bellemare et al.) and practical quantile-based estimators like IQN showed that modeling the full return distribution yields richer training signals. D4PG extended these ideas to actor\u2013critic in continuous control, demonstrating stability and performance gains. Building on this lineage, SimbaV2 integrates a distributional critic within the Soft Actor-Critic framework, inheriting SAC\u2019s robust off-policy, maximum-entropy foundation while obtaining more stable gradients from a distributional value estimate.\n\nSecond, SimbaV2 addresses scale-related optimization pathologies by controlling feature and parameter norms. The idea of decoupling magnitude from direction in parameters (Salimans & Kingma\u2019s Weight Normalization) and the hyperspherical normalization used in modern classification losses (e.g., ArcFace), where both weights and features are L2-normalized and scaled, directly inform SimbaV2\u2019s hyperspherical normalization. This constrains norm growth, improving conditioning and mitigating instability when models and compute scale up. Complementing this, SimbaV2 introduces reward scaling to stabilize gradients across tasks with disparate reward magnitudes, echoing PopArt\u2019s objective of scale robustness while retaining a simple mechanism compatible with off-policy actor\u2013critic.\n\nTogether, these influences yield a principled combination\u2014SAC + distributional value estimation + hyperspherical normalization + reward scaling\u2014that directly targets the failure modes that typically emerge when scaling deep RL, enabling state-of-the-art performance across diverse continuous control domains.",
+  "analysis_timestamp": "2026-01-07T00:21:32.384683"
+}

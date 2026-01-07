@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Discovering governing equations from data by sparse identification of nonlinear dynamical systems",
+      "authors": "Steven L. Brunton, Joshua L. Proctor, J. Nathan Kutz",
+      "year": 2016,
+      "role": "Application motivation and problem setting",
+      "relationship_sentence": "SINDy established sparse regression as a tool for discovering dynamical laws but relied on heuristics, motivating OKRidge\u2019s need for a fast solver that certifies globally optimal k-sparse (ridge) models to identify governing equations reliably."
+    },
+    {
+      "title": "Best Subset Selection via a Modern Optimization Lens",
+      "authors": "Dimitris Bertsimas, Angela King, Rahul Mazumder",
+      "year": 2016,
+      "role": "Exact sparse regression baseline via MIO",
+      "relationship_sentence": "This work showed that mixed-integer optimization can solve best-subset regression exactly and popularized Gurobi-based formulations that OKRidge eclipses by providing orders-of-magnitude faster optimality certificates through a different lower-bounding/algorithmic route."
+    },
+    {
+      "title": "Sparse learning via Boolean relaxations",
+      "authors": "Mert Pilanci, Martin J. Wainwright",
+      "year": 2015,
+      "role": "Lower bounds via Lagrangian/saddle-point relaxations",
+      "relationship_sentence": "Boolean relaxations develop dual/saddle-point viewpoints that yield strong bounds for cardinality-constrained regression; OKRidge\u2019s novel lower bound builds on this relaxation paradigm, tailoring it to ridge-regularized k-sparsity and making it efficiently computable via linear systems."
+    },
+    {
+      "title": "Sparse Prediction with the k-Support Norm",
+      "authors": "Andreas Argyriou, Ryan Foygel, Nathan Srebro",
+      "year": 2012,
+      "role": "Convex envelope of k-sparse with \u21132 structure",
+      "relationship_sentence": "The k-support norm provides the tight convex relaxation of k-sparse ridge-type models and informs the geometry/duality that OKRidge exploits to derive computable lower bounds and proximal steps connected to sorting-based operations."
+    },
+    {
+      "title": "Strong formulations for sparse optimization with conic quadratic constraints (perspective relaxations)",
+      "authors": "Alper Atamt\u00fcrk, Andr\u00e9s G\u00f3mez",
+      "year": 2020,
+      "role": "Strong relaxations and lower bounds for sparse regression with ridge",
+      "relationship_sentence": "Perspective-based formulations yield state-of-the-art conic relaxations and bounds for sparse regression with quadratic (ridge) terms; OKRidge advances this line by deriving a specialized saddle-point lower bound that avoids heavy conic MIP machinery and is solvable via linear algebra."
+    },
+    {
+      "title": "Distributed Optimization and Statistical Learning via the Alternating Direction Method of Multipliers",
+      "authors": "Stephen Boyd, Neal Parikh, Eric Chu, Borja Peleato, Jonathan Eckstein",
+      "year": 2011,
+      "role": "Algorithmic framework (ADMM) for splitting and proximal evaluation",
+      "relationship_sentence": "OKRidge\u2019s ADMM-based option leverages this framework to split variables so that the proximal operators reduce to a linear solve and a structured projection, enabling fast, scalable iterations with optimality certificates."
+    },
+    {
+      "title": "SLOPE\u2014Adaptive variable selection via the sorted L1 norm",
+      "authors": "Mariusz Bogdan, Ewout van den Berg, Chiara Sabatti, Weijie Su, Emmanuel J. Cand\u00e8s",
+      "year": 2015,
+      "role": "Isotonic-regression-based proximal operator design",
+      "relationship_sentence": "SLOPE popularized using isotonic regression to compute sorted-structure proximals; OKRidge adopts a related isotonic-regression subroutine to efficiently evaluate its proximal steps arising from the saddle-point/ADMM formulation."
+    }
+  ],
+  "synthesis_narrative": "OKRidge targets the longstanding challenge of certifiably optimal sparse regression central to scientific discovery of dynamical systems. The SINDy framework demonstrated the promise of sparse models for identifying governing equations but relied on heuristic thresholding, leaving a gap for exact solvers that scale. Mixed-integer approaches for best-subset selection showed that exact solutions are possible and set strong baselines, yet their reliance on commercial MIP solvers leads to high runtimes for large problems. A parallel thread on convex and dual relaxations\u2014Boolean relaxations and perspective-based formulations\u2014established that tight lower bounds for cardinality-constrained regression can be derived through saddle-point/Lagrangian views or conic strengthening, especially effective with ridge terms. The k-support norm clarified the convex envelope of k-sparse ridge structure, informing the geometry of relaxations and the sorted-structure computations that make such relaxations practical.\nBuilding on these ideas, OKRidge introduces a specialized saddle-point lower bound for k-sparse ridge regression that is efficiently computable via linear systems, avoiding heavy conic or MIP machinery while still certifying optimality. For fast iterations, OKRidge employs an ADMM splitting whose proximal operators decompose into a linear solve and a projection solvable by isotonic regression\u2014an idea popularized in SLOPE\u2019s proximal design for sorted penalties. This synthesis of exactness-focused relaxations with lightweight linear-algebraic and isotonic subroutines yields a solver that attains provable optimality at orders-of-magnitude lower runtimes, directly addressing the scalability and certification needs raised by prior work.",
+  "analysis_timestamp": "2026-01-07T00:02:04.797139"
+}

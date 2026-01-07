@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Distilling the Knowledge in a Neural Network",
+      "authors": "Geoffrey Hinton et al.",
+      "year": 2015,
+      "arxiv_id": "1503.02531",
+      "role": "Foundation",
+      "relationship_sentence": "Introduces the teacher\u2013student soft-target transfer mechanism that this paper generalizes to arbitrary model pairings without a priori teacher ranking and augments with safeguards to avoid performance degradation."
+    },
+    {
+      "title": "Deep Mutual Learning",
+      "authors": "Ying Zhang et al.",
+      "year": 2018,
+      "arxiv_id": "1706.00384",
+      "role": "Baseline",
+      "relationship_sentence": "Provides the closest peer-to-peer distillation setup for equally capable models, whose tendency to drag down the stronger model motivates this paper\u2019s selective, robustness-oriented transfer between arbitrary pretrained pairs."
+    },
+    {
+      "title": "Born-Again Neural Networks",
+      "authors": "Tommaso Furlanello et al.",
+      "year": 2018,
+      "arxiv_id": "1805.04770",
+      "role": "Inspiration",
+      "relationship_sentence": "Shows that students can surpass their own teachers, directly inspiring the paper\u2019s core premise that relative performance is not a reliable proxy for who should teach whom in knowledge transfer."
+    },
+    {
+      "title": "Model Soups: Averaging weights of multiple fine-tuned models improves accuracy without increasing inference time",
+      "authors": "Mitchell Wortsman et al.",
+      "year": 2022,
+      "arxiv_id": "2203.05482",
+      "role": "Inspiration",
+      "relationship_sentence": "Demonstrates that differently trained models contain complementary features that can be profitably combined, underpinning this paper\u2019s search for transferable complementary knowledge across arbitrary pretrained models."
+    },
+    {
+      "title": "Similarity of Neural Network Representations Revisited",
+      "authors": "Simon Kornblith et al.",
+      "year": 2019,
+      "arxiv_id": "1905.00414",
+      "role": "Foundation",
+      "relationship_sentence": "Provides CKA-based tools to quantify representational similarity/dissimilarity that the paper leverages to evidence and analyze complementary feature sets across pretrained models."
+    },
+    {
+      "title": "Weak-to-Strong Generalization: Eliciting Strong Capabilities with Weak Supervision",
+      "authors": "Collin Burns et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "Formalizes supervision from weaker or equiperformant models, directly motivating this paper\u2019s any-to-any transfer setting and its requirement to avoid degrading the stronger model."
+    },
+    {
+      "title": "Git Re-Basin: Merging Models modulo Permutation Symmetries",
+      "authors": "Samuel Ainsworth et al.",
+      "year": 2022,
+      "arxiv_id": "2209.04836",
+      "role": "Related Problem",
+      "relationship_sentence": "Shows one route to combine knowledge from independently trained models via weight-space alignment, whose architectural and weight-access constraints this paper circumvents with a data-driven transfer approach."
+    }
+  ],
+  "synthesis_narrative": "Soft-target knowledge transfer was crystallized by Hinton et al., who showed that matching a student\u2019s outputs to a teacher\u2019s softened logits can impart the teacher\u2019s inductive biases. Zhang et al. extended this idea to peers with Deep Mutual Learning, using symmetric KL divergence to enforce consistency across equally capable networks, but often at the cost of pulling down the stronger model. Furlanello et al.\u2019s Born-Again Networks revealed that teachers need not be stronger: even self-teaching across generations can yield students that exceed their teachers, challenging the assumption that performance rankings determine knowledge value. Wortsman et al. demonstrated that models trained with different recipes embed complementary features that can be fruitfully combined through weight averaging, giving concrete evidence that disparate training choices yield non-overlapping competencies. Kornblith et al. provided CKA to measure representational similarity, enabling rigorous assessments of when two models encode different information. In parallel, Burns et al. formalized weak-to-strong generalization, framing supervision from weaker or equiperformant sources as a legitimate learning signal. Ainsworth et al. pursued knowledge combination in weight space via permutation alignment, highlighting practical limits when architectures differ or weight access is constrained.\nTaken together, these works suggested a gap: complementary knowledge is abundant and not well predicted by accuracy, yet existing KD, mutual learning, or model merging either require teacher ranking, risk negative transfer, or impose architectural constraints. The present paper synthesizes these insights by detecting and exploiting complementary signal between arbitrary pretrained pairs and enforcing transfer in a way that provably avoids degrading performance, thereby generalizing KD beyond ranked teachers and making peer-to-peer, any-to-any knowledge transfer safe and effective.",
+  "target_paper": {
+    "title": "Fantastic Gains and Where to Find Them: On the Existence and Prospect of General Knowledge Transfer between Any Pretrained Model",
+    "authors": "Karsten Roth, Lukas Thede, A. Sophia Koepke, Oriol Vinyals, Olivier J Henaff, Zeynep Akata",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "transfer learning, pretraining, weak-to-strong transfer, continual learning",
+    "abstract": "Training deep networks requires various design decisions regarding for instance their architecture, data augmentation, or optimization. In this work, we find these training variations to result in networks learning unique feature sets from the data. Using public model libraries comprising thousands of models trained on canonical datasets like ImageNet, we observe that for arbitrary pairings of pretrained models, one model extracts significant data context unavailable in the other \u2013 independent of overall performance. Given any arbitrary pairing of pretrained models and no external rankings (such as separate test sets, e.g. due to data privacy), we investigate if it is possible to transfer such \"complementary\" knowledge from one model to another without performance degradation \u2013 a task made particularly difficult as additional knowledge can be contained in stronger, equiperformant or weaker models. Yet facilitating robust transfer in scenarios agnostic to pretrained model pairings would",
+    "openreview_id": "m50eKHCttz",
+    "forum_id": "m50eKHCttz"
+  },
+  "analysis_timestamp": "2026-01-06T14:12:53.824329"
+}

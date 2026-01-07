@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Segment Anything",
+      "authors": "Alexander Kirillov et al.",
+      "year": 2023,
+      "role": "Vision foundation model providing high-quality, promptable 2D masks that can supervise downstream tasks without 2D labels.",
+      "relationship_sentence": "SEAL distills general segmentation priors from SAM into 3D by using its mask cues to drive point-to-segment regularization, enabling annotation-free pretraining in LiDAR."
+    },
+    {
+      "title": "PointPainting: Sequential Fusion for 3D Object Detection",
+      "authors": "Vivek Vora, Alex H. Lang, Bassam Helou, Matthew Beijbom",
+      "year": 2020,
+      "role": "Introduced projecting 2D semantic predictions onto LiDAR points via camera\u2013LiDAR calibration to transfer image semantics to 3D.",
+      "relationship_sentence": "SEAL generalizes the PointPainting idea from task-specific 2D semantic scores to distilling rich VFM signals and enforcing camera\u2013LiDAR consistency throughout pretraining and regularization."
+    },
+    {
+      "title": "xMUDA: Cross-Modal Unsupervised Domain Adaptation for 3D Semantic Segmentation",
+      "authors": "Karl Jaritz et al.",
+      "year": 2020,
+      "role": "Pioneered 2D\u20133D consistency and cross-modal self-training to reduce reliance on 3D labels.",
+      "relationship_sentence": "SEAL adopts and extends cross-modal consistency by aligning camera and LiDAR both spatially and temporally, but does so with off-the-shelf VFMs and without any 2D/3D annotations during pretraining."
+    },
+    {
+      "title": "OpenScene: 3D Scene Understanding with Open Vocabulary",
+      "authors": "Zan Gojcic et al.",
+      "year": 2023,
+      "role": "Demonstrated distilling open-vocabulary 2D vision-language features into 3D via multi-view lifting and cross-view consistency.",
+      "relationship_sentence": "SEAL builds on the 2D-to-3D distillation paradigm of OpenScene, pushing it to automotive LiDAR sequences and adding explicit temporal consistency and point-to-segment regularization for scalable, label-free pretraining."
+    },
+    {
+      "title": "CLIP: Learning Transferable Visual Models From Natural Language Supervision",
+      "authors": "Alec Radford et al.",
+      "year": 2021,
+      "role": "Established vision-language foundation features that enable open-vocabulary supervision and transfer without task-specific labels.",
+      "relationship_sentence": "SEAL leverages the generalizability of VFMs like CLIP (often via downstream open-vocabulary segmenters) as teachers whose semantics are distilled into 3D representations."
+    },
+    {
+      "title": "PointContrast: Unsupervised Pre-training for 3D Point Cloud Understanding",
+      "authors": "Saining Xie et al.",
+      "year": 2020,
+      "role": "Showed that spatial correspondence and multi-view/temporal constraints can self-supervise robust 3D features.",
+      "relationship_sentence": "SEAL\u2019s spatial\u2013temporal regularization across point cloud sequences echoes PointContrast\u2019s correspondence-based self-supervision, but augments it with cross-modal VFM guidance."
+    },
+    {
+      "title": "OpenSeg: Scaling Open-Vocabulary Image Segmentation with Image-level Supervision",
+      "authors": "Xiuye Gu, Golnaz Ghiasi, Yin Cui, Tsung-Yi Lin, Ruoming Pang, Quoc V. Le",
+      "year": 2023,
+      "role": "Provides dense, open-vocabulary segmentation features from image-level supervision that can act as a strong 2D teacher.",
+      "relationship_sentence": "SEAL benefits from teachers like OpenSeg to transfer category-agnostic and open-vocabulary cues into 3D, improving scalability and generalizability without 2D/3D labels."
+    }
+  ],
+  "synthesis_narrative": "SEAL\u2019s core idea\u2014scalable, label-free pretraining of LiDAR sequence segmenters by distilling vision foundation models\u2014stands on three converging lines of work. First, PointPainting established the practical bridge between cameras and LiDAR by projecting 2D semantics onto 3D points via calibration, while xMUDA formalized camera\u2013LiDAR consistency and cross-modal self-training to reduce 3D label needs. SEAL generalizes both, replacing task-specific 2D predictors and supervised signals with powerful VFMs and enforcing consistency at both camera\u2013LiDAR and point-to-segment levels.\nSecond, the rise of VFMs provides the supervisory breadth SEAL exploits. SAM offers robust, promptable masks that transfer fine-grained, category-agnostic boundaries; CLIP and OpenSeg contribute open-vocabulary, transferable semantics. Prior 3D open-vocabulary efforts like OpenScene showed that multi-view lifting of 2D VLM features can endow 3D scenes with rich semantics without 3D annotations. SEAL extends this to the challenging automotive setting, treating long LiDAR sequences and varied sensors in an off-the-shelf manner.\nThird, unsupervised 3D representation learning demonstrated that spatial correspondences and temporal coherence are powerful regularizers\u2014PointContrast being emblematic. SEAL integrates similar spatiotemporal constraints but anchors them to VFM-derived segments, yielding more structured supervision. By unifying these strands\u20142D-to-3D projection and consistency, VFM-based supervision, and spatiotemporal regularization\u2014SEAL achieves scalable, consistent, and generalizable segmentation across diverse point cloud datasets without 2D or 3D annotations during pretraining.",
+  "analysis_timestamp": "2026-01-07T00:02:04.859273"
+}

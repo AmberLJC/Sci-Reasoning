@@ -1,0 +1,90 @@
+{
+  "prior_works": [
+    {
+      "title": "Diffusion Convolutional Recurrent Neural Network: Data-Driven Traffic Forecasting",
+      "authors": [
+        "Yaguang Li",
+        "Rose Yu",
+        "Cyrus Shahabi",
+        "Yan Liu"
+      ],
+      "year": 2018,
+      "role": "Foundational spatiotemporal graph modeling for road-networked signals",
+      "relationship_sentence": "TransferTraj\u2019s region-agnostic trajectory encoder builds on the idea of modeling mobility over networked spatial structures popularized by DCRNN, while pushing beyond sensor-bound settings to trajectories that must generalize across different cities and maps."
+    },
+    {
+      "title": "Spatio-Temporal Graph Convolutional Networks: A Deep Learning Framework for Traffic Forecasting",
+      "authors": [
+        "Bing Yu",
+        "Haoteng Yin",
+        "Zhanxing Zhu"
+      ],
+      "year": 2018,
+      "role": "Graph convolutional architectures for spatiotemporal dynamics",
+      "relationship_sentence": "ST-GCN\u2019s formulation of joint spatial-temporal operators informs TransferTraj\u2019s design choice to encode movement patterns and spatial topology in a unified module that remains stable under region changes."
+    },
+    {
+      "title": "Graph WaveNet for Deep Spatial-Temporal Graph Modeling",
+      "authors": [
+        "Zonghan Wu",
+        "Shirui Pan",
+        "Guodong Long",
+        "Jing Jiang",
+        "Chengqi Zhang"
+      ],
+      "year": 2019,
+      "role": "Advanced spatiotemporal graph forecasting with learnable diffusion kernels",
+      "relationship_sentence": "TransferTraj inherits the notion of learnable, data-driven spatial connectivity (as in Graph WaveNet) to capture city-specific dynamics, while introducing mechanisms to transfer those representations across regions without retraining."
+    },
+    {
+      "title": "ST-MetaNet: Entity-Aware Spatio-Temporal Meta-Learning for Traffic Forecasting",
+      "authors": [
+        "Yaguang Li",
+        "Rose Yu",
+        "Cyrus Shahabi",
+        "Yan Liu"
+      ],
+      "year": 2019,
+      "role": "Meta-learning for cross-entity/cross-region adaptation in spatiotemporal tasks",
+      "relationship_sentence": "TransferTraj directly addresses the same cross-region challenge as ST-MetaNet but replaces episodic meta-learning with a single transferable trajectory model that does not require per-region finetuning."
+    },
+    {
+      "title": "SimCLR: A Simple Framework for Contrastive Learning of Visual Representations",
+      "authors": [
+        "Ting Chen",
+        "Simon Kornblith",
+        "Mohammad Norouzi",
+        "Geoffrey Hinton"
+      ],
+      "year": 2020,
+      "role": "Self-supervised contrastive pretraining paradigm",
+      "relationship_sentence": "TransferTraj adapts contrastive/self-supervised pretraining principles popularized by SimCLR to trajectories to learn task-agnostic representations that support downstream transfer without retraining."
+    },
+    {
+      "title": "Perceiver IO: A General Architecture for Structured Inputs & Outputs",
+      "authors": [
+        "Andrew Jaegle",
+        "Sebastian Borgeaud",
+        "Jean-Baptiste Alayrac",
+        "et al."
+      ],
+      "year": 2021,
+      "role": "Unified input-output interface enabling multi-task conditioning",
+      "relationship_sentence": "Perceiver IO\u2019s separation of a general latent encoder from flexible task-specific IO hints at TransferTraj\u2019s task-transfer design: a single trajectory backbone paired with lightweight, configurable IO heads for different tasks."
+    },
+    {
+      "title": "Parameter-Efficient Transfer Learning for NLP",
+      "authors": [
+        "Neil Houlsby",
+        "Andrei Giurgiu",
+        "Stanislaw Jastrzebski",
+        "et al."
+      ],
+      "year": 2019,
+      "role": "Adapters for efficient task transfer without full retraining",
+      "relationship_sentence": "The adapter-tuning idea motivates TransferTraj\u2019s lightweight task modules, enabling new task instantiation with minimal parameters while preserving a frozen, region-transferable trajectory backbone."
+    }
+  ],
+  "synthesis_narrative": "TransferTraj targets two traditionally disjoint challenges in mobility modeling: cross-region generalization and cross-task reuse of a single model. Its region-transfer backbone is grounded in the spatiotemporal graph literature\u2014DCRNN, ST-GCN, and Graph WaveNet established that mobility dynamics are best captured by operators that couple temporal modeling with data-driven spatial connectivity. TransferTraj internalizes this principle for trajectories rather than fixed sensor graphs, then introduces mechanisms to make the learned movement representations portable across cities without re-training. On the task-transfer side, the paper inherits a core systems idea from Perceiver IO: decouple a powerful, modality-agnostic latent encoder from flexible IO transforms. By pairing a universal trajectory encoder with lightweight output mappings, TransferTraj can serve heterogeneous tasks (e.g., next-location, destination, travel time) without rebuilding the model. This is reinforced by parameter-efficient transfer ideas (adapters) that minimize per-task parameters while leaving the backbone intact. Finally, self-supervised pretraining\u2014epitomized by SimCLR\u2014supplies a robust path to task-agnostic trajectory embeddings that avoid overfitting to any single region or task. Compared to meta-learning approaches like ST-MetaNet that adapt models to new regions episodically, TransferTraj emphasizes a single, transferable representation that works across regions and tasks out-of-the-box, unifying prior insights into a cohesive trajectory foundation model for mobility.",
+  "analysis_timestamp": "2026-01-07T00:21:32.339052"
+}

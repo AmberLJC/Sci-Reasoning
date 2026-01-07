@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Transformer-XL: Attentive Language Models Beyond a Fixed-Length Context",
+      "authors": "Zihang Dai et al.",
+      "year": 2019,
+      "role": "Introduced segment-level recurrence and a reusable memory to extend Transformer context over long sequences.",
+      "relationship_sentence": "Memo inherits the notion of reusing summarized past information across segments from Transformer-XL, but replaces raw cached activations with learned, in-sequence summarization tokens tailored for RL."
+    },
+    {
+      "title": "Stabilizing Transformers for Reinforcement Learning (GTrXL)",
+      "authors": "Emilio Parisotto et al.",
+      "year": 2020,
+      "role": "Adapted Transformer-XL to RL with gating and stabilization, demonstrating effective long-horizon credit assignment in POMDPs.",
+      "relationship_sentence": "Memo builds on the GTrXL paradigm of transformer-based RL policies and extends it with an explicit mechanism to write and retrieve compact memory summaries during training."
+    },
+    {
+      "title": "Compressive Transformers for Long-Range Sequence Modelling",
+      "authors": "Jack W. Rae et al.",
+      "year": 2020,
+      "role": "Proposed learnable compression of old activations into a compact memory to overcome context limits.",
+      "relationship_sentence": "Memo adopts the core idea of compressing historical context but operationalizes it via periodic, learnable summarization tokens interleaved with inputs rather than a separate compressed buffer."
+    },
+    {
+      "title": "MERLIN: Unsupervised Predictive Memory in a Goal-Directed Agent",
+      "authors": "Greg Wayne et al.",
+      "year": 2018,
+      "role": "Introduced a memory system that learns compressed predictive representations to support long-horizon RL.",
+      "relationship_sentence": "Memo echoes MERLIN\u2019s principle of learning compact, useful summaries of experience, embedding this idea directly into a Transformer policy through learned summary tokens."
+    },
+    {
+      "title": "Neural Map: Structured External Memory for Deep Reinforcement Learning",
+      "authors": "Emilio Parisotto and Ruslan Salakhutdinov",
+      "year": 2017,
+      "role": "Proposed explicit write/read memory structures for embodied agents, enabling long-term spatial reasoning.",
+      "relationship_sentence": "Memo shifts from spatially structured external memories like Neural Map to a parameterized, token-based memory that periodically writes summaries while retaining efficient retrieval for embodied tasks."
+    },
+    {
+      "title": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+      "authors": "Lili Chen et al.",
+      "year": 2021,
+      "role": "Showed that Transformer policies can model trajectories directly but are constrained by finite context windows.",
+      "relationship_sentence": "Memo addresses the context-length bottleneck highlighted by Decision Transformer by learning to summarize and retain salient past information beyond the raw token window."
+    },
+    {
+      "title": "Set Transformer: A Framework for Attention-based Permutation-Invariant Set Processing",
+      "authors": "Juho Lee et al.",
+      "year": 2019,
+      "role": "Introduced inducing-point attention, using learnable latent tokens to summarize large input sets.",
+      "relationship_sentence": "Memo\u2019s periodic summarization tokens are conceptually akin to Set Transformer\u2019s inducing points, serving as learnable latent summaries that the policy can query efficiently."
+    }
+  ],
+  "synthesis_narrative": "Memo\u2019s core idea\u2014learning to create and retrieve compact summaries within a Transformer policy to operate over long horizons\u2014emerges at the intersection of memory-augmented RL and long-context Transformers. On the RL side, MERLIN and Neural Map established that agents benefit from writing compressed, queryable memories of past experience, especially in partially observable, embodied settings. These works crystallized the need for explicit mechanisms that distill high-dimensional sensory streams into actionable state abstractions. On the sequence modeling side, Transformer-XL and its RL adaptation GTrXL demonstrated how segment-level recurrence enables long-range dependencies in Transformer policies, but still leaves models vulnerable to context overflow. Compressive Transformer advanced this further by showing that older activations can be learnably compressed without sacrificing access, directly motivating Memo\u2019s emphasis on selective retention rather than full-context reliance. Complementing these, Set Transformer\u2019s inducing-point tokens provided a general blueprint for learnable latent summaries that can stand in for large input sets, a concept Memo recasts temporally as periodic summarization tokens interleaved with sensory inputs. Decision Transformer highlighted the practical limitations of vanilla Transformer policies in RL due to finite context, underscoring the importance of memory efficiency. Synthesizing these threads, Memo embeds learnable summarization tokens into the policy\u2019s training loop, teaching the agent when and what to write and how to retrieve it, thereby achieving memory efficiency and long-horizon competence in embodied RL.",
+  "analysis_timestamp": "2026-01-07T00:21:33.129845"
+}

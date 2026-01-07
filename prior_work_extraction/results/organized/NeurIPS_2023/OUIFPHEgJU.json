@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+      "authors": "Edward J. Hu, Yelong Shen, Philip Wallis, Zeyuan Allen-Zhu, et al.",
+      "year": 2021,
+      "role": "Core parameter-efficient finetuning mechanism",
+      "relationship_sentence": "QLoRA\u2019s central training recipe freezes the base model and learns low-rank adapters, directly inheriting LoRA\u2019s idea to update a small number of rank-limited parameters while keeping the pretrained weights fixed."
+    },
+    {
+      "title": "LLM.int8(): 8-bit Matrix Multiplication for Transformers at Scale",
+      "authors": "Tim Dettmers, Mike Lewis, Younes Belkada, Luke Zettlemoyer",
+      "year": 2022,
+      "role": "Foundation for low-bit inference/training plumbing and outlier-aware quantization",
+      "relationship_sentence": "QLoRA builds on the outlier-aware, blockwise quantization and kernel infrastructure introduced in LLM.int8(), extending the approach from 8-bit to 4-bit weights and enabling backprop through a quantized model."
+    },
+    {
+      "title": "GPTQ: Accurate Post-Training Quantization for Generative Pretrained Transformers",
+      "authors": "Elias Frantar, Dan Alistarh",
+      "year": 2022,
+      "role": "Evidence that 4-bit weight-only quantization preserves LLM quality",
+      "relationship_sentence": "GPTQ demonstrated that 4-bit post-training quantization can maintain LLM accuracy, directly motivating QLoRA\u2019s choice to push finetuning onto a 4-bit\u2013quantized backbone and to engineer a better 4-bit format (NF4)."
+    },
+    {
+      "title": "ZeRO-Infinity: Breaking the GPU Memory Wall for Extreme Scale Deep Learning",
+      "authors": "Samyam Rajbhandari, Jeff Rasley, Olatunji Ruwase, Yuxiong He",
+      "year": 2021,
+      "role": "Memory offloading/paging paradigm for training at scale",
+      "relationship_sentence": "QLoRA\u2019s paged optimizers echo ZeRO-Infinity\u2019s insight that paging/offloading can tame peak memory, adapting the idea to optimizer-state management to prevent OOM spikes during finetuning."
+    },
+    {
+      "title": "Parameter-Efficient Transfer Learning for NLP",
+      "authors": "Neil Houlsby, Andrei Giurgiu, Stanislaw Jastrzebski, et al.",
+      "year": 2019,
+      "role": "Foundational adapters concept for PEFT",
+      "relationship_sentence": "QLoRA\u2019s use of lightweight trainable modules atop frozen backbones is rooted in adapter-based PEFT, of which LoRA is a specialized and more scalable instantiation."
+    },
+    {
+      "title": "Least Squares Quantization in PCM",
+      "authors": "Stuart P. Lloyd",
+      "year": 1982,
+      "role": "Quantization theory underpinning NF4 codebook design",
+      "relationship_sentence": "QLoRA\u2019s NF4 format leverages quantization principles optimized for normally distributed signals, directly drawing on Lloyd\u2013Max quantization theory to construct an information-theoretically optimal 4-bit codebook for Gaussian-like weight distributions."
+    }
+  ],
+  "synthesis_narrative": "QLoRA\u2019s core contribution\u2014full-quality finetuning of very large LLMs on a single GPU\u2014emerges by fusing parameter-efficient adaptation with aggressively low-bit quantization and careful memory engineering. The parameter-efficiency piece is inherited from LoRA, which showed that adapting a model via trainable low-rank matrices atop a frozen backbone preserves quality while minimizing trainable parameters. This approach itself is grounded in earlier adapter-based PEFT, which established the viability of adding small modules to large pretrained networks.\nOn the quantization side, LLM.int8() supplied the practical and conceptual foundation: outlier-aware, blockwise low-bit quantization for Transformers with robust kernels, proving that substantial compression can retain accuracy. GPTQ then pushed the boundary to 4-bit weight-only post-training quantization for LLMs, indicating that such extreme compression remains viable. QLoRA extends these insights by introducing NF4, a 4-bit format guided by Lloyd\u2013Max quantization theory to be optimal for near-Gaussian weight distributions, and by adding double quantization to further reduce memory.\nFinally, scaling finetuning to 65B parameters requires taming transient memory peaks. Here QLoRA\u2019s paged optimizers echo ZeRO-Infinity\u2019s offloading/paging paradigm, but tailor it to optimizer-state management for stable, single-GPU finetuning. Together, these strands\u2014LoRA-style PEFT, robust low-bit quantization (from 8-bit foundations to 4-bit viability), and paging-based memory control\u2014directly coalesce into QLoRA\u2019s efficient finetuning recipe.",
+  "analysis_timestamp": "2026-01-07T00:02:04.794452"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "The variational formulation of the Fokker\u2013Planck equation",
+      "authors": "Richard Jordan, David Kinderlehrer, Felix Otto",
+      "year": 1998,
+      "role": "Theoretical foundation (JKO scheme)",
+      "relationship_sentence": "Introduces the JKO minimizing-movement scheme for Wasserstein gradient flows; JKO-iFlow explicitly unfolds these discrete-time steps as stacked residual blocks to train each step block-wise."
+    },
+    {
+      "title": "Gradient Flows: In Metric Spaces and in the Space of Probability Measures",
+      "authors": "Luigi Ambrosio, Nicola Gigli, Giuseppe Savar\u00e9",
+      "year": 2008,
+      "role": "Theoretical foundation (Wasserstein gradient flows)",
+      "relationship_sentence": "Provides the rigorous framework for Wasserstein gradient flows and convergence of JKO schemes, underpinning the probabilistic trajectory interpretation and justifying adaptive time-stepping in JKO-iFlow."
+    },
+    {
+      "title": "A computational fluid mechanics solution to the Monge\u2013Kantorovich mass transfer problem",
+      "authors": "Jean-David Benamou, Yann Brenier",
+      "year": 2000,
+      "role": "Optimal transport dynamic formulation",
+      "relationship_sentence": "The dynamic OT (Benamou\u2013Brenier) view links probability transport to velocity fields and kinetic energy, motivating JKO-iFlow\u2019s ODE-based parameterization of transport between distributions under the Wasserstein metric."
+    },
+    {
+      "title": "Neural Ordinary Differential Equations",
+      "authors": "Ricky T. Q. Chen, Yulia Rubanova, Jesse Bettencourt, David Duvenaud",
+      "year": 2018,
+      "role": "Continuous-time flow parameterization",
+      "relationship_sentence": "Introduces neural ODEs and the continuous change-of-variables formula that JKO-iFlow adopts to realize a neural ODE flow network and compute likelihoods along continuous trajectories."
+    },
+    {
+      "title": "Residual Flows for Invertible Generative Modeling",
+      "authors": "Ricky T. Q. Chen, Jens Behrmann, David Duvenaud, J\u00f6rn-Henrik Jacobsen",
+      "year": 2019,
+      "role": "Invertible residual architecture for flows",
+      "relationship_sentence": "Establishes invertible residual blocks for likelihood-based flows; JKO-iFlow uses such residual stacking, but trains blocks via JKO-inspired proximal steps rather than end-to-end."
+    },
+    {
+      "title": "Stable Architectures for Deep Neural Networks",
+      "authors": "Eldad Haber, Lars Ruthotto",
+      "year": 2017,
+      "role": "ResNets as ODE time-stepping; stability and time parameterization",
+      "relationship_sentence": "Connects residual networks to time-discretized ODEs and emphasizes step-size/stability considerations, informing JKO-iFlow\u2019s interpretation of each block as a time step and its adaptive time reparameterization."
+    },
+    {
+      "title": "Score-Based Generative Modeling through Stochastic Differential Equations",
+      "authors": "Yang Song, Jascha Sohl-Dickstein, Diederik P. Kingma, Abhishek Kumar, Stefano Ermon, Ben Poole",
+      "year": 2021,
+      "role": "Predecessor baseline motivating departure",
+      "relationship_sentence": "Establishes SDE-based score models requiring score matching and SDE sampling; JKO-iFlow is designed to avoid these by using JKO-driven deterministic ODE flows with block-wise likelihood training."
+    }
+  ],
+  "synthesis_narrative": "JKO-iFlow\u2019s core insight is to recast normalizing-flow training as a discrete-time Wasserstein gradient flow and to implement each minimizing-movement (JKO) step with an invertible residual block trained greedily. This builds directly on Jordan\u2013Kinderlehrer\u2013Otto\u2019s variational time-discretization of diffusion, which provides the proximal objective per step, and on the Ambrosio\u2013Gigli\u2013Savar\u00e9 theory that justifies working in the Wasserstein space and supports adaptive time stepping. The Benamou\u2013Brenier dynamic formulation of optimal transport connects these gradient-flow updates to velocity fields and energy along probability paths, aligning naturally with an ODE parameterization of transport.\nNeural ODEs supply the continuous change-of-variables machinery to compute likelihoods along trajectories, making it feasible to implement a normalizing flow as a neural ODE while retaining exact log-density evaluation. Residual Flows demonstrate how to realize invertible residual blocks with tractable log-determinants; JKO-iFlow leverages this architecture but departs in training: instead of end-to-end optimization of a long flow, it performs block-wise training consistent with the JKO proximal updates. The PDE/ODE perspective of Haber and Ruthotto motivates viewing residual networks as time discretizations, guiding the use of step sizes and an adaptive time reparameterization to progressively refine the probability trajectory. Finally, compared to score-based SDE approaches, which require score matching and stochastic trajectory sampling, JKO-iFlow attains high-dimensional generative performance without SDE sampling by exploiting the deterministic, likelihood-trained, JKO-unfolded ODE flow.",
+  "analysis_timestamp": "2026-01-06T23:42:49.053525"
+}

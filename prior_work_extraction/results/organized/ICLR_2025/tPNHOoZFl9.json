@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Direct Preference Optimization: Your Language Model is Secretly a Reward Model",
+      "authors": "Alexander N. Rafailov et al.",
+      "year": 2023,
+      "arxiv_id": "2305.18290",
+      "role": "Baseline",
+      "relationship_sentence": "The paper\u2019s step-wise influence decomposition explicitly analyzes how updates change the chosen\u2013rejected log-odds margin that DPO directly optimizes, providing a unified interpretation of DPO\u2019s learning behavior during finetuning."
+    },
+    {
+      "title": "Training a Helpful and Harmless Assistant with Reinforcement Learning from Human Feedback",
+      "authors": "Yuntao Bai et al.",
+      "year": 2022,
+      "arxiv_id": "2204.05862",
+      "role": "Foundation",
+      "relationship_sentence": "This work established the pairwise preference-learning formulation and datasets underpinning modern preference tuning, which the paper\u2019s dynamics framework targets to explain cross-example influence among candidate responses."
+    },
+    {
+      "title": "Training language models to follow instructions with human feedback",
+      "authors": "Long Ouyang et al.",
+      "year": 2022,
+      "arxiv_id": "2203.02155",
+      "role": "Foundation",
+      "relationship_sentence": "The instruction-tuning and SFT+RLHF protocols formalized here define the finetuning regimes whose example-to-example influence and post-finetuning behaviors the paper analyzes under a unified dynamics framework."
+    },
+    {
+      "title": "Estimating Training Data Influence by Tracing Gradient Descent",
+      "authors": "Pruthi et al.",
+      "year": 2020,
+      "arxiv_id": "2002.08484",
+      "role": "Inspiration",
+      "relationship_sentence": "The idea of decomposing influence along the optimization trajectory directly motivates the paper\u2019s step-wise accumulation analysis of how each gradient step redistributes probability mass across potential responses."
+    },
+    {
+      "title": "The Implicit Bias of Gradient Descent on Separable Data",
+      "authors": "Daniel Soudry et al.",
+      "year": 2018,
+      "arxiv_id": "1710.10345",
+      "role": "Inspiration",
+      "relationship_sentence": "Results showing cross-entropy gradient descent drives margins to grow inform the paper\u2019s \u2018squeezing effect\u2019 explanation by extending margin-growth intuitions to token-level logit dynamics in LLM finetuning."
+    },
+    {
+      "title": "The Curious Case of Neural Text Degeneration",
+      "authors": "Ari Holtzman et al.",
+      "year": 2020,
+      "arxiv_id": "1904.09751",
+      "role": "Gap Identification",
+      "relationship_sentence": "This work\u2019s identification of repetition and degeneration under likelihood-based generation motivates the paper\u2019s analysis of how finetuning dynamics amplify phrase repetition via cross-example influence."
+    }
+  ],
+  "synthesis_narrative": "Direct Preference Optimization formalizes preference learning as maximizing the log-odds margin between chosen and rejected responses, making the update direction and its effect on response probabilities explicit. RLHF for helpful and harmless assistants established pairwise preference datasets and the Bradley\u2013Terry\u2013style modeling that now anchor preference tuning objectives. Instruction-tuned systems via SFT and RLHF defined the dominant finetuning regimes and surfaced practical alignment\u2013factuality tradeoffs, seeding observations about post-finetuning behaviors. TracIn showed that training influence can be decomposed step-by-step along the optimization trajectory, providing a concrete way to attribute how gradients from specific examples accumulate over time. Implicit bias results for cross-entropy gradient descent demonstrated that margins grow even without explicit regularization, suggesting systematic probability reallocation as training proceeds. Finally, neural text degeneration work highlighted that likelihood-driven models tend toward repetitive, high-probability phrases, a phenomenon plausibly affected by how finetuning reshapes logits across alternatives.\n\nTaken together, these works exposed a gap: we lacked a principled, step-wise account of how finetuning objectives\u2014spanning SFT and preference optimization\u2014redistribute probability mass among competing responses and thereby induce repetition or hallucination. By marrying trajectory-based influence decomposition with the explicit log-odds structure of preference objectives and the margin-growth implicit bias of cross-entropy, the paper synthesizes a unified dynamics view. This perspective naturally yields the \u2018squeezing effect,\u2019 where growing margins compress probability for neutral alternatives, explaining strengthened hallucinations and phrase repetition after finetuning across both instruction and preference-tuning algorithms.",
+  "target_paper": {
+    "title": "Learning Dynamics of LLM Finetuning",
+    "authors": "Yi Ren, Danica J. Sutherland",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "oral",
+    "keywords": "Learning dynamics, LLM, finetuning, DPO",
+    "abstract": "Learning dynamics, which describes how the learning of specific training examples influences the model's predictions on other examples, \ngives us a powerful tool for understanding the behavior of deep learning systems. We study the learning dynamics of large language models during different types of finetuning, by analyzing the step-wise decomposition of how influence accumulates among different potential responses. Our framework allows a uniform interpretation of many interesting observations about the training of popular algorithms for both instruction tuning and preference tuning. In particular, we propose a hypothetical explanation of why specific types of hallucination are strengthened after finetuning, e.g., the model might use phrases or facts in the response for question B to answer question A, or the model might keep repeating similar simple phrases when generating responses. We also extend our framework and highlight a unique ``squeezing effect'' to explain a previously obser",
+    "openreview_id": "tPNHOoZFl9",
+    "forum_id": "tPNHOoZFl9"
+  },
+  "analysis_timestamp": "2026-01-06T20:01:32.934580"
+}

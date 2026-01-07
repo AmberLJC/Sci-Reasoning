@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "The Curse of Recursion: Training on Generated Data Makes Models Forget",
+      "authors": "Vitaly Shumailov; Yarin Gal; Florian Tram\u00e8r; Nicholas Carlini; \u00dalfar Erlingsson; et al.",
+      "year": 2023,
+      "role": "Foundational analysis of self-consuming generative models and collapse",
+      "relationship_sentence": "This paper provides the central negative result on iterative retraining without curation\u2014model collapse\u2014against which the present work positions its theory by showing that human-curated selection in the loop reverses the dynamic and yields preference optimization."
+    },
+    {
+      "title": "Deep Reinforcement Learning from Human Preferences",
+      "authors": "Paul F. Christiano; Jan Leike; Tom B. Brown; Miljan Martic; Shane Legg; Dario Amodei",
+      "year": 2017,
+      "role": "Introduced preference-based learning as an objective",
+      "relationship_sentence": "The authors\u2019 formalization of learning from pairwise human comparisons underpins this paper\u2019s preference objective, enabling the analysis that curated selections of model outputs correspond to optimizing human preference functions."
+    },
+    {
+      "title": "Learning to Summarize with Human Feedback",
+      "authors": "Nisan Stiennon; Long Ouyang; Jeffrey Wu; Daniel M. Ziegler; Ryan Lowe; et al.",
+      "year": 2020,
+      "role": "Operational pipeline for pairwise preference data from multiple candidates",
+      "relationship_sentence": "By demonstrating best-of-k/paired comparison collection and training, this work models the same user curation mechanism (selecting among multiple generations) that the present paper abstracts and analyzes in self-consuming loops."
+    },
+    {
+      "title": "Training language models to follow instructions with human feedback",
+      "authors": "Long Ouyang; Jeffrey Wu; Xu Jiang; Diogo Almeida; Carroll Wainwright; Pamela Mishkin; et al.",
+      "year": 2022,
+      "role": "Established RLHF as a practical route to align models with preferences",
+      "relationship_sentence": "InstructGPT shows that learning from curated human preferences steers models toward desired behavior; the present paper provides theory that an analogous, web-scale curation-and-retrain loop provably optimizes those preferences."
+    },
+    {
+      "title": "Direct Preference Optimization: Your Language Model is Secretly a Reward Model",
+      "authors": "Rafael Rafailov; Shengjia Zhao; Arnav Sharma; Kshitij Gupta; Stephen Tu; Chelsea Finn; et al.",
+      "year": 2023,
+      "role": "Preference optimization without RL via a likelihood-based objective",
+      "relationship_sentence": "DPO links pairwise preferences to a tractable likelihood objective; the current paper\u2019s guarantees can be viewed as showing that iterative MLE on curated selections implicitly performs a DPO-like preference improvement."
+    },
+    {
+      "title": "Interactively Optimizing Information Retrieval Systems as a Dueling Bandits Problem",
+      "authors": "Yisong Yue; Thorsten Joachims",
+      "year": 2009,
+      "role": "Theory for learning from relative (duel/choice) feedback",
+      "relationship_sentence": "The dueling bandits framework formalizes learning from relative choices among candidates; this paper leverages an analogous best-of-k selection model to characterize how curation yields consistent preference-improving updates."
+    },
+    {
+      "title": "Constitutional AI: Harmlessness from AI Feedback",
+      "authors": "Yuntao Bai; Andy Jones; Kamal Ndousse; Amanda Askell; Anna Chen; et al.",
+      "year": 2022,
+      "role": "Demonstrated best-of-N selection and supervised training on chosen outputs",
+      "relationship_sentence": "By showing that selecting higher-scoring outputs and retraining on them improves alignment, this work provides the empirical precedent that the present paper formalizes in the context of self-consuming data pipelines."
+    }
+  ],
+  "synthesis_narrative": "The key contribution of the NeurIPS 2024 paper is to show, theoretically, that self-consuming generative models do not inevitably collapse when their synthetic outputs are curated by users; instead, iterative retraining on curated selections provably optimizes human preferences. This advances the foundational result of Shumailov et al., who demonstrated collapse in recursive training without safeguards. The present work identifies curation\u2014users choosing among multiple candidates\u2014as the safeguard, grounding it in the preference-learning paradigm initiated by Christiano et al. and instantiated at scale by Stiennon et al. and Ouyang et al. These prior works define and operationalize the objective (maximize human preferences) and the data-collection mechanism (best-of-k choices) that the new theory formalizes within a closed-loop retraining setting.\n\nMethodologically, the paper\u2019s analysis aligns curated selection with likelihood-based preference optimization, echoing DPO\u2019s insight that pairwise comparisons can be optimized via simple MLE-style updates. The choice-based feedback structure is naturally modeled by dueling bandits, which justify learning from relative winners among multiple samples\u2014precisely the interface many generative systems expose. Finally, empirical alignment pipelines such as Constitutional AI validate the practical effectiveness of best-of-N selection and SFT on chosen outputs; the current paper explains why repeating this process over web-scale data does not degrade but instead monotically improves preference alignment under appropriate mixing and curation conditions. Together, these works directly inform the paper\u2019s core idea: curation transforms self-consumption from a collapse-inducing loop into a provably preference-optimizing dynamic.",
+  "analysis_timestamp": "2026-01-06T23:33:35.526388"
+}

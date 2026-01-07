@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Continual Learning Through Synaptic Intelligence",
+      "authors": "Friedemann Zenke, Ben Poole, Surya Ganguli",
+      "year": 2017,
+      "role": "Foundational regularization-based continual learning method (data-free) that estimates parameter importance via a path-integral of contribution to loss.",
+      "relationship_sentence": "FedSSI directly builds on Synaptic Intelligence by tailoring its importance estimation and consolidation mechanism to the federated setting and addressing its failure modes under heterogeneous non-IID client data."
+    },
+    {
+      "title": "Overcoming Catastrophic Forgetting in Neural Networks (Elastic Weight Consolidation)",
+      "authors": "James Kirkpatrick, Razvan Pascanu, Neil C. Rabinowitz, Joel Veness, et al.",
+      "year": 2017,
+      "role": "Seminal quadratic regularization using Fisher information to protect important parameters across tasks.",
+      "relationship_sentence": "EWC provides the core regularization paradigm that FedSSI contrasts against; insights from EWC\u2019s parameter-protection framework inform FedSSI\u2019s rehearsal-free consolidation and its adaptation to CFL."
+    },
+    {
+      "title": "Memory Aware Synapses: Learning What (not) to Forget",
+      "authors": "Rahaf Aljundi, Francesca Babiloni, Mohamed Elhoseiny, Marcus Rohrbach, Tinne Tuytelaars",
+      "year": 2018,
+      "role": "Regularization-based continual learning without replay, estimating importance from sensitivity of outputs.",
+      "relationship_sentence": "MAS represents an alternative data-free consolidation strategy evaluated in CFL; FedSSI\u2019s design choices are motivated by analyzing why such regularizers work in homogeneous regimes yet degrade under client heterogeneity."
+    },
+    {
+      "title": "Learning without Forgetting",
+      "authors": "Zhizhong Li, Derek Hoiem",
+      "year": 2016,
+      "role": "Early rehearsal-free continual learning via knowledge distillation on old tasks while training on new data.",
+      "relationship_sentence": "LwF established the rehearsal-free objective of preserving prior knowledge without storing old data; FedSSI pursues the same privacy- and memory-friendly principle but via synaptic-importance regularization suitable for CFL."
+    },
+    {
+      "title": "Communication-Efficient Learning of Deep Networks from Decentralized Data (FedAvg)",
+      "authors": "H. Brendan McMahan, Eider Moore, Daniel Ramage, Seth Hampson, Blaise Ag\u00fcera y Arcas",
+      "year": 2017,
+      "role": "Foundational algorithm for federated learning using local SGD and server-side model averaging.",
+      "relationship_sentence": "FedSSI is implemented atop the FedAvg framework, integrating synaptic-importance signals into the local update/aggregation pipeline to remain compatible with standard FL deployments."
+    },
+    {
+      "title": "Federated Optimization in Heterogeneous Networks (FedProx)",
+      "authors": "Tian Li, Anit Kumar Sahu, Manzil Zaheer, Maziar Sanjabi, Ameet Talwalkar, Virginia Smith",
+      "year": 2020,
+      "role": "Addresses client heterogeneity with a proximal term to reduce client drift under non-IID data.",
+      "relationship_sentence": "FedProx\u2019s treatment of heterogeneity motivates FedSSI\u2019s focus on stabilizing local updates; FedSSI analogously constrains updates, but with synaptic-importance-aware penalties that target forgetting in CFL."
+    },
+    {
+      "title": "SCAFFOLD: Stochastic Controlled Averaging for Federated Learning",
+      "authors": "Sai Praneeth Karimireddy, Satyen Kale, Mehryar Mohri, Sashank Reddi, Sebastian Stich, Ananda Theertha Suresh",
+      "year": 2020,
+      "role": "Client-drift mitigation via control variates to handle non-IID data in FL.",
+      "relationship_sentence": "SCAFFOLD\u2019s insight on correcting client drift under non-IID partitions informs FedSSI\u2019s treatment of heterogeneity: FedSSI synchronizes and leverages synaptic-importance information to reduce drift-induced forgetting across clients."
+    }
+  ],
+  "synthesis_narrative": "FedSSI\u2019s core contribution\u2014rehearsal-free continual federated learning that remains robust under non-IID client distributions\u2014emerges at the intersection of rehearsal-free continual learning and heterogeneity-aware federated optimization. Synaptic Intelligence (Zenke et al., 2017) is the central intellectual foundation, providing a path-integral estimate of parameter importance to regularize updates without storing past samples. Elastic Weight Consolidation (Kirkpatrick et al., 2017) and Memory Aware Synapses (Aljundi et al., 2018) establish the broader regularization paradigm that protects important parameters across tasks, and they serve as key points of comparison when adapting such methods to the federated setting. Learning without Forgetting (Li & Hoiem, 2016) reinforces the rehearsal-free objective\u2014preserving prior knowledge without caching data\u2014aligning with privacy and memory constraints in CFL.\nOn the federated side, FedAvg (McMahan et al., 2017) provides the basic aggregation mechanism and practical substrate on which FedSSI operates. However, the principal challenge addressed by FedSSI is non-IID heterogeneity, where standard SI degrades. FedProx (Li et al., 2020) and SCAFFOLD (Karimireddy et al., 2020) contribute essential insights into stabilizing local training and mitigating client drift. FedSSI synthesizes these lines by making synaptic-importance estimates compatible with federated aggregation and by using them to constrain local updates in a heterogeneity-aware manner. This synergy preserves past knowledge across evolving client streams without rehearsal, achieving continual learning goals while respecting FL\u2019s privacy and resource constraints.",
+  "analysis_timestamp": "2026-01-07T00:21:32.401685"
+}

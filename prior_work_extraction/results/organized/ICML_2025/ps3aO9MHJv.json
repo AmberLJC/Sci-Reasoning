@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Inference and missing data",
+      "authors": "Donald B. Rubin",
+      "year": 1976,
+      "role": "Foundation",
+      "relationship_sentence": "Rubin\u2019s framework for MCAR/MAR/MNAR underpins the paper\u2019s problem formulation; MA models explicitly exploit contextual missingness patterns to reduce reliance on features that are likely missing given observed context."
+    },
+    {
+      "title": "Classification and Regression Trees",
+      "authors": "Leo Breiman et al.",
+      "year": 1984,
+      "role": "Foundation",
+      "relationship_sentence": "MA-DT directly modifies CART\u2019s split selection by adding a missingness-avoidance term to the impurity objective, replacing CART\u2019s post-hoc surrogate splits with a training-time preference to avoid features prone to be missing on a path."
+    },
+    {
+      "title": "C4.5: Programs for Machine Learning",
+      "authors": "J. Ross Quinlan",
+      "year": 1993,
+      "role": "Gap Identification",
+      "relationship_sentence": "C4.5\u2019s fractional routing of missing values increases model complexity and obscures interpretability; the MA framework targets this limitation by training trees to avoid querying attributes expected to be missing in the current context."
+    },
+    {
+      "title": "XGBoost: A Scalable Tree Boosting System",
+      "authors": "Tianqi Chen et al.",
+      "year": 2016,
+      "role": "Baseline",
+      "relationship_sentence": "XGBoost\u2019s sparsity-aware default direction handles missing inputs at split time; MA-GBT extends this baseline by augmenting the split objective with a penalty that discourages splits likely to hit the default due to contextual missingness."
+    },
+    {
+      "title": "The Greedy Miser: Learning under Test-time Budgets",
+      "authors": "Z. Xu et al.",
+      "year": 2012,
+      "role": "Inspiration",
+      "relationship_sentence": "Greedy Miser introduced training objectives that penalize feature usage via test-time costs; MA generalizes this idea by treating expected missingness (context-dependent) as a cost, thus regularizing models to avoid requiring missing features."
+    },
+    {
+      "title": "missForest\u2014non-parametric missing value imputation for mixed-type data",
+      "authors": "Daniel J. Stekhoven et al.",
+      "year": 2012,
+      "role": "Gap Identification",
+      "relationship_sentence": "Imputation-first pipelines like missForest can introduce bias and blur interpretability; MA directly optimizes predictive models to minimize dependence on imputed features, addressing this documented weakness of impute-then-model strategies."
+    },
+    {
+      "title": "The adaptive lasso and its oracle properties",
+      "authors": "Hui Zou",
+      "year": 2006,
+      "role": "Extension",
+      "relationship_sentence": "Adaptive Lasso\u2019s feature-specific penalty weights provide the template for MA-LASSO, which assigns penalties proportional to expected missingness so sparse linear models learn to avoid features likely to be absent at test time."
+    }
+  ],
+  "synthesis_narrative": "The core idea of missingness-avoiding (MA) learning\u2014regularizing models to minimize reliance on features that will be absent at test time\u2014emerges from three converging lines of work. First, Rubin\u2019s missing-data theory established the formal lens (MCAR/MAR/MNAR) through which contextual missingness can be modeled and anticipated, enabling MA to quantify a feature\u2019s expected availability given observed context. Second, classical decision-tree methods (CART and C4.5) provided the algorithmic substrate and highlighted limitations the authors target: surrogate splits and fractional routing handle missingness post hoc, often at the cost of complexity and interpretability. MA-DT/MA-GBT directly modify split objectives, teaching trees to prefer branches that rarely need missing values under the current path\u2019s context. Third, test-time cost-aware learning\u2014epitomized by the Greedy Miser\u2014showed that incorporating feature costs into the training loss can steer models away from expensive features. MA adopts and refines this principle by redefining the \u201ccost\u201d as the context-dependent risk of missingness, rather than monetary or compute cost. To ground the linear model instantiation, Adaptive Lasso supplies the mechanism for feature-specific penalties, which MA-LASSO repurposes to encode missingness risk. Finally, imputation-based pipelines such as missForest motivate the approach: while effective, they can induce bias and obscure how features drive predictions. MA replaces impute-then-predict with learning objectives that directly minimize dependence on imputed or unavailable inputs while preserving interpretability.",
+  "analysis_timestamp": "2026-01-06T23:07:19.580912"
+}

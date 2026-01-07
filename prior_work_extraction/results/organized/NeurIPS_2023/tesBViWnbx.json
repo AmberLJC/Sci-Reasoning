@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "High-Resolution Image Synthesis with Latent Diffusion Models",
+      "authors": "Andreas Rombach, Robin Blattmann, Dominik Lorenz, Patrick Esser, Bj\u00f6rn Ommer",
+      "year": 2022,
+      "role": "target_model_foundation",
+      "relationship_sentence": "ATM specifically targets Stable Diffusion-style latent diffusion pipelines, so the LDM architecture and text-conditioning mechanism defined by this work are the attack\u2019s primary substrate."
+    },
+    {
+      "title": "Learning Transferable Visual Models From Natural Language Supervision (CLIP)",
+      "authors": "Alec Radford et al.",
+      "year": 2021,
+      "role": "text_image_alignment_backbone",
+      "relationship_sentence": "Because Stable Diffusion uses a CLIP text encoder, ATM\u2019s gradient-based prompt perturbations directly exploit the CLIP-driven text embedding space that conditions the diffusion process."
+    },
+    {
+      "title": "Categorical Reparameterization with Gumbel-Softmax",
+      "authors": "Eric Jang, Shixiang Gu, Ben Poole",
+      "year": 2017,
+      "role": "discrete_reparameterization_technique",
+      "relationship_sentence": "ATM relies on Gumbel-Softmax to relax discrete word replacement/extension into a differentiable sampling process, enabling end-to-end gradient optimization over token choices."
+    },
+    {
+      "title": "The Concrete Distribution: A Continuous Relaxation of Discrete Random Variables",
+      "authors": "Chris J. Maddison, Andriy Mnih, Yee Whye Teh",
+      "year": 2017,
+      "role": "discrete_relaxation_foundation",
+      "relationship_sentence": "The Concrete distribution provides the theoretical foundation for continuous relaxations of categorical variables, directly underpinning ATM\u2019s differentiable treatment of token selection."
+    },
+    {
+      "title": "HotFlip: White-Box Adversarial Examples for Text Classification",
+      "authors": "Javid Ebrahimi et al.",
+      "year": 2018,
+      "role": "gradient_based_text_attack",
+      "relationship_sentence": "HotFlip introduced gradient-guided discrete edits via one-hot perturbations, inspiring ATM\u2019s gradient-driven search over prompt tokens despite their discreteness."
+    },
+    {
+      "title": "Universal Adversarial Triggers for NLP",
+      "authors": "Eric Wallace, Shi Feng, Nikhil Kandpal, Matt Gardner, Sameer Singh",
+      "year": 2019,
+      "role": "discrete_trigger_optimization",
+      "relationship_sentence": "The idea of learning discrete token triggers that reliably steer model behavior informs ATM\u2019s objective of finding small prompt additions that consistently derail text-to-image generation."
+    },
+    {
+      "title": "TextFooler: A Textual Adversarial Attack",
+      "authors": "Di Jin, Zhijing Jin, Joey Tianyi Zhou, Peter Szolovits",
+      "year": 2020,
+      "role": "semantics_preserving_text_attack",
+      "relationship_sentence": "TextFooler\u2019s emphasis on preserving key semantics while substituting words parallels ATM\u2019s constraint of not modifying category keywords, guiding its perturbation constraints."
+    }
+  ],
+  "synthesis_narrative": "ATM\u2019s core insight is to cast prompt editing for text-to-image diffusion models as a differentiable optimization over discrete tokens, producing minimal but highly effective perturbations that break subject fidelity without changing category keywords. This is enabled by two pillars. First, the attack is tailored to the Latent Diffusion/Stable Diffusion ecosystem and its CLIP-based text conditioning, so the gradients that ATM exploits flow through the CLIP text encoder into the diffusion conditioning space that governs synthesis (Rombach et al.; Radford et al.). Second, ATM makes discrete prompt manipulation trainable by adopting the Gumbel-Softmax/Concrete reparameterization, allowing sampling-based word replacement or extension to be optimized with backpropagation (Jang et al.; Maddison et al.).\nBuilding on these foundations, ATM borrows the intuition of gradient-driven discrete edits from white-box NLP attacks like HotFlip, translating one-hot perturbation logic to the tokenized prompt setting of T2I models. It further echoes the idea of learned trigger phrases that reliably induce failure modes across inputs, as in Universal Adversarial Triggers, but applies it to generative alignment rather than classification. Finally, by constraining edits to avoid altering category-identifying words, ATM operationalizes semantics-preserving principles familiar from TextFooler, ensuring attacks are subtle yet impactful. Together, these strands produce a scalable, gradient-based prompt attack that reveals and measures the fragility of Stable Diffusion-style generators under small, learned textual perturbations.",
+  "analysis_timestamp": "2026-01-07T00:02:04.860177"
+}

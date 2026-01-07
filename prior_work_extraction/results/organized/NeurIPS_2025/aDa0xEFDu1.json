@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "DeepSeek-R1: Incentivizing Reasoning in Language Models via Reinforcement Learning",
+      "authors": "DeepSeek-AI et al.",
+      "year": 2024,
+      "role": "Extension",
+      "relationship_sentence": "CoRL directly adopts the GRPO objective introduced in DeepSeek-R1 and extends it from text-only reasoning to a unified multimodal setting, using group-relative baselines to jointly optimize understanding and generation under a single policy."
+    },
+    {
+      "title": "Direct Preference Optimization: Your Language Model is Secretly a Reward Model",
+      "authors": "Rafailov et al.",
+      "year": 2023,
+      "role": "Gap Identification",
+      "relationship_sentence": "CoRL explicitly addresses DPO\u2019s limitation of off-policy preference fitting without exploration or on-policy credit assignment by replacing it with GRPO-based RL to enable cross-task co-evolution in a shared policy."
+    },
+    {
+      "title": "ImageReward: Learning and Evaluating Human Preferences for Text-to-Image Generation",
+      "authors": "Xu et al.",
+      "year": 2023,
+      "role": "Foundation",
+      "relationship_sentence": "CoRL relies on ImageReward-style preference scoring as the generation-side reward, enabling on-policy reinforcement of text-to-image quality within the unified RL stage."
+    },
+    {
+      "title": "Pick-a-Pic: An Open Dataset of User Preferences for Text-to-Image Generation",
+      "authors": "Kirstain et al.",
+      "year": 2023,
+      "role": "Extension",
+      "relationship_sentence": "CoRL leverages the Pick-a-Pic paradigm of learning preference models (e.g., PickScore) to define image-generation rewards, extending it by co-optimizing these rewards alongside multimodal understanding within the same policy."
+    },
+    {
+      "title": "UniDiffuser: Unified Diffusion Probabilistic Modeling for Both Image Generation and Understanding",
+      "authors": "Bao et al.",
+      "year": 2023,
+      "role": "Foundation",
+      "relationship_sentence": "CoRL builds on UniDiffuser\u2019s core problem formulation\u2014one model handling both text-to-image generation and visual understanding\u2014shifting from supervised/unified likelihood training to unified on-policy RL for co-improvement."
+    },
+    {
+      "title": "Constitutional AI: Harmlessness from AI Feedback",
+      "authors": "Bai et al.",
+      "year": 2022,
+      "role": "Inspiration",
+      "relationship_sentence": "CoRL adopts the AI-feedback principle from Constitutional AI to construct scalable, judge-based reward signals for multimodal understanding, integrating them with image-preference rewards in a unified RL pipeline."
+    }
+  ],
+  "synthesis_narrative": "CoRL\u2019s core innovation\u2014co-reinforcement learning that jointly optimizes multimodal understanding and text-to-image generation within a single policy\u2014arises from fusing three intellectual threads. First, the problem formulation of a single model handling both understanding and generation is rooted in unified modeling efforts typified by UniDiffuser, which demonstrated that one network can serve dual roles but remained largely likelihood- or SFT-driven. CoRL inherits this unified objective and transitions it to an on-policy reinforcement regime.\nSecond, CoRL\u2019s ability to actually optimize image generation with preferences builds directly on preference-based evaluators from ImageReward and Pick-a-Pic, which supply reliable scalar signals for perceptual and semantic alignment. CoRL extends this idea by coupling these generation rewards with understanding-side rewards in a shared policy so that progress in one capability can benefit the other.\nThird, CoRL\u2019s RL backbone derives from DeepSeek-R1\u2019s GRPO, whose group-relative baseline stabilizes and improves on-policy optimization. CoRL generalizes GRPO to a multimodal, multi-task grouping that supports a unified RL stage followed by a refined, task-specific stage. Along the way, CoRL addresses limitations of DPO\u2014its off-policy, non-exploratory preference fitting\u2014by using GRPO\u2019s on-policy credit assignment to enable cross-task co-evolution. Finally, inspired by Constitutional AI, CoRL uses AI-feedback style judges to scale understanding rewards, unifying them with image preference rewards to produce broad gains across both modalities.",
+  "analysis_timestamp": "2026-01-06T23:08:23.967170"
+}

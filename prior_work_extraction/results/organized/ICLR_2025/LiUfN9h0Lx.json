@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "A Unified Approach to Interpreting Model Predictions",
+      "authors": "Lundberg and Lee",
+      "year": 2017,
+      "arxiv_id": "1705.07874",
+      "role": "Baseline",
+      "relationship_sentence": "KernelSHAP and related SHAP estimators rely on i.i.d. background sampling over feature coalitions, and CTE directly replaces this i.i.d. step with kernel-thinned compression to reduce Monte Carlo error and stabilize SHAP attributions."
+    },
+    {
+      "title": "An Efficient Explanation of Individual Classifications using Game Theory",
+      "authors": "Strumbelj and Kononenko",
+      "year": 2010,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "This work introduces Monte Carlo Shapley sampling for local explanations, whose high-variance i.i.d. coalition sampling is the precise bottleneck CTE addresses by compressing the input distribution before estimation."
+    },
+    {
+      "title": "Understanding Global Feature Importance with SAGE",
+      "authors": "Covert et al.",
+      "year": 2020,
+      "arxiv_id": "2004.02668",
+      "role": "Baseline",
+      "relationship_sentence": "SAGE estimates global Shapley-based importance via Monte Carlo over feature subsets and background draws, and CTE injects distribution compression to improve the accuracy and efficiency of these estimates at low sample budgets."
+    },
+    {
+      "title": "Greedy Function Approximation: A Gradient Boosting Machine",
+      "authors": "Friedman",
+      "year": 2001,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "Partial Dependence relies on marginal expectations approximated with sample averages, and CTE targets this integration step by replacing raw i.i.d. samples with a kernel-thinned subset that better matches the data marginal."
+    },
+    {
+      "title": "Visualizing the Effects of Predictor Variables in Black Box Supervised Learning Models",
+      "authors": "Apley and Zhu",
+      "year": 2020,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "ALE estimates effects via local integrals over the empirical distribution, and CTE improves these estimates by pre-compressing data with kernel thinning to reduce sampling error without extra runtime."
+    },
+    {
+      "title": "Stein Thinning: Selecting Representative Samples from Markov Chain Simulations",
+      "authors": "Riabiz et al.",
+      "year": 2020,
+      "arxiv_id": "2005.03952",
+      "role": "Inspiration",
+      "relationship_sentence": "Stein Thinning formalizes selecting a small, representative subset by minimizing a kernel-based discrepancy, and CTE adopts this distribution-compression principle to pre-compress background data used in explanation estimation."
+    },
+    {
+      "title": "Support Points",
+      "authors": "Mak and Joseph",
+      "year": 2018,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "Support Points show that optimizing a discrepancy objective yields small subsets that reduce Monte Carlo integration error, directly motivating CTE\u2019s use of kernel-based compression before computing explanations."
+    }
+  ],
+  "synthesis_narrative": "Shapley-based explainers emerged from Monte Carlo coalition sampling for local explanations, with Strumbelj and Kononenko demonstrating practical Shapley estimation via i.i.d. draws over feature subsets. Lundberg and Lee\u2019s SHAP unified local attribution with KernelSHAP\u2019s weighted sampling over coalitions and background data, operationalizing Shapley estimation but inheriting the variance and scaling issues of i.i.d. sampling. For global importance, SAGE computes Shapley-based aggregations through Monte Carlo over subsets and background draws, again depending critically on the quality of i.i.d. samples. Partial Dependence defined feature effects as marginal expectations over the data distribution, and ALE refined this with local accumulation; both ultimately approximate integrals over empirical marginals via sampling. In parallel, distribution compression methods showed that carefully chosen subsets can dramatically reduce integration error: Support Points minimize an energy-distance objective to obtain representative samples, while Stein Thinning selects subsets by minimizing a kernel-based discrepancy, offering deterministic, sample-efficient alternatives to i.i.d. Monte Carlo.\nTogether, these strands reveal a clear gap: explanation algorithms hinge on i.i.d. sampling to approximate expectations over data marginals and coalitions, yet distribution compression can provably deliver better finite-sample approximations. The natural synthesis is to pre-compress the background distribution before explanation\u2014replacing i.i.d. draws with a small, representative set selected by a kernel-based discrepancy criterion. Building on these insights, the current work connects explanation estimation to distribution compression and instantiates this connection via kernel thinning, yielding more accurate and stable feature attributions, importance, and effects with negligible overhead.",
+  "target_paper": {
+    "title": "Efficient and Accurate Explanation Estimation with Distribution Compression",
+    "authors": "Hubert Baniecki, Giuseppe Casalicchio, Bernd Bischl, Przemyslaw Biecek",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "explainable ai, feature attributions, feature importance, sampling, kernel thinning",
+    "abstract": "We discover a theoretical connection between explanation estimation and distribution compression that significantly improves the approximation of feature attributions, importance, and effects. While the exact computation of various machine learning explanations requires numerous model inferences and becomes impractical, the computational cost of approximation increases with an ever-increasing size of data and model parameters. We show that the standard i.i.d. sampling used in a broad spectrum of algorithms for post-hoc explanation leads to an approximation error worthy of improvement. To this end, we introduce Compress Then Explain (CTE), a new paradigm of sample-efficient explainability. It relies on distribution compression through kernel thinning to obtain a data sample that best approximates its marginal distribution. CTE significantly improves the accuracy and stability of explanation estimation with negligible computational overhead. It often achieves an on-par explanation approx",
+    "openreview_id": "LiUfN9h0Lx",
+    "forum_id": "LiUfN9h0Lx"
+  },
+  "analysis_timestamp": "2026-01-06T15:28:39.255958"
+}

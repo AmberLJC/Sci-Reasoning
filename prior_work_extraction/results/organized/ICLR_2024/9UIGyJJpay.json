@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "De novo protein design by diffusion",
+      "authors": "Joseph L. Watson et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "This work established the frame-diffusion formulation for de novo protein design and relies on a structure encoder operating on residue rigid-body frames, the exact setting in which VFN is designed to plug in as a more expressive frame-native encoder."
+    },
+    {
+      "title": "Highly accurate protein structure prediction with AlphaFold",
+      "authors": "John Jumper et al.",
+      "year": 2021,
+      "arxiv_id": "",
+      "role": "Extension",
+      "relationship_sentence": "Invariant Point Attention (introduced with AlphaFold\u2019s structure module) is the basic frame-based geometric encoder VFN replaces/extends, with VFN generalizing point-based geometric computations into learnable vector-field layers over frame-anchored coordinates."
+    },
+    {
+      "title": "Learning from Protein Structure with Geometric Vector Perceptrons",
+      "authors": "Bowen Jing et al.",
+      "year": 2021,
+      "arxiv_id": "",
+      "role": "Inspiration",
+      "relationship_sentence": "The idea of vector channels and learned vector-linear transformations in GVP directly inspires VFN\u2019s learnable vector computations, which adapt this concept to operate on 3D coordinates of frame-anchored virtual atoms rather than abstract vector features."
+    },
+    {
+      "title": "E(n) Equivariant Graph Neural Networks",
+      "authors": "Victor Garcia Satorras et al.",
+      "year": 2021,
+      "arxiv_id": "2102.09844",
+      "role": "Related Problem",
+      "relationship_sentence": "EGNN demonstrated that learned functions of point coordinates can yield equivariant vector updates, informing VFN\u2019s design of vector computations from 3D coordinates while preserving geometric consistency in frame space."
+    },
+    {
+      "title": "Robust deep learning-based protein sequence design using protein backbone structures (ProteinMPNN)",
+      "authors": "Jonas Dauparas et al.",
+      "year": 2022,
+      "arxiv_id": "",
+      "role": "Gap Identification",
+      "relationship_sentence": "ProteinMPNN\u2019s reliance on atom-wise distances/angles for sequence design highlights a limitation when only residue frames (without explicit atoms) are available, motivating VFN\u2019s frame-native vector computations without requiring atomistic features."
+    },
+    {
+      "title": "Accurate prediction of protein structures and interactions using a 3-track network (RoseTTAFold)",
+      "authors": "Minkyung Baek et al.",
+      "year": 2021,
+      "arxiv_id": "",
+      "role": "Foundation",
+      "relationship_sentence": "RoseTTAFold\u2019s IPA-based structure module and single/pair representations underpin the architecture used in diffusion-based design systems, providing the concrete encoder slot that VFN targets to improve frame modeling capacity."
+    }
+  ],
+  "synthesis_narrative": "Diffusion-based de novo protein design introduced a residue-frame generative formulation, with RFdiffusion showing that effective generation hinges on a structure encoder that operates directly on rigid-body frames. AlphaFold\u2019s structure module provided the seminal Invariant Point Attention mechanism, computing geometric signals from points anchored to residue frames; this became the default frame encoder later reused in design systems. RoseTTAFold operationalized a compatible IPA-based architecture with single and pair representations, supplying the practical template for frame-conditioned modeling in generative pipelines. In parallel, Geometric Vector Perceptrons established that neural networks can carry vector channels and apply learned vector-linear maps, enabling rich vector computations beyond scalar-only graph features in protein tasks. EGNN further demonstrated that learnable functions of 3D coordinates can produce equivariant vector updates without heavy tensor machinery, validating the efficacy of coordinate-driven vector operations. Meanwhile, ProteinMPNN exemplified the strong performance of atom-feature\u2013based design, but also highlighted a key limitation: many protein ML encoders depend on atom-wise distances and angles, which are unavailable when modeling only residue frames during diffusion.\nCollectively, these works exposed a gap: frame-based generative design lacked an encoder with the expressive vector reasoning seen in atom-based models, while prevailing IPA layers offered only a basic geometric interface to frames. The natural next step was to combine the coordinate-driven equivariant intuition of EGNN with the vector-channel expressiveness of GVP, but implement it natively on frame-anchored coordinates within the IPA-era architecture used by RFdiffusion\u2014precisely the niche a vector-field layer over virtual atoms fills.",
+  "target_paper": {
+    "title": "De novo Protein Design Using Geometric Vector Field Networks",
+    "authors": "Weian Mao, Muzhi Zhu, Zheng Sun, Shuaike Shen, Lin Yuanbo Wu, Hao Chen, Chunhua Shen",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Protein design, Protein structure encoder, Inverse folding, Protein diffusion",
+    "abstract": "Advances like protein diffusion have marked revolutionary progress in $\\textit{de novo}$ protein design, a central topic in life science. These methods typically depend on protein structure encoders to model residue backbone frames, where atoms do not exist. Most prior encoders rely on atom-wise features, such as angles and distances between atoms, which are not available in this context. Only a few basic encoders, like IPA, have been proposed for this scenario, exposing the frame modeling as a bottleneck. In this work, we introduce the Vector Field Network (VFN), that enables network layers to perform learnable vector computations between coordinates of frame-anchored virtual atoms, thus achieving a higher capability for modeling frames. The vector computation operates in a manner similar to a linear layer, with each input channel receiving 3D virtual atom coordinates instead of scalar values. The multiple feature vectors output by the vector computation are then used to update the re",
+    "openreview_id": "9UIGyJJpay",
+    "forum_id": "9UIGyJJpay"
+  },
+  "analysis_timestamp": "2026-01-06T23:46:09.768559"
+}

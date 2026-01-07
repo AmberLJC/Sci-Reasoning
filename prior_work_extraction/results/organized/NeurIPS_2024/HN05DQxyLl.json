@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Estimating mutual information",
+      "authors": "Alexander Kraskov, Harald St\u00f6gbauer, Peter Grassberger",
+      "year": 2004,
+      "role": "Foundational nonparametric MI estimator (KSG) widely used up to moderate dimensions",
+      "relationship_sentence": "LMI\u2019s key idea is to apply a robust nonparametric MI estimator after dimensionality reduction; KSG is the canonical choice they leverage in the learned low-dimensional space to avoid the high-dimensional sample complexity that breaks KSG on raw data."
+    },
+    {
+      "title": "Mutual Information Neural Estimation (MINE)",
+      "authors": "Mohamed I. Belghazi, Aristide Baratin, Sai Rajeswar, Sherjil Ozair, Yoshua Bengio, Aaron Courville, R. Devon Hjelm",
+      "year": 2018,
+      "role": "Neural MI estimator based on the Donsker\u2013Varadhan bound; common high-dimensional baseline",
+      "relationship_sentence": "By highlighting the bias/variance and optimization instabilities of neural MI bounds in high dimensions, MINE motivates LMI\u2019s strategy to sidestep direct high-dim MI estimation and instead estimate MI on learned low-dimensional representations."
+    },
+    {
+      "title": "Representation Learning with Contrastive Predictive Coding",
+      "authors": "Aaron van den Oord, Yazhe Li, Oriol Vinyals",
+      "year": 2018,
+      "role": "Introduced InfoNCE, a contrastive lower bound on MI widely used for multiview dependence",
+      "relationship_sentence": "InfoNCE-based estimators saturate and depend on negatives, making calibrated MI hard in high dimensions; LMI responds by learning representations that capture dependence and then using nonparametric MI estimation to obtain numeric MI approximations."
+    },
+    {
+      "title": "The Information Bottleneck Method",
+      "authors": "Naftali Tishby, Fernando C. Pereira, William Bialek",
+      "year": 1999,
+      "role": "Theoretical framework for learning compressed representations that preserve information about a target",
+      "relationship_sentence": "LMI\u2019s representation-learning step is guided by the IB principle: learn low-dimensional encodings of X and Y that retain their mutual dependence, so that I(Zx; Zy) approximates I(X; Y) by the data processing inequality."
+    },
+    {
+      "title": "Deep Variational Information Bottleneck",
+      "authors": "Alexander A. Alemi, Ian Fischer, Joshua V. Dillon, Kevin Murphy",
+      "year": 2017,
+      "role": "Practical neural instantiation of the IB objective with stochastic encoders and KL regularization",
+      "relationship_sentence": "LMI\u2019s simple, theoretically motivated architecture and training objective draw on VIB-style encoders to control representation dimensionality while preserving predictive information needed to approximate MI."
+    },
+    {
+      "title": "Deep Canonical Correlation Analysis",
+      "authors": "Galen Andrew, Raman Arora, Jeff Bilmes, Karen Livescu",
+      "year": 2013,
+      "role": "Nonlinear multiview representation learning that maps two high-dimensional views to correlated low-dimensional embeddings",
+      "relationship_sentence": "LMI adopts a two-encoder paradigm akin to DCCA to concentrate cross-view dependence into a low-dimensional shared space, after which MI can be reliably estimated nonparametrically."
+    },
+    {
+      "title": "A Probabilistic Interpretation of Canonical Correlation Analysis",
+      "authors": "Francis R. Bach, Michael I. Jordan",
+      "year": 2005,
+      "role": "Latent-variable view of CCA linking shared low-dimensional structure to dependence (and MI in the Gaussian case)",
+      "relationship_sentence": "This work provides the blueprint that, when dependence is mediated by a low-dimensional latent, MI is determined by a few canonical components\u2014an idea LMI generalizes beyond Gaussianity by learning such components and estimating MI on them."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core contribution\u2014approximating mutual information for very high-dimensional variables by estimating MI on learned low-dimensional representations\u2014sits at the intersection of MI estimation and multiview representation learning. Classical nonparametric estimators like KSG established a reliable way to compute MI but break under high dimensionality; LMI preserves their strengths by first compressing the data, then applying KSG where it is accurate. Neural MI estimators (MINE) and contrastive bounds (InfoNCE/CPC) motivated the need for a different route: while they scale to large models, they suffer from bias, variance, and calibration issues that make numeric MI unreliable in high dimensions. LMI avoids these pitfalls by not estimating MI directly in the original space.\n\nInformation Bottleneck theory provides the conceptual backbone: learn compressed representations that retain the information relevant to the other variable. Variational IB supplies practical stochastic encoders and regularization to enforce compactness while preserving dependence. Deep CCA demonstrates that two-tower networks can concentrate cross-view dependence into a small number of shared components; the probabilistic view of CCA further clarifies that, in Gaussian settings, MI is governed by a few canonical factors\u2014precisely the structure LMI seeks to uncover nonlinearly. By combining IB-inspired two-view encoders with nonparametric MI estimation on the resulting latents, LMI overcomes the curse of dimensionality and yields accurate MI approximations for variables with thousands of dimensions.",
+  "analysis_timestamp": "2026-01-07T00:02:04.761660"
+}

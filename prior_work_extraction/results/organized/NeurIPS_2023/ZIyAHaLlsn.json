@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Denoising Diffusion Probabilistic Models",
+      "authors": "Jonathan Ho, Ajay Jain, Pieter Abbeel",
+      "year": 2020,
+      "role": "Foundational diffusion framework and training objective",
+      "relationship_sentence": "ResShift keeps the DDPM training paradigm but redesigns the forward Markov chain to move from HR toward LR by shifting the HR\u2013LR residual instead of diffusing to pure Gaussian noise, enabling far fewer steps."
+    },
+    {
+      "title": "Improved Denoising Diffusion Probabilistic Models",
+      "authors": "Alex Nichol, Prafulla Dhariwal",
+      "year": 2021,
+      "role": "Noise schedule design and x0-prediction insights",
+      "relationship_sentence": "The cosine/learned variance schedules and x0-prediction formulation informed ResShift\u2019s elaborated schedule that jointly controls residual-shift speed and stochastic noise strength along the diffusion trajectory."
+    },
+    {
+      "title": "Elucidating the Design Space of Diffusion-Based Generative Models",
+      "authors": "Tero Karras, Miika Aittala, Timo Aila, Samuli Laine",
+      "year": 2022,
+      "role": "Sigma-parameterization and sampling trajectory principles",
+      "relationship_sentence": "EDM\u2019s analysis of noise parameterization and trajectory shaping guided ResShift\u2019s decoupling of noise magnitude from progression along the HR\u2192LR path, stabilizing high-fidelity few-step sampling."
+    },
+    {
+      "title": "Image Super-Resolution via Iterative Refinement (SR3)",
+      "authors": "Chitwan Saharia, Jonathan Ho, William Chan, Tim Salimans, David J. Fleet, Mohammad Norouzi",
+      "year": 2021,
+      "role": "Diffusion for super-resolution baseline and motivation",
+      "relationship_sentence": "SR3 established diffusion as a powerful SR prior but required hundreds of steps; ResShift directly addresses this bottleneck by constructing an LR-anchored forward process that achieves comparable fidelity in far fewer steps."
+    },
+    {
+      "title": "Denoising Diffusion Implicit Models (DDIM)",
+      "authors": "Jiaming Song, Chenlin Meng, Stefano Ermon",
+      "year": 2020,
+      "role": "Fast non-Markovian samplers and quality\u2013speed trade-off",
+      "relationship_sentence": "DDIM showed acceleration with reduced steps can blur SR details, motivating ResShift to eliminate post-hoc accelerators by making the forward chain itself highly efficient via residual shifting."
+    },
+    {
+      "title": "Enhanced Deep Residual Networks for Single Image Super-Resolution (EDSR)",
+      "authors": "Bee Lim, Sanghyun Son, Heewon Kim, Seungjun Nah, Kyoung Mu Lee",
+      "year": 2017,
+      "role": "Residual learning formulation for SR",
+      "relationship_sentence": "EDSR popularized predicting the residual between an upsampled LR reference and the HR target; ResShift elevates this residual to the state variable of the diffusion chain, progressively shifting it from zero toward the true HR\u2013LR residual."
+    }
+  ],
+  "synthesis_narrative": "ResShift\u2019s core idea\u2014replacing the standard noise-to-data diffusion with a Markov chain that explicitly transports HR images toward the LR condition by shifting their residual\u2014stands on three pillars from prior work. First, the diffusion modeling foundations from DDPM provide the training objective and Markovian formulation that ResShift retains while redefining the forward process. Second, advances in scheduling and parameterization (Improved DDPM and EDM) directly inform ResShift\u2019s elaborate noise schedule: these works showed how prediction targets (e.g., x0) and sigma parameterizations govern sample quality and stability, enabling ResShift to decouple stochastic noise strength from the deterministic residual-shift pace to support high fidelity with few steps. Third, diffusion for super-resolution (SR3) crystalized both the promise and the key bottleneck\u2014excellent perceptual quality at the cost of hundreds of sampling steps\u2014while DDIM revealed that naively reducing steps via non-Markovian samplers often sacrifices sharpness in SR. ResShift\u2019s response is to build efficiency into the generative process itself by transporting along the SR residual, so that standard Markovian sampling with a carefully tuned schedule yields sharp results in a small number of steps. Finally, classic residual learning from EDSR provides the representational perspective: the SR residual is the most informative pathway between LR and HR, and ResShift makes that pathway the state of the diffusion chain.",
+  "analysis_timestamp": "2026-01-06T23:42:49.129424"
+}

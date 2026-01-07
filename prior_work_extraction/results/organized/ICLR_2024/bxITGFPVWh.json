@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "On Large-Batch Training for Deep Learning: Generalization Gap and Sharp Minima",
+      "authors": "Nitish Shirish Keskar et al.",
+      "year": 2017,
+      "arxiv_id": "1609.04836",
+      "role": "Foundation",
+      "relationship_sentence": "This work established loss-landscape sharpness as a proxy for generalization and sensitivity to training, providing the conceptual basis for modeling retraining uncertainty via sharpness in the poisoning objective."
+    },
+    {
+      "title": "Sharpness-Aware Minimization for Efficiently Improving Generalization",
+      "authors": "Pierre Foret et al.",
+      "year": 2021,
+      "arxiv_id": "2010.01412",
+      "role": "Extension",
+      "relationship_sentence": "SAPA extends SAM\u2019s inner maximization over adversarial weight perturbations to the poisoning setting, directly using SAM\u2019s sharpness surrogate to approximate the worst-case retrained model when optimizing poison data."
+    },
+    {
+      "title": "Adversarial Weight Perturbation Helps Robust Generalization",
+      "authors": "Dongxian Wu et al.",
+      "year": 2020,
+      "arxiv_id": "2004.05884",
+      "role": "Related Problem",
+      "relationship_sentence": "By showing that maximizing loss over small weight perturbations captures worst-case behavior around a solution, this work motivates SAPA\u2019s use of weight-space adversarial perturbations to represent retraining variability."
+    },
+    {
+      "title": "MetaPoison: Practical General-purpose Clean-label Data Poisoning",
+      "authors": "Yuxin Huang et al.",
+      "year": 2020,
+      "arxiv_id": "2004.00225",
+      "role": "Gap Identification",
+      "relationship_sentence": "MetaPoison\u2019s bilevel, expectation-over-randomness approach to retraining uncertainty highlights the challenge of variability across seeds/augmentations, which SAPA addresses by replacing expectations with a sharpness-based worst-case surrogate."
+    },
+    {
+      "title": "Witches\u2019 Brew: Industrial Scale Data Poisoning via Gradient Matching",
+      "authors": "Jonas Geiping et al.",
+      "year": 2021,
+      "arxiv_id": "unknown",
+      "role": "Baseline",
+      "relationship_sentence": "SAPA is instantiated on top of gradient-matching poisons to make them robust to retraining by optimizing their effect under worst-case weight perturbations, directly improving this primary baseline."
+    },
+    {
+      "title": "Bullseye Polytope: A Scalable Clean-Label Poisoning Attack with Improved Transferability",
+      "authors": "Omid Aghakhani et al.",
+      "year": 2021,
+      "arxiv_id": "unknown",
+      "role": "Inspiration",
+      "relationship_sentence": "By targeting poisons that transfer across initializations and architectures, this work directly motivates SAPA\u2019s goal of training-agnostic poisoning, which SAPA generalizes via a sharpness-based worst-case formulation."
+    }
+  ],
+  "synthesis_narrative": "Sharpness in loss landscapes was identified as a key indicator of generalization and sensitivity to training by Keskar et al., who connected sharp minima to instability with respect to initialization and training choices. Building on this insight, Foret et al. operationalized sharpness through sharpness-aware minimization (SAM), introducing an efficient inner maximization over small weight perturbations to approximate worst-case loss in a neighborhood. Wu et al. further validated the weight-perturbation perspective by showing that adversarial weight perturbations capture worst-case behavior and improve robust generalization, providing practical mechanisms for weight-space maximization. In parallel, Huang et al.\u2019s MetaPoison framed neural network poisoning as a bilevel problem and attempted to handle retraining randomness via expectation over augmentations and training variations, exposing both the centrality of retraining uncertainty and the computational cost of expectation-based approaches. Geiping et al. introduced gradient matching, an efficient and strong poisoning objective widely used in practice but known to be brittle to victim training details. Aghakhani et al. explicitly pursued transferability across seeds and architectures in clean-label poisoning via geometric constraints, emphasizing the need for retraining-agnostic poisons. Taken together, these works suggest a gap: strong poisoning objectives lack principled robustness to retraining variability, while expectation-based defenses are costly and incomplete. The natural synthesis is to replace expectations with a worst-case surrogate grounded in sharpness: use weight-space adversarial perturbations (as in SAM/AWP) to model the hardest plausible retrained model and then optimize poisons against that surrogate. By embedding this sharpness-aware inner maximization into existing poisoning objectives like gradient matching, one obtains a general, training-agnostic poisoning strategy.",
+  "target_paper": {
+    "title": "Sharpness-Aware Data Poisoning Attack",
+    "authors": "Pengfei He, Han Xu, Jie Ren, Yingqian Cui, Shenglai Zeng, Hui Liu, Charu C. Aggarwal, Jiliang Tang",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Data poisoning attack; generalization; deep learning",
+    "abstract": "Recent research has highlighted the vulnerability of Deep Neural Networks (DNNs) against data poisoning attacks. These attacks aim to inject poisoning samples into the models' training dataset such that the trained models have inference failures. While previous studies have executed different types of attacks, one major challenge that greatly limits their effectiveness is the \nuncertainty of the re-training process after the injection of poisoning samples. It includes the uncertainty of training initialization, algorithm and model architecture. To address this challenge, we propose a new strategy called **Sharpness-Aware Data Poisoning Attack (SAPA)**. In particular, it leverages the concept of DNNs' loss landscape sharpness to optimize the poisoning effect on the (approximately) worst re-trained model. Extensive experiments demonstrate that SAPA offers a general and principled strategy that significantly enhances various types of poisoning attacks against various types of re-training ",
+    "openreview_id": "bxITGFPVWh",
+    "forum_id": "bxITGFPVWh"
+  },
+  "analysis_timestamp": "2026-01-06T10:49:10.389543"
+}

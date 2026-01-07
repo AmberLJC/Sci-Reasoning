@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Outrageously Large Neural Networks: The Sparsely-Gated Mixture-of-Experts Layer",
+      "authors": "Noam Shazeer et al.",
+      "year": 2017,
+      "role": "Foundational MoE architecture",
+      "relationship_sentence": "FlexOLMo builds directly on the MoE paradigm introduced by Shazeer et al., inheriting the expert specialization and routing idea while innovating by training experts independently on private datasets and deferring integration to a nonparametric router without joint training."
+    },
+    {
+      "title": "GShard: Scaling Giant Models with Conditional Computation and Automatic Sharding",
+      "authors": "Yan Lepikhin et al.",
+      "year": 2020,
+      "role": "Scalable MoE and distributed systems precursor",
+      "relationship_sentence": "GShard demonstrated practical large-scale, distributed MoE training and expert sharding; FlexOLMo adapts this conditional computation framing to a cross-dataset, cross-owner setting where experts are trained in isolation and later combined."
+    },
+    {
+      "title": "Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity",
+      "authors": "William Fedus, Barret Zoph, Noam Shazeer",
+      "year": 2021,
+      "role": "Efficient sparse MoE routing",
+      "relationship_sentence": "Switch Transformers\u2019 simple, efficient top-1 routing motivates FlexOLMo\u2019s sparse expert activation, while FlexOLMo departs by using a nonparametric, data-indexed router to enable plug-and-play experts without joint router training."
+    },
+    {
+      "title": "Communication-Efficient Learning of Deep Networks from Decentralized Data (FedAvg)",
+      "authors": "H. Brendan McMahan et al.",
+      "year": 2017,
+      "role": "Privacy-preserving distributed learning principle",
+      "relationship_sentence": "FedAvg established the viability of training without centralizing private data; FlexOLMo embraces the same privacy principle but forgoes parameter aggregation, instead composing independently trained experts at inference."
+    },
+    {
+      "title": "AdapterFusion: Non-Destructive Task Composition for Transfer Learning",
+      "authors": "Jonas Pfeiffer et al.",
+      "year": 2021,
+      "role": "Methodological precursor for post-hoc composition",
+      "relationship_sentence": "AdapterFusion showed that task-specific modules trained in isolation can be combined without retraining the base model; FlexOLMo generalizes this late-binding idea to MoE experts tied to distinct data owners."
+    },
+    {
+      "title": "Model Soups: Averaging weights of multiple fine-tuned models improves accuracy without increasing inference time",
+      "authors": "Mitchell Wortsman et al.",
+      "year": 2022,
+      "role": "Post-hoc model composition without joint training",
+      "relationship_sentence": "Model Soups validated that independently trained models can be combined post hoc; FlexOLMo similarly seeks post-training composition but preserves modular experts and uses routing rather than weight averaging to enable selective inclusion/exclusion."
+    },
+    {
+      "title": "Generalization through Memorization: Nearest Neighbor Language Models (kNN-LM)",
+      "authors": "Urvashi Khandelwal et al.",
+      "year": 2020,
+      "role": "Nonparametric, data-flexible inference inspiration",
+      "relationship_sentence": "kNN-LM illustrates augmenting LMs with an external, swappable datastore at inference; FlexOLMo\u2019s nonparametric routing uses data-associated indices to decide expert activation, enabling inclusion/exclusion of data-tied experts without further training."
+    }
+  ],
+  "synthesis_narrative": "FlexOLMo\u2019s core innovation\u2014independently training experts on private datasets and integrating them later via nonparametric routing for data-flexible inference\u2014sits at the intersection of sparse conditional computation, privacy-preserving training, and post-hoc model composition. The sparsely-gated MoE framework of Shazeer et al. established expert specialization and token routing, while GShard and Switch Transformers demonstrated how to scale and efficiently route among experts in large systems. FlexOLMo adopts this conditional computation scaffolding but departs crucially from prior MoE practice by eliminating joint training across datasets and by replacing learned routers with a nonparametric mechanism bound to data, enabling experts to be plugged in or removed at inference.\n\nFrom the privacy side, FedAvg provided the central principle that performant models can be trained without centralizing sensitive data. FlexOLMo embraces this ethos but eschews parameter aggregation, instead preserving expert modularity to respect data boundaries and enable selective use. Methodologically, AdapterFusion and Model Soups showed that independently trained components can be composed post hoc without access to original training data; FlexOLMo extends this late-binding philosophy to expert-level modules and operationalizes composition through routing rather than weight merging. Finally, kNN-LM motivates FlexOLMo\u2019s nonparametric, data-flexible inference: by decoupling parametric model weights from an external, swappable data index, it becomes possible to control what information influences predictions at run time. Synthesizing these strands, FlexOLMo delivers a MoE-based, privacy-aware framework where experts trained in isolation can be composed on demand, enabling distributed training without data sharing and fine-grained, data-governed inference.",
+  "analysis_timestamp": "2026-01-07T00:02:04.981350"
+}

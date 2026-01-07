@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Fair Clustering Through Fairlets",
+      "authors": "Chierichetti et al.",
+      "year": 2017,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "This paper formalized proportional fairness for clustering and introduced the fairlet framework that the current work adopts as the fairness constraint it analyzes in streaming and sliding-window settings."
+    },
+    {
+      "title": "Fair Algorithms for Clustering",
+      "authors": "Bera et al.",
+      "year": 2019,
+      "arxiv_id": null,
+      "role": "Inspiration",
+      "relationship_sentence": "It established bicriteria approaches that allow a small multiplicative violation of fairness to obtain good cost approximations, directly motivating the current paper\u2019s (1+\u03b5)-fairness relaxation to overcome sliding-window impossibility."
+    },
+    {
+      "title": "Scalable Fair Clustering",
+      "authors": "Backurs et al.",
+      "year": 2019,
+      "arxiv_id": null,
+      "role": "Related Problem",
+      "relationship_sentence": "By operationalizing fairlet-based and local-search techniques at scale for proportionally fair clustering in the offline setting, this work provided algorithmic primitives and baselines that the present paper must match in a streaming context."
+    },
+    {
+      "title": "Smooth Histograms and Streaming Algorithms",
+      "authors": "Braverman and Ostrovsky",
+      "year": 2007,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "The smooth histogram framework underpins sliding-window summarization, which the present paper adapts to maintain near-fair cluster quality with poly(k, \u03b5\u207b\u00b9, log n) space once fairness is relaxed by (1+\u03b5)."
+    },
+    {
+      "title": "Turning Big Data into Tiny Data: Coresets for k-Means, k-Median, and k-Center",
+      "authors": "Feldman et al.",
+      "year": 2013,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "Coreset constructions enabling small-space approximations for k-clustering directly inform the paper\u2019s streaming design, serving as the cost-approximation primitive combined with sliding-window maintenance under relaxed fairness."
+    },
+    {
+      "title": "Coresets for k-Median and k-Means and Their Applications in Dynamic and Streaming Settings",
+      "authors": "Braverman et al.",
+      "year": 2011,
+      "arxiv_id": null,
+      "role": "Extension",
+      "relationship_sentence": "This work\u2019s coreset and streaming toolkit for insertion-only clustering provides the insertion-only baseline the new paper separates from, and its techniques are adapted to the sliding-window regime when allowing (1+\u03b5)-fairness."
+    }
+  ],
+  "synthesis_narrative": "Proportional fairness in clustering was crystallized by the fairlet framework, which encoded demographic-parity-style constraints into a combinatorial structure that could be paired with classical k-clustering objectives. Subsequent progress showed that exact fairness is often too restrictive, and that permitting a controlled multiplicative violation can recover efficient approximations; in particular, bicriteria designs demonstrated that a (1+\u03b5) slack in group proportions can dramatically simplify algorithmic design while preserving utility. On the algorithmic side, fair clustering techniques were scaled in the offline setting, combining fairlets with local search to achieve practical performance and to clarify which parts of the pipeline bore the computational burden. Orthogonally, sliding-window stream processing introduced smooth histograms as a general blueprint to maintain summaries over the active window, and coreset constructions for k-means/k-median provided compact surrogates with strong cost guarantees suitable for streaming maintenance. Dynamic-and-streaming coreset frameworks further showed how to realize insertion-only k-clustering approximations in small space.\nBringing these strands together highlights a tension: insertion-only streaming approximations benefit from coresets, but the windowed, adversarial nature of sliding windows undermines strict proportional fairness. The natural synthesis\u2014implied by bicriteria fairness\u2014relaxes fairness by (1+\u03b5) and then marries smooth-histogram window maintenance with coreset-based k-clustering summaries. This yields near-optimal poly(k, \u03b5\u207b\u00b9, log n)-space algorithms while the impossibility of finite approximation under exact fairness explains the sharp separation from the insertion-only model.",
+  "target_paper": {
+    "title": "Fair Clustering in the Sliding Window Model",
+    "authors": "Vincent Cohen-Addad, Shaofeng H.-C. Jiang, Qiaoyuan Yang, Yubo Zhang, Samson Zhou",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "spotlight",
+    "keywords": "fair clustering, sliding window model",
+    "abstract": "We study streaming algorithms for proportionally fair clustering, a notion originally suggested by Chierichetti et al. (2017), in the sliding window model. We show that although there exist efficient streaming algorithms in the insertion-only model, surprisingly no algorithm can achieve finite ratio without violating the fairness constraint in sliding window. Hence, the problem of fair clustering is a rare separation between the insertion-only streaming model and the sliding window model. On the other hand, we show that if the fairness constraint is relaxed by a multiplicative $(1+\\varepsilon)$ factor, there exists a $(1 + \\varepsilon)$-approximate sliding window algorithm that uses $\\text{poly}(k\\varepsilon^{-1}\\log n)$ space. This achieves essentially the best parameters (up to degree in the polynomial) provided the aforementioned lower bound. We also implement a number of empirical evaluations on real datasets to complement our theoretical results.",
+    "openreview_id": "VGQugiuCQs",
+    "forum_id": "VGQugiuCQs"
+  },
+  "analysis_timestamp": "2026-01-06T12:40:24.961955"
+}

@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Edinburgh\u2019s Neural Machine Translation Systems for WMT16",
+      "authors": "Rico Sennrich et al.",
+      "year": 2016,
+      "role": "Baseline",
+      "relationship_sentence": "Established the standard decoding-time ensemble that averages per-token probabilities across models over the full vocabulary, which UniTE replaces by operating on the union of top-k tokens to avoid costly full-vocabulary alignment."
+    },
+    {
+      "title": "On Integrating a Language Model into Neural Machine Translation",
+      "authors": "Caglar Gulcehre et al.",
+      "year": 2015,
+      "role": "Foundation",
+      "relationship_sentence": "Introduced log-linear fusion of model distributions at decoding time, and UniTE can be viewed as a sparse, compatibility-aware instantiation that fuses probabilities only over a restricted candidate set."
+    },
+    {
+      "title": "On Using Very Large Target Vocabularies for Neural Machine Translation",
+      "authors": "S\u00e9bastien Jean et al.",
+      "year": 2015,
+      "role": "Extension",
+      "relationship_sentence": "Showed that restricting computation to a candidate subset preserves quality while reducing cost; UniTE adapts this candidate-restriction principle by taking the union of each model\u2019s top-k tokens to sidestep full-vocabulary alignment across heterogeneous LLMs."
+    },
+    {
+      "title": "Ensemble Selection from Libraries of Models",
+      "authors": "Rich Caruana et al.",
+      "year": 2004,
+      "role": "Foundation",
+      "relationship_sentence": "Demonstrated that selecting a compatible subset of models before ensembling improves performance, directly motivating the paper\u2019s determine-then-ensemble strategy for LLM compatibility-driven selection."
+    },
+    {
+      "title": "Model Soup: Averaging weights of multiple fine-tuned models improves accuracy without increasing inference time",
+      "authors": "Mitchell Wortsman et al.",
+      "year": 2022,
+      "role": "Inspiration",
+      "relationship_sentence": "Highlighted that compatibility among models is crucial for effective combination, an insight this paper translates from weight-space averaging to output-space ensembling with an explicit compatibility-based model selection step."
+    },
+    {
+      "title": "A Post-Processing System to Yield Reduced Word Error Rates: ROVER",
+      "authors": "Jonathan G. Fiscus",
+      "year": 1997,
+      "role": "Related Problem",
+      "relationship_sentence": "Established system combination by aligning and voting over the union of top hypotheses, informing UniTE\u2019s idea of focusing fusion on the union of high-probability candidates rather than an entire output space."
+    },
+    {
+      "title": "Self-Consistency Improves Chain of Thought Reasoning in Language Models",
+      "authors": "Xuezhi Wang et al.",
+      "year": 2022,
+      "role": "Baseline",
+      "relationship_sentence": "Provided a dominant LLM ensembling baseline via response-level voting over multiple samples; the present work extends beyond sample voting to token-probability fusion across multiple models with a top-k union."
+    }
+  ],
+  "synthesis_narrative": "The core of Determine-Then-Ensemble (UniTE) rests on two intertwined ideas: select compatible models before combining them, and fuse their token probabilities only over a compact candidate set. Decoding-time probability ensembling from neural MT (Sennrich et al., 2016) and log-linear fusion (Gulcehre et al., 2015) provided the basic mechanism for combining model distributions, but assume a shared vocabulary and incur full-vocabulary scoring. Jean et al. (2015) demonstrated that restricting computation to a carefully chosen candidate subset maintains quality while reducing cost, a principle UniTE repurposes by forming the union of each model\u2019s top-k tokens\u2014thereby eliminating the need for expensive, error-prone full-vocabulary alignment across heterogeneous LLMs.\n\nOn the selection side, classic ensemble selection (Caruana et al., 2004) and the modern \u201cModel Soup\u201d result (Wortsman et al., 2022) both underscore that compatibility among models is central to realizing ensemble gains. This paper operationalizes that insight for LLMs by empirically identifying compatibility determinants (performance, vocabulary size, and response style) and then selecting models accordingly\u2014determine, then ensemble. System combination traditions like ROVER (Fiscus, 1997) further legitimize focusing aggregation over the union of top hypotheses rather than an entire output space. Finally, while self-consistency (Wang et al., 2022) popularized response-level ensembling, it overlooks cross-model probability fusion and compatibility; UniTE advances beyond this by unifying compatibility-aware selection with efficient top-k union probability aggregation, directly addressing the limitations of prior LLM ensemble practices.",
+  "analysis_timestamp": "2026-01-06T23:08:23.929659"
+}

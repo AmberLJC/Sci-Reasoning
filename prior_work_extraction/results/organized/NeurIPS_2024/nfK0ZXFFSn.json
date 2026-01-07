@@ -1,0 +1,86 @@
+{
+  "prior_works": [
+    {
+      "title": "SelfCheckGPT: Zero-Resource Hallucination Detection for Generative AI",
+      "authors": [
+        "Potsawee Manakul et al."
+      ],
+      "year": 2023,
+      "role": "Consistency-based hallucination scoring without ground truth",
+      "relationship_sentence": "HaloScope builds on the idea that an LLM\u2019s own generations can be exploited to assess veracity\u2014echoing SelfCheckGPT\u2019s self-consistency signal\u2014by formalizing an automated scoring function over unlabeled model outputs and turning that score into trainable supervision for a binary truthfulness classifier."
+    },
+    {
+      "title": "Self-Consistency Improves Chain-of-Thought Reasoning in Language Models",
+      "authors": [
+        "Xuezhi Wang",
+        "Jason Wei",
+        "Dale Schuurmans",
+        "Quoc V. Le",
+        "Ed H. Chi"
+      ],
+      "year": 2023,
+      "role": "Multi-sample aggregation principle",
+      "relationship_sentence": "HaloScope leverages the multi-sampling and aggregation principle introduced by self-consistency to derive robust signals from diverse LLM generations, using agreement/disagreement structure to inform its automated truthfulness scoring."
+    },
+    {
+      "title": "Snorkel: Rapid Training Data Creation with Weak Supervision",
+      "authors": [
+        "Alex Ratner",
+        "Stephen H. Bach",
+        "Paroma Varma",
+        "Christopher R\u00e9"
+      ],
+      "year": 2017,
+      "role": "Programmatic weak supervision (from heuristic scores to trainable labels)",
+      "relationship_sentence": "Conceptually akin to Snorkel\u2019s conversion of noisy heuristic signals into supervisory labels, HaloScope converts an automated scoring function over unlabeled LLM outputs into reliable training signals for a discriminative hallucination detector without human annotation."
+    },
+    {
+      "title": "Noisy Student Training: Bridging the Gap between Student and Teacher",
+      "authors": [
+        "Qizhe Xie",
+        "Eduard Hovy",
+        "Minh-Thang Luong",
+        "Quoc V. Le"
+      ],
+      "year": 2020,
+      "role": "Semi-supervised learning via pseudo-labels on unlabeled data",
+      "relationship_sentence": "HaloScope echoes Noisy Student\u2019s paradigm of using model-derived pseudo-labels on unlabeled data, but adapts it to the hallucination setting by crafting an automated truthfulness score to generate pseudo-labels for training a dedicated classifier."
+    },
+    {
+      "title": "Learning from Positive and Unlabeled Examples",
+      "authors": [
+        "Charles Elkan",
+        "Keith Noto"
+      ],
+      "year": 2008,
+      "role": "Learning from unlabeled mixtures",
+      "relationship_sentence": "HaloScope\u2019s setting\u2014truthful and hallucinated samples mixed in unlabeled generations\u2014resonates with PU learning\u2019s treatment of mixed unlabeled data; HaloScope operationalizes this by designing a scoring function that separates the mixture and enables binary classifier training."
+    },
+    {
+      "title": "VOS: Learning What You Don\u2019t Know by Virtual Outlier Synthesis",
+      "authors": [
+        "Xuefeng Du",
+        "Yiyou Sun",
+        "Shiyu Chang",
+        "Yixuan Li"
+      ],
+      "year": 2022,
+      "role": "Training detectors without labeled negatives via generated signals",
+      "relationship_sentence": "Methodologically, HaloScope inherits from VOS the philosophy of training a detector without explicit labeled negatives by leveraging generated/derived signals\u2014in HaloScope\u2019s case, using automated scores over unlabeled LLM outputs to identify and learn to detect hallucinations."
+    },
+    {
+      "title": "FactCC: Factual Consistency Checking for Abstractive Summarization",
+      "authors": [
+        "Wojciech Kry\u015bci\u0144ski",
+        "Bryan McCann",
+        "Caiming Xiong",
+        "Richard Socher"
+      ],
+      "year": 2020,
+      "role": "Classifier-based factuality detection",
+      "relationship_sentence": "HaloScope adopts the classifier-based framing of factuality detection popularized by FactCC, but crucially sidesteps supervised data by deriving training supervision from its automated scoring of unlabeled generations."
+    }
+  ],
+  "synthesis_narrative": "HaloScope\u2019s core innovation is to detect hallucinations by harnessing unlabeled LLM generations encountered in the wild, using an automated scoring function to separate truthful from untruthful responses and then training a binary classifier. This builds directly on two strands of prior work. First, consistency-based evaluation of LLM outputs\u2014exemplified by SelfCheckGPT and the self-consistency paradigm\u2014shows that one can assess reliability by aggregating multiple samples from the model itself. HaloScope generalizes this idea into a formal, scalable scoring function for truthfulness on unlabeled mixtures. Second, the weak-supervision and semi-supervised literature (Snorkel, Noisy Student, and PU learning) demonstrates how noisy or heuristic signals over unlabeled data can be converted into effective supervisory signals. HaloScope adopts this blueprint: it programmatically transforms its automated truthfulness scores into pseudo-labels for training, without human annotation or curated references.\nIn shaping the final detector, HaloScope is aligned with classifier-based factuality approaches like FactCC, but replaces expensive labeled data with its automated scoring pipeline. Conceptually, it also echoes the Li group\u2019s work on training detectors without explicit negatives (VOS), using generated or derived signals to inform decision boundaries. Together, these works converge into HaloScope\u2019s design: use multi-sample agreement signals to score truthfulness, convert those scores into weak labels, and train a discriminative classifier that scales to real-world unlabeled LLM outputs while avoiding additional data collection and human labeling.",
+  "analysis_timestamp": "2026-01-06T23:33:35.574890"
+}

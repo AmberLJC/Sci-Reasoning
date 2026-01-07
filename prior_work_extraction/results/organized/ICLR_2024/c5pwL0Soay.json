@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Diversity is All You Need: Learning Diverse Skills without a Reward Function",
+      "authors": "Benjamin Eysenbach et al.",
+      "year": 2019,
+      "arxiv_id": "1802.06070",
+      "role": "Baseline",
+      "relationship_sentence": "METRA directly addresses DIAYN\u2019s mutual-information skill objective by replacing skill discriminability with a control-aware distance objective, tackling the exploration failures DIAYN exhibits in complex, high-dimensional environments."
+    },
+    {
+      "title": "Dynamics-Aware Unsupervised Discovery of Skills (DADS)",
+      "authors": "Archit Sharma et al.",
+      "year": 2020,
+      "arxiv_id": "1907.01657",
+      "role": "Gap Identification",
+      "relationship_sentence": "METRA is motivated by DADS\u2019s limitation that dynamics-aware MI still provides no explicit incentive to reach distant regions, and instead learns an abstraction anchored to a reachability-based metric to drive scalable exploration."
+    },
+    {
+      "title": "Skew-Fit: State-Covering Self-Supervised Reinforcement Learning",
+      "authors": "Vitchyr H. Pong et al.",
+      "year": 2020,
+      "arxiv_id": "1903.03698",
+      "role": "Gap Identification",
+      "relationship_sentence": "By showing that pure state-coverage objectives scale poorly when uniform coverage is infeasible, Skew-Fit motivates METRA\u2019s shift to metric-aware abstraction that prioritizes controllably reachable structure over exhaustive coverage."
+    },
+    {
+      "title": "C-Learning: Learning to Achieve Goals via Recursive Classification",
+      "authors": "Benjamin Eysenbach et al.",
+      "year": 2022,
+      "arxiv_id": "2206.04021",
+      "role": "Extension",
+      "relationship_sentence": "METRA extends C-Learning\u2019s goal-reachability classifier by using its induced reachability probabilities as a control-aware distance that the representation must preserve, forming the core metric-aware abstraction objective."
+    },
+    {
+      "title": "Metrics for Markov Decision Processes",
+      "authors": "Norm Ferns et al.",
+      "year": 2004,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "METRA operationalizes the bisimulation metric formalism from this work by learning an embedding that preserves behaviorally relevant distances (reachability) rather than raw observation similarity."
+    },
+    {
+      "title": "The Laplacian Framework for Option Discovery in Reinforcement Learning",
+      "authors": "Marlos C. Machado et al.",
+      "year": 2017,
+      "arxiv_id": "1703.00953",
+      "role": "Inspiration",
+      "relationship_sentence": "Building on the insight that the transition graph\u2019s geometry (Laplacian/diffusion distances) yields useful abstractions, METRA learns a control-aware metric to structure representations and drive exploration without spectral decompositions."
+    }
+  ],
+  "synthesis_narrative": "Mutual-information skill discovery in DIAYN trains a discriminator so skills are identifiable from states, but offers no guarantee of exploring distant regions when the observation space is large. DADS makes this discriminator dynamics-aware, tying skills to predictable state transitions, yet it still lacks an explicit incentive to traverse hard-to-reach areas and can stall locally. Skew-Fit instead maximizes state entropy by sampling rare goals from a generative model, but in complex environments this requires near-uniform coverage of a vast state space, making it difficult to scale. In contrast, C-Learning reframes goal achievement as recursive classification, producing a reachability probability whose logit behaves like a control-aware distance between states. Classical bisimulation metrics formalize the idea that behaviorally equivalent states should be close under a learned metric, suggesting representations ought to preserve control-relevant distances. Complementarily, the Laplacian option framework shows that the transition graph\u2019s geometry encodes diffusion distances that produce effective abstractions and options. Together these works reveal a gap: MI-based skills and pure state coverage either overemphasize discriminability or exhaustiveness, while bisimulation and Laplacian geometry point to preserving control-relevant distances as the key structural prior. METRA synthesizes this by anchoring representation learning to a reachability-derived metric (via C-Learning) and enforcing metric preservation as an abstraction objective, yielding a scalable unsupervised RL pre-training method that structures exploration and learning around what is controllably reachable rather than what is merely novel or easily discriminable.",
+  "target_paper": {
+    "title": "METRA: Scalable Unsupervised RL with Metric-Aware Abstraction",
+    "authors": "Seohong Park, Oleh Rybkin, Sergey Levine",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "oral",
+    "keywords": "reinforcement learning",
+    "abstract": "Unsupervised pre-training strategies have proven to be highly effective in natural language processing and computer vision. Likewise, unsupervised reinforcement learning (RL) holds the promise of discovering a variety of potentially useful behaviors that can accelerate the learning of a wide array of downstream tasks. Previous unsupervised RL approaches have mainly focused on pure exploration and mutual information skill learning. However, despite the previous attempts, making unsupervised RL truly scalable still remains a major open challenge: pure exploration approaches might struggle in complex environments with large state spaces, where covering every possible transition is infeasible, and mutual information skill learning approaches might completely fail to explore the environment due to the lack of incentives. To make unsupervised RL scalable to complex, high-dimensional environments, we propose a novel unsupervised RL objective, which we call Metric-Aware Abstraction (METRA). Ou",
+    "openreview_id": "c5pwL0Soay",
+    "forum_id": "c5pwL0Soay"
+  },
+  "analysis_timestamp": "2026-01-06T13:06:48.448882"
+}

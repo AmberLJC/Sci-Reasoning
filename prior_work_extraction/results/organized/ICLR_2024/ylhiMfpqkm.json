@@ -1,0 +1,65 @@
+{
+  "prior_works": [
+    {
+      "title": "Flow Network based Generative Models for Non-Iterative Diverse Candidate Generation",
+      "authors": "Emmanuel Bengio et al.",
+      "year": 2021,
+      "arxiv_id": "2106.04399",
+      "role": "Foundation",
+      "relationship_sentence": "This paper introduced the GFlowNet framework for sampling proportional to unnormalized rewards via flow matching on compositional DAGs, whose machinery is retained while being extended to outcome-conditioned (goal-conditioned) training."
+    },
+    {
+      "title": "Training GFlowNets with Trajectory Balance",
+      "authors": "Kanika Madan et al.",
+      "year": 2023,
+      "arxiv_id": "2201.13259",
+      "role": "Baseline",
+      "relationship_sentence": "Trajectory Balance provides the primary training objective and scratch-training baseline that the proposed outcome-conditioned pretraining modifies and improves upon by conditioning the flows/policies on target outcomes."
+    },
+    {
+      "title": "Universal Value Function Approximators",
+      "authors": "Tom Schaul et al.",
+      "year": 2015,
+      "arxiv_id": "1509.06461",
+      "role": "Inspiration",
+      "relationship_sentence": "UVFA introduced the key idea of goal-parameterized value/policy functions, directly inspiring the paper\u2019s outcome-conditioned GFlowNet that conditions its policy and flows on desired outcomes for reward-free goal reaching."
+    },
+    {
+      "title": "Hindsight Experience Replay",
+      "authors": "Marcin Andrychowicz et al.",
+      "year": 2017,
+      "arxiv_id": "1707.01495",
+      "role": "Inspiration",
+      "relationship_sentence": "HER\u2019s strategy of relabeling achieved outcomes as goals informs the self-supervised pretraining scheme that uses reached terminal outcomes as conditioning targets to train the goal-conditioned GFlowNet."
+    },
+    {
+      "title": "Learning to Reach Goals via Iterative Supervised Learning (GCSL)",
+      "authors": "Dibya Ghosh et al.",
+      "year": 2019,
+      "arxiv_id": "1912.06088",
+      "role": "Related Problem",
+      "relationship_sentence": "GCSL shows that goal-reaching policies can be learned from offline trajectories with supervised objectives absent extrinsic rewards, directly shaping the reward-free, outcome-conditioned training formulation used here."
+    },
+    {
+      "title": "Biological Sequence Design with GFlowNets",
+      "authors": "Moksh Jain et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Gap Identification",
+      "relationship_sentence": "This application-centric work exemplifies that prior GFlowNets rely on task-specific extrinsic reward oracles, highlighting the lack of unsupervised/pretrained GFlowNets that the current paper explicitly addresses."
+    }
+  ],
+  "synthesis_narrative": "Flow Network based Generative Models established the core mechanism of Generative Flow Networks: learning flows over compositional trajectories so that terminal states are sampled in proportion to unnormalized rewards. Training GFlowNets with Trajectory Balance then provided a stable, single-trajectory objective that equates forward and backward probability products, becoming the default way to train GFlowNets from a known reward. In reinforcement learning, Universal Value Function Approximators introduced conditioning policies and value functions on explicit goals, making goal-parameterization a natural interface for reuse. Hindsight Experience Replay showed how to turn arbitrary rollouts into useful training data by relabeling achieved outcomes as the goals, enabling learning even without dense rewards. Complementing this, Goal-Conditioned Supervised Learning demonstrated that reward-free goal-reaching can be cast as supervised learning from trajectories, achieving effective coverage and adaptability. Application work such as Biological Sequence Design with GFlowNets crystallized a key limitation: prior GFlowNets are typically trained against extrinsic reward oracles, preventing the kind of unsupervised pretraining that has transformed other domains. Taken together, these works suggested a path: retain the GFlowNet and Trajectory Balance machinery but adopt a goal-conditioned parameterization, and build a self-supervised dataset of achieved outcomes\u2014as in HER and GCSL\u2014to pretrain a reward-free, outcome-conditioned sampler. The paper synthesizes these insights into an outcome-conditioned GFlowNet that explores and learns to reach arbitrary outcomes during pretraining, then efficiently fine-tunes on downstream extrinsic rewards, naturally extending the baseline TB-trained GFlowNets to a pretrain\u2013finetune paradigm.",
+  "target_paper": {
+    "title": "Pre-Training and Fine-Tuning Generative Flow Networks",
+    "authors": "Ling Pan, Moksh Jain, Kanika Madan, Yoshua Bengio",
+    "conference": "ICLR",
+    "year": 2024,
+    "presentation_type": "spotlight",
+    "keywords": "Generative Flow Network (GFlowNets), Pre-train, Goal-conditioned",
+    "abstract": "Generative Flow Networks (GFlowNets) are amortized samplers that learn stochastic policies to sequentially generate compositional objects from a given unnormalized reward distribution.\nThey can generate diverse sets of high-reward objects, which is an important consideration in scientific discovery tasks. However, as they are typically trained from a given extrinsic reward function, it remains an important open challenge about how to leverage the power of pre-training and train GFlowNets in an unsupervised fashion for efficient adaptation to downstream tasks.\nInspired by recent successes of unsupervised pre-training in various domains, we introduce a novel approach for reward-free pre-training of GFlowNets. By framing the training as a self-supervised problem, we propose an outcome-conditioned GFlowNet (OC-GFN) that learns to explore the candidate space. Specifically, OC-GFN learns to reach any targeted outcomes, akin to goal-conditioned policies in reinforcement learning. \nWe show tha",
+    "openreview_id": "ylhiMfpqkm",
+    "forum_id": "ylhiMfpqkm"
+  },
+  "analysis_timestamp": "2026-01-06T17:35:07.057171"
+}

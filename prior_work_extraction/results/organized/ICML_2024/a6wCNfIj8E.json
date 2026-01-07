@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Neural Processes",
+      "authors": "Marta Garnelo et al.",
+      "year": 2018,
+      "role": "Function-space inference template",
+      "relationship_sentence": "FRE adopts the Neural Processes idea of amortized inference over functions from context (x, y) pairs, here treating tasks as reward functions and encoding state\u2013reward samples into a latent, enabling zero-shot generalization from few support points."
+    },
+    {
+      "title": "PEARL: Efficient Off-Policy Meta-Reinforcement Learning via Probabilistic Context Variables",
+      "authors": "Kate Rakelly, Aurick Zhou, Deirdre Quillen, Chelsea Finn, Sergey Levine",
+      "year": 2019,
+      "role": "Probabilistic task embedding for meta-RL",
+      "relationship_sentence": "FRE extends PEARL\u2019s probabilistic task-inference paradigm by inferring a latent task from sparse reward-labeled samples, but pretrains over many unsupervised reward functions to enable zero-shot adaptation without online interaction."
+    },
+    {
+      "title": "Universal Value Function Approximators",
+      "authors": "Tom Schaul, Daniel Horgan, Karol Gregor, David Silver",
+      "year": 2015,
+      "role": "Conditioned value/policy representations",
+      "relationship_sentence": "FRE can be viewed as a universal policy/value conditioned on a task descriptor; unlike UVFA\u2019s hand-specified goal vectors, FRE learns the task descriptor by encoding observed state\u2013reward pairs."
+    },
+    {
+      "title": "Successor Features for Transfer in Reinforcement Learning",
+      "authors": "Andr\u00e9 Barreto, R\u00e9mi Munos, Tom Schaul, David Silver",
+      "year": 2017,
+      "role": "Zero-shot transfer across reward functions",
+      "relationship_sentence": "FRE targets the same zero-shot objective as successor features/GPI\u2014solving new reward functions without further learning\u2014while relaxing the linear reward assumption by learning nonlinear functional reward embeddings."
+    },
+    {
+      "title": "DIAYN: Diversity is All You Need",
+      "authors": "Benjamin Eysenbach, Abhishek Gupta, Julian Ibarz, Sergey Levine",
+      "year": 2019,
+      "role": "Unsupervised RL pretraining for downstream tasks",
+      "relationship_sentence": "FRE shares DIAYN\u2019s core insight of pretraining without external task rewards for broad competence, but replaces MI-based skill discovery with training on a wide set of random unsupervised reward functions and conditioning on their encodings."
+    },
+    {
+      "title": "Hindsight Experience Replay",
+      "authors": "Marcin Andrychowicz et al.",
+      "year": 2017,
+      "role": "Relabeling trajectories with alternative rewards/goals",
+      "relationship_sentence": "FRE leverages the HER-style idea of repurposing trajectories under many reward specifications\u2014here, by evaluating diverse synthetic rewards and learning to act conditioned on the functional encoding of those rewards."
+    },
+    {
+      "title": "Set Transformer: A Framework for Attention-Based Permutation-Invariant Neural Networks",
+      "authors": "Juho Lee, Yoonho Lee, Jungtaek Kim, Adam Kosiorek, Seungjin Choi, Yee Whye Teh",
+      "year": 2019,
+      "role": "Architecture for encoding sets",
+      "relationship_sentence": "FRE\u2019s transformer-based VAE over variable-size sets of state\u2013reward samples relies on attention-based, permutation-invariant set encoding principles introduced by Set Transformer."
+    }
+  ],
+  "synthesis_narrative": "FRE\u2019s central move is to treat a task as an unknown reward function and to infer a compact representation of that function from a few state\u2013reward samples, then act conditioned on this representation. This functional, few-shot perspective is grounded in Neural Processes, which formalize amortized inference over functions from context pairs; FRE adapts this mechanism to reward functions by using a transformer VAE that encodes sets of state\u2013reward observations. The choice of a transformer set encoder follows Set Transformer\u2019s permutation-invariant attention design, enabling robust aggregation of variable-size support sets.\n\nOn the control side, FRE inherits from meta-RL the idea of a latent task variable inferred from data. PEARL established probabilistic context embeddings for fast adaptation; FRE retains that latent conditioning but replaces online interaction with pretraining over many unsupervised reward functions and zero-shot conditioning at test time. UVFA and successor features/GPI provide the conceptual backbone for zero-shot generalization across reward specifications by conditioning policies on task descriptors; FRE generalizes beyond explicit goal vectors (UVFA) and linear rewards (successor features) by learning nonlinear functional encodings from data.\n\nFinally, FRE\u2019s data strategy echoes HER and DIAYN. Like HER, it repurposes trajectories under alternative reward definitions, and like DIAYN, it embraces unsupervised pretraining to prepare for downstream tasks. Together, these strands yield a scalable, offline, zero-shot RL agent that can rapidly solve novel tasks from a handful of reward-annotated examples.",
+  "analysis_timestamp": "2026-01-06T23:42:48.058719"
+}

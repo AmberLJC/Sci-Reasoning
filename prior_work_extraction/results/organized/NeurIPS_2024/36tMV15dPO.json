@@ -1,0 +1,48 @@
+{
+  "prior_works": [
+    {
+      "title": "Layered Depth Images",
+      "authors": "Jonathan Shade, Steven J. Gortler, Li-wei He, Richard Szeliski",
+      "year": 1998,
+      "role": "Representation",
+      "relationship_sentence": "X-Ray directly builds on the LDI idea of storing multiple surface samples along each camera ray to capture occlusions, extending it to a sequential, per-ray ordered set of depth/normal/color \u2018frames\u2019 that can be modeled as a video."
+    },
+    {
+      "title": "Stereo Magnification: Learning view synthesis using multiplane images",
+      "authors": "Tinghui Zhou, Richard Tucker, John Flynn, Graham Fyffe, Noah Snavely",
+      "year": 2018,
+      "role": "Representation",
+      "relationship_sentence": "The MPI representation\u2019s depth-layered slicing for handling occlusions motivates X-Ray\u2019s layered surface encoding; X-Ray replaces discretized planes with actual surface hits along rays, yielding a more surface-efficient, sequential format."
+    },
+    {
+      "title": "NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis",
+      "authors": "Ben Mildenhall, Pratul P. Srinivasan, Matthew Tancik, Jonathan T. Barron, Ravi Ramamoorthi, Ren Ng",
+      "year": 2020,
+      "role": "Algorithmic/Rendering",
+      "relationship_sentence": "NeRF popularized ray-based sampling and visibility reasoning; X-Ray adopts the ray-casting perspective but collapses volumetric samples to ordered surface intersections (depth/normal/color), giving a compact surface-only sequence."
+    },
+    {
+      "title": "Video Diffusion Models",
+      "authors": "Jonathan Ho, Tim Salimans, et al.",
+      "year": 2022,
+      "role": "Architectural",
+      "relationship_sentence": "By turning 3D into a multi-frame sequence, X-Ray can leverage temporal U-Net architectures from video diffusion, directly inheriting designs for modeling temporal coherence across frames."
+    },
+    {
+      "title": "SR3: Image Super-Resolution via Iterative Refinement",
+      "authors": "Chitwan Saharia, Jonathan Ho, William Chan, Tim Salimans, et al.",
+      "year": 2021,
+      "role": "Training Strategy",
+      "relationship_sentence": "X-Ray\u2019s two-stage pipeline (base diffusion model plus upsampler) mirrors SR3-style cascaded diffusion, using a coarse-to-fine refinement strategy to enhance resolution and detail of the sequential surface frames."
+    },
+    {
+      "title": "EG3D: Efficient Geometry-Aware 3D Generative Adversarial Networks",
+      "authors": "Eric R. Chan, Connor Z. Lin, Matthew A. Chan, Koki Nagano, Boxiao Pan, et al.",
+      "year": 2022,
+      "role": "Architectural/Representation",
+      "relationship_sentence": "EG3D showed that factorizing 3D into 2D-friendly structures (tri-planes) lets 2D architectures excel at 3D generation; X-Ray similarly recasts 3D as 2D sequential frames to exploit mature video-generation architectures."
+    }
+  ],
+  "synthesis_narrative": "X-Ray\u2019s core idea\u2014a camera-centric, sequential representation that records all surface intersections along each ray\u2014stands on the lineage of layered scene representations and ray-based rendering. Layered Depth Images (Shade et al., 1998) introduced storing multiple samples along a ray to represent occlusions; Stereo Magnification\u2019s Multiplane Images (Zhou et al., 2018) operationalized layered depth for learning-based view synthesis. X-Ray adopts this layered philosophy but replaces coarse depth planes with actual per-ray surface hits, packaging depth, normal, and color into succinct, surface-only layers. From NeRF (Mildenhall et al., 2020), X-Ray inherits the insight that camera-ray parameterizations elegantly couple geometry, appearance, and visibility; yet it departs from volumetric integration to a sparse, surface-centric sequence that is both compact and well-aligned with discriminative and generative supervision.\nCrucially, representing a 3D object as an ordered set of frames enables reusing Video Diffusion Models (Ho et al., 2022), whose temporal U-Nets are designed for dependencies across frames; X-Ray treats layer order as a temporal dimension, making video diffusion a natural fit. To reach high fidelity, X-Ray adopts a cascaded diffusion strategy akin to SR3 (Saharia et al., 2021), first generating a coarse sequential representation and then refining it with an upsampler. Finally, EG3D (Chan et al., 2022) demonstrated that converting 3D structure into 2D-friendly factorized representations lets 2D generative architectures scale effectively; X-Ray extends this principle by turning 3D surfaces into a multi-frame sequence, unlocking the capabilities of state-of-the-art video diffusion for single-image 3D reconstruction with both visible and hidden surfaces.",
+  "analysis_timestamp": "2026-01-06T23:33:35.576843"
+}

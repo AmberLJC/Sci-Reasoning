@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "High-Resolution Image Synthesis with Latent Diffusion Models",
+      "authors": "Robin Rombach, Andreas Blattmann, Dominik Lorenz, Patrick Esser, Bj\u00f6rn Ommer",
+      "year": 2022,
+      "role": "Foundational architecture for text-to-image diffusion and token-conditioned cross-attention that CURE edits.",
+      "relationship_sentence": "CURE\u2019s weight-space edits and token-embedding operations are applied to the Latent Diffusion/Stable Diffusion pipeline introduced here, leveraging its text encoder and cross-attention structure to realize concept-specific suppression."
+    },
+    {
+      "title": "Man is to Computer Programmer as Woman is to Homemaker? Debiasing Word Embeddings",
+      "authors": "Tolga Bolukbasi, Kai-Wei Chang, James Zou, Venkatesh Saligrama, Adam T. Kalai",
+      "year": 2016,
+      "role": "Pioneer of subspace-based debiasing via projection in embedding spaces.",
+      "relationship_sentence": "CURE\u2019s Spectral Eraser directly echoes this work\u2019s idea of identifying a concept subspace and removing it with an orthogonal projection, generalizing from gender debiasing in word embeddings to concept erasure in diffusion models."
+    },
+    {
+      "title": "Null It Out: Guarding Protected Attributes by Iterative Nullspace Projection",
+      "authors": "Yuval Ravfogel, Yanai Elazar, Hila Gonen, Michael Twiton, Yoav Goldberg",
+      "year": 2020,
+      "role": "Formalizes concept removal by constructing nullspaces that eliminate linearly predictable attributes.",
+      "relationship_sentence": "CURE adopts the core principle of projection-based concept removal, but provides a closed-form SVD-based discriminative subspace between forget/retain sets instead of iterative nullspace construction."
+    },
+    {
+      "title": "Amnesic Probing: Behavioral Explanation by Removing Concepts From Representations",
+      "authors": "Yonatan Elazar, Shauli Ravfogel, Alon Jacovi, Yoav Goldberg",
+      "year": 2021,
+      "role": "Introduces selective removal of target concepts while preserving others using retain sets and projection.",
+      "relationship_sentence": "CURE\u2019s use of both \u2018forget\u2019 and \u2018retain\u2019 token sets and its emphasis on minimizing collateral damage closely follow the amnesic probing paradigm applied to diffusion token embeddings."
+    },
+    {
+      "title": "ROME: Locating and Editing Factual Associations in the Memory of Transformer Networks",
+      "authors": "Kevin Meng, David Bau, Alex Andonian, Yonatan Belinkov",
+      "year": 2022,
+      "role": "Training-free weight-space model editing via closed-form, localized updates.",
+      "relationship_sentence": "CURE is inspired by ROME\u2019s demonstration that precise, interpretable, training-free edits in weight space can steer model behavior, adapting the idea to diffusion models and targeting a concept subspace rather than a single fact."
+    },
+    {
+      "title": "Textual Inversion: Generating Personalization Using Natural Language Prompts",
+      "authors": "Rinon Gal, Yuval Alaluf, Or Patashnik, Amit H. Bermano, Gal Chechik, Daniel Cohen-Or",
+      "year": 2022,
+      "role": "Demonstrates that concept semantics in T2I diffusion can be captured and manipulated via token embeddings.",
+      "relationship_sentence": "CURE leverages the notion that token embeddings encode concepts by collecting embeddings for \u2018forget\u2019 and \u2018retain\u2019 concepts and using SVD to derive the discriminative subspace to erase."
+    },
+    {
+      "title": "Prompt-to-Prompt Image Editing with Cross-Attention Control",
+      "authors": "Amir Hertz, Ron Mokady, Sebastian Aberman, Yael Pritch, Daniel Cohen-Or",
+      "year": 2022,
+      "role": "Shows controllability of T2I diffusion via token-conditioned cross-attention manipulation.",
+      "relationship_sentence": "This work motivates CURE\u2019s focus on token-conditional subspaces, indicating that targeted manipulation around cross-attention/text-embedding pathways can alter specific concepts without full retraining."
+    }
+  ],
+  "synthesis_narrative": "CURE\u2019s core idea\u2014orthogonal, training-free removal of a concept by projecting out a discriminative subspace\u2014sits at the intersection of three lines of work. First, debiasing and concept erasure in representation learning established that concepts live in linear subspaces that can be identified and removed. Bolukbasi et al. introduced hard debiasing by projecting off a concept direction in word embeddings, while INLP and Amnesic Probing refined this into a principled, often SVD-informed, projection that removes linearly predictable concept information while preserving other capabilities. CURE generalizes these projection-based ideas to the token embedding and cross-attention representations used in diffusion models, explicitly contrasting \u2018forget\u2019 and \u2018retain\u2019 sets to derive a discriminative subspace with a closed-form SVD.\nSecond, weight-space editing methods like ROME demonstrated that localized, closed-form edits can precisely and efficiently steer large models without full fine-tuning. CURE adopts this philosophy, applying a spectral, rank-controlled edit directly to diffusion weights for speed, interpretability, and minimal collateral damage.\nThird, advances specific to text-to-image diffusion\u2014Latent Diffusion (the underlying architecture), Textual Inversion (concept encoding in token embeddings), and Prompt-to-Prompt (cross-attention control)\u2014show where and how concepts are represented and can be manipulated. CURE synthesizes these insights, moving from inference-time guidance or costly fine-tuning to a fast, interpretable, SVD-driven weight-space projection that selectively suppresses undesired concepts while preserving unrelated capabilities.",
+  "analysis_timestamp": "2026-01-07T00:21:32.288132"
+}

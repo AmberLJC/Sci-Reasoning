@@ -1,0 +1,81 @@
+{
+  "prior_works": [
+    {
+      "title": "Eureka: Human-Level Reward Design via Large Language Models",
+      "authors": [
+        "Linxi (Jim) Fan",
+        "et al."
+      ],
+      "year": 2023,
+      "role": "LLM-driven dense reward generation baseline",
+      "relationship_sentence": "RF-Agent directly builds on Eureka\u2019s idea of using LLMs to author dense reward functions from task specs but replaces Eureka\u2019s largely greedy/evolutionary outer loop with an MCTS-guided, sequential decision process that better exploits historical feedback."
+    },
+    {
+      "title": "ReAct: Synergizing Reasoning and Acting in Language Models",
+      "authors": [
+        "Shunyu Yao",
+        "Jeffrey Zhao",
+        "Dian Yu",
+        "Karthik Narasimhan"
+      ],
+      "year": 2022,
+      "role": "Language-agents paradigm (reasoning + acting with tools)",
+      "relationship_sentence": "RF-Agent treats the LLM as an agent that reasons, proposes reward-code edits, and interacts with external tools/simulators, following the ReAct agentic loop to integrate environment feedback into subsequent reasoning."
+    },
+    {
+      "title": "Tree of Thoughts: Deliberate Problem Solving with Large Language Models",
+      "authors": [
+        "Shunyu Yao",
+        "Dian Yu",
+        "Jeffrey Zhao",
+        "Karthik Narasimhan"
+      ],
+      "year": 2023,
+      "role": "Structured multi-step reasoning via tree search",
+      "relationship_sentence": "RF-Agent adopts the core insight of exploring multiple reasoning branches and aggregating intermediate signals; it operationalizes this for reward design by searching over sequences of reward edits guided by feedback."
+    },
+    {
+      "title": "Language Agent Tree Search (LATS)",
+      "authors": [
+        "Zhou et al."
+      ],
+      "year": 2024,
+      "role": "MCTS applied to language agents",
+      "relationship_sentence": "RF-Agent closely follows LATS in marrying LLM agents with Monte Carlo Tree Search, adapting the MCTS framework to the specific state/action design space of reward functions and their evaluation outcomes."
+    },
+    {
+      "title": "Mastering the game of Go with deep neural networks and tree search",
+      "authors": [
+        "David Silver",
+        "Aja Huang",
+        "Chris J. Maddison",
+        "et al."
+      ],
+      "year": 2016,
+      "role": "Demonstration of MCTS with learned guidance",
+      "relationship_sentence": "RF-Agent inherits the principle of using learned heuristics to guide MCTS (policy/value-style signals), here using LLM-generated proposals and evaluation summaries to balance exploration and exploitation over reward candidates."
+    },
+    {
+      "title": "Bandit based Monte-Carlo Planning (UCT)",
+      "authors": [
+        "Levente Kocsis",
+        "Csaba Szepesv\u00e1ri"
+      ],
+      "year": 2006,
+      "role": "Foundational MCTS algorithm (UCT selection)",
+      "relationship_sentence": "RF-Agent\u2019s search procedure relies on UCT-style selection to reuse historical rollouts and direct search toward promising reward-design trajectories, addressing inefficiencies of prior greedy/evolutionary loops."
+    },
+    {
+      "title": "Reflexion: Language Agents with Verbal Reinforcement Learning",
+      "authors": [
+        "Noah Shinn",
+        "et al."
+      ],
+      "year": 2023,
+      "role": "Using past experience to improve LLM agents",
+      "relationship_sentence": "RF-Agent leverages Reflexion\u2019s idea of incorporating historical feedback into future reasoning, but embeds it in a principled tree-search framework that stores and reuses trial outcomes across branches."
+    }
+  ],
+  "synthesis_narrative": "RF-Agent\u2019s core innovation\u2014casting reward function design as a sequential decision-making problem and solving it with an LLM-driven, Monte Carlo Tree Search\u2014sits at the intersection of two lines of work. First, Eureka demonstrated that LLMs can author dense reward functions for low-level control tasks by iteratively refining code based on training outcomes, but its greedy/evolutionary search struggled to exploit accumulated feedback and scale to complex tasks. Second, the language-agent literature (ReAct) and structured reasoning methods (Tree of Thoughts) showed that LLMs can reason over multi-step plans, interact with tools, and explore alternate solution paths. Building on these, LATS established that MCTS provides a powerful backbone for language agents, combining exploration-exploitation with systematic reuse of past rollouts.\nRF-Agent unifies these insights: it treats reward design edits as actions, simulator results and diagnostics as observations, and applies UCT-style selection to guide exploration using historical evaluations. Inspired by AlphaGo\u2019s integration of learned guidance with MCTS, RF-Agent uses the LLM\u2019s contextual reasoning to propose and prioritize edits while the tree reuses outcome statistics, overcoming the myopic updates of greedy/evolutionary loops. Reflexion\u2019s emphasis on learning from prior mistakes further informs RF-Agent\u2019s explicit use of past feedback within the tree. The result is a principled, search-based language-agent framework that more efficiently discovers effective reward functions for challenging control tasks by leveraging both multi-stage reasoning and historical information.",
+  "analysis_timestamp": "2026-01-07T00:21:32.263586"
+}

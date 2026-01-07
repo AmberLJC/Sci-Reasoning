@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Sequential Monte Carlo Methods in Practice",
+      "authors": "Doucet et al.",
+      "year": 2001,
+      "arxiv_id": null,
+      "role": "Foundation",
+      "relationship_sentence": "This work establishes the SMC framework\u2014proposal, weighting, and resampling for sequential conditioning\u2014which the paper directly applies to autoregressive LM decoding under syntactic and semantic constraints."
+    },
+    {
+      "title": "Neural Adaptive Sequential Monte Carlo",
+      "authors": "Gu et al.",
+      "year": 2015,
+      "arxiv_id": "1506.09149",
+      "role": "Inspiration",
+      "relationship_sentence": "Demonstrates that learned proposals dramatically improve SMC efficiency; the paper leverages this insight by using a pretrained LM as a neurally learned proposal to guide particles during constrained generation."
+    },
+    {
+      "title": "CGMH: Constrained Sentence Generation by Metropolis-Hastings Sampling",
+      "authors": "Miao et al.",
+      "year": 2019,
+      "arxiv_id": "1811.10996",
+      "role": "Related Problem",
+      "relationship_sentence": "Introduces MCMC-based constrained text generation, whose slow mixing and difficulty handling online constraints motivate the paper\u2019s shift to SMC for efficient, left-to-right probabilistic conditioning."
+    },
+    {
+      "title": "Fast Lexically Constrained Decoding with Dynamic Beam Allocation for Neural Machine Translation",
+      "authors": "Post and Vilar",
+      "year": 2018,
+      "arxiv_id": "1804.06609",
+      "role": "Baseline",
+      "relationship_sentence": "Provides a decoding baseline that enforces hard lexical constraints via heuristic beam partitioning, which the paper subsumes by principled SMC weighting and resampling to handle arbitrary constraints."
+    },
+    {
+      "title": "PICARD: Parsing Incrementally for Constrained Auto-Regressive Decoding for Text-to-SQL",
+      "authors": "Scholak et al.",
+      "year": 2021,
+      "arxiv_id": "2109.05093",
+      "role": "Baseline",
+      "relationship_sentence": "Shows how incremental parsers can enforce syntax/denotation constraints during decoding; the paper generalizes this idea by treating such checks as likelihood updates within an SMC loop."
+    },
+    {
+      "title": "Plug and Play Language Models: A Simple Approach to Controlled Text Generation",
+      "authors": "Dathathri et al.",
+      "year": 2020,
+      "arxiv_id": "1912.02164",
+      "role": "Gap Identification",
+      "relationship_sentence": "Provides a widely used control method based on gradient perturbations that lacks probabilistic soundness, motivating the paper\u2019s formulation of control as posterior sampling via SMC."
+    },
+    {
+      "title": "GeDi: Generative Discriminator Guided Sequence Generation",
+      "authors": "Krause et al.",
+      "year": 2021,
+      "arxiv_id": "2009.06367",
+      "role": "Gap Identification",
+      "relationship_sentence": "Uses classifier-based Bayes guidance for attribute control but relies on token-local scoring; the paper addresses this by conditioning on stateful syntactic/semantic constraints with SMC\u2019s adaptive resampling."
+    }
+  ],
+  "synthesis_narrative": "Sequential Monte Carlo (SMC) provides a general recipe for sequential conditioning\u2014proposing partial states, weighting by likelihood, and resampling to focus computation where the posterior concentrates. Neural Adaptive SMC shows that learned proposals can dramatically improve such inference, pointing toward using powerful sequence models to guide particles. In constrained text generation, CGMH formulates the problem as sampling from a posterior under hard constraints via Metropolis\u2013Hastings steps, revealing the need for an algorithm that mixes efficiently while operating left-to-right. Decoding methods like dynamic beam allocation enforce lexical constraints by partitioning the beam heuristically, while PICARD demonstrates that incremental parsing and denotation checks can prune illegal continuations during sequence generation. Meanwhile, attribute-control methods such as PPLM and GeDi steer generation with gradients or classifiers but do not correspond to samples from the true posterior under constraints, and they struggle to express complex, stateful syntactic and semantic conditions. Together, these works suggest framing controlled generation as principled Bayesian conditioning over an autoregressive generative process. The natural next step is to deploy SMC with a pretrained LM as the proposal, treating syntactic monitors, parsers, unit tests, database execution, or molecular validators as likelihood updates. This synthesis inherits the efficiency of neurally guided proposals, the expressivity of parser- and execution-time checks, and the adaptivity of resampling\u2014yielding a unified, probabilistically grounded approach that overcomes mixing issues of MCMC and heuristic limitations of beam and gradient-guided control.",
+  "target_paper": {
+    "title": "Syntactic and Semantic Control of Large Language Models via Sequential Monte Carlo",
+    "authors": "Jo\u00e3o Loula, Benjamin LeBrun, Li Du, Ben Lipkin, Clemente Pasti, Gabriel Grand, Tianyu Liu, Yahya Emara, Marjorie Freedman, Jason Eisner, Ryan Cotterell, Vikash Mansinghka, Alexander K. Lew, Tim Vieira, Timothy J. O'Donnell",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "oral",
+    "keywords": "Sequential Monte Carlo, Language Models, Semantic parsing, Bayesian inference, Probabilistic programming, SMC",
+    "abstract": "A wide range of LM applications require generating text that conforms to syntactic or semantic constraints. Imposing such constraints can be naturally framed as _probabilistic conditioning_, but exact generation from the resulting distribution\u2014which can differ substantially from the LM\u2019s base distribution\u2014is generally intractable. In this work,\nwe develop an architecture for controlled LM generation based on sequential Monte Carlo (SMC). Our SMC framework allows us to flexibly incorporate domain- and problem-specific constraints at inference time, and efficiently reallocate computational resources in light of new information during the course of generation. By comparing to a number of alternatives and ablations on four challenging domains---Python code generation for data science, text-to-SQL, goal inference, and molecule synthesis\u2014we demonstrate that, with little overhead, our approach allows small open-source language models to outperform models over 8$\\times$ larger, as well as clos",
+    "openreview_id": "xoXn62FzD0",
+    "forum_id": "xoXn62FzD0"
+  },
+  "analysis_timestamp": "2026-01-06T07:25:08.612837"
+}

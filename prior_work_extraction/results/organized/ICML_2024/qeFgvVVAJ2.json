@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Transformer-XL: Attentive Language Models Beyond a Fixed-Length Context",
+      "authors": "Zihang Dai et al.",
+      "year": 2019,
+      "role": "Foundation",
+      "relationship_sentence": "MC-ViT adopts Transformer-XL\u2019s core idea of letting current tokens attend to a cache of past hidden activations to break the fixed context window, instantiating this recurrence-like memory for video transformers."
+    },
+    {
+      "title": "Compressive Transformers for Long-Range Sequence Modelling",
+      "authors": "Jack W. Rae et al.",
+      "year": 2020,
+      "role": "Gap Identification",
+      "relationship_sentence": "While Compressive Transformer shows that compressing old memories extends temporal range, its learned compression and added complexity motivate MC-ViT\u2019s simpler non-parametric, redundancy-reduced consolidation of past activations."
+    },
+    {
+      "title": "Memorizing Transformers",
+      "authors": "Jack W. Rae et al.",
+      "year": 2022,
+      "role": "Inspiration",
+      "relationship_sentence": "MC-ViT is directly inspired by the use of non-parametric stores of prior activations for retrieval, adapting that principle to video by attending to a consolidated cache of past features during fine-tuning."
+    },
+    {
+      "title": "Barlow Twins: Self-Supervised Learning via Redundancy Reduction",
+      "authors": "Jure Zbontar et al.",
+      "year": 2021,
+      "role": "Foundation",
+      "relationship_sentence": "MC-ViT leverages the Barlow Twins redundancy-reduction principle (decorrelating feature components) to consolidate and de-duplicate stored video activations so a compact memory can remain informative over long horizons."
+    },
+    {
+      "title": "VICReg: Variance-Invariance-Covariance Regularization for Self-Supervised Learning",
+      "authors": "Adrien Bardes et al.",
+      "year": 2022,
+      "role": "Extension",
+      "relationship_sentence": "MC-ViT extends redundancy-reduction style regularization in the temporal/memory setting, using VICReg-like covariance control to keep memory entries diverse and non-redundant without introducing parametric compressors."
+    },
+    {
+      "title": "Is Space-Time Attention All You Need for Video Understanding?",
+      "authors": "Gedas Bertasius et al.",
+      "year": 2021,
+      "role": "Baseline",
+      "relationship_sentence": "TimeSformer exemplifies the pre-trained video transformers MC-ViT repurposes; MC-ViT directly augments such models with memory attention to overcome their quadratic complexity and short effective temporal windows."
+    },
+    {
+      "title": "Perceiver IO: A General Architecture for Structured Inputs & Outputs",
+      "authors": "Andrew Jaegle et al.",
+      "year": 2021,
+      "role": "Related Problem",
+      "relationship_sentence": "Perceiver IO\u2019s use of cross-attention to a compact latent set informs MC-ViT\u2019s design choice to attend from current tokens into a small external memory, though MC-ViT populates that memory non-parametrically from past activations."
+    }
+  ],
+  "synthesis_narrative": "MC-ViT\u2019s core innovation\u2014repurposing pre-trained video transformers to attend to a compact, external cache of past activations\u2014draws a direct line from the memory mechanisms of sequence models to video. Transformer-XL provides the foundational mechanism: enabling current tokens to attend to a segment-level cache of prior hidden states to surpass fixed context limits. Compressive Transformer identifies the right objective\u2014keeping distant history accessible via compression\u2014but its reliance on learned compressors and architectural complexity exposes a gap MC-ViT targets with a non-parametric alternative. Memorizing Transformers crystallizes the power of non-parametric stores of activations and retrieval, which MC-ViT adapts to video by integrating a retrieval-like cache inside the attention of a fine-tuned backbone. The consolidation step in MC-ViT is anchored in redundancy-reduction principles from Barlow Twins and VICReg: by decorrelating feature components and controlling covariance across stored entries, the memory remains compact yet informative, sidestepping heavy parametric compression. On the video side, TimeSformer represents the class of strong pre-trained backbones that suffer from quadratic temporal complexity; MC-ViT\u2019s simple memory-attention retrofit directly addresses this limitation without altering core architecture. Finally, Perceiver IO\u2019s cross-attention to a small latent set informs the interface\u2014querying a compact set with attention\u2014while MC-ViT\u2019s key departure is to populate that set non-parametrically from past activations and to keep it redundancy-reduced for long-context video understanding.",
+  "analysis_timestamp": "2026-01-06T23:09:26.406416"
+}

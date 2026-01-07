@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Probabilistic Counting Algorithms for Data Base Applications",
+      "authors": "Philippe Flajolet et al.",
+      "year": 1985,
+      "role": "Foundation",
+      "relationship_sentence": "Introduced bitmap-style distinct-count sketches with OR-merge semantics, providing the exact sketching-and-merging framework that Sketch-Flip-Merge privatizes via noisy-bit logic."
+    },
+    {
+      "title": "HyperLogLog: the analysis of a near-optimal cardinality estimation algorithm",
+      "authors": "Philippe Flajolet et al.",
+      "year": 2007,
+      "role": "Baseline",
+      "relationship_sentence": "Established the practical, mergeable cardinality sketch widely used in data warehouses; Sketch-Flip-Merge targets the same mergeable-union use case and directly remedies HLL\u2019s lack of privacy when sketches are merged."
+    },
+    {
+      "title": "New cardinality estimation algorithms for HyperLogLog sketches",
+      "authors": "Otmar Ertl",
+      "year": 2017,
+      "role": "Extension",
+      "relationship_sentence": "Provides likelihood-based, provably optimal estimators for HLL-style sketches; Sketch-Flip-Merge extends this estimation philosophy to the noisy (DP-perturbed) sketch setting to obtain provably optimal estimators under privacy."
+    },
+    {
+      "title": "RAPPOR: Randomized Aggregatable Privacy-Preserving Ordinal Response",
+      "authors": "\u00dalfar Erlingsson et al.",
+      "year": 2014,
+      "role": "Inspiration",
+      "relationship_sentence": "Demonstrated using randomized response on bit vectors to enable aggregatable analytics; Sketch-Flip-Merge directly builds on this noisy-bit paradigm and introduces a new randomized procedure to perform logical operations (e.g., OR) on such noisy bits while preserving DP through merges."
+    },
+    {
+      "title": "Pan-Private Streaming Algorithms",
+      "authors": "Cynthia Dwork et al.",
+      "year": 2010,
+      "role": "Gap Identification",
+      "relationship_sentence": "Showed privacy for streaming distinct counts is possible but with significant accuracy and practicality tradeoffs; Sketch-Flip-Merge explicitly addresses this gap by providing practical, mergeable sketches with tight DP guarantees and low error."
+    },
+    {
+      "title": "An Optimal Algorithm for the Distinct Elements Problem",
+      "authors": "Daniel M. Kane et al.",
+      "year": 2010,
+      "role": "Foundation",
+      "relationship_sentence": "Formalized optimal streaming algorithms for F0 (distinct counting), anchoring the problem formulation that Sketch-Flip-Merge solves while adding differential privacy and mergeability constraints."
+    },
+    {
+      "title": "Extremal Mechanisms for Local Differential Privacy",
+      "authors": "Peter Kairouz et al.",
+      "year": 2014,
+      "role": "Foundation",
+      "relationship_sentence": "Characterized optimal binary randomized-response mechanisms and composition in LDP; Sketch-Flip-Merge leverages this channel perspective to design and tightly analyze its flip mechanism for noisy bits so merged outputs match the distribution of a single DP release on the union."
+    }
+  ],
+  "synthesis_narrative": "Sketch-Flip-Merge sits at the intersection of mergeable distinct-count sketches and differential privacy. The lineage begins with Flajolet\u2013Martin\u2019s bitmap sketches, which introduced OR-merge semantics for distinct counting, and HyperLogLog, which established the dominant practical, mergeable sketch used in data warehouses. Building on this sketching-and-merging paradigm, Ertl\u2019s likelihood-based analyses showed how to attain provably optimal estimation for HLL-style summaries, a blueprint that Sketch-Flip-Merge adapts to the DP-perturbed setting to achieve optimal estimation under noise. On the privacy side, RAPPOR demonstrated that randomized response on bit vectors enables aggregatable analytics from noisy bits. Sketch-Flip-Merge draws directly on this idea but goes further, introducing a new randomized algorithm that performs logical operations (e.g., OR/merge) on already-noisy bits, ensuring that the result is distributed as if one had first merged the true sketches and then applied a single DP randomizer. Theoretical treatments of distinct counting and streaming (Kane\u2013Nelson\u2013Woodruff) solidified the F0 problem and mergeability goals, while pan-private streaming results (Dwork et al.) highlighted the accuracy and practicality gaps of prior private approaches for distinct counts. Finally, the characterization of optimal binary mechanisms in local DP (Kairouz\u2013Oh\u2013Viswanath) informs Sketch-Flip-Merge\u2019s tight privacy analysis of its flip mechanism, enabling the first practical, mergeable, differentially private sketches with low empirical error.",
+  "analysis_timestamp": "2026-01-06T23:09:26.533224"
+}

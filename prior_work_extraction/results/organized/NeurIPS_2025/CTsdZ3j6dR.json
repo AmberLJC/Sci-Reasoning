@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Mean Field Multi-Agent Reinforcement Learning",
+      "authors": "Yaodong Yang, Rui Luo, Minne Li, Ming Zhou, Weinan Zhang, Jun Wang",
+      "year": 2018,
+      "role": "Algorithmic template for approximating multi-agent interactions by a local mean field (MFQ/MFAC), enabling MARL to scale with population size.",
+      "relationship_sentence": "SUBSAMPLE-MFQ explicitly builds on MFQ\u2019s mean-field state-action abstraction and Q-learning backbone, replacing full-population averaging with randomized subsampling to obtain n-independent complexity."
+    },
+    {
+      "title": "Mean Field Games",
+      "authors": "Jean-Michel Lasry, Pierre-Louis Lions",
+      "year": 2007,
+      "role": "Foundational theory showing that in large populations, strategic interactions can be summarized by aggregate distributions (mean fields), yielding decentralized, population-size\u2013independent control laws.",
+      "relationship_sentence": "The paper\u2019s n-independent optimality guarantee leverages the MFG paradigm that agents respond to a distributional summary rather than the full joint action profile."
+    },
+    {
+      "title": "Large-Population LQG Problems with Mean Field Interaction: Nash Certainty Equivalence",
+      "authors": "Minyi Huang, Peter E. Caines, Roland P. Malham\u00e9",
+      "year": 2006,
+      "role": "Control-theoretic mean-field framework establishing decentralized policies that depend on empirical averages and their convergence as population grows.",
+      "relationship_sentence": "The decentralized randomized policy in SUBSAMPLE-MFQ is conceptually justified by Nash certainty equivalence, which underpins replacing detailed interactions with empirical means."
+    },
+    {
+      "title": "Mean-Field Q-Learning: Theory and Algorithms",
+      "authors": "Yunlong Cui, Heinz Koeppl",
+      "year": 2021,
+      "role": "Theoretical development of Q-learning in mean-field settings, including convergence analyses for model-free learning against distributional (mean-field) opponents.",
+      "relationship_sentence": "SUBSAMPLE-MFQ inherits the model-free MFQ learning structure and extends its analysis by quantifying the additional error from subsampling the mean field."
+    },
+    {
+      "title": "A Random Batch Method for Interacting Particle Systems",
+      "authors": "Weinan E, Jianfeng Lu, Jian-Guo Liu (and variants with Lei Li/Lu)",
+      "year": 2020,
+      "role": "Introduces randomized batching (subsampling) to approximate many-body mean-field interactions with reduced computational cost and controllable O(1/sqrt{batch}) error.",
+      "relationship_sentence": "The core idea of estimating mean-field interactions via small random batches directly motivates SUBSAMPLE-MFQ\u2019s k-agent subsampling and its O(1/sqrt{k}) accuracy-time tradeoff."
+    },
+    {
+      "title": "Graphon Games: A Limit Theory for Strategic Interaction on Large Networks",
+      "authors": "Massimo D. Parise, Asuman E. Ozdaglar",
+      "year": 2019,
+      "role": "Scalable large-network limit framework showing how local interactions can be captured by aggregate objects independent of network size.",
+      "relationship_sentence": "The paper\u2019s independence from n and focus on local interactions align with graphon-limit insights that justify learning policies from sampled neighborhoods rather than full populations."
+    },
+    {
+      "title": "On the Rate of Convergence of Empirical Measures in Wasserstein Distance",
+      "authors": "Nicolas Fournier, Arnaud Guillin",
+      "year": 2015,
+      "role": "Provides non-asymptotic 1/sqrt{k}-type concentration rates for empirical distributions approximating population measures.",
+      "relationship_sentence": "SUBSAMPLE-MFQ\u2019s \u02dcO(1/sqrt{k}) convergence to the optimal mean-field policy is underpinned by empirical-measure concentration that controls the error from subsampling k agents."
+    }
+  ],
+  "synthesis_narrative": "The key contribution of SUBSAMPLE-MFQ is to make mean-field MARL computationally scalable by replacing full-population aggregation with unbiased subsampling while retaining provable optimality guarantees that are independent of the number of agents n. The immediate algorithmic precursor is Mean Field Multi-Agent Reinforcement Learning (Yang et al., 2018), which formalized MFQ/MFAC\u2014approximating many-agent interactions by a mean action and learning via model-free Q-updates. The mean-field abstraction itself is grounded in mean field games (Lasry & Lions, 2007) and Nash certainty equivalence for large populations (Huang, Caines & Malham\u00e9, 2006), which justify decentralized policies that depend only on aggregate distributions rather than the full joint action space. On the learning-theoretic side, recent analyses of mean-field Q-learning (Cui & Koeppl, 2021) provide convergence of model-free updates against a distributional opponent, supplying the base onto which SUBSAMPLE-MFQ layers sampling-induced approximation.\nCrucially, the paper\u2019s design and guarantees echo the Random Batch Method (E et al., 2020), where interactions in particle systems are approximated by small random subsets to cut complexity while incurring a quantifiable O(1/sqrt{batch}) error. This directly inspires subsampling k agents to estimate the mean field with an error that diminishes as 1/sqrt{k}. Concentration results for empirical measures (Fournier & Guillin, 2015) mathematically underpin this rate. Finally, ideas from graphon/large-network limits (Parise & Ozdaglar, 2019) reinforce that local, sample-based summaries can suffice for global decision-making, explaining why the algorithm\u2019s complexity and performance bounds can be made independent of n. Together, these strands yield a principled, decentralized, and provably efficient subsampled MFQ algorithm.",
+  "analysis_timestamp": "2026-01-07T00:21:32.318979"
+}

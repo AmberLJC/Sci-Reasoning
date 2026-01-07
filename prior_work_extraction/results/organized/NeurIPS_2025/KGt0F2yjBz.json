@@ -1,0 +1,93 @@
+{
+  "prior_works": [
+    {
+      "title": "Training language models to follow instructions with human feedback",
+      "authors": [
+        "Long Ouyang",
+        "Jeff Wu",
+        "Xu Jiang",
+        "Diogo Almeida",
+        "Carroll L. Wainwright",
+        "Pamela Mishkin",
+        "et al."
+      ],
+      "year": 2022,
+      "role": "Established the modern RLHF/RFT pipeline for LLMs (reward model + policy optimization) where prompts are typically sampled uniformly.",
+      "relationship_sentence": "GAIN-RL is proposed squarely within the RLHF/RFT setting introduced by InstructGPT and targets the sample-inefficiency arising from uniform prompt sampling in this pipeline."
+    },
+    {
+      "title": "Proximal Policy Optimization Algorithms",
+      "authors": [
+        "John Schulman",
+        "Filip Wolski",
+        "Prafulla Dhariwal",
+        "Alec Radford",
+        "Oleg Klimov"
+      ],
+      "year": 2017,
+      "role": "Widely used on-policy RL optimizer for RLHF/RFT of LLMs.",
+      "relationship_sentence": "The proposed angle-informed navigation augments standard PPO-style RFT by altering what to train on (sampling/weighting) rather than how to optimize, making PPO the practical backbone GAIN-RL plugs into."
+    },
+    {
+      "title": "Prioritized Experience Replay",
+      "authors": [
+        "Tom Schaul",
+        "John Quan",
+        "Ioannis Antonoglou",
+        "David Silver"
+      ],
+      "year": 2016,
+      "role": "Introduced sampling transitions by a model-driven signal (TD-error) to improve sample efficiency in RL.",
+      "relationship_sentence": "GAIN-RL\u2019s use of a model-intrinsic signal (angle concentration) to prioritize/weight data is a direct conceptual analogue of PER\u2019s TD-error prioritization for efficient learning."
+    },
+    {
+      "title": "Self-Paced Learning",
+      "authors": [
+        "M. Pawan Kumar",
+        "Benjamin Packer",
+        "Daphne Koller"
+      ],
+      "year": 2010,
+      "role": "Foundational curriculum learning approach that weights samples based on the learner\u2019s own feedback (loss) rather than fixed heuristics.",
+      "relationship_sentence": "GAIN-RL extends the self-paced principle from loss-based curricula to an intrinsic geometric signal of the model\u2019s representations, replacing heuristic difficulty with learned, model-driven guidance."
+    },
+    {
+      "title": "GLISTER: Generalization based Data Subset Selection for Efficient and Robust Learning",
+      "authors": [
+        "Krishnateja Killamsetty",
+        "Durga S. R.",
+        "Abir De",
+        "Ganesh Ramakrishnan",
+        "Rishabh Iyer"
+      ],
+      "year": 2021,
+      "role": "Bilevel, gradient/Fisher-informed data selection to improve training efficiency via example importance estimates.",
+      "relationship_sentence": "The paper\u2019s theory linking angular concentration to gradient signals aligns with GLISTER\u2019s gradient-informed selection, inspiring GAIN-RL\u2019s gradient-driven, angle-based sampling for RFT."
+    },
+    {
+      "title": "How Contextual are Contextualized Word Representations? Comparing the Geometry of BERT, ELMo, and GPT-2",
+      "authors": [
+        "Kawin Ethayarajh"
+      ],
+      "year": 2019,
+      "role": "Revealed anisotropy and narrow-cone angle concentration in contextual embeddings, highlighting the angular geometry of LLM representations.",
+      "relationship_sentence": "GAIN-RL operationalizes representation geometry by formalizing how angular concentration of token states correlates with gradients and using it as a learning signal."
+    },
+    {
+      "title": "An Empirical Study of Example Forgetting during Deep Neural Network Learning",
+      "authors": [
+        "Mariya Toneva",
+        "Alina Sordoni",
+        "Remi Tachet des Combes",
+        "Adam Trischler",
+        "Yoshua Bengio",
+        "Geoffrey J. Gordon"
+      ],
+      "year": 2019,
+      "role": "Showed that per-example training dynamics (forgetting events) reveal example difficulty/importance for data selection.",
+      "relationship_sentence": "By leveraging a per-example, model-derived signal to steer training, GAIN-RL echoes the insight that internal learning dynamics can guide efficient data curation."
+    }
+  ],
+  "synthesis_narrative": "The key contribution of Angles Don\u2019t Lie is to replace heuristic curricula and uniform sampling in reinforcement fine-tuning with a model-intrinsic geometric signal\u2014angle concentration\u2014shown to correlate with gradient magnitude and thus with learnability. This builds directly on the RLHF/RFT regime popularized by InstructGPT, where PPO is the standard optimizer and uniform prompt sampling induces sample inefficiency. The authors\u2019 idea of prioritizing data via the model\u2019s own signal is a conceptual continuation of Prioritized Experience Replay, which improved RL sample efficiency by sampling proportional to TD-error, a learned signal of utility.\nCurriculum and data selection research provides the methodological scaffolding. Self-Paced Learning demonstrated that curricula guided by the learner\u2019s feedback (loss) outperform fixed heuristics, while GLISTER established that gradient/Fisher-informed selection yields efficient training by focusing on examples that most influence generalization. The present work advances this line by identifying a principled, computationally accessible proxy\u2014angular concentration of token representations\u2014that predicts gradient impact and can be used online during RFT.\nFinally, representation geometry studies\u2014particularly the discovery of anisotropy and narrow-cone angular structure in contextual embeddings\u2014motivate angle concentration as a meaningful intrinsic statistic. Complementary evidence from example-level training dynamics (e.g., forgetting events) underscores that internal signals can expose example importance. Synthesizing these threads, GAIN-RL injects an angle-informed, gradient-driven scheduler into PPO-based RFT, yielding a theoretically grounded and practically effective route to training-efficient RL for LLMs.",
+  "analysis_timestamp": "2026-01-07T00:21:32.329307"
+}

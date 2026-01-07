@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Hamiltonian Neural Networks",
+      "authors": "Sam Greydanus; Misko Dzamba; Jason Yosinski",
+      "year": 2019,
+      "role": "Hamiltonian inductive bias for learning dynamics; preserves symplectic structure/energy from data.",
+      "relationship_sentence": "FlashMD builds on the HNN idea of parameterizing dynamics with Hamiltonian structure to constrain long-stride updates in phase space, improving stability and conservation over extended rollouts."
+    },
+    {
+      "title": "Lagrangian Neural Networks",
+      "authors": "Michael Cranmer; Sam Greydanus; Stephan Hoyer; Peter Battaglia; David Spergel; Shirley Ho",
+      "year": 2020,
+      "role": "Physics-informed learning via Lagrangians and Noether symmetries to conserve momenta and energy.",
+      "relationship_sentence": "FlashMD\u2019s position\u2013momentum treatment and symmetry-aware parameterization are directly informed by LNN, guiding the incorporation of invariances and conserved quantities into long-stride predictors."
+    },
+    {
+      "title": "E(n) Equivariant Graph Neural Networks",
+      "authors": "Victor Garcia Satorras; Emiel Hoogeboom; Max Welling",
+      "year": 2021,
+      "role": "Equivariant message passing for particles that updates coordinates with SE(3)/E(n) symmetry.",
+      "relationship_sentence": "FlashMD leverages EGNN-style equivariance to ensure its stride-to-stride mappings of atomic positions and momenta obey rotational and translational symmetries essential for molecular dynamics."
+    },
+    {
+      "title": "NequIP: a model for accurate, efficient, and scalable interatomic potentials",
+      "authors": "Stefan Batzner; Al\u00e1n Musaelian; Lixin Sun; Andrea Johansson; Rafael A. Morales-Garc\u00eda; Philipp M. Geiger; Tess E. Smidt; Boris Kozinsky",
+      "year": 2022,
+      "role": "E(3)-equivariant neural interatomic potentials enabling accurate, sample-efficient ML-MD at small timesteps.",
+      "relationship_sentence": "NequIP provides the state-of-the-art ML force-field baseline that FlashMD moves beyond by predicting long-stride state evolution directly rather than forces, while adopting similar equivariant design principles."
+    },
+    {
+      "title": "Deep Potential Molecular Dynamics: a scalable model with the accuracy of quantum mechanics",
+      "authors": "Linfeng Zhang; Jiequn Han; Han Wang; Roberto Car; Weinan E",
+      "year": 2018,
+      "role": "Pioneering ML potentials (DP/DeepMD) that replace ab initio forces to accelerate MD with conventional integrators.",
+      "relationship_sentence": "FlashMD addresses the core limitation of DP-style approaches\u2014requirement of tiny integration steps\u2014by learning the integrator itself to take strides 10\u2013100\u00d7 longer while retaining accurate thermodynamic behavior."
+    },
+    {
+      "title": "Neural Stochastic Differential Equations",
+      "authors": "Patrick Kidger; James Foster; James Morrill; Terry Lyons",
+      "year": 2021,
+      "role": "Learning drift and diffusion of SDEs with differentiable solvers and calibration of stochastic dynamics.",
+      "relationship_sentence": "FlashMD\u2019s generalization to thermostatted ensembles (e.g., Langevin/NVT and barostatted/NPT) draws on Neural SDE methodology to represent and learn stochastic components consistent with thermodynamic targets."
+    },
+    {
+      "title": "Learning to Simulate Complex Physics with Graph Networks",
+      "authors": "Alvaro Sanchez-Gonzalez; Jonathan Godwin; Tobias Pfaff; Rex Ying; Jure Leskovec; Peter Battaglia",
+      "year": 2020,
+      "role": "Graph network simulators trained for multi-step rollouts with attention to stability and error accumulation.",
+      "relationship_sentence": "FlashMD adopts GN-based interaction modeling and rollout-centric training/validation strategies from this line of work to control compounding errors when predicting dynamics over long strides."
+    }
+  ],
+  "synthesis_narrative": "FlashMD\u2019s central innovation\u2014directly predicting long-stride updates of molecular positions and momenta while preserving correct equilibrium and time-dependent properties\u2014sits at the intersection of structure-preserving dynamics learning, equivariant graph modeling, and stochastic ensemble-aware simulation. Hamiltonian Neural Networks and Lagrangian Neural Networks established that encoding the mechanics of phase space and symmetries into neural parameterizations yields physically faithful, long-horizon rollouts. FlashMD extends these principles to high-dimensional many-body molecular systems, embedding Hamiltonian structure into its architecture to maintain conservation properties over strides that are orders of magnitude larger than conventional integrator steps.\n\nEquivariant GNNs, particularly EGNN and NequIP, demonstrated how rotation/translation symmetries and local interactions can be captured to achieve accurate predictions in molecular settings. FlashMD leverages these equivariant message-passing ideas not to output forces, as in NequIP, but to map full states across long strides while respecting SE(3) symmetry. In contrast to Deep Potential MD, which accelerates simulations by approximating forces yet remains bound to small timesteps, FlashMD learns the integrator itself, bypassing the stability limits of traditional time discretizations.\n\nFinally, to operate across thermodynamic ensembles, FlashMD draws on Neural SDEs to model stochastic thermostats and barostats, and on graph-network simulators for stable multi-step rollouts and mitigation of error accumulation. Together, these works directly motivate FlashMD\u2019s Hamiltonian-structured, equivariant, and stochastic-aware design, enabling accurate, ensemble-general long-stride molecular dynamics.",
+  "analysis_timestamp": "2026-01-07T00:02:04.946407"
+}

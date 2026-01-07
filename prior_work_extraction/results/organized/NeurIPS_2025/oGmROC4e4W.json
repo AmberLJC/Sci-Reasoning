@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Estimating or Propagating Gradients Through Stochastic Neurons for Conditional Computation",
+      "authors": "Yoshua Bengio, Nicholas L\u00e9onard, Aaron Courville",
+      "year": 2013,
+      "role": "Foundational estimator for non-differentiable units (straight-through/surrogate gradients)",
+      "relationship_sentence": "This work formalized biased but low-variance straight-through estimators, establishing the bias\u2013variance and alignment trade-offs that motivate adapting the surrogate slope in the proposed method."
+    },
+    {
+      "title": "Surrogate Gradient Learning in Spiking Neural Networks: Bringing the Power of Gradient-Based Optimization to Spiking Neural Networks",
+      "authors": "Emre O. Neftci, Hesham Mostafa, Friedemann Zenke",
+      "year": 2019,
+      "role": "Comprehensive review and framework for surrogate gradients in SNNs",
+      "relationship_sentence": "By systematizing surrogate gradient choices and their optimization properties, this paper directly motivates the authors\u2019 systematic analysis of slope settings and their impact on gradient magnitude and alignment."
+    },
+    {
+      "title": "SuperSpike: Supervised Learning in Multilayer Spiking Neural Networks",
+      "authors": "Friedemann Zenke, Surya Ganguli",
+      "year": 2017,
+      "role": "Event-driven surrogate derivative with tunable slope for multilayer SNNs",
+      "relationship_sentence": "SuperSpike introduced a tunable-slope surrogate derivative for spikes, providing both the functional form and the notion that slope controls gradient flow that the present work adapts dynamically during sequential RL."
+    },
+    {
+      "title": "SLAYER: Spike Layer Error Reassignment in Time",
+      "authors": "Sumit Bam Shrestha, Garrick Orchard",
+      "year": 2018,
+      "role": "Time-domain backpropagation with surrogate derivatives for SNNs",
+      "relationship_sentence": "SLAYER established practical BPTT with surrogate derivatives across spike times, which the paper extends from supervised settings to sequential reinforcement learning with adaptive surrogate slopes."
+    },
+    {
+      "title": "Recurrent Experience Replay in Distributed Reinforcement Learning (R2D2)",
+      "authors": "Krzysztof Kapturowski, Georg Ostrovski, John Quan, R\u00e9mi Munos, Will Dabney",
+      "year": 2019,
+      "role": "RNN-based RL with burn-in and long unrolls for credit assignment",
+      "relationship_sentence": "R2D2\u2019s burn-in and truncation strategy directly informs the paper\u2019s diagnosis that short unrolls early in training impede bridging warm-up, motivating adaptive training dynamics to preserve credit assignment in SNNs."
+    },
+    {
+      "title": "Can Recurrent Neural Networks Warp Time?",
+      "authors": "Corentin Tallec, Yann Ollivier",
+      "year": 2018,
+      "role": "Analysis of timescales, truncated BPTT, and initialization for long dependencies",
+      "relationship_sentence": "Their analysis of time-scale mismatch and truncation effects underpins the paper\u2019s idea of adjusting surrogate slope to modulate effective temporal credit assignment when sequence lengths are limited."
+    },
+    {
+      "title": "e-prop: A Local Learning Rule for Recurrent Neural Networks",
+      "authors": "Guillaume Bellec et al.",
+      "year": 2020,
+      "role": "Local temporal credit assignment for SNNs and RNNs, including RL variants",
+      "relationship_sentence": "e-prop provides a biologically plausible alternative for sequence learning in SNNs, serving as a conceptual and empirical baseline that the proposed adaptive surrogate-gradient BPTT seeks to match or exceed in sequential RL."
+    }
+  ],
+  "synthesis_narrative": "The paper\u2019s core contribution\u2014adapting surrogate gradient slopes for sequential reinforcement learning in SNNs\u2014sits at the intersection of two lines of prior work. First, the surrogate-gradient lineage originates with straight-through estimators (Bengio et al., 2013), which established the usefulness of biased gradients for non-differentiable units and highlighted bias\u2013variance trade-offs central to slope selection. Within SNNs, SuperSpike (Zenke & Ganguli, 2017) and SLAYER (Shrestha & Orchard, 2018) operationalized surrogate derivatives through spikes and exposed the practical role of slope in controlling gradient flow and alignment, while Neftci et al. (2019) systematized these design choices and their optimization properties. The present work builds directly on this foundation by quantifying how slope affects gradient magnitude in depth and alignment with true gradients, and by making slope a quantity to schedule or adapt.\nSecond, the sequential RL aspect draws from recurrent RL practice. R2D2 (Kapturowski et al., 2019) showed that burn-in and sufficient unroll length are critical for credit assignment, a problem exacerbated in SNNs with stateful dynamics; Tallec & Ollivier (2018) analyzed how time-scale mismatch and truncated BPTT distort learning, motivating mechanisms that modulate effective timescales. The proposed adaptive slope acts as a learning-time control knob to bridge warm-up under limited sequence lengths. Finally, e-prop (Bellec et al., 2020) offers a contrasting local-credit paradigm in SNNs; positioning against it clarifies the contribution: preserve the performance benefits of BPTT-based training while gaining robustness to sequential RL constraints via adaptive surrogate gradients.",
+  "analysis_timestamp": "2026-01-07T00:21:33.142063"
+}

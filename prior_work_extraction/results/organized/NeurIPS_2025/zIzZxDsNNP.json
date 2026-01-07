@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "LOUPE: Learning-based Optimization of the Under-sampling Pattern in MRI",
+      "authors": "Caner F. D. Bahadir, Adrian V. Dalca, Mert R. Sabuncu",
+      "year": 2019,
+      "role": "Differentiable co-design of sensing and reconstruction",
+      "relationship_sentence": "LOUPE showed that one can backpropagate through a reconstruction network to optimize a constrained sampling pattern; PhySense generalizes this idea from k-space masks to spatial sensor placement, using reconstruction feedback and projected gradient steps to satisfy spatial constraints."
+    },
+    {
+      "title": "Near-Optimal Sensor Placements in Gaussian Processes: Theory, Efficient Algorithms and Empirical Studies",
+      "authors": "Andreas Krause, Ajit Singh, Carlos Guestrin",
+      "year": 2008,
+      "role": "Foundational information-theoretic sensor placement",
+      "relationship_sentence": "This work established sensor placement as maximizing information (e.g., mutual information/submodular objectives); PhySense inherits the principle that placement should maximize informativeness for reconstruction, but replaces greedy submodular optimization with differentiable, feedback-driven updates tied to its learned reconstructor."
+    },
+    {
+      "title": "Efficient Bayesian Experimental Design for Implicit Models via Mutual Information Lower Bound",
+      "authors": "Michel Kleinegesse, Michael U. Gutmann",
+      "year": 2020,
+      "role": "Gradient-based Bayesian experimental design via MI bounds",
+      "relationship_sentence": "By making information-theoretic design objectives differentiable via tractable bounds, this work underpins PhySense\u2019s use of gradient-based placement driven by a learned model\u2019s feedback, aligning sensor optimization with expected information/reconstruction quality."
+    },
+    {
+      "title": "Attentive Neural Processes",
+      "authors": "Hyunjik Kim, Andriy Mnih, Jonathan Schwarz, Marta Garnelo, Ali Eslami, Dan Rosenbaum, Oriol Vinyals, Yee Whye Teh",
+      "year": 2019,
+      "role": "Cross-attention for fusing sparse context observations in function regression",
+      "relationship_sentence": "ANP introduced cross-attention to aggregate arbitrary sets of (location, value) pairs; PhySense adopts cross-attention to adaptively fuse sparse sensor readings before reconstruction, enabling permutation-invariant conditioning on variable sensor sets."
+    },
+    {
+      "title": "Analyzing Inverse Problems with Invertible Neural Networks",
+      "authors": "Laurent Ardizzone, Jakob Kruse, Sebastian L\u00fcth, Runa Esche, Beate Rother, Ullrich K\u00f6the",
+      "year": 2019,
+      "role": "Conditional normalizing flows for inverse problems",
+      "relationship_sentence": "This line of work demonstrated using (conditional) invertible/flow-based models to recover full-field posteriors from partial observations; PhySense builds on this by employing a flow-based generative model conditioned on sparse sensors, augmented with cross-attention for adaptive conditioning."
+    },
+    {
+      "title": "Fourier Neural Operator for Parametric Partial Differential Equations",
+      "authors": "Zongyi Li, Nikola Kovachki, Kamyar Azizzadenesheli, Burigede Liu, Kaushik Bhattacharya, Andrew Stuart, Anima Anandkumar",
+      "year": 2020,
+      "role": "Neural operator learning for physics field reconstruction",
+      "relationship_sentence": "FNO established powerful learned surrogates for PDE solution fields; PhySense targets the same regime of physical fields but emphasizes sparse-data conditioning with a generative model and couples it with sensor placement optimization."
+    },
+    {
+      "title": "Set Transformer: A Framework for Attention-based Permutation-Invariant Set Inputs",
+      "authors": "Juho Lee, Yoonho Lee, Jungtaek Kim, Adam Kosiorek, Seungjin Choi, Yee Whye Teh",
+      "year": 2019,
+      "role": "Attention architectures for unordered sets",
+      "relationship_sentence": "Set Transformer formalized attention mechanisms for set inputs; PhySense\u2019s cross-attentive fusion of unordered sensor measurements reflects these architectural principles to handle variable, scattered sensor layouts."
+    }
+  ],
+  "synthesis_narrative": "PhySense\u2019s key contribution is a synergistic two-stage pipeline that couples a powerful sparse-observation reconstructor with a differentiable, constraint-aware sensor placement optimizer. Its reconstruction stage draws directly from conditional normalizing flows for inverse problems, using a flow-based generative model to represent uncertainty over dense physical fields from partial observations. To robustly condition on arbitrary, unordered sensor sets, PhySense incorporates cross-attention, echoing Attentive Neural Processes and set-attention architectures so it can adaptively fuse scattered measurements.\nOn the placement side, PhySense embraces the long-standing insight from information-theoretic sensor placement in Gaussian processes: good reconstructions depend critically on where sensors are placed. Rather than greedy submodular selection, it follows the modern differentiable experimental-design thread, where mutual-information\u2013aligned, model-based objectives admit gradient optimization (as in MI-bound\u2013based Bayesian experimental design). In spirit and methodology, it parallels LOUPE\u2019s end-to-end co-design of sampling and reconstruction\u2014backpropagating through a learned reconstructor\u2014while extending to continuous spatial sensor locations and enforcing feasibility with projected gradient descent under spatial constraints.\nFinally, the work is grounded in the physics-learning literature exemplified by Fourier Neural Operators, situating PhySense within data-driven modeling of PDE-governed fields while highlighting its distinct emphasis on sparse sensing and placement-reconstruction co-optimization. Together, these strands yield a framework that not only reconstructs fields from few sensors but also learns where to place those sensors to maximize reconstruction fidelity.",
+  "analysis_timestamp": "2026-01-07T00:21:32.342740"
+}

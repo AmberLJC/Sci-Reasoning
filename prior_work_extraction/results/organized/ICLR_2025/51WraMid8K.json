@@ -1,0 +1,73 @@
+{
+  "prior_works": [
+    {
+      "title": "Evaluating Large Language Models Trained on Code",
+      "authors": "Mark Chen et al.",
+      "year": 2021,
+      "arxiv_id": "2107.03374",
+      "role": "Foundation",
+      "relationship_sentence": "Their pass@k estimator formalized evaluation as estimating success probability over multiple samples, directly inspiring this paper\u2019s shift from single-point outputs to distribution-level metrics with statistical guarantees."
+    },
+    {
+      "title": "Self-Consistency Improves Chain of Thought Reasoning in Language Models",
+      "authors": "Xuezhi Wang et al.",
+      "year": 2022,
+      "arxiv_id": "2203.11171",
+      "role": "Inspiration",
+      "relationship_sentence": "By showing that sampling multiple reasoning paths reveals capabilities missed by greedy decoding, this work motivated evaluating the full output distribution rather than a single deterministic response."
+    },
+    {
+      "title": "Holistic Evaluation of Language Models (HELM)",
+      "authors": "Percy Liang et al.",
+      "year": 2022,
+      "arxiv_id": "2211.09110",
+      "role": "Baseline",
+      "relationship_sentence": "HELM popularized standardized LLM evaluation that predominantly reports single-decoding point estimates, providing the baseline evaluation paradigm that this paper replaces with probabilistic, high-confidence metrics."
+    },
+    {
+      "title": "Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena",
+      "authors": "Lianmin Zheng et al.",
+      "year": 2023,
+      "arxiv_id": "2306.05685",
+      "role": "Gap Identification",
+      "relationship_sentence": "MT-Bench evaluates models via one or few deterministic responses judged by another LLM, exemplifying the point-estimate practice whose blind spots this paper directly addresses with distributional guarantees."
+    },
+    {
+      "title": "Conformal Language Modeling",
+      "authors": "Anastasios N. Angelopoulos et al.",
+      "year": 2024,
+      "arxiv_id": "",
+      "role": "Inspiration",
+      "relationship_sentence": "This work introduced set-valued, distribution-free coverage guarantees for LM outputs, providing the key statistical insight that underlies this paper\u2019s high-probability evaluation guarantees."
+    },
+    {
+      "title": "Mass-Editing Memory in a Transformer (MEMIT)",
+      "authors": "Kevin Meng et al.",
+      "year": 2023,
+      "arxiv_id": "",
+      "role": "Gap Identification",
+      "relationship_sentence": "MEMIT\u2019s evaluation often relies on checking edited facts via canonical prompts or greedy decodes, a limitation this paper targets by assessing whether residual probability mass contradicts claimed unlearning."
+    },
+    {
+      "title": "Constitutional AI: Harmlessness from AI Feedback",
+      "authors": "Yuntao Bai et al.",
+      "year": 2022,
+      "arxiv_id": "",
+      "role": "Related Problem",
+      "relationship_sentence": "Constitutional AI evaluates harmlessness largely through single-response judgments on safety prompts, motivating this paper\u2019s probabilistic metrics that bound unsafe generation rates across the output distribution."
+    }
+  ],
+  "synthesis_narrative": "Pass@k from code model evaluation demonstrated that success should be estimated as a probability over samples rather than as a single answer, introducing a practical, sampling-based lens on model capability. Self-consistency extended this idea to reasoning, showing that multiple sampled chains of thought can surface correct behavior that greedy decoding misses, indicating that the decoding distribution contains latent competence. Standardized evaluation efforts such as HELM consolidated practice around reporting single-decoding metrics across diverse tasks, while MT-Bench popularized LLM-as-a-judge scoring of one or a few deterministic chat responses, reinforcing point-estimate reporting conventions. Conformal Language Modeling brought distribution-free, high-confidence guarantees to generative outputs via set-valued predictions, showing that rigorous probabilistic guarantees are feasible even for black-box language models. In parallel, unlearning and alignment methods like MEMIT and Constitutional AI typically validated success with canonical prompts and greedy decodes, leaving open whether undesired behaviors persist with non-greedy sampling or paraphrases. Together these works established both the ubiquity and shortcomings of deterministic evaluation and the feasibility of probabilistic guarantees.\nRecognizing that deterministic evaluations can overstate success in unlearning and alignment, the present work synthesizes sampling-based success estimation (as in pass@k and self-consistency) with distribution-free guarantee principles from conformal approaches to create application-agnostic, high-probability metrics over the entire output distribution. By reframing evaluation from point predictions to statistically guaranteed statements about generation risk, it directly addresses the gap surfaced by HELM/MT-Bench-style practices and reveals residual capability and safety failures that editing and alignment methods may mask under greedy decoding.",
+  "target_paper": {
+    "title": "A Probabilistic Perspective on Unlearning and Alignment for Large Language Models",
+    "authors": "Yan Scholten, Stephan G\u00fcnnemann, Leo Schwinn",
+    "conference": "ICLR",
+    "year": 2025,
+    "presentation_type": "oral",
+    "keywords": "Machine Unlearning, Alignment, Large Language Models",
+    "abstract": "Comprehensive evaluation of Large Language Models (LLMs) is an open research problem. Existing evaluations rely on deterministic point estimates generated via greedy decoding. However, we find that deterministic evaluations fail to capture the whole output distribution of a model, yielding inaccurate estimations of model capabilities. This is particularly problematic in critical contexts such as unlearning and alignment, where precise model evaluations are crucial. To remedy this, we introduce the first formal probabilistic evaluation framework for LLMs. Namely, we propose novel metrics with high probability guarantees concerning the output distribution of a model. Our metrics are application-independent and allow practitioners to make more reliable estimates about model capabilities before deployment. Our experimental analysis reveals that deterministic evaluations falsely indicate successful unlearning and alignment, whereas our probabilistic evaluations better capture model capabili",
+    "openreview_id": "51WraMid8K",
+    "forum_id": "51WraMid8K"
+  },
+  "analysis_timestamp": "2026-01-06T17:04:56.929087"
+}

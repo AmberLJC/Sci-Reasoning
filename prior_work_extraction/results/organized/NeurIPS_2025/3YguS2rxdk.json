@@ -1,0 +1,55 @@
+{
+  "prior_works": [
+    {
+      "title": "Masked Autoregressive Flow for Density Estimation",
+      "authors": "George Papamakarios, Theo Pavlakou, Iain Murray",
+      "year": 2017,
+      "role": "Foundational method for autoregressive normalizing flows",
+      "relationship_sentence": "STARFlow\u2019s TARFlow builds directly on the MAF paradigm\u2014using autoregressive parameterizations in an invertible flow\u2014while replacing MAF\u2019s feedforward conditioners with high-capacity Transformer conditioners."
+    },
+    {
+      "title": "Glow: Generative Flow with Invertible 1x1 Convolutions",
+      "authors": "Diederik P. Kingma, Prafulla Dhariwal",
+      "year": 2018,
+      "role": "Scalable flow architecture for image synthesis",
+      "relationship_sentence": "Glow established practical, scalable flow-based image generation (invertible 1\u00d71 convs, multi-scale architecture), which STARFlow inherits conceptually as the likelihood-based, invertible backbone for high-resolution synthesis."
+    },
+    {
+      "title": "Image Transformer",
+      "authors": "Niki Parmar, Ashish Vaswani, Jakob Uszkoreit, Lukasz Kaiser, Noam Shazeer, et al.",
+      "year": 2018,
+      "role": "Autoregressive Transformer for images",
+      "relationship_sentence": "STARFlow\u2019s Transformer Autoregressive Flow leverages the Image Transformer insight that Transformers can model image dependencies autoregressively, but embeds that capacity inside an invertible flow."
+    },
+    {
+      "title": "High-Resolution Image Synthesis with Latent Diffusion Models",
+      "authors": "Robin Rombach, Andreas Blattmann, Dominik Lorenz, Patrick Esser, Bj\u00f6rn Ommer",
+      "year": 2022,
+      "role": "Latent-space training for scalable, high-resolution generation",
+      "relationship_sentence": "STARFlow\u2019s decision to train in the latent space of pretrained autoencoders is directly inspired by LDM\u2019s demonstration that learning in a compressed continuous latent greatly improves efficiency at high resolutions."
+    },
+    {
+      "title": "Classifier-Free Diffusion Guidance",
+      "authors": "Jonathan Ho, Tim Salimans",
+      "year": 2021,
+      "role": "Guidance mechanism to trade off fidelity and diversity at sampling time",
+      "relationship_sentence": "STARFlow\u2019s novel guidance algorithm adapts the core idea of classifier-free guidance\u2014amplifying conditional scores during sampling\u2014to the flow-based setting to boost sample quality without retraining."
+    },
+    {
+      "title": "Coupling-based Invertible Neural Networks are Universal Diffeomorphism Approximators",
+      "authors": "Takeshi Teshima, Issei Sato, Masashi Sugiyama",
+      "year": 2020,
+      "role": "Theoretical underpinning for expressivity of flow architectures",
+      "relationship_sentence": "STARFlow\u2019s universality result for TARFlow builds on expressivity analyses of coupling-based flows, extending these guarantees to Transformer-conditioned autoregressive transformations."
+    },
+    {
+      "title": "Transformers are Universal Approximators of Sequence-to-Sequence Functions",
+      "authors": "Chulhee Yun, Yin Tat Lee, Se-Young Yun",
+      "year": 2020,
+      "role": "Theoretical underpinning for Transformer expressivity",
+      "relationship_sentence": "The universality proof for TARFlow leverages Transformer approximation results to argue that Transformer conditioners can realize the requisite autoregressive transformations for universal density modeling."
+    }
+  ],
+  "synthesis_narrative": "STARFlow\u2019s core innovation\u2014Transformer Autoregressive Flow (TARFlow) scaled in latent space with an effective guidance mechanism\u2014sits at the intersection of three direct lines of prior work. First, flow-based generative modeling (Glow) and, more specifically, autoregressive flows (MAF) provide the tractable, invertible framework and autoregressive parameterization that TARFlow inherits; STARFlow replaces earlier feedforward conditioners with Transformers to greatly expand modeling capacity while retaining exact likelihoods. Second, the efficacy of Transformers for autoregressive image modeling (Image Transformer) motivates embedding a powerful Transformer inside the flow, and informs the paper\u2019s deep\u2013shallow design that concentrates capacity in a dominant Transformer block with lightweight refiners. Third, scalability to high-resolution synthesis is directly enabled by training in the latent space of pretrained autoencoders, a strategy that latent diffusion models (LDM) showed to be both efficient and quality-preserving for image generation; STARFlow adopts this continuous latent-space setting for flows rather than diffusion. On the algorithmic side, STARFlow\u2019s new sampling-time guidance explicitly echoes classifier-free guidance principles\u2014tilting generation toward the conditional signal without extra networks\u2014now adapted to likelihood-based flows. Finally, STARFlow\u2019s universality theorem is conceptually grounded by two expressivity threads: coupling-flow universality (Teshima et al.) for invertible architectures and Transformer universality (Yun et al.) for the conditioners, together yielding universality for TARFlow\u2019s continuous density modeling.",
+  "analysis_timestamp": "2026-01-07T00:05:12.535748"
+}
