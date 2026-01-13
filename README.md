@@ -1,5 +1,10 @@
 # Sci-Reasoning: A Dataset Decoding AI Innovation Patterns
 
+[![arXiv](https://img.shields.io/badge/arXiv-2601.04577-b31b1b.svg)](https://arxiv.org/abs/2601.04577v1)
+[![Hugging Face](https://img.shields.io/badge/🤗%20Hugging%20Face-Dataset-yellow)](https://huggingface.co/datasets/AmberLJC/Sci-Reasoning)
+[![Blog](https://img.shields.io/badge/Blog-Post-blue)](https://www.orchestra-research.com/perspectives/sci-reasoning-story)
+[![Platform](https://img.shields.io/badge/Platform-Orchestra-purple)](https://www.orchestra-research.com/)
+
 A dataset capturing the structured intellectual synthesis behind high-quality AI research.
 
 ## Overview
